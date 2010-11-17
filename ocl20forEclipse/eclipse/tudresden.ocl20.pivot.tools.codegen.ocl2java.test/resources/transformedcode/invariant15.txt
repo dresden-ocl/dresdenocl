@@ -32,8 +32,8 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
         result1 = false;
         
         /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction t : aClass.transactions) {
-            if ((t.points > new Integer(0))) {
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+            if ((anElement1.points > new Integer(0))) {
                 result1 = true;
                 break;
             }

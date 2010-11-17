@@ -21,9 +21,9 @@ public privileged aspect CustomerCard_DefAspect_getTotalPoints {
         result2 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitVariable0$ : aClass.transactions) {
-            if ($implicitVariable0$.date.isAfter(d)) {
-                result2.add($implicitVariable0$);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+            if (anElement1.date.isAfter(d)) {
+                result2.add(anElement1);
             }
             // no else
         }
@@ -31,8 +31,8 @@ public privileged aspect CustomerCard_DefAspect_getTotalPoints {
         result1 = new java.util.ArrayList<Integer>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitCollect0$ : result2) {
-            result1.add($implicitCollect0$.points);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : result2) {
+            result1.add(anElement2.points);
         }
     
         return new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(result1).intValue());

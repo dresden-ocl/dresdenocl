@@ -1,0 +1,10 @@
+package testpackage
+
+context Class1
+def: testSortedByIteratorExp02() : Boolean =
+let firstPart =
+	OrderedSet{3, 2, 1}->sortedBy(i: Integer | i)
+,	secondPart =
+	OrderedSet{3, 2, 1}->sortedBy(i: Integer | i)
+in firstPart->isEmpty() and secondPart->isEmpty()
+endpackage

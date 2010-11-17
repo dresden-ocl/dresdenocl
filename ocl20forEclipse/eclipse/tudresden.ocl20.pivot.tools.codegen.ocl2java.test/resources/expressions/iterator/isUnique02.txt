@@ -4,16 +4,20 @@ collection1 = new java.util.HashSet<Integer>();
 collection1.add(new Integer(1));
 collection1.add(new Integer(2));
 collection1.add(new Integer(3));
+java.util.Set<String> collection2;
 Boolean result1;
+
+collection2 = new java.util.HashSet<String>();
 result1 = true;
 
-/* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
+/* Iterator IsUnique: Iterate and check, if all elements are unique. */
 for (Integer anElement1 : collection1) {
-    if (!(anElement1 > new Integer(0))) {
+    if (collection2.contains(anElement1.toString())) {
         result1 = false;
         break;
+    } else {
+        collection2.add(anElement1.toString());
     }
-    // no else
 }
 
 result1

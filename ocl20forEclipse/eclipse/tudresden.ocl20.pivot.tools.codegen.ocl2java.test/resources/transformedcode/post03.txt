@@ -30,8 +30,8 @@ public privileged aspect LoyaltyProgram_PostAspect_addService {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel $implicitCollect0$ : aClass.levels) {
-            result1.addAll($implicitCollect0$.availableServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement1 : aClass.levels) {
+            result1.addAll(anElement1.availableServices);
         }
     
         if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService)) {

@@ -32,8 +32,8 @@ public privileged aspect LoyaltyProgram_InvAspect_minServices {
         result1 = true;
         
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitVariable0$ : aClass.partners) {
-            if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size($implicitVariable0$.deliveredServices) >= new Integer(1))) {
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(anElement1.deliveredServices) >= new Integer(1))) {
                 result1 = false;
                 break;
             }

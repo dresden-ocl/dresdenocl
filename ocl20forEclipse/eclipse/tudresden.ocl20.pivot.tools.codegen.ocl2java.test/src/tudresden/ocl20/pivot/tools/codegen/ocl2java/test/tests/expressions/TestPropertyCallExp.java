@@ -108,4 +108,20 @@ public class TestPropertyCallExp extends AbstractDiffTest {
 		settings.setGettersForPropertyCallsEnabled(true);
 		this.compareFragmentCodeGeneration("expressions/calls", "property03", settings);
 	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testProperty04() throws Exception {
+
+		IOcl2JavaSettings settings = Ocl2JavaFactory.getInstance()
+				.createJavaCodeGeneratorSettings();
+		settings.setGettersForPropertyCallsEnabled(true);
+		this.compareFragmentCodeGeneration("expressions/calls", "property04", settings);
+	}
 }

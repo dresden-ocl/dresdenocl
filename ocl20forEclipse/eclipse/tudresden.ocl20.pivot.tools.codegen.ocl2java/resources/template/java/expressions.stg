@@ -150,11 +150,11 @@ for ($itType$ $itVar$ : $sourceExp$) {
 
 
 // --- IteratorExp for Iterator IsUnique ---
-iteratorExp_isUnique(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, collectionVar, resultVar) ::= <<
-$sourceCode$$setType()$<$itType$> $collectionVar$;
+iteratorExp_isUnique(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, bodyExpType, collectionVar, resultVar) ::= <<
+$sourceCode$$setType()$<$bodyExpType$> $collectionVar$;
 $booleanType()$ $resultVar$;
 
-$collectionVar$ = new $setTypeInitialization()$<$itType$>();
+$collectionVar$ = new $setTypeInitialization()$<$bodyExpType$>();
 $resultVar$ = true;
 
 /* Iterator IsUnique: Iterate and check, if all elements are unique. */

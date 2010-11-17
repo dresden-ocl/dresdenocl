@@ -177,7 +177,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * Contains the name mappings for {@link Variable}s that require renaming
 	 * during code generation.
 	 */
-	protected Map<String, String> mappedVariableNames = new HashMap<String, String>();
+	protected Map<String, Stack<String>> mappedVariableNames = new HashMap<String, Stack<String>>();
 
 	/**
 	 * The canonical names of all classes which use the special OCL operation
@@ -208,9 +208,17 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 		 * Adds some variable mappings for names that must be always rename
 		 * (reserved keywords in Java).
 		 */
-		mappedVariableNames.put("class", "clazz");
-		mappedVariableNames.put("extends", "ixtends");
-		mappedVariableNames.put("public", "publik");
+		Stack<String> stack = new Stack<String>();
+		stack.push("clazz");
+		mappedVariableNames.put("class", stack);
+
+		stack = new Stack<String>();
+		stack.push("ixtends");
+		mappedVariableNames.put("extends", stack);
+
+		stack = new Stack<String>();
+		stack.push("publik");
+		mappedVariableNames.put("public", stack);
 	}
 
 	/*
@@ -318,7 +326,17 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * #addVariableMapping(java.lang.String, java.lang.String)
 	 */
 	public void addVariableMapping(String oldName, String newName) {
-		this.mappedVariableNames.put(oldName, newName);
+		
+		Stack<String> stack;
+		
+		if (this.mappedVariableNames.containsKey(oldName))
+			stack = this.mappedVariableNames.get(oldName);
+		else
+			stack = new Stack<String>();
+		
+		stack.add(newName);
+		
+		this.mappedVariableNames.put(oldName, stack);
 	}
 
 	/*
@@ -660,7 +678,15 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * #getVariableMapping(java.lang.String)
 	 */
 	public String getVariableMapping(String name) {
-		return this.mappedVariableNames.get(name);
+		
+		String result = null;
+		
+		Stack<String> stack = this.mappedVariableNames.get(name);
+		
+		if (stack != null && stack.size() > 0)
+			result = stack.peek();
+		
+		return result;
 	}
 
 	/*
@@ -785,7 +811,33 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * #removeVariableMapping(java.lang.String)
 	 */
 	public boolean removeVariableMapping(String name) {
-		return this.mappedVariableNames.remove(name) != null;
+		
+		boolean result;
+		
+		Stack<String> stack = this.mappedVariableNames.get(name);
+		
+		if (stack != null) {
+			if (stack.size() == 0) {
+				this.mappedVariableNames.remove(name);
+				result = false;
+			}
+			
+			else {
+				stack.pop();
+				
+				if (stack.size() > 0)
+					this.mappedVariableNames.put(name, stack);
+				else
+					this.mappedVariableNames.remove(name);
+				
+				result = true;
+			}
+		}
+		
+		else
+			result = false;
+		
+		return result;
 	}
 
 	/*

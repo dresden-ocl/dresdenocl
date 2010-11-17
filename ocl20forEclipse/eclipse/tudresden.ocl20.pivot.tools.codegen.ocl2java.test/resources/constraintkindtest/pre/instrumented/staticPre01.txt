@@ -20,7 +20,7 @@ public privileged aspect Class1_PreAspect_staticPreOperation01 {
      *       pre testStaticPre01: not anInt.oclIsUndefined()</code></p>
      */
     before(Integer anInt): staticPreOperation01Caller(anInt) {
-        if (!!(anInt == null)) {
+        if (!!(((Integer) anInt) == null)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

@@ -1,1 +1,4 @@
-((Object) atPreValue1).equals((aClass.anInteger01 - new Integer(1)))
+java.util.Set<Integer> result1;
+result1 = new java.util.HashSet<Integer>();
+result1.add(new Integer(42));
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(result1)

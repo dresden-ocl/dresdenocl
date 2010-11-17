@@ -1,0 +1,34 @@
+Integer firstPart;
+java.util.HashSet<Integer> collection2;
+collection2 = new java.util.HashSet<Integer>();
+
+collection2.add(new Integer(1));
+collection2.add(new Integer(2));
+collection2.add(new Integer(3));
+Integer result2;
+result2 = new Integer(0);
+/* IterateExp: Iterate through all elements and perform an operation on them. */
+for (Integer anElement2 : collection2) {
+    result2 = (result2 + anElement2);
+}
+
+firstPart = result2;
+
+Integer secondPart;
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+collection1.add(new Integer(3));
+Integer result1;
+result1 = new Integer(0);
+/* IterateExp: Iterate through all elements and perform an operation on them. */
+for (Integer anElement1 : collection1) {
+    result1 = (result1 + anElement1);
+}
+
+secondPart = result1;
+
+
+(firstPart + secondPart)

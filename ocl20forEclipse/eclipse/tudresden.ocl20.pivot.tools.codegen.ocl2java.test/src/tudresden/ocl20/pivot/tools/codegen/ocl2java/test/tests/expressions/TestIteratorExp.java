@@ -164,9 +164,35 @@ public class TestIteratorExp extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testForAll03() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "forAll03");
+	}
+	
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
 	public void testIsUnique01() throws Exception {
 
 		this.compareFragmentCodeGeneration("expressions/iterator", "isUnique01");
+	}
+	
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testIsUnique02() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "isUnique02");
 	}
 	
 	/**
@@ -219,5 +245,18 @@ public class TestIteratorExp extends AbstractDiffTest {
 	public void testSortedBy01() throws Exception {
 
 		this.compareFragmentCodeGeneration("expressions/iterator", "sortedBy01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testSortedBy02() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "sortedBy02");
 	}
 }

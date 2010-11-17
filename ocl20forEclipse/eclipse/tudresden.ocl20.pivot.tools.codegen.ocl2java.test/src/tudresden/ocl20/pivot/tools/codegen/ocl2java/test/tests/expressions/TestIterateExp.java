@@ -77,4 +77,17 @@ public class TestIterateExp extends AbstractDiffTest {
 
 		this.compareFragmentCodeGeneration("expressions/iterator", "iterate01");
 	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testIterate02() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "iterate02");
+	}
 }

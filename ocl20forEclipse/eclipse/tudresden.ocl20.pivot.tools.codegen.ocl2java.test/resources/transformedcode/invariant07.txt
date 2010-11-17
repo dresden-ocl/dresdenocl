@@ -33,9 +33,9 @@ public privileged aspect Customer_InvAspect_sizesAgree {
         result1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard $implicitVariable0$ : aClass.cards) {
-            if (((Object) $implicitVariable0$.valid).equals(new Boolean(true))) {
-                result1.add($implicitVariable0$);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard anElement1 : aClass.cards) {
+            if (((Object) anElement1.valid).equals(new Boolean(true))) {
+                result1.add(anElement1);
             }
             // no else
         }

@@ -16,12 +16,20 @@ Release 3.X (Not scheduled yet)
   - Generated aspects are named according to their constraints.
   - Statically defined operations and properties are now instrumented correctly.
   - No new super classes are generated for definitions, initial and derived values are
-    instroduced anymore.
+    introduced anymore.
   - Definitions, Initial and Derived values should now work correctly if fields are 
     accessed directly from other classes.
   - Type Literals are now transformed correctly in all known contexts.
   - InvalidLiterals should now be transformed correctly in all known contexts.
   - Generic types in LetExpressions are now transformed correctly.
+  - Nested IterateExpressions using the same names for iterator variables are now
+    handled correctly.
+  - Nested IteratorExpressions using the same names for iterator variables are now
+    handled correctly.
+  - OclAny.asSet() is now transformed correctly.
+  - OclAny.oclIsUndefined() now works on Java primitive types as well.
+  - IsUnique() iterators are now transformed correctly if their body expression result
+    in another type than the collection's element type.
 
 * Changes on Ocl2SQL
   - for nested where statements now generated join statements

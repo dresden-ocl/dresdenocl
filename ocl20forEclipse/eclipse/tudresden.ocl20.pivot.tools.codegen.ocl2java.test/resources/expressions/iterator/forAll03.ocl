@@ -1,0 +1,14 @@
+package testpackage
+
+context Class1
+
+/* Contains two iterators having the same variable names.
+   Used to test that variable names must be different in Java. */
+def: testForAll03() : Boolean =
+let firstPart = Set{1, 2, 3}
+  ->forAll(sameName: Integer | sameName > 0)
+, secondPart = Set{1, 2, 3}
+  ->forAll(sameName: Integer | sameName > 0)
+in firstPart and secondPart
+
+endpackage

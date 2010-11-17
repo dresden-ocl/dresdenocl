@@ -244,6 +244,19 @@ public class TestOclAny extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testOclIsUndefined02() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsUndefined02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
 	public void testOclType01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclType01");

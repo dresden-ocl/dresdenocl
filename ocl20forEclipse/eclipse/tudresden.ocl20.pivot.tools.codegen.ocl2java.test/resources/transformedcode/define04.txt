@@ -31,8 +31,8 @@ public privileged aspect LoyaltyAccount_DefAspect_usedServices {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitCollect0$ : aClass.transactions) {
-            result1.add($implicitCollect0$.service);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+            result1.add(anElement1.service);
         }
     
         aClass.usedServices = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(result1);

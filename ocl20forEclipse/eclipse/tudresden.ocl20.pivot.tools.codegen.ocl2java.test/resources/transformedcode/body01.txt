@@ -25,8 +25,8 @@ public privileged aspect LoyaltyProgram_BodyAspect_getServices {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitCollect0$ : aClass.partners) {
-            result1.addAll($implicitCollect0$.deliveredServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            result1.addAll(anElement1.deliveredServices);
         }
     
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(result1);

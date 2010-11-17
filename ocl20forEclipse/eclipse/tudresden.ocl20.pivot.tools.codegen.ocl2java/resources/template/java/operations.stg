@@ -109,10 +109,10 @@ $sequenceUtility()$.asSequence($sourceExp$)
 >>
 
 // --- OclAny.asSet() ---
-asSetOperationOnOclAny(sourceExp, argsExp, elementType, resultVariable) ::= <<
-$setType()$<$elementType$> $resultVariable$;
-$resultVariable$ = new $setTypeInitialization()$<$elementType$>();
-$resultVariable$.$addOperationName()$($sourceExp$);
+asSetOperationOnOclAny(sourceExp, argsExp, elementType, resultVar) ::= <<
+$setType()$<$elementType$> $resultVar$;
+$resultVar$ = new $setTypeInitialization()$<$elementType$>();
+$resultVar$.$addOperationName()$($sourceExp$);
 >>
 
 // --- Bag.asSet() ---
@@ -544,6 +544,11 @@ $sourceExp$.getClass().getCanonicalName().equals($argsExp$.getCanonicalName())
 // --- OclAny.oclIsUndefined() ---
 oclIsUndefinedOperationOnOclAny(sourceExp) ::= <<
 ($sourceExp$ == null)
+>>
+
+// --- OclAny.oclIsUndefined() ---
+oclIsUndefinedOperationOnPrimitiveType(sourceExp, sourceType) ::= <<
+((($sourceType$) $sourceExp$) == null)
 >>
 
 // --- Boolean.or(Boolean) ---

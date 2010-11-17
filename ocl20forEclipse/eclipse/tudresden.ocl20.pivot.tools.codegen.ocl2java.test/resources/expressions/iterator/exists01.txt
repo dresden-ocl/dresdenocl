@@ -8,8 +8,8 @@ Boolean result1;
 result1 = false;
 
 /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-for (Integer i : collection1) {
-    if (((Object) i).equals(new Integer(2))) {
+for (Integer anElement1 : collection1) {
+    if (((Object) anElement1).equals(new Integer(2))) {
         result1 = true;
         break;
     }

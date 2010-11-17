@@ -1,0 +1,44 @@
+Boolean firstPart;
+java.util.HashSet<Integer> collection2;
+collection2 = new java.util.HashSet<Integer>();
+
+collection2.add(new Integer(1));
+collection2.add(new Integer(2));
+collection2.add(new Integer(3));
+Boolean result2;
+result2 = true;
+
+/* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
+for (Integer anElement2 : collection2) {
+    if (!(anElement2 > new Integer(0))) {
+        result2 = false;
+        break;
+    }
+    // no else
+}
+
+firstPart = result2;
+
+Boolean secondPart;
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+collection1.add(new Integer(3));
+Boolean result1;
+result1 = true;
+
+/* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
+for (Integer anElement1 : collection1) {
+    if (!(anElement1 > new Integer(0))) {
+        result1 = false;
+        break;
+    }
+    // no else
+}
+
+secondPart = result1;
+
+
+(firstPart && secondPart)

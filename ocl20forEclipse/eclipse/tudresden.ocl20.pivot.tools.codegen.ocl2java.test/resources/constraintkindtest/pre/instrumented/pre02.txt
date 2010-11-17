@@ -20,7 +20,7 @@ public privileged aspect Class1_PreAspect_Class1 {
      *       pre testPre02: not anInt.oclIsUndefined()</code></p>
      */
     before(Integer anInt): Class1Caller(anInt) {
-        if (!!(anInt == null)) {
+        if (!!(((Integer) anInt) == null)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

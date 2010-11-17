@@ -659,6 +659,13 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		 * recursive calls).
 		 */
 		Variable iterateVariable = anIterateExp.getIterator().remove(0);
+		String iterateVarName = iterateVariable.getName();
+		String resultVarName = anIterateExp.getResult().getName();
+
+		this.environment.addVariableMapping(iterateVarName,
+				this.environment.getNewIteratorVarName());
+		this.environment.addVariableMapping(resultVarName,
+				this.environment.getNewResultVarName());
 
 		/*
 		 * If the Expression has more than one iterator variable. Create an
@@ -687,25 +694,29 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 		template.setAttribute("sourceCode", sourceCode.getCode());
 		template.setAttribute("sourceExp", sourceCode.getResultExp());
-		template.setAttribute("itVar", iterateVariable.getName());
+		template.setAttribute("itVar",
+				this.environment.getVariableMapping(iterateVarName));
 		template.setAttribute("bodyCode", bodyCode.getCode());
 		template.setAttribute("bodyExp", bodyCode.getResultExp());
 
-		String resultVar = anIterateExp.getResult().getName();
 		ITransformedCode resultVarInitCode = this.doSwitch(anIterateExp
 				.getResult().getInitExpression());
 
 		template.setAttribute("resultVarInitCode", resultVarInitCode.getCode());
 		template.setAttribute("resultVarInitExp",
 				resultVarInitCode.getResultExp());
-		template.setAttribute("resultVar", resultVar);
+		template.setAttribute("resultVar",
+				this.environment.getVariableMapping(resultVarName));
 		template.setAttribute("resultType", resultType.toString());
 		template.setAttribute("sourceGenericType", sourceType.getGenericType()
 				.toString());
 
 		ITransformedCode result = new TransformedCodeImpl();
 		result.addCode(template.toString());
-		result.setResultExp(resultVar);
+		result.setResultExp(this.environment.getVariableMapping(resultVarName));
+
+		this.environment.removeVariableMapping(iterateVarName);
+		this.environment.removeVariableMapping(resultVarName);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIterateExp(IterateExp)"
@@ -741,15 +752,17 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Get unique name iterateResultName and iterateVarName. */
 		String resultVarName = this.environment.getNewResultVarName();
 
-		/* TODO Find a solution without modifying the ASM (Part 1). */
-		/* Get the first iterator variable. */
-		Variable itVariable = anIteratorExp.getIterator().remove(0);
-		String itVarName = itVariable.getName();
-
 		/* Transform code for source of the iteratorExp. */
 		ITransformedCode sourceCode = this.doSwitch(anIteratorExp.getSource());
 		ITransformedType sourceType = this.transformType(anIteratorExp
 				.getSource().getType());
+
+		/* TODO Find a solution without modifying the ASM (Part 1). */
+		/* Get the first iterator variable. */
+		Variable itVariable = anIteratorExp.getIterator().remove(0);
+		String itVarName = itVariable.getName();
+		this.environment.addVariableMapping(itVarName,
+				this.environment.getNewIteratorVarName());
 
 		OclExpression bodyExp = anIteratorExp.getBody();
 
@@ -787,20 +800,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			 */
 			itVarName2 = this.environment.getNewIteratorVarName();
 
-			/* Rename the variable and preserve the old name. */
-			String oldVarMapping = this.environment
-					.getVariableMapping(itVariable.getName());
 			this.environment.addVariableMapping(itVariable.getName(),
 					itVarName2);
-
 			bodyCode2 = this.doSwitch(bodyExp);
-
-			/* Reset the mapping. */
-			if (oldVarMapping != null)
-				this.environment.addVariableMapping(itVariable.getName(),
-						oldVarMapping);
-			else
-				this.environment.removeVariableMapping(itVariable.getName());
+			this.environment.removeVariableMapping(itVariable.getName());
 		}
 
 		/* TODO Find a solution without modifying the ASM (Part 2). */
@@ -824,6 +827,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			/* Set iterator specific template attributes. */
 			template.setAttribute("itType", sourceType.getGenericType()
 					.toString());
+			template.setAttribute("bodyExpType", bodyType.toString());
 			template.setAttribute("collectionVar",
 					this.environment.getNewCollectionVarName());
 		}
@@ -879,13 +883,16 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/* Set template attributes which are needed for all iterators. */
 		template.setAttribute("sourceCode", sourceCode.getCode());
 		template.setAttribute("sourceExp", sourceCode.getResultExp());
-		template.setAttribute("itVar", itVarName);
+		template.setAttribute("itVar",
+				this.environment.getVariableMapping(itVarName));
 		template.setAttribute("bodyCode", bodyCode.getCode());
 		template.setAttribute("bodyExp", bodyCode.getResultExp());
 		template.setAttribute("resultVar", resultVarName);
 
 		result.addCode(template.toString());
 		result.setResultExp(resultVarName);
+
+		this.environment.removeVariableMapping(itVarName);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIteratorExp(IteratorExp)"
@@ -1437,7 +1444,10 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 							&& referredOperation.getOwner() != null && referredOperation
 							.getOwner().equals(oclLibrary.getOclAny()))
 					|| operationName.equals("oclAsType")
-					|| operationName.equals("oclType")) {
+					|| operationName.equals("oclType")
+					|| (operationName.equals("asSet") && (referredOperation
+							.getOwningType() == null || !(referredOperation
+							.getOwningType() instanceof CollectionType)))) {
 
 				/* Probably rename the operation. */
 				if (renamedOperationNames.containsKey(operationName)) {
@@ -1498,6 +1508,21 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 
 					result.addCode(template.toString());
 					resultExp = resultVar;
+				}
+
+				/*
+				 * oclIsUndefined Operation requires special attributes and
+				 * special handling for primitive types since they can be
+				 * primitive types in Java on which null checks are not allowed.
+				 */
+				else if (template != null
+						&& operationName.equals("oclIsUndefined")
+						&& sourceExp.getType() != null
+						&& sourceExp.getType() instanceof PrimitiveType) {
+					template = this.templateGroup
+							.getTemplate("oclIsUndefinedOperationOnPrimitiveType");
+					template.setAttribute("sourceType",
+							this.transformType(sourceExp.getType()));
 				}
 				// no else.
 			}
@@ -1665,7 +1690,15 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		if (!(aPropertyCallExp.getSource() != null && aPropertyCallExp
 				.getSource().getType() instanceof TupleType)
 				&& this.settings.isGettersForPropertyCallsEnabled()) {
-			String newName = "get" + propertyName.substring(0, 1).toUpperCase();
+			String newName;
+
+			if (referredProperty.getType() instanceof PrimitiveType
+					&& ((PrimitiveType) referredProperty.getType()).getKind() == PrimitiveTypeKind.BOOLEAN)
+				newName = "is";
+			else
+				newName = "get";
+
+			newName = newName + propertyName.substring(0, 1).toUpperCase();
 			if (propertyName.length() > 1)
 				newName += propertyName.substring(1, propertyName.length());
 			// no else.
@@ -1952,8 +1985,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 		/*
 		 * The special OCL variable 'result' has to be transformed in their name
 		 * in Java.
+		 * 
+		 * The second check avoids to faulty handle declared 'result' variables
+		 * from iterator or let expressions.
 		 */
-		else if (aVariable.getName().equals("result")) {
+		else if (aVariable.getName().equals("result")
+				&& aVariable.getInitExpression() == null) {
 
 			template = this.templateGroup.getTemplate("resultVariable");
 			result.setResultExp(template.toString());
@@ -2360,6 +2397,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			/* Set all arguments of the Operation. */
 			for (Parameter anArgument : definedOperation.getInputParameter()) {
 				String anArgumentsName = anArgument.getName();
+
+				if (this.environment.existsMappingForVariable(anArgumentsName))
+					anArgumentsName = this.environment
+							.getVariableMapping(anArgumentsName);
+				// no else.
+
 				String anArgumentsType = this.transformType(
 						anArgument.getType()).toString();
 
@@ -3255,6 +3298,12 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 			String anArgumentsType;
 
 			anArgumentsName = anArgument.getName();
+
+			if (this.environment.existsMappingForVariable(anArgumentsName))
+				anArgumentsName = this.environment
+						.getVariableMapping(anArgumentsName);
+			// no else.
+
 			anArgumentsType = this.transformType(anArgument.getType())
 					.toString();
 

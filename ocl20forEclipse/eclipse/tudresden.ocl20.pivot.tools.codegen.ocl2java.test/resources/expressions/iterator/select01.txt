@@ -8,9 +8,9 @@ java.util.HashSet<Integer> result1;
 result1 = new java.util.HashSet<Integer>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
-for (Integer i : collection1) {
-    if (((Object) i).equals(new Integer(2))) {
-        result1.add(i);
+for (Integer anElement1 : collection1) {
+    if (((Object) anElement1).equals(new Integer(2))) {
+        result1.add(anElement1);
     }
     // no else
 }
