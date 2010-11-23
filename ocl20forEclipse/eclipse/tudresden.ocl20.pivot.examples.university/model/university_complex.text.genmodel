@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.examples.university/src"
+    modelPluginID="tudresden.ocl20.pivot.examples.university" modelName="University_complex"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>university_complex.text.ecore</foreignModel>
+  <genPackages prefix="University" basePackage="tudresden.ocl20.pivot.examples" disposableProviderFactory="true"
+      ecorePackage="university_complex.text.ecore#/">
+    <genDataTypes ecoreDataType="university_complex.text.ecore#//Date"/>
+    <genClasses ecoreClass="university_complex.text.ecore#//Grade">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Grade/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Grade/value"/>
+    </genClasses>
+    <genClasses ecoreClass="university_complex.text.ecore#//Person">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Person/firstName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Person/lastName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Person/isMarried"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Person/birthDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Person/age"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Person/salaries"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference university_complex.text.ecore#//Person/supervisor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference university_complex.text.ecore#//Person/supervised"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference university_complex.text.ecore#//Person/grade"/>
+    </genClasses>
+    <genClasses ecoreClass="university_complex.text.ecore#//Student">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Student/matNr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Student/matDate"/>
+    </genClasses>
+    <genClasses ecoreClass="university_complex.text.ecore#//Employee">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Employee/soSecNr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Employee/taxClass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//Employee/wage"/>
+    </genClasses>
+    <genClasses ecoreClass="university_complex.text.ecore#//PhDStudent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute university_complex.text.ecore#//PhDStudent/dissSubject"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
