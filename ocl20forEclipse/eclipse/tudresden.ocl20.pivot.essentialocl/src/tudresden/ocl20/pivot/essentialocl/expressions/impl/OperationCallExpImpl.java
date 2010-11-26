@@ -71,11 +71,15 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getArgument <em>Argument</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getReferredOperation <em>Referred Operation</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getArgument
+ * <em>Argument</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl#getReferredOperation
+ * <em>Referred Operation</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class OperationCallExpImpl extends FeatureCallExpImpl implements
@@ -88,8 +92,9 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 			.getLogger(OperationCallExpImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getArgument() <em>Argument</em>}' containment reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getArgument() <em>Argument</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getArgument()
 	 * @generated
 	 * @ordered
@@ -97,9 +102,10 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 	protected EList<OclExpression> argument;
 
 	/**
-	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getReferredOperation()
+	 * <em>Referred Operation</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #getReferredOperation()
 	 * @generated
 	 * @ordered
@@ -108,6 +114,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected OperationCallExpImpl() {
@@ -185,6 +192,12 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 				referredOperation = bindAllInstancesOperation(referredOperation);
 			}
 
+			// bind 'asSet' operation
+			else if (!(source.getType() instanceof CollectionType)
+					&& operationName.equals("asSet")) { //$NON-NLS-1$
+				referredOperation = bindAsSetOperation(referredOperation);
+			}
+
 			// bind 'oclAsType' operation
 			else if (operationName.equals("oclAsType")) { //$NON-NLS-1$
 				referredOperation = bindOclAsTypeOperation(referredOperation);
@@ -247,9 +260,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		/* Probably log entry. */
 		if (logger.isDebugEnabled()) {
-			logger
-					.debug("bindCharactersOperation(charactersOperation=" + charactersOperation //$NON-NLS-1$
-							+ ") - enter"); //$NON-NLS-1$
+			logger.debug("bindCharactersOperation(charactersOperation=" + charactersOperation //$NON-NLS-1$
+					+ ") - enter"); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -260,9 +272,11 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		/* Bind the operation. */
 		charactersOperation = charactersOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(((ComplexGenericType) charactersOperation
-						.getGenericType()).getUnboundType().getOwnedTypeParameter()),
-				Arrays.asList(sourceType));
+				new ArrayList<TypeParameter>(
+						((ComplexGenericType) charactersOperation
+								.getGenericType()).getUnboundType()
+								.getOwnedTypeParameter()), Arrays
+						.asList(sourceType));
 
 		/* Probably log exit. */
 		if (logger.isDebugEnabled()) {
@@ -312,8 +326,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		// bind the operation
 		flattenOperation = flattenOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(flattenOperation.getOwnedTypeParameter()),
-				Arrays.asList(elementType));
+				new ArrayList<TypeParameter>(flattenOperation
+						.getOwnedTypeParameter()), Arrays.asList(elementType));
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("bindFlattenOperation() - exit - return value=" //$NON-NLS-1$
@@ -330,6 +344,61 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 			elementType = checkForNestedCollection(elementType);
 		}
 		return elementType;
+	}
+
+	/**
+	 * FIXME Claas: Isn't there a general solution to solve the binding of
+	 * generic operations?
+	 * 
+	 * <p>
+	 * Helper method to bind the <code>OclAny.oclType()</code> {@link Operation}
+	 * .
+	 * </p>
+	 * 
+	 * @param The
+	 *            <code>OclAny.asSet()</code> {@link Operation} that shall be
+	 *            bound to this {@link OperationCallExp}.
+	 */
+	private Operation bindAsSetOperation(Operation asSetOperation) {
+
+		/* Probably log the entry of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("bindAsSetOperation(oclTypeOperation=" //$NON-NLS-1$
+					+ asSetOperation + ") - enter"); //$NON-NLS-1$
+		}
+		// no else.
+
+		/* Get the source's type. */
+		Type elementType;
+		elementType = this.getSource().getType();
+
+		/* Check that the type is not null. */
+		if (elementType == null) {
+			throw new WellformednessException(this,
+					"The source of the 'asSet' operation must be defined."); //$NON-NLS-1$
+		}
+		// no else.
+
+		/* Check argument size. */
+		if (getArgument().size() != 0) {
+			throw new WellformednessException(this,
+					"The 'asSet' operation has not to have any argument."); //$NON-NLS-1$
+		}
+		// no else.
+
+		/* Bind the asSet operation, which will set its return type. */
+		asSetOperation = asSetOperation.bindTypeParameter(
+				new ArrayList<TypeParameter>(asSetOperation
+						.getOwnedTypeParameter()), Arrays.asList(elementType));
+
+		/* Probably log the exit of this method. */
+		if (logger.isDebugEnabled()) {
+			logger.debug("bindAsSetOperation() - exit - return value=" //$NON-NLS-1$
+					+ asSetOperation);
+		}
+		// no else.
+
+		return asSetOperation;
 	}
 
 	/**
@@ -380,9 +449,10 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 		}
 
 		// bind the oclAsType operation, which will set its return type
-		oclAsTypeOperation = oclAsTypeOperation
-				.bindTypeParameter(new ArrayList<TypeParameter>(oclAsTypeOperation
-						.getOwnedTypeParameter()), Arrays.asList(representedType));
+		oclAsTypeOperation = oclAsTypeOperation.bindTypeParameter(
+				new ArrayList<TypeParameter>(oclAsTypeOperation
+						.getOwnedTypeParameter()), Arrays
+						.asList(representedType));
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("bindOclAsTypeOperation() - exit - return value=" //$NON-NLS-1$
@@ -434,8 +504,9 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		/* Bind the oclType operation, which will set its return type. */
 		oclTypeOperation = oclTypeOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(oclTypeOperation.getOwnedTypeParameter()),
-				Arrays.asList(representedType));
+				new ArrayList<TypeParameter>(oclTypeOperation
+						.getOwnedTypeParameter()), Arrays
+						.asList(representedType));
 
 		/* Probably log the exit of this method. */
 		if (logger.isDebugEnabled()) {
@@ -500,8 +571,9 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		/* Bind the product operation, which will set its return type. */
 		productOperation = productOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(productOperation.getOwnedTypeParameter()),
-				Arrays.asList(paramElementType));
+				new ArrayList<TypeParameter>(productOperation
+						.getOwnedTypeParameter()), Arrays
+						.asList(paramElementType));
 
 		/* Probably log the exit of this method. */
 		if (logger.isDebugEnabled()) {
@@ -528,7 +600,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 		// allInstances may only refer to types with a finite number of
 		// instances
-		if (srcType instanceof PrimitiveType || srcType instanceof CollectionType
+		if (srcType instanceof PrimitiveType
+				|| srcType instanceof CollectionType
 				|| srcType instanceof TupleType) {
 			throw new WellformednessException(this,
 					"The 'allInstances' operation cannot be invoked on '" //$NON-NLS-1$
@@ -563,6 +636,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List<OclExpression> getArgument() {
@@ -576,6 +650,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Operation getReferredOperation() {
@@ -584,19 +659,23 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setReferredOperation(Operation newReferredOperation) {
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
 					ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION,
 					oldReferredOperation, referredOperation));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -604,13 +683,15 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case ExpressionsPackageImpl.OPERATION_CALL_EXP__ARGUMENT:
-			return ((InternalEList<?>) getArgument()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getArgument()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -626,6 +707,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -634,7 +716,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 		switch (featureID) {
 		case ExpressionsPackageImpl.OPERATION_CALL_EXP__ARGUMENT:
 			getArgument().clear();
-			getArgument().addAll((Collection<? extends OclExpression>) newValue);
+			getArgument()
+					.addAll((Collection<? extends OclExpression>) newValue);
 			return;
 		case ExpressionsPackageImpl.OPERATION_CALL_EXP__REFERRED_OPERATION:
 			setReferredOperation((Operation) newValue);
@@ -645,6 +728,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -662,6 +746,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -677,6 +762,7 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -693,8 +779,8 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString()).append(
-						"referredOperation", referredOperation).toString(); //$NON-NLS-1$
+				.appendSuper(super.toString())
+				.append("referredOperation", referredOperation).toString(); //$NON-NLS-1$
 	}
 
 } // OperationCallExpImpl

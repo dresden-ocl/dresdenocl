@@ -144,16 +144,22 @@
     <ownedOperation name="oclIsInvalid" type="//@oclBoolean"/>
     <ownedOperation name="oclIsNew" type="//@oclBoolean"/>
     <ownedOperation name="oclIsKindOf" type="//@oclBoolean">
+      <ownedTypeParameter name="E"/>
       <ownedParameter name="typespec">
         <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
-          <typeArgument/>
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.6/@ownedTypeParameter.0"/>
+          </typeArgument>
         </genericType>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation name="oclIsTypeOf" type="//@oclBoolean">
+      <ownedTypeParameter name="E"/>
       <ownedParameter name="typespec">
         <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclType">
-          <typeArgument/>
+          <typeArgument>
+            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclAny/@ownedOperation.7/@ownedTypeParameter.0"/>
+          </typeArgument>
         </genericType>
       </ownedParameter>
     </ownedOperation>

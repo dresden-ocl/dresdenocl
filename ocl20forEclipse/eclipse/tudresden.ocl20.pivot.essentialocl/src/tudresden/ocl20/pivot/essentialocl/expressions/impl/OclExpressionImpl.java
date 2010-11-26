@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
@@ -52,7 +51,6 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
 
@@ -245,11 +243,6 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 					"The 'asSet' operation in type '" + getType().getName() //$NON-NLS-1$
 							+ "' does not define the expected type parameter."); //$NON-NLS-1$
 		}
-
-		// bind the type parameter with the type of this operation
-		asSetOperation = asSetOperation.bindTypeParameter(
-				new ArrayList<TypeParameter>(asSetOperation.getOwnedTypeParameter()),
-				Arrays.asList(getType()));
 
 		// create a new operation call expression
 		OperationCallExp withAsSet = ExpressionsFactory.INSTANCE

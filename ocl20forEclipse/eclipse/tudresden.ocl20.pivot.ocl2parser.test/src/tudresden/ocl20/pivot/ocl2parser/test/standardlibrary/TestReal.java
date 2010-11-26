@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.standardlibrary;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
@@ -93,6 +94,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testAddPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -147,6 +149,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testDivisionPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -228,6 +231,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testGreaterThanEqualPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -282,6 +286,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testGreaterThanPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -336,6 +341,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testLessThanEqualPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -390,6 +396,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testLessThanPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -498,6 +505,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testMinusPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -552,6 +560,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testMultiplyPositive02() throws Exception {
 
 		TestPerformer testPerformer;
@@ -606,6 +615,7 @@ public class TestReal {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testNegationPositive02() throws Exception {
 
 		TestPerformer testPerformer;

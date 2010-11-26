@@ -11,6 +11,7 @@ Release 3.X (Not scheduled yet)
   - Derive and Init constraints defined for static properties are now parsed correctly.
   - The escape underscore for reserved words can now be used.
   - The ASM of nested LetExpressions now has the right order.
+  - OclAny.asSet() is now parsed correctly either if used implicitly or explicitly.
   
 * Improvements on Ocl2Java
   - Generated aspects are named according to their constraints.

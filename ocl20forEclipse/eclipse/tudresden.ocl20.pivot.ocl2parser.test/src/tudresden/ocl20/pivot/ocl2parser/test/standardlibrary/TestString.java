@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.standardlibrary;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
@@ -66,6 +67,7 @@ public class TestString {
 	 * </p>
 	 */
 	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
 	public void testAddPositive02() throws Exception {
 
 		TestPerformer testPerformer;
