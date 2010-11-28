@@ -58,6 +58,9 @@ public abstract class AbstractInterpreterTest {
 	/** The name of a test {@link IModelInstance} for this test suite. */
 	protected static final String INSTANCE1_NAME = "package1/Instance1";
 
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE2_NAME = "package1/Instance2";
+
 	/** The name of a test {@link IModel} for this test suite. */
 	protected static final String MODEL1_NAME = "package1/Model1";
 

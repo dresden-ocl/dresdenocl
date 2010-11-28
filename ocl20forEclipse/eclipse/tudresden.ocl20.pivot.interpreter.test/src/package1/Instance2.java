@@ -18,27 +18,41 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package package1;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+
 /**
  * <p>
- * A class of a simple test model.
+ * A class of a simple test model instance.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class Class1 {
+public class Instance2 {
 
-	/** Required to initialize undefined in constraints. */
-	@SuppressWarnings("unused")
-	private Boolean booleanNull = null;
-	
-	/** Required to initialize undefined in constraints. */
-	@SuppressWarnings("unused")
-	private Integer[] bagIntegerNull = null;
-	
-	/** Required to initialize undefined in constraints. */
-	@SuppressWarnings("unused")
-	private Integer integerNull = null;
-	
-	/** Required to test recursion of defined properties. */
-	protected Class1 parent = null;
+	/**
+	 * <p>
+	 * Returns a {@link List} of {@link Object}s that are part of the
+	 * {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @return A {@link List} of {@link Object}s that are part of the
+	 *         {@link IModelInstance}.
+	 */
+	public static List<Object> getModelObjects() {
+
+		List<Object> result;
+		result = new ArrayList<Object>();
+
+		Class1 class1 = new Class1();
+		Class1 class2 = new Class1();
+		class2.parent = class1;
+		
+		result.add(class1);
+		result.add(class2);
+
+		return result;
+	}
 }

@@ -1,0 +1,11 @@
+package package1
+
+/* Count of parents of this Class1 */
+context Class1
+def: numberOfParents : Integer =
+if self.parent.oclIsUndefined() 
+	then 0
+    else self.parent.numberOfParents + 1
+endif
+
+endpackage

@@ -105,4 +105,29 @@ public class TestRecursion extends AbstractInterpreterTest {
 		this.assertIsTrue(results.get(5));
 		this.assertIsTrue(results.get(6));
 	}
+	
+	/**
+	 * <p>
+	 * Tests the operation <code>Collection.product(Collection)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRecursiveProperty01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/recProperty01", INSTANCE2_NAME, Arrays
+						.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsEqual(new Integer(0), results.get(0));
+		this.assertIsEqual(new Integer(1), results.get(1));
+	}
 }
