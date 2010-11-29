@@ -497,7 +497,7 @@ invInstrumentation3_methodCallPointcut(class, package) ::= <<
  * <p>Pointcut for all calls on {@link $package$.$class$#$checkInvariantsOperationName()$()}.</p>
  */
 protected pointcut $checkInvariantsOperationName()$Caller($package$.$class$ $selfVariable()$):
-	call(void $package$.$class$.$checkInvariantsOperationName()$())
+	call(void $checkInvariantsOperationName()$())
 	&& target($selfVariable()$);
 >>
 

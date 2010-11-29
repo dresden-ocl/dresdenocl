@@ -1,0 +1,32 @@
+/* Well, what has to be the result here? */
+
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException test;
+test = (tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+
+Boolean result1;
+
+/* Check if the expression results in invalid. */
+try {
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = test; 
+    result1 = false;
+}
+
+catch (Exception e) {
+    result1 = true;
+}
+
+Boolean result2;
+
+/* Check if the expression results in invalid. */
+try {
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = test; 
+    result2 = false;
+}
+
+catch (Exception e) {
+    result2 = true;
+}
+
+(result1 || result2)

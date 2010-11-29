@@ -17,7 +17,7 @@ public privileged aspect ProgramPartner_InvAspect_totalPoints {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**

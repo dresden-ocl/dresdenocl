@@ -191,6 +191,71 @@ public class TestOclAny extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testOclIsInvalid03() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid03");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsInvalid04() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid04");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsInvalid05() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid05");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsInvalid06() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid06");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testOclIsInvalid07() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsInvalid07");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of a constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
 	public void testOclIsNew01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/oclany", "oclIsNew01");

@@ -17,7 +17,7 @@ public privileged aspect Membership_InvAspect_levelAndColor {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.Membership.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**

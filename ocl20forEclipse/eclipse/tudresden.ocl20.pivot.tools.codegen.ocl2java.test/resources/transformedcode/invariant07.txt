@@ -17,7 +17,7 @@ public privileged aspect Customer_InvAspect_sizesAgree {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Customer#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.Customer.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**

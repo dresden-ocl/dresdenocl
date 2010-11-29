@@ -49,6 +49,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
@@ -1472,14 +1473,24 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 						&& operationName.equals("oclIsInvalid")) {
 					String resultVar = this.environment.getNewResultVarName();
 
+					if (result.containsCode())
+						template.setAttribute("sourceCode", result.getCode());
+					// no else.
+					
 					template.setAttribute("sourceExp",
 							sourceCode.getResultExp());
 					template.setAttribute("resultVar", resultVar);
 
-					if (sourceExp.getType() != null) {
+					if (sourceExp.getType() != null)
 						template.setAttribute("sourceHasType", "true");
-					}
 					// no else.
+
+					/*
+					 * Reset resulting code because all code must be contained
+					 * within the try block (has been added to the template
+					 * before).
+					 */
+					result = new TransformedCodeImpl();
 
 					result.addCode(template.toString());
 					resultExp = resultVar;

@@ -17,7 +17,7 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**

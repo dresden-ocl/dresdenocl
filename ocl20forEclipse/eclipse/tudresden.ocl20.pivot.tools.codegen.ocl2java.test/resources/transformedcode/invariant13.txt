@@ -17,7 +17,7 @@ public privileged aspect CustomerCard_InvAspect1 {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**

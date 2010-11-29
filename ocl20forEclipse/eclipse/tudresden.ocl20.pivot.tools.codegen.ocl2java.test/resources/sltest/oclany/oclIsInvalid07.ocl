@@ -1,0 +1,8 @@
+package testpackage
+
+/* Tests nested oclIsInvalid. */
+context Class1
+def: testOclIsInvalid07(): Boolean =
+'a'.oclIsInvalid().oclIsInvalid()
+	
+endpackage

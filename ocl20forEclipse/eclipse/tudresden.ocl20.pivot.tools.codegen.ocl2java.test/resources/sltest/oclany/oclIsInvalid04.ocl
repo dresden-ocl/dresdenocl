@@ -1,0 +1,10 @@
+package testpackage
+
+/* If a let expression contains a check for invalidity, the variable must be
+   defined outside the try block. */
+context Class1
+def: testOclIsInvalid04(): Boolean =
+	let test = 'invalid'.oclIsInvalid() 
+	in  test
+	
+endpackage

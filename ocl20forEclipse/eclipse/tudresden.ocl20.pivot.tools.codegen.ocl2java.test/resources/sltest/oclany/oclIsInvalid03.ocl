@@ -1,0 +1,10 @@
+package testpackage
+
+/* LetExpressions check for invalidity later on must be within the
+	generated catch block in Java. */
+context Class1
+def: testOclIsInvalid03(): Boolean =
+	let test = invalid 
+	in  test.oclIsInvalid()
+	
+endpackage

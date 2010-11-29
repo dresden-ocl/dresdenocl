@@ -506,11 +506,14 @@ oclAsTypeOperationOnOclAny(sourceExp, argsExp) ::= <<
 >>
 
 // --- OclAny.oclIsInvalid() ---
-oclIsInvalidOperationOnOclAny(sourceExp, resultVar, sourceHasType) ::= <<
+oclIsInvalidOperationOnOclAny(sourceCode, sourceExp, resultVar, sourceHasType) ::= <<
 Boolean $resultVar$;
 
 /* Check if the expression results in invalid. */
 try {
+	$if(sourceCode)$
+	$sourceCode$
+	$endif$
     $if(sourceHasType)$
     /* DUMMY variable is necessary to form literals into a statement. */
     Object DUMMY = $sourceExp$; 
