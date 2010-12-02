@@ -1,0 +1,14 @@
+java.util.HashMap<String, Object> tuple1;
+tuple1 = new java.util.HashMap<String, Object>();
+
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+collection1.add(new Integer(3));
+tuple1.put("a", collection1);
+tuple1.put("b", "foo");
+tuple1.put("c", "bar");
+
+tuple1.get("b").equals("foo")

@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::simple
+
+-- Before returning the age, the age must be defined.
+context Person::getAge()
+pre: not age.oclIsUndefined()
+
+endpackage

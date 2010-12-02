@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 48 and adapted.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+   
+context LoyaltyProgram
+inv minServices: partners->forAll(deliveredServices->size() >= 1)
+                     
+endpackage

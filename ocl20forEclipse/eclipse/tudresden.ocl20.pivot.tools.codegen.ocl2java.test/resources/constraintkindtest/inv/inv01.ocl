@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1
+inv testInvariant01: self.isInvariant01Violated
+
+endpackage

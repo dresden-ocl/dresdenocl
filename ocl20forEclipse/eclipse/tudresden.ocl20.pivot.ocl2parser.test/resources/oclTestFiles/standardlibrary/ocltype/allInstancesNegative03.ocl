@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Should fail. allInstances() is defined on types, not
+-- on type instances.
+context Type1
+def: testAllInstancesNegative03(): Set(Type1) =
+self::allInstances()
+
+endpackage

@@ -1,0 +1,7 @@
+package package1::package2
+
+-- This operation is new in OCL 2.1
+context Type1
+inv: Set { 1, 2 } -> max() = 2
+
+endpackage

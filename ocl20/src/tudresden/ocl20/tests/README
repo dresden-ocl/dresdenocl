@@ -1,0 +1,24 @@
+TESTS OF THE DRESDEN OCL TOOLKIT FOR OCL2.0
+
+This folder contains all tests delivered with the Dresden OCL2 Toolkit source code.
+
+!!!This folder is still under construction and incomplete.!!!
+(Last Update on 03-31-2008)
+
+How to run the tests
+====================
+1. Before you can run the test cases you may read the instructions in the GETTING-STARTED file in the root
+   folder of this project.
+
+2. The Test Suite is written in jUnit4. Make sure that the jUnit4 library is listed in your classpath.
+
+3. Some of the test cases uses files located in the resources folder of the Dresden OCL2 Toolkit!
+   If you run the AllTests.java, make sure, that the resources folder is listed as a library in the 
+   classpath of your project!
+
+4. Run the AllTests.java of the package tudresden.ocl2.tests as a jUnit4 Test Suite
+   or call the run.tests task in the build.xml Ant script.
+
+ATTENTION: Some test case uses the Java class FileReader which seems to have some problems with
+paths containing white spaces. Make sure, that your project folder and its absolute path does not 
+contain any white spaces!

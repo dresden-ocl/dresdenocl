@@ -1,0 +1,28 @@
+OCL22JAVA TEST SUITE FOR DRESDEN OCL2 FOR ECLIPSE
+=================================================
+This plug-in contains some classes to test the Ocl22Java code generator.
+
+Provided Tests
+==============
+* The package tudresden.ocl20.pivot.ocl2java.test.tests contains test cases testing
+  Ocl22Java with the Royals and Loyals Example.
+  
+* The class tudresden.ocl20.pivot.ocl2java.test.tests.CreateAspectJCode can be executed
+  as a JUnit test suite to generate the AspectJ files for the Royals and Loyals Example.
+
+* The package tudresden.ocl20.pivot.ocl2java.test.tests.constraintkinds contains test 
+  cases testing the correct transformation the differend kinds of OCL constraints to
+  AspectJ aspects.
+  
+* The package tudresden.ocl20.pivot.ocl2java.test.tests.standardlibrary contains test 
+  cases testing the correct transformation of operations defined in the OCL Standard 
+  Library.
+  
+* The class tudresden.ocl20.pivot.ocl2java.test.tests.GenerateAspectJCode can be executed
+  as a JUnit test suite to generate the AspectJ files for the test plug-in
+  tudresden.ocl20.pivot.ocl22java.test.aspectj.
+  
+Run the complete Suite
+======================
+* Run the class tudresden.ocl20.pivot.ocl22java.test.AllOcl22JavaTests as JUnit Plug-in
+  test suite.

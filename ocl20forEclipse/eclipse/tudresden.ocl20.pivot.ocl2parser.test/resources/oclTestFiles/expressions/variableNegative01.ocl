@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Test variables from Operation arguments.
+-- Should fail. Variable does not exist.
+context Type1::addInteger(anInt01 : Integer)
+pre: 
+  anInt02 > 0 
+
+endpackage

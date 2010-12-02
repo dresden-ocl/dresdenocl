@@ -1,0 +1,8 @@
+ROYAL AND LOYAL EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
+GENERATED JAVA CODE AND TEST SUITE
+==============================================================
+
+This directory again contains some classes of the royal and loyal example.
+
+Code duplication is enforced to avoid unepected results by using the same
+example for code generation and OCL interpretation.

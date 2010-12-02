@@ -1,0 +1,9 @@
+ROYAL AND LOYAL EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
+GENERATED JAVA CODE AND TEST SUITE
+==============================================================
+
+This directory contains the generated code although generated code should not
+be distributed in the SVN.
+
+Anyhow, the code is distributed to compile all test cases without errors that
+depend on newly defined methods and properties. 

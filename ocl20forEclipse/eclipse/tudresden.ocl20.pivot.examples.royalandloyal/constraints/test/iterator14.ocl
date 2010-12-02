@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 181 and adapted.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context LoyaltyAccount
+inv: transactions->collect(points)->exists(p:Integer | p = 500)
+
+endpackage

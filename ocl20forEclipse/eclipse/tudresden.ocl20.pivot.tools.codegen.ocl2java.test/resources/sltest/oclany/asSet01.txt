@@ -1,0 +1,4 @@
+java.util.Set<testpackage.Class1> result1;
+result1 = new java.util.HashSet<testpackage.Class1>();
+result1.add(aClass);
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(result1)

@@ -1,0 +1,8 @@
+String outer;
+outer = "outer";
+
+String inner;
+inner = "inner";
+
+
+outer.concat(inner)

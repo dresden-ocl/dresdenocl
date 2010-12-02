@@ -1,0 +1,46 @@
+violated ocl invariant 'anInterface' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'anInterface' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'anInterface' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'dates' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'dates' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'dates' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'dates' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'formats' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'formats' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'formats' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'formats' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'integers' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'integers' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'integers' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'integers' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'interfaces' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'interfaces' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'interfaces' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'mapuq' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'mapuq' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'mapuq' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'mapuq' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'strings' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'strings' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'strings' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'stringsMinusGreaterincludes_inline_space_hallo_' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'stringsMinusGreaterincludes_inline_space_hallo_' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'stringsMinusGreaterincludes_inline_space_hallo_' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'stringsMinusGreaterincludes_inlinehallo_' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'stringsMinusGreaterincludes_inlinehallo_' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'stringsMinusGreaterincludes_inlinehallo_' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl invariant 'testingInheritance' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'testingInheritance' on object 'tudresden.ocl.injection.test.SecondExample'.
+violated ocl invariant 'testingInheritance' on object 'tudresden.ocl.injection.test.ThirdExample'.
+violated ocl postcondition 'getQ_post_bello' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl postcondition 'getQ_post_bello' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl postcondition 'stringsMinusGreaterincludes_inline_space_hallo_post_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl postcondition 'stringsMinusGreaterincludes_inline_space_hallo_post_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl postcondition 'stringsMinusGreaterincludes_inlinehallopost_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl postcondition 'stringsMinusGreaterincludes_inlinehallopost_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl precondition 'getQ_pre_bello' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl precondition 'getQ_pre_bello' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl precondition 'stringsMinusGreaterincludes_inline_space_hallo_pre_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl precondition 'stringsMinusGreaterincludes_inline_space_hallo_pre_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl precondition 'stringsMinusGreaterincludes_inlinehallopre_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.
+violated ocl precondition 'stringsMinusGreaterincludes_inlinehallopre_' on object 'tudresden.ocl.injection.test.SecondExample' operation 'getQualifiers()'.

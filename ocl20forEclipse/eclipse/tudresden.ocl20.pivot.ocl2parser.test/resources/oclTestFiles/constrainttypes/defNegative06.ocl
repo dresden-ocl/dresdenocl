@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Definition of already defined operation of the OCL Standard Library is not allowed.
+context Type1
+def: oclIsUndefined(): Boolean = true
+
+endpackage

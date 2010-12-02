@@ -1,0 +1,28 @@
+README file for "software" directory.
+
+
+This directory contains software packages required satisfy fundamental
+external dependecies. This software is required to build or run parts of
+the Dresden OCL2.0 Toolkit.
+
+
+SableCC	2.18.1          required to build the extended SableCC, which is
+                        in turn required to build the SableCC-based OCL2.0
+			parser. SableCC is an LALR(1) class parser generator
+			(see http://www.sablecc.org for details).
+
+  sablecc.jar		SableCC java archive containing runnable version
+                        of the plain SableCC parser generator.
+			License: LICENSE-SABLECC
+
+
+
+Binary libraries
+
+  lib/*                 Libraries in binary form (*.jar), taken from the NetBeans
+    jmi.jar		project.
+    mof.jar
+    openide.jar
+
+  JGraph 5.0		JGraph, used to display graphs (License: LICENSE-JGRAPH)
+  JGraph-Addons	0.1.0.0 TreeLayout for JGraph (License: LICENSE-JGRAPH-ADDONS)

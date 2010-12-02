@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Should fail. Static Property cannot be accessed non-statically.
+-- Probably a lower reaction would also possible because the specification
+-- not explicitely forbids this expression. Maybe a warning?
+context Type1
+inv: self.aStaticInteger > 0
+
+endpackage

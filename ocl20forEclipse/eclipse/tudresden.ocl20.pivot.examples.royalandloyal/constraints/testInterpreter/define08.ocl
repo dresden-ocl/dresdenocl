@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Used to test the preparation contained in '../define08.ocl'
+context ProgramPartner
+inv: getBurningTransactions()->size() >= 0
+
+endpackage

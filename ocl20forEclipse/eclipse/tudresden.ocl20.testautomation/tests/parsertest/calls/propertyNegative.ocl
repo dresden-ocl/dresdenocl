@@ -1,0 +1,25 @@
+----------------------
+-- Parsertest
+-- These default options are overridden by statement's
+-- options.
+-- 
+-- @Options{parseonly fail}
+----------------------
+package parsertest::subpackage
+
+-- Should fail. Property does not exist.
+context Type1
+inv: self.somethingInteger > 0
+
+-- Should fail. Non-static Property cannot be accessed statically.
+context Type1
+inv: self::anInteger > 0
+
+-- Should fail. Static Property cannot be accessed non-statically.
+-- Probably a lower reaction would also possible because the specification
+-- not explicitely forbids this expression. Maybe a warning?
+context Type1
+inv: self.aStaticInteger > 0
+
+
+endpackage

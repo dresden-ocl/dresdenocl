@@ -1,0 +1,7 @@
+package package1::package2
+
+/* Since Ocl 2.2. the InvalidLiteral explicitly exists in OCL. */
+context Type1
+inv: invalid.oclIsInvalid()
+
+endpackage

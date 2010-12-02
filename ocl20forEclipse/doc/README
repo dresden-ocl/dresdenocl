@@ -1,0 +1,11 @@
+MANUAL OF DRESDEN OCL2 FOR ECLIPSE
+==================================
+
+This directory contains the manual of Dresden OCL2 for Eclipse.
+The manual is located in the 'pdf' sub-directory.
+
+The Latex files to edit the manual are located in the 'tex' sub-
+directory.
+
+Further information and best practices can be found in the 
+ST Wiki (http://st.inf.tu-dresden.de/stwiki/index.php/OCL:Best_Practices).

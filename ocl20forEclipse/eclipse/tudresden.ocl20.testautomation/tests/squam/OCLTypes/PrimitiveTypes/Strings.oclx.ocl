@@ -1,0 +1,69 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: Strings
+
+--	A library with examples for Strings in OCL.
+-- 
+--	Author: Joanna Chimiak-Opoka
+--	Author: Hannes Mösl
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Tests operations on Strings.
+-- 
+context Model
+
+inv tStringOperations_1: let s1 : String = 'OCL' in
+			 let s2 : String = ' is cool' in s1.size() = 3
+
+context Model
+
+inv tStringOperations_2: let s1 : String = 'OCL' in
+			 let s2 : String = ' is cool' in s1.concat(s2) = 'OCL is cool'
+
+context Model
+
+inv tStringOperations_3: let s1 : String = 'OCL' in
+			 let s2 : String = ' is cool' in s2.substring(5,8) = 'cool'
+
+--context Model
+
+--inv tStringOperations_4: let s1 : String = 'OCL' in
+--			 let s2 : String = ' is cool' in s2.toUpper() = ' IS COOL'
+
+--context Model
+
+--inv tStringOperations_5: let s1 : String = 'OCL' in
+--			 let s2 : String = ' is cool' in s1.toLower() = 'ocl'
+
+--	Tests convertion of a String to a number or a Boolean value.
+-- The generic conversion operation are defined for OclAny, see OCLSpecial.oclx.
+context Model
+
+inv tString2NumberOrBoolean_1: let s1 : String = '5' in
+			  let s2 : String = '2.8' in
+			  let s3 : String = 'true' in s1.toInteger() = 5
+
+context Model
+
+inv tString2NumberOrBoolean_2: let s1 : String = '5' in
+			  let s2 : String = '2.8' in
+			  let s3 : String = 'true' in '5'.toInteger() = 5
+
+context Model
+
+inv tString2NumberOrBoolean_3: let s1 : String = '5' in
+			  let s2 : String = '2.8' in
+			  let s3 : String = 'true' in s2.toReal() = 2.8
+
+context Model
+
+inv tString2NumberOrBoolean_4: let s1 : String = '5' in
+			  let s2 : String = '2.8' in
+			  let s3 : String = 'true' in '2.8'.toReal() = 2.8
+
+endpackage

@@ -1,0 +1,90 @@
+-- 
+-- OCL2.0 test and demonstration constraints
+-- 
+-- Part of Dresden OCL Tookit, see LICENSE for license terms.
+-- (c) 2004, 2005 Ansgar Konermann <konermann@itikko.net>
+-- 
+-- 
+-- Use this constraint file with model CarOwner.xmi
+-- 
+
+package carworld
+context Car
+inv:
+   let fourtytwo: oclLib::Integer = 42 in
+   let ow: Person = owner->asSequence()->first() in 
+      1 > fourtytwo or not ow->isEmpty()
+inv hasOwner: self.owner->notEmpty()
+endpackage
+
+-- Line comment: this text should be discarded by the lexer
+
+/* 
+ * Block comment: this text should be discarded by the lexer
+ * 
+ * 
+ */
+
+package oclLib
+
+context Boolean
+inv longsum: 3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 = 27
+inv mult_add_precedence: 3 + 4 * 5 * 6 + 7 + 8 * 9 > 0
+inv boolean_comparison: (3 + 4 > 5 + 6) = (3 + 4 > 5 + 6)
+endpackage
+
+package carworld::nested
+context Classifier1
+inv size_is_positive: size > 0
+endpackage
+
+package carworld
+context Person
+inv age_is_not_negative: age >= 0
+
+context Person
+def optionalName1: isAdult: oclLib::Boolean = age >= 18
+def optionalName2: ownsCar: oclLib::Boolean = not ownedCar->isEmpty()
+
+context Car
+inv:
+  let o: oclLib::Integer = 42 in 
+  let p: Person = owner->asSequence()->first() in
+    1 + 1 > 2
+
+context Person::age: Integer
+  init: let a: Integer = 5 in let b: Integer = 7 in if a < b then 0 else 0 endif
+  derive: 1+1+1
+
+context Car::model: String
+  init: '<unknown>'
+  derive: 'abc'.concat('def')
+
+
+context Car::driveTo(x: Integer, y: Integer): Boolean
+  pre precond1: x > 0 and y > 0 and x <= 100 and y <= 100 and not self.owner->isEmpty()
+  body: true
+
+-- test parsing of def: constraints for operations
+context Car
+def: isMyCar(me: Person): Boolean = owner->includes(me)
+
+-- test parsing of operation contexts
+context Car::getTopSpeed(): Real
+  post: true
+
+-- test parsing of operations with type argument
+context Car
+inv: self.oclIsTypeOf(OclAny)
+
+-- test parsing of real literals
+context Car
+  inv: topSpeed >= 10.0
+  inv: topSpeed >= 1.0e1
+  inv: topSpeed >= 1.0e+1
+  inv: topSpeed >= 1.0e+001
+  inv: topSpeed >= 100.0e-1
+  inv: topSpeed >= 100.0e-01
+
+endpackage
+

@@ -1,0 +1,1 @@
+"Anneke ".concat("and Jos").equals("Anneke and Jos")

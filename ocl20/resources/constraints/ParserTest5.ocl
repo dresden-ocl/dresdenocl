@@ -1,0 +1,5 @@
+package timing
+context calendar::weekend
+inv: this.getName() >= 'hello'
+endpackage
+

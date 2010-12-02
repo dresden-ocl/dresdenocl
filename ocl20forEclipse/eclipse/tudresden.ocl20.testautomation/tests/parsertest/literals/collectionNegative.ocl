@@ -1,0 +1,30 @@
+----------------------
+-- Parsertest
+-- These default options are overridden by statement's
+-- options.
+-- 
+-- @Options{parseonly fail}
+----------------------
+package parsertest::subpackage
+
+-- Parsing should fail. Range expression is only valid for Integers.
+context Type1
+inv: Sequence{1.0 .. 3.2}->size() = 3
+
+-- Parsing should fail. Range expression is only valid for Integers.
+context Customer
+inv: Sequence{1 .. 3.2}->size()=3
+
+-- Parsing should fail. Range expression is only valid for Integers.
+context Type1
+inv: Sequence{1.7 .. 3}->size()=3
+
+-- Parsing should fail. Range expression is only valid for Integers.
+context Type1
+inv: Sequence{'a' .. 'c'}->size()=3
+
+-- Abstract type Collection should not be initialize-able.
+context Type1
+inv: Collection{1 .. 3}->size() = 3
+
+endpackage

@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testExistsIteratorExp02() : Boolean =
+Set{1, 2, 3}->exists(i1: Integer, i2: Integer | i1 + i2 = 3)
+
+endpackage

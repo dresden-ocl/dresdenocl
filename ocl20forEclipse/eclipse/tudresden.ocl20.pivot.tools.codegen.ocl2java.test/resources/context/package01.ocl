@@ -1,0 +1,9 @@
+package testpackage
+
+/* Used to test the generation of a basis package from the settings
+ * for type literals. */
+context Class1
+def: testPackage01(): OclType =
+Class1
+
+endpackage

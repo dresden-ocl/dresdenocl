@@ -1,0 +1,7 @@
+package package1::package2
+
+-- An Integer is also a Real but a Real is not an Integer!
+context Type1::getInteger(): Integer
+body: 42.0
+
+endpackage

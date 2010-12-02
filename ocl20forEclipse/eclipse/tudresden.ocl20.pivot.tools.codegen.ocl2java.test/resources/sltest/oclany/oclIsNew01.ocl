@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1::postOperation03() : Class1
+post testOclIsNew: result.oclIsNew()
+
+endpackage

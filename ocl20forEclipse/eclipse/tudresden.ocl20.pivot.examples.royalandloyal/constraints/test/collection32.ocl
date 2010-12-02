@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 173f.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Membership
+inv: OrderedSet{'a','b','c','d'}->subOrderedSet( 2, 3 ) = OrderedSet{'b','c'}
+  
+endpackage

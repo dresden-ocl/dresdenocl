@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+/* Expected as invalid. */
+def: testCollect(): Bag(Integer) =
+Bag { 1, 2, 3 } -> collect(element: Integer | 
+  if element = 2
+    then 1 / 0
+    else element
+  endif
+)
+
+endpackage

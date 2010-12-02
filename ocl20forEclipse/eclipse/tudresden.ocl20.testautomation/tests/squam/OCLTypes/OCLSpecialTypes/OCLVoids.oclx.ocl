@@ -1,0 +1,48 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: OCLVoids
+
+--	A library with examples for OclVoid.
+-- 
+--	Author: Joanna Chimiak-Opoka
+--	Author: Hannes Mösl
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Testing OclUdefined type and its only instantiation, i.
+-- e. null.
+context Model
+
+inv tOCLAnyUndefined_1: let v:OclVoid = null in v.oclIsUndefined()
+
+context Model
+
+inv tOCLAnyUndefined_2: let v:OclVoid = null in not v.oclIsInvalid()
+
+context Model
+-- v = v must be oclInvalid as the =-operation called on OclVoid results in oclInvalid
+inv tOCLAnyUndefined_3: let v:OclVoid = null in (v = v).oclIsInvalid()
+
+context Model
+inv tOclAnyUndefined_3a: let v:OclVoid = null in v->isEmpty()
+  
+context Model 
+inv tOCLAnyUndefined_3b: let v:OclVoid = null in not v.oclIsInvalid() and v.oclIsUndefined()
+
+
+
+context Model
+inv tOCLAnyUndefined_4: let v:OclVoid = null in (v <> 1).oclIsInvalid()
+-- invalid constraint as all operation calls on voids or invalids result in invalids
+-- inv tOCLAnyUndefined_4: let v:OclVoid = null in not (v <> 1)
+
+context Model
+-- changed 0 to 1
+-- must be 1 since oclVoid is a valid member of a collection
+inv tOCLAnyUndefined_5: let v:OclVoid = null in Set{null}->size() = 1
+
+endpackage

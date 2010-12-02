@@ -1,0 +1,12 @@
+package package1::package2
+
+-- Should fail. Result variable is not initialized.
+context Type1
+inv: self.aSet
+       ->iterate(
+           anInstance : Type1; 
+           sum : Integer | 
+           sum + anInstance.anInteger)  
+     > 0
+
+endpackage

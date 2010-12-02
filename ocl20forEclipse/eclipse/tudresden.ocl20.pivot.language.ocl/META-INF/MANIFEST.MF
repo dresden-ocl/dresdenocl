@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Abstract Syntax Model
+Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ tudresden.ocl20.pivot.pivotmodel
+Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.language.ocl,
+ tudresden.ocl20.pivot.language.ocl.impl,
+ tudresden.ocl20.pivot.language.ocl.util

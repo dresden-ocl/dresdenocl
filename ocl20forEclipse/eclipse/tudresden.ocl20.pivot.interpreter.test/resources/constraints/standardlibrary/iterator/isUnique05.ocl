@@ -1,0 +1,17 @@
+package package1
+
+context Class1
+inv:
+/* Expected as invalid. */
+Bag { 1, 2, 1 } -> isUnique(element: Integer | 
+  if element = 2
+    then integerNull
+    else 
+      if element = 3
+        then 1 / 0
+        else element
+      endif
+  endif
+)
+
+endpackage

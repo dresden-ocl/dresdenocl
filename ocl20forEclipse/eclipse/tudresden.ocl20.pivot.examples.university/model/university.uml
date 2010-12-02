@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="tudresden">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="ocl20">
+    <packagedElement xmi:type="uml:Package" xmi:id="_BlraUMHiEd2UNuYhQ_ApoA" name="pivot">
+      <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+        <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university">
+          <packagedElement xmi:type="uml:Class" xmi:id="_cjU9YDXHEd-_J9pP9Zsbaw" name="Grade">
+            <ownedAttribute xmi:id="_ePVMMDXHEd-_J9pP9Zsbaw" name="name" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_fV82ADXHEd-_J9pP9Zsbaw" value=""/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_kfdtgDXHEd-_J9pP9Zsbaw" name="value" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
+            <ownedAttribute xmi:id="_MIZyMMHiEd2UNuYhQ_ApoA" name="firstName" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_ix9C0DXHEd-_J9pP9Zsbaw" value=""/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_fjVkADXCEd-_J9pP9Zsbaw" name="lastName" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Y5dQgDXDEd-_J9pP9Zsbaw" name="isMarried" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_HRNAYDXDEd-_J9pP9Zsbaw" name="birthDate" visibility="private" type="_WWSGULnfEd-wmYSW0rs3Tw">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_bw5U4LnfEd-wmYSW0rs3Tw" value=""/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">
+            <generalization xmi:id="_U2mRYMHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+            <ownedAttribute xmi:id="_6H5LUDXDEd-_J9pP9Zsbaw" name="matNr" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_9LuIsDXDEd-_J9pP9Zsbaw" name="matDate" visibility="private" type="_WWSGULnfEd-wmYSW0rs3Tw"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XPL5YMHiEd2UNuYhQ_ApoA" name="Employee">
+            <generalization xmi:id="_XrWQ8MHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+            <ownedAttribute xmi:id="_KCsbIDXEEd-_J9pP9Zsbaw" name="soSecNr" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_jdA5YDXEEd-_J9pP9Zsbaw" name="taxClass" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="__dru0DXEEd-_J9pP9Zsbaw" name="wage" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_Gp76IDXFEd-_J9pP9Zsbaw" name="PhDStudent">
+            <generalization xmi:id="_QtHPQDXFEd-_J9pP9Zsbaw" general="_XPL5YMHiEd2UNuYhQ_ApoA"/>
+            <ownedAttribute xmi:id="_Z5zBQDXFEd-_J9pP9Zsbaw" name="dissSubject" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_kbv9EDXFEd-_J9pP9Zsbaw" name="A_supervisor_supervised" memberEnd="_UG71UDXGEd-_J9pP9Zsbaw _g5eTsDXGEd-_J9pP9Zsbaw" navigableOwnedEnd="_UG71UDXGEd-_J9pP9Zsbaw _g5eTsDXGEd-_J9pP9Zsbaw">
+            <ownedEnd xmi:id="_UG71UDXGEd-_J9pP9Zsbaw" name="supervised" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_kbv9EDXFEd-_J9pP9Zsbaw">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P5cSgDd5Ed-JXKTQMEgtig" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O-NZUDd5Ed-JXKTQMEgtig"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_g5eTsDXGEd-_J9pP9Zsbaw" name="supervisor" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_kbv9EDXFEd-_J9pP9Zsbaw">
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ljg0EDd5Ed-JXKTQMEgtig"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_B6LiUDd5Ed-JXKTQMEgtig" name="A_person_grade" memberEnd="_TG4e4Dd5Ed-JXKTQMEgtig _ZeJi8Dd5Ed-JXKTQMEgtig" navigableOwnedEnd="_ZeJi8Dd5Ed-JXKTQMEgtig">
+            <ownedEnd xmi:id="_ZeJi8Dd5Ed-JXKTQMEgtig" name="grade" type="_cjU9YDXHEd-_J9pP9Zsbaw" association="_B6LiUDd5Ed-JXKTQMEgtig"/>
+            <ownedEnd xmi:id="_TG4e4Dd5Ed-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_B6LiUDd5Ed-JXKTQMEgtig"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_WWSGULnfEd-wmYSW0rs3Tw" name="Date"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

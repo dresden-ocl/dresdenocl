@@ -1,0 +1,6 @@
+package package1
+
+context Class1
+inv testOrderedSetEquals01: OrderedSet{1,2,3,4,5} = OrderedSet{1,2,3,4,5}
+
+endpackage

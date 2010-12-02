@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOrderedSetInsertAt(source: OrderedSet(OclAny), arg01: Integer, arg02: OclAny): OrderedSet(OclAny) =
+source -> insertAt(arg01, arg02)
+
+endpackage

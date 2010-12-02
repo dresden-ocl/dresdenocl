@@ -1,0 +1,1 @@
+((Object) (new Integer(12) > new Float(22.7))).equals(new Boolean(false))

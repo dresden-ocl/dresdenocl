@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Should fail. For isUnique only one iterator variable is allowed.
+context Type1
+inv: Sequence { -2, -1, 0, 1, 2 }  
+       -> reject(number1 : Integer, number2 : Integer | number1 = number2)
+       -> size() = 5
+
+endpackage

@@ -1,0 +1,325 @@
+group javaExpressions;
+
+// ---- TEMPLATES FOR JAVA EXPRESSIONS ----
+// ----------------------------------------
+
+
+// --- CollectionLiteralExp ---
+// -- Declaration Code --
+collectionLiteralExp(collectionName, collectionType, elementCodes, elementExps) ::= <<
+$collectionType$ $collectionName$;
+$collectionName$ = new $collectionType$();
+$if(elementExps)$
+
+$elementCodes, elementExps:{code, exp | $if(code)$$code$$endif$$exp$}; separator = "\n"$$endif$
+
+>>
+
+
+// -- Including CollectionItem --
+collectionLiteralExp_collectionItem(collectionName, itemExp) ::= <<
+$collectionName$.add($itemExp$);
+>>
+
+
+// -- Including CollectionRange --
+collectionLiteralExp_collectionRange(collectionName, indexVar, indexType, firstExp, lastExp) ::= <<
+/* TODO: Auto-generated initialization does only work for numeric values. */
+for ($indexType$ $indexVar$ = $firstExp$; $indexVar$ <= $lastExp$; $indexVar$++) {
+    $collectionName$.add($indexVar$);
+}
+>>
+
+
+// --- EnumLiteralExp ---
+enumLiteralExp(enumerationName, literalName) ::= <<
+$enumerationName$.$literalName$
+>>
+
+
+// --- IfExp ---
+ifExp(ifCode, ifExp, thenCode, thenExp, elseCode, elseExp, resultVar, resultType) ::= <<
+$resultType$ $resultVar$;
+
+$ifCode$if ($ifExp$) {
+    $thenCode$$resultVar$ = $thenExp$;
+} else {
+    $elseCode$$resultVar$ = $elseExp$;
+}
+
+>>
+
+// --- InvalidLiteralExp ---
+invalidLiteralExp(resultType) ::= <<
+$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()
+>>
+
+
+// --- IterateExp ---
+iterateExp(sourceCode, sourceExp, sourceGenericType, itVar, bodyCode, bodyExp, resultType, resultVar, resultVarInitCode, resultVarInitExp) ::= <<
+$sourceCode$$resultVarInitCode$$resultType$ $resultVar$;
+$resultVar$ = $resultVarInitExp$;
+/* IterateExp: Iterate through all elements and perform an operation on them. */
+for ($sourceGenericType$ $itVar$ : $sourceExp$) {
+    $bodyCode$$resultVar$ = $bodyExp$;
+}
+
+>>
+
+
+// --- IteratorExp for Iterator Any ---
+iteratorExp_any(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar) ::= <<
+$sourceCode$$itType$ $resultVar$;
+$resultVar$ = null;
+
+/* Iterator Any: Iterate through the elements and return one element that fulfills the condition. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if ($bodyExp$) {
+        $resultVar$ = $itVar$;
+        break;
+    }
+    // no else
+}
+
+>>
+
+
+// --- IteratorExp for Iterator Collect ---
+iteratorExp_collect(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar, resultType, addOp) ::= <<
+$sourceCode$$resultType$ $resultVar$;
+$resultVar$ = new $resultType$();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    $resultVar$.$addOp$($bodyExp$);
+}
+
+>>
+
+
+// --- IteratorExp for CollectNested ---
+iteratorExp_collectNested(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar, resultType) ::= <<
+$sourceCode$$resultType$ $resultVar$;
+$resultVar$ = new $resultType$();
+
+/* Iterator CollectNested: Iterate through all elements and collect them. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    $resultVar$.add($bodyExp$);
+}
+
+>>
+
+
+// --- IteratorExp for Iterator Exists ---
+iteratorExp_exists(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar) ::= <<
+$sourceCode$$booleanType()$ $resultVar$;
+$resultVar$ = false;
+
+/* Iterator Exists: Iterate and check, if any element fulfills the condition. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if ($bodyExp$) {
+        $resultVar$ = true;
+        break;
+    }
+    // no else
+}
+
+>>
+
+
+// --- IteratorExp for Iterator ForAll ---
+iteratorExp_forAll(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar) ::= <<
+$sourceCode$$booleanType()$ $resultVar$;
+$resultVar$ = true;
+
+/* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if (!$bodyExp$) {
+        $resultVar$ = false;
+        break;
+    }
+    // no else
+}
+
+>>
+
+
+// --- IteratorExp for Iterator IsUnique ---
+iteratorExp_isUnique(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, bodyExpType, collectionVar, resultVar) ::= <<
+$sourceCode$$setType()$<$bodyExpType$> $collectionVar$;
+$booleanType()$ $resultVar$;
+
+$collectionVar$ = new $setTypeInitialization()$<$bodyExpType$>();
+$resultVar$ = true;
+
+/* Iterator IsUnique: Iterate and check, if all elements are unique. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if ($collectionVar$.contains($bodyExp$)) {
+        $resultVar$ = false;
+        break;
+    } else {
+        $collectionVar$.add($bodyExp$);
+    }
+}
+
+>>
+
+
+// --- IteratorExp for Iterator One ---
+iteratorExp_one(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar) ::= <<
+$sourceCode$$booleanType()$ $resultVar$;
+$resultVar$ = false;
+
+/* Iterator One: Iterate and check, if exactly one element fulfills the condition. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if ($bodyExp$) {
+        if ($resultVar$) {
+            // Found a second element.
+            $resultVar$ = false;
+            break;
+        } else {
+            // Found a first element.
+            $resultVar$ = true;
+	    }
+    }
+    // no else
+}
+
+>>
+
+
+// --- IteratorExp for Iterator Reject ---
+iteratorExp_reject(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar, resultType) ::= <<
+$sourceCode$$resultType$ $resultVar$;
+$resultVar$ = new $resultType$();
+
+/* Iterator Reject: Select all elements which do not fulfill the condition. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if (!$bodyExp$) {
+        $resultVar$.add($itVar$);
+    }
+    // no else
+}
+
+>>
+
+
+// --- IteratorExp for Iterator Select ---
+iteratorExp_select(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar, resultType) ::= <<
+$sourceCode$$resultType$ $resultVar$;
+$resultVar$ = new $resultType$();
+
+/* Iterator Select: Select all elements which fulfill the condition. */
+for ($itType$ $itVar$ : $sourceExp$) {
+    $bodyCode$
+    if ($bodyExp$) {
+        $resultVar$.add($itVar$);
+    }
+    // no else
+}
+
+>>
+
+
+// --- IteratorExp for Iterator SortedBy ---
+iteratorExp_sortedBy(sourceCode, sourceExp, itVar, itVar2, itType, bodyCode, bodyExp, bodyCode2, bodyExp2, comparatorName, compareResult, resultVar, resultType) ::= <<
+$sourceCode$$resultType$ $resultVar$;
+java.util.Comparator<$itType$> $comparatorName$;
+
+$resultVar$ = $sourceExp$;
+
+$comparatorName$ = new java.util.Comparator<$itType$>() {
+
+    /** Method which compares two elements of the collection. */
+    public int compare($itType$ $itVar$, $itType$ $itVar2$) {
+        int $compareResult$;
+
+        $bodyCode$$bodyCode2$$compareResult$ = 0;
+
+        if ($bodyExp$ < $bodyExp2$) {
+            $compareResult$ = -1;
+        } else if ($bodyExp$ > $bodyExp2$) {
+            $compareResult$ = 1;
+        }
+
+        return $compareResult$;
+    }
+};
+
+java.util.Collections.sort($resultVar$, $comparatorName$);
+
+>>
+
+
+// --- LetExp ---
+letExp(varType, varName, initCode, initExp, inCode) ::= <<
+$varType$ $varName$;
+$if(initCode)$
+$initCode$
+$endif$
+
+$if(initExp)$
+$varName$ = $initExp$;
+
+
+$endif$
+$inCode$
+>>
+
+
+// --- LiteralExp ---
+literalExp(type, value) ::= <<
+new $type$($value$)
+>>
+
+
+// --- PropertyCallExp ---
+propertyCallExp(sourceExp, propertyName) ::= <<
+$sourceExp$.$propertyName$
+>>
+
+
+// -- PropertyCallExp on Tuple Types --
+propertyCallExpOnTuple(sourceExp, propertyName) ::= <<
+$sourceExp$.get("$propertyName$")
+>>
+
+
+// --- StringLiteralExp ---
+stringLiteralExp(value) ::= <<
+"$value$"
+>>
+
+
+// --- TupleLiteralExp ---
+// -- Declaration Code --
+tupleLiteralExp(tupleName, argNames, argCodes, argExps) ::= <<
+$tupleType()$ $tupleName$;
+$tupleName$ = new $tupleType()$();
+$if(argNames)$
+
+$argNames, argCodes, argExps:{name, code, exp | $if(code)$$code$$endif$$tupleName$.put("$name$", $exp$);}; separator = "\n"$
+
+$endif$
+
+>>
+
+
+// --- TypeLiteralExp ---
+typeLiteralExp(type) ::= <<
+$type$.class
+>>
+
+
+// --- UndefinedLiteralExp ---
+undefinedLiteralExp() ::= <<
+null
+>>

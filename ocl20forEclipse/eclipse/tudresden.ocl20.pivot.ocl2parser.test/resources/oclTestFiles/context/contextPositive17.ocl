@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Used to test the name of the parameters specified in the context.
+context Type1::addInteger(testInput: Integer)
+pre: testInput <> null
+
+endpackage

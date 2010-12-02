@@ -1,0 +1,8 @@
+package package1::package2
+
+-- This operation is valid because .=() is defined on OclAny.
+-- Integers and Strings are both OclAny instances.
+context Type1
+inv: anInteger = aString
+
+endpackage

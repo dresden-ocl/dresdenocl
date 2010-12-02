@@ -1,0 +1,11 @@
+package package1::package2
+
+context Type1
+inv: self.aSet
+       ->iterate(
+           anInstance : Type1; 
+           sum : Integer = 0 | 
+           sum + anInstance.anInteger)  
+     > 0
+
+endpackage

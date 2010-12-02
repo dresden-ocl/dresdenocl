@@ -1,0 +1,7 @@
+package package1
+
+context Class1
+/* true and booleanNull causes invalid. */
+inv testOr04: false or (true and booleanNull)
+
+endpackage

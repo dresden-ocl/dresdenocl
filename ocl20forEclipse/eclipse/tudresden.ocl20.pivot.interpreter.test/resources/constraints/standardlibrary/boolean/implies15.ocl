@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+/* booleanNull is a property with the value undefined. */
+/* true and booleanNull causes invalid. */
+inv testOr15: (true and booleanNull) implies booleanNull
+
+endpackage

@@ -1,0 +1,8 @@
+package testpackage
+
+context Class1
+def: testBooleanLiteralExp01(): 
+  Boolean =
+true
+
+endpackage

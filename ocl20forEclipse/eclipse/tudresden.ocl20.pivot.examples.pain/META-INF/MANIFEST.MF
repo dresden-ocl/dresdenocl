@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL2 for Eclipse Pain Example
+Bundle-SymbolicName: tudresden.ocl20.pivot.examples.pain;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.junit4;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.facade,
+ org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.metamodels.xsd,
+ tudresden.ocl20.pivot.modelinstancetype.xml,
+ tudresden.ocl20.pivot.testsuite
+Bundle-Activator: tudresden.ocl20.pivot.examples.pain.PainExamplePlugin
+Bundle-ActivationPolicy: lazy

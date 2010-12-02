@@ -1,0 +1,17 @@
+java.util.Set<Integer> collection1;
+Boolean result1;
+
+collection1 = new java.util.HashSet<Integer>();
+result1 = true;
+
+/* Iterator IsUnique: Iterate and check, if all elements are unique. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1 : aClass.membership.accounts) {
+    if (collection1.contains(anElement1.number)) {
+        result1 = false;
+        break;
+    } else {
+        collection1.add(anElement1.number);
+    }
+}
+
+result1

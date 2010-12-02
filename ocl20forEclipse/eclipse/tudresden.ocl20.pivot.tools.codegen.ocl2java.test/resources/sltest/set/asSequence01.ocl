@@ -1,0 +1,8 @@
+package testpackage
+
+context Class1
+def: testSetAsSequence(source: Set(OclAny)): 
+  Sequence(OclAny) =
+source -> asSequence()
+
+endpackage

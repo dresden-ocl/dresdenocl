@@ -1,0 +1,9 @@
+package testpackage
+
+/* Used to test correct code generation of nested let expressions. */
+context Class1
+def: testLetExp02(): String =
+let outer = 'outer', inner = 'inner'
+in outer + inner
+
+endpackage

@@ -1,0 +1,11 @@
+-- Constraint taken and adapted from [1] page 48.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Membership
+inv levelAndColor:
+  (currentLevel.name = 'Silver' implies card.color = Color::silver)
+  and
+  (currentLevel.name = 'Gold' implies card.color = Color::gold)
+
+endpackage

@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Should fail. Self is not allowed in static operation's context.
+context Type1::aStaticOperation(): Integer
+body: 
+  self.anInteger 
+
+endpackage

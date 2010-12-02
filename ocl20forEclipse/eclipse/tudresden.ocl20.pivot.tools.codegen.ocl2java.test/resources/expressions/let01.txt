@@ -1,0 +1,5 @@
+Integer senseOfLife;
+senseOfLife = new Integer(42);
+
+
+senseOfLife

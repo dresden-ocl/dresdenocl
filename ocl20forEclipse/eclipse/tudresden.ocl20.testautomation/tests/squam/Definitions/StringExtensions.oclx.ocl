@@ -1,0 +1,116 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: StringExtensions
+
+--------------------------------------------------------
+-- definitions
+--------------------------------------------------------
+
+context String
+def: lowerCaseLetters : Set(String) = 
+			  Set{'a','b','c','d','e','f','g','h','i','j','k','l','m',
+			      'n','o','p','q','r','s','t','u','v','w','x','y','z'}
+			      
+context String
+def: upperCaseLetters : Set(String)=
+    		Set{'A','B','C','D','E','F','G','H','I','J','K','L','M',
+        		'N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}
+        		
+context String
+def: startsWithUpperCaseAndThenLowerCaseLetters() : Boolean = 	
+        	upperCaseLetters->includes(self.substring(1,1)) 
+        	and Set{2..self.size()}
+        	    -> forAll(i:Integer| lowerCaseLetters->includes(self.substring(i,i))) 
+        	and self.size()>=1
+        	
+context String
+def: isInNameFormat() : Boolean =
+        	if self.size()>=1 then
+        	  let firstLetter : String = self.substring(1,1) in
+        	   let theRest : String = self.substring(2,self.size()) in
+        	   firstLetter.toUpper() = firstLetter  
+        	   and theRest.toLower() = theRest  
+        	else 
+        	 false -- an empty string
+        	endif
+        	
+context String
+def: includesAt(s:String, from:Integer) : Boolean =
+			if s.size() = self.size() and from = 1 then
+      		    self = s
+      		  else
+      		    if s.size() < self.size() and from + s.size() -1 <= self.size() then 	 
+         		  self.substring(from, from + s.size() -1) = s
+           		else
+           		  false
+           		endif
+           	  endif
+           	  
+context String
+def: startsWith (prefix : String) : Boolean = self.includesAt(prefix, 1)
+
+
+context String
+def: endsWith(postfix : String) : Boolean =      		  
+      		  self.includesAt(postfix, self.size() - postfix.size() + 1)
+      		  
+      		  
+context String
+def: includes(str : String) : Boolean =
+      		let len : Integer = (self.size() - str.size() + 1) in
+      		  let iterator : Sequence(Integer) = Sequence{1..len} in      		  
+      		    iterator->collect(e | self.includesAt(str,e))->exists(true)
+      		    
+
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+
+
+context Model
+
+inv tStartsWithUpperCaseAndThenLowerCaseLetters_1: let s : Sequence(String) = Sequence{'Joanna', 'JoannaOpoka', 'J', 'joanna', ''} in 
+			let r : Sequence(Boolean) = Sequence{true, false, true, false, false} in not (s.startsWithUpperCaseAndThenLowerCaseLetters() = r)
+
+context Model
+
+inv tStartsWithUpperCaseAndThenLowerCaseLetters_2: let s : Sequence(String) = Sequence{'Joanna', 'JoannaOpoka', 'J', 'joanna', ''} in 
+			let r : Sequence(Boolean) = Sequence{true, false, true, false, false} in s.isInNameFormat() = r
+
+context Model
+
+inv tStartsEndsWith_1: let s : Sequence(String) = Sequence{'Joanna', 'Jo', 'J', 'joanna', '', 'na'} in s.startsWith('Jo') = Sequence{true, true, false, false, false, false}
+
+context Model
+
+inv tStartsEndsWith_2: let s : Sequence(String) = Sequence{'Joanna', 'Jo', 'J', 'joanna', '', 'na'} in s.endsWith('na') = Sequence{true, false, false, true, false, true}
+
+context Model
+
+inv tSingle_1: let s : Boolean = true in 'Joanna'.includes('an')
+
+context Model
+
+inv tSingle_2: let s : Boolean = true in not 'Jo'.includes('an')
+
+context Model
+
+inv tSingle_3: let s : Boolean = true in not 'J'.includes('an')
+
+context Model
+
+inv tSingle_4: let s : Boolean = true in 'joanna'.includes('an')
+
+context Model
+
+inv tSingle_5: let s : Boolean = true in not ''.includes('an')
+
+context Model
+
+inv tSingle_6: let s : Boolean = true in not 'na'.includes('an')
+
+endpackage

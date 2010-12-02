@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<root xmlns="http://www.w3.org/1999/XSL/Format">
+
+<layout-master-set>
+  <simple-page-master master-name="A4" 
+   	page-height="297mm" page-width="210mm"
+   	margin-top="1cm"   margin-bottom="1cm"
+   	margin-left="1cm"  margin-right="1cm">
+    <region-body   margin="2cm"/>
+  	<region-before extent="2cm"/>
+  	<region-after  extent="2cm"/>
+  	<region-start  extent="2cm"/>
+  	<region-end    extent="2cm"/>
+  </simple-page-master>
+</layout-master-set>
+
+<page-sequence master-reference="A4">
+<flow flow-name="xsl-region-body">
+	<block font-size="14pt" font-family="sans-serif">
+		Test
+	</block>
+	<block font-size="12pt" font-family="sans-serif" space-before="5mm" space-after="0mm">
+		Group 1
+	</block>
+	<table table-layout="fixed"  width="100%" border-width="1pt" border-style="solid">
+	<table-column column-width="5%"/>
+	<table-column column-width="30%"/>
+    <table-column column-width="65%"/>
+	<table-body>
+		<table-row border-bottom-width="0.5pt" border-bottom-style="solid">
+		<table-cell padding="2pt 2pt">
+			<block font-size="10pt" margin-left="0cm" font-family="sans-serif">
+				1.1
+			</block>
+		</table-cell>
+		<table-cell padding="2pt 2pt">
+			<block font-size="10pt" margin-left="1cm" font-family="sans-serif" space-before="2mm">
+				Item 1
+			</block>
+		</table-cell>
+		<table-cell padding="2pt 2pt">
+			<block text-align="left" font-size="10pt">
+  				<inline border-after-style="solid" border-after-width="thin" background-color="rgb(80%,80%,80%)" color="rgb(80%,80%,80%)">&#160;&#160;&#160;&#160;&#160;&#160;&#160;</inline> 
+  				<inline font-size="8pt">(please give a number)</inline> 
+  			</block>
+			
+		</table-cell>
+		</table-row>
+		
+	</table-body>
+	</table>
+</flow>
+</page-sequence>
+
+</root>

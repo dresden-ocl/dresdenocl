@@ -1,0 +1,40 @@
+<project>
+
+	<target name="Scala Compiler Init">
+		<property
+			name="scala.home"
+			value="./../scala.library"
+		/>
+		<property
+      name="scala-library.jar"
+      value="${scala.home}/lib/scala-library.jar"
+    />
+		<property
+			name="scala-compiler.jar"
+			value="${scala.home}/lib/scala-compiler.jar">
+		</property>
+		
+		<path id="build.classpath">
+      <pathelement location="${scala-library.jar}"   />
+			<fileset dir="${eclipse.home}">
+				<include name="plugins/org.eclipse.*.jar" />
+				<include name="plugins/org.emftext.access*.jar" />
+				<include name="dropins/*/org.emftext.access*.jar" />
+			</fileset>
+			<dirset dir="./..">
+      	<include name="tudresden.ocl20.**/bin"/>
+				<include name="org.kiama.**/bin"/>
+				<include name="org.emftext.**/bin"/>
+      </dirset>
+			<pathelement location="./../tudresden.ocl20.logging/lib/log4j-1.2.14.jar" />
+    </path>
+
+		<taskdef resource="scala/tools/ant/antlib.xml">
+      <classpath>
+        <pathelement location="${scala-compiler.jar}"   />
+        <pathelement location="${scala-library.jar}"   />
+      </classpath>
+    </taskdef>
+	</target>
+	
+</project>

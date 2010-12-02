@@ -1,0 +1,9 @@
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner> result1;
+result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.availableServices) {
+    result1.add(anElement1.partner);
+}
+
+((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.excludesAll(aClass.program.partners, result1)).equals(new Boolean(false))

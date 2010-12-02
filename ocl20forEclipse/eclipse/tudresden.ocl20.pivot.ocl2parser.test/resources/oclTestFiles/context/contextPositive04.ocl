@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Operation should be parsed.
+context Type1::getType1(): Type1
+pre: true
+  
+endpackage

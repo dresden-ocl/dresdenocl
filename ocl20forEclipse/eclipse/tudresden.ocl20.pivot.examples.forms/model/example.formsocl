@@ -1,0 +1,3 @@
+FORM "Test"
+  GROUP "Group 1"
+    ITEM "Item 1" : NUMBER

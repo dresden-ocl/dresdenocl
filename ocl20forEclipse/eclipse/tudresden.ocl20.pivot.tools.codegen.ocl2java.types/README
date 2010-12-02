@@ -1,0 +1,10 @@
+OCL22JAVA CODE GENERATOR TYPES PLUG-IN OF DRESEN OCL2 FOR ECLIPSE
+=================================================================
+
+This package contains some classes used by the OCL22Java code 
+generator to implement some OCL types in Java such as Collections.
+
+How to get started and how to use the code generator is explained in 
+the manual, located in the 'doc' directory in the SVN trunk or your
+toolkit's release (see chapter 'AspectJ Code Generation').
+

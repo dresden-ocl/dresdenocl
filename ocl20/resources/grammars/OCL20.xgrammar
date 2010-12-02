@@ -1,0 +1,731 @@
+/*
+ *
+ * Copyright (c) 2004, 2005 Ansgar Konermann
+ * Contact: <konermann@itikko.net>
+ *
+ * This file is part of the OCL2.0 parser and compiler libraries
+ * created at Technische Universitaet Dresden (TUD), Germany.
+ * Visit http://dresden-ocl.sourceforge.net/ for details.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA  02111-1307  USA
+ *
+ */
+Package tudresden.ocl20.core.parser.sablecc;
+
+//
+// Step 1: define tokens, replace them in production rules
+// Step 2: replace (x y)? ebnf terms by new production z = x y and z?
+//         rename rules so that they are all lower-case (use "_" to structure
+//         words) -- SableCC requires these transformations (grammar syntax)
+// Step 3: add lexical definitions for literals, comments, etc. [todo/cont here]
+// Step 4: define role names for equal rule references of the same productions
+//         add more role names where appropriate
+// Step 5: replace "simple_name" by "infix_operator" in infix operation call
+// Step 6: remove LALR(1) conflicts
+// Step 7: remove syntactically duplicate constructs
+// Step 8: associate OCL2.0 concrete syntax productions with productions contained in this
+//         new (modified 1.4) grammar. Make sure all OCL2.0 CS productions have a syntactical
+//         peer in this new grammar.
+
+// Restarted working: 2004 06 10
+
+// Step 8.1: add concrete syntax constructs for context declarations
+//           from chapter 7.4 of OCL1.6 (making sure that all OCL2.0 CS
+//           productions have a peer in this new grammar)
+// Step 8.2: build a table defining the mapping between old (OCL2.0 CS)
+//           and new (my new OCL CS) concrete syntax constructs.
+//
+//
+// Step 7b:  remove references to ocl_expression_cs, replace by
+//           primary_expression_cs, remove expression_in_ocl_cs
+// Step 9:   add context handling according to attribute rules
+//
+
+// Next larger steps (20040923)
+//
+// Step 10
+//      a)   add AST node types to every production
+//      b)   declare unwanted nodes and tokens in AST by using "!"
+
+
+
+Helpers
+  all                   = [0 .. 0xffff]; // full unicode range
+  lf                    = 10;
+  cr                    = 13;
+  tab                   =  9;
+  space                 = ' ';
+
+  line_terminator       = cr | lf | cr lf;
+  input_character       = [all - [cr + lf]];
+
+  decimal_digit         = ['0' .. '9'];
+  octal_digit           = ['0' .. '7'];
+  hex_digit             = ['0' .. '9'] | ['a' .. 'f'] | ['A' .. 'F'] ;
+  loweralpha            = ['a' .. 'z'];
+  upperalpha            = ['A' .. 'Z'];
+  name_start_character  = [loweralpha + upperalpha];
+  name_character        = [[name_start_character + '_'] + decimal_digit];
+  char_e				= 'e' | 'E';
+  sign					= '+' | '-';
+  backslash             = '\';
+  quote                 = '"';
+  
+  tick                  = ''';
+  dot                   = '.';
+  minus                 = '-';
+  dbl_dash              = '--';
+  commentblock_start    = '/*';
+  commentblock_end      = '*/';
+  noasterisk            = [ all - '*' ];
+  noslash               = [ all - '/' ];
+  asterisk              = '*';
+
+  string_not_unescaped  = [ ''' + [ backslash + [cr + lf] ] ];
+  // basic escape codes according to ANSI C 90
+  basic_escape_code     = 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' | tick | quote | '?' | backslash ;
+  octal_escape_code     = octal_digit ( octal_digit octal_digit? )? ;
+  hex_escape_code       = 'x' hex_digit ( hex_digit (hex_digit hex_digit? )? )? ;
+  escape_sequence       = backslash ( basic_escape_code | octal_escape_code | hex_escape_code );
+  string_literal_part   = [all - string_not_unescaped] | escape_sequence;
+
+
+Tokens
+! newline               = line_terminator;
+! blank                 = tab | space* ;
+
+! commentline           = dbl_dash input_character* line_terminator;
+! commentblock          = commentblock_start ( noasterisk | asterisk noslash )* commentblock_end;
+! tick                  = ''';
+! paren_open            = '(';
+! paren_close           = ')';
+! comma                 = ',';
+! arrow_right           = '->';
+! dot                   = '.';
+! dbl_dot               = '..';
+! colon                 = ':';
+! dbl_colon	            = '::';
+! semi_colon            = ';';
+  equals                = '=';
+! question_mark         = '?';
+! hash                  = '#';
+! at_pre                = '@pre';
+! bag                   = 'Bag';
+! collection            = 'Collection';
+! ordered_set           = 'OrderedSet';
+! sequence              = 'Sequence';
+! set                   = 'Set';
+! tuple                 = 'Tuple';
+! tuple_type            = 'TupleType';
+! bracket_open          = '[';
+! bracket_close         = ']';
+  caret <OclMessageOperator>        = '^';
+  dbl_caret <OclMessageOperator>    = '^^';
+! body                  = 'body';
+! context               = 'context';
+! def                   = 'def';
+! derive                = 'derive';
+! else                  = 'else';
+! endif                 = 'endif';
+! endpackage            = 'endpackage';
+  false <Boolean>       = 'false';
+! if                    = 'if';
+! in                    = 'in';
+! init                  = 'init';
+! inv                   = 'inv';
+! let                   = 'let';
+! package               = 'package';
+! pre                   = 'pre';
+! post                  = 'post';
+! then                  = 'then';
+  true <Boolean>        = 'true';
+! brace_open            = '{';
+! brace_close           = '}';
+! vertical_bar          = '|';
+
+
+
+  integer_literal <Integer>   = decimal_digit+;
+  
+  real_literal <Double>       = 
+      decimal_digit+ dot decimal_digit+
+    | decimal_digit+ dot decimal_digit+ char_e sign? decimal_digit+
+    ;
+    
+  string_literal <String>     = tick string_literal_part* tick;
+
+  iterate               = 'iterate';
+
+  // tokens for special iterate "instances":
+  select                = 'select';
+  reject                = 'reject';
+  collect               = 'collect';
+  for_all               = 'forAll';
+  any                   = 'any';
+  exists                = 'exists';
+  one                   = 'one';
+  is_unique             = 'isUnique';
+
+  ocl_op_is_type_of     = 'oclIsTypeOf';
+  ocl_op_is_kind_of     = 'oclIsKindOf';
+  ocl_op_as_type        = 'oclAsType';
+
+  minus                 = '-';
+  star                  = '*';
+  slash                 = '/';
+  plus                  = '+';
+
+  rel_gt                = '>';
+  rel_lt                = '<';
+  rel_gte               = '>=';
+  rel_lte               = '<=';
+  rel_notequal          = '<>';
+
+  log_and               = 'and';
+  log_or                = 'or';
+  log_xor               = 'xor';
+  log_implies           = 'implies';
+
+  not                   = 'not';
+
+  simple_name           = name_start_character name_character*;
+
+
+
+Ignored Tokens
+  commentline, commentblock, newline, blank;
+
+Productions
+    
+//
+// from UML1.4
+//
+
+  ocl_file <List> = [packages]:packaged_constraint_list_cs+ #customheritage #nocreate;
+  packaged_constraint_list_cs <OclPackagedConstraintList> =
+        package
+        [name]:path_name_cs 
+        [contexts]:context_declaration_list_cs? #customheritage
+        endpackage
+    ;
+
+//
+// Context declarations, taken from OCL16 (Ch. 7.4)
+//
+// Added: 20040611
+
+  // List of OclContextDeclaration instances
+  context_declaration_list_cs <List> = 
+        [context]:context_declaration_cs
+        [tail]:context_declaration_list_cs? #nocreate
+    ;
+
+  context_declaration_cs <OclContextDeclaration> =
+        {attr_or_assoc} <OclAttrOrAssocContextDecl> context [context_name]:path_name_cs colon [type]:type_specifier [constraints]:init_or_der_value_cs+             #customheritage
+    |   {classifier}    <OclClassifierContextDecl>  context [context_name]:path_name_cs [constraints]:classifier_constraint_cs+                                     #customheritage
+    |   {operation}     <OclOperationContextDecl>   context [context_name]:path_name_cs [signature]:operation_signature_cs [constraints]:operation_constraint_cs+   #customheritage
+    ;
+
+  init_or_der_value_cs <OclAttrOrAssocConstraint> =
+        {init} <OclInitConstraint> 
+            init colon 
+            [initializer]:ocl_expression_cs            
+    |   {derive} <OclDeriveConstraint> 
+            derive colon 
+            [derive_expression]:ocl_expression_cs
+    ;
+
+  // classifier context
+  classifier_constraint_cs <OclClassifierConstraint> =
+      {invariant} <OclInvariantClassifierConstraint>
+        inv
+        [name]:simple_name? 
+        colon
+        [invariant]:ocl_expression_cs
+    | {definition} <OclDefinitionClassifierConstraint>
+        def
+        [name]:simple_name? 
+        colon 
+        [definition]:definition_constraint_cs
+    ;
+ 
+  definition_constraint_cs <OclDefinitionConstraint> =
+        [entity]:defined_entity_decl_cs 
+        !equals
+        [definition]:ocl_expression_cs #customheritage
+    ;
+
+  defined_entity_decl_cs <OclDefinedEntityDecl> =
+        {attribute} <OclAttributeDefinedEntityDecl>
+            [attribute]:formal_parameter_cs 
+   |    {operation} <OclOperationDefinedEntityDecl>
+            [operation_name]:simple_name 
+            [operation]:operation_signature_cs 
+   ;
+
+  operation_signature_cs <OclOperationSignature> =
+        paren_open
+        [parameters]:formal_parameter_list_cs?
+        paren_close 
+        [return_type]:operation_return_type_specifier_cs?
+    ;
+  operation_return_type_specifier_cs <Classifier> =
+        colon
+        [return_type]:type_specifier #chain
+    ;
+  operation_constraint_cs <OclOperationConstraint> =
+        [stereotype]:op_constraint_stereotype_cs 
+        [name]:simple_name?
+        colon
+        [expression]:ocl_expression_cs #customheritage
+    ;
+  op_constraint_stereotype_cs <OclOperationConstraintStereotype> = 
+        {pre} pre       #nocreate
+    |   {post} post     #nocreate
+    |   {body} body     #nocreate
+    ;
+
+
+//
+// === Taken from OCL1.6 and merged with older OCL1.4 rules
+//
+
+  collection_literal_exp_cs <CollectionLiteralExp> =
+        [kind]:collection_type_identifier_cs
+        brace_open
+        [parts]:collection_literal_parts_cs?
+        brace_close
+    ;
+
+  collection_literal_parts_cs <List> =
+        [part]:collection_literal_part_cs
+        [tail]:collection_literal_parts_tail_cs? #nocreate
+    ;
+
+  collection_literal_parts_tail_cs <List> =
+        comma [tail]:collection_literal_parts_cs #chain
+    ;
+
+  collection_literal_part_cs <CollectionLiteralPart> =
+        {range}      collection_range_cs #chain
+    |   {single_exp} <CollectionItem> expression
+    ;
+
+  collection_range_cs <CollectionRange> =
+        [first]:expression dbl_dot [last]:expression
+    ;
+
+  // renamed to collection_type_ specifier _cs from collection_type_cs
+  collection_type_specifier_cs <CollectionType> =
+        [kind]:collection_type_identifier_cs 
+        paren_open
+        [type]:type_specifier
+        paren_close 
+        #nocreate
+   ;
+
+  collection_type_identifier_cs <CollectionKind> =
+     {set} set #nocreate
+   | {bag} bag #nocreate
+   | {sequence} sequence #nocreate
+   | {collection} collection #nocreate
+   | {ordered_set} ordered_set #nocreate
+   ;
+
+  // Part of OCL2.0 concrete syntax, but unused here by now.
+  // expression_in_ocl_cs              = ocl_expression_cs ;
+
+  time_exp_cs <OclTimeExp> =
+        is_marked_pre_cs #chain
+    ;
+
+  is_marked_pre_cs <OclTimeExp> =
+        at_pre #nocreate
+    ;
+
+  if_exp_cs <IfExp> =
+     if [condition]:logical_exp_cs
+        then [then_branch]:ocl_expression_cs
+        else [else_branch]:ocl_expression_cs
+     endif
+   ;
+
+  simple_type_specifier_cs <Classifier> =
+        path_name_cs #nocreate
+    ;
+
+  type_specifier <Classifier> =
+     // type_cs{a} path_name_cs
+     {simple_type} simple_type_specifier_cs #chain #nocreate
+     // #der < type_specifier <- :custom: #depends_on{}; >
+
+   | // type_cs{b} collection_type_cs
+     {collection_type} collection_type_specifier_cs #chain #nocreate
+     // #der < collection_type <- :custom: #depends_on{} ; >
+
+   | // type_cs{c} tuple_type_cs
+     {tuple_type} tuple_type_specifier_cs #chain #nocreate
+     // #der < tuple_type <- :custom: #depends_on{} ; >
+   ;
+
+
+  tuple_type_specifier_cs <TupleType> =
+        tuple_type
+        paren_open
+        [tuple_members]:formal_parameter_list_cs?
+        paren_close #nocreate
+    ;
+
+  ocl_expression_cs <OclExpression> =
+      {with_let}    let_exp_cs      #chain
+    | {without_let} logical_exp_cs  #chain
+    ;
+
+  let_exp_cs <LetExp> =
+        let
+        [variables]:initialized_variable_list_cs
+        in
+        [expression]:expression #customheritage
+    ;
+
+  expression <OclExpression> = ocl_expression_cs #chain;
+
+
+  // constructs which are syntactically valid as message argument
+  message_arg_cs <OclMessageArg> =
+     {undefined} question_mark [typespec]:formal_parameter_type_specifier ?
+   | {defined} [exp]:expression
+   ;
+
+  // list of message arguments
+  message_argument_list_cs <List> =
+        [argument]:message_arg_cs
+        [tail]:message_argument_list_tail_cs? #nocreate
+    ;
+  message_argument_list_tail_cs <List> =
+        comma
+        [list]:message_argument_list_cs #chain
+    ;
+
+  // recognize pre-defined operations as identifier names
+  // @@TODO@@: add all pre-defined operations which should be recognized as identifier
+  identifier_cs <String> =
+     {simple} simple_name #chain
+   | {iterate} iterate #chain
+   | {iterator_name} iterator_name_cs #chain
+   | {ocl_op_name} ocl_op_name #chain
+   ;
+
+  // added (iterator names are required to decide whether IteratorExpCS::A or
+  // OperationCallExpCS::B should be used).
+  iterator_name_cs <String> = 
+     {select} T.select #chain
+   | {reject} T.reject #chain
+   | {collect} T.collect #chain
+   | {for_all} T.for_all #chain
+   | {exists} T.exists #chain
+   | {any} T.any #chain
+   | {one} T.one #chain
+   | {is_unique} T.is_unique #chain
+   ;
+
+  // added (names of ocl operation with type argument)
+  ocl_op_name <String> =
+     {kind_of} T.ocl_op_is_kind_of      #chain
+   | {type_of} T.ocl_op_is_type_of      #chain
+   | {as_type} T.ocl_op_as_type         #chain
+   ;
+
+  path_name_cs <List>           = [qualifier]:path_name_head_cs* [name]:identifier_cs #nocreate;
+  path_name_head_cs <String>    = identifier_cs dbl_colon #chain;
+
+  literal_exp_cs <LiteralExp> =
+     {lit_collection}   collection_literal_exp_cs   #chain
+   | {lit_tuple}        tuple_literal_exp_cs        #chain
+   | {lit_primitive}    primitive_literal_exp_cs    #chain
+   ;
+
+  primitive_literal_exp_cs <PrimitiveLiteralExp> =
+      {numeric} numeric_literal_exp_cs  #chain
+    | {string} string_literal_exp_cs    #chain
+    | {boolean} boolean_literal_exp_cs  #chain
+    ;
+
+  numeric_literal_exp_cs <NumericLiteralExp> =
+      {int}  <IntegerLiteralExp> [integer]:integer_literal 
+    | {real} <RealLiteralExp>    [real]:real_literal
+    ;
+    
+  string_literal_exp_cs <StringLiteralExp> =
+        [value]:string_literal
+    ;
+  boolean_literal_exp_cs <BooleanLiteralExp> = 
+      {false} false #nocreate
+    | {true} true #nocreate
+    ;
+
+  tuple_literal_exp_cs <TupleLiteralExp> = 
+        tuple
+        brace_open 
+        [tuple_part]:initialized_variable_list_cs 
+        brace_close
+    ;
+
+// === taken from OCL 1.4
+
+  name_exp_cs <OclExpression> =  logical_exp_cs #chain;
+
+  logical_exp_cs <OclExpression> =
+      {chain}  <OclExpression>    [operand]:relational_exp_cs #chain
+    | {binary} <OperationCallExp> [operand]:relational_exp_cs [tail]:logical_exp_tail_cs+ 
+    ;
+
+  logical_exp_tail_cs <OclBinaryExpTail> =
+      [operator]:logic_op [operand]:relational_exp_cs
+    ;
+
+  logic_op <String> = 
+      {and} log_and             #chain
+    | {or} log_or               #chain
+    | {xor} log_xor             #chain
+    | {implies} log_implies     #chain
+    ;
+
+  relational_exp_cs <OclExpression> =
+      {chain}                     [operand]:additive_exp_cs #chain
+    | {binary} <OperationCallExp> [operand]:additive_exp_cs [tail]:relational_exp_tail_cs
+    ;
+
+  relational_exp_tail_cs <OclBinaryExpTail> =
+        [operator]:rel_op [operand]:additive_exp_cs
+    ;
+  rel_op <String> =
+      {eq}  equals          #chain 
+    | {ne}  rel_notequal    #chain
+    | {gt}  rel_gt          #chain
+    | {lt}  rel_lt          #chain
+    | {gte} rel_gte         #chain
+    | {lte} rel_lte         #chain
+    ;
+
+  additive_exp_cs <OclExpression> =
+      {chain}                     [operand]:multiplicative_exp_cs #chain
+    | {binary} <OperationCallExp> [operand]:multiplicative_exp_cs [tail]:additive_exp_tail_cs+
+    ;
+
+  additive_exp_tail_cs <OclBinaryExpTail> =
+        [operator]:add_op [operand]:multiplicative_exp_cs
+    ;
+  add_op <String> =
+      {plus} plus       #chain
+    | {minus} minus     #chain
+    ;
+
+  multiplicative_exp_cs <OclExpression> =
+      {chain}                     [operand]:unary_exp_cs #chain
+    | {binary} <OperationCallExp> [operand]:unary_exp_cs [tail]:multiplicative_exp_tail_cs+
+    ;
+  multiplicative_exp_tail_cs <OclBinaryExpTail> =
+        [operator]:mult_op [operand]:unary_exp_cs
+    ;
+  mult_op <String> =
+      {mult} star       #chain
+    | {div} slash       #chain
+    ;
+
+  unary_exp_cs <OclExpression> =
+      {unary_op} <OperationCallExp> [operator]:unary_op [operand]:postfix_exp_cs
+    | {unary_nop}                   [postfix]:postfix_exp_cs                    #chain
+    ;
+  unary_op <String> =
+      {minus} minus     #chain
+    | {not} not         #chain
+    ;
+
+
+  postfix_exp_cs <OclExpression> =
+      {primary}     [primary]:primary_exp_cs #chain
+    | {with_tail}   [leftmost_exp]:primary_exp_cs postfix_exp_tail_cs+ #maketree #nocreate
+    ;
+
+  primary_exp_cs <OclExpression> =
+     {literal} literal_exp_cs                                       #chain
+   | {parenthesized} paren_open expression paren_close              #chain
+   | {property} [prop_call]:property_call_exp_cs #customheritage    #nocreate 
+   | {if} if_exp_cs                                                 #chain
+   ;
+
+  postfix_exp_tail_cs <OclExpression> =
+      {prop}                dot [prop_call]:property_call_exp_cs #customheritage    #nocreate
+    | {arrow_prop}          arrow_right [tail]:arrow_property_call_exp_cs           #chain
+    | {msg} <OclMessageExp> [operator]:msg_operator_cs [signal]:signal_spec_exp_cs  #nocreate
+    ;    
+
+  property_call_exp_cs <OclExpression> =        
+         {path_time} <OclExpression> [name]:path_name_cs                                         [time]:time_exp_cs?                                          #nocreate
+    |    {arg_list}  <OclExpression> [name]:path_name_cs                                         [time]:time_exp_cs? [parameters]:property_call_parameters_cs #customheritage #nocreate 
+    |    {qualified} <OclExpression> [name]:path_name_cs [qualifiers]:qualifiers #customheritage [time]:time_exp_cs?                                          #nocreate
+    ;
+
+  arrow_property_call_exp_cs <PropertyCallExp> =
+      {iterate} <IterateExp> 
+                T.iterate 
+                paren_open
+                [iterators]:iterate_vars_cs? #customheritage
+                [accumulator]:initialized_variable_cs
+                vertical_bar
+                [body]:expression #customheritage
+                paren_close
+    | {implicit_collection} <OperationCallExp>
+                [name]:simple_name
+                paren_open
+                [parameters]:actual_parameter_list_cs? #customheritage 
+                    // check element type
+                paren_close
+    | {iterator} <IteratorExp>
+                [name]:iterator_name_cs
+                paren_open
+                [iterators]:iterator_vars_cs? #customheritage
+                [body]:expression #customheritage 
+                paren_close
+    ;
+
+    // impl_coll_arrow_property_call_exp_cs <OperationCallExp> =
+    //     [name]:simple_name
+    //     paren_open
+    //     [params]:actual_parameter_list_cs // actual_parameter_list_cs
+    //     paren_close
+    // ;
+
+
+  iterate_vars_cs <List> =
+      // must return list of VariableDeclaration instances
+      [iterators]:actual_parameter_list_cs #customheritage
+      semi_colon
+      #chain
+    ;
+  iterator_vars_cs <List> =
+      // must return list of VariableDclaration instances
+      [iterators]:actual_parameter_list_cs #customheritage
+      vertical_bar      
+      #chain
+    ;
+
+  msg_operator_cs <OclMessageOperator> =
+      {caret}       caret       #chain
+    | {dbl_caret}   dbl_caret   #chain
+    ;
+  
+  qualifiers <List> =
+        bracket_open
+        actual_parameter_list_cs #customheritage
+        bracket_close #chain
+    ;
+
+  // type argument for oclIsKindOf, oclIsTypeOf and oclAsType
+  type_argument <Classifier> =
+        paren_open [type]:type_specifier paren_close #chain
+    ;
+  
+  property_call_parameters_cs <List> =
+        paren_open [param_list]:actual_parameter_list_cs? #customheritage paren_close #nocreate
+    ;
+
+  signal_spec_exp_cs <OclSignalSpec> =
+        [name]:simple_name 
+        paren_open  
+        [args]:message_argument_list_cs?
+        paren_close
+    ;
+
+  actual_parameter_list_cs <List> =
+      // must return list of VariableDeclaration in context "IteratorVarDecl"
+      [element]:actual_parameter_list_element_cs [tail]:actual_parameter_list_tail_cs? #nocreate
+    ;
+
+  actual_parameter_list_tail_cs <List> =
+        comma
+        [tail]:actual_parameter_list_cs #chain
+    ;
+
+  actual_parameter_list_element_cs <OclActualParameterListItem> =
+      {untyped} [element]:expression
+    | {typed}   [param]:formal_parameter_cs
+    ;
+
+  //
+  // ----- formal parameter lists -----
+  // 
+  formal_parameter_list_cs <List> =
+        [item]:formal_parameter_cs 
+        [tail]:formal_parameter_list_tail_cs ? #nocreate
+    ;
+  formal_parameter_list_tail_cs <List> =
+        comma
+        [tail]:formal_parameter_list_cs #chain
+    ;
+  formal_parameter_cs <OclFormalParameter> =
+        [name]:simple_name
+        [type]:formal_parameter_type_specifier
+        // a formal parameter must always have a type
+        // [type]:formal_parameter_type_specifier ?
+    ;
+  formal_parameter_type_specifier <Classifier> =  // introduced for SableCC
+        colon
+        [type]:type_specifier #chain
+    ;
+
+  //
+  // ----- initialized variables (for tuple literals) -----
+  //
+  initialized_variable_list_cs <List> = 
+        [item]:initialized_variable_cs
+        [tail]:initialized_variable_list_tail_cs* #nocreate
+    ;
+
+  initialized_variable_list_tail_cs <VariableDeclaration> =
+        comma
+        [item]:initialized_variable_cs #chain
+    ;
+
+  initialized_variable_cs <VariableDeclaration> =
+        [name_and_type]:formal_parameter_cs
+        [initializer]:variable_initializer
+    ;
+
+
+  //
+  // ----- variable declarations -----
+  // 
+  variable_declaration_cs <VariableDeclaration> =
+        [name_and_type]:formal_parameter_cs
+        // [initializer]:variable_initializer ?
+        // if you want initialized variables, use initialized_variable_cs
+    ;
+  // introduced for SableCC
+  variable_initializer <OclExpression> =
+        !equals
+        [init_value]:ocl_expression_cs #chain
+    ;
+  variable_declaration_list_cs <List> =
+        [element]:variable_declaration_cs 
+        [tail]:variable_declaration_list_tail_cs ? #nocreate
+    ;
+  variable_declaration_list_tail_cs <List> =
+        comma 
+        [tail]:variable_declaration_list_cs #chain
+    ;
+

@@ -1,0 +1,126 @@
+context AConstraint 
+inv: 
+contextDeclaration.oclAsType(AContextDeclaration).contextBody.oclIsTypeOf(AOperationContextBody)
+=
+constraintBody->collect(c:AConstraintBody|c.stereotype)->forAll(
+  s: PStereotype |s.oclIsTypeOf(APreStereotype) or 
+  s.oclIsTypeOf(APostStereotype)
+)
+inv:
+contextDeclaration.oclAsType(AContextDeclaration).contextBody.oclIsTypeOf(AClassifierContextBody)
+=
+constraintBody->collect(c:AConstraintBody|c.stereotype)->forAll(
+  s: PStereotype |s.oclIsTypeOf(AInvStereotype)
+)
+
+
+context APostfixExpressionTail inv:
+let iteratingMethodNames:Set(String)=
+  Set{'iterate', 'forAll', 'isUnique', 'exists', 'collect', 'select', 'reject', 'sortedBy'} in
+if (
+  postfixExpressionTailBegin.oclIsTypeOf(
+    AArrowPostfixExpressionTailBegin
+  ) and
+  iteratingMethodNames->includes(featureCall.oclAsType(AFeatureCall).pathName.toString())
+)
+then (
+  featureCall.oclAsType(AFeatureCall).featureCallParameters.oclAsType(AFeatureCallParameters).declarator->size>0 implies
+  featureCall.oclAsType(AFeatureCall).featureCallParameters.oclAsType(AFeatureCallParameters).declarator.oclIsTypeOf(
+    if (featureCall.oclAsType(AFeatureCall).pathName.toString()='iterate')
+    then AIterateDeclarator else AStandardDeclarator
+    endif
+  )
+)  
+else (
+  featureCall.oclAsType(AFeatureCall).featureCallParameters->size>0 implies
+  featureCall.oclAsType(AFeatureCall).featureCallParameters.oclAsType(AFeatureCallParameters).declarator->size=0
+)
+endif
+
+
+context AStandardDeclarator inv:
+let parentPathName:String = 
+  if parent.parent.oclIsTypeOf(AFeatureCall)
+  then parent.parent.oclAsType(AFeatureCall).pathName.toString()
+  else parent.parent.oclAsType(AFeaturePrimaryExpression).pathName.toString()
+  endif
+in
+(not declaratorTail->isEmpty)
+implies
+'forAll'=parentPathName
+
+
+context AFeatureCallParameters inv:
+(
+  declarator->size>0 and 
+  declarator.oclIsTypeOf(AStandardDeclarator) and
+  declarator.oclAsType(AStandardDeclarator).declaratorTail->size>0
+)
+implies
+actualParameterList.subnodes->select(
+  n|n.oclIsTypeOf(AFeaturePrimaryExpression)
+)->forAll(
+  n | 
+  (  n.oclAsType(AFeaturePrimaryExpression).pathName.oclAsType(APathName).
+     pathNameBegin.oclIsTypeOf(ANamePathNameBegin) and 
+     n.oclAsType(AFeaturePrimaryExpression).featureCallParameters->isEmpty 
+  ) implies
+  n.boundNames->includes(n.toString())
+)
+
+
+context AOperationContext inv:
+formalParameterList->size > 0 
+implies
+(
+  formalParameterList.oclAsType(AFormalParameterList).formalParameterListTail->
+   collect(f:AFormalParameterListTail|f.formalParameter)->
+   including(formalParameterList.oclAsType(AFormalParameterList).formalParameter)->forAll(
+    fp | fp.oclAsType(AFormalParameter).name.toString()<>'self'
+  )
+)
+
+
+context AStandardDeclarator inv:
+name.toString()<>'self' and declaratorTail->collect(d: ADeclaratorTail|d.name)->
+forAll(
+  n:TName|n.toString()<>'self'
+)
+
+
+context AIterateDeclarator inv:
+iterator.toString()<>'self' and accumulator.toString()<>'self'
+
+
+context APostfixExpressionTail inv:
+let fc=self.featureCall.oclAsType(AFeatureCall) in
+(
+  self.postfixExpressionTailBegin.oclIsTypeOf(AArrowPostfixExpressionTailBegin)
+  and
+  Set {'forAll', 'exists', 'isUnique', 'sortedBy', 'iterate', 
+    'select', 'reject', 'collect'} -> includes( fc.pathName.toString() )
+)
+implies
+(
+  fc.featureCallParameters->notEmpty and
+  fc.featureCallParameters.oclAsType(AFeatureCallParameters).actualParameterList->notEmpty and 
+  fc.featureCallParameters.oclAsType(AFeatureCallParameters).actualParameterList.
+    oclAsType(AActualParameterList).actualParameterListTail->isEmpty
+)
+
+
+context AConstraintBody inv:
+(not self.stereotype.oclIsTypeOf(APostStereotype))
+implies
+(
+  subnodes->select(oclIsTypeOf(ATimeExpression))->isEmpty
+	and
+	subnodes->select(oclIsTypeOf(AFeaturePrimaryExpression))->select(
+	  n: Node | n.oclAsType(AFeaturePrimaryExpression).pathName.toString()='oclIsNew'
+  )->isEmpty
+	and
+	subnodes->select(oclIsTypeOf(AFeatureCall))->select(
+	  n: Node | 
+		n.oclAsType(AFeatureCall).pathName.toString()='oclIsNew'
+	)->isEmpty	  
+)

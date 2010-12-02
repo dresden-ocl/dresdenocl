@@ -1,0 +1,9 @@
+OCL22JAVA CODE GENERATOR PLUG-IN OF DRESEN OCL2 FOR ECLIPSE
+===========================================================
+
+This plug-in contains the OCL22Java Code Generator of Dresden OCL2
+for Eclipse.
+
+How to get started and how to use the code generator is explained in 
+the manual, located in the 'doc' directory in the SVN trunk or your
+toolkit's release (see chapter 'AspectJ Code Generation').

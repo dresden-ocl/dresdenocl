@@ -1,0 +1,7 @@
+java.util.HashMap<String, Object> tuple1;
+tuple1 = new java.util.HashMap<String, Object>();
+
+tuple1.put("a", new Integer(42));
+tuple1.put("b", "some");
+
+tuple1

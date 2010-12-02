@@ -1,0 +1,9 @@
+package package1::package2
+
+-- The return Type of getSet() is Type1,
+-- but multiple, unique, and unordered.
+-- Thus the Parser should interpret the Type as Set(Type1).
+context Type1::getSet(): Set(Type1)
+body: Type1.allInstances()
+  
+endpackage

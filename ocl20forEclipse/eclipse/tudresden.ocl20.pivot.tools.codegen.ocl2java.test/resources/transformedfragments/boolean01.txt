@@ -1,0 +1,1 @@
+(!(aClass.pointsEarned > new Integer(0)) || !((Object) aClass.pointsBurned).equals(new Integer(0)))

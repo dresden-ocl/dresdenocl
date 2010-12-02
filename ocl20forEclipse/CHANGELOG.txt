@@ -1,0 +1,351 @@
+Changes and Bugs fixed during the different Releases
+====================================================
+
+Release 3.X (Not scheduled yet)
+===================================
+
+* A Bug in the UML2 Metamodel has been fixed.
+  - Class diagrams using stereotypes are now adapted correctly.
+  
+* Some bugs of the OCL Parser / Editor have been fixed.
+  - Derive and Init constraints defined for static properties are now parsed correctly.
+  - The escape underscore for reserved words can now be used.
+  - The ASM of nested LetExpressions now has the right order.
+  - OclAny.asSet() is now parsed correctly either if used implicitly or explicitly.
+  
+* Improvements on Ocl2Java
+  - Generated aspects are named according to their constraints.
+  - Statically defined operations and properties are now instrumented correctly.
+  - No new super classes are generated for definitions, initial and derived values are
+    introduced anymore.
+  - Definitions, Initial and Derived values should now work correctly if fields are 
+    accessed directly from other classes.
+  - Type Literals are now transformed correctly in all known contexts.
+  - InvalidLiterals should now be transformed correctly in all known contexts.
+  - Generic types in LetExpressions are now transformed correctly.
+  - Nested IterateExpressions using the same names for iterator variables are now
+    handled correctly.
+  - Nested IteratorExpressions using the same names for iterator variables are now
+    handled correctly.
+  - OclAny.asSet() is now transformed correctly.
+  - OclAny.oclIsUndefined() now works on Java primitive types as well.
+  - IsUnique() iterators are now transformed correctly if their body expression result
+    in another type than the collection's element type.
+
+* Changes on Ocl2SQL
+  - for nested where statements now generated join statements
+  - the IteratorExp of OCL will now correctly generated to SQL
+  - difference sql code for managed and not managed key references (new template) 
+
+Tests
+-----
+* Ocl2Java
+  - Some test cases have been added testing the right instrumentation of all constraint 
+    kinds.
+    
+    
+Release 3.0 (September, 29th, 2010)
+===============================================
+
+* A new OCL Editor/Parser is now available with Dresden OCL.
+  - The editor includes
+    - Syntax Highlighting
+    - Code completion
+    - Outline view of OCL Abstract Syntax
+  - The parser includes
+    - Type inference wherever possible
+    
+* A new version of the Ocl2Sql Code Generator is now available with Dresden OCL.
+    
+* Some modifications of the pivot model were done.
+  - MultiplicityElements are now removed. Multiple elements are now adapted to 
+    CollectionTypes.
+
+* Some bugs in the Java meta-model were fixed.
+  - Types built of nested collections or arrays are now adapted correctly.
+
+* Some bugs in the UML2 meta-model were fixed.
+  - Loading UML models containing references to other models should now work appropriately.
+  - Reload of UML models now reloads changes of referenced external model elements as well.
+
+* Some bugs in the OCL Parser were fixed.
+  - Recursive operations can now be defined.
+  - For a detailed issue list investigate bug tracker on SourceForge.
+  
+* Some bugs in the OCL Interpreter were fixed.
+  - The Interpreter now supports interpretation of recursive operations.
+  - The comparison of nested collections should now work correctly.
+  
+* Some bugs in Ocl2Java were fixed.
+  - Invalid literals are now transformed into the right working Java code.
+  - OclAny.oclIsInvalid() is now transformed into working Java code.
+  - OclAny.oclIsKindOf() is now transformed into working Java code.
+  - OclCollection.sum() is now transformed into working Java code. 
+  - Fixed bugs in code generation of iterators collectNested(), isUnique(),
+    one(), sortedBy().
+
+GUI
+---
+* Introduction of the new OCL Editor (see above)
+
+* DresdenOCL now provides its own Eclipse perspective.
+
+* Improvements of the Model Browser
+  - Static operations and properties are now highlighted with different symbols.
+  - Constraints and their expressions are now highlighted with sensible symbols.
+  
+* A bug in the Model Instance Browser has been fixed.
+  - OCL-defined features are not displayed as undefined in the Model Instance Browser 
+    anymore.
+    
+* The Eclipse Package Explorer and Navigator now provide functionalities for Model and Model
+  Instance Import in their pop-up menus.
+
+
+Release 2.2 (June 16th 2010)
+============================
+
+* Dresden OCL2 for Eclipse now supports OCL 2.2!
+  - The only exception is that the new keyword static is not supported yet.
+  - Parsing, Interpretation and Java Code Generation of OCL 2.2 is now possible.
+  
+* A new Facade Plug-in containing a facade for all functionalities of
+  Dresden OCL2 for Eclipse has been introduced.
+  
+* Dresden OCL2 for Eclipse now includes a standalone version for non-Eclipse Java projects.
+  
+* The Model and Model Instance Life-cycle Management has been improved.
+  - After import, Models can now be removed again.
+  - After import, Models can now be refreshed to update external changes.
+  - After import, Model Instances can now be removed again.
+  - Constraints can now be removed from models again.
+  - Defined operations and properties are now removed then their constraints are removed as well.
+  - Models can now be observed for changes.
+
+* A bug in the ModelRegistry was fixed.
+  - Adding of Models should now handle NullPointerExceptions correctly.
+ 
+* XML Schemas are now supported as models for DresdenOCL.
+
+* XML files are now supported as model instances for DresdenOCL.
+
+* Some bugs in the UML2 Meta-Model were fixed.
+  - If the top-level package is a UML model or profile directory, 
+    these packages are now adapted correctly.
+  - In UML2 models containing references to other UML2 models, the referenced models are now
+    imported as part of the model as well.
+    
+* A bug in the EMF Ecore Meta-Model was fixed.
+  - In Ecore models containing references to other Ecore models, the referenced models are now
+    imported as part of the model as well.
+
+* The Java Meta-Model has been modified.
+  - Java models can now refer to JAR archives if explicitly defined in a .javamodel File.
+
+* Some bugs in the basis model instance elements were fixed.
+  - Illegal arguments are now handled appropriately.
+  - JavaModelInstanceCollections can now be initialized with null 
+    values even if they are of the type Set or OrderedSet.
+
+* Some bugs in the Ecore ModelInstance Type were fixed.
+  - Empty model instances now get a created default name.
+  - Illegal arguments are now handled appropriately.
+  - Types are now resolved, even if their package name is not modeled completely
+    in the Model.
+
+* Some bugs in the Java ModelInstance Type were fixed.
+  - Empty model instances now get a created default name.
+  - Illegal arguments are now handled appropriately.
+  - The copy mechanism for @pre values works now correctly when invoking
+    empty constructors.
+  - The return type of operations and properties is now adapted correctly if the type of the operation
+    or property is a super type of the result's type.
+  
+* Some bugs in the OCL2 Parser were fixed.
+  - The Parser now implements the IOclParser interface.
+  - If the parsing process fails, no constraints or defined features will be added to the model anymore.
+  - The special operations OclAny.oclAsType(), oclIsKindOf(), ... can now contain Property- 
+    and OperationCallExpressions instead of simple TypeLiteralExpressions.
+  - Collection(T1).product(Collection(T2)) is now parsed appropriately.
+    
+* Some bugs in the OCL2 Interpreter were fixed.
+  - Boolean operations and, or, implies are now only interpreted partly if necessary.
+  - In IfExpressions either then or else clause is interpreted.
+  - Interpretation of nested definitions has now the right context as self variable.
+  - Iterate expressions are now interpreted correctly if their source collection is invalid or contains
+    undefined values. Body expressions can result in invalid or undefined without leading to wrong 
+    interpretation results.
+  - Body Expressions, Definitions, Derive and Init expressions must not be prepared anymore and are only
+    interpreted if referenced.
+
+* A bugs in the OCL2 Interpreter GUI was fixed.
+  - The view should not crash with an SWT-Exception for presentation of a large number of results anymore.
+
+* Complete rewrite of the OCL2 Standard Library; some bugs were fixed.
+  - invalid and null values are now created by every library method and no exceptions are thrown
+  - consistent way of handling null(undefined) and invalid
+  - undefined can be created for AnyType
+  - TypeConstants: create BagType, etc. instead of CollectionType -> invalid and undefined collections can be created
+  - OclBoolean: and(), or() and implies() accept undefined values and can return OclBooleans (standard, p. 15)
+  - union(OclSequence) only on OclSequence instead of SortedCollection
+  - excluding(T) now removes all appearances, not only the first
+  - OclCollections can return their generic/element type
+  - support for the creation of nested OclCollections
+  - OclAny: oclIsUndefined() now returns invalid if the object is invalid
+  - OclString: substring() returns invalid if lower index is greater than higher index
+
+* Some bugs in the Ocl22Java Code Generator were fixed.
+  - The code generation of OclAny.allInstances() now works appropriately again.
+  - The code generation of Collection.flatten() now works appropriately.
+  - The code generation of Integer.mod(Integer) now works appropriately.
+  - The code generation of Integer.min(Integer) now works appropriately.
+  - The code generation of Real.floor() now works appropriately.
+  - Transformation of abstract Collection type now works appropriately.
+  - The transformation of operations whose arguments are named differently in the constraint's context
+    than in the model now works correctly.
+  - The code generation of Constructors now works appropriately.
+  - Ocl22Java now supports Arrays instead of Collections wherever possible.
+
+
+GUI
+---
+* The Model Browser has been improved.
+  - Imported models can now be closed again.
+  - Parsed constraints can now be removed again.
+* The Model Instance Browser has been improved.
+  - Imported model instances can now be closed again.
+  - Owned properties of ModelInstanceElements can now be browsed.
+  
+
+Tests
+-----
+* A new Modelbus Test Suite Plug-in has been introduced.
+
+* A new OCL Standard Library Test Suite Plug-in has been introduced.
+
+* Some test cases have been added to the Generic Model Instance Type
+  Test Suite.
+  - Illegal arguments are now tested.
+  - Recasts between primitive type instances are now tested.
+
+
+Release 2.0 (January 11th 2010)
+===============================
+* The Pivot Model do now contain the PrimitiveTypeKind Void for the adaptation
+  of a void Type for Operations without return Parameter.
+
+* The ModelBus Architecture was refactored.
+  - IModelInstances are now meta model independent.
+  - The IModel interface was refactored.
+    > A new method getType() was introduced.
+    > A new method isInstanceOf(Type) was introduced.
+  - The IModelInstance interface and the IModelObject respectively 
+    IModelElement interface have been refactored and restructured completely.
+
+* Some bugs in the UML2 Meta Model were fixed.
+  - UML2 models can now contain n-ary associations.
+  - Interfaces are now mapped correctly.
+  - Abstract DataTypes are no longer adapted.
+  - Logging now works properly.
+
+* Some bugs in the EMF Ecore Meta Model were fixed.
+  - Logging now works properly.
+
+* New Meta Model added: Java.
+
+* The Java Model Instance Type has been refactored completely.
+  - Java instances can now also be imported, if they implement or extend Java
+    Classes or Interfaces defined in the model.
+
+* The EMF Ecore Model Instance Type has been refactored completely.
+
+* Some bugs of the OCL-Interpreter were fixed.
+  - Constraints are now interpreted for constrained 
+    sub-classes as well.
+  - Local Variables are now only declared locally.
+
+* The interpreter plugins have been renamed from 
+  tudresden.ocl20.interpreter.* to tudresden.ocl20.pivot.interpreter.*
+
+* A bug in the Ocl22Java Code Generator was fixed.
+  - The variables for Comparators are now right numbered.
+
+
+GUI
+---
+* A bug in the Wizards were fixed.
+  - The Model Import Wizard can now be started when the current focus is on a 
+    non tree-like view.
+  - The Model Instance Import Wizard can now be started when the current focus
+    is on a non tree-like view.
+  - The OCL Constraint Import Wizard can now be started when the current focus
+    is on a non tree-like view.
+  - The Java Code Generator can now be started when the current focus is on a 
+    non tree-like view.
+
+* The Model Instance Wizard has been redesigned.
+
+* The Model Instance Browser has been redesigned.
+  - ModeObjects are now also displayed for Sub-Types of selected 
+    Types in the Model Browser.
+
+* The OCL Parser Wizard was redesigned.
+  - OCL Files can now also be selected using a 'Browse Workspace' button.
+  - The wizard will now switch into the Model Browser after parsing constraints.
+
+* The Interpreter View was redesigned.
+
+* Some problems with icons and menu entries in the binary release were fixed.
+
+
+Tests
+-----
+* A new central Test Suite Plug-in has been introduced.
+
+* A new generic Test Suite for Meta-Models was introduced.
+
+* A new generic Test Suite for Model Instance Types was introduced.
+
+
+
+Release 1.2 (February 26th 2009)
+================================
+* The new tool Ocl2Java (ApsectJ code generation for OCL 
+  constraints) was added to the release.
+
+* The royal and loyal example was added to the release.
+
+* Some Bugs of the OCL-Parser were fixed:
+  - Enumerations are now parsed correctly
+
+* Some Bugs of the OCL-Interpreter were fixed.
+  - Operation names are now interpreted correctly
+  - Collection operations should now be interpreted correctly.
+  - The Variable defined by a LetExpression is now valid in the 
+    scope of the LetExpression only.
+
+* Some Bugs of the Java Standard Library were fixed.
+  - Collections from model instances are now adapted correctly.
+  - Sets will no longer contain the same model object multiple 
+    types.
+
+* Some Bugs for Ecore instances were fixed.
+  - Enumerations are now adapted correctly.
+
+* Some Bugs for UML2 instances were fixed. 
+  - UML2 Model instance adaption does now work correctly.
+  - UML2 Model instances now support tuple types.
+  
+  
+
+Release 1.1 (December 9th 2008)
+================================
+* The UML1.5 meta model works now in the binary release.
+
+* New meta model added: UML2.0.
+
+* New example added: Simple-Example.
+
+* Some Bugs of the OCL-Parser were fixed.
+
+* Some Bugs of the OCL-Interpreter were fixed.

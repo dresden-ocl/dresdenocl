@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Thu Aug 19 08:56:31 CEST 2010
+builderNum=2
+outputDir=tex/
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tex
+mainTexFile=manual.tex
+outputFile=manual.pdf
+langSpell=
+markDer=true
+srcDir=tex/

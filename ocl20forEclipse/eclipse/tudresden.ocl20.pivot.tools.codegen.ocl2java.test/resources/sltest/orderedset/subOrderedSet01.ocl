@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOrderedSetSubOrderedSet(source: OrderedSet(OclAny), arg01: Integer, arg02: Integer): OrderedSet(OclAny) =
+source -> subOrderedSet(arg01, arg02)
+
+endpackage

@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+def: getAny(): Integer =
+/* Expected as 1. */
+Bag { integerNull, 0, 1 } -> any(element: Integer | 
+  if element.oclIsUndefined()
+    then booleanNull
+    else 1 / element = 1
+  endif
+)
+
+endpackage

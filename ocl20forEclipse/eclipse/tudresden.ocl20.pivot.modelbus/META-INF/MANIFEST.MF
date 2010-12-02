@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Bus
+Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.modelbus.ModelBusPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi,
+ tudresden.ocl20.pivot.modelinstance;visibility:=reexport,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Export-Package: tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.modelbus.descriptor,
+ tudresden.ocl20.pivot.modelbus.metamodel,
+ tudresden.ocl20.pivot.modelbus.modelinstance
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

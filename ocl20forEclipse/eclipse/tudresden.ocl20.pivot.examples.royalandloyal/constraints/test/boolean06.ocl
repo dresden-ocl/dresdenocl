@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 151f.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Customer
+inv: name = 'Foobar'
+
+endpackage

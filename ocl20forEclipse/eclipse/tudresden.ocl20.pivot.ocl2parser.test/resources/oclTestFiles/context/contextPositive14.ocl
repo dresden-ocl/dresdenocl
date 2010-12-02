@@ -1,0 +1,9 @@
+package package1::package2
+
+-- The return Type of aSequence is Type1,
+-- but multiple, nonunique, and ordered.
+-- Thus the Parser should interpret the Type as Sequence(Type1).
+context Type1::aSequence: Sequence(Type1)
+derive: Type1.allInstances()->asSequence()
+  
+endpackage

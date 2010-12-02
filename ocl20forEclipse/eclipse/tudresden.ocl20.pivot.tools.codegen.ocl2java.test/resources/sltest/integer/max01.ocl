@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testIntegerMax01(source: Integer, arg01: Integer): Integer =
+source.max(arg01)
+
+endpackage

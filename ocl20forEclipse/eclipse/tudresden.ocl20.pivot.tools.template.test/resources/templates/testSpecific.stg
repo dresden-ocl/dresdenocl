@@ -1,0 +1,9 @@
+group testSpecific;
+
+specific() ::= <<
+specificTemplate
+>>
+
+specific2() ::= <<
+specificTemplate
+>>

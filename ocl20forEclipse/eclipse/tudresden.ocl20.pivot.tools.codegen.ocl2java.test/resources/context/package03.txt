@@ -1,0 +1,1 @@
+basisPackage1.basisPackage2.testpackage.Enumeration1.literal1

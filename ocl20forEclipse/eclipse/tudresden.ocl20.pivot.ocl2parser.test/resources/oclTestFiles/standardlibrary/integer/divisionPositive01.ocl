@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: 5 / 2 = 2.5
+
+endpackage

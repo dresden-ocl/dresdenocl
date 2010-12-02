@@ -1,0 +1,1 @@
+((Object) java.lang.Math.min(new Float(33.7), new Integer(12))).equals(new Float(12.0))

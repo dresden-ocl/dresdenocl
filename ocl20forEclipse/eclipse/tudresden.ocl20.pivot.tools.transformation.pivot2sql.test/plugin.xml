@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+>
+   <extension
+         point="tudresden.ocl20.pivot.testsuite">
+      <testSuites
+            testSuite="tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.AllTestsPivot2Sql">
+      </testSuites>
+   </extension>
+</plugin>

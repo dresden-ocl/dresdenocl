@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testBagFlatten(source: Bag(OclAny)): Bag(OclAny) =
+source -> flatten()
+
+endpackage

@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testStringConcat01(source: String, arg01: String): String =
+source.concat(arg01)
+
+endpackage

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 153.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Service
+inv: 33.max(12) = 33
+
+endpackage

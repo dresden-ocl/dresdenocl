@@ -1,0 +1,129 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: Sets
+
+--	Examples of operations on Sets.
+--  Some operations are defined as generic ones for Collections, see Collections.oclx.
+--	Author: Joanna Chimiak-Opoka
+--	Author: Hannes Mösl
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Tests operations on a single Set.
+-- Notice: -- the difference between includes (from Collection) and including (from Set), excludes (from Collection) and excluding (from Set)! -- that any is not deterministic!
+context Model
+
+inv tSetSingle_1: let s : Set(Integer) = Set{1,3,5} in s = Set{3,1,5}
+
+context Model
+
+inv tSetSingle_2: let s : Set(Integer) = Set{1,3,5} in s->including(2) = Set{1,2,3,5}
+
+context Model
+
+inv tSetSingle_3: let s : Set(Integer) = Set{1,3,5} in s->excluding(5) = Set{1,3}
+
+context Model
+
+inv tSetSingle_4: let s : Set(Integer) = Set{1,3,5} in s->select(e| e>2) = Set{3,5}
+
+context Model
+
+inv tSetSingle_5: let s : Set(Integer) = Set{1,3,5} in s->reject(e| e>2) = Set{1}
+
+context Model
+
+inv tSetSingle_6: let s : Set(Integer) = Set{1,3,5} in s->any(e| e>2) = 3 or s->any(e| e>2) = 5
+
+context Model
+
+inv tSetSingle_7: let s : Set(Integer) = Set{1,3,5} in Set{3,5}->includes(s->any(e| e>2))
+
+--	Tests a set with elements of mixed types.
+--  If one Element of Collection is invalid, the whole Collection is Invalid --> every function call
+-- results in oclInvalid too!
+-- However, when comparing OclInvalid with OclAny, result is not OclInvalid
+context Model
+inv tSetMixedTypes: let s : Set(OclAny) = Set{1, 3.4, 'c', true, null, 1/0} in s->size() <> 6
+
+-- OclInvalid equals OclInvalid
+-- The spec says "every property call on OclInvalid results 
+-- in OclInvalid, execept OclIsInvalid and oclIsUndefined"
+-- This obviously doesn't include `=` as OclInvalid.isEqualTo(OclIsInvalid) == true
+context Model
+inv tSetMixedTypes2: let s : Set(OclAny) = Set{1/0} in
+        let t : Integer = 1/0 in
+            s->size() = t
+
+context Model
+inv tInvalid_1: let i:OclInvalid = invalid in i.oclIsInvalid()
+       
+        
+--	Tests operations on two Sets.
+-- For operations on a Bag and a Set see SetsBags.oclx
+context Model
+inv tSetComparison_1: let s1 :  Set(Integer) = Set{1,3,5} in
+    		  let s2 :  Set(Integer) = Set{1,4} in s1->union(s2) = Set{1,3,4,5}
+
+context Model
+
+inv tSetComparison_2: let s1 :  Set(Integer) = Set{1,3,5} in
+    		  let s2 :  Set(Integer) = Set{1,4} in s1->intersection(s2) = Set{1}
+
+context Model
+
+inv tSetComparison_3: let s1 :  Set(Integer) = Set{1,3,5} in
+    		  let s2 :  Set(Integer) = Set{1,4} in s1->symmetricDifference(s2) = Set{3,4,5}
+
+context Model
+
+inv tSetComparison_4: let s1 :  Set(Integer) = Set{1,3,5} in
+    		  let s2 :  Set(Integer) = Set{1,4} in s1-s2 = Set{3,5}
+
+--	Tests operations on a nested Set.
+-- For the one level of nesting the collectNested and collect give the same results.
+context Model
+
+inv tSetCollectNested_1: let s : Set(Set(Integer)) = Set{Set{}, Set{1}, Set{1,2}, Set{1,3,5}} in s->collectNested(e|e->size()) = Bag{0, 1, 2, 3}
+
+context Model
+
+inv tSetCollectNested_2: let s : Set(Set(Integer)) = Set{Set{}, Set{1}, Set{1,2}, Set{1,3,5}} in s->collectNested(e|e->size()>1) = Bag{false, false, true, true}
+
+context Model
+
+inv tSetCollectNested_3: let s : Set(Set(Integer)) = Set{Set{}, Set{1}, Set{1,2}, Set{1,3,5}} in s->collect(e|e->size()>0) = s->collectNested(e|e->size()>0)
+
+--	Tests operations on a twice nested Set.
+-- For the two levels of nesting the collectNested and collect give different results.
+context Model
+
+inv tSetCollectNestedDeeper_1: let s : Set(Set(Set(Integer))) = Set{Set{Set{}, Set{1}, Set{1,2}, Set{1,3,5}}} in s->collectNested(e|e->size()) = Bag{4, 0, 1, 2, 3}
+
+context Model
+
+inv tSetCollectNestedDeeper_2: let s : Set(Set(Set(Integer))) = Set{Set{Set{}, Set{1}, Set{1,2}, Set{1,3,5}}} in s->collectNested(e|e->size()>1) = Bag{true, false, false, true, true}
+
+context Model
+
+inv tSetCollectNestedDeeper_3: let s : Set(Set(Set(Integer))) = Set{Set{Set{}, Set{1}, Set{1,2}, Set{1,3,5}}} in s->collect(e|e->size()>0) <> s->collectNested(e|e->size()>0)
+
+--	Tests types of a set as whole and its single elements.
+-- 
+context Model
+
+inv tSetType_1: let s : Set(Integer) = Set{1,3,5} in s->forAll(e | e.oclIsTypeOf(Integer))
+
+context Model
+
+inv tSetType_2: let s : Set(Integer) = Set{1,3,5} in s->forAll(e | e.oclIsKindOf(Integer))
+
+context Model
+
+inv tSetType_3: let s : Set(Integer) = Set{1,3,5} in s.oclIsKindOf(Integer)->forAll(e|e=true)
+
+endpackage

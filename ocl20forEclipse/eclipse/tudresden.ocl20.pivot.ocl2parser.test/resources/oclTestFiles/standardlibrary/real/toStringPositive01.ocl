@@ -1,0 +1,7 @@
+package package1::package2
+
+-- New operation in OCL 2.1
+context Type1
+inv: 1.3.toString() = '1.3'
+
+endpackage

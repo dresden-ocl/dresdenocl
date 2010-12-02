@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fai. @pre is not allowed on static properties.
+context Type1::getInteger(): Integer
+post: Type1::anStaticInteger@pre > 0
+
+endpackage

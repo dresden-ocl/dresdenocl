@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Wrong type for invariant.
+context Type1
+inv: 'something but not a boolean'
+
+endpackage

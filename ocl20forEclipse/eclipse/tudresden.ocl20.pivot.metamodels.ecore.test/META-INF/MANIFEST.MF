@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ecore Meta-Model Test Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.ecore.test;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.metamodels.ecore.test.EcoreMetaModelTestPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.metamodels.test,
+ tudresden.ocl20.pivot.metamodels.ecore,
+ tudresden.ocl20.pivot.facade,
+ tudresden.ocl20.pivot.testsuite
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

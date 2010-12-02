@@ -1,0 +1,9 @@
+package package1::package2
+
+-- The return Type of getBag() is Type1,
+-- but multiple, nonunique, and unordered.
+-- Thus the Parser should interpret the Type as Bag(Type1).
+context Type1::getBag(): Bag(Type1)
+body: Type1.allInstances()->asBag()
+  
+endpackage

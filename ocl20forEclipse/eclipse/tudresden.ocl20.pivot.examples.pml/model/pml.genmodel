@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.examples.pml/src"
+    modelPluginID="tudresden.ocl20.pivot.examples.pml" modelName="Pml" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>pml.ecore</foreignModel>
+  <genPackages prefix="Tudresden" disposableProviderFactory="true" ecorePackage="pml.ecore#/">
+    <nestedGenPackages prefix="Ocl20" disposableProviderFactory="true" ecorePackage="pml.ecore#//ocl20">
+      <nestedGenPackages prefix="Pivot" disposableProviderFactory="true" ecorePackage="pml.ecore#//ocl20/pivot">
+        <nestedGenPackages prefix="Examples" disposableProviderFactory="true" ecorePackage="pml.ecore#//ocl20/pivot/examples">
+          <nestedGenPackages prefix="Pml" disposableProviderFactory="true" ecorePackage="pml.ecore#//ocl20/pivot/examples/pml">
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/Plugin">
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Plugin/id"/>
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Plugin/name"/>
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Plugin/version"/>
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Plugin/provider"/>
+              <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Plugin/feature"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Plugin/extensionPoints"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Plugin/services"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Plugin/activator"/>
+              <genOperations ecoreOperation="pml.ecore#//ocl20/pivot/examples/pml/Plugin/getNameOf">
+                <genParameters ecoreParameter="pml.ecore#//ocl20/pivot/examples/pml/Plugin/getNameOf/feature"/>
+              </genOperations>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/Feature">
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Feature/id"/>
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Feature/name"/>
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Feature/version"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Feature/plugins"/>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/ExtensionPoint">
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/ExtensionPoint/id"/>
+              <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/ExtensionPoint/plugin"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/ExtensionPoint/interface"/>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/Extension">
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Extension/implementation"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Extension/extensionPoint"/>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/JavaType">
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/JavaType/fullyQualifiedName"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/JavaType/implements"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/JavaType/operations"/>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/Operation">
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Operation/name"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Operation/returnType"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Operation/parameters"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Operation/myType"/>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/Parameter">
+              <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pml.ecore#//ocl20/pivot/examples/pml/Parameter/name"/>
+              <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                  ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Parameter/type"/>
+              <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/Parameter/operation"/>
+            </genClasses>
+            <genClasses ecoreClass="pml.ecore#//ocl20/pivot/examples/pml/PluginPackage">
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/PluginPackage/plugins"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/PluginPackage/types"/>
+              <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference pml.ecore#//ocl20/pivot/examples/pml/PluginPackage/features"/>
+            </genClasses>
+          </nestedGenPackages>
+        </nestedGenPackages>
+      </nestedGenPackages>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

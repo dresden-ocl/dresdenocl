@@ -1,0 +1,9 @@
+package package1::package2
+
+-- The return Type of getOrderedSet() is Type1,
+-- but multiple, unique, and ordered.
+-- Thus the Parser should interpret the Type as OrderedSet(Type1).
+context Type1::getOrderedSet(): OrderedSet(Type1)
+body: Type1.allInstances()->asOrderedSet()
+  
+endpackage

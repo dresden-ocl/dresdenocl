@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testInvalidLiteralExp03(): Set(Integer) =
+Set { invalid, 2 }
+
+endpackage

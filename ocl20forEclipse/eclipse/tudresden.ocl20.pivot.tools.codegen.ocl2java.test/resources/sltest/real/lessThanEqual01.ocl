@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testRealLessThanEqual01(source: Real, arg01: Real): Boolean =
+source <= arg01
+
+endpackage

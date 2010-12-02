@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+
+<form titel="Test"
+	xmlns="http://org.emftext.language.forms/metamodel/FormMM.xsd" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://org.emftext.language.forms/metamodel/FormMM.xsd schema/FormMM.xsd">
+	   <gruppe name="Group 1">
+		<number>
+			<text>
+				Item 1
+			</text>
+						
+			</number>
+	</gruppe>
+	
+</form>

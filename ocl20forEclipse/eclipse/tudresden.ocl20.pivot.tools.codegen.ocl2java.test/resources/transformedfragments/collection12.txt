@@ -1,0 +1,23 @@
+java.util.HashSet<java.util.Set<Integer>> collection1;
+collection1 = new java.util.HashSet<java.util.Set<Integer>>();
+
+java.util.HashSet<Integer> collection2;
+collection2 = new java.util.HashSet<Integer>();
+
+collection2.add(new Integer(1));
+collection2.add(new Integer(2));
+collection1.add(collection2);
+java.util.HashSet<Integer> collection3;
+collection3 = new java.util.HashSet<Integer>();
+
+collection3.add(new Integer(3));
+collection3.add(new Integer(4));
+collection1.add(collection3);
+java.util.HashSet<Integer> collection4;
+collection4 = new java.util.HashSet<Integer>();
+
+collection4.add(new Integer(5));
+collection4.add(new Integer(6));
+collection1.add(collection4);
+
+((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(3))

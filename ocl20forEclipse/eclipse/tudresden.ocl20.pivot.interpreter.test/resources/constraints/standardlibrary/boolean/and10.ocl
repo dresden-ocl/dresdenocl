@@ -1,0 +1,7 @@
+package package1
+
+context Class1
+/* booleanNull is a property with the value undefined. */
+inv testAnd10: booleanNull and true
+
+endpackage

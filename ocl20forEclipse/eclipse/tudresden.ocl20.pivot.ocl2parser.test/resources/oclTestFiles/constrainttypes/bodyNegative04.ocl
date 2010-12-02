@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should not be parsed. Wrong result type.
+context Type1::getInteger(): Integer
+body: 'fourty-two'
+
+endpackage

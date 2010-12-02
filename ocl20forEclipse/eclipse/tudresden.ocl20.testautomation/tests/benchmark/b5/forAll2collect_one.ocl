@@ -1,0 +1,311 @@
+package uml
+
+-------------------------------------
+-- B5: forAll2collect_one
+-------------------------------------
+
+
+-- Collection Operations
+
+-- -- Collect
+
+-- -- -- forAll to collect and one
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set ------------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in 
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- Bag
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- Sequence
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{ null } in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- Bag
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null } in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- Sequence
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Expression e fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{1} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Bag
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{1} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{1} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- Expression e not fulfilled
+
+-- -- -- -- -- -- -- Set -------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{4} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Bag
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{4} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{4} in 
+   c->forAll(i|i<4) = 
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{ null , 1, 2, 3} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 2, 3, 
+                   null } in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 1, 2, 3} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 2, 3, 
+                        null } in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 1, 2, 3} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Expression e fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{1, 2, 3} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{1, 2, 3, 1} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{1, 2, 3} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 3, 1} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{1, 2, 3} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- Expression e not fulfilled
+
+-- -- -- -- -- -- -- Set ------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{2, 3, 4, 5} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- -- Equal Values (both violating)
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{2, 3, 4, 5, 4} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- -- Equal Values (both not violating)
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{2, 3, 4, 5, 2} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{2, 3, 4, 5} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- -- Equal Values (both violating)
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{2, 3, 4, 5, 4} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- -- Equal Values (both not violating)
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{2, 3, 4, 5, 2} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+-- -- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{2, 3, 4, 5} in 
+   c->forAll(i|i<4) =
+         (let s = c->collect(i|i<4)->asSet() in
+       c->notEmpty() implies s->one(true) and s->one(e|e))
+
+  
+endpackage

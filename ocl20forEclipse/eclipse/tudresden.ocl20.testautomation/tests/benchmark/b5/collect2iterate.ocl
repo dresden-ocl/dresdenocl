@@ -1,0 +1,286 @@
+package uml
+
+-------------------------------------
+-- B5: collect2iterate
+-------------------------------------
+
+
+-- Collection Operations
+
+-- -- Iterate
+
+-- -- -- collect
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set ------------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- Bag
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- Sequence A
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->including(i*i))
+
+  
+-- -- -- -- -- Sequence B
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; 
+                    r:Sequence(Integer) = Sequence{} | 
+           r->append(i*i))
+
+  
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{ null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Bag
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence A
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence B
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; 
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Bag
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence A
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; 
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence B
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; 
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+  
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{ null , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 0, 1, 2, 
+                   null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{ null , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence A
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2, 
+                        null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence B
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2, 
+                        null } in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+     false : Boolean
+
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{ null , 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+     false : Boolean
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set ---------------------------------------------
+
+context Model inv: 
+	let c:Set(Integer) = Set{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{-1, 0, 1, 2, 1} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Bag(Integer) = Bag{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; r:Bag(Integer) = Bag{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence A
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2, 1} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer; 
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(i*i))
+
+  
+-- -- -- -- -- -- Sequence B
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2, 1} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+  
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv: 
+	let c:Sequence(Integer) = Sequence{-1, 0, 1, 2} in 
+   c->collect(i|i*i) = 
+     c->iterate(i:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->append(i*i))
+
+  
+endpackage

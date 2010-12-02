@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Realisierung eines konfigurierbaren Datenbankschemagenerators</title>
+<link rel="stylesheet" type="text/css" href="formate.css">
+</head>
+
+<body>
+<table width="80%" align="center">
+<tr>
+<td>
+<h2 align="center">Howto zur Bedienung des Datenbankschemagenerators</h2>
+<h3 align="center">6 Schritte zur ersten Modelltransformation</h3>
+<b>Systemvorausetzungen:</b>
+<ul>
+<li>Java ab Version 5.0 <a href="Tools\jdk-1_5_0_06-windows-i586-p.exe">installer</a></li>
+</ul>
+<b>Vorgehen:</b>
+<ol>
+<li>Dieses <a href="TransformationEngine.rar">Archiv</a> auf die Festplatte entpacken.<br></li>
+<li>Die Anwendung durch "TransformationGUI.bat" starten.<br></li>
+<li>Im Dialog zur Modellselektion unter "Auswahl des Metamodells" UML auswählen , und unter "Auswahl der Metamodellinstanz" das Beispielmodell "universityExample" selektieren.<br> Die Betätigung des  Buttons "Weiter >>" schließt diesen Schritt ab.<br>
+</li>
+<li>
+Im Dialog zur Transformationsselektion die gewünschte metamodellbasiere Transformation auswählen und den Namen für das Ausgangsmodell festlegen. <br>Die Betätigung des  Buttons "Weiter >>" schließt diesen Schritt ab.<br>
+</li>
+<li>
+Im Dialog zur Transformationkonfiguration die Transformationsparameter wie gewünscht konfigurieren und mit "Weiter >>" die Transformation starten.<br>
+</li>
+<li>
+Der nächste Dialog zeigt das Ausführungsprotokoll. Die Betätigung des Buttons "Abschließen" schließt die aktuelle Modelltransformation ab. <br>
+</li>
+</li>
+</ol>
+<br><br>
+<b>Anmerkungen:</b><br><br>
+Während der Transformation generierte Modelle stehen anschließend im Dialog zur Modellselektion zur Verfügung. Erzeugte DDL's werden in das oberste Verzeichnis der Anwendung unter dem Namen, der im Dialog zur Transformationsselektion angegeben wurde, abgelegt.
+<br><br>
+Es können beliebige UML Modelle in das Repository geladen werden. Dazu sind die Modell in einer UML Entwicklungsumgebung (z.B. Poseidon) zu erstellen. Dabei müssen alle Anforderungen an UML Modelle, die im <a href="Dokumente\gb.pdf">Beleg</a> in Abschnitt "Anforderungen an Eingangsmodelle" (S.53) beschrieben sind, beachten werden. Anschließend müssen die entwickelten UML Klassendiagramme in das XMI-Format exportiert werden (ACHTUNG: nicht die Diagramminformationen mit exportierten). <br>Die erzeugten XMI-Dateien können anschließend in das Repository geladen werden.<br> Ein Poseidon-Beispielprojekt befindet sich im Archiv unter ./resources/cwm/UmlModels/university.zuml.
+</td>
+</tr>
+</table>
+</body>
+</html>

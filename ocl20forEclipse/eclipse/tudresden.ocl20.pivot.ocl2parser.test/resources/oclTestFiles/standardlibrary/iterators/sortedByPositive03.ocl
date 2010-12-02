@@ -1,0 +1,6 @@
+package package1::package2
+
+context Type1
+inv: Sequence { -2, -1, 0, 1, 2 } -> sortedBy(number : Integer | number - 0) -> size() = 5
+
+endpackage

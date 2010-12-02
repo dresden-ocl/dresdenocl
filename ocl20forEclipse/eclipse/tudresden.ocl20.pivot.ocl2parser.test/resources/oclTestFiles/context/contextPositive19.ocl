@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Static operations should be expressable as context.
+context Type1::aStaticOperation()
+body: 42
+
+endpackage

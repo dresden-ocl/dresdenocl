@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Parser
+Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.resource.ocl;singleton:=true
+Bundle-Version: 3.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.resources,
+ org.emftext.access;resolution:=optional,
+ org.eclipse.emf,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.workspace,
+ org.emftext.commons.antlr3_2_0,
+ tudresden.ocl20.pivot.language.ocl,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.modelbus
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl.util
+Bundle-Activator: tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin

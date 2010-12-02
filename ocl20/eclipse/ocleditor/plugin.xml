@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="tudresden.ocl20.eclipse.ocleditor"
+   name="Dresden OCL Editor"
+   version="1.0.0"
+   provider-name="TU-Dresden - SWT">
+
+   <runtime>
+      <library name="EclipseOCLEditor.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+   <requires>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="tudresden.ocl20.eclipseplugin"/>
+   </requires>
+   <extension-point id="OCLEditorExtensionPoint" name="OCLEditorExtensionPoint" schema="resources/schema/OCLEditorExtensionPoint.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            icon="resources/icons/OCLToolkit_Logo.gif"
+            class="tudresden.ocl20.eclipse.plugins.ocleditor.OCLEditorControler"
+            category="tudresden.ocl20.eclipse.ocleditor.category"
+            name="OCL-Editor"
+            id="tudresden.ocl20.eclipse.ocleditor"/>
+      <category
+            name="OCL Toolkit For Eclipse"
+            id="tudresden.ocl20.eclipse.ocleditor.category"/>
+   </extension>
+   <extension
+         point="tudresden.ocl20.eclipseplugin.initializeMDR">
+      <initializer
+            class="tudresden.ocl20.eclipse.plugins.ocleditor.extension.MDRInitializer"
+            id="OCLEditor.MDRInitializer"
+            name="MDRInitializer"/>
+   </extension>
+</plugin>

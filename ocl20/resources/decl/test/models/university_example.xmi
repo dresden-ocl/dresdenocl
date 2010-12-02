@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmlns:UML2="org.omg.xmi.namespace.UML2" xmlns:UML="org.omg.xmi.namespace.UML" xmi.version="1.2" timestamp="Thu Apr 06 11:44:27 CEST 2006">
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <UML:Model xmi.id="Imc600261m1035a382a80mm7f55" name="Modell" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+      <UML:Namespace.ownedElement>
+        <UML:Package xmi.id="Imc600261m1035a382a80mm7f3a" name="java" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+          <UML:Namespace.ownedElement>
+            <UML:Package xmi.id="Imc600261m1035a382a80mm7f3b" name="lang" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Namespace.ownedElement>
+                <UML:DataType xmi.id="Imc600261m1035a382a80mm7f3c" name="int" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false"/>
+                <UML:Class xmi.id="Imc600261m1035a382a80mm7f27" name="String" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+                <UML:DataType xmi.id="I5e1a2372m10373837166mm7e17" name="boolean" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false"/>
+                <UML:DataType xmi.id="Im5d058383m1040e18fbffmm7cd2" name="float" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false"/>
+                <UML:DataType xmi.id="Im57c64fd3m1075b461c96mm7b87" name="void" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false"/>
+                <UML:Class xmi.id="Im57c64fd3m1075b461c96mm7b75" name="Integer" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+                <UML:DataType xmi.id="Im57c64fd3m1075b461c96mm7b31" name="int[]" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false"/>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+            <UML:Package xmi.id="Imc600261m1035a382a80mm7f03" name="util" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Namespace.ownedElement>
+                <UML:Class xmi.id="Imc600261m1035a382a80mm7f04" name="Date" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+              </UML:Namespace.ownedElement>
+            </UML:Package>
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+        <UML:Package xmi.id="I4c7366ccm1035fa43444mm7e3e" name="Uni" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+          <UML:Namespace.ownedElement>
+            <UML:Class xmi.id="Imc600261m1035a382a80mm7e9b" name="Grade" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7e88" name="name" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b66">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b65" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7e77" name="value" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b68">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b67" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref="Imc600261m1035a382a80mm7f3c"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Class xmi.id="Imc600261m1035a382a80mm7f51" name="Person" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:Namespace.ownedElement>
+                <UML:Class xmi.id="I5e1a2372m10373837166mm7e15" name="boolean" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+              </UML:Namespace.ownedElement>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7f38" name="firstName" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b58">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b57" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7f26" name="lastName" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b5a">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b59" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7f15" name="birthDate" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b5c">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b5b" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f04"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7f02" name="age" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b5e">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b5d" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref="Imc600261m1035a382a80mm7f3c"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Imc600261m1035a382a80mm7ece" name="isMarried" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="I6a0554a2m1035fddd755mm7b64">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="I6a0554a2m1035fddd755mm7b63" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="I5e1a2372m10373837166mm7e15"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Association xmi.id="Imc600261m1035a382a80mm7e4f" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Imc600261m1035a382a80mm7e55" name="person" visibility="public" isSpecification="false" isNavigable="false" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Imc600261m1035a382a80mm7e53">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Imc600261m1035a382a80mm7e54" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Imc600261m1035a382a80mm7e52" name="grade" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Imc600261m1035a382a80mm7e50">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Imc600261m1035a382a80mm7e51" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7e9b"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Association xmi.id="Imc600261m1035a382a80mm7daf" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Imc600261m1035a382a80mm7db5" name="supervisor" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Imc600261m1035a382a80mm7db3">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Imc600261m1035a382a80mm7db4" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Imc600261m1035a382a80mm7db2" name="supervised" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Imc600261m1035a382a80mm7d92">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Imc600261m1035a382a80mm7d91" lower="0" upper="-1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Class xmi.id="Im5d058383m1040e18fbffmm7d71" name="Student" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref="Im5d058383m1040e18fbffmm7d41"/>
+              </UML:GeneralizableElement.generalization>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Im5d058383m1040e18fbffmm7d31" name="matNr" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im1890fa6dm1041374aff1mm7d0c">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im1890fa6dm1041374aff1mm7d0b" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref="Imc600261m1035a382a80mm7f3c"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im5d058383m1040e18fbffmm7d05" name="matDate" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im1890fa6dm1041374aff1mm7d0a">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im1890fa6dm1041374aff1mm7d09" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f04"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Generalization xmi.id="Im5d058383m1040e18fbffmm7d41" isSpecification="false">
+              <UML:Generalization.child>
+                <UML:Class xmi.idref="Im5d058383m1040e18fbffmm7d71"/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id="Im5d058383m1040e18fbffmm7d54" name="Employee" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref="Im6b673e76m10a6e864317mm79e1"/>
+              </UML:GeneralizableElement.generalization>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Im5d058383m1040e18fbffmm7d20" name="soSecNr" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im1890fa6dm1041374aff1mm7d08">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im1890fa6dm1041374aff1mm7d07" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im5d058383m1040e18fbffmm7ce3" name="wage" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im1890fa6dm1041374aff1mm7d04">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im1890fa6dm1041374aff1mm7d03" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref="Im5d058383m1040e18fbffmm7cd2"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im1890fa6dm1041374aff1mm7d30" name="taxClass" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im1890fa6dm1041374aff1mm7d02">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im1890fa6dm1041374aff1mm7d01" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Class xmi.id="Im5d058383m1040e18fbffmm7cc0" name="PhDStudent" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref="Im1890fa6dm1041374aff1mm7d37"/>
+              </UML:GeneralizableElement.generalization>
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Im5d058383m1040e18fbffmm7c9c" name="dissSubject" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im1890fa6dm1041374aff1mm7d0e">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im1890fa6dm1041374aff1mm7d0d" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Generalization xmi.id="Im1890fa6dm1041374aff1mm7d37" isSpecification="false">
+              <UML:Generalization.child>
+                <UML:Class xmi.idref="Im5d058383m1040e18fbffmm7cc0"/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref="Im5d058383m1040e18fbffmm7d54"/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id="Im565757b1m1072740da92mm7d58" name="Facility" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Im565757b1m1072740da92mm7d3b" name="name" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7c88">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7c87" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Association xmi.id="Im565757b1m1072740da92mm7ca9" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7caf" name="subFacility" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7c86">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7c85" lower="1" upper="-1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7cac" name="superFacility" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7caa">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7cab" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Association xmi.id="Im565757b1m1072740da92mm7c7e" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7c84" name="member" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7c5e">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7c5d" lower="1" upper="-1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7c81" name="owner" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7c60">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7c5f" lower="1" upper="-1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Association xmi.id="Im565757b1m1072740da92mm7c3f" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7c45" name="headOfFacility" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7c43">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7c44" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7c42" name="theFacility" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7c40">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7c41" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Generalization xmi.id="Im565757b1m1072740da92mm7c01" isSpecification="false">
+              <UML:Generalization.child>
+                <UML:Class xmi.idref="Im565757b1m1072740da92mm7c22"/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id="Im565757b1m1072740da92mm7c22" name="Faculty" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref="Im565757b1m1072740da92mm7c01"/>
+              </UML:GeneralizableElement.generalization>
+            </UML:Class>
+            <UML:Class xmi.id="Im565757b1m1072740da92mm7bf0" name="Institute" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref="Im565757b1m1072740da92mm7bd3"/>
+              </UML:GeneralizableElement.generalization>
+            </UML:Class>
+            <UML:Generalization xmi.id="Im565757b1m1072740da92mm7bd3" isSpecification="false">
+              <UML:Generalization.child>
+                <UML:Class xmi.idref="Im565757b1m1072740da92mm7bf0"/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Generalization xmi.id="Im565757b1m1072740da92mm7bb9" isSpecification="false">
+              <UML:Generalization.child>
+                <UML:Class xmi.idref="Im565757b1m1072740da92mm7bcc"/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref="Im565757b1m1072740da92mm7d58"/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+            <UML:Class xmi.id="Im565757b1m1072740da92mm7bb2" name="Paper" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:Classifier.feature>
+                <UML:Attribute xmi.id="Im565757b1m1072740da92mm7b6e" name="title" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7b08">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7b07" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im565757b1m1072740da92mm7b5d" name="edition" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7b06">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7b05" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im565757b1m1072740da92mm7b4c" name="purpose" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7b04">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7b03" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im565757b1m1072740da92mm7b3b" name="category" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7afa">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7af9" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f27"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+                <UML:Attribute xmi.id="Im565757b1m1072740da92mm7b2a" name="inProgress" visibility="private" isSpecification="false" ownerScope="instance" changeability="changeable">
+                  <UML:StructuralFeature.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7af8">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7af7" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:StructuralFeature.multiplicity>
+                  <UML:StructuralFeature.type>
+                    <UML:DataType xmi.idref="I5e1a2372m10373837166mm7e17"/>
+                  </UML:StructuralFeature.type>
+                </UML:Attribute>
+              </UML:Classifier.feature>
+            </UML:Class>
+            <UML:Association xmi.id="Im565757b1m1072740da92mm7b8f" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7b95" name="author" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7b72">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7b71" lower="1" upper="-1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Im565757b1m1072740da92mm7b92" name="papers" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im565757b1m1072740da92mm7b70">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im565757b1m1072740da92mm7b6f" lower="0" upper="-1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Im565757b1m1072740da92mm7bb2"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Class xmi.id="Im565757b1m1072740da92mm7bcc" name="Chair" visibility="public" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+              <UML:GeneralizableElement.generalization>
+                <UML:Generalization xmi.idref="Im565757b1m1072740da92mm7bb9"/>
+              </UML:GeneralizableElement.generalization>
+            </UML:Class>
+            <UML:Association xmi.id="Im57c64fd3m1075b461c96mm7ba8" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+              <UML:Association.connection>
+                <UML:AssociationEnd xmi.id="Im57c64fd3m1075b461c96mm7bae" name="person" visibility="public" isSpecification="false" isNavigable="false" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im57c64fd3m1075b461c96mm7bac">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im57c64fd3m1075b461c96mm7bad" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+                <UML:AssociationEnd xmi.id="Im57c64fd3m1075b461c96mm7bab" name="currentPaper" visibility="public" isSpecification="false" isNavigable="true" ordering="unordered" aggregation="none" targetScope="instance" changeability="changeable">
+                  <UML:AssociationEnd.multiplicity>
+                    <UML:Multiplicity xmi.id="Im57c64fd3m1075b461c96mm7b89">
+                      <UML:Multiplicity.range>
+                        <UML:MultiplicityRange xmi.id="Im57c64fd3m1075b461c96mm7b88" lower="1" upper="1"/>
+                      </UML:Multiplicity.range>
+                    </UML:Multiplicity>
+                  </UML:AssociationEnd.multiplicity>
+                  <UML:AssociationEnd.participant>
+                    <UML:Class xmi.idref="Im565757b1m1072740da92mm7bb2"/>
+                  </UML:AssociationEnd.participant>
+                </UML:AssociationEnd>
+              </UML:Association.connection>
+            </UML:Association>
+            <UML:Generalization xmi.id="Im6b673e76m10a6e864317mm79e1" isSpecification="false">
+              <UML:Generalization.child>
+                <UML:Class xmi.idref="Im5d058383m1040e18fbffmm7d54"/>
+              </UML:Generalization.child>
+              <UML:Generalization.parent>
+                <UML:Class xmi.idref="Imc600261m1035a382a80mm7f51"/>
+              </UML:Generalization.parent>
+            </UML:Generalization>
+          </UML:Namespace.ownedElement>
+        </UML:Package>
+        <UML:Stereotype xmi.id="Im5d058383m1040e18fbffmm7c2c" name="realize" isSpecification="false" isRoot="false" isLeaf="false" isAbstract="false">
+          <UML:Stereotype.baseClass>Abstraction</UML:Stereotype.baseClass>
+        </UML:Stereotype>
+      </UML:Namespace.ownedElement>
+    </UML:Model>
+  </XMI.content>
+</XMI>

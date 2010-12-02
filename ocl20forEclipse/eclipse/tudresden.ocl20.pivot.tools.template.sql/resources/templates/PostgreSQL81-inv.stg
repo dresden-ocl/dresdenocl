@@ -1,0 +1,68 @@
+group postgre;
+
+// --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
+feature_call_attribute_boolean(attribute) ::= <<
+($attribute$ = true)
+>>
+
+
+// ---  BOOLEAN (BASIC TYPE) --- 
+literal_boolean_true() ::= <<
+(true)
+>>
+
+literal_boolean_false() ::= <<
+(false)
+>>
+
+
+// ---  COLLECTIONS - SET (QUERY) --- 
+literal_collection_set(items) ::= <<
+$items:literal_collection_set_item(); separator=", "$
+>>
+
+literal_collection_set_item(item) ::= <<
+$item$
+>>
+
+// -- ITERATOR FORALL (QUERY) ---
+feature_call_forall(source,alias,object,object2,from,expression) ::= <<
+NOT EXISTS (
+  SELECT $object$ FROM $from$ AS foo
+  WHERE $object2$ IN (
+    SELECT $object2$ FROM $source$ AS $alias$
+    WHERE NOT $expression$
+  )
+)
+>>
+
+feature_call_exists(source,object,from,expression) ::= <<
+NOT EXISTS (
+  SELECT $object$ FROM $from$ AS foo
+  WHERE $object$ IN (
+    SELECT $object$ FROM $source$
+    WHERE NOT $expression$
+  )
+)
+>>
+
+feature_call_excluding_sequence(collection,object,element) ::= <<
+SELECT $object$,
+  (SELECT COUNT(*)+1 FROM (
+    SELECT $object$, SEQNO
+    FROM $collection$
+    WHERE NOT ($element$ = $object$)
+  ) AS foo WHERE SEQNO < s.SEQNO) AS SEQNO
+  FROM (
+    SELECT $object$, SEQNO
+    FROM $collection$
+    WHERE NOT ($element$ = $object$)
+  ) AS foo
+>>
+
+feature_call_union_sequence(collection1,collection2,object) ::= <<
+($collection1$)
+  UNION
+  (SELECT $object$, (SELECT MAX(SEQNO) FROM ($collection$)) + SEQNO
+   FROM $collection2$)
+>>

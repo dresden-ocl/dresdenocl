@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail @pre is only allowed in postconditions.
+context Type1::getInteger(): Integer
+pre: self.anInteger@pre > 0
+
+endpackage

@@ -1,0 +1,10 @@
+FORM "Pizza Order" 
+	GROUP "Your Personal Pizza" 
+	ITEM "dough" "Select your dough" : 
+		CHOICE ( "american", "italian", "cheezy crust" )
+	ITEM "topping" "Select your topping" :
+		CHOICE multiple ( "ham", "salami", "ananas", "onions",
+			"mushrooms", "tuna")
+	ITEM "extraCheese" "Do you want extra cheese?" :
+		DECISION ( "yes", "no")
+	ITEM "amount" "How many pizzas do you want?" : NUMBER 

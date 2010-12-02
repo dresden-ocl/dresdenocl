@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<note xsi:noNamespaceSchemaLocation="Test.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<to>String</to>
+	<from>String</from>
+	<heading>String</heading>
+	<body>String</body>
+</note>

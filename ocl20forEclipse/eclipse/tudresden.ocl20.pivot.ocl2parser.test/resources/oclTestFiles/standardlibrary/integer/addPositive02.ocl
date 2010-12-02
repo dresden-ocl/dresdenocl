@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Add can also be used non-infix.
+context Type1
+inv: 1.+(2) = 3
+
+endpackage

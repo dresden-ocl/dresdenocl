@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Should fail. allInstances() is not a static operation.
+context Type1
+def: testAllInstancesNegative01(): Set(Type1) =
+Type1::allInstances()
+
+endpackage

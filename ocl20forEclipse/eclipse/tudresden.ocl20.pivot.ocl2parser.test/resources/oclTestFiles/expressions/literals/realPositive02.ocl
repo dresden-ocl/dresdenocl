@@ -1,0 +1,7 @@
+package package1::package2
+
+-- An integer is also a real.
+context Type1::aReal: Real
+init: 42
+
+endpackage

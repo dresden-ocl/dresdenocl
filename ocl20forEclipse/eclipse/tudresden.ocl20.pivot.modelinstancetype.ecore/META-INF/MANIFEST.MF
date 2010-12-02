@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XML Ecore Model Instance Type Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.ecore;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.modelbus
+Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.modelinstancetype.ecore;uses:="org.osgi.framework,org.eclipse.core.runtime",
+ tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider;uses:="tudresden.ocl20.pivot.modelbus,tudresden.ocl20.pivot.modelbus.model.base,org.eclipse.emf.ecore.resource"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

@@ -1,0 +1,8 @@
+ROYAL AND LOYAL PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
+======================================================
+
+This directory again contains some classes of the that where defined elsewere
+already.
+
+Code duplication is enforced to avoid dependency problems during loading of
+the Java Model Instance.

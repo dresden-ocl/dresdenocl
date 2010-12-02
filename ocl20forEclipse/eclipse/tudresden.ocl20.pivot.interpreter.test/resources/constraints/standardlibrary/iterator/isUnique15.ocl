@@ -1,0 +1,13 @@
+package package1
+
+context Class1
+inv:
+/* Expected as invalid. */
+Bag { 0, integerNull, 2, 3 } -> isUnique(element: Integer | 
+  if element.oclIsUndefined()
+    then 1 / 0
+    else element
+  endif
+)
+
+endpackage

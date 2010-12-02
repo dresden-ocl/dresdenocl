@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Literal0 does not exists
+context Type1::anEnumeration1: Enumeration1
+init: Enumeration1::Literal0
+
+endpackage

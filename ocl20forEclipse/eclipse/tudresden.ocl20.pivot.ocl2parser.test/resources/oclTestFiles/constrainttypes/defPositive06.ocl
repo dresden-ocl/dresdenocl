@@ -1,0 +1,10 @@
+package package1::package2
+
+/* Definition of a property being recursively defined. 
+   Allthough this expression will never terminate, it should 
+   be parsed appropriately. */
+context Type1
+def: testDefPositive06 : Integer =
+self.testDefPositive06
+
+endpackage

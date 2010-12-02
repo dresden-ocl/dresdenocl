@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testSequenceIndexOf01(source: Sequence(OclAny), arg01: OclAny): Integer =
+source -> indexOf(arg01)
+
+endpackage

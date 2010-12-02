@@ -1,0 +1,65 @@
+--------------------------------------------------------------------
+-- exported by the SQUAM OCLEditor v0.8.0.x (OCLLib to standard OCL)
+--------------------------------------------------------------------
+package uml 
+
+
+-- Library: Tuples
+
+--	A library with examples for Tuples.
+-- 
+--	Author: Joanna Chimiak-Opoka
+--	Author: Hannes Mösl
+--------------------------------------------------------
+-- tests (queries with boolean result)
+--------------------------------------------------------
+--	Tests creation and accessing elements of a single Tuple.
+-- 
+context Model
+
+inv tTuple_1: let t : Tuple(author: String, id: Integer) 
+    		      = Tuple{author: String = 'Joanna', id: Integer = 6} in t.author = 'Joanna'
+
+context Model
+
+inv tTuple_2: let t : Tuple(author: String, id: Integer) 
+    		      = Tuple{author: String = 'Joanna', id: Integer = 6} in t.id = 6
+
+--	Tests creation of and manipulation on a Set of Tuples.
+-- 
+context Model
+
+inv tTupleSet_1: let tt : Set(Tuple(author:String, id:Integer)) = Set{
+			  Tuple{author = 'Joanna', id = 6},
+			  Tuple{author = 'Hannes', id = 4}
+			} in tt->size() = 2
+
+context Model
+
+inv tTupleSet_2: let tt : Set(Tuple(author:String, id:Integer)) = Set{
+			  Tuple{author = 'Joanna', id = 6},
+			  Tuple{author = 'Hannes', id = 4}
+			} in tt->isUnique(e|e.id)
+
+context Model
+
+inv tTupleSet_3: let tt : Set(Tuple(author:String, id:Integer)) = Set{
+			  Tuple{author = 'Joanna', id = 6},
+			  Tuple{author = 'Hannes', id = 4}
+			} in tt->collect(e|e.author) = Bag{'Joanna','Hannes'}
+
+context Model
+
+inv tTupleSet_4: let tt : Set(Tuple(author:String, id:Integer)) = Set{
+			  Tuple{author = 'Joanna', id = 6},
+			  Tuple{author = 'Hannes', id = 4}
+			} in tt->select(t|t.id > 5).author = Bag{'Joanna'}
+
+-- context Model
+-- abbreviated form --> doesn't work
+-- inv tTupleSet_5: let tt : Set(Tuple(author:String, id:Integer)) = Set{
+-- 			  Tuple{author = 'Joanna', id = 6},
+-- 			  Tuple{author = 'Hannes', id = 4}
+-- 			} in tt->select(id > 5).author = Bag{'Joanna'}
+
+endpackage

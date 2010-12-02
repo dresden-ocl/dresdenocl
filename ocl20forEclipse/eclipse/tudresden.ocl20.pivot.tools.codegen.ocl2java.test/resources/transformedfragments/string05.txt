@@ -1,0 +1,1 @@
+((Object) Integer.parseInt("1")).equals(new Integer(1))

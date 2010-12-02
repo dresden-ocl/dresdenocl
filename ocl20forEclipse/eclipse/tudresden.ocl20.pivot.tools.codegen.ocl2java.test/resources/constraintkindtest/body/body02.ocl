@@ -1,0 +1,7 @@
+package testpackage
+
+-- Used to test the right transformation of argument names.
+context Class1::bodyOperation02(anInt: Integer): Integer
+body testBody02: -anInt
+
+endpackage

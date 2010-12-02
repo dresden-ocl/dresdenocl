@@ -1,0 +1,28 @@
+package tudresden::ocl20::benchmark::testdata::b2
+
+----------------------------------------
+-- Pre and Post Conditions
+-- for method death
+----------------------------------------
+	
+context Person::death()
+  pre  isAlive:
+	 alive
+
+context Person::death()
+  post notAlive:
+	 not(alive)
+
+context Person::death()
+  post husbandWidowed:
+	 gender=Gender::female and husband.isDefined implies
+     husband@pre.wife.isUndefined and husband@pre.civstat=Civilstatus::widowed
+     
+context Person::death()
+  post wifeWidowed:
+	 gender=Gender::male and wife.isDefined implies
+     wife@pre.husband.isUndefined and wife@pre.civstat=Civilstatus::widowed
+
+	
+------------------------------------------------------------------------
+endpackage

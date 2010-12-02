@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOclIsUndefined02(): Boolean =
+true.oclIsUndefined()
+
+endpackage

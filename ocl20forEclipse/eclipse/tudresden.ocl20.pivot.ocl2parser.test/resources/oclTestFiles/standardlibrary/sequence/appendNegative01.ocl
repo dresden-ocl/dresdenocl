@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Wrong type.
+context Type1
+inv: Sequence { 1, 2 } -> append('3') -> size() = 3
+
+endpackage

@@ -1,0 +1,19 @@
+TODOs:
+
+* = important
+
+- dynamic test generation transparently to static
+- * support more meta models
+- pre/post constraints
+- def - definitions
+- proper Logging!!
+- implement remaining tests from benchmark
+- * find interpreter bugs :)
+- * better error reporting!
+- * refactor naming of models and packages etc.
+- ** evaluate on all model instance objects!!!!
+- generate very simple models / model instances
+- ** comment everything :)
+- status report for generator like "generated xxx tests" etc.
+- generate header + comments in testclasses
+- error if no statements were found (wrong file or directory empty)

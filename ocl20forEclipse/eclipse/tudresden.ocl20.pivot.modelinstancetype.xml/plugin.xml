@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="tudresden.ocl20.pivot.modelbus.modelinstancetypes">
+      <modelinstancetype
+            icon="icons/xml.gif"
+            id="tudresden.ocl20.pivot.modelinstancetype.xml"
+            modelInstanceProvider="tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider.XmlModelInstanceProvider"
+            name="XML Instance">
+      </modelinstancetype>
+   </extension>
+
+</plugin>

@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOneIteratorExp01() : Boolean =
+Set{1, 2, 3}->one(i: Integer | i = 2)
+
+endpackage

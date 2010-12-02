@@ -1,0 +1,7 @@
+<Container>
+	<booleanValues>true</booleanValues>
+	<integerValues>42</integerValues>
+	<realValues>42.7</realValues>
+	<stringValues>Something</stringValues>
+	<enumerationValues>Literal1</enumerationValues>
+</Container>

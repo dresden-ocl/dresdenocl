@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. Wrong type.
+context Type1
+inv: Sequence { 1, 2 } -> union ( OrderedSet { 1, 2} ) -> size() = 2
+
+endpackage

@@ -1,0 +1,107 @@
+group java;
+
+
+// --- Name for the OCL Result Variable ---
+resultVariable() ::= <<
+result
+>>
+
+
+
+// --- Name for the OCL Self Variable ---
+selfVariable() ::= <<
+aClass
+>>
+
+
+
+// --- Variable Declaration ---
+variableDeclaration(type, name) ::= <<
+$type$ $name$;
+
+>>
+
+
+// ---- JAVA CLASS CODE ----
+// -------------------------
+
+
+// --- Code skeleton for a Java class file ---
+javaFile(package, name, superType, attributes, methods) ::= <<
+package $package$;
+
+/**
+ * <p>
+ * The class {@link $package$.Extended$name$} provides some newly defined attributes and methods class {@link $name$}.
+ * </p>
+ */
+public class Extended$name$ $if(superType)$extends $superType$$endif$ {
+    $if(attributes)$
+
+    $attributes:{att | $att$};separator = "\n\n"$    
+    $endif$
+    $if(methods)$    
+    $methods:{method | $method$};separator = "\n\n"$
+
+    $endif$        
+}
+>>
+
+
+// --- Code skeleton for an attribute of a Java class ---
+javaAttribute(name, type) ::= <<
+protected $type$ $name$;
+>>
+
+
+// --- Code skeleton for a getter method to an attribute of a Java class ---
+javaAttributeGetter(name, ucaseName, type) ::= <<
+/**
+ * @return The attribute $name$ of the type {@link $type$}.
+ */
+public $type$ get$ucaseName$() {
+    return this.$name$;
+}
+>>
+
+
+// --- Code skeleton for a method of a Java class ---
+// -- A method with a normal return type --
+javaMethod(name, args, argTypes, returnType) ::= <<
+/**
+ *<p>
+ *A method signature implemented by an aspect.
+ *</p>
+ */
+public $if(returnType)$$returnType$$else$void$endif$ $name$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator=", "$$endif$) {
+    $if(returnType)$
+    return null;
+    $endif$
+}
+>>
+
+
+// -- A method with an numeric return type --
+javaNumericMethod(name, args, argTypes, returnType) ::= <<
+/**
+ *<p>
+ *A method signature implemented by an aspect.
+ *</p>
+ */
+public $returnType$ $name$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator=", "$$endif$) {
+    return 0;
+}
+>>
+
+
+// -- A method with an boolean return type --
+javaBooleanMethod(name, args, argTypes) ::= <<
+/**
+ *<p>
+ *A method signature implemented by an aspect.
+ *</p>
+ */
+public $booleanType()$ $name$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator=", "$$endif$) {
+    return false;
+}
+>>

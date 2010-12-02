@@ -1,0 +1,9 @@
+package package1::package2
+
+-- The return Type of getSequence() is Type1,
+-- but multiple, nonunique, and ordered.
+-- Thus the Parser should interpret the Type as Sequence(Type1).
+context Type1::getSequence(): Sequence(Type1)
+body: Type1.allInstances()->asSequence()
+  
+endpackage

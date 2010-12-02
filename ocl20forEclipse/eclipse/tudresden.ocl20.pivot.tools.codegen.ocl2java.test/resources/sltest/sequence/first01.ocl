@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testSequenceFirst(source: Sequence(OclAny)): OclAny =
+source -> first()
+
+endpackage

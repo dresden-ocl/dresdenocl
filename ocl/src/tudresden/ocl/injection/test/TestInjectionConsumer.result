@@ -1,0 +1,455 @@
+/*
+Copyright (C) 2000  Ralf Wiebicke
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
+package// hallo
+  tudresden.ocl.injection.test[onPackage(tudresden.ocl.injection.test)];
+
+import java.util.*[onImport(java.util.*)];
+import java.io.BufferedReader[onImport(java.io.BufferedReader)];
+import java.text.Format[onImport(java.text.Format)];
+
+[onFileDocComment]/**
+   Represents an attribute or association partner of a class.
+   Note: type==Model.AMIGOUS means, the attribute cannot be used in OCL due to attribute ambiguities.
+   See OCL spec 5.4.1. for details.
+*/[/onFileDocComment]
+public abstract class Example[onClass(Example)] implements Runnable
+{
+  [onAttributeHeader]private String name;[onClassFeature(name)]
+  [onAttributeHeader]private Integer type=new Integer(5);[onClassFeature(type)]
+  [onAttributeHeader]private volatile Integer[] qualifiers;[onClassFeature(qualifiers)]
+  [onAttributeHeader]String hallo="hallo";[onClassFeature(hallo)]
+  
+  [onDocComment]/**TestCommentCommaSeparated123*/[/onDocComment]
+  [onAttributeHeader]int commaSeparated1,commaSeparated2=0,commaSeparated3;[onClassFeature(commaSeparated1){/**TestCommentCommaSeparated123*/}][onClassFeature(commaSeparated2){/**TestCommentCommaSeparated123*/}][onClassFeature(commaSeparated3){/**TestCommentCommaSeparated123*/}] 
+  [onDocComment]/**TestCommentCommaSeparated456*/[/onDocComment]
+  [onAttributeHeader]int commaSeparated4=80,commaSeparated5,commaSeparated6=200;[onClassFeature(commaSeparated4){/**TestCommentCommaSeparated456*/}][onClassFeature(commaSeparated5){/**TestCommentCommaSeparated456*/}][onClassFeature(commaSeparated6){/**TestCommentCommaSeparated456*/}] 
+
+  // these attributes test the ability of the parser
+  // to skip more complex (ugly) attribute initializers
+  [onAttributeHeader]String   uglyAttribute1="some'Thing{some\"Thing;Else";[onClassFeature(uglyAttribute1)]
+  [onAttributeHeader]char     uglyAttribute2=';';[onClassFeature(uglyAttribute2)]
+  [onAttributeHeader]char     uglyAttribute3='{';[onClassFeature(uglyAttribute3)]
+  [onAttributeHeader]char     uglyAttribute4='"';[onClassFeature(uglyAttribute4)]
+  [onAttributeHeader]char     uglyAttribute5='\'';[onClassFeature(uglyAttribute5)]
+  [onAttributeHeader]String[] uglyAttribute6=
+  {
+    "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+    "some'Thing{some\"Thing;Else"
+  };[onClassFeature(uglyAttribute6)]
+  [onAttributeHeader]char[]   uglyAttribute7={';','{','"','\''};[onClassFeature(uglyAttribute7)]
+  [onAttributeHeader]Runnable uglyAttribute8=new Runnable()
+  {
+    // ugly ; { " ' comment
+    String   uglyInnerAttribute1="some'Thing{some\"Thing;Else";
+    char     uglyInnerAttribute2=';';
+    char     uglyInnerAttribute3='{';
+    char     uglyInnerAttribute4='"';
+    char     uglyInnerAttribute5='\'';
+    String[] uglyInnerAttribute6=
+    {
+      "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+      "some'Thing{some\"Thing;Else"
+    };
+    char[]   uglyInnerAttribute7={';','{','"','\''};
+    public void run()
+    {
+      // ugly ; { " ' comment
+      String   uglyVariable1="some'Thing{some\"Thing;Else";
+      char     uglyVariable2=';';
+      char     uglyVariable3='{';
+      char     uglyVariable4='"';
+      char     uglyVariable5='\'';
+      String[] uglyVariable6=
+      {
+        "some'Thing{some\"Thing;Else", // ugly ; { " ' comment
+        "some'Thing{some\"Thing;Else"
+      };
+      char[]   uglyAttribute7={';','{','"','\''};
+    }
+    // ugly ; { " ' comment
+  };[onClassFeature(uglyAttribute8)]
+  // end of ugly attributes
+  
+
+  [onClass(Inner)]class Inner implements Runnable
+  {
+    [onClass(Drinner)]class Drinner implements Runnable
+    {
+      [onAttributeHeader]boolean someDrinnerBoolean=true;[onClassFeature(someDrinnerBoolean)]
+    
+      [onBehaviourHeader]public void run()
+      [/onBehaviourHeader]{
+      }[onClassFeature(run)]
+    [onClassEnd(Drinner)][onClassFeature(Drinner)]}
+
+    [onAttributeHeader]boolean someInnerBoolean=true;[onClassFeature(someInnerBoolean)]
+    
+    [onBehaviourHeader]public void run()
+    [/onBehaviourHeader]{
+    }[onClassFeature(run)]
+  [onClassEnd(Inner)][onClassFeature(Inner)]}  
+
+  [onDocComment]/**
+    * Testcomment A
+    */[/onDocComment]
+  [onAttributeHeader]private int a;[onClassFeature(a){/**
+    * Testcomment A
+    */}]
+  
+  [onAttributeHeader]private List collectionWithoutComment;[onClassFeature(collectionWithoutComment)]
+  
+  [onDocComment]/**
+    * Testcomment B
+    */[/onDocComment]
+  [onAttributeHeader]private int b;[onClassFeature(b){/**
+    * Testcomment B
+    */}]
+  
+  [onAttributeHeader]private Map mapWithoutComment;[onClassFeature(mapWithoutComment)]
+
+  [onBehaviourHeader]private Example()
+  [/onBehaviourHeader]{
+    namedIntegers.put("5", new Integer(5));
+  }[onClassFeature(Example)]
+  
+  [onBehaviourHeader]public Example(String name, Integer type)
+  [/onBehaviourHeader]{
+    super();
+    qualifiers=new Integer[6];
+    namedIntegers.put("5", new Integer(5));
+  }[onClassFeature(Example)]
+
+  [onBehaviourHeader]public void set(String name, Integer type,// what a cool parameter
+    final Integer[] qualifiers)
+  [/onBehaviourHeader]{
+    if(name==null)
+      throw new IllegalArgumentException(); // ugly comment : { {
+    this.name=name;
+    String x="ugly { string \" { literal";
+    char c='{';
+
+    /**
+      ugly comment *
+    **/
+    if(type==null)
+      throw new IllegalArgumentException(); // some other comment
+    this.type=type;
+
+    if(qualifiers!=null&&qualifiers.length==0)
+      throw new IllegalArgumentException();
+    this.qualifiers=qualifiers;
+    
+    int a=20;
+    a=a/(a+b); // ugly expression
+  }[onClassFeature(set)]
+
+  [onBehaviourHeader]abstract void abstractMethod()[/onBehaviourHeader];[onClassFeature(abstractMethod)]
+
+  [onDocComment]/**
+     Some example doc-comment.
+  */[/onDocComment]
+  [onBehaviourHeader]public void run()
+  [/onBehaviourHeader]{}[onClassFeature(run){/**
+     Some example doc-comment.
+  */}]
+
+  [onDocComment]/**
+     A collection of Strings.
+     @element-type java.lang.String
+     @see java.lang.String
+     @invariant stringsMinusGreaterincludes_inlinehallo_:        strings->includes('inlinehallo')
+     @invariant stringsMinusGreaterincludes_inline_space_hallo_: strings->includes('inline space hallo')
+  */[/onDocComment]
+  [onAttributeHeader]Set myStrings=new HashSet();[onClassFeature(myStrings){/**
+     A collection of Strings.
+     @element-type java.lang.String
+     @see java.lang.String
+     @invariant stringsMinusGreaterincludes_inlinehallo_:        strings->includes('inlinehallo')
+     @invariant stringsMinusGreaterincludes_inline_space_hallo_: strings->includes('inline space hallo')
+  */}]
+  
+  [onDocComment]/**
+     @element-type Integer
+  */[/onDocComment]
+  [onAttributeHeader]Set integers=new HashSet();[onClassFeature(integers){/**
+     @element-type Integer
+  */}]
+  
+  [onAttributeHeader]Integer anInteger=new Integer(5);[onClassFeature(anInteger)]
+  
+  [onDocComment]/**
+    * A collection of dates.
+    *
+    * Here are some lines to test the reveng GUI....
+    *
+     @element-type Date
+  */[/onDocComment]
+  [onAttributeHeader]List dates=new ArrayList();[onClassFeature(dates){/**
+    * A collection of dates.
+    *
+    * Here are some lines to test the reveng GUI....
+    *
+     @element-type Date
+  */}]
+  
+  [onAttributeHeader]Date aDate=new Date();[onClassFeature(aDate)]
+  
+  [onDocComment]/**
+     @element-type AbstractImplementation
+  */[/onDocComment]
+  [onAttributeHeader]Set interfaces=new HashSet();[onClassFeature(interfaces){/**
+     @element-type AbstractImplementation
+  */}]
+  
+  [onAttributeHeader]AbstractImplementation anInterface=new Implementation();[onClassFeature(anInterface)]
+  
+  [onDocComment]/**
+     @element-type Format
+  */[/onDocComment]
+  [onAttributeHeader]Vector formats=new Vector();[onClassFeature(formats){/**
+     @element-type Format
+  */}]
+  
+  [onAttributeHeader]Format aFormat=new java.text.DecimalFormat();[onClassFeature(aFormat)]
+
+  [onDocComment]/**
+  *
+  * A map from strings to integers.
+  * * * * *  These stars should be removed by the reveng GUI...
+  
+  *
+     @element-type Integer
+     @key-type String
+  */[/onDocComment]
+  [onAttributeHeader]HashMap namedIntegers=new HashMap();[onClassFeature(namedIntegers){/**
+  *
+  * A map from strings to integers.
+  * * * * *  These stars should be removed by the reveng GUI...
+  
+  *
+     @element-type Integer
+     @key-type String
+  */}]
+  
+  [onBehaviourHeader]public boolean poly1(Interface someInterface)
+  [/onBehaviourHeader]{
+    return true;
+  }[onClassFeature(poly1)]
+
+  [onBehaviourHeader]public String getName()
+  [/onBehaviourHeader]{
+    return name;
+  }[onClassFeature(getName)]
+
+  [onBehaviourHeader]public Integer getType()
+  [/onBehaviourHeader]{
+    return type;
+  }[onClassFeature(getType)]
+
+  [onDocComment]/**
+     @precondition  stringsMinusGreaterincludes_inlinehallopre_:          strings->includes('inlinehallopre')
+     @precondition  stringsMinusGreaterincludes_inline_space_hallo_pre_:  strings->includes('inline space hallo pre')
+     @postcondition stringsMinusGreaterincludes_inlinehallopost_:         strings->includes('inlinehallopost')
+     @postcondition stringsMinusGreaterincludes_inline_space_hallo_post_: strings->includes('inline space hallo post')
+  */[/onDocComment]
+  [onBehaviourHeader]public Integer[] getQualifiers()
+  [/onBehaviourHeader]{
+    namedIntegers.put("10", new Integer(10));
+    return qualifiers;
+  }[onClassFeature(getQualifiers){/**
+     @precondition  stringsMinusGreaterincludes_inlinehallopre_:          strings->includes('inlinehallopre')
+     @precondition  stringsMinusGreaterincludes_inline_space_hallo_pre_:  strings->includes('inline space hallo pre')
+     @postcondition stringsMinusGreaterincludes_inlinehallopost_:         strings->includes('inlinehallopost')
+     @postcondition stringsMinusGreaterincludes_inline_space_hallo_post_: strings->includes('inline space hallo post')
+  */}]
+
+  [onAttributeHeader]public Integer unqualifiedType=null;[onClassFeature(unqualifiedType)]
+
+  [onBehaviourHeader]public Integer getUnqualifiedType() throws IllegalArgumentException
+  [/onBehaviourHeader]{
+    if(unqualifiedType!=null)
+      return unqualifiedType;
+
+    if(qualifiers==null)
+      throw new IllegalArgumentException();
+
+    unqualifiedType=
+      (type instanceof Integer) ? type : type;
+    return unqualifiedType;
+  }[onClassFeature(getUnqualifiedType)]
+
+  [onAttributeHeader]private Object parent;[onClassFeature(parent)]
+
+  [onBehaviourHeader]public void setParent  (Object parent)
+    throws
+      IllegalArgumentException,
+      NullPointerException
+  [/onBehaviourHeader]{
+    if(this.parent==null)
+      this.parent=parent;
+    else
+      throw new IllegalArgumentException("An attributes parent cannot be set twice.");
+  }[onClassFeature(setParent)]
+
+  [onBehaviourHeader]public Object getParent()
+  [/onBehaviourHeader]{
+    return parent;
+  }[onClassFeature(getParent)]
+
+  [onBehaviourHeader]public void printData
+    (java.io.PrintStream o)
+  [/onBehaviourHeader]{
+  }[onClassFeature(printData)]
+  
+  [onBehaviourHeader]private   void accessifierPrivate() [/onBehaviourHeader]{}[onClassFeature(accessifierPrivate)]
+  [onBehaviourHeader]protected void accessifierProtected() [/onBehaviourHeader]{}[onClassFeature(accessifierProtected)]
+            [onBehaviourHeader]void accessifierPackage() [/onBehaviourHeader]{}[onClassFeature(accessifierPackage)]
+  [onBehaviourHeader]public    void accessifierPublic() [/onBehaviourHeader]{}[onClassFeature(accessifierPublic)]
+  
+  [onBehaviourHeader]void test_super()
+  [/onBehaviourHeader]{
+  }[onClassFeature(test_super)]
+  
+  [onAttributeHeader]Collection testTypeTrace=new HashSet();[onClassFeature(testTypeTrace)]
+  [onBehaviourHeader]public void addTestTypeTrace(Object o)
+  [/onBehaviourHeader]{
+    testTypeTrace.add(o);
+  }[onClassFeature(addTestTypeTrace)]
+	
+	[onDocComment]/**
+		Tests null strings to be treated as empty strings.
+		@invariant nullString: nullString=''
+	*/[/onDocComment]
+	[onAttributeHeader]String nullString=null;[onClassFeature(nullString){/**
+		Tests null strings to be treated as empty strings.
+		@invariant nullString: nullString=''
+	*/}]
+
+	[onDocComment]/**
+		Tests null collections to be treated as empty collections.
+		@element-type String
+	*/[/onDocComment]
+	[onAttributeHeader]Collection nullCollection=null;[onClassFeature(nullCollection){/**
+		Tests null collections to be treated as empty collections.
+		@element-type String
+	*/}]
+
+	[onDocComment]/**
+		Tests null sets to be treated as empty sets.
+		@invariant nullSet: nullSet->size=0
+		@element-type String
+	*/[/onDocComment]
+	[onAttributeHeader]Set nullSet=null;[onClassFeature(nullSet){/**
+		Tests null sets to be treated as empty sets.
+		@invariant nullSet: nullSet->size=0
+		@element-type String
+	*/}]
+
+	[onDocComment]/**
+		Tests null lists to be treated as empty lists.
+		@invariant nullList: nullList->size=0
+		@element-type String
+	*/[/onDocComment]
+	[onAttributeHeader]List nullList=null;[onClassFeature(nullList){/**
+		Tests null lists to be treated as empty lists.
+		@invariant nullList: nullList->size=0
+		@element-type String
+	*/}]
+
+	[onDocComment]/**
+		Tests null maps to be treated as empty maps.
+		@element-type String
+		@key-type String
+	*/[/onDocComment]
+	[onAttributeHeader]Map nullMap=null;[onClassFeature(nullMap){/**
+		Tests null maps to be treated as empty maps.
+		@element-type String
+		@key-type String
+	*/}]
+
+	[onBehaviourHeader]static public void main(String[] args)
+  [/onBehaviourHeader]{
+    tudresden.ocl.lib.Ocl.TOLERATE_NONEXISTENT_FIELDS=false;
+    tudresden.ocl.lib.Ocl.setNameAdapter(new tudresden.ocl.lib.ArgoNameAdapter());
+    SecondExample e2=new SecondExample();
+    e2.getQualifiers();
+    e2.i=10;
+    e2.anInteger=new Integer(8);
+    e2.getQualifiers();
+    e2.test_super();
+    e2.addTestTypeTrace(new ThirdExample());
+    e2.addTestTypeTrace(new SecondExample());
+  }[onClassFeature(main)]
+
+[onClassEnd(Example)]}
+
+class SecondExample[onClass(SecondExample)] extends Example{
+  [onAttributeHeader]int i;[onClassFeature(i)]
+  
+  [onDocComment]/**
+     @invariant testingInheritance: self.hallo='prollo'
+  */[/onDocComment]
+  [onBehaviourHeader]SecondExample()
+  [/onBehaviourHeader]{
+    super("somename", new Integer(5));
+  }[onClassFeature(SecondExample){/**
+     @invariant testingInheritance: self.hallo='prollo'
+  */}]
+  
+  {
+    // Object initializer as defined in Java Language Spec D.1.3
+    i=10;
+  }
+
+  [onBehaviourHeader]void abstractMethod()  [/onBehaviourHeader]{}[onClassFeature(abstractMethod)]
+  
+  [onDocComment]/**
+     Tests, whether injection does not produce infinite loops,
+     when wrapping methods with calls to super.
+  */[/onDocComment]
+  [onBehaviourHeader]void test_super()
+  [/onBehaviourHeader]{
+    super.test_super();
+  }[onClassFeature(test_super){/**
+     Tests, whether injection does not produce infinite loops,
+     when wrapping methods with calls to super.
+  */}]
+  
+  static
+  {
+    // this has to be tested too.
+  }
+  
+  [onBehaviourHeader]public String toString()
+  [/onBehaviourHeader]{
+    return getClass().getName();
+  }[onClassFeature(toString)]
+  
+[onClassEnd(SecondExample)]}
+
+class ThirdExample[onClass(ThirdExample)] extends SecondExample
+{
+  // this class has no explicit constructor
+  [onBehaviourHeader]void abstractMethod()  [/onBehaviourHeader]{}[onClassFeature(abstractMethod)]
+[onClassEnd(ThirdExample)]}
+
+interface ExampleFour[onClass(ExampleFour)]
+{
+  [onBehaviourHeader]public int someMethod(double x)[/onBehaviourHeader];[onClassFeature(someMethod)]
+[onClassEnd(ExampleFour)]}

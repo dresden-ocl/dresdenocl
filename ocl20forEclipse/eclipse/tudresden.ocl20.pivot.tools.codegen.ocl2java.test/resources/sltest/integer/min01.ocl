@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testIntegerMin01(source: Integer, arg01: Integer): Integer =
+source.min(arg01)
+
+endpackage

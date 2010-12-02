@@ -1,0 +1,11 @@
+package tudresden::ocl20::benchmark::testdata::b3
+
+context Exam inv threeParticipants:
+  self.examinee<>self.examiner and
+  self.examinee<>self.recorder and
+  self.examiner<>self.recorder
+
+context Exam inv threeParticipants2:
+  Set{self.examinee,self.examiner,self.recorder}->size()=3
+
+endpackage

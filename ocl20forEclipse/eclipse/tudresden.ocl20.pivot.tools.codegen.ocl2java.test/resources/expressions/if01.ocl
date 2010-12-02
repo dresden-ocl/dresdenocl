@@ -1,0 +1,10 @@
+package testpackage
+
+context Class1
+def: testIfExp01(): Integer =
+if (true)
+  then 1
+  else -1
+endif
+
+endpackage

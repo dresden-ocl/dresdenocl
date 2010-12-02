@@ -1,0 +1,11 @@
+package package1::package2
+
+context Type1
+inv: 
+  if (true) then
+    true
+  else 
+    false
+  endif    
+
+endpackage

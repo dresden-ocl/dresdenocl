@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Void operation should not be parsed with result type.
+context Type1::getVoid(): Boolean
+pre: true
+  
+endpackage

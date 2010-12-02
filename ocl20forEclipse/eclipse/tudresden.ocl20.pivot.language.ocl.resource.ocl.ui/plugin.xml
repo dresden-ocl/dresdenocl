@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="ocl" icon="icons/editor_icon.gif" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor" name="EMFText ocl Editor">
+			<contentTypeBinding contentTypeId="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Ocl Text Editor" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
+		</page>
+		<page name="Brackets" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketPreferencePage" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketPreferencePage" category="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizard" name="EMFText .ocl file">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator" markerType="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem" />
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclAnnotationModelFactory" extensions="ocl" />
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="tudresden.ocl20.pivot.language.ocl.resource.ocl" name=".ocl File" base-type="org.eclipse.core.runtime.text" file-extensions="ocl"/>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="ocl" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.provider" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences" />
+		<type name="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences.declaration" super="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences" label="Occurrences (in .ocl files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="ocl.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="ocl.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="ocl.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="ocl.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="ocl.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="ocl.occurrenceTextStyle" textStylePreferenceValue="NONE" />
+		<specification annotationType="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences.declaration" label="Declarations (in .ocl files)" textPreferenceKey="ocl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="ocl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="ocl.declarationTextStyle" textStylePreferenceValue="NONE" />
+	</extension>
+	
+</plugin>

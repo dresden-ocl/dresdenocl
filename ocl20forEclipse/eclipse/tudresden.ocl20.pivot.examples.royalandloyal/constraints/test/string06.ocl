@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 154.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context Service
+inv: '1.5'.toReal() = 1.5
+
+endpackage

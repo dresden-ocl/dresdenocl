@@ -1,0 +1,1 @@
+source.getClass().getCanonicalName().equals(arg01.getCanonicalName())

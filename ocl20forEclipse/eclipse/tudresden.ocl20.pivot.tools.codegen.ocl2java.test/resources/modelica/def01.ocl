@@ -1,0 +1,275 @@
+package modelica
+
+
+context Reference
+def: rName : String
+     = if (reference.oclIsKindOf(ComponentName)) then reference.oclAsType(ComponentName).name
+	   else if (reference.oclIsKindOf(AbstractContent)) then reference.oclAsType(AbstractContent).name
+	        else reference.oclAsType(ImportClause).name.name
+			endif
+	   endif
+
+	   
+/* ****************************************************************************
+*                   Helper methods for checking functions                     *
+**************************************************************************** */
+	   
+context Component
+def: isFormalParameter() : Boolean
+     = let public : Boolean = xVisibilityComponentsSection().oclIsUndefined() or xVisibilityComponentsSection().visibilitytype = VisibilityType::PUBLIC
+       in public and (xBody().xContent().xMoClass().oclIsKindOf(MoFunction) or xBody().xContent().xMoClass().oclIsKindOf(MoOperatorFunction))
+
+context AbstractComponent
+def: acIsPublic() : Boolean
+     = xVisibilityComponentsSection().oclIsUndefined() or
+       xVisibilityComponentsSection().visibilitytype = VisibilityType::PUBLIC
+
+context InputOrOutputPrefix
+def: isInput()  : Boolean = (not value.oclIsUndefined()) and value = 'input'
+def: isOutput() : Boolean = (not value.oclIsUndefined()) and value = 'output'
+def: isPrefixSet() : Boolean = isInput() or isOutput()
+
+context ConnectorPrefix
+def: isFlow()  : Boolean = (not value.oclIsUndefined()) and value = 'flow'
+def: isStream() : Boolean = (not value.oclIsUndefined()) and value = 'stream'
+def: isConnectorPrefixSet() : Boolean = isFlow() or isStream()
+
+context Component
+def: cIsFlow() : Boolean = (not connectorprefix.oclIsUndefined()) and
+                           connectorprefix.isFlow()
+def: cIsStream():Boolean = (not connectorprefix.oclIsUndefined()) and
+                           connectorprefix.isStream()
+def: cIsConnectorPrefixSet() : Boolean =
+     (not connectorprefix.oclIsUndefined()) and 
+     (connectorprefix.isFlow() or connectorprefix.isStream())
+def: cIsInput() : Boolean = not componentinputoutput.oclIsUndefined() and
+                            componentinputoutput.isInput()
+def: cIsOutput(): Boolean = not componentinputoutput.oclIsUndefined() and
+                            componentinputoutput.isOutput()
+
+context ReplaceableComponent
+def: rcIsFlow() : Boolean = (not connectorprefix.oclIsUndefined()) and
+                           connectorprefix.isFlow()
+def: rcIsStream():Boolean = (not connectorprefix.oclIsUndefined()) and
+                           connectorprefix.isStream()
+def: rcIsConnectorPrefixSet() : Boolean =
+     (not connectorprefix.oclIsUndefined()) and 
+     (connectorprefix.isFlow() or connectorprefix.isStream())
+def: rcIsInput() : Boolean = not componentinputoutput.oclIsUndefined() and
+                            componentinputoutput.isInput()
+def: rcIsOutput(): Boolean = not componentinputoutput.oclIsUndefined() and
+                            componentinputoutput.isOutput()
+
+context Body
+def: bCollectAbstractComponents() : Sequence(AbstractComponent)
+     = bodyelements->iterate(
+            abe : AbstractBodyElements; resultSet : Sequence(AbstractComponent) = Sequence{} | 
+            if abe.oclIsKindOf(AbstractComponent) then resultSet->including(abe.oclAsType(AbstractComponent))
+                else if abe.oclIsKindOf(VisibilityComponentsSection)
+                     then resultSet->union(abe.oclAsType(VisibilityComponentsSection).components->asSequence())
+                     else resultSet
+                endif
+            endif
+	   )
+-- Dresden OCL: implizites ->collect wird vom Parser nicht erkannt
+def: bCollectOutputComponents() : Sequence(Component)
+     = bCollectAbstractComponents()->select(oclIsKindOf(Component))->collect(oclAsType(Component))->select((not componentinputoutput.oclIsUndefined()) and componentinputoutput.isOutput())
+def: bCollectInputComponents() : Sequence(Component)
+     = bCollectAbstractComponents()->select(oclIsKindOf(Component))->collect(oclAsType(Component))->select((not componentinputoutput.oclIsUndefined()) and componentinputoutput.isInput())
+def: bCollectConnectorComponents() : Sequence(Component)
+     = bCollectAbstractComponents()->select(oclIsKindOf(Component))->collect(oclAsType(Component))->select((not connectorprefix.oclIsUndefined()) and connectorprefix.isConnectorPrefixSet())
+def: bCollectExtendsClauses() : Sequence(ExtendsClause)
+     = bCollectAbstractComponents()->select(oclIsKindOf(ExtendsClause))->collect(oclAsType(ExtendsClause))
+def: bCollectPublicComponents() : Sequence(Component)
+     = bCollectAbstractComponents()->select(oclIsKindOf(Component))->collect(
+                                     oclAsType(Component))->select(acIsPublic())
+
+context AbstractContent
+def: acBodyElements() : Collection(AbstractBodyElements)
+     = if oclIsKindOf(CommonContent) then
+        if oclAsType(CommonContent).xBody().oclIsUndefined() then
+         Sequence{}
+        else
+         oclAsType(CommonContent).xBody().bodyelements
+        endif
+       else
+        if oclIsKindOf(ExtensionContent) then
+         if oclAsType(ExtensionContent).xBody().oclIsUndefined() then
+          oclAsType(ExtensionContent).xBody().bodyelements
+         else
+          Sequence{}
+         endif
+        else
+         Sequence{}
+        endif
+       endif
+
+context AbstractContent
+def: acCollectAbstractComponents() : Sequence(AbstractComponent)
+     = if oclIsKindOf(CommonContent) then
+        oclAsType(CommonContent).xBody().bCollectAbstractComponents()
+       else
+        if oclIsKindOf(ExtensionContent) then
+         oclAsType(ExtensionContent).xBody().bCollectAbstractComponents()
+        else
+         Sequence {}
+        endif
+       endif
+def: acCollectExtendsClauses() : Sequence(ExtendsClause)
+     = if oclIsKindOf(CommonContent) and not oclAsType(CommonContent).xBody().oclIsUndefined() then
+        oclAsType(CommonContent).xBody().bCollectExtendsClauses()
+       else
+        if oclIsKindOf(ExtensionContent) and not oclAsType(ExtensionContent).xBody().oclIsUndefined() then
+         oclAsType(ExtensionContent).xBody().bCollectExtendsClauses()
+        else
+         Sequence {}
+        endif
+       endif
+def: acCollectIOComponents() : Sequence(Component)
+     = if oclIsKindOf(CommonContent) then
+        oclAsType(CommonContent).xBody().bCollectInputComponents()->union(
+                    oclAsType(CommonContent).xBody().bCollectOutputComponents())
+       else
+        if oclIsKindOf(ExtensionContent) then
+         oclAsType(ExtensionContent).xBody().bCollectInputComponents()->union(
+                    oclAsType(CommonContent).xBody().bCollectOutputComponents())
+        else
+         Sequence {}
+        endif
+       endif
+def: acCollectConnectorComponents() : Sequence(Component)
+     = if oclIsKindOf(CommonContent) then
+        oclAsType(CommonContent).xBody().bCollectConnectorComponents()
+       else
+        if oclIsKindOf(ExtensionContent) then
+         oclAsType(ExtensionContent).xBody().bCollectConnectorComponents()
+        else
+         Sequence {}
+        endif
+       endif
+
+context AbstractMoClass
+def: amcCollectAbstractComponents() : Sequence(AbstractComponent)
+     = content.acCollectAbstractComponents()
+def: amcCollectExtendsClauses() : Sequence(ExtendsClause)
+     = content.acCollectExtendsClauses()
+def: amcCollectIOComponents() : Sequence(Component)
+     = content.acCollectIOComponents()
+def: amcCollectConnectorComponents() : Sequence(Component)
+     = content.acCollectConnectorComponents()
+def: amcCollectComponents() : Sequence(Component)
+     = amcCollectAbstractComponents()->select(oclIsKindOf(Component))->
+       collect(oclAsType(Component))
+
+context AbstractEquation
+def: isContainedInWhenEquation() : Boolean =
+(not xEquation().oclIsUndefined() and xEquation().oclIsKindOf(WhenEquation)) or
+not xElseWhenEquation().oclIsUndefined()
+/*   DresdenOCL: hat nicht true zurückgegeben, wenn xEquation() eine WhenEquation war
+     = let eqDefined : Boolean = not (xEquation().oclIsInvalid() or xEquation().oclIsUndefined()),
+           ewDefined : Boolean = not (xElseWhenEquation().oclIsInvalid() or xElseWhenEquation().oclIsUndefined())
+       in (eqDefined and (xEquation().oclIsTypeOf(WhenEquation))) or ewDefined
+*/     
+/* ****************************************************************************
+*          Helper methods for controlling the form of when-equations          *
+**************************************************************************** */
+-- MDT OCL: let fName : String = name.name , ... in
+--         org.eclipse.ocl.SyntaxException: 11:39:11:39 "." expected instead of ","
+context FunctionCall
+def: fcIsSuitableForWhenEquation() : Boolean
+     = let fName : String = reference.name in
+       let suitableOperators : Collection(String) = Sequence { 'assert', 'reinit', 'terminate' }
+       in suitableOperators->includes(fName)
+
+-- Every expression has a firstvalue and optionally multiple values with operators
+context Expression
+def: eValueCount() : Integer
+     = moreexpressions->size() + 1
+def: eIsAReference() : Boolean
+     = eValueCount() = 1 and firstvalue.oclIsKindOf(Reference)
+     
+context AbstractExpression
+def: aeIsAReference() : Boolean
+     = oclIsKindOf(Expression) and oclAsType(Expression).eIsAReference()
+     
+context ExpressionList
+def: elIsSuitableForWhenEquation() : Boolean
+     = expressions->forAll(aeIsAReference())
+
+context Expression
+def: eIsSuitableExpressionListForWhenEquation() : Boolean
+     = eValueCount() = 1 and firstvalue.oclIsKindOf(ExpressionList) and firstvalue.oclAsType(ExpressionList).elIsSuitableForWhenEquation()
+def: eIsFunctionCall() : Boolean
+     = eValueCount() = 1 and firstvalue.oclIsKindOf(FunctionCall)
+
+context AbstractExpression
+def: aeIsFunctionCall() : Boolean
+     = oclIsKindOf(Expression) and oclAsType(Expression).eIsFunctionCall()
+
+context EquationExpression
+def: eeIsSuitableForWhenEquation() : Boolean
+     = let le : Expression = leftexpression in
+       let re : AbstractExpression = rightexpression in
+       le.aeIsAReference()
+       or (le.eIsSuitableExpressionListForWhenEquation()
+           and re.aeIsFunctionCall())
+
+context Reference
+def: rIsLeftInEquationExpression() : Boolean
+     = let ee1 : EquationExpression = xExpression().xEquationExpression(),
+           ee2 : EquationExpression = xExpression().xExpressionList().xExpression().xEquationExpression()
+       in ((not ee1.oclIsInvalid()) and not ee1.oclIsUndefined() and xExpression() = ee1.leftexpression) or
+          ((not ee2.oclIsInvalid()) and not ee2.oclIsUndefined() and xExpression().xExpressionList().xExpression() = ee2.leftexpression)
+def: rNavToEquationExpression() : EquationExpression
+     = let ee1 : EquationExpression = xExpression().xEquationExpression(),
+           ee2 : EquationExpression = xExpression().xExpressionList().xExpression().xEquationExpression()
+       in if ((not ee1.oclIsInvalid()) and not ee1.oclIsUndefined()) then
+           ee1
+          else
+           ee2
+          endif
+           
+-- context AbstractEquation
+-- def: aeIsSuitableForWhenEquation() : Boolean
+-- can be found in the implementation specific definitions
+
+/* ****************************************************************************
+*               Helper methods for checking correct extension                 *
+**************************************************************************** */
+
+context AbstractMoClass
+def: canBeDerivedFrom(baseClass : AbstractMoClass) : Boolean
+     = if oclIsKindOf(MoPackage) then baseClass.oclIsKindOf(MoPackage) else
+	    if oclIsKindOf(MoOperator) then baseClass.oclIsKindOf(MoOperator) else
+		 if oclIsKindOf(MoFunction) then baseClass.oclIsKindOf(MoFunction) else
+		  if oclIsKindOf(MoOperatorFunction) then baseClass.oclIsKindOf(MoFunction) or baseClass.oclIsKindOf(MoOperatorFunction) else
+		   if oclIsKindOf(MoType) then baseClass.oclIsKindOf(MoType) else
+		    if oclIsKindOf(MoRecord) then baseClass.oclIsKindOf(MoRecord) else
+			 if oclIsKindOf(MoConnector) then baseClass.oclIsKindOf(MoType) or baseClass.oclIsKindOf(MoRecord) or baseClass.oclIsKindOf(MoConnector) else
+			  if oclIsKindOf(MoBlock) then baseClass.oclIsKindOf(MoRecord) or baseClass.oclIsKindOf(MoBlock) else
+			   if oclIsKindOf(MoModel) then baseClass.oclIsKindOf(MoRecord) or baseClass.oclIsKindOf(MoBlock) or baseClass.oclIsKindOf(MoModel)
+			   else true
+			   endif
+			  endif
+			 endif
+			endif
+		   endif
+          endif
+		 endif
+		endif
+	   endif
+
+context MoRecord
+def: containsOperators() : Boolean =
+     if (content.oclIsKindOf(AssignmentContent) or content.oclIsKindOf(EnumerationContent)) then false
+     else let b : Body = if content.oclIsKindOf(CommonContent) then content.oclAsType(CommonContent).xBody() else content.oclAsType(ExtensionContent).xBody() endif
+          in b.bCollectAbstractComponents()->exists(oclIsKindOf(MoOperator))
+     endif
+
+-- helper method for inStream_only_on_stream_variables
+context AbstractExpression
+def: aeIsStreamVariable() : Boolean =
+aeIsAReference() and oclAsType(Expression).firstvalue.oclAsType(Reference).
+               reference.oclAsType(ComponentName).xComponent().cIsStream()
+
+endpackage

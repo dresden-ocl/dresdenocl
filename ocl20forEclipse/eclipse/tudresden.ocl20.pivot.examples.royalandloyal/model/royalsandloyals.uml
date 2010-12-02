@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="tudresden">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="ocl20">
+    <packagedElement xmi:type="uml:Package" xmi:id="_BlraUMHiEd2UNuYhQ_ApoA" name="pivot">
+      <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+        <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="royalsandloyals">
+          <elementImport xmi:id="_F_itgGvLEd6ofs5w8Takvg">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EFloat"/>
+          </elementImport>
+          <elementImport xmi:id="_F_lw0GvLEd6ofs5w8Takvg">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </elementImport>
+          <elementImport xmi:id="_F_lw0WvLEd6ofs5w8Takvg">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </elementImport>
+          <elementImport xmi:id="_F_lw0mvLEd6ofs5w8Takvg">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </elementImport>
+          <packagedElement xmi:type="uml:Class" xmi:id="__d9IUMnCEd23VbTmZ6CCEw" name="Burning">
+            <generalization xmi:id="_EArFkMnDEd23VbTmZ6CCEw" general="_qdRHkMkkEd2S2cuzoMKaDg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_VW-hEMVEEd2gxo2Yyu8isA" name="Customer">
+            <ownedAttribute xmi:id="_1y46wMnOEd23VbTmZ6CCEw" name="age">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_MC0aoMoREd2R-LEScdZDXg" name="dateOfBirth" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+            <ownedAttribute xmi:id="_FONTQMoREd2R-LEScdZDXg" name="isMale">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_doldsMkwEd2S2cuzoMKaDg" name="name">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_noF1gMm5Ed23VbTmZ6CCEw" name="title">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_LoRdkMoaEd2R-LEScdZDXg" name="birthdayHappens"/>
+            <ownedOperation xmi:id="_KtaX0MoaEd2R-LEScdZDXg" name="getAge">
+              <ownedParameter xmi:id="_5XTyMMoaEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_fBpSwMVIEd2gxo2Yyu8isA" name="CustomerCard">
+            <ownedAttribute xmi:id="_dJRj4MnSEd23VbTmZ6CCEw" name="color" type="_2Cn4gMnREd23VbTmZ6CCEw"/>
+            <ownedAttribute xmi:id="_f8pz0Mm5Ed23VbTmZ6CCEw" name="printedName">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_gYE6MMVIEd2gxo2Yyu8isA" name="valid">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="__hwMwMnOEd23VbTmZ6CCEw" name="validFrom" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+            <ownedAttribute xmi:id="_CZyJ0MnPEd23VbTmZ6CCEw" name="validThru" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_9ZyRIMnCEd23VbTmZ6CCEw" name="Earning">
+            <generalization xmi:id="_IDgo4MnDEd23VbTmZ6CCEw" general="_qdRHkMkkEd2S2cuzoMKaDg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_MG7VMMVIEd2gxo2Yyu8isA" name="LoyaltyAccount">
+            <ownedAttribute xmi:id="_W-Nn0MVIEd2gxo2Yyu8isA" name="points">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_m30qoMnDEd23VbTmZ6CCEw" name="totalPointsEarned">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_ufv9UMobEd2R-LEScdZDXg" name="number">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_07xlkMobEd2R-LEScdZDXg" name="burn">
+              <ownedParameter xmi:id="_EZge4MocEd2R-LEScdZDXg" name="points">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="__MBGUMobEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_zvn7gMobEd2R-LEScdZDXg" name="earn">
+              <ownedParameter xmi:id="_Az4cAMocEd2R-LEScdZDXg" name="points">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="__t2BAMobEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_ymYvEMm5Ed23VbTmZ6CCEw" name="getCustomerName">
+              <ownedParameter xmi:id="_0bqOoMm5Ed23VbTmZ6CCEw" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_1eWHIMobEd2R-LEScdZDXg" name="isEmpty">
+              <ownedParameter xmi:id="_JHZxYMocEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_AVjVsMVEEd2gxo2Yyu8isA" name="LoyaltyProgram">
+            <ownedAttribute xmi:id="_GSa8wMVEEd2gxo2Yyu8isA" name="name">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_v22JkMoPEd2R-LEScdZDXg" name="addService">
+              <ownedParameter xmi:id="_zaFm0MoPEd2R-LEScdZDXg" name="aPartner" type="_ODIWQMn1Ed2R-LEScdZDXg"/>
+              <ownedParameter xmi:id="_0-q_AMoPEd2R-LEScdZDXg" name="aLevel" type="_8fH4kMkmEd2S2cuzoMKaDg"/>
+              <ownedParameter xmi:id="_z9QlUMoPEd2R-LEScdZDXg" name="aService" type="_bFF6cMVEEd2gxo2Yyu8isA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Ne3VUMVEEd2gxo2Yyu8isA" name="enroll" concurrency="concurrent">
+              <ownedParameter xmi:id="_T5ZIwMVEEd2gxo2Yyu8isA" name="c" type="_VW-hEMVEEd2gxo2Yyu8isA"/>
+              <ownedParameter xmi:id="_lRjNkMoJEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_BSpSEMoQEd2R-LEScdZDXg" name="getName">
+              <ownedParameter xmi:id="_C0s6sMoQEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_ZUJhQMVEEd2gxo2Yyu8isA" name="getServices">
+              <ownedParameter xmi:id="_NjeDsMqCEd2SKu80i6SbVA" name="return" type="_bFF6cMVEEd2gxo2Yyu8isA" direction="return">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Nj8vYMqDEd2SKu80i6SbVA" value="*"/>
+                <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NSXQIMqDEd2SKu80i6SbVA"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_ktNNcMkkEd2S2cuzoMKaDg" name="Membership"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_ODIWQMn1Ed2R-LEScdZDXg" name="ProgramPartner">
+            <ownedAttribute xmi:id="__tTjkModEd2R-LEScdZDXg" name="name">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_6y_F0Mn1Ed2R-LEScdZDXg" name="numberOfCustomers">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_bFF6cMVEEd2gxo2Yyu8isA" name="Service">
+            <ownedAttribute xmi:id="_pOKSQMn3Ed2R-LEScdZDXg" name="condition">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_rZL_YMn3Ed2R-LEScdZDXg" name="pointsBurned">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_q2Bn8Mn3Ed2R-LEScdZDXg" name="pointsEarned">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_r4VZgMn3Ed2R-LEScdZDXg" name="description">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_scP-4Mn3Ed2R-LEScdZDXg" name="serviceNr">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_Zl_OQModEd2R-LEScdZDXg" name="calcPoints">
+              <ownedParameter xmi:id="_gOqycModEd2R-LEScdZDXg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_aCmRwModEd2R-LEScdZDXg" name="upgradePointsEarned">
+              <ownedParameter xmi:id="_pR4fYModEd2R-LEScdZDXg" name="amount">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_8fH4kMkmEd2S2cuzoMKaDg" name="ServiceLevel">
+            <ownedAttribute xmi:id="_blCOYMksEd2S2cuzoMKaDg" name="name">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_qdRHkMkkEd2S2cuzoMKaDg" name="Transaction">
+            <ownedAttribute xmi:id="_fZ8HkMklEd2S2cuzoMKaDg" name="amount">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EFloat"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="__Y7BIMkvEd2S2cuzoMKaDg" name="points">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_hr_PkMoeEd2R-LEScdZDXg" name="date" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+            <ownedOperation xmi:id="_nI91oMoeEd2R-LEScdZDXg" name="getProgram">
+              <ownedParameter xmi:id="_o1TboMoeEd2R-LEScdZDXg" type="_AVjVsMVEEd2gxo2Yyu8isA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_3XPEYMm4Ed23VbTmZ6CCEw" name="Customer CustomerCards" memberEnd="_5liH8Mm4Ed23VbTmZ6CCEw _6tqNoMm4Ed23VbTmZ6CCEw">
+            <ownedEnd xmi:id="_5liH8Mm4Ed23VbTmZ6CCEw" name="owner" type="_VW-hEMVEEd2gxo2Yyu8isA" association="_3XPEYMm4Ed23VbTmZ6CCEw"/>
+            <ownedEnd xmi:id="_6tqNoMm4Ed23VbTmZ6CCEw" name="cards" type="_fBpSwMVIEd2gxo2Yyu8isA" association="_3XPEYMm4Ed23VbTmZ6CCEw">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xFOxcMnREd23VbTmZ6CCEw" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_w0PvIMnREd23VbTmZ6CCEw"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_1e-1YMnQEd23VbTmZ6CCEw" name="Customers LoyaltyPrograms" memberEnd="_3Q1NgMnQEd23VbTmZ6CCEw _4ns50MnQEd23VbTmZ6CCEw">
+            <ownedEnd xmi:id="_3Q1NgMnQEd23VbTmZ6CCEw" name="participants" type="_VW-hEMVEEd2gxo2Yyu8isA" association="_1e-1YMnQEd23VbTmZ6CCEw">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8DMwUMnQEd23VbTmZ6CCEw" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7t4noMnQEd23VbTmZ6CCEw"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_4ns50MnQEd23VbTmZ6CCEw" name="programs" type="_AVjVsMVEEd2gxo2Yyu8isA" association="_1e-1YMnQEd23VbTmZ6CCEw">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-YNf4MnQEd23VbTmZ6CCEw" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-Fk3wMnQEd23VbTmZ6CCEw"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_kNUNMMm4Ed23VbTmZ6CCEw" name="CustomerCard Membership" memberEnd="_p5fs4Mm4Ed23VbTmZ6CCEw _rdoZIMm4Ed23VbTmZ6CCEw">
+            <ownedEnd xmi:id="_p5fs4Mm4Ed23VbTmZ6CCEw" name="card" type="_fBpSwMVIEd2gxo2Yyu8isA" association="_kNUNMMm4Ed23VbTmZ6CCEw"/>
+            <ownedEnd xmi:id="_rdoZIMm4Ed23VbTmZ6CCEw" name="membership" type="_ktNNcMkkEd2S2cuzoMKaDg" association="_kNUNMMm4Ed23VbTmZ6CCEw"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_cpOH4MkvEd2S2cuzoMKaDg" name="CustomerCard Transactions" memberEnd="_e_SAUMkvEd2S2cuzoMKaDg _fo2hwMkvEd2S2cuzoMKaDg">
+            <ownedEnd xmi:id="_e_SAUMkvEd2S2cuzoMKaDg" name="card" type="_fBpSwMVIEd2gxo2Yyu8isA" association="_cpOH4MkvEd2S2cuzoMKaDg"/>
+            <ownedEnd xmi:id="_fo2hwMkvEd2S2cuzoMKaDg" name="transactions" type="_qdRHkMkkEd2S2cuzoMKaDg" association="_cpOH4MkvEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kERkMMkvEd2S2cuzoMKaDg" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jtLS0MkvEd2S2cuzoMKaDg"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_4jBocMnAEd23VbTmZ6CCEw" name="LoyaltyAccounts Membership" memberEnd="_7Yh18MnAEd23VbTmZ6CCEw _7_txwMnAEd23VbTmZ6CCEw">
+            <ownedEnd xmi:id="_7Yh18MnAEd23VbTmZ6CCEw" name="membership" type="_ktNNcMkkEd2S2cuzoMKaDg" association="_4jBocMnAEd23VbTmZ6CCEw">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_9Xxw4MnAEd23VbTmZ6CCEw" value=""/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_7_txwMnAEd23VbTmZ6CCEw" name="accounts" type="_MG7VMMVIEd2gxo2Yyu8isA" association="_4jBocMnAEd23VbTmZ6CCEw">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BeV9oMnBEd23VbTmZ6CCEw" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Bvn64MnBEd23VbTmZ6CCEw"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_yIQdUMkkEd2S2cuzoMKaDg" name="LoyaltyAccount Transactions" memberEnd="_C1aXIMklEd2S2cuzoMKaDg _HkgjgMklEd2S2cuzoMKaDg">
+            <ownedEnd xmi:id="_C1aXIMklEd2S2cuzoMKaDg" name="transactions" type="_qdRHkMkkEd2S2cuzoMKaDg" association="_yIQdUMkkEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_TM90YMklEd2S2cuzoMKaDg" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_HkgjgMklEd2S2cuzoMKaDg" name="account" type="_MG7VMMVIEd2gxo2Yyu8isA" association="_yIQdUMkkEd2S2cuzoMKaDg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_WSNl0MocEd2R-LEScdZDXg" name="LoyaltyPrograms ProgramPartners" memberEnd="_dNOQIMocEd2R-LEScdZDXg _eENigMocEd2R-LEScdZDXg">
+            <ownedEnd xmi:id="_dNOQIMocEd2R-LEScdZDXg" name="programs" type="_AVjVsMVEEd2gxo2Yyu8isA" association="_WSNl0MocEd2R-LEScdZDXg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fN9_4MocEd2R-LEScdZDXg" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_eENigMocEd2R-LEScdZDXg" name="partners" type="_ODIWQMn1Ed2R-LEScdZDXg" association="_WSNl0MocEd2R-LEScdZDXg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jwGHQMocEd2R-LEScdZDXg" value="*"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_zjGjUMknEd2S2cuzoMKaDg" name="LoyaltyProgram ServiceLevels" memberEnd="_l9pk0MkoEd2S2cuzoMKaDg _n8Tp4MkoEd2S2cuzoMKaDg">
+            <ownedEnd xmi:id="_l9pk0MkoEd2S2cuzoMKaDg" name="program" type="_AVjVsMVEEd2gxo2Yyu8isA" association="_zjGjUMknEd2S2cuzoMKaDg"/>
+            <ownedEnd xmi:id="_n8Tp4MkoEd2S2cuzoMKaDg" name="levels" type="_8fH4kMkmEd2S2cuzoMKaDg" isOrdered="true" association="_zjGjUMknEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wMZ30MkoEd2S2cuzoMKaDg" value="*"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_gpxhEMnQEd23VbTmZ6CCEw" name="LoyaltyProgram Membership" memberEnd="_nTWdIMnQEd23VbTmZ6CCEw _oBQE8MnQEd23VbTmZ6CCEw">
+            <ownedEnd xmi:id="_nTWdIMnQEd23VbTmZ6CCEw" name="membership" type="_ktNNcMkkEd2S2cuzoMKaDg" association="_gpxhEMnQEd23VbTmZ6CCEw"/>
+            <ownedEnd xmi:id="_oBQE8MnQEd23VbTmZ6CCEw" name="program" type="_AVjVsMVEEd2gxo2Yyu8isA" association="_gpxhEMnQEd23VbTmZ6CCEw"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_fWAwMMktEd2S2cuzoMKaDg" name="Memberships ServiceLevel" memberEnd="_lVke4MktEd2S2cuzoMKaDg _yHf5QMktEd2S2cuzoMKaDg">
+            <ownedEnd xmi:id="_lVke4MktEd2S2cuzoMKaDg" name="memberships" type="_ktNNcMkkEd2S2cuzoMKaDg" association="_fWAwMMktEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uQ4NAMktEd2S2cuzoMKaDg" value="*"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_yHf5QMktEd2S2cuzoMKaDg" name="currentLevel" type="_8fH4kMkmEd2S2cuzoMKaDg" association="_fWAwMMktEd2S2cuzoMKaDg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_eiu8QMn1Ed2R-LEScdZDXg" name="ProgramPartner Services" memberEnd="_gcCAMMn1Ed2R-LEScdZDXg _g-5csMn1Ed2R-LEScdZDXg">
+            <ownedEnd xmi:id="_gcCAMMn1Ed2R-LEScdZDXg" name="partner" type="_ODIWQMn1Ed2R-LEScdZDXg" association="_eiu8QMn1Ed2R-LEScdZDXg"/>
+            <ownedEnd xmi:id="_g-5csMn1Ed2R-LEScdZDXg" name="deliveredServices" type="_bFF6cMVEEd2gxo2Yyu8isA" association="_eiu8QMn1Ed2R-LEScdZDXg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lmsHMMn1Ed2R-LEScdZDXg" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lNWaIMn1Ed2R-LEScdZDXg"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_geG2IMksEd2S2cuzoMKaDg" name="Services ServiceLevel" memberEnd="_kSVVsMksEd2S2cuzoMKaDg _qIWt4MksEd2S2cuzoMKaDg">
+            <ownedEnd xmi:id="_kSVVsMksEd2S2cuzoMKaDg" name="availableServices" type="_bFF6cMVEEd2gxo2Yyu8isA" association="_geG2IMksEd2S2cuzoMKaDg">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_mMOPgMksEd2S2cuzoMKaDg" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nbzBAMksEd2S2cuzoMKaDg"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_qIWt4MksEd2S2cuzoMKaDg" name="level" type="_8fH4kMkmEd2S2cuzoMKaDg" association="_geG2IMksEd2S2cuzoMKaDg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_tMXmkMkuEd2S2cuzoMKaDg" name="Service Transaction" memberEnd="_0DzYcMkuEd2S2cuzoMKaDg _3mJd0MkuEd2S2cuzoMKaDg">
+            <ownedEnd xmi:id="_0DzYcMkuEd2S2cuzoMKaDg" name="service" type="_bFF6cMVEEd2gxo2Yyu8isA" association="_tMXmkMkuEd2S2cuzoMKaDg"/>
+            <ownedEnd xmi:id="_3mJd0MkuEd2S2cuzoMKaDg" name="transaction" type="_qdRHkMkkEd2S2cuzoMKaDg" association="_tMXmkMkuEd2S2cuzoMKaDg"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_W--kwWu4Ed6ofs5w8Takvg" name="Date">
+            <ownedAttribute xmi:id="_EPbawfQqEd2SMeEUZ5YgYQ" name="now" isStatic="true" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+            <ownedAttribute xmi:id="_73W4YPQwEd2SMeEUZ5YgYQ" name="nowString" isStatic="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_skwXgMkvEd2S2cuzoMKaDg" name="isAfter">
+              <ownedParameter xmi:id="_t7e54MkvEd2S2cuzoMKaDg" name="aDate" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+              <ownedParameter xmi:id="_1d1RAMkvEd2S2cuzoMKaDg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_2_vIoMkvEd2S2cuzoMKaDg" name="isBefore">
+              <ownedParameter xmi:id="_2_vIockvEd2S2cuzoMKaDg" name="aDate" type="_W--kwWu4Ed6ofs5w8Takvg"/>
+              <ownedParameter xmi:id="_2_vIoskvEd2S2cuzoMKaDg" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_gQ8boMojEd2R-LEScdZDXg" name="now" isStatic="true">
+              <ownedParameter xmi:id="_lkjDQMojEd2R-LEScdZDXg" type="_W--kwWu4Ed6ofs5w8Takvg" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_DDgWAPQxEd2SMeEUZ5YgYQ" name="nowAsString" isStatic="true">
+              <ownedParameter xmi:id="_Gb3Y8PQxEd2SMeEUZ5YgYQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Du6CcPQ8Ed2SMeEUZ5YgYQ" name="toString">
+              <ownedParameter xmi:id="_I7zlIPQ8Ed2SMeEUZ5YgYQ" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Enumeration" xmi:id="_2Cn4gMnREd23VbTmZ6CCEw" name="Color">
+            <ownedLiteral xmi:id="_Blk-UMnSEd23VbTmZ6CCEw" name="silver"/>
+            <ownedLiteral xmi:id="_C_ILMMnSEd23VbTmZ6CCEw" name="gold"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

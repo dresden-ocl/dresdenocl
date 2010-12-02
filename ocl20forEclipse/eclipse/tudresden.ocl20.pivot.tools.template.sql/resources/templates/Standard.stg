@@ -1,0 +1,58 @@
+group sql;
+
+typeMap ::= [
+        "Integer":"INT",
+        "Long":"BIGINT",
+        "Float":"FLOAT",
+        "Double":"DOUBLE",
+        "Boolean":"NUMBER(1)",
+        "Short":"INT",
+        "Char":"CHAR",
+        "String":"VARCHAR(255)",
+        "Date":"DATE",
+        default:"VARCHAR(255)"
+]
+
+createComment(comment) ::= <<
+-- $comment$
+>>
+
+createSubType(type) ::= <<
+type = "$type$"
+>>
+
+createType(type) ::= <<
+$typeMap.(type)$
+>>
+
+selectStmt(columns, tables, where) ::= <<
+SELECT $columns$
+FROM $tables$
+$if(where)$
+WHERE $where$
+$endif$
+>>
+
+createView(viewname, body) ::= <<
+CREATE VIEW $viewname$
+AS ( $body$ );
+>>
+
+createColumn(name, type, primaryKey, foreignKey) ::= <<
+$name$ $type$$if(primaryKey)$ PRIMARY KEY$endif$
+>>
+
+createTable(tablename, columns) ::= <<
+CREATE TABLE $tablename$ (
+$columns$
+);
+>>
+
+createForeignKeyConstraint(tablename, columnname, pktablename,pkname) ::= <<
+ALTER TABLE $tablename$ ADD CONSTRAINT CON$tablename$$columnname$
+FOREIGN KEY ($columnname$) REFERENCES $pktablename$($pkname$);
+>>
+
+createProperty(tablename,columnname,asname) ::= <<
+$if(tablename)$$tablename$.$endif$$columnname$$if(asname)$ AS $columnname$$endif$
+>>

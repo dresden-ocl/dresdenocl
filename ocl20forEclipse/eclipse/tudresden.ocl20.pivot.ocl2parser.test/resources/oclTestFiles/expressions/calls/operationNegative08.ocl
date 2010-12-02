@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Should fail. No return type.
+context Type1
+inv: self.getVoid() 
+
+endpackage

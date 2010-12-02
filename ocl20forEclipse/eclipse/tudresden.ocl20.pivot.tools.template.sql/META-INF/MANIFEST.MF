@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Template SQL Plug-In
+Bundle-SymbolicName: tudresden.ocl20.pivot.tools.template.sql;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.tools.template.sql.SQLTemplatePlugin
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.tools.template,
+ org.eclipse.ui
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: TU Dresden, Software Technology Group

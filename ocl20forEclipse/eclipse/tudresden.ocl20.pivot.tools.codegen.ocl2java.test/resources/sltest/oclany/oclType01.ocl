@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOclAnyOclType(source: OclAny): OclType =
+source.oclType()
+
+endpackage

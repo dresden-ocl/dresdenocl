@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Tests parsing of implicit collect
+context Type1
+inv: (Type1.allInstances().anInteger > 0) -> size() = 0
+
+endpackage

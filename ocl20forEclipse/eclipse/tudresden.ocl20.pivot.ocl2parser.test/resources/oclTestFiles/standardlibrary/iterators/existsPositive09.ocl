@@ -1,0 +1,7 @@
+package package1::package2
+
+-- The iterator variable should be optional.
+context Type1
+inv: Type1.allInstances()->exists(anInteger > 0)
+
+endpackage

@@ -1,0 +1,7 @@
+package tudresden::ocl20::pivot::examples::simple
+
+-- Returns the age of a Person.
+context Person
+def: getAge(): Integer = age
+
+endpackage

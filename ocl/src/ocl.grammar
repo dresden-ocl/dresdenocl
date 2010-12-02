@@ -1,0 +1,366 @@
+Package tudresden.ocl.parser;
+
+Helpers
+  all = [0..127];
+  lf = 10;
+  cr = 13;
+  uppercase = ['A'..'Z'];
+  lowercase = ['a'..'z'];
+  digit = ['0'..'9'];
+  number = digit+;
+  line_terminator = lf | cr | cr lf;
+  input_character = [all - [cr + lf]];
+  
+
+  simple_escape_sequence = '\' ''' | '\"' | '\?' | '\\' | 
+        '\a' | '\b' | '\f' | '\n' | '\r' | '\t' | '\v';
+  octal_digit = ['0' .. '7'];
+  octal_escape_sequence = '\' octal_digit octal_digit? octal_digit?;
+  hexadecimal_digit = [digit + [['a' .. 'f'] + ['A' .. 'F']]];
+  hexadecimal_escape_sequence = '\x' hexadecimal_digit+;
+  escape_sequence = simple_escape_sequence |
+                    octal_escape_sequence | 
+                    hexadecimal_escape_sequence;
+  s_char = [all - [''' + ['\' + [lf + cr]]]] | escape_sequence;
+  s_char_sequence = s_char+;
+  h_set = 'Set';
+  h_bag = 'Bag';
+  h_sequence = 'Sequence';
+  h_collection = 'Collection';
+  
+
+Tokens
+
+  comment = '--' [[all - 10] - 13]* [10 + 13]?;
+
+  // comment = '--' input_character* line_terminator?; 
+
+  dot = '.';
+  arrow = '->';
+
+  not = 'not';
+
+  mult = '*';
+  div = '/';
+  plus = '+';
+  minus = '-';
+
+  context = 'context';
+  enum = 'enum';
+  t_pre = 'pre';
+  t_post = 'post';
+  t_inv = 'inv';
+
+  equal = '=';
+  n_equal = '<>';
+  lt = '<';
+  gt = '>';
+  lteq = '<=';
+  gteq = '>=';
+
+  and = 'and';
+  or = 'or';
+  xor = 'xor';
+  implies = 'implies';
+
+  l_par = '(';
+  r_par = ')';
+  l_bracket = '[';
+  r_bracket = ']';
+  l_brace = '{';
+  r_brace = '}';
+  semicolon = ';';
+
+  dcolon = '::';
+  colon = ':';
+  comma = ',';
+  channel = '#';
+  at = '@';
+  bar = '|';
+  ddot = '..';
+  apostroph = ''';
+  
+  t_let = 'let';
+  t_in = 'in';
+
+  t_if = 'if';
+  t_then = 'then';
+  t_else = 'else';
+  endif = 'endif';
+  
+  t_set = h_set;
+  t_bag = h_bag;
+  t_sequence = h_sequence;
+  t_collection = h_collection;
+
+  bool = 'true' | 'false';
+  simple_type_name = ( uppercase (lowercase | digit | uppercase | '_')* ) | 
+    h_set | h_bag | h_sequence | h_collection; 
+  name = lowercase (lowercase | digit | uppercase | '_')*;
+
+  new_line = line_terminator;
+  int = number;
+  real = number '.' number;
+  blank = 9 | ' '*;
+  tab = 9;
+
+  string_lit = ''' s_char_sequence? ''';
+
+Ignored Tokens
+
+  comment,
+  new_line,
+  blank,
+  tab;
+
+Productions
+  constraint = 
+    context_declaration constraint_body+ ;
+  
+  // added (SableCC)
+  constraint_body = 
+    stereotype name? colon expression ;
+    
+  context_declaration = 
+    context context_body ;
+  
+  // added (SableCC)
+  context_body = 
+    {classifier} classifier_context | 
+    {operation}  operation_context ;
+    
+  classifier_context = 
+    classifier_head? path_type_name ;
+  
+  // added (SableCC)
+  classifier_head = 
+    name colon ;
+  
+  operation_context = 
+    path_type_name dcolon name l_par formal_parameter_list? r_par return_type_declaration? ;
+  
+  // added (SableCC)
+  return_type_declaration = 
+    colon path_type_name;
+    
+  formal_parameter_list = 
+    formal_parameter formal_parameter_list_tail* ;
+
+  // added (SableCC)    
+  formal_parameter_list_tail =
+    semicolon formal_parameter;
+    
+  formal_parameter = 
+    name colon path_type_name ;
+    
+  stereotype = 
+    {inv} t_inv | 
+    {pre} t_pre | 
+    {post} t_post ;
+    
+  expression = 
+    let_expression* logical_expression ;
+    
+  if_expression = 
+    t_if [if_branch]:expression t_then [then_branch]:expression t_else [else_branch]:expression endif ; 
+  
+  logical_expression = 
+    relational_expression logical_expression_tail* ;
+  
+  // added (SableCC)
+  logical_expression_tail =
+    logical_operator relational_expression ;
+    
+  relational_expression = 
+    additive_expression relational_expression_tail? ;
+
+  // added (SableCC)
+  relational_expression_tail =
+    relational_operator additive_expression ;
+    
+  additive_expression = 
+    multiplicative_expression additive_expression_tail* ;
+    
+  // added (SableCC)
+  additive_expression_tail = 
+    add_operator multiplicative_expression ;
+    
+  multiplicative_expression = 
+    unary_expression multiplicative_expression_tail* ;
+  
+  // added (SableCC)
+  multiplicative_expression_tail = 
+    multiply_operator unary_expression ;
+    
+  unary_expression = 
+    {unary}   unary_operator postfix_expression | 
+    {postfix} postfix_expression ;
+    
+  postfix_expression = 
+    primary_expression postfix_expression_tail* ;
+  
+  // added (SableCC)
+  postfix_expression_tail =
+     postfix_expression_tail_begin feature_call ;
+  
+  // added (SableCC)
+  postfix_expression_tail_begin = 
+    {dot}   dot |
+    {arrow} arrow ;
+    
+  primary_expression = 
+    {lit_col} literal_collection | 
+    {literal} literal | 
+    {feature} path_name time_expression? qualifiers? feature_call_parameters? | 
+    {parentheses} l_par expression r_par | 
+    {if} if_expression ;
+
+  feature_call_parameters = 
+    {empty} l_par r_par |
+    {concrete}  l_par expression fcp_helper* r_par |
+    ( l_par declarator? actual_parameter_list? r_par ) ;
+  
+  fcp_helper = 
+    {comma} comma expression |
+    {colon} colon simple_type_specifier |
+    {iterate} semicolon name colon simple_type_specifier equal expression |
+    {bar} bar expression ;
+  
+  let_expression = 
+    t_let name let_expression_type_declaration? equal expression t_in ;
+  
+  // added (SableCC)
+  let_expression_type_declaration =
+    colon path_type_name ;
+
+  // added alternatives real and boolean
+  literal = 
+    {string} string_lit |
+    {real} real |
+    {integer} int |
+    {boolean} bool |
+    {enum} channel name ;
+    
+  enumeration_type = 
+    enum l_brace channel name enumeration_type_tail* r_brace ;
+  
+  // added (SableCC)
+  enumeration_type_tail = 
+    comma channel name ;
+    
+  simple_type_specifier = 
+    {path} path_type_name | 
+    {enum} enumeration_type ;
+
+  literal_collection = 
+    collection_kind l_brace expression_list_or_range? r_brace ;
+    
+  expression_list_or_range = 
+    expression expression_list_or_range_tail? ;
+    
+  // added (SableCC)
+  expression_list_or_range_tail = 
+    {list}  expression_list_tail+ | 
+    {range} ddot expression ;
+  
+  // added (SableCC)
+  expression_list_tail = 
+    comma expression ;
+    
+  feature_call = 
+    path_name time_expression? qualifiers? feature_call_parameters? ;
+    
+  qualifiers = 
+    l_bracket actual_parameter_list r_bracket ;
+  
+  // "iterate" alternative added (missing in specification)
+  declarator = 
+    {standard} name declarator_tail* declarator_type_declaration? bar | 
+    {iterate} [iterator]:name [iter_type]:declarator_type_declaration semicolon 
+      [accumulator]:name [acc_type]:declarator_type_declaration equal expression bar;
+  
+  // added (SableCC)
+  declarator_tail =
+    comma name ;
+  
+  // added (SableCC)
+  declarator_type_declaration =
+    colon simple_type_specifier ;
+
+  path_type_name = 
+    path_tail* type_name;
+
+  // added (SableCC)
+  path_tail = 
+    name dcolon;
+
+  // added to solve keyword conflict
+  type_name =
+    {non_collection}  simple_type_name |
+    {collection}      collection_type l_par simple_type_name r_par;
+    
+  collection_type = 
+    {set}             t_set |
+    {bag}             t_bag |
+    {sequence}        t_sequence |
+    {collection}      t_collection;
+  
+  path_name = 
+    path_name_begin path_name_tail* ;
+    
+  // added (SableCC)
+  path_name_begin = 
+    {type_name} type_name | 
+    {name}      name ;
+  
+  // added (SableCC)
+  path_name_tail =
+    dcolon path_name_end ;
+  
+  // added (SableCC)
+  path_name_end =
+    {type_name} type_name |
+    {name}      name ;
+
+  // changed from "at name" to "at t_pre" to solve keyword conflict
+  time_expression = 
+    at t_pre ;
+
+  actual_parameter_list = 
+    expression actual_parameter_list_tail* ;
+
+  // added (SableCC)
+  actual_parameter_list_tail =
+    comma expression ;
+
+  logical_operator = 
+    {and}     and | 
+    {or}      or | 
+    {xor}     xor | 
+    {implies} implies;
+
+  collection_kind = 
+    {set} t_set | 
+    {bag} t_bag | 
+    {sequence} t_sequence | 
+    {collection} t_collection ;
+
+  relational_operator =
+    {equal}   equal | 
+    {n_equal} n_equal |
+    {gt}      gt | 
+    {lt}      lt | 
+    {gteq}    gteq | 
+    {lteq}    lteq ;
+
+  add_operator =
+    {plus}  plus | 
+    {minus} minus;
+
+  multiply_operator =
+    {mult}  mult | 
+    {div}   div;
+
+  unary_operator =
+    {minus} minus |
+    {not}   not;

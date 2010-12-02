@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="tudresden.ocl20.pivot.modelbus.metamodels">
+      <metamodel
+            id="tudresden.ocl20.pivot.metamodels.forms"
+            modelProvider="tudresden.ocl20.pivot.metamodels.forms.internal.provider.FormsModelProvider"
+            name="Forms Meta-Model">
+      </metamodel>
+   </extension>
+
+</plugin>

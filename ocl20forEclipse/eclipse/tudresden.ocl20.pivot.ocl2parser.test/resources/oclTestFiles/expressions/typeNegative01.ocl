@@ -1,0 +1,7 @@
+package package1::package2
+
+context Type1
+inv: 
+  self.oclIsTypeOf(UnknownType1)  
+
+endpackage

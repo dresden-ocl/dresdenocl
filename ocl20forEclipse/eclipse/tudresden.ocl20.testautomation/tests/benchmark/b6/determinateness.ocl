@@ -1,0 +1,613 @@
+package uml
+
+-------------------------------------
+-- B6: determinateness
+-------------------------------------
+
+
+-- Technical Relationships
+
+-- -- Determinateness Constraints
+
+-- -- -- In Addition to the Ocl4All 2007 equivalences
+
+-- -- -- -- Empty
+
+-- -- -- -- -- Set -----------------------------------------------------
+
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+
+	 
+-- -- -- -- -- Bag
+
+context Model inv:
+	let c:Bag(Integer) = Bag{} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = c->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- Sequence
+
+-- -- -- -- Singleton
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set --------------------------------------------------
+
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asBag()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asBag()->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} |
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+
+	 
+-- -- -- -- -- -- Bag
+
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
+   c->any(true) = c->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set -----------------------------------------------
+
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+
+	 
+-- -- -- -- -- -- Bag
+
+context Model inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = c->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- Many Elements
+
+-- -- -- -- -- Includes Undefined
+
+-- -- -- -- -- -- Set --------------------------------------------------
+
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->any(true)
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->first()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{null, 1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+     -- Expected Result:
+	 = false
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem)
+)
+
+	 
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c = Bag{null, 1, -1, 3, 2, 0, 
+                  null} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{null, 1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+-- -- -- -- -- -- -- No Equal Values
+
+-- -- -- -- -- Excludes Undefined
+
+-- -- -- -- -- -- Set -----------------------------------------------
+
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->any(true)
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->any(true)
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->first()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = c->asBag()->asSequence()->last()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+context Model inv:
+	let c:Set(Integer) = Set{1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asBag()->asSequence()
+     -- Expected Result:
+	 = false
+
+-- -- -- -- -- -- Bag
+
+-- -- -- -- -- -- -- Equal Values
+
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0, 1} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- -- -- No Equal Values
+
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->asSequence() = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->any(true)
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = c->asSequence()->last()
+     -- Expected Result:
+	 = false
+
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+   c->any(true) = 
+     c->iterate(elem:Integer;
+                    r:Sequence(Integer) = Sequence{} | 
+           r->including(elem))->first()
+
+	 
+context Model inv:
+	let c:Bag(Integer) = Bag{1, -1, 3, 2, 0} in
+       Sequence{c}->flatten() = c->asSequence()
+
+	 
+-- -- -- -- -- -- Sequence
+
+-- -- -- -- -- -- -- Equal Values
+
+-- -- -- -- -- -- -- No Equal Values
+
+
+endpackage

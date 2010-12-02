@@ -1,0 +1,121 @@
+-----------------------------
+-- some tests for arithmetic
+-- parsing and interpretation
+-- All tests are to be parsed, 
+-- interpreted and successful
+-- (default -> no explicit options)
+-----------------------------
+package uml
+
+
+
+context Model
+
+inv addRealReal1: let v1: Real = 1.0 in 
+        let v2: Real = 1.0 in v1 + v2 = 2.0
+
+context Model
+inv addRealReal2: let v1: Real = 1.9 in 
+        let v2: Real = 1.0 in v1 + v2 = 2.9
+        
+context Model
+inv addRealReal3: let v1: Real = 2/3 in 
+        let v2: Real = 2/3 in v1 + v2 - 4/3 < 0.00001
+        
+context Model
+inv compareRealReal1: let v1: Real = 2/3 in 
+        let v2: Real = 2/3 in v1 = v2
+        
+-- this test is very dependend on the maximum precision
+-- (which is 5 at the moment)
+context Model
+inv compareRealReal2: let v1: Real = 1.99999 in 
+        let v2: Real = 0.88999+1.11 in v1 = v2
+        
+-- test for 1.01 (-- probably a parser issue!!)
+context Model
+inv compareRealReal3: let v1: Real = 1.01 in 
+      let v2:Real = 1.001 in v1 + v2 = 1.011
+        
+-- extra tests for parsing 0-leading values
+context Model
+inv testFloatPointValues1: 
+      let v1: Real = 0.01 in v1 < 0.1
+
+context Model
+inv testFloatPointValues2: 
+      let v1: Real = 10.11 in v1 > 10.011              
+        
+context Model
+inv subRealReal1: let v1: Real = 2/3 in 
+        let v2: Real = 2/3 in v1 - v2 = 0.0
+
+context Model
+inv subRealReal2: let v1: Real = 1.33333 in 
+        let v2: Real = 0.0 in v2 - v1 = -v1
+        
+context Model
+inv multRealReal1: let v1: Real = 1.6 in 
+        let v2: Real = 2.0 in v1*v2 = 3.2
+        
+context Model
+inv multRealReal2: let v1: Real = 1.33333 in 
+        let v2: Real = 0.0 in v2 * v1 = 0
+        
+context Model
+inv divRealReal1: let v1: Real = 1.8 in 
+        let v2: Real = 2.0 in v1 / v2 = 0.9
+        
+----------------------------------
+-- mixed data types (real and int)
+----------------------------------
+
+-------------
+-- add 
+context Model
+inv addRealInteger1: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v1+v2 = 3.6   
+
+-- flip operands
+context Model
+inv addRealInteger2: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v2+v1 = 3.6
+
+
+-------------
+-- substract 
+context Model
+inv subRealInteger1: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v1-v2 = -0.4
+
+-- flip operands
+context Model
+inv subRealInteger2: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v2-v1 = 0.4
+
+-------------
+-- multiply
+context Model
+inv multRealInteger1: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v1*v2 = 3.2
+
+-- flip operands
+context Model
+inv multRealInteger2: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v2*v1 = 3.2
+       
+       
+-------------
+-- divide
+context Model
+inv divRealInteger1: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v1/v2 = 0.8
+
+-- flip operands
+context Model
+inv divRealInteger2: let v1: Real = 1.6 in 
+        let v2: Integer = 2 in v2/v1 = 1.25
+       
+
+        
+endpackage

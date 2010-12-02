@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Body expression are only valid on operations.
+context Type1
+body: Type1->allInstances()->any(true)
+
+endpackage

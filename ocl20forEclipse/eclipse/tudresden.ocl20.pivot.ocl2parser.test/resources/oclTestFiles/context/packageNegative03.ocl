@@ -1,0 +1,4 @@
+-- Package declaration is missing.
+
+context Type1
+inv: true

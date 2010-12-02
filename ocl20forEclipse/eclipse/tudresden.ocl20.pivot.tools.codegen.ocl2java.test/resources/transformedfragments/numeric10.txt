@@ -1,0 +1,1 @@
+((Object) java.lang.Math.abs(-(new Integer(24)))).equals(new Integer(24))

@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Static proper ties should be expressable as context.
+context Type1::aStaticInteger
+init: 42
+
+endpackage

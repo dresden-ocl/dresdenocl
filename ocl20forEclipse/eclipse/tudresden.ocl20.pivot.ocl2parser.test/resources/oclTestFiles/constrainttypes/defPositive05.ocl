@@ -1,0 +1,9 @@
+package package1::package2
+
+/* Definition of an operation returning a Set of Tuples. */
+context Type1
+def: testProductReturnType(c1: Collection(OclAny), c2: Collection(OclAny)):
+  Set(Tuple(first : OclAny, second : OclAny)) =
+  c1 -> product(c2)
+
+endpackage

@@ -1,0 +1,8 @@
+package package1
+
+context Class1
+inv:
+/* Expected as invalid. */
+Bag { 1 / 0 } -> iterate(element: Integer; result: Boolean = true | result and element > 0)
+
+endpackage

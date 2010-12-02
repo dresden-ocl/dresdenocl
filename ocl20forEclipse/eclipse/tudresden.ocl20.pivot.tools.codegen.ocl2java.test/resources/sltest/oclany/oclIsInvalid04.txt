@@ -1,0 +1,18 @@
+Boolean test;
+Boolean result1;
+
+/* Check if the expression results in invalid. */
+try {
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = "invalid"; 
+    result1 = false;
+}
+
+catch (Exception e) {
+    result1 = true;
+}
+
+test = result1;
+
+
+test

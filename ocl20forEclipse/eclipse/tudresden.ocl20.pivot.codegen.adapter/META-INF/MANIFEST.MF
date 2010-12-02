@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Meta-Model Adapter Generator Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.codegen.adapter;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorPlugin$Implementation
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.core.resources,
+ org.eclipse.jdt.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.ui.ide,
+ org.eclipse.emf.common.ui
+Bundle-ActivationPolicy: lazy
+Created-By: 1.5.0_12-b04 (Sun Microsystems Inc.)
+Ant-Version: Apache Ant 1.7.0
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

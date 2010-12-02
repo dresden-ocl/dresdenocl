@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Abstract Meta-Model Test Plug-in
+Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.test
+Bundle-Version: 3.0.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.facade
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: tudresden.ocl20.pivot.metamodels.test
+Bundle-Vendor: TU Dresden, Software Technology Group

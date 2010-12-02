@@ -1,0 +1,10 @@
+package package1::package2
+
+-- An iterate expression must not have an iterator variable.
+context Type1
+inv: self.aSet
+       ->iterate(count : Integer = 0 | 
+           count + 1)  
+     > 0
+
+endpackage

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 43.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+context CustomerCard::printedName
+derive: owner.title.concat(' ').concat(owner.name)
+
+endpackage

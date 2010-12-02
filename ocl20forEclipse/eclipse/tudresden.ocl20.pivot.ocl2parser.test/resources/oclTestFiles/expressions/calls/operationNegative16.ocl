@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Self is not valid for static operations.
+context Type1
+inv: self::aStaticOperation() = 0
+
+endpackage

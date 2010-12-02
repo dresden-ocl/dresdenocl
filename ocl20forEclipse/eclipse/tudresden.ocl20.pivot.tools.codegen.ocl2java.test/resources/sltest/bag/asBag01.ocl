@@ -1,0 +1,8 @@
+package testpackage
+
+context Class1
+def: testBagAsBag(source: Bag(OclAny)): 
+  Bag(OclAny) =
+source -> asBag()
+
+endpackage

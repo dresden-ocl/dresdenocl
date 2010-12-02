@@ -1,0 +1,13 @@
+package uml 
+
+context Model
+inv 3025086_testOclIsTypeOf01: self.oclIsTypeOf(Model)
+        
+        
+context Model inv 3007222_letExpression:
+let execs:Sequence(Model) = self.stmts->collect(s|s.oclIsKindOf(ClassB)),
+a:Integer= execs->collect(e|e.attr1 > 0)-> sum()
+in
+true
+
+endpackage

@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Used to check write parsing as 24.-().abs().=(24)
+-- (issue #2256114, won't fix -> use parenthesis like done now)
+context Type1
+inv: (-24).abs() = 24
+
+endpackage

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="tudresden.ocl20.pivot.modelbus.ui.actionSet"
+            label="Dresden OCL Action Set"
+            visible="true">
+         <menu
+               icon="icons/dresdenocl.gif"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu"
+               label="DresdenOCL">
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+            </separator>
+         </menu>
+         <action
+               class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
+               icon="icons/instance.gif"
+               id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"
+               label="Load Model Instance"
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
+               tooltip="Loads a Model Instance into Dresden OCL">
+         </action>
+         <action
+               label="Load Model"
+               icon="icons/models.gif"
+               class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction"
+               tooltip="Loads a domain-specific model into Dresden OCL"
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.import"
+               id="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelWizardAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Dresden OCL"
+            id="tudresden.ocl20.views.category">
+      </category>
+      <view
+            name="Model Browser"
+            icon="icons/models.gif"
+            category="tudresden.ocl20.views.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView"
+            id="tudresden.ocl20.pivot.modelbus.ui.views.models">
+      </view>
+      <view
+            name="Model Instance Browser"
+            icon="icons/instance.gif"
+            category="tudresden.ocl20.views.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView"
+            id="tudresden.ocl20.pivot.modelbus.ui.views.modelinstances">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.importWizards">
+      <category
+            id="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
+            name="Dresden OCL">
+      </category>
+      <wizard
+            category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelWizard"
+            icon="icons/models.gif"
+            id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelWizard"
+            name="Model">
+         <description>
+            Loads a Model into Dresden OCL.
+         </description>
+      </wizard>
+      <wizard
+            category="tudresden.ocl20.pivot.modelbus.ui.importWizards.category"
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstanceWizard"
+            icon="icons/models.gif"
+            id="tudresden.ocl20.pivot.modelbus.ui.importWizards.loadModelInstanceWizard"
+            name="Model Instance">
+         <description>
+            Loads a Model Instance into Dresden OCL.
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
+            name="Dresden OCL">
+      </category>
+   </extension>
+   <extension
+         id="tudresden.ocl20.pivot.modelbus.ui.contextmenu"
+         name="Dresden OCL Context Menu"
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               icon="icons/dresdenocl.gif"
+               label="Dresden OCL"
+               tooltip="Tools of Dresden OCL">
+            <command
+                  commandId="tudresden.ocl20.pivot.modelbus.ui.loadModelCommand"
+                  icon="icons/models.gif"
+                  label="Load as Model ..."
+                  mnemonic="M"
+                  style="push"
+                  tooltip="Loads a domain-specific model into DresdenOCL">
+            </command>
+            <command
+                  commandId="tudresden.ocl20.pivot.modelbus.ui.loadModelInstanceCommand"
+                  icon="icons/instance.gif"
+                  label="Load as Model Instance ..."
+                  mnemonic="I"
+                  style="push"
+                  tooltip="Loads a Model Instance into DresdenOCL">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="tudresden.ocl20.pivot.modelbus.ui.command.LoadModelWizardCommand"
+            description="Loads a Model into Dresden OCL"
+            id="tudresden.ocl20.pivot.modelbus.ui.loadModelCommand"
+            name="LoadModelCommand">
+      </command>
+      <command
+            defaultHandler="tudresden.ocl20.pivot.modelbus.ui.command.LoadModelInstanceWizardCommand"
+            description="Loads a Model Instance into Dresden OCL"
+            id="tudresden.ocl20.pivot.modelbus.ui.loadModelInstanceCommand"
+            name="LoadModelCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="tudresden.ocl20.pivot.modelbus.ui.internal.perspective.DresdenOclPerspectiveFactory"
+            icon="icons/dresdenocl.gif"
+            id="tudresden.ocl20.pivot.ui.perspective"
+            name="Dresden OCL">
+         <description>
+            The perspective of Dresden OCL. Contains the Model Browser, the Model Instance Browser and further installed tools of Dresden OCL.
+         </description>
+      </perspective>
+   </extension>
+   
+</plugin>

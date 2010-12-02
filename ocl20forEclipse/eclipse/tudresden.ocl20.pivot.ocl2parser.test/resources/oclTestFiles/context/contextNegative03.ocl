@@ -1,0 +1,7 @@
+package package1::package2
+
+-- Unknown operation should not be parsed.
+context Type1::getInt(): Integer
+pre: true
+  
+endpackage

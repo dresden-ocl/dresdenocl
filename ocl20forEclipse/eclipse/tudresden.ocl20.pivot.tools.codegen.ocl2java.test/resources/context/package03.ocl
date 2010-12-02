@@ -1,0 +1,9 @@
+package testpackage
+
+/* Used to test the generation of a basis package from the settings
+ * for enumeration literals. */
+context Class1
+def: testPackage01(): Enumeration1 =
+Enumeration1::literal1
+
+endpackage

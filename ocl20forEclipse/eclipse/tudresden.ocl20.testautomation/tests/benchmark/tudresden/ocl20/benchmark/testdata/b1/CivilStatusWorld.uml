@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_blW7AJf4Ed-XL_X1uhh7fA" name="tudresden">
+  <packagedElement xmi:type="uml:Package" xmi:id="_eNcXkJf4Ed-XL_X1uhh7fA" name="ocl20">
+    <packagedElement xmi:type="uml:Package" xmi:id="_jEciwJf4Ed-XL_X1uhh7fA" name="benchmark">
+      <packagedElement xmi:type="uml:Package" xmi:id="_ljpJEJf4Ed-XL_X1uhh7fA" name="testdata">
+        <packagedElement xmi:type="uml:Package" xmi:id="_ljpwIJf4Ed-XL_X1uhh7fA" name="b1">
+          <elementImport xmi:id="_3bsIsJf4Ed-XL_X1uhh7fA">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </elementImport>
+          <elementImport xmi:id="_3bsIsZf4Ed-XL_X1uhh7fA">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </elementImport>
+          <elementImport xmi:id="_3bsvwJf4Ed-XL_X1uhh7fA">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </elementImport>
+          <elementImport xmi:id="_3bsvwZf4Ed-XL_X1uhh7fA" alias="null">
+            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+          </elementImport>
+          <packagedElement xmi:type="uml:Class" xmi:id="_qNclwJf4Ed-XL_X1uhh7fA" name="Person">
+            <ownedAttribute xmi:id="_xtLGsJf4Ed-XL_X1uhh7fA" name="name">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_6HtDAJf4Ed-XL_X1uhh7fA" name="civstat">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_6_WcsJf4Ed-XL_X1uhh7fA" name="gender">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_6T1agJf4Ed-XL_X1uhh7fA" name="alive">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_6uevIZf4Ed-XL_X1uhh7fA" name="husband" type="_qNclwJf4Ed-XL_X1uhh7fA"/>
+            <ownedAttribute xmi:id="_6uevIJf4Ed-XL_X1uhh7fA" name="wife" type="_qNclwJf4Ed-XL_X1uhh7fA"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

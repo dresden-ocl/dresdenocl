@@ -1,0 +1,1 @@
+((Object) java.lang.Math.round(((new Integer(2654) * new Float(4.3)) + new Integer(101)))).equals(new Integer(11513))

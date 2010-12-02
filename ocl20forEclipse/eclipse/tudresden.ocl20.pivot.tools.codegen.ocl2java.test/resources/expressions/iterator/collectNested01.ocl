@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testCollectNestedIteratorExp01() : Bag(Boolean) =
+Set{1, 2, 3}->collectNested(i: Integer | i <> 2)
+
+endpackage

@@ -1,0 +1,9 @@
+-- Constraint taken from [1] page 44 and modified.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- The expression type must match the operation return type in the context. Error occured at line 7 and column 1. The error occured at the token body.
+context LoyaltyProgram::getServices(): Set(Service)
+body: partners.deliveredServices->asSet()
+
+endpackage

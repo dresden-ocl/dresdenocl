@@ -1,0 +1,8 @@
+java.util.HashSet<String> collection1;
+collection1 = new java.util.HashSet<String>();
+
+collection1.add("Apfel");
+collection1.add("Orange");
+collection1.add("Erdbeere");
+
+((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(3))

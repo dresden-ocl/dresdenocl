@@ -1,0 +1,23 @@
+
+context Example
+inv hallo:       hallo='hallo'
+inv strings:     self.strings->includes('hallo')
+inv integers:    self.integers->includes(anInteger)
+inv dates:       self.dates->includes(aDate)
+inv interfaces:  self.interfaces->includes(anInterface)
+inv anInterface: anInterface->isEmpty
+inv formats:     self.formats->includes(aFormat)
+inv poly:        self.poly1(anInterface)=true
+inv someMethod:  self.anInterface.someMethod(10)=0
+inv mapuq:       self.namedIntegers->includes(10)
+inv mapq:        self.namedIntegers['5']=5
+inv mapq2:       self.namedIntegers['10']->isEmpty or self.namedIntegers['10']=10
+
+context Example::getQualifiers()
+pre  getQ_pre_bello:  hallo='bello'
+post getQ_post_bello: hallo='bello'
+post getQ_post_hallo: hallo='hallo'
+post getQ_timepre:   hallo=hallo@pre
+
+
+

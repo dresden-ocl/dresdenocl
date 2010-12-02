@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.nature" name="ocl nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNature" />
+		</runtime>
+		<builder id="tudresden.ocl20.pivot.language.ocl.resource.ocl.builder" />
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.builder" name="ocl Builder">
+		<builder hasNature="true">
+			<run class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclBuilderAdapter" />
+		</builder>
+	</extension>
+	
+	<extension-point id="tudresden.ocl20.pivot.language.ocl.resource.ocl.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd"/>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResourceFactoryDelegator" type="ocl">
+		</parser>
+	</extension>
+	
+	<extension-point id="tudresden.ocl20.pivot.language.ocl.resource.ocl.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd"/>
+	
+</plugin>

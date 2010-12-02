@@ -1,0 +1,6 @@
+package testpackage
+
+context Class1::staticPreOperation01(anInt: Integer): Integer
+pre testStaticPre01: not anInt.oclIsUndefined()
+
+endpackage

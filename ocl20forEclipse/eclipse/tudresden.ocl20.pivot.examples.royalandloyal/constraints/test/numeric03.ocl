@@ -1,0 +1,9 @@
+-- Constraint taken from [1] page 153.
+
+package tudresden::ocl20::pivot::examples::royalsandloyals
+
+-- Added round() operation because rounding errors can occur.
+context Service
+inv: (1.175 * (-8.9).abs() - 10).round() = (0.4574995).round()
+
+endpackage

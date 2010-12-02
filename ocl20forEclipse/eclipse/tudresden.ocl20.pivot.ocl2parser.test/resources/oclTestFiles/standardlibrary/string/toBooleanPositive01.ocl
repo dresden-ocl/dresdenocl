@@ -1,0 +1,7 @@
+package package1::package2
+
+-- This toBoolean() operation is new in OCL 2.1
+context Type1
+inv: 'true'.toBoolean()
+
+endpackage

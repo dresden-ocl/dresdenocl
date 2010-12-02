@@ -1,0 +1,7 @@
+package package1::package2
+
+-- not can also be used as a non-infix operation.
+context Type1
+inv: false.not()
+
+endpackage

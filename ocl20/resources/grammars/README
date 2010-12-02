@@ -1,0 +1,80 @@
+
+
+  This directory contains various grammar files for the OCL2.0 parser generator
+  and specification analysis utility. Some of these files reside in subdirectory
+  "historic" since they are outdated.
+
+      BasicGrammar.txt          Early version of a machine-readable OCL2.0
+                                specification. No rules for context declarations.
+                                Mainly used to find bugs in the specification
+                                of the OCL2.0 concrete syntax (extracted from
+                                [OCL15]).
+
+      OCL20.txt                 Basically the same as BasicGrammar.txt, but with
+                                some reformatting applied and some obvious incon-
+                                sistencies fixed (e. g. production names or 
+                                production reference names).
+
+      OCL20CTX.TSG              OCL2.0 concrete syntax for context specifications.
+                                Extracted from [OCL16], ch. 7.4.
+
+      OCL20_WC1.txt             Working copy (#1) of OCL20.txt, with changes to
+                                reflect specification updates/changes which
+                                occurred from [OCL15] to [OCL16]. Removed some
+                                productions which are no longer contained in
+                                [OCL16].
+
+      OCL20.TSG                 OCL20_WC1.txt merged with OCL20CTX.TSG, to allow
+                                parsing of context declarations. Was used as basis
+                                to generate initial version of grammar file for
+                                sablecc parser generator.
+				
+      EbnfTerms-NoContexts.txt  File containing raw ebnf terms for OCL2.0 in no
+                                specific parser generator syntax (does not contain
+				context declaration productions). Sorted by rhs of
+				production to allow quick visual checking of possible
+				parser conflicts. Creation date: approx. Sept. 2003
+
+      EbnfTerms-WithContexts.txt
+                                File containing raw ebnf terms for OCL2.0 in no
+				specific parser generatorsyntax (DOES contain
+				context declaration productions). Sorted by rhs
+				of production. Creation date: approx. June 2004
+
+      EBNF.g                    ANTLR grammar of the EBNF terms used in the
+                                OCL 1.6 Draft Specification. Used to analyze
+                                EBNF terms with the specification analysis tool.
+
+      TSG.g                     Defines the "Terse Specification Grammar". TSG
+                                is a text file format used to specify an easy-to-parse
+                                variant of an EBNF description of a grammar. A TSG
+                                file contains a grammar description. This grammar
+                                describes the grammar of a TSG file. (ANTLR syntax)
+
+      PrimOCL.g                 Grammar of primitive OCL constructs used in the
+                                attribution rules and disambiguating rules of the
+                                OCL 1.6 Draft Specification. (ANTLR syntax)
+
+      PrecRulesLeftAssoc.g      Example grammar to play with precedence rules and
+                                left associativity of operators. (ANTLR syntax)
+
+      sablecc2.sable            SableCC (grammar) input file grammar. This file
+                                defines the extended grammar for input files of
+                                the tailor-made SableCC variant used to generate
+                                the attribute evaluator for the OCL2.0 parser.				
+                                (plain old SableCC 2.x syntax).
+				
+      TEST.grammar		Intermediate OCL2.0 grammar file. Unused.
+				
+      OCL20.xgrammar            OCL2.0 grammar file (extended SableCC syntax). This
+                                file defines the OCL2.0 concrete syntax and basic
+				attribute evaluation properties of the productions
+				in this grammar. This file is used to generate the
+				SableCC-based OCL2.0 parser.
+
+
+  All grammar files (c) 2004, 2005 Ansgar Konermann.
+
+  All files in this directory are subject to the license terms contained in the
+  file "LICENSE" in this directory.
+

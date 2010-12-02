@@ -1,0 +1,7 @@
+package package1::package2
+
+-- A valid comment. -- Another valid comment.
+context Type1
+inv: true
+  
+endpackage

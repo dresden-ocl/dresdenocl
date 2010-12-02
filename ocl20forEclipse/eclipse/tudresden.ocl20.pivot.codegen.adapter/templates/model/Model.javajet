@@ -1,0 +1,190 @@
+<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="Model" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil java.util.List"%>
+<%GenModel genModel = (GenModel)argument;
+String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String modelNameLC = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(genModel.getModelName());
+String pluginName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";
+String packageName = PivotAdapterGeneratorUtil.getAdapterPackage(genModel);
+String className = modelName + "Model";
+List<String> namespaceClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(genModel, "Namespace");
+String namespaceClass = namespaceClasses.isEmpty() ? null : namespaceClasses.get(0);
+List<String> typeClasses = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeNames(genModel, "Type");
+String typeClass = typeClasses.isEmpty() ? null : typeClasses.get(0);
+String implementThis = PivotAdapterGeneratorUtil.getImplementThis();
+String resourceType = PivotAdapterGeneratorUtil.getResourceType(genModel);
+String dslTypeSuperclass = PivotAdapterGeneratorUtil.getCommonSuperTypeForDSLTypes(genModel);
+%>
+package <%=packageName%>;
+
+<%genModel.addImport("org.apache.log4j.Logger");
+genModel.addImport("org.eclipse.osgi.util.NLS");
+genModel.addImport("tudresden.ocl20.pivot.modelbus.IModel");
+genModel.addImport("tudresden.ocl20.pivot.modelbus.IModelInstanceProvider");
+genModel.addImport("tudresden.ocl20.pivot.modelbus.ModelAccessException");
+genModel.addImport("tudresden.ocl20.pivot.modelbus.ModelBusPlugin");
+genModel.addImport("tudresden.ocl20.pivot.modelbus.base.AbstractModel");
+genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
+genModel.addImport("java.util.List");
+if (namespaceClass != null)
+	genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, namespaceClass));
+if (typeClass != null)
+	genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, typeClass));
+genModel.addImport(PivotAdapterGeneratorUtil.getProjectName(genModel) + "." + PivotAdapterGeneratorUtil.startWithCapitalLetter(modelName) + "MetamodelPlugin");
+genModel.markImportLocation(stringBuffer);
+%>
+
+/**
+ * If the root of the model is a single {@link <%=namespaceClass%>}, a corresponding {@link <%=modelName%>Namespace}
+ * adapter will be created. If there are several root packages, a new "virtual" root namespace will
+ * be created.
+ *
+ * @generated
+ */
+public class <%=className%> extends AbstractModel implements IModel {
+
+	/**
+	 * a logger for this class
+	 *
+	 * @generated
+	 */
+	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=className%>.class);
+
+	// the resource containing the corresponding <%=modelName%> model
+	private <%=resourceType%> resource;
+
+	// the adapter for the top package of the associated <%=modelName%> model
+	private Namespace rootNamespace;
+
+	/**
+	 * Creates a new <code><%=className%></code> adapting the given {@link <%=namespaceClass%>}.
+	 * 
+	 * @param resource the {@link <%=resourceType%>} containing the model
+	 *
+	 * @generated
+	 */
+	public <%=className%>(<%=resourceType%> resource) {
+		// TODO: initialize super class, for Ecore Resources use:
+		//super(resource.getURI().toString(), ModelBusPlugin.getMetamodelRegistry().
+		//	getMetamodel(<%=modelName%>MetamodelPlugin.ID));
+		super("", ModelBusPlugin.getMetamodelRegistry().getMetamodel(<%=modelName%>MetamodelPlugin.ID));
+
+		// initialize
+		this.resource = resource;
+	}
+
+
+	/**
+	 * This method lazily creates a {@link Namespace} adapter for the virtual root package in the
+	 * associated <%=modelName%> model. Thus, any possible resource loading errors will not happen until this
+	 * method is called for the first time.
+	 * 
+	 * @throws ModelAccessException if an error occurs when creating the adapter for the top namespace
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.IModel#getRootNamespace()
+	 *
+	 * @generated
+	 */
+	public Namespace getRootNamespace() throws ModelAccessException {
+
+		if (rootNamespace == null) {
+			rootNamespace = createRootNamespace();
+		}
+
+		return rootNamespace;
+	}
+
+	/**
+	 * Helper method that creates the adapter for the root namespace. If there is only one
+	 * top-level namespace possible, then this method should just return the adapter for
+	 * the top-level namespace, else it should create a new "virtual" root namespace.
+	 * 
+	 * @return a <code>Namespace</code> instance
+	 * 
+	 * @throws ModelAccessException if an error occurs while loading the adapted <%=modelName%> model
+	 *
+	 * @generated
+	 */
+	protected Namespace createRootNamespace() throws ModelAccessException {
+
+		// TODO: load the resource; for Ecore use:
+		/*
+		if (!resource.isLoaded()) {
+
+			if (logger.isInfoEnabled()) {
+				logger.info(NLS.bind(<%=modelName%>ModelMessages.<%=modelName%>Model_Loading<%=modelName%>Model,
+						resource.getURI()));
+			}
+
+			try {
+				resource.load(null);
+			} catch (IOException e) {
+				throw new ModelAccessException(
+						"Error while loading resource from " + resource.getURI(), e); //$NON-NLS-1$
+			}
+
+		}
+		*/		
+
+		// TODO: get the root packages; for Ecore use:
+		// List<EObject> roots = resource.getContents();
+		
+		List<Object> roots = null;
+
+		// TODO: create a new package to serve as the root package
+		<%if (namespaceClass != null) {%><%=namespaceClass%> rootPackage = null;<%} else {%>DSLNamespace rootPackage = null;<%}%>
+		// TODO: rootPackage.setName("root"); //$NON-NLS-1$
+
+		// add all sub-packages and subtypes to the new root package
+		for (Object object : roots) {
+			<%for (String aNamespaceClass : namespaceClasses) {%>
+			if (object instanceof <%=aNamespaceClass%>)
+				; // TODO: add namespace to root package
+			<%}%>
+			if (object instanceof <%=dslTypeSuperclass%>)
+				; // TODO: add types to root package
+		}
+
+		return <%=modelName%>AdapterFactory.INSTANCE.createNamespace(rootPackage);
+	}
+
+	/**
+	 * Overridden to base equality check on the URI of the associated resource.
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 *
+	 * @generated
+	 */
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj instanceof <%=className%>) {
+			return resource.equals(((<%=className%>) obj).resource);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Overridden to base the hash code on the URI of the associated resource.
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 *
+	 * @generated
+	 */
+	@Override
+	public int hashCode() {
+		return resource.hashCode();
+	}
+
+	/**
+	 * Returns a String representation of this <code><%=className%></code>.
+	 * 
+	 * @see java.lang.Object#toString()
+	 *
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return resource.toString();
+	}
+}
+<%genModel.emitSortedImports();%>

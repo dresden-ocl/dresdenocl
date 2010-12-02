@@ -1,0 +1,891 @@
+<?xml version = "1.0" encoding = "ISO-8859-1" ?>
+<!DOCTYPE XMI SYSTEM "uml.dtd" >
+<XMI>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Argo/UML</XMI.exporter>
+      <XMI.exporterVersion>0.7.0</XMI.exporterVersion> 
+    </XMI.documentation>
+    <XMI.metamodel name="uml" version="1.1"/>
+  </XMI.header>
+  <XMI.content>
+    <Model XMI.id = "S.100025">
+      <name>packageAleph</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <ownedElement>
+        <Class XMI.id = "S.100072">
+          <name>Alpha</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+          <feature>
+            <Operation XMI.id = "S.100099">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100138">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100076"/> </type>
+                  <!-- Type is: Eins -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Operation XMI.id = "S.100139">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100141">
+                  <name>schnaps</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="in"/>
+                  <type> <XMI.reference target="S.100003"/> </type>
+                  <!-- Type is: String -->
+                </Parameter>
+              </parameter>
+              <parameter>
+                <Parameter XMI.id = "S.100142">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100075"/> </type>
+                  <!-- Type is: Zwei -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Operation XMI.id = "S.100143">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100145">
+                  <name>schnipps</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="in"/>
+                  <type> <XMI.reference target="S.100006"/> </type>
+                  <!-- Type is: int -->
+                </Parameter>
+              </parameter>
+              <parameter>
+                <Parameter XMI.id = "S.100146">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100088"/> </type>
+                  <!-- Type is: Drei -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Attribute XMI.id = "S.100095">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100006"/> </type>
+              <!-- Type is: int -->
+            </Attribute>
+          </feature>
+          <feature>
+            <Attribute XMI.id = "S.100096">
+              <name>alpha2</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100011"/> </type>
+              <!-- Type is: double -->
+            </Attribute>
+          </feature>
+          <feature>
+            <Attribute XMI.id = "S.100152">
+              <name>alpha3</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100006"/> </type>
+              <!-- Type is: int -->
+            </Attribute>
+          </feature>
+        </Class>
+      </ownedElement>
+      <ownedElement>
+        <Class XMI.id = "S.100073">
+          <name>Beta</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+          <feature>
+            <Operation XMI.id = "S.100162">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100164">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100076"/> </type>
+                  <!-- Type is: Eins -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Operation XMI.id = "S.100165">
+              <name>beta1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100167">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100076"/> </type>
+                  <!-- Type is: Eins -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Operation XMI.id = "S.100168">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100170">
+                  <name>schnaps</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="in"/>
+                  <type> <XMI.reference target="S.100003"/> </type>
+                  <!-- Type is: String -->
+                </Parameter>
+              </parameter>
+              <parameter>
+                <Parameter XMI.id = "S.100171">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100075"/> </type>
+                  <!-- Type is: Zwei -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Attribute XMI.id = "S.100147">
+              <name>alpha1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100006"/> </type>
+              <!-- Type is: int -->
+            </Attribute>
+          </feature>
+          <feature>
+            <Attribute XMI.id = "S.100148">
+              <name>beta1</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100006"/> </type>
+              <!-- Type is: int -->
+            </Attribute>
+          </feature>
+          <feature>
+            <Attribute XMI.id = "S.100149">
+              <name>alpha2</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100006"/> </type>
+              <!-- Type is: int -->
+            </Attribute>
+          </feature>
+        </Class>
+      </ownedElement>
+      <ownedElement>
+        <Class XMI.id = "S.100074">
+          <name>Gamma</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+          <feature>
+            <Attribute XMI.id = "S.100214">
+              <name>drei</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100088"/> </type>
+              <!-- Type is: Drei -->
+            </Attribute>
+          </feature>
+        </Class>
+      </ownedElement>
+      <ownedElement>
+        <Class XMI.id = "S.100075">
+          <name>Zwei</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+          <feature>
+            <Operation XMI.id = "S.100177">
+              <name>hoppel</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100203">
+                  <name>hops</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="in"/>
+                  <type> <XMI.reference target="S.100072"/> </type>
+                  <!-- Type is: Alpha -->
+                </Parameter>
+              </parameter>
+              <parameter>
+                <Parameter XMI.id = "S.100204">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100072"/> </type>
+                  <!-- Type is: Alpha -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+          <feature>
+            <Operation XMI.id = "S.100205">
+              <name>hoppel</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100207">
+                  <name>hops</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="in"/>
+                  <type> <XMI.reference target="S.100074"/> </type>
+                  <!-- Type is: Gamma -->
+                </Parameter>
+              </parameter>
+              <parameter>
+                <Parameter XMI.id = "S.100208">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100074"/> </type>
+                  <!-- Type is: Gamma -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+        </Class>
+      </ownedElement>
+      <ownedElement>
+        <Class XMI.id = "S.100076">
+          <name>Eins</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+          <feature>
+            <Operation XMI.id = "S.100172">
+              <name>hoppel</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <isQuery XMI.value="false"/>
+              <concurrency XMI.value="sequential"/>
+              <isPolymorphic XMI.value="false"/>
+              <operationSpecification>
+              </operationSpecification>
+              <parameter>
+                <Parameter XMI.id = "S.100199">
+                  <name>hops</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="in"/>
+                  <type> <XMI.reference target="S.100073"/> </type>
+                  <!-- Type is: Beta -->
+                </Parameter>
+              </parameter>
+              <parameter>
+                <Parameter XMI.id = "S.100200">
+                  <name>return</name>
+                  <visibility XMI.value = "public"/>
+                  <defaultValue>
+                  </defaultValue>
+                  <kind XMI.value="return"/>
+                  <type> <XMI.reference target="S.100073"/> </type>
+                  <!-- Type is: Beta -->
+                </Parameter>
+              </parameter>
+            </Operation>
+          </feature>
+        </Class>
+      </ownedElement>
+      <ownedElement>
+        <Generalization XMI.id = "S.100079">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <discriminator>
+          </discriminator>
+          <subtype> <XMI.reference target="S.100073"/> </subtype>
+          <!-- subtype is: Beta -->
+          <supertype> <XMI.reference target="S.100072"/> </supertype>
+          <!-- supertype is: Alpha -->
+        </Generalization>
+      </ownedElement>
+      <ownedElement>
+        <Generalization XMI.id = "S.100080">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <discriminator>
+          </discriminator>
+          <subtype> <XMI.reference target="S.100074"/> </subtype>
+          <!-- subtype is: Gamma -->
+          <supertype> <XMI.reference target="S.100073"/> </supertype>
+          <!-- supertype is: Beta -->
+        </Generalization>
+      </ownedElement>
+      <ownedElement>
+        <Association XMI.id="S.100081">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+            <connection>
+              <AssociationEnd XMI.id = "S.100082">
+                <name>alpha</name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>0..*</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100072"/> </type>
+                <!-- Type is: Alpha -->
+              </AssociationEnd>
+            </connection>
+            <connection>
+              <AssociationEnd XMI.id = "S.100083">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100076"/> </type>
+                <!-- Type is: Eins -->
+              </AssociationEnd>
+            </connection>
+        </Association>
+      </ownedElement>
+      <ownedElement>
+        <Generalization XMI.id = "S.100084">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <discriminator>
+          </discriminator>
+          <subtype> <XMI.reference target="S.100075"/> </subtype>
+          <!-- subtype is: Zwei -->
+          <supertype> <XMI.reference target="S.100076"/> </supertype>
+          <!-- supertype is: Eins -->
+        </Generalization>
+      </ownedElement>
+      <ownedElement>
+        <Association XMI.id="S.100085">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+            <connection>
+              <AssociationEnd XMI.id = "S.100086">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100073"/> </type>
+                <!-- Type is: Beta -->
+              </AssociationEnd>
+            </connection>
+            <connection>
+              <AssociationEnd XMI.id = "S.100087">
+                <name>ZWEI</name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1..*</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100075"/> </type>
+                <!-- Type is: Zwei -->
+              </AssociationEnd>
+            </connection>
+        </Association>
+      </ownedElement>
+      <ownedElement>
+        <Class XMI.id = "S.100088">
+          <name>Drei</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+          <feature>
+            <Attribute XMI.id = "S.100213">
+              <name>gamma</name>
+              <visibility XMI.value = "public"/>
+              <ownerScope XMI.value="instance"/>
+              <changeable XMI.value="none"/>
+              <multiplicity>1</multiplicity>
+              <targetScope XMI.value="instance"/>
+              <initialValue>
+              </initialValue>
+              <type> <XMI.reference target="S.100074"/> </type>
+              <!-- Type is: Gamma -->
+            </Attribute>
+          </feature>
+        </Class>
+      </ownedElement>
+      <ownedElement>
+        <Association XMI.id="S.100089">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+            <connection>
+              <AssociationEnd XMI.id = "S.100090">
+                <name>GAMMA</name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>0..1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100074"/> </type>
+                <!-- Type is: Gamma -->
+              </AssociationEnd>
+            </connection>
+            <connection>
+              <AssociationEnd XMI.id = "S.100091">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>0..1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100088"/> </type>
+                <!-- Type is: Drei -->
+              </AssociationEnd>
+            </connection>
+        </Association>
+      </ownedElement>
+      <ownedElement>
+        <Generalization XMI.id = "S.100092">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <discriminator>
+          </discriminator>
+          <subtype> <XMI.reference target="S.100088"/> </subtype>
+          <!-- subtype is: Drei -->
+          <supertype> <XMI.reference target="S.100075"/> </supertype>
+          <!-- supertype is: Zwei -->
+        </Generalization>
+      </ownedElement>
+      <ownedElement>
+        <Association XMI.id="S.100209">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+            <connection>
+              <AssociationEnd XMI.id = "S.100210">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100073"/> </type>
+                <!-- Type is: Beta -->
+              </AssociationEnd>
+            </connection>
+            <connection>
+              <AssociationEnd XMI.id = "S.100211">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100073"/> </type>
+                <!-- Type is: Beta -->
+              </AssociationEnd>
+            </connection>
+        </Association>
+      </ownedElement>
+      <ownedElement>
+        <Association XMI.id="S.101372">
+          <name></name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+            <connection>
+              <AssociationEnd XMI.id = "S.101373">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100074"/> </type>
+                <!-- Type is: Gamma -->
+              </AssociationEnd>
+            </connection>
+            <connection>
+              <AssociationEnd XMI.id = "S.101374">
+                <name></name>
+                <visibility XMI.value = "public"/>
+                <isNavigable XMI.value="true"/>
+                <isOrdered XMI.value="false"/>
+                <aggregation XMI.value="none"/>
+                <multiplicity>1</multiplicity>
+                <changeable XMI.value="none"/>
+                <targetScope XMI.value="instance"/>
+                <type> <XMI.reference target="S.100073"/> </type>
+                <!-- Type is: Beta -->
+              </AssociationEnd>
+            </connection>
+        </Association>
+      </ownedElement>
+    </Model>
+    <Model XMI.id = "S.100124">
+      <name>packageBeleph</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <ownedElement>
+        <Class XMI.id = "S.100216">
+          <name>classBeleph</name>
+          <visibility XMI.value = "public"/>
+          <isAbstract XMI.value="false"/>
+          <isLeaf XMI.value="false"/>
+          <isRoot XMI.value="false"/>
+          <isActive XMI.value = "false"/>
+        </Class>
+      </ownedElement>
+    </Model>
+    <Class XMI.id = "S.100024">
+      <name>Stack</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <DataType XMI.id = "S.100007">
+      <name>boolean</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <Class XMI.id = "S.100018">
+      <name>Double</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100174">
+      <name>A</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100021">
+      <name>Color</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100022">
+      <name>Vector</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100013">
+      <name>Integer</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <DataType XMI.id = "S.100010">
+      <name>float</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <DataType XMI.id = "S.100004">
+      <name>void</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <Class XMI.id = "S.100012">
+      <name>Character</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <DataType XMI.id = "S.100008">
+      <name>byte</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <Class XMI.id = "S.100023">
+      <name>Hashtable</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100019">
+      <name>Rectangle</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100015">
+      <name>Byte</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100017">
+      <name>Float</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <DataType XMI.id = "S.100009">
+      <name>long</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <Class XMI.id = "S.100020">
+      <name>Point</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <DataType XMI.id = "S.100006">
+      <name>int</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <Class XMI.id = "S.100003">
+      <name>String</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <Class XMI.id = "S.100014">
+      <name>Boolean</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+    <DataType XMI.id = "S.100011">
+      <name>double</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <DataType XMI.id = "S.100005">
+      <name>char</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+    </DataType>
+    <Class XMI.id = "S.100016">
+      <name>Long</name>
+      <visibility XMI.value = "public"/>
+      <isAbstract XMI.value="false"/>
+      <isLeaf XMI.value="false"/>
+      <isRoot XMI.value="false"/>
+      <isActive XMI.value = "false"/>
+    </Class>
+  </XMI.content>
+</XMI>

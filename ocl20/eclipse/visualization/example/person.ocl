@@ -1,0 +1,4 @@
+package test
+context Person
+inv ageinv: age > 0
+endpackage

@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testStringSubstring01(source: String, arg01: Integer, arg02: Integer): String =
+source.substring(arg01, arg02)
+
+endpackage

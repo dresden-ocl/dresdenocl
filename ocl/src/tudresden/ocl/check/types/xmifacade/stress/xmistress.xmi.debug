@@ -1,0 +1,103 @@
+classifier A --> A
+class A A
+classifier Alpha --> packageAleph::Alpha
+class packageAleph::Alpha Alpha
+  integer alpha1
+  real alpha2
+  integer alpha3
+  Eins eins
+  Eins alpha1()
+  Drei alpha1(integer)
+  Zwei alpha1(string)
+classifier Beta --> packageAleph::Beta
+class packageAleph::Beta Beta
+  implements packageAleph::Alpha
+  Set(Zwei) ZWEI
+  integer alpha1
+  integer alpha2
+  integer alpha3
+  AMBIGOUS beta
+  integer beta1
+  Eins eins
+  Gamma gamma
+  Eins alpha1()
+  Drei alpha1(integer)
+  Zwei alpha1(string)
+  Eins beta1()
+classifier Boolean --> Boolean
+class Boolean Boolean
+classifier Byte --> Byte
+class Byte Byte
+classifier Character --> Character
+class Character Character
+classifier Color --> Color
+class Color Color
+classifier Double --> Double
+class Double Double
+classifier Drei --> packageAleph::Drei
+class packageAleph::Drei Drei
+  implements packageAleph::Eins
+  implements packageAleph::Zwei
+  Gamma GAMMA
+  Set(Alpha) alpha
+  Beta beta
+  Gamma gamma
+  Alpha hoppel(Alpha)
+  Beta hoppel(Beta)
+  Gamma hoppel(Gamma)
+classifier Eins --> packageAleph::Eins
+class packageAleph::Eins Eins
+  Set(Alpha) alpha
+  Beta hoppel(Beta)
+classifier Float --> Float
+class Float Float
+classifier Gamma --> packageAleph::Gamma
+class packageAleph::Gamma Gamma
+  implements packageAleph::Alpha
+  implements packageAleph::Beta
+  Set(Zwei) ZWEI
+  integer alpha1
+  integer alpha2
+  integer alpha3
+  Beta beta
+  integer beta1
+  AMBIGOUS drei
+  Eins eins
+  Gamma gamma
+  Eins alpha1()
+  Drei alpha1(integer)
+  Zwei alpha1(string)
+  Eins beta1()
+classifier Hashtable --> Hashtable
+class Hashtable Hashtable
+classifier Integer --> Integer
+class Integer Integer
+classifier Long --> Long
+class Long Long
+classifier Point --> Point
+class Point Point
+classifier Rectangle --> Rectangle
+class Rectangle Rectangle
+classifier Stack --> Stack
+class Stack Stack
+classifier Vector --> Vector
+class Vector Vector
+classifier Zwei --> packageAleph::Zwei
+class packageAleph::Zwei Zwei
+  implements packageAleph::Eins
+  Set(Alpha) alpha
+  Beta beta
+  Alpha hoppel(Alpha)
+  Beta hoppel(Beta)
+  Gamma hoppel(Gamma)
+classifier char --> char
+class char char
+classifier classBeleph --> packageBeleph::classBeleph
+class packageBeleph::classBeleph classBeleph
+classifier packageAleph::Alpha --> packageAleph::Alpha
+classifier packageAleph::Beta --> packageAleph::Beta
+classifier packageAleph::Drei --> packageAleph::Drei
+classifier packageAleph::Eins --> packageAleph::Eins
+classifier packageAleph::Gamma --> packageAleph::Gamma
+classifier packageAleph::Zwei --> packageAleph::Zwei
+classifier packageBeleph::classBeleph --> packageBeleph::classBeleph

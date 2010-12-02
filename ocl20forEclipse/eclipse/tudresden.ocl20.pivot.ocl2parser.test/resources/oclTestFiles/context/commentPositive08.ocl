@@ -1,0 +1,9 @@
+package package1::package2
+
+/* A valid comment
+ * Containing multiple lines,
+   Containing multiple lines. */
+context Type1
+inv: true
+  
+endpackage

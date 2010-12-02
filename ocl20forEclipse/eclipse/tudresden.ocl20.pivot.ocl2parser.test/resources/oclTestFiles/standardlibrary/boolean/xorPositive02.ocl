@@ -1,0 +1,7 @@
+package package1::package2
+
+-- xor can also be used as a non-infix operation.
+context Type1
+inv: true.xor(false)
+
+endpackage

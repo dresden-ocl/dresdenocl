@@ -1,0 +1,28 @@
+----------------------
+-- Parsertest
+-- These default options are overridden by statement's
+-- options.
+-- 
+-- @Options{parseonly}
+----------------------
+package parsertest::subpackage
+
+context Type1
+inv: self.aSet
+       ->iterate(
+           anInstance : Type1; 
+           sum : Integer = 0 | 
+           sum + anInstance.anInteger)  
+     > 0
+     
+    
+    
+-- @Options{fail}
+-- An iterate expression must not have an iterator variable.
+context Type1
+inv: self.aSet
+       ->iterate(count : Integer = 0 | 
+           count + 1)  
+     > 0
+
+endpackage
