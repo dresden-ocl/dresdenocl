@@ -68,22 +68,103 @@ public class TestOclType {
 	 */
 	@Test
 	public void testAllInstancesPositive02() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/ocltype/allInstancesPositive02.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(
 				AllStandardLibraryTests.META_MODEL_ID,
 				AllStandardLibraryTests.MODEL_BUNDLE,
 				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclType.allInstances()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testAllInstancesPositive03() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/ocltype/allInstancesPositive03.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclType.allInstances()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testAllInstancesPositive04() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/ocltype/allInstancesPositive04.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>OclType.allInstances()</code>.
+	 * </p>
+	 */
+	@Test
+	public void testAllInstancesPositive05() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/ocltype/allInstancesPositive05.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}

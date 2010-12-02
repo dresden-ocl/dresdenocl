@@ -1,0 +1,8 @@
+package package1::package2
+
+/* Since OCL 2.3 allInstances() is defined on OclBoolean. */
+context Type1
+def: testAllInstancesPositive03(): Set(Boolean) =
+Boolean.allInstances()
+
+endpackage
