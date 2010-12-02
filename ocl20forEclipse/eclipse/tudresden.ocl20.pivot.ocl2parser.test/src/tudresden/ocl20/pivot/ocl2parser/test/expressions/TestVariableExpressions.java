@@ -120,6 +120,34 @@ public class TestVariableExpressions {
 
 	/**
 	 * <p>
+	 * A test case to check that a VariableExpression is parsed appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testVariableExpressionPositive04() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/variablePositive04.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer
+						.getInstance(AllExpressionTests.META_MODEL_ID,
+								AllExpressionTests.MODEL_BUNDLE,
+								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case to check that a VariableLiteralExpression is not parsed
 	 * appropriately.
 	 * </p>
@@ -249,6 +277,35 @@ public class TestVariableExpressions {
 		String oclFileName;
 	
 		oclFileName = "expressions/variableNegative05.ocl";
+		modelFileName = "testmodel.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer
+						.getInstance(AllExpressionTests.META_MODEL_ID,
+								AllExpressionTests.MODEL_BUNDLE,
+								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+	
+	/**
+	 * <p>
+	 * A test case to check that a VariableLiteralExpression is not parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test(expected = SemanticException.class)
+	public void testVariableExpressionNegative06() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "expressions/variableNegative06.ocl";
 		modelFileName = "testmodel.uml";
 	
 		/* Try to get the TestPerformer. */
