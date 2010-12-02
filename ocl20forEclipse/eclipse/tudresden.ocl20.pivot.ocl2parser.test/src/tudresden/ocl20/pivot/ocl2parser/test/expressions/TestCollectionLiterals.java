@@ -19,10 +19,19 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Collection;
+
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.SemanticException;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 
 /**
  * <p>
@@ -52,11 +61,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -81,11 +89,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -110,11 +117,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -139,11 +145,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -168,11 +173,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -197,11 +201,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -226,11 +229,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -255,17 +257,106 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
 
+	/**
+	 * <p>
+	 * A test case to check that a CollectionLiteralExpression is parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testCollectionPositive09() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/literals/collectionPositive09.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		Collection<Constraint> constraints = testPerformer
+				.parseFile(oclFileName);
+		assertNotNull(constraints);
+		assertEquals(1, constraints.size());
+
+		Constraint constraint = constraints.iterator().next();
+		assertEquals(ConstraintKind.DEFINITION, constraint.getKind());
+
+		Feature definedFeature = constraint.getDefinedFeature();
+		assertNotNull(definedFeature);
+		assertEquals(
+				EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getSetType(
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclInteger()),
+				definedFeature.getType());
+	}
+
+	/**
+	 * <p>
+	 * A test case to check that a CollectionLiteralExpression is parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testCollectionPositive10() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/literals/collectionPositive10.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		Collection<Constraint> constraints = testPerformer
+				.parseFile(oclFileName);
+		assertNotNull(constraints);
+		assertEquals(1, constraints.size());
+
+		Constraint constraint = constraints.iterator().next();
+		assertEquals(ConstraintKind.DEFINITION, constraint.getKind());
+
+		Feature definedFeature = constraint.getDefinedFeature();
+		assertNotNull(definedFeature);
+		assertEquals(
+				EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getSetType(
+								EssentialOclPlugin.getOclLibraryProvider()
+										.getOclLibrary().getOclVoid()),
+				definedFeature.getType());
+	}
+	
 	/**
 	 * <p>
 	 * A test case to check that a CollectionLiteralExpression is not parsed
@@ -284,11 +375,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -313,11 +403,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -342,11 +431,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -371,11 +459,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
@@ -400,11 +487,10 @@ public class TestCollectionLiterals {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer
-						.getInstance(AllExpressionTests.META_MODEL_ID,
-								AllExpressionTests.MODEL_BUNDLE,
-								AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
