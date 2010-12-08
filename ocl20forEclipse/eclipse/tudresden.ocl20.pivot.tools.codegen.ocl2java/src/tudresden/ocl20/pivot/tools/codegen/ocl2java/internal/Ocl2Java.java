@@ -49,7 +49,6 @@ import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
@@ -110,8 +109,8 @@ import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
  * 
  * @author Claas Wilke
  */
-public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
-		implements IOcl2Java {
+public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
+		IOcl2Java {
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER = Logger.getLogger(Ocl2Java.class);
@@ -1476,7 +1475,7 @@ public final class Ocl2Java extends ExpressionsSwitch<ITransformedCode>
 					if (result.containsCode())
 						template.setAttribute("sourceCode", result.getCode());
 					// no else.
-					
+
 					template.setAttribute("sourceExp",
 							sourceCode.getResultExp());
 					template.setAttribute("resultVar", resultVar);
