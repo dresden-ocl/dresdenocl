@@ -1,0 +1,6 @@
+package package1
+
+context Class1
+def :testGreaterThanEquals08 = 'a' >= invalid
+
+endpackage
