@@ -200,6 +200,116 @@ public class TestString {
 
 	/**
 	 * <p>
+	 * A test case testing the method <code>String.>(String)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanPositive01() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/greaterThanPositive01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.>(String)</code> .
+	 * </p>
+	 */
+	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
+	public void testGreaterThanPositive02() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/greaterThanPositive02.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.>=(String)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanEqualPositive01() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/greaterThanEqualPositive01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.>=(String)</code> .
+	 * </p>
+	 */
+	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
+	public void testGreaterThanEqualPositive02() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/greaterThanEqualPositive02.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the method <code>String.indexOf(String)</code> .
 	 * </p>
 	 */
@@ -212,6 +322,116 @@ public class TestString {
 		String oclFileName;
 
 		oclFileName = "standardlibrary/string/indexOfPositive01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.<(String)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testLessThanPositive01() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/lessThanPositive01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.<(String)</code> .
+	 * </p>
+	 */
+	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
+	public void testLessThanPositive02() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/lessThanPositive02.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.<=(String)</code> .
+	 * </p>
+	 */
+	@Test
+	public void testLessThanEqualPositive01() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/lessThanEqualPositive01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer =
+				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
+						AllStandardLibraryTests.MODEL_BUNDLE,
+						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the method <code>String.<=(String)</code> .
+	 * </p>
+	 */
+	@Test
+	@Ignore("Postfix syntax for infix operators is currently not possible using EMFText.")
+	public void testLessThanEqualPositive02() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/string/lessThanEqualPositive02.ocl";
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */

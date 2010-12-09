@@ -20,6 +20,18 @@
     <ownedOperation name="+" type="//@oclString">
       <ownedParameter name="s" type="//@oclString"/>
     </ownedOperation>
+    <ownedOperation name="&lt;" type="//@oclBoolean">
+      <ownedParameter name="s" type="//@oclString"/>
+    </ownedOperation>
+    <ownedOperation name=">" type="//@oclBoolean">
+      <ownedParameter name="s" type="//@oclString"/>
+    </ownedOperation>
+    <ownedOperation name="&lt;=" type="//@oclBoolean">
+      <ownedParameter name="s" type="//@oclString"/>
+    </ownedOperation>
+    <ownedOperation name=">=" type="//@oclBoolean">
+      <ownedParameter name="s" type="//@oclString"/>
+    </ownedOperation>
     <ownedOperation name="at" type="//@oclString">
       <ownedParameter name="i" type="//@oclInteger"/>
     </ownedOperation>
