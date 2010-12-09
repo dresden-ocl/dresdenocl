@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
@@ -19,45 +20,57 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibra
  */
 public class JavaOclStringTest {
 
-	private final IStandardLibraryFactory myStandardLibraryFactory =
-			TestPerformer.getInstance().getSLFactory();
+	private final IStandardLibraryFactory myStandardLibraryFactory = TestPerformer
+			.getInstance().getSLFactory();
 
-	private final OclString emptyString =
-			myStandardLibraryFactory.createOclString("");
+	private final OclString a = myStandardLibraryFactory.createOclString("a");
+	private final OclString b = myStandardLibraryFactory.createOclString("b");
+	private final OclString emptyString = myStandardLibraryFactory
+			.createOclString("");
 	private final OclString ws = myStandardLibraryFactory.createOclString(" ");
-	private final OclString OCL_rocks =
-			myStandardLibraryFactory.createOclString("OCL rocks");
-	private final OclString OCL = myStandardLibraryFactory.createOclString("OCL");
-	private final OclString rocks =
-			myStandardLibraryFactory.createOclString("rocks");
-	private final OclString ocl = myStandardLibraryFactory.createOclString("ocl");
+	private final OclString OCL_rocks = myStandardLibraryFactory
+			.createOclString("OCL rocks");
+	private final OclString OCL = myStandardLibraryFactory
+			.createOclString("OCL");
+	private final OclString rocks = myStandardLibraryFactory
+			.createOclString("rocks");
+	private final OclString ocl = myStandardLibraryFactory
+			.createOclString("ocl");
 	private final OclString O = myStandardLibraryFactory.createOclString("O");
 	private final OclString o = myStandardLibraryFactory.createOclString("o");
-	private final OclString fourtyTwo =
-			myStandardLibraryFactory.createOclString("42");
-	private final OclString fourtyTwoAndSomething =
-			myStandardLibraryFactory.createOclString("42.23");
-	private final OclString _true =
-			myStandardLibraryFactory.createOclString("true");
+	private final OclString undefined = myStandardLibraryFactory
+			.createOclUndefined(EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getOclString(),
+					"Undefined for testing purpose.");
+	private final OclString invalid = myStandardLibraryFactory
+			.createOclInvalid(EssentialOclPlugin.getOclLibraryProvider()
+					.getOclLibrary().getOclString(), new RuntimeException(
+					"Undefined for testing purpose."));
+	private final OclString fourtyTwo = myStandardLibraryFactory
+			.createOclString("42");
+	private final OclString fourtyTwoAndSomething = myStandardLibraryFactory
+			.createOclString("42.23");
+	private final OclString _true = myStandardLibraryFactory
+			.createOclString("true");
 
-	private final OclInteger integer0 =
-			myStandardLibraryFactory.createOclInteger(0L);
-	private final OclInteger integer1 =
-			myStandardLibraryFactory.createOclInteger(1L);
-	private final OclInteger integer2 =
-			myStandardLibraryFactory.createOclInteger(2L);
-	private final OclInteger integer3 =
-			myStandardLibraryFactory.createOclInteger(3L);
-	private final OclInteger integer5 =
-			myStandardLibraryFactory.createOclInteger(5L);
-	private final OclInteger integer6 =
-			myStandardLibraryFactory.createOclInteger(6L);
-	private final OclInteger integer9 =
-			myStandardLibraryFactory.createOclInteger(9L);
-	private final OclInteger integer42 =
-			myStandardLibraryFactory.createOclInteger(42L);
-	private final OclReal real42_23 =
-			myStandardLibraryFactory.createOclReal(42.23);
+	private final OclInteger integer0 = myStandardLibraryFactory
+			.createOclInteger(0L);
+	private final OclInteger integer1 = myStandardLibraryFactory
+			.createOclInteger(1L);
+	private final OclInteger integer2 = myStandardLibraryFactory
+			.createOclInteger(2L);
+	private final OclInteger integer3 = myStandardLibraryFactory
+			.createOclInteger(3L);
+	private final OclInteger integer5 = myStandardLibraryFactory
+			.createOclInteger(5L);
+	private final OclInteger integer6 = myStandardLibraryFactory
+			.createOclInteger(6L);
+	private final OclInteger integer9 = myStandardLibraryFactory
+			.createOclInteger(9L);
+	private final OclInteger integer42 = myStandardLibraryFactory
+			.createOclInteger(42L);
+	private final OclReal real42_23 = myStandardLibraryFactory
+			.createOclReal(42.23);
 
 	@Test
 	public void testConcat() {
@@ -81,7 +94,8 @@ public class JavaOclStringTest {
 		assertTrue(emptyString.substring(integer1, integer1).oclIsInvalid()
 				.isTrue());
 		assertTrue(OCL.substring(integer1, integer3).isEqualTo(OCL).isTrue());
-		assertTrue(OCL_rocks.substring(integer1, integer3).isEqualTo(OCL).isTrue());
+		assertTrue(OCL_rocks.substring(integer1, integer3).isEqualTo(OCL)
+				.isTrue());
 		assertTrue(OCL_rocks.size().isEqualTo(integer9).isTrue());
 		assertTrue(OCL.substring(integer2, integer1).oclIsInvalid().isTrue());
 	}
@@ -141,7 +155,8 @@ public class JavaOclStringTest {
 	@Test
 	public void testIndexOf() {
 
-		assertTrue(emptyString.indexOf(emptyString).isEqualTo(integer0).isTrue());
+		assertTrue(emptyString.indexOf(emptyString).isEqualTo(integer0)
+				.isTrue());
 		assertTrue(emptyString.indexOf(OCL).isEqualTo(integer0).isTrue());
 		assertTrue(OCL.indexOf(emptyString).isEqualTo(integer1).isTrue());
 		assertTrue(OCL_rocks.indexOf(OCL).isEqualTo(integer1).isTrue());
@@ -176,5 +191,61 @@ public class JavaOclStringTest {
 		assertTrue(chars.at(integer1).isEqualTo(O).isTrue());
 		assertTrue(chars.at(integer6).isEqualTo(o).isTrue());
 		assertTrue(chars.size().isEqualTo(integer9).isTrue());
+	}
+
+	@Test
+	public void testIsLessThan() {
+
+		assertFalse(emptyString.isLessThan(emptyString).isTrue());
+		assertFalse(fourtyTwo.isLessThan(fourtyTwo).isTrue());
+		assertTrue(a.isLessThan(b).isTrue());
+		assertFalse(b.isLessThan(a).isTrue());
+
+		assertTrue(undefined.isLessThan(a).oclIsInvalid().isTrue());
+		assertTrue(a.isLessThan(undefined).oclIsInvalid().isTrue());
+		assertTrue(invalid.isLessThan(a).oclIsInvalid().isTrue());
+		assertTrue(a.isLessThan(invalid).oclIsInvalid().isTrue());
+	}
+
+	@Test
+	public void testIsLessEqual() {
+
+		assertTrue(emptyString.isLessEqual(emptyString).isTrue());
+		assertTrue(fourtyTwo.isLessEqual(fourtyTwo).isTrue());
+		assertTrue(a.isLessEqual(b).isTrue());
+		assertFalse(b.isLessEqual(a).isTrue());
+
+		assertTrue(undefined.isLessEqual(a).oclIsInvalid().isTrue());
+		assertTrue(a.isLessEqual(undefined).oclIsInvalid().isTrue());
+		assertTrue(invalid.isLessEqual(a).oclIsInvalid().isTrue());
+		assertTrue(a.isLessEqual(invalid).oclIsInvalid().isTrue());
+	}
+	
+	@Test
+	public void testIsGreaterThan() {
+
+		assertFalse(emptyString.isGreaterThan(emptyString).isTrue());
+		assertFalse(fourtyTwo.isGreaterThan(fourtyTwo).isTrue());
+		assertFalse(a.isGreaterThan(b).isTrue());
+		assertTrue(b.isGreaterThan(a).isTrue());
+
+		assertTrue(undefined.isGreaterThan(a).oclIsInvalid().isTrue());
+		assertTrue(a.isGreaterThan(undefined).oclIsInvalid().isTrue());
+		assertTrue(invalid.isGreaterThan(a).oclIsInvalid().isTrue());
+		assertTrue(a.isGreaterThan(invalid).oclIsInvalid().isTrue());
+	}
+	
+	@Test
+	public void testIsGreaterEqual() {
+
+		assertTrue(emptyString.isGreaterEqual(emptyString).isTrue());
+		assertTrue(fourtyTwo.isGreaterEqual(fourtyTwo).isTrue());
+		assertFalse(a.isGreaterEqual(b).isTrue());
+		assertTrue(b.isGreaterEqual(a).isTrue());
+
+		assertTrue(undefined.isGreaterEqual(a).oclIsInvalid().isTrue());
+		assertTrue(a.isGreaterEqual(undefined).oclIsInvalid().isTrue());
+		assertTrue(invalid.isGreaterEqual(a).oclIsInvalid().isTrue());
+		assertTrue(a.isGreaterEqual(invalid).oclIsInvalid().isTrue());
 	}
 }

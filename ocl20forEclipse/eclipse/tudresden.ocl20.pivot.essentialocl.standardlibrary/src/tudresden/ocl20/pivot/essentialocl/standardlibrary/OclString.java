@@ -158,4 +158,33 @@ public interface OclString extends OclLibraryObject {
 	 * @return the characters of <code>this</code> as an {@link OclSequence}
 	 */
 	OclSequence<OclString> characters();
+	
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is less than <code>s</code>.
+	 */
+	OclBoolean isLessThan(OclString s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is greater than <code>s</code>.
+	 */
+	OclBoolean isGreaterThan(OclString s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is less than or equal to <code>s</code>.
+	 */
+	OclBoolean isLessEqual(OclString s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is greater than or equal to
+	 *         <code>s</code>.
+	 */
+	OclBoolean isGreaterEqual(OclString s);
 }

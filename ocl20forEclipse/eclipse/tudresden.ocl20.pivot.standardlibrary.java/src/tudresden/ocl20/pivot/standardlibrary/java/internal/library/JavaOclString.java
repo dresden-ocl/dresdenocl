@@ -325,6 +325,142 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isGreaterEqual
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 */
+	public OclBoolean isGreaterEqual(OclString that) {
+
+		OclBoolean result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, that);
+
+		if (result == null)
+			result = checkUndefined(">=", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			String string1 = getModelInstanceString().getString();
+			String string2 = that.getModelInstanceString().getString();
+
+			int intResult = string1.compareTo(string2);
+
+			result = JavaOclBoolean.getInstance(intResult >= 0);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isGreaterThan
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 */
+	public OclBoolean isGreaterThan(OclString that) {
+
+		OclBoolean result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, that);
+
+		if (result == null)
+			result = checkUndefined(">", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			String string1 = getModelInstanceString().getString();
+			String string2 = that.getModelInstanceString().getString();
+
+			int intResult = string1.compareTo(string2);
+
+			result = JavaOclBoolean.getInstance(intResult > 0);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isLessEqual
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 */
+	public OclBoolean isLessEqual(OclString that) {
+
+		OclBoolean result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, that);
+
+		if (result == null)
+			result = checkUndefined("<=", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			String string1 = getModelInstanceString().getString();
+			String string2 = that.getModelInstanceString().getString();
+
+			int intResult = string1.compareTo(string2);
+
+			result = JavaOclBoolean.getInstance(intResult <= 0);
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isLessThan
+	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 */
+	public OclBoolean isLessThan(OclString that) {
+
+		OclBoolean result = null;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, that);
+
+		if (result == null)
+			result = checkUndefined("<", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this, that);
+
+		if (result == null) {
+			/* Else compute the result. */
+			String string1 = getModelInstanceString().getString();
+			String string2 = that.getModelInstanceString().getString();
+
+			int intResult = string1.compareTo(string2);
+
+			result = JavaOclBoolean.getInstance(intResult < 0);
+
+		}
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#plus(tudresden
+	 * .ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 */
 	public OclString plus(OclString s) {
 
 		return concat(s);
