@@ -36,10 +36,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
@@ -64,15 +65,6 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
-	 * The cached value of the '{@link #getOclLibrary() <em>Ocl Library</em>}' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getOclLibrary()
-	 * @generated
-	 * @ordered
-	 */
-	protected OclLibrary oclLibrary;
-	/**
 	 * Logger for this class
 	 */
 	private static final Logger logger = Logger.getLogger(VoidTypeImpl.class);
@@ -96,7 +88,6 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	public boolean conformsTo(Type other) {
 
 		return true;
@@ -211,25 +202,21 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
-		if (oclLibrary != null && oclLibrary.eIsProxy()) {
-			InternalEObject oldOclLibrary = (InternalEObject) oclLibrary;
-			oclLibrary = (OclLibrary) eResolveProxy(oldOclLibrary);
-			if (oclLibrary != oldOclLibrary) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary,
-							oclLibrary));
-			}
-		}
-		return oclLibrary;
+		if (eContainerFeatureID() != TypesPackageImpl.VOID_TYPE__OCL_LIBRARY)
+			return null;
+		return (OclLibrary) eContainer();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclLibrary basicGetOclLibrary() {
-		return oclLibrary;
+	public NotificationChain basicSetOclLibrary(OclLibrary newOclLibrary,
+			NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject) newOclLibrary,
+				TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, msgs);
+		return msgs;
 	}
 
 	/**
@@ -237,11 +224,71 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
-		OclLibrary oldOclLibrary = oclLibrary;
-		oclLibrary = newOclLibrary;
-		if (eNotificationRequired())
+		if (newOclLibrary != eInternalContainer()
+				|| (eContainerFeatureID() != TypesPackageImpl.VOID_TYPE__OCL_LIBRARY && newOclLibrary != null)) {
+			if (EcoreUtil.isAncestor(this, newOclLibrary))
+				throw new IllegalArgumentException(
+						"Recursive containment not allowed for " + toString()); //$NON-NLS-1$
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOclLibrary != null)
+				msgs = ((InternalEObject) newOclLibrary).eInverseAdd(this,
+						TypesPackageImpl.OCL_LIBRARY__OCL_VOID, OclLibrary.class, msgs);
+			msgs = basicSetOclLibrary(newOclLibrary, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, oldOclLibrary, oclLibrary));
+					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, newOclLibrary, newOclLibrary));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+		switch (featureID) {
+		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			return basicSetOclLibrary((OclLibrary) otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+			return basicSetOclLibrary(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(
+			NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
+			return eInternalContainer().eInverseRemove(this,
+					TypesPackageImpl.OCL_LIBRARY__OCL_VOID, OclLibrary.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -252,9 +299,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
-			if (resolve)
-				return getOclLibrary();
-			return basicGetOclLibrary();
+			return getOclLibrary();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -295,7 +340,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
-			return oclLibrary != null;
+			return getOclLibrary() != null;
 		}
 		return super.eIsSet(featureID);
 	}

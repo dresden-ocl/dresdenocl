@@ -97,8 +97,9 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements
 		Type type = getValidOclLibrary().getOclType();
 
 		// bind the type with the referred type
-		type = type.bindTypeParameter(new ArrayList<TypeParameter>(type
-				.getOwnedTypeParameter()), Arrays.asList(referredType));
+		type = type.bindTypeParameter(
+				new ArrayList<TypeParameter>(type.getOwnedTypeParameter()),
+				Arrays.asList(referredType));
 
 		return type;
 	}

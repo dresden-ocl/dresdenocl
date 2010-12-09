@@ -62,18 +62,12 @@ import org.apache.commons.lang.builder.ToStringBuilder;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getPart
- * <em>Part</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getKind
- * <em>Kind</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getElementType
- * <em>Element Type</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getPart <em>Part</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl#getElementType <em>Element Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class CollectionLiteralExpImpl extends LiteralExpImpl implements
@@ -86,9 +80,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 			.getLogger(CollectionLiteralExpImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getPart()
 	 * @generated
 	 * @ordered
@@ -116,9 +109,8 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 	protected CollectionKind kind = KIND_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getElementType() <em>Element Type</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getElementType() <em>Element Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getElementType()
 	 * @generated
 	 * @ordered
@@ -127,7 +119,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected CollectionLiteralExpImpl() {
@@ -235,7 +226,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public List<CollectionLiteralPart> getPart() {
@@ -249,7 +239,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public CollectionKind getKind() {
@@ -258,7 +247,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setKind(CollectionKind newKind) {
@@ -271,7 +259,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getElementType() {
@@ -290,7 +277,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type basicGetElementType() {
@@ -299,7 +285,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setElementType(Type newElementType) {
@@ -313,7 +298,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -328,7 +312,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -348,7 +331,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -371,7 +353,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -392,7 +373,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -410,7 +390,6 @@ public class CollectionLiteralExpImpl extends LiteralExpImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

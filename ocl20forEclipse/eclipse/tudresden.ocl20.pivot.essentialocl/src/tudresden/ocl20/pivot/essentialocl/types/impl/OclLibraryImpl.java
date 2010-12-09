@@ -268,12 +268,10 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 			NotificationChain msgs = null;
 			if (oclVoid != null)
 				msgs = ((InternalEObject) oclVoid).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
-						null, msgs);
+						TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, VoidType.class, msgs);
 			if (newOclVoid != null)
 				msgs = ((InternalEObject) newOclVoid).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
-						null, msgs);
+						TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, VoidType.class, msgs);
 			msgs = basicSetOclVoid(newOclVoid, msgs);
 			if (msgs != null)
 				msgs.dispatch();
@@ -1031,8 +1029,9 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		}
 
 		// bind the template type and set the element type
-		bagType = oclBag.bindTypeParameter(new ArrayList<TypeParameter>(oclBag
-				.getOwnedTypeParameter()), Arrays.asList(elementType));
+		bagType = oclBag.bindTypeParameter(
+				new ArrayList<TypeParameter>(oclBag.getOwnedTypeParameter()),
+				Arrays.asList(elementType));
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getBagType() - exit - return value=" + bagType); //$NON-NLS-1$
@@ -1066,8 +1065,9 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 		}
 
 		// bind the template type and set the element type
-		setType = oclSet.bindTypeParameter(new ArrayList<TypeParameter>(oclSet
-				.getOwnedTypeParameter()), Arrays.asList(elementType));
+		setType = oclSet.bindTypeParameter(
+				new ArrayList<TypeParameter>(oclSet.getOwnedTypeParameter()),
+				Arrays.asList(elementType));
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getSetType() - exit - return value=" + setType); //$NON-NLS-1$
@@ -1158,6 +1158,12 @@ public class OclLibraryImpl extends EObjectImpl implements OclLibrary {
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
 			NotificationChain msgs) {
 		switch (featureID) {
+		case TypesPackageImpl.OCL_LIBRARY__OCL_VOID:
+			if (oclVoid != null)
+				msgs = ((InternalEObject) oclVoid).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
+						null, msgs);
+			return basicSetOclVoid((VoidType) otherEnd, msgs);
 		case TypesPackageImpl.OCL_LIBRARY__OCL_INVALID:
 			if (oclInvalid != null)
 				msgs = ((InternalEObject) oclInvalid).eInverseRemove(this,

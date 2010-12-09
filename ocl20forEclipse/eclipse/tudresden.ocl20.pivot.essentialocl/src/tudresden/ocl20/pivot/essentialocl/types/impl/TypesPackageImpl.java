@@ -1053,7 +1053,7 @@ public class TypesPackageImpl extends EPackageImpl {
 	public static final int VOID_TYPE__GENERIC_SUPER_TYPE = PivotModelPackage.TYPE__GENERIC_SUPER_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Ocl Library</b></em>' reference.
+	 * The feature id for the '<em><b>Ocl Library</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1739,10 +1739,10 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ocl Library</em>'.
+	 * @return the meta object for the container reference '<em>Ocl Library</em>'.
 	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary()
 	 * @see #getVoidType()
 	 * @generated
@@ -2162,8 +2162,8 @@ public class TypesPackageImpl extends EPackageImpl {
 		initEReference(
 				getVoidType_OclLibrary(),
 				this.getOclLibrary(),
-				null,
-				"oclLibrary", null, 1, 1, VoidType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+				this.getOclLibrary_OclVoid(),
+				"oclLibrary", null, 1, 1, VoidType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(typeTypeEClass, TypeType.class,
 				"TypeType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -2203,7 +2203,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		initEReference(
 				getOclLibrary_OclVoid(),
 				this.getVoidType(),
-				null,
+				this.getVoidType_OclLibrary(),
 				"oclVoid", null, 1, 1, OclLibrary.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 		initEReference(
 				getOclLibrary_OclInvalid(),
@@ -2430,7 +2430,7 @@ public class TypesPackageImpl extends EPackageImpl {
 		public static final EClass VOID_TYPE = eINSTANCE.getVoidType();
 
 		/**
-		 * The meta object literal for the '<em><b>Ocl Library</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Ocl Library</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

@@ -3040,8 +3040,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		// Obtain or create and register package
 		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl) (EPackage.Registry.INSTANCE
 				.get(eNS_URI) instanceof ExpressionsPackageImpl ? EPackage.Registry.INSTANCE
-				.get(eNS_URI)
-				: new ExpressionsPackageImpl());
+				.get(eNS_URI) : new ExpressionsPackageImpl());
 
 		isInited = true;
 
@@ -3052,8 +3051,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 		// Obtain or create and register interdependencies
 		TypesPackageImpl theTypesPackage = (TypesPackageImpl) (EPackage.Registry.INSTANCE
 				.getEPackage(TypesPackageImpl.eNS_URI) instanceof TypesPackageImpl ? EPackage.Registry.INSTANCE
-				.getEPackage(TypesPackageImpl.eNS_URI)
-				: TypesPackageImpl.eINSTANCE);
+				.getEPackage(TypesPackageImpl.eNS_URI) : TypesPackageImpl.eINSTANCE);
 
 		// Create package meta-data objects
 		theExpressionsPackage.createPackageContents();

@@ -52,24 +52,26 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public interface VoidType extends Type {
 
 	/**
-	 * Returns the value of the '<em><b>Ocl Library</b></em>' reference.
+	 * Returns the value of the '<em><b>Ocl Library</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ocl Library</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ocl Library</em>' reference.
+	 * @return the value of the '<em>Ocl Library</em>' container reference.
 	 * @see #setOclLibrary(OclLibrary)
+	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclVoid
 	 * @generated
 	 */
 	OclLibrary getOclLibrary();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}' reference.
+	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ocl Library</em>' reference.
+	 * @param value the new value of the '<em>Ocl Library</em>' container reference.
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
