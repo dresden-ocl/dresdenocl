@@ -1,0 +1,8 @@
+package package1
+
+/* Should result in invalid. */
+context Class1
+def: testClosure05(): Set(Class1) =
+Set(Class1) { null } ->closure(parent)
+
+endpackage

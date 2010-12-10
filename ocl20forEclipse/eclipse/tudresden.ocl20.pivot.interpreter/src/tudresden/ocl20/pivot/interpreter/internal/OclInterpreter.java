@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -1365,6 +1366,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 		}
 
+		else if (iteratorExp.getName().equals("closure")) {
+
+			/* Closure can only use one iterator variable. */
+			if (allIteratorVariables.size() > 1) {
+				String msg = "Iterator closure() can have only one iterator variable.";
+
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.warn(msg);
+				}
+				// no else.
+
+				result = myStandardLibraryFactory.createOclInvalid(
+						iteratorExp.getType(),
+						new IllegalArgumentException(msg));
+			}
+
+			else {
+				result = this.evaluateClosure(bodyExpression, sourceCollection,
+						allIteratorVariables.get(0), resultType);
+			}
+		}
+
 		else if (iteratorExp.getName().equals("collect")) {
 
 			/* Collect can only use one iterator variable. */
@@ -1675,6 +1698,101 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * The closure of applying body transitively to every distinct element of
+	 * the source collection.
+	 * </p>
+	 * 
+	 * @param body
+	 *            The body expression to be evaluated.
+	 * @param source
+	 *            The collection representing the source expression of the
+	 *            iteration.
+	 * @param iterator
+	 *            The iterator (closure may have at most one iterator
+	 *            variable.).
+	 * @param resultType
+	 *            The result type (set or orderedSet).
+	 * 
+	 * @return The result of the iteration.
+	 */
+	protected OclAny evaluateClosure(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
+		OclAny result;
+
+		List<OclAny> resultList;
+		OclIterator<OclAny> sourceIt;
+
+		sourceIt = source.getIterator();
+
+		/* Check if iterator is undefined. */
+		if (sourceIt.next().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator closure() was invalid.", sourceIt
+							.next().getInvalidReason()));
+		}
+
+		/* Else compute the result. */
+		else {
+
+			// FIXME Implement closure here correctly.
+			TreeSet<OclAny> elementsToVisit = new TreeSet<OclAny>();
+			// TODO Add all elements to elementsToVisit.
+			TreeSet<OclAny> visitedElements = new TreeSet<OclAny>();
+
+			while (elementsToVisit.size() > 0) {
+
+				OclAny element = elementsToVisit.pollFirst();
+				visitedElements.add(element);
+
+				/* Compute relation for one element. */
+				myEnvironment.setVariableValue(iterator.getQualifiedName(),
+						element);
+				OclAny relationResult = doSwitch(body);
+
+				/* TODO Check if result is collection or not. */
+				
+
+				/* Add not yet visited elements to elements to visit. */
+			}
+			// end while.
+
+			/* Compute the result type depending on the given result type. */
+			if (resultType instanceof OrderedSetType) {
+				result = myStandardLibraryFactory.createOclOrderedSet(
+						new ArrayList<OclAny>(visitedElements),
+						((OrderedSetType) resultType).getElementType());
+			}
+
+			else if (resultType instanceof SetType) {
+				result = myStandardLibraryFactory.createOclSet(
+						new HashSet<OclAny>(visitedElements),
+						((SetType) resultType).getElementType());
+			}
+
+			else {
+				String msg;
+				msg = "The ResultType of a closure Iterator should by a Set or OrderedSet.";
+				msg += " But was " + resultType.getQualifiedName();
+
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.warn(msg);
+				}
+				// no else.
+
+				result = myStandardLibraryFactory.createOclInvalid(resultType,
+						new IllegalArgumentException(msg));
+			}
+			// end else.
+		}
+		// end else.
 
 		return result;
 	}

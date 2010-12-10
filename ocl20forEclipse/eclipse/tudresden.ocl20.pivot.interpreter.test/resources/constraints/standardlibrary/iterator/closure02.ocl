@@ -1,0 +1,8 @@
+package package1
+
+/* Returns all transitive parents as an OrderedSet. */
+context Class1
+def: testClosure02(): OrderedSet(Class1) =
+self->asOrderedSet()->closure(parent)
+
+endpackage

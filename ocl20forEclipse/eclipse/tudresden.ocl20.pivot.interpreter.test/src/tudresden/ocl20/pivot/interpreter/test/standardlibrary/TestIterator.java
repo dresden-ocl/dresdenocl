@@ -90,8 +90,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -114,8 +114,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -138,8 +138,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -162,8 +162,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -186,8 +186,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -210,8 +210,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -234,8 +234,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -258,8 +258,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -282,8 +282,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -306,8 +306,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -330,8 +330,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -354,8 +354,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -378,8 +378,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -402,8 +402,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -426,8 +426,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -450,8 +450,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -474,13 +474,185 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/any17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/any17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
 		this.assertIsEqual(1, results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure01", INSTANCE2_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(0, results.get(0));
+		this.assertIsCollectionOfSize(1, results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure02", INSTANCE2_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(0, results.get(0));
+		this.assertIsCollectionOfSize(1, results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure03() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure03", INSTANCE2_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(0, results.get(0));
+		this.assertIsCollectionOfSize(1, results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure04() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure04", INSTANCE2_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(0, results.get(0));
+		this.assertIsCollectionOfSize(1, results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure05() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure06() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure07() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
 	}
 
 	/**
@@ -498,8 +670,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -522,8 +694,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -546,8 +718,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -570,8 +742,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -594,8 +766,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -618,8 +790,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -642,8 +814,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -666,8 +838,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -690,8 +862,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/collect09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/collect09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -930,8 +1102,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -954,8 +1126,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -978,8 +1150,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1002,8 +1174,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1026,8 +1198,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1050,8 +1222,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1074,8 +1246,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1098,8 +1270,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1122,8 +1294,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1146,8 +1318,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1170,8 +1342,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1194,8 +1366,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1218,8 +1390,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1242,8 +1414,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1266,8 +1438,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1290,8 +1462,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1314,8 +1486,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/exists17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/exists17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1338,8 +1510,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1362,8 +1534,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1386,8 +1558,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1410,8 +1582,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1434,8 +1606,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1458,8 +1630,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1482,8 +1654,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1506,8 +1678,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1530,8 +1702,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1554,8 +1726,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1578,8 +1750,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1602,8 +1774,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1626,8 +1798,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1650,8 +1822,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1674,8 +1846,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1698,8 +1870,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1722,8 +1894,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1746,8 +1918,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll18", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll18", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1770,8 +1942,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll19", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll19", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1794,8 +1966,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll20", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll20", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1818,8 +1990,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll21", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll21", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1842,8 +2014,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll22", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll22", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1866,8 +2038,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll23", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll23", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1890,8 +2062,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll24", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll24", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1914,8 +2086,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/forAll25", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/forAll25", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1938,8 +2110,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1962,8 +2134,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -1986,8 +2158,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2010,8 +2182,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2034,8 +2206,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2058,8 +2230,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2082,8 +2254,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2106,8 +2278,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2130,8 +2302,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2154,8 +2326,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2178,8 +2350,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2202,8 +2374,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2226,8 +2398,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2250,8 +2422,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2274,8 +2446,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2298,8 +2470,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2322,8 +2494,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/isUnique17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/isUnique17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2346,8 +2518,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/iterate01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/iterate01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2370,8 +2542,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/iterate02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/iterate02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2394,8 +2566,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/iterate03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/iterate03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2418,8 +2590,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2442,8 +2614,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2466,8 +2638,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2490,8 +2662,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2514,8 +2686,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2538,8 +2710,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2562,8 +2734,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2586,8 +2758,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2610,8 +2782,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2634,8 +2806,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2658,8 +2830,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2682,8 +2854,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2706,8 +2878,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2730,8 +2902,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2754,8 +2926,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2778,8 +2950,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2802,8 +2974,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2826,8 +2998,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one18", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one18", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2850,8 +3022,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one19", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one19", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2874,8 +3046,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one20", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one20", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2898,8 +3070,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one21", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one21", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2922,8 +3094,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one22", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one22", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2946,8 +3118,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one23", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one23", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2970,8 +3142,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one24", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one24", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -2994,8 +3166,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/one25", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/one25", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3018,8 +3190,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3042,8 +3214,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3066,8 +3238,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3090,8 +3262,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3114,8 +3286,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3138,8 +3310,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3162,8 +3334,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3186,8 +3358,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3210,8 +3382,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3234,8 +3406,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3258,8 +3430,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3282,8 +3454,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3306,8 +3478,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3330,8 +3502,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3354,8 +3526,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3378,8 +3550,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3402,8 +3574,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/reject17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/reject17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3426,8 +3598,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3450,8 +3622,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3474,8 +3646,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3498,8 +3670,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3522,8 +3694,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3546,8 +3718,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3570,8 +3742,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3594,8 +3766,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3618,8 +3790,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3642,8 +3814,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select10", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select10", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3666,8 +3838,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select11", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select11", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3690,8 +3862,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select12", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select12", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3714,8 +3886,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select13", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select13", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3738,8 +3910,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select14", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select14", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3762,8 +3934,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select15", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select15", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3786,8 +3958,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select16", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select16", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3810,8 +3982,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/select17", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/select17", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3834,8 +4006,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3858,8 +4030,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3882,8 +4054,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy03", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy03", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3906,8 +4078,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy04", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy04", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3930,8 +4102,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy05", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy05", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3954,8 +4126,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy06", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy06", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -3978,8 +4150,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy07", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy07", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -4002,8 +4174,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy08", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy08", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
@@ -4026,8 +4198,8 @@ public class TestIterator extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/sortedBy09", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/sortedBy09", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
