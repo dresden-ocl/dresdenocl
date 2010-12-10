@@ -51,10 +51,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -77,10 +77,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -103,10 +103,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -129,10 +129,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -155,10 +155,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -181,10 +181,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -207,10 +207,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -233,10 +233,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -259,10 +259,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -285,10 +285,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -311,10 +311,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -337,10 +337,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -363,10 +363,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -389,10 +389,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -405,22 +405,22 @@ public class TestIterators {
 	 */
 	@Test
 	public void testCollectPositive06() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "standardlibrary/iterators/collectPositive06.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		testPerformer.parseFile(oclFileName);
 	}
 
@@ -441,10 +441,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -467,10 +467,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -493,10 +493,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -519,10 +519,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -530,8 +530,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test
@@ -546,10 +546,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -557,8 +557,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test
@@ -573,10 +573,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -584,8 +584,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test
@@ -600,10 +600,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -611,8 +611,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test
@@ -627,10 +627,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -638,8 +638,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test
@@ -654,10 +654,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -665,8 +665,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
@@ -681,10 +681,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -692,8 +692,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
@@ -708,10 +708,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -719,8 +719,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
@@ -735,10 +735,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -746,8 +746,8 @@ public class TestIterators {
 
 	/**
 	 * <p>
-	 * A test case testing the iterator <code>Collection->collectNested(..)</code>
-	 * .
+	 * A test case testing the iterator
+	 * <code>Collection->collectNested(..)</code> .
 	 * </p>
 	 */
 	@Test(expected = SemanticException.class)
@@ -762,10 +762,192 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive01() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive02() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive02.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive03() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive03.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive04() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive04.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive05() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive05.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive06() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive06.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the iterator <code>Collection->collect(..)</code>.
+	 * </p>
+	 */
+	@Test(expected = SemanticException.class)
+	public void testClosureNegative01() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closureNegative01.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -788,10 +970,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -814,10 +996,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -840,10 +1022,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -866,10 +1048,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -892,10 +1074,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -918,10 +1100,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -944,10 +1126,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -970,10 +1152,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -996,10 +1178,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1022,10 +1204,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1048,10 +1230,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1074,10 +1256,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1100,10 +1282,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1126,10 +1308,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1152,10 +1334,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1178,10 +1360,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1204,10 +1386,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1230,10 +1412,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1256,10 +1438,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1282,10 +1464,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1308,10 +1490,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1334,10 +1516,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1360,10 +1542,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1386,10 +1568,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1412,10 +1594,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1438,10 +1620,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1464,10 +1646,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1490,10 +1672,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1516,10 +1698,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1542,10 +1724,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1568,10 +1750,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1594,10 +1776,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1620,10 +1802,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1646,10 +1828,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1672,10 +1854,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1698,10 +1880,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1724,10 +1906,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1750,10 +1932,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1776,10 +1958,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1802,10 +1984,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1828,10 +2010,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1854,10 +2036,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1880,10 +2062,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1906,10 +2088,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1932,10 +2114,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1958,10 +2140,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -1984,10 +2166,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2010,10 +2192,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2036,10 +2218,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2062,10 +2244,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2088,10 +2270,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2114,10 +2296,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2140,10 +2322,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2166,10 +2348,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2192,10 +2374,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2218,10 +2400,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2244,10 +2426,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2270,10 +2452,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2296,10 +2478,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2322,10 +2504,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2348,10 +2530,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2374,10 +2556,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);
@@ -2400,10 +2582,10 @@ public class TestIterators {
 		modelFileName = "testmodel.uml";
 
 		/* Try to get the TestPerformer. */
-		testPerformer =
-				TestPerformer.getInstance(AllStandardLibraryTests.META_MODEL_ID,
-						AllStandardLibraryTests.MODEL_BUNDLE,
-						AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
 
 		testPerformer.parseFile(oclFileName);

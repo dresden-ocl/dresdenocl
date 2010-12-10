@@ -1,0 +1,7 @@
+package package1::package2
+
+context Type1
+def: testClosurePositive06 : OrderedSet(Type1) =
+self->asSequence()->closure(aType1)
+
+endpackage

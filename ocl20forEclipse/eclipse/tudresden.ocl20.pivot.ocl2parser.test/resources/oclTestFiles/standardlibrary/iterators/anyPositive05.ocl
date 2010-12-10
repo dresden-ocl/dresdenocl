@@ -2,6 +2,6 @@ package package1::package2
 
 -- Iterator variable should be optional.
 context Type1
-inv: Type1.allInstances()->any(anInteger > 0) > 0
+def: testAnyPositive05 = Type1.allInstances()->any(anInteger > 0)
 
 endpackage

@@ -1,0 +1,8 @@
+package package1::package2
+
+/* Closure operator can have only one iterator variable. */
+context Type1
+def: testClosureNegative01 : Set(Type1) =
+self.asSet()->closure(elem1 : Type1, elem2 : Type1 | elem1.parent)
+
+endpackage

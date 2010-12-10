@@ -1,0 +1,7 @@
+package package1::package2
+
+context Type1
+def: testClosurePositive03 : Set(Type1) =
+self.asSet()->closure(elem : Type1 | elem.aType1)
+
+endpackage

@@ -36,10 +36,10 @@ import tudresden.ocl20.pivot.model.IModel;
 /* Specify a runner class: Suite.class. */
 @RunWith(Suite.class)
 /* Specify an array of test classes. */
-@Suite.SuiteClasses( { TestBag.class, TestBoolean.class, TestCollection.class,
-		TestInteger.class, TestOclAny.class, TestOclType.class,
-		TestOrderedSet.class, TestReal.class, TestSequence.class,
-		TestSet.class, TestString.class })
+@Suite.SuiteClasses({ TestBag.class, TestBoolean.class, TestCollection.class,
+		TestInteger.class, TestIterators.class, TestOclAny.class,
+		TestOclType.class, TestOrderedSet.class, TestReal.class,
+		TestSequence.class, TestSet.class, TestString.class })
 public class AllStandardLibraryTests {
 
 	/**
