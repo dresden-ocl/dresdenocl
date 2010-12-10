@@ -53,7 +53,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 			
 			// EMFText allows proxies to resolve to multiple objects. The first one is
 			// returned, the others are added here to the reference.
-			if(result.wasResolvedMultiple()) {
+			if (result.wasResolvedMultiple()) {
 				handleMultipleResults();
 			}
 		}
@@ -71,7 +71,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 		}
 		
 		boolean first = true;
-		for(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping : result.getMappings()) {
+		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping : result.getMappings()) {
 			if (first) {
 				first = false;
 			} else if (list != null) {

@@ -63,6 +63,10 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 			return Math.max(0, locationMap.getLine(element));
 		}
 		
+		public org.eclipse.emf.ecore.EObject getElement() {
+			return element;
+		}
+		
 		public boolean wasCausedBy(org.eclipse.emf.ecore.EObject element) {
 			if (this.element == null) {
 				return false;
@@ -174,12 +178,12 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		referenceResolverSwitch.setOptions(options);
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclParseResult result = parser.parse();
 		clearState();
-		getContents().clear();
+		getContentsInternal().clear();
 		org.eclipse.emf.ecore.EObject root = null;
 		if (result != null) {
 			root = result.getRoot();
 			if (root != null) {
-				getContents().add(root);
+				getContentsInternal().add(root);
 			}
 			java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>> commands = result.getPostParseCommands();
 			if (commands != null) {
@@ -217,7 +221,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 		referenceResolverSwitch.setOptions(options);
-		for(org.eclipse.emf.ecore.EObject root : getContents()) {
+		for (org.eclipse.emf.ecore.EObject root : getContentsInternal()) {
 			printer.print(root);
 		}
 	}
@@ -245,14 +249,10 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		internalURIFragmentMap.put(internalURIFragment, uriFragment);
 	}
 	
-	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement) {
-		int pos = -1;
-		if (reference.isMany()) {
-			pos = ((java.util.List<?>)container.eGet(reference)).size();
-		}
+	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement, int position) {
 		org.eclipse.emf.ecore.InternalEObject proxy = (org.eclipse.emf.ecore.InternalEObject) proxyElement;
 		String internalURIFragment = tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX + (proxyCounter++) + "_" + id;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<?> uriFragment = factory.create(id, container, reference, pos, proxy);
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<?> uriFragment = factory.create(id, container, reference, position, proxy);
 		proxy.eSetProxyURI(getURI().appendFragment(internalURIFragment));
 		addURIFragment(internalURIFragment, uriFragment);
 	}
@@ -267,7 +267,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 				return null;
 			}
 			if (!wasResolvedBefore && !result.wasResolved()) {
-				attachErrors(result, uriFragment.getProxy());
+				attachResolveError(result, uriFragment.getProxy());
 				return null;
 			} else if (!result.wasResolved()) {
 				return null;
@@ -277,7 +277,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 				removeDiagnostics(proxy, getErrors());
 				// remove old warnings and attach new
 				removeDiagnostics(proxy, getWarnings());
-				attachWarnings(result, proxy);
+				attachResolveWarnings(result, proxy);
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<? extends org.eclipse.emf.ecore.EObject> mapping = result.getMappings().iterator().next();
 				org.eclipse.emf.ecore.EObject resultElement = getResultElement(uriFragment, mapping, proxy, result.getErrorMessage());
 				org.eclipse.emf.ecore.EObject container = uriFragment.getContainer();
@@ -314,7 +314,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 					if (errorMessage == null) {
 						assert(false);
 					} else {
-						addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(errorMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR), proxy);
+						addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(errorMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNRESOLVED_REFERENCE, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.ERROR), proxy);
 					}
 				}
 				return result;
@@ -340,29 +340,30 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		}
 	}
 	
-	private void removeDiagnostics(org.eclipse.emf.ecore.EObject proxy, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
+	private void removeDiagnostics(org.eclipse.emf.ecore.EObject cause, java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> diagnostics) {
 		// remove all errors/warnings from this resource
 		for (org.eclipse.emf.ecore.resource.Resource.Diagnostic errorCand : new org.eclipse.emf.common.util.BasicEList<org.eclipse.emf.ecore.resource.Resource.Diagnostic>(diagnostics)) {
 			if (errorCand instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic) {
-				if (((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic) errorCand).wasCausedBy(proxy)) {
+				if (((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic) errorCand).wasCausedBy(cause)) {
 					diagnostics.remove(errorCand);
+					tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this, cause);
 				}
 			}
 		}
 	}
 	
-	private void attachErrors(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
+	private void attachResolveError(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<?> result, org.eclipse.emf.ecore.EObject proxy) {
 		// attach errors to this resource
 		assert result != null;
 		final String errorMessage = result.getErrorMessage();
 		if (errorMessage == null) {
 			assert(false);
 		} else {
-			addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(errorMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR), proxy);
+			addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(errorMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNRESOLVED_REFERENCE, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.ERROR, result.getQuickFixes()), proxy);
 		}
 	}
 	
-	private void attachWarnings(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
+	private void attachResolveWarnings(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<? extends org.eclipse.emf.ecore.EObject> result, org.eclipse.emf.ecore.EObject proxy) {
 		assert result != null;
 		assert result.wasResolved();
 		if (result.wasResolved()) {
@@ -371,7 +372,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 				if (warningMessage == null) {
 					continue;
 				}
-				addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(warningMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR), proxy);
+				addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(warningMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNRESOLVED_REFERENCE, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.WARNING), proxy);
 			}
 		}
 	}
@@ -390,30 +391,36 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		if (loadOptions == null) {
 			return;
 		}
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ANALYSIS_PROBLEM);
 		Object resourcePostProcessorProvider = loadOptions.get(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.RESOURCE_POSTPROCESSOR_PROVIDER);
 		if (resourcePostProcessorProvider != null) {
 			if (resourcePostProcessorProvider instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) {
-				((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) resourcePostProcessorProvider).getResourcePostProcessor().process(this);
+				runPostProcessor(((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) resourcePostProcessorProvider).getResourcePostProcessor());
 			} else if (resourcePostProcessorProvider instanceof java.util.Collection<?>) {
 				java.util.Collection<?> resourcePostProcessorProviderCollection = (java.util.Collection<?>) resourcePostProcessorProvider;
 				for (Object processorProvider : resourcePostProcessorProviderCollection) {
 					if (processorProvider instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) {
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider csProcessorProvider = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider) processorProvider;
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor postProcessor = csProcessorProvider.getResourcePostProcessor();
-						try {
-							postProcessor.process(this);
-						} catch (Exception e) {
-							tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while running a post-processor.", e);
-						}
+						runPostProcessor(postProcessor);
 					}
 				}
 			}
 		}
 	}
 	
+	protected void runPostProcessor(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor postProcessor) {
+		try {
+			postProcessor.process(this);
+		} catch (Exception e) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while running a post-processor.", e);
+		}
+	}
+	
 	public void load(java.util.Map<?, ?> options) throws java.io.IOException {
 		java.util.Map<Object, Object> loadOptions = addDefaultLoadOptions(options);
 		super.load(loadOptions);
+		org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(this);
 	}
 	
 	public void setURI(org.eclipse.emf.common.util.URI uri) {
@@ -429,7 +436,7 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	
 	public void addProblem(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem, org.eclipse.emf.ecore.EObject element) {
 		ElementBasedTextDiagnostic diagnostic = new ElementBasedTextDiagnostic(locationMap, getURI(), problem, element);
-		getDiagnostics(problem.getType()).add(diagnostic);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
 		if (isMarkerCreationEnabled()) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.mark(this, diagnostic);
 		}
@@ -445,22 +452,32 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 	
 	public void addProblem(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem, int column, int line, int charStart, int charEnd) {
 		PositionBasedTextDiagnostic diagnostic = new PositionBasedTextDiagnostic(getURI(), problem, column, line, charStart, charEnd);
-		getDiagnostics(problem.getType()).add(diagnostic);
+		getDiagnostics(problem.getSeverity()).add(diagnostic);
 		if (isMarkerCreationEnabled()) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.mark(this, diagnostic);
 		}
 	}
 	
+	@Deprecated	
 	public void addError(String message, org.eclipse.emf.ecore.EObject cause) {
-		addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR), cause);
+		addError(message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNKNOWN, cause);
 	}
 	
+	public void addError(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, org.eclipse.emf.ecore.EObject cause) {
+		addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(message, type, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.ERROR), cause);
+	}
+	
+	@Deprecated	
 	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause) {
-		addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.WARNING), cause);
+		addWarning(message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNKNOWN, cause);
 	}
 	
-	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type) {
-		if (type == tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR) {
+	public void addWarning(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, org.eclipse.emf.ecore.EObject cause) {
+		addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(message, type, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.WARNING), cause);
+	}
+	
+	private java.util.List<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getDiagnostics(tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity severity) {
+		if (severity == tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.ERROR) {
 			return getErrors();
 		} else {
 			return getWarnings();
@@ -535,14 +552,29 @@ public class OclResource extends org.eclipse.emf.ecore.resource.impl.ResourceImp
 		getErrors().clear();
 		getWarnings().clear();
 		if (isMarkerCreationEnabled()) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this);
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNKNOWN);
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.SYNTAX_ERROR);
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper.unmark(this, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNRESOLVED_REFERENCE);
 		}
 		proxyCounter = 0;
 		resolverSwitch = null;
 	}
 	
+	/**
+	 * Returns a copy of the contents of this resource wrapped in a list that
+	 * propagates changes to the original resource list. Wrapping is required to make
+	 * sure that clients which obtain a reference to the list of contents do not
+	 * interfere when changing the list.
+	 */
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContents() {
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclCopiedEObjectInternalEList((org.eclipse.emf.ecore.util.InternalEList<org.eclipse.emf.ecore.EObject>) super.getContents());
+	}
+	
+	/**
+	 * Returns the raw contents of this resource.
+	 */
+	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> getContentsInternal() {
+		return super.getContents();
 	}
 	
 	public org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.resource.Resource.Diagnostic> getWarnings() {

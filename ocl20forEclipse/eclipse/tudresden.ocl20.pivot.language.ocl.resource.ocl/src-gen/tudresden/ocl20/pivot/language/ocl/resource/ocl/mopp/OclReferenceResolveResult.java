@@ -19,6 +19,7 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> mappings;
 	private String errorMessage;
 	private boolean resolveFuzzy;
+	private java.util.Set<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes;
 	
 	public OclReferenceResolveResult(boolean resolveFuzzy) {
 		super();
@@ -27,6 +28,20 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+	
+	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+		if (quickFixes == null) {
+			quickFixes = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+		}
+		return java.util.Collections.unmodifiableSet(quickFixes);
+	}
+	
+	public void addQuickFix(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
+		if (quickFixes == null) {
+			quickFixes = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+		}
+		quickFixes.add(quickFix);
 	}
 	
 	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {

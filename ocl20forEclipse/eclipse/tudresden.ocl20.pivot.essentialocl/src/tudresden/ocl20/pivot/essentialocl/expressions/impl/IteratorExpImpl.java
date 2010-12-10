@@ -143,6 +143,17 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 			}
 		}
 
+		else if (name.equals("closure")) {
+
+			if (sourceType instanceof SequenceType || sourceType instanceof OrderedSetType) {
+				type = getValidOclLibrary().getOrderedSetType(elementType);
+			}
+
+			else {
+				type = getValidOclLibrary().getSetType(elementType);
+			}
+		}
+
 		// additional rule missing in the spec
 		else if (name.equals("collectNested")) { //$NON-NLS-1$
 

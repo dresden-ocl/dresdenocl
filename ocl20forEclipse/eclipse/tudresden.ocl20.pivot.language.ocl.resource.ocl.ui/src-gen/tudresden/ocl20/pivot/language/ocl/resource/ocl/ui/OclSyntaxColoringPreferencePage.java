@@ -203,7 +203,7 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		
 		public Object[] getElements(Object inputElement) {
 			java.util.List<HighlightingColorListItem> contentsList = new java.util.ArrayList<HighlightingColorListItem>();
-			for(java.util.List<HighlightingColorListItem> l : content.values()) {
+			for (java.util.List<HighlightingColorListItem> l : content.values()) {
 				contentsList.addAll(l);
 			}
 			return contentsList.toArray();

@@ -22,3 +22,4 @@ Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
  tudresden.ocl20.pivot.language.ocl.staticsemantics.impl,
  tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor
 Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

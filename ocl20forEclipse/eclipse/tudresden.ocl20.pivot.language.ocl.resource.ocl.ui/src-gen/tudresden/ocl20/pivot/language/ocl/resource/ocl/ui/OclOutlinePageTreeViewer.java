@@ -64,6 +64,18 @@ public class OclOutlinePageTreeViewer extends org.eclipse.jface.viewers.TreeView
 		super.refresh(updateLabels);
 		expandToLevel(getAutoExpandLevel());
 	}
+	
+	public void expandToLevel(int level) {
+		// we need to catch exceptions here, because refreshing the outline does sometimes
+		// cause the LabelProviders to throw exceptions, if the model is in some
+		// inconsistent state.
+		try {
+			super.expandToLevel(level);
+		} catch (Exception e) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while refreshing outline view", e);
+		}
+	}
+	
 	protected void fireSelectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent event) {
 		if (suppressNotifications == true) return;
 		super.fireSelectionChanged(event);

@@ -6,6 +6,15 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
+/**
+ * A OclLayoutInformation is used to store layout information that is found while
+ * parsing text files. Layout information does include all unused tokens. Usually,
+ * these are whitespace characters, line breaks and comments, but depending on the
+ * concrete syntax definition it can also include other tokens.
+ * OclLayoutInformations are aggregated in LayoutInformationAdapters. One
+ * OclLayoutInformation contains the layout that was found before a keyword,
+ * attribute or reference.
+ */
 public class OclLayoutInformation {
 	
 	private final tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement;

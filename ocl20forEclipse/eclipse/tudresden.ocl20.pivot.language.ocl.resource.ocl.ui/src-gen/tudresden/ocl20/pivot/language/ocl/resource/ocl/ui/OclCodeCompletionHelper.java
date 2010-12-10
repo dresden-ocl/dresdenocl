@@ -145,6 +145,9 @@ public class OclCodeCompletionHelper {
 		} else if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal expectedBooleanTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal) expectedElement;
 			return handleBooleanTerminal(expectedBooleanTerminal, expectedTerminal.getPrefix());
+		} else if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal) {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal expectedEnumerationTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal) expectedElement;
+			return handleEnumerationTerminal(expectedEnumerationTerminal, expectedTerminal.getPrefix());
 		} else if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature) expectedElement;
 			org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
@@ -302,12 +305,22 @@ public class OclCodeCompletionHelper {
 	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleBooleanTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
 		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>(2);
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
-		result.addAll(handleBooleanLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
-		result.addAll(handleBooleanLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
+		result.addAll(handleLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
+		result.addAll(handleLiteral(booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
 		return result;
 	}
 	
-	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleBooleanLiteral(org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
+	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleEnumerationTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
+		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>(2);
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal = expectedEnumerationTerminal.getEnumerationTerminal();
+		java.util.Map<String, String> literalMapping = enumerationTerminal.getLiteralMapping();
+		for (String literalName : literalMapping.keySet()) {
+			result.addAll(handleLiteral(enumerationTerminal.getAttribute(), prefix, literalMapping.get(literalName)));
+		}
+		return result;
+	}
+	
+	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleLiteral(org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
 		if ("".equals(literal)) {
 			return java.util.Collections.emptySet();
 		}

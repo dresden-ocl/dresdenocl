@@ -40,7 +40,7 @@ public class OclBackgroundParsingStrategy {
 		
 		// this synchronization is needed to avoid the creation of multiple tasks. without
 		// the synchronization this could easily happen, when this method is accessed by
-		// multiple threads. the creation of multiple tasks would imply the multiple
+		// multiple threads. the creation of multiple tasks would imply that multiple
 		// background parsing threads for one editor are created, which is not desired.
 		synchronized (lock) {
 			// cancel old task

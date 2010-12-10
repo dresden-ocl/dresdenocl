@@ -12,6 +12,7 @@ OPTIONS {
 	overrideTextResource = "false";
 	overrideCodeCompletionHelper = "true";
 	overrideManifest = "false";
+	overridePluginXML = "false";
 	usePredefinedTokens = "false";
 }
 
@@ -32,7 +33,7 @@ TOKENS {
 	DEFINE IS_MARKED_PRE			$ '@pre'$;
 	DEFINE BOOLEAN_LITERAL			$ 'true' | 'false' $;
 	DEFINE COLLECTION_TYPES			$ 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' $;
-	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' $;
+	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' $;
 	DEFINE STATIC					$ 'static'$;
 	DEFINE INTEGER_0				$ '0'+ ('0'..'9')$;
 	DEFINE INTEGER_LITERAL			$ ('1'..'9') ('0'..'9')* | '0'$;

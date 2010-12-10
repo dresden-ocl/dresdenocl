@@ -31,11 +31,6 @@ options {
 	 */
 	private int lastPosition;
 	
-	/**
-	 * the index of the last token that was handled by retrieveLayoutInformation()
-	 */
-	private int lastPosition2;
-	
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult tokenResolveResult = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
 	
 	/**
@@ -78,13 +73,6 @@ options {
 	private int stopIncludingHiddenTokens;
 	private int stopExcludingHiddenTokens;
 	/**
-	 * A collection that is filled with commands to be executed after parsing. This
-	 * collection is cleared before parsing starts and returned as part of the parse
-	 * result object.
-	 */
-	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>> postParseCommands;
-	
-	/**
 	 * A flag to indicate that the parser should stop parsing as soon as possible. The
 	 * flag is set to false before parsing starts. It can be set to true by invoking
 	 * the terminateParsing() method from another thread. This feature is used, when
@@ -100,11 +88,6 @@ options {
 	private int expectedElementsIndexOfLastCompleteElement;
 	
 	/**
-	 * a collection to store all anonymous tokens
-	 */
-	private java.util.List<org.antlr.runtime3_2_0.CommonToken> anonymousTokens = new java.util.ArrayList<org.antlr.runtime3_2_0.CommonToken>();
-	
-	/**
 	 * The offset indicating the cursor position when the parser is used for code
 	 * completion by calling parseToExpectedElements().
 	 */
@@ -116,7 +99,7 @@ options {
 	 */
 	private int lastStartIncludingHidden;
 	
-	protected void addErrorToResource(final String errorMessage, final int line, final int charPositionInLine, final int startIndex, final int stopIndex) {
+	protected void addErrorToResource(final String errorMessage, final int column, final int line, final int startIndex, final int stopIndex) {
 		postParseCommands.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>() {
 			public boolean execute(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
 				if (resource == null) {
@@ -124,8 +107,11 @@ options {
 					return true;
 				}
 				resource.addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem() {
+					public tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity getSeverity() {
+						return tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.ERROR;
+					}
 					public tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType getType() {
-						return tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ERROR;
+						return tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.SYNTAX_ERROR;
 					}
 					public String getMessage() {
 						return errorMessage;
@@ -133,7 +119,7 @@ options {
 					public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
 						return null;
 					}
-				}, line, charPositionInLine, startIndex, stopIndex);
+				}, column, line, startIndex, stopIndex);
 				return true;
 			}
 		});
@@ -472,7 +458,7 @@ options {
 		if (result != null) {
 			org.eclipse.emf.ecore.EObject root = result.getRoot();
 			if (root != null) {
-				dummyResource.getContents().add(root);
+				dummyResource.getContentsInternal().add(root);
 			}
 			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource> command : result.getPostParseCommands()) {
 				command.execute(dummyResource);
@@ -557,19 +543,6 @@ options {
 		}
 	}
 	
-	protected <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(final tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, final ContainerType element, final org.eclipse.emf.ecore.EReference reference, final String id, final org.eclipse.emf.ecore.EObject proxy) {
-		postParseCommands.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>() {
-			public boolean execute(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
-				if (resource == null) {
-					// the resource can be null if the parser is used for code completion
-					return true;
-				}
-				resource.registerContextDependentProxy(factory, element, reference, id, proxy);
-				return true;
-			}
-		});
-	}
-	
 	/**
 	 * Translates errors thrown by the parser into human readable messages.
 	 */
@@ -577,23 +550,13 @@ options {
 		String message = e.getMessage();
 		if (e instanceof org.antlr.runtime3_2_0.MismatchedTokenException) {
 			org.antlr.runtime3_2_0.MismatchedTokenException mte = (org.antlr.runtime3_2_0.MismatchedTokenException) e;
-			String tokenName = "<unknown>";
-			if (mte.expecting == Token.EOF) {
-				tokenName = "EOF";
-			} else {
-				tokenName = getTokenNames()[mte.expecting];
-				tokenName = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.formatTokenName(tokenName);
-			}
-			message = "Syntax error on token \"" + e.token.getText() + "\", \"" + tokenName + "\" expected";
+			String expectedTokenName = formatTokenName(mte.expecting);
+			String actualTokenName = formatTokenName(e.token.getType());
+			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
 		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedTreeNodeException) {
 			org.antlr.runtime3_2_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_2_0.MismatchedTreeNodeException) e;
-			String tokenName = "<unknown>";
-			if (mtne.expecting == Token.EOF) {
-				tokenName = "EOF";
-			} else {
-				tokenName = getTokenNames()[mtne.expecting];
-			}
-			message = "mismatched tree node: " + "xxx" + "; expecting " + tokenName;
+			String expectedTokenName = formatTokenName(mtne.expecting);
+			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
 		} else if (e instanceof org.antlr.runtime3_2_0.NoViableAltException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
 		} else if (e instanceof org.antlr.runtime3_2_0.EarlyExitException) {
@@ -630,21 +593,35 @@ options {
 			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
 		} else if (e instanceof org.antlr.runtime3_2_0.EarlyExitException) {
 			org.antlr.runtime3_2_0.EarlyExitException eee = (org.antlr.runtime3_2_0.EarlyExitException) e;
-			message ="required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
+			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
 		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedSetException) {
 			org.antlr.runtime3_2_0.MismatchedSetException mse = (org.antlr.runtime3_2_0.MismatchedSetException) e;
-			message ="mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
+			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
 		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedNotSetException) {
 			org.antlr.runtime3_2_0.MismatchedNotSetException mse = (org.antlr.runtime3_2_0.MismatchedNotSetException) e;
-			message ="mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
+			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
 		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedRangeException) {
 			org.antlr.runtime3_2_0.MismatchedRangeException mre = (org.antlr.runtime3_2_0.MismatchedRangeException) e;
-			message ="mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
+			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
 		} else if (e instanceof org.antlr.runtime3_2_0.FailedPredicateException) {
 			org.antlr.runtime3_2_0.FailedPredicateException fpe = (org.antlr.runtime3_2_0.FailedPredicateException) e;
-			message ="rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
+			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
 		}
-		addErrorToResource(message, e.index, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
+		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
+	}
+	
+	private String formatTokenName(int tokenType)  {
+		String tokenName = "<unknown>";
+		if (tokenType == org.antlr.runtime3_2_0.Token.EOF) {
+			tokenName = "EOF";
+		} else {
+			if (tokenType < 0) {
+				return tokenName;
+			}
+			tokenName = getTokenNames()[tokenType];
+			tokenName = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.formatTokenName(tokenName);
+		}
+		return tokenName;
 	}
 	
 	public void setOptions(java.util.Map<?,?> options) {
@@ -707,61 +684,6 @@ options {
 		return (T) proxy;
 	}
 	
-	protected void retrieveLayoutInformation(org.eclipse.emf.ecore.EObject element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object) {
-		if (!(syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder) && !(syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword)) {
-			return;
-		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
-		for (org.antlr.runtime3_2_0.CommonToken anonymousToken : anonymousTokens) {
-			layoutInformationAdapter.addLayoutInformation(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, anonymousToken.getStartIndex(), anonymousToken.getText(), ""));
-		}
-		anonymousTokens.clear();
-		int currentPos = getTokenStream().index();
-		if (currentPos == 0) {
-			return;
-		}
-		int endPos = currentPos - 1;
-		for (; endPos >= this.lastPosition2; endPos--) {
-			org.antlr.runtime3_2_0.Token token = getTokenStream().get(endPos);
-			int _channel = token.getChannel();
-			if (_channel != 99) {
-				break;
-			}
-		}
-		StringBuilder hiddenTokenText = new StringBuilder();
-		StringBuilder visibleTokenText = new StringBuilder();
-		org.antlr.runtime3_2_0.CommonToken firstToken = null;
-		for (int pos = this.lastPosition2; pos <= endPos; pos++) {
-			org.antlr.runtime3_2_0.Token token = getTokenStream().get(pos);
-			if (firstToken == null) {
-				firstToken = (org.antlr.runtime3_2_0.CommonToken) token;
-			}
-			int _channel = token.getChannel();
-			if (_channel == 99) {
-				hiddenTokenText.append(token.getText());
-			} else {
-				visibleTokenText.append(token.getText());
-			}
-		}
-		int offset = -1;
-		if (firstToken != null) {
-			offset = firstToken.getStartIndex();
-		}
-		layoutInformationAdapter.addLayoutInformation(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, offset, hiddenTokenText.toString(), visibleTokenText.toString()));
-		this.lastPosition2 = (endPos < 0 ? 0 : endPos + 1);
-	}
-	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
-		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
-			if (adapter instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
-				return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
-			}
-		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
-		element.eAdapters().add(newAdapter);
-		return newAdapter;
-	}
-	
 }
 
 start returns [ org.eclipse.emf.ecore.EObject element = null]
@@ -772,13 +694,16 @@ start returns [ org.eclipse.emf.ecore.EObject element = null]
 		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_1, 0, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_0);
 		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_2, 0, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_0);
 		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_3, 0, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_0);
-		expectedElementsIndexOfLastCompleteElement = expectedElements.size() - 1;
+		expectedElementsIndexOfLastCompleteElement = 0;
 	}
 	(
 		c0 = parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS{ element = c0; }
 		|  		c1 = parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS{ element = c1; }
 	)
-	EOF	
+	EOF	{
+		retrieveLayoutInformation(element, null, null, false);
+	}
+	
 ;
 
 parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.pivot.language.ocl.SimpleNameCS element = null]
@@ -794,7 +719,6 @@ parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.p
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createSimpleNameCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -807,11 +731,12 @@ parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.p
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), resolved);
-					completedElement(resolved, false);
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0_0_0_0, resolved);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0_0_0_0, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 			}
 		}
@@ -841,10 +766,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS retur
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationWithNamespaceCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -860,15 +784,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS retur
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationWithNamespaceCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a1_0 != null) {
 				if (a1_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS__NESTED_NAMESPACE), a1_0);
-					completedElement(a1_0, true);
+					Object value = a1_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS__NESTED_NAMESPACE), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_1, a1_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_1, a1_0, true);
 				copyLocalizationInfos(a1_0, element);
 			}
 		}
@@ -891,15 +815,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS retur
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationWithNamespaceCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS__CONTEXT_DECLARATIONS, a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITH_NAMESPACE_CS__CONTEXT_DECLARATIONS, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_3_0_0_0, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_3_0_0_0, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -926,10 +850,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS retur
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationWithNamespaceCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_5, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 	}
 	{
@@ -951,7 +874,6 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationNestedNamespaceCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -967,11 +889,12 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS, tudresden.ocl20.pivot.pivotmodel.Namespace>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPackageDeclarationNestedNamespaceCSNamespaceReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -992,10 +915,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationNestedNamespaceCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_0, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 			}
 			{
@@ -1011,15 +933,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationNestedNamespaceCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE), a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_1, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_1, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -1057,15 +979,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS re
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPackageDeclarationWithoutNamespaceCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a0_0 != null) {
 					if (a0_0 != null) {
-						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS__CONTEXT_DECLARATIONS, a0_0);
-						completedElement(a0_0, true);
+						Object value = a0_0;
+						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS__CONTEXT_DECLARATIONS, value);
+						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_3_0_0_0, a0_0);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_3_0_0_0, a0_0, true);
 					copyLocalizationInfos(a0_0, element);
 				}
 			}
@@ -1088,10 +1010,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS returns [
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationContextDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -1108,15 +1029,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationContextDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a1_0 != null) {
 				if (a1_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CONTEXT_DECLARATION_CS__OPERATION), a1_0);
-					completedElement(a1_0, true);
+					Object value = a1_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CONTEXT_DECLARATION_CS__OPERATION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_1, a1_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_1, a1_0, true);
 				copyLocalizationInfos(a1_0, element);
 			}
 		}
@@ -1137,15 +1058,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS returns [
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationContextDeclarationCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a2_0 != null) {
 					if (a2_0 != null) {
-						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS, a2_0);
-						completedElement(a2_0, true);
+						Object value = a2_0;
+						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS, value);
+						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_3, a2_0);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_3, a2_0, true);
 					copyLocalizationInfos(a2_0, element);
 				}
 			}
@@ -1172,10 +1093,9 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -1192,15 +1112,15 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a1_0 != null) {
 				if (a1_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME), a1_0);
-					completedElement(a1_0, true);
+					Object value = a1_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_1, a1_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_1, a1_0, true);
 				copyLocalizationInfos(a1_0, element);
 			}
 		}
@@ -1214,10 +1134,9 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 	}
 	{
@@ -1234,7 +1153,6 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -1250,11 +1168,12 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS, tudresden.ocl20.pivot.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getAttributeContextDeclarationCSPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_3, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_3, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
 			}
@@ -1273,10 +1192,9 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_0, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
 			}
 			{
@@ -1295,15 +1213,15 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a5_0 != null) {
 						if (a5_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE), a5_0);
-							completedElement(a5_0, true);
+							Object value = a5_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__TYPE), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_1, a5_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_1, a5_0, true);
 						copyLocalizationInfos(a5_0, element);
 					}
 				}
@@ -1330,15 +1248,15 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a6_0 != null) {
 				if (a6_0 != null) {
-					addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE, a6_0);
-					completedElement(a6_0, true);
+					Object value = a6_0;
+					addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE, value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_6, a6_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_6, a6_0, true);
 				copyLocalizationInfos(a6_0, element);
 			}
 		}
@@ -1362,15 +1280,15 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAttributeContextDeclarationCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a7_0 != null) {
 					if (a7_0 != null) {
-						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE, a7_0);
-						completedElement(a7_0, true);
+						Object value = a7_0;
+						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE, value);
+						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_7, a7_0);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_7, a7_0, true);
 					copyLocalizationInfos(a7_0, element);
 				}
 			}
@@ -1394,10 +1312,9 @@ parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS returns 
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createClassifierContextDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -1416,15 +1333,15 @@ parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS returns 
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createClassifierContextDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a1_0 != null) {
 				if (a1_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME), a1_0);
-					completedElement(a1_0, true);
+					Object value = a1_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__TYPE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_1, a1_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_1, a1_0, true);
 				copyLocalizationInfos(a1_0, element);
 			}
 		}
@@ -1445,15 +1362,15 @@ parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS returns 
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createClassifierContextDeclarationCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a2_0 != null) {
 					if (a2_0 != null) {
-						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__INVARIANTS_AND_DEFINITIONS, a2_0);
-						completedElement(a2_0, true);
+						Object value = a2_0;
+						addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.CLASSIFIER_CONTEXT_DECLARATION_CS__INVARIANTS_AND_DEFINITIONS, value);
+						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_3, a2_0);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_3, a2_0, true);
 					copyLocalizationInfos(a2_0, element);
 				}
 			}
@@ -1480,10 +1397,9 @@ parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pi
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInitValueCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -1495,10 +1411,9 @@ parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pi
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInitValueCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -1541,15 +1456,15 @@ parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pi
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInitValueCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INIT_VALUE_CS__OCL_EXPRESSION), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INIT_VALUE_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_3, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_3, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -1574,10 +1489,9 @@ parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDeriveValueCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -1589,10 +1503,9 @@ parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDeriveValueCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -1635,15 +1548,15 @@ parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDeriveValueCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DERIVE_VALUE_CS__OCL_EXPRESSION), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DERIVE_VALUE_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_3, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_3, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -1668,10 +1581,9 @@ parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInvariantExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -1689,15 +1601,15 @@ parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInvariantExpCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a1_0 != null) {
 					if (a1_0 != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INVARIANT_EXP_CS__NAME), a1_0);
-						completedElement(a1_0, true);
+						Object value = a1_0;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INVARIANT_EXP_CS__NAME), value);
+						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_1, a1_0);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_1, a1_0, true);
 					copyLocalizationInfos(a1_0, element);
 				}
 			}
@@ -1712,10 +1624,9 @@ parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInvariantExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_3, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 	}
 	{
@@ -1758,15 +1669,15 @@ parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInvariantExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3_0 != null) {
 				if (a3_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INVARIANT_EXP_CS__OCL_EXPRESSION), a3_0);
-					completedElement(a3_0, true);
+					Object value = a3_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INVARIANT_EXP_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_4, a3_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_4, a3_0, true);
 				copyLocalizationInfos(a3_0, element);
 			}
 		}
@@ -1799,7 +1710,6 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a0 != null) {
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("STATIC");
@@ -1812,11 +1722,12 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 						}
 						java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 						if (resolved != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), resolved);
-							completedElement(resolved, false);
+							Object value = resolved;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), value);
+							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_0_0_0_0, resolved);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_0_0_0_0, resolved, true);
 						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 					}
 				}
@@ -1837,10 +1748,9 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_1, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -1852,10 +1762,9 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_3, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 	}
 	{
@@ -1872,15 +1781,15 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3_0 != null) {
 				if (a3_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART), a3_0);
-					completedElement(a3_0, true);
+					Object value = a3_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__DEFINITION_EXP_PART), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_4, a3_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_4, a3_0, true);
 				copyLocalizationInfos(a3_0, element);
 			}
 		}
@@ -1910,15 +1819,15 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS returns [tudres
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpPropertyCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_11_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_11_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -1948,15 +1857,15 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudre
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpOperationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OPERATION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -1975,7 +1884,6 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudre
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpOperationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a1 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
@@ -1988,11 +1896,12 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudre
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), resolved);
-					completedElement(resolved, false);
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_1, resolved);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_1, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 			}
 		}
@@ -2037,15 +1946,15 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudre
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createDefinitionExpOperationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_2, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_2, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -2071,10 +1980,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudr
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPreConditionDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -2093,15 +2001,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudr
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPreConditionDeclarationCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a1_0 != null) {
 						if (a1_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PRE_CONDITION_DECLARATION_CS__NAME), a1_0);
-							completedElement(a1_0, true);
+							Object value = a1_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PRE_CONDITION_DECLARATION_CS__NAME), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_1_0_0_0, a1_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_1_0_0_0, a1_0, true);
 						copyLocalizationInfos(a1_0, element);
 					}
 				}
@@ -2122,10 +2030,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudr
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPreConditionDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_3, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 	}
 	{
@@ -2168,15 +2075,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudr
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPreConditionDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3_0 != null) {
 				if (a3_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PRE_CONDITION_DECLARATION_CS__OCL_EXPRESSION), a3_0);
-					completedElement(a3_0, true);
+					Object value = a3_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PRE_CONDITION_DECLARATION_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_4, a3_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_4, a3_0, true);
 				copyLocalizationInfos(a3_0, element);
 			}
 		}
@@ -2202,10 +2109,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tud
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPostConditionDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -2224,15 +2130,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tud
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPostConditionDeclarationCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a1_0 != null) {
 						if (a1_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.POST_CONDITION_DECLARATION_CS__NAME), a1_0);
-							completedElement(a1_0, true);
+							Object value = a1_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.POST_CONDITION_DECLARATION_CS__NAME), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_1_0_0_0, a1_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_1_0_0_0, a1_0, true);
 						copyLocalizationInfos(a1_0, element);
 					}
 				}
@@ -2253,10 +2159,9 @@ parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tud
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPostConditionDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_3, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 	}
 	{
@@ -2299,15 +2204,15 @@ parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tud
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPostConditionDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3_0 != null) {
 				if (a3_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.POST_CONDITION_DECLARATION_CS__OCL_EXPRESSION), a3_0);
-					completedElement(a3_0, true);
+					Object value = a3_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.POST_CONDITION_DECLARATION_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_4, a3_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_4, a3_0, true);
 				copyLocalizationInfos(a3_0, element);
 			}
 		}
@@ -2333,10 +2238,9 @@ parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.oc
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBodyDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -2355,15 +2259,15 @@ parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.oc
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBodyDeclarationCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a1_0 != null) {
 						if (a1_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BODY_DECLARATION_CS__NAME), a1_0);
-							completedElement(a1_0, true);
+							Object value = a1_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BODY_DECLARATION_CS__NAME), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_1_0_0_0, a1_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_1_0_0_0, a1_0, true);
 						copyLocalizationInfos(a1_0, element);
 					}
 				}
@@ -2384,10 +2288,9 @@ parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.oc
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBodyDeclarationCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_3, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 	}
 	{
@@ -2430,15 +2333,15 @@ parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.oc
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBodyDeclarationCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3_0 != null) {
 				if (a3_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BODY_DECLARATION_CS__OCL_EXPRESSION), a3_0);
-					completedElement(a3_0, true);
+					Object value = a3_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BODY_DECLARATION_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_4, a3_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_4, a3_0, true);
 				copyLocalizationInfos(a3_0, element);
 			}
 		}
@@ -2468,15 +2371,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -2490,10 +2393,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -2510,7 +2412,6 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -2526,11 +2427,12 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationDefinitionCSOperationReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_4, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_4, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
 			}
@@ -2545,10 +2447,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_6, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_6, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 	}
 	{
@@ -2567,15 +2468,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a4_0 != null) {
 						if (a4_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__PARAMETERS, a4_0);
-							completedElement(a4_0, true);
+							Object value = a4_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__PARAMETERS, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_0, a4_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_0, a4_0, true);
 						copyLocalizationInfos(a4_0, element);
 					}
 				}
@@ -2592,10 +2493,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 						if (element == null) {
 							element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 							incompleteObjects.push(element);
-							// initialize boolean attributes
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_1, null);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_1, null, true);
 						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
 					}
 					{
@@ -2611,15 +2511,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 							if (element == null) {
 								element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 								incompleteObjects.push(element);
-								// initialize boolean attributes
 							}
 							if (a6_0 != null) {
 								if (a6_0 != null) {
-									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__PARAMETERS, a6_0);
-									completedElement(a6_0, true);
+									Object value = a6_0;
+									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__PARAMETERS, value);
+									completedElement(value, true);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_2, a6_0);
+								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_2, a6_0, true);
 								copyLocalizationInfos(a6_0, element);
 							}
 						}
@@ -2649,10 +2549,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_10, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_10, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 	}
 	{
@@ -2669,10 +2568,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_0, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
 			}
 			{
@@ -2691,15 +2589,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInContextCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a9_0 != null) {
 						if (a9_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__RETURN_TYPE), a9_0);
-							completedElement(a9_0, true);
+							Object value = a9_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__RETURN_TYPE), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_1, a9_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_1, a9_0, true);
 						copyLocalizationInfos(a9_0, element);
 					}
 				}
@@ -2735,7 +2633,6 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -2751,11 +2648,12 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationDefinitionCSOperationReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -2770,10 +2668,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_1, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -2792,15 +2689,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__PARAMETERS, a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__PARAMETERS, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_0, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_0, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -2817,10 +2714,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 						if (element == null) {
 							element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 							incompleteObjects.push(element);
-							// initialize boolean attributes
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_0, null);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_0, null, true);
 						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 					}
 					{
@@ -2836,15 +2732,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 							if (element == null) {
 								element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 								incompleteObjects.push(element);
-								// initialize boolean attributes
 							}
 							if (a4_0 != null) {
 								if (a4_0 != null) {
-									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__PARAMETERS, a4_0);
-									completedElement(a4_0, true);
+									Object value = a4_0;
+									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__PARAMETERS, value);
+									completedElement(value, true);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_1, a4_0);
+								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_1, a4_0, true);
 								copyLocalizationInfos(a4_0, element);
 							}
 						}
@@ -2874,10 +2770,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_3, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_3, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
 	}
 	{
@@ -2892,10 +2787,9 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_0, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
 			}
 			{
@@ -2914,15 +2808,15 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationDefinitionInDefCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a7_0 != null) {
 						if (a7_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__RETURN_TYPE), a7_0);
-							completedElement(a7_0, true);
+							Object value = a7_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__RETURN_TYPE), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_1, a7_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_1, a7_0, true);
 						copyLocalizationInfos(a7_0, element);
 					}
 				}
@@ -2954,7 +2848,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createParameterCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -2970,11 +2863,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.ParameterCS, tudresden.ocl20.pivot.pivotmodel.Parameter>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getParameterCSParameterReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -2989,10 +2883,9 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createParameterCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_1, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -3011,15 +2904,15 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createParameterCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER_TYPE), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER_TYPE), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_2, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_2, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -3048,7 +2941,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a0 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
@@ -3064,11 +2956,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_0_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_0_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 				}
@@ -3089,7 +2982,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a1 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NEQUALITY_OPERATOR");
@@ -3105,11 +2997,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_1_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_1_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, proxy);
 				}
@@ -3130,7 +3023,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a2 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NOT_OPERATOR");
@@ -3146,11 +3038,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_2_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_2_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
 				}
@@ -3171,7 +3064,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a3 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("AND_OPERATOR");
@@ -3187,11 +3079,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_3_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_3_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
 				}
@@ -3212,7 +3105,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a4 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("OR_OPERATOR");
@@ -3228,11 +3120,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_4_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_4_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, proxy);
 				}
@@ -3253,7 +3146,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a5 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("XOR_OPERATOR");
@@ -3269,11 +3161,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_5_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_5_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, proxy);
 				}
@@ -3294,7 +3187,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a6 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IMPLIES_OPERATOR");
@@ -3310,11 +3202,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_6_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_6_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, proxy);
 				}
@@ -3335,7 +3228,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a7 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -3351,11 +3243,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					collectHiddenTokens(element);
 					registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), resolved, proxy);
 					if (proxy != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), proxy);
-						completedElement(proxy, false);
+						Object value = proxy;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_7_0, proxy);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_7_0, proxy, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, proxy);
 				}
@@ -3376,10 +3269,9 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
 	}
 	{
@@ -3425,15 +3317,15 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a9_0 != null) {
 						if (a9_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__ARGUMENTS, a9_0);
-							completedElement(a9_0, true);
+							Object value = a9_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__ARGUMENTS, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_1, a9_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_1, a9_0, true);
 						copyLocalizationInfos(a9_0, element);
 					}
 				}
@@ -3450,10 +3342,9 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 						if (element == null) {
 							element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 							incompleteObjects.push(element);
-							// initialize boolean attributes
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_0, null);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_0, null, true);
 						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
 					}
 					{
@@ -3496,15 +3387,15 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 							if (element == null) {
 								element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 								incompleteObjects.push(element);
-								// initialize boolean attributes
 							}
 							if (a11_0 != null) {
 								if (a11_0 != null) {
-									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__ARGUMENTS, a11_0);
-									completedElement(a11_0, true);
+									Object value = a11_0;
+									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__ARGUMENTS, value);
+									completedElement(value, true);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_1, a11_0);
+								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_1, a11_0, true);
 								copyLocalizationInfos(a11_0, element);
 							}
 						}
@@ -3534,10 +3425,9 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitOperationCallCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_5, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
 	}
 	{
@@ -3598,7 +3488,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitPropertyCallCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -3614,11 +3503,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPropertyCallBaseExpCSPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -3679,7 +3569,6 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createImplicitPropertyCallCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a1 != null) {
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IS_MARKED_PRE");
@@ -3692,11 +3581,12 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 						}
 						java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 						if (resolved != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), resolved);
-							completedElement(resolved, false);
+							Object value = resolved;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), value);
+							completedElement(value, false);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_1_0_0_1, resolved);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_1_0_0_1, resolved, true);
 						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 					}
 				}
@@ -3804,7 +3694,6 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("ITERATOR_NAME");
@@ -3817,11 +3706,12 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), resolved);
-					completedElement(resolved, false);
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_0, resolved);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_0, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 			}
 		}
@@ -3835,10 +3725,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -3884,15 +3773,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_VARIABLES, a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_VARIABLES, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_1, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_1, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -3909,10 +3798,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 						if (element == null) {
 							element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 							incompleteObjects.push(element);
-							// initialize boolean attributes
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_1, null);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_1, null, true);
 						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 					}
 					{
@@ -3928,15 +3816,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 							if (element == null) {
 								element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 								incompleteObjects.push(element);
-								// initialize boolean attributes
 							}
 							if (a4_0 != null) {
 								if (a4_0 != null) {
-									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_VARIABLES, a4_0);
-									completedElement(a4_0, true);
+									Object value = a4_0;
+									addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_VARIABLES, value);
+									completedElement(value, true);
 								}
 								collectHiddenTokens(element);
-								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_2, a4_0);
+								retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_2, a4_0, true);
 								copyLocalizationInfos(a4_0, element);
 							}
 						}
@@ -3957,10 +3845,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_3, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_3, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
 			}
 			{
@@ -4037,15 +3924,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a6_0 != null) {
 				if (a6_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__BODY_EXPRESSION), a6_0);
-					completedElement(a6_0, true);
+					Object value = a6_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__BODY_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_5, a6_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_5, a6_0, true);
 				copyLocalizationInfos(a6_0, element);
 			}
 		}
@@ -4059,10 +3946,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_7, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_7, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 	}
 	{
@@ -4118,10 +4004,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -4133,10 +4018,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -4154,15 +4038,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__ITERATOR_VARIABLE), a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__ITERATOR_VARIABLE), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_0, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_0, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -4176,10 +4060,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_2, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_2, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 			}
 			{
@@ -4202,15 +4085,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a4_0 != null) {
 				if (a4_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__RESULT_VARIABLE), a4_0);
-					completedElement(a4_0, true);
+					Object value = a4_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__RESULT_VARIABLE), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_4, a4_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_4, a4_0, true);
 				copyLocalizationInfos(a4_0, element);
 			}
 		}
@@ -4224,10 +4107,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_5, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
 	}
 	{
@@ -4270,15 +4152,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a6_0 != null) {
 				if (a6_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__BODY_EXPRESSION), a6_0);
-					completedElement(a6_0, true);
+					Object value = a6_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATE_EXP_CS__BODY_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_6, a6_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_6, a6_0, true);
 				copyLocalizationInfos(a6_0, element);
 			}
 		}
@@ -4292,10 +4174,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIterateExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_8, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_8, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 	}
 	{
@@ -4355,15 +4236,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS returns [tudresde
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpVariableCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -4382,10 +4263,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS returns [tudresde
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpVariableCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_0, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 			}
 			{
@@ -4404,15 +4284,15 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS returns [tudresde
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIteratorExpVariableCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME), a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_1, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_1, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -4448,7 +4328,6 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS returns [tudresden
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTypePathNameSimpleCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -4464,11 +4343,12 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS returns [tudresden
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS, tudresden.ocl20.pivot.pivotmodel.Type>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypePathNameSimpleCSTypeNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -4508,7 +4388,6 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTypePathNameNestedCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -4524,11 +4403,12 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS, tudresden.ocl20.pivot.pivotmodel.Namespace>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getTypePathNameNestedCSNamespaceReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -4543,10 +4423,9 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTypePathNameNestedCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -4563,15 +4442,15 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTypePathNameNestedCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_4, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_4, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -4605,10 +4484,9 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleTypeCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_0, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_0, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 	}
 	{
@@ -4620,10 +4498,9 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleTypeCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_1, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -4641,15 +4518,15 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleTypeCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a2_0 != null) {
 					if (a2_0 != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST), a2_0);
-						completedElement(a2_0, true);
+						Object value = a2_0;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST), value);
+						completedElement(value, true);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_3, a2_0);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_3, a2_0, true);
 					copyLocalizationInfos(a2_0, element);
 				}
 			}
@@ -4664,10 +4541,9 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleTypeCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_5, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_5, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 	}
 	{
@@ -4726,7 +4602,6 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionTypeIdentifierCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("COLLECTION_TYPES");
@@ -4742,11 +4617,12 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				collectHiddenTokens(element);
 				registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS, tudresden.ocl20.pivot.pivotmodel.Type>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getCollectionTypeIdentifierCSTypeNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), resolved, proxy);
 				if (proxy != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), proxy);
-					completedElement(proxy, false);
+					Object value = proxy;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_0, proxy);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_0, proxy, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 			}
@@ -4799,10 +4675,9 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionTypeIdentifierCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_1, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_1, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 			}
 			{
@@ -4821,15 +4696,15 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionTypeIdentifierCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE), a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_3, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_3, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -4843,10 +4718,9 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionTypeIdentifierCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_5, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_5, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 			}
 			{
@@ -4945,15 +4819,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS return
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithoutInitCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS__VARIABLE_NAME), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS__VARIABLE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -4967,10 +4841,9 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS return
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithoutInitCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -4989,15 +4862,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS return
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithoutInitCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS__TYPE_NAME), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_CS__TYPE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_2, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_2, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -5022,15 +4895,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS re
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithoutInitListCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS, a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS, value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -5047,10 +4920,9 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS re
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithoutInitListCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_1, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_1, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 			}
 			{
@@ -5066,15 +4938,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS re
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithoutInitListCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS, a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_2, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_2, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -5107,15 +4979,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__VARIABLE_NAME), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__VARIABLE_NAME), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -5132,10 +5004,9 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_0, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_0, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 			}
 			{
@@ -5154,15 +5025,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__TYPE_NAME), a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__TYPE_NAME), value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_1, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_1, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -5188,7 +5059,6 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a3 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
@@ -5201,11 +5071,12 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), resolved);
-					completedElement(resolved, false);
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_2, resolved);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_2, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
 			}
 		}
@@ -5250,15 +5121,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a4_0 != null) {
 				if (a4_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__INITIALIZATION), a4_0);
-					completedElement(a4_0, true);
+					Object value = a4_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__INITIALIZATION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_3, a4_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_3, a4_0, true);
 				copyLocalizationInfos(a4_0, element);
 			}
 		}
@@ -5293,15 +5164,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS retur
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitListCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS__VARIABLE_DECLARATIONS, a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS__VARIABLE_DECLARATIONS, value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -5318,10 +5189,9 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS retur
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitListCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_1, null);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_1, null, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 			}
 			{
@@ -5337,15 +5207,15 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS retur
 					if (element == null) {
 						element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createVariableDeclarationWithInitListCS();
 						incompleteObjects.push(element);
-						// initialize boolean attributes
 					}
 					if (a2_0 != null) {
 						if (a2_0 != null) {
-							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS__VARIABLE_DECLARATIONS, a2_0);
-							completedElement(a2_0, true);
+							Object value = a2_0;
+							addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_LIST_CS__VARIABLE_DECLARATIONS, value);
+							completedElement(value, true);
 						}
 						collectHiddenTokens(element);
-						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_2, a2_0);
+						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_2, a2_0, true);
 						copyLocalizationInfos(a2_0, element);
 					}
 				}
@@ -5378,15 +5248,15 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS returns [tudresden.oc
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionRangeCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_RANGE_CS__FROM), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_RANGE_CS__FROM), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -5400,10 +5270,9 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS returns [tudresden.oc
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionRangeCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_2, null);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_2, null, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 	}
 	{
@@ -5446,15 +5315,15 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS returns [tudresden.oc
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionRangeCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a2_0 != null) {
 				if (a2_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_RANGE_CS__TO), a2_0);
-					completedElement(a2_0, true);
+					Object value = a2_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_RANGE_CS__TO), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_4, a2_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_4, a2_0, true);
 				copyLocalizationInfos(a2_0, element);
 			}
 		}
@@ -5479,15 +5348,15 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS returns 
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralPartsOclExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0_0 != null) {
 				if (a0_0 != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_PARTS_OCL_EXP_CS__OCL_EXPRESSION), a0_0);
-					completedElement(a0_0, true);
+					Object value = a0_0;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_PARTS_OCL_EXP_CS__OCL_EXPRESSION), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_0, a0_0);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50_0_0_0, a0_0, true);
 				copyLocalizationInfos(a0_0, element);
 			}
 		}
@@ -5516,7 +5385,6 @@ parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclE
 				if (element == null) {
 					element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalImpliesOperationCallExpCS();
 					incompleteObjects.push(element);
-					// initialize boolean attributes
 				}
 				if (a0 != null) {
 					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IMPLIES_OPERATOR");
@@ -5529,11 +5397,12 @@ parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclE
 					}
 					java.lang.String resolved = (java.lang.String)resolvedObject;
 					if (resolved != null) {
-						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-						completedElement(resolved, false);
+						Object value = resolved;
+						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+						completedElement(value, false);
 					}
 					collectHiddenTokens(element);
-					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_1, resolved);
+					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_1, resolved, true);
 					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 				}
 			}
@@ -5577,15 +5446,15 @@ parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclE
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalImpliesOperationCallExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (leftArg != null) {
 				if (leftArg != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-					completedElement(leftArg, true);
+					Object value = leftArg;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__SOURCE), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_0, leftArg);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_0, leftArg, true);
 				copyLocalizationInfos(leftArg, element);
 			}
 		}
@@ -5596,15 +5465,15 @@ parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclE
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalImpliesOperationCallExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (rightArg != null) {
 				if (rightArg != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-					completedElement(rightArg, true);
+					Object value = rightArg;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__TARGET), value);
+					completedElement(value, true);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_2, rightArg);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_2, rightArg, true);
 				copyLocalizationInfos(rightArg, element);
 			}
 		}
@@ -5630,7 +5499,6 @@ leftArg = parseop_OclExpressionCS_level_6((
 			if (element == null) {
 				element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalXorOperationCallExpCS();
 				incompleteObjects.push(element);
-				// initialize boolean attributes
 			}
 			if (a0 != null) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("XOR_OPERATOR");
@@ -5643,11 +5511,12 @@ leftArg = parseop_OclExpressionCS_level_6((
 				}
 				java.lang.String resolved = (java.lang.String)resolvedObject;
 				if (resolved != null) {
-					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-					completedElement(resolved, false);
+					Object value = resolved;
+					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+					completedElement(value, false);
 				}
 				collectHiddenTokens(element);
-				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_1, resolved);
+				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_1, resolved, true);
 				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 			}
 		}
@@ -5691,15 +5560,15 @@ leftArg = parseop_OclExpressionCS_level_6((
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalXorOperationCallExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		if (leftArg != null) {
 			if (leftArg != null) {
-				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-				completedElement(leftArg, true);
+				Object value = leftArg;
+				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__SOURCE), value);
+				completedElement(value, true);
 			}
 			collectHiddenTokens(element);
-			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_0, leftArg);
+			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_0, leftArg, true);
 			copyLocalizationInfos(leftArg, element);
 		}
 	}
@@ -5710,15 +5579,15 @@ leftArg = parseop_OclExpressionCS_level_6((
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalXorOperationCallExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		if (rightArg != null) {
 			if (rightArg != null) {
-				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-				completedElement(rightArg, true);
+				Object value = rightArg;
+				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__TARGET), value);
+				completedElement(value, true);
 			}
 			collectHiddenTokens(element);
-			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_2, rightArg);
+			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_2, rightArg, true);
 			copyLocalizationInfos(rightArg, element);
 		}
 	}
@@ -5744,7 +5613,6 @@ leftArg = parseop_OclExpressionCS_level_7((
 		if (element == null) {
 			element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalOrOperationCallExpCS();
 			incompleteObjects.push(element);
-			// initialize boolean attributes
 		}
 		if (a0 != null) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("OR_OPERATOR");
@@ -5757,11 +5625,12 @@ leftArg = parseop_OclExpressionCS_level_7((
 			}
 			java.lang.String resolved = (java.lang.String)resolvedObject;
 			if (resolved != null) {
-				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-				completedElement(resolved, false);
+				Object value = resolved;
+				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+				completedElement(value, false);
 			}
 			collectHiddenTokens(element);
-			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_1, resolved);
+			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_1, resolved, true);
 			copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 		}
 	}
@@ -5805,15 +5674,15 @@ rightArg = parseop_OclExpressionCS_level_7{
 	if (element == null) {
 		element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalOrOperationCallExpCS();
 		incompleteObjects.push(element);
-		// initialize boolean attributes
 	}
 	if (leftArg != null) {
 		if (leftArg != null) {
-			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-			completedElement(leftArg, true);
+			Object value = leftArg;
+			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__SOURCE), value);
+			completedElement(value, true);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_0, leftArg);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_0, leftArg, true);
 		copyLocalizationInfos(leftArg, element);
 	}
 }
@@ -5824,15 +5693,15 @@ rightArg = parseop_OclExpressionCS_level_7{
 	if (element == null) {
 		element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalOrOperationCallExpCS();
 		incompleteObjects.push(element);
-		// initialize boolean attributes
 	}
 	if (rightArg != null) {
 		if (rightArg != null) {
-			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-			completedElement(rightArg, true);
+			Object value = rightArg;
+			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__TARGET), value);
+			completedElement(value, true);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_2, rightArg);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_2, rightArg, true);
 		copyLocalizationInfos(rightArg, element);
 	}
 }
@@ -5858,7 +5727,6 @@ a0 = AND_OPERATOR
 	if (element == null) {
 		element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalAndOperationCallExpCS();
 		incompleteObjects.push(element);
-		// initialize boolean attributes
 	}
 	if (a0 != null) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("AND_OPERATOR");
@@ -5871,11 +5739,12 @@ a0 = AND_OPERATOR
 		}
 		java.lang.String resolved = (java.lang.String)resolvedObject;
 		if (resolved != null) {
-			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-			completedElement(resolved, false);
+			Object value = resolved;
+			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+			completedElement(value, false);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_1, resolved);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_1, resolved, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 	}
 }
@@ -5919,15 +5788,15 @@ if (terminateParsing) {
 if (element == null) {
 	element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalAndOperationCallExpCS();
 	incompleteObjects.push(element);
-	// initialize boolean attributes
 }
 if (leftArg != null) {
 	if (leftArg != null) {
-		element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-		completedElement(leftArg, true);
+		Object value = leftArg;
+		element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__SOURCE), value);
+		completedElement(value, true);
 	}
 	collectHiddenTokens(element);
-	retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_0, leftArg);
+	retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_0, leftArg, true);
 	copyLocalizationInfos(leftArg, element);
 }
 }
@@ -5938,15 +5807,15 @@ if (terminateParsing) {
 if (element == null) {
 	element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalAndOperationCallExpCS();
 	incompleteObjects.push(element);
-	// initialize boolean attributes
 }
 if (rightArg != null) {
 	if (rightArg != null) {
-		element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-		completedElement(rightArg, true);
+		Object value = rightArg;
+		element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__TARGET), value);
+		completedElement(value, true);
 	}
 	collectHiddenTokens(element);
-	retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_2, rightArg);
+	retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_2, rightArg, true);
 	copyLocalizationInfos(rightArg, element);
 }
 }
@@ -5973,7 +5842,6 @@ a0 = EQUALITY_OPERATOR
 	if (element == null) {
 		element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEqualityOperationCallExpCS();
 		incompleteObjects.push(element);
-		// initialize boolean attributes
 	}
 	if (a0 != null) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
@@ -5986,11 +5854,12 @@ a0 = EQUALITY_OPERATOR
 		}
 		java.lang.String resolved = (java.lang.String)resolvedObject;
 		if (resolved != null) {
-			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-			completedElement(resolved, false);
+			Object value = resolved;
+			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+			completedElement(value, false);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_0_0, resolved);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_0_0, resolved, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 	}
 }
@@ -6037,7 +5906,6 @@ a1 = NEQUALITY_OPERATOR
 	if (element == null) {
 		element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEqualityOperationCallExpCS();
 		incompleteObjects.push(element);
-		// initialize boolean attributes
 	}
 	if (a1 != null) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NEQUALITY_OPERATOR");
@@ -6050,11 +5918,12 @@ a1 = NEQUALITY_OPERATOR
 		}
 		java.lang.String resolved = (java.lang.String)resolvedObject;
 		if (resolved != null) {
-			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-			completedElement(resolved, false);
+			Object value = resolved;
+			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+			completedElement(value, false);
 		}
 		collectHiddenTokens(element);
-		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_1_0, resolved);
+		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_1_0, resolved, true);
 		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 	}
 }
@@ -6131,15 +6000,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEqualityOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (leftArg != null) {
 if (leftArg != null) {
-	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-	completedElement(leftArg, true);
+	Object value = leftArg;
+	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__SOURCE), value);
+	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_0, leftArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_0, leftArg, true);
 copyLocalizationInfos(leftArg, element);
 }
 }
@@ -6150,15 +6019,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEqualityOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (rightArg != null) {
 if (rightArg != null) {
-	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-	completedElement(rightArg, true);
+	Object value = rightArg;
+	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__TARGET), value);
+	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_2, rightArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_2, rightArg, true);
 copyLocalizationInfos(rightArg, element);
 }
 }
@@ -6184,7 +6053,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRelationalOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("RELATIONAL_OPERATOR");
@@ -6197,11 +6065,12 @@ if (resolvedObject == null) {
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-	completedElement(resolved, false);
+	Object value = resolved;
+	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+	completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_1, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_1, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -6245,15 +6114,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRelationalOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (leftArg != null) {
 if (leftArg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-completedElement(leftArg, true);
+Object value = leftArg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__SOURCE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_0, leftArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_0, leftArg, true);
 copyLocalizationInfos(leftArg, element);
 }
 }
@@ -6264,15 +6133,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRelationalOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (rightArg != null) {
 if (rightArg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-completedElement(rightArg, true);
+Object value = rightArg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__TARGET), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_2, rightArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_2, rightArg, true);
 copyLocalizationInfos(rightArg, element);
 }
 }
@@ -6298,7 +6167,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAdditiveOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("ADDITIVE_OPERATOR");
@@ -6311,11 +6179,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_1, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_1, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -6359,15 +6228,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAdditiveOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (leftArg != null) {
 if (leftArg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-completedElement(leftArg, true);
+Object value = leftArg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__SOURCE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_0, leftArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_0, leftArg, true);
 copyLocalizationInfos(leftArg, element);
 }
 }
@@ -6378,15 +6247,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createAdditiveOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (rightArg != null) {
 if (rightArg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-completedElement(rightArg, true);
+Object value = rightArg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__TARGET), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_2, rightArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_2, rightArg, true);
 copyLocalizationInfos(rightArg, element);
 }
 }
@@ -6412,7 +6281,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createMultOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("MULT_OPERATOR");
@@ -6425,11 +6293,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_1, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_1, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -6473,15 +6342,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createMultOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (leftArg != null) {
 if (leftArg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__SOURCE), leftArg);
-completedElement(leftArg, true);
+Object value = leftArg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__SOURCE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_0, leftArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_0, leftArg, true);
 copyLocalizationInfos(leftArg, element);
 }
 }
@@ -6492,15 +6361,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createMultOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (rightArg != null) {
 if (rightArg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__TARGET), rightArg);
-completedElement(rightArg, true);
+Object value = rightArg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__TARGET), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_2, rightArg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_2, rightArg, true);
 copyLocalizationInfos(rightArg, element);
 }
 }
@@ -6523,7 +6392,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createUnaryOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("ADDITIVE_OPERATOR");
@@ -6536,11 +6404,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -6584,15 +6453,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createUnaryOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (arg != null) {
 if (arg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET), arg);
-completedElement(arg, true);
+Object value = arg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_2, arg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_2, arg, true);
 copyLocalizationInfos(arg, element);
 }
 }
@@ -6606,7 +6475,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalNotOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NOT_OPERATOR");
@@ -6619,11 +6487,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -6667,15 +6536,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLogicalNotOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (arg != null) {
 if (arg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET), arg);
-completedElement(arg, true);
+Object value = arg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_2, arg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_2, arg, true);
 copyLocalizationInfos(arg, element);
 }
 }
@@ -6698,7 +6567,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNavigationCallExp();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NAVIGATION_OPERATOR");
@@ -6711,11 +6579,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, resolved);
-completedElement(resolved, false);
+Object value = resolved;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_2, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_2, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -6743,15 +6612,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNavigationCallExp();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1_0 != null) {
 if (a1_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__FEATURE_CALLS, a1_0);
-completedElement(a1_0, true);
+Object value = a1_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__FEATURE_CALLS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_4, a1_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_4, a1_0, true);
 copyLocalizationInfos(a1_0, element);
 }
 }
@@ -6811,7 +6680,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNavigationCallExp();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NAVIGATION_OPERATOR");
@@ -6824,11 +6692,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, resolved);
-completedElement(resolved, false);
+Object value = resolved;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_1, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_1, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 }
 }
@@ -6856,15 +6725,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNavigationCallExp();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a3_0 != null) {
 if (a3_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__FEATURE_CALLS, a3_0);
-completedElement(a3_0, true);
+Object value = a3_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__FEATURE_CALLS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_3, a3_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_3, a3_0, true);
 copyLocalizationInfos(a3_0, element);
 }
 }
@@ -6966,15 +6835,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNavigationCallExp();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (arg != null) {
 if (arg != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__SOURCE), arg);
-completedElement(arg, true);
+Object value = arg;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__SOURCE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_0, arg);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_0, arg, true);
 copyLocalizationInfos(arg, element);
 }
 }
@@ -7021,7 +6890,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("EQUALITY_OPERATOR");
@@ -7037,11 +6905,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_0_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_0_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 }
@@ -7063,7 +6932,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NEQUALITY_OPERATOR");
@@ -7079,11 +6947,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_1_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_1_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, proxy);
 }
@@ -7105,7 +6974,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NOT_OPERATOR");
@@ -7121,11 +6989,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_2_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_2_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
 }
@@ -7147,7 +7016,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a3 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("AND_OPERATOR");
@@ -7163,11 +7031,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_3_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_3_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
 }
@@ -7189,7 +7058,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a4 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("OR_OPERATOR");
@@ -7205,11 +7073,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_4_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_4_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, proxy);
 }
@@ -7231,7 +7100,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a5 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("XOR_OPERATOR");
@@ -7247,11 +7115,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_5_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_5_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, proxy);
 }
@@ -7273,7 +7142,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a6 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IMPLIES_OPERATOR");
@@ -7289,11 +7157,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_6_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_6_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, proxy);
 }
@@ -7315,7 +7184,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a7 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -7331,11 +7199,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getOperationCallBaseExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_7_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_7_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, proxy);
 }
@@ -7365,7 +7234,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a8 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IS_MARKED_PRE");
@@ -7378,11 +7246,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a8, element);
 }
 }
@@ -7403,10 +7272,9 @@ a9 = '(' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_3, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
 }
 {
@@ -7452,15 +7320,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a10_0 != null) {
 if (a10_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__ARGUMENTS, a10_0);
-completedElement(a10_0, true);
+Object value = a10_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__ARGUMENTS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_1, a10_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_1, a10_0, true);
 copyLocalizationInfos(a10_0, element);
 }
 }
@@ -7477,10 +7345,9 @@ a11 = ',' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
 }
 {
@@ -7523,15 +7390,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a12_0 != null) {
 if (a12_0 != null) {
-	addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__ARGUMENTS, a12_0);
-	completedElement(a12_0, true);
+	Object value = a12_0;
+	addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__ARGUMENTS, value);
+	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_1, a12_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_1, a12_0, true);
 copyLocalizationInfos(a12_0, element);
 }
 }
@@ -7561,10 +7428,9 @@ a13 = ')' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createOperationCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a13, element);
 }
 {
@@ -7624,15 +7490,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0_0 != null) {
 if (a0_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME), a0_0);
-completedElement(a0_0, true);
+Object value = a0_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_0, a0_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
@@ -7646,10 +7512,9 @@ a1 = '::' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_2, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_2, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 }
 {
@@ -7666,7 +7531,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -7682,11 +7546,12 @@ tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS, tudresden.ocl20.pivot.pivotmodel.Operation>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getStaticOperationCallExpCSOperationNameReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_4, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_4, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
 }
@@ -7701,10 +7566,9 @@ a3 = '(' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_6, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_6, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 }
 {
@@ -7750,15 +7614,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a4_0 != null) {
 if (a4_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS, a4_0);
-completedElement(a4_0, true);
+Object value = a4_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_1, a4_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_1, a4_0, true);
 copyLocalizationInfos(a4_0, element);
 }
 }
@@ -7775,10 +7639,9 @@ a5 = ',' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
 }
 {
@@ -7821,15 +7684,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a6_0 != null) {
 if (a6_0 != null) {
-	addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS, a6_0);
-	completedElement(a6_0, true);
+	Object value = a6_0;
+	addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS, value);
+	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_1, a6_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_1, a6_0, true);
 copyLocalizationInfos(a6_0, element);
 }
 }
@@ -7859,10 +7722,9 @@ a7 = ')' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStaticOperationCallExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_9, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_9, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
 }
 {
@@ -7922,15 +7784,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0_0 != null) {
 if (a0_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME), a0_0);
-completedElement(a0_0, true);
+Object value = a0_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__TYPE_NAME), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_0, a0_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
@@ -7944,10 +7806,9 @@ a1 = '::' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_1, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 }
 {
@@ -7964,7 +7825,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -7980,11 +7840,12 @@ tudresden.ocl20.pivot.pivotmodel.NamedElement proxy = tudresden.ocl20.pivot.pivo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS, tudresden.ocl20.pivot.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getEnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_2, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_2, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
 }
@@ -8043,10 +7904,9 @@ a0 = 'Tuple' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 }
 {
@@ -8058,10 +7918,9 @@ a1 = '{' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_1, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 }
 {
@@ -8077,15 +7936,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2_0 != null) {
 if (a2_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_LITERAL_EXP_CS__VARIABLE_DECLARATIONS), a2_0);
-completedElement(a2_0, true);
+Object value = a2_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_LITERAL_EXP_CS__VARIABLE_DECLARATIONS), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_2, a2_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_2, a2_0, true);
 copyLocalizationInfos(a2_0, element);
 }
 }
@@ -8099,10 +7958,9 @@ a3 = '}' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_3, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 }
 {
@@ -8158,10 +8016,9 @@ a0 = 'if' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 }
 {
@@ -8204,15 +8061,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1_0 != null) {
 if (a1_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__CONDITION), a1_0);
-completedElement(a1_0, true);
+Object value = a1_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__CONDITION), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_1, a1_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_1, a1_0, true);
 copyLocalizationInfos(a1_0, element);
 }
 }
@@ -8226,10 +8083,9 @@ a2 = 'then' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_3, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 }
 {
@@ -8272,15 +8128,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a3_0 != null) {
 if (a3_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__THEN_BRANCH), a3_0);
-completedElement(a3_0, true);
+Object value = a3_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__THEN_BRANCH), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_5, a3_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_5, a3_0, true);
 copyLocalizationInfos(a3_0, element);
 }
 }
@@ -8294,10 +8150,9 @@ a4 = 'else' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_7, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_7, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
 }
 {
@@ -8340,15 +8195,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a5_0 != null) {
 if (a5_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__ELSE_BRANCH), a5_0);
-completedElement(a5_0, true);
+Object value = a5_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IF_EXP_CS__ELSE_BRANCH), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_9, a5_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_9, a5_0, true);
 copyLocalizationInfos(a5_0, element);
 }
 }
@@ -8362,10 +8217,9 @@ a6 = 'endif' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_11, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_11, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
 }
 {
@@ -8425,15 +8279,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0_0 != null) {
 if (a0_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_TYPE), a0_0);
-completedElement(a0_0, true);
+Object value = a0_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_TYPE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_0, a0_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
@@ -8447,10 +8301,9 @@ a1 = '{' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
 }
 {
@@ -8496,15 +8349,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2_0 != null) {
 if (a2_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_LITERAL_PARTS, a2_0);
-completedElement(a2_0, true);
+Object value = a2_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_LITERAL_PARTS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_0, a2_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_0, a2_0, true);
 copyLocalizationInfos(a2_0, element);
 }
 }
@@ -8521,10 +8374,9 @@ a3 = ',' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_1, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
 }
 {
@@ -8567,15 +8419,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a4_0 != null) {
 if (a4_0 != null) {
-	addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_LITERAL_PARTS, a4_0);
-	completedElement(a4_0, true);
+	Object value = a4_0;
+	addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_LITERAL_EXP_CS__COLLECTION_LITERAL_PARTS, value);
+	completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_2, a4_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_2, a4_0, true);
 copyLocalizationInfos(a4_0, element);
 }
 }
@@ -8605,10 +8457,9 @@ a5 = '}' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
 }
 {
@@ -8668,15 +8519,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createCollectionTypeLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0_0 != null) {
 if (a0_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE), a0_0);
-completedElement(a0_0, true);
+Object value = a0_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_0, a0_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
@@ -8738,15 +8589,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createTupleTypeLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0_0 != null) {
 if (a0_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE), a0_0);
-completedElement(a0_0, true);
+Object value = a0_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52_0_0_0, a0_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52_0_0_0, a0_0, true);
 copyLocalizationInfos(a0_0, element);
 }
 }
@@ -8809,7 +8660,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPropertyCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -8825,11 +8675,12 @@ tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmod
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS, tudresden.ocl20.pivot.pivotmodel.Property>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getPropertyCallBaseExpCSPropertyReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 }
@@ -8849,7 +8700,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createPropertyCallOnSelfExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("IS_MARKED_PRE");
@@ -8862,11 +8712,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_2, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_2, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 }
 }
@@ -8924,10 +8775,9 @@ a0 = 'let' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 }
 {
@@ -8943,15 +8793,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1_0 != null) {
 if (a1_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__VARIABLE_DECLARATIONS, a1_0);
-completedElement(a1_0, true);
+Object value = a1_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__VARIABLE_DECLARATIONS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_1, a1_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_1, a1_0, true);
 copyLocalizationInfos(a1_0, element);
 }
 }
@@ -8968,10 +8818,9 @@ a2 = ',' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_1, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_1, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 }
 {
@@ -8987,15 +8836,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a3_0 != null) {
 if (a3_0 != null) {
-addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__VARIABLE_DECLARATIONS, a3_0);
-completedElement(a3_0, true);
+Object value = a3_0;
+addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__VARIABLE_DECLARATIONS, value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_2, a3_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_2, a3_0, true);
 copyLocalizationInfos(a3_0, element);
 }
 }
@@ -9018,10 +8867,9 @@ a4 = 'in' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_3, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_3, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
 }
 {
@@ -9064,15 +8912,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createLetExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a5_0 != null) {
 if (a5_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__OCL_EXPRESSION), a5_0);
-completedElement(a5_0, true);
+Object value = a5_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LET_EXP_CS__OCL_EXPRESSION), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_5, a5_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_5, a5_0, true);
 copyLocalizationInfos(a5_0, element);
 }
 }
@@ -9135,7 +8983,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRealLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER_LITERAL");
@@ -9148,11 +8995,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -9171,7 +9019,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRealLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("NAVIGATION_OPERATOR");
@@ -9184,11 +9031,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
 }
 }
@@ -9209,7 +9057,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRealLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a2 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER_0");
@@ -9222,11 +9069,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
 }
 }
@@ -9284,7 +9132,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createRealLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a3 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER_LITERAL");
@@ -9297,11 +9144,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_1_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_1_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
 }
 }
@@ -9408,7 +9256,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createIntegerLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("INTEGER_LITERAL");
@@ -9421,11 +9268,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -9488,7 +9336,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBooleanLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("BOOLEAN_LITERAL");
@@ -9501,11 +9348,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -9568,7 +9416,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createStringLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("QUOTED_39_39");
@@ -9581,11 +9428,12 @@ addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToke
 }
 java.lang.String resolved = (java.lang.String)resolvedObject;
 if (resolved != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), resolved);
-completedElement(resolved, false);
+Object value = resolved;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 }
 }
@@ -9643,10 +9491,9 @@ a0 = 'invalid' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createInvalidLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 }
 {
@@ -9702,10 +9549,9 @@ a0 = 'null' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNullLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 }
 {
@@ -9766,7 +9612,6 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createNamedLiteralExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a0 != null) {
 tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
@@ -9782,11 +9627,12 @@ tudresden.ocl20.pivot.pivotmodel.NamedElement proxy = tudresden.ocl20.pivot.pivo
 collectHiddenTokens(element);
 registerContextDependentProxy(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS, tudresden.ocl20.pivot.pivotmodel.NamedElement>(getReferenceResolverSwitch() == null ? null : getReferenceResolverSwitch().getNamedLiteralExpCSNamedElementReferenceResolver()), element, (org.eclipse.emf.ecore.EReference) element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), resolved, proxy);
 if (proxy != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), proxy);
-completedElement(proxy, false);
+Object value = proxy;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), value);
+completedElement(value, false);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, proxy);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, proxy, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
 }
@@ -9845,10 +9691,9 @@ a0 = '(' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBracketExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
 }
 {
@@ -9891,15 +9736,15 @@ throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTerminateParsi
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBracketExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 if (a1_0 != null) {
 if (a1_0 != null) {
-element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BRACKET_EXP_CS__OCL_EXPRESSION), a1_0);
-completedElement(a1_0, true);
+Object value = a1_0;
+element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BRACKET_EXP_CS__OCL_EXPRESSION), value);
+completedElement(value, true);
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_2, a1_0);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_2, a1_0, true);
 copyLocalizationInfos(a1_0, element);
 }
 }
@@ -9913,10 +9758,9 @@ a2 = ')' {
 if (element == null) {
 element = tudresden.ocl20.pivot.language.ocl.OclFactory.eINSTANCE.createBracketExpCS();
 incompleteObjects.push(element);
-// initialize boolean attributes
 }
 collectHiddenTokens(element);
-retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_4, null);
+retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_4, null, true);
 copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
 }
 {
@@ -10090,7 +9934,7 @@ COLLECTION_TYPES:
 ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
 ;
 ITERATOR_NAME:
-( 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' )
+( 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' )
 ;
 STATIC:
 ( 'static')
