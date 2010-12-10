@@ -25,9 +25,9 @@ public privileged aspect Class1_DefAspect_testAnyIteratorExp01 {
         result1 = null;
         
         /* Iterator Any: Iterate through the elements and return one element that fulfills the condition. */
-        for (Integer i : collection1) {
-            if (((Object) i).equals(new Integer(2))) {
-                result1 = i;
+        for (Integer anElement1 : collection1) {
+            if (((Object) anElement1).equals(new Integer(2))) {
+                result1 = anElement1;
                 break;
             }
             // no else

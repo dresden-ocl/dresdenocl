@@ -124,9 +124,61 @@ public class TestString extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testGreaterThan01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/string", "greaterThan01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testGreaterThanEqual01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/string", "greaterThanEqual01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
 	public void testIndexOf01() throws Exception {
 
 		this.compareFragmentCodeGeneration("sltest/string", "indexOf01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testLessThan01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/string", "lessThan01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testLessThanEqual01() throws Exception {
+
+		this.compareFragmentCodeGeneration("sltest/string", "lessThanEqual01");
 	}
 
 	/**

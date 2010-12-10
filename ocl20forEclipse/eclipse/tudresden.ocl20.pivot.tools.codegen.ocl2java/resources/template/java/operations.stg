@@ -310,9 +310,19 @@ greaterOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ > $argsExp$)
 >>
 
+// --- String.>(String) ---
+greaterOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) > 0)
+>>
+
 // --- Real.>=(Real) ---
 greaterEqualsOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ >= $argsExp$)
+>>
+
+// --- String.>=(String) ---
+greaterEqualsOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) >= 0)
 >>
 
 // --- Boolean.implies(Boolean) ---
@@ -400,9 +410,19 @@ lesserOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ < $argsExp$)
 >>
 
+// --- String.<(String) ---
+lesserOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) < 0)
+>>
+
 // --- Real.<=(Real) ---
 lesserEqualsOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ <= $argsExp$)
+>>
+
+// --- String.<=(String) ---
+lesserEqualsOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) <= 0)
 >>
 
 // --- Integer.max(Integer) ---

@@ -139,6 +139,40 @@ public class TestString {
 
 	/**
 	 * <p>
+	 * Tests the generated code for the method <code>Real.>(Real)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThan01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertFalse(class1.testStringGreaterThan01("", ""));
+		assertFalse(class1.testStringGreaterThan01("a", "a"));
+		assertTrue(class1.testStringGreaterThan01("b", "a"));
+		assertFalse(class1.testStringGreaterThan01("a", "b"));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Real.>=(Real)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testGreaterThanEqual01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertTrue(class1.testStringGreaterThanEqual01("", ""));
+		assertTrue(class1.testStringGreaterThanEqual01("a", "a"));
+		assertTrue(class1.testStringGreaterThanEqual01("b", "a"));
+		assertFalse(class1.testStringGreaterThanEqual01("a", "b"));
+	}
+
+	/**
+	 * <p>
 	 * Tests the generated code for the method
 	 * <code>String.indexOf(String)</code>.
 	 * </p>
@@ -151,6 +185,40 @@ public class TestString {
 
 		assertEquals(new Integer(1), class1.testStringIndexOf("some", "s"));
 		assertEquals(new Integer(4), class1.testStringIndexOf("some", "e"));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Real.<(Real)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testLessThan01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertFalse(class1.testStringLessThan01("", ""));
+		assertFalse(class1.testStringLessThan01("a", "a"));
+		assertFalse(class1.testStringLessThan01("b", "a"));
+		assertTrue(class1.testStringLessThan01("a", "b"));
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for the method <code>Real.<=(Real)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testLessThanEqual01() {
+
+		Class1 class1;
+		class1 = new Class1();
+
+		assertTrue(class1.testStringLessThanEqual01("", ""));
+		assertTrue(class1.testStringLessThanEqual01("a", "a"));
+		assertFalse(class1.testStringLessThanEqual01("b", "a"));
+		assertTrue(class1.testStringLessThanEqual01("a", "b"));
 	}
 
 	/**

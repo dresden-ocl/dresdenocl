@@ -23,7 +23,7 @@ public privileged aspect Class1_PreAspect_preOperation01 {
     before(testpackage.Class1 aClass, Integer anInt): preOperation01Caller(aClass, anInt) {
         /* Disable this constraint for subclasses of Class1. */
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
-        if (!!(anInt == null)) {
+        if (!!(((Integer) anInt) == null)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	throw new RuntimeException("Error: Constraint was violated.");
         }

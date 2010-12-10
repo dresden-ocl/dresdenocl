@@ -25,8 +25,8 @@ public privileged aspect Class1_DefAspect_testCollectNestedIteratorExp01 {
         result1 = new java.util.ArrayList<Boolean>();
         
         /* Iterator CollectNested: Iterate through all elements and collect them. */
-        for (Integer i : collection1) {
-            result1.add(!((Object) i).equals(new Integer(2)));
+        for (Integer anElement1 : collection1) {
+            result1.add(!((Object) anElement1).equals(new Integer(2)));
         }
     
         return result1;

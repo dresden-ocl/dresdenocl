@@ -28,12 +28,12 @@ public privileged aspect Class1_DefAspect_testIsUniqueIteratorExp01 {
         result1 = true;
         
         /* Iterator IsUnique: Iterate and check, if all elements are unique. */
-        for (Integer i : collection1) {
-            if (collection2.contains(i)) {
+        for (Integer anElement1 : collection1) {
+            if (collection2.contains(anElement1)) {
                 result1 = false;
                 break;
             } else {
-                collection2.add(i);
+                collection2.add(anElement1);
             }
         }
     

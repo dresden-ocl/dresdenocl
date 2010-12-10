@@ -25,7 +25,7 @@ public privileged aspect Class1_DefAspect_testExistsIteratorExp02 {
         result1 = false;
         
         /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-        for (Integer i1 : collection1) {
+        for (Integer anElement1 : collection1) {
             java.util.HashSet<Integer> collection2;
             collection2 = new java.util.HashSet<Integer>();
             
@@ -36,8 +36,8 @@ public privileged aspect Class1_DefAspect_testExistsIteratorExp02 {
             result2 = false;
             
             /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-            for (Integer i2 : collection2) {
-                if (((Object) (i1 + i2)).equals(new Integer(3))) {
+            for (Integer anElement2 : collection2) {
+                if (((Object) (anElement1 + anElement2)).equals(new Integer(3))) {
                     result2 = true;
                     break;
                 }

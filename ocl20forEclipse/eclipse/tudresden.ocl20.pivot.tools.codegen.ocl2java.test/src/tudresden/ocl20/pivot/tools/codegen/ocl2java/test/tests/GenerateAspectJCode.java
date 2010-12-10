@@ -292,7 +292,11 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "sltest/string", "characters01" });
 		constraints.add(new String[] { "sltest/string", "concat01" });
 		constraints.add(new String[] { "sltest/string", "equalsIgnoreCase01" });
+		constraints.add(new String[] { "sltest/string", "greaterThan01" });
+		constraints.add(new String[] { "sltest/string", "greaterThanEqual01" });
 		constraints.add(new String[] { "sltest/string", "indexOf01" });
+		constraints.add(new String[] { "sltest/string", "lessThan01" });
+		constraints.add(new String[] { "sltest/string", "lessThanEqual01" });
 		constraints.add(new String[] { "sltest/string", "plus01" });
 		constraints.add(new String[] { "sltest/string", "size01" });
 		constraints.add(new String[] { "sltest/string", "substring01" });

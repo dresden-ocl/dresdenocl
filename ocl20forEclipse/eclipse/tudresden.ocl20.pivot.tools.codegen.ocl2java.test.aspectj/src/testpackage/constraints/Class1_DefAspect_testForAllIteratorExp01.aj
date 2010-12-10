@@ -25,8 +25,8 @@ public privileged aspect Class1_DefAspect_testForAllIteratorExp01 {
         result1 = true;
         
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-        for (Integer i : collection1) {
-            if (!(i > new Integer(0))) {
+        for (Integer anElement1 : collection1) {
+            if (!(anElement1 > new Integer(0))) {
                 result1 = false;
                 break;
             }

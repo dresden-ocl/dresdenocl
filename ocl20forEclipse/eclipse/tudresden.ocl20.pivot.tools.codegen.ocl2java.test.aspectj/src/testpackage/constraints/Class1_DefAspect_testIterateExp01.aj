@@ -21,13 +21,13 @@ public privileged aspect Class1_DefAspect_testIterateExp01 {
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
         collection1.add(new Integer(3));
-        Integer sum;
-        sum = new Integer(0);
+        Integer result1;
+        result1 = new Integer(0);
         /* IterateExp: Iterate through all elements and perform an operation on them. */
-        for (Integer i : collection1) {
-            sum = (sum + i);
+        for (Integer anElement1 : collection1) {
+            result1 = (result1 + anElement1);
         }
     
-        return sum;
+        return result1;
     }
 }

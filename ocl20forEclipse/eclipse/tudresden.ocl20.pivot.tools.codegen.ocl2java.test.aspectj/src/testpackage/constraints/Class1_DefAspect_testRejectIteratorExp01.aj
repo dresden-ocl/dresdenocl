@@ -25,9 +25,9 @@ public privileged aspect Class1_DefAspect_testRejectIteratorExp01 {
         result1 = new java.util.HashSet<Integer>();
         
         /* Iterator Reject: Select all elements which do not fulfill the condition. */
-        for (Integer i : collection1) {
-            if (!((Object) i).equals(new Integer(2))) {
-                result1.add(i);
+        for (Integer anElement1 : collection1) {
+            if (!((Object) anElement1).equals(new Integer(2))) {
+                result1.add(anElement1);
             }
             // no else
         }

@@ -17,7 +17,7 @@ public privileged aspect Class1_InvAspect_testInvariant03 {
      * <p>Pointcut for all calls on {@link testpackage.Class1#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(testpackage.Class1 aClass):
-    	call(void testpackage.Class1.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
