@@ -38,7 +38,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -46,6 +45,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -162,6 +163,16 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
+			
+			for (Type paramType : paramTypes) {
+				Parameter param = PivotModelFactory.eINSTANCE.createParameter();
+				param.setKind(ParameterDirectionKind.IN);
+				param.setName(paramType.getName().toLowerCase());
+				param.setType(paramType);
+				
+				operation.addParameter(param);
+			}
+			
 		}
 
 		return operation;

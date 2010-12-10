@@ -45,6 +45,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -146,6 +148,15 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
+			
+			for (Type paramType : paramTypes) {
+				Parameter param = PivotModelFactory.eINSTANCE.createParameter();
+				param.setKind(ParameterDirectionKind.IN);
+				param.setName(paramType.getName().toLowerCase());
+				param.setType(paramType);
+				
+				operation.addParameter(param);
+			}
 		}
 
 		return operation;
