@@ -64,6 +64,21 @@ Dresden OCL.
 to~\cite[p.~1]{spec:OCL2-2}.}
 \label{tab:compliance}
 \end{table}
+
+Besides the features enlisted in Table~\ref{tab:compliance} some minor
+differences exist between Dresden OCL and the OCL specification:
+
+\begin{itemize}
+  \item Dresden OCL does not support the operation OclAny.oclLocale() introduced
+  	within OCL 2.3 that can be used to implement different behavior for
+  	\texttt{String.toLowerCase()}, \texttt{String.toUperCase()},
+  	\texttt{String.<(String)}, \texttt{String.>(String)},
+  	\texttt{String.<=(String)}, and \texttt{String.>=(String)}. Since Dresden OCL
+  	is implemented in Java, it uses the semantics of
+  	\texttt{java.lang.String.toLowerCase()},
+  	\texttt{java.lang.String.toUpperCase()}, and
+  	\texttt{java.lang.String.compareTo(String)} instead.
+\end{itemize}
 	
 	
 \subsection{Different Semantics of OCL Expressions in Dresden OCL}
