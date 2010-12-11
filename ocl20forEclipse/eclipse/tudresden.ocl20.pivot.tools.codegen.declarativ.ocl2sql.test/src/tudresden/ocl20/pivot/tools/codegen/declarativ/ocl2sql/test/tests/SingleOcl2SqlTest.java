@@ -395,6 +395,78 @@ public class SingleOcl2SqlTest {
 		this.runConstraint(37);
 	}
 
+	@Test
+	public void runConstraint15_1() {
+
+		this.runConstraint(38);
+	}
+
+	@Test
+	public void runConstraint15_2() {
+
+		this.runConstraint(39);
+	}
+
+	@Test
+	public void runConstraint15_3() {
+
+		this.runConstraint(40);
+	}
+
+	@Test
+	public void runConstraint15_4() {
+
+		this.runConstraint(41);
+	}
+
+	@Test
+	public void runConstraint15_5() {
+
+		this.runConstraint(42);
+	}
+
+	@Test
+	public void runConstraint15_6() {
+
+		this.runConstraint(43);
+	}
+
+	@Test
+	public void runConstraint15_7() {
+
+		this.runConstraint(44);
+	}
+
+	@Test
+	public void runConstraint15_8() {
+
+		this.runConstraint(45);
+	}
+
+	@Test
+	public void runConstraint15_9() {
+
+		this.runConstraint(46);
+	}
+
+	@Test
+	public void runConstraint15_10() {
+
+		this.runConstraint(47);
+	}
+
+	@Test
+	public void runConstraint15_11() {
+
+		this.runConstraint(48);
+	}
+
+	@Test
+	public void runConstraint15_12() {
+
+		this.runConstraint(49);
+	}
+
 	private void runConstraint(int index) {
 
 		IOcl2DeclSettings settings =

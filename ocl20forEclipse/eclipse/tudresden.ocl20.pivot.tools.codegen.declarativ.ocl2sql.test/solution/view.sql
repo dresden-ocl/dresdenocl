@@ -288,3 +288,51 @@ WHERE NOT (((self.age / 1000) < 1)));
 CREATE OR REPLACE VIEW tudOclInv14_7 AS
 (SELECT * FROM OV_Student AS self
 WHERE NOT ((self.age - ((self.age / 1000) * 1000) = self.age)));
+
+CREATE OR REPLACE VIEW tudOclInv15_1 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT (('x' < 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_2 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT (('y' <= 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_3 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT (('z' >= 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_4 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT (('z' > 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_5 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName < 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_6 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName <= 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_7 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName >= 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_8 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName > 'y')));
+
+CREATE OR REPLACE VIEW tudOclInv15_9 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName < self.lastName)));
+
+CREATE OR REPLACE VIEW tudOclInv15_10 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName <= self.lastName)));
+
+CREATE OR REPLACE VIEW tudOclInv15_11 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName >= self.lastName)));
+
+CREATE OR REPLACE VIEW tudOclInv15_12 AS
+(SELECT * FROM OV_Student AS self
+WHERE NOT ((self.firstName > self.lastName)));

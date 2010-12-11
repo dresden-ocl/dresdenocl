@@ -3,6 +3,7 @@
 -- 
 -- Part of Dresden OCL Tookit, see LICENSE for license terms.
 -- (c) 2005 Florian Heidenreich <mail@fheidenreich.de>
+-- (c) 2010 Bjoern Freitag <bjoern.freitag@mailbox.tu-dresden.de>
 -- 
 -- 
 -- Use this constraint file with model university_complex.uml
@@ -173,5 +174,30 @@ inv tudOclInv14_6: self.age.div(1000) < 1
 
 -- mod (basic type)
 inv tudOclInv14_7: self.age.mod(1000) = self.age
+
+-- String operation
+inv tudOclInv15_1: 'x' < 'y'
+
+inv tudOclInv15_2: 'y' <= 'y'
+
+inv tudOclInv15_3: 'z' >= 'y'
+
+inv tudOclInv15_4: 'z' > 'y'
+
+inv tudOclInv15_5: self.firstName < 'y'
+
+inv tudOclInv15_6: self.firstName <= 'y'
+
+inv tudOclInv15_7: self.firstName >= 'y'
+
+inv tudOclInv15_8: self.firstName > 'y'
+
+inv tudOclInv15_9: self.firstName < self.lastName
+
+inv tudOclInv15_10: self.firstName <= self.lastName
+
+inv tudOclInv15_11: self.firstName >= self.lastName
+
+inv tudOclInv15_12: self.firstName > self.lastName
 
 endpackage
