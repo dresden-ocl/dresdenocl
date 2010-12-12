@@ -1,6 +1,6 @@
 package package1
 
-/* Should result in invalid. */
+/* Should result in empty set. */
 context Class1
 def: testClosure05(): Set(Class1) =
 self->closure(null)

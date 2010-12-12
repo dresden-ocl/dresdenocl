@@ -18,6 +18,8 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package package1;
 
+import java.util.Collection;
+
 /**
  * <p>
  * A class of a simple test model.
@@ -30,15 +32,18 @@ public class Class1 {
 	/** Required to initialize undefined in constraints. */
 	@SuppressWarnings("unused")
 	private Boolean booleanNull = null;
-	
+
 	/** Required to initialize undefined in constraints. */
 	@SuppressWarnings("unused")
 	private Integer[] bagIntegerNull = null;
-	
+
 	/** Required to initialize undefined in constraints. */
 	@SuppressWarnings("unused")
 	private Integer integerNull = null;
-	
+
 	/** Required to test recursion of defined properties. */
 	protected Class1 parent = null;
+
+	/** Required to test closure operator. */
+	protected Collection<Class1> children = null;
 }

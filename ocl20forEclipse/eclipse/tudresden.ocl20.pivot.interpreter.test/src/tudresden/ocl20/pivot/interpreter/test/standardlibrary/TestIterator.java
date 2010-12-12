@@ -28,6 +28,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.parser.ParseException;
@@ -493,7 +494,7 @@ public class TestIterator extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testClosure01() throws IllegalArgumentException,
+	public void testClosure01_1() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
@@ -504,8 +505,41 @@ public class TestIterator extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsCollectionOfSize(0, results.get(0));
-		this.assertIsCollectionOfSize(1, results.get(0));
+		if (((OclCollection<?>) results.get(0).getResult()).size()
+				.getModelInstanceInteger().getLong() == 0) {
+			this.assertIsCollectionOfSize(0, results.get(0));
+			this.assertIsCollectionOfSize(1, results.get(1));
+		}
+
+		else {
+			this.assertIsCollectionOfSize(1, results.get(0));
+			this.assertIsCollectionOfSize(0, results.get(1));
+		}
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure01_2() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure01", INSTANCE3_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(2, results.get(0));
+		this.assertIsCollectionOfSize(2, results.get(1));
 	}
 
 	/**
@@ -529,8 +563,16 @@ public class TestIterator extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsCollectionOfSize(0, results.get(0));
-		this.assertIsCollectionOfSize(1, results.get(0));
+		if (((OclCollection<?>) results.get(0).getResult()).size()
+				.getModelInstanceInteger().getLong() == 0) {
+			this.assertIsCollectionOfSize(0, results.get(0));
+			this.assertIsCollectionOfSize(1, results.get(1));
+		}
+
+		else {
+			this.assertIsCollectionOfSize(1, results.get(0));
+			this.assertIsCollectionOfSize(0, results.get(1));
+		}
 	}
 
 	/**
@@ -554,8 +596,16 @@ public class TestIterator extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsCollectionOfSize(0, results.get(0));
-		this.assertIsCollectionOfSize(1, results.get(0));
+		if (((OclCollection<?>) results.get(0).getResult()).size()
+				.getModelInstanceInteger().getLong() == 0) {
+			this.assertIsCollectionOfSize(0, results.get(0));
+			this.assertIsCollectionOfSize(1, results.get(1));
+		}
+
+		else {
+			this.assertIsCollectionOfSize(1, results.get(0));
+			this.assertIsCollectionOfSize(0, results.get(1));
+		}
 	}
 
 	/**
@@ -579,8 +629,16 @@ public class TestIterator extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsCollectionOfSize(0, results.get(0));
-		this.assertIsCollectionOfSize(1, results.get(0));
+		if (((OclCollection<?>) results.get(0).getResult()).size()
+				.getModelInstanceInteger().getLong() == 0) {
+			this.assertIsCollectionOfSize(0, results.get(0));
+			this.assertIsCollectionOfSize(1, results.get(1));
+		}
+
+		else {
+			this.assertIsCollectionOfSize(1, results.get(0));
+			this.assertIsCollectionOfSize(0, results.get(1));
+		}
 	}
 
 	/**
@@ -604,7 +662,7 @@ public class TestIterator extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
-		this.assertIsInvalid(results.get(0));
+		this.assertIsCollectionOfSize(0, results.get(0));
 	}
 
 	/**
@@ -653,6 +711,31 @@ public class TestIterator extends AbstractInterpreterTest {
 		assertEquals(1, results.size());
 
 		this.assertIsInvalid(results.get(0));
+	}
+
+	/**
+	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure08() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure08", INSTANCE3_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(2, results.get(0));
+		this.assertIsCollectionOfSize(2, results.get(1));
 	}
 
 	/**

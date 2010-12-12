@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -1721,76 +1720,127 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * 
 	 * @return The result of the iteration.
 	 */
+	@SuppressWarnings("unchecked")
 	protected OclAny evaluateClosure(OclExpression body,
 			OclCollection<OclAny> source, Variable iterator, Type resultType) {
 
-		OclAny result;
-
-		List<OclAny> resultList;
-		OclIterator<OclAny> sourceIt;
-
-		sourceIt = source.getIterator();
+		OclAny result = null;
+		OclIterator<OclAny> sourceIt = source.getIterator();
 
 		/* Check if iterator is undefined. */
-		if (sourceIt.next().oclIsInvalid().isTrue()) {
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
 			result = myStandardLibraryFactory.createOclInvalid(source
 					.getGenericType(), new IllegalArgumentException(
 					"Source of iterator closure() was invalid.", sourceIt
-							.next().getInvalidReason()));
+							.hasNext().getInvalidReason()));
 		}
 
 		/* Else compute the result. */
 		else {
+			List<OclAny> elementsToVisit = new ArrayList<OclAny>();
+			List<OclAny> resultElements = new ArrayList<OclAny>();
 
-			// FIXME Implement closure here correctly.
-			TreeSet<OclAny> elementsToVisit = new TreeSet<OclAny>();
-			// TODO Add all elements to elementsToVisit.
-			TreeSet<OclAny> visitedElements = new TreeSet<OclAny>();
+			/* Add all elements to elementsToVisit. */
+			while (sourceIt.hasNext().isTrue()) {
+				elementsToVisit.add(sourceIt.next());
+			}
 
 			while (elementsToVisit.size() > 0) {
 
-				OclAny element = elementsToVisit.pollFirst();
-				visitedElements.add(element);
+				OclAny element = elementsToVisit.remove(0);
 
 				/* Compute relation for one element. */
 				myEnvironment.setVariableValue(iterator.getQualifiedName(),
 						element);
 				OclAny relationResult = doSwitch(body);
 
-				/* TODO Check if result is collection or not. */
-				
+				if (relationResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									resultType,
+									new IllegalArgumentException(
+											"Body of closure iterator was invalid for at least one element."));
+					break;
+				}
+
+				/*
+				 * If the result conforms to the source's element type the
+				 * result is only one element. Else the result is a collection
+				 * of elements.
+				 */
+				if (((CollectionType) source.getGenericType()).getElementType()
+						.conformsTo(
+								relationResult.getModelInstanceElement().getType())) {
+
+					if (!relationResult.oclIsUndefined().isTrue()
+							&& !resultElements.contains(relationResult)) {
+						/* Visit the element later, if not visited yet. */
+						elementsToVisit.add(relationResult);
+						resultElements.add(relationResult);
+					}
+					// no else.
+				}
+
+				else if (relationResult instanceof OclCollection<?>) {
+
+					OclIterator<OclAny> relationResultsIt = ((OclCollection<OclAny>) relationResult)
+							.getIterator();
+
+					while (relationResultsIt.hasNext().isTrue()) {
+						OclAny elem = relationResultsIt.next();
+						if (elem.oclIsInvalid().isTrue()) {
+							result = this.myStandardLibraryFactory
+									.createOclInvalid(
+											resultType,
+											new IllegalArgumentException(
+													"Body of closure iterator was invalid for at least one element."));
+							break;
+						}
+
+						else if (!elem.oclIsUndefined().isTrue()
+								&& !resultElements.contains(elem)) {
+							/* Visit the element later, if not visited yet. */
+							elementsToVisit.add(elem);
+							resultElements.add(elem);
+						}
+						// no else.
+					}
+					// end while
+				}
 
 				/* Add not yet visited elements to elements to visit. */
 			}
 			// end while.
 
-			/* Compute the result type depending on the given result type. */
-			if (resultType instanceof OrderedSetType) {
-				result = myStandardLibraryFactory.createOclOrderedSet(
-						new ArrayList<OclAny>(visitedElements),
-						((OrderedSetType) resultType).getElementType());
-			}
-
-			else if (resultType instanceof SetType) {
-				result = myStandardLibraryFactory.createOclSet(
-						new HashSet<OclAny>(visitedElements),
-						((SetType) resultType).getElementType());
-			}
-
-			else {
-				String msg;
-				msg = "The ResultType of a closure Iterator should by a Set or OrderedSet.";
-				msg += " But was " + resultType.getQualifiedName();
-
-				if (LOGGER.isInfoEnabled()) {
-					LOGGER.warn(msg);
+			if (result == null) {
+				/* Compute the result type depending on the given result type. */
+				if (resultType instanceof OrderedSetType) {
+					result = myStandardLibraryFactory.createOclOrderedSet(
+							resultElements,
+							((OrderedSetType) resultType).getElementType());
 				}
-				// no else.
 
-				result = myStandardLibraryFactory.createOclInvalid(resultType,
-						new IllegalArgumentException(msg));
+				else if (resultType instanceof SetType) {
+					result = myStandardLibraryFactory.createOclSet(
+							new HashSet<OclAny>(resultElements),
+							((SetType) resultType).getElementType());
+				}
+
+				else {
+					String msg;
+					msg = "The ResultType of a closure Iterator should by a Set or OrderedSet.";
+					msg += " But was " + resultType.getQualifiedName();
+
+					if (LOGGER.isInfoEnabled()) {
+						LOGGER.warn(msg);
+					}
+					// no else.
+
+					result = myStandardLibraryFactory.createOclInvalid(
+							resultType, new IllegalArgumentException(msg));
+				}
 			}
-			// end else.
+			// no else.
 		}
 		// end else.
 
