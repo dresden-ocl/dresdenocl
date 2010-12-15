@@ -85,6 +85,48 @@ for ($itType$ $itVar$ : $sourceExp$) {
 >>
 
 
+// --- IteratorExp for Iterator Closure ---
+iteratorExp_closure(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, bodyResultType, bodyResultsInCollection, resultVar, resultType) ::= <<
+/* Compute closure iterator. */
+$sourceCode$$resultType$ $resultVar$;
+$resultVar$ = new $resultType$();
+// TODO replace toVisit with generated var    
+$resultType$ toVisit = new $resultType$();
+toVisit.addAll($sourceExp$);
+        
+while (toVisit.size() > 0) {
+	$itType$ $itVar$ = toVisit.iterator().next();
+    toVisit.remove($itVar$);
+        	
+    /* This is the body. */
+    $bodyCode$
+    // TODO repleace bodyResult with generated var
+    $bodyResultType$ bodyResult = $bodyExp$;
+    $if(bodyResultsInCollection)$    	
+	if (bodyResult != null) {
+		// TODO replace anElem with generated var.
+		for ($itType$ anElem : bodyResult) {
+			if(!$resultVar$.contains(anElem)) {
+        		$resultVar$.$addOperationName()$(anElem);
+        		toVisit.$addOperationName()$(anElem);
+        	}
+        	// no else.
+        }
+        // end for.
+    }
+    // no else.
+    $else$
+	if (bodyResult != null && !$resultVar$.contains(bodyResult)) {
+        $resultVar$.$addOperationName()$(bodyResult);
+        toVisit.$addOperationName()$(bodyResult);
+    }
+    // no else.
+    $endif$
+}
+// end while.
+>>
+
+
 // --- IteratorExp for Iterator Collect ---
 iteratorExp_collect(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, resultVar, resultType, addOp) ::= <<
 $sourceCode$$resultType$ $resultVar$;

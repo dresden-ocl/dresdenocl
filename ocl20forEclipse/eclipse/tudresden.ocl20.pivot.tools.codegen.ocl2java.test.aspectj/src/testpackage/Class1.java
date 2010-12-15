@@ -19,6 +19,8 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package testpackage;
 
+import java.util.Set;
+
 /**
  * <p>
  * A test class for generated AspectJ code.
@@ -69,6 +71,16 @@ public class Class1 {
 	 * means violation.
 	 */
 	public Boolean isInvariant04Violated = true;
+
+	/**
+	 * Parent relation used to test closure iterator.
+	 */
+	public Class1 parent = null;
+
+	/**
+	 * Children relation used to test closure iterator.
+	 */
+	public Set<Class1> children = null;
 
 	/**
 	 * <p>

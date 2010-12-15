@@ -86,6 +86,71 @@ public class TestIteratorExp extends AbstractDiffTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testClosure01() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "closure01");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testClosure02() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "closure02");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testClosure03() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "closure03");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testClosure04() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "closure04");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testClosure05() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/iterator", "closure05");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
 	public void testCollect01() throws Exception {
 
 		this.compareFragmentCodeGeneration("expressions/iterator", "collect01");

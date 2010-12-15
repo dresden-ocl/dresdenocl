@@ -832,6 +832,25 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 					this.environment.getNewCollectionVarName());
 		}
 
+		else if (itName.equals("closure")) {
+
+			/*
+			 * Decide whether body returns a collection ore only one result
+			 * element.
+			 */
+			if (bodyExp.getType().conformsTo(
+					anIteratorExp.getSource().getType())) {
+				template.setAttribute("bodyResultsInCollection", "true");
+			}
+			// no else.
+
+			/* Set iterator specific template attributes. */
+			template.setAttribute("itType", sourceType.getGenericType()
+					.toString());
+			template.setAttribute("resultType", resultType.toString());
+			template.setAttribute("bodyResultType", bodyType.toString());
+		}
+
 		else if (itName.equals("collect")) {
 
 			String addOp;

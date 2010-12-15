@@ -50,6 +50,10 @@
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       <defaultValue xmi:type="uml:LiteralString" xmi:id="_WZsN8doQEd-SQtj4YsYIRg" value=""/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="_KOs5YAgTEeC199kZ32Tr5w" name="parent" type="_HtFR8BvWEd-lK-Yjl_N2xQ"/>
+    <ownedAttribute xmi:id="_QOw-YAgTEeC199kZ32Tr5w" name="children" type="_HtFR8BvWEd-lK-Yjl_N2xQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VRji0AgTEeC199kZ32Tr5w" value="*"/>
+    </ownedAttribute>
     <ownedOperation xmi:id="_TMg-EEO0Ed-6dYpdYOZoUQ" name="Class1" isStatic="true">
       <ownedParameter xmi:id="_TMg-EkO0Ed-6dYpdYOZoUQ" name="in1">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>

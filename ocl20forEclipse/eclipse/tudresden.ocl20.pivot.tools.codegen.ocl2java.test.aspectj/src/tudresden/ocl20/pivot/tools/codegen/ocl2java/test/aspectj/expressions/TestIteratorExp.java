@@ -60,6 +60,222 @@ public class TestIteratorExp {
 	 * </p>
 	 */
 	@Test
+	public void testClosureIteratorExp01_01() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		Class1 c = new Class1();
+		
+		a.parent = b;
+		b.parent = c;
+
+		Set<Class1> expectedResult01 = new HashSet<Class1>();
+		expectedResult01.add(b);
+		expectedResult01.add(c);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp01());
+
+		Set<Class1> expectedResult02 = new HashSet<Class1>();
+		expectedResult02.add(c);
+
+		assertEquals(expectedResult02, b.testClosureIteratorExp01());
+
+		Set<Class1> expectedResult03 = new HashSet<Class1>();
+
+		assertEquals(expectedResult03, c.testClosureIteratorExp01());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
+	public void testClosureIteratorExp01_02() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		
+		a.parent = b;
+		b.parent = a;
+
+		Set<Class1> expectedResult01 = new HashSet<Class1>();
+		expectedResult01.add(a);
+		expectedResult01.add(b);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp01());
+		assertEquals(expectedResult01, b.testClosureIteratorExp01());
+	}
+	
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
+	public void testClosureIteratorExp02_01() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		Class1 c = new Class1();
+		
+		a.parent = b;
+		b.parent = c;
+
+		Set<Class1> expectedResult01 = new HashSet<Class1>();
+		expectedResult01.add(b);
+		expectedResult01.add(c);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp02());
+
+		Set<Class1> expectedResult02 = new HashSet<Class1>();
+		expectedResult02.add(c);
+
+		assertEquals(expectedResult02, b.testClosureIteratorExp02());
+
+		Set<Class1> expectedResult03 = new HashSet<Class1>();
+
+		assertEquals(expectedResult03, c.testClosureIteratorExp02());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
+	public void testClosureIteratorExp03_01() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		Class1 c = new Class1();
+		
+		a.parent = b;
+		b.parent = c;
+
+		List<Class1> expectedResult01 = new ArrayList<Class1>();
+		expectedResult01.add(b);
+		expectedResult01.add(c);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp03());
+
+		List<Class1> expectedResult02 = new ArrayList<Class1>();
+		expectedResult02.add(c);
+
+		assertEquals(expectedResult02, b.testClosureIteratorExp03());
+
+		List<Class1> expectedResult03 = new ArrayList<Class1>();
+
+		assertEquals(expectedResult03, c.testClosureIteratorExp03());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
+	public void testClosureIteratorExp04_01() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		Class1 c = new Class1();
+		
+		a.parent = b;
+		b.parent = c;
+
+		List<Class1> expectedResult01 = new ArrayList<Class1>();
+		expectedResult01.add(b);
+		expectedResult01.add(c);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp04());
+
+		List<Class1> expectedResult02 = new ArrayList<Class1>();
+		expectedResult02.add(c);
+
+		assertEquals(expectedResult02, b.testClosureIteratorExp04());
+
+		List<Class1> expectedResult03 = new ArrayList<Class1>();
+
+		assertEquals(expectedResult03, c.testClosureIteratorExp04());
+	}
+
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
+	public void testClosureIteratorExp05_01() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		Class1 c = new Class1();
+		Class1 d = new Class1();
+		
+		Set<Class1> children = new HashSet<Class1>();
+		children.add(b);
+		
+		a.children = children;
+		
+		children = new HashSet<Class1>();
+		children.add(c);
+		children.add(d);
+		b.children = children;
+
+		Set<Class1> expectedResult01 = new HashSet<Class1>();
+		expectedResult01.add(b);
+		expectedResult01.add(c);
+		expectedResult01.add(d);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp05());
+
+		Set<Class1> expectedResult02 = new HashSet<Class1>();
+		expectedResult02.add(c);
+		expectedResult02.add(d);
+
+		assertEquals(expectedResult02, b.testClosureIteratorExp05());
+
+		Set<Class1> expectedResult03 = new HashSet<Class1>();
+
+		assertEquals(expectedResult03, c.testClosureIteratorExp05());
+		assertEquals(expectedResult03, d.testClosureIteratorExp05());
+	}	
+
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
+	public void testClosureIteratorExp05_02() {
+
+		Class1 a = new Class1();
+		Class1 b = new Class1();
+		
+		Set<Class1> children = new HashSet<Class1>();
+		children.add(b);
+		
+		a.children = children;
+		
+		children = new HashSet<Class1>();
+		children.add(a);
+		b.children = children;
+
+		Set<Class1> expectedResult01 = new HashSet<Class1>();
+		expectedResult01.add(a);
+		expectedResult01.add(b);
+
+		assertEquals(expectedResult01, a.testClosureIteratorExp05());
+		assertEquals(expectedResult01, b.testClosureIteratorExp05());
+	}	
+
+	/**
+	 * <p>
+	 * Tests the generated code for an OCL Expression
+	 * </p>
+	 */
+	@Test
 	public void testCollectIteratorExp01() {
 
 		Class1 class1;

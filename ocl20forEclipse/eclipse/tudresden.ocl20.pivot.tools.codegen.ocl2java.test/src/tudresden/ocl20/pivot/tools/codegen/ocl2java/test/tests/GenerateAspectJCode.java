@@ -118,6 +118,11 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "expressions/calls", "property01" });
 		constraints.add(new String[] { "expressions/calls", "property02" });
 		constraints.add(new String[] { "expressions/iterator", "any01" });
+		constraints.add(new String[] { "expressions/iterator", "closure01" });
+		constraints.add(new String[] { "expressions/iterator", "closure02" });
+		constraints.add(new String[] { "expressions/iterator", "closure03" });
+		constraints.add(new String[] { "expressions/iterator", "closure04" });
+		constraints.add(new String[] { "expressions/iterator", "closure05" });
 		constraints.add(new String[] { "expressions/iterator", "collect01" });
 		constraints.add(new String[] { "expressions/iterator",
 				"collectNested01" });
