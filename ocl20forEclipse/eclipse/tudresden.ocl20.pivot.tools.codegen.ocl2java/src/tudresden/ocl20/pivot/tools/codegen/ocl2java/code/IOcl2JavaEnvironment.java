@@ -184,6 +184,11 @@ public interface IOcl2JavaEnvironment {
 	public Set<String> getIsNewClasses();
 
 	/**
+	 * @return A name for a variable used to save a result of a body expression.
+	 */
+	public String getNewBodyResultVarName();
+
+	/**
 	 * @return A name for a Collection variable.
 	 */
 	public String getNewCollectionVarName();
@@ -215,6 +220,12 @@ public interface IOcl2JavaEnvironment {
 	 * @return A name for a variable used to save a result.
 	 */
 	public String getNewResultVarName();
+
+	/**
+	 * @return A name for a variable containing elements remaining to visit
+	 *         during an iteration.
+	 */
+	public String getNewToVisitVarName();
 
 	/**
 	 * @return A name for a Tuple variable.

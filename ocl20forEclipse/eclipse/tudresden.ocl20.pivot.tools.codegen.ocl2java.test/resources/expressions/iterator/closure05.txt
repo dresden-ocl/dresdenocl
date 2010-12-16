@@ -1,19 +1,30 @@
-java.util.HashSet<Integer> collection1;
-collection1 = new java.util.HashSet<Integer>();
-
-collection1.add(new Integer(1));
-collection1.add(new Integer(2));
-collection1.add(new Integer(3));
-Boolean result1;
-result1 = false;
-
-/* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-for (Integer anElement1 : collection1) {
-    if (((Object) anElement1).equals(new Integer(2))) {
-        result1 = true;
-        break;
+/* Compute closure iterator. */
+java.util.Set<testpackage.Class1> result2;
+result2 = new java.util.HashSet<testpackage.Class1>();
+result2.add(aClass);java.util.HashSet<testpackage.Class1> result1;
+result1 = new java.util.HashSet<testpackage.Class1>();
+java.util.HashSet<testpackage.Class1> toVisit1 = new java.util.HashSet<testpackage.Class1>();
+toVisit1.addAll(result2);
+        
+while (toVisit1.size() > 0) {
+	testpackage.Class1 anElement1 = toVisit1.iterator().next();
+    toVisit1.remove(anElement1);
+        	
+    /* This is the body. */
+    java.util.Set<testpackage.Class1> bodyResult1 = anElement1.children;
+    	
+	if (bodyResult1 != null) {
+		// TODO replace anElem with generated var.
+		for (testpackage.Class1 anElem : bodyResult1) {
+			if(!result1.contains(anElem)) {
+        		result1.add(anElem);
+        		toVisit1.add(anElem);
+        	}
+        	// no else.
+        }
+        // end for.
     }
-    // no else
+    // no else.
 }
-
+// end while.
 result1

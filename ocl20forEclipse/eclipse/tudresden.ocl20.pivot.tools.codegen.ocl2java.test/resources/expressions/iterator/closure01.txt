@@ -1,19 +1,22 @@
-java.util.HashSet<Integer> collection1;
-collection1 = new java.util.HashSet<Integer>();
-
-collection1.add(new Integer(1));
-collection1.add(new Integer(2));
-collection1.add(new Integer(3));
-Boolean result1;
-result1 = false;
-
-/* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-for (Integer anElement1 : collection1) {
-    if (((Object) anElement1).equals(new Integer(2))) {
-        result1 = true;
-        break;
+/* Compute closure iterator. */
+java.util.Set<testpackage.Class1> result2;
+result2 = new java.util.HashSet<testpackage.Class1>();
+result2.add(aClass);java.util.HashSet<testpackage.Class1> result1;
+result1 = new java.util.HashSet<testpackage.Class1>();
+java.util.HashSet<testpackage.Class1> toVisit1 = new java.util.HashSet<testpackage.Class1>();
+toVisit1.addAll(result2);
+        
+while (toVisit1.size() > 0) {
+	testpackage.Class1 anElement1 = toVisit1.iterator().next();
+    toVisit1.remove(anElement1);
+        	
+    /* This is the body. */
+    testpackage.Class1 bodyResult1 = anElement1.parent;
+	if (bodyResult1 != null && !result1.contains(bodyResult1)) {
+        result1.add(bodyResult1);
+        toVisit1.add(bodyResult1);
     }
-    // no else
+    // no else.
 }
-
+// end while.
 result1

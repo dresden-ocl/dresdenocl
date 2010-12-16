@@ -46,6 +46,9 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/** Names for generated aspects of Body constraints having no specific name. */
 	public static final String BODY_ASPECT_NAME = "BodyAspect";
 
+	/** Names for generated variable for result value. */
+	protected static final String BODY_RESULT_VAR_NAME = "bodyResult";
+
 	/**
 	 * Names for generated aspects of Definition constraints having no specific
 	 * name.
@@ -103,6 +106,9 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/** Names for generated variable for result value. */
 	protected static final String RESULT_VAR_NAME = "result";
 
+	/** Names for generated variable for to visit collections. */
+	protected static final String TO_VISIT_VAR_NAME = "toVisit";
+
 	/** Names for generated variable for tuple value. */
 	protected static final String TUPLE_VAR_NAME = "tuple";
 
@@ -124,6 +130,9 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/** Counter for names for generated body constraint aspects. */
 	protected int bodyAspectNameCounter = 0;
+
+	/** Counter for names for generated variables for body result values. */
+	protected int bodyResultVarCounter = 0;
 
 	/**
 	 * The call paths of all properties which are called for Constraint
@@ -196,6 +205,9 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/** {@link Stack} used for expected return {@link Type}s. */
 	protected Stack<Type> returnTypeStack = new Stack<Type>();
+
+	/** Counter for names for generated variables for to visit collections. */
+	protected int toVisitVarCounter = 0;
 
 	/** Counter for names for generated variables for tuple values. */
 	protected int tupleVarCounter = 0;
@@ -413,6 +425,22 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#getNewBodyResultVarName()
+	 */
+	public String getNewBodyResultVarName() {
+	
+		String result;
+	
+		this.bodyResultVarCounter++;
+	
+		result = BODY_RESULT_VAR_NAME;
+		result += this.bodyResultVarCounter;
+	
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * 
 	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#
 	 * getNewIteratorExpCollectionVarName()
@@ -519,6 +547,22 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 		result = RESULT_VAR_NAME;
 		result += this.resultVarCounter;
+
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#getNewToVisitVarName()
+	 */
+	public String getNewToVisitVarName() {
+
+		String result;
+
+		this.toVisitVarCounter++;
+
+		result = TO_VISIT_VAR_NAME;
+		result += this.toVisitVarCounter;
 
 		return result;
 	}
@@ -850,12 +894,14 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	public void resetEnvironmentForNextConstraint() {
 
 		this.atPreVarNameCounter = 0;
+		this.bodyResultVarCounter = 0;
 		this.comparatorVarCounter = 0;
 		this.collectionVarCounter = 0;
 		this.ifExpResultVarCounter = 0;
 		this.indexVarCounter = 0;
 		this.iteratorExpIteratorVarCounter = 0;
 		this.resultVarCounter = 0;
+		this.toVisitVarCounter = 0;
 		this.tupleVarCounter = 0;
 
 		this.allInstancesClasses.clear();

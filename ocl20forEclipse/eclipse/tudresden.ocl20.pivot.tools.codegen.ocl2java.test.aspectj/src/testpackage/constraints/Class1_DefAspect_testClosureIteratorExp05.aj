@@ -23,24 +23,22 @@ public privileged aspect Class1_DefAspect_testClosureIteratorExp05 {
         result2 = new java.util.HashSet<testpackage.Class1>();
         result2.add(aClass);java.util.HashSet<testpackage.Class1> result1;
         result1 = new java.util.HashSet<testpackage.Class1>();
-        // TODO replace toVisit with generated var    
-        java.util.HashSet<testpackage.Class1> toVisit = new java.util.HashSet<testpackage.Class1>();
-        toVisit.addAll(result2);
+        java.util.HashSet<testpackage.Class1> toVisit1 = new java.util.HashSet<testpackage.Class1>();
+        toVisit1.addAll(result2);
                 
-        while (toVisit.size() > 0) {
-        	testpackage.Class1 anElement1 = toVisit.iterator().next();
-            toVisit.remove(anElement1);
+        while (toVisit1.size() > 0) {
+        	testpackage.Class1 anElement1 = toVisit1.iterator().next();
+            toVisit1.remove(anElement1);
                 	
             /* This is the body. */
-            // TODO repleace bodyResult with generated var
-            java.util.Set<testpackage.Class1> bodyResult = anElement1.children;
+            java.util.Set<testpackage.Class1> bodyResult1 = anElement1.children;
             	
-        	if (bodyResult != null) {
+        	if (bodyResult1 != null) {
         		// TODO replace anElem with generated var.
-        		for (testpackage.Class1 anElem : bodyResult) {
+        		for (testpackage.Class1 anElem : bodyResult1) {
         			if(!result1.contains(anElem)) {
                 		result1.add(anElem);
-                		toVisit.add(anElem);
+                		toVisit1.add(anElem);
                 	}
                 	// no else.
                 }

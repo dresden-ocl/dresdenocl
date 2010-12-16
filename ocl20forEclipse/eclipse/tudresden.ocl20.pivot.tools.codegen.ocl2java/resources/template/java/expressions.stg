@@ -86,29 +86,27 @@ for ($itType$ $itVar$ : $sourceExp$) {
 
 
 // --- IteratorExp for Iterator Closure ---
-iteratorExp_closure(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, bodyResultType, bodyResultsInCollection, resultVar, resultType) ::= <<
+iteratorExp_closure(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, bodyResultType, bodyResultsInCollection, bodyResultVar, toVisitVar, resultVar, resultType) ::= <<
 /* Compute closure iterator. */
 $sourceCode$$resultType$ $resultVar$;
 $resultVar$ = new $resultType$();
-// TODO replace toVisit with generated var    
-$resultType$ toVisit = new $resultType$();
-toVisit.addAll($sourceExp$);
+$resultType$ $toVisitVar$ = new $resultType$();
+$toVisitVar$.addAll($sourceExp$);
         
-while (toVisit.size() > 0) {
-	$itType$ $itVar$ = toVisit.iterator().next();
-    toVisit.remove($itVar$);
+while ($toVisitVar$.size() > 0) {
+	$itType$ $itVar$ = $toVisitVar$.iterator().next();
+    $toVisitVar$.remove($itVar$);
         	
     /* This is the body. */
     $bodyCode$
-    // TODO repleace bodyResult with generated var
-    $bodyResultType$ bodyResult = $bodyExp$;
+    $bodyResultType$ $bodyResultVar$ = $bodyExp$;
     $if(bodyResultsInCollection)$    	
-	if (bodyResult != null) {
+	if ($bodyResultVar$ != null) {
 		// TODO replace anElem with generated var.
-		for ($itType$ anElem : bodyResult) {
+		for ($itType$ anElem : $bodyResultVar$) {
 			if(!$resultVar$.contains(anElem)) {
         		$resultVar$.$addOperationName()$(anElem);
-        		toVisit.$addOperationName()$(anElem);
+        		$toVisitVar$.$addOperationName()$(anElem);
         	}
         	// no else.
         }
@@ -116,9 +114,9 @@ while (toVisit.size() > 0) {
     }
     // no else.
     $else$
-	if (bodyResult != null && !$resultVar$.contains(bodyResult)) {
-        $resultVar$.$addOperationName()$(bodyResult);
-        toVisit.$addOperationName()$(bodyResult);
+	if ($bodyResultVar$ != null && !$resultVar$.contains($bodyResultVar$)) {
+        $resultVar$.$addOperationName()$($bodyResultVar$);
+        $toVisitVar$.$addOperationName()$($bodyResultVar$);
     }
     // no else.
     $endif$

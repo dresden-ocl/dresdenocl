@@ -23,20 +23,18 @@ public privileged aspect Class1_DefAspect_testClosureIteratorExp04 {
         result2 = new java.util.HashSet<testpackage.Class1>();
         result2.add(aClass);java.util.ArrayList<testpackage.Class1> result1;
         result1 = new java.util.ArrayList<testpackage.Class1>();
-        // TODO replace toVisit with generated var    
-        java.util.ArrayList<testpackage.Class1> toVisit = new java.util.ArrayList<testpackage.Class1>();
-        toVisit.addAll(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asSequence(result2));
+        java.util.ArrayList<testpackage.Class1> toVisit1 = new java.util.ArrayList<testpackage.Class1>();
+        toVisit1.addAll(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asSequence(result2));
                 
-        while (toVisit.size() > 0) {
-        	testpackage.Class1 anElement1 = toVisit.iterator().next();
-            toVisit.remove(anElement1);
+        while (toVisit1.size() > 0) {
+        	testpackage.Class1 anElement1 = toVisit1.iterator().next();
+            toVisit1.remove(anElement1);
                 	
             /* This is the body. */
-            // TODO repleace bodyResult with generated var
-            testpackage.Class1 bodyResult = anElement1.parent;
-        	if (bodyResult != null && !result1.contains(bodyResult)) {
-                result1.add(bodyResult);
-                toVisit.add(bodyResult);
+            testpackage.Class1 bodyResult1 = anElement1.parent;
+        	if (bodyResult1 != null && !result1.contains(bodyResult1)) {
+                result1.add(bodyResult1);
+                toVisit1.add(bodyResult1);
             }
             // no else.
         }

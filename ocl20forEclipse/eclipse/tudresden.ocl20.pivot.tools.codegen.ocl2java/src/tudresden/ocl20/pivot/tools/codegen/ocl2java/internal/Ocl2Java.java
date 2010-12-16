@@ -849,6 +849,10 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 					.toString());
 			template.setAttribute("resultType", resultType.toString());
 			template.setAttribute("bodyResultType", bodyType.toString());
+			template.setAttribute("bodyResultVar",
+					this.environment.getNewBodyResultVarName());
+			template.setAttribute("toVisitVar",
+					this.environment.getNewToVisitVarName());
 		}
 
 		else if (itName.equals("collect")) {
