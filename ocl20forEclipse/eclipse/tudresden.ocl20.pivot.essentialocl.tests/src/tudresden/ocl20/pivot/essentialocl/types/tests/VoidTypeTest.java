@@ -1,120 +1,94 @@
-/**
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2007 Matthias Braeuer (braeuer.matthias@web.de).            *
- * All rights reserved.                                                      *
- *                                                                           *
- * This work was done as a project at the Chair for Software Technology,     *
- * Dresden University Of Technology, Germany (http://st.inf.tu-dresden.de).  *
- * It is understood that any modification not identified as such is not      *
- * covered by the preceding statement.                                       *
- *                                                                           *
- * This work is free software; you can redistribute it and/or modify it      *
- * under the terms of the GNU Library General Public License as published    *
- * by the Free Software Foundation; either version 2 of the License, or      *
- * (at your option) any later version.                                       *
- *                                                                           *
- * This work is distributed in the hope that it will be useful, but WITHOUT  *
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or     *
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library General Public     *
- * License for more details.                                                 *
- *                                                                           *
- * You should have received a copy of the GNU Library General Public License *
- * along with this library; if not, you can view it online at                *
- * http://www.fsf.org/licensing/licenses/gpl.html.                           *
- *                                                                           *
- * To submit a bug report, send a comment, or get the latest news on this    *
- * project, please visit the website: http://dresden-ocl.sourceforge.net.    *
- * For more information on OCL and related projects visit the OCL Portal:    *
- * http://st.inf.tu-dresden.de/ocl                                           *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *
- * $Id$
+/*
+Copyright (C) 2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+
+This file is part of OCL2 Intepreter Test Suite of Dresden OCL.
+
+Dresden OCL is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.framework.TestCase;
-
-import junit.textui.TestRunner;
-
+import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc -->
- * A test case for the model object '<em><b>Void Type</b></em>'.
- * <!-- end-user-doc -->
- * @generated
+ * Tests the VoidType implementation.
+ * 
+ * @generated NOT
  */
 public class VoidTypeTest extends TestCase {
 
 	/**
-	 * The fixture for this Void Type test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * Test the operation {@link Type#conformsTo(Type)} for {@link VoidType}.
+	 * 
+	 * @generated NOT
 	 */
-	protected VoidType fixture = null;
+	public void testConformsTo01() {
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static void main(String[] args) {
-		TestRunner.run(VoidTypeTest.class);
+		Type voidType = EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclVoid();
+
+		assertTrue(voidType.conformsTo(voidType));
+
+		/* OclVoid does not conform to OclInvalid. */
+		assertFalse(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclInvalid()));
+
+		/* OclVoid does conform to other library types. */
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclAny()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getBagType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary()
+				.getCollectionType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclBag()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclBoolean()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclCollection()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclInteger()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclOrderedSet()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclReal()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclSequence()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclSet()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclString()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getOclType()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary()
+				.getOrderedSetType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary()
+				.getSequenceType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getSetType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin
+				.getOclLibraryProvider().getOclLibrary().getTypeType(voidType)));
+
+		/* OclVoid does conform to model defined types. */
+		Type aType = PivotModelFactory.eINSTANCE.createType();
+		aType.setName("SomeModelType");
+		assertTrue(voidType.conformsTo(aType));
 	}
-
-	/**
-	 * Constructs a new Void Type test case with the given name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public VoidTypeTest(String name) {
-		super(name);
-	}
-
-	/**
-	 * Sets the fixture for this Void Type test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void setFixture(VoidType fixture) {
-		this.fixture = fixture;
-	}
-
-	/**
-	 * Returns the fixture for this Void Type test case.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VoidType getFixture() {
-		return fixture;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#setUp()
-	 * @generated
-	 */
-	@Override
-	protected void setUp() throws Exception {
-		setFixture(TypesFactoryImpl.eINSTANCE.createVoidType());
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see junit.framework.TestCase#tearDown()
-	 * @generated
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		setFixture(null);
-	}
-
-} //VoidTypeTest
+} // VoidTypeTest

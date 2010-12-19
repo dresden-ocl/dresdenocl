@@ -53,15 +53,17 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Void Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Void Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl#getOclLibrary
+ * <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class VoidTypeImpl extends TypeImpl implements VoidType {
@@ -73,6 +75,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected VoidTypeImpl() {
@@ -80,23 +83,26 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * Void conforms to all other types (OCL 2.0 specification, Section 8.2.2):
-	 * 
-	 * <pre>
-	 * context VoidType
-	 * inv: Classifier.allInstances()-&gt;forAll (c | self.conformsTo (c))
-	 * </pre>
+	 * Void conforms to all other types except OclInvalid (OCL 2.3
+	 * specification):
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @generated NOT
 	 */
 	@Override
 	public boolean conformsTo(Type other) {
 
-		return true;
+		Type invalidType = getOclLibrary().getOclInvalid();
+
+		if (other != null && other == invalidType)
+			return false;
+		else
+			return true;
 	}
 
 	/**
-	 * The common super type of <code>VoidType</code> and another {@link Type} is the other type.
+	 * The common super type of <code>VoidType</code> and another {@link Type}
+	 * is the other type.
 	 * 
 	 * @return the given other type
 	 * 
@@ -109,16 +115,18 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * Since <code>undefined</code> (the single instance of <code>OclVoid</code>) conforms to all
-	 * other types, we can also try to call any operation on it. However, only the predefined
-	 * operation <code>oclIsUndefined</code> is actually available on <code>OclVoid</code>.
-	 * Hence, this method is overridden to return a freshly created operation with the given name if
-	 * the {@link #lookupOperation(String, List) super implementation} cannot find the correct
-	 * operation. The new operation instance will have the type
+	 * Since <code>undefined</code> (the single instance of <code>OclVoid</code>
+	 * ) conforms to all other types, we can also try to call any operation on
+	 * it. However, only the predefined operation <code>oclIsUndefined</code> is
+	 * actually available on <code>OclVoid</code>. Hence, this method is
+	 * overridden to return a freshly created operation with the given name if
+	 * the {@link #lookupOperation(String, List) super implementation} cannot
+	 * find the correct operation. The new operation instance will have the type
 	 * {@link OclLibrary#getOclInvalid() OclInvalid} since any operation call on
-	 * <code>undefined</code> should result in <code>invalid</code> (OCL 2.0 Specification,
-	 * Section 11.2).This little implementation trick avoids having to make <code>OclVoid</code> the
-	 * subtype of all model types which would be very expensive.
+	 * <code>undefined</code> should result in <code>invalid</code> (OCL 2.0
+	 * Specification, Section 11.2).This little implementation trick avoids
+	 * having to make <code>OclVoid</code> the subtype of all model types which
+	 * would be very expensive.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupOperation(java.lang.String,
 	 *      java.util.List)
@@ -128,7 +136,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 		Operation operation;
 
-		// try to look up using default implementation (will only find oclIsUndefined and oclIsInvalid)
+		// try to look up using default implementation (will only find
+		// oclIsUndefined and oclIsInvalid)
 		operation = super.lookupOperation(name, paramTypes);
 
 		// if no operation with this name was found, simply make up a new one
@@ -143,18 +152,19 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 			// set the type of the new operation to invalid
 			if (getOclLibrary() == null) {
-				throw new IllegalStateException("The VoidType called '" + getName() //$NON-NLS-1$
-						+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+				throw new IllegalStateException(
+						"The VoidType called '" + getName() //$NON-NLS-1$
+								+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 			}
 
 			operation.setType(getOclLibrary().getOclInvalid());
-			
+
 			for (Type paramType : paramTypes) {
 				Parameter param = PivotModelFactory.eINSTANCE.createParameter();
 				param.setKind(ParameterDirectionKind.IN);
 				param.setName(paramType.getName().toLowerCase());
 				param.setType(paramType);
-				
+
 				operation.addParameter(param);
 			}
 		}
@@ -163,13 +173,14 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * Since <code>undefined</code> conforms to all other types, we can also try to call any
-	 * property on it. Hence, this method is overridden to return a freshly created property with the
-	 * given name. The new property instance will have the type
-	 * {@link OclLibrary#getOclInvalid() OclInvalid} since any property call on <code>undefined</code>
-	 * should result in <code>invalid</code> (OCL 2.0 Specification, Section 11.2). This little
-	 * implementation trick avoids having to make <code>OclVoid</code> the subtype of all model
-	 * types which would be very expensive.
+	 * Since <code>undefined</code> conforms to all other types, we can also try
+	 * to call any property on it. Hence, this method is overridden to return a
+	 * freshly created property with the given name. The new property instance
+	 * will have the type {@link OclLibrary#getOclInvalid() OclInvalid} since
+	 * any property call on <code>undefined</code> should result in
+	 * <code>invalid</code> (OCL 2.0 Specification, Section 11.2). This little
+	 * implementation trick avoids having to make <code>OclVoid</code> the
+	 * subtype of all model types which would be very expensive.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupProperty(java.lang.String)
 	 */
@@ -185,8 +196,9 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 		// set the type of the new property to invalid
 		if (getOclLibrary() == null) {
-			throw new IllegalStateException("The InvalidType called '" + getName() //$NON-NLS-1$
-					+ "' is not contained in the OCL Library."); //$NON-NLS-1$
+			throw new IllegalStateException(
+					"The InvalidType called '" + getName() //$NON-NLS-1$
+							+ "' is not contained in the OCL Library."); //$NON-NLS-1$
 		}
 
 		property.setType(getOclLibrary().getOclInvalid());
@@ -195,9 +207,10 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * Simply returns the name of the <code>VoidType</code> which will be <code>OclVoid</code>
-	 * because the OCL 2.0 Specification defines only this single instance. As a member of the OCL
-	 * Standard Library, <code>OclVoid</code> does not really have a namespace. It is implicitly
+	 * Simply returns the name of the <code>VoidType</code> which will be
+	 * <code>OclVoid</code> because the OCL 2.0 Specification defines only this
+	 * single instance. As a member of the OCL Standard Library,
+	 * <code>OclVoid</code> does not really have a namespace. It is implicitly
 	 * available in all namespaces.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
@@ -210,6 +223,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
@@ -219,8 +233,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOclLibrary(OclLibrary newOclLibrary,
@@ -232,6 +246,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
@@ -245,23 +260,25 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOclLibrary != null)
 				msgs = ((InternalEObject) newOclLibrary).eInverseAdd(this,
-						TypesPackageImpl.OCL_LIBRARY__OCL_VOID, OclLibrary.class, msgs);
+						TypesPackageImpl.OCL_LIBRARY__OCL_VOID,
+						OclLibrary.class, msgs);
 			msgs = basicSetOclLibrary(newOclLibrary, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, newOclLibrary, newOclLibrary));
+					TypesPackageImpl.VOID_TYPE__OCL_LIBRARY, newOclLibrary,
+					newOclLibrary));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
-			NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
 			if (eInternalContainer() != null)
@@ -272,8 +289,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -287,8 +304,8 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -297,13 +314,15 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 		switch (eContainerFeatureID()) {
 		case TypesPackageImpl.VOID_TYPE__OCL_LIBRARY:
 			return eInternalContainer().eInverseRemove(this,
-					TypesPackageImpl.OCL_LIBRARY__OCL_VOID, OclLibrary.class, msgs);
+					TypesPackageImpl.OCL_LIBRARY__OCL_VOID, OclLibrary.class,
+					msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -317,6 +336,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -331,6 +351,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -345,6 +366,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -358,6 +380,7 @@ public class VoidTypeImpl extends TypeImpl implements VoidType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

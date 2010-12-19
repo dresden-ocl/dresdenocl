@@ -35,4 +35,10 @@
 -->
 
 <plugin>
+   <extension
+         point="tudresden.ocl20.pivot.testsuite">
+      <testSuites
+            testSuite="tudresden.ocl20.pivot.essentialocl.types.tests.EssentialOCLAllTests">
+      </testSuites>
+   </extension>
 </plugin>
