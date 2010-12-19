@@ -226,47 +226,49 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 		/* Replace specific templates from the violation macro. */
 		String stringResult = result.getCode();
 
-		if (stringResult.contains(CONSTRAINT_NAME_PATTERN)) {
-			String constraintName = constraint.getName();
-			if (constraintName == null || constraintName.length() == 0)
-				constraintName = "undefined";
+		if (constraint != null) {
+			if (stringResult.contains(CONSTRAINT_NAME_PATTERN)) {
+				String constraintName = constraint.getName();
+				if (constraintName == null || constraintName.length() == 0)
+					constraintName = "undefined";
+				// no else.
+
+				stringResult = stringResult.replaceAll(CONSTRAINT_NAME_PATTERN,
+						constraintName);
+			}
 			// no else.
 
-			stringResult = stringResult.replaceAll(CONSTRAINT_NAME_PATTERN,
-					constraintName);
-		}
-		// no else.
-
-		if (stringResult.contains(CONSTRAINT_BODY_PATTERN)) {
-			stringResult = stringResult.replaceAll(
-					CONSTRAINT_BODY_PATTERN,
-					constraint.getSpecification().getBody().trim()
-							.replaceAll("\r\n", " ").replaceAll("\r", " ")
-							.replaceAll("\n", " "));
-		}
-		// no else.
-
-		if (stringResult.contains(OBJECT_IN_ILLEGAL_STATE_PATTERN)) {
-			ConstrainableElement constrainedElement = constraint
-					.getConstrainedElement().iterator().next();
-
-			/* Static fields must be handled special here. */
-			if (constrainedElement instanceof Feature
-					&& ((Feature) constrainedElement).isStatic()) {
-				stringResult = stringResult.replaceAll(
-						OBJECT_IN_ILLEGAL_STATE_PATTERN,
-						"static field or operation");
+			if (stringResult.contains(CONSTRAINT_BODY_PATTERN)) {
+				stringResult = stringResult.replaceAll(CONSTRAINT_BODY_PATTERN,
+						constraint.getSpecification().getBody().trim()
+								.replaceAll("\r\n", " ").replaceAll("\r", " ")
+								.replaceAll("\n", " "));
 			}
+			// no else.
 
-			else {
-				/*
-				 * TODO Claas: use the variable from the specific template here
-				 * instead.
-				 */
-				stringResult = stringResult.replaceAll(
-						OBJECT_IN_ILLEGAL_STATE_PATTERN,
-						"\" + aClass.toString() + \"");
+			if (stringResult.contains(OBJECT_IN_ILLEGAL_STATE_PATTERN)) {
+				ConstrainableElement constrainedElement = constraint
+						.getConstrainedElement().iterator().next();
+
+				/* Static fields must be handled special here. */
+				if (constrainedElement instanceof Feature
+						&& ((Feature) constrainedElement).isStatic()) {
+					stringResult = stringResult.replaceAll(
+							OBJECT_IN_ILLEGAL_STATE_PATTERN,
+							"static field or operation");
+				}
+
+				else {
+					/*
+					 * TODO Claas: use the variable from the specific template
+					 * here instead.
+					 */
+					stringResult = stringResult.replaceAll(
+							OBJECT_IN_ILLEGAL_STATE_PATTERN,
+							"\" + aClass.toString() + \"");
+				}
 			}
+			// no else.
 		}
 		// no else.
 
