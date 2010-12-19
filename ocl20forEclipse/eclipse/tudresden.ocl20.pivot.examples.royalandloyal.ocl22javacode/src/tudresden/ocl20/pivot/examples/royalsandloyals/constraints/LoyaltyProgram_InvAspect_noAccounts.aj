@@ -12,7 +12,7 @@ public privileged aspect LoyaltyProgram_InvAspect_noAccounts {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -30,15 +30,15 @@ public privileged aspect LoyaltyProgram_InvAspect_noAccounts {
         result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitCollect0$ : aClass.partners) {
-            result2.addAll($implicitCollect0$.deliveredServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            result2.addAll(anElement1.deliveredServices);
         }
         Boolean result1;
         result1 = true;
         
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Service $implicitVariable0$ : result2) {
-            if (!(((Object) $implicitVariable0$.pointsEarned).equals(new Integer(0)) && ((Object) $implicitVariable0$.pointsBurned).equals(new Integer(0)))) {
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement2 : result2) {
+            if (!(((Object) anElement2.pointsEarned).equals(new Integer(0)) && ((Object) anElement2.pointsBurned).equals(new Integer(0)))) {
                 result1 = false;
                 break;
             }
@@ -47,7 +47,8 @@ public privileged aspect LoyaltyProgram_InvAspect_noAccounts {
     
         if (!(!result1 || tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(aClass.membership.accounts))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'noAccounts' (inv noAccounts:    partners.deliveredServices     ->forAll(pointsEarned = 0 and pointsBurned = 0)     implies membership.accounts->isEmpty()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

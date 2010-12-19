@@ -25,7 +25,8 @@ public privileged aspect Class1_PostAspect_Class1 {
     
         if (!new Boolean(true)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testPost02' (post testPost02: true) was violated for Object static field or operation.";
+        	throw new RuntimeException(msg);
         }
         // no else.
     }

@@ -29,7 +29,8 @@ public privileged aspect LoyaltyAccount_PostAspect_isEmpty {
     
         if (!((Object) result).equals(((Object) aClass.points).equals(new Integer(0)))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: result = (points = 0)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

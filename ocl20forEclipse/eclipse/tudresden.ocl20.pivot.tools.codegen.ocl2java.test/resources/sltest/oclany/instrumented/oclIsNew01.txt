@@ -43,7 +43,8 @@ public privileged aspect Class1_PostAspect_postOperation03 {
     
         if (!this.newInstances.containsKey(result)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testOclIsNew' (post testOclIsNew: result.oclIsNew()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

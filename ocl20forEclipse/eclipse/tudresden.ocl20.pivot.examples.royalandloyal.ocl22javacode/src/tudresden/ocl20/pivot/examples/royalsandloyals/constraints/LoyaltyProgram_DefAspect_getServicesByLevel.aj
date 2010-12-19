@@ -22,9 +22,9 @@ public privileged aspect LoyaltyProgram_DefAspect_getServicesByLevel {
         result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel $implicitVariable0$ : aClass.levels) {
-            if ($implicitVariable0$.name.equals(levelName)) {
-                result2.add($implicitVariable0$);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement1 : aClass.levels) {
+            if (anElement1.name.equals(levelName)) {
+                result2.add(anElement1);
             }
             // no else
         }
@@ -32,8 +32,8 @@ public privileged aspect LoyaltyProgram_DefAspect_getServicesByLevel {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel $implicitCollect0$ : result2) {
-            result1.addAll($implicitCollect0$.availableServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement2 : result2) {
+            result1.addAll(anElement2.availableServices);
         }
     
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSet((java.util.List<tudresden.ocl20.pivot.examples.royalsandloyals.Service>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.flatten(result1));

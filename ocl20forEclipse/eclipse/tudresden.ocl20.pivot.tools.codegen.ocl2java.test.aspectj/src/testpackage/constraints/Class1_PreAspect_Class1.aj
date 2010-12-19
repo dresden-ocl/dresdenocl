@@ -22,7 +22,8 @@ public privileged aspect Class1_PreAspect_Class1 {
     before(Integer anInt): Class1Caller(anInt) {
         if (!!(((Integer) anInt) == null)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testPre02' (pre testPre02: not anInt.oclIsUndefined()) was violated for Object static field or operation.";
+        	throw new RuntimeException(msg);
         }
         // no else.
     }

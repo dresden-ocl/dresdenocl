@@ -17,7 +17,7 @@ public privileged aspect LoyaltyAccount_InvAspect_oneOwner {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -32,20 +32,21 @@ public privileged aspect LoyaltyAccount_InvAspect_oneOwner {
         result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitCollect0$ : aClass.transactions) {
-            result2.add($implicitCollect0$.card);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+            result2.add(anElement1.card);
         }
         java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Customer> result1;
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Customer>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard $implicitCollect0$ : result2) {
-            result1.add($implicitCollect0$.owner);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard anElement2 : result2) {
+            result1.add(anElement2.owner);
         }
     
         if (!((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(result1))).equals(new Integer(1))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'oneOwner' (inv oneOwner: transactions.card.owner->asSet()->size() = 1) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

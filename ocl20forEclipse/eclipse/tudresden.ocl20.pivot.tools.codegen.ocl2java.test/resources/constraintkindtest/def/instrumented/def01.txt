@@ -11,7 +11,7 @@ public privileged aspect Class1_DefAspect_defProperty01 {
     /**
      * <p>Defines the field defProperty01 defined by the constraint
      * <code>context Class1
-     *       def: defProperty01: Integer = 42</code></p>
+     *       def: defProperty01: Integer =  42</code></p>
      */
     public Integer testpackage.Class1.defProperty01;
     
@@ -24,7 +24,7 @@ public privileged aspect Class1_DefAspect_defProperty01 {
     /**
      * <p>Initializes the attribute defProperty01 defined by the constraint
      * <code>context Class1
-     *       def: defProperty01: Integer = 42</code></p>
+     *       def: defProperty01: Integer =  42</code></p>
      */
     before(testpackage.Class1 aClass): defProperty01Getter(aClass) {
         aClass.defProperty01 = new Integer(42);

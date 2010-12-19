@@ -35,7 +35,8 @@ public privileged aspect Class1_InvAspect_testInvariant01 {
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
         if (!aClass.isInvariant01Violated) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testInvariant01' (inv testInvariant01: self.isInvariant01Violated) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

@@ -347,7 +347,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 
 		if (selectedConstraint != null) {
 
-			ITransformedCode violationMacro;
+			String violationMacro;
 			boolean inheritanceStatus;
 			int invariantCheckMode;
 
@@ -360,7 +360,7 @@ public class SpecificSettingsPage extends ConstraintViewPage {
 					this.mySettings.getInvariantCheckMode(selectedConstraint);
 
 			/* Update the display for the violation macro. */
-			this.violationMacroText.setText(violationMacro.getCode());
+			this.violationMacroText.setText(violationMacro);
 
 			/* Update the check box for inheritance status. */
 			if (selectedConstraint.getKind() == ConstraintKind.INVARIANT

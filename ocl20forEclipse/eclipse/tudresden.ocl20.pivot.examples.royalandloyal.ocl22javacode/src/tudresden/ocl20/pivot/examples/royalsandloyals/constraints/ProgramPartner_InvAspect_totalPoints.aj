@@ -12,7 +12,7 @@ public privileged aspect ProgramPartner_InvAspect_totalPoints {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -27,20 +27,21 @@ public privileged aspect ProgramPartner_InvAspect_totalPoints {
         result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Service $implicitCollect0$ : aClass.deliveredServices) {
-            result2.add($implicitCollect0$.transaction);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.deliveredServices) {
+            result2.add(anElement1.transaction);
         }
         java.util.ArrayList<Integer> result1;
         result1 = new java.util.ArrayList<Integer>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction $implicitCollect0$ : result2) {
-            result1.add($implicitCollect0$.points);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : result2) {
+            result1.add(anElement2.points);
         }
     
         if (!(new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(result1).intValue()) < new Integer(10000))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'totalPoints' (inv totalPoints: deliveredServices.transaction.points->sum() < 10000) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

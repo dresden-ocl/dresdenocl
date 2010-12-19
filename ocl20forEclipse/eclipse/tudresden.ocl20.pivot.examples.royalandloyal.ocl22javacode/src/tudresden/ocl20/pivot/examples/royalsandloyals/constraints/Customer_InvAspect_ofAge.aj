@@ -31,7 +31,8 @@ public privileged aspect Customer_InvAspect_ofAge {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Customer")) {
         if (!(aClass.age >= new Integer(18))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'ofAge' (inv ofAge: age >= 18) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }
@@ -49,7 +50,8 @@ public privileged aspect Customer_InvAspect_ofAge {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Customer")) {
         if (!(aClass.age >= new Integer(18))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'ofAge' (inv ofAge: age >= 18) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }
@@ -67,7 +69,8 @@ public privileged aspect Customer_InvAspect_ofAge {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Customer")) {
         if (!(aClass.age >= new Integer(18))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'ofAge' (inv ofAge: age >= 18) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

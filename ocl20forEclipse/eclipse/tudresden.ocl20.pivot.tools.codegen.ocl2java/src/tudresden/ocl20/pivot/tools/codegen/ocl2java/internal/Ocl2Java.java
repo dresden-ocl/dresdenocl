@@ -2267,7 +2267,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
 		adviceTemplate.setAttribute("method", operationName);
 
 		/* Probably set the returnType. */
@@ -2469,7 +2470,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
 
 		/* Add the advice code to the aspect template. */
 		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
@@ -2586,7 +2588,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
 
 		/* Probably set that the constrained attribute is static. */
 		if (constrainedProperty.isStatic()) {
@@ -2709,7 +2712,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
 
 		aspectTemplate.setAttribute("advice", adviceTemplate.toString());
 
@@ -2837,9 +2841,10 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
-		adviceTemplate.setAttribute("errorCode", this.settings
-				.getViolationMacro(constraint).getCode());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
+		adviceTemplate.setAttribute("errorCode",
+				this.settings.getViolationMacro(constraint));
 
 		/*
 		 * Probably add called attributes as parameters (only if the invariant
@@ -2976,10 +2981,11 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
 		adviceTemplate.setAttribute("method", operationName);
-		adviceTemplate.setAttribute("errorCode", this.settings
-				.getViolationMacro(constraint).getCode());
+		adviceTemplate.setAttribute("errorCode",
+				this.settings.getViolationMacro(constraint));
 
 		/* Probably set the returnType. */
 		if (!operationResultType.equals(this.templateGroup.getTemplate(
@@ -3170,10 +3176,11 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		adviceTemplate.setAttribute("constCode", constrainedCode.getCode());
 		adviceTemplate.setAttribute("constExp", constrainedCode.getResultExp());
 		adviceTemplate.setAttribute("oclBody", constraint.getSpecification()
-				.getBody().trim());
+				.getBody().trim().replaceAll("\r\n", " ").replaceAll("\r", " ")
+				.replaceAll("\n", " "));
 		adviceTemplate.setAttribute("method", operationName);
-		adviceTemplate.setAttribute("errorCode", this.settings
-				.getViolationMacro(constraint).getCode());
+		adviceTemplate.setAttribute("errorCode",
+				this.settings.getViolationMacro(constraint));
 
 		/* Probably set the returnType. */
 		if (!operationResultType.equals(this.templateGroup.getTemplate(

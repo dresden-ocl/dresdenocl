@@ -25,7 +25,8 @@ public privileged aspect LoyaltyProgram_PreAspect_addService {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
         if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(aClass.partners, aPartner)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (pre: partners->includes(aPartner)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

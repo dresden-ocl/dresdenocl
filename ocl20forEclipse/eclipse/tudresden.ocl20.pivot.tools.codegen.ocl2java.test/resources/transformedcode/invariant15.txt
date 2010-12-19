@@ -42,7 +42,8 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
     
         if (!(!(aClass.points > new Integer(0)) || result1)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (inv: points > 0 implies transactions->exists(t | t.points > 0)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

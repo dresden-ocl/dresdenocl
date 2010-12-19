@@ -30,21 +30,22 @@ public privileged aspect LoyaltyProgram_PostAspect2 {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitCollect0$ : aClass.partners) {
-            result1.addAll($implicitCollect0$.deliveredServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            result1.addAll(anElement1.deliveredServices);
         }
 
         java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service> result2;
         result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel $implicitCollect0$ : aClass.levels) {
-            result2.addAll($implicitCollect0$.availableServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement2 : aClass.levels) {
+            result2.addAll(anElement2.availableServices);
         }
     
         if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService) && tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result2, aService))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: partners.deliveredServices->includes(aService) and levels.availableServices->includes(aService)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

@@ -31,25 +31,25 @@ public privileged aspect ProgramPartner_DefAspect_getBurningTransactions {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Service $implicitCollect0$ : aClass.deliveredServices) {
-            result1.add($implicitCollect0$.transaction);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Service anElement1 : aClass.deliveredServices) {
+            result1.add(anElement1.transaction);
         }
         java.util.HashSet collection1;
         collection1 = new java.util.HashSet();
-        java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> resultSet;
-        resultSet = collection1;
+        java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result2;
+        result2 = collection1;
         /* IterateExp: Iterate through all elements and perform an operation on them. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction t : result1) {
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : result1) {
             java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> ifExpResult1;
             
-            if (t.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Burning.class.getCanonicalName())) {
-                ifExpResult1 = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.including(resultSet, t);
+            if (anElement2.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Burning.class.getCanonicalName())) {
+                ifExpResult1 = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.including(result2, anElement2);
             } else {
-                ifExpResult1 = resultSet;
+                ifExpResult1 = result2;
             }
-            resultSet = ifExpResult1;
+            result2 = ifExpResult1;
         }
     
-        return resultSet;
+        return result2;
     }
 }

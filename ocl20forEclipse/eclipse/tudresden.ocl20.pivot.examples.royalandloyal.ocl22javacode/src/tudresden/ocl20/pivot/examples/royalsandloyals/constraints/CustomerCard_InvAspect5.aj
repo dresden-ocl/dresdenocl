@@ -17,7 +17,7 @@ public privileged aspect CustomerCard_InvAspect5 {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -50,7 +50,8 @@ public privileged aspect CustomerCard_InvAspect5 {
     
         if (!ifExpResult1) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (inv:  let correctDate : Boolean =   self.validFrom.isBefore(Date::now()) and   self.validThru.isAfter(Date::now()) in   if valid then     correctDate = true   else     correctDate = false   endif) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

@@ -12,7 +12,7 @@ public privileged aspect LoyaltyProgram_InvAspect_firstLevel {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -25,7 +25,8 @@ public privileged aspect LoyaltyProgram_InvAspect_firstLevel {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
         if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.first(aClass.levels).name.equals("Silver")) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'firstLevel' (inv firstLevel: levels->first().name = 'Silver') was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

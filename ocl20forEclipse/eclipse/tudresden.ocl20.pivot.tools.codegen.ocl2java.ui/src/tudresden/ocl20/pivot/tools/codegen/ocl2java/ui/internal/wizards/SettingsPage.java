@@ -232,7 +232,7 @@ public class SettingsPage extends WizardPage {
 		violationMacroText = new Text(violationMacroGroup, SWT.MULTI | SWT.BORDER);
 		violationMacroText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true));
-		violationMacroText.setText(this.settings.getViolationMacro(null).getCode());
+		violationMacroText.setText(this.settings.getViolationMacro(null));
 
 		/* Add a change listener to react on updates. */
 		violationMacroText.addModifyListener(new ModifyListener() {
@@ -322,7 +322,7 @@ public class SettingsPage extends WizardPage {
 	 */
 	private boolean isViolationMacroSet() {
 
-		return this.settings.getViolationMacro(null).getCode().length() > 0;
+		return this.settings.getViolationMacro(null).length() > 0;
 	}
 
 	/**

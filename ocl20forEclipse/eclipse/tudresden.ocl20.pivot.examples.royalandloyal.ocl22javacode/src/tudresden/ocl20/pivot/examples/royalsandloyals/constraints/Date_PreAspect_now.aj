@@ -22,7 +22,8 @@ public privileged aspect Date_PreAspect_now {
     before(): nowCaller() {
         if (!new Boolean(true)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (pre: true) was violated for Object static field or operation.";
+        	throw new RuntimeException(msg);
         }
         // no else.
     }

@@ -25,7 +25,8 @@ public privileged aspect Transaction_PreAspect_getProgram {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Transaction")) {
         if (!aClass.getClass().getCanonicalName().equals(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction.class.getCanonicalName())) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (pre: self.oclIsTypeOf(Transaction)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

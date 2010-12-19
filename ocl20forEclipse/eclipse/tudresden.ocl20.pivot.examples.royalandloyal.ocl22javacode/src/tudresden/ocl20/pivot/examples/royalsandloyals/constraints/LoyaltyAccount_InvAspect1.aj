@@ -12,7 +12,7 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -27,8 +27,8 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
         result1 = false;
         
         /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction t : aClass.transactions) {
-            if ((t.points > new Integer(0))) {
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+            if ((anElement1.points > new Integer(0))) {
                 result1 = true;
                 break;
             }
@@ -37,7 +37,8 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
     
         if (!(!(aClass.points > new Integer(0)) || result1)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (inv: points > 0 implies transactions->exists(t | t.points > 0)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

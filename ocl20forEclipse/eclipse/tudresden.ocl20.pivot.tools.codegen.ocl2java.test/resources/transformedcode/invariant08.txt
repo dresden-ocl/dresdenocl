@@ -23,10 +23,7 @@ public privileged aspect LoyaltyProgram_InvAspect_noAccounts {
     /**
      * <p><code>Checks an invariant on the class LoyaltyProgram defined by the constraint
      * <code>context LoyaltyProgram
-     *       inv noAccounts: 
-      partners.deliveredServices
-        ->forAll(pointsEarned = 0 and pointsBurned = 0)
-        implies membership.accounts->isEmpty()</code></p>
+     *       inv noAccounts:    partners.deliveredServices     ->forAll(pointsEarned = 0 and pointsBurned = 0)     implies membership.accounts->isEmpty()</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
@@ -52,7 +49,8 @@ public privileged aspect LoyaltyProgram_InvAspect_noAccounts {
     
         if (!(!result1 || tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(aClass.membership.accounts))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'noAccounts' (inv noAccounts:    partners.deliveredServices     ->forAll(pointsEarned = 0 and pointsBurned = 0)     implies membership.accounts->isEmpty()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

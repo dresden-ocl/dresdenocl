@@ -12,7 +12,7 @@ public privileged aspect Membership_InvAspect_levelAndColor {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.Membership.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -28,7 +28,8 @@ public privileged aspect Membership_InvAspect_levelAndColor {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Membership")) {
         if (!((!aClass.currentLevel.name.equals("Silver") || aClass.card.color.equals(tudresden.ocl20.pivot.examples.royalsandloyals.Color.silver)) && (!aClass.currentLevel.name.equals("Gold") || aClass.card.color.equals(tudresden.ocl20.pivot.examples.royalsandloyals.Color.gold)))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'levelAndColor' (inv levelAndColor:   (currentLevel.name = 'Silver' implies card.color = Color::silver)   and   (currentLevel.name = 'Gold' implies card.color = Color::gold)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

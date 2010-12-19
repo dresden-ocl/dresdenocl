@@ -44,7 +44,8 @@ public privileged aspect LoyaltyProgram_PostAspect_addService {
     
         if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService) && tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result2, aService))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: partners.deliveredServices->includes(aService) and levels.availableServices->includes(aService)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

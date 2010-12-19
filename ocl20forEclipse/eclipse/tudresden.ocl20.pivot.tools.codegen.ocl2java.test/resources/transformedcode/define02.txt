@@ -11,8 +11,7 @@ public privileged aspect LoyaltyProgram_DefAspect_getServicesByLevel {
     /**
      * <p>Defines the method getServicesByLevel(String levelName) defined by the constraint
      * <code>context LoyaltyProgram
-     *       def: getServicesByLevel(levelName: String): Set(Service)
-         = levels->select(name = levelName).availableServices->flatten()->asSet()</code></p>
+     *       def: getServicesByLevel(levelName: String): Set(Service)      = levels->select(name = levelName).availableServices->flatten()->asSet()</code></p>
      */
     public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Service> tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.getServicesByLevel(String levelName) {
     	/* Self variable probably used within the definition. */

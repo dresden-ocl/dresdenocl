@@ -29,7 +29,8 @@ public privileged aspect Transaction_PostAspect_getProgram {
     
         if (!result.equals(aClass.card.membership.program)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: result = self.card.membership.program) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

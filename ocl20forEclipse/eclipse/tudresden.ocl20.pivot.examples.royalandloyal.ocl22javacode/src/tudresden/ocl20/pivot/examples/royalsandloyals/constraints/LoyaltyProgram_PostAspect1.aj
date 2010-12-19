@@ -30,13 +30,14 @@ public privileged aspect LoyaltyProgram_PostAspect1 {
         result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel $implicitCollect0$ : aClass.levels) {
-            result1.addAll($implicitCollect0$.availableServices);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement1 : aClass.levels) {
+            result1.addAll(anElement1.availableServices);
         }
     
         if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: levels.availableServices->includes(aService)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

@@ -36,7 +36,8 @@ public privileged aspect Customer_PostAspect_birthdayHappens {
     
         if (!((Object) aClass.age).equals((atPreValue1 + new Integer(1)))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: age = age@pre + 1) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

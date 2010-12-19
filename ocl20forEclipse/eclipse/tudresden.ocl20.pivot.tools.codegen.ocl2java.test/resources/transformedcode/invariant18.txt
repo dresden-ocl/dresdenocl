@@ -30,7 +30,8 @@ public privileged aspect Burning_InvAspect1 {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Burning")) {
         if (!((Object) aClass.points).equals(((tudresden.ocl20.pivot.examples.royalsandloyals.Transaction) aClass).points)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (inv: self.points = self.oclAsType(Transaction).points) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

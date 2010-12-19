@@ -43,7 +43,8 @@ public privileged aspect Transaction_PostAspect_getProgram {
     
         if (!!this.newInstances.containsKey(result)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: not result.oclIsNew()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

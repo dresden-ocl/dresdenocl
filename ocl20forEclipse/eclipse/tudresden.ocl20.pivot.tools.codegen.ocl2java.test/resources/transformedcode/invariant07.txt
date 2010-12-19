@@ -23,8 +23,7 @@ public privileged aspect Customer_InvAspect_sizesAgree {
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
-     *       inv sizesAgree:
-        programs->size() = cards->select( valid = true )->size()</code></p>
+     *       inv sizesAgree:     programs->size() = cards->select( valid = true )->size()</code></p>
      */
     after(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Customer. */
@@ -42,7 +41,8 @@ public privileged aspect Customer_InvAspect_sizesAgree {
     
         if (!((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.programs)).equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'sizesAgree' (inv sizesAgree:     programs->size() = cards->select( valid = true )->size()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

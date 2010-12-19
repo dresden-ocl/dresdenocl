@@ -42,7 +42,8 @@ public privileged aspect CustomerCard_InvAspect_checkDates {
         if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard")) {
         if (!aClass.validFrom.isBefore(aClass.validThru)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'checkDates' (inv checkDates: validFrom.isBefore(validThru)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

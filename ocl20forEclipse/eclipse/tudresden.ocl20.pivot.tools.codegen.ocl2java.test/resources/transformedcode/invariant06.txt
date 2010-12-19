@@ -42,7 +42,8 @@ public privileged aspect LoyaltyProgram_InvAspect_minServices {
     
         if (!result1) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'minServices' (inv minServices: partners->forAll(deliveredServices->size() >= 1)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

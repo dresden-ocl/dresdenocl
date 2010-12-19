@@ -23,11 +23,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
 import tudresden.ocl20.pivot.tools.codegen.code.impl.TransformedCodeImpl;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 
 /**
  * <p>
@@ -37,6 +38,24 @@ import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
  * @author Claas Wilke
  */
 public class Ocl2JavaSettings implements IOcl2JavaSettings {
+
+	/**
+	 * Pattern used for the body of a violated constraint within a violation
+	 * macro.
+	 */
+	public static final String CONSTRAINT_BODY_PATTERN = "<CONSTRAINT_BODY>";
+
+	/**
+	 * Pattern used for the name of a violated constraint within a violation
+	 * macro.
+	 */
+	public static final String CONSTRAINT_NAME_PATTERN = "<CONSTRAINT_NAME>";
+
+	/**
+	 * Pattern used for the String representation of the object violating a
+	 * constraint within a violation macro.
+	 */
+	public static final String OBJECT_IN_ILLEGAL_STATE_PATTERN = "<OBJECT_IN_ILLEGAL_STATE>";
 
 	/** The basis package. */
 	protected String basisPackage = "";
@@ -123,8 +142,11 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 		this.defaultViolationMacro = new TransformedCodeImpl();
 		this.defaultViolationMacro
 				.addCode("// TODO Auto-generated code executed when constraint is violated.");
-		this.defaultViolationMacro
-				.addCode("throw new RuntimeException(\"Error: Constraint was violated.\");");
+		this.defaultViolationMacro.addCode("String msg = \"Error: Constraint '"
+				+ CONSTRAINT_NAME_PATTERN + "' (" + CONSTRAINT_BODY_PATTERN
+				+ ") was violated for Object "
+				+ OBJECT_IN_ILLEGAL_STATE_PATTERN + ".\";");
+		this.defaultViolationMacro.addCode("throw new RuntimeException(msg);");
 
 		this.violationMacros = new HashMap<Constraint, ITransformedCode>();
 	}
@@ -186,11 +208,10 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.IOcl2CodeSettings#getViolationMacro(tudresden
-	 * .ocl20.pivot.pivotmodel.Constraint)
+	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings#
+	 * getViolationMacro(tudresden.ocl20.pivot.pivotmodel.Constraint)
 	 */
-	public ITransformedCode getViolationMacro(Constraint constraint) {
+	public String getViolationMacro(Constraint constraint) {
 
 		ITransformedCode result;
 
@@ -202,7 +223,54 @@ public class Ocl2JavaSettings implements IOcl2JavaSettings {
 			result = this.defaultViolationMacro;
 		}
 
-		return result;
+		/* Replace specific templates from the violation macro. */
+		String stringResult = result.getCode();
+
+		if (stringResult.contains(CONSTRAINT_NAME_PATTERN)) {
+			String constraintName = constraint.getName();
+			if (constraintName == null || constraintName.length() == 0)
+				constraintName = "undefined";
+			// no else.
+
+			stringResult = stringResult.replaceAll(CONSTRAINT_NAME_PATTERN,
+					constraintName);
+		}
+		// no else.
+
+		if (stringResult.contains(CONSTRAINT_BODY_PATTERN)) {
+			stringResult = stringResult.replaceAll(
+					CONSTRAINT_BODY_PATTERN,
+					constraint.getSpecification().getBody().trim()
+							.replaceAll("\r\n", " ").replaceAll("\r", " ")
+							.replaceAll("\n", " "));
+		}
+		// no else.
+
+		if (stringResult.contains(OBJECT_IN_ILLEGAL_STATE_PATTERN)) {
+			ConstrainableElement constrainedElement = constraint
+					.getConstrainedElement().iterator().next();
+
+			/* Static fields must be handled special here. */
+			if (constrainedElement instanceof Feature
+					&& ((Feature) constrainedElement).isStatic()) {
+				stringResult = stringResult.replaceAll(
+						OBJECT_IN_ILLEGAL_STATE_PATTERN,
+						"static field or operation");
+			}
+
+			else {
+				/*
+				 * TODO Claas: use the variable from the specific template here
+				 * instead.
+				 */
+				stringResult = stringResult.replaceAll(
+						OBJECT_IN_ILLEGAL_STATE_PATTERN,
+						"\" + aClass.toString() + \"");
+			}
+		}
+		// no else.
+
+		return stringResult;
 	}
 
 	/*

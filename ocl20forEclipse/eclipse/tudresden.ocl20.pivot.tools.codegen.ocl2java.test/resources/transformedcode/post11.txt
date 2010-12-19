@@ -57,7 +57,8 @@ public privileged aspect LoyaltyProgram_PostAspect_enroll {
     
         if (!aClass.membership.equals(atPreValue1)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: membership = membership@pre) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

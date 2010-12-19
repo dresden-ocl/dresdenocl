@@ -31,7 +31,8 @@ public privileged aspect Class1_InvAspect_testInvariant02 {
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
         if (!aClass.isInvariant02Violated) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testInvariant02' (inv testInvariant02: self.isInvariant02Violated) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }
@@ -49,7 +50,8 @@ public privileged aspect Class1_InvAspect_testInvariant02 {
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
         if (!aClass.isInvariant02Violated) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testInvariant02' (inv testInvariant02: self.isInvariant02Violated) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }
@@ -67,7 +69,8 @@ public privileged aspect Class1_InvAspect_testInvariant02 {
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
         if (!aClass.isInvariant02Violated) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testInvariant02' (inv testInvariant02: self.isInvariant02Violated) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

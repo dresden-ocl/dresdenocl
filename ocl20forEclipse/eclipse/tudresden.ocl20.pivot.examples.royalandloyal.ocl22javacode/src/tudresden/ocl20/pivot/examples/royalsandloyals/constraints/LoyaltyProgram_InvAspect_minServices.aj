@@ -12,7 +12,7 @@ public privileged aspect LoyaltyProgram_InvAspect_minServices {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -27,8 +27,8 @@ public privileged aspect LoyaltyProgram_InvAspect_minServices {
         result1 = true;
         
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner $implicitVariable0$ : aClass.partners) {
-            if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size($implicitVariable0$.deliveredServices) >= new Integer(1))) {
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(anElement1.deliveredServices) >= new Integer(1))) {
                 result1 = false;
                 break;
             }
@@ -37,7 +37,8 @@ public privileged aspect LoyaltyProgram_InvAspect_minServices {
     
         if (!result1) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'minServices' (inv minServices: partners->forAll(deliveredServices->size() >= 1)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

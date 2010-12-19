@@ -37,7 +37,8 @@ public privileged aspect LoyaltyProgram_PostAspect_enroll {
     
         if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.equals(aClass.participants, tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.including(atPreValue1, c))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (post: participants = participants@pre->including(c)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

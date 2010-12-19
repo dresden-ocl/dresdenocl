@@ -17,8 +17,7 @@ public privileged aspect LoyaltyAccount_DeriveAspect_totalPointsEarned {
     /**
      * <p>Derives the attribute totalPointsEarned defined by the constraint
      * <code>context LoyaltyAccount
-     *       derive: transactions->select(
-    	oclIsTypeOf(Earning)).points->sum()</code></p>
+     *       derive: transactions->select( 	oclIsTypeOf(Earning)).points->sum()</code></p>
      */
     before(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): totalPointsEarnedGetter(aClass) {
         java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result2;

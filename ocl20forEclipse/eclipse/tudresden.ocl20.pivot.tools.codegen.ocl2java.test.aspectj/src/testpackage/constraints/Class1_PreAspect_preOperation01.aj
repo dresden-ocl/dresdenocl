@@ -25,7 +25,8 @@ public privileged aspect Class1_PreAspect_preOperation01 {
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
         if (!!(((Integer) anInt) == null)) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testPre01' (pre testPre01: not anInt.oclIsUndefined()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

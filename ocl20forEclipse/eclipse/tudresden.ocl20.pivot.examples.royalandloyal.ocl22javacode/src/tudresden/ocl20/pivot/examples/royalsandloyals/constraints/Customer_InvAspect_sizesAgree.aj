@@ -17,7 +17,7 @@ public privileged aspect Customer_InvAspect_sizesAgree {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Customer#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.Customer.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -33,16 +33,17 @@ public privileged aspect Customer_InvAspect_sizesAgree {
         result1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard $implicitVariable0$ : aClass.cards) {
-            if (((Object) $implicitVariable0$.valid).equals(new Boolean(true))) {
-                result1.add($implicitVariable0$);
+        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard anElement1 : aClass.cards) {
+            if (((Object) anElement1.valid).equals(new Boolean(true))) {
+                result1.add(anElement1);
             }
             // no else
         }
     
         if (!((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.programs)).equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'sizesAgree' (inv sizesAgree:     programs->size() = cards->select( valid = true )->size()) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

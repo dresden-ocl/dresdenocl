@@ -45,7 +45,8 @@ public privileged aspect ProgramPartner_InvAspect_totalPoints {
     
         if (!(new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(result1).intValue()) < new Integer(10000))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'totalPoints' (inv totalPoints: deliveredServices.transaction.points->sum() < 10000) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

@@ -12,7 +12,7 @@ public privileged aspect Service_InvAspect3 {
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Service#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Service aClass):
-    	call(void tudresden.ocl20.pivot.examples.royalsandloyals.Service.checkInvariants())
+    	call(void checkInvariants())
     	&& target(aClass);
     
     /**
@@ -38,7 +38,8 @@ public privileged aspect Service_InvAspect3 {
     
         if (!((Object) result1).equals(new Boolean(false))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'undefined' (inv: self.oclIsInvalid() = false) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }

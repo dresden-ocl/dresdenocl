@@ -29,7 +29,8 @@ public privileged aspect Class1_PostAspect_postOperation01 {
     
         if (!((Object) result).equals((anInt * new Integer(2)))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testPost01' (post testPost01: result = anInt * 2) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
     

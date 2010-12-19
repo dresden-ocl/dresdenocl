@@ -36,7 +36,8 @@ public privileged aspect Class1_PostAspect_postOperation02 {
     
         if (!((Object) atPreValue1).equals((aClass.anInteger01 - new Integer(1)))) {
         	// TODO Auto-generated code executed when constraint is violated.
-        	throw new RuntimeException("Error: Constraint was violated.");
+        	String msg = "Error: Constraint 'testAtPre02' (post testAtPre02: self.anInteger01@pre = self.anInteger01 - 1) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
         }
         // no else.
         }
