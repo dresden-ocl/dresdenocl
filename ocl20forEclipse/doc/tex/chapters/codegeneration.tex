@@ -234,9 +234,36 @@ should be valid before data transmission only, he should use the strategy
 
 Finally, we can specify a \keyword{Violation Macro} which specifies the code, 
 which will be executed when a constraint is violated during runtime. By default,
-the violation macro throws a run-time exception. We also want to have a run-time
-exception thrown when our constraint is violated. Thus, we do not change the 
-violation macro and continue with the \eclipse{Next} button.
+the violation macro throws a run-time exception containing a message saying
+which constraint was violated by which runtime object. Whithin such messages,
+some specific keywords can be used to declare information such as the violated
+constraint's name or body. Table~\ref{tab:codegen:patterns} gives an overview
+over the allowed keywords and their meaning. We also want to have a run-time exception thrown
+when our constraint is violated. Thus, we do not change the violation macro and continue with the \eclipse{Next} button.
+
+\begin{table}[h]
+\begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+    \textbf{Keyword} & \textbf{Meaning within generated error message} \\
+    \hline
+    \texttt{<CONSTRAINT\_NAME>} & 
+    The name of the constraint violated during runtime. If the constraint has no
+    name, the term \texttt{undefined} will be used instead.
+    \\
+    \hline
+    \texttt{<CONSTAINTS\_BODY>} & 
+    The body (\acs{OCL} expression) of the constraint violated during runtime.
+    \\
+    \hline
+    \texttt{<OBJECT\_IN\_ILLEGAL\_STATE>} & 
+    The Object causing the constraint violation at runtime. The keyword will be
+    replaced by calling the \texttt{.toString()} method of the object.
+    \\
+    \hline
+\end{tabular}
+\caption{Keywords allowed to parameterize messages within violation macros.}
+\label{tab:codegen:patterns}
+\end{table}
 
 
 \subsection{Constraint-Specific Settings}
