@@ -70,14 +70,17 @@ differences exist between Dresden OCL and the OCL specification:
 
 \begin{itemize}
   \item Dresden OCL does not support the operation OclAny.oclLocale() introduced
-  	within OCL 2.3 that can be used to implement different behavior for
-  	\texttt{String.toLowerCase()}, \texttt{String.toUperCase()},
-  	\texttt{String.<(String)}, \texttt{String.>(String)},
-  	\texttt{String.<=(String)}, and \texttt{String.>=(String)}. Since Dresden OCL
-  	is implemented in Java, it uses the semantics of
+  	within OCL 2.3 that can be used to implement different behavior for the
+  	\texttt{String} operations \texttt{toLowerCase()},
+  	\texttt{to\-Upper\-Case()}, \texttt{<(String)}, \texttt{>(String)},
+  	\texttt{<=(String)}, and \texttt{>=(String)}.
+  	Since Dresden OCL is implemented in Java, it uses the semantics of
   	\texttt{java.lang.String.toLowerCase()},
-  	\texttt{java.lang.String.toUpperCase()}, and
-  	\texttt{java.lang.String.compareTo(String)} instead.
+  	\texttt{to\-Upper\-Case()}, and
+  	\texttt{compareTo(String)} instead.
+  \item Dresden OCL does not support the expression of
+  	UnlimitedNaturalExpressions to define multiplicities within constraints such
+  	as \texttt{(1 .. *)}.
 \end{itemize}
 	
 	
@@ -180,10 +183,9 @@ are neither \code{null} nor \code{invalid}. Otherwise the operand will result in
 of two given \acs{OCL} expressions. Since \acs{OCL} values can be both
 \code{null} or \code{invalid}, it is important to know how these operators 
 behave when used with \code{null} and \code{invalid} values. According to the 
-specification, comparing two \acs{OCL} values results in an illegal state when 
-one of the two values is either \code{null} or \code{invalid}. However, it is
-not specified if the comparison results in \code{null} or 
-\code{invalid}~\cite[p. 195]{spec:OCL2-2}. In some situations this can lead to 
+specification, comparing two \acs{OCL} values results in \code{invalid} when 
+one of the two values is either \code{null} or
+\code{invalid}~\cite[p.~195]{spec:OCL2-2}. In some situations this can lead to
 problems during evaluation, e.g., when iterating on an \acs{OCL} collection 
 containing \code{null} values.
 
