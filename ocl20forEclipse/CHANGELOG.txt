@@ -31,6 +31,9 @@ Release 3.X (Not scheduled yet)
   - OclAny.oclIsUndefined() now works on Java primitive types as well.
   - IsUnique() iterators are now transformed correctly if their body expression result
     in another type than the collection's element type.
+  - The patterns <CONSTRAINT_NAME>, <CONSTAINTS_BODY>, and <OBJECT_IN_ILLEGAL_STATE>
+    can now be used to parameterize error messages in violation macros constraint 
+    specific.
 
 * Changes on Ocl2SQL
   - for nested where statements now generated join statements
