@@ -57,7 +57,7 @@ Constraints and Model are kindly provided by Nomos Software (http://www.nomos-so
             hasPages="false"
             icon="icons/example.gif"
             id="tudresden.ocl20.pivot.examples.ui.wizard.royalandloyal"
-            name="Royal and Loyal Example (UML/Java)a)"
+            name="Royal and Loyal Example (UML/Java)"
             project="true">
          <description>
             Creates a project containing the well-known Royal &amp; Loyal UML model from Warmer &amp; Kleppe, some OCL constraints and a Java model instance.
@@ -83,7 +83,7 @@ This example can be used for OCL interpretation.
       <wizard
             canFinishEarly="true"
             category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.LivingExampleWizard"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.UniversityExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
             id="tudresden.ocl20.pivot.examples.ui.wizard.university"

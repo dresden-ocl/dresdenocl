@@ -11,7 +11,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.common,
  org.eclipse.emf.common.ui,
  tudresden.ocl20.logging,
- tudresden.ocl20.pivot.examples.simple
+ tudresden.ocl20.pivot.examples.simple,
+ tudresden.ocl20.pivot.examples.living,
+ tudresden.ocl20.pivot.examples.pain,
+ tudresden.ocl20.pivot.examples.pml,
+ tudresden.ocl20.pivot.examples.royalandloyal;bundle-version="3.0.0",
+ tudresden.ocl20.pivot.examples.university
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.examples.ui.wizard
