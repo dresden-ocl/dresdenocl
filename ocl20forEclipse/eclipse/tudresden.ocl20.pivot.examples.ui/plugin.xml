@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="tudresden.ocl20.pivot.examples.ui.category"
+            name="Dresden OCL Examples">
+      </category>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.LivingExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.living"
+            name="Living Example (Java)"
+            project="true">
+         <description>
+            Creates a project containing a simple Java model and some OCL constraints.
+
+This example can be used for OCL parsing and SQL code generation.
+         </description>
+      </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.PainExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.pain"
+            name="SEPA/Pain Example (XML)"
+            project="true">
+         <description>
+            Creates a project containing an XML Schema as a model and three different instances of this XML Schema that can be used for OCL interpretation of contained OCL constraints.
+
+Constraints and Model are kindly provided by Nomos Software (http://www.nomos-software.com/)
+         </description>
+      </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.PmlExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.pain"
+            name="PML Example (Ecore)"
+            project="true">
+         <description>
+            Creates a project containing an EMF Ecore model and different Ecore instances that can be used for OCL interpretation of contained OCL constraints.
+         </description>
+      </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.RoyalAndLoyalExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.royalandloyal"
+            name="Royal and Loyal Example (UML/Java)a)"
+            project="true">
+         <description>
+            Creates a project containing the well-known Royal &amp; Loyal UML model from Warmer &amp; Kleppe, some OCL constraints and a Java model instance.
+
+This example can be used for OCL interpretation.
+         </description>
+      </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.SimpleExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.simple"
+            name="Simple Example (UML/Java)"
+            project="true">
+         <description>
+            Creates a project containing a simple UML/Java model, some OCL constraints and a simple Java model instance.
+
+This example can be used for OCL interpretation.
+         </description>
+      </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ui.wizard.LivingExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.university"
+            name="University Example (UML)"
+            project="true">
+         <description>
+            Creates a project containing a simple UML model and some OCL constraints.
+
+This example can be used for OCL parsing and SQL code generation.
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

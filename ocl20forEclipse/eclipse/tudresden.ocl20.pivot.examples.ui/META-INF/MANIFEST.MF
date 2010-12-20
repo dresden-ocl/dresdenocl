@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL Example Creation Wizards
+Bundle-SymbolicName: tudresden.ocl20.pivot.examples.ui;singleton:=true
+Bundle-Version: 3.0.0.qualifier
+Bundle-Activator: tudresden.ocl20.pivot.examples.ui.ExampleUiPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ org.eclipse.emf.common,
+ org.eclipse.emf.common.ui,
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.examples.simple
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
