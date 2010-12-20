@@ -49,7 +49,7 @@ public class JavaOclAnyTest {
 	private final OclString invalid =
 			myStandardLibraryFactory.createOclInvalid(EssentialOclPlugin
 					.getOclLibraryProvider().getOclLibrary().getOclString(),
-					new RuntimeException("invlaid string"));
+					new RuntimeException("invalid string"));
 
 	@Test
 	public void testOclAsType() {
