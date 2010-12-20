@@ -20,6 +20,7 @@ package tudresden.ocl20.pivot.interpreter.test.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +29,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.parser.ParseException;
@@ -98,9 +100,7 @@ public class TestOclInvalid extends AbstractInterpreterTest {
 		assertEquals(1, results.size());
 
 		this.assertIsInvalid(results.get(0));
-		assertEquals(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-				.getOclInteger(), results.get(0).getResult().oclType()
-				.getType());
+		assertTrue(results.get(0).getResult() instanceof OclInteger);
 	}
 
 	/**
@@ -125,7 +125,6 @@ public class TestOclInvalid extends AbstractInterpreterTest {
 		assertEquals(1, results.size());
 
 		this.assertIsInvalid(results.get(0));
-		assertEquals(results.get(0).getModelObject().getType(), results.get(0)
-				.getResult().oclType().getType());
+		assertTrue(results.get(0).getResult() instanceof OclModelInstanceObject);
 	}
 }
