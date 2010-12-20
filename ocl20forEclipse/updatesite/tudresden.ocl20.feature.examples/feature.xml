@@ -190,6 +190,11 @@ Library.
       <import plugin="tudresden.ocl20.pivot.metamodels.xsd" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.common.ui"/>
+      <import plugin="tudresden.ocl20.logging"/>
    </requires>
 
    <plugin
@@ -222,6 +227,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.examples.university"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
