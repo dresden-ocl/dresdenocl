@@ -40,6 +40,10 @@ Release 3.X (Not scheduled yet)
   - the IteratorExp of OCL will now correctly generated to SQL
   - difference sql code for managed and not managed key references (new template) 
 
+GUI
+---
+* All Examples can now be easily import into Eclipse using import wizards.
+
 Tests
 -----
 * Ocl2Java
