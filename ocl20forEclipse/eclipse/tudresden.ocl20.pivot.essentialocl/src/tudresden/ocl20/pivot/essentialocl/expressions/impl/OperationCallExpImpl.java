@@ -595,12 +595,15 @@ public class OperationCallExpImpl extends FeatureCallExpImpl implements
 					+ allInstancesOperation + ") - enter"); //$NON-NLS-1$
 		}
 
-		// determine the source type
+		/* Determine the source type. */
 		Type srcType = ((TypeType) getSourceType()).getRepresentedType();
 
-		// allInstances may only refer to types with a finite number of
-		// instances
-		if (srcType instanceof PrimitiveType
+		/*
+		 * allInstances may only refer to types with a finite number of
+		 * instances.
+		 */
+		if ((srcType instanceof PrimitiveType && ((PrimitiveType) srcType)
+				.getKind() != PrimitiveTypeKind.BOOLEAN)
 				|| srcType instanceof CollectionType
 				|| srcType instanceof TupleType) {
 			throw new WellformednessException(this,
