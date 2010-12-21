@@ -1,0 +1,9 @@
+package package1::package2
+
+/* The body expression might be a collection of the same type as the source
+ * expression. */
+context Type1
+def: testClosurePositive01 : Set(Type1) =
+self.asSet()->closure(aType1.asSet())
+
+endpackage

@@ -4,6 +4,10 @@ Changes and Bugs fixed during the different Releases
 Release 3.X (Not scheduled yet)
 ===================================
 
+* OCL 2.3 is now supported by Dresden OCL
+  - The new closure() iterator is supported by parser, interpreter and Ocl2Java.
+  - The String operations <, <=, >=, > are supported.
+  
 * A Bug in the UML2 Metamodel has been fixed.
   - Class diagrams using stereotypes are now adapted correctly.
   
@@ -12,6 +16,8 @@ Release 3.X (Not scheduled yet)
   - The escape underscore for reserved words can now be used.
   - The ASM of nested LetExpressions now has the right order.
   - OclAny.asSet() is now parsed correctly either if used implicitly or explicitly.
+  - Wellformednes Rules for Iterators having at most one iterator variable are checked
+    appropriately.
   
 * Improvements on Ocl2Java
   - Generated aspects are named according to their constraints.

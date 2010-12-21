@@ -929,6 +929,32 @@ public class TestIterators {
 
 	/**
 	 * <p>
+	 * A test case testing the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 */
+	@Test
+	public void testClosurePositive07() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "standardlibrary/iterators/closurePositive07.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllStandardLibraryTests.META_MODEL_ID,
+				AllStandardLibraryTests.MODEL_BUNDLE,
+				AllStandardLibraryTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the iterator <code>Collection->collect(..)</code>.
 	 * </p>
 	 */

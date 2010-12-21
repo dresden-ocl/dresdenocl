@@ -242,12 +242,40 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 			// no else.
 		}
 
+		/* Check result type of closure iterator. */
+		if (name.equals("closure")) {
+
+			String msg = "The body expression of a closure iterator expression must conform to the source expression's element type.";
+			Type bodyType = body.getType();
+			Type sourceType = source.getType();
+			Type sourceElementType = ((CollectionType) sourceType)
+					.getElementType();
+
+			if (!bodyType.conformsTo(sourceElementType)
+					&& !(bodyType instanceof CollectionType)) {
+				throw new WellformednessException(this, msg);
+			}
+
+			else if (bodyType instanceof CollectionType) {
+				Type bodyElementType = ((CollectionType) bodyType)
+						.getElementType();
+
+				if (!bodyElementType.conformsTo(sourceElementType)) {
+					throw new WellformednessException(this, msg);
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// no else.
+
 		/* Check count of variables. */
 		if (name.equals("any") || name.equals("collect")
-				|| name.equals("collectNested") || name.equals("isUnique")
-				|| name.equals("one") || name.equals("reject")
-				|| name.equals("select") || name.equals("sortedBy")) {
-			
+				|| name.equals("collectNested") || name.equals("closure")
+				|| name.equals("isUnique") || name.equals("one")
+				|| name.equals("reject") || name.equals("select")
+				|| name.equals("sortedBy")) {
+
 			if (this.getIterator().size() > 1) {
 				throw new WellformednessException(this, "The iterator " + name
 						+ " may have at most one iterator variable.");
