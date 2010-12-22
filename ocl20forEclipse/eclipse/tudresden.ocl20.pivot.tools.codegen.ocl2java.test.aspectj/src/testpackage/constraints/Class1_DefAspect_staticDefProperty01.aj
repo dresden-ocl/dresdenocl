@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_staticDefProperty01 {
     /**
      * <p>Defines the field staticDefProperty01 defined by the constraint
      * <code>context Class1
-     *       static def: staticDefProperty01: Integer = 
-    42</code></p>
+     *       static def: staticDefProperty01: Integer =  42</code></p>
      */
     public static Integer testpackage.Class1.staticDefProperty01;
     
@@ -31,8 +30,7 @@ public privileged aspect Class1_DefAspect_staticDefProperty01 {
     /**
      * <p>Initializes the attribute staticDefProperty01 defined by the constraint
      * <code>context Class1
-     *       static def: staticDefProperty01: Integer = 
-    42</code></p>
+     *       static def: staticDefProperty01: Integer =  42</code></p>
      */
     before(): staticDefProperty01Getter() {
         testpackage.Class1.staticDefProperty01 = new Integer(42);

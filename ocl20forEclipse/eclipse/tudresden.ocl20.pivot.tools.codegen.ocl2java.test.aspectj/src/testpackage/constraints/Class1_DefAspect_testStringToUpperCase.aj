@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testStringToUpperCase {
     /**
      * <p>Defines the method testStringToUpperCase(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringToUpperCase(source: String): String =
-    source.toUpperCase()</code></p>
+     *       def: testStringToUpperCase(source: String): String = source.toUpperCase()</code></p>
      */
     public String testpackage.Class1.testStringToUpperCase(String source) {
         return source.toUpperCase();

@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_defOperation02 {
     /**
      * <p>Defines the method defOperation02(Integer anInt) defined by the constraint
      * <code>context Class1
-     *       def: defOperation02(anInt: Integer): Integer = 
-    -anInt</code></p>
+     *       def: defOperation02(anInt: Integer): Integer =  -anInt</code></p>
      */
     public Integer testpackage.Class1.defOperation02(Integer anInt) {
         return -(anInt);

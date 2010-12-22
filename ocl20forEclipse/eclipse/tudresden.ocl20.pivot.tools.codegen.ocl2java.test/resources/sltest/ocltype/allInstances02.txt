@@ -1,0 +1,3 @@
+java.util.Set<Object> result1 = new java.util.HashSet<Object>();
+result1.add(null);
+result1

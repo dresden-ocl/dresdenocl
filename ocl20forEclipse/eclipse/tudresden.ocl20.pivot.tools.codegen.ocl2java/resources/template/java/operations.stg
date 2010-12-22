@@ -13,9 +13,27 @@ absOperationOnReal(sourceExp, resultType) ::= <<
 java.lang.Math.abs($sourceExp$)
 >>
 
+// --- OclBoolean.allInstances() ---
+allInstancesOperationOnOclBoolean(resultVar, typeName) ::= <<
+$setType()$<$typeName$> $resultVar$ = new $setTypeInitialization()$<$typeName$>();
+$resultVar$.$addOperationName()$($typeName$.FALSE);
+$resultVar$.$addOperationName()$($typeName$.TRUE);
+>>
+
+// --- OclInvalid.allInstances() ---
+allInstancesOperationOnOclInvalid(sourceExp, typeName) ::= <<
+$invalidLiteralExp(resultType = typeName)$
+>>
+
 // --- OclType.allInstances() ---
 allInstancesOperationOnOclType(sourceExp, typeName) ::= <<
 (new $setTypeInitialization()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
+>>
+
+// --- OclVoid.allInstances() ---
+allInstancesOperationOnOclVoid(resultVar) ::= <<
+$setType()$<$anyType()$> $resultVar$ = new $setTypeInitialization()$<$anyType()$>();
+$resultVar$.$addOperationName()$($undefinedLiteralExp()$);
 >>
 
 // --- Boolean.and(Boolean) ---

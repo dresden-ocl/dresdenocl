@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testLetExp01 {
     /**
      * <p>Defines the method testLetExp01() defined by the constraint
      * <code>context Class1
-     *       def: testLetExp01(): Integer =
-    let senseOfLife = 42
-    in senseOfLife</code></p>
+     *       def: testLetExp01(): Integer = let senseOfLife = 42 in senseOfLife</code></p>
      */
     public Integer testpackage.Class1.testLetExp01( ) {
         Integer senseOfLife;

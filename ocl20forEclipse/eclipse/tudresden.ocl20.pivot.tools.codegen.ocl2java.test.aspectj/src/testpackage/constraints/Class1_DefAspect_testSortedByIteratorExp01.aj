@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testSortedByIteratorExp01 {
     /**
      * <p>Defines the method testSortedByIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testSortedByIteratorExp01() : OrderedSet(Integer) =
-    OrderedSet{3, 2, 1}->sortedBy(i: Integer | i)</code></p>
+     *       def: testSortedByIteratorExp01() : OrderedSet(Integer) = OrderedSet{3, 2, 1}->sortedBy(i: Integer | i)</code></p>
      */
     public java.util.List<Integer> testpackage.Class1.testSortedByIteratorExp01( ) {
         java.util.ArrayList<Integer> collection1;

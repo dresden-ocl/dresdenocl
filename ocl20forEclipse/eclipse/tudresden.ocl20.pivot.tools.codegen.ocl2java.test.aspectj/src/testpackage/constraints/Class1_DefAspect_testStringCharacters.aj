@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testStringCharacters {
     /**
      * <p>Defines the method testStringCharacters(String source) defined by the constraint
      * <code>context Class1
-     *       def: testStringCharacters(source: String): Sequence(String) =
-    source.characters()</code></p>
+     *       def: testStringCharacters(source: String): Sequence(String) = source.characters()</code></p>
      */
     public java.util.List<String> testpackage.Class1.testStringCharacters(String source) {
         java.util.List<String> result1;

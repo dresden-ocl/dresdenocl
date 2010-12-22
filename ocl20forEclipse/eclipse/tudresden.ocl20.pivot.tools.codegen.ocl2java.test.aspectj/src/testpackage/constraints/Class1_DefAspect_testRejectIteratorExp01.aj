@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testRejectIteratorExp01 {
     /**
      * <p>Defines the method testRejectIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testRejectIteratorExp01() : Set(Integer) =
-    Set{1, 2, 3}->reject(i: Integer | i = 2)</code></p>
+     *       def: testRejectIteratorExp01() : Set(Integer) = Set{1, 2, 3}->reject(i: Integer | i = 2)</code></p>
      */
     public java.util.Set<Integer> testpackage.Class1.testRejectIteratorExp01( ) {
         java.util.HashSet<Integer> collection1;

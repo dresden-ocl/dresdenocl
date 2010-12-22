@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testCollectionSize {
     /**
      * <p>Defines the method testCollectionSize(java.util.Collection<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testCollectionSize(source: Collection(OclAny)): 
-      Integer =
-    source ->size()</code></p>
+     *       def: testCollectionSize(source: Collection(OclAny)):    Integer = source ->size()</code></p>
      */
     public Integer testpackage.Class1.testCollectionSize(java.util.Collection<Object> source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(source);

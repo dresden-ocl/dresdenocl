@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testBagFlatten {
     /**
      * <p>Defines the method testBagFlatten(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testBagFlatten(source: Bag(OclAny)): Bag(OclAny) =
-    source ->flatten()</code></p>
+     *       def: testBagFlatten(source: Bag(OclAny)): Bag(OclAny) = source ->flatten()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testBagFlatten(java.util.List<Object> source) {
         return (java.util.List<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.flatten(source);

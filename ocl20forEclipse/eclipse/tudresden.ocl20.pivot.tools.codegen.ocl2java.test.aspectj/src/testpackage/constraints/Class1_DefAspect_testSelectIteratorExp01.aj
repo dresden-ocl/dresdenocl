@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testSelectIteratorExp01 {
     /**
      * <p>Defines the method testSelectIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testSelectIteratorExp01() : Set(Integer) =
-    Set{1, 2, 3}->select(i: Integer | i = 2)</code></p>
+     *       def: testSelectIteratorExp01() : Set(Integer) = Set{1, 2, 3}->select(i: Integer | i = 2)</code></p>
      */
     public java.util.Set<Integer> testpackage.Class1.testSelectIteratorExp01( ) {
         java.util.HashSet<Integer> collection1;

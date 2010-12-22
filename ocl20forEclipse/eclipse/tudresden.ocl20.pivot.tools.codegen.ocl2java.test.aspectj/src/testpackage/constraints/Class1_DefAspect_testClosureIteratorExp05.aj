@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testClosureIteratorExp05 {
     /**
      * <p>Defines the method testClosureIteratorExp05() defined by the constraint
      * <code>context Class1
-     *       def: testClosureIteratorExp05() : Set(Class1) =
-    self->closure(children)</code></p>
+     *       def: testClosureIteratorExp05() : Set(Class1) = self->closure(children)</code></p>
      */
     public java.util.Set<testpackage.Class1> testpackage.Class1.testClosureIteratorExp05( ) {
     	/* Self variable probably used within the definition. */

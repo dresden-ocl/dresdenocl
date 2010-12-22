@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testCollectionLiteralExp04 {
     /**
      * <p>Defines the method testCollectionLiteralExp04() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionLiteralExp04(): 
-      Sequence(Integer) =
-    Sequence { 0, 1, 2 }</code></p>
+     *       def: testCollectionLiteralExp04():    Sequence(Integer) = Sequence { 0, 1, 2 }</code></p>
      */
     public java.util.List<Integer> testpackage.Class1.testCollectionLiteralExp04( ) {
         java.util.ArrayList<Integer> collection1;

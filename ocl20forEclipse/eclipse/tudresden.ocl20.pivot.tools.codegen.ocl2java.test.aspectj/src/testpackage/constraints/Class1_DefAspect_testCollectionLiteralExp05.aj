@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testCollectionLiteralExp05 {
     /**
      * <p>Defines the method testCollectionLiteralExp05() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionLiteralExp05(): 
-      Set(Integer) =
-    Set { 0, 1, 2 }</code></p>
+     *       def: testCollectionLiteralExp05():    Set(Integer) = Set { 0, 1, 2 }</code></p>
      */
     public java.util.Set<Integer> testpackage.Class1.testCollectionLiteralExp05( ) {
         java.util.HashSet<Integer> collection1;

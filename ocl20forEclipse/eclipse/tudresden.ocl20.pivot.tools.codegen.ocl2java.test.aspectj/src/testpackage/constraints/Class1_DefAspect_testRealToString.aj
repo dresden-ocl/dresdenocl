@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testRealToString {
     /**
      * <p>Defines the method testRealToString(Float source) defined by the constraint
      * <code>context Class1
-     *       def: testRealToString(source: Real): String =
-    source.toString()</code></p>
+     *       def: testRealToString(source: Real): String = source.toString()</code></p>
      */
     public String testpackage.Class1.testRealToString(Float source) {
         return source.toString();

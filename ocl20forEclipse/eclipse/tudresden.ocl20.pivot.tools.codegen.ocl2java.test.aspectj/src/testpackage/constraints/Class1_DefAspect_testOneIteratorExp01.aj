@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testOneIteratorExp01 {
     /**
      * <p>Defines the method testOneIteratorExp01() defined by the constraint
      * <code>context Class1
-     *       def: testOneIteratorExp01() : Boolean =
-    Set{1, 2, 3}->one(i: Integer | i = 2)</code></p>
+     *       def: testOneIteratorExp01() : Boolean = Set{1, 2, 3}->one(i: Integer | i = 2)</code></p>
      */
     public Boolean testpackage.Class1.testOneIteratorExp01( ) {
         java.util.HashSet<Integer> collection1;

@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testClosureIteratorExp04 {
     /**
      * <p>Defines the method testClosureIteratorExp04() defined by the constraint
      * <code>context Class1
-     *       def: testClosureIteratorExp04() : OrderedSet(Class1) =
-    self->asSequence()->closure(parent)</code></p>
+     *       def: testClosureIteratorExp04() : OrderedSet(Class1) = self->asSequence()->closure(parent)</code></p>
      */
     public java.util.List<testpackage.Class1> testpackage.Class1.testClosureIteratorExp04( ) {
     	/* Self variable probably used within the definition. */

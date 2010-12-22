@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testInvalidLiteralExp02 {
     /**
      * <p>Defines the method testInvalidLiteralExp02() defined by the constraint
      * <code>context Class1
-     *       def: testInvalidLiteralExp02(): Boolean =
-    invalid.oclIsInvalid()</code></p>
+     *       def: testInvalidLiteralExp02(): Boolean = invalid.oclIsInvalid()</code></p>
      */
     public Boolean testpackage.Class1.testInvalidLiteralExp02( ) {
         Boolean result1;

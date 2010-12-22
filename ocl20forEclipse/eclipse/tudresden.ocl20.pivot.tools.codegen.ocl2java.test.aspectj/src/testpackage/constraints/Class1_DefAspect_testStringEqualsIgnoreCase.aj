@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testStringEqualsIgnoreCase {
     /**
      * <p>Defines the method testStringEqualsIgnoreCase(String source, String arg01) defined by the constraint
      * <code>context Class1
-     *       def: testStringEqualsIgnoreCase(source: String, arg01: String): Boolean =
-    source.equalsIgnoreCase(arg01)</code></p>
+     *       def: testStringEqualsIgnoreCase(source: String, arg01: String): Boolean = source.equalsIgnoreCase(arg01)</code></p>
      */
     public Boolean testpackage.Class1.testStringEqualsIgnoreCase(String source, String arg01) {
         return source.equalsIgnoreCase(arg01);

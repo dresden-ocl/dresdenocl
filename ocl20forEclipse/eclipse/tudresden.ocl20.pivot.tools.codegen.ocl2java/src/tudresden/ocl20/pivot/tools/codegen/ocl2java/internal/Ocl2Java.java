@@ -1586,18 +1586,60 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 
 					/* Esspecially handle type literal exps. */
 					if (sourceExp instanceof TypeLiteralExp) {
+
+						Type typeLiteralType = ((TypeLiteralExp) sourceExp)
+								.getReferredType();
+
 						sourceCode = new TransformedCodeImpl();
-						sourceCode.setResultExp(this
-								.transformType(
-										(((TypeLiteralExp) sourceExp)
-												.getReferredType()))
-								.getTypeName());
+						sourceCode.setResultExp(this.transformType(
+								(typeLiteralType)).getTypeName());
+
+						if (typeLiteralType instanceof PrimitiveType
+								&& ((PrimitiveType) typeLiteralType).getKind() == PrimitiveTypeKind.BOOLEAN) {
+							template = this.templateGroup
+									.getTemplate(operationName
+											+ "OperationOnOclBoolean");
+
+							template.setAttribute("typeName",
+									sourceCode.getResultExp());
+							resultExp = this.environment.getNewResultVarName();
+							template.setAttribute("resultVar", resultExp);
+
+							result.addCode(template.toString());
+						}
+
+						else if (typeLiteralType instanceof VoidType) {
+							template = this.templateGroup
+									.getTemplate(operationName
+											+ "OperationOnOclVoid");
+
+							resultExp = this.environment.getNewResultVarName();
+							template.setAttribute("resultVar", resultExp);
+
+							result.addCode(template.toString());
+						}
+
+						else if (typeLiteralType instanceof InvalidType) {
+							template = this.templateGroup
+									.getTemplate(operationName
+											+ "OperationOnOclInvalid");
+
+							template.setAttribute(
+									"typeName",
+									this.transformType(
+											anOperationCallExp.getType())
+											.toString());
+						}
+
+						else {
+							template.setAttribute("typeName",
+									sourceCode.getResultExp());
+							this.environment.addAllInstancesClass(sourceCode
+									.getResultExp());
+						}
+
 					}
 					// no else.
-
-					template.setAttribute("typeName", sourceCode.getResultExp());
-					this.environment.addAllInstancesClass(sourceCode
-							.getResultExp());
 				}
 				// no else.
 			}

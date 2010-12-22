@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testOclIsInvalid02 {
     /**
      * <p>Defines the method testOclIsInvalid02() defined by the constraint
      * <code>context Class1
-     *       def: testOclIsInvalid02(): Boolean =
-    (Sequence { } ->first()).oclIsInvalid()</code></p>
+     *       def: testOclIsInvalid02(): Boolean = (Sequence { } ->first()).oclIsInvalid()</code></p>
      */
     public Boolean testpackage.Class1.testOclIsInvalid02( ) {
         Boolean result1;

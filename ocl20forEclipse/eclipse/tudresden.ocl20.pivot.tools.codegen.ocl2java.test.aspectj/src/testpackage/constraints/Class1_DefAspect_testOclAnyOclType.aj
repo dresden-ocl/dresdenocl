@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testOclAnyOclType {
     /**
      * <p>Defines the method testOclAnyOclType(Object source) defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyOclType(source: OclAny): OclType =
-    source.oclType()</code></p>
+     *       def: testOclAnyOclType(source: OclAny): OclType = source.oclType()</code></p>
      */
     public Class<?> testpackage.Class1.testOclAnyOclType(Object source) {
         return source.getClass();

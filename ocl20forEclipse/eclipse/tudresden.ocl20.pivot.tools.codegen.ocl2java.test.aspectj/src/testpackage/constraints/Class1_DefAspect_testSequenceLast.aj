@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testSequenceLast {
     /**
      * <p>Defines the method testSequenceLast(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSequenceLast(source: Sequence(OclAny)): OclAny =
-    source ->last()</code></p>
+     *       def: testSequenceLast(source: Sequence(OclAny)): OclAny = source ->last()</code></p>
      */
     public Object testpackage.Class1.testSequenceLast(java.util.List<Object> source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.last(source);

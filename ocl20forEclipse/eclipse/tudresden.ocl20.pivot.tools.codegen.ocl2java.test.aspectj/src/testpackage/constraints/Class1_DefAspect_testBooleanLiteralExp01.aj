@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testBooleanLiteralExp01 {
     /**
      * <p>Defines the method testBooleanLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testBooleanLiteralExp01(): 
-      Boolean =
-    true</code></p>
+     *       def: testBooleanLiteralExp01():    Boolean = true</code></p>
      */
     public Boolean testpackage.Class1.testBooleanLiteralExp01( ) {
         return new Boolean(true);

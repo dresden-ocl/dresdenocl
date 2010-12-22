@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testSetAsSet {
     /**
      * <p>Defines the method testSetAsSet(java.util.Set<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testSetAsSet(source: Set(OclAny)): 
-      Set(OclAny) =
-    source ->asSet()</code></p>
+     *       def: testSetAsSet(source: Set(OclAny)):    Set(OclAny) = source ->asSet()</code></p>
      */
     public java.util.Set<Object> testpackage.Class1.testSetAsSet(java.util.Set<Object> source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asSet(source);

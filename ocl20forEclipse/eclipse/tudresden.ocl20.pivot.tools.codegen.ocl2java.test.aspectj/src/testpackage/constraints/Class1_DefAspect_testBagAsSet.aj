@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testBagAsSet {
     /**
      * <p>Defines the method testBagAsSet(java.util.List<Object> source) defined by the constraint
      * <code>context Class1
-     *       def: testBagAsSet(source: Bag(OclAny)): 
-      Set(OclAny) =
-    source ->asSet()</code></p>
+     *       def: testBagAsSet(source: Bag(OclAny)):    Set(OclAny) = source ->asSet()</code></p>
      */
     public java.util.Set<Object> testpackage.Class1.testBagAsSet(java.util.List<Object> source) {
         return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asSet(source);

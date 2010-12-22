@@ -11,8 +11,7 @@ public privileged aspect Class1_DefAspect_testTupleLiteralExp01 {
     /**
      * <p>Defines the method testTupleLiteralExp01() defined by the constraint
      * <code>context Class1
-     *       def: testTupleLiteralExp01() =
-    Tuple { a : Integer = 42, b : String = 'some'}</code></p>
+     *       def: testTupleLiteralExp01() = Tuple { a : Integer = 42, b : String = 'some'}</code></p>
      */
     public java.util.HashMap<String, Object> testpackage.Class1.testTupleLiteralExp01( ) {
         java.util.HashMap<String, Object> tuple1;

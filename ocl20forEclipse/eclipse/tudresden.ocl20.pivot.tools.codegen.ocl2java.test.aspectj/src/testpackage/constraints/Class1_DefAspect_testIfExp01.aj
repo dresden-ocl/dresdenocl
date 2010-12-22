@@ -11,11 +11,7 @@ public privileged aspect Class1_DefAspect_testIfExp01 {
     /**
      * <p>Defines the method testIfExp01() defined by the constraint
      * <code>context Class1
-     *       def: testIfExp01(): Integer =
-    if (true)
-      then 1
-      else -1
-    endif</code></p>
+     *       def: testIfExp01(): Integer = if (true)   then 1   else -1 endif</code></p>
      */
     public Integer testpackage.Class1.testIfExp01( ) {
         Integer ifExpResult1;

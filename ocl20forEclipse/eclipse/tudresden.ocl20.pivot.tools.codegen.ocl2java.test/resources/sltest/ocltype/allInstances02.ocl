@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testOclTypeAllInstances02(): Set(OclVoid) =
+OclVoid.allInstances()
+
+endpackage

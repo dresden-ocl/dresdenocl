@@ -32,8 +32,7 @@ public privileged aspect Class1_DefAspect_testOclAnyAllInstances {
     /**
      * <p>Defines the method testOclAnyAllInstances() defined by the constraint
      * <code>context Class1
-     *       def: testOclAnyAllInstances(): Set(Class1) =
-    Class1.allInstances()</code></p>
+     *       def: testOclAnyAllInstances(): Set(Class1) = Class1.allInstances()</code></p>
      */
     public java.util.Set<testpackage.Class1> testpackage.Class1.testOclAnyAllInstances( ) {
         return (new java.util.HashSet<testpackage.Class1>((java.util.Set<testpackage.Class1>) allInstances.get(testpackage.Class1.class.getCanonicalName()).keySet()));

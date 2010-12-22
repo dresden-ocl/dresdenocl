@@ -11,9 +11,7 @@ public privileged aspect Class1_DefAspect_testCollectionLiteralExp03 {
     /**
      * <p>Defines the method testCollectionLiteralExp03() defined by the constraint
      * <code>context Class1
-     *       def: testCollectionLiteralExp03(): 
-      OrderedSet(Integer) =
-    OrderedSet { 0, 1, 2 }</code></p>
+     *       def: testCollectionLiteralExp03():    OrderedSet(Integer) = OrderedSet { 0, 1, 2 }</code></p>
      */
     public java.util.List<Integer> testpackage.Class1.testCollectionLiteralExp03( ) {
         java.util.ArrayList<Integer> collection1;
