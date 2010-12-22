@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public interface OclType<T extends OclAny> extends OclAny {
 
 	/**
-	 * The only method valid for OclType except "=" and "<>". Returns the wrapped
-	 * {@link Type} of the PivotModel.
+	 * The only method valid for OclType except "=" and "<>". Returns the
+	 * wrapped {@link Type} of the PivotModel.
 	 * 
 	 * @return the wrapped {@link Type} of the PivotModel
 	 */
@@ -64,10 +64,10 @@ public interface OclType<T extends OclAny> extends OclAny {
 	 * </p>
 	 * 
 	 * @param property
-	 *          The static {@link Property} whose value shall be returned.
+	 *            The static {@link Property} whose value shall be returned.
 	 * @param modelInstance
-	 *          The {@link IModelInstance} that shall be used to retrieve the
-	 *          {@link Property}'s value.
+	 *            The {@link IModelInstance} that shall be used to retrieve the
+	 *            {@link Property}'s value.
 	 * @return The value(as an {@link OclAny}) of the static {@link Property}.
 	 */
 	OclAny getStaticProperty(Property property, IModelInstance modelInstance);
@@ -79,15 +79,28 @@ public interface OclType<T extends OclAny> extends OclAny {
 	 * </p>
 	 * 
 	 * @param operation
-	 *          The static {@link Operation} that shall be invoked.
+	 *            The static {@link Operation} that shall be invoked.
 	 * @param oclAnyParameters
-	 *          The probably existing parameters of the {@link Operation} as an
-	 *          array of {@link OclAny}.
+	 *            The probably existing parameters of the {@link Operation} as
+	 *            an array of {@link OclAny}.
 	 * @param modelInstance
-	 *          The {@link IModelInstance} that shall be used to invoke the static
-	 *          {@link Operation}.
+	 *            The {@link IModelInstance} that shall be used to invoke the
+	 *            static {@link Operation}.
 	 * @return The result as an {@link OclAny}.
 	 */
-	OclAny invokeStaticOperation(Operation operation, OclAny[] oclAnyParameters,
-			IModelInstance modelInstance);
+	OclAny invokeStaticOperation(Operation operation,
+			OclAny[] oclAnyParameters, IModelInstance modelInstance);
+
+	/**
+	 * <p>
+	 * Returns all instances of this OclType either available within the
+	 * standard library or within the given {@link IModelInstance}.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *            The {@link IModelInstance} that can be used to compute the
+	 *            allInstances operation.
+	 * @return The result as an {@link OclSet}.
+	 */
+	OclSet<OclAny> allInstances(IModelInstance modelInstance);
 }

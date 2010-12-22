@@ -75,14 +75,12 @@ import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
@@ -1770,7 +1768,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				 */
 				if (((CollectionType) source.getGenericType()).getElementType()
 						.conformsTo(
-								relationResult.getModelInstanceElement().getType())) {
+								relationResult.getModelInstanceElement()
+										.getType())) {
 
 					if (!relationResult.oclIsUndefined().isTrue()
 							&& !resultElements.contains(relationResult)) {
@@ -3182,6 +3181,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 *            .
 	 * @return The result of a special {@link Operation} or <code>null</code>.
 	 */
+	@SuppressWarnings("unchecked")
 	private OclAny handleSpecialOperations(OperationCallExp anOperationCallExp,
 			OclAny source) {
 
@@ -3288,27 +3288,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 				// no else.
 
-				if (source.oclIsInvalid().isTrue())
-					result = myStandardLibraryFactory.createOclInvalid(
-							anOperationCallExp.getSourceType(),
-							source.getInvalidReason());
-
-				else if (source.oclIsUndefined().isTrue())
-					result = myStandardLibraryFactory.createOclInvalid(
-							anOperationCallExp.getSourceType(),
-							new RuntimeException(
-									"Tried to call allInstances() on null. Reason :"
-											+ source.getUndefinedReason()));
-				else {
-					final Type sourceType = ((TypeType) anOperationCallExp
-							.getSourceType()).getRepresentedType();
-
-					Set<IModelInstanceObject> allInstances = myEnvironment
-							.getModelInstance().getAllInstances(sourceType);
-
-					result = myStandardLibraryFactory.createOclSet(
-							allInstances, sourceType);
-				}
+				result = ((OclType<OclAny>) source)
+						.allInstances(this.myEnvironment.getModelInstance());
 			}
 
 			/*

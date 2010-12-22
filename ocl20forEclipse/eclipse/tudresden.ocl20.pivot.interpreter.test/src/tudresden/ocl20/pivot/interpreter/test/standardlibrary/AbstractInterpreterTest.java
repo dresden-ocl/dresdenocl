@@ -34,6 +34,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugin;
@@ -212,6 +213,37 @@ public abstract class AbstractInterpreterTest {
 	 */
 	protected void assertIsInvalid(IInterpretationResult result) {
 		assertTrue(result.getResult().oclIsInvalid().isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is of
+	 * a given Type.
+	 * </p>
+	 * 
+	 * @param expectedType
+	 *            The expected {@link Type} of the {@link IInterpretationResult}
+	 *            .
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	protected void assertIsOfType(Type expectedType,
+			IInterpretationResult result) {
+
+		assertFalse(result.getResult().oclIsInvalid().isTrue());
+		assertFalse(result.getResult().oclIsUndefined().isTrue());
+
+		OclType<?> oclType = result.getResult().oclType();
+
+		if (oclType.oclIsInvalid().isTrue()
+				|| oclType.oclIsUndefined().isTrue()) {
+			fail("OclType was invalid or undefined.");
+		}
+
+		else if (!expectedType.conformsTo(oclType.getType())) {
+			fail("ExpectedType was '" + expectedType.getName() + "' but was '"
+					+ oclType.getType().getName() + "'.");
+		}
 	}
 
 	/**
