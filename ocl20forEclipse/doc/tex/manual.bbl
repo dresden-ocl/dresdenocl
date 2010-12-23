@@ -39,23 +39,23 @@
 \newblock Addison-Wesley Professional, Indianapolis, IN, USA, 1995
 
 \bibitem[OMG06]{spec:MOF2.0}
-; Object Management Group (OMG) (Veranst.):
+Object Management Group (OMG):
 \newblock \emph{Meta Object Facility (MOF) Core Specification}.
-\newblock \,Version:\,January 2006.
+\newblock \,Version:\,2.2, January 2006.
 \newblock \url{http://www.omg.org/spec/MOF/2.0/}
 
 \bibitem[OMG09]{spec:UML2-2Inf}
-Object Management Group (OMG), Needham, MA, USA:
+Object Management Group (OMG):
 \newblock \emph{OMG Unified Modeling Language\texttrademark (OMG UML),
   Infrastructure}.
-\newblock \url{http://www.omg.org/spec/UML/2.2/}.
-\newblock \,Version:\,2.2, February 2009
+\newblock \,Version:\,2.2, February 2009.
+\newblock \url{http://www.omg.org/spec/UML/2.2/}
 
 \bibitem[OMG10]{spec:OCL2-2}
-\emph{Object Constraint Language}.
-\newblock 2.2.
-\newblock Needham : Object Management Group (OMG), 2010
-  \url{http://www.omg.org/spec/OCL/2.2/}
+Object Management Group (OMG):
+\newblock \emph{Object Constraint Language}.
+\newblock \,Version:\,2.2, February 2010.
+\newblock \url{http://www.omg.org/spec/OCL/2.2/}
 
 \bibitem[URL10a]{WWW:chainsaw}
 \emph{Apache Chainsaw}.
@@ -87,31 +87,25 @@ Object Management Group (OMG), Needham, MA, USA:
 \newblock \url{http://www.eclipse.org/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10f]{WWW:eclipseSubversive}
-\emph{Polarion Software: Subversive}.
-\newblock Polarion.org Community.
-\newblock \url{http://www.polarion.com/products/svn/subversive.php}.
-\newblock \,Version:\,2010
-
-\bibitem[URL10g]{WWW:toolkitSourceforge}
+\bibitem[URL10f]{WWW:toolkitSourceforge}
 \emph{Sourceforge Project Site of the Dresden OCL Toolkit}.
 \newblock Sourceforge project website.
 \newblock \url{http://sourceforge.net/projects/dresden-ocl/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10h]{WWW:toolkitSVN}
+\bibitem[URL10g]{WWW:toolkitSVN}
 \emph{SVN of the Dresden OCL Toolkit}.
 \newblock Subversion Repository.
 \newblock \url{http://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10i]{WWW:toolkitUpdatesite}
+\bibitem[URL10h]{WWW:toolkitUpdatesite}
 \emph{Update Site of the Dresden OCL Toolkit}.
 \newblock Eclipse Update Site.
 \newblock \url{http://dresden-ocl.sourceforge.net/downloads/updatesite/}.
 \newblock \,Version:\,2010
 
-\bibitem[URL10j]{WWW:toolkit}
+\bibitem[URL10i]{WWW:toolkit}
 \emph{Website of the Dresden OCL Toolkit}.
 \newblock Project website.
 \newblock \url{http://dresden-ocl.sourceforge.net/}.
@@ -132,8 +126,9 @@ Object Management Group (OMG), Needham, MA, USA:
 \bibitem[WTW10]{wilkeEA:MODELS2010}
 \textsc{Wilke}, Claas; \textsc{Thiele}, Michael ; \textsc{Wende}, Christian:
 \newblock Extending Variability for OCL Interpretation.
-\newblock {In: }\emph{Proceedings of the ACM/IEEE 13th International Conference
-  on Model Driven Engineering Languages and Systems (MoDELS2010), Oslo, October
-  3-8, 2010}, 2010, To be published in Springer LNCS series.
+\newblock {In: }\textsc{Petriu}, Dorina (ed.); \textsc{Rouquette}, Nicolas
+  (ed.) ; \textsc{Haugen}, {\O}ystein (ed.): \emph{Model Driven Engineering
+  Languages and Systems} Vol. 6394, Springer Berlin / Heidelberg, 2010 (Lecture
+  Notes in Computer Science), pages 361--375
 
 \end{thebibliography}

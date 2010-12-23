@@ -7,7 +7,7 @@
 
 This chapter describes how the SQL Code Generator \keyword{OCL2SQL} provided 
 with Dresden OCL can be used. A general introduction into Dresden OCL can 
-be found in chapter~\ref{chapter:introduction}. 
+be found in Chapter~\ref{chapter:introduction}. 
 
 Actual the SQL Code Generator is able to generate the following SQL dialects:
 \begin{itemize}
@@ -22,26 +22,13 @@ Actual the SQL Code Generator is able to generate the following SQL dialects:
 \section{Code Generator Preparation}
 This chapter uses the \keyword{University Example} which is provided with 
 Dresden OCL. The example is show in Figure~\ref{pic:example:university01}. To
-import the university example into our Eclipse workspace we have to create a new Project into our workspace (here called 
-\model{tudresden.ocl20.pivot.\linebreak[0]examp\-les.\linebreak[0]university}) and
-use the import wizard \eclipse{General -> Archive File} to import the example 
-provided as a \acs{JAR} archive. In the following window we select the directory
-where the \acs{JAR} file is located (probably the \model{plugins} or
-\model{dropins} directory inside the Eclipse root folder). We select the archive
-\model{tudresden.ocl20.pivot.\linebreak[0]examples.university\_XXX.jar} and push the 
-\eclipse{Finish} button (if you use a source code distribution of 
-Dresden OCL instead, you can import the project 
-\model{tudresden.ocl20.pivot.examples.university} using the import wizard 
-\eclipse{General -> Exis\-ting Pr\-ojects into Workspace}).\\
+import the university example into our Eclipse workspace we simply have to use
+the wizard \emph{File -> New -> Other\ldots -> Dresden OCL Examples ->
+University Example (UML)}. Afterwards, the project 
+\model{tudresden.ocl20.pivot.\linebreak[0]examp\-les.\linebreak[0]university})
+should exist within the workspace.
 
-\begin{figure}[!t]
-	\centering
-	\includegraphics[width=0.85\linewidth]{figures/examples/university01}
-	\caption{the UML diagram of the university example.}
-	\label{pic:example:university01}
-\end{figure}
-
-Now we have imported all files we need to run this tutorial. The project 
+The project 
 provides a model file which contains the university class diagram (the model file is located at 
 \model{model/university.uml}) and the constraint file we want to generate code for 
 (located at
@@ -50,6 +37,13 @@ invariant is shown in Listing~\ref{lst:codegen:universityInvariant}. It is conta
 constraint file we want to generate code for. The invariant declares, that the
 \model{grade} of any \model{Person}'s superviser must be greater thant its own
 \model{grade}.
+
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=0.85\linewidth]{figures/examples/university01}
+	\caption{the UML diagram of the university example.}
+	\label{pic:example:university01}
+\end{figure}
 
 \begin{figure}[!htbp]
   \lstset{
@@ -75,18 +69,18 @@ Figure~\ref{pic:codegen:modelBrowserSQL}. Now we can start the code generation.
 By selecting the item \eclipse{Generate SQL Code} of the menu \eclipse{Dresden
 OCL} the sql code generation can be started.
 
-\begin{figure}[!t]
+\begin{figure}[!b]
 	\centering
-	\includegraphics[width=0.6\linewidth]{figures/codegen/modelBrowserSQL}
+	\includegraphics[width=0.45\linewidth]{figures/codegen/modelBrowserSQL}
 	\caption{The Model Browser containing the University Model and its Constraints.}
 	\label{pic:codegen:modelBrowserSQL}
 \end{figure}
 
 
 \subsection{Selecting a Model}
-A wizard opens and we have to select a model for code generation (see 
-Figure~\ref{pic:codegen:codegen01SQL}). We select the \model{university.uml} model and
-push the \eclipse{Next} button.
+A wizard opens and we have to select a model for code generation (cf. 
+Fig.~\ref{pic:codegen:codegen01SQL}). We select the \model{university.uml} model
+and click the \eclipse{Next} button.
 
 \begin{figure}[!p]
 	\centering
@@ -107,9 +101,9 @@ push the \eclipse{Next} button.
 As a second step we have to select the constraints we want to
 generate code for. We only select the constraints \model{inv: oclInv1} and
 \model{inv: oclInv2}. After selecting the constraints we click on the
-\eclipse{Next} button (see Figure~\ref{pic:codegen:codegen02SQL}).
+\eclipse{Next} button (cf. Fig.~\ref{pic:codegen:codegen02SQL}).
 
-\begin{figure}[!t]
+\begin{figure}[!p]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/codegen/codegen03SQL}
 	\caption{The third Step: Selecting a target directory for the Generated Code.}
@@ -128,15 +122,16 @@ generate code for. We only select the constraints \model{inv: oclInv1} and
 Now, we have to choice the directory where the generated code will be stored.
 We select the folder \model{sql} in this project (which is 
 \model{tudresden.\linebreak[0]ocl20.pivot.examples.university/\linebreak[0]sql})
-(see Figure~\ref{pic:codegen:codegen03SQL}). We can push the \eclipse{Next} button.
+(cf. Fig.~\ref{pic:codegen:codegen03SQL}). We can click the \eclipse{Next}
+button.
 
 On the following page of the wizard we can specify general settings for the code
-generation (see Figure~\ref{pic:codegen:codegen04SQL}). We can choice a SQL
+generation (cf. Fig.~\ref{pic:codegen:codegen04SQL}). We can choice a SQL
 dialect for the generated code. The modus of SQL generation decides how
 inheritance relationships are described in the SQL schema. In the typed
 modus all subclass properties will be written to the table of the super class.
 Any class has its own table with the own properties in the vertical modus. If
-you wish only to generate the code for invariant you must choice \model{Only
+you wish only to generate the code for invariant you must choice \emph{Only
 Integrity View} otherwiese the table schema will be generated as well. The other
 parameter will set the prefix for the different parts of the SQL schema. We can
 finish the settings and start the code generation with the \eclipse{Finish} button.
@@ -146,14 +141,14 @@ finish the settings and start the code generation with the \eclipse{Finish} butt
 \section{The Generated Code}
 After finishing the wizard, the code for the selected constraints will be 
 generated. To investigate the results it can be necessary to refresh the
-project (F5). Our project contains two new SQL files in the folder \eclipse{sql}
-(see Figure~\ref{pic:codegen:projectExplorerSQL}). The file 
-\eclipse{2010-09-29-09-34\_schema.sql} has the table and view schema of the model. 
-Every class of the model has its own view. Over this view the
+project (F5). Our project contains two new SQL files in the folder \texttt{sql}
+(cf. Fig.~\ref{pic:codegen:projectExplorerSQL}). The file 
+\texttt{2010-09-29-09-34\_schema.sql} has the table and view schema of the
+model. Every class of the model has its own view. Over this view the
 data(object) of the class can be accesssed. The other file
-\eclipse{2010-09-29-09-34\_view.sql} has the views for the invariants (see
-Figure~\ref{pic:codegen:generateSQL}). The views contain all objects that
-violtate the specific invariant (see Listing~\ref{lst:codegen:sqlInvariant}).
+\texttt{2010-09-29-09-34\_view.sql} has the views for the invariants (cf.
+Fig.~\ref{pic:codegen:generateSQL}). The views contain all objects that
+violtate the specific invariant (cf. Listing~\ref{lst:codegen:sqlInvariant}).
 
 \begin{figure}[!p]
 	\centering

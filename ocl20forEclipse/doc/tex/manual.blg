@@ -1,10 +1,11 @@
-This is BibTeX, Version 0.99cThe top-level auxiliary file: manual.aux
+This is BibTeX, Version 0.99cThe top-level auxiliary file: C:\Users\Claas\Documents\Workspaces\DresdenOCL\DresdenOCL\doc\tex\manual.aux
 A level-1 auxiliary file: chapters/license.aux
 A level-1 auxiliary file: chapters/abstract.aux
 A level-1 auxiliary file: chapters/info.aux
 A level-1 auxiliary file: chapters/introduction.aux
 A level-1 auxiliary file: chapters/interpretation.aux
 A level-1 auxiliary file: chapters/codegeneration.aux
+A level-1 auxiliary file: chapters/ocl2sql.aux
 A level-1 auxiliary file: chapters/architecture.aux
 A level-1 auxiliary file: chapters/integration.aux
 A level-1 auxiliary file: chapters/standalone.aux
@@ -16,14 +17,8 @@ A level-1 auxiliary file: chapters/metaModelTestSuite.aux
 A level-1 auxiliary file: chapters/modelInstanceTestSuite.aux
 A level-1 auxiliary file: chapters/appendix.aux
 The style file: alphadin.bst
+A level-1 auxiliary file: chapters/acknowledgements.aux
 Database file #1: manual.bib
-Warning--entry type for "spec:MOF2.0" isn't style-file defined
---line 181 of file manual.bib
 Warning--empty pages in braeuerEA:OCL2007
 Warning--empty pages in demuth:RGWS09
-You can't pop an empty literal stack for entry spec:MOF2.0
-while executing---line 2205 of file alphadin.bst
-Warning--empty author and editor in spec:OCL2-2
-Warning--empty author and editor in spec:OCL2-2
-Warning--empty pages in wilkeEA:MODELS2010
-(There was 1 error message)
+(There were 2 warnings)

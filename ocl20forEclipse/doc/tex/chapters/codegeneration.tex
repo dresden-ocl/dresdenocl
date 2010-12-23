@@ -6,7 +6,7 @@
 \end{flushright}
 
 This chapter describes how the Java Code Generator \keyword{OCL22Java} provided 
-with Dresden OCL can be used. A general introduction into \acl{DOT4Eclipse} can 
+with Dresden OCL can be used. A general introduction into Dresden OCL can 
 be found in Chapter~\ref{chapter:introduction}. A detailed documentation of the 
 development of OCL22Java can be found in the Minor Thesis (Groﬂer Beleg) of 
 Claas Wilke~\cite{GB:Wilke}.
@@ -20,59 +20,30 @@ can be found at the \acs{AJDT} website~\cite{WWW:AJDT}.
 \section{Code Generator Preparation}
 
 This chapter uses the \keyword{Simple Example} which is provided with 
-Dresden OCL and has been introduced in Section~\ref{intro:simpleExample}. To 
-import the Simple Example into our Eclipse workspace we have to create a new 
-Java project into our Workspace (here called 
-\model{tudresden.ocl20.pivot.\linebreak[0]examp\-les.\linebreak[0]simple}) and
-use the import wizard \eclipse{General -> Archive File} to import the example 
-provided as a \acs{JAR} archive. In the following window we select the directory
-where the \acs{JAR} file is located (probably the \model{plugins} or
-\model{dropins} directory inside the Eclipse root folder). We select the archive
-\model{tudresden.ocl20.pivot.\linebreak[0]examples.simple.jar} and push the 
-\eclipse{Finish} button (if you use a source code distribution of 
-\acl{DOT4Eclipse} instead, you can import the project 
-\model{tudresden.ocl20.pivot.examples.simple} using the import wizard 
-\eclipse{General -> Existing Projects into Workspace}) instead.
+Dresden OCL and has been introduced in Section~\ref{intro:simpleExample}. Since
+for this scenario we require two different projects and not just the one
+imported in Chpater~\ref{chapter:introduction}, we use another example wizard
+now. By using the menu option \emph{File -> New -> Dresden OCL Examples ->
+Simple Example (Ocl22Java)} the two projects are imported into the Eclipse
+workspace. Afterwards, the workspace should contain two projects named  
+\model{tudresden.ocl20.pivot.\linebreak[0]examp\-les.\linebreak[0]simple} and
+\model{\ldots simple.\linebreak[0]ocl\-2\-2\-ja\-va\-code}
+(cf. Fig.~\ref{pic:example:simple03}).
 
-Next, we have to import a second project called 
-\model{tudresden.ocl20.pivot.\linebreak[0]examples.simple.\linebreak[0]ocl22javacode}.
-We can use the same mechanism explained above, but instead of a Java project we 
-now create an \keyword{AspectJ Project} before we import the archive file (if 
-the wizard to create an AspectJ project is not available you have to install the
-\acs{AJDT} first). Figure~\ref{pic:example:simple03} shows the \eclipse{Package
-Explorer} containing both imported projects.
-
-\begin{figure}[!b]
+\begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.45\linewidth]{figures/examples/simple03}
+	\includegraphics[width=0.4\linewidth]{figures/examples/simple03}
 	\caption{The two Projects which are required to run this Tutorial.}
 	\label{pic:example:simple03}
 \end{figure}
 
-\begin{figure}[!b]
-	\centering
-	\includegraphics[width=0.75\linewidth]{figures/codegen/properties1}
-	\caption{Selecting the Properties Settings.}
-	\label{pic:codegen:properties1}
-\end{figure}
-
-After importing the second plug-in, we have to add the JUnit4 library to the
-project's build path. Push the second mouse button on the project in the 
-\eclipse{Package Explorer} and select the menu item \eclipse{Properties} (see 
-Figure~\ref{pic:codegen:properties1}). In the new opened window select the 
-sub-menu \eclipse{Java Build Path -> Libraries} and push the \eclipse{Add 
-Library...} button (see Figure~\ref{pic:codegen:properties2}). In the following 
-window select \eclipse{JUnit}, push \eclipse{Next}, select \eclipse{JUnit 4} 
-and push \eclipse{Finish}. Push the \eclipse{OK} button to close the project's 
-properties. The project should not contain any compile errors anymore.
-
-Now we have imported all files we need to run this tutorial. The first project 
+The first project 
 provides a model file which contains the simple class diagram which has been 
 explained in Section~\ref{intro:simpleExample} (the model file is located at 
 \model{model/simple.uml}) and the constraint file we want to generate code for 
 (the constraint file is located at \model{constraints/invariants.ocl}). 
 Listing~\ref{lst:codegen:simpleInvariant} shows one invariant that is contained
-in the constraint file for which we want to generate code. The invariant 
+in the constraint file. The invariant 
 declares, that the \model{age} of any \model{Person} must be greater or equal 
 to zero at any time during the life cycle of the \model{Person}.
 
@@ -115,12 +86,12 @@ The code for the mentioned constraint has not been generated yet and thus the
 exception will not be thrown. We run the test case by opening the context menu 
 on the Java class in the \eclipse{Package Explorer} and selecting the menu item
 \eclipse{Run as -> JUnit Test}. The test case fails because the exception is not
-thrown (see Figure~\ref{pic:codegen:junit01}). To fulfill the test case we have 
+thrown (cf. Fig.~\ref{pic:codegen:junit01}). To fulfill the test case we have 
 to generate the ApsectJ code for the constraint which enforces the constraint's 
 condition. How to generate such code will be explained in the following.
 
 
-
+\newpage
 \section{Code Generation}
 
 To prepare the code generation we have to import the model 
@@ -142,68 +113,72 @@ To start the code generation we open the menu \eclipse{Dresden OCL} and select
 the item \eclipse{Generate AspectJ Constraint Code}.
 
 
+\newpage
 \subsection{Selecting a Model}
 
-A wizard opens and we have to select a model for code generation (see 
-Figure~\ref{pic:codegen:codegen01}). We select the \model{simple.uml} model and
-push the \eclipse{Next} button.
+A wizard opens and we have to select a model for code generation (cf. 
+Fig.~\ref{pic:codegen:codegen01}). We select the \model{simple.uml} model and
+click the \eclipse{Next} button.
 
-\begin{figure}[!p]
+\begin{figure}[!b]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/codegen/codegen01}
+	\includegraphics[width=0.9\linewidth]{figures/codegen/codegen01}
 	\caption{The first Step: Selecting a Model for Code Generation.}
 	\label{pic:codegen:codegen01}
 \end{figure}
 
 
+\newpage
 \subsection{Selecting Constraints}
 
 As a second step we have to select the constraints for which we want to generate
 code. We only select the constraint that enforces that the \model{age} of any 
-\model{Person} must be equal to or greater than zero and push the 
-\eclipse{Next} button (see Figure~\ref{pic:codegen:codegen02}).
+\model{Person} must be equal to or greater than zero and click the 
+\eclipse{Next} button (cf. Fig.~\ref{pic:codegen:codegen02}).
 
-\begin{figure}[!p]
+\begin{figure}[!b]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/codegen/codegen02}
+	\includegraphics[width=0.9\linewidth]{figures/codegen/codegen02}
 	\caption{The second Step: Selecting Constraints for Code Generation.}
 	\label{pic:codegen:codegen02}
 \end{figure}
 
 
+\newpage
 \subsection{Selecting a Target Directory}
 
 Next, we have to select a target directory into that the generated code shall 
 be stored. We select the source directory of our second project (which is 
 \model{tudresden.\linebreak[0]ocl20.pivot.examples.simple.\linebreak[0]ocl22javacode/src})
-(see Figure~\ref{pic:codegen:codegen03}). Please note, that we select the 
+(cf. Fig.~\ref{pic:codegen:codegen03}). Please note, that we select the 
 source directory and not the package directory into which the code shall be 
 generated! The code generator creates or uses contained package directories 
 depending on the package structure of the selected constraint. Additionally we
 can specify a sub folder into that the constraint code shall be generated 
 relatively to the package of the constrained class. By default this is a sub 
 directory called \model{constraints}. We don't want to change this setting and
-push the \eclipse{Next} button.
+click the \eclipse{Next} button.
 	
 \begin{figure}[!b]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/codegen/codegen03}
+	\includegraphics[width=0.9\linewidth]{figures/codegen/codegen03}
 	\caption{The third Step: Selecting a Target Directory for the Generated Code.}
 	\label{pic:codegen:codegen03}
 \end{figure}
 
 
+\newpage
 \subsection{Specifying General Settings}
 	
 \begin{figure}[!b]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/codegen/codegen04}
+	\includegraphics[width=0.9\linewidth]{figures/codegen/codegen04}
 	\caption{The fourth Step: General Settings for the Code Generation.}
 	\label{pic:codegen:codegen04}
 \end{figure}
 
 On the following page of the wizard we can specify general settings for the code
-generation (see Figure~\ref{pic:codegen:codegen04}). We can disable the 
+generation (cf. Fig.~\ref{pic:codegen:codegen04}). We can disable the 
 inheritance of constraints (which would not be useful in our example because we 
 want to enforce the constraint for \model{Persons}, but for \model{Students} and
 \model{Professors} as well). We can also enable that the code generator will 
@@ -266,24 +241,26 @@ when our constraint is violated. Thus, we do not change the violation macro and 
 \end{table}
 
 
+\newpage
 \subsection{Constraint-Specific Settings}
 
 The last page of the code generation wizard provides the possibility to
 configure some of the code generation settings constraint-specific by selecting 
-a constraint and adapting it's settings (see
-Figure~\ref{pic:codegen:codegen05}). We don't want to adapt the settings, thus 
-we can finish the wizard and start the code generation by pushing the 
+a constraint and adapting it's settings (cf.
+Fig.~\ref{pic:codegen:codegen05}). We don't want to adapt the settings, thus 
+we can finish the wizard and start the code generation by clicking the 
 \eclipse{Finish} button.
 
 \begin{figure}[!b]
 	\centering
-	\includegraphics[width=1.0\linewidth]{figures/codegen/codegen05}
+	\includegraphics[width=0.9\linewidth]{figures/codegen/codegen05}
 	\caption{The fifth Step: Constraint-Specific Settings for the Code Generation.}
 	\label{pic:codegen:codegen05}
 \end{figure}
 
 
 
+\newpage
 \section{The Generated Code}
 
 After finishing the wizard, the code for the selected constraint will be 
@@ -294,9 +271,9 @@ We select the project
 \eclipse{Refresh}. Afterwards, our project contains a newly generated AspectJ 
 file called 
 \model{tu\-dres\-den\linebreak[0].ocl20\linebreak[0].pivot.examples.simple.constraints.InvAspect\-01.aj}
-(see Figure~\ref{pic:codegen:packageExplorer}). Now we can rerun our JUnit test
+(cf. Fig.~\ref{pic:codegen:packageExplorer}). Now we can rerun our JUnit test
 case. The test case finishes successfully because the expected run-time 
-exception is thrown (see Figure~\ref{pic:codegen:junit02}).
+exception is thrown (cf. Fig.~\ref{pic:codegen:junit02}).
 
 \begin{figure}[!b]
 	\centering
@@ -308,7 +285,7 @@ exception is thrown (see Figure~\ref{pic:codegen:junit02}).
 
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/codegen/junit02}
+	\includegraphics[width=0.45\linewidth]{figures/codegen/junit02}
 	\caption{The successfully executed jUnit Test Case.}
 	\label{pic:codegen:junit02}
 \end{figure}
@@ -318,7 +295,7 @@ exception is thrown (see Figure~\ref{pic:codegen:junit02}).
 \section{Summary}
   
 This chapter described how to generate AspectJ code using the 
-\keyword{OCL22Java} code generator of \acl{DOT4Eclipse}. A more detailed 
+\keyword{OCL22Java} code generator of Dresden OCL. A more detailed 
 documentation of the OCL22Java code generator can be found in the Minor Thesis
 (Groﬂer Beleg) of Claas Wilke \cite{GB:Wilke}. Besides the use of OCL22Java via
 Dresden OCL's GUI, you can also invoke OCL22Java via Dresden OCL's \acs{API}. The 

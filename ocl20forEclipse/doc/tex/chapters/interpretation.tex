@@ -18,7 +18,7 @@ of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
 This chapter uses the \keyword{Simple Example} which is provided with 
 \acl{DOT4Eclipse} located in the plug-in 
 \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. An overview over
-all examples provided with \acl{DOT4Eclipse} can be found in 
+all examples provided with Dresden OCL can be found in 
 Table~\ref{tab:examples} in the appendix of this manual. An introduction into
 the Simple Example can be found in Section~\ref{intro:simpleExample}. The model 
 of the example defines three classes: The class \model{Person} has the 
@@ -31,7 +31,7 @@ Section~\ref{intro:simpleExample}. Figure~\ref{pic:example:simple02} shows the
 
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/examples/simple02}
+	\includegraphics[width=0.45\linewidth]{figures/examples/simple02}
 	\caption{The Project Explorer containing the Project which is required to run
 	this Tutorial.}
 	\label{pic:example:simple02}
@@ -109,7 +109,7 @@ Figure~\ref{pic:interpret:prepare02}.
 
 \begin{figure}[!p]
 	\centering
-	\includegraphics[width=0.6\linewidth]{figures/interpreter/prepare01}
+	\includegraphics[width=0.5\linewidth]{figures/interpreter/prepare01}
 	\caption{The Model Browser containing the Simple Model and its Constraints.}
 	\label{pic:interpret:prepare01}
 
@@ -132,8 +132,8 @@ we now want to interpret the imported constraints.
 
 Now we can start the interpretation. To open the \acs{OCL} Interpreter we use 
 the menu option \eclipse{Dresden OCL2 > Open OCL2 Interpreter}. The 
-\eclipse{OCL Interpreter View} should now be visible (see 
-Figure~\ref{pic:interpret:interpret01}).
+\eclipse{OCL Interpreter View} should now be visible (cf. 
+Fig.~\ref{pic:interpret:interpret01}).
 
 By now, the \eclipse{OCL Interpreter View} does not contain any result. Besides
 the results table, the view provides four buttons to control the \acs{OCL} 
@@ -198,7 +198,7 @@ The two other invariants were only interpreted for the \model{Student} or the
 respectively. Again, the \model{Student's} result is \model{true} and the 
 \model{Professor's} result is \model{false}.
 
-Besides invariants, \acs{OCL}~2.2 enables us to use \acs{OCL} expressions to
+Besides invariants, \acs{OCL} allows to use \acs{OCL} expressions to
 define new attributes and methods or to initialize attributes and methods. Such
 \model{def}, \model{init} and \model{body} constraints cannot be interpreted to
 \model{true} or \model{false}, because their result type has not to be 
@@ -206,8 +206,8 @@ define new attributes and methods or to initialize attributes and methods. Such
 constraints that shall be interpreted. The \model{allConstraints.ocl} file 
 contains a definition constraint, which defines the method \model{getAge()} for 
 the class \model{Person}. Now, we want to interpret this definition constraint. 
-We select the constraint in the \eclipse{Model Browser} and push the \eclipse{Interpret} button.
-The result of the interpretation is shown in 
+We select the constraint in the \eclipse{Model Browser} and click the
+\eclipse{Interpret} button. The result of the interpretation is shown in 
 Figure~\ref{pic:interpret:interpret07}. The interpretation finishes for all
 three instances successfully because the attribute \model{age} has been set for 
 all three instances.
@@ -224,19 +224,19 @@ method \model{getAge()} with the attribute \model{age} of the referenced
 method's execution. Using the \eclipse{\acs{OCL} Interpreter View} we cannot 
 execute the method \model{getAge()} and store the result in the \model{result} 
 variable. We can interpret the postcondition in a specific context which has to 
-be prepared by hand only. We have to set the result variable manually.
+be prepared by hand only. We have to set the \texttt{result} variable manually.
 
 If we interpret the postcondition constraint (the sixth and last constraint in 
 the \eclipse{Model Browser}) without setting the \model{result} variable, the 
 constraint results in a \model{undefined} result for all three model instances
-(see Figure~\ref{pic:interpret:interpret08}).
+(cf. Fig.~\ref{pic:interpret:interpret08}).
 
 To prepare the variable, we push the button to add new variables to the 
 Interpreter Environment (the second button from the left) and a new window opens
 which we can use to specify new variables. We enter the name \model{result}, 
 select the variable type \model{Integer} and enter the value \model{25}. Then we
-push the \eclipse{OK} button (see Figure~\ref{pic:interpret:interpret09}. The 
-result variable has now been added to the Interpreter's Environment.
+click the \eclipse{OK} button (cf. Fig.~\ref{pic:interpret:interpret09}). The 
+\texttt{result} variable has now been added to the Interpreter's Environment.
 
 \begin{figure}[!p]
 	\centering
@@ -247,7 +247,7 @@ result variable has now been added to the Interpreter's Environment.
   \vspace{3.0em}
 	
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/interpreter/interpret09}
+	\includegraphics[width=0.4\linewidth]{figures/interpreter/interpret09}
 	\caption{The Window to add new Variables to the Environment.}
 	\label{pic:interpret:interpret09}
 

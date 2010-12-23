@@ -7,9 +7,9 @@
 
 \emph{Dresden OCL} is developed as a project at the Technische Universität 
 Dresden (TUD), Software Technology Group since 1999. Its latest version is 
-released as a set of Eclipse plug-ins and thus, called \emph{\acl{DOT4Eclipse}}.
-Dresden OCL contains a set of OCL tools, including an OCL parser, an OCL
-interpreter, an OCL-to-Java and an OCL-to-SQL code generator.
+released as a set of Eclipse plug-ins and thus, is sometimes also referred
+as \emph{\acl{DOT4Eclipse}}. Dresden OCL consists of a set of OCL tools,
+including an OCL parser, an OCL interpreter, an OCL-to-Java and an OCL-to-SQL code generator.
 
 In this chapter, some general information on Dresden OCL is presented. The 
 supported OCL version and the differences to the official OCL specification are 
@@ -40,10 +40,12 @@ Dresden OCL.
     \textbf{Compliance Point} & \textbf{Support in Dresden OCL} \\
     \hline
     Syntax & 
-    Fully supported (Except OclMessage and related operations) \\
+    Fully supported (Except OclMessage, its related operations, and
+    OclAny.oclLocale()).
+    \\
     \hline
     XMI & 
-    XMI export import of OCL is currently not supported \\
+    XMI export import of OCL is currently not supported. \\
     \hline
     Evaluation & 
     \\
@@ -60,7 +62,7 @@ Dresden OCL.
     supported \\
     \hline
 \end{tabular}
-\caption{Compliance points addressed by Dresden OCL (v. 3.0.0) according
+\caption{Compliance points addressed by Dresden OCL (v. 3.x) according
 to~\cite[p.~1]{spec:OCL2-2}.}
 \label{tab:compliance}
 \end{table}
@@ -69,18 +71,18 @@ Besides the features enlisted in Table~\ref{tab:compliance} some minor
 differences exist between Dresden OCL and the OCL specification:
 
 \begin{itemize}
-  \item Dresden OCL does not support the operation OclAny.oclLocale() introduced
-  	within OCL 2.3 that can be used to implement different behavior for the
-  	\texttt{String} operations \texttt{toLowerCase()},
+  \item Dresden OCL does not support the operation \texttt{OclAny.oclLocale()}
+  introduced within OCL 2.3 that can be used to implement different behavior for
+  the \texttt{String} operations \texttt{to\-Low\-er\-Case()},
   	\texttt{to\-Upper\-Case()}, \texttt{<(String)}, \texttt{>(String)},
   	\texttt{<=(String)}, and \texttt{>=(String)}.
   	Since Dresden OCL is implemented in Java, it uses the semantics of
-  	\texttt{java.lang.String.toLowerCase()},
+  	\texttt{java.lang.String.to\-Low\-er\-Case()},
   	\texttt{to\-Upper\-Case()}, and
   	\texttt{compareTo(String)} instead.
   \item Dresden OCL does not support the expression of
   	UnlimitedNaturalExpressions to define multiplicities within constraints such
-  	as \texttt{(1 .. *)}.
+  	as \texttt{(1..*)}.
 \end{itemize}
 	
 	
@@ -222,7 +224,7 @@ In Dresden OCL, iterators will result in a value as long as they can be computed
 even if their collection contains \code{null} values. 
 Listing~\ref{lst:exampleIterators} shows some examples for iterator expressions 
 and their results in Dresden OCL. E.g., an \code{any} iterator will result in 
-\code{true} as long as one element of its source's collection fulfils its 
+\code{true} as long as one element of its source's collection fulfills its 
 condition even if other elements are \code{null} values. On the other hand, a 
 \code{select} iterator will result in \code{invalid} if the condition for any 
 element in its collection results in \code{null}. However, if the collection 
@@ -427,7 +429,7 @@ Ecore-generated model editor, the instance matches to the naming pattern
 \code{*.mydsl}.
 
 Besides complete models it can be useful to import single model instance
-elements into Dres\-den\-OCL when using Dresden OCL directly from another
+elements into Dres\-den OCL when using Dresden OCL directly from another
 software application via its \acs{API}. How this is possible is documented in 
 Section~\ref{sect:modelInstanceTypeAdaptation:addIMIElement}. For Ecore model 
 instances, this mechanism can be used to add single \code{EObjects} to a model 
