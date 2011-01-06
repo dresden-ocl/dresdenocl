@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_defOperation01 {
      * <code>context Class1
      *       def: defOperation01(): Integer =  42</code></p>
      */
-    public Integer testpackage.Class1.defOperation01( ) {
+    public Integer testpackage.Class1.defOperation01() {
         return new Integer(42);
     }
 }

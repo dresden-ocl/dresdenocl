@@ -13,7 +13,7 @@ public privileged aspect Membership_DefAspect_getCurrentLevelName {
      * <code>context Membership
      *       def: getCurrentLevelName() : String = currentLevel.name</code></p>
      */
-    public String tudresden.ocl20.pivot.examples.royalsandloyals.Membership.getCurrentLevelName( ) {
+    public String tudresden.ocl20.pivot.examples.royalsandloyals.Membership.getCurrentLevelName() {
     	/* Self variable probably used within the definition. */
     	tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass = this;
     	

@@ -58,14 +58,15 @@ public class SingleOcl2SqlTest {
 
 		expected = parseFile(filePath + "solution/view_nop.sql");
 
-		URL stream = SingleOcl2SqlTest.class.getResource("/template/standard.stg");
+		URL stream = SingleOcl2SqlTest.class
+				.getResource("/template/standard.stg");
 		ITemplateGroup standardGroup = null;
 		try {
-			standardGroup =
-					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+			standardGroup = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup(
 							"StandardTest(SQL)",
-							TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
-									"Standard(SQL)"));
+							TemplatePlugin.getTemplateGroupRegistry()
+									.getTemplateGroup("Standard(SQL)"));
 			standardGroup.addFile(stream);
 		} catch (TemplateException e) {
 			e.printStackTrace();
@@ -98,10 +99,12 @@ public class SingleOcl2SqlTest {
 	public void setUp() {
 
 		try {
-			model =
-					ModelBusPlugin.getMetamodelRegistry()
-							.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
-							.getModel(new File(filePath + "model/university_complex.uml"));
+			model = ModelBusPlugin
+					.getMetamodelRegistry()
+					.getMetamodel(UML2MetamodelPlugin.ID)
+					.getModelProvider()
+					.getModel(
+							new File(filePath + "model/university_complex.uml"));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -112,9 +115,9 @@ public class SingleOcl2SqlTest {
 		if (!exists) {
 			new File(sourcePath).mkdir();
 		}
-		else {
-			fail("Path " + sourcePath + " already exits");
-		}
+		// else {
+		// fail("Path " + sourcePath + " already exits");
+		// }
 	}
 
 	@After
@@ -127,13 +130,16 @@ public class SingleOcl2SqlTest {
 		boolean exists = (new File(sourcePath)).exists();
 		if (exists) {
 			deleteDir(new File(sourcePath));
-		}
-		else {
+		} else {
 			fail("Path " + sourcePath + " already exits");
 		}
 	}
 
 	private void testString(String actual, String expected) {
+
+		/* Required replacements for OS independent regression tests */
+		actual = actual.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+		expected = expected.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
 
 		assertTrue("actual:" + actual + "\nexptected:" + expected,
 				expected.contains(actual));
@@ -152,14 +158,16 @@ public class SingleOcl2SqlTest {
 		}
 		try {
 			constraints = new LinkedList<Constraint>();
-			constraints.add(Ocl22Parser.INSTANCE.doParse(model,
-					URI.createFileURI(filePath + "constraints/university_complex.ocl"),
-					true).get(index));
+			constraints.add(Ocl22Parser.INSTANCE.doParse(
+					model,
+					URI.createFileURI(filePath
+							+ "constraints/university_complex.ocl"), true).get(
+					index));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
-		IOcl2Sql ocl2Sql =
-				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
+				settings);
 		ocl2Sql.setInputModel(model);
 		return ocl2Sql.transformFragmentCode(constraints);
 	}
@@ -469,8 +477,8 @@ public class SingleOcl2SqlTest {
 
 	private void runConstraint(int index) {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		List<String> result = null;
@@ -502,12 +510,10 @@ public class SingleOcl2SqlTest {
 					continue;
 				if (temp == null) {
 					temp = zeile;
-				}
-				else if (zeile.equals("")) {
+				} else if (zeile.equals("")) {
 					retValue.add(temp);
 					temp = null;
-				}
-				else {
+				} else {
 					temp += "\n" + zeile;
 				}
 

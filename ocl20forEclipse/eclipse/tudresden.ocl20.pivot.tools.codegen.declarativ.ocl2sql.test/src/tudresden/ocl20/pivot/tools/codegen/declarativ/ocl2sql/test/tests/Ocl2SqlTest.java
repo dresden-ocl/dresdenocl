@@ -76,10 +76,12 @@ public class Ocl2SqlTest {
 	public void setUp() {
 
 		try {
-			model =
-					ModelBusPlugin.getMetamodelRegistry()
-							.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
-							.getModel(new File(filePath + "model/university_complex.uml"));
+			model = ModelBusPlugin
+					.getMetamodelRegistry()
+					.getMetamodel(UML2MetamodelPlugin.ID)
+					.getModelProvider()
+					.getModel(
+							new File(filePath + "model/university_complex.uml"));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -90,9 +92,9 @@ public class Ocl2SqlTest {
 		if (!exists) {
 			new File(sourcePath).mkdir();
 		}
-		else {
-			fail("Path " + sourcePath + " already exits");
-		}
+		// else {
+		// fail("Path " + sourcePath + " already exits");
+		// }
 	}
 
 	@After
@@ -105,23 +107,40 @@ public class Ocl2SqlTest {
 		boolean exists = (new File(sourcePath)).exists();
 		if (exists) {
 			deleteDir(new File(sourcePath));
-		}
-		else {
+		} else {
 			fail("Path " + sourcePath + " already exits");
 		}
 	}
 
 	private void testStringList(List<String> actual, List<String> expected) {
 
-		for (String s : actual) {
-			if (s.equals(""))
-				continue;
-			assertTrue("A extra view is generated\n" + s, expected.contains(s));
+		/* Required for OS-independent regression tests. */
+		List<String> expectedCorrected = new ArrayList<String>(expected.size());
+		List<String> actualCorrected = new ArrayList<String>(expected.size());
+
+		for (String anExpected : expected) {
+			expectedCorrected.add(anExpected.replaceAll("\r\n", "\n")
+					.replaceAll("\r", "\n"));
 		}
-		for (String s : expected) {
+
+		for (String anActual : actual) {
+			actualCorrected.add(anActual.replaceAll("\r\n", "\n").replaceAll(
+					"\r", "\n"));
+		}
+
+		for (String s : actualCorrected) {
 			if (s.equals(""))
 				continue;
-			assertTrue("A view isn't generate\n" + s, actual.contains(s));
+			assertTrue("A extra view is generated\n" + s,
+					expectedCorrected.contains(s.replaceAll("\r\n", "\n")
+							.replaceAll("\r", "\n")));
+		}
+		for (String s : expectedCorrected) {
+			if (s.equals(""))
+				continue;
+			assertTrue("A view isn't generate\n" + s,
+					actualCorrected.contains(s.replaceAll("\r\n", "\n")
+							.replaceAll("\r", "\n")));
 		}
 	}
 
@@ -144,14 +163,15 @@ public class Ocl2SqlTest {
 			fail("Can't model reset.");
 		}
 		try {
-			constraints =
-					Ocl22Parser.INSTANCE.doParse(model, URI.createFileURI(filePath
+			constraints = Ocl22Parser.INSTANCE.doParse(
+					model,
+					URI.createFileURI(filePath
 							+ "constraints/university_complex.ocl"), true);
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
-		IOcl2Sql ocl2Sql =
-				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
+				settings);
 		ocl2Sql.setInputModel(model);
 		return ocl2Sql.transformFragmentCode(constraints);
 	}
@@ -162,8 +182,8 @@ public class Ocl2SqlTest {
 	@Test
 	public void runExceptionTest() {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		try {
 			runCodeGenerator(settings);
 		} catch (Ocl2CodeException e1) {
@@ -171,8 +191,8 @@ public class Ocl2SqlTest {
 		}
 		settings.setSaveCode(true);
 		settings.setModus(0);
-		IOcl2Sql ocl2Sql =
-				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
+				settings);
 		ocl2Sql.setInputModel(model);
 		try {
 			ocl2Sql.transformFragmentCode(constraints);
@@ -222,8 +242,8 @@ public class Ocl2SqlTest {
 	@Test
 	public void runTestNotSave() {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		List<String> result = null;
@@ -236,8 +256,8 @@ public class Ocl2SqlTest {
 		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(1, files.length);
-		testStringList(parseFile(sourcePath + "/" + files[0]), parseFile(filePath
-				+ "solution/view.sql"));
+		testStringList(parseFile(sourcePath + "/" + files[0]),
+				parseFile(filePath + "solution/view.sql"));
 	}
 
 	/**
@@ -246,8 +266,8 @@ public class Ocl2SqlTest {
 	@Test
 	public void runTestWithSave() {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(true);
 		List<String> result = null;
 		try {
@@ -259,17 +279,17 @@ public class Ocl2SqlTest {
 		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath + "/" + files[0]), parseFile(filePath
-				+ "solution/schema.sql"));
-		testStringList(parseFile(sourcePath + "/" + files[1]), parseFile(filePath
-				+ "solution/view.sql"));
+		testStringList(parseFile(sourcePath + "/" + files[0]),
+				parseFile(filePath + "solution/schema.sql"));
+		testStringList(parseFile(sourcePath + "/" + files[1]),
+				parseFile(filePath + "solution/view.sql"));
 	}
 
 	@Test
 	public void runTestWithSaveAndOtherParameter() {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(true);
 		settings.setTablePrefix("TB_");
 		settings.setObjectViewPrefix("O_");
@@ -283,10 +303,10 @@ public class Ocl2SqlTest {
 		}
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath + "/" + files[0]), parseFile(filePath
-				+ "solution/schema_para.sql"));
-		testStringList(parseFile(sourcePath + "/" + files[1]), parseFile(filePath
-				+ "solution/view_para.sql"));
+		testStringList(parseFile(sourcePath + "/" + files[0]),
+				parseFile(filePath + "solution/schema_para.sql"));
+		testStringList(parseFile(sourcePath + "/" + files[1]),
+				parseFile(filePath + "solution/view_para.sql"));
 	}
 
 	private static List<String> parseFile(String file) {
@@ -301,12 +321,10 @@ public class Ocl2SqlTest {
 					continue;
 				if (temp == null) {
 					temp = zeile;
-				}
-				else if (zeile.equals("")) {
+				} else if (zeile.equals("")) {
 					retValue.add(temp);
 					temp = null;
-				}
-				else {
+				} else {
 					temp += "\n" + zeile;
 				}
 

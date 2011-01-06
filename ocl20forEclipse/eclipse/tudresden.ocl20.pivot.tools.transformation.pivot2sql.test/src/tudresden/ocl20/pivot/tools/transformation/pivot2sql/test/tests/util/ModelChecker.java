@@ -110,10 +110,15 @@ public class ModelChecker {
 						String actual = view.getQueryExpression().getBody();
 						String expected = view2queryexpression.get(view.getName());
 						String message =
-								"No correct queryexpression in " + view.getName() + "\n";
-						message += "expected: " + expected + "\n";
-						message += "actual: " + actual;
-						assertTrue(message, expected.equals(actual));
+								"No correct queryexpression in " + view.getName() + ".";
+						
+						/* Required for OS-independent regression tests. */
+						expected = expected.replaceAll("\r\n", "\n");
+						expected = expected.replaceAll("\r", "\n");
+						actual = actual.replaceAll("\r\n", "\n");
+						actual = actual.replaceAll("\r", "\n");
+						
+						assertEquals(message, expected, actual);
 					}
 				}
 				else {
@@ -230,18 +235,30 @@ public class ModelChecker {
 			if (view2queryexpression.containsKey(view)) {
 				String actual = v.getQueryExpression().getBody();
 				String expected = view2queryexpression.get(view);
-				String message = "No correct queryexpression in " + view + "\n";
-				message += "expected: " + expected + "\n";
-				message += "actual: " + actual;
-				assertTrue(message, expected.equals(actual));
+				String message = "No correct queryexpression in " + view + ".";
+
+				/* Required for OS-independent regression tests. */
+				expected = expected.replaceAll("\r\n", "\n");
+				expected = expected.replaceAll("\r", "\n");
+				actual = actual.replaceAll("\r\n", "\n");
+				actual = actual.replaceAll("\r", "\n");
+				
+				assertEquals(message, expected, actual);
 			}
 		}
 	}
 
 	public static void sameDdl(String expected, String actual) {
 
+		/* Required for OS-independent regression tests. */
+		expected = expected.replaceAll("\r\n", "\n");
+		expected = expected.replaceAll("\r", "\n");
+		actual = actual.replaceAll("\r\n", "\n");
+		actual = actual.replaceAll("\r", "\n");
+		
 		List<String> expectedList = Arrays.asList(expected.split("\n\n"));
 		List<String> actualList = Arrays.asList(actual.split("\n\n"));
+		
 		for (String s : expectedList) {
 			assertTrue("expected string " + s + " not in \n" + actual,
 					actualList.contains(s));

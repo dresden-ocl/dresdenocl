@@ -13,7 +13,7 @@ public privileged aspect ProgramPartner_DefAspect_getBurningTransactions {
      * <code>context ProgramPartner
      *       def: getBurningTransactions(): Set(Transaction) =   self.deliveredServices.transaction->iterate(     t         : Transaction;     resultSet : Set(Transaction) = Set{} |          if (t.oclIsTypeOf( Burning )) then       resultSet->including( t )     else       resultSet     endif   )</code></p>
      */
-    public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.getBurningTransactions( ) {
+    public java.util.Set<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.getBurningTransactions() {
     	/* Self variable probably used within the definition. */
     	tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass = this;
     	

@@ -75,10 +75,9 @@ public class CarOcl2Sql_optimizeTest {
 	public void setUp() {
 
 		try {
-			model =
-					ModelBusPlugin.getMetamodelRegistry()
-							.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
-							.getModel(new File(filePath + "model/car.uml"));
+			model = ModelBusPlugin.getMetamodelRegistry()
+					.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
+					.getModel(new File(filePath + "model/car.uml"));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -89,9 +88,9 @@ public class CarOcl2Sql_optimizeTest {
 		if (!exists) {
 			new File(sourcePath).mkdir();
 		}
-		else {
-			fail("Path " + sourcePath + " already exits");
-		}
+		// else {
+		// fail("Path " + sourcePath + " already exits");
+		// }
 	}
 
 	@After
@@ -104,13 +103,16 @@ public class CarOcl2Sql_optimizeTest {
 		boolean exists = (new File(sourcePath)).exists();
 		if (exists) {
 			deleteDir(new File(sourcePath));
-		}
-		else {
+		} else {
 			fail("Path " + sourcePath + " already exits");
 		}
 	}
 
 	private void testString(String actual, String expected) {
+
+		/* Required replacements for OS independent regression tests */
+		actual = actual.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
+		expected = expected.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
 
 		assertTrue("actual:" + actual + "\nexptected:" + expected,
 				expected.contains(actual));
@@ -136,15 +138,14 @@ public class CarOcl2Sql_optimizeTest {
 		}
 		try {
 			constraints = new LinkedList<Constraint>();
-			constraints
-					.add(Ocl22Parser.INSTANCE.doParse(model,
-							URI.createFileURI(filePath + "constraints/car.ocl"), true).get(
-							index));
+			constraints.add(Ocl22Parser.INSTANCE.doParse(model,
+					URI.createFileURI(filePath + "constraints/car.ocl"), true)
+					.get(index));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
-		IOcl2Sql ocl2Sql =
-				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
+				settings);
 		ocl2Sql.setInputModel(model);
 		return ocl2Sql.transformFragmentCode(constraints);
 	}
@@ -214,15 +215,15 @@ public class CarOcl2Sql_optimizeTest {
 
 	private void runConstraint(int index) {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		List<String> result = null;
 		try {
 			result = runCodeGenerator(settings, index);
 		} catch (Ocl2CodeException e) {
-			fail("Can't generate sql code");
+			fail("Can't generate sql code. Reason: " + e.getMessage());
 		}
 		assertNotNull("No result", result);
 		testString(removeComment(result.get(0)), expected.get(index));
@@ -240,12 +241,10 @@ public class CarOcl2Sql_optimizeTest {
 					continue;
 				if (temp == null) {
 					temp = zeile;
-				}
-				else if (zeile.equals("")) {
+				} else if (zeile.equals("")) {
 					retValue.add(temp);
 					temp = null;
-				}
-				else {
+				} else {
 					temp += "\n" + zeile;
 				}
 

@@ -33,6 +33,7 @@ import java.util.LinkedList;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
+import org.antlr.stringtemplate.language.DefaultTemplateLexer;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
@@ -76,10 +77,10 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * {@link ITemplate} groups.
 	 * 
 	 * @param groupFiles
-	 *          The names of the group files as full paths to the projects
-	 *          resource folder.
+	 *            The names of the group files as full paths to the projects
+	 *            resource folder.
 	 * @throws TemplateException
-	 *           Thrown, if a given File name can not be found.
+	 *             Thrown, if a given File name can not be found.
 	 */
 	public StringTemplateEngine(LinkedList<URL> groupFiles)
 			throws TemplateException {
@@ -96,9 +97,9 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * {@link ITemplate} groups.
 	 * 
 	 * @param files
-	 *          The names of the file as full path resource folder.
+	 *            The names of the file as full path resource folder.
 	 * @throws TemplateException
-	 *           Thrown, if a given File name can not be found.
+	 *             Thrown, if a given File name can not be found.
 	 */
 	public StringTemplateEngine(URL file) throws TemplateException {
 
@@ -112,7 +113,12 @@ public class StringTemplateEngine implements ITemplateEngine {
 	public ITemplate getTemplate(String name) {
 
 		try {
-			return new StringTemplateAdapter(templateGroup.getInstanceOf(name));
+			StringTemplate stringTemplate = templateGroup.getInstanceOf(name);
+
+			if (stringTemplate != null)
+				return new StringTemplateAdapter(stringTemplate);
+			else
+				return null;
 		} catch (NullPointerException e) {
 			return null;
 		} catch (IllegalArgumentException e) {
@@ -165,13 +171,14 @@ public class StringTemplateEngine implements ITemplateEngine {
 		}
 
 		if (templateGroup == null) {
-			templateGroup = new StringTemplateGroup(groupReader);
+			templateGroup = new StringTemplateGroup(groupReader,
+					DefaultTemplateLexer.class);
 
-		}
-		else {
+		} else {
 			lastGroup = templateGroup;
-			templateGroup = new StringTemplateGroup(groupReader);
-			lastGroup.setSuperGroup(templateGroup);
+			templateGroup = new StringTemplateGroup(groupReader,
+					DefaultTemplateLexer.class);
+			templateGroup.setSuperGroup(lastGroup);
 		}
 
 		lastGroup = templateGroup;
@@ -189,12 +196,12 @@ public class StringTemplateEngine implements ITemplateEngine {
 				throw new TemplateException("Files not correctly added");
 			}
 
-			superGroup = new StringTemplateGroup(groupReader);
+			superGroup = new StringTemplateGroup(groupReader,
+					DefaultTemplateLexer.class);
 
 			lastGroup.setSuperGroup(superGroup);
 			lastGroup = superGroup;
 		}
 
 	}
-
 }

@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -89,9 +89,9 @@ public class SingleOcl2Sql_optimizeTest {
 		if (!exists) {
 			new File(sourcePath).mkdir();
 		}
-		else {
-			fail("Path " + sourcePath + " already exits");
-		}
+//		else {
+//			fail("Path " + sourcePath + " already exits");
+//		}
 	}
 
 	@After
@@ -112,8 +112,13 @@ public class SingleOcl2Sql_optimizeTest {
 
 	private void testString(String actual, String expected) {
 
-		assertTrue("actual:" + actual + "\nexptected:" + expected,
-				expected.contains(actual));
+		/* Required for OS-independent regression tests. */
+		expected = expected.replaceAll("\r\n", "\n");
+		expected = expected.replaceAll("\r", "\n");
+		actual = actual.replaceAll("\r\n", "\n");
+		actual = actual.replaceAll("\r", "\n");
+		
+		assertEquals(expected, actual);
 	}
 
 	private List<String> runCodeGenerator(IOcl2DeclSettings settings, int index)
