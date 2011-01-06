@@ -105,8 +105,7 @@ public class TemplateGroup implements ITemplateGroup {
 	 */
 	public void addFiles(List<URL> files) throws TemplateException {
 
-		files.addAll(files);
+		this.files.addAll(files);
 		templateEngine.addFiles((LinkedList<URL>) files);
 	}
-
 }
