@@ -10,7 +10,7 @@
          <menu
                icon="icons/dresdenocl.gif"
                id="tudresden.ocl20.pivot.modelbus.ui.menu"
-               label="DresdenOCL">
+               label="Dresden OCL">
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
             </separator>
