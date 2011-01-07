@@ -11,7 +11,7 @@ The SEPA example was adapted from an online demo provided by Nomos Software
 Further details how to import models, model instances and constraints into
 Dresden OCL can be found in the manual, available in the 'doc'
 directory of your distribution or online at
-http://dresden-ocl.sourceforge.net/4eclipse_usage.html
+http://www.reuseware.org/index.php/DresdenOCL:Documentation
 
 
 Provided Model(s)
