@@ -1,10 +1,10 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.X (Not scheduled yet)
-===================================
+Release 3.1 (January, 17th 2011)
+================================
 
-* OCL 2.3 is now supported by Dresden OCL
+* First (inofficial) parts of OCL 2.3 are now supported by Dresden OCL
   - The new closure() iterator is supported by parser, interpreter and Ocl2Java.
   - The String operations <, <=, >=, > are supported.
   
@@ -18,6 +18,9 @@ Release 3.X (Not scheduled yet)
   - OclAny.asSet() is now parsed correctly either if used implicitly or explicitly.
   - Wellformednes Rules for Iterators having at most one iterator variable are checked
     appropriately.
+  
+* Changes on Code Generators
+  - The template engine was switched to String Template v. 3.2.1.
   
 * Improvements on Ocl2Java
   - Generated aspects are named according to their constraints.
@@ -48,7 +51,7 @@ Release 3.X (Not scheduled yet)
 
 GUI
 ---
-* All Examples can now be easily import into Eclipse using import wizards.
+* All Examples can now be easily imported into Eclipse using import wizards.
 
 Tests
 -----
