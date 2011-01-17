@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.ocl2sql"
-      label="Dresden OCL Ocl2Sql"
-      version="3.0.2.qualifier"
+      label="Dresden OCL Ocl2Sql Code Generator"
+      version="3.1.0.qualifier"
       provider-name="TU Dresden, Software Technoloy Group">
 
    <description url="http://www.example.com/description">

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: XML Ecore Model Instance Type Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.ecore;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UML2 Meta-Model Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.uml2;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

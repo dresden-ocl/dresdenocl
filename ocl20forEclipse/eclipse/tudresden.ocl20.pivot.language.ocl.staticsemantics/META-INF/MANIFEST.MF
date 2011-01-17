@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Static Semantics Analysis Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.staticsemantics;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.1.0.qualifier
 Require-Bundle: tudresden.ocl20.pivot.language.ocl.semantics;bundle-version="1.0.0",
  scala.library;bundle-version="2.7.7";visibility:=reexport,
  org.eclipse.core.runtime,

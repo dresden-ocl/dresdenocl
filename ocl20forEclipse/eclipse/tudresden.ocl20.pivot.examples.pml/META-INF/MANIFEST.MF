@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: PML Example Plugin
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.pml;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology
 Bundle-Localization: plugin

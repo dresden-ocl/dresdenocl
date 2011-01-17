@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.modelinstances"
-      label="Dresden OCL Model Instances"
-      version="3.0.2.qualifier"
+      label="Dresden OCL Model Instance Adapters"
+      version="3.1.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_intro.html">

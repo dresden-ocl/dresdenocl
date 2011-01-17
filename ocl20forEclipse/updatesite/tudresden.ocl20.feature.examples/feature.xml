@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.examples"
-      label="Dresden OCL2 for Eclipse Examples"
-      version="3.0.2.qualifier"
+      label="Dresden OCL Examples"
+      version="3.1.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
    <install-handler library="" handler=""/>
 
    <description url="http://www.example.com/description">
-      Examples for DresdenOCL.
+      This feature contains example projects for Dresden OCL. Some UML, EMF Ecore, XML and Java models and OCL constraints are provided as well as some model instances that can be used for interpretation. Code generation examples are provided as well.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -195,6 +195,7 @@ Library.
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="tudresden.ocl20.logging"/>
+      <import plugin="tudresden.ocl20.pivot.examples.royalandloyal" version="3.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
