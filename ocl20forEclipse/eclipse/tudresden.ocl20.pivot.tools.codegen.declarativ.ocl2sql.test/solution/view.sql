@@ -72,24 +72,26 @@ CREATE OR REPLACE VIEW tudOclInv9_1 AS
 WHERE NOT ((NOT ((SELECT temp1.name
 FROM OV_Grade AS temp1
 WHERE temp1.PK_Grade = self.FK_grade) = 'doctor') OR ((SELECT CASE
-  WHEN COUNT(temp2.PK_Paper) IS NULL THEN 0
-  ELSE COUNT(temp2.PK_Paper)
+  WHEN COUNT(temp2.FK_papers) IS NULL THEN 0
+  ELSE COUNT(temp2.FK_papers)
 END
-FROM OV_Paper AS temp2
-INNER JOIN (SELECT FK_papers,FK_author FROM ASS_author_papers) AS temp3 ON temp2.PK_Paper = temp3.FK_papers
-WHERE (temp3.FK_author = self.PK_Person AND (temp2.purpose = 'Dissertation'))) = 1))));
+FROM ASS_author_papers AS temp2
+WHERE (temp2.FK_author = self.PK_Person AND ((SELECT temp3.purpose
+FROM OV_Paper AS temp3
+WHERE temp3.PK_Paper = temp2.FK_papers) = 'Dissertation'))) = 1))));
 
 CREATE OR REPLACE VIEW tudOclInv9_2 AS
 (SELECT * FROM OV_Employee AS self
 WHERE NOT ((NOT ((SELECT temp1.name
 FROM OV_Grade AS temp1
 WHERE temp1.PK_Grade = self.FK_grade) = 'doctor') OR ((SELECT CASE
-  WHEN COUNT(temp2.PK_Paper) IS NULL THEN 0
-  ELSE COUNT(temp2.PK_Paper)
+  WHEN COUNT(temp2.FK_papers) IS NULL THEN 0
+  ELSE COUNT(temp2.FK_papers)
 END
-FROM OV_Paper AS temp2
-INNER JOIN (SELECT FK_papers,FK_author FROM ASS_author_papers) AS temp3 ON temp2.PK_Paper = temp3.FK_papers
-WHERE (temp3.FK_author = self.PK_Person AND NOT((temp2.purpose = 'Dissertation')))) > 0))));
+FROM ASS_author_papers AS temp2
+WHERE (temp2.FK_author = self.PK_Person AND NOT(((SELECT temp3.purpose
+FROM OV_Paper AS temp3
+WHERE temp3.PK_Paper = temp2.FK_papers) = 'Dissertation')))) > 0))));
 
 CREATE OR REPLACE VIEW tudOclInv10_1 AS
 (SELECT * FROM OV_Student AS self
@@ -336,3 +338,128 @@ WHERE NOT ((self.firstName >= self.lastName)));
 CREATE OR REPLACE VIEW tudOclInv15_12 AS
 (SELECT * FROM OV_Student AS self
 WHERE NOT ((self.firstName > self.lastName)));
+
+CREATE OR REPLACE VIEW tudOclInv16_1 AS
+(WITH RECURSIVE tudOclInv16_1_1 (variable1, variable2) AS (
+(SELECT temp2.PK_Facility, temp1.PK_Facility
+FROM OV_Facility AS temp1
+INNER JOIN (SELECT PK_Facility FROM OV_Facility) AS temp2 ON temp1.FK_superFacility = temp2.PK_Facility
+)
+UNION 
+(SELECT temp4.variable1, temp3.PK_Facility
+FROM OV_Facility AS temp3
+INNER JOIN (SELECT variable2,variable1 FROM tudOclInv16_1_1) AS temp4 ON temp3.FK_superFacility = temp4.variable2
+)
+)
+SELECT * FROM OV_Facility AS self
+WHERE NOT (((SELECT CASE
+  WHEN COUNT(temp1.variable2) IS NULL THEN 0
+  ELSE COUNT(temp1.variable2)
+END
+FROM tudOclInv16_1_1 AS temp1
+WHERE temp1.variable1 = self.PK_Facility) > 1)));
+
+CREATE OR REPLACE VIEW tudOclInv16_2 AS
+(WITH RECURSIVE tudOclInv16_2_1 (variable1, variable2) AS (
+(SELECT temp2.PK_Facility, temp1.PK_Facility
+FROM OV_Facility AS temp1
+INNER JOIN (SELECT PK_Facility FROM OV_Facility) AS temp2 ON temp1.FK_superFacility = temp2.PK_Facility
+)
+UNION 
+(SELECT temp4.variable1, temp3.PK_Facility
+FROM OV_Facility AS temp3
+INNER JOIN (SELECT variable2,variable1 FROM tudOclInv16_2_1) AS temp4 ON temp3.FK_superFacility = temp4.variable2
+)
+)
+SELECT * FROM OV_Facility AS self
+WHERE NOT (((SELECT CASE
+  WHEN COUNT(temp1.variable2) IS NULL THEN 0
+  ELSE COUNT(temp1.variable2)
+END
+FROM tudOclInv16_2_1 AS temp1
+) > 1)));
+
+CREATE OR REPLACE VIEW tudOclInv16_3 AS
+(WITH RECURSIVE tudOclInv16_3_1 (variable1, variable2) AS (
+(SELECT temp3.PK_Facility, temp1.PK_Facility
+FROM OV_Facility AS temp1
+INNER JOIN (SELECT PK_Facility,FK_superFacility FROM OV_Facility) AS temp2 ON temp1.FK_superFacility = temp2.PK_Facility
+INNER JOIN (SELECT PK_Facility FROM OV_Facility) AS temp3 ON temp2.FK_superFacility = temp3.PK_Facility
+)
+UNION 
+(SELECT temp6.variable1, temp4.PK_Facility
+FROM OV_Facility AS temp4
+INNER JOIN (SELECT PK_Facility,FK_superFacility FROM OV_Facility) AS temp5 ON temp4.FK_superFacility = temp5.PK_Facility
+INNER JOIN (SELECT variable2,variable1 FROM tudOclInv16_3_1) AS temp6 ON temp5.FK_superFacility = temp6.variable2
+)
+)
+SELECT * FROM OV_Facility AS self
+WHERE NOT (((SELECT CASE
+  WHEN COUNT(temp1.variable2) IS NULL THEN 0
+  ELSE COUNT(temp1.variable2)
+END
+FROM tudOclInv16_3_1 AS temp1
+) > 1)));
+
+CREATE OR REPLACE VIEW tudOclInv16_4 AS
+(WITH RECURSIVE tudOclInv16_4_1 (variable1, variable2) AS (
+(SELECT temp1.PK_Facility, temp1.FK_superFacility
+FROM OV_Facility AS temp1
+)
+UNION 
+(SELECT temp3.variable1, temp2.FK_superFacility
+FROM OV_Facility AS temp2
+INNER JOIN (SELECT variable2,variable1 FROM tudOclInv16_4_1) AS temp3 ON temp2.PK_Facility = temp3.variable2
+)
+)
+SELECT * FROM OV_Facility AS self
+WHERE NOT (((SELECT CASE
+  WHEN COUNT(temp1.variable2) IS NULL THEN 0
+  ELSE COUNT(temp1.variable2)
+END
+FROM tudOclInv16_4_1 AS temp1
+) > 1)));
+
+CREATE OR REPLACE VIEW tudOclInv16_5 AS
+(WITH RECURSIVE tudOclInv16_5_1 (variable1, variable2) AS (
+(SELECT temp2.PK_Facility, temp1.FK_superFacility
+FROM OV_Facility AS temp1
+INNER JOIN (SELECT FK_superFacility,PK_Facility FROM OV_Facility) AS temp2 ON temp1.PK_Facility = temp2.FK_superFacility
+)
+UNION 
+(SELECT temp5.variable1, temp3.FK_superFacility
+FROM OV_Facility AS temp3
+INNER JOIN (SELECT FK_superFacility,PK_Facility FROM OV_Facility) AS temp4 ON temp3.PK_Facility = temp4.FK_superFacility
+INNER JOIN (SELECT variable2,variable1 FROM tudOclInv16_5_1) AS temp5 ON temp4.PK_Facility = temp5.variable2
+)
+)
+SELECT * FROM OV_Facility AS self
+WHERE NOT (((SELECT CASE
+  WHEN COUNT(temp1.variable2) IS NULL THEN 0
+  ELSE COUNT(temp1.variable2)
+END
+FROM tudOclInv16_5_1 AS temp1
+) > 1)));
+
+CREATE OR REPLACE VIEW tudOclInv16_6 AS
+(WITH RECURSIVE tudOclInv16_6_1 (variable1, variable2) AS (
+(SELECT temp3.PK_Facility, temp1.PK_Facility
+FROM OV_Facility AS temp1
+INNER JOIN (SELECT FK_superFacility,PK_Facility FROM OV_Facility) AS temp2 ON temp1.FK_superFacility = temp2.FK_superFacility
+INNER JOIN (SELECT FK_superFacility,PK_Facility FROM OV_Facility) AS temp3 ON temp2.PK_Facility = temp3.FK_superFacility
+)
+UNION 
+(SELECT temp7.variable1, temp4.PK_Facility
+FROM OV_Facility AS temp4
+INNER JOIN (SELECT FK_superFacility,PK_Facility FROM OV_Facility) AS temp5 ON temp4.FK_superFacility = temp5.FK_superFacility
+INNER JOIN (SELECT FK_superFacility,PK_Facility FROM OV_Facility) AS temp6 ON temp5.PK_Facility = temp6.FK_superFacility
+INNER JOIN (SELECT variable2,variable1 FROM tudOclInv16_6_1) AS temp7 ON temp6.PK_Facility = temp7.variable2
+)
+)
+SELECT * FROM OV_Facility AS self
+WHERE NOT (((SELECT CASE
+  WHEN COUNT(temp1.variable2) IS NULL THEN 0
+  ELSE COUNT(temp1.variable2)
+END
+FROM tudOclInv16_6_1 AS temp1
+) > 1)));

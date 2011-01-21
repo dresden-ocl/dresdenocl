@@ -132,15 +132,13 @@ public class Ocl2SqlTest {
 			if (s.equals(""))
 				continue;
 			assertTrue("A extra view is generated\n" + s,
-					expectedCorrected.contains(s.replaceAll("\r\n", "\n")
-							.replaceAll("\r", "\n")));
+					expectedCorrected.contains(s));
 		}
 		for (String s : expectedCorrected) {
 			if (s.equals(""))
 				continue;
 			assertTrue("A view isn't generate\n" + s,
-					actualCorrected.contains(s.replaceAll("\r\n", "\n")
-							.replaceAll("\r", "\n")));
+					actualCorrected.contains(s));
 		}
 	}
 

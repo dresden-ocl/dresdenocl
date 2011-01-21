@@ -128,7 +128,24 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 */
 	private Map<String, Guide> variableMap;
 
+	/**
+	 * If the variable true, than generated no allInstances code.
+	 */
 	private boolean useVariable;
+
+	private boolean closure;
+
+	/**
+	 * 
+	 */
+	private List<ISQLCode> commonTableExpressions;
+
+	private String constraintName;
+
+	/**
+	 * The actualNumber of commonTable
+	 */
+	private int cteNumber;
 
 	/**
 	 * The number for not named constraints.
@@ -191,6 +208,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		navigationMap = new HashMap<OclExpression, List<Guide>>();
 		variableMap = new HashMap<String, Guide>();
 		useVariable = false;
+		commonTableExpressions = new LinkedList<ISQLCode>();
+		constraintName = "";
+		closure = false;
 	}
 
 	/*
@@ -257,13 +277,13 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		// no else.
 
+		reset();
 		// Check of generated Constraint Types:
 		if (aConstraint.getKind() != ConstraintKind.INVARIANT) {
 			return null;
 		}
 
 		ITemplate template = null;
-		String constraintName = "";
 		if (aConstraint.getKind() == ConstraintKind.INVARIANT) {
 			template =
 					mySettings.getTemplateGroup().getTemplate("constraint_invariant");
@@ -276,7 +296,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		ISQLCode bodyExpression;
 		Expression anExpression;
-		reset();
+
 		anExpression = aConstraint.getSpecification();
 		bodyExpression = doSwitch(anExpression);
 
@@ -287,6 +307,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		template.setAttribute("context", classGuide.getFrom());
 		template.setAttribute("context_alias", classGuide.getAlias());
 		template.setAttribute("expression", bodyExpression.getResult());
+
+		if (commonTableExpressions.size() > 0) {
+			template.setAttribute("common_table", commonTableExpressions.get(0)
+					.getResult());
+		}
 
 		ITemplate comment =
 				mySettings.getTemplateGroup().getTemplate("constraint_comment");
@@ -569,94 +594,50 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					srcGuides.get(0).getWhere());
 			guideSrc.reset();
 		}
-		// evaluate the arguments
-		for (Variable v : anIteratorExp.getIterator()) {
-			variableMap.put(v.getName(), guideSrc);
-		}
 
-		boolean saveAllInstances = useVariable;
-		useVariable = false;
-		ISQLCode arg = doSwitch(bodyExp);
-		useVariable = saveAllInstances;
+		if (operationName.equals("closure")) {
+			result = handleIterClosure(anIteratorExp, bodyExp, guideSrc, srcGuides);
+		}
+		else {
+			Guide varGuide = guideSrc;
+			// evaluate the arguments
+			for (Variable v : anIteratorExp.getIterator()) {
+				variableMap.put(v.getName(), varGuide);
+				if (anIteratorExp.getIterator().size() > 1) {
+					varGuide =
+							new Guide(guideSrc.isNavigation(), mySettings.getMappedModel()
+									.getUniqueAlias());
+					varGuide.add(guideSrc.getSelect(), guideSrc.getFrom(),
+							guideSrc.getWhere());
+					varGuide.reset();
+				}
+			}
 
-		if (operationName.equals("collect")) {
-			List<Guide> nav = new LinkedList<Guide>();
-			nav.addAll(navigationMap.get(bodyExp));
-			nav.addAll(srcGuides);
-			navigationMap.put(anIteratorExp, nav);
-			if (arg != null) {
-				Guide guideBody = navigationMap.get(bodyExp).get(0);
-				guideBody.reset();
-				boolean temp =
-						Boolean.valueOf(mySettings.getTemplateGroup()
-								.getTemplate("check_database_references").toString());
-				if (temp && guideSrc.getAlias().equals(guideBody.getAlias())
-						&& !guideSrc.getFrom().equals(guideBody.getFrom())) {
-					guideBody.setAlias(mySettings.getMappedModel().getUniqueAlias());
-					arg = createSelectStatement(navigationMap.get(bodyExp));
-					arg.changeElement("object", doSwitch(bodyExp));
-				}
-				else if (!temp) {
-					guideSrc = srcGuides.get(0);
-				}
-				result = createCollectStatement(arg, sourceCode, guideSrc, bodyExp);
+			boolean saveAllInstances = useVariable;
+			useVariable = false;
+			ISQLCode arg = doSwitch(bodyExp);
+			useVariable = saveAllInstances;
+
+			if (operationName.equals("collect")) {
+				result =
+						handleIterCollect(anIteratorExp, bodyExp, arg, guideSrc, srcGuides,
+								sourceCode);
 			}
-			else {
-				result = sourceCode;
+			else if (operationName.equals("select") || operationName.equals("reject")) {
+				result =
+						handleIterSelectReject(operationName, sourceCode, arg,
+								anIteratorExp, bodyExp);
 			}
-		}
-		else if (operationName.equals("select") || operationName.equals("reject")) {
-			ISQLCode expression = handleIterOperation(operationName, arg);
-			if (!navigationMap.get(bodyExp)
-					.get(navigationMap.get(bodyExp).size() - 1).equals(guideSrc)) {
-				Guide classGuide = assignClassGuide(anIteratorExp, sourceExp.getType());
-				classGuide.setAlias(navigationMap.get(bodyExp).get(0).getAlias());
-				sourceCode =
-						createCollectStatement(
-								createSelectStatement(Arrays.asList(classGuide)), sourceCode,
-								guideSrc, bodyExp);
-				ISQLCode join = sourceCode.getElement("join");
-				if (join != null
-						&& sourceCode.getElement("alias").toString()
-								.equals(join.getElement("alias").toString())) {
-					sourceCode.changeElement("alias", join.getElement("alias"));
-					sourceCode.getElement("object").changeElement("alias",
-							join.getElement("alias"));
-					join.changeElement("alias", new SQLString(mySettings.getMappedModel()
-							.getUniqueAlias()));
-					join.getElement("where").changeElement("alias2",
-							join.getElement("alias"));
-					if (join.getElement("join") == null) {
-						if (sourceCode.getElement("where") != null) {
-							if (sourceCode.getElement("where").getElement("alias1") != null) {
-								sourceCode.getElement("where").changeElement("alias1",
-										join.getElement("alias"));
-							}
-							else if (sourceCode.getElement("where").getElement("operand1") != null) {
-								sourceCode.getElement("where").getElement("operand1")
-										.changeElement("alias", join.getElement("alias"));
-							}
-						}
-					}
-					else {
-						join.getElement("join").getElement("where")
-								.changeElement("alias1", join.getElement("alias"));
-					}
-				}
-				sourceCode.getElement("join").getElement("where")
-						.changeElement("alias1", sourceCode.getElement("alias"));
+			else if (operationName.equals("forAll") || operationName.equals("exists")) {
+				result =
+						handleIterForAllExits(operationName, sourceCode, arg, srcGuides,
+								anIteratorExp.getIterator());
 			}
-			changeWhereStatement(sourceCode, expression);
-			result = sourceCode;
-		}
-		else if (operationName.equals("forAll") || operationName.equals("exists")) {
-			arg = handleIterOperation(operationName + "_where", arg);
-			changeWhereStatement(sourceCode, arg);
-			result = handleIterOperation(operationName, sourceCode);
 		}
 
 		for (Variable v : anIteratorExp.getIterator()) {
-			variableMap.remove(v.getName());
+			if (variableMap.containsKey(v.getName()))
+				variableMap.remove(v.getName());
 		}
 
 		if (LOGGER.isDebugEnabled()) {
@@ -831,6 +812,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		template.addElement("value", createObjectValue(variableMap.get(aVariableExp
 				.getReferredVariable().getName())));
+
+		if (aVariableExp.getType() instanceof Type
+				&& !(aVariableExp.getType() instanceof PrimitiveType)) {
+			List<Guide> guides = new LinkedList<Guide>();
+			guides.add(assignClassGuide(aVariableExp, aVariableExp.getType()));
+			navigationMap.put(aVariableExp, guides);
+		}
+		else {
+			navigationMap.put(aVariableExp, assignGuides(aVariableExp));
+		}
+
+		if (aVariableExp.getReferredVariable().getName().equals("self"))
+			navigationMap.get(aVariableExp).get(0).setAlias("self");
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseVariableExp(VariableExp)" + " - end - return value="
@@ -1102,7 +1096,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	protected ISQLCode handleAllInstances(Guide guide) {
 
 		useVariable = true;
-		return null;
+		// return null;
+		return createSelectStatement(Arrays.asList(guide));
 	}
 
 	/**
@@ -1515,13 +1510,199 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	/**
 	 * Generates a declarative code fragment for a collect iterator.
 	 * 
-	 * @param codeSrcExp
-	 *          the code of the source expression
+	 * @param anIteratorExp
+	 *          the iterator expression
+	 * @param bodyExp
+	 *          the body expression
+	 * @param arg
+	 *          the generated body code
+	 * @param guideSrc
+	 *          the source guide
+	 * @param srcGuides
+	 *          the source guides
+	 * @param sourceCode
+	 *          the generated source code
 	 * @return declarative code fragment for the collect iterator
 	 */
-	protected ISQLCode handleIterCollect(ISQLCode codeSrcExp) {
+	protected ISQLCode handleIterCollect(IteratorExp anIteratorExp,
+			OclExpression bodyExp, ISQLCode arg, Guide guideSrc,
+			List<Guide> srcGuides, ISQLCode sourceCode) {
 
-		return codeSrcExp;
+		// TODO: optimize collect for the optimize way
+		List<Guide> nav = new LinkedList<Guide>();
+		nav.addAll(navigationMap.get(bodyExp));
+		nav.addAll(srcGuides);
+		navigationMap.put(anIteratorExp, nav);
+		Guide guideBody = navigationMap.get(bodyExp).get(0);
+		guideBody.reset();
+		guideSrc.reset();
+		if (srcGuides.size() == 1 && !guideSrc.isNavigation()
+				&& guideSrc.getSelect().equals(guideSrc.getWhere())) {
+			sourceCode = null;
+		}
+		boolean temp =
+				Boolean.valueOf(mySettings.getTemplateGroup()
+						.getTemplate("check_database_references").toString());
+		if (temp && guideSrc.getAlias().equals(guideBody.getAlias())
+				&& !guideSrc.getFrom().equals(guideBody.getFrom())) {
+			guideBody.setAlias(mySettings.getMappedModel().getUniqueAlias());
+			arg = createSelectStatement(navigationMap.get(bodyExp));
+			arg.changeElement("object", doSwitch(bodyExp));
+		}
+		else if (!temp) {
+			guideSrc = srcGuides.get(0);
+		}
+		return createCollectStatement(arg, sourceCode, guideSrc, bodyExp);
+	}
+
+	/**
+	 * Generates a declarative code fragment for a forAll or exists iterator.
+	 * 
+	 * @param operationName
+	 *          the name of the operation
+	 * @param srcCode
+	 *          the generated source code
+	 * @param where
+	 *          the generated body code
+	 * @param srcGuides
+	 *          the source guides
+	 * @param variables
+	 *          all iteratpr variables
+	 * @return declarative code fragment for the collect iterator
+	 */
+	protected ISQLCode handleIterForAllExits(String operationName,
+			ISQLCode srcCode, ISQLCode where, List<Guide> srcGuides,
+			List<Variable> variables) {
+
+		where = handleIterOperation(operationName + "_where", where);
+
+		ISQLCode join = srcCode.getElement("join");
+		if (variables.size() > 1) {
+			for (int i = 1; i < variables.size(); i++) {
+				if (join != null) {
+					ISQLCode newJoin =
+							createJoinStatement(variableMap.get(variables.get(i).getName()),
+									srcGuides.get(1));
+					newJoin.changeElement("join", join.getElement("join"));
+					join.changeElement("join", newJoin);
+					join = newJoin;
+				}
+				else {	
+					ISQLCode newJoin;
+					if (srcGuides.size() > 1) {
+					newJoin = createJoinStatement(variableMap.get(variables.get(i).getName()),
+								srcGuides.get(1));
+					} else {
+						newJoin = createJoinStatement(variableMap.get(variables.get(i).getName()),
+								null);
+					}
+							
+					srcCode.changeElement("join", newJoin);
+					join = newJoin;
+				}
+			}
+		}
+		changeWhereStatement(srcCode, where);
+		return handleIterOperation(operationName, srcCode);
+	}
+
+	/**
+	 * Generates a declarative code fragment for a select or reject iterator.
+	 * 
+	 * @param operationName
+	 *          the name of the operation
+	 * @param sourceCode
+	 *          the generation source code
+	 * @param where
+	 *          the generated body code
+	 * @param anIteratorExp
+	 *          the iterator expression
+	 * @param bodyExp
+	 *          the body expression
+	 * @return declarative code fragment for the collect iterator
+	 */
+	protected ISQLCode handleIterSelectReject(String operationName,
+			ISQLCode sourceCode, ISQLCode where, IteratorExp anIteratorExp,
+			OclExpression bodyExp) {
+
+		ISQLCode expression = handleIterOperation(operationName, where);
+		navigationMap.put(anIteratorExp, navigationMap.get(bodyExp));
+		changeWhereStatement(sourceCode, expression);
+		return sourceCode;
+	}
+
+	/**
+	 * Generates a declarative code fragment for a closure iterator.
+	 * 
+	 * @param anIteratorExp
+	 *          the iterator expression
+	 * @param bodyExp
+	 *          the body expression
+	 * @param guideSrc
+	 *          the source guide
+	 * @param srcGuides
+	 *          the source guides
+	 * @return declarative code fragment for the collect iterator
+	 */
+	protected ISQLCode handleIterClosure(IteratorExp anIteratorExp,
+			OclExpression bodyExp, Guide guideSrc, List<Guide> srcGuides) {
+
+		String alias = guideSrc.getAlias();
+		guideSrc.setAlias(mySettings.getMappedModel().getUniqueAlias());
+
+		closure = true;
+		ISQLCode code =
+				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						"common_table_expression"));
+		commonTableExpressions.add(code);
+		ISQLCode cteName = new SQLString(constraintName + "_" + cteNumber++);
+		Guide closureGuide =
+				new Guide(false, mySettings.getMappedModel().getUniqueAlias());
+		closureGuide.add("variable2", cteName.getResult(), "variable1");
+		closureGuide.reset();
+
+		boolean saveAllInstances = useVariable;
+		useVariable = true;
+		Map<OclExpression, List<Guide>> navMap =
+				new HashMap<OclExpression, List<Guide>>();
+		navMap.putAll(navigationMap);
+		for (Variable v : anIteratorExp.getIterator()) {
+			variableMap.put(v.getName(), guideSrc);
+		}
+		ISQLCode arg1 = doSwitch(bodyExp);
+		if (arg1.getElement("object") == null) {
+			arg1 = createSelectStatement(Arrays.asList(guideSrc));
+		}
+		arg1.changeElement("object",
+				createObjectValue(navigationMap.get(bodyExp).get(0), guideSrc));
+		navigationMap.clear();
+		navigationMap.putAll(navMap);
+		for (Variable v : anIteratorExp.getIterator()) {
+			variableMap.remove(v.getName());
+		}
+		for (Variable v : anIteratorExp.getIterator()) {
+			variableMap.put(v.getName(), closureGuide);
+		}
+		ISQLCode arg2 = doSwitch(bodyExp);
+		closureGuide.reset();
+		Guide closureGuide1 = new Guide(false, closureGuide.getAlias());
+		closureGuide1.add("variable1", cteName.getResult(), "variable2");
+		closureGuide1.reset();
+		arg2.changeElement("object", this.createObjectValue(
+				navigationMap.get(bodyExp).get(0), closureGuide1));
+		useVariable = saveAllInstances;
+		guideSrc.setAlias(alias);
+		navMap.clear();
+		code.addElement("constraint_name", cteName);
+		code.addElement("recursive", arg2);
+		code.addElement("non_recursive", arg1);
+
+		LinkedList<Guide> guides = new LinkedList<Guide>();
+		guides.add(closureGuide);
+		guides.addAll(srcGuides);
+		closure = false;
+		navigationMap.put(anIteratorExp, guides);
+		return createSelectStatement(navigationMap.get(anIteratorExp));
 	}
 
 	/**
@@ -1833,6 +2014,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		navigationMap.clear();
 		variableMap.clear();
 		useVariable = false;
+		commonTableExpressions.clear();
+		constraintName = "";
+		cteNumber = 1;
+		closure = false;
 	}
 
 	/**
@@ -1891,7 +2076,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
 		Guide guide1 = new Guide(guide);
 		guide.setAlias(saveAlias);
-		navigationMap.put(exp, Arrays.asList(guide1));
+		List<Guide> guides = new LinkedList<Guide>();
+		guides.add(guide1);
+		navigationMap.put(exp, guides);
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
 					.debug("assignClassGuide(OclExpression exp, Type type) - end - Guide:"
@@ -1978,7 +2165,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		template.addElement("alias", new SQLString(from.getAlias()));
 		template.addElement("from", fromCode);
-		template.addElement("where", createWhereStatement(from, where));
+		if (where != null) template.addElement("where", createWhereStatement(from, where));
 		return template;
 	}
 
@@ -2019,6 +2206,24 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 						"feature_call_attribute_context"));
 		select.addElement("alias", new SQLString(guide.getAlias()));
 		select.addElement("attribute", new SQLString(guide.getSelect()));
+		return select;
+	}
+
+	/**
+	 * Generate the object value.
+	 * 
+	 * @param guide1
+	 *          the guide for object
+	 * @param guide2
+	 *          the guide for object
+	 * @return the code fragment.
+	 */
+	protected ISQLCode createObjectValue(Guide guide1, Guide guide2) {
+
+		guide1.reset();
+		ISQLCode select = createObjectValue(guide2);
+		select.addElement("alias2", new SQLString(guide1.getAlias()));
+		select.addElement("attribute2", new SQLString(guide1.getSelect()));
 		return select;
 	}
 
@@ -2068,7 +2273,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		guide.reset();
 		LinkedList<Guide> joinGuides = new LinkedList<Guide>();
 		joinGuides.addAll(steps);
-		joinGuides.removeLast();
+		if (!closure)
+			joinGuides.removeLast();
 		template =
 				new SQLCode(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_select"));
@@ -2146,21 +2352,24 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 			guides.add(guide);
 			guides.addAll(assignGuides(sourceExp));
 			if (sourceExp instanceof VariableExp) {
-				if (!guide.isNavigation()) {
+				/*
+				 * if (!guide.isNavigation()) { guide.reset(); Guide varGuide =
+				 * guides.getLast(); varGuide.reset();
+				 * guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+				 * //guides.getLast().reset();
+				 * //guide.setAlias(guides.removeLast().getAlias()); } else {
+				 */
+				guide.reset();
+				Guide varGuide = guides.getLast();
+				varGuide.reset();
+				if (guide.getWhere().equals(varGuide.getSelect())
+						&& guide.getWhere().equals(varGuide.getWhere())) {
 					guide.setAlias(guides.removeLast().getAlias());
 				}
 				else {
-					guide.reset();
-					Guide varGuide = guides.getLast();
-					varGuide.reset();
-					if (guide.getWhere().equals(varGuide.getSelect())
-							&& guide.getWhere().equals(varGuide.getWhere())) {
-						guide.setAlias(guides.removeLast().getAlias());
-					}
-					else {
-						guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
-					}
+					guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
 				}
+				// }
 			}
 			else {
 				guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
@@ -2242,15 +2451,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		if (bodyCode != null && bodyCode.getElement("from") != null) {
 			result = bodyCode;
 			ISQLCode join = result;
-			if (temp) {
-				while (join.getElement("join") != null) {
-					join = join.getElement("join");
-				}
-			}
-			else {
-				while (join.getElement("join") != null) {
-					join = join.getElement("join");
-				}
+			while (join.getElement("join") != null) {
+				join = join.getElement("join");
 			}
 			if (result.getElement("where") != null) {
 				if (result.getElement("where").getElement("operand1") != null) {
@@ -2265,8 +2467,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 				srcGuide.reset();
 				bodyGuide.reset();
 				if (temp) {
-					join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
-					join = join.getElement("join");
+					if (srcGuide.equals(bodyGuide)) {
+						join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
+						join = join.getElement("join");
+					}
+					else {
+						if (sourceCode.getElement("join") != null
+								&& srcGuide.getSelect().equals(bodyGuide.getSelect())) {
+							sourceCode.getElement("join").getElement("where")
+									.changeElement("alias1", join.getElement("alias"));
+						}
+						else {
+							join.changeElement("join",
+									createJoinStatement(srcGuide, bodyGuide));
+							join = join.getElement("join");
+						}
+					}
 				}
 				else {
 					if (!srcGuide.getAlias().equals(bodyGuide.getAlias())
@@ -2279,7 +2495,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					}
 					else {
 						sourceCode.getElement("join").getElement("where")
-								.changeElement("alias1", new SQLString(bodyGuide.getAlias()));
+								.changeElement("alias1", join.getElement("alias"));
 					}
 				}
 				join.changeElement("join", sourceCode.getElement("join"));
@@ -2334,6 +2550,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		ISQLCode result = null;
 		Guide guideBody;
+
 		if (navigationMap.get(bodyExp).size() >= 2) {
 			guideBody =
 					navigationMap.get(bodyExp).get(navigationMap.get(bodyExp).size() - 2);

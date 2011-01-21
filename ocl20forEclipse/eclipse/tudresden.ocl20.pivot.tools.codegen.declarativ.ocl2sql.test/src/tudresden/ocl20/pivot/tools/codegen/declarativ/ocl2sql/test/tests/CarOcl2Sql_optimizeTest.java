@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -114,8 +114,7 @@ public class CarOcl2Sql_optimizeTest {
 		actual = actual.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
 		expected = expected.replaceAll("\r\n", "\n").replaceAll("\r", "\n");
 
-		assertTrue("actual:" + actual + "\nexptected:" + expected,
-				expected.contains(actual));
+		assertEquals(expected, actual);
 	}
 
 	private List<String> runCodeGenerator(IOcl2DeclSettings settings, int index)
@@ -167,7 +166,7 @@ public class CarOcl2Sql_optimizeTest {
 
 	@Test
 	public void runConstraint3() {
-
+		//TODO: optimize collect statement
 		this.runConstraint(2);
 	}
 

@@ -1,9 +1,10 @@
 group sql;
 
 // --- OCL INVARIANT --- 
-constraint_invariant(constraint_name,context,context_alias,expression) ::= <<
+constraint_invariant(common_table,constraint_name,context,context_alias,expression) ::= <<
 CREATE OR REPLACE VIEW $constraint_name$ AS
-(SELECT * FROM $context$ AS $context_alias$
+($if(common_table)$$common_table$
+$endif$SELECT * FROM $context$ AS $context_alias$
 WHERE NOT ($expression$));
 >>
 
@@ -12,21 +13,30 @@ constraint_comment(context,expression) ::= <<
 -- Expression: $expression$
 >>
 
+// --- COMMON TABLE EXPRESSION ---
+common_table_expression(constraint_name, recursive, non_recursive) ::= <<
+WITH RECURSIVE $constraint_name$ (variable1, variable2) AS (
+$non_recursive$
+UNION 
+$recursive$
+)
+
+>>
+
 check_database_references() ::= <<
 true
 >>
 
 // --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
-feature_call_navigation_select(object,from,alias,join,where,groupby) ::= <<
+feature_call_navigation_select(object,from,alias,join,where) ::= <<
 (SELECT $object$
 FROM $from$ AS $alias$
 $join$
-$if(where)$WHERE $where$$endif$$if(groupby)$
-GROUP BY $groupby$$endif$)
+$if(where)$WHERE $where$$endif$)
 >>
 
 feature_call_navigation_join(object,from,alias,join,where) ::= <<
-INNER JOIN $from$ AS $alias$ ON $where$$if(join)$
+INNER JOIN $from$ AS $alias$ $if(where)$ON $where$$endif$$if(join)$
 
 $join$$endif$
 >>
@@ -41,9 +51,10 @@ feature_call_navigation_from(object,where,from) ::= <<
 
 
 // --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
-feature_call_attribute_context(alias,attribute) ::= <<
-$if(alias)$$alias$.$attribute$$else$$attribute$$endif$
+feature_call_attribute_context(alias,attribute,alias2,attribute2) ::= <<
+$if(alias)$$alias$.$endif$$attribute$$if(attribute2)$, $alias2$.$attribute2$$endif$
 >>
+
 
 feature_call_attribute_boolean(attribute) ::= <<
 ($attribute$ = 1)

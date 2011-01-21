@@ -1,20 +1,20 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2008-2011 by Bjoern Freitag (Bjoern.Freitag@mail.zih.tu-dresden.de)
 
-This file is part of the OCL 2 Java Code Generator of Dresden OCL2 for Eclipse.
+This file is part of the OCL 2 SQL Code Generator of Dresden OCL for Eclipse.
 
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+Dresden OCL for Eclipse is free software: you can redistribute it and/or modify 
 it under the terms of the GNU Lesser General Public License as published by the 
 Free Software Foundation, either version 3 of the License, or (at your option)
 any later version.
 
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+Dresden OCL for Eclipse is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
 or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
 for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+with Dresden OCL for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test;
@@ -25,21 +25,21 @@ import org.junit.runners.Suite;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2SqlTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2Sql_optimizeTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.Ocl2SqlTest;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2SqlTest;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_notoptimizeTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_optimizeTest;
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2 Java
- * Code transformer ({@link Ocl2JavaPlugin}).
+ * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2Sql
+ * Code transformer ({@link Ocl2SqlPlugin}).
  * </p>
  * 
- * @author Claas Wilke
+ * @author Bjoern Freitag
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ Ocl2SqlTest.class, SingleOcl2SqlTest.class,
-		SingleOcl2Sql_optimizeTest.class, CarOcl2SqlTest.class,
+@Suite.SuiteClasses({ SingleOcl2Sql_notoptimizeTest.class,
+		SingleOcl2Sql_optimizeTest.class,Ocl2SqlTest.class, CarOcl2SqlTest.class,
 		CarOcl2Sql_optimizeTest.class })
 public class AllOcl2SqlTests {
 	/*
