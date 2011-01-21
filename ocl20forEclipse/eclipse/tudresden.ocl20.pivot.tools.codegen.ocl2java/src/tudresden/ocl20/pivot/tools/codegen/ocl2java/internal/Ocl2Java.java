@@ -143,6 +143,12 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		renamedOperationNames.put(">=", "greaterEquals");
 	}
 
+	/**
+	 * The engine to provide all {@link ITemplate}s used for code
+	 * transformation.
+	 */
+	protected ITemplateGroup templateGroup;
+
 	/** Cache used to improve speed of {@link Type} transformation. */
 	private Map<Type, ITransformedType> cachedTransformedTypes = new WeakHashMap<Type, ITransformedType>();
 
@@ -154,12 +160,6 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 
 	/** The Settings used during code generation. */
 	private IOcl2JavaSettings settings;
-
-	/**
-	 * The engine to provide all {@link ITemplate}s used for code
-	 * transformation.
-	 */
-	private ITemplateGroup templateGroup;
 
 	/**
 	 * <p>
@@ -2094,6 +2094,67 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 
 	/**
 	 * <p>
+	 * Initializes the code generator.
+	 * </p>
+	 * 
+	 * @throws Ocl2CodeException
+	 *             Thrown, if a String template for code transformation can not
+	 *             be found.
+	 */
+	protected void init() throws Ocl2CodeException {
+	
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("init() - start");
+		}
+		// no else.
+	
+		this.environment = new Ocl2JavaEnvironment();
+	
+		/* Try to load the template engine. */
+		try {
+			LinkedList<URL> templatePaths = new LinkedList<URL>();
+	
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
+			templatePaths.add(this.getClass().getResource(
+					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
+	
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
+					"Ocl2Java");
+			this.templateGroup = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("Ocl2Java", null);
+	
+			this.templateGroup.addFiles(templatePaths);
+	
+			this.settings = new Ocl2JavaSettings();
+		}
+	
+		catch (TemplateException e) {
+			String msg = "The template for code transformation could not be loaded. ";
+			msg += e.getMessage();
+	
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("init() - failed", e);
+			}
+			// no else.
+	
+			throw new Ocl2CodeException(msg);
+		}
+	
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("init() - end");
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
 	 * Returns The canonical Name of a {@link NamedElement} in the
 	 * {@link IModel}.
 	 * </p>
@@ -2169,67 +2230,6 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		// no else.
 
 		return result;
-	}
-
-	/**
-	 * <p>
-	 * Initializes the code generator.
-	 * </p>
-	 * 
-	 * @throws Ocl2CodeException
-	 *             Thrown, if a String template for code transformation can not
-	 *             be found.
-	 */
-	private void init() throws Ocl2CodeException {
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("init() - start");
-		}
-		// no else.
-
-		this.environment = new Ocl2JavaEnvironment();
-
-		/* Try to load the template engine. */
-		try {
-			LinkedList<URL> templatePaths = new LinkedList<URL>();
-
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
-
-			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
-					"Ocl2Java");
-			this.templateGroup = TemplatePlugin.getTemplateGroupRegistry()
-					.addDefaultTemplateGroup("Ocl2Java", null);
-
-			this.templateGroup.addFiles(templatePaths);
-
-			this.settings = new Ocl2JavaSettings();
-		}
-
-		catch (TemplateException e) {
-			String msg = "The template for code transformation could not be loaded. ";
-			msg += e.getMessage();
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.error("init() - failed", e);
-			}
-			// no else.
-
-			throw new Ocl2CodeException(msg);
-		}
-
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("init() - end");
-		}
-		// no else.
 	}
 
 	/**
