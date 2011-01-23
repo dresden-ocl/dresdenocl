@@ -202,6 +202,7 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
       (vd.getTypeName->oclType).flatMap{tipe =>
         val property = PivotModelFactory.eINSTANCE.createProperty
         property.setType(tipe)
+        property.setName(name)
         if (property.getType == null) {
           // this can happen for not fully qualified collections, e.g., Set instead of Set(Integer)
           resolveTypeByComputingFeature(vd, name, t)

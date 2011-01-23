@@ -96,6 +96,8 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
    */
   protected lazy val iResource : IResource = EMFTextAccessProxy.get(resource, classOf[IResource]).asInstanceOf[IResource]
   
+  protected var lastRoot : EObject = null
+  
   /*
    * For cached attributes.
    */
@@ -173,16 +175,21 @@ trait OclStaticSemantics extends ocl.semantics.OclAttributeMaker
   
   @throws(classOf[OclStaticSemanticsException])
   def cs2EssentialOcl(root : EObject) : java.util.List[Constraint] = {
-    resetMemo
-    model.getRootNamespace
-    OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, iResource.getContents.get(0))
-    val constraints = computeConstraints(root)
-    // to avoid the conversion of Scala List to Java List multiple times
-    val result : java.util.List[Constraint] = constraints.openOr {throw new OclStaticSemanticsException}
-    OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result)
-    //definedOperationsType.clear
-    allDefs = null
-    result
+    if (root ne lastRoot) {
+    	resetMemo
+	    model.getRootNamespace
+	    OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, iResource.getContents.get(0))
+	    val constraints = computeConstraints(root)
+	    // to avoid the conversion of Scala List to Java List multiple times
+	    val result : java.util.List[Constraint] = constraints.openOr {throw new OclStaticSemanticsException}
+	    OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result)
+	    //definedOperationsType.clear
+	    allDefs = null
+	    lastRoot = root
+	    result
+    }
+    else
+      computeConstraints(root).openOr {throw new OclStaticSemanticsException}
   }
   
   def getAllDefs = {
