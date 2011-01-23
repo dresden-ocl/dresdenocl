@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Dresden OCL Editor UI Plug-in
+Bundle-Name: EMFText UI Plugin: ocl
 Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;singleton:=true
-Bundle-Version: 3.1.0.modifier
-Bundle-Vendor: TU Dresden Software Technology Group
+Bundle-Version: 1.0.0
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Require-Bundle: org.eclipse.core.resources,
   org.emftext.access;resolution:=optional,
   org.eclipse.emf,

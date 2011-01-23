@@ -72,4 +72,8 @@ public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.re
 		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNewFileContentProvider();
 	}
 	
+	public void registerResourceFactory() {
+		org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResourceFactory());
+	}
+	
 }

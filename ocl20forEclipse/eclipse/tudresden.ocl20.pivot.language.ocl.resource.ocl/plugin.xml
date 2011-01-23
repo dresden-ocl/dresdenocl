@@ -13,6 +13,43 @@
 		</super>
 		<super type="org.eclipse.core.resources.textmarker">
 		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem">
+		</super>
+	</extension>
+	
+	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="tudresden.ocl20.pivot.language.ocl.resource.ocl.problem">
+		</super>
 	</extension>
 	
 	<extension id="tudresden.ocl20.pivot.language.ocl.resource.ocl.nature" name="ocl nature" point="org.eclipse.core.resources.natures">
