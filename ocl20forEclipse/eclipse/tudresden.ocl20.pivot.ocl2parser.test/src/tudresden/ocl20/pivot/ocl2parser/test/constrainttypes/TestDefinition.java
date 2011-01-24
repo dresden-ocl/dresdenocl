@@ -225,6 +225,8 @@ public class TestDefinition {
 		assertEquals("testDefPositive06", prop.getName());
 		assertEquals(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 				.getOclInteger(), prop.getType());
+		
+		assertNotNull(prop.getOwner());
 	}
 
 	/**
