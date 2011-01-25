@@ -120,4 +120,25 @@ trait OclAttributes { selfType : OclStaticSemantics =>
     }
   }
   
+  protected val propertyForVariableDeclarationWithInit = __propertyForVariableDeclarationWithInit
+  protected def __propertyForVariableDeclarationWithInit : Attributable ==> Box[Property] = {
+    attr {
+  	  case v@VariableDeclarationWithInitCS(variableName, typeCS, initExp, _) => {
+  	    (if (typeCS != null) {
+	  	    typeCS->oclType
+  	    } else {
+          (initExp->computeOclExpression).flatMap { oclExpression =>
+  	  	    Full(oclExpression.getType)
+  	  	  }
+        }).flatMap {tipe =>
+		    	val property = PivotModelFactory.eINSTANCE.createProperty
+		    	property.setName(variableName.getSimpleName)
+		    	property.setType(tipe)
+		    	Full(property)
+        }
+      }
+  	  case _ => Empty
+    }
+  }
+  
 }

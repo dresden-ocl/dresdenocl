@@ -199,10 +199,7 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
   
   private def getPropertyFromVariableDeclaration(vd : VariableDeclarationWithInitCS, t : Type, name : String) : Box[Property] = {
     if (vd.getTypeName != null) {
-      (vd.getTypeName->oclType).flatMap{tipe =>
-        val property = PivotModelFactory.eINSTANCE.createProperty
-        property.setType(tipe)
-        property.setName(name)
+      (vd->propertyForVariableDeclarationWithInit).flatMap{property =>
         if (property.getType == null) {
           // this can happen for not fully qualified collections, e.g., Set instead of Set(Integer)
           resolveTypeByComputingFeature(vd, name, t)

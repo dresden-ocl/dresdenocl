@@ -147,24 +147,22 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
       case v@VariableDeclarationWithInitCS(variableName, typeName, initialization, _) => {
         (initialization->computeOclExpression).flatMap{oclExpressionEOcl =>
           checkVariableDeclarationType(v).flatMap {tipe =>
-	          val property = PivotModelFactory.eINSTANCE.createProperty
-			      property.setName(variableName.getSimpleName)
-			      // TODO: does not work yet for nested collections
-			      property.setType(tipe)
-			      v.parent match {
-			        case v : VariableDeclarationWithInitListCS => v.parent match {
-			          case _ : TupleLiteralExpCS => Full((property, oclExpressionEOcl))
-             }
-			        case _ => {
-			          (v->self).flatMap{self =>
-					      	self.getType.allProperties.find(_.getName == property.getName) match {
-					      	  case Some(p) => yieldFailure("Property " + p.getName + " is already defined on " + 
-		                                           		self.getType.getName, v)
-					      	  case None => Full((property, oclExpressionEOcl))
-					      	}
-					      }
-			        }
-			      }
+	          (v->propertyForVariableDeclarationWithInit).flatMap{property =>
+				      v.parent match {
+				        case v : VariableDeclarationWithInitListCS => v.parent match {
+				          case _ : TupleLiteralExpCS => Full((property, oclExpressionEOcl))
+	             }
+				        case _ => {
+				          (v->self).flatMap{self =>
+						      	self.getType.allProperties.find(_.getName == property.getName) match {
+						      	  case Some(p) => yieldFailure("Property " + p.getName + " is already defined on " + 
+			                                           		self.getType.getName, v)
+						      	  case None => Full((property, oclExpressionEOcl))
+						      	}
+						      }
+				        }
+				      }
+	          }
           }
         }
       }
