@@ -3434,7 +3434,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					.createOclString(referredProperty.getName()));
 		}
 
-		/* Else the source must be an OclModelInstanceObject. */
 		else {
 			try {
 				OclModelInstanceObject sourceObject;

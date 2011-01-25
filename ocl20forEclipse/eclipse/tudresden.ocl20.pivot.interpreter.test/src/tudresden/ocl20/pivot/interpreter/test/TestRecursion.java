@@ -19,7 +19,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.interpreter.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.test.standardlibrary.AbstractInterpreterTest;
 import tudresden.ocl20.pivot.model.ModelAccessException;
@@ -91,8 +94,8 @@ public class TestRecursion extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/fibonacci01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/fibonacci01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(7, results.size());
@@ -105,7 +108,7 @@ public class TestRecursion extends AbstractInterpreterTest {
 		this.assertIsTrue(results.get(5));
 		this.assertIsTrue(results.get(6));
 	}
-	
+
 	/**
 	 * <p>
 	 * Tests the operation <code>Collection.product(Collection)</code>.
@@ -121,13 +124,29 @@ public class TestRecursion extends AbstractInterpreterTest {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/recProperty01", INSTANCE2_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/recProperty01", INSTANCE2_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		this.assertIsEqual(new Integer(0), results.get(0));
-		this.assertIsEqual(new Integer(1), results.get(1));
+		assertFalse(results.get(0).getResult().oclIsInvalid().isTrue());
+		assertFalse(results.get(0).getResult().oclIsUndefined().isTrue());
+		assertTrue(results.get(0).getResult() instanceof OclInteger);
+
+		assertFalse(results.get(1).getResult().oclIsInvalid().isTrue());
+		assertFalse(results.get(1).getResult().oclIsUndefined().isTrue());
+		assertTrue(results.get(1).getResult() instanceof OclInteger);
+
+		OclInteger oclInteger01;
+		oclInteger01 = (OclInteger) results.get(0).getResult();
+		OclInteger oclInteger02;
+		oclInteger02 = (OclInteger) results.get(1).getResult();
+
+		/* One result must be 1 and one 0. */
+		assertTrue((oclInteger01.getModelInstanceInteger().getLong() == 0 && oclInteger02
+				.getModelInstanceInteger().getLong() == 1)
+				|| (oclInteger01.getModelInstanceInteger().getLong() == 1 && oclInteger02
+						.getModelInstanceInteger().getLong() == 0));
 	}
 }
