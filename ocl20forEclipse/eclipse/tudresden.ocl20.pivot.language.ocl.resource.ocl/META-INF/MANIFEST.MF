@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: EMFText Parser Plugin: ocl
+Bundle-Name: OCL Parser
 Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.resource.ocl;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Bundle-Version: 3.1.0.qualifier
+Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.emf,
  org.eclipse.emf.codegen.ecore,
@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.core.resources,
  org.emftext.commons.antlr3_2_0,
  tudresden.ocl20.pivot.language.ocl,
  tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.model;bundle-version="3.1.0"
+ tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
