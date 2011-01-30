@@ -200,6 +200,7 @@ Library.
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.emf.workspace"/>
+      <import plugin="org.emftext.commons.antlr3_2_0"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.jface.text"/>
@@ -215,7 +216,8 @@ Library.
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.emftext.commons.antlr3_2_0"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="tudresden.ocl20.pivot.pivotmodel.edit"/>
    </requires>
 
    <plugin
@@ -282,6 +284,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.pivotmodel.semantics"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.language.ocl.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
