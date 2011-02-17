@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+ * Copyright (C) 2008-2011 by Claas Wilke (claas.wilke@tu-dresden.de)
  *
  * This file is part of the OCL2Java Code Generator of Dresden OCL.
  *
@@ -2102,18 +2102,18 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 *             be found.
 	 */
 	protected void init() throws Ocl2CodeException {
-	
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("init() - start");
 		}
 		// no else.
-	
+
 		this.environment = new Ocl2JavaEnvironment();
-	
+
 		/* Try to load the template engine. */
 		try {
 			LinkedList<URL> templatePaths = new LinkedList<URL>();
-	
+
 			templatePaths.add(this.getClass().getResource(
 					TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
 			templatePaths.add(this.getClass().getResource(
@@ -2124,29 +2124,29 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 					TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
 			templatePaths.add(this.getClass().getResource(
 					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
-	
+
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
 					"Ocl2Java");
 			this.templateGroup = TemplatePlugin.getTemplateGroupRegistry()
 					.addDefaultTemplateGroup("Ocl2Java", null);
-	
+
 			this.templateGroup.addFiles(templatePaths);
-	
+
 			this.settings = new Ocl2JavaSettings();
 		}
-	
+
 		catch (TemplateException e) {
 			String msg = "The template for code transformation could not be loaded. ";
 			msg += e.getMessage();
-	
+
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.error("init() - failed", e);
 			}
 			// no else.
-	
+
 			throw new Ocl2CodeException(msg);
 		}
-	
+
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("init() - end");
 		}
@@ -2240,7 +2240,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForBody(Constraint constraint)
+	protected String instrumentCodeForBody(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -2359,7 +2359,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForDef(Constraint constraint)
+	protected String instrumentCodeForDef(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -2545,7 +2545,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForDerive(Constraint constraint)
+	protected String instrumentCodeForDerive(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -2669,7 +2669,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForInit(Constraint constraint)
+	protected String instrumentCodeForInit(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -2786,7 +2786,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForInv(Constraint constraint)
+	protected String instrumentCodeForInv(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -2944,7 +2944,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForPost(Constraint constraint)
+	protected String instrumentCodeForPost(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -3148,7 +3148,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @param constraint
 	 *            The {@link Constraint} which shall be instrumented.
 	 */
-	private String instrumentCodeForPre(Constraint constraint)
+	protected String instrumentCodeForPre(Constraint constraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
@@ -3479,7 +3479,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 *         the given {@link Constraint}'s {@link OclExpression}.
 	 * @throws Ocl2CodeException
 	 */
-	private ITransformedCode transformFragmentCode(Constraint aConstraint)
+	protected ITransformedCode transformFragmentCode(Constraint aConstraint)
 			throws Ocl2CodeException {
 
 		if (LOGGER.isDebugEnabled()) {
@@ -3664,7 +3664,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 *             Thrown, if an unknown or illegal Type or Expression is found
 	 *             during code transformation.
 	 */
-	private String transformInstrumentationCode(Constraint aConstraint)
+	protected String transformInstrumentationCode(Constraint aConstraint)
 			throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
