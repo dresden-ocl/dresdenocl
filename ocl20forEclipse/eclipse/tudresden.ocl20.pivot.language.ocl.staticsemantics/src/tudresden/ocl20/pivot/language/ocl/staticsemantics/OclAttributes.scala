@@ -73,6 +73,11 @@ trait OclAttributes { selfType : OclStaticSemantics =>
    * @return a Tuple2 with the first tuple element yielding the List of implicit variables,
    * 				 and the second tuple element a List of explicit variables.
    */
+  def getVariables(attributable : EObject) : (java.util.List[Variable], java.util.List[Variable])= variables (attributable) match {
+    case Full(variables) => (variables._1, variables._2)
+    case Failure(msg, _, _) => throw new IllegalStateException(msg)
+    case _ => throw new IllegalStateException("Cannot compute variables for " + attributable + ".")
+  }
   protected val variables = __variables
   protected def __variables : Attributable ==> Box[Tuple2[List[Variable], List[Variable]]] = {
     childAttr {
@@ -83,6 +88,11 @@ trait OclAttributes { selfType : OclStaticSemantics =>
     }
   }
   
+  def getOclType(attributable : EObject) : Type = oclType (attributable) match {
+    case Full(oclType) => oclType
+    case Failure(msg, _, _) => throw new IllegalStateException(msg)
+    case _ => throw new IllegalStateException("Cannot compute oclType for " + attributable + ".")
+  }
   protected[staticsemantics] val oclType = __oclType
   protected def __oclType : Attributable ==> Box[Type] = {
     attr {

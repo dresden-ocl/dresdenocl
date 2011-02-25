@@ -8,7 +8,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.junit4;bundle-version="4.0.0",
  tudresden.ocl20.pivot.testsuite,
  tudresden.ocl20.pivot.facade,
- tudresden.ocl20.pivot.language.ocl.staticsemantics
+ tudresden.ocl20.pivot.language.ocl.staticsemantics,
+ tudresden.ocl20.pivot.language.ocl.resource.ocl,
+ tudresden.ocl20.pivot.language.ocl;bundle-version="3.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

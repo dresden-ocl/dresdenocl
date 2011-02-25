@@ -30,10 +30,13 @@ import org.junit.Test;
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
+import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.SemanticException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <p>
@@ -200,6 +203,75 @@ public class TestLetExpressions {
 		var = letExp.getVariable();
 		assertEquals("inner", var.getName());
 
+	}
+	
+	/**
+	 * <p>
+	 * A test case to check that a LetExpression is parsed appropriately with correct associativity (see Issue #14582).
+	 * </p>
+	 */
+	@Test
+	public void testLetPositive06() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/letPositive06.ocl";
+		modelFileName = "testmodel02.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		List<Constraint> constraints = testPerformer.parseFile(oclFileName);
+
+		assertNotNull(constraints);
+		assertEquals(1, constraints.size());
+
+		Constraint constraint = constraints.get(0);
+		assertTrue(constraint.getSpecification() instanceof ExpressionInOcl);
+
+		OclExpression exp = ((ExpressionInOcl) constraint.getSpecification())
+				.getBodyExpression();
+		assertTrue(exp instanceof OperationCallExp);
+
+		OperationCallExp operationCallExp = (OperationCallExp) exp;
+		Operation operation = operationCallExp.getReferredOperation();
+		assertEquals("+", operation.getName());
+
+		exp = operationCallExp.getSource();
+		assertTrue(exp instanceof PropertyCallExp);
+
+		exp = operationCallExp.getArgument().get(0);
+		LetExp letExp = (LetExp) exp;
+		assertEquals("b", letExp.getVariable().getName());
+		
+		operationCallExp = (OperationCallExp) letExp.getIn();
+		operation = operationCallExp.getReferredOperation();
+		assertEquals("+", operation.getName());
+
+		exp = operationCallExp.getSource();
+		assertTrue(exp instanceof PropertyCallExp);
+		
+		exp = operationCallExp.getArgument().get(0);
+		letExp = (LetExp) exp;
+		assertEquals("c", letExp.getVariable().getName());
+		
+		operationCallExp = (OperationCallExp) letExp.getIn();
+		operation = operationCallExp.getReferredOperation();
+		assertEquals("+", operation.getName());
+		
+		exp = operationCallExp.getSource();
+		assertTrue(exp instanceof PropertyCallExp);
+		
+		exp = operationCallExp.getArgument().get(0);
+		assertTrue(exp instanceof PropertyCallExp);
 	}
 
 	/**

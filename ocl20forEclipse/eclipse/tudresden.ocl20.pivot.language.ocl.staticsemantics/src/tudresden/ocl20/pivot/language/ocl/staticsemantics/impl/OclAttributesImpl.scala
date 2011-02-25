@@ -442,6 +442,17 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
       case StringLiteralExpCS(_) => {
         Full(oclLibrary.getOclString)
       }
+      case IterateExpCS(_, resultVariable, _) => {
+        for (innerType <- resultVariable->oclType) yield {
+          innerType
+        }
+      }
+      case IteratorExpCS(_, _, name) => {
+        name match {
+          // FIXME: how to determine source type?
+          case "select" => Empty
+        }
+      }
       case unknown => super.__oclType(unknown)
     }
   }

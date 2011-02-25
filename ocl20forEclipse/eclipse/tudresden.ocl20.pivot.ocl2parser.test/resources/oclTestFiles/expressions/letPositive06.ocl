@@ -1,0 +1,7 @@
+package test
+
+/* Used to test correct parsing of nested let expressions (associativity). */
+context ClassA
+def: testLetPositive06() = attr1 + let b = 1 in attr1 + let c = 2 in attr1 + attr1
+
+endpackage

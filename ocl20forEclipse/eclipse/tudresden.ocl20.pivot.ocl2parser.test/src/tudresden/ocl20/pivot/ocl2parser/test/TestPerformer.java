@@ -54,7 +54,7 @@ public class TestPerformer {
 	 * The path of the basic directory that contains the OCL constraints used
 	 * during testing.
 	 */
-	protected String OCL_FILE_DIRECTORY = "resources/oclTestFiles/";
+	protected static String OCL_FILE_DIRECTORY = "resources/oclTestFiles/";
 
 	/**
 	 * Contains the instance of the {@link TestPerformer} in relation to the ID

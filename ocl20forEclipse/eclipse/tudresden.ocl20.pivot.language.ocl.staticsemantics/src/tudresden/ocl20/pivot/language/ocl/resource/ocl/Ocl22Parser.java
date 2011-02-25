@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -12,6 +11,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
+import scala.Tuple2;
+import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemanticsException;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor.OclStaticSemanticsProvider;
@@ -20,6 +21,7 @@ import tudresden.ocl20.pivot.parser.IOclParser;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.parser.SemanticException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 public class Ocl22Parser implements IOclParser {
 
@@ -74,6 +76,42 @@ public class Ocl22Parser implements IOclParser {
 		} catch (IOException e) {
 			throw new ParseException("Unable to load OCL file.", e);
 		}
+	}
+
+	/**
+	 * 
+	 * @param eObject
+	 *          context for which the variables are defined
+	 * @return a Tuple with 2 Lists: the first List holds all implicit variables
+	 *         (i.e., self, iterator variables), while the second List contains
+	 *         all explicitly defined variables (i.e., operation parameters, from
+	 *         let expressions, iterator variables, result variable in
+	 *         postconditions).
+	 */
+	public Variables getVariables(EObject eObject) {
+		Resource res = eObject.eResource();
+		if (res instanceof OclResource) {
+			tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
+					.getStaticSemantics((OclResource) res);
+			Variables result = new Variables();
+			Tuple2<List<Variable>, List<Variable>> variables = staticSemantics.getVariables(eObject);
+			result.setImplicitVariables(variables._1());
+			result.setExplicitVariables(variables._2());
+			return result;
+		} else
+			throw new IllegalArgumentException("Resource of EObject " + eObject
+					+ " is not of type OclResource.");
+	}
+
+	public Type getOclType(EObject eObject) {
+		Resource res = eObject.eResource();
+		if (res instanceof OclResource) {
+			tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
+					.getStaticSemantics((OclResource) res);
+			return staticSemantics.getOclType(eObject);
+		} else
+			throw new IllegalArgumentException("Resource of EObject " + eObject
+					+ " is not of type OclResource.");
 	}
 
 	private List<Constraint> staticSemanticsAnalysis(OclResource resource)
