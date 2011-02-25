@@ -23,7 +23,8 @@ import org.kiama.attribution.Attribution._
 trait OclReferenceResolver { selfType : OclStaticSemantics =>
   
   protected val keywords = List("and", "body", "context", "def", "derive", "else", "endif", "endpackage", "if", "implies",
-          				"in", "init", "inv", "let", "not", "or", "package", "post", "pre", "static", "then", "xor")
+          				"in", "init", "inv", "let", "not", "or", "package", "post", "pre", "static", "then", "xor", "exists",
+  						"forAll", "isUnique", "any", "one", "collect", "select", "reject", "collectNested", "sortedBy")
   
   protected val _resolveNamespace : Tuple2[String, Boolean] => Attributable ==> Box[List[Namespace]] = {
     paramAttr {
