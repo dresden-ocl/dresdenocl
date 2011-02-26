@@ -143,23 +143,23 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		renamedOperationNames.put(">=", "greaterEquals");
 	}
 
-	/**
-	 * The engine to provide all {@link ITemplate}s used for code
-	 * transformation.
-	 */
-	protected ITemplateGroup templateGroup;
-
 	/** Cache used to improve speed of {@link Type} transformation. */
-	private Map<Type, ITransformedType> cachedTransformedTypes = new WeakHashMap<Type, ITransformedType>();
+	protected Map<Type, ITransformedType> cachedTransformedTypes = new WeakHashMap<Type, ITransformedType>();
 
 	/**
 	 * The environment to provide and store some values during code
 	 * transformation.
 	 */
-	private IOcl2JavaEnvironment environment;
+	protected IOcl2JavaEnvironment environment;
 
 	/** The Settings used during code generation. */
-	private IOcl2JavaSettings settings;
+	protected IOcl2JavaSettings settings;
+
+	/**
+	 * The engine to provide all {@link ITemplate}s used for code
+	 * transformation.
+	 */
+	protected ITemplateGroup templateGroup;
 
 	/**
 	 * <p>
@@ -3291,7 +3291,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * @throws Ocl2CodeException
 	 *             Thrown if the given file or location can not be found.
 	 */
-	private void saveTransformedCode(String generatedCode, String fileName,
+	protected void saveTransformedCode(String generatedCode, String fileName,
 			String subFolder) throws Ocl2CodeException {
 
 		/* Probably log the entry into this method. */
