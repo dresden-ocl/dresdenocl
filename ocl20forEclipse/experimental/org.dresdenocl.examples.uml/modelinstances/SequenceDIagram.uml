@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="SequenceDIagram">
+    <packagedElement xmi:type="uml:Class" xmi:id="_hl2E4BmsEeCYb_r36PiY5g" name="Directory">
+      <generalization xmi:id="_q_Co4xmsEeCYb_r36PiY5g" general="_hunmaBmsEeCYb_r36PiY5g"/>
+      <ownedOperation xmi:id="_tUQMwBmsEeCYb_r36PiY5g" name="find"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_hunmaBmsEeCYb_r36PiY5g" name="Content"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_pInSwBmsEeCYb_r36PiY5g" name="File">
+      <generalization xmi:id="_rlkdYBmsEeCYb_r36PiY5g" general="_hunmaBmsEeCYb_r36PiY5g"/>
+      <ownedOperation xmi:id="_um-Y4hmsEeCYb_r36PiY5g" name="getName"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Collaboration" xmi:id="_xE07YBmsEeCYb_r36PiY5g">
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_xE07YRmsEeCYb_r36PiY5g">
+        <ownedAttribute xmi:id="_zPxwABmsEeCYb_r36PiY5g" name="Property1" type="_hl2E4BmsEeCYb_r36PiY5g"/>
+        <ownedAttribute xmi:id="_1k2J8BmsEeCYb_r36PiY5g" name="Property2" type="_pInSwBmsEeCYb_r36PiY5g"/>
+        <ownedConnector xmi:id="_zPxwARmsEeCYb_r36PiY5g" name="Connector1">
+          <end xmi:id="_zPxwAhmsEeCYb_r36PiY5g" role="_zPxwABmsEeCYb_r36PiY5g"/>
+          <end xmi:id="_1k2J8RmsEeCYb_r36PiY5g" role="_1k2J8BmsEeCYb_r36PiY5g"/>
+        </ownedConnector>
+        <lifeline xmi:id="_xlQH4BmsEeCYb_r36PiY5g" name="d" represents="_zPxwABmsEeCYb_r36PiY5g" coveredBy="_FbDNoBmtEeCYb_r36PiY5g _2k-KMhmsEeCYb_r36PiY5g"/>
+        <lifeline xmi:id="_0zwEMBmsEeCYb_r36PiY5g" name="f" represents="_1k2J8BmsEeCYb_r36PiY5g" coveredBy="_FbDNoRmtEeCYb_r36PiY5g _3dDowhmsEeCYb_r36PiY5g"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_FbDNoBmtEeCYb_r36PiY5g" name="MessageOccurrenceSpecification1" covered="_xlQH4BmsEeCYb_r36PiY5g" event="_FbDNohmtEeCYb_r36PiY5g" message="_FbDNoxmtEeCYb_r36PiY5g"/>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_FbDNoRmtEeCYb_r36PiY5g" name="MessageOccurrenceSpecification2" covered="_0zwEMBmsEeCYb_r36PiY5g" event="_FbDNohmtEeCYb_r36PiY5g" message="_FbDNoxmtEeCYb_r36PiY5g"/>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_2k-KMhmsEeCYb_r36PiY5g" name="BehaviorExecutionSpecification1" covered="_xlQH4BmsEeCYb_r36PiY5g" start="_FbDNoBmtEeCYb_r36PiY5g" finish="_FbDNoBmtEeCYb_r36PiY5g"/>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_3dDowhmsEeCYb_r36PiY5g" name="BehaviorExecutionSpecification2" covered="_0zwEMBmsEeCYb_r36PiY5g" start="_FbDNoRmtEeCYb_r36PiY5g" finish="_FbDNoRmtEeCYb_r36PiY5g"/>
+        <message xmi:id="_FbDNoxmtEeCYb_r36PiY5g" name="getName" receiveEvent="_FbDNoRmtEeCYb_r36PiY5g" sendEvent="_FbDNoBmtEeCYb_r36PiY5g"/>
+      </ownedBehavior>
+    </packagedElement>
+    <packagedElement xmi:type="uml:CallEvent" xmi:id="_FbDNohmtEeCYb_r36PiY5g" name="CallEvent1" operation="_um-Y4hmsEeCYb_r36PiY5g"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_WPLlsB4tEeCQTbbZHixhAw" name="A_&lt;directory>_&lt;content>" memberEnd="_WPLlsR4tEeCQTbbZHixhAw _WPLltB4tEeCQTbbZHixhAw">
+      <ownedEnd xmi:id="_WPLlsR4tEeCQTbbZHixhAw" name="directory" type="_hl2E4BmsEeCYb_r36PiY5g" association="_WPLlsB4tEeCQTbbZHixhAw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WPLlsh4tEeCQTbbZHixhAw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WPLlsx4tEeCQTbbZHixhAw" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_WPLltB4tEeCQTbbZHixhAw" name="content" type="_hunmaBmsEeCYb_r36PiY5g" aggregation="shared" association="_WPLlsB4tEeCQTbbZHixhAw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WPLltR4tEeCQTbbZHixhAw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WPLlth4tEeCQTbbZHixhAw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

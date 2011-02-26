@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL Metrics Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.metrics.test
+Bundle-Version: 3.1.0.qualifier
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit,
+ org.dresdenocl.metrics,
+ org.dresdenocl.examples.uml,
+ tudresden.ocl20.pivot.facade,
+ tudresden.ocl20.pivot.metamodels.ecore
