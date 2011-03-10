@@ -100,7 +100,20 @@ public class TypePathNameSimpleCSItemProvider extends
 	 */
 	@Override
 	public String getText(Object object) {
-		return ((TypePathNameSimpleCS) object).getTypeName().getName();
+		try {
+			if (object == null)
+				return "";
+			else {
+				TypePathNameSimpleCS simpleCS = (TypePathNameSimpleCS) object;
+
+				if (simpleCS.getTypeName() == null)
+					return "";
+				else
+					return simpleCS.getTypeName().getName();
+			}
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**

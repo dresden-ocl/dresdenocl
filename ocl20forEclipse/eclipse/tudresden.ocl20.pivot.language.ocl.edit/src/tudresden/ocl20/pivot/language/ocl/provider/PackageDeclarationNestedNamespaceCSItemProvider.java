@@ -146,8 +146,12 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 	 */
 	@Override
 	public String getText(Object object) {
-		return ((PackageDeclarationNestedNamespaceCS) object).getNamespace()
-				.getName();
+		try {
+			return ((PackageDeclarationNestedNamespaceCS) object)
+					.getNamespace().getName();
+		} catch (NullPointerException e) {
+			return "";
+		}
 	}
 
 	/**
