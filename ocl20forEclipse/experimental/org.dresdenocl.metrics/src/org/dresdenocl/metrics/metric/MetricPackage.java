@@ -116,13 +116,58 @@ public interface MetricPackage extends EPackage {
 	int CONSTRAINT_METRIC__CALLED_OPERATIONS = METRIC_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Called Properties</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_METRIC__CALLED_PROPERTIES = METRIC_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Referred Constraint</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_METRIC__REFERRED_CONSTRAINT = METRIC_FEATURE_COUNT + 3;
+	int CONSTRAINT_METRIC__REFERRED_CONSTRAINT = METRIC_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Number Of If Expressions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_METRIC__NUMBER_OF_IF_EXPRESSIONS = METRIC_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Let Expressions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_METRIC__NUMBER_OF_LET_EXPRESSIONS = METRIC_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Used Iterators</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_METRIC__USED_ITERATORS = METRIC_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Used Literals</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_METRIC__USED_LITERALS = METRIC_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Constraint Metric</em>' class.
@@ -131,7 +176,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_METRIC_FEATURE_COUNT = METRIC_FEATURE_COUNT + 4;
+	int CONSTRAINT_METRIC_FEATURE_COUNT = METRIC_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.dresdenocl.metrics.metric.impl.ModelMetricImpl <em>Model Metric</em>}' class.
@@ -171,6 +216,15 @@ public interface MetricPackage extends EPackage {
 	int MODEL_METRIC__CALLED_OPERATIONS = CONSTRAINT_METRIC__CALLED_OPERATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Called Properties</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC__CALLED_PROPERTIES = CONSTRAINT_METRIC__CALLED_PROPERTIES;
+
+	/**
 	 * The feature id for the '<em><b>Referred Constraint</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,6 +232,42 @@ public interface MetricPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_METRIC__REFERRED_CONSTRAINT = CONSTRAINT_METRIC__REFERRED_CONSTRAINT;
+
+	/**
+	 * The feature id for the '<em><b>Number Of If Expressions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC__NUMBER_OF_IF_EXPRESSIONS = CONSTRAINT_METRIC__NUMBER_OF_IF_EXPRESSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Number Of Let Expressions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC__NUMBER_OF_LET_EXPRESSIONS = CONSTRAINT_METRIC__NUMBER_OF_LET_EXPRESSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Used Iterators</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC__USED_ITERATORS = CONSTRAINT_METRIC__USED_ITERATORS;
+
+	/**
+	 * The feature id for the '<em><b>Used Literals</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_METRIC__USED_LITERALS = CONSTRAINT_METRIC__USED_LITERALS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Model Id</b></em>' attribute.
@@ -382,6 +472,17 @@ public interface MetricPackage extends EPackage {
 	EAttribute getConstraintMetric_CalledOperations();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getCalledProperties <em>Called Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Called Properties</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetric#getCalledProperties()
+	 * @see #getConstraintMetric()
+	 * @generated
+	 */
+	EAttribute getConstraintMetric_CalledProperties();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getReferredConstraint <em>Referred Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -391,6 +492,50 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getConstraintMetric_ReferredConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfIfExpressions <em>Number Of If Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Number Of If Expressions</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfIfExpressions()
+	 * @see #getConstraintMetric()
+	 * @generated
+	 */
+	EAttribute getConstraintMetric_NumberOfIfExpressions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfLetExpressions <em>Number Of Let Expressions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Number Of Let Expressions</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfLetExpressions()
+	 * @see #getConstraintMetric()
+	 * @generated
+	 */
+	EAttribute getConstraintMetric_NumberOfLetExpressions();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getUsedIterators <em>Used Iterators</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Used Iterators</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetric#getUsedIterators()
+	 * @see #getConstraintMetric()
+	 * @generated
+	 */
+	EAttribute getConstraintMetric_UsedIterators();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getUsedLiterals <em>Used Literals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Used Literals</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetric#getUsedLiterals()
+	 * @see #getConstraintMetric()
+	 * @generated
+	 */
+	EAttribute getConstraintMetric_UsedLiterals();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -519,12 +664,52 @@ public interface MetricPackage extends EPackage {
 		EAttribute CONSTRAINT_METRIC__CALLED_OPERATIONS = eINSTANCE.getConstraintMetric_CalledOperations();
 
 		/**
+		 * The meta object literal for the '<em><b>Called Properties</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT_METRIC__CALLED_PROPERTIES = eINSTANCE.getConstraintMetric_CalledProperties();
+
+		/**
 		 * The meta object literal for the '<em><b>Referred Constraint</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference CONSTRAINT_METRIC__REFERRED_CONSTRAINT = eINSTANCE.getConstraintMetric_ReferredConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Number Of If Expressions</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT_METRIC__NUMBER_OF_IF_EXPRESSIONS = eINSTANCE.getConstraintMetric_NumberOfIfExpressions();
+
+		/**
+		 * The meta object literal for the '<em><b>Number Of Let Expressions</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT_METRIC__NUMBER_OF_LET_EXPRESSIONS = eINSTANCE.getConstraintMetric_NumberOfLetExpressions();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Iterators</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT_METRIC__USED_ITERATORS = eINSTANCE.getConstraintMetric_UsedIterators();
+
+		/**
+		 * The meta object literal for the '<em><b>Used Literals</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT_METRIC__USED_LITERALS = eINSTANCE.getConstraintMetric_UsedLiterals();
 
 	}
 

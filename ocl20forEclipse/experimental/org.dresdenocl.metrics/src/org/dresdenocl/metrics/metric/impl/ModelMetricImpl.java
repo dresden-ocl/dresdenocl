@@ -508,34 +508,83 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 		resultBuffer.append("\n");
 
 		resultBuffer.append("== Constraints ==\n");
-		resultBuffer.append("# constraints: " + this.getConstraintCount()
+		resultBuffer.append("# constraints, " + this.getConstraintCount()
 				+ "\n");
-		resultBuffer.append("# expressions: " + this.getExpressionCount()
+		resultBuffer.append("# expressions, " + this.getExpressionCount()
 				+ "\n");
-		resultBuffer.append("# min. expressions / constraint: "
+		resultBuffer.append("# min. expressions / constraint, "
 				+ this.getMinExpressionCount() + "\n");
-		resultBuffer.append("# max. expressions / constraint: "
+		resultBuffer.append("# max. expressions / constraint, "
 				+ this.getMaxExpressionCount() + "\n");
-		resultBuffer.append("# avg. expressions / constraint: "
+		resultBuffer.append("# avg. expressions / constraint, "
 				+ this.getAvgExpressionCount() + "\n");
-		resultBuffer.append("# mean expressions / constraint: "
+		resultBuffer.append("# mean expressions / constraint, "
 				+ this.getMeanExpressionCount() + "\n");
-		resultBuffer.append("# min. expression depth / constraint: "
+		resultBuffer.append("# min. expression depth / constraint, "
 				+ this.getMinExpressionDepth() + "\n");
-		resultBuffer.append("# max. expression depth / constraint: "
+		resultBuffer.append("# max. expression depth / constraint, "
 				+ this.getMaxExpressionDepth() + "\n");
-		resultBuffer.append("# avg. expression depth / constraint: "
+		resultBuffer.append("# avg. expression depth / constraint, "
 				+ this.getAvgExpressionDepth() + "\n");
-		resultBuffer.append("# Mean expression depth / constraint: "
+		resultBuffer.append("# Mean expression depth / constraint, "
 				+ this.getMeanExpressionDepth() + "\n");
-		resultBuffer.append("\n");
 
-		resultBuffer.append("=== Called Operations ===\n");
+		resultBuffer.append("# If expressions, "
+				+ this.getNumberOfIfExpressions() + "\n");
+		resultBuffer.append("# Let expressions, "
+				+ this.getNumberOfLetExpressions() + "\n");
 
-		for (String opName : this.getCalledOperations().keySet())
-			resultBuffer.append(opName + ", "
-					+ this.getCalledOperations().get(opName) + "\n");
-		// end for.
+		if (this.getUsedLiterals() != null) {
+			resultBuffer.append("\n === Used Literals ===\n");
+
+			ArrayList<String> keys = new ArrayList<String>(this
+					.getUsedLiterals().keySet());
+			Collections.sort(keys);
+
+			for (String litName : keys)
+				resultBuffer.append(litName + ", "
+						+ this.getUsedLiterals().get(litName) + "\n");
+			// end for.
+		}
+
+		if (this.getCalledProperties() != null) {
+			resultBuffer.append("\n=== Called Properties ===\n");
+
+			ArrayList<String> keys = new ArrayList<String>(this
+					.getCalledProperties().keySet());
+			Collections.sort(keys);
+
+			for (String propName : keys)
+				resultBuffer.append(propName + ", "
+						+ this.getCalledProperties().get(propName) + "\n");
+			// end for.
+		}
+
+		if (this.getCalledOperations() != null) {
+			resultBuffer.append("\n=== Called Operations ===\n");
+
+			ArrayList<String> keys = new ArrayList<String>(this
+					.getCalledOperations().keySet());
+			Collections.sort(keys);
+
+			for (String opName : keys)
+				resultBuffer.append(opName + ", "
+						+ this.getCalledOperations().get(opName) + "\n");
+			// end for.
+		}
+
+		if (this.getUsedIterators() != null) {
+			resultBuffer.append("\n=== Used Iterators ===\n");
+
+			ArrayList<String> keys = new ArrayList<String>(this
+					.getUsedIterators().keySet());
+			Collections.sort(keys);
+
+			for (String itName : keys)
+				resultBuffer.append(itName + ", "
+						+ this.getUsedIterators().get(itName) + "\n");
+			// end for.
+		}
 
 		return resultBuffer.toString();
 	}
@@ -580,6 +629,145 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 
 					result.put(opName, opCount
 							+ metric.getCalledOperations().get(opName));
+				}
+				// end for.
+			}
+			// no else.
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricImpl#getCalledProperties()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Map<String, Integer> getCalledProperties() {
+		Map<String, Integer> result = new HashMap<String, Integer>();
+
+		for (ConstraintMetric metric : this.getConstraintMetrics()) {
+
+			if (metric.getCalledProperties() != null) {
+				for (String propName : metric.getCalledProperties().keySet()) {
+					Integer opCount = result.get(propName);
+
+					if (opCount == null)
+						opCount = 0;
+					// no else.
+
+					result.put(propName, opCount
+							+ metric.getCalledProperties().get(propName));
+				}
+				// end for.
+			}
+			// no else.
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricImpl#getNumberOfIfExpressions()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public int getNumberOfIfExpressions() {
+		int result = 0;
+
+		for (org.dresdenocl.metrics.metric.ConstraintMetric metric : this
+				.getConstraintMetrics())
+			result += metric.getNumberOfIfExpressions();
+
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricImpl#getNumberOfLetExpressions()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public int getNumberOfLetExpressions() {
+		int result = 0;
+
+		for (org.dresdenocl.metrics.metric.ConstraintMetric metric : this
+				.getConstraintMetrics())
+			result += metric.getNumberOfLetExpressions();
+
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricImpl#getUsedIterators()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Map<String, Integer> getUsedIterators() {
+		Map<String, Integer> result = new HashMap<String, Integer>();
+
+		for (ConstraintMetric metric : this.getConstraintMetrics()) {
+
+			if (metric.getUsedIterators() != null) {
+				for (String litName : metric.getUsedIterators().keySet()) {
+					Integer opCount = result.get(litName);
+
+					if (opCount == null)
+						opCount = 0;
+					// no else.
+
+					result.put(litName, opCount
+							+ metric.getUsedIterators().get(litName));
+				}
+				// end for.
+			}
+			// no else.
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricImpl#getUsedLiterals()
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public Map<String, Integer> getUsedLiterals() {
+		Map<String, Integer> result = new HashMap<String, Integer>();
+
+		for (ConstraintMetric metric : this.getConstraintMetrics()) {
+
+			if (metric.getUsedLiterals() != null) {
+				for (String litName : metric.getUsedLiterals().keySet()) {
+					Integer opCount = result.get(litName);
+
+					if (opCount == null)
+						opCount = 0;
+					// no else.
+
+					result.put(litName,
+							opCount + metric.getUsedLiterals().get(litName));
 				}
 				// end for.
 			}

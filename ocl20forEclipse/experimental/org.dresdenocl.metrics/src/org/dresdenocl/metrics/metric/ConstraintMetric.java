@@ -21,7 +21,12 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
  *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getExpressionCount <em>Expression Count</em>}</li>
  *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getExpressionDepth <em>Expression Depth</em>}</li>
  *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getCalledOperations <em>Called Operations</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getCalledProperties <em>Called Properties</em>}</li>
  *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getReferredConstraint <em>Referred Constraint</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfIfExpressions <em>Number Of If Expressions</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfLetExpressions <em>Number Of Let Expressions</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getUsedIterators <em>Used Iterators</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetric#getUsedLiterals <em>Used Literals</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,6 +114,32 @@ public interface ConstraintMetric extends Metric {
 	void setCalledOperations(Map<String, Integer> value);
 
 	/**
+	 * Returns the value of the '<em><b>Called Properties</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Called Properties</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Called Properties</em>' attribute.
+	 * @see #setCalledProperties(Map)
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetric_CalledProperties()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<String, Integer> getCalledProperties();
+
+	/**
+	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getCalledProperties <em>Called Properties</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Called Properties</em>' attribute.
+	 * @see #getCalledProperties()
+	 * @generated
+	 */
+	void setCalledProperties(Map<String, Integer> value);
+
+	/**
 	 * Returns the value of the '<em><b>Referred Constraint</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -133,5 +164,109 @@ public interface ConstraintMetric extends Metric {
 	 * @generated
 	 */
 	void setReferredConstraint(Constraint value);
+
+	/**
+	 * Returns the value of the '<em><b>Number Of If Expressions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Number Of If Expressions</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Number Of If Expressions</em>' attribute.
+	 * @see #setNumberOfIfExpressions(int)
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetric_NumberOfIfExpressions()
+	 * @model
+	 * @generated
+	 */
+	int getNumberOfIfExpressions();
+
+	/**
+	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfIfExpressions <em>Number Of If Expressions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Number Of If Expressions</em>' attribute.
+	 * @see #getNumberOfIfExpressions()
+	 * @generated
+	 */
+	void setNumberOfIfExpressions(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Number Of Let Expressions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Number Of Let Expressions</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Number Of Let Expressions</em>' attribute.
+	 * @see #setNumberOfLetExpressions(int)
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetric_NumberOfLetExpressions()
+	 * @model
+	 * @generated
+	 */
+	int getNumberOfLetExpressions();
+
+	/**
+	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getNumberOfLetExpressions <em>Number Of Let Expressions</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Number Of Let Expressions</em>' attribute.
+	 * @see #getNumberOfLetExpressions()
+	 * @generated
+	 */
+	void setNumberOfLetExpressions(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Used Iterators</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Iterators</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Iterators</em>' attribute.
+	 * @see #setUsedIterators(Map)
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetric_UsedIterators()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<String, Integer> getUsedIterators();
+
+	/**
+	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getUsedIterators <em>Used Iterators</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Used Iterators</em>' attribute.
+	 * @see #getUsedIterators()
+	 * @generated
+	 */
+	void setUsedIterators(Map<String, Integer> value);
+
+	/**
+	 * Returns the value of the '<em><b>Used Literals</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Used Literals</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Used Literals</em>' attribute.
+	 * @see #setUsedLiterals(Map)
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetric_UsedLiterals()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<String, Integer> getUsedLiterals();
+
+	/**
+	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ConstraintMetric#getUsedLiterals <em>Used Literals</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Used Literals</em>' attribute.
+	 * @see #getUsedLiterals()
+	 * @generated
+	 */
+	void setUsedLiterals(Map<String, Integer> value);
 
 } // ConstraintMetric

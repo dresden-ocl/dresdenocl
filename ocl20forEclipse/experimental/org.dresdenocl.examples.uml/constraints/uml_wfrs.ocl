@@ -23,19 +23,19 @@ self.endType = self.memberEnd->collect(e | e.type)
 
 /* [4] Only binary associations can be aggregations. */
 inv:
--- FIX ENUM Renamed Aggregation to AggregationKind.
+-- FIX EVOLUTION ENUM Renamed Aggregation to AggregationKind.
 self.memberEnd->exists(aggregation <> AggregationKind::none) implies self.memberEnd->size() = 2
 
 /* [5] Association ends of associations with more than two ends must be owned by the association. */
 inv:
--- FIX WRONG_IF Wrong syntax: if a then b -> a implies b 
+-- FIX SYNTAX WRONG_IF Wrong syntax: if a then b -> a implies b 
 memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
 
 
 context AssociationClass
 /* [1] An AssociationClass cannot be defined between itself and something else. */
 inv:
-/* FIX ARROW OTHER WRONG_IT
+/* FIX TYPE SYNTAX ARROW OTHER WRONG_IT
   Added missing - for -> in front of collect. 
   Replaced allparents()->ecludes(self) with not conformsTo(self). 
   Replaced collect(true) with forAll(true)*/
@@ -43,7 +43,7 @@ self.endType->excludes(self) and self.endType->forAll(et|not et.conformsTo(self)
 
 /* [2] The owned attributes and owned ends of an AssociationClass are disjoint. */
 inv:
--- FIX ASSET intersection is only defined on Set. Introduced to asSet().
+-- FIX TYPE ASSET intersection is only defined on Set. Introduced to asSet().
 ownedAttribute->asSet()->intersection(ownedEnd->asSet())->isEmpty()
 
 
@@ -63,14 +63,14 @@ self.parents()->forAll(c | self.maySpecializeType(c))
 
 /* [4] The inheritedMember association is derived by inheriting the inheritable members of the parents. */
 inv:
-/* FIX BRACKET ASSET
+/* FIX SYNTAX TYPE BRACKET ASSET
    Added missing bracket at end of rule.
    Added missing asSet() */
 self.inheritedMember->includesAll(self.inherit(self.parents()->collect(p | p.inheritableMembers(self))->asSet()))
 
 /* [5] The parents of a classifier must be non-final. */
 inv:
-/* FIX WRONG_NAMED_ELEMENT isFinalSpecialization */
+/* FIX MINOR WRONG_NAMED_ELEMENT isFinalSpecialization */
 self.parents()->forAll(not isLeaf)
 
 /* [6] The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in 
@@ -105,12 +105,12 @@ self.mustBeOwned() implies owner->notEmpty()
 context ElementImport
 /* [1] The visibility of an ElementImport is either public or private. */
 inv: 
--- FIX ENUM renamed #public to VisibilityKind::public and private as well.
+-- FIX EVOLUTION ENUM renamed #public to VisibilityKind::public and private as well.
 self.visibility = VisibilityKind::public or self.visibility = VisibilityKind::private
 
 /* [2] An importedElement has either public visibility or no visibility at all. */
 inv: 
-/* FIX ENUM ARROW renamed #public to public.
+/* FIX EVOLUTION SYNTAX ENUM ARROW renamed #public to public.
    renamed .notEmpty() to ->notEmpty() */
 self.importedElement.visibility->notEmpty() implies self.importedElement.visibility = VisibilityKind::public
 
@@ -140,7 +140,7 @@ classifier->forAll(c | (c.allFeatures()->forAll(f | slot->select(s | s.definingF
 
 context Interface
 /* [1] The visibility of all features owned by an interface must be public. */
--- FIX ENUM changed #public to VisibilityKind::public.
+-- FIX EVOLUTION ENUM changed #public to VisibilityKind::public.
 inv:
 self.feature->forAll(f | f.visibility = VisibilityKind::public)
 
@@ -203,7 +203,7 @@ membersAreDistinguishable()
 
 /* [2] The importedMember property is derived from the ElementImports and the PackageImports. */
 /* inv:
-/* FIX COULD_NOT_FIX BRACKETS WRONG_TYPE
+/* FIX SYNTAX, TYPE COULD_NOT_FIX BRACKETS WRONG_TYPE
    removed to brackets from end of constraint.
    results in Bag not Boolean?
 self.elementImport.importedElement.asSet()->union(self.packageImport.importedPackage->collect(p |
@@ -213,7 +213,7 @@ p.visibleMembers())) */
 context OpaqueExpression
 /* [1] If the language attribute is not empty, then the size of the body and language arrays must be the same. */
 inv:
--- FIX ESCAPE replaced body with _body.
+-- FIX SYNTAX ESCAPE replaced body with _body.
 language->notEmpty() implies
 (_body->size() = language->size())
 
@@ -222,7 +222,7 @@ context Operation
 /* [1] An operation can have at most one return parameter (i.e., an owned parameter with the direction set to 
    ‘return’). */
 inv:
--- FIX ENUM renamed #return to ParameterDirectionKind::return.
+-- FIX EVOLUTION ENUM renamed #return to ParameterDirectionKind::return.
 ownedParameter->select(par | par.direction = ParameterDirectionKind::return)->size() <= 1
 
 /* [2] If this operation has a return parameter, isOrdered equals the value of isOrdered for that parameter; 
@@ -242,7 +242,7 @@ _isUnique = if returnResult()->notEmpty() then returnResult()->any(p | p._isUniq
 
 /* [4] If this operation has a return parameter, lower equals the value of lower for that parameter; otherwise,
    lower is not defined. */
-/* FIX 
+/* FIX TYPE EVOLUTION
    OTHER Argument of iterator was outside iterator
    WRONG_IT Use of iterator instead of at(1)
    ASORDEREDSET Missing asOrderedSet
@@ -252,7 +252,7 @@ lower = if returnResult()->notEmpty() then returnResult()->asOrderedSet()->at(1)
 
 /* [5] If this operation has a return parameter, upper equals the value of upper for that parameter; otherwise, 
    upper is not defined. */
-/* FIX 
+/* FIX TYPE EVOLUTION
    OTHER Argument of iterator was outside iterator
    WRONG_IT Use of iterator instead of at(1)
    ASORDEREDSET Missing asOrderedSet
@@ -262,7 +262,7 @@ upper = if returnResult()->notEmpty() then returnResult()->asOrderedSet()->at(1)
 
 /* [6] If this operation has a return parameter, type equals the value of type for that parameter; otherwise, 
    type is not defined. */
-/* FIX 
+/* FIX TYPE EVOLUTION
    OTHER Argument of iterator was outside iterator
    WRONG_IT Use of iterator instead of at(1)
    ASORDEREDSET Missing asOrderedSet
@@ -278,7 +278,7 @@ bodyCondition->notEmpty() implies isQuery
 context Package
 /* [1] If an element that is owned by a package has visibility, it is public or private. */
 inv:
-/* FIX ENUM adapted VisibilityKind again.
+/* FIX EVOLUTION MINOR SYNTAX ENUM adapted VisibilityKind again.
    WRONG_NAMED_ELEMENT renamed ownedElements to packagedElement
    TYPO visbility */
 self.packagedElement->forAll(e | e.visibility->notEmpty() implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private)
@@ -287,14 +287,14 @@ self.packagedElement->forAll(e | e.visibility->notEmpty() implies e.visibility =
 context PackageImport
 /* [1] The visibility of a PackageImport is either public or private. */
 inv: 
--- FIX ENUM adapted VisibilityKind again.
+-- FIX EVOLUTION ENUM adapted VisibilityKind again.
 self.visibility = VisibilityKind::public or self.visibility = VisibilityKind::private
 
 
 context Property
 /* [1] If this property is owned by a class associated with a binary association, and the other end of the 
    association is also owned by a class, then opposite gives the other end. */
-/* FIX
+/* FIX EVOLUTION
    NULL replaced Set{} with null 
    OTHER replaced - with excluding()
    OTHER iterator any() was used without argument*/
@@ -325,7 +325,7 @@ sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
 /* [4] A redefined property must be inherited from a more general classifier containing the redefining property. */
 /* TODO still contains errors. */
 inv:
-/* FIX 
+/* FIX SYNTAX
    WRONG_IF replaced 'if a then b' with 'a implies b'. 
    BRACKET Added bracket to end of constraint. */
 (redefinedProperty->notEmpty()) implies
@@ -357,12 +357,12 @@ isDerivedUnion implies isReadOnly
 
 /* [9] The value of isComposite is true only if aggregation is composite. */
 inv:
--- FIX ENUM modified #composite to AggregationKind::composite.
+-- FIX EVOLUTION ENUM modified #composite to AggregationKind::composite.
 isComposite = (self.aggregation = AggregationKind::composite)
 
 /* [10] A Property cannot be subset by a Property with the same name */
 inv:
--- FIX WRONG_IF replaced 'if a then b' with 'a implies b'.
+-- FIX SYNTAX WRONG_IF replaced 'if a then b' with 'a implies b'.
 (self.subsettedProperty->notEmpty()) implies 
 self.subsettedProperty->forAll(sp | sp.name <> self.name)
 
@@ -470,13 +470,13 @@ self.endType->forAll (t | t.oclIsKindOf(DeploymentTarget))
 context DeploymentSpecification
 /* [1] The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment. */
 inv:
--- FIX TYPO changed .. to .
+-- FIX SYNTAX TYPO changed .. to .
 self.deployment->forAll (d | d.location.oclIsKindOf(ExecutionEnvironment))
 
 /* [2] The deployedElements of a DeploymentTarget that are involved in a Deployment that has an associated
    DeploymentSpecification is a kind of Component (i.e., the configured components). */
 inv:
--- FIX TYPO renamed deployedElements to deployedElement
+-- FIX SYNTAX TYPO renamed deployedElements to deployedElement
 self.deployment->forAll (d | d.location.deployedElement->forAll (de | de.oclIsKindOf(Component)))
 
 
@@ -504,7 +504,7 @@ context AcceptCallAction
 
 /* [2] The trigger event must be a CallEvent. */
 inv: 
--- FIX WRONG_TYPE introduced forAll to result in Boolean.
+-- FIX TYPE WRONG_TYPE introduced forAll to result in Boolean.
 trigger->forAll(event.oclIsKindOf(CallEvent))
 
 /* [3] isUnmarshall must be true for an AcceptCallAction. */
@@ -547,7 +547,7 @@ context AddStructuralFeatureValueAction
    insertion point. */
 /* TODO still contains errors (wrong types) */
 inv:
-/* FIX 
+/* FIX SYNTAX TYPE MINOR
    NUMCHAR modified #false to false.
    BRACKET removed unecessary closing bracket. 
    WRONG_TYPE Changed type of insertAtPins from Collection to InputPin 
@@ -571,7 +571,7 @@ context AddVariableValueAction
    type UnlimitedNatural and multiplicity of 1..1; otherwise, the action has no input pin for the insertion
    point. */
 inv:
-/* FIX modified #unordered to ?
+/* FIX TYPE SYNTAX MINOR modified #unordered to ?
    WRONG_TYPE Changed type of insertAtPins from Collection to InputPin 
    BRACKET removed unecessary closing bracket.
    OTHER replace 'ordering = unordered' with 'not isOrdered'
@@ -644,12 +644,12 @@ context ClearAssociationAction
 /* [1] The type of the input pin must be the same as the type of at least one of the association ends of 
    the association. */
 inv:
--- FIX WRONG_NAMED_ELEMENT replaced end.type with endType.
+-- FIX MINOR WRONG_NAMED_ELEMENT replaced end.type with endType.
 self.association->exists(endType = self.object.type)
 
 /* [2] The multiplicity of the input pin is 1..1. */
 inv:
-/* FIX WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..). */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..). */
 self.object.is(1,1)
 
 
@@ -660,14 +660,14 @@ result->notEmpty() implies self.result.type = self.object.type
 
 /* [2] The multiplicity of the result output pin must be 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
 result->notEmpty() implies self.result.is(1,1)
 
 
 context CreateLinkAction
 /* [1] The association cannot be an abstract classifier. */
 inv:
--- FIX NUMCHAR modified #false to false.
+-- FIX SYNTAX NUMCHAR modified #false to false.
 self.association().isAbstract = false
 
 
@@ -682,14 +682,14 @@ self.result.type = self.association()
 
 /* [3] The multiplicity of the output pin is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
 self.result.is(1,1)
 
 
 context CreateObjectAction
 /* [1] The classifier cannot be abstract. */
 inv:
--- FIX NUMCHAR modified #true to true.
+-- FIX SYNTAX NUMCHAR modified #true to true.
 not (self.classifier.isAbstract = true)
 
 /* [2] The classifier cannot be an association class. */
@@ -702,14 +702,14 @@ self.result.type = self.classifier
 
 /* [4] The multiplicity of the output pin is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
 self.result.is(1,1)
 
 
 context DestroyObjectAction
 /* [1] The multiplicity of the input pin is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
 self.target.is(1,1)
 
 /* [2] The input pin has no type. */
@@ -720,19 +720,19 @@ self.target.type->size() = 0
 context LinkAction
 /* [1] The association ends of the link end data must all be from the same association and include all and only
    the association ends of that association. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT Unknown element connection 
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT Unknown element connection 
 inv:
 self.endData->collect(end) = self.association()->collect(connection)
 
 /* [2] The association ends of the link end data must not be static. */
-/* FIX NUMCHAR replaced #false with false. 
+/* FIX SYNTAX MINOR NUMCHAR replaced #false with false. 
    TYPO replaced forall with forAll, oclisKindOf with oclIsKindOf 
    WRONG_NAMED_ELEMENT COULD_NOT_FIX NavigableEnd does not exist
 inv:
 self.endData->forAll(end.oclIsKindOf(NavigableEnd) implies end.isStatic = false)
 
 /* [3] The input pins of the action are the same as the pins of the link end data and insertion pins. */
-/* FIX 
+/* FIX SYNTAX TYPE
    WRONG_IF Added missing endif 
    ASSET Added missing asSet in let
    OTHER added generic to allow type inference. */
@@ -755,7 +755,7 @@ self.LinkAction.oclIsKindOf(CreateLinkAction)
    with type UnlimitedNatural and multiplicity of 1..1; otherwise, the action has no input pin for the insertion
    point. */
 inv:
-/* FIX changed #unordered to ?
+/* FIX SYNTAX TYPE MINOR changed #unordered to ?
    BRACKET removed unecessary closing bracket
    WRONG_TYPE Collection instead of InputPin for let
    WRONG_NAMED_ELEMENT changed 'ordering = unordered' to not isOrdered
@@ -782,7 +782,7 @@ self.value.type = self.end.type
 
 /* [3] The multiplicity of the end object input pin must be “1..1.” */
 inv:
-/* FIX WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
 self.value.is(1,1)
 
 
@@ -823,7 +823,7 @@ self.value.type = self.qualifier.type
 
 /* [3] The multiplicity of the qualifier value input pin is “1..1.” */
 inv:
-/* FIX WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
 self.value.is(1,1)
 
 
@@ -833,7 +833,7 @@ context ReadExtentAction
 
 /* [2] The multiplicity of the result output pin is “0..*.” */
 inv:
-/* FIX NUMCHAR changed #null to null.
+/* FIX SYNTAX MINOR NUMCHAR changed #null to null.
    WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
 self.result.is(0,null)
 
@@ -841,7 +841,7 @@ self.result.is(0,null)
 context ReadIsClassifiedObjectAction
 /* [1] The multiplicity of the input pin is 1..1. */
 inv:
-/* FIX WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
 self.object.is(1,1)
 
 /* [2] The input pin has no type. */
@@ -850,7 +850,7 @@ self.object.type->isEmpty()
 
 /* [3] The multiplicity of the output pin is 1..1. */
 inv:
-/* FIX WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
 self.result.is(1,1)
 
 /* [4] The type of the output pin is Boolean. */
@@ -865,7 +865,7 @@ self.endData->select(ed | ed.value->size() = 0)->size() = 1
 
 /* [2] The type and ordering of the result output pin are the same as the type and ordering of the open
    association end. */
-/* FIX WRONG_NAMED_ELEMENT replace ordering with isOrdered */
+/* FIX MINOR WRONG_NAMED_ELEMENT replace ordering with isOrdered */
 inv:
 let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequence()->first().end in
 self.result.type = openend.type
@@ -873,7 +873,7 @@ and self.result.isOrdered = openend.isOrdered
 
 /* [3] The multiplicity of the open association end must be compatible with the multiplicity of the result output 
     pin. */
-/* FIX WRONG_NAMED_ELEMENT replaced .multiplicity.compatibleWith wiht .compatibleWith */
+/* FIX MINOR WRONG_NAMED_ELEMENT replaced .multiplicity.compatibleWith wiht .compatibleWith */
 inv:
 let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequence()->first().end in
 openend.compatibleWith(self.result)
@@ -884,7 +884,7 @@ let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequ
 openend.isNavigable()
 
 /* [5] Visibility of the open end must allow access to the object performing the action. */
-/* COULD_NOT_FIX Too many errors.
+/* COULD_NOT_FIX MINOR SYNTAX EVOLUTION Too many errors.
    ENUM changed #public to VisibilityKind::public and #protected accordingly.
    ESCAPE changed context to _context 
    BRACKET
@@ -913,7 +913,7 @@ inv:
 self.qualifier.associationEnd.association.oclIsKindOf(AssociationClass)
 
 /* [3] The ends of the association must not be static. */
-/* FIX TYPO replaced forall with forAll */
+/* FIX SYNTAX TYPO replaced forall with forAll */
 inv:
 self.qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)
 
@@ -924,12 +924,12 @@ self.object.type = self.qualifier.associationEnd.association
 
 /* [5] The multiplicity of the qualifier attribute is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.qualifier.is(1,1)
 
 /* [6] The multiplicity of the object input pin is “1..1.” */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.object.is(1,1)
 
 /* [7] The type of the result output pin is the same as the type of the qualifier attribute. */
@@ -938,14 +938,14 @@ self.result.type = self.qualifier.type
 
 /* [8] The multiplicity of the result output pin is “1..1.” */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.result.is(1,1)
 
 
 context ReadSelfAction
 /* [1] The action must be contained in a behavior that has a host classifier. */
 inv:
--- FIX ESCAPE changed context to _context
+-- FIX SYNTAX ESCAPE changed context to _context
 self._context->size() = 1
 
 /* [2] If the action is contained in a behavior that is acting as the body of a method, then the operation of 
@@ -954,25 +954,25 @@ self._context->size() = 1
 
 /* [3] The type of the result output pin is the host classifier. */
 inv:
--- FIX ESCAPE changed context to _context
+-- FIX SYNTAX ESCAPE changed context to _context
 self.result.type = self._context
 
 /* [4] The multiplicity of the result output pin is “1..1.” */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.result.is(1,1)
 
 
 context ReadStructuralFeatureAction
 /* [1] The type and ordering of the result output pin are the same as the type and ordering of the structural 
    feature. */
-/* FIX WRONG_NAMED_ELEMENT changed ordering to isOrdered */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed ordering to isOrdered */
 inv:   
 self.result.type = self.structuralFeature.type
 and self.result.isOrdered = self.structuralFeature.isOrdered
 
 /* [2] The multiplicity of the structural feature must be compatible with the multiplicity of the output pin. */
-/* FIX WRONG_NAMED_ELEMENT replaced .multiplicity with . */
+/* FIX MINOR WRONG_NAMED_ELEMENT replaced .multiplicity with . */
 inv:
 self.structuralFeature.compatibleWith(self.result)
 
@@ -980,13 +980,13 @@ self.structuralFeature.compatibleWith(self.result)
 context ReadVariableAction
 /* [1] The type and ordering of the result output pin of a read-variable action are the same as the type and 
    ordering of the variable. */
-/* FIX WRONG_NAMED_ELEMENT changed ordering to isOrdered */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed ordering to isOrdered */
 inv:   
 self.result.type =self.variable.type
 and self.result.ordering = self.variable.isOrdered
 
 /* [2] The multiplicity of the variable must be compatible with the multiplicity of the output pin. */
-/* FIX WRONG_NAMED_ELEMENT replaced .multiplicity with . */
+/* FIX MINOR WRONG_NAMED_ELEMENT replaced .multiplicity with . */
 inv:
 self.variable.compatibleWith(self.result)
 
@@ -997,14 +997,14 @@ inv:
 not self.newClassifier->exists(isAbstract = true)
 
 /* [2] The multiplicity of the input pin is 1..1. */
-/* COULD_NOT_FIX
+/* COULD_NOT_FIX MINOR
    WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..) 
    WRONG_NAMED_ELEMENT argument does not exist 
 inv:
 self.argument.is(1,1)
 
 /* [3] The input pin has no type. */
-/* COULD_NOT_FIX
+/* COULD_NOT_FIX MINOR
    WRONG_NAMED_ELEMENT argument does not exist 
 inv:
 self.argument.type->size() = 0
@@ -1025,7 +1025,7 @@ context RemoveStructuralFeatureValueAction
 /* [1] Actions removing a value from ordered non-unique structural features must have a single removeAt input
    pin and no value input pin if isRemoveDuplicates is false. The removeAt pin must be of type Unlimited Natural
    with multiplicity 1..1. Otherwise, the action has a value input pin and no removeAt input pin. */
-/* FIX
+/* FIX SYNTAX MINOR
    ESCAPE isUnique
    WRONG_NAMED_ELEMENT Replaced lower() = 1 and upper() = 1 with is(1,1) */
 inv: 
@@ -1046,7 +1046,7 @@ context RemoveVariableValueAction
 /* [1] Actions removing a value from ordered non-unique variables must have a single removeAt input pin and 
    no value input pin if isRemoveDuplicates is false. The removeAt pin must be of type Unlimited Natural with
    multiplicity 1..1. Otherwise, the action has a value input pin and no removeAt input pin. */
-/* FIX 
+/* FIX MINOR SYNTAX
    ESCAPE isUnique
    WRONG_NAMED_ELEMENT Replaced lower() = 1 and upper() = 1 with is(1,1) */
 inv:   
@@ -1066,7 +1066,7 @@ context ReplyAction
 -- NO_OCL   
 
 /* [2] The event on replyToCall trigger must be a CallEvent. */
-/* FIX WRONG_NAMED_ELEMENT renamed replyToCallEvent to replyToCall*/
+/* FIX MINOR WRONG_NAMED_ELEMENT renamed replyToCallEvent to replyToCall*/
 inv:
 replyToCall.oclIsKindOf(CallEvent)
 
@@ -1109,7 +1109,7 @@ replyToCall.oclIsKindOf(CallEvent)
 context StructuralFeatureAction
 /* [1] The structural feature must not be static. */
 inv:
--- FIX NUMCHAR changed from #false to false.
+-- FIX SYNTAX NUMCHAR changed from #false to false.
 self.structuralFeature.isStatic = false
 
 /* [2] The structural feature must either be owned by the type of the object input pin, or it must be an 
@@ -1125,7 +1125,7 @@ self.object.lowerBound()=1 and self.object.upperBound()=1
 
 /* [4] Visibility of structural feature must allow access to the object performing the action. */
 inv:
-/* FIX 
+/* FIX EVOLUTION SYNTAX MINOR
    ENUM changed from #public to VisibilityKind::public and #protected accordingly. 
    ESCAPE context
    BRACKET unecessary bracket at end of constraint.
@@ -1152,7 +1152,7 @@ and self.second.type->size() = 0
 
 /* [2] The multiplicity of the input pins is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.first.is(1,1)
 and self.second.is(1,1)
 
@@ -1204,7 +1204,7 @@ self.variable.isAccessibleBy(self)
 context WriteLinkAction
 /* [1] All end data must have exactly one input object pin. */
 inv:
--- FIX TYPO replaced .forall with ->forAll.
+-- FIX SYNTAX TYPO replaced .forall with ->forAll.
 self.endData->forAll(value->size() = 1)
 
 /* [2] The visibility of at least one end must allow access to the class using the action. */
@@ -1220,7 +1220,7 @@ self.structuralFeature.featuringClassifier->includes(self.value.type.oclAsType(C
 
 /* [2] The multiplicity of the input pin is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.value.is(1,1)
 
 /* [3] The type of the result output pin is the same as the type of the inherited object input pin. */
@@ -1229,7 +1229,7 @@ result->notEmpty() implies self.result.type = self.object.type
 
 /* [4] The multiplicity of the result output pin must be 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 result->notEmpty() implies self.result.is(1,1)
 
 
@@ -1240,7 +1240,7 @@ self.value -> notEmpty() implies self.value.type = self.variable.type
 
 /* [2] The multiplicity of the input pin is 1..1. */
 inv:
--- FIX WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
 self.value.is(1,1)
 
 
@@ -1464,7 +1464,7 @@ self.outgoing->size() = 1
 /* [2] If a join node has an incoming object flow, it must have an outgoing object flow, otherwise, it must 
    have an outgoing control flow. */
 inv:
-/* FIX 
+/* FIX MINOR SYNTAX TYPE
    WRONG_NAMED_ELEMENT	changed isTypeOf(..) to oclIsTypeOf(..). 
    BRACKET fixed many enclosing brackets.
    WRONG_NAMED_ELEMENT replace empty() with isEmpty(). 
@@ -1630,7 +1630,7 @@ context DurationConstraint
    multiplicity of constrainedElement is 1, then the constraint is a requirement on the duration given by the
    duration of the execution of that constrainedElement.) */
 inv:
--- FIX WRONG_IF added endif
+-- FIX SYNTAX WRONG_IF added endif
 if (constrainedElement->size() = 2) then (firstEvent->size() = 2) else (firstEvent->size() = 0) endif
 
 
@@ -1638,13 +1638,13 @@ context DurationObservation
 /* [1] The multiplicity of firstEvent must be 2 if the multiplicity of event is 2; otherwise, the multiplicity
    of firstEvent is 0. */
 inv:
--- FIX WRONG_IF added endif.
+-- FIX SYNTAX WRONG_IF added endif.
 if (event->size() = 2) then (firstEvent->size() = 2) else (firstEvent->size() = 0) endif
 
 
 context FunctionBehavior
 /* [1] A function behavior has at least one output parameter. */
-/* FIX TYPO replaced ownedParameters with ownedParameter 
+/* FIX SYNTAX MINOR TYPO replaced ownedParameters with ownedParameter 
    METHOD_FIELD change notEmpty to notEmpty() */
 inv:
 (self.ownedParameter->notEmpty()) and self.ownedParameter->exists (p|
@@ -1659,14 +1659,14 @@ inv:
 context OpaqueExpression
 /* [1] The behavior can only have return result parameters. */
 inv:
-/* FIX ARROW changed .notEmpty() to ->notEmpty() 
+/* FIX SYNTAX ARROW changed .notEmpty() to ->notEmpty() 
    TYPO replaced ownedParameters with ownedParameter */
 self.behavior->notEmpty() implies
 (self.behavior.ownedParameter->select(p | p.direction <> ParameterDirectionKind::return))->isEmpty()
 
 /* [2] The behavior must have exactly one return result parameter. */
 inv:
--- FIX ARROW changed .notEmpty() to ->notEmpty()
+-- FIX SYNTAX ARROW changed .notEmpty() to ->notEmpty()
 self.behavior->notEmpty() implies
 (self.behavior.ownedParameter->select(p | p.direction = ParameterDirectionKind::return))->size() = 1
 
@@ -1674,7 +1674,7 @@ self.behavior->notEmpty() implies
 /* 
 context Reception
 /* [1] A Reception cannot be a query. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT query
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT query
 inv:
 not self.isQuery
 
@@ -1699,7 +1699,7 @@ context CombinedFragment
 
 /* [4] The interaction operators ‘consider’ and ‘ignore’ can only be used for the CombineIgnoreFragment 
    subtype of CombinedFragment. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT CombineIgnoreFragment
+/* COULD_NOT_FIX MINOR EVOLUTION SYNTAX WRONG_NAMED_ELEMENT CombineIgnoreFragment
    ENUM changed #consider to InteractionOperatorKind::consider and ignore accordingly.
    TYPO changed oclsisTypeOf to oclIsTypeOf 
 inv:
@@ -1711,7 +1711,7 @@ inv:
 context ConsiderIgnoreFragment
 /* [1] The interaction operator of a ConsiderIgnoreFragment must be either ‘consider’ or ‘ignore.’ */
 inv:
--- FIX ENUM changed #consider to InteractionOperatorKind::consider and ignore accordingly.
+-- FIX EVOLUTION ENUM changed #consider to InteractionOperatorKind::consider and ignore accordingly.
 (interactionOperator = InteractionOperatorKind::consider) or (interactionOperator = InteractionOperatorKind::ignore)
 
 /* [2] The NamedElements must be of a type of element that identifies a message (e.g., an Operation, Reception, 
@@ -1745,7 +1745,7 @@ a given Lifeline in an InteractionOperand. */
 /*
 context ExecutionSpecification
 /* [1] The startEvent and the finishEvent must be on the same Lifeline. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT lifeline
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT lifeline
 inv:
 start.lifeline = finish.lifeline
 
@@ -1817,14 +1817,14 @@ and represents associations. */
 -- NO_OCL
 
 /* [2] The selector for a Lifeline must only be specified if the referenced Part is multivalued. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT isMultivalued()
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT isMultivalued()
 inv:
 (self.selector->isEmpty() implies not self.represents.isMultivalued()) or
 (not self.selector->isEmpty() implies self.represents.isMultivalued())
 
 /* [3] The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, 
    of the classifier that contains the interaction enclosing this lifeline. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT isMultivalued()
+/* COULD_NOT_FIX MINOR SYNTAX WRONG_NAMED_ELEMENT isMultivalued()
    WRONG_IF replace 'if a then b' with 'a implie b', added missing endif
 inv:
 (represents->notEmpty()) implies
@@ -1887,12 +1887,12 @@ called commutativity of decomposition.) */
 context ConnectionPointReference
 /* [1] The entry Pseudostates must be Pseudostates with kind entryPoint. */
 inv:
--- FIX ENUM replaced #entryPoint with PseudostateKind::entryPoint.
+-- FIX EVOLUTION ENUM replaced #entryPoint with PseudostateKind::entryPoint.
 entry->notEmpty() implies entry->forAll(e | e.kind = PseudostateKind::entryPoint)
 
 /* [2] The exit Pseudostates must be Pseudostates with kind exitPoint. */
 inv:
--- FIX ENUM replaced #entryPoint with PseudostateKind::exitPoint.
+-- FIX EVOLUTION ENUM replaced #entryPoint with PseudostateKind::exitPoint.
 exit->notEmpty() implies exit->forAll(e | e.kind = PseudostateKind::exitPoint)
 
 
@@ -1918,7 +1918,7 @@ inv:
 self.exit->isEmpty()
 
 /* [6] A final state has no state (doActivity) behavior. */
-/* FIX TYPO replaced doActivty with doActivity */
+/* FIX SYNTAX TYPO replaced doActivty with doActivity */
 inv:
 self.doActivity->isEmpty()
 
@@ -1926,7 +1926,7 @@ self.doActivity->isEmpty()
 context ProtocolStateMachine
 /* [1] A protocol state machine must only have a classifier context, not a behavioral feature context. */
 inv:
--- FIX ESCAPE replaced context with _context.
+-- FIX SYNTAX ESCAPE replaced context with _context.
 (not _context->isEmpty( )) and specification->isEmpty()
 
 /* [2] All transitions of a protocol state machine must be protocol transitions. (transitions as extended by the
@@ -1936,13 +1936,13 @@ region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 
 /* [3] The states of a protocol state machine cannot have entry, exit, or do activity actions. */
 inv:
--- FIX WRONG_TYPE Added cast oclAsType(State). (3x)
+-- FIX TYPE WRONG_TYPE Added cast oclAsType(State). (3x)
 region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 (v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 
 /* [4] Protocol state machines cannot have deep or shallow history pseudostates. */
 inv:
-/* FIX 
+/* FIX EVOLUTION SYNTAX TYPE
    ENUM replaced #deepHistory with PseudostateKind::deepHistory and #shallowHistory accordingly.
    BRACKET removed unecessary closing bracket.
    TYPO renamed Psuedostate to Pseudostate.
@@ -1972,7 +1972,7 @@ effect->isEmpty()
 context Pseudostate
 /* [1] An initial vertex can have at most one outgoing transition. */
 inv:
-/* FIX 
+/* FIX EVOLUTION MINOR
    ENUM Modified PseudostateKind enum.
    METHOD_FIELD changed size to size() */
 (self.kind = PseudostateKind::initial) implies
@@ -1980,7 +1980,7 @@ inv:
 
 /* [2] History vertices can have at most one outgoing transition. */
 inv:
-/* FIX 
+/* FIX EVOLUTION MINOR
    ENUM Modified PseudostateKind enum.
    METHOD_FIELD changed size to size() */
 ((self.kind = PseudostateKind::deepHistory) or (self.kind = PseudostateKind::shallowHistory)) implies
@@ -1989,14 +1989,14 @@ inv:
 /* [3] In a complete statemachine, a join vertex must have at least two incoming transitions and exactly one 
    outgoing transition. */
 inv:
-/* FIX 
+/* FIX EVOLUTION MINOR
    ENUM Modified PseudostateKind enum.
    METHOD_FIELD changed size to size() */
 (self.kind = PseudostateKind::join) implies
 ((self.outgoing->size() = 1) and (self.incoming->size() >= 2))
 
 /* [4] All transitions incoming a join vertex must originate in different regions of an orthogonal state. */
-/* COULD_NOT_FIX 
+/* COULD_NOT_FIX EVOLUTION TYPE MINOR
    ENUM Modified PseudostateKind enum.
    WRONG_TYPE Added cast to State (2x), to Transition
    WRONG_NAME_ELEMENT isOrthogonal
@@ -2009,14 +2009,14 @@ self.incoming->forAll (t1, t2 | t1<>t2 implies
 /* [5] In a complete statemachine, a fork vertex must have at least two outgoing transitions and exactly one 
    incoming transition. */
 inv:
-/* FIX 
+/* FIX  MINOR EVOLUTION
    ENUM Modified PseudostateKind enum.
    METHOD_FIELD changed size to size() */
 (self.kind = PseudostateKind::fork) implies
 ((self.incoming->size() = 1) and (self.outgoing->size() >= 2))
 
 /* [6] All transitions outgoing a fork vertex must target states in different regions of an orthogonal state. */
-/* COULD_NOT_FIX 
+/* COULD_NOT_FIX EVOLUTION TYPE MINOR
    ENUM Modified PseudostateKind enum.
    WRONG_TYPE Added cast to State (2x), to Transition
    WRONG_NAME_ELEMENT isOrthogonal
@@ -2029,7 +2029,7 @@ container.isOrthogonal))
 
 /* [7] In a complete statemachine, a junction vertex must have at least one incoming and one outgoing 
    transition. */
-/* FIX 
+/* FIX EVOLUTION MINOR
    ENUM Modified PseudostateKind enum.
    METHOD_FIELD changed size to size() */
 inv:
@@ -2037,7 +2037,7 @@ inv:
 ((self.incoming->size() >= 1) and (self.outgoing->size() >= 1))
 
 /* [8] In a complete statemachine, a choice vertex must have at least one incoming and one outgoing transition. */
-/* FIX 
+/* FIX EVOLUTION MINOR
    ENUM Modified PseudostateKind enum.
    METHOD_FIELD changed size to size() */
 inv:
@@ -2052,21 +2052,21 @@ inv:
 context Region
 /* [1] A region can have at most one initial vertex. */
 inv:
-/* FIX ENUM Modified PseudostateKind enum.
+/* FIX EVOLUTION TYPE ENUM Modified PseudostateKind enum.
    WRONG_TYPE added cast ->collect(oclAsType(Pseudostate)) */
 self.subvertex->select (v | v.oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 select(p : Pseudostate | p.kind = PseudostateKind::initial)->size() <= 1
 
 /* [2] A region can have at most one deep history vertex. */
 inv:
-/* FIX ENUM Modified PseudostateKind enum.
+/* FIX EVOLUTION TYPE ENUM Modified PseudostateKind enum.
    WRONG_TYPE added cast ->collect(oclAsType(Pseudostate)) */
 self.subvertex->select (v | v.oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 select(p : Pseudostate | p.kind = PseudostateKind::deepHistory)->size() <= 1
 
 /* [3] A region can have at most one shallow history vertex. */
 inv:
-/* FIX ENUM Modified PseudostateKind enum.
+/* FIX EVOLUTION TYPE ENUM Modified PseudostateKind enum.
    WRONG_TYPE added cast ->collect(oclAsType(Pseudostate)) */
 self.subvertex->select(v | v.oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 select(p : Pseudostate | p.kind = PseudostateKind::shallowHistory)->size() <= 1
@@ -2076,7 +2076,7 @@ inv:
 (stateMachine->notEmpty() implies state->isEmpty()) and (state->notEmpty() implies stateMachine->isEmpty())
 
 /* [5] The redefinition context of a region is the nearest containing statemachine. */
--- FIX ESCAPE replaced context with _context (2x)
+-- FIX SYNTAX ESCAPE replaced context with _context (2x)
 inv:
 redefinitionContext =
 let sm = containingStateMachine() in
@@ -2105,7 +2105,7 @@ isSubmachineState implies connection->notEmpty ( )
 
 /* [2] The connection point references used as destinations/sources of transitions associated with a submachine
    state must be defined as entry/exit points in the submachine state machine. */
-/* FIX TYPO replaced p.statemachine with p.stateMachine (2x)*/
+/* FIX SYNTAX TYPO replaced p.statemachine with p.stateMachine (2x)*/
 inv:
 self.isSubmachineState implies (self.connection->forAll (cp |
 cp.entry->forAll (p | p.stateMachine = self.submachine) and cp.exit->forAll (p | p.stateMachine = self.submachine)))
@@ -2116,12 +2116,12 @@ isComposite implies not isSubmachineState
 
 /* [4] A simple state is a state without any regions. */
 inv:
--- FIX ARROW replaced .notEmpty() with ->notEmpty()
+-- FIX SYNTAX ARROW replaced .isEmpty() with ->isEmpty()
 isSimple = region->isEmpty()
 
 /* [5] A composite state is a state with at least one region. */
 inv:
--- FIX ARROW replaced .notEmpty() with ->notEmpty()
+-- FIX SYNTAX ARROW replaced .notEmpty() with ->notEmpty()
 isComposite = region->notEmpty()
 
 /* [6] An orthogonal state is a composite state with at least 2 regions. */
@@ -2130,11 +2130,11 @@ isOrthogonal = (region->size () > 1)
 
 /* [7] Only submachine states can have a reference statemachine. */
 inv:
--- FIX ARROW replaced .notEmpty() with ->notEmpty()
+-- FIX SYNTAX ARROW replaced .notEmpty() with ->notEmpty()
 isSubmachineState = submachine->notEmpty()
 
 /* [8] The redefinition context of a state is the nearest containing statemachine. */
--- FIX ESCAPE replaced context with _context
+-- FIX SYNTAX ESCAPE replaced context with _context
 inv:
 redefinitionContext =
 let sm = containingStateMachine() in
@@ -2146,32 +2146,32 @@ endif
 
 /* [9] Only composite states can have entry or exit pseudostates defined. */
 inv:
--- FIX TYPO renamed isComoposite
+-- FIX SYNTAX TYPO renamed isComoposite
 connectionPoint->notEmpty() implies isComposite
 
 /* [10] Only entry or exit pseudostates can serve as connection points. */
 inv:
--- FIX ENUM Replaced #entry, #exit with PseudostateKind::entryPoint, exitPoint
+-- FIX EVOLUTION ENUM Replaced #entry, #exit with PseudostateKind::entryPoint, exitPoint
 connectionPoint->forAll(cp|cp.kind = PseudostateKind::entryPoint or cp.kind = PseudostateKind::exitPoint)
 
 
 context StateMachine
 /* [1] The classifier context of a state machine cannot be an interface. */
 inv:
--- FIX ESCAPE replaced context with _context
+-- FIX SYNTAX ESCAPE replaced context with _context
 _context->notEmpty() implies not _context.oclIsKindOf(Interface)
 
 /* [2] The context classifier of the method state machine of a behavioral feature must be the classifier that 
    owns the behavioral feature. */
-/* FIX 
-   ENUM replaced context with _context
+/* FIX SYNTAX
+   ESCAPE replaced context with _context
    ARROW Replaced specification->featuringClassifier with specification->featuringClassifier */
 inv:   
 specification->notEmpty() implies (_context->notEmpty() and specification.featuringClassifier->exists (c | c = _context))
 
 /* [3] The connection points of a state machine are pseudostates of kind entry point or exit point. */
 inv:
-/* FIX
+/* FIX EVOLUTION SYNTAX
    ENUM adapted enum PseudostateKind.
    TYPO renamed conectionPoint to connectionPoint. */
 connectionPoint->forAll (c | c.kind = PseudostateKind::entryPoint or c.kind = PseudostateKind::exitPoint)
@@ -2189,39 +2189,39 @@ specification->notEmpty() implies connectionPoint->isEmpty()
 context Transition
 /* [1] A fork segment must not have guards or triggers. */
 inv:
-/* FIX ENUM adapted enum PseudostateKind.
+/* FIX EVOLUTION TYPE ENUM adapted enum PseudostateKind.
    WRONG_TYPE added cast .oclAsType(Pseudostate) */
 (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard->isEmpty() and trigger->isEmpty())
 
 /* [2] A join segment must not have guards or triggers. */
 inv:
-/* FIX ENUM adapted enum PseudostateKind.
+/* FIX EVOLUTION SYNTAX TYPE ENUM adapted enum PseudostateKind.
    BRACKET adapted enclosing brackets
    WRONG_TYPE added cast .oclAsType(Pseudostate) */
 (target.oclIsKindOf(Pseudostate) and (target.oclAsType(Pseudostate).kind = PseudostateKind::join)) implies (guard->isEmpty() and trigger->isEmpty())
 
 /* [3] A fork segment must always target a state. */
 inv:
-/* FIX ENUM adapted enum PseudostateKind.
+/* FIX ENUM EVOLUTION TYPE adapted enum PseudostateKind.
    WRONG_TYPE added cast .oclAsType(Pseudostate) */
 (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State))
 
 /* [4] A join segment must always originate from a state. */
 inv:
-/* FIX ENUM adapted enum PseudostateKind.
+/* FIX EVOLUTION TYPE ENUM adapted enum PseudostateKind.
    WRONG_TYPE added cast .oclAsType(Pseudostate) */
 (target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))
 
 /* [5] Transitions outgoing pseudostates may not have a trigger (except for those coming out of the initial
    pseudostate). */
 inv:
-/* FIX ENUM adapted enum PseudostateKind.
+/* FIX EVOLUTION TYPE ENUM adapted enum PseudostateKind.
    WRONG_TYPE added cast .oclAsType(Pseudostate) */
 (source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial)) implies trigger->isEmpty()
 
 /* [6] An initial transition at the topmost level (region of a statemachine) either has no trigger or it 
    has a trigger with the stereotype “create.” */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT top
+/* COULD_NOT_FIX MINOR EVOLUTION WRONG_NAMED_ELEMENT top
    ENUM adapted enum PseudostateKind.
    METHOD_FIELD changed isEmpty to isEmpty()
    WRONG_NAMED_ELEMENT replaced stateMachine with self.containingStateMachine()
@@ -2237,7 +2237,7 @@ self.source.oclIsKindOf(Pseudostate) implies
 -- NO_OCL
 
 /* [8] The redefinition context of a transition is the nearest containing statemachine. */
--- FIX ESCAPE replaced context with _context
+-- FIX SYNTAX ESCAPE replaced context with _context
 inv:
 redefinitionContext =
 let sm = containingStateMachine() in
@@ -2269,7 +2269,7 @@ context Transition inv:
 context Actor
 /* [1] An actor can only have associations to use cases, components, and classes. Furthermore these 
    associations must be binary. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT ownedAttribute
+/* COULD_NOT_FIX MINOR SYNTAX WRONG_NAMED_ELEMENT ownedAttribute
    BRACKET added closing bracket to end of constraint.
 inv:
 self.ownedAttribute->forAll ( a |
@@ -2333,7 +2333,7 @@ oclIsKindOf(InstanceSpecification)))
 
 /* [3] An information flow can only convey classifiers that are allowed to represent an information item 
    (see constraints on “InformationItem (from InformationFlows)” on page 628). */
-/* FIX BRACKET added closing bracket to end of constraint. 
+/* FIX SYNTAX MINOR BRACKET added closing bracket to end of constraint. 
    WRONG_NAMED_ELEMENT represented renamed to representation */
 inv:
 self.conveyed.representation->forAll(p |
@@ -2346,7 +2346,7 @@ context InformationItem
    of the sources and targets of the representation information item, if any. The Classifiers that can realize
    an information item can only be of the following kind: Class, Interface, InformationItem, Signal, 
    Component. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT could not find informationFlow
+/* COULD_NOT_FIX MINOR SYNTAX TYPE WRONG_NAMED_ELEMENT could not find informationFlow
    ARROW replaced ->oclIsKindOf() with .oclIsKindOf() 
    WRONG_TYPE missing cast to InformationItem
 inv:
@@ -2374,13 +2374,13 @@ isAbstract
 /*context TemplateBinding
 /* [1] Each parameter substitution must refer to a formal template parameter of the target template 
    signature. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT template
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT template
 inv:   
 parameterSubstitution->forAll(b | template.parameter->includes(b.formal))
 
 /* [2] A binding contains at most one parameter substitution for each formal template parameter of the 
    target template signature. */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT template
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT template
 inv:
 template.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 */
@@ -2396,7 +2396,7 @@ actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))
 context TemplateSignature
 /* [1] Parameters must own the elements they parameter or those elements must be owned by the element being 
    templated. */
-/* FIX
+/* FIX MINOR
    WRONG_NAMED_ELEMENT template instead of templatedElement
    OTHER replaced parameter.parameteredElement - parameter.ownedParameteredElement with parameter */
 inv: 
@@ -2424,13 +2424,13 @@ operand->forAll (op | op.oclIsKindOf (LiteralString))
 /* [2] If a StringExpression has sub expressions, it cannot have operands and vice versa (this avoids 
    the problem of having to define a collating sequence between operands and subexpressions). */
 inv:   
--- FIX WRONG_IF added endif.
+-- FIX SYNTAX WRONG_IF added endif.
 if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
 
 
 /*context Property
 /* [1] A binding of a property template parameter representing an attribute must be to an attribute */
-/* COULD_NOT_FIX WRONG_NAMED_ELEMENT templateParameterSubstitution
+/* COULD_NOT_FIX MINOR SYNTAX WRONG_NAMED_ELEMENT templateParameterSubstitution
    BRACKET added closing brackets
 inv:
 (isAttribute(self) and (templateParameterSubstitution->notEmpty() implies
@@ -2439,7 +2439,7 @@ inv:
 
 context Extension
 /* [1] The non-owned end of an Extension is typed by a Class. */
-/* FIX METHOD_FIELD changed metaclass() to metaclass */
+/* FIX MINOR METHOD_FIELD changed metaclass() to metaclass */
 inv:
 metaclassEnd()->notEmpty() and metaclass->oclIsKindOf(Class)
 
@@ -2450,19 +2450,19 @@ memberEnd->size() = 2
 
 context ExtensionEnd
 /* [1] The multiplicity of ExtensionEnd is 0..1 or 1. */
-/* FIX WRONG_NAMED_ELEMENT changed (self->lowerBound() = 0 or self->lowerBound() = 1) and self->upperBound() = 1 to is(0, 1) or is(1,1)*/
+/* FIX MINOR WRONG_NAMED_ELEMENT changed (self->lowerBound() = 0 or self->lowerBound() = 1) and self->upperBound() = 1 to is(0, 1) or is(1,1)*/
 inv:
 is(0,1) or is(1,1)
 
 /* [2] The aggregation of an ExtensionEnd is composite. */
 inv:
--- FIX ENUM adapted enum AggregationKind.
+-- FIX EVOLUTION ENUM adapted enum AggregationKind.
 self.aggregation = AggregationKind::composite
 
 
 context Profile
 /* [1] An element imported as a metaclassReference is not specialized or generalized in a Profile. */
-/* COULD_NOT_FIX: WRONG_NAMED_ELEMENT namespace
+/* COULD_NOT_FIX: MINOR TYPE WRONG_NAMED_ELEMENT namespace
    WRONG_TYPE Added downcast to Classifier
 inv:
 self.metaclassReference.importedElement->
@@ -2487,7 +2487,7 @@ generalization.specific->forAll(e | e.oclIsKindOf(Stereotype))
 -- NO_OCL
 
 /* [3] A stereotype must be contained, directly or indirectly, in a profile. */
-/* COULD_NOT_FIX containingProfile() ?
+/* COULD_NOT_FIX MINOR containingProfile() ?
    WRONG_NAMED_ELEMENT changed profile to getProfile()
 inv:
 getProfile() = self.containingProfile()*/

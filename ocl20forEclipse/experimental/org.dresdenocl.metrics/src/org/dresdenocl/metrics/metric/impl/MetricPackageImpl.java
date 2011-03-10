@@ -238,8 +238,53 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getConstraintMetric_CalledProperties() {
+		return (EAttribute)constraintMetricEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getConstraintMetric_ReferredConstraint() {
-		return (EReference)constraintMetricEClass.getEStructuralFeatures().get(3);
+		return (EReference)constraintMetricEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintMetric_NumberOfIfExpressions() {
+		return (EAttribute)constraintMetricEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintMetric_NumberOfLetExpressions() {
+		return (EAttribute)constraintMetricEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintMetric_UsedIterators() {
+		return (EAttribute)constraintMetricEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintMetric_UsedLiterals() {
+		return (EAttribute)constraintMetricEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -285,7 +330,12 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__EXPRESSION_COUNT);
 		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__EXPRESSION_DEPTH);
 		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__CALLED_OPERATIONS);
+		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__CALLED_PROPERTIES);
 		createEReference(constraintMetricEClass, CONSTRAINT_METRIC__REFERRED_CONSTRAINT);
+		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__NUMBER_OF_IF_EXPRESSIONS);
+		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__NUMBER_OF_LET_EXPRESSIONS);
+		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__USED_ITERATORS);
+		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__USED_LITERALS);
 	}
 
 	/**
@@ -365,7 +415,27 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 		g2 = createEGenericType(ecorePackage.getEIntegerObject());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getConstraintMetric_CalledOperations(), g1, "calledOperations", null, 0, 1, ConstraintMetric.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEIntegerObject());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getConstraintMetric_CalledProperties(), g1, "calledProperties", null, 0, 1, ConstraintMetric.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConstraintMetric_ReferredConstraint(), thePivotModelPackage.getConstraint(), null, "referredConstraint", null, 0, 1, ConstraintMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstraintMetric_NumberOfIfExpressions(), ecorePackage.getEInt(), "numberOfIfExpressions", null, 0, 1, ConstraintMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstraintMetric_NumberOfLetExpressions(), ecorePackage.getEInt(), "numberOfLetExpressions", null, 0, 1, ConstraintMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEIntegerObject());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getConstraintMetric_UsedIterators(), g1, "usedIterators", null, 0, 1, ConstraintMetric.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEIntegerObject());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getConstraintMetric_UsedLiterals(), g1, "usedLiterals", null, 0, 1, ConstraintMetric.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

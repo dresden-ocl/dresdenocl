@@ -144,6 +144,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("Boolean", metric);
 	}
 
 	/**
@@ -238,6 +240,8 @@ public class OclMetrics {
 		// end for.
 
 		metric.setExpressionDepth(maxDepth);
+
+		increaseLiteralCount(exp.getType().getName(), metric);
 	}
 
 	/**
@@ -279,6 +283,10 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("EnumerationLiteral", metric);
+		increaseLiteralCount("EnumerationLiteral: "
+				+ exp.getReferredEnumLiteral().getQualifiedName(), metric);
 	}
 
 	/**
@@ -334,6 +342,8 @@ public class OclMetrics {
 
 		metric.setExpressionDepth(Math.max(conditionExpDepth,
 				Math.max(thenExpDepth, elseExpDepth)));
+
+		metric.setNumberOfIfExpressions(metric.getNumberOfIfExpressions() + 1);
 	}
 
 	/**
@@ -350,6 +360,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("Integer", metric);
 	}
 
 	/**
@@ -366,6 +378,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("invalid", metric);
 	}
 
 	/**
@@ -397,6 +411,8 @@ public class OclMetrics {
 
 		metric.setExpressionDepth(Math.max(sourceExpDepth,
 				Math.max(bodyExpDepth, resultExpDepth)));
+
+		increaseIteratorCount("iterate", metric);
 	}
 
 	/**
@@ -423,6 +439,8 @@ public class OclMetrics {
 		int bodyExpDepth = metric.getExpressionDepth();
 
 		metric.setExpressionDepth(Math.max(sourceExpDepth, bodyExpDepth));
+
+		increaseIteratorCount(exp.getName(), metric);
 	}
 
 	/**
@@ -448,6 +466,8 @@ public class OclMetrics {
 		int varExpDepth = metric.getExpressionDepth();
 
 		metric.setExpressionDepth(Math.max(inExpDepth, varExpDepth));
+
+		metric.setNumberOfLetExpressions(metric.getNumberOfLetExpressions() + 1);
 	}
 
 	/**
@@ -650,6 +670,20 @@ public class OclMetrics {
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
 
 		visitOclExpression(exp.getSource(), metric);
+
+		/* Increase or set the property count. */
+		if (metric.getCalledProperties() == null)
+			metric.setCalledProperties(new HashMap<String, Integer>());
+		// no else.
+
+		String name = exp.getReferredProperty().getQualifiedName();
+		Integer propertyCount = metric.getCalledProperties().get(name);
+		if (propertyCount == null)
+			propertyCount = 1;
+		else
+			propertyCount++;
+		// end else.
+		metric.getCalledProperties().put(name, propertyCount);
 	}
 
 	/**
@@ -666,6 +700,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("Real", metric);
 	}
 
 	/**
@@ -682,6 +718,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("String", metric);
 	}
 
 	/**
@@ -711,6 +749,9 @@ public class OclMetrics {
 		// end for.
 
 		metric.setExpressionDepth(maxDepth);
+
+		increaseLiteralCount("Tuple", metric);
+		increaseLiteralCount("Tuple: " + exp.getType().getName(), metric);
 	}
 
 	/**
@@ -727,6 +768,10 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("Type", metric);
+		increaseLiteralCount("Type: "
+				+ exp.getReferredType().getQualifiedName(), metric);
 	}
 
 	/**
@@ -743,6 +788,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("null", metric);
 	}
 
 	/**
@@ -759,6 +806,8 @@ public class OclMetrics {
 
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
+
+		increaseLiteralCount("UnlimitedNatural", metric);
 	}
 
 	/**
@@ -793,5 +842,53 @@ public class OclMetrics {
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
 
 		visitVariable(exp.getReferredVariable(), metric);
+	}
+
+	/**
+	 * Helper method to increase the count for a given iterator's name.
+	 * 
+	 * @param name
+	 *            The name of the iterator.
+	 * @param metric
+	 *            The {@link ConstraintMetric}.
+	 */
+	private static void increaseIteratorCount(String name,
+			ConstraintMetric metric) {
+		/* Increase or set the literal count. */
+		if (metric.getUsedIterators() == null)
+			metric.setUsedIterators(new HashMap<String, Integer>());
+		// no else.
+
+		Integer literalCount = metric.getUsedIterators().get(name);
+		if (literalCount == null)
+			literalCount = 1;
+		else
+			literalCount++;
+		// end else.
+		metric.getUsedIterators().put(name, literalCount);
+	}
+
+	/**
+	 * Helper method to increase the count for a given literal's name.
+	 * 
+	 * @param name
+	 *            The name of the literal.
+	 * @param metric
+	 *            The {@link ConstraintMetric}.
+	 */
+	private static void increaseLiteralCount(String name,
+			ConstraintMetric metric) {
+		/* Increase or set the literal count. */
+		if (metric.getUsedLiterals() == null)
+			metric.setUsedLiterals(new HashMap<String, Integer>());
+		// no else.
+
+		Integer literalCount = metric.getUsedLiterals().get(name);
+		if (literalCount == null)
+			literalCount = 1;
+		else
+			literalCount++;
+		// end else.
+		metric.getUsedLiterals().put(name, literalCount);
 	}
 }
