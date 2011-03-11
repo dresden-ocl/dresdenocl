@@ -31,8 +31,9 @@ import org.junit.runners.Suite;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestBugFix01.class, TestBugFix02.class,
-		TestValueProperty.class, TestXmlModelInstanceType.class })
+@Suite.SuiteClasses({ TestBugFix01.class, TestBugFix02.class,
+		TestBugFix03.class, TestValueProperty.class,
+		TestXmlModelInstanceType.class })
 public class AllXmlInstanceTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

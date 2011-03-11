@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CAEXFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CAEX_ClassModel.xsd" FileName="DemoCAEX.xml" SchemaVersion="2.15">
+	<Version>1.94</Version>
+	<InstanceHierarchy Name="MappingExample_InstanceHierarchy">
+		<InternalElement Name="Example_Plant" ID="GUID1">
+			<InternalElement Name="Products" ID="GUID9">
+				<InternalElement Name="Auto" ID="GUID10" RefBaseSystemUnitPath="MappingExample_SystemUnitClassLib/MappingExample_SystemUnitClass/Products/Auto">
+					<ExternalInterface Name="PPR" RefBaseClassPath="MappingExample_InterfaceClassLib/MappingExample_BaseInterface/PPRConnector"/>
+					<RoleRequirements RefBaseRoleClassPath="MappingExample_ExtendedRoleLib/Car body"/>
+				</InternalElement>
+			</InternalElement>
+			<InternalElement Name="Resources" ID="GUID2">
+				<InternalElement Name="TB1" ID="GUID3" RefBaseSystemUnitPath="MappingExample_SystemUnitClassLib/MappingExample_SystemUnitClass/Resources/TB">
+					<ExternalInterface Name="PPR" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector"/>
+					<RoleRequirements RefBaseRoleClassPath="MappingExample_ExtendedRoleLib/Conveyor"/>
+				</InternalElement>
+				<InternalElement Name="DT1" ID="GUID4" RefBaseSystemUnitPath="MappingExample_SystemUnitClassLib/MappingExample_SystemUnitClass/Resources/DT">
+					<ExternalInterface Name="PPR" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector"/>
+					<RoleRequirements RefBaseRoleClassPath="MappingExample_ExtendedRoleLib/Turntable"/>
+				</InternalElement>
+				<InternalElement Name="TB2" ID="GUID6" RefBaseSystemUnitPath="MappingExample_SystemUnitClassLib/MappingExample_SystemUnitClass/Resources/TB">
+					<ExternalInterface Name="PPR" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector"/>
+					<RoleRequirements RefBaseRoleClassPath="MappingExample_ExtendedRoleLib/Conveyor"/>
+				</InternalElement>
+				<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource"/>
+			</InternalElement>
+			<InternalLink Name="TB1_DT1" RefPartnerSideA="GUID3:PPR" RefPartnerSideB="GUID4:PPR" ID=""/>
+			<InternalLink Name="TB2_DT1" RefPartnerSideA="GUID6:PPR" RefPartnerSideB="GUID4:PPR" ID=""/>
+			<InternalLink Name="TB1_Auto" RefPartnerSideA="GUID3:PPR" RefPartnerSideB="GUID10:PPR" ID=""/>
+			<InternalLink Name="DT1_Auto" RefPartnerSideA="GUID4:PPR" RefPartnerSideB="GUID10:PPR" ID=""/>
+			<InternalLink Name="TB2_Auto" RefPartnerSideA="GUID6:PPR" RefPartnerSideB="GUID10:PPR" ID=""/>
+			<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/Cell"/>
+		</InternalElement>
+	</InstanceHierarchy>
+	<InterfaceClassLib Name="MappingExample_InterfaceClassLib">
+		<Description>Standard AutomationML Interface Class Library</Description>
+		<InterfaceClass Name="MappingExample_BaseInterface" RefBaseClassPath="">
+			<InterfaceClass Name="PPRConnector" RefBaseClassPath="MappingExample_BaseInterface"/>
+			<InterfaceClass Name="TopologieConnector" RefBaseClassPath="MappingExample_BaseInterface"/>
+		</InterfaceClass>
+	</InterfaceClassLib>
+	<RoleClassLib Name="MappingExample_BaseRoleClassLib">
+		<Description>AutomationML base role library</Description>
+		<RoleClass Name="MappingExample_BaseRole">
+			<RoleClass Name="Resource" RefBaseClassPath="MappingExample_BaseRole">
+			</RoleClass>
+			<RoleClass Name="Product" RefBaseClassPath="MappingExample_BaseRole"/>
+			<RoleClass Name="Process" RefBaseClassPath="MappingExample_BaseRole"/>
+			<RoleClass Name="Structure" RefBaseClassPath="MappingExample_BaseRole">
+			</RoleClass>
+		</RoleClass>
+	</RoleClassLib>
+	<RoleClassLib Name="MappingExample_ExtendedRoleLib">
+		<RoleClass Name="Cell" RefBaseClassPath="MappingExample_BaseRoleClassLib/MappingExample_BaseRole/Structure"/>
+		<RoleClass Name="Conveyor" RefBaseClassPath="MappingExample_BaseRoleClassLib/MappingExample_BaseRole/Resource"/>
+		<RoleClass Name="Turntable" RefBaseClassPath="MappingExample_BaseRoleClassLib/MappingExample_BaseRole/Resource"/>
+		<RoleClass Name="Car body" RefBaseClassPath="MappingExample_BaseRoleClassLib/MappingExample_BaseRole/Product"/>
+	</RoleClassLib>
+	<SystemUnitClassLib Name="MappingExample_SystemUnitClassLib">
+		<SystemUnitClass Name="MappingExample_SystemUnitClass" RefBaseClassPath="MappingExample_SystemUnitClassLib">
+			<SystemUnitClass Name="Resources" RefBaseClassPath="MappingExample_SystemUnitClass">
+				<SystemUnitClass Name="TB" RefBaseClassPath="MappingExample_SystemUnitClass/Resources">
+					<Attribute Name="Attribut1" AttributeDataType="Integer" Unit="m">
+						<Value>1</Value>
+					</Attribute>
+					<Attribute Name="Attribut2">
+						<Value>1</Value>
+					</Attribute>
+				</SystemUnitClass>
+				<SystemUnitClass Name="DT" RefBaseClassPath="MappingExample_SystemUnitClass/Resources"/>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Products" RefBaseClassPath="MappingExample_SystemUnitClass">
+				<SystemUnitClass Name="Auto" RefBaseClassPath="MappingExample_SystemUnitClass/Products"/>
+			</SystemUnitClass>
+		</SystemUnitClass>
+	</SystemUnitClassLib>
+</CAEXFile>
