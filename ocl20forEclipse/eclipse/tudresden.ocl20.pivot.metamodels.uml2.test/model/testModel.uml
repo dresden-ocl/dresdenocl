@@ -131,5 +131,9 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_f9a01GCTEd6dPvgh_DkPIw" value="*"/>
       </ownedEnd>
     </packagedElement>
+    <packagedElement xmi:type="uml:DataType" xmi:id="_4xgMgE5MEeC5b5deIBxCkg" name="DataType">
+      <ownedAttribute xmi:id="_fkoe8E5NEeC5b5deIBxCkg" name="property1" type="_HtPiAFjeEd6lGdDGCz3Giw"/>
+      <ownedOperation xmi:id="_fkoe8U5NEeC5b5deIBxCkg" name="operation1"/>
+    </packagedElement>
   </packagedElement>
 </uml:Package>

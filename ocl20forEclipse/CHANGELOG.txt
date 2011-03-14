@@ -6,6 +6,7 @@ Release 3.x (not scheduled yet)
 * Bug fixes on UML metamodel adaptation
   - Added missing dependency to org.eclipse.uml.resources. Should now be installable
     appropiately within non MDT-Eclipse distributions.
+  - Adaptation of DataTypes is now supported.
   
 * Bug fixes on OCL Parser/Editor
   - Parsing of recursively defined properties is now supported.

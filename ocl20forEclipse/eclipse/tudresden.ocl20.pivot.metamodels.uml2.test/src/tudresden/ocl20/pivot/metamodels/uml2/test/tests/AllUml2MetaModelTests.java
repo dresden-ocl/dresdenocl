@@ -31,8 +31,8 @@ import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestUML2MetaModel.class, TestModelImport.class,
-		TestUML2Packages.class })
+@Suite.SuiteClasses({ TestUML2MetaModel.class, TestModelImport.class,
+		TestUML2Packages.class, TestUmlDataType.class })
 public class AllUml2MetaModelTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

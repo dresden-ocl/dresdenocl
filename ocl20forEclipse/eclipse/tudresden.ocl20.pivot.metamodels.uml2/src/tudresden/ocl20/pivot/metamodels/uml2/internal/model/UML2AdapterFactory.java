@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.AssociationClass;
 import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.DataType;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
@@ -282,6 +283,11 @@ public class UML2AdapterFactory {
 
 		else if (dslType instanceof Interface) {
 			result = createType((Interface) dslType);
+		}
+
+		/* Else if the given type is a datatype, adapt to Type. */
+		else if (dslType instanceof DataType) {
+			result = createType((DataType) dslType);
 		}
 
 		/* Check if aType is an association class. */
@@ -731,6 +737,39 @@ public class UML2AdapterFactory {
 		return type;
 	}
 
+	/**
+	 * <p>
+	 * Creates a {@link Type} adapter for a {@link DataType} .
+	 * </p>
+	 * 
+	 * @generated NOT
+	 */
+	private Type createType(DataType dslDataType) {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType(dslDataType=" + dslDataType + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (dslDataType == null) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug("createType() - exit: dslInterface is null");
+			return null;
+		}
+
+		Type type = (Type) adapters.get(dslDataType);
+
+		if (type == null) {
+			type = new UML2Datatype(dslDataType, this);
+			adapters.put(dslDataType, type);
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createType() - exit - return value=" + type); //$NON-NLS-1$
+		}
+
+		return type;
+	}
+	
 	/**
 	 * <p>
 	 * Creates a {@link Type} adapter for a
