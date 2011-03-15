@@ -176,10 +176,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			throw new IllegalArgumentException(
 					"Parameter 'constraint' must not be null.");
 		// no else.
-		if (modelInstanceElement == null)
-			throw new IllegalArgumentException(
-					"Parameter 'modelInstanceElement' must not be null.");
-		// no else.
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -191,11 +187,29 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		IInterpretationResult result;
 
+		/* Check if the constraint has a static context. */
+		if (this.hasStaticContext(constraint)) {
+			OclAny context = myStandardLibraryFactory.createOclUndefined(
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny(), "Static context.");
+
+			OclAny oclResult = this.interpretConstraint(constraint, context);
+
+			result = new InterpretationResultImpl(null, constraint, oclResult);
+
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.fireInterpretationFinished(result);
+		}
+
 		/*
 		 * Check if the IModelInstanceElement is constrained by the constraint
 		 * at all.
 		 */
-		if (this.isConstrained(modelInstanceElement, constraint)) {
+		else if (modelInstanceElement == null)
+			throw new IllegalArgumentException(
+					"Parameter 'modelInstanceElement' cannot be null for constraints not defined in a static context.");
+
+		else if (this.isConstrained(modelInstanceElement, constraint)) {
 
 			OclAny context = myStandardLibraryFactory
 					.createOclAny(modelInstanceElement);
@@ -239,10 +253,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (constraints == null)
 			throw new IllegalArgumentException(
 					"Parameter 'constraints' must not be null.");
-		// no else.
-		if (modelInstanceElement == null)
-			throw new IllegalArgumentException(
-					"Parameter 'modelInstanceElement' must not be null.");
 		// no else.
 
 		/* Probably log the entry into this method. */
@@ -527,6 +537,30 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			index++;
 		}
 		// end for.
+	}
+
+	/**
+	 * Checks if a given {@link Constraint} is defined in a static context i.e.
+	 * is defined in a static context (static def, or body/derive/init on static
+	 * feature).
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint}
+	 * @return <code>true</code> if the context is static.
+	 */
+	private boolean hasStaticContext(Constraint constraint) {
+
+		switch (constraint.getKind()) {
+		case DEFINITION:
+			return constraint.getDefinedFeature().isStatic();
+		case DERIVED:
+		case INITIAL:
+		case BODY:
+			return ((Feature) constraint.getConstrainedElement().iterator()
+					.next()).isStatic();
+			// no default;
+		}
+		return false;
 	}
 
 	/**

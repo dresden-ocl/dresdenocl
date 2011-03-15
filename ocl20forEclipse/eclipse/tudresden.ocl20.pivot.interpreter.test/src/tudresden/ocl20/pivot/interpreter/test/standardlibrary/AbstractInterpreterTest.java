@@ -44,6 +44,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -65,8 +66,17 @@ public abstract class AbstractInterpreterTest {
 	/** The name of a test {@link IModelInstance} for this test suite. */
 	protected static final String INSTANCE3_NAME = "package1/Instance3";
 
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE4_NAME = "package1/Instance4";
+
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE5_NAME = "package1/Instance5";
+
 	/** The name of a test {@link IModel} for this test suite. */
 	protected static final String MODEL1_NAME = "package1/Model1";
+
+	/** The name of a test {@link IModel} for this test suite. */
+	protected static final String MODEL2_NAME = "package1/Model2";
 
 	/**
 	 * <p>
@@ -355,12 +365,38 @@ public abstract class AbstractInterpreterTest {
 		imiObjects = modelInstance.getAllInstances(objectType);
 
 		assertNotNull(imiObjects);
-		assertTrue(imiObjects.size() >= 1);
 
 		assertNotNull(modelInstance);
 
 		/* Interpret the constraints. */
 		result = new ArrayList<IInterpretationResult>();
+
+		List<Constraint> staticConstraints = new ArrayList<Constraint>();
+
+		for (Constraint constraint : parsedConstraints) {
+			switch (constraint.getKind()) {
+			case DEFINITION:
+				if (constraint.getDefinedFeature().isStatic()) {
+					staticConstraints.add(constraint);
+				}
+				break;
+			case DERIVED:
+			case INITIAL:
+			case BODY:
+				if (((Feature) constraint.getConstrainedElement().iterator()
+						.next()).isStatic()) {
+					staticConstraints.add(constraint);
+				}
+				break;
+			// no default;
+			}
+		}
+		// end for.
+
+		parsedConstraints.removeAll(staticConstraints);
+
+		result.addAll(Ocl2ForEclipseFacade.interpretConstraints(
+				staticConstraints, modelInstance, null));
 
 		for (IModelInstanceObject imiObject : imiObjects) {
 			result.addAll(Ocl2ForEclipseFacade.interpretConstraints(

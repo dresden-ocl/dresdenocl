@@ -77,8 +77,8 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 		Image result;
 
-		result = PlatformUI.getWorkbench().getSharedImages().getImage(
-				ISharedImages.IMG_OBJ_ELEMENT);
+		result = PlatformUI.getWorkbench().getSharedImages()
+				.getImage(ISharedImages.IMG_OBJ_ELEMENT);
 
 		return result;
 	}
@@ -194,8 +194,8 @@ public class ResultsLabelProvider extends LabelProvider implements
 		}
 
 		else {
-			result = PlatformUI.getWorkbench().getSharedImages().getImage(
-					ISharedImages.IMG_OBJ_ELEMENT);
+			result = PlatformUI.getWorkbench().getSharedImages()
+					.getImage(ISharedImages.IMG_OBJ_ELEMENT);
 		}
 
 		return result;
@@ -229,6 +229,10 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 					if (aRow[index] != null) {
 						result = aRow[index].toString();
+					}
+
+					else if (index == 0) {
+						result = "static";
 					}
 
 					else {
@@ -277,15 +281,6 @@ public class ResultsLabelProvider extends LabelProvider implements
 						}
 
 						body = aConstraint.getSpecification().getBody();
-
-						result += aConstraint.getKind() + " ";
-
-						if (aConstraint.getName() != null) {
-							result += aConstraint.getName();
-						}
-						// no else.
-
-						result += ": ";
 
 						if (body != null) {
 							result += body;

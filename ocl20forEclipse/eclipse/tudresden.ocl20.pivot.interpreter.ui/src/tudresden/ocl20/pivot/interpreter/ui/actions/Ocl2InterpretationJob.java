@@ -22,6 +22,7 @@ import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIUtility;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Feature;
 
 public class Ocl2InterpretationJob extends Job {
 
@@ -149,12 +150,11 @@ public class Ocl2InterpretationJob extends Job {
 				 * Iterate through the model objects and constraints and compute
 				 * their results.
 				 */
-				for (IModelInstanceElement aModelObject : usedModelObjects) {
+				for (Constraint aConstraint : usedConstraints) {
 
-					for (Constraint aConstraint : usedConstraints) {
-
+					if (hasStaticContext(aConstraint)) {
 						IInterpretationResult interpretationResult = interpreter
-								.interpretConstraint(aConstraint, aModelObject);
+								.interpretConstraint(aConstraint, null);
 
 						/*
 						 * May be null if Element does not match to context of
@@ -166,7 +166,7 @@ public class Ocl2InterpretationJob extends Job {
 						}
 						// no else.
 
-						monitor.worked(1);
+						monitor.worked(usedModelObjects.size());
 
 						if (monitor.isCanceled()) {
 							return new Status(IStatus.CANCEL,
@@ -175,7 +175,36 @@ public class Ocl2InterpretationJob extends Job {
 						}
 						// no else.
 					}
-					// end for.
+
+					else {
+						for (IModelInstanceElement aModelObject : usedModelObjects) {
+
+							IInterpretationResult interpretationResult = interpreter
+									.interpretConstraint(aConstraint,
+											aModelObject);
+
+							/*
+							 * May be null if Element does not match to context
+							 * of constraint.
+							 */
+							if (interpretationResult != null) {
+								this.interpreterView
+										.addInterpretationResult(interpretationResult);
+							}
+							// no else.
+
+							monitor.worked(1);
+
+							if (monitor.isCanceled()) {
+								return new Status(IStatus.CANCEL,
+										InterpreterUIPlugin.PLUGIN_ID,
+										"Interpretation was canceled.");
+							}
+							// no else.
+						}
+						// end for.
+					}
+					// end else.
 				}
 				// end for.
 
@@ -213,5 +242,29 @@ public class Ocl2InterpretationJob extends Job {
 		// end else.
 
 		return result;
+	}
+
+	/**
+	 * Checks if a given {@link Constraint} is defined in a static context i.e.
+	 * is defined in a static context (static def, or body/derive/init on static
+	 * feature).
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint}
+	 * @return <code>true</code> if the context is static.
+	 */
+	private boolean hasStaticContext(Constraint constraint) {
+
+		switch (constraint.getKind()) {
+		case DEFINITION:
+			return constraint.getDefinedFeature().isStatic();
+		case DERIVED:
+		case INITIAL:
+		case BODY:
+			return ((Feature) constraint.getConstrainedElement().iterator()
+					.next()).isStatic();
+			// no default;
+		}
+		return false;
 	}
 }

@@ -1,0 +1,6 @@
+package package1
+
+context Class2
+def: definedOperation() = 42
+
+endpackage

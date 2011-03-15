@@ -36,6 +36,7 @@ import java.util.List;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.interpreter.internal.InterpretationEnvironment;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -79,7 +80,10 @@ public interface IOclInterpreter {
 	 *            The {@link Constraint} to be interpreted.
 	 * @param aModelObject
 	 *            The {@link IModelInstanceElement} representing the current
-	 *            object.
+	 *            object. Can be <code>null</code> if the given
+	 *            {@link Constraint}s requires no {@link IModelInstanceObject}
+	 *            as context, i.e. is defined in a static context (static def,
+	 *            or body/derive/init on static feature).
 	 * 
 	 * @return The {@link IInterpretationResult} of the interpretation or
 	 *         <code>null</code>.
@@ -97,7 +101,10 @@ public interface IOclInterpreter {
 	 *            The {@link Constraint}s to be interpreted.
 	 * @param aModelObject
 	 *            The {@link IModelInstanceElement} representing the current
-	 *            object.
+	 *            object. Can be <code>null</code> if none of the given
+	 *            {@link Constraint}s requires an {@link IModelInstanceObject}
+	 *            as context, i.e. all of them are defined in a static context
+	 *            (static def, or body/derive/init on static feature).
 	 * 
 	 * @return A {@link List} containing the {@link IInterpretationResult} of
 	 *         the interpretation as {@link OclRoot}s.

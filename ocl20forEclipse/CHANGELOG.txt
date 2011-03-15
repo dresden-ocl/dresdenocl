@@ -13,6 +13,8 @@ Release 3.x (not scheduled yet)
 
 * Bug fixes on OCL Interpreter
   - Interpretation of recursively defined properties is now supported.
+  - Constraints defined in a static context are now interpreted only once for a given
+    set of constraints.
   
 * Changes on OCL2SQL
   - Closure iterator is now supported.
