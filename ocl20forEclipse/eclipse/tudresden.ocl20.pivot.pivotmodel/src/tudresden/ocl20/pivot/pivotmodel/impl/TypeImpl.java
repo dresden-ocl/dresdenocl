@@ -498,7 +498,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 */
 	public List<Property> allProperties() {
 
-		List<Property> allProperties = new ArrayList<Property>();
+		Set<Property> allProperties = new HashSet<Property>();
 
 		// add the properties of this type
 		allProperties.addAll(getOwnedProperty());
@@ -508,7 +508,7 @@ public class TypeImpl extends NamedElementImpl implements Type {
 			allProperties.addAll(superType.allProperties());
 		}
 
-		return allProperties;
+		return new ArrayList<Property>(allProperties);
 	}
 
 	/**
