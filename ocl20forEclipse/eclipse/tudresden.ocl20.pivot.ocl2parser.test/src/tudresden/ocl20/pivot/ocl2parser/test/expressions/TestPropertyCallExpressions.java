@@ -176,6 +176,34 @@ public class TestPropertyCallExpressions {
 
 	/**
 	 * <p>
+	 * A test case to check that a PropertyCallExpression is parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testPropertyCallExpressionPositive06() throws Exception {
+	
+		TestPerformer testPerformer;
+	
+		String modelFileName;
+		String oclFileName;
+	
+		oclFileName = "expressions/calls/propertyPositive06.ocl";
+		modelFileName = "testmodel03.uml";
+	
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+	
+		/* Try to parse the constraint file. */
+		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
 	 * A test case to check that a PropertyCallExpression is not parsed
 	 * appropriately.
 	 * </p>
@@ -246,34 +274,6 @@ public class TestPropertyCallExpressions {
 
 		oclFileName = "expressions/calls/propertyNegative03.ocl";
 		modelFileName = "testmodel.uml";
-
-		/* Try to get the TestPerformer. */
-		testPerformer = TestPerformer.getInstance(
-				AllExpressionTests.META_MODEL_ID,
-				AllExpressionTests.MODEL_BUNDLE,
-				AllExpressionTests.MODEL_DIRECTORY);
-		testPerformer.setModel(modelFileName);
-
-		/* Try to parse the constraint file. */
-		testPerformer.parseFile(oclFileName);
-	}
-
-	/**
-	 * <p>
-	 * A test case to check that a PropertyCallExpression is parsed
-	 * appropriately.
-	 * </p>
-	 */
-	@Test
-	public void testPropertyCallExpressionPositive06() throws Exception {
-
-		TestPerformer testPerformer;
-
-		String modelFileName;
-		String oclFileName;
-
-		oclFileName = "expressions/calls/propertyPositive06.ocl";
-		modelFileName = "testmodel03.uml";
 
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(

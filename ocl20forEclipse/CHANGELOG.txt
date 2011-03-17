@@ -6,6 +6,8 @@ Release 3.x (not scheduled yet)
 * Genreal bug fixes:
   - Enumerations now extend OclAny. Thus, operations of OclAny can now be parsed on
     enumerations.
+  - Properties having the same name within inheritance relations are now shadowed
+    correctly.
 
 * Bug fixes on UML metamodel adaptation
   - Added missing dependency to org.eclipse.uml.resources. Should now be installable

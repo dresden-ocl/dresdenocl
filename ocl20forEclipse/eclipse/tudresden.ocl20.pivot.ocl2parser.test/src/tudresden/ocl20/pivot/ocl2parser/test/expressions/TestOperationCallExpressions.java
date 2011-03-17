@@ -19,11 +19,24 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.ParseException;
 import tudresden.ocl20.pivot.parser.SemanticException;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.Property;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -229,6 +242,61 @@ public class TestOperationCallExpressions {
 
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case to check that a OperationCallExpression is parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test
+	public void testOperationCallExpressionPositive09() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/calls/operationPositive09.ocl";
+		modelFileName = "testmodel04.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		List<Constraint> constraints = testPerformer.parseFile(oclFileName);
+
+		assertEquals(1, constraints.size());
+		Constraint constraint = constraints.get(0);
+
+		OclExpression exp = ((ExpressionInOcl) constraint.getSpecification())
+				.getBodyExpression();
+		assertTrue(exp instanceof PropertyCallExp);
+
+		PropertyCallExp propExp = (PropertyCallExp) exp;
+		Property referredProperty = propExp.getReferredProperty();
+
+		Type childClassType = testPerformer.getCurrentModel().findType(
+				Arrays.asList(new String[] { "root", "test", "ChildClass" }));
+		assertNotNull(childClassType);
+
+		Property expectedProperty = null;
+		for (Property property : childClassType.getOwnedProperty()) {
+			if (property.getName().equals("sameName")) {
+				expectedProperty = property;
+				break;
+			}
+			// no else.
+		}
+		// end for.
+
+		assertNotNull(expectedProperty);
+		assertEquals(expectedProperty, referredProperty);
 	}
 
 	/**
@@ -659,22 +727,22 @@ public class TestOperationCallExpressions {
 	 */
 	@Test(expected = SemanticException.class)
 	public void testOperationCallExpressionNegative19() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "expressions/calls/operationNegative19.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(
 				AllExpressionTests.META_MODEL_ID,
 				AllExpressionTests.MODEL_BUNDLE,
 				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
