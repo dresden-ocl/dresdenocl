@@ -3,6 +3,10 @@ Changes and Bugs fixed during the different Releases
 
 Release 3.x (not scheduled yet)
 ================================
+* Genreal bug fixes:
+  - Enumerations now extend OclAny. Thus, operations of OclAny can now be parsed on
+    enumerations.
+
 * Bug fixes on UML metamodel adaptation
   - Added missing dependency to org.eclipse.uml.resources. Should now be installable
     appropiately within non MDT-Eclipse distributions.

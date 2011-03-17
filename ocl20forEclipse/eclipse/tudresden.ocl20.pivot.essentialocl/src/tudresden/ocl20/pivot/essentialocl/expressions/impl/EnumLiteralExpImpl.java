@@ -110,7 +110,8 @@ public class EnumLiteralExpImpl extends LiteralExpImpl implements
 					"The referred enum literal of an EnumLiteralExp must not be null."); //$NON-NLS-1$
 		}
 
-		Type type = referredEnumLiteral.getEnumeration();
+		/* Do not use the enumeration type directly -> inheritance from OclAny. */
+		Type type = getOclType(referredEnumLiteral.getEnumeration());
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("evaluateType() - exit - return value=" + type); //$NON-NLS-1$
