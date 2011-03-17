@@ -1,0 +1,17 @@
+package uml
+
+/* [1] If an element that is owned by a package has visibility, it is public or private. */
+context Package
+inv: 
+self.ownedMember->forAll(e | e.visibility->notEmpty() 
+	implies e.visibility = VisibilityKind::public 
+		or e.visibility = VisibilityKind::private)
+
+/* The following bugs were fixed:
+- renamed ownedElements to ownedElement
+- changed ownedElement to ownedMember (avoids cast on forAll)
+- replaced old EnumerationLiteral notation with new one (2x)
+- renamed visbility to visibility
+*/
+
+endpackage 
