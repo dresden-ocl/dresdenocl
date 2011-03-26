@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de)
 
 This file is part of OCL2 Intepreter Test Suite of Dresden OCL.
 
@@ -18,6 +18,7 @@ with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -32,7 +33,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TypesTests.class })
-public class EssentialOCLAllTests {
+public class EssentialOCLAllTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

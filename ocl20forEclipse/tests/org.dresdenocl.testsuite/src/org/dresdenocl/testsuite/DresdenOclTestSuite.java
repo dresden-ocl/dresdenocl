@@ -15,10 +15,10 @@ package org.dresdenocl.testsuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import tudresden.ocl20.pivot.essentialocl.types.tests.EssentialOCLAllTests;
 import tudresden.ocl20.pivot.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import tudresden.ocl20.pivot.metamodels.java.test.tests.TestJavaMetaModel;
 import tudresden.ocl20.pivot.metamodels.uml2.test.tests.AllUml2MetaModelTests;
-import tudresden.ocl20.pivot.metamodels.xsd.test.AllXmlSchemaMetamodelTests;
 
 /**
  * <p>
@@ -31,7 +31,7 @@ import tudresden.ocl20.pivot.metamodels.xsd.test.AllXmlSchemaMetamodelTests;
 // FIXME Claas: Collect all test suites.
 @Suite.SuiteClasses({ AllEcoreMetaModelTests.class,
 		AllUml2MetaModelTests.class, /* AllXmlSchemaMetamodelTests.class, */
-		TestJavaMetaModel.class })
+		TestJavaMetaModel.class, EssentialOCLAllTests.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
