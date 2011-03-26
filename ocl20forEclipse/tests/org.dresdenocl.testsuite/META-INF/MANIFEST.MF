@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Testsuite Plug-in for Dresden OCL and all its Tools
+Bundle-SymbolicName: org.dresdenocl.testsuite
+Bundle-Version: 3.1.0.qualifier
+Bundle-Activator: org.dresdenocl.testsuite.Activator
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit;bundle-version="4.0.0",
+ tudresden.ocl20.pivot.metamodels.ecore.test,
+ tudresden.ocl20.pivot.metamodels.java.test,
+ tudresden.ocl20.pivot.metamodels.uml2.test,
+ tudresden.ocl20.pivot.metamodels.xsd.test
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
