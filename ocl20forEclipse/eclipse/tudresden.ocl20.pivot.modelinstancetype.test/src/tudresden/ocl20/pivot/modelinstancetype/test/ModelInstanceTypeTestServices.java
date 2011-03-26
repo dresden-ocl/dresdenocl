@@ -20,13 +20,14 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.osgi.util.NLS;
 import org.osgi.framework.Bundle;
 
@@ -289,23 +290,19 @@ public final class ModelInstanceTypeTestServices {
 
 		IModelInstance result;
 
-		String bundleDirectory;
-		File modelInstanceFile;
-
 		/* Load the IModel first. */
 		if (this.myModel == null) {
 			this.loadModel();
 		}
 		// no else.
 
-		/* Get the bundle location for the model instance files. */
-		bundleDirectory = Platform.getBundle(this.myModelInstanceBundleId)
-				.getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		bundleDirectory = bundleDirectory.substring(15);
-
-		modelInstanceFile = new File(bundleDirectory + this.myModelInstancePath);
+		File modelInstanceFile;
+		try {
+			modelInstanceFile = AbstractDresdenOclTest.getFile(
+					this.myModelInstancePath, this.myModelInstanceBundleId);
+		} catch (IOException e1) {
+			throw new RuntimeException(e1.getMessage(), e1);
+		}
 
 		/* Check if the model instance has already been loaded. */
 		if (this.myCachedModelInstances.containsKey(modelInstanceFile
@@ -337,8 +334,8 @@ public final class ModelInstanceTypeTestServices {
 							this.myModelInstanceTypeId);
 
 					/* Cache the result. */
-					this.myCachedModelInstances.put(modelInstanceFile
-							.toString(), result);
+					this.myCachedModelInstances.put(
+							modelInstanceFile.toString(), result);
 				}
 
 				else {
@@ -729,8 +726,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("bagProperty" + index);
-				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getBagType(
+				aProperty.setType(EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getBagType(
 								EssentialOclPlugin.getOclLibraryProvider()
 										.getOclLibrary().getOclAny()));
 
@@ -743,8 +742,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("orderedSetProperty" + index);
-				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getOrderedSetType(
+				aProperty.setType(EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getOrderedSetType(
 								EssentialOclPlugin.getOclLibraryProvider()
 										.getOclLibrary().getOclAny()));
 
@@ -757,8 +758,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("sequenceProperty" + index);
-				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getSequenceType(
+				aProperty.setType(EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getSequenceType(
 								EssentialOclPlugin.getOclLibraryProvider()
 										.getOclLibrary().getOclAny()));
 
@@ -771,8 +774,10 @@ public final class ModelInstanceTypeTestServices {
 
 				aProperty = PivotModelFactory.eINSTANCE.createProperty();
 				aProperty.setName("setProperty" + index);
-				aProperty.setType(EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getSetType(
+				aProperty.setType(EssentialOclPlugin
+						.getOclLibraryProvider()
+						.getOclLibrary()
+						.getSetType(
 								EssentialOclPlugin.getOclLibraryProvider()
 										.getOclLibrary().getOclAny()));
 
@@ -815,42 +820,19 @@ public final class ModelInstanceTypeTestServices {
 		/* Check if the model has already been loaded. */
 		if (this.myModel == null) {
 
-			String bundleDirectory;
-			File modelFile;
-
-			/* Get the bundle location for the model files. */
-			bundleDirectory = Platform.getBundle(MODEL_BUNDLE_ID).getLocation();
-
-			/* Remove the 'reference:file:' from the beginning. */
-			bundleDirectory = bundleDirectory.substring(15);
-
-			modelFile = new File(bundleDirectory + MODEL_PATH);
-
-			/* Check if the given file does not exist. */
-			if (!modelFile.exists()) {
-				String msg;
-
-				msg = ModelInstanceTypeTestSuiteMessages.ModelInstanceTypeTestSuite_Services_ModelFileNotFound;
-				msg = NLS.bind(msg, MODEL_PATH, bundleDirectory);
-
-				throw new RuntimeException(msg);
+			try {
+				File modelFile = AbstractDresdenOclTest.getFile(MODEL_PATH,
+						MODEL_BUNDLE_ID);
+				this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
+						META_MODEL_ID);
+				this.addPropertiesToTestModel();
 			}
 
-			/* Else try to load the model. */
-			else {
-
-				try {
-					this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
-							META_MODEL_ID);
-
-					this.addPropertiesToTestModel();
-				}
-
-				catch (ModelAccessException e) {
-					throw new RuntimeException(e.getMessage());
-				}
+			catch (ModelAccessException e) {
+				throw new RuntimeException(e.getMessage(), e);
+			} catch (IOException e) {
+				throw new RuntimeException(e.getMessage(), e);
 			}
-			// end else.
 
 		}
 		// no else. Model has already been loaded.

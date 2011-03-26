@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -38,8 +39,8 @@ import tudresden.ocl20.pivot.modelinstancetype.test.tests.AllTests;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllTests.class })
-public class ModelInstanceTypeTestSuite {
+@Suite.SuiteClasses({ AllTests.class })
+public class ModelInstanceTypeTestSuite extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

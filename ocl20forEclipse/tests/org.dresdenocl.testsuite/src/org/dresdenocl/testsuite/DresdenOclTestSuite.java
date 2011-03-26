@@ -20,6 +20,7 @@ import tudresden.ocl20.pivot.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import tudresden.ocl20.pivot.metamodels.java.test.tests.TestJavaMetaModel;
 import tudresden.ocl20.pivot.metamodels.uml2.test.tests.AllUml2MetaModelTests;
 import tudresden.ocl20.pivot.modelbus.test.AllModelbusTests;
+import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTypeTests;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ import tudresden.ocl20.pivot.modelbus.test.AllModelbusTests;
 																	 * AllXmlSchemaMetamodelTests
 																	 * .class,
 																	 */
-		TestJavaMetaModel.class })
+		TestJavaMetaModel.class, AllJavaModelInstanceTypeTests.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

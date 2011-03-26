@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.metamodels.uml2.test,
  tudresden.ocl20.pivot.metamodels.xsd.test,
  tudresden.ocl20.pivot.essentialocl.tests,
- tudresden.ocl20.pivot.modelbus.test
+ tudresden.ocl20.pivot.modelbus.test,
+ tudresden.ocl20.pivot.modelinstancetype.java.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

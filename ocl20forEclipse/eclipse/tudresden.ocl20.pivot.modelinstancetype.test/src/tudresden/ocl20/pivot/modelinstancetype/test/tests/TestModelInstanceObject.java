@@ -281,9 +281,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -323,9 +323,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -346,9 +346,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -363,9 +363,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -406,9 +406,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -448,9 +448,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -490,9 +490,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -513,9 +513,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -530,9 +530,9 @@ public class TestModelInstanceObject {
 				assertTrue(msg, castedElement instanceof IModelInstanceObject);
 
 				/* The value should remain the same. */
-				assertEquals(msg, ((IModelInstanceObject) anElement)
-						.getObject(), ((IModelInstanceObject) castedElement)
-						.getObject());
+				assertEquals(msg,
+						((IModelInstanceObject) anElement).getObject(),
+						((IModelInstanceObject) castedElement).getObject());
 
 				/* The casted element should have exactly one type. */
 				assertNotNull(msg, castedElement.getType());
@@ -624,19 +624,18 @@ public class TestModelInstanceObject {
 				/* Both values should have the right type. */
 				assertNotNull(msg, class2PropertyValue.getType());
 				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getOclString(), class2PropertyValue
-						.getType());
+						.getOclLibrary().getOclString(),
+						class2PropertyValue.getType());
 
 				assertNotNull(msg, class1PropertyValue.getType());
 				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getOclString(), class1PropertyValue
-						.getType());
+						.getOclLibrary().getOclString(),
+						class1PropertyValue.getType());
 
 				/* Both values should not be equal. */
 				if (((IModelInstanceString) class1PropertyValue).getString()
-						.equals(
-								((IModelInstanceString) class2PropertyValue)
-										.getString())
+						.equals(((IModelInstanceString) class2PropertyValue)
+								.getString())
 						&& LOGGER.isDebugEnabled()) {
 
 					/*
@@ -791,8 +790,8 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have the same type as the operation. */
-				assertEquals(msg, operation.getType(), operationResult
-						.getType());
+				assertEquals(msg, operation.getType(),
+						operationResult.getType());
 
 				/* The result should be void. */
 				assertTrue(msg, operationResult instanceof IModelInstanceVoid);
@@ -863,14 +862,15 @@ public class TestModelInstanceObject {
 
 				/* The result should have the same type as the operation. */
 				if (operation.getType() instanceof PrimitiveType) {
-					assertEquals(msg, ((PrimitiveType) operation.getType())
-							.getKind(), ((PrimitiveType) operationResult
-							.getType()).getKind());
+					assertEquals(msg,
+							((PrimitiveType) operation.getType()).getKind(),
+							((PrimitiveType) operationResult.getType())
+									.getKind());
 				}
 
 				else {
-					assertEquals(msg, operation.getType(), operationResult
-							.getType());
+					assertEquals(msg, operation.getType(),
+							operationResult.getType());
 				}
 
 				/* The result should be an IModelInstanceElement. */
@@ -942,23 +942,22 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an ordered set type. */
-				assertEquals(msg,
-						EssentialOclPlugin.getOclLibraryProvider()
-								.getOclLibrary().getOrderedSetType(
-										operation.getType()), operationResult
-								.getType());
+				assertEquals(msg, operation.getType(),
+						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
 				assertTrue(msg,
 						operationResult instanceof IModelInstanceCollection<?>);
 
 				/* The result should be unique. */
-				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
-						.isUnique());
+				assertTrue(msg,
+						((IModelInstanceCollection<?>) operationResult)
+								.isUnique());
 
 				/* The result should be ordered. */
-				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
-						.isOrdered());
+				assertTrue(msg,
+						((IModelInstanceCollection<?>) operationResult)
+								.isOrdered());
 			}
 
 			catch (OperationAccessException e) {
@@ -1025,8 +1024,7 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an set type. */
-				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getSetType(operation.getType()),
+				assertEquals(msg, operation.getType(),
 						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
@@ -1034,8 +1032,9 @@ public class TestModelInstanceObject {
 						operationResult instanceof IModelInstanceCollection<?>);
 
 				/* The result should be unique. */
-				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
-						.isUnique());
+				assertTrue(msg,
+						((IModelInstanceCollection<?>) operationResult)
+								.isUnique());
 
 				/* The result should not be ordered. */
 				assertFalse(msg,
@@ -1107,8 +1106,7 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an sequence type. */
-				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getSequenceType(operation.getType()),
+				assertEquals(msg, operation.getType(),
 						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
@@ -1121,8 +1119,9 @@ public class TestModelInstanceObject {
 								.isUnique());
 
 				/* The result should be ordered. */
-				assertTrue(msg, ((IModelInstanceCollection<?>) operationResult)
-						.isOrdered());
+				assertTrue(msg,
+						((IModelInstanceCollection<?>) operationResult)
+								.isOrdered());
 			}
 
 			catch (OperationAccessException e) {
@@ -1189,8 +1188,7 @@ public class TestModelInstanceObject {
 				assertNotNull(msg, operationResult.getType());
 
 				/* The result should have an bag type. */
-				assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-						.getOclLibrary().getBagType(operation.getType()),
+				assertEquals(msg, operation.getType(),
 						operationResult.getType());
 
 				/* The result should be an IModelInstanceCollecttion. */
@@ -1243,8 +1241,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyBooleanNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -1356,8 +1354,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyStringNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -1469,8 +1467,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyBooleanMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -1582,8 +1580,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyStringMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -1695,8 +1693,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyObjectNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -1807,8 +1805,8 @@ public class TestModelInstanceObject {
 			if (property.getName().equals("argumentPropertyObjectMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -1920,8 +1918,8 @@ public class TestModelInstanceObject {
 					"argumentPropertyEnumerationLiteralNonMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -2033,8 +2031,8 @@ public class TestModelInstanceObject {
 					"argumentPropertyEnumerationLiteralMultiple")) {
 				argumentProperty = property;
 				try {
-					argument1 = instances_Class1.iterator().next().getProperty(
-							argumentProperty);
+					argument1 = instances_Class1.iterator().next()
+							.getProperty(argumentProperty);
 					break;
 				}
 
@@ -2238,8 +2236,8 @@ public class TestModelInstanceObject {
 					}
 
 					else {
-						assertEquals(msg, aProperty.getType(), aPropertyValue
-								.getType());
+						assertEquals(msg, aProperty.getType(),
+								aPropertyValue.getType());
 					}
 
 					/* The result should be and IModelInstanceElement. */
@@ -2302,8 +2300,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an ordered set type. */
-					assertEquals(msg, aProperty.getType(), aPropertyValue
-							.getType());
+					assertEquals(msg, aProperty.getType(),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2376,8 +2374,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an unordered set type. */
-					assertEquals(msg, aProperty.getType(), aPropertyValue
-							.getType());
+					assertEquals(msg, aProperty.getType(),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2450,8 +2448,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an ordered list type. */
-					assertEquals(msg, aProperty.getType(), aPropertyValue
-							.getType());
+					assertEquals(msg, aProperty.getType(),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(
@@ -2524,8 +2522,8 @@ public class TestModelInstanceObject {
 					assertNotNull(msg, aPropertyValue.getType());
 
 					/* The result should have an unordered list type. */
-					assertEquals(msg, aProperty.getType(), aPropertyValue
-							.getType());
+					assertEquals(msg, aProperty.getType(),
+							aPropertyValue.getType());
 
 					/* The result should be an IModelInstanceCollecttion. */
 					assertTrue(

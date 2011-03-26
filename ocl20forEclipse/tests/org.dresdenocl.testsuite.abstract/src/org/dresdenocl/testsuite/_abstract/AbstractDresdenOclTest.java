@@ -26,10 +26,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.junit.BeforeClass;
 
@@ -61,17 +61,19 @@ import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelI
  * 
  * @author Claas Wilke
  */
-@SuppressWarnings("restriction")
 public class AbstractDresdenOclTest {
 
 	/** Whether or not logging has been enabled yet. */
 	private static boolean loggingEnabled = false;
 
+	/** Whether or not was initialized yet. */
+	private static boolean isInitialized = false;
+
 	@BeforeClass
 	public static void setUp() throws IOException {
 
 		/* Initializes Dresden OCL when tests were started headless. */
-		if (!Platform.isRunning()) {
+		if (!Platform.isRunning() && !isInitialized) {
 			initializeLogging();
 			registerEmfResourceFactories();
 			registerMetamodels();
@@ -79,6 +81,8 @@ public class AbstractDresdenOclTest {
 
 			OclReferenceResolveHelperProvider
 					.setOclReferenceResolveHelper(new OclReferenceResolveHelper());
+
+			isInitialized = true;
 		}
 		// no else.
 	}
@@ -103,10 +107,10 @@ public class AbstractDresdenOclTest {
 
 		/* Probably register the Ecore resource for EMF. */
 		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
-				"ecore") == null) {
+				EcorePackage.eNS_PREFIX) == null) {
 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"ecore", new XMIResourceFactoryImpl() {
+					EcorePackage.eNS_PREFIX, new EcoreResourceFactoryImpl() {
 						public Resource createResource(URI uri) {
 							XMIResource xmiResource = new XMIResourceImpl(uri);
 							return xmiResource;
@@ -123,15 +127,10 @@ public class AbstractDresdenOclTest {
 
 		/* Probably register the UML resource for EMF. */
 		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
-				"uml") == null) {
+				UMLPackage.eNS_PREFIX) == null) {
 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"uml", new XMIResourceFactoryImpl() {
-						public Resource createResource(URI uri) {
-							XMIResource xmiResource = new XMIResourceImpl(uri);
-							return xmiResource;
-						}
-					});
+					UMLPackage.eNS_PREFIX, UMLResource.Factory.INSTANCE);
 		}
 		// no else.
 
@@ -144,10 +143,10 @@ public class AbstractDresdenOclTest {
 
 		/* Probably register the types resource for EMF. */
 		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
-				"types") == null) {
+				TypesPackageImpl.eNS_PREFIX) == null) {
 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"types", new XMIResourceFactoryImpl() {
+					TypesPackageImpl.eNS_PREFIX, new XMIResourceFactoryImpl() {
 						public Resource createResource(URI uri) {
 							XMIResource xmiResource = new XMIResourceImpl(uri);
 							return xmiResource;
@@ -196,11 +195,6 @@ public class AbstractDresdenOclTest {
 		if (umlResources == null)
 			throw new IllegalArgumentException(
 					"Cannot laod an UML model with umlResources == null; umlResources has to point to the jar file of the plugin org.eclipse.uml2.uml.resources.");
-
-		EPackage.Registry.INSTANCE
-				.put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				UMLResource.FILE_EXTENSION, UMLResourceFactoryImpl.INSTANCE);
 
 		URI pluginURI = URI.createURI("jar:file:"
 				+ umlResources.getAbsolutePath() + "!/");

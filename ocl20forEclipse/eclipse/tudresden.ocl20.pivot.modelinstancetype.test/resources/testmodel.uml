@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_cfxLIJuMEd6sw42LIRB5Lg" name="tudresden">
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_cfxLIJuMEd6sw42LIRB5Lg" name="tudresden">
   <packagedElement xmi:type="uml:Package" xmi:id="_iaXhUJuMEd6sw42LIRB5Lg" name="ocl20">
     <packagedElement xmi:type="uml:Package" xmi:id="_joVJQJuMEd6sw42LIRB5Lg" name="pivot">
       <packagedElement xmi:type="uml:Package" xmi:id="_kr4Q8JuMEd6sw42LIRB5Lg" name="modelinstancetype">
