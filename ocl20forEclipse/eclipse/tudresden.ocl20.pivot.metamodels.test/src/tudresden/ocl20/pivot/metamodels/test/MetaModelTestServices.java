@@ -315,6 +315,12 @@ public final class MetaModelTestServices {
 	 */
 	public static final String PRIMITIVETYPE_STRING_PROPERTY_PREFIX = "aString";
 
+	/**
+	 * Indicates whether or not the first letter of a package name must be
+	 * capitalized.
+	 */
+	public static boolean capitalizePackageNames = false;
+
 	/** The only instance of {@link MetaModelTestServices}. */
 	private static MetaModelTestServices myInstance;
 
@@ -374,7 +380,14 @@ public final class MetaModelTestServices {
 		result = new ArrayList<String>();
 
 		for (String aPackage : qualifiedName.split("::")) {
-			result.add(aPackage);
+
+			if (capitalizePackageNames
+					&& !(aPackage.equals(ModelConstants.ROOT_PACKAGE_NAME) && result
+							.size() == 0))
+				result.add(aPackage.substring(0, 1).toUpperCase()
+						+ aPackage.substring(1));
+			else
+				result.add(aPackage);
 		}
 
 		return result;
@@ -409,13 +422,44 @@ public final class MetaModelTestServices {
 		File modelFile;
 
 		/* Get the bundle location for the model files. */
-		bundleDirectory = Platform.getBundle(this.myTestModelBundleId)
-				.getLocation();
+		Bundle bundle = Platform.getBundle(this.myTestModelBundleId);
+		if (bundle != null) {
+			bundleDirectory = Platform.getBundle(this.myTestModelBundleId)
+					.getLocation();
 
-		/* Remove the 'reference:file:' from the beginning. */
-		bundleDirectory = bundleDirectory.substring(15);
+			/* Remove the 'reference:file:' from the beginning. */
+			bundleDirectory = bundleDirectory.substring(15);
+			modelFile = new File(bundleDirectory + myTestModelPath);
+		}
 
-		modelFile = new File(bundleDirectory + myTestModelPath);
+		/* If started head less, try to find the bundle's location anyway. */
+		else {
+			File currentLocation = new File("./");
+			File bundleFile = null;
+
+			while (currentLocation != null && currentLocation.exists()
+					&& currentLocation.isDirectory()) {
+				bundleFile = new File(currentLocation.getAbsolutePath()
+						+ File.separator + myTestModelBundleId);
+
+				if (bundleFile.exists() && bundleFile.isDirectory())
+					break;
+				else {
+					bundleFile = null;
+					currentLocation = new File(
+							currentLocation.getAbsolutePath() + File.separator
+									+ ".." + File.separator);
+				}
+			}
+
+			if (bundleFile != null)
+				modelFile = new File(bundleFile + File.separator
+						+ myTestModelPath);
+
+			else
+				throw new RuntimeException("Bundle or directory '"
+						+ myTestModelBundleId + "' was not found.");
+		}
 
 		/* Check if the model has already been loaded. */
 		if (this.myCachedModels.containsKey(modelFile.toString())) {

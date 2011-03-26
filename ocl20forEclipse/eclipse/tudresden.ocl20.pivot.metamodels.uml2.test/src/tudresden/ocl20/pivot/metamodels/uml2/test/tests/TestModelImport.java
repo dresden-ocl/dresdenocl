@@ -15,13 +15,11 @@ package tudresden.ocl20.pivot.metamodels.uml2.test.tests;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.URL;
 import java.util.Arrays;
 
-import org.eclipse.core.runtime.FileLocator;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
@@ -55,17 +53,8 @@ public class TestModelImport {
 	 */
 	protected static File getFile(String path) throws Exception {
 
-		URL fileLocation;
-		fileLocation = UML2MetaModelTestPlugin.getDefault().getBundle()
-				.getResource(path);
-		fileLocation = FileLocator.resolve(fileLocation);
-
-		File file;
-		file = new File(fileLocation.getFile());
-
-		assertTrue(file.exists());
-
-		return file;
+		return AbstractDresdenOclTest.getFile(path,
+				UML2MetaModelTestPlugin.PLUGIN_ID);
 	}
 
 	/**

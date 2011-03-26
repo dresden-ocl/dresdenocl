@@ -86,6 +86,7 @@ public class ModelBusPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
@@ -98,6 +99,7 @@ public class ModelBusPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
@@ -148,7 +150,7 @@ public class ModelBusPlugin extends Plugin {
 
 		return plugin;
 	}
-	
+
 	/**
 	 * <p>
 	 * Returns the {@link IMetamodelRegistry} managed by the
@@ -167,18 +169,21 @@ public class ModelBusPlugin extends Plugin {
 	 * @return An {@link IMetamodelRegistry} instance.
 	 */
 	public synchronized static IMetamodelRegistry getMetamodelRegistry() {
-	
+
 		/* Check that the plugin has been activated. */
 		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Model plugin has not been activated."); //$NON-NLS-1$
+			// throw new IllegalStateException(
+			//					"The Model plugin has not been activated."); //$NON-NLS-1$
+			plugin = new ModelBusPlugin();
+			System.out
+					.println("The Model plugin has not been activated. Intialized it manually.");
 		}
-	
+
 		/* Lazily create the registry. */
 		if (plugin.metamodelRegistry == null) {
 			plugin.metamodelRegistry = new MetamodelRegistry();
 		}
-	
+
 		return plugin.metamodelRegistry;
 	}
 
@@ -188,7 +193,7 @@ public class ModelBusPlugin extends Plugin {
 	 * argument should be {@link StandaloneMetamodelRegistry}.
 	 * 
 	 * @param metamodelRegistry
-	 *          the {@link IMetamodelRegistry} to set
+	 *            the {@link IMetamodelRegistry} to set
 	 */
 	public synchronized static void setMetamodelRegistry(
 			IMetamodelRegistry metamodelRegistry) {
@@ -286,7 +291,7 @@ public class ModelBusPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          the class to return the logger for
+	 *            the class to return the logger for
 	 * 
 	 * @return a log4j <code>Logger</code> instance
 	 */

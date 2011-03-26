@@ -20,6 +20,7 @@ import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 
 /**
  * <p>
@@ -46,7 +47,6 @@ public class TestUML2MetaModel extends MetaModelTestSuite {
 	 */
 	@BeforeClass
 	public static void setUp() {
-
 		MetaModelTestPlugin.prepareTest(UML2MetaModelTestPlugin.PLUGIN_ID,
 				TEST_MODEL_PATH, META_MODEL_ID);
 	}

@@ -18,7 +18,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
@@ -84,8 +86,8 @@ public class TestUML2Packages {
 
 	/**
 	 * <p>
-	 * Tests to load a model whose root package is a package. This package should
-	 * be adapted correctly.
+	 * Tests to load a model whose root package is a package. This package
+	 * should be adapted correctly.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
@@ -128,8 +130,8 @@ public class TestUML2Packages {
 
 	/**
 	 * <p>
-	 * Tests to load a model whose root package is a profile package. This package
-	 * should not be adapted but its children packages should be adapted
+	 * Tests to load a model whose root package is a profile package. This
+	 * package should not be adapted but its children packages should be adapted
 	 * correctly.
 	 * </p>
 	 * 
@@ -177,40 +179,23 @@ public class TestUML2Packages {
 	 * </p>
 	 * 
 	 * @param path
-	 *          The relative path in this plug-in to the model that shall be
-	 *          loaded.
+	 *            The relative path in this plug-in to the model that shall be
+	 *            loaded.
 	 * @return The current {@link IModel} or <code>null</code>.
 	 * @throws ModelAccessException
 	 */
 	private IModel getUML2Model(String path) throws ModelAccessException {
 
 		IModel result;
-
-		String bundleDirectory;
 		File modelFile;
-
-		/* Get the bundle location for the model files. */
-		bundleDirectory =
-				UML2MetaModelTestPlugin.getDefault().getBundle().getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		bundleDirectory = bundleDirectory.substring(15);
-
-		modelFile = new File(bundleDirectory + path);
-
-		/* Check if the given file does not exist. */
-		if (!modelFile.exists()) {
-			throw new RuntimeException("The model for the path " + bundleDirectory
-					+ path + " cannot be found.");
+		try {
+			modelFile = AbstractDresdenOclTest.getFile(path,
+					UML2MetaModelTestPlugin.PLUGIN_ID);
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
 		}
-
-		/* Else try to load the model. */
-		else {
-			result =
-					Ocl2ForEclipseFacade.getModel(modelFile,
-							Ocl2ForEclipseFacade.UML2_MetaModel);
-		}
-		// end else.
+		result = Ocl2ForEclipseFacade.getModel(modelFile,
+				Ocl2ForEclipseFacade.UML2_MetaModel);
 
 		return result;
 	}

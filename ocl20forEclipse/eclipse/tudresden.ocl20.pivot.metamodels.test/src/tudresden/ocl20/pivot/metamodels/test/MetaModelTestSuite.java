@@ -13,6 +13,7 @@
  */
 package tudresden.ocl20.pivot.metamodels.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -40,11 +41,11 @@ import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestEnumeration.class, TestEnumerationLiteral.class,
+@Suite.SuiteClasses({ TestEnumeration.class, TestEnumerationLiteral.class,
 		TestModel.class, TestNamespace.class, TestType.class,
 		TestOperation.class, TestParameter.class, TestPrimitiveType.class,
 		TestProperty.class })
-public class MetaModelTestSuite {
+public class MetaModelTestSuite extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

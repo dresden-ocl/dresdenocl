@@ -105,7 +105,9 @@ public class UML2Model extends AbstractModel implements IModel {
 		// end for.
 
 		for (Resource resource : resourcesToUnload) {
-			resource.unload();
+			if (resource != null && resource.isLoaded())
+				resource.unload();
+			// no else.
 		}
 		// end for.
 

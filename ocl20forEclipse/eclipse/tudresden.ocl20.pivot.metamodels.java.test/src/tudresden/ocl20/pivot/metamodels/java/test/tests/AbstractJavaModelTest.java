@@ -13,12 +13,9 @@
  */
 package tudresden.ocl20.pivot.metamodels.java.test.tests;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-import java.net.URL;
 
-import org.eclipse.core.runtime.FileLocator;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 import tudresden.ocl20.pivot.metamodels.java.test.JavaMetaModelTestPlugin;
 
@@ -45,16 +42,7 @@ public abstract class AbstractJavaModelTest {
 	 */
 	protected static File getFile(String path) throws Exception {
 
-		URL fileLocation;
-		fileLocation = JavaMetaModelTestPlugin.getDefault().getBundle()
-				.getResource(path);
-		fileLocation = FileLocator.resolve(fileLocation);
-
-		File file;
-		file = new File(fileLocation.getFile());
-
-		assertTrue(file.exists());
-
-		return file;
+		return AbstractDresdenOclTest.getFile(path,
+				JavaMetaModelTestPlugin.PLUGIN_ID);
 	}
 }

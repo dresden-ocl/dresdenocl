@@ -11,4 +11,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.uml2.uml.resources,
  tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.metamodels.uml2
+Export-Package: tudresden.ocl20.pivot.metamodels.uml2,
+ tudresden.ocl20.pivot.metamodels.uml2.internal.provider
