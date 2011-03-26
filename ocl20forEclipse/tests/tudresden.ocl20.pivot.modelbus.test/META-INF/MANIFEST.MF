@@ -7,6 +7,8 @@ Bundle-Activator: tudresden.ocl20.pivot.modelbus.test.Activator
 Bundle-Vendor: TU Dresden
 Require-Bundle: org.eclipse.core.runtime,
  org.junit4;bundle-version="4.0.0",
- tudresden.ocl20.pivot.facade
+ tudresden.ocl20.pivot.facade,
+ org.dresdenocl.testsuite.abstract
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.modelbus.test

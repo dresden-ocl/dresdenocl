@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.modelbus.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -34,9 +35,9 @@ import tudresden.ocl20.pivot.modelbus.test.modelinstance.AllModelInstanceTests;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { AllMetaModelTests.class, AllModelTests.class,
+@Suite.SuiteClasses({ AllMetaModelTests.class, AllModelTests.class,
 		AllModelInstanceTests.class })
-public class AllModelbusTests {
+public class AllModelbusTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

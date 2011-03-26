@@ -1,7 +1,10 @@
 package tudresden.ocl20.pivot.modelbus.test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
+
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
@@ -44,22 +47,13 @@ public class ModelBusTestUtility {
 	public static IModelInstance getJavaModelInstance(String path, IModel model)
 			throws RuntimeException, ModelAccessException {
 
-		/* Get the bundle location for the model files. */
-		String bundleDirectory;
-		bundleDirectory = Activator.getDefault().getBundle().getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		bundleDirectory = bundleDirectory.substring(15);
-
 		File modelInstanceFile;
-		modelInstanceFile = new File(bundleDirectory + path);
-
-		/* Check if the given file exist. */
-		if (!modelInstanceFile.exists()) {
-			throw new RuntimeException("The model instance for the path "
-					+ modelInstanceFile + " cannot be found.");
+		try {
+			modelInstanceFile = AbstractDresdenOclTest.getFile(path,
+					Activator.PLUGIN_ID);
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
 		}
-		// no else.
 
 		return Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile, model,
 				Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
@@ -78,29 +72,15 @@ public class ModelBusTestUtility {
 	 */
 	public static IModel getUML2Model(String path) throws ModelAccessException {
 
-		String bundleDirectory;
 		File modelFile;
-
-		/* Get the bundle location for the model files. */
-		bundleDirectory = Activator.getDefault().getBundle().getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		bundleDirectory = bundleDirectory.substring(15);
-
-		modelFile = new File(bundleDirectory + path);
-
-		/* Check if the given file does not exist. */
-		if (!modelFile.exists()) {
-			throw new RuntimeException("The model for the path "
-					+ bundleDirectory + path + " cannot be found.");
+		try {
+			modelFile = AbstractDresdenOclTest.getFile(path,
+					Activator.PLUGIN_ID);
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
 		}
-
-		/* Else try to load the model. */
-		else {
-			return Ocl2ForEclipseFacade.getModel(modelFile,
-					Ocl2ForEclipseFacade.UML2_MetaModel);
-		}
-		// end else.
+		return Ocl2ForEclipseFacade.getModel(modelFile,
+				Ocl2ForEclipseFacade.UML2_MetaModel);
 	}
 
 	/**
@@ -151,29 +131,13 @@ public class ModelBusTestUtility {
 			throws IllegalArgumentException, ParseException,
 			ModelAccessException {
 
-		String bundleDirectory;
-		File constraintFile;
-
-		/* Get the bundle location for the model files. */
-		bundleDirectory = Activator.getDefault().getBundle().getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		bundleDirectory = bundleDirectory.substring(15);
-
-		constraintFile = new File(bundleDirectory + constraintLocation);
-
-		/* Check if the given file does not exist. */
-		if (!constraintFile.exists()) {
-			throw new RuntimeException("The model for the path "
-					+ bundleDirectory + constraintLocation
-					+ " cannot be found.");
-		}
-
-		/* Else try to parse the constraints. */
-		else {
+		try {
+			File constraintFile = AbstractDresdenOclTest.getFile(
+					constraintLocation, Activator.PLUGIN_ID);
 			return Ocl2ForEclipseFacade.parseConstraints(constraintFile, model,
 					true);
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
 		}
-		// end else.
 	}
 }

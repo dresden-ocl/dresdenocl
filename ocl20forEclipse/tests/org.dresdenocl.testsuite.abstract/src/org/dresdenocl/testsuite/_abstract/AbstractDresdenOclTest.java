@@ -35,6 +35,9 @@ import org.junit.BeforeClass;
 
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
+import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
+import tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor.OclReferenceResolveHelper;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.internal.provider.EcoreModelProvider;
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
@@ -45,6 +48,11 @@ import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
+import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
 
 /**
  * Abstract class for Dresden OCL test cases. Contains static setUp and tearDown
@@ -67,6 +75,10 @@ public class AbstractDresdenOclTest {
 			initializeLogging();
 			registerEmfResourceFactories();
 			registerMetamodels();
+			registerModelInstanceTypes();
+
+			OclReferenceResolveHelperProvider
+					.setOclReferenceResolveHelper(new OclReferenceResolveHelper());
 		}
 		// no else.
 	}
@@ -147,6 +159,26 @@ public class AbstractDresdenOclTest {
 		if (EPackage.Registry.INSTANCE.getEPackage(TypesPackageImpl.eNS_URI) == null) {
 			EPackage.Registry.INSTANCE.put(TypesPackageImpl.eNS_PREFIX,
 					TypesPackageImpl.eINSTANCE);
+		}
+		// no else.
+
+		/* Probably register the OCL resource for EMF. */
+		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
+				OclPackage.eNS_PREFIX) == null) {
+
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					OclPackage.eNS_PREFIX, new XMIResourceFactoryImpl() {
+						public Resource createResource(URI uri) {
+							XMIResource xmiResource = new XMIResourceImpl(uri);
+							return xmiResource;
+						}
+					});
+		}
+		// no else.
+
+		if (EPackage.Registry.INSTANCE.getEPackage(OclPackage.eNS_URI) == null) {
+			EPackage.Registry.INSTANCE.put(OclPackage.eNS_PREFIX,
+					OclPackage.eINSTANCE);
 		}
 		// no else.
 	}
@@ -251,6 +283,38 @@ public class AbstractDresdenOclTest {
 				}
 			};
 			ModelBusPlugin.getMetamodelRegistry().addMetamodel(umlMetamodel);
+		}
+	}
+
+	/**
+	 * Registers {@link IModelInstanceType}s at the
+	 * {@link IModelInstanceTypeRegistry}.
+	 */
+	protected static void registerModelInstanceTypes() {
+
+		/* Probably register the Java model instance. */
+		IModelInstanceType javaModelInstanceType = ModelBusPlugin
+				.getModelInstanceTypeRegistry().getModelInstanceType(
+						JavaModelInstanceTypePlugin.PLUGIN_ID);
+		if (javaModelInstanceType == null) {
+			javaModelInstanceType = new IModelInstanceType() {
+
+				private IModelInstanceProvider provider = new JavaModelInstanceProvider();
+
+				public String getName() {
+					return JavaModelInstanceTypePlugin.PLUGIN_ID;
+				}
+
+				public IModelInstanceProvider getModelInstanceProvider() {
+					return provider;
+				}
+
+				public String getId() {
+					return JavaModelInstanceTypePlugin.PLUGIN_ID;
+				}
+			};
+			ModelBusPlugin.getModelInstanceTypeRegistry().addModelInstanceType(
+					javaModelInstanceType);
 		}
 	}
 
