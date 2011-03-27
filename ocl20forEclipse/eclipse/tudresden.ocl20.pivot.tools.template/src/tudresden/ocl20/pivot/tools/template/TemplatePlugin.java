@@ -46,6 +46,10 @@ public class TemplatePlugin extends Plugin {
 	 */
 	public static TemplatePlugin getDefault() {
 
+		if (plugin == null)
+			plugin = new TemplatePlugin();
+		// no else.
+
 		return plugin;
 	}
 
@@ -56,7 +60,7 @@ public class TemplatePlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          The {@link Class} to return the {@link Logger} for.
+	 *            The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 
@@ -69,6 +73,7 @@ public class TemplatePlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
@@ -87,6 +92,7 @@ public class TemplatePlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
@@ -112,8 +118,8 @@ public class TemplatePlugin extends Plugin {
 	 * </p>
 	 * <p>
 	 * If no {@link ITemplateGroupRegistry} has been given to the
-	 * {@link TemplatePlugin}, the standard {@link TemplateGroupRegistry} will be
-	 * used. This is important when using DresdenOCL stand-alone, as the
+	 * {@link TemplatePlugin}, the standard {@link TemplateGroupRegistry} will
+	 * be used. This is important when using DresdenOCL stand-alone, as the
 	 * {@link StandaloneTemplateGroupRegistry} should be set first, using
 	 * {@link #setMetamodelRegistry(ITemplateGroupRegistry)}.
 	 * </p>
@@ -139,12 +145,12 @@ public class TemplatePlugin extends Plugin {
 	}
 
 	/**
-	 * Sets the {@link ITemplateGroupRegistry} of the {@link TemplatePlugin}. This
-	 * method has to be called when using DresdenOCL stand-alone. The standard
-	 * argument should be {@link StandaloneTemplateGroupRegistry}.
+	 * Sets the {@link ITemplateGroupRegistry} of the {@link TemplatePlugin}.
+	 * This method has to be called when using DresdenOCL stand-alone. The
+	 * standard argument should be {@link StandaloneTemplateGroupRegistry}.
 	 * 
 	 * @param templateGroupRegistry
-	 *          the {@link ITemplateGroupRegistry} to set
+	 *            the {@link ITemplateGroupRegistry} to set
 	 */
 	public synchronized static void setTempateGroupRegistry(
 			ITemplateGroupRegistry templateGroupRegistry) {
@@ -165,8 +171,8 @@ public class TemplatePlugin extends Plugin {
 	 * </p>
 	 * <p>
 	 * If no {@link ITemplateEngineRegistry} has been given to the
-	 * {@link TemplatePlugin}, the standard {@link TemplateEngineRegistry} will be
-	 * used. This is important when using DresdenOCL stand-alone, as the
+	 * {@link TemplatePlugin}, the standard {@link TemplateEngineRegistry} will
+	 * be used. This is important when using DresdenOCL stand-alone, as the
 	 * {@link StandaloneTemplateEngineRegistry} should be set first, using
 	 * {@link #setMetamodelRegistry(ITemplateEngineRegistry)}.
 	 * </p>
@@ -198,7 +204,7 @@ public class TemplatePlugin extends Plugin {
 	 * standard argument should be {@link StandaloneTemplateEngineRegistry}.
 	 * 
 	 * @param templateEngineRegistry
-	 *          the {@link ITemplateEngineRegistry} to set
+	 *            the {@link ITemplateEngineRegistry} to set
 	 */
 	public synchronized static void setTempateEngineRegistry(
 			ITemplateEngineRegistry templateEngineRegistry) {

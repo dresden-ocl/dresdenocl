@@ -20,5 +20,9 @@ Require-Bundle: org.junit;bundle-version="4.0.0",
  tudresden.ocl20.pivot.language.ocl.staticsemantics,
  tudresden.ocl20.pivot.modelinstancetype.ecore,
  org.eclipse.xsd,
- tudresden.ocl20.pivot.modelinstancetype.xml
+ tudresden.ocl20.pivot.modelinstancetype.xml,
+ tudresden.ocl20.pivot.tools.template,
+ tudresden.ocl20.pivot.tools.template.sql,
+ tudresden.ocl20.pivot.tools.transformation,
+ tudresden.ocl20.pivot.tools.transformation.pivot2sql
 Export-Package: org.dresdenocl.testsuite._abstract

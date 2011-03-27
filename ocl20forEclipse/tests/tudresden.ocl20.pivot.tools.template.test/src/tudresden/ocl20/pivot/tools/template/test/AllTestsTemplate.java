@@ -27,6 +27,7 @@
 
 package tudresden.ocl20.pivot.tools.template.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -44,7 +45,7 @@ import tudresden.ocl20.pivot.tools.template.test.tests.TestTemplateEngineRegistr
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestTemplateEngineRegistry.class,
 		TestStringTemplateEngine.class, TestTemplateGroup.class })
-public class AllTestsTemplate {
+public class AllTestsTemplate extends AbstractDresdenOclTest {
 	// this class remains completely empty,
 	// being used only as a holder for the above annotations
 }

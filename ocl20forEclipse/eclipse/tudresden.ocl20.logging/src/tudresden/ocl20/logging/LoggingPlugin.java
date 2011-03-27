@@ -294,8 +294,9 @@ public class LoggingPlugin extends Plugin {
 		else {
 			// invariant check
 			if (LoggingPlugin.plugin == null) {
-				throw new IllegalStateException(
-						"The LoggingPlugin has not been activated. Intialized it manually."); //$NON-NLS-1$
+				System.out
+						.println("The LoggingPlugin has not been activated. Intialized it manually."); //$NON-NLS-1$
+				plugin = new LoggingPlugin();
 			}
 
 			final String key = "standaloneLogger";

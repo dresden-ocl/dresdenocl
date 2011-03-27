@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  tudresden.ocl20.pivot.tools.transformation;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.tools.transformation.pivot2sql,
+ tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl,
  tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping
 Bundle-Vendor: TU Dresden, Software Technology Group

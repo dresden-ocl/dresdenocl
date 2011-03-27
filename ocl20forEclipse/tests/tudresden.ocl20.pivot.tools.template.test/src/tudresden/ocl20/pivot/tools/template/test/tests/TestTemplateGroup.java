@@ -33,11 +33,14 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -48,6 +51,7 @@ import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import tudresden.ocl20.pivot.tools.template.test.TemplateTestPlugin;
 
 /**
  * This test will test the class ITemplateGroupRegistry.java and ITemplateGroup
@@ -63,21 +67,23 @@ public class TestTemplateGroup {
 	private static List<ITemplateGroup> tempGroup;
 
 	@BeforeClass
-	public static void class_setup() {
+	public static void class_setup() throws MalformedURLException, IOException {
 
 		LinkedList<URL> groups = new LinkedList<URL>();
-		groups.add(TestStringTemplateEngine.class
-				.getResource("/resources/templates/testGeneral.stg"));
-		tempGroup = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups();
+		groups.add(AbstractDresdenOclTest
+				.getFile("/resources/templates/testGeneral.stg",
+						TemplateTestPlugin.ID).toURI().toURL());
+		tempGroup = TemplatePlugin.getTemplateGroupRegistry()
+				.getTemplateGroups();
 		for (ITemplateGroup tg : tempGroup) {
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(tg);
 		}
 		try {
-			general =
-					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"Test1", null);
+			general = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("Test1", null);
 			general.addFiles(groups);
-			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(general);
+			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
+					general);
 		} catch (TemplateException e) {
 			fail("Can't set a template group!");
 		}
@@ -91,23 +97,22 @@ public class TestTemplateGroup {
 		} catch (TemplateException e) {
 			e.printStackTrace();
 		}
-		int size =
-				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		int size = TemplatePlugin.getTemplateGroupRegistry()
+				.getTemplateGroups().size();
 		assertEquals(1, size);
 	}
 
 	@After
 	public void tear_down() {
 
-		Iterator<ITemplateGroup> iterTempEng =
-				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups()
-						.iterator();
+		Iterator<ITemplateGroup> iterTempEng = TemplatePlugin
+				.getTemplateGroupRegistry().getTemplateGroups().iterator();
 		while (iterTempEng.hasNext()) {
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
 					iterTempEng.next());
 		}
-		int size =
-				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		int size = TemplatePlugin.getTemplateGroupRegistry()
+				.getTemplateGroups().size();
 		assertEquals(0, size);
 	}
 
@@ -137,7 +142,8 @@ public class TestTemplateGroup {
 
 		ITemplateGroup test = null;
 		try {
-			test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+			test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
+					"Test1");
 		} catch (TemplateException e) {
 			fail("No exception has thrown.");
 		}
@@ -147,10 +153,11 @@ public class TestTemplateGroup {
 		assertSame(test, general);
 
 		try {
-			test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test2");
+			test = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
+					"Test2");
 			fail("A excpetion must be thrown.");
 		} catch (TemplateException e) {
-			
+
 		}
 
 	}
@@ -167,18 +174,20 @@ public class TestTemplateGroup {
 	public void checkRemoveGroup() {
 
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Test2");
-		int size =
-				TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		int size = TemplatePlugin.getTemplateGroupRegistry()
+				.getTemplateGroups().size();
 		assertEquals(1, size);
 		ITemplateGroup temp = null;
 		try {
-			temp = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("Test1");
+			temp = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
+					"Test1");
 		} catch (TemplateException e) {
 			e.printStackTrace();
 		}
 
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(temp);
-		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups()
+				.size();
 		assertEquals(0, size);
 
 		try {
@@ -186,11 +195,13 @@ public class TestTemplateGroup {
 		} catch (TemplateException e) {
 			e.printStackTrace();
 		}
-		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups()
+				.size();
 		assertEquals(1, size);
 
 		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup("Test1");
-		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups().size();
+		size = TemplatePlugin.getTemplateGroupRegistry().getTemplateGroups()
+				.size();
 		assertEquals(0, size);
 	}
 
@@ -201,21 +212,23 @@ public class TestTemplateGroup {
 	 * Tests the ITemplateGroup for get a Template.
 	 * </p>
 	 * 
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 * 
 	 */
 	@Test
-	public void checkGetTemplates() {
+	public void checkGetTemplates() throws MalformedURLException, IOException {
 
 		ITemplate temp = general.getTemplate("specific");
 		assertEquals("generalTemplate", temp.toString());
 
-		URL secondTemp =
-				TestStringTemplateEngine.class
-						.getResource("/resources/templates/testSpecific.stg");
+		URL secondTemp = AbstractDresdenOclTest
+				.getFile("/resources/templates/testSpecific.stg",
+						TemplateTestPlugin.ID).toURI().toURL();
 		ITemplateGroup testSuper1 = null;
 		try {
-			testSuper1 =
-					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"TestSuper1", general);
+			testSuper1 = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("TestSuper1", general);
 			testSuper1.addFile(secondTemp);
 		} catch (TemplateException e) {
 			fail("Can't set TemplateGroup testSuper1");
@@ -229,11 +242,11 @@ public class TestTemplateGroup {
 
 		ITemplateGroup testSuper2 = null;
 		try {
-			testSuper2 =
-					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
-							"TestSuper2", testSuper1);
-			testSuper2.addFile(TestStringTemplateEngine.class
-					.getResource("/resources/templates/testGeneral.stg"));
+			testSuper2 = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("TestSuper2", testSuper1);
+			testSuper2.addFile(AbstractDresdenOclTest
+					.getFile("/resources/templates/testGeneral.stg",
+							TemplateTestPlugin.ID).toURI().toURL());
 		} catch (TemplateException e) {
 			fail("Can't set TemplateGroup testSuper2");
 		}

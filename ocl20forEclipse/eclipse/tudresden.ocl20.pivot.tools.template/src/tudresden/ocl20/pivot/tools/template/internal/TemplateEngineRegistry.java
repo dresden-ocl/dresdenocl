@@ -41,8 +41,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	private Map<String, ITemplateEngine> templateEngines;
 
 	/** The full identifier of the {@link ITemplateEngine}s' extension point. */
-	private static final String TEMPLATEENGINE_EXTENSION_POINT_ID =
-			TemplatePlugin.ID + ".templateEngines";
+	private static final String TEMPLATEENGINE_EXTENSION_POINT_ID = TemplatePlugin.ID
+			+ ".templateEngines";
 
 	/** A list of listeners. */
 	private ListenerList listeners;
@@ -58,11 +58,18 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 		// no else.
 
 		this.templateEngines = new HashMap<String, ITemplateEngine>();
-		this.added(this.getExtensionPoint().getExtensions());
 
-		/* Register this registry as a listener for plug-in events. */
-		Platform.getExtensionRegistry().addListener(this,
-				TEMPLATEENGINE_EXTENSION_POINT_ID);
+		if (Platform.isRunning()) {
+			this.added(this.getExtensionPoint().getExtensions());
+
+			/* Register this registry as a listener for plug-in events. */
+			Platform.getExtensionRegistry().addListener(this,
+					TEMPLATEENGINE_EXTENSION_POINT_ID);
+		}
+
+		else {
+			LOGGER.warn("Platform is not running. TemplateEngines must be registered manually.");
+		}
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("TemplateEngineRegistry() - exit"); //$NON-NLS-1$
@@ -77,8 +84,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 			throws TemplateException {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER.debug("addTemplateEngine(templateEngine=" + templateEngine + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
@@ -89,18 +95,18 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 		// no else.
 
 		/*
-		 * Check if model is already contained in the registry; this is meant to be
-		 * captured and dealt with on the UI, e.g., by showing an error message;
-		 * this is better than silently do nothing.
+		 * Check if model is already contained in the registry; this is meant to
+		 * be captured and dealt with on the UI, e.g., by showing an error
+		 * message; this is better than silently do nothing.
 		 */
 		if (this.templateEngines.containsValue(templateEngine)) {
-			LOGGER
-					.warn("TemplateEngine '" + templateEngine.getDisplayName() + "' is already loaded. The templateEngine will be replaced."); //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER.warn("TemplateEngine '" + templateEngine.getDisplayName() + "' is already loaded. The templateEngine will be replaced."); //$NON-NLS-1$//$NON-NLS-2$
 		}
 		// no else.
 
 		/* Add the model. */
-		this.templateEngines.put(templateEngine.getDisplayName(), templateEngine);
+		this.templateEngines.put(templateEngine.getDisplayName(),
+				templateEngine);
 
 		/* Inform listeners. */
 		this.fireTemplateEngineAdded(templateEngine);
@@ -135,8 +141,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 		// no else.
 		ITemplateEngine templateEngine;
 		try {
-			templateEngine =
-					this.templateEngines.get(templateEngineName).getClass().newInstance();
+			templateEngine = this.templateEngines.get(templateEngineName)
+					.getClass().newInstance();
 		} catch (InstantiationException e) {
 			templateEngine = null;
 		} catch (IllegalAccessException e) {
@@ -175,8 +181,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 
 		this.templateEngines.remove(templateEngine.getDisplayName());
 
-		this.fireTemplateEngineRemoved(this.templateEngines.remove(templateEngine
-				.getDisplayName()));
+		this.fireTemplateEngineRemoved(this.templateEngines
+				.remove(templateEngine.getDisplayName()));
 
 	}
 
@@ -211,7 +217,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	 * </p>
 	 * 
 	 * @param model
-	 *          The {@link ITemplateEngine} that has been added.
+	 *            The {@link ITemplateEngine} that has been added.
 	 */
 	private void fireTemplateEngineAdded(ITemplateEngine model) {
 
@@ -246,7 +252,7 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	 * </p>
 	 * 
 	 * @param templateEngine
-	 *          The {@link ITemplate} that has been removed.
+	 *            The {@link ITemplate} that has been removed.
 	 */
 	private void fireTemplateEngineRemoved(ITemplateEngine templateEngine) {
 
@@ -261,7 +267,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new TemplateEngineRegistryEvent(this, templateEngine);
+					event = new TemplateEngineRegistryEvent(this,
+							templateEngine);
 				}
 				// no else.
 
@@ -323,9 +330,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 
 					ITemplateEngine templateEngine;
 					try {
-						templateEngine =
-								(ITemplateEngine) configurationElement
-										.createExecutableExtension("class");
+						templateEngine = (ITemplateEngine) configurationElement
+								.createExecutableExtension("class");
 					} catch (CoreException e) {
 						continue;
 					}
@@ -384,9 +390,10 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 
 					String templateEngineID;
 					try {
-						templateEngineID =
-								((ITemplateEngine) (Class.forName(this.getAttribute("class",
-										configurationElement)).newInstance())).getDisplayName();
+						templateEngineID = ((ITemplateEngine) (Class
+								.forName(this.getAttribute("class",
+										configurationElement)).newInstance()))
+								.getDisplayName();
 					} catch (InstantiationException e) {
 						templateEngineID = null;
 					} catch (IllegalAccessException e) {
@@ -434,9 +441,8 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 		IExtensionPoint result;
 
 		/* Get the point from the registry. */
-		result =
-				Platform.getExtensionRegistry().getExtensionPoint(
-						TEMPLATEENGINE_EXTENSION_POINT_ID);
+		result = Platform.getExtensionRegistry().getExtensionPoint(
+				TEMPLATEENGINE_EXTENSION_POINT_ID);
 
 		/* This should not happen unless the id changes. */
 		if (result == null) {
@@ -452,26 +458,26 @@ public class TemplateEngineRegistry implements ITemplateEngineRegistry,
 	/**
 	 * <p>
 	 * Helper method that returns the value of an attribute of the given
-	 * {@link IConfigurationElement}. Throws an {@link InvalidDescriptorException}
-	 * if the attribute is empty and required.
+	 * {@link IConfigurationElement}. Throws an
+	 * {@link InvalidDescriptorException} if the attribute is empty and
+	 * required.
 	 * </p>
 	 * 
 	 * @param attributeName
-	 *          The name of the extension point attribute.
+	 *            The name of the extension point attribute.
 	 * @param configurationElement
-	 *          The {@link IllegalClassException} whose attribute shall be
-	 *          returned.
+	 *            The {@link IllegalClassException} whose attribute shall be
+	 *            returned.
 	 * 
 	 * @throws InvalidDescriptorException
-	 *           If the value of the attribute is invalid.
+	 *             If the value of the attribute is invalid.
 	 */
 	private String getAttribute(String attributeName,
 			IConfigurationElement configurationElement) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
-							+ ") - enter"); //$NON-NLS-1$
+			LOGGER.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
+					+ ") - enter"); //$NON-NLS-1$
 		}
 		// no else.
 

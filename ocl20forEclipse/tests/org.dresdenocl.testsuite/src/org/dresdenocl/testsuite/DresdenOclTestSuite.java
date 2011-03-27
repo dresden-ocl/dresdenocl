@@ -27,6 +27,7 @@ import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTyp
 import tudresden.ocl20.pivot.ocl2parser.test.AllOCL2ParserTests;
 import tudresden.ocl20.pivot.standardlibrary.java.test.tests.AllStandardLibraryTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.AllAspectJTests;
+import tudresden.ocl20.pivot.tools.template.test.AllTestsTemplate;
 
 /**
  * <p>
@@ -37,15 +38,32 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.AllAspectJTests
  */
 @RunWith(Suite.class)
 // FIXME Claas: Collect all test suites.
-@Suite.SuiteClasses({ EssentialOCLAllTests.class, AllModelbusTests.class,
-		AllEcoreMetaModelTests.class, AllUml2MetaModelTests.class,
-		/* AllXmlSchemaMetamodelTests .class, */
-		AllOCL2ParserTests.class, TestJavaMetaModel.class,
-		/* AllEcoreModelInstanceTypeTests.class, */
-		AllJavaModelInstanceTypeTests.class, /* AllXmlInstanceTests.class, */
+@Suite.SuiteClasses({
+
+/* Core Tests: */
+EssentialOCLAllTests.class, AllModelbusTests.class,
+
+/* Metamodel tests: */
+AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
+		AllUml2MetaModelTests.class,
+		/* TODO AllXmlSchemaMetamodelTests .class, */
+
+		/* Parser tests: */
+		AllOCL2ParserTests.class,
+
+		/* Model Instance Type tests: */
+		/* TODO AllEcoreModelInstanceTypeTests.class, */
+		AllJavaModelInstanceTypeTests.class, /* TODO AllXmlInstanceTests.class, */
+
+		/* Interpreter Tests: */
 		AllStandardLibraryTests.class, AllOclInterpreterTests.class,
-		AllPainTests.class, AllAspectJTests.class,
-		AllRoyalAndLoyalAspectJTests.class })
+		AllPainTests.class,
+
+		/* Code Generator tests: */
+		AllTestsTemplate.class,
+
+		/* OCL2Java tests: */
+		AllAspectJTests.class, AllRoyalAndLoyalAspectJTests.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

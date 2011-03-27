@@ -60,6 +60,22 @@ import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider.XmlModelInstanceProvider;
+import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;
+import tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry;
+import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
+import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import tudresden.ocl20.pivot.tools.template.impl.StandaloneTemplateEngineRegistry;
+import tudresden.ocl20.pivot.tools.template.impl.StandaloneTemplateGroupRegistry;
+import tudresden.ocl20.pivot.tools.template.internal.TemplateGroup;
+import tudresden.ocl20.pivot.tools.template.sql.SQLTemplate;
+import tudresden.ocl20.pivot.tools.template.stringtemplate.StringTemplateEngine;
+import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
+import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
+import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Cwm2DdlImpl;
+import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmImpl;
+import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2Ddl;
+import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel;
+import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl;
 
 /**
  * Abstract class for Dresden OCL test cases. Contains static setUp and tearDown
@@ -89,6 +105,12 @@ public class AbstractDresdenOclTest {
 			OclReferenceResolveHelperProvider
 					.setOclReferenceResolveHelper(new OclReferenceResolveHelper());
 
+			try {
+				initializeTemplateEngine();
+			} catch (TemplateException e) {
+				new RuntimeException(e.getMessage(), e);
+			}
+
 			isInitialized = true;
 		}
 		// no else.
@@ -103,6 +125,68 @@ public class AbstractDresdenOclTest {
 			loggingEnabled = true;
 		}
 		// no else.
+	}
+
+	/**
+	 * Intitializes the template engine required for code generation.
+	 * 
+	 * @throws TemplateException
+	 */
+	protected static void initializeTemplateEngine() throws TemplateException {
+
+		TemplatePlugin.getDefault();
+
+		final StringTemplateEngine stringTemplateEngine = new StringTemplateEngine();
+
+		ITemplateEngineRegistry templateEngineRegistry = new StandaloneTemplateEngineRegistry();
+		templateEngineRegistry.addTemplateEngine(stringTemplateEngine);
+
+		ITemplateGroupRegistry templateGroupRegistry = new StandaloneTemplateGroupRegistry();
+		templateGroupRegistry.addTemplateGroup(new TemplateGroup(
+				stringTemplateEngine.getDisplayName(), null,
+				stringTemplateEngine));
+
+		TemplatePlugin.setTempateEngineRegistry(templateEngineRegistry);
+		TemplatePlugin.setTempateGroupRegistry(templateGroupRegistry);
+
+		// SQLTemplate.loadSQLTemplates();
+
+		// ITransformationRegistry transformationRegistry = TransformationPlugin
+		// .getTransformationRegistry();
+		// transformationRegistry.addTransformation(new Pivot2MappedModelImpl(
+		// null, null));
+		// transformationRegistry.addTransformation(new Pivot2CwmImpl(null,
+		// null));
+		// transformationRegistry.addTransformation(new Pivot2Ddl(null, null));
+		// transformationRegistry.addTransformation(new Cwm2DdlImpl(null,
+		// null));
+		// transformationRegistry.addTransformation(new Pivot2DdlAndMappedModel(
+		// null, null));
+	}
+
+	/**
+	 * Loads resources required for the UML meta model.
+	 * 
+	 * @throws IOException
+	 */
+	protected static void loadUmlResources() throws IOException {
+
+		File umlResources = getFile(
+				"lib/org.eclipse.uml2.uml.resources_3.1.1.v201008191505.jar",
+				"org.dresdenocl.testsuite.abstract");
+		if (umlResources == null)
+			throw new IllegalArgumentException(
+					"Cannot laod an UML model with umlResources == null; umlResources has to point to the jar file of the plugin org.eclipse.uml2.uml.resources.");
+
+		URI pluginURI = URI.createURI("jar:file:"
+				+ umlResources.getAbsolutePath() + "!/");
+		URIConverter.URI_MAP.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP),
+				pluginURI.appendSegment("libraries").appendSegment(""));
+		URIConverter.URI_MAP.put(URI.createURI(UMLResource.METAMODELS_PATHMAP),
+				pluginURI.appendSegment("metamodels").appendSegment(""));
+		URIConverter.URI_MAP.put(URI.createURI(UMLResource.PROFILES_PATHMAP),
+				pluginURI.appendSegment("profiles").appendSegment(""));
+
 	}
 
 	/**
@@ -208,31 +292,6 @@ public class AbstractDresdenOclTest {
 					OclPackage.eINSTANCE);
 		}
 		// no else.
-	}
-
-	/**
-	 * Loads resources required for the UML meta model.
-	 * 
-	 * @throws IOException
-	 */
-	protected static void loadUmlResources() throws IOException {
-
-		File umlResources = getFile(
-				"lib/org.eclipse.uml2.uml.resources_3.1.1.v201008191505.jar",
-				"org.dresdenocl.testsuite.abstract");
-		if (umlResources == null)
-			throw new IllegalArgumentException(
-					"Cannot laod an UML model with umlResources == null; umlResources has to point to the jar file of the plugin org.eclipse.uml2.uml.resources.");
-
-		URI pluginURI = URI.createURI("jar:file:"
-				+ umlResources.getAbsolutePath() + "!/");
-		URIConverter.URI_MAP.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP),
-				pluginURI.appendSegment("libraries").appendSegment(""));
-		URIConverter.URI_MAP.put(URI.createURI(UMLResource.METAMODELS_PATHMAP),
-				pluginURI.appendSegment("metamodels").appendSegment(""));
-		URIConverter.URI_MAP.put(URI.createURI(UMLResource.PROFILES_PATHMAP),
-				pluginURI.appendSegment("profiles").appendSegment(""));
-
 	}
 
 	/** Registers {@link IMetamodel}s at the {@link IMetamodelRegistry}. */
