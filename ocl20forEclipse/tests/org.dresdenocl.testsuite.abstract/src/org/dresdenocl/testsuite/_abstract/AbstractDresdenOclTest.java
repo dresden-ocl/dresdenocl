@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
+import org.eclipse.xsd.XSDPackage;
 import org.junit.BeforeClass;
 
 import tudresden.ocl20.logging.LoggingPlugin;
@@ -44,6 +45,8 @@ import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.metamodels.java.internal.provider.JavaModelProvider;
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.metamodels.uml2.internal.provider.UML2ModelProvider;
+import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
+import tudresden.ocl20.pivot.metamodels.xsd.internal.provider.XSDModelProvider;
 import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
@@ -51,8 +54,12 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider.XmlModelInstanceProvider;
 
 /**
  * Abstract class for Dresden OCL test cases. Contains static setUp and tearDown
@@ -137,6 +144,27 @@ public class AbstractDresdenOclTest {
 		if (EPackage.Registry.INSTANCE.getEPackage(UMLPackage.eNS_URI) == null) {
 			EPackage.Registry.INSTANCE.put(UMLPackage.eNS_PREFIX,
 					UMLPackage.eINSTANCE);
+			loadUmlResources();
+		}
+		// no else.
+
+		/* Probably register the XSD resource for EMF. */
+		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
+				XSDPackage.eNS_PREFIX) == null) {
+
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					XSDPackage.eNS_PREFIX, new XMIResourceFactoryImpl() {
+						public Resource createResource(URI uri) {
+							XMIResource xmiResource = new XMIResourceImpl(uri);
+							return xmiResource;
+						}
+					});
+		}
+		// no else.
+
+		if (EPackage.Registry.INSTANCE.getEPackage(XSDPackage.eNS_URI) == null) {
+			EPackage.Registry.INSTANCE.put(XSDPackage.eNS_PREFIX,
+					XSDPackage.eINSTANCE);
 			loadUmlResources();
 		}
 		// no else.
@@ -278,6 +306,29 @@ public class AbstractDresdenOclTest {
 			};
 			ModelBusPlugin.getMetamodelRegistry().addMetamodel(umlMetamodel);
 		}
+
+		/* Probably register the XSD metamodel. */
+		IMetamodel xsdMetamodel = ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel(XSDMetamodelPlugin.ID);
+		if (xsdMetamodel == null) {
+			xsdMetamodel = new IMetamodel() {
+
+				IModelProvider provider = new XSDModelProvider();
+
+				public String getName() {
+					return XSDMetamodelPlugin.ID;
+				}
+
+				public IModelProvider getModelProvider() {
+					return provider;
+				}
+
+				public String getId() {
+					return XSDMetamodelPlugin.ID;
+				}
+			};
+			ModelBusPlugin.getMetamodelRegistry().addMetamodel(xsdMetamodel);
+		}
 	}
 
 	/**
@@ -285,6 +336,31 @@ public class AbstractDresdenOclTest {
 	 * {@link IModelInstanceTypeRegistry}.
 	 */
 	protected static void registerModelInstanceTypes() {
+
+		/* Probably register the Ecore model instance. */
+		IModelInstanceType ecoreModelInstanceType = ModelBusPlugin
+				.getModelInstanceTypeRegistry().getModelInstanceType(
+						EcoreModelInstanceTypePlugin.PLUGIN_ID);
+		if (ecoreModelInstanceType == null) {
+			ecoreModelInstanceType = new IModelInstanceType() {
+
+				private IModelInstanceProvider provider = new EcoreModelInstanceProvider();
+
+				public String getName() {
+					return EcoreModelInstanceTypePlugin.PLUGIN_ID;
+				}
+
+				public IModelInstanceProvider getModelInstanceProvider() {
+					return provider;
+				}
+
+				public String getId() {
+					return EcoreModelInstanceTypePlugin.PLUGIN_ID;
+				}
+			};
+			ModelBusPlugin.getModelInstanceTypeRegistry().addModelInstanceType(
+					ecoreModelInstanceType);
+		}
 
 		/* Probably register the Java model instance. */
 		IModelInstanceType javaModelInstanceType = ModelBusPlugin
@@ -309,6 +385,31 @@ public class AbstractDresdenOclTest {
 			};
 			ModelBusPlugin.getModelInstanceTypeRegistry().addModelInstanceType(
 					javaModelInstanceType);
+		}
+
+		/* Probably register the XML model instance. */
+		IModelInstanceType xmlModelInstanceType = ModelBusPlugin
+				.getModelInstanceTypeRegistry().getModelInstanceType(
+						XmlModelInstanceTypePlugin.PLUGIN_ID);
+		if (xmlModelInstanceType == null) {
+			xmlModelInstanceType = new IModelInstanceType() {
+
+				private IModelInstanceProvider provider = new XmlModelInstanceProvider();
+
+				public String getName() {
+					return XmlModelInstanceTypePlugin.PLUGIN_ID;
+				}
+
+				public IModelInstanceProvider getModelInstanceProvider() {
+					return provider;
+				}
+
+				public String getId() {
+					return XmlModelInstanceTypePlugin.PLUGIN_ID;
+				}
+			};
+			ModelBusPlugin.getModelInstanceTypeRegistry().addModelInstanceType(
+					xmlModelInstanceType);
 		}
 	}
 

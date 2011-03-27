@@ -10,4 +10,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.modelinstancetype.xml
+Export-Package: tudresden.ocl20.pivot.modelinstancetype.xml,
+ tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider

@@ -13,12 +13,9 @@
  */
 package tudresden.ocl20.pivot.modelinstancetype.xml.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-import java.net.URL;
 
-import org.eclipse.core.runtime.FileLocator;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 /**
  * <p>
@@ -42,17 +39,7 @@ public abstract class AbstractXmlModelInstanceTest {
 	 *             If loading of File fails.
 	 */
 	protected static File getFile(String path) throws Exception {
-
-		URL fileLocation;
-		fileLocation = XmlModelInstanceTypeTestPlugin.getDefault().getBundle()
-				.getResource(path);
-		fileLocation = FileLocator.resolve(fileLocation);
-
-		File file;
-		file = new File(fileLocation.getFile());
-
-		assertTrue(file.exists());
-
-		return file;
+		return AbstractDresdenOclTest.getFile(path,
+				XmlModelInstanceTypeTestPlugin.PLUGIN_ID);
 	}
 }

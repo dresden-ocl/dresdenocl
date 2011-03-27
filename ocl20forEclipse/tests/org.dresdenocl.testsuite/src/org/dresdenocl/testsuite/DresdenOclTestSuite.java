@@ -20,7 +20,9 @@ import tudresden.ocl20.pivot.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import tudresden.ocl20.pivot.metamodels.java.test.tests.TestJavaMetaModel;
 import tudresden.ocl20.pivot.metamodels.uml2.test.tests.AllUml2MetaModelTests;
 import tudresden.ocl20.pivot.modelbus.test.AllModelbusTests;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.test.AllEcoreModelInstanceTypeTests;
 import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTypeTests;
+import tudresden.ocl20.pivot.modelinstancetype.xml.test.AllXmlInstanceTests;
 
 /**
  * <p>
@@ -32,11 +34,10 @@ import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTyp
 @RunWith(Suite.class)
 // FIXME Claas: Collect all test suites.
 @Suite.SuiteClasses({ EssentialOCLAllTests.class, AllModelbusTests.class,
-		AllEcoreMetaModelTests.class, AllUml2MetaModelTests.class, /*
-																	 * AllXmlSchemaMetamodelTests
-																	 * .class,
-																	 */
-		TestJavaMetaModel.class, AllJavaModelInstanceTypeTests.class })
+		AllEcoreMetaModelTests.class, AllUml2MetaModelTests.class,
+		/* AllXmlSchemaMetamodelTests .class, */
+		TestJavaMetaModel.class, /* AllEcoreModelInstanceTypeTests.class, */
+		AllJavaModelInstanceTypeTests.class /* , AllXmlInstanceTests.class */})
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

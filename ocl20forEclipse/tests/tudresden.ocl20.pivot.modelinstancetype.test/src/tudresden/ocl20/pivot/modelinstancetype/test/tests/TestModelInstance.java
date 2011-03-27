@@ -352,14 +352,14 @@ public class TestModelInstance {
 
 				/* The value should be of the right type. */
 				if (property.getType() instanceof PrimitiveType) {
-					assertEquals(msg, ((PrimitiveType) property.getType())
-							.getKind(), ((PrimitiveType) propertyValue
-							.getType()).getKind());
+					assertEquals(msg,
+							((PrimitiveType) property.getType()).getKind(),
+							((PrimitiveType) propertyValue.getType()).getKind());
 				}
 
 				else {
-					assertEquals(msg, property.getType(), propertyValue
-							.getType());
+					assertEquals(msg, property.getType(),
+							propertyValue.getType());
 				}
 			}
 
@@ -448,14 +448,15 @@ public class TestModelInstance {
 
 				/* The result should be of the right type. */
 				if (operation.getType() instanceof PrimitiveType) {
-					assertEquals(msg, ((PrimitiveType) operation.getType())
-							.getKind(), ((PrimitiveType) operationResult
-							.getType()).getKind());
+					assertEquals(msg,
+							((PrimitiveType) operation.getType()).getKind(),
+							((PrimitiveType) operationResult.getType())
+									.getKind());
 				}
 
 				else {
-					assertEquals(msg, operation.getType(), operationResult
-							.getType());
+					assertEquals(msg, operation.getType(),
+							operationResult.getType());
 				}
 			}
 
@@ -600,8 +601,10 @@ public class TestModelInstance {
 			/* Remove the object. */
 			modelInstanceUnderTest.removeModelInstanceElement(anAdaptedObject);
 
-			assertEquals(msg, similarAdaptees - 1, modelInstanceUnderTest
-					.getAllInstances(anAdaptedObject.getType()).size());
+			if (similarAdaptees != 0)
+				assertEquals(msg, similarAdaptees - 1, modelInstanceUnderTest
+						.getAllInstances(anAdaptedObject.getType()).size());
+			// no else.
 
 			/* Re-adapt the given object. */
 			try {
