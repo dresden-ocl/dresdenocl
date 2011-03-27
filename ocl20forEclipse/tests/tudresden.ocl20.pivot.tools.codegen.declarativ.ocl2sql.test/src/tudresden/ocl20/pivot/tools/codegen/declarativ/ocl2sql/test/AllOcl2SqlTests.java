@@ -19,6 +19,7 @@ with Dresden OCL for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -30,8 +31,8 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleO
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2Sql
- * Code transformer ({@link Ocl2SqlPlugin}).
+ * Provides a jUnit Test Suite containing all plug-in tests of the OCL 2Sql Code
+ * transformer ({@link Ocl2SqlPlugin}).
  * </p>
  * 
  * @author Bjoern Freitag
@@ -39,9 +40,9 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleO
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ SingleOcl2Sql_notoptimizeTest.class,
-		SingleOcl2Sql_optimizeTest.class,Ocl2SqlTest.class, CarOcl2SqlTest.class,
-		CarOcl2Sql_optimizeTest.class })
-public class AllOcl2SqlTests {
+		SingleOcl2Sql_optimizeTest.class, Ocl2SqlTest.class,
+		CarOcl2SqlTest.class, CarOcl2Sql_optimizeTest.class })
+public class AllOcl2SqlTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

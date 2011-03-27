@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.junit.After;
 import org.junit.Before;
@@ -45,16 +45,14 @@ public class Ocl2SqlTest {
 	private static List<String> expected;
 
 	private IModel model;
-	private static String filePath = Platform
-			.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-			.replace("reference:file:", "");
-
 	public List<Constraint> constraints = null;
 
 	@BeforeClass
-	public static void setUpClass() {
+	public static void setUpClass() throws IOException {
 
-		expected = parseFile(filePath + "solution/view.sql");
+		expected = parseFile(AbstractDresdenOclTest.getFile(
+				"solution/view.sql", Ocl2SqlTestPlugin.PLUGIN_ID)
+				.getAbsolutePath());
 	}
 
 	private boolean deleteDir(File dir) {
@@ -81,11 +79,15 @@ public class Ocl2SqlTest {
 					.getMetamodel(UML2MetamodelPlugin.ID)
 					.getModelProvider()
 					.getModel(
-							new File(filePath + "model/university_complex.uml"));
+							AbstractDresdenOclTest.getFile(
+									"model/university_complex.uml",
+									Ocl2SqlTestPlugin.PLUGIN_ID));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
 			fail("The model can't generate");
+		} catch (IOException e) {
+			fail(e.getMessage());
 		}
 
 		boolean exists = (new File(sourcePath)).exists();
@@ -163,10 +165,13 @@ public class Ocl2SqlTest {
 		try {
 			constraints = Ocl22Parser.INSTANCE.doParse(
 					model,
-					URI.createFileURI(filePath
-							+ "constraints/university_complex.ocl"), true);
+					URI.createFileURI(AbstractDresdenOclTest.getFile(
+							"constraints/university_complex.ocl",
+							Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
+		} catch (IOException e) {
+			fail(e.getMessage());
 		}
 		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
 				settings);
@@ -236,9 +241,11 @@ public class Ocl2SqlTest {
 
 	/**
 	 * Test if no schema created and check the created views.
+	 * 
+	 * @throws IOException
 	 */
 	@Test
-	public void runTestNotSave() {
+	public void runTestNotSave() throws IOException {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
@@ -254,15 +261,19 @@ public class Ocl2SqlTest {
 		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(1, files.length);
-		testStringList(parseFile(sourcePath + "/" + files[0]),
-				parseFile(filePath + "solution/view.sql"));
+		testStringList(
+				parseFile(sourcePath + "/" + files[0]),
+				parseFile(AbstractDresdenOclTest.getFile("solution/view.sql",
+						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
 
 	/**
 	 * Test if check the created views and schema.
+	 * 
+	 * @throws IOException
 	 */
 	@Test
-	public void runTestWithSave() {
+	public void runTestWithSave() throws IOException {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
@@ -277,14 +288,18 @@ public class Ocl2SqlTest {
 		testStringList(removeComments(result), expected);
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath + "/" + files[0]),
-				parseFile(filePath + "solution/schema.sql"));
-		testStringList(parseFile(sourcePath + "/" + files[1]),
-				parseFile(filePath + "solution/view.sql"));
+		testStringList(
+				parseFile(sourcePath + "/" + files[0]),
+				parseFile(AbstractDresdenOclTest.getFile("solution/schema.sql",
+						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
+		testStringList(
+				parseFile(sourcePath + "/" + files[1]),
+				parseFile(AbstractDresdenOclTest.getFile("solution/view.sql",
+						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
 
 	@Test
-	public void runTestWithSaveAndOtherParameter() {
+	public void runTestWithSaveAndOtherParameter() throws IOException {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
@@ -301,10 +316,14 @@ public class Ocl2SqlTest {
 		}
 		String[] files = (new File(sourcePath)).list();
 		assertEquals(2, files.length);
-		testStringList(parseFile(sourcePath + "/" + files[0]),
-				parseFile(filePath + "solution/schema_para.sql"));
-		testStringList(parseFile(sourcePath + "/" + files[1]),
-				parseFile(filePath + "solution/view_para.sql"));
+		testStringList(
+				parseFile(sourcePath + "/" + files[0]),
+				parseFile(AbstractDresdenOclTest.getFile("solution/schema.sql",
+						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
+		testStringList(
+				parseFile(sourcePath + "/" + files[1]),
+				parseFile(AbstractDresdenOclTest.getFile("solution/view.sql",
+						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
 
 	private static List<String> parseFile(String file) {

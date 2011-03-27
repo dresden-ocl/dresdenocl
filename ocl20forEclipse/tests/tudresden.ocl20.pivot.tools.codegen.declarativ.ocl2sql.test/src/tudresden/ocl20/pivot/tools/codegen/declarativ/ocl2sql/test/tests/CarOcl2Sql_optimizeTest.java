@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.junit.After;
 import org.junit.Before;
@@ -44,16 +44,14 @@ public class CarOcl2Sql_optimizeTest {
 	private static List<String> expected;
 
 	private IModel model;
-	private static String filePath = Platform
-			.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-			.replace("reference:file:", "");
 
 	public List<Constraint> constraints = null;
 
 	@BeforeClass
-	public static void setUpClass() {
+	public static void setUpClass() throws IOException {
 
-		expected = parseFile(filePath + "solution/car.sql");
+		expected = parseFile(AbstractDresdenOclTest.getFile("solution/car.sql",
+				Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath());
 	}
 
 	private boolean deleteDir(File dir) {
@@ -72,12 +70,16 @@ public class CarOcl2Sql_optimizeTest {
 	}
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		try {
-			model = ModelBusPlugin.getMetamodelRegistry()
-					.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
-					.getModel(new File(filePath + "model/car.uml"));
+			model = ModelBusPlugin
+					.getMetamodelRegistry()
+					.getMetamodel(UML2MetamodelPlugin.ID)
+					.getModelProvider()
+					.getModel(
+							AbstractDresdenOclTest.getFile("model/car.uml",
+									Ocl2SqlTestPlugin.PLUGIN_ID));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -118,7 +120,7 @@ public class CarOcl2Sql_optimizeTest {
 	}
 
 	private List<String> runCodeGenerator(IOcl2DeclSettings settings, int index)
-			throws Ocl2CodeException {
+			throws Ocl2CodeException, IOException {
 
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
@@ -137,9 +139,11 @@ public class CarOcl2Sql_optimizeTest {
 		}
 		try {
 			constraints = new LinkedList<Constraint>();
-			constraints.add(Ocl22Parser.INSTANCE.doParse(model,
-					URI.createFileURI(filePath + "constraints/car.ocl"), true)
-					.get(index));
+			constraints.add(Ocl22Parser.INSTANCE.doParse(
+					model,
+					URI.createFileURI(AbstractDresdenOclTest.getFile(
+							"constraints/car.ocl", Ocl2SqlTestPlugin.PLUGIN_ID)
+							.getAbsolutePath())).get(index));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
@@ -151,68 +155,70 @@ public class CarOcl2Sql_optimizeTest {
 
 	/**
 	 * Test if no schema created and check the created views.
+	 * 
+	 * @throws IOException
 	 */
 	@Test
-	public void runConstraint1() {
+	public void runConstraint1() throws IOException {
 
 		this.runConstraint(0);
 	}
 
 	@Test
-	public void runConstraint2() {
+	public void runConstraint2() throws IOException {
 
 		this.runConstraint(1);
 	}
 
 	@Test
-	public void runConstraint3() {
-		//TODO: optimize collect statement
+	public void runConstraint3() throws IOException {
+		// TODO: optimize collect statement
 		this.runConstraint(2);
 	}
 
 	@Test
-	public void runConstraint4() {
+	public void runConstraint4() throws IOException {
 
 		this.runConstraint(3);
 	}
 
 	@Test
-	public void runConstraint5() {
+	public void runConstraint5() throws IOException {
 
 		this.runConstraint(4);
 	}
 
 	@Test
-	public void runConstraint6() {
+	public void runConstraint6() throws IOException {
 
 		this.runConstraint(5);
 	}
 
 	@Test
-	public void runConstraint7() {
+	public void runConstraint7() throws IOException {
 
 		this.runConstraint(6);
 	}
 
 	@Test
-	public void runConstraint8() {
+	public void runConstraint8() throws IOException {
 
 		this.runConstraint(7);
 	}
 
 	@Test
-	public void runConstraint9() {
+	public void runConstraint9() throws IOException {
 
 		this.runConstraint(8);
 	}
 
 	@Test
-	public void runConstraint10() {
+	public void runConstraint10() throws IOException {
 
 		this.runConstraint(9);
 	}
 
-	private void runConstraint(int index) {
+	private void runConstraint(int index) throws IOException {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();

@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 
@@ -27,21 +27,17 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 
-
 public abstract class SingleOcl2SqlTest {
-	
+
 	protected String sourcePath = System.getProperty("java.io.tmpdir")
-	+ "/ocl2sqltest";
+			+ "/ocl2sqltest";
 
 	protected static List<String> expected;
 
 	protected IModel model;
-	protected static String filePath = Platform
-	.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-	.replace("reference:file:", "");
 
 	protected List<Constraint> constraints = null;
-	
+
 	protected boolean deleteDir(File dir) {
 
 		if (dir.isDirectory()) {
@@ -56,7 +52,7 @@ public abstract class SingleOcl2SqlTest {
 
 		return dir.delete();
 	}
-	
+
 	private void testString(String actual, String expected) {
 
 		/* Required for OS-independent regression tests. */
@@ -64,16 +60,17 @@ public abstract class SingleOcl2SqlTest {
 		expected = expected.replaceAll("\r", "\n");
 		actual = actual.replaceAll("\r\n", "\n");
 		actual = actual.replaceAll("\r", "\n");
-		
+
 		assertEquals(expected, actual);
 	}
 
-  abstract protected List<String> runCodeGenerator(IOcl2DeclSettings settings, int index) throws Ocl2CodeException;
-	
+	abstract protected List<String> runCodeGenerator(
+			IOcl2DeclSettings settings, int index) throws Ocl2CodeException;
+
 	private void runConstraint(int index) {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
@@ -87,11 +84,16 @@ public abstract class SingleOcl2SqlTest {
 		}
 		try {
 			constraints = new LinkedList<Constraint>();
-			constraints.add(Ocl22Parser.INSTANCE.doParse(model,
-					URI.createFileURI(filePath + "constraints/university_complex.ocl"),
+			constraints.add(Ocl22Parser.INSTANCE.doParse(
+					model,
+					URI.createFileURI(AbstractDresdenOclTest.getFile(
+							"constraints/university_complex.ocl",
+							Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()),
 					true).get(index));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
+		} catch (IOException e) {
+			fail("Can't find/open the constraint file: " + e.getMessage());
 		}
 		try {
 			result = runCodeGenerator(settings, index);
@@ -101,7 +103,7 @@ public abstract class SingleOcl2SqlTest {
 		assertNotNull("No result", result);
 		testString(removeComment(result.get(0)), expected.get(index));
 	}
-	
+
 	protected static List<String> parseFile(String file) {
 
 		List<String> retValue = new ArrayList<String>();
@@ -114,12 +116,10 @@ public abstract class SingleOcl2SqlTest {
 					continue;
 				if (temp == null) {
 					temp = zeile;
-				}
-				else if (zeile.equals("")) {
+				} else if (zeile.equals("")) {
 					retValue.add(temp);
 					temp = null;
-				}
-				else {
+				} else {
 					temp += "\n" + zeile;
 				}
 
@@ -143,7 +143,7 @@ public abstract class SingleOcl2SqlTest {
 		}
 		return result.trim();
 	}
-	
+
 	/**
 	 * Test if no schema created and check the created views.
 	 */
@@ -446,7 +446,7 @@ public abstract class SingleOcl2SqlTest {
 
 		this.runConstraint(49);
 	}
-	
+
 	@Test
 	public void runConstraint16_1() {
 

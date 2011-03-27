@@ -1,7 +1,7 @@
 package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,25 +47,26 @@ public class CarOcl2SqlTest {
 	private static List<String> expected;
 
 	private IModel model;
-	private static String filePath = Platform
-			.getBundle(Ocl2SqlTestPlugin.PLUGIN_ID).getLocation()
-			.replace("reference:file:", "");
 
 	public List<Constraint> constraints = null;
 
 	@BeforeClass
-	public static void setUpClass() {
+	public static void setUpClass() throws IOException {
 
-		expected = parseFile(filePath + "solution/car-nop.sql");
+		expected = parseFile(AbstractDresdenOclTest.getFile(
+				"solution/car-nop.sql", Ocl2SqlTestPlugin.PLUGIN_ID)
+				.getAbsolutePath());
 
-		URL stream = CarOcl2SqlTest.class.getResource("/template/standard.stg");
+		URL stream = AbstractDresdenOclTest
+				.getFile("/template/standard.stg", Ocl2SqlTestPlugin.PLUGIN_ID)
+				.toURI().toURL();
 		ITemplateGroup standardGroup = null;
 		try {
-			standardGroup =
-					TemplatePlugin.getTemplateGroupRegistry().addDefaultTemplateGroup(
+			standardGroup = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup(
 							"StandardTest(SQL)",
-							TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup(
-									"MySQL(SQL)"));
+							TemplatePlugin.getTemplateGroupRegistry()
+									.getTemplateGroup("MySQL(SQL)"));
 			standardGroup.addFile(stream);
 		} catch (TemplateException e) {
 			e.printStackTrace();
@@ -95,13 +96,16 @@ public class CarOcl2SqlTest {
 	}
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		try {
-			model =
-					ModelBusPlugin.getMetamodelRegistry()
-							.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
-							.getModel(new File(filePath + "model/car.uml"));
+			model = ModelBusPlugin
+					.getMetamodelRegistry()
+					.getMetamodel(UML2MetamodelPlugin.ID)
+					.getModelProvider()
+					.getModel(
+							AbstractDresdenOclTest.getFile("model/car.uml",
+									Ocl2SqlTestPlugin.PLUGIN_ID));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
 		} catch (ModelAccessException e) {
@@ -127,8 +131,7 @@ public class CarOcl2SqlTest {
 		boolean exists = (new File(sourcePath)).exists();
 		if (exists) {
 			deleteDir(new File(sourcePath));
-		}
-		else {
+		} else {
 			fail("Path " + sourcePath + " already exits");
 		}
 	}
@@ -143,7 +146,7 @@ public class CarOcl2SqlTest {
 	}
 
 	private List<String> runCodeGenerator(IOcl2DeclSettings settings, int index)
-			throws Ocl2CodeException {
+			throws Ocl2CodeException, IOException {
 
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
@@ -155,86 +158,89 @@ public class CarOcl2SqlTest {
 		}
 		try {
 			constraints = new LinkedList<Constraint>();
-			constraints
-					.add(Ocl22Parser.INSTANCE.doParse(model,
-							URI.createFileURI(filePath + "constraints/car.ocl"), true).get(
-							index));
+			constraints.add(Ocl22Parser.INSTANCE.doParse(
+					model,
+					URI.createFileURI(AbstractDresdenOclTest.getFile(
+							"constraints/car.ocl", Ocl2SqlTestPlugin.PLUGIN_ID)
+							.getAbsolutePath())).get(index));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");
 		}
-		IOcl2Sql ocl2Sql =
-				Ocl2SQLFactory.getInstance().createSQLCodeGenerator(settings);
+		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
+				settings);
 		ocl2Sql.setInputModel(model);
 		return ocl2Sql.transformFragmentCode(constraints);
 	}
 
 	/**
 	 * Test if no schema created and check the created views.
+	 * 
+	 * @throws IOException
 	 */
 	@Test
-	public void runConstraint1() {
+	public void runConstraint1() throws IOException {
 
 		this.runConstraint(0);
 	}
 
 	@Test
-	public void runConstraint2() {
+	public void runConstraint2() throws IOException {
 
 		this.runConstraint(1);
 	}
 
 	@Test
-	public void runConstraint3() {
+	public void runConstraint3() throws IOException {
 
 		this.runConstraint(2);
 	}
 
 	@Test
-	public void runConstraint4() {
+	public void runConstraint4() throws IOException {
 
 		this.runConstraint(3);
 	}
 
 	@Test
-	public void runConstraint5() {
+	public void runConstraint5() throws IOException {
 
 		this.runConstraint(4);
 	}
 
 	@Test
-	public void runConstraint6() {
+	public void runConstraint6() throws IOException {
 
 		this.runConstraint(5);
 	}
 
 	@Test
-	public void runConstraint7() {
+	public void runConstraint7() throws IOException {
 
 		this.runConstraint(6);
 	}
 
 	@Test
-	public void runConstraint8() {
+	public void runConstraint8() throws IOException {
 
 		this.runConstraint(7);
 	}
 
 	@Test
-	public void runConstraint9() {
+	public void runConstraint9() throws IOException {
 
 		this.runConstraint(8);
 	}
 
 	@Test
-	public void runConstraint10() {
+	public void runConstraint10() throws IOException {
 
 		this.runConstraint(9);
 	}
 
-	private void runConstraint(int index) {
+	private void runConstraint(int index) throws IOException {
 
-		IOcl2DeclSettings settings =
-				Ocl2DeclCodeFactory.getInstance().createOcl2DeclCodeSettings();
+		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
+				.createOcl2DeclCodeSettings();
 		settings.setSaveCode(false);
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		List<String> result = null;
@@ -266,12 +272,10 @@ public class CarOcl2SqlTest {
 					continue;
 				if (temp == null) {
 					temp = zeile;
-				}
-				else if (zeile.equals("")) {
+				} else if (zeile.equals("")) {
 					retValue.add(temp);
 					temp = null;
-				}
-				else {
+				} else {
 					temp += "\n" + zeile;
 				}
 
