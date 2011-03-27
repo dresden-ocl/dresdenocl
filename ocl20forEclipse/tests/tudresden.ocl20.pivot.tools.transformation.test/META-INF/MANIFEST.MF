@@ -10,5 +10,7 @@ Require-Bundle: tudresden.ocl20.logging,
  org.junit4,
  org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.transformation,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.tools.transformation.test

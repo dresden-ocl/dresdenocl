@@ -23,6 +23,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.examples.pain,
  tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj,
  tudresden.ocl20.pivot.tools.template.test,
- tudresden.ocl20.pivot.tools.codegen.ocl2java.test
+ tudresden.ocl20.pivot.tools.codegen.ocl2java.test,
+ tudresden.ocl20.pivot.tools.transformation.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

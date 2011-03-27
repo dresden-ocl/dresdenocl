@@ -29,6 +29,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.test.tests.AllStandardLibraryT
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.AllOcl2JavaTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.AllAspectJTests;
 import tudresden.ocl20.pivot.tools.template.test.AllTestsTemplate;
+import tudresden.ocl20.pivot.tools.transformation.test.AllTestsTransformation;
 
 /**
  * <p>
@@ -65,7 +66,10 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 
 		/* OCL2Java tests: */
 		AllOcl2JavaTests.class, AllAspectJTests.class,
-		AllRoyalAndLoyalAspectJTests.class })
+		AllRoyalAndLoyalAspectJTests.class,
+
+		/* OCL2SQL tests: */
+		AllTestsTransformation.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

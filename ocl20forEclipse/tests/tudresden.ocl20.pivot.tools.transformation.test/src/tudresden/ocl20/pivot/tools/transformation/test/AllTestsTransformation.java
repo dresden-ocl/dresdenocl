@@ -27,6 +27,7 @@
 
 package tudresden.ocl20.pivot.tools.transformation.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -51,11 +52,12 @@ import tudresden.ocl20.pivot.tools.transformation.test.util.TestTrans;
 		TestTransformationRegistry.class
 
 })
-public class AllTestsTransformation {
+public class AllTestsTransformation extends AbstractDresdenOclTest {
 
 	@BeforeClass
-	public static void setUp() {
+	public static void setUp() throws Exception {
 
+		AbstractDresdenOclTest.setUp();
 		TransformationPlugin.getTransformationRegistry().addTransformation(
 				new TestTrans("", ""));
 		TransformationPlugin.getTransformationRegistry().addTransformation(

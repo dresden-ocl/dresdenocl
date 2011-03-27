@@ -149,19 +149,17 @@ public class AbstractDresdenOclTest {
 		TemplatePlugin.setTempateEngineRegistry(templateEngineRegistry);
 		TemplatePlugin.setTempateGroupRegistry(templateGroupRegistry);
 
-		// SQLTemplate.loadSQLTemplates();
+		SQLTemplate.loadSQLTemplates();
 
-		// ITransformationRegistry transformationRegistry = TransformationPlugin
-		// .getTransformationRegistry();
-		// transformationRegistry.addTransformation(new Pivot2MappedModelImpl(
-		// null, null));
-		// transformationRegistry.addTransformation(new Pivot2CwmImpl(null,
-		// null));
-		// transformationRegistry.addTransformation(new Pivot2Ddl(null, null));
-		// transformationRegistry.addTransformation(new Cwm2DdlImpl(null,
-		// null));
-		// transformationRegistry.addTransformation(new Pivot2DdlAndMappedModel(
-		// null, null));
+		ITransformationRegistry transformationRegistry = TransformationPlugin
+				.getTransformationRegistry();
+		transformationRegistry.addTransformation(new Pivot2MappedModelImpl(
+				null, null));
+		transformationRegistry.addTransformation(new Pivot2CwmImpl(null, null));
+		transformationRegistry.addTransformation(new Pivot2Ddl(null, null));
+		transformationRegistry.addTransformation(new Cwm2DdlImpl(null, null));
+		transformationRegistry.addTransformation(new Pivot2DdlAndMappedModel(
+				null, null));
 	}
 
 	/**
