@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.examples.pain.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -30,7 +31,7 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { TestAmendmentInformationDetails1.class,
+@Suite.SuiteClasses({ TestAmendmentInformationDetails1.class,
 		TestDirectDebitTransaction1.class,
 		TestDirectDebitTransactionInformation1.class, TestGroupHeader1.class,
 		TestLocalInstrument1Choice.class, TestMandateRelatedInformation1.class,
@@ -38,7 +39,7 @@ import org.junit.runners.Suite;
 		TestPaymentTypeInformation2.class, TestRemittanceInformation1.class,
 		TestServiceLevel3Choice.class,
 		TestStructuredRemittanceInformation6.class })
-public class AllPainTests {
+public class AllPainTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

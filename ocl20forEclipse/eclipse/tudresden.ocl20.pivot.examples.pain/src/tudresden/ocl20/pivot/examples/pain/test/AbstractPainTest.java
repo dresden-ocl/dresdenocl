@@ -26,13 +26,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.runtime.FileLocator;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.examples.pain.PainExamplePlugin;
@@ -111,21 +110,12 @@ public abstract class AbstractPainTest {
 	 * @param path
 	 *            The path of the resource.
 	 * @return The found {@link File} object.
-	 * @throws Exception Thrown, if the opening fails.
+	 * @throws Exception
+	 *             Thrown, if the opening fails.
 	 */
 	private static File getFile(String path) throws Exception {
 
-		URL fileLocation;
-		fileLocation = PainExamplePlugin.getDefault().getBundle().getResource(
-				path);
-		fileLocation = FileLocator.resolve(fileLocation);
-
-		File file;
-		file = new File(fileLocation.getFile());
-
-		assertTrue(file.exists());
-
-		return file;
+		return AbstractDresdenOclTest.getFile(path, PainExamplePlugin.ID);
 	}
 
 	/**
@@ -160,8 +150,9 @@ public abstract class AbstractPainTest {
 	 *            The {@link IInterpretationResult} to be checked.
 	 * @throws Throwable
 	 */
-	protected void assertIsInvalid(IInterpretationResult result) throws Throwable {
-	
+	protected void assertIsInvalid(IInterpretationResult result)
+			throws Throwable {
+
 		assertTrue(result.getResult().oclIsInvalid().isTrue());
 	}
 
@@ -330,8 +321,7 @@ public abstract class AbstractPainTest {
 	 * @throws Exception
 	 */
 	protected void reportConstraintInterpreationForInstance(
-			String constraintName, String instanceName)
-			throws Exception {
+			String constraintName, String instanceName) throws Exception {
 
 		assertNotNull(constraintName);
 		assertNotNull(instanceName);

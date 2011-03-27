@@ -19,6 +19,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.ocl2parser.test,
  tudresden.ocl20.pivot.interpreter.test,
  tudresden.ocl20.pivot.standardlibrary.java.test,
- tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode
+ tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode,
+ tudresden.ocl20.pivot.examples.pain
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

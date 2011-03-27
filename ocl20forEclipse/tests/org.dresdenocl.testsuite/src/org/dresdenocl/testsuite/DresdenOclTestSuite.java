@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.essentialocl.types.tests.EssentialOCLAllTests;
+import tudresden.ocl20.pivot.examples.pain.test.AllPainTests;
 import tudresden.ocl20.pivot.examples.royalsandloyals.test.AllRoyalAndLoyalAspectJTests;
 import tudresden.ocl20.pivot.interpreter.test.AllOclInterpreterTests;
 import tudresden.ocl20.pivot.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
@@ -42,7 +43,7 @@ import tudresden.ocl20.pivot.standardlibrary.java.test.tests.AllStandardLibraryT
 		/* AllEcoreModelInstanceTypeTests.class, */
 		AllJavaModelInstanceTypeTests.class, /* AllXmlInstanceTests.class, */
 		AllStandardLibraryTests.class, AllOclInterpreterTests.class,
-		AllRoyalAndLoyalAspectJTests.class })
+		AllPainTests.class, AllRoyalAndLoyalAspectJTests.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
