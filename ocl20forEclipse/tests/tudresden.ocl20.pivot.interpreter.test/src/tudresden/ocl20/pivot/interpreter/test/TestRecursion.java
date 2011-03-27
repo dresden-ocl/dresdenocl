@@ -16,71 +16,40 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test.standardlibrary;
+package tudresden.ocl20.pivot.interpreter.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
+import tudresden.ocl20.pivot.interpreter.test.standardlibrary.AbstractInterpreterTest;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
  * Contains some test cases to test Standard Library operations on
- * <code>OclInvalid</code> literals.
+ * <code>Bag</code>s.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestOclVoid extends AbstractInterpreterTest {
+public class TestRecursion extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
-	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/oclvoid";
+	private static final String CONSTRAINT_DIRECTORY = "recursion";
 
 	/**
 	 * <p>
-	 * Initializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.setUp();
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@AfterClass
-	public static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.tearDown();
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>OclVoid.oclAsType(Type)</code>.
+	 * Tests the operation <code>Collection.product(Collection)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -88,43 +57,64 @@ public class TestOclVoid extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testOclAsType01() throws IllegalArgumentException,
+	public void testFibonacci01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/oclAsType01", INSTANCE1_NAME,
+				CONSTRAINT_DIRECTORY + "/fibonacci01", INSTANCE1_NAME,
 				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
-		assertEquals(1, results.size());
+		assertEquals(7, results.size());
 
-		this.assertIsInvalid(results.get(0));
+		this.assertIsUndefined(results.get(0));
+		this.assertIsTrue(results.get(1));
+		this.assertIsTrue(results.get(2));
+		this.assertIsTrue(results.get(3));
+		this.assertIsTrue(results.get(4));
+		this.assertIsTrue(results.get(5));
+		this.assertIsTrue(results.get(6));
+	}
+
+	/**
+	 * <p>
+	 * Tests the operation <code>Collection.product(Collection)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testRecursiveProperty01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/recProperty01", INSTANCE2_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		assertFalse(results.get(0).getResult().oclIsInvalid().isTrue());
+		assertFalse(results.get(0).getResult().oclIsUndefined().isTrue());
 		assertTrue(results.get(0).getResult() instanceof OclInteger);
-	}
 
-	/**
-	 * <p>
-	 * Tests the operation <code>OclVoid.oclAsType(Type)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testOclAsType02() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
+		assertFalse(results.get(1).getResult().oclIsInvalid().isTrue());
+		assertFalse(results.get(1).getResult().oclIsUndefined().isTrue());
+		assertTrue(results.get(1).getResult() instanceof OclInteger);
 
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/oclAsType02", INSTANCE1_NAME,
-				Arrays.asList(new String[] { "Class1" }));
+		OclInteger oclInteger01;
+		oclInteger01 = (OclInteger) results.get(0).getResult();
+		OclInteger oclInteger02;
+		oclInteger02 = (OclInteger) results.get(1).getResult();
 
-		assertNotNull(results);
-		assertEquals(1, results.size());
-
-		this.assertIsInvalid(results.get(0));
-		assertTrue(results.get(0).getResult() instanceof OclModelInstanceObject);
+		/* One result must be 1 and one 0. */
+		assertTrue((oclInteger01.getModelInstanceInteger().getLong() == 0 && oclInteger02
+				.getModelInstanceInteger().getLong() == 1)
+				|| (oclInteger01.getModelInstanceInteger().getLong() == 1 && oclInteger02
+						.getModelInstanceInteger().getLong() == 0));
 	}
 }

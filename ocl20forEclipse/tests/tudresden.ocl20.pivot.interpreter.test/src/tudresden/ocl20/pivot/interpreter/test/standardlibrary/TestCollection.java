@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+Copyright (C) 2010 by Claas Wilke (claaswilke@gmx.net)
 
 This file is part of the PAIN Case Study of Dresden OCL2 for Eclipse.
 
@@ -24,8 +24,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -35,45 +33,16 @@ import tudresden.ocl20.pivot.parser.ParseException;
 /**
  * <p>
  * Contains some test cases to test Standard Library operations on
- * <code>Bag</code>s.
+ * <code>Collection</code>s.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestBag extends AbstractInterpreterTest {
+public class TestCollection extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
-	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/bag";
+	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/collection";
 
-	/**
-	 * <p>
-	 * Initializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.setUp();
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@AfterClass
-	public static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.tearDown();
-	}
 
 	/**
 	 * <p>
@@ -85,41 +54,17 @@ public class TestBag extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testEquals01() throws IllegalArgumentException,
+	public void testProduct01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/equals01", INSTANCE1_NAME, Arrays
+				CONSTRAINT_DIRECTORY + "/product01", INSTANCE1_NAME, Arrays
 						.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
-		this.assertIsTrue(results.get(0));
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Collection.product(Collection)</code>.
-	 * </p>
-	 * 
-	 * @throws ParseException
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@Test
-	public void testEquals02() throws IllegalArgumentException,
-			ModelAccessException, ParseException {
-	
-		List<IInterpretationResult> results;
-		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/equals02", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
-	
-		assertNotNull(results);
-		assertEquals(1, results.size());
-	
 		this.assertIsTrue(results.get(0));
 	}
 }

@@ -8,7 +8,9 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.examples.royalandloyal,
  org.junit4;bundle-version="4.0.0",
  tudresden.ocl20.pivot.testsuite,
- tudresden.ocl20.pivot.facade
+ tudresden.ocl20.pivot.facade,
+ org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group
+Export-Package: tudresden.ocl20.pivot.interpreter.test

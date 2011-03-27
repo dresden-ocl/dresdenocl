@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2010 by Claas Wilke (claaswilke@gmx.net)
+Copyright (C) 2010 by Claas Wilke (claas.wilke@tu-dresden.de)
 
 This file is part of the PAIN Case Study of Dresden OCL2 for Eclipse.
 
@@ -20,14 +20,15 @@ package tudresden.ocl20.pivot.interpreter.test.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.parser.ParseException;
@@ -35,49 +36,19 @@ import tudresden.ocl20.pivot.parser.ParseException;
 /**
  * <p>
  * Contains some test cases to test Standard Library operations on
- * <code>Collection</code>s.
+ * <code>OclInvalid</code> literals.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestCollection extends AbstractInterpreterTest {
+public class TestOclInvalid extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
-	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/collection";
+	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/oclinvalid";
 
 	/**
 	 * <p>
-	 * Initializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.setUp();
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@AfterClass
-	public static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.tearDown();
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>Collection.product(Collection)</code>.
+	 * Tests the operation <code>OclInvalid.oclAsType(Type)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -85,17 +56,43 @@ public class TestCollection extends AbstractInterpreterTest {
 	 * @throws IllegalArgumentException
 	 */
 	@Test
-	public void testProduct01() throws IllegalArgumentException,
+	public void testOclAsType01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL1_NAME,
-				CONSTRAINT_DIRECTORY + "/product01", INSTANCE1_NAME, Arrays
-						.asList(new String[] { "Class1" }));
+				CONSTRAINT_DIRECTORY + "/oclAsType01", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
-		this.assertIsTrue(results.get(0));
+		this.assertIsInvalid(results.get(0));
+		assertTrue(results.get(0).getResult() instanceof OclInteger);
+	}
+
+	/**
+	 * <p>
+	 * Tests the operation <code>OclInvalid.oclAsType(Type)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testOclAsType02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/oclAsType02", INSTANCE1_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(1, results.size());
+
+		this.assertIsInvalid(results.get(0));
+		assertTrue(results.get(0).getResult() instanceof OclModelInstanceObject);
 	}
 }

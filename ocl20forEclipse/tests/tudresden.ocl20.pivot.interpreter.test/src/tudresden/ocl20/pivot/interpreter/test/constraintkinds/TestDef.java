@@ -24,8 +24,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -35,56 +33,26 @@ import tudresden.ocl20.pivot.parser.ParseException;
 
 /**
  * <p>
- * Contains some test cases to test init constraints.
+ * Contains some test cases to test def constraints.
  * </p>
  * 
  * @author Claas Wilke
  */
-public class TestInit extends AbstractInterpreterTest {
+public class TestDef extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
-	private static final String CONSTRAINT_DIRECTORY = "constraintkind/initial";
+	private static final String CONSTRAINT_DIRECTORY = "constraintkind/def";
 
 	/**
-	 * <p>
-	 * Initializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.setUp();
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@AfterClass
-	public static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.tearDown();
-	}
-
-	/**
-	 * A non-static init should be interpreted for every model element.
+	 * A non-static def should be interpreted for every model element.
 	 */
 	@Test
-	public void testInit01() throws IllegalArgumentException,
+	public void testDef01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL2_NAME,
-				CONSTRAINT_DIRECTORY + "/init01", INSTANCE4_NAME,
+				CONSTRAINT_DIRECTORY + "/def01", INSTANCE4_NAME,
 				Arrays.asList(new String[] { "Class2" }));
 
 		assertNotNull(results);
@@ -95,15 +63,15 @@ public class TestInit extends AbstractInterpreterTest {
 	}
 
 	/**
-	 * A static init should be interpreted exactly once.
+	 * A static def should be interpreted exactly once.
 	 */
 	@Test
-	public void testInit02_01() throws IllegalArgumentException,
+	public void testDef02_01() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL2_NAME,
-				CONSTRAINT_DIRECTORY + "/init02", INSTANCE4_NAME,
+				CONSTRAINT_DIRECTORY + "/def02", INSTANCE4_NAME,
 				Arrays.asList(new String[] { "Class2" }));
 
 		assertNotNull(results);
@@ -117,17 +85,73 @@ public class TestInit extends AbstractInterpreterTest {
 	 * ModelInstanceElement for this type exists).
 	 */
 	@Test
-	public void testInit02_02() throws IllegalArgumentException,
+	public void testDef02_02() throws IllegalArgumentException,
 			ModelAccessException, ParseException {
 
 		List<IInterpretationResult> results;
 		results = super.interpretConstraintsForInstance(MODEL2_NAME,
-				CONSTRAINT_DIRECTORY + "/init02", INSTANCE5_NAME,
+				CONSTRAINT_DIRECTORY + "/def02", INSTANCE5_NAME,
 				Arrays.asList(new String[] { "Class2" }));
 
 		assertNotNull(results);
 		assertEquals(1, results.size());
 
+		this.assertIsEqual(new Integer(42), results.get(0));
+	}
+
+	/**
+	 * A non-static def should be interpreted for every model element.
+	 */
+	@Test
+	public void testDef03() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL2_NAME,
+				CONSTRAINT_DIRECTORY + "/def03", INSTANCE4_NAME,
+				Arrays.asList(new String[] { "Class2" }));
+	
+		assertNotNull(results);
+		assertEquals(2, results.size());
+	
+		this.assertIsEqual(new Integer(42), results.get(0));
+		this.assertIsEqual(new Integer(42), results.get(0));
+	}
+
+	/**
+	 * A static def should be interpreted exactly once.
+	 */
+	@Test
+	public void testDef04_01() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL2_NAME,
+				CONSTRAINT_DIRECTORY + "/def04", INSTANCE4_NAME,
+				Arrays.asList(new String[] { "Class2" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
+		this.assertIsEqual(new Integer(42), results.get(0));
+	}
+
+	/**
+	 * A static body should be interpreted exactly once (even if not
+	 * ModelInstanceElement for this type exists).
+	 */
+	@Test
+	public void testDef04_02() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+	
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL2_NAME,
+				CONSTRAINT_DIRECTORY + "/def04", INSTANCE5_NAME,
+				Arrays.asList(new String[] { "Class2" }));
+	
+		assertNotNull(results);
+		assertEquals(1, results.size());
+	
 		this.assertIsEqual(new Integer(42), results.get(0));
 	}
 }

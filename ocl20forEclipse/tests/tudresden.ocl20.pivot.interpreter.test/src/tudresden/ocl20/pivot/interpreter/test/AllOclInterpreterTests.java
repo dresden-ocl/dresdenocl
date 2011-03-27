@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.interpreter.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -36,7 +37,7 @@ import tudresden.ocl20.pivot.interpreter.test.standardlibrary.AllStandardLibrary
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestInterpretation.class, AllStandardLibraryTests.class,
 		TestRecursion.class, AllConstraintKindTests.class })
-public class AllOclInterpreterTests {
+public class AllOclInterpreterTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.

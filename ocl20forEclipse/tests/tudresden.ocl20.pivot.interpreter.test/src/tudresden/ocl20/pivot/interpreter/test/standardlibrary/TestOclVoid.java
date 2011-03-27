@@ -25,8 +25,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
@@ -43,44 +41,14 @@ import tudresden.ocl20.pivot.parser.ParseException;
  * 
  * @author Claas Wilke
  */
-public class TestOclInvalid extends AbstractInterpreterTest {
+public class TestOclVoid extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
-	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/oclinvalid";
+	private static final String CONSTRAINT_DIRECTORY = "standardlibrary/oclvoid";
 
 	/**
 	 * <p>
-	 * Initializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.setUp();
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@AfterClass
-	public static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.tearDown();
-	}
-
-	/**
-	 * <p>
-	 * Tests the operation <code>OclInvalid.oclAsType(Type)</code>.
+	 * Tests the operation <code>OclVoid.oclAsType(Type)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException
@@ -105,7 +73,7 @@ public class TestOclInvalid extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Tests the operation <code>OclInvalid.oclAsType(Type)</code>.
+	 * Tests the operation <code>OclVoid.oclAsType(Type)</code>.
 	 * </p>
 	 * 
 	 * @throws ParseException

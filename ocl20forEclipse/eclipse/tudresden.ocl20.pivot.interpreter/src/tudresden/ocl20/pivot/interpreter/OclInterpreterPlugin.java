@@ -56,8 +56,8 @@ public class OclInterpreterPlugin extends Plugin {
 	private static OclInterpreterPlugin plugin;
 
 	/**
-	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener} s
-	 * of the {@link IOclInterpreter}.
+	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener}
+	 * s of the {@link IOclInterpreter}.
 	 */
 	private IInterpreterRegistry interpreterRegistry;
 
@@ -77,9 +77,10 @@ public class OclInterpreterPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param aModelInstance
-	 *          The {@link IModelInstance} used during interpretation.
+	 *            The {@link IModelInstance} used during interpretation.
 	 */
-	public static IOclInterpreter createInterpreter(IModelInstance aModelInstance) {
+	public static IOclInterpreter createInterpreter(
+			IModelInstance aModelInstance) {
 
 		return new OclInterpreter(aModelInstance);
 	}
@@ -99,7 +100,7 @@ public class OclInterpreterPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          The {@link Class} to return the {@link Logger} for.
+	 *            The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 
@@ -118,8 +119,9 @@ public class OclInterpreterPlugin extends Plugin {
 
 		/* Check if the plug-in has been activated. */
 		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Interpreter plugin has not been activated.");
+			System.out
+					.println("The Interpreter plugin has not been activated. Initialized it manually.");
+			plugin = new OclInterpreterPlugin();
 		}
 		// no else.
 
@@ -134,6 +136,7 @@ public class OclInterpreterPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
@@ -146,7 +149,9 @@ public class OclInterpreterPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 

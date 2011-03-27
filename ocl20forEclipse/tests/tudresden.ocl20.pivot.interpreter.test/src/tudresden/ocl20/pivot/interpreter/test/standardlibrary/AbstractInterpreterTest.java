@@ -26,9 +26,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
@@ -55,7 +58,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public abstract class AbstractInterpreterTest {
+public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest{
 
 	/** The name of a test {@link IModelInstance} for this test suite. */
 	protected static final String INSTANCE1_NAME = "package1/Instance1";
@@ -80,32 +83,6 @@ public abstract class AbstractInterpreterTest {
 
 	/**
 	 * <p>
-	 * Initializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	protected static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	protected static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-	}
-
-	/**
-	 * <p>
 	 * Returns the file object for a given path relative to the plug-in's
 	 * directory.
 	 * </p>
@@ -113,25 +90,12 @@ public abstract class AbstractInterpreterTest {
 	 * @param path
 	 *            The path of the resource.
 	 * @return The found {@link File} object.
+	 * @throws IOException
 	 */
-	private static File getFile(String path) {
+	private static File getFile(String path) throws IOException {
 
-		File result;
-
-		String filePath;
-		filePath = OclInterpreterTestPlugin.getDefault().getBundle()
-				.getLocation();
-		/* Remove 'reference:file:/' */
-		filePath = filePath.substring(15);
-
-		filePath += OclInterpreterTestPlugin.getDefault().getBundle()
-				.getResource(path).getPath().substring(1);
-
-		result = new File(filePath);
-
-		assertTrue(result.exists());
-
-		return result;
+		return AbstractDresdenOclTest.getFile(path,
+				OclInterpreterTestPlugin.PLUGIN_ID);
 	}
 
 	/**
@@ -324,8 +288,12 @@ public abstract class AbstractInterpreterTest {
 
 		/* Load the model. */
 		File modelFile;
-		modelFile = AbstractInterpreterTest.getFile("bin/" + modelName
-				+ ".class");
+		try {
+			modelFile = AbstractInterpreterTest.getFile("bin/" + modelName
+					+ ".class");
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
+		}
 
 		IModel model;
 		model = Ocl2ForEclipseFacade.getModel(modelFile,
@@ -341,8 +309,12 @@ public abstract class AbstractInterpreterTest {
 
 		/* Parse the constraint. */
 		File constraintFile;
-		constraintFile = AbstractInterpreterTest
-				.getFile("resources/constraints/" + constraintName + ".ocl");
+		try {
+			constraintFile = AbstractInterpreterTest
+					.getFile("resources/constraints/" + constraintName + ".ocl");
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
+		}
 
 		List<Constraint> parsedConstraints;
 		parsedConstraints = Ocl2ForEclipseFacade.parseConstraints(
@@ -353,8 +325,12 @@ public abstract class AbstractInterpreterTest {
 
 		/* Load or get the instance. */
 		File instanceFile;
-		instanceFile = AbstractInterpreterTest.getFile("bin/" + instanceName
-				+ ".class");
+		try {
+			instanceFile = AbstractInterpreterTest.getFile("bin/"
+					+ instanceName + ".class");
+		} catch (IOException e) {
+			throw new ModelAccessException(e.getMessage(), e);
+		}
 
 		IModelInstance modelInstance;
 		modelInstance = Ocl2ForEclipseFacade.getModelInstance(instanceFile,

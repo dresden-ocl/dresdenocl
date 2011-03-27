@@ -24,8 +24,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -44,36 +42,6 @@ public class TestDerive extends AbstractInterpreterTest {
 
 	/** The name of the constraint directory for this test suite. */
 	private static final String CONSTRAINT_DIRECTORY = "constraintkind/derive";
-
-	/**
-	 * <p>
-	 * Deriveializes the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@BeforeClass
-	public static void setUp() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.setUp();
-	}
-
-	/**
-	 * <p>
-	 * Tears down the test cases.
-	 * </p>
-	 * 
-	 * @throws ModelAccessException
-	 * @throws IllegalArgumentException
-	 */
-	@AfterClass
-	public static void tearDown() throws IllegalArgumentException,
-			ModelAccessException {
-
-		AbstractInterpreterTest.tearDown();
-	}
 
 	/**
 	 * A non-static derive should be interpreted for every model element.

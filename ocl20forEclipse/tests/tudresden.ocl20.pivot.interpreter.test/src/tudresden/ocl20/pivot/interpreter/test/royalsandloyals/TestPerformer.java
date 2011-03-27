@@ -20,10 +20,11 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.interpreter.test.royalsandloyals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -56,12 +57,6 @@ public class TestPerformer {
 
 	/** The path of the UML model file. */
 	private final static String MODEL_FILE = "model/royalsandloyals.uml";
-
-	/**
-	 * Contains the directory where the OCL files are stored which shall be
-	 * parsed and imported.
-	 */
-	protected String fileDirectory = "";
 
 	/** Contains the loaded UML2 model. */
 	protected IModel myModel = null;
@@ -146,12 +141,6 @@ public class TestPerformer {
 
 		/* Try to load model and model instance. */
 		try {
-			/* Get the bundle location for the model files. */
-			fileDirectory = Platform.getBundle(MODEL_BUNDLE).getLocation();
-
-			/* Remove the 'reference:file:' from the beginning. */
-			fileDirectory = fileDirectory.substring(15);
-
 			/* Load the model. */
 			this.loadModel();
 
@@ -334,25 +323,14 @@ public class TestPerformer {
 	public List<Constraint> loadOCLFile(String oclFileName)
 			throws RuntimeException, ParseException, ModelAccessException {
 
-		List<Constraint> result;
-		File oclFile;
-		oclFile = new File(fileDirectory + oclFileName);
-
-		/* Check if the given file exists. */
-		if (!oclFile.exists()) {
-			String msg;
-
-			msg = "The given OCL file does not exist. File name: ";
-			msg += oclFileName + ".";
-
-			throw new RuntimeException(msg);
+		try {
+			File oclFile = AbstractDresdenOclTest.getFile(oclFileName,
+					MODEL_BUNDLE);
+			return Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel,
+					true);
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
 		}
-		// no else.
-
-		result = Ocl2ForEclipseFacade.parseConstraints(oclFile, this.myModel,
-				true);
-
-		return result;
 	}
 
 	/**
@@ -414,24 +392,10 @@ public class TestPerformer {
 		if (!(this.myModel != null && this.myModel.getDisplayName().equals(
 				MODEL_FILE))) {
 
-			File modelFile;
-
-			modelFile = new File(this.fileDirectory + MODEL_FILE);
-
-			/* Check if the given file exists. */
-			if (!modelFile.exists()) {
-				String msg;
-
-				msg = "The model file ";
-				msg += this.fileDirectory + MODEL_FILE;
-				msg += " doesn't exists.";
-
-				throw new RuntimeException(msg);
-			}
-			// no else;
-
 			/* Try to load the model. */
 			try {
+				File modelFile = AbstractDresdenOclTest.getFile(MODEL_FILE,
+						MODEL_BUNDLE);
 				this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
 						META_MODEL);
 			}
@@ -439,6 +403,8 @@ public class TestPerformer {
 			catch (ModelAccessException e) {
 				throw new RuntimeException("The model could not be loaded. "
 						+ e.getMessage());
+			} catch (IOException e) {
+				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
 		// no else.
