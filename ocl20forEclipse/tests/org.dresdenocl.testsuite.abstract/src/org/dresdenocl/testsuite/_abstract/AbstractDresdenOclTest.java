@@ -93,7 +93,7 @@ public class AbstractDresdenOclTest {
 	private static boolean isInitialized = false;
 
 	@BeforeClass
-	public static void setUp() throws IOException {
+	public static void setUp() throws Exception {
 
 		/* Initializes Dresden OCL when tests were started headless. */
 		if (!Platform.isRunning() && !isInitialized) {

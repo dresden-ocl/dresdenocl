@@ -33,6 +33,8 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
@@ -94,6 +96,7 @@ import tudresden.ocl20.pivot.tools.codegen.code.impl.TransformedTypeImpl;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.impl.Ocl2JavaEnvironment;
 import tudresden.ocl20.pivot.tools.template.ITemplate;
@@ -2114,16 +2117,14 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 		try {
 			LinkedList<URL> templatePaths = new LinkedList<URL>();
 
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + OPERATION_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + EXPRESSION_TEMPLATE_FILE));
-			templatePaths.add(this.getClass().getResource(
-					TEMPLATE_PATH + INSTRUMENTATION_TEMPLATE_FILE));
+			templatePaths.add(this.getUrl(TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
+			templatePaths.add(this.getUrl(TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
+			templatePaths.add(this.getUrl(TEMPLATE_PATH
+					+ OPERATION_TEMPLATE_FILE));
+			templatePaths.add(this.getUrl(TEMPLATE_PATH
+					+ EXPRESSION_TEMPLATE_FILE));
+			templatePaths.add(this.getUrl(TEMPLATE_PATH
+					+ INSTRUMENTATION_TEMPLATE_FILE));
 
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
 					"Ocl2Java");
@@ -2145,12 +2146,63 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 			// no else.
 
 			throw new Ocl2CodeException(msg);
+		} catch (IOException e) {
+			throw new Ocl2CodeException(e.getMessage(), e);
 		}
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("init() - end");
 		}
 		// no else.
+	}
+
+	/**
+	 * Helper method to get the URL for a given resource in this plug-in.
+	 * 
+	 * @param path
+	 *            The path of the resource.
+	 * @throws IOException
+	 */
+	private URL getUrl(String path) throws IOException {
+
+		URL fileLocation;
+		File file;
+
+		if (Platform.isRunning()) {
+			fileLocation = Platform.getBundle(Ocl2JavaPlugin.PLUGIN_ID)
+					.getResource(path);
+			fileLocation = FileLocator.resolve(fileLocation);
+			file = new File(fileLocation.getFile());
+		}
+
+		else {
+			File currentLocation = new File("./");
+			File bundleFile = null;
+
+			while (currentLocation != null && currentLocation.exists()
+					&& currentLocation.isDirectory()) {
+				bundleFile = new File(currentLocation.getAbsolutePath()
+						+ File.separator + Ocl2JavaPlugin.PLUGIN_ID);
+
+				if (bundleFile.exists() && bundleFile.isDirectory())
+					break;
+				else {
+					bundleFile = null;
+					currentLocation = new File(
+							currentLocation.getAbsolutePath() + File.separator
+									+ ".." + File.separator);
+				}
+			}
+
+			if (bundleFile != null)
+				file = new File(bundleFile + File.separator + path);
+
+			else
+				throw new RuntimeException("Bundle or directory '"
+						+ Ocl2JavaPlugin.PLUGIN_ID + "' was not found.");
+		}
+
+		return file.toURI().toURL();
 	}
 
 	/**

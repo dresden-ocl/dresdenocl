@@ -21,14 +21,12 @@ package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.FileLocator;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
@@ -52,7 +50,7 @@ import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.Ocl2JavaTestPlugin;
  * 
  * @author Claas Wilke
  */
-public abstract class AbstractDiffTest {
+public abstract class AbstractDiffTest extends AbstractDresdenOclTest {
 
 	/** The location of the {@link IModel} used for testing. */
 	private static final String MODEL_NAME = "resources/models/model01.uml";
@@ -78,11 +76,11 @@ public abstract class AbstractDiffTest {
 	 * 
 	 * @throws Exception
 	 */
-	protected static void setUp() throws Exception {
+	public static void setUp() throws Exception {
 
-		File modelFile;
-		modelFile = AbstractDiffTest.getFile(MODEL_NAME);
+		AbstractDresdenOclTest.setUp();
 
+		File modelFile = AbstractDiffTest.getFile(MODEL_NAME);
 		testModel = ModelBusPlugin.getMetamodelRegistry()
 				.getMetamodel(UML2MetamodelPlugin.ID).getModelProvider()
 				.getModel(modelFile);
@@ -116,17 +114,8 @@ public abstract class AbstractDiffTest {
 	 */
 	protected static File getFile(String path) throws Exception {
 
-		URL fileLocation;
-		fileLocation = Ocl2JavaTestPlugin.getDefault().getBundle()
-				.getResource(path);
-		fileLocation = FileLocator.resolve(fileLocation);
-
-		File file;
-		file = new File(fileLocation.getFile());
-
-		assertTrue(file.exists());
-
-		return file;
+		return AbstractDresdenOclTest.getFile(path,
+				Ocl2JavaTestPlugin.PLUGIN_ID);
 	}
 
 	/**

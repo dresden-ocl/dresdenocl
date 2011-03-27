@@ -19,8 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.modelinstancetype.ecore.test;
 
-import java.io.IOException;
-
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -49,7 +47,7 @@ import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 public class AllEcoreModelInstanceTypeTests extends AbstractDresdenOclTest {
 
 	@BeforeClass
-	public static void setUp() throws IOException {
+	public static void setUp() throws Exception {
 
 		AbstractDresdenOclTest.setUp();
 
