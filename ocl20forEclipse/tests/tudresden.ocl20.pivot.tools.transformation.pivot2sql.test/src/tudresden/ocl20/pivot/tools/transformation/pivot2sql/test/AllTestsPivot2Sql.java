@@ -27,6 +27,7 @@
 
 package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -49,7 +50,7 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2Map
 @Suite.SuiteClasses({ Pivot2MappedModelTest.class, Pivot2CWMtypedTest.class,
 		Pivot2CWMverticalTest.class, CWM2DdlTest.class, Pivot2DdlTest.class,
 		Pivot2DdlAndMappedModelTest.class })
-public class AllTestsPivot2Sql {
+public class AllTestsPivot2Sql extends AbstractDresdenOclTest {
 	// this class remains completely empty,
 	// being used only as a holder for the above annotations
 }

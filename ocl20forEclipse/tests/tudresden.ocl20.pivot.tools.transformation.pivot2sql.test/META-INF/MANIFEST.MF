@@ -14,5 +14,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.metamodels.uml2,
  tudresden.ocl20.pivot.tools.transformation,
  tudresden.ocl20.pivot.tools.CWM,
- tudresden.ocl20.pivot.tools.codegen.declarativ
+ tudresden.ocl20.pivot.tools.codegen.declarativ,
+ org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
+Export-Package: tudresden.ocl20.pivot.tools.transformation.pivot2sql.test
