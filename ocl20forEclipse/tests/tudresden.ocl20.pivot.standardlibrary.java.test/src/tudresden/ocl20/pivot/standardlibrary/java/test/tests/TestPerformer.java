@@ -20,8 +20,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
@@ -65,57 +66,49 @@ public class TestPerformer {
 	 * for testing.
 	 */
 
-	public static String QUALIFIED_NAME_MODEL_PACKAGE =
-			ModelConstants.ROOT_PACKAGE_NAME
-					+ "::tudresden::ocl20::pivot::examples::royalsandloyals";
+	public static String QUALIFIED_NAME_MODEL_PACKAGE = ModelConstants.ROOT_PACKAGE_NAME
+			+ "::tudresden::ocl20::pivot::examples::royalsandloyals";
 
 	/** The qualified Name of {@link Customer}. */
-	public static String QUALIFIED_NAME_CUSTOMER =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::Customer";
+	public static String QUALIFIED_NAME_CUSTOMER = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::Customer";
 
 	/** The qualified Name of {@link CustomerCard}. */
-	public static String QUALIFIED_NAME_CUSTOMER_CARD =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::CustomerCard";
+	public static String QUALIFIED_NAME_CUSTOMER_CARD = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::CustomerCard";
 
 	/** The qualified Name of {@link Date}. */
-	public static String QUALIFIED_NAME_DATE =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::Date";
+	public static String QUALIFIED_NAME_DATE = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::Date";
 
 	/** The qualified Name of {@link LoyaltyAccount}. */
-	public static String QUALIFIED_NAME_LOYALTY_ACCOUNT =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::LoyaltyAccount";
+	public static String QUALIFIED_NAME_LOYALTY_ACCOUNT = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::LoyaltyAccount";
 
 	/** The qualified Name of {@link LoyaltyProgram}. */
-	public static String QUALIFIED_NAME_LOYALTY_PROGRAM =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::LoyaltyProgram";
+	public static String QUALIFIED_NAME_LOYALTY_PROGRAM = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::LoyaltyProgram";
 
 	/** The qualified Name of {@link LoyaltyProgram}. */
-	public static String QUALIFIED_NAME_MEMBERSHIP =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::Membership";
+	public static String QUALIFIED_NAME_MEMBERSHIP = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::Membership";
 
 	/** The qualified Name of {@link ProgramPartner}. */
-	public static String QUALIFIED_NAME_PROGRAM_PARTNER =
-			QUALIFIED_NAME_MODEL_PACKAGE + "::ProgramPartner";
+	public static String QUALIFIED_NAME_PROGRAM_PARTNER = QUALIFIED_NAME_MODEL_PACKAGE
+			+ "::ProgramPartner";
 
 	/** The package of the UML2 meta model. */
 	private final static String META_MODEL = UML2MetamodelPlugin.ID;
 
 	/** The name of the bundle of the model file. */
-	private final static String MODEL_BUNDLE =
-			"tudresden.ocl20.pivot.examples.royalandloyal";
+	private final static String MODEL_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal";
 
 	/** The path of the UML model file. */
 	private final static String MODEL_FILE = "model/royalsandloyals.uml";
 
 	/** The standard library factory to create OclAny and sub-types. */
-	protected IStandardLibraryFactory myStandardLibraryFactory =
-			JavaStandardlibraryPlugin.getStandardLibraryFactory();
-
-	/**
-	 * Contains the directory where the OCL files are stored which shall be parsed
-	 * and imported.
-	 */
-	protected String fileDirectory = "";
+	protected IStandardLibraryFactory myStandardLibraryFactory = JavaStandardlibraryPlugin
+			.getStandardLibraryFactory();
 
 	/** Contains the UML2 meta model. */
 	protected IMetamodel myMetaModel = null;
@@ -171,12 +164,12 @@ public class TestPerformer {
 
 	/**
 	 * <p>
-	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds it
-	 * to the {@link IModelInstance} under test.
+	 * Adapts a given {@link Object} as {@link IModelInstanceElement} and adds
+	 * it to the {@link IModelInstance} under test.
 	 * </p>
 	 * 
 	 * @param object
-	 *          The {@link Object} that shall be adapted and added.
+	 *            The {@link Object} that shall be adapted and added.
 	 * @return The adapted {@link IModelInstanceElement}.
 	 */
 	public IModelInstanceElement addModelObject(Object object) {
@@ -202,27 +195,22 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws RuntimeException
-	 *           Is thrown if any error occurred while loading the model or the
-	 *           meta model.
+	 *             Is thrown if any error occurred while loading the model or
+	 *             the meta model.
 	 */
 	private void init() throws RuntimeException {
 
 		/* Try to load model and meta model. */
 		try {
 
-			this.myMetaModel =
-					ModelBusPlugin.getMetamodelRegistry().getMetamodel(META_MODEL);
+			this.myMetaModel = ModelBusPlugin.getMetamodelRegistry()
+					.getMetamodel(META_MODEL);
 
 			if (myMetaModel == null) {
-				throw new RuntimeException("Unable to load meta model during test.");
+				throw new RuntimeException(
+						"Unable to load meta model during test.");
 			}
 			// no else.
-
-			/* Get the bundle location for the model files. */
-			fileDirectory = Platform.getBundle(MODEL_BUNDLE).getLocation();
-
-			/* Remove the 'reference:file:' from the beginning. */
-			fileDirectory = fileDirectory.substring(15);
 
 			/* Load the model. */
 			this.loadModel();
@@ -233,8 +221,8 @@ public class TestPerformer {
 		}
 
 		catch (Exception e) {
-			throw new RuntimeException("Unable to initialize the test. Reason: "
-					+ e.getMessage());
+			throw new RuntimeException(
+					"Unable to initialize the test. Reason: " + e.getMessage());
 		}
 	}
 
@@ -242,7 +230,8 @@ public class TestPerformer {
 	public Operation findOperation(IModelInstanceElement imiElement, String name)
 			throws OperationNotFoundException {
 
-		for (Operation ownedOperation : imiElement.getType().getOwnedOperation()) {
+		for (Operation ownedOperation : imiElement.getType()
+				.getOwnedOperation()) {
 
 			if (ownedOperation.getName().equals(name)) {
 				return ownedOperation;
@@ -256,8 +245,9 @@ public class TestPerformer {
 	/**
 	 * <p>
 	 * Resets the environment ({@link IModel} and {@link IModelInstance} used by
-	 * this {@link TestPerformer} and reinitializes it. Used to remove new defined
-	 * or initialized {@link IModelInstanceElement}s from the {@link IModel}.
+	 * this {@link TestPerformer} and reinitializes it. Used to remove new
+	 * defined or initialized {@link IModelInstanceElement}s from the
+	 * {@link IModel}.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
@@ -280,8 +270,8 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws Ocl22JavaException
-	 *           Is thrown if the {@link IModel} cannot be initialized or the
-	 *           model file is not found.
+	 *             Is thrown if the {@link IModel} cannot be initialized or the
+	 *             model file is not found.
 	 */
 	protected void loadModel() throws RuntimeException {
 
@@ -289,27 +279,15 @@ public class TestPerformer {
 		if (!(this.myModel != null && this.myModel.getDisplayName().equals(
 				MODEL_FILE))) {
 
-			File modelFile;
-
-			modelFile = new File(this.fileDirectory + MODEL_FILE);
-
-			/* Check if the given file exists. */
-			if (!modelFile.exists()) {
-				String msg;
-
-				msg = "The model file ";
-				msg += this.fileDirectory + MODEL_FILE;
-				msg += " doesn't exists.";
-
-				throw new RuntimeException(msg);
-			}
-			// no else;
-
 			/* Try to load the model. */
 			try {
+				File modelFile = AbstractDresdenOclTest.getFile(MODEL_FILE,
+						MODEL_BUNDLE);
+
 				IModelRegistry modelRegistry;
 
-				this.myModel = this.myMetaModel.getModelProvider().getModel(modelFile);
+				this.myModel = this.myMetaModel.getModelProvider().getModel(
+						modelFile);
 
 				modelRegistry = ModelBusPlugin.getModelRegistry();
 
@@ -320,6 +298,8 @@ public class TestPerformer {
 			catch (ModelAccessException e) {
 				throw new RuntimeException("The model could not be loaded. "
 						+ e.getMessage());
+			} catch (IOException e) {
+				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
 		// no else.
@@ -332,8 +312,8 @@ public class TestPerformer {
 	 * </p>
 	 * 
 	 * @throws RuntimeException
-	 *           Thrown, if an error during {@link IModelInstance} initialization
-	 *           occurs.
+	 *             Thrown, if an error during {@link IModelInstance}
+	 *             initialization occurs.
 	 */
 	protected void loadModelInstance() throws RuntimeException {
 
@@ -343,10 +323,9 @@ public class TestPerformer {
 			this.myModelInstance = null;
 
 			/* Load the model instance. */
-			IModelInstanceProvider modelInstanceProvider =
-					new JavaModelInstanceProvider();
-			this.myModelInstance =
-					modelInstanceProvider.createEmptyModelInstance(this.myModel);
+			IModelInstanceProvider modelInstanceProvider = new JavaModelInstanceProvider();
+			this.myModelInstance = modelInstanceProvider
+					.createEmptyModelInstance(this.myModel);
 
 			/*
 			 * Add the successfully loaded model instance to the model instance
@@ -361,7 +340,8 @@ public class TestPerformer {
 		}
 
 		else {
-			throw new RuntimeException("No model found to load a model instance.");
+			throw new RuntimeException(
+					"No model found to load a model instance.");
 		}
 	}
 

@@ -23,6 +23,7 @@ import tudresden.ocl20.pivot.metamodels.uml2.test.tests.AllUml2MetaModelTests;
 import tudresden.ocl20.pivot.modelbus.test.AllModelbusTests;
 import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTypeTests;
 import tudresden.ocl20.pivot.ocl2parser.test.AllOCL2ParserTests;
+import tudresden.ocl20.pivot.standardlibrary.java.test.tests.AllStandardLibraryTests;
 
 /**
  * <p>
@@ -39,7 +40,7 @@ import tudresden.ocl20.pivot.ocl2parser.test.AllOCL2ParserTests;
 		AllOCL2ParserTests.class, TestJavaMetaModel.class,
 		/* AllEcoreModelInstanceTypeTests.class, */
 		AllJavaModelInstanceTypeTests.class, /* AllXmlInstanceTests.class, */
-		AllOclInterpreterTests.class })
+		AllStandardLibraryTests.class, AllOclInterpreterTests.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

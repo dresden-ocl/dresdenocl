@@ -1,5 +1,6 @@
 package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -10,12 +11,12 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( { JavaOclAnyTest.class, JavaOclBagTest.class,
+@Suite.SuiteClasses({ JavaOclAnyTest.class, JavaOclBagTest.class,
 		JavaOclBooleanTest.class, JavaOclCollectionTest.class,
 		JavaOclIntegerTest.class, JavaOclInvalidTest.class,
 		JavaOclOrderedSetTest.class, JavaOclRealTest.class,
 		JavaOclSequenceTest.class, JavaOclSetTest.class,
 		JavaOclSortedCollectionTest.class, JavaOclStringTest.class })
-public class AllTests {
+public class AllStandardLibraryTests extends AbstractDresdenOclTest {
 
 }
