@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.constrainttypes;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
@@ -32,7 +33,7 @@ import tudresden.ocl20.pivot.parser.ParseException;
  * 
  * @author Claas Wilke
  */
-public class TestBody {
+public class TestBody extends AbstractDresdenOclTest {
 
 	/**
 	 * <p>

@@ -20,9 +20,8 @@ import tudresden.ocl20.pivot.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import tudresden.ocl20.pivot.metamodels.java.test.tests.TestJavaMetaModel;
 import tudresden.ocl20.pivot.metamodels.uml2.test.tests.AllUml2MetaModelTests;
 import tudresden.ocl20.pivot.modelbus.test.AllModelbusTests;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.test.AllEcoreModelInstanceTypeTests;
 import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTypeTests;
-import tudresden.ocl20.pivot.modelinstancetype.xml.test.AllXmlInstanceTests;
+import tudresden.ocl20.pivot.ocl2parser.test.AllOCL2ParserTests;
 
 /**
  * <p>
@@ -36,7 +35,8 @@ import tudresden.ocl20.pivot.modelinstancetype.xml.test.AllXmlInstanceTests;
 @Suite.SuiteClasses({ EssentialOCLAllTests.class, AllModelbusTests.class,
 		AllEcoreMetaModelTests.class, AllUml2MetaModelTests.class,
 		/* AllXmlSchemaMetamodelTests .class, */
-		TestJavaMetaModel.class, /* AllEcoreModelInstanceTypeTests.class, */
+		AllOCL2ParserTests.class, TestJavaMetaModel.class,
+		/* AllEcoreModelInstanceTypeTests.class, */
 		AllJavaModelInstanceTypeTests.class /* , AllXmlInstanceTests.class */})
 public class DresdenOclTestSuite {
 	/*

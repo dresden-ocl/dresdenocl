@@ -10,8 +10,10 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.facade,
  tudresden.ocl20.pivot.language.ocl.staticsemantics,
  tudresden.ocl20.pivot.language.ocl.resource.ocl,
- tudresden.ocl20.pivot.language.ocl;bundle-version="3.1.0"
+ tudresden.ocl20.pivot.language.ocl;bundle-version="3.1.0",
+ org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group
 Import-Package: tudresden.ocl20.pivot.essentialocl.expressions
+Export-Package: tudresden.ocl20.pivot.ocl2parser.test

@@ -31,7 +31,7 @@ public class Activator extends Plugin {
 
 	/** The plug-in id. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.ocl2parser.test.uml2.parsertests";
+			"tudresden.ocl20.pivot.ocl2parser.test";
 
 	/** The shared instance. */
 	private static Activator plugin;

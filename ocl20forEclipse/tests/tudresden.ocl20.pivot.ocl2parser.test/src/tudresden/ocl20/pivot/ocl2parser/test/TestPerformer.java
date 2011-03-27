@@ -19,11 +19,12 @@ package tudresden.ocl20.pivot.ocl2parser.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Platform;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
@@ -206,23 +207,13 @@ public class TestPerformer {
 	public List<Constraint> parseFile(String filename, boolean addToModel)
 			throws ParseException, FileNotFoundException {
 
-		String fileDirectory;
-		fileDirectory = Activator.getDefault().getBundle().getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		fileDirectory = fileDirectory.substring(15);
-
 		File oclFile;
-		oclFile = new File(fileDirectory + OCL_FILE_DIRECTORY + filename);
-
-		/* Check if the file exists at all. */
-		if (!oclFile.exists()) {
-			throw new FileNotFoundException(
-					"The OCL test file does not exists. File name: "
-							+ OCL_FILE_DIRECTORY + filename + ".");
+		try {
+			oclFile = AbstractDresdenOclTest.getFile(OCL_FILE_DIRECTORY
+					+ filename, Activator.PLUGIN_ID);
+		} catch (IOException e) {
+			throw new FileNotFoundException(e.getMessage());
 		}
-		// no else.
-
 		URI uri = URI.createFileURI(oclFile.getAbsolutePath());
 
 		/* Not replaced by facade method to test the different exception types. */
@@ -269,25 +260,15 @@ public class TestPerformer {
 	public void setModel(String modelName, boolean local)
 			throws ModelAccessException, FileNotFoundException {
 
-		String pathToModel;
-
-		if (local) {
-			pathToModel = LOCAL_MODEL_FILE_DIRECTORY;
+		File modelFile;
+		try {
+			modelFile = AbstractDresdenOclTest.getFile(this.myModelPath
+					+ modelName, Activator.PLUGIN_ID);
+		} catch (IOException e) {
+			throw new FileNotFoundException(e.getMessage());
 		}
 
-		else {
-
-			/* Get the bundle location for the model files. */
-			pathToModel = Platform.getBundle(this.myModelBundle).getLocation();
-
-			/*
-			 * Remove the 'reference:file:' from the beginning and add path in
-			 * remote location.
-			 */
-			pathToModel = pathToModel.substring(15) + this.myModelPath;
-		}
-
-		this.setModel(modelName, pathToModel);
+		this.setModel(modelFile);
 	}
 
 	/**
@@ -309,29 +290,15 @@ public class TestPerformer {
 	 * Loads the {@link IModel} from a specified location.
 	 * </p>
 	 * 
-	 * @param modelName
-	 *            The name of file containing the {@link IModel}.
-	 * @param pathToModel
-	 *            The path to the {@link IModel} file.
+	 * @param modelFile
+	 *            The file containing the {@link IModel}.
 	 * @throws ModelAccessException
 	 *             Thrown from {@link IModelProvider#getModel(File)}
 	 * @throws FileNotFoundException
 	 *             Thrown, if the {@link IModel} file has not been found.
 	 */
-	private void setModel(String modelName, String pathToModel)
-			throws ModelAccessException, FileNotFoundException {
-
-		File modelFile;
-		modelFile = new File(pathToModel + modelName);
-
-		/* Check if the file exists. */
-		if (!modelFile.exists()) {
-			throw new FileNotFoundException(
-					"The IModel file does not exists. The file name was: "
-							+ this.myRemoteModelFileDirectoryPath + modelName
-							+ ".");
-		}
-		// no else.
+	private void setModel(File modelFile) throws ModelAccessException,
+			FileNotFoundException {
 
 		this.myModel = Ocl2ForEclipseFacade.getModel(modelFile,
 				this.myMetaModel);
