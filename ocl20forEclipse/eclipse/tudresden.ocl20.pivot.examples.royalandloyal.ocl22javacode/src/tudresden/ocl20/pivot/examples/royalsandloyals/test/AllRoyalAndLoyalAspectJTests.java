@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses( { TestBodyAspects.class, TestDefAspects.class,
 		TestDeriveAspects.class, TestInitAspects.class, TestInvAspects.class,
 		TestPostAspects.class, TestPreAspects.class })
-public class AllAspectTests {
+public class AllRoyalAndLoyalAspectJTests {
 	// this class remains completely empty,
 	// being used only as a holder for the above annotations
 }
