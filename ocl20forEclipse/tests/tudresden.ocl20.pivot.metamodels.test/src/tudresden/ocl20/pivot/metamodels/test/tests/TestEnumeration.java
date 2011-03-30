@@ -60,7 +60,7 @@ public class TestEnumeration {
 	private static List<EnumerationLiteral> enumerationLiterals;
 
 	/** The {@link Namespace} in which the {@link Enumeration} must be located. */
-	private static Namespace package2;
+	private static Namespace package1;
 
 	/**
 	 * <p>
@@ -72,7 +72,7 @@ public class TestEnumeration {
 	public static void setUp() {
 
 		enumerationLiterals = null;
-		package2 = null;
+		package1 = null;
 
 		enumeration1 =
 				(Enumeration) MetaModelTestServices.getInstance().getTypeUnderTest(
@@ -102,9 +102,9 @@ public class TestEnumeration {
 		else {
 			enumerationLiterals = enumeration1.getOwnedLiteral();
 
-			package2 =
+			package1 =
 					MetaModelTestServices.getInstance().getNamespaceUnderTest(
-							MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2);
+							MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);
 		}
 	}
 
@@ -173,7 +173,7 @@ public class TestEnumeration {
 			msg = "The adaptation of Enumeration.getNamespace() seems to be wrong.";
 
 			/* The enumeration must be in the name space. */
-			assertEquals(msg, package2, enumeration1.getNamespace());
+			assertEquals(msg, package1, enumeration1.getNamespace());
 		}
 		// no else.
 	}
@@ -323,7 +323,7 @@ public class TestEnumeration {
 			msg = "The adaptation of Enumeration.getOwner() seems to be wrong.";
 
 			/* The enumeration must be owned by the name space. */
-			assertEquals(msg, package2, enumeration1.getOwner());
+			assertEquals(msg, package1, enumeration1.getOwner());
 		}
 		// no else.
 	}

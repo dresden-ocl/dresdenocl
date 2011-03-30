@@ -13,15 +13,15 @@
  */
 package tudresden.ocl20.pivot.metamodels.java.test.model;
 
-import package1.package2.TestEnumeration;
-import package1.package2.TestInnerClassesClass;
-import package1.package2.TestOperationAndParameterClass;
-import package1.package2.TestPrimitiveTypeClass;
-import package1.package2.TestPropertyClass;
-import package1.package2.TestTypeClass1;
-import package1.package2.TestTypeClass2;
-import package1.package2.TestTypeInterface1;
-import package1.package2.TestTypeInterface2;
+import package1.TestEnumeration;
+import package1.TestInnerClassesClass;
+import package1.TestOperationAndParameterClass;
+import package1.TestPrimitiveTypeClass;
+import package1.TestPropertyClass;
+import package1.TestTypeClass1;
+import package1.TestTypeClass2;
+import package1.TestTypeInterface1;
+import package1.TestTypeInterface2;
 
 /**
  * <p>

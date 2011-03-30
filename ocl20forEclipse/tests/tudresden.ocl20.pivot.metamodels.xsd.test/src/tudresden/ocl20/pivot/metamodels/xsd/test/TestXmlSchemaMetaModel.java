@@ -13,13 +13,6 @@
  */
 package tudresden.ocl20.pivot.metamodels.xsd.test;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
-import org.eclipse.xsd.XSDPackage;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runners.Suite;
@@ -28,10 +21,7 @@ import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
 import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.xsd.internal.provider.XSDModelProvider;
-import tudresden.ocl20.pivot.model.IModelProvider;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -58,50 +48,8 @@ public class TestXmlSchemaMetaModel extends MetaModelTestSuite {
 	@BeforeClass
 	public static void setUp() {
 
-		/* Problably register the XSD metamodel. */
-		IMetamodel xsdMetamodel = ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel(META_MODEL_ID);
-		if (xsdMetamodel == null) {
-			xsdMetamodel = new IMetamodel() {
-
-				IModelProvider provider = new XSDModelProvider();
-
-				public String getName() {
-					return META_MODEL_ID;
-				}
-
-				public IModelProvider getModelProvider() {
-					return provider;
-				}
-
-				public String getId() {
-					return META_MODEL_ID;
-				}
-			};
-			ModelBusPlugin.getMetamodelRegistry().addMetamodel(xsdMetamodel);
-		}
-
-		/* Probably register the XSD resource for EMF. */
-		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
-				"xsd") == null) {
-
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-					"xsd", new XMIResourceFactoryImpl() {
-						public Resource createResource(URI uri) {
-							XMIResource xmiResource = new XMIResourceImpl(uri);
-							return xmiResource;
-						}
-					});
-		}
-		// no else.
-
-		if (EPackage.Registry.INSTANCE.getEPackage(XSDPackage.eNS_URI) == null) {
-			EPackage.Registry.INSTANCE.put(XSDPackage.eNS_PREFIX,
-					XSDPackage.eINSTANCE);
-		}
-		// no else.
-
 		MetaModelTestServices.capitalizePackageNames = true;
+		MetaModelTestServices.supportsNoOperations = true;
 
 		MetaModelTestPlugin.prepareTest(XmlSchemaMetamodelTestPlugin.ID,
 				TEST_MODEL_PATH, META_MODEL_ID);
@@ -110,5 +58,6 @@ public class TestXmlSchemaMetaModel extends MetaModelTestSuite {
 	@AfterClass
 	public static void tearDown() {
 		MetaModelTestServices.capitalizePackageNames = false;
+		MetaModelTestServices.supportsNoOperations = false;
 	}
 }

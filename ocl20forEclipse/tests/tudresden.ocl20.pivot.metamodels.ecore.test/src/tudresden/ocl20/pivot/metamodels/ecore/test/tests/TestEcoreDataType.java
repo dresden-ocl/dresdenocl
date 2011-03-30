@@ -48,14 +48,14 @@ public class TestEcoreDataType {
 	private static String PRIMITIVETYPE_NAME_NONPRIMITIVEDATATYPE = "NonPrimitiveDataType";
 
 	/** The name of a non-primitive data type in the model under test. */
-	private static String PRIMITIVETYPE_QUALIFIED_NAME_NONPRIMITIVEDATATYPE = MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	private static String PRIMITIVETYPE_QUALIFIED_NAME_NONPRIMITIVEDATATYPE = MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + PRIMITIVETYPE_NAME_NONPRIMITIVEDATATYPE;
 
 	/** The {@link Type} used for the tests in this class. */
 	private static Type nonPrimitiveDataType;
 
 	/** The {@link Namespace} used for the tests in this class. */
-	private static Namespace package2;
+	private static Namespace package1;
 
 	/**
 	 * <p>
@@ -68,8 +68,8 @@ public class TestEcoreDataType {
 				.getTypeUnderTest(
 						PRIMITIVETYPE_QUALIFIED_NAME_NONPRIMITIVEDATATYPE);
 
-		package2 = MetaModelTestServices.getInstance().getNamespaceUnderTest(
-				MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2);
+		package1 = MetaModelTestServices.getInstance().getNamespaceUnderTest(
+				MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);
 	}
 
 	/**
@@ -115,14 +115,13 @@ public class TestEcoreDataType {
 	 */
 	@Test
 	public void testGetNamespace1() {
-	
+
 		String msg;
-	
+
 		msg = "The adaptation of EDataType.getNamespace() seems to be wrong.";
-	
+
 		/* The type should belong to the right name space. */
-		assertEquals(msg, package2,
-				nonPrimitiveDataType.getNamespace());
+		assertEquals(msg, package1, nonPrimitiveDataType.getNamespace());
 	}
 
 	/**

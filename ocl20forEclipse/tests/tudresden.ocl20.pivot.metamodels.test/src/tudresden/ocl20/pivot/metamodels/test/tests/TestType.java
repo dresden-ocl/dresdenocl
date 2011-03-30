@@ -46,8 +46,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestType {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestEnumeration.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestEnumeration.class);
 
 	/** A {@link Type} of the current {@link IModel} under test. */
 	private static Type class1;
@@ -68,36 +68,31 @@ public class TestType {
 	private static Type interface3;
 
 	/** A {@link Namespace} of the current {@link IModel} under test. */
-	private static Namespace package2;
+	private static Namespace package1;
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
 	public static void setUp() {
 
-		class1 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
+		class1 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
 
-		class2 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS2);
+		class2 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS2);
 
-		class3 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
+		class3 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
 
-		interface1 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1);
+		interface1 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1);
 
-		interface2 =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2);
+		interface2 = MetaModelTestServices.getInstance().getTypeUnderTest(
+				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2);
 
 		if (interface1 == null || interface2 == null) {
 
@@ -105,15 +100,12 @@ public class TestType {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						MetaModelTestSuiteMessages.MetaModelTestSuite_InterfaceNotFoundInModel;
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_InterfaceNotFoundInModel;
+				msg += " "
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -121,9 +113,8 @@ public class TestType {
 		}
 		// no else.
 
-		package2 =
-				MetaModelTestServices.getInstance().getNamespaceUnderTest(
-						MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2);
+		package1 = MetaModelTestServices.getInstance().getNamespaceUnderTest(
+				MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);
 	}
 
 	/**
@@ -160,8 +151,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getGenericSuperType() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getGenericSuperType() seems to be wrong for Interfaces.";
 			msg += " The Type " + interface1.getQualifiedName();
 			msg += " should not have Generic Super Types.";
 
@@ -184,8 +174,8 @@ public class TestType {
 		msg = "The adaptation of Type.getName() seems to be wrong.";
 
 		/* The type must have the given name in the model. */
-		assertEquals(msg, MetaModelTestServices.TYPE_NAME_TESTTYPECLASS1, class1
-				.getName());
+		assertEquals(msg, MetaModelTestServices.TYPE_NAME_TESTTYPECLASS1,
+				class1.getName());
 	}
 
 	/**
@@ -207,7 +197,8 @@ public class TestType {
 		if (interface1 != null) {
 
 			/* The type must have the given name in the model. */
-			assertEquals(msg, MetaModelTestServices.TYPE_NAME_TESTTYPEINTERFACE1,
+			assertEquals(msg,
+					MetaModelTestServices.TYPE_NAME_TESTTYPEINTERFACE1,
 					interface1.getName());
 		}
 		// no else.
@@ -226,7 +217,7 @@ public class TestType {
 		msg = "The adaptation of Type.getNamespace() seems to be wrong.";
 
 		/* The type must be located in the name space 'test'. */
-		assertEquals(msg, package2, class1.getNamespace());
+		assertEquals(msg, package1, class1.getNamespace());
 	}
 
 	/**
@@ -239,8 +230,7 @@ public class TestType {
 
 		String msg;
 
-		msg =
-				"The adaptation of Type.getNamespace() seems to be wrong for Interfaces.";
+		msg = "The adaptation of Type.getNamespace() seems to be wrong for Interfaces.";
 
 		/*
 		 * Only execute this test case, if interfaces are adapted by the current
@@ -249,7 +239,7 @@ public class TestType {
 		if (interface1 != null) {
 
 			/* The type must be located in the name space 'test'. */
-			assertEquals(msg, package2, interface1.getNamespace());
+			assertEquals(msg, package1, interface1.getNamespace());
 		}
 		// no else.
 	}
@@ -262,42 +252,45 @@ public class TestType {
 	@Test
 	public void testGetOwnedOperation1() {
 
-		List<Operation> operations;
+		if (!MetaModelTestServices.supportsNoOperations) {
+			List<Operation> operations;
 
-		boolean foundOperation1;
-		boolean foundOperation2;
+			boolean foundOperation1;
+			boolean foundOperation2;
 
-		String msg;
+			String msg;
 
-		msg = "The adaptation of Type.getOwnedOperation() seems to be wrong.";
+			msg = "The adaptation of Type.getOwnedOperation() seems to be wrong.";
 
-		operations = class1.getOwnedOperation();
+			operations = class1.getOwnedOperation();
 
-		/* The type must have exactly one operation. */
-		assertEquals(1, operations.size());
+			/* The type must have exactly one operation. */
+			assertEquals(1, operations.size());
 
-		foundOperation1 = false;
-		foundOperation2 = false;
+			foundOperation1 = false;
+			foundOperation2 = false;
 
-		/* Search for some operations. */
-		for (Operation anOperation : operations) {
+			/* Search for some operations. */
+			for (Operation anOperation : operations) {
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OPERATION1)) {
-				foundOperation1 = true;
+				if (anOperation.getName().equals(
+						MetaModelTestServices.OPERATION_NAME_OPERATION1)) {
+					foundOperation1 = true;
+				}
+
+				else if (anOperation.getName().equals(
+						MetaModelTestServices.OPERATION_NAME_OPERATION2)) {
+					foundOperation2 = true;
+				}
 			}
 
-			else if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OPERATION2)) {
-				foundOperation2 = true;
-			}
+			/* Operation1 should be found. */
+			assertTrue(msg, foundOperation1);
+
+			/* Operation2 should not be found. */
+			assertFalse(msg, foundOperation2);
 		}
-
-		/* Operation1 should be found. */
-		assertTrue(msg, foundOperation1);
-
-		/* Operation2 should not be found. */
-		assertFalse(msg, foundOperation2);
+		// no else.
 	}
 
 	/**
@@ -308,42 +301,45 @@ public class TestType {
 	@Test
 	public void testGetOwnedOperation2() {
 
-		List<Operation> operations;
+		if (!MetaModelTestServices.supportsNoOperations) {
+			List<Operation> operations;
 
-		boolean foundOperation1;
-		boolean foundOperation2;
+			boolean foundOperation1;
+			boolean foundOperation2;
 
-		String msg;
+			String msg;
 
-		msg = "The adaptation of Type.getOwnedOperation() seems to be wrong.";
+			msg = "The adaptation of Type.getOwnedOperation() seems to be wrong.";
 
-		operations = class2.getOwnedOperation();
+			operations = class2.getOwnedOperation();
 
-		/* The type must have exactly one operation. */
-		assertEquals(1, operations.size());
+			/* The type must have exactly one operation. */
+			assertEquals(1, operations.size());
 
-		foundOperation1 = false;
-		foundOperation2 = false;
+			foundOperation1 = false;
+			foundOperation2 = false;
 
-		/* Search for some operations. */
-		for (Operation anOperation : operations) {
+			/* Search for some operations. */
+			for (Operation anOperation : operations) {
 
-			if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OPERATION1)) {
-				foundOperation1 = true;
+				if (anOperation.getName().equals(
+						MetaModelTestServices.OPERATION_NAME_OPERATION1)) {
+					foundOperation1 = true;
+				}
+
+				else if (anOperation.getName().equals(
+						MetaModelTestServices.OPERATION_NAME_OPERATION2)) {
+					foundOperation2 = true;
+				}
 			}
 
-			else if (anOperation.getName().equals(
-					MetaModelTestServices.OPERATION_NAME_OPERATION2)) {
-				foundOperation2 = true;
-			}
+			/* Operation1 should not be found. */
+			assertFalse(msg, foundOperation1);
+
+			/* Operation2 should be found. */
+			assertTrue(msg, foundOperation2);
 		}
-
-		/* Operation1 should not be found. */
-		assertFalse(msg, foundOperation1);
-
-		/* Operation2 should be found. */
-		assertTrue(msg, foundOperation2);
+		// no else.
 	}
 
 	/**
@@ -367,8 +363,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getOwnedOperation() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getOwnedOperation() seems to be wrong for Interfaces.";
 
 			operations = interface1.getOwnedOperation();
 
@@ -422,8 +417,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getOwnedOperation() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getOwnedOperation() seems to be wrong for Interfaces.";
 
 			operations = interface2.getOwnedOperation();
 
@@ -558,8 +552,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getOwnedProperty() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getOwnedProperty() seems to be wrong for Interfaces.";
 
 			/* The interface must not have properties. */
 			assertEquals(msg, 0, interface1.getOwnedProperty().size());
@@ -583,8 +576,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getOwnedProperty() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getOwnedProperty() seems to be wrong for Interfaces.";
 
 			/* The interface must not have properties. */
 			assertEquals(msg, 0, interface2.getOwnedProperty().size());
@@ -626,8 +618,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getOwnedTypeParameter() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getOwnedTypeParameter() seems to be wrong for Interfaces.";
 			msg += " The Type " + interface1.getQualifiedName();
 			msg += " should not have Type Parameters.";
 
@@ -650,7 +641,7 @@ public class TestType {
 		msg = "The adaptation of Type.getOwner() seems to be wrong.";
 
 		/* The type must be owned by the name space 'test'. */
-		assertEquals(msg, package2, class1.getOwner());
+		assertEquals(msg, package1, class1.getOwner());
 	}
 
 	/**
@@ -669,11 +660,10 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getOwner() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getOwner() seems to be wrong for Interfaces.";
 
 			/* The type must be owned by the name space 'test'. */
-			assertEquals(msg, package2, interface1.getOwner());
+			assertEquals(msg, package1, interface1.getOwner());
 		}
 		// no else.
 	}
@@ -735,8 +725,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getSuperType() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getSuperType() seems to be wrong for Interfaces.";
 
 			/*
 			 * The type must not have super types (but general super types like
@@ -766,8 +755,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getSuperType() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getSuperType() seems to be wrong for Interfaces.";
 
 			/* The type must not have at least one super type. */
 			assertTrue(msg, 1 <= interface2.getSuperType().size());
@@ -794,8 +782,7 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getSuperType() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getSuperType() seems to be wrong for Interfaces.";
 
 			/* The type must not have at least two super types. */
 			assertTrue(msg, 2 <= class3.getSuperType().size());
@@ -822,8 +809,12 @@ public class TestType {
 		msg = "The adaptation of Type.getQualifiedName() seems to be wrong.";
 
 		/* The type must have the same name as in the model. */
-		assertEquals(msg, MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1,
-				class1.getQualifiedName());
+		assertEquals(
+				msg,
+				MetaModelTestServices
+						.probablyToLowerCase(MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1),
+				MetaModelTestServices.probablyToLowerCase(class1
+						.getQualifiedName()));
 	}
 
 	/**
@@ -842,11 +833,11 @@ public class TestType {
 
 			String msg;
 
-			msg =
-					"The adaptation of Type.getQualifiedName() seems to be wrong for Interfaces.";
+			msg = "The adaptation of Type.getQualifiedName() seems to be wrong for Interfaces.";
 
 			/* The type must have the same name as in the model. */
-			assertEquals(msg,
+			assertEquals(
+					msg,
 					MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1,
 					interface1.getQualifiedName());
 		}

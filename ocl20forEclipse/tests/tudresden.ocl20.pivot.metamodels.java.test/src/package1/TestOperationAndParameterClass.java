@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package package1.package2;
+package package1;
 
 import java.lang.reflect.Method;
 import java.util.Collection;

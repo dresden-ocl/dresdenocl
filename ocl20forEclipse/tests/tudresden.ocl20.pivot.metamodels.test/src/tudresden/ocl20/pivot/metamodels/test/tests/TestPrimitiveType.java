@@ -117,16 +117,14 @@ public class TestPrimitiveType {
 				String msg;
 
 				msg = NLS
-						.bind(
-								MetaModelTestSuiteMessages.MetaModelTestSuite_ClassNotFoundInModel,
+						.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_ClassNotFoundInModel,
 								MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS,
 								PrimitiveType.class.getName());
 				msg += " "
-						+ NLS
-								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-										MetaModelTestServices.getInstance()
-												.getMetaModelUnderTestID());
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -147,8 +145,15 @@ public class TestPrimitiveType {
 				String primtiveTypeName;
 
 				PrimitiveType aPrimitiveType;
-
 				aPropertiesName = aProperty.getName();
+
+				if (!(aProperty.getType() instanceof PrimitiveType)) {
+					org.junit.Assert
+							.fail("Found expected PrimitiveType that is no PrimitiveType: "
+									+ aProperty.getType().getQualifiedName());
+				}
+				// no else.
+
 				aPrimitiveType = (PrimitiveType) aProperty.getType();
 
 				primtiveTypeName = null;
@@ -218,16 +223,13 @@ public class TestPrimitiveType {
 						String msg;
 
 						msg = NLS
-								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_UnknownPrimitiveTypeKind,
+								.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_UnknownPrimitiveTypeKind,
 										aPropertiesName);
 						msg += " "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices
-														.getInstance()
-														.getMetaModelUnderTestID());
+								+ NLS.bind(
+										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+										MetaModelTestServices.getInstance()
+												.getMetaModelUnderTestID());
 
 						LOGGER.warn(msg);
 					}
@@ -247,11 +249,10 @@ public class TestPrimitiveType {
 
 				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeFound;
 				msg += " "
-						+ NLS
-								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-										MetaModelTestServices.getInstance()
-												.getMetaModelUnderTestID());
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -268,15 +269,13 @@ public class TestPrimitiveType {
 					String msg;
 
 					msg = NLS
-							.bind(
-									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+							.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
 									PrimitiveTypeKind.BOOLEAN.getName());
 					msg += " "
-							+ NLS
-									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-											MetaModelTestServices.getInstance()
-													.getMetaModelUnderTestID());
+							+ NLS.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+									MetaModelTestServices.getInstance()
+											.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -292,15 +291,13 @@ public class TestPrimitiveType {
 					String msg;
 
 					msg = NLS
-							.bind(
-									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+							.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
 									PrimitiveTypeKind.INTEGER.getName());
 					msg += " "
-							+ NLS
-									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-											MetaModelTestServices.getInstance()
-													.getMetaModelUnderTestID());
+							+ NLS.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+									MetaModelTestServices.getInstance()
+											.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -316,15 +313,13 @@ public class TestPrimitiveType {
 					String msg;
 
 					msg = NLS
-							.bind(
-									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+							.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
 									PrimitiveTypeKind.REAL.getName());
 					msg += " "
-							+ NLS
-									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-											MetaModelTestServices.getInstance()
-													.getMetaModelUnderTestID());
+							+ NLS.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+									MetaModelTestServices.getInstance()
+											.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}
@@ -340,15 +335,13 @@ public class TestPrimitiveType {
 					String msg;
 
 					msg = NLS
-							.bind(
-									MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
+							.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_NoPrimitiveTypeOfKindFound,
 									PrimitiveTypeKind.STRING.getName());
 					msg += " "
-							+ NLS
-									.bind(
-											MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-											MetaModelTestServices.getInstance()
-													.getMetaModelUnderTestID());
+							+ NLS.bind(
+									MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+									MetaModelTestServices.getInstance()
+											.getMetaModelUnderTestID());
 
 					LOGGER.warn(msg);
 				}

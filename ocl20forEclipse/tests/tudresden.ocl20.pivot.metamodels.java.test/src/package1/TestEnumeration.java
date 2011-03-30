@@ -11,16 +11,15 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package package1.package2;
+package package1;
 
 /**
  * <p>
- * A simple {@link Class} used to test the adaptation of java {@link Class}es.
+ * A simple Enumeration used to test the adaptation of java Enumerations.
  * </p>
  * 
  * @author Claas Wilke
  */
-public interface TestTypeInterface2 extends TestTypeInterface1 {
-
-	public void operation2();
+public enum TestEnumeration {
+	TestLiteral1, TestLiteral2
 }

@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package package1.package2;
+package package1;
 
 /**
  * <p>
@@ -20,7 +20,11 @@ package package1.package2;
  * 
  * @author Claas Wilke
  */
-public interface TestTypeInterface1 {
+public class TestTypeClass1 {
 
-	public void operation1();
+	public TestTypeClass1 property1;
+
+	public void operation1() {
+
+	}
 }

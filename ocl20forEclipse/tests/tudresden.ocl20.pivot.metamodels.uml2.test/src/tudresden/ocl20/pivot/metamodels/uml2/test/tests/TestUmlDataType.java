@@ -45,19 +45,17 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 public class TestUmlDataType {
 
 	/** The name of a non-primitive data type in the model under test. */
-	private static String DATATYPE_NAME_DATATYPE =
-			"DataType";
+	private static String DATATYPE_NAME_DATATYPE = "DataType";
 
 	/** The name of a non-primitive data type in the model under test. */
-	private static String DATATYPE_QUALIFIED_NAME_DATATYPE =
-			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::"
-					+ DATATYPE_NAME_DATATYPE;
+	private static String DATATYPE_QUALIFIED_NAME_DATATYPE = MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1
+			+ "::" + DATATYPE_NAME_DATATYPE;
 
 	/** The {@link Type} used for the tests in this class. */
 	private static Type dataType;
 
 	/** The {@link Namespace} used for the tests in this class. */
-	private static Namespace package2;
+	private static Namespace package1;
 
 	/**
 	 * <p>
@@ -67,13 +65,11 @@ public class TestUmlDataType {
 	@BeforeClass
 	public static void setUp() {
 
-		dataType =
-				MetaModelTestServices.getInstance().getTypeUnderTest(
-						DATATYPE_QUALIFIED_NAME_DATATYPE);
+		dataType = MetaModelTestServices.getInstance().getTypeUnderTest(
+				DATATYPE_QUALIFIED_NAME_DATATYPE);
 
-		package2 =
-				MetaModelTestServices.getInstance().getNamespaceUnderTest(
-						MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2);
+		package1 = MetaModelTestServices.getInstance().getNamespaceUnderTest(
+				MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);
 	}
 
 	/**
@@ -106,8 +102,7 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getGenericSuperType() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getGenericSuperType() seems to be wrong.";
 		msg += " The Type " + dataType.getQualifiedName();
 		msg += " should not have Generic Super Types.";
 
@@ -125,12 +120,10 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getName() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getName() seems to be wrong.";
 
 		/* The type should have the right name. */
-		assertEquals(msg, DATATYPE_NAME_DATATYPE,
-				dataType.getName());
+		assertEquals(msg, DATATYPE_NAME_DATATYPE, dataType.getName());
 	}
 
 	/**
@@ -143,11 +136,10 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getNamespace() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getNamespace() seems to be wrong.";
 
 		/* The type should belong to the right name space. */
-		assertEquals(msg, package2, dataType.getNamespace());
+		assertEquals(msg, package1, dataType.getNamespace());
 	}
 
 	/**
@@ -166,8 +158,7 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getOwnedOperation() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getOwnedOperation() seems to be wrong.";
 
 		operations = dataType.getOwnedOperation();
 
@@ -214,8 +205,7 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getOwnedProperty() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getOwnedProperty() seems to be wrong.";
 
 		properties = dataType.getOwnedProperty();
 
@@ -254,19 +244,18 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getOwnedTypeParameter() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getOwnedTypeParameter() seems to be wrong.";
 		msg += " The Type " + dataType.getQualifiedName();
 		msg += " should not have Type Parameters.";
 
 		/* The type must not have type parameters. */
-		assertEquals(msg, 0, dataType.getOwnedTypeParameter()
-				.size());
+		assertEquals(msg, 0, dataType.getOwnedTypeParameter().size());
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link UML2TypePrimitiveType#getOwner()}.
+	 * A test case testing the operation
+	 * {@link UML2TypePrimitiveType#getOwner()}.
 	 * </p>
 	 */
 	@Test
@@ -277,7 +266,7 @@ public class TestUmlDataType {
 		msg = "The adaptation of UML2DataType.getOwner() seems to be wrong.";
 
 		/* The type must be owned by the name space 'test'. */
-		assertEquals(msg, package2, dataType.getOwner());
+		assertEquals(msg, package1, dataType.getOwner());
 	}
 
 	/**
@@ -290,8 +279,7 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getQualifiedName() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getQualifiedName() seems to be wrong.";
 
 		/* The type should have the right qualified name. */
 		assertEquals(msg, DATATYPE_QUALIFIED_NAME_DATATYPE,
@@ -309,8 +297,7 @@ public class TestUmlDataType {
 
 		String msg;
 
-		msg =
-				"The adaptation of UML2DataType.getSuperType() seems to be wrong.";
+		msg = "The adaptation of UML2DataType.getSuperType() seems to be wrong.";
 		msg += " UML2TypePrimitiveTypes cannot have super types.";
 
 		/* The type must not have super types. */

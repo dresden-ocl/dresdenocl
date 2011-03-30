@@ -22,8 +22,11 @@ import tudresden.ocl20.pivot.interpreter.test.AllOclInterpreterTests;
 import tudresden.ocl20.pivot.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import tudresden.ocl20.pivot.metamodels.java.test.tests.TestJavaMetaModel;
 import tudresden.ocl20.pivot.metamodels.uml2.test.tests.AllUml2MetaModelTests;
+import tudresden.ocl20.pivot.metamodels.xsd.test.AllXmlSchemaMetamodelTests;
 import tudresden.ocl20.pivot.modelbus.test.AllModelbusTests;
+import tudresden.ocl20.pivot.modelinstancetype.ecore.test.AllEcoreModelInstanceTypeTests;
 import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTypeTests;
+import tudresden.ocl20.pivot.modelinstancetype.xml.test.AllXmlInstanceTests;
 import tudresden.ocl20.pivot.ocl2parser.test.AllOCL2ParserTests;
 import tudresden.ocl20.pivot.standardlibrary.java.test.tests.AllStandardLibraryTests;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.AllOcl2SqlTests;
@@ -41,7 +44,6 @@ import tudresden.ocl20.pivot.tools.transformation.test.AllTestsTransformation;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-// FIXME Claas: Collect all test suites.
 @Suite.SuiteClasses({
 
 /* Core Tests: */
@@ -49,15 +51,14 @@ EssentialOCLAllTests.class, AllModelbusTests.class,
 
 /* Metamodel tests: */
 AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
-		AllUml2MetaModelTests.class,
-		/* TODO AllXmlSchemaMetamodelTests .class, */
+		AllUml2MetaModelTests.class, AllXmlSchemaMetamodelTests.class,
 
 		/* Parser tests: */
 		AllOCL2ParserTests.class,
 
 		/* Model Instance Type tests: */
-		/* TODO AllEcoreModelInstanceTypeTests.class, */
-		AllJavaModelInstanceTypeTests.class, /* TODO AllXmlInstanceTests.class, */
+		AllEcoreModelInstanceTypeTests.class,
+		AllJavaModelInstanceTypeTests.class, AllXmlInstanceTests.class,
 
 		/* Interpreter Tests: */
 		AllStandardLibraryTests.class, AllOclInterpreterTests.class,

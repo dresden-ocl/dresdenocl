@@ -87,44 +87,44 @@ public final class MetaModelTestServices {
 	public static final String TYPE_NAME_TESTTYPEINTERFACE2 = "TestTypeInterface2";
 
 	/** The qualified name of the {@link Type} <code>TestTypeClass1</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS1 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS1 = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTTYPECLASS1;
 
 	/** The qualified name of the {@link Type} <code>TestTypeClass2</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS2 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPECLASS2 = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTTYPECLASS2;
 
 	/** The qualified name of the {@link Type} <code>TestPropertyClass</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTPROPERTYCLASS;
 
 	/**
 	 * The qualified name of the {@link Type}
 	 * <code>TestOperationAndParameterClass</code>.
 	 */
-	public static final String TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTOPERATIONANDPARAMETERCLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTOPERATIONANDPARAMETERCLASS;
 
 	/**
 	 * The qualified name of the {@link Type}
 	 * <code>TestPrimitiveTypeClass</code>.
 	 */
-	public static final String TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTPRIMITIVETYPECLASS = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTPRIMITIVETYPECLASS;
 
 	/** The qualified name of the {@link Type} <code>TestTypeInterface1</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE1 = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTTYPEINTERFACE1;
 
 	/** The qualified name of the {@link Type} <code>TestTypeInterface2</code>. */
-	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2 = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + TYPE_NAME_TESTTYPEINTERFACE2;
 
 	/** The name of the {@link Type} <code>TestEnumeration</code>. */
 	public static final String ENUMERATION_NAME_ENUMERATION1 = "TestEnumeration";
 
 	/** The qualified name of the {@link Type} <code>TestEnumeration</code>. */
-	public static final String ENUMERATION_QUALIFIED_NAME_ENUMERATION1 = NAMESPACE_QUALIFIED_NAME_PACKAGE2
+	public static final String ENUMERATION_QUALIFIED_NAME_ENUMERATION1 = NAMESPACE_QUALIFIED_NAME_PACKAGE1
 			+ "::" + ENUMERATION_NAME_ENUMERATION1;
 
 	/**
@@ -321,6 +321,11 @@ public final class MetaModelTestServices {
 	 */
 	public static boolean capitalizePackageNames = false;
 
+	/**
+	 * Indicates whether or not an adapted metamodel supports operations.
+	 */
+	public static boolean supportsNoOperations = false;
+
 	/** The only instance of {@link MetaModelTestServices}. */
 	private static MetaModelTestServices myInstance;
 
@@ -361,6 +366,23 @@ public final class MetaModelTestServices {
 		// no else.
 
 		return myInstance;
+	}
+
+	/**
+	 * Helper method that lower cases a String if the
+	 * {@link MetaModelTestServices#capitalizePackageNames} flag is set.
+	 * 
+	 * @param string
+	 *            The {@link String} to be lower cased.
+	 * @return The same {@link String} (probably with a lower cases).
+	 */
+	public static String probablyToLowerCase(String string) {
+		if (string == null || string.length() == 0)
+			return string;
+		else if (capitalizePackageNames)
+			return string.toLowerCase();
+		else
+			return string;
 	}
 
 	/**
@@ -541,6 +563,25 @@ public final class MetaModelTestServices {
 
 		/* Get the model. */
 		model = this.getModelUnderTest();
+
+		if (capitalizePackageNames) {
+			StringBuffer newQualifiedName = new StringBuffer();
+			for (String elem : qualifiedName.split("::")) {
+				if (newQualifiedName.length() == 0
+						&& elem.equals(ModelConstants.ROOT_PACKAGE_NAME))
+					newQualifiedName.append(elem);
+				else {
+					if (newQualifiedName.length() > 0)
+						newQualifiedName.append("::");
+					// no else.
+					newQualifiedName.append(elem.substring(0, 1).toUpperCase()
+							+ elem.substring(1, elem.length()));
+				}
+			}
+			// end for.
+			qualifiedName = newQualifiedName.toString();
+		}
+		// no else.
 
 		/* Get the type to test. */
 		try {

@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -52,7 +53,7 @@ public class TestProperty {
 	private static Type class1;
 
 	/** A {@link Type} of the current {@link IModel} under test. */
-	private static Type class3;
+	private static Type testPropertyClass;
 
 	/** A {@link Property} of the current {@link IModel} under test. */
 	private static Property associationEnd1;
@@ -102,97 +103,103 @@ public class TestProperty {
 		class1 = MetaModelTestServices.getInstance().getTypeUnderTest(
 				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPECLASS1);
 
-		class3 = MetaModelTestServices.getInstance().getTypeUnderTest(
-				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
+		testPropertyClass = MetaModelTestServices
+				.getInstance()
+				.getTypeUnderTest(
+						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
 
 		/* Find some properties in the class. */
-		for (Property aProperty : class3.getOwnedProperty()) {
+		for (Property aProperty : testPropertyClass.getOwnedProperty()) {
 
 			if (aProperty.getName().equals(
 					MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEPROPERTY)) {
 				nonmultipleProperty = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty.getName().equals(
 					MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY)) {
 				staticProperty = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY)) {
 				orderedMultipleProperty = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY)) {
 				unorderedMultipleProperty = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty.getName().equals(
 					MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEPROPERTY)) {
 				uniqueMultipleProperty = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY)) {
 				nonuniqueMultipleProperty = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND)) {
 				associationEnd1 = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty.getName().equals(
 					MetaModelTestServices.PROPERTY_NAME_STATICASSOCIATONEND)) {
 				staticAssociationEnd = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND)) {
 				orderedMultipleAssociationEnd = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND)) {
 				unorderedMultipleAssociationEnd = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND)) {
 				uniqueMultipleAssociationEnd = aProperty;
+				continue;
 			}
 			// no else.
 
 			if (aProperty
 					.getName()
-					.equals(
-							MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND)) {
+					.equals(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND)) {
 				nonuniqueMultipleAssociationEnd = aProperty;
+				continue;
 			}
 			// no else.
 		}
@@ -208,11 +215,10 @@ public class TestProperty {
 
 				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_AssociationEndNotFound;
 				msg += " "
-						+ NLS
-								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-										MetaModelTestServices.getInstance()
-												.getMetaModelUnderTestID());
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -227,22 +233,39 @@ public class TestProperty {
 				String msg;
 
 				msg = NLS
-						.bind(
-								MetaModelTestSuiteMessages.MetaModelTestSuite_PropertyNotFoundInModel,
+						.bind(MetaModelTestSuiteMessages.MetaModelTestSuite_PropertyNotFoundInModel,
 								MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY,
 								"Property.isStatic()");
 				msg += " "
-						+ NLS
-								.bind(
-										MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-										MetaModelTestServices.getInstance()
-												.getMetaModelUnderTestID());
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
 			// no else.
 		}
 		// no else.
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		class1 = null;
+		testPropertyClass = null;
+		associationEnd1 = null;
+		staticAssociationEnd = null;
+		orderedMultipleAssociationEnd = null;
+		uniqueMultipleAssociationEnd = null;
+		unorderedMultipleAssociationEnd = null;
+		uniqueMultipleAssociationEnd = null;
+		nonuniqueMultipleAssociationEnd = null;
+		nonmultipleProperty = null;
+		staticProperty = null;
+		orderedMultipleProperty = null;
+		uniqueMultipleProperty = null;
+		unorderedMultipleProperty = null;
+		nonuniqueMultipleProperty = null;
 	}
 
 	/**
@@ -304,7 +327,7 @@ public class TestProperty {
 		msg += "A Property must be owned by the Type to which it belongs.";
 
 		/* The property must be owned by the same type as in the model. */
-		assertEquals(msg, class3, nonmultipleProperty.getOwner());
+		assertEquals(msg, testPropertyClass, nonmultipleProperty.getOwner());
 	}
 
 	/**
@@ -327,7 +350,7 @@ public class TestProperty {
 			msg += "A Property must be owned by the Type to which it belongs.";
 
 			/* The property must be owned by the same type as in the model. */
-			assertEquals(msg, class3, associationEnd1.getOwner());
+			assertEquals(msg, testPropertyClass, associationEnd1.getOwner());
 			// no else.
 		}
 	}
@@ -345,7 +368,8 @@ public class TestProperty {
 		msg = "The adaptation of Property.getOwningType() seems to be wrong.";
 
 		/* The property must be owned by the same type as in the model. */
-		assertEquals(msg, class3, nonmultipleProperty.getOwningType());
+		assertEquals(msg, testPropertyClass,
+				nonmultipleProperty.getOwningType());
 	}
 
 	/**
@@ -367,7 +391,8 @@ public class TestProperty {
 			msg = "The adaptation of Property.getOwningType() seems to be wrong for Associations.";
 
 			/* The property must be owned by the same type as in the model. */
-			assertEquals(msg, class3, associationEnd1.getOwningType());
+			assertEquals(msg, testPropertyClass,
+					associationEnd1.getOwningType());
 		}
 		// no else.
 	}
@@ -427,9 +452,14 @@ public class TestProperty {
 		msg = "The adaptation of Property.getType() seems to be wrong.";
 
 		/* The property must be multiple. */
-		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getSequenceType(class1),
-				orderedMultipleProperty.getType());
+		assertTrue(
+				msg,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSequenceType(class1)
+						.equals(orderedMultipleProperty.getType())
+						|| EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOrderedSetType(class1)
+								.equals(orderedMultipleProperty.getType()));
 	}
 
 	/**
@@ -520,9 +550,14 @@ public class TestProperty {
 		msg = "The adaptation of Property.getType() seems to be wrong.";
 
 		/* The property must be multiple. */
-		assertEquals(msg, EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getSetType(class1), uniqueMultipleProperty
-				.getType());
+		assertTrue(
+				msg,
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getSetType(class1)
+						.equals(uniqueMultipleProperty.getType())
+						|| EssentialOclPlugin.getOclLibraryProvider()
+								.getOclLibrary().getOrderedSetType(class1)
+								.equals(uniqueMultipleProperty.getType()));
 	}
 
 	/**
@@ -614,8 +649,10 @@ public class TestProperty {
 		/* The property must have the same name as in the model. */
 		assertEquals(
 				msg,
-				MetaModelTestServices.PROPERTY_QUALIFIED_NAME_NONMULTIPLEPROPERTY,
-				nonmultipleProperty.getQualifiedName());
+				MetaModelTestServices
+						.probablyToLowerCase(MetaModelTestServices.PROPERTY_QUALIFIED_NAME_NONMULTIPLEPROPERTY),
+				MetaModelTestServices.probablyToLowerCase(nonmultipleProperty
+						.getQualifiedName()));
 	}
 
 	/**

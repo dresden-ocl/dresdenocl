@@ -43,7 +43,7 @@ public class TestInnerTypes {
 
 	/** The name of a {@link Type} in the model under test. */
 	private static String NAMESPACE_QUALIFIEDNAME_TESTINNERCLASSESCLASS =
-			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::"
+			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1 + "::"
 					+ NAMESPACE_NAME_TESTINNERCLASSESCLASS;
 
 	/** The name of a {@link Type} in the model under test. */
@@ -76,7 +76,7 @@ public class TestInnerTypes {
 
 	/** The name of a {@link Type} in the model under test. */
 	private static String TYPE_QUALIFIED_NAME_TESTINNERCLASSESCLASS =
-			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::"
+			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1 + "::"
 					+ TYPE_NAME_TESTINNERCLASSESCLASS;
 
 	/** A {@link Type} used for the tests in this class. */

@@ -50,14 +50,14 @@ public class TestUmlTypePrimitiveType {
 
 	/** The name of a non-primitive data type in the model under test. */
 	private static String PRIMITIVETYPE_QUALIFIED_NAME_NONPRIMITIVEPRIMITIVETYPE =
-			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2 + "::"
+			MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1 + "::"
 					+ PRIMITIVETYPE_NAME_NONPRIMITIVEPRIMITIVETYPE;
 
 	/** The {@link Type} used for the tests in this class. */
 	private static Type nonPrimitivePrimitiveType;
 
 	/** The {@link Namespace} used for the tests in this class. */
-	private static Namespace package2;
+	private static Namespace package1;
 
 	/**
 	 * <p>
@@ -71,9 +71,9 @@ public class TestUmlTypePrimitiveType {
 				MetaModelTestServices.getInstance().getTypeUnderTest(
 						PRIMITIVETYPE_QUALIFIED_NAME_NONPRIMITIVEPRIMITIVETYPE);
 
-		package2 =
+		package1 =
 				MetaModelTestServices.getInstance().getNamespaceUnderTest(
-						MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE2);
+						MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class TestUmlTypePrimitiveType {
 				"The adaptation of UML2TypePrimitiveType.getNamespace() seems to be wrong.";
 
 		/* The type should belong to the right name space. */
-		assertEquals(msg, package2, nonPrimitivePrimitiveType.getNamespace());
+		assertEquals(msg, package1, nonPrimitivePrimitiveType.getNamespace());
 	}
 
 	/**
@@ -279,7 +279,7 @@ public class TestUmlTypePrimitiveType {
 		msg = "The adaptation of Type.getOwner() seems to be wrong.";
 
 		/* The type must be owned by the name space 'test'. */
-		assertEquals(msg, package2, nonPrimitivePrimitiveType.getOwner());
+		assertEquals(msg, package1, nonPrimitivePrimitiveType.getOwner());
 	}
 
 	/**
