@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Set;
 
 import org.junit.Test;
+import org.w3c.dom.Node;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
@@ -97,6 +98,6 @@ public class TestBugFix03 extends AbstractXmlModelInstanceTest {
 		Object objectValue = ((IModelInstanceObject) value).getObject();
 
 		assertNotNull(objectValue);
-		assertEquals(1, objectValue);
+		assertEquals("1", ((Node)objectValue).getTextContent());
 	}
 }

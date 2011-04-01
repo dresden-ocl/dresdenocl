@@ -24,7 +24,8 @@ import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
  * 
  * @author Claas Wilke
  */
-public abstract class AbstractXmlModelInstanceTest {
+public abstract class AbstractXmlModelInstanceTest extends
+		AbstractDresdenOclTest {
 
 	/**
 	 * <p>
