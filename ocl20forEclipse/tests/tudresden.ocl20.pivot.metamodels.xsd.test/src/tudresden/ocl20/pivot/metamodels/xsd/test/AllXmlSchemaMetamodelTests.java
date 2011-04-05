@@ -24,7 +24,7 @@ import org.junit.runners.Suite;
  * @author Claas Wilke
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestXmlSchemaMetaModel.class })
+@Suite.SuiteClasses({ TestXmlSchemaMetaModel.class, TestXmlSchemaIOSB.class })
 public class AllXmlSchemaMetamodelTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
