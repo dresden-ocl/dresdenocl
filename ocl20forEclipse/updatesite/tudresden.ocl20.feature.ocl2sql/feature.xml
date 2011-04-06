@@ -210,11 +210,6 @@ Library.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="tudresden.ocl20.pivot.tools.template"/>
       <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite"/>
-      <import plugin="org.junit4"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
-      <import plugin="tudresden.ocl20.pivot.parser"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl"/>
    </requires>
@@ -249,20 +244,6 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.tools.transformation.pivot2sql"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.transformation.pivot2sql.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

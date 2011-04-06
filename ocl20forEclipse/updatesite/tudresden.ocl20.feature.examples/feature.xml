@@ -196,6 +196,23 @@ Library.
       <import plugin="org.eclipse.emf.common.ui"/>
       <import plugin="tudresden.ocl20.logging"/>
       <import plugin="tudresden.ocl20.pivot.examples.royalandloyal" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.junit" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.ecore"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.java"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.uml2.uml"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore"/>
+      <import plugin="org.eclipse.xsd"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template.sql"/>
+      <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
+      <import plugin="tudresden.ocl20.pivot.tools.transformation.pivot2sql"/>
    </requires>
 
    <plugin
@@ -235,6 +252,13 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.examples.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.testsuite.abstract"
          download-size="0"
          install-size="0"
          version="0.0.0"

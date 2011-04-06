@@ -190,9 +190,6 @@ Library.
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
-      <import plugin="tudresden.ocl20.pivot.parser"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
@@ -202,13 +199,6 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.tools.codegen.ocl2java"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

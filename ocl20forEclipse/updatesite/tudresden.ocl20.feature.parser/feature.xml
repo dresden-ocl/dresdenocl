@@ -198,10 +198,10 @@ Library.
       <import plugin="org.eclipse.emf"/>
       <import plugin="org.eclipse.emf.codegen.ecore"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.emf.workspace"/>
       <import plugin="org.emftext.commons.antlr3_2_0"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
@@ -213,11 +213,9 @@ Library.
       <import plugin="tudresden.ocl20.pivot.model"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.emftext.access"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="tudresden.ocl20.pivot.pivotmodel.edit"/>
+      <import plugin="org.eclipse.emf.validation"/>
    </requires>
 
    <plugin
@@ -263,13 +261,6 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.language.ocl.staticsemantics"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.ocl2parser.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

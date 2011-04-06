@@ -196,8 +196,6 @@ Library.
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="greaterOrEqual"/>
    </requires>
 
@@ -223,21 +221,7 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.template.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="tudresden.ocl20.pivot.tools.transformation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.transformation.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

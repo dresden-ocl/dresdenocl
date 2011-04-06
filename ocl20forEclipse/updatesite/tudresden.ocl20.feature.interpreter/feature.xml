@@ -189,23 +189,12 @@ Library.
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.standardlibrary.java" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.examples.royalandloyal" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="tudresden.ocl20.pivot.interpreter"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.interpreter.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
