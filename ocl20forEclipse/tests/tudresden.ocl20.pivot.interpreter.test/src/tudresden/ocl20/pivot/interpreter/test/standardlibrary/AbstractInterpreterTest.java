@@ -58,7 +58,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest{
+public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest {
 
 	/** The name of a test {@link IModelInstance} for this test suite. */
 	protected static final String INSTANCE1_NAME = "package1/Instance1";
@@ -187,6 +187,24 @@ public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest{
 	 */
 	protected void assertIsInvalid(IInterpretationResult result) {
 		assertTrue(result.getResult().oclIsInvalid().isTrue());
+	}
+
+	/**
+	 * <p>
+	 * Helper method to assert that a given {@link IInterpretationResult} is not
+	 * <code>invalid</code>.
+	 * </p>
+	 * 
+	 * @param result
+	 *            The {@link IInterpretationResult} to be checked.
+	 */
+	protected void assertIsNotInvalid(IInterpretationResult result) {
+		Throwable throwable = result.getResult().getInvalidReason();
+		String msg = "";
+		if (throwable != null && throwable.getMessage() != null)
+			msg = throwable.getMessage();
+		// no else.
+		assertFalse(msg, result.getResult().oclIsInvalid().isTrue());
 	}
 
 	/**

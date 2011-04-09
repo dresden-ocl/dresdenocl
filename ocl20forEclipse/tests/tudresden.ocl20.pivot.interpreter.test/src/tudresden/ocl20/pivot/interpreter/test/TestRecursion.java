@@ -98,11 +98,11 @@ public class TestRecursion extends AbstractInterpreterTest {
 		assertNotNull(results);
 		assertEquals(2, results.size());
 
-		assertFalse(results.get(0).getResult().oclIsInvalid().isTrue());
+		assertIsNotInvalid(results.get(0));
 		assertFalse(results.get(0).getResult().oclIsUndefined().isTrue());
 		assertTrue(results.get(0).getResult() instanceof OclInteger);
 
-		assertFalse(results.get(1).getResult().oclIsInvalid().isTrue());
+		assertIsNotInvalid(results.get(1));
 		assertFalse(results.get(1).getResult().oclIsUndefined().isTrue());
 		assertTrue(results.get(1).getResult() instanceof OclInteger);
 
