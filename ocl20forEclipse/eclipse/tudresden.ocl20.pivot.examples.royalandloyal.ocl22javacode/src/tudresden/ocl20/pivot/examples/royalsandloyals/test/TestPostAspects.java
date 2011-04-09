@@ -1,5 +1,6 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -200,6 +201,6 @@ public class TestPostAspects {
 		
 		date1 = Date.now();
 		
-		System.out.println(date1);
+		assertNotNull(date1);
 	}
 }
