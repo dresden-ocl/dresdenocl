@@ -19,13 +19,13 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Ocl22JavaAspectJTestPlugin extends AbstractUIPlugin {
+public class Ocl22JavaAspectJTestPlugin extends Plugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj";
