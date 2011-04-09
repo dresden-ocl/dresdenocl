@@ -428,6 +428,126 @@ Figure~\ref{pic:intro:loadconstraints03}.
 
 	
 
+\section{Possible Use Cases of Dresden OCL using different Models and Model
+Instances}
+\label{sec:usecases}
+
+Dresden \acs{OCL} can be used in the context of different kind of models and
+instances and even at different modeling layers. This section tries to name some 
+prominent examples for possible use cases of Dresden \acs{OCL} w.r.t.
+different kinds of models and instances. Readers who are not interested in
+these details are encouraged to skip this section.
+
+In general, Dresden \acs{OCL} supports the use of \acs{OCL} at two different 
+levels: First, \acs{OCL} constraints can be defined on a metamodel and evaluated
+on instances of this metamodel (i.e., models). In this context,
+\acs{OCL} constraints are often called \emph{\acf{WFRs}}. Second, \acs{OCL}
+constraints can be defined on a model and evaluated on instances of this model
+(i.e., runtime objects or data). These constraints are often called
+\emph{\acf{BRs}}. Examples for both use cases are shown in
+Table~\ref{tab:usecases} and shortly explained in the following.
+
+\begin{table}[!t]
+\begin{tabular}{|p{7cm}p{7cm}|}
+  \hline
+  \textbf{WFR Specification and Evaluation} & \\
+  \hline
+  EMF/Ecore-based model,\newline e.g., \texttt{mydsl.ecore} &
+  EMF/Ecore-based instance (model),\newline e.g., \texttt{model01.mydsl} \\
+  \hline
+  UML metamodel,\newline \texttt{uml.ecore} of MDT/UML &
+  UML instance (model),\newline e.g., \texttt{model01.uml} \\
+  \hline
+  \hline
+  \textbf{BR Specification and Evaluation} & \\
+  \hline
+  UML-based model,\newline e.g., \texttt{model01.uml} &
+  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.class} \\
+  \hline
+  Java classes,\newline e.g., \texttt{Model01.class} &
+  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.class} \\
+  \hline
+  XML Schema (\acs{XSD}),\newline e.g., \texttt{mySchema.xsd} &
+  XML instance (data),\newline e.g., \texttt{Instance01.xml} \\
+  \hline
+\end{tabular}
+\caption{Different possible use cases of Dresden OCL.}
+\label{tab:usecases}
+\end{table}
+
+
+\subsection{Use Cases of Dresden OCL for Well-Formedness Rules}
+
+Dresden \acs{OCL} supports different scenarios, where \acs{OCL} rules can be
+specified on metamodels as \acs{WFRs}. The mose prominent scenarios are shortly
+explained below.
+
+\subsubsection{WFRs for EMF/Ecore Models} 
+\acs{EMF}/Ecore is often used as a metamodeling language to develop \acl{DSL}s
+(\acs{DSL}s). To specify \acs{OCL} constraints on an Ecore-based metamodel, you
+import the model file (e.g., \texttt{mydsl.ecore}) as a model into Dresden
+\acs{OCL} using the model importer for \acs{EMF}/Ecore-based models. Afterwards,
+you can specify \acs{OCL} constraints using the \acs{OCL} parser/editor of
+Dresden \acs{OCL}. You can import istances of your \acs{DSL} into Dresden
+\acs{OCL} using the model instance importer for \acs{EMF}/Ecore-based instances
+(e.g., \texttt{model01.mydsl}) to interprete the specified constraints on them.
+
+\subsubsection{WFRs for the UML Metamodel}
+Another common use case is the specification of \acs{OCL} constraints on the
+\acs{UML} metamodel and their evaluation for instances of the metamodel (i.e.,
+\acs{UML} models). You can do this by importing the \acs{EMF}/Ecore-based
+\acs{UML}-metamodel of the Eclipse \acf{MDT}. You can find the required
+\texttt{uml.ecore} within the Eclipse plug-in \texttt{org.eclipse.uml.uml} of
+Eclipse MDT. Please note, when importing this metamodel into Dresden \acs{OCL},
+you have to import using the \acs{EMF}/Ecore model importer and not a \acs{UML}
+model importer (since the \acs{UML} metamodel was modelled in \acs{EMF})!
+Afterwards, you can import a \acs{UML} model as an instance of the metamodel to
+evaluate constraints on it (e.g., \texttt{model.uml}). Again, you have use
+the \acs{EMF}/Ecore model instance importer.
+
+
+\subsection{Use Case of Dresden OCL for Busines Rules}
+
+Besides the evaluation of \acs{WFRs}, multiple use cases for the evaluation of
+\acf{BRs} are supported and explained below.
+
+\subsubsection{BRs for UML models}
+A common use case is the definition of \acs{OCL} constraints on a \acs{UML}
+model (e.g., \texttt{model01.uml}), typically containing a class model. You can
+import \acs{UML} class models into Dresden \acs{OCL} using the corresponding
+model importer. For \acs{OCL} evaluation a
+possible model instance is a set of runtime objects by using a Java class and
+the Java model instance importer (e.g., \texttt{Instance01.class}). Details how
+a Java class usable as a Java model instance must be implemented are documented
+in Section~\ref{subsec:javaInstance}.
+
+\subsubsection{BRs for Java Classes}
+Another possible use case is the use of a set of Java classes as a model for
+\acs{OCL} constraint specification (e.g., \texttt{Model01.class}). A Java class
+can be imported as a model using the Java model importer. Details how the class
+is imported as a model are documented in Section~\ref{subsec:javaModel}. Again,
+a typical model istance would be a set of Java objects as mentioned above
+(e.g., \texttt{Instance01.class}).
+
+\subsubsection{BRs for XML Schemata}
+Dresden \acs{OCL} supports the definition of \acs{OCL} rules on \acl{XSDs}
+(\acs{XSD}s) as well (e.g., \texttt{mySchema.xsd}) using the \acs{XSD} model
+importer. Obviously an \acs{XML} file would be an appropriate model instance, 
+using the \acs{XML} model instance importer (e.g., \texttt{Instance01.xml}).
+
+
+\subsection{Further Use Cases}
+
+Of course, the use cases presented above are not a complete list of all possible
+use cases. Theoretically, every supported type of model importer can be combined
+with every type of model instances. And besides, you can even define your own
+importers for further use cases, if necessary. How to adapt Dresden \acs{OCL} to
+other types of models and instances is documented in the
+Chapters~\ref{chapter:pivotModelAdaptation}
+and~\ref{chapter:modelInstanceTypeAdaptation}.
+
+
+
 \section{Summary} 
 
 This chapter described how to use Dresden OCL. It was explained how to 
