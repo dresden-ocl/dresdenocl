@@ -59,6 +59,7 @@ public class CreateAspectCode {
 			this.loadPostConstraints();
 			this.loadPreConstraints();
 
+			this.testPerformer.myCodeGeneratorSettings.setBasisPackage("org.dresdenocl");
 			this.testPerformer.doCodeGeneration();
 		}
 

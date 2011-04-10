@@ -68,7 +68,7 @@ public final class CodegenTestPerformer {
 	private static CodegenTestPerformer myInstance;
 
 	/** The {@link IOcl2javaSettings} used for testing. */
-	private IOcl2JavaSettings myCodeGeneratorSettings;
+	protected IOcl2JavaSettings myCodeGeneratorSettings;
 
 	/** The {@link IModel} used for testing. */
 	private IModel myModel = null;
