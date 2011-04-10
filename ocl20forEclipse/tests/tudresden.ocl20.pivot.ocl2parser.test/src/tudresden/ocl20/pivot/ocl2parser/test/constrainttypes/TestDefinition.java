@@ -25,6 +25,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
@@ -45,7 +46,7 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * 
  * @author Claas Wilke
  */
-public class TestDefinition {
+public class TestDefinition extends AbstractDresdenOclTest {
 
 	/**
 	 * <p>
@@ -225,7 +226,7 @@ public class TestDefinition {
 		assertEquals("testDefPositive06", prop.getName());
 		assertEquals(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 				.getOclInteger(), prop.getType());
-		
+
 		assertNotNull(prop.getOwner());
 	}
 
