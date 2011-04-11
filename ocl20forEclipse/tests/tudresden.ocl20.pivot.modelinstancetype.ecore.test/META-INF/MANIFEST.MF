@@ -8,6 +8,7 @@ Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.ecore.test,
+ tudresden.ocl20.pivot.modelinstancetype.ecore.test.tests,
  tudresden.ocl20.pivot.modelinstancetype.test.testmodel,
  tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl,
  tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util

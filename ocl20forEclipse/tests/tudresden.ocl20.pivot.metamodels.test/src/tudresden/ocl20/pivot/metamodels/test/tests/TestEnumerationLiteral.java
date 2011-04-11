@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
- * the Meta Model Architecture of Dresden OCL2 for Eclipse. Dresden OCL2 for
- * Eclipse is free software: you can redistribute it and/or modify it under the
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
- * later version. Dresden OCL2 for Eclipse is distributed in the hope that it
+ * later version. Dresden OCL is distributed in the hope that it
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
  * General Public License for more details. You should have received a copy of
- * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
+ * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
@@ -41,8 +41,8 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 public class TestEnumerationLiteral {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestEnumerationLiteral.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestEnumerationLiteral.class);
 
 	/** The {@link Enumeration} under test. */
 	private static Enumeration enumeration1;
@@ -52,8 +52,8 @@ public class TestEnumerationLiteral {
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
@@ -61,8 +61,9 @@ public class TestEnumerationLiteral {
 
 		enumerationLiteral1 = null;
 
-		enumeration1 =
-				(Enumeration) MetaModelTestServices.getInstance().getTypeUnderTest(
+		enumeration1 = (Enumeration) MetaModelTestServices
+				.getInstance()
+				.getTypeUnderTest(
 						MetaModelTestServices.ENUMERATION_QUALIFIED_NAME_ENUMERATION1);
 
 		if (enumeration1 == null) {
@@ -71,15 +72,12 @@ public class TestEnumerationLiteral {
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						MetaModelTestSuiteMessages.MetaModelTestSuite_EnumerationNotFoundInModel;
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_EnumerationNotFoundInModel;
+				msg += " "
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -87,15 +85,8 @@ public class TestEnumerationLiteral {
 		}
 
 		else {
-			for (EnumerationLiteral aLiteral : enumeration1.getOwnedLiteral()) {
-
-				if (aLiteral.getName().equals(
-						MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1)) {
-					enumerationLiteral1 = aLiteral;
-					break;
-				}
-				// no else.
-			}
+			enumerationLiteral1 = enumeration1
+					.lookupLiteral(MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1);
 		}
 	}
 
@@ -113,11 +104,11 @@ public class TestEnumerationLiteral {
 
 			String msg;
 
-			msg =
-					"The adaptation of EnumerationLiteral.getEnumeration() seems to be wrong.";
+			msg = "The adaptation of EnumerationLiteral.getEnumeration() seems to be wrong.";
 
 			/* The enumeration literal must be a literal of the enumeration. */
-			assertEquals(msg, enumeration1, enumerationLiteral1.getEnumeration());
+			assertEquals(msg, enumeration1,
+					enumerationLiteral1.getEnumeration());
 		}
 		// no else.
 	}
@@ -138,7 +129,8 @@ public class TestEnumerationLiteral {
 			msg = "The adaptation of EnumerationLiteral.getName() seems to be wrong.";
 
 			/* The enumeration literal must have the same name as in the model. */
-			assertEquals(msg,
+			assertEquals(
+					msg,
 					MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1,
 					enumerationLiteral1.getName());
 		}
@@ -158,8 +150,7 @@ public class TestEnumerationLiteral {
 
 			String msg;
 
-			msg =
-					"The adaptation of EnumerationLiteral.getOwner() seems to be wrong.";
+			msg = "The adaptation of EnumerationLiteral.getOwner() seems to be wrong.";
 			msg += "An EnumerationLiteral must be owned by its Enumeration.";
 
 			/* The enumeration literal must be owned by the enumeration. */
@@ -182,8 +173,7 @@ public class TestEnumerationLiteral {
 
 			String msg;
 
-			msg =
-					"The adaptation of EnumerationLiteral.getQualifiedName() seems to be wrong.";
+			msg = "The adaptation of EnumerationLiteral.getQualifiedName() seems to be wrong.";
 
 			/* The enumeration literal must have the same name as in the model. */
 			assertEquals(

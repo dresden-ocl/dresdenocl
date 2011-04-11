@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
- * the Meta Model Architecture of Dresden OCL2 for Eclipse. Dresden OCL2 for
- * Eclipse is free software: you can redistribute it and/or modify it under the
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
- * later version. Dresden OCL2 for Eclipse is distributed in the hope that it
+ * later version. Dresden OCL is distributed in the hope that it
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
  * General Public License for more details. You should have received a copy of
- * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
+ * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
@@ -20,6 +20,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -277,6 +278,22 @@ public class TestOperation {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Operation#getInputParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetInputParameter3() {
+
+		if (!MetaModelTestServices.supportsNoOperations) {
+			String msg = "The adaptation of Operation.getInputParameter() seems to be wrong. Result should be an EList.";
+
+			assertTrue(msg, operation1.getInputParameter() instanceof EList);
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Operation#getName()}.
 	 * </p>
 	 */
@@ -360,6 +377,21 @@ public class TestOperation {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Operation#getOutputParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOutputParameter4() {
+
+		if (!MetaModelTestServices.supportsNoOperations) {
+			String msg = "The adaptation of Operation.getOutputParameter() seems to be wrong. Result should be an EList.";
+
+			assertTrue(msg, operation1.getOutputParameter() instanceof EList);
+		}
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Operation#getOwnedParameter()}.
 	 * </p>
 	 */
@@ -431,6 +463,21 @@ public class TestOperation {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Operation#getOwnedParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedParameter4() {
+
+		if (!MetaModelTestServices.supportsNoOperations) {
+			String msg = "The adaptation of Operation.getOwnedParameter() seems to be wrong. Result should be an EList.";
+
+			assertTrue(msg, operation1.getOwnedParameter() instanceof EList);
+		}
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation
 	 * {@link Operation#getOwnedTypeParameter()} .
 	 * </p>
@@ -447,6 +494,26 @@ public class TestOperation {
 
 			/* The operation must have no type parameters. */
 			assertEquals(msg, 0, operation1.getOwnedTypeParameter().size());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
+	 * {@link Operation#getOwnedTypeParameter()} .
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedTypeParameter2() {
+
+		if (!MetaModelTestServices.supportsNoOperations) {
+			String msg;
+
+			msg = "The adaptation of Operation.getOwnedTypeParameter() seems to be wrong. ";
+			msg += "Result should be an EList.";
+
+			assertTrue(msg, operation1.getOwnedTypeParameter() instanceof EList);
 		}
 		// no else.
 	}
@@ -650,6 +717,22 @@ public class TestOperation {
 			/* The operation must have one signature parameters. */
 			assertEquals(msg, 1, outputParameterOperation
 					.getSignatureParameter().size());
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
+	 * {@link Operation#getSignatureParameter()} .
+	 * </p>
+	 */
+	@Test
+	public void testGetSignatureParameter4() {
+
+		if (!MetaModelTestServices.supportsNoOperations) {
+			String msg = "The adaptation of Operation.getSignatureParameter() seems to be wrong. Result should be an EList.";
+
+			assertTrue(msg, operation1.getSignatureParameter() instanceof EList);
 		}
 	}
 

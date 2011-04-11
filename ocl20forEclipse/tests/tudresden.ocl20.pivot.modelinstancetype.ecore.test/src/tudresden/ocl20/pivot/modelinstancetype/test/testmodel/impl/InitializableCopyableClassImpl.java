@@ -16,7 +16,7 @@ import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
  * <em><b>Initializable Copyable Class</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class InitializableCopyableClassImpl extends CopyableClassImpl implements
@@ -34,12 +34,10 @@ public class InitializableCopyableClassImpl extends CopyableClassImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TestmodelPackage.Literals.INITIALIZABLE_COPYABLE_CLASS;
 	}
 

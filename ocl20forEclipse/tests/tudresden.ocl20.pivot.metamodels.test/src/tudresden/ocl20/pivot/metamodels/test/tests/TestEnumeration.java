@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
- * the Meta Model Architecture of Dresden OCL2 for Eclipse. Dresden OCL2 for
- * Eclipse is free software: you can redistribute it and/or modify it under the
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
- * later version. Dresden OCL2 for Eclipse is distributed in the hope that it
+ * later version. Dresden OCL is distributed in the hope that it
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
  * General Public License for more details. You should have received a copy of
- * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
+ * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -50,8 +51,8 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 public class TestEnumeration {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			MetaModelTestPlugin.getLogger(TestEnumeration.class);
+	private static final Logger LOGGER = MetaModelTestPlugin
+			.getLogger(TestEnumeration.class);
 
 	/** The {@link Enumeration} under test. */
 	private static Enumeration enumeration1;
@@ -64,8 +65,8 @@ public class TestEnumeration {
 
 	/**
 	 * <p>
-	 * Loads some elements from the current {@link IModel} under test required for
-	 * the tests contained in this Class.
+	 * Loads some elements from the current {@link IModel} under test required
+	 * for the tests contained in this Class.
 	 * </p>
 	 */
 	@BeforeClass
@@ -74,25 +75,23 @@ public class TestEnumeration {
 		enumerationLiterals = null;
 		package1 = null;
 
-		enumeration1 =
-				(Enumeration) MetaModelTestServices.getInstance().getTypeUnderTest(
+		enumeration1 = (Enumeration) MetaModelTestServices
+				.getInstance()
+				.getTypeUnderTest(
 						MetaModelTestServices.ENUMERATION_QUALIFIED_NAME_ENUMERATION1);
 
 		if (enumeration1 == null) {
 
-			/* Eventually send a warning to the logger. */
+			/* Probably send a warning to the logger. */
 			if (LOGGER.isInfoEnabled()) {
 				String msg;
 
-				msg =
-						MetaModelTestSuiteMessages.MetaModelTestSuite_EnumerationNotFoundInModel;
-				msg +=
-						" "
-								+ NLS
-										.bind(
-												MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
-												MetaModelTestServices.getInstance()
-														.getMetaModelUnderTestID());
+				msg = MetaModelTestSuiteMessages.MetaModelTestSuite_EnumerationNotFoundInModel;
+				msg += " "
+						+ NLS.bind(
+								MetaModelTestSuiteMessages.MetaModelTestSuite_CurrentlyTestedMetaModel,
+								MetaModelTestServices.getInstance()
+										.getMetaModelUnderTestID());
 
 				LOGGER.warn(msg);
 			}
@@ -102,16 +101,17 @@ public class TestEnumeration {
 		else {
 			enumerationLiterals = enumeration1.getOwnedLiteral();
 
-			package1 =
-					MetaModelTestServices.getInstance().getNamespaceUnderTest(
+			package1 = MetaModelTestServices
+					.getInstance()
+					.getNamespaceUnderTest(
 							MetaModelTestServices.NAMESPACE_QUALIFIED_NAME_PACKAGE1);
 		}
 	}
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Enumeration#getGenericSuperType()}
-	 * .
+	 * A test case testing the operation
+	 * {@link Enumeration#getGenericSuperType()} .
 	 * </p>
 	 */
 	@Test
@@ -123,14 +123,32 @@ public class TestEnumeration {
 
 			String msg;
 
-			msg =
-					"The adaptation of Enumeration.getGenericSuperType() seems to be wrong.";
+			msg = "The adaptation of Enumeration.getGenericSuperType() seems to be wrong.";
 			msg += "An Enumeration should not have any generic super types.";
 
 			genericSuperTypes = enumeration1.getGenericSuperType();
 
 			/* Enumerations should not have generic super types. */
 			assertEquals(msg, 0, genericSuperTypes.size());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
+	 * {@link Enumeration#getGenericSuperType()} .
+	 * </p>
+	 */
+	@Test
+	public void testGetGenericSuperType2() {
+
+		/* Only execute this test case for meta models with enumeration support. */
+		if (enumeration1 != null) {
+			String msg = "The adaptation of Enumeration.getGenericSuperType() seems to be wrong.";
+			msg += "Result should be an EList.";
+
+			assertTrue(msg, enumeration1.getGenericSuperType() instanceof EList);
 		}
 		// no else.
 	}
@@ -151,7 +169,8 @@ public class TestEnumeration {
 			msg = "The adaptation of Enumeration.getName() seems to be wrong.";
 
 			/* The enumeration must have the same name as in the model. */
-			assertEquals(msg, MetaModelTestServices.ENUMERATION_NAME_ENUMERATION1,
+			assertEquals(msg,
+					MetaModelTestServices.ENUMERATION_NAME_ENUMERATION1,
 					enumeration1.getName());
 		}
 		// no else.
@@ -193,8 +212,7 @@ public class TestEnumeration {
 
 			String msg;
 
-			msg =
-					"The adaptation of Enumeration.getOwnedLiteral() seems to be wrong.";
+			msg = "The adaptation of Enumeration.getOwnedLiteral() seems to be wrong.";
 
 			/* The enumeration must have two literals. */
 			assertEquals(msg, 2, enumerationLiterals.size());
@@ -203,8 +221,9 @@ public class TestEnumeration {
 			isLiteralInEnum = false;
 
 			for (EnumerationLiteral aLiteral : enumerationLiterals) {
-				if (aLiteral.getName().equals(
-						MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1)) {
+				if (aLiteral
+						.getName()
+						.equals(MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL1)) {
 					isLiteralInEnum = true;
 					break;
 				}
@@ -216,8 +235,9 @@ public class TestEnumeration {
 			isLiteralInEnum = false;
 
 			for (EnumerationLiteral aLiteral : enumerationLiterals) {
-				if (aLiteral.getName().equals(
-						MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL2)) {
+				if (aLiteral
+						.getName()
+						.equals(MetaModelTestServices.ENUMERATIONLITERAL_NAME_ENUMERATIONLITERAL2)) {
 					isLiteralInEnum = true;
 					break;
 				}
@@ -230,7 +250,25 @@ public class TestEnumeration {
 
 	/**
 	 * <p>
-	 * A test case testing the operation {@link Enumeration#getOwnedOperation()} .
+	 * A test case testing the operation {@link Enumeration#getOwnedLiteral()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedLiteral2() {
+
+		/* Only execute this test case for meta models with enumeration support. */
+		if (enumeration1 != null) {
+
+			String msg = "The adaptation of Enumeration.getOwnedLiteral() seems to be wrong. Return type should be an EList.";
+			assertTrue(msg, enumeration1.getOwnedLiteral() instanceof EList);
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Enumeration#getOwnedOperation()}
+	 * .
 	 * </p>
 	 */
 	@Test
@@ -242,14 +280,32 @@ public class TestEnumeration {
 
 			String msg;
 
-			msg =
-					"The adaptation of Enumeration.getOwnedOperation() seems to be wrong.";
+			msg = "The adaptation of Enumeration.getOwnedOperation() seems to be wrong.";
 			msg += "An Enumeration should not have any Operations.";
 
 			operations = enumeration1.getOwnedOperation();
 
 			/* Enumerations should not have operations. */
 			assertEquals(msg, 0, operations.size());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Enumeration#getOwnedOperation()}
+	 * .
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedOperation2() {
+
+		/* Only execute this test case for meta models with enumeration support. */
+		if (enumeration1 != null) {
+			String msg = "The adaptation of Enumeration.getOwnedOperation() seems to be wrong.";
+			msg += "Return type should be an EList.";
+
+			assertTrue(msg, enumeration1.getOwnedOperation() instanceof EList);
 		}
 		// no else.
 	}
@@ -268,14 +324,31 @@ public class TestEnumeration {
 
 			String msg;
 
-			msg =
-					"The adaptation of Enumeration.getOwnedProperty() seems to be wrong.";
+			msg = "The adaptation of Enumeration.getOwnedProperty() seems to be wrong.";
 			msg += "An Enumeration should not have any Properties.";
 
 			properties = enumeration1.getOwnedProperty();
 
 			/* Enumerations should not have properties. */
 			assertEquals(msg, 0, properties.size());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Enumeration#getOwnedProperty()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedProperty2() {
+
+		/* Only execute this test case for meta models with enumeration support. */
+		if (enumeration1 != null) {
+			String msg = "The adaptation of Enumeration.getOwnedProperty() seems to be wrong.";
+			msg += "Return type should be an EList.";
+
+			assertTrue(msg, enumeration1.getOwnedProperty() instanceof EList);
 		}
 		// no else.
 	}
@@ -295,14 +368,33 @@ public class TestEnumeration {
 
 			String msg;
 
-			msg =
-					"The adaptation of Enumeration.getOwnedTypeParameter() seems to be wrong.";
+			msg = "The adaptation of Enumeration.getOwnedTypeParameter() seems to be wrong.";
 			msg += "An Enumeration should not have any Parameters.";
 
 			typeParameters = enumeration1.getOwnedTypeParameter();
 
 			/* Enumerations should not have type parameters. */
 			assertEquals(msg, 0, typeParameters.size());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
+	 * {@link Enumeration#getOwnedTypeParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedTypeParameter2() {
+
+		/* Only execute this test case for meta models with enumeration support. */
+		if (enumeration1 != null) {
+			String msg = "The adaptation of Enumeration.getOwnedTypeParameter() seems to be wrong.";
+			msg += "Return type should be an EList.";
+
+			assertTrue(msg,
+					enumeration1.getOwnedTypeParameter() instanceof EList);
 		}
 		// no else.
 	}
@@ -341,11 +433,11 @@ public class TestEnumeration {
 
 			String msg;
 
-			msg =
-					"The adaptation of Enumeration.getQualifiedName() seems to be wrong.";
+			msg = "The adaptation of Enumeration.getQualifiedName() seems to be wrong.";
 
 			/* The enumeration must have the same name as in the model. */
-			assertEquals(msg,
+			assertEquals(
+					msg,
 					MetaModelTestServices.ENUMERATION_QUALIFIED_NAME_ENUMERATION1,
 					enumeration1.getQualifiedName());
 		}
@@ -373,6 +465,24 @@ public class TestEnumeration {
 
 			/* Enumerations should not have super types. */
 			assertEquals(msg, 0, superTypes.size());
+		}
+		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Enumeration#getSuperType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetSuperType2() {
+
+		/* Only execute this test case for meta models with enumeration support. */
+		if (enumeration1 != null) {
+			String msg = "The adaptation of Enumeration.getSuperType() seems to be wrong. ";
+			msg += "Result should be an EList.";
+
+			assertTrue(msg, enumeration1.getSuperType() instanceof EList);
 		}
 		// no else.
 	}

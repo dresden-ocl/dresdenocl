@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
- * the Meta Model Architecture of Dresden OCL2 for Eclipse. Dresden OCL2 for
- * Eclipse is free software: you can redistribute it and/or modify it under the
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
- * later version. Dresden OCL2 for Eclipse is distributed in the hope that it
+ * later version. Dresden OCL is distributed in the hope that it
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
  * General Public License for more details. You should have received a copy of
- * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
+ * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -159,6 +160,20 @@ public class TestType {
 			assertEquals(msg, 0, interface1.getGenericSuperType().size());
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Type#getGenericSuperType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetGenericSuperType3() {
+
+		String msg = "The adaptation of Type.getGenericSuperType() seems to be wrong for Interfaces.";
+		msg += " Result shoul be an EList.";
+
+		assertTrue(msg, class1.getGenericSuperType() instanceof EList);
 	}
 
 	/**
@@ -452,6 +467,19 @@ public class TestType {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Type#getOwnedOperation()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedOperation5() {
+
+		String msg = "The adaptation of Type.getOwnedOperation() seems to be wrong. Result should be an EList.";
+
+		assertTrue(msg, class1.getOwnedOperation() instanceof EList);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Type#getOwnedProperty()}.
 	 * </p>
 	 */
@@ -586,6 +614,19 @@ public class TestType {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Type#getOwnedProperty()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedProperty5() {
+
+		String msg = "The adaptation of Type.getOwnedProperty() seems to be wrong. Result should be an EList.";
+
+		assertTrue(msg, class1.getOwnedProperty() instanceof EList);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Type#getOwnedTypeParameter()}.
 	 * </p>
 	 */
@@ -626,6 +667,22 @@ public class TestType {
 			assertEquals(msg, 0, interface1.getOwnedTypeParameter().size());
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Type#getOwnedTypeParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedTypeParameter3() {
+
+		String msg;
+
+		msg = "The adaptation of Type.getOwnedTypeParameter() seems to be wrong.";
+		msg += " Result should be an EList.";
+
+		assertTrue(msg, class1.getOwnedTypeParameter() instanceof EList);
 	}
 
 	/**
@@ -794,6 +851,19 @@ public class TestType {
 			assertTrue(msg, class3.getSuperType().contains(interface3));
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Type#getSuperType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetSuperType6() {
+
+		String msg = "The adaptation of Type.getSuperType() seems to be wrong. Result should be an EList.";
+
+		assertTrue(msg, class1.getSuperType() instanceof EList);
 	}
 
 	/**

@@ -13,10 +13,10 @@
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
@@ -125,7 +125,7 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 
 		List<EnumerationLiteral> result;
 
-		result = new ArrayList<EnumerationLiteral>();
+		result = new BasicEList<EnumerationLiteral>();
 
 		for (org.eclipse.uml2.uml.EnumerationLiteral dslEnumerationLiteral : this.dslEnumeration
 				.getOwnedLiterals()) {

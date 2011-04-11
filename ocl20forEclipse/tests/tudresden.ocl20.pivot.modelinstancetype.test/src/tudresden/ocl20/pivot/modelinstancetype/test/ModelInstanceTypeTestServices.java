@@ -87,7 +87,7 @@ public final class ModelInstanceTypeTestServices {
 	/**
 	 * The {@link IModel}s used during testing;
 	 */
-	private IModel myModel;
+	protected IModel myModel;
 
 	/**
 	 * The ID of the {@link Bundle} providing the {@link IModelInstance} which

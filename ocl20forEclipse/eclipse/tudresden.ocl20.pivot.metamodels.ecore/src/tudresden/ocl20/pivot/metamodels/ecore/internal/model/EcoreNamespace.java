@@ -32,12 +32,12 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -56,8 +56,8 @@ import tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace;
 public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreNamespace.class);
+	private static final Logger LOGGER = EcoreMetamodelPlugin
+			.getLogger(EcoreNamespace.class);
 
 	/** The adapted {@link EPackage}. */
 	private EPackage ePackage;
@@ -68,7 +68,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 	 * </p>
 	 * 
 	 * @param ePackage
-	 *          The {@link EPackage} that is adapted by this class.
+	 *            The {@link EPackage} that is adapted by this class.
 	 */
 	public EcoreNamespace(EPackage ePackage) {
 
@@ -100,6 +100,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
 	 */
 	@Override
@@ -110,6 +111,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace
 	 * ()
@@ -123,7 +125,8 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 		eSuperPackage = this.ePackage.getESuperPackage();
 
 		if (eSuperPackage != null) {
-			result = EcoreAdapterFactory.INSTANCE.createNamespace(eSuperPackage);
+			result = EcoreAdapterFactory.INSTANCE
+					.createNamespace(eSuperPackage);
 		}
 
 		else {
@@ -135,15 +138,17 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl ()
+	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl
+	 * ()
 	 */
 	@Override
 	public List<Type> getOwnedType() {
 
 		List<Type> result;
 
-		result = new ArrayList<Type>();
+		result = new BasicEList<Type>();
 
 		for (EClassifier eClassifier : this.ePackage.getEClassifiers()) {
 			result.add(EcoreAdapterFactory.INSTANCE.createType(eClassifier));
@@ -163,6 +168,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#
 	 * getNestedNamespaceImpl()
 	 */
@@ -171,7 +177,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 		List<Namespace> result;
 
-		result = new ArrayList<Namespace>();
+		result = new BasicEList<Namespace>();
 
 		for (EPackage subPackage : this.ePackage.getESubpackages()) {
 			result.add(EcoreAdapterFactory.INSTANCE.createNamespace(subPackage));

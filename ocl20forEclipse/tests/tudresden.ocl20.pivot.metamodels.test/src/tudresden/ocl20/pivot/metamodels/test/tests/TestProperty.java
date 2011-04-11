@@ -1,14 +1,14 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
- * the Meta Model Architecture of Dresden OCL2 for Eclipse. Dresden OCL2 for
- * Eclipse is free software: you can redistribute it and/or modify it under the
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
- * later version. Dresden OCL2 for Eclipse is distributed in the hope that it
+ * later version. Dresden OCL is distributed in the hope that it
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
  * General Public License for more details. You should have received a copy of
- * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
+ * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
@@ -108,101 +108,30 @@ public class TestProperty {
 				.getTypeUnderTest(
 						MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS);
 
-		/* Find some properties in the class. */
-		for (Property aProperty : testPropertyClass.getOwnedProperty()) {
-
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEPROPERTY)) {
-				nonmultipleProperty = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY)) {
-				staticProperty = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY)) {
-				orderedMultipleProperty = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY)) {
-				unorderedMultipleProperty = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEPROPERTY)) {
-				uniqueMultipleProperty = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY)) {
-				nonuniqueMultipleProperty = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND)) {
-				associationEnd1 = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty.getName().equals(
-					MetaModelTestServices.PROPERTY_NAME_STATICASSOCIATONEND)) {
-				staticAssociationEnd = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND)) {
-				orderedMultipleAssociationEnd = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND)) {
-				unorderedMultipleAssociationEnd = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND)) {
-				uniqueMultipleAssociationEnd = aProperty;
-				continue;
-			}
-			// no else.
-
-			if (aProperty
-					.getName()
-					.equals(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND)) {
-				nonuniqueMultipleAssociationEnd = aProperty;
-				continue;
-			}
-			// no else.
-		}
+		nonmultipleProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEPROPERTY);
+		staticProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_STATICPROPERTY);
+		orderedMultipleProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEPROPERTY);
+		unorderedMultipleProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEPROPERTY);
+		uniqueMultipleProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEPROPERTY);
+		nonuniqueMultipleProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEPROPERTY);
+		associationEnd1 = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_NONMULTIPLEASSOCIATONEND);
+		staticAssociationEnd = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_STATICASSOCIATONEND);
+		orderedMultipleAssociationEnd = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_ORDEREDMULTIPLEASSOCIATONEND);
+		unorderedMultipleAssociationEnd = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_UNORDEREDMULTIPLEASSOCIATONEND);
+		uniqueMultipleAssociationEnd = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND);
+		nonuniqueMultipleAssociationEnd = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND);
 
 		if (associationEnd1 == null || orderedMultipleAssociationEnd == null
 				|| unorderedMultipleAssociationEnd == null

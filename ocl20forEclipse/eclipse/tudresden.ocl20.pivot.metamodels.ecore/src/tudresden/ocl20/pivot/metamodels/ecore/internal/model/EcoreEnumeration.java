@@ -32,10 +32,10 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 
@@ -130,7 +130,7 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 
 		List<EnumerationLiteral> result;
 
-		result = new ArrayList<EnumerationLiteral>();
+		result = new BasicEList<EnumerationLiteral>();
 
 		for (EEnumLiteral literal : eEnum.getELiterals()) {
 			result

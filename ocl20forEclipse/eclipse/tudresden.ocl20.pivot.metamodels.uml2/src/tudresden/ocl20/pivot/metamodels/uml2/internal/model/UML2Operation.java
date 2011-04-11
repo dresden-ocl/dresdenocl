@@ -13,10 +13,10 @@
  */
 package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.LiteralUnlimitedNatural;
 
@@ -81,8 +81,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 			UML2AdapterFactory factory) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("UML2Operation(dslOperation = " + dslOperation + ", factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER.debug("UML2Operation(dslOperation = " + dslOperation + ", factory = " + factory + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// initialize
@@ -115,7 +114,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 
 		List<Parameter> result;
 
-		result = new ArrayList<Parameter>();
+		result = new BasicEList<Parameter>();
 
 		for (org.eclipse.uml2.uml.Parameter dslOwnedParameter : dslOperation
 				.getOwnedParameters()) {
@@ -150,8 +149,8 @@ public class UML2Operation extends AbstractOperation implements Operation {
 		else {
 
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType, this
-						.toString()));
+				LOGGER.info(NLS.bind(UML2ModelMessages.UML2_GetOwningType,
+						this.toString()));
 			}
 			// no else.
 

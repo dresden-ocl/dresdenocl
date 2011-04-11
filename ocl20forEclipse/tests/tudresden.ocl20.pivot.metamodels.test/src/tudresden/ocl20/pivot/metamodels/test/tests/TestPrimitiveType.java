@@ -1,26 +1,28 @@
 /*
- * Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net) This file is part of
- * the Meta Model Architecture of Dresden OCL2 for Eclipse. Dresden OCL2 for
- * Eclipse is free software: you can redistribute it and/or modify it under the
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
- * later version. Dresden OCL2 for Eclipse is distributed in the hope that it
+ * later version. Dresden OCL is distributed in the hope that it
  * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
  * General Public License for more details. You should have received a copy of
- * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
+ * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -523,6 +525,25 @@ public class TestPrimitiveType {
 	/**
 	 * <p>
 	 * A test case testing the operation
+	 * {@link PrimitiveType#getOwnedOperation()} .
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedOperation2() {
+
+		String msg = "The adaptation of PrimitiveType.getOwnedOperation() seems to be wrong.";
+		msg += "Result should be an EList.";
+
+		for (String aTypesName : allPrimitiveTypes.keySet()) {
+
+			assertTrue(msg, allPrimitiveTypes.get(aTypesName)
+					.getOwnedOperation() instanceof EList);
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
 	 * {@link PrimitiveType#getOwnedProperty()}.
 	 * </p>
 	 */
@@ -548,6 +569,25 @@ public class TestPrimitiveType {
 	/**
 	 * <p>
 	 * A test case testing the operation
+	 * {@link PrimitiveType#getOwnedProperty()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedProperty2() {
+
+		String msg = "The adaptation of PrimitiveType.getOwnedProperty() seems to be wrong.";
+		msg += "Result should be an EList.";
+
+		for (String aTypesName : allPrimitiveTypes.keySet()) {
+
+			assertTrue(msg, allPrimitiveTypes.get(aTypesName)
+					.getOwnedProperty() instanceof EList);
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
 	 * {@link PrimitiveType#getOwnedTypeParameter()}.
 	 * </p>
 	 */
@@ -567,6 +607,25 @@ public class TestPrimitiveType {
 
 			/* Primitive types should not have type parameters. */
 			assertEquals(msg, 0, type.getOwnedTypeParameter().size());
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
+	 * {@link PrimitiveType#getOwnedTypeParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedTypeParameter2() {
+
+		String msg = "The adaptation of PrimitiveType.getOwnedTypeParameter() seems to be wrong.";
+		msg += "Result should be an EList.";
+
+		for (String aTypesName : allPrimitiveTypes.keySet()) {
+
+			assertTrue(msg, allPrimitiveTypes.get(aTypesName)
+					.getOwnedTypeParameter() instanceof EList);
 		}
 	}
 
@@ -645,6 +704,25 @@ public class TestPrimitiveType {
 
 	/**
 	 * <p>
+	 * A test case testing the operation
+	 * {@link PrimitiveType#getGenericSuperType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetGenericSuperType2() {
+
+		String msg = "The adaptation of PrimitiveType.getGenericSuperType() seems to be wrong.";
+		msg += "Result should be an EList.";
+
+		for (String aTypesName : allPrimitiveTypes.keySet()) {
+
+			assertTrue(msg, allPrimitiveTypes.get(aTypesName)
+					.getGenericSuperType() instanceof EList);
+		}
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link PrimitiveType#getSuperType()}.
 	 * </p>
 	 */
@@ -664,6 +742,25 @@ public class TestPrimitiveType {
 
 			/* The primitive must not have super types. */
 			assertEquals(msg, 0, type.getSuperType().size());
+		}
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation {@link PrimitiveType#getSuperType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetSuperType2() {
+
+		String msg = "The adaptation of PrimitiveType.getSuperType() seems to be wrong.";
+		msg += "Result should be an EList.";
+
+		for (String aTypesName : allPrimitiveTypes.keySet()) {
+
+			assertTrue(
+					msg,
+					allPrimitiveTypes.get(aTypesName).getSuperType() instanceof EList);
 		}
 	}
 }

@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -130,7 +131,7 @@ public class EcoreType extends AbstractType implements Type {
 
 		List<Operation> result;
 
-		result = new ArrayList<Operation>();
+		result = new BasicEList<Operation>();
 
 		for (EOperation eOperation : this.eClass.getEOperations()) {
 			result.add(EcoreAdapterFactory.INSTANCE.createOperation(eOperation));

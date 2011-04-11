@@ -1,20 +1,15 @@
 /*
-Copyright (C) 2009 by Claas Wilke (claaswilke@gmx.net)
-
-This file is part of the Meta Model Architecture of Dresden OCL2 for Eclipse.
-
-Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
-it under the terms of the GNU Lesser General Public License as published by the 
-Free Software Foundation, either version 3 of the License, or (at your option)
-any later version.
-
-Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
-or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
-for more details.
-
-You should have received a copy of the GNU Lesser General Public License along 
-with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de) This file is part of
+ * the Meta Model Architecture of Dresden OCL. Dresden OCL
+ * is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version. Dresden OCL is distributed in the hope that it
+ * will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+ * General Public License for more details. You should have received a copy of
+ * the GNU Lesser General Public License along with Dresden OCL. If
+ * not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.metamodels.test.tests;
 
@@ -24,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -126,6 +122,19 @@ public class TestNamespace {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Namespace#getNestedNamespace()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetNestedNamespace2() {
+
+		String msg = "The adaptation of Namespace.getNestedNamespace() seems to be wrong. The return type should be an EList.";
+
+		assertTrue(msg, package1.getNestedNamespace() instanceof EList);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation {@link Namespace#getNestingNamespace()}
 	 * .
 	 * </p>
@@ -208,6 +217,19 @@ public class TestNamespace {
 
 	/**
 	 * <p>
+	 * A test case testing the operation {@link Namespace#getOwnedType()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedType3() {
+
+		String msg = "The adaptation of Namespace.getOwnedType() seems to be wrong. The return type should be an ESet.";
+
+		assertTrue(msg, package1.getOwnedType() instanceof EList);
+	}
+
+	/**
+	 * <p>
 	 * A test case testing the operation
 	 * {@link Namespace#getOwnedTypeParameter()}.
 	 * </p>
@@ -223,6 +245,22 @@ public class TestNamespace {
 
 		/* The name space must not have type parameters. */
 		assertEquals(msg, 0, package1.getOwnedTypeParameter().size());
+	}
+
+	/**
+	 * <p>
+	 * A test case testing the operation
+	 * {@link Namespace#getOwnedTypeParameter()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetOwnedTypeParameter2() {
+
+		String msg = "The adaptation of Namespace.getOwnedTypeParameter() seems to be wrong. ";
+		msg += "The return type should be an EList.";
+
+		/* The name space must not have type parameters. */
+		assertTrue(msg, package1.getOwnedTypeParameter() instanceof EList);
 	}
 
 	/**

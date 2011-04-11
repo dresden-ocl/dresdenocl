@@ -32,8 +32,9 @@
  */
 package tudresden.ocl20.pivot.pivotmodel.base;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.eclipse.emf.common.util.BasicEList;
 
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -98,7 +99,7 @@ public abstract class AbstractNamespace extends NamespaceImpl implements
 	 */
 	@Override
 	public final List<Namespace> getNestedNamespace() {
-		List<Namespace> nestedNamespace = new ArrayList<Namespace>();
+		List<Namespace> nestedNamespace = new BasicEList<Namespace>();
 		nestedNamespace.addAll(getNestedNamespaceImpl());
 		nestedNamespace.addAll(getNestedNamespaceGen());
 		return nestedNamespace;

@@ -6,13 +6,16 @@
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
   <foreignModel>testmodel.ecore</foreignModel>
   <genPackages prefix="Tudresden" disposableProviderFactory="true" ecorePackage="testmodel.ecore#/">
-    <nestedGenPackages prefix="Ocl20" disposableProviderFactory="true" ecorePackage="testmodel.ecore#//ocl20">
-      <nestedGenPackages prefix="Pivot" disposableProviderFactory="true" ecorePackage="testmodel.ecore#//ocl20/pivot">
-        <nestedGenPackages prefix="Modelinstancetype" disposableProviderFactory="true"
-            ecorePackage="testmodel.ecore#//ocl20/pivot/modelinstancetype">
-          <nestedGenPackages prefix="Test" disposableProviderFactory="true" ecorePackage="testmodel.ecore#//ocl20/pivot/modelinstancetype/test">
-            <nestedGenPackages prefix="Testmodel" disposableProviderFactory="true"
-                ecorePackage="testmodel.ecore#//ocl20/pivot/modelinstancetype/test/testmodel">
+    <nestedGenPackages prefix="Ocl20" basePackage="tudresden" disposableProviderFactory="true"
+        ecorePackage="testmodel.ecore#//ocl20">
+      <nestedGenPackages prefix="Pivot" basePackage="tudresden.ocl20" disposableProviderFactory="true"
+          ecorePackage="testmodel.ecore#//ocl20/pivot">
+        <nestedGenPackages prefix="Modelinstancetype" basePackage="tudresden.ocl20.pivot"
+            disposableProviderFactory="true" ecorePackage="testmodel.ecore#//ocl20/pivot/modelinstancetype">
+          <nestedGenPackages prefix="Test" basePackage="tudresden.ocl20.pivot.modelinstancetype"
+              disposableProviderFactory="true" ecorePackage="testmodel.ecore#//ocl20/pivot/modelinstancetype/test">
+            <nestedGenPackages prefix="Testmodel" basePackage="tudresden.ocl20.pivot.modelinstancetype.test"
+                disposableProviderFactory="true" ecorePackage="testmodel.ecore#//ocl20/pivot/modelinstancetype/test/testmodel">
               <genEnums typeSafeEnumCompatible="false" ecoreEnum="testmodel.ecore#//ocl20/pivot/modelinstancetype/test/testmodel/Enumeration1">
                 <genEnumLiterals ecoreEnumLiteral="testmodel.ecore#//ocl20/pivot/modelinstancetype/test/testmodel/Enumeration1/Literal1"/>
                 <genEnumLiterals ecoreEnumLiteral="testmodel.ecore#//ocl20/pivot/modelinstancetype/test/testmodel/Enumeration1/Literal2"/>

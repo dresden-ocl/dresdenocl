@@ -38,8 +38,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 public class ModelInstanceTypeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.modelinstancetype.test";
+	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.modelinstancetype.test";
 
 	/** The shared instance. */
 	private static ModelInstanceTypeTestPlugin plugin;
@@ -63,7 +62,7 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          The {@link Class} to return the {@link Logger} for.
+	 *            The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 
@@ -80,21 +79,28 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param testModelInstanceBundleID
-	 *          The ID of {@link Bundle} which provides the {@link IModelInstance}
-	 *          the {@link IModelInstanceType} should be tested with.
+	 *            The ID of {@link Bundle} which provides the
+	 *            {@link IModelInstance} the {@link IModelInstanceType} should
+	 *            be tested with.
 	 * @param testModelInstancePath
-	 *          The path of the {@link IModelInstance} the
-	 *          {@link IModelInstanceType} should be tested with.
+	 *            The path of the {@link IModelInstance} the
+	 *            {@link IModelInstanceType} should be tested with.
 	 * @param modelInstanceID
-	 *          The ID of the {@link IModelInstanceType} in which the
-	 *          <code>testModelInstance</code> is modeled and which shall be
-	 *          tested.
+	 *            The ID of the {@link IModelInstanceType} in which the
+	 *            <code>testModelInstance</code> is modeled and which shall be
+	 *            tested.
 	 */
 	public static void prepareTest(String testModelInstanceBundleID,
 			String testModelInstancePath, String modelInstanceID) {
 
-		ModelInstanceTypeTestServices.getInstance().setTestModelInstanceBundleID(
-				testModelInstanceBundleID);
+		/*
+		 * Reset the model. Has probably been used by another instance of this
+		 * test suite.
+		 */
+		ModelInstanceTypeTestServices.getInstance().myModel = null;
+
+		ModelInstanceTypeTestServices.getInstance()
+				.setTestModelInstanceBundleID(testModelInstanceBundleID);
 
 		ModelInstanceTypeTestServices.getInstance().setTestModelInstancePath(
 				testModelInstancePath);
@@ -104,11 +110,15 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 
 		/* Set all counters to default values. */
 		ModelInstanceTypeTestServices.getInstance().setBagPropertyCounter(1);
-		ModelInstanceTypeTestServices.getInstance().setBooleanPropertyCounter(1);
-		ModelInstanceTypeTestServices.getInstance().setIntegerPropertyCounter(1);
-		ModelInstanceTypeTestServices.getInstance().setOrderedSetPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance()
+				.setBooleanPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance()
+				.setIntegerPropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance()
+				.setOrderedSetPropertyCounter(1);
 		ModelInstanceTypeTestServices.getInstance().setRealPropertyCounter(1);
-		ModelInstanceTypeTestServices.getInstance().setSequencePropertyCounter(1);
+		ModelInstanceTypeTestServices.getInstance().setSequencePropertyCounter(
+				1);
 		ModelInstanceTypeTestServices.getInstance().setSetPropertyCounter(1);
 		ModelInstanceTypeTestServices.getInstance().setStringPropertyCounter(1);
 	}
@@ -124,6 +134,7 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
@@ -136,6 +147,7 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
