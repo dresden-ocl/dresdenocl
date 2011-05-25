@@ -22,15 +22,15 @@ documented in Chapter~\ref{chapter:introduction}.
 
 \section{Supported Version of OCL}
 
-Dresden OCL generally supports OCL 2.2 as specified in \cite{spec:OCL2-2}. 
-Nevertheless, some differences between Dresden OCL and OCL 2.2 exist as
+Dresden OCL generally supports OCL 2.3 as specified in \cite{spec:OCL2-3}. 
+Nevertheless, some differences between Dresden OCL and OCL 2.3 exist as
 documented in the following:
 
 
-\subsection{Comformance of Dresden OCL to the OCL 2.2 specification}
+\subsection{Comformance of Dresden OCL to the OCL 2.3 specification}
 
-The OCL 2.2 specification defines a set of compliance points that can be
-addressed by tools implementing OCL~\cite[p.~1]{spec:OCL2-2}.
+The OCL 2.3 specification defines a set of compliance points that can be
+addressed by tools implementing OCL~\cite[p.~1]{spec:OCL2-3}.
 Table~\ref{tab:compliance} summarises the compliance points addressed by
 Dresden OCL.
 
@@ -88,12 +88,12 @@ differences exist between Dresden OCL and the OCL specification:
 	
 \subsection{Different Semantics of OCL Expressions in Dresden OCL}
 
-The current OCL 2.2 specification~\cite{spec:OCL2-2} contains some
+The current OCL 2.3 specification~\cite{spec:OCL2-3} contains some
 inconsistencies and misses some definitions especially when evaluating
 \code{invalid} or \code{null} values. Thus, we had to assume or change the
 semantics of OCL during evaluation of some OCL statements. In the following
 we present the differences of the OCL semantics used in Dresden OCL compared 
-with the official OCL specification~\cite{spec:OCL2-2}.
+with the official OCL specification~\cite{spec:OCL2-3}.
 
 
 \subsubsection{Boolean Operators}
@@ -245,13 +245,13 @@ invalid.oclIsUndefined() => invalid
 \end{lstlisting}
 \end{figure}
 
-According to the OCL 2.2 specification~\cite{spec:OCL2-2}, all operation calls
+According to the OCL 2.3 specification~\cite{spec:OCL2-3}, all operation calls
 invoked on \code{null} values will result in \code{invalid}. An exception is the
 operation \code{oclIsUndefined()} which results in \code{true} if its source is 
-\code{null} and \code{false} otherwise. According to the OCL 2.2 specification 
+\code{null} and \code{false} otherwise. According to the OCL 2.3 specification 
 the expression \code{invalid.oclIsUndefined()} will result in \code{true} as
 well. \textbf{In Dresden OCL, \code{invalid.ocl\-Is\-Undefined()} results in 
-\code{invalid} instead!} According to the OCL 2.2. specification, the implicit 
+\code{invalid} instead!} According to the OCL 2.3. specification, the implicit 
 OCL operation \code{asSet()} can be invoked on \code{null} values and will
 result in an empty \code{Set}. Listing~\ref{lst:info:nullValues} shows some
 examples for evaluations on \code{null} values.
@@ -269,7 +269,7 @@ undefined.oclIsInvalid() => false
 \end{lstlisting}
 \end{figure}
 
-According to the OCL 2.2 specification~\cite{spec:OCL2-2}, all operation calls 
+According to the OCL 2.3 specification~\cite{spec:OCL2-3}, all operation calls 
 invoked on \code{invalid} values will result in \code{invalid}. Exceptions are 
 the operations \code{oclIsInvalid()} and \code{oclIsUndefined()}. The evaluation
 of \code{oclIsInvalid()} will result in \code{true} when invoked on 
