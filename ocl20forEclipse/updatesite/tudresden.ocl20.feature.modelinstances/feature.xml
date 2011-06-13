@@ -206,13 +206,6 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="tudresden.ocl20.pivot.modelinstancetype.xml"
          download-size="0"
          install-size="0"
