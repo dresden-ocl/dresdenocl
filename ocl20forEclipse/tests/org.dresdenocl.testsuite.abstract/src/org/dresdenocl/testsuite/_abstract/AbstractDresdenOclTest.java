@@ -58,6 +58,7 @@ import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugi
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
+import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider.XmlModelInstanceProvider;
 import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;
@@ -288,6 +289,29 @@ public class AbstractDresdenOclTest {
 		if (EPackage.Registry.INSTANCE.getEPackage(OclPackage.eNS_URI) == null) {
 			EPackage.Registry.INSTANCE.put(OclPackage.eNS_PREFIX,
 					OclPackage.eINSTANCE);
+		}
+		// no else.
+		
+		/* Probably register the Testmodel resource for EMF. */
+		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
+				.get(TestmodelPackage.eNS_PREFIX) == null) {
+
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
+					.put(TestmodelPackage.eNS_PREFIX,
+							new XMIResourceFactoryImpl() {
+								public Resource createResource(URI uri) {
+									XMIResource xmiResource = new XMIResourceImpl(
+											uri);
+									return xmiResource;
+								}
+							});
+		}
+		// no else.
+
+		if (EPackage.Registry.INSTANCE
+				.getEPackage(TestmodelPackage.eNS_URI) == null) {
+			EPackage.Registry.INSTANCE.put(TestmodelPackage.eNS_PREFIX,
+					TestmodelPackage.eINSTANCE);
 		}
 		// no else.
 	}

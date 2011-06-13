@@ -20,19 +20,11 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.modelinstancetype.ecore.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.modelinstancetype.ecore.test.tests.TestEcoreModelInstanceType;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 /**
  * <p>
@@ -50,31 +42,5 @@ public class AllEcoreModelInstanceTypeTests extends AbstractDresdenOclTest {
 	public static void setUp() throws Exception {
 
 		AbstractDresdenOclTest.setUp();
-
-		if (!Platform.isRunning()) {
-			/* Probably register the Testmodel resource for EMF. */
-			if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-					.get(TestmodelPackage.eNS_PREFIX) == null) {
-
-				Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-						.put(TestmodelPackage.eNS_PREFIX,
-								new XMIResourceFactoryImpl() {
-									public Resource createResource(URI uri) {
-										XMIResource xmiResource = new XMIResourceImpl(
-												uri);
-										return xmiResource;
-									}
-								});
-			}
-			// no else.
-
-			if (EPackage.Registry.INSTANCE
-					.getEPackage(TestmodelPackage.eNS_URI) == null) {
-				EPackage.Registry.INSTANCE.put(TestmodelPackage.eNS_PREFIX,
-						TestmodelPackage.eINSTANCE);
-			}
-			// no else.
-		}
-		// no else.
 	}
 }

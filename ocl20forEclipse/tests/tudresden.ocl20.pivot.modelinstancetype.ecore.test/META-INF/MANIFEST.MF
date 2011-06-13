@@ -8,15 +8,13 @@ Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.modelinstancetype.ecore.test,
- tudresden.ocl20.pivot.modelinstancetype.ecore.test.tests,
- tudresden.ocl20.pivot.modelinstancetype.test.testmodel,
- tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl,
- tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util
+ tudresden.ocl20.pivot.modelinstancetype.ecore.test.tests
 Require-Bundle: org.eclipse.core.runtime,
  org.junit4;bundle-version="4.0.0",
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.modelinstancetype.ecore,
  tudresden.ocl20.pivot.testsuite,
  tudresden.ocl20.pivot.modelinstancetype.test,
- org.eclipse.emf.ecore.xmi
+ org.eclipse.emf.ecore.xmi,
+ tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel
 Bundle-ActivationPolicy: lazy

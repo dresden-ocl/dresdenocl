@@ -24,5 +24,6 @@ Require-Bundle: org.junit;bundle-version="4.0.0",
  tudresden.ocl20.pivot.tools.template,
  tudresden.ocl20.pivot.tools.template.sql,
  tudresden.ocl20.pivot.tools.transformation,
- tudresden.ocl20.pivot.tools.transformation.pivot2sql
+ tudresden.ocl20.pivot.tools.transformation.pivot2sql,
+ tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel
 Export-Package: org.dresdenocl.testsuite._abstract
