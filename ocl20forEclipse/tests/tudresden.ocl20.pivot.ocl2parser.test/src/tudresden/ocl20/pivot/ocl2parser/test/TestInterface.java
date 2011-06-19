@@ -29,6 +29,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.test.constrainttypes.AllConstraintTypeTests;
@@ -43,7 +44,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * 
  * @author Claas Wilke
  */
-public class TestInterface {
+public class TestInterface extends AbstractDresdenOclTest {
 
 	/**
 	 * <p>
