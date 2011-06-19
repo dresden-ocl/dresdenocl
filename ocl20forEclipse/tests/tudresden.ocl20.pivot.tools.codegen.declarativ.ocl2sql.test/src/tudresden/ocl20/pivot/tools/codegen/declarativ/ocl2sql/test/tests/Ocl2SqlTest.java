@@ -133,7 +133,7 @@ public class Ocl2SqlTest {
 		for (String s : actualCorrected) {
 			if (s.equals(""))
 				continue;
-			assertTrue("A extra view is generated\n" + s,
+			assertTrue("An extra view is generated\n" + s,
 					expectedCorrected.contains(s));
 		}
 		for (String s : expectedCorrected) {
