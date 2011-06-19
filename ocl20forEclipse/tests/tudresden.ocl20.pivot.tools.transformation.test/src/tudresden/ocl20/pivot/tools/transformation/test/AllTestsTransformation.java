@@ -27,17 +27,11 @@
 
 package tudresden.ocl20.pivot.tools.transformation.test;
 
-import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
 import tudresden.ocl20.pivot.tools.transformation.test.tests.TestTransformationFactory;
 import tudresden.ocl20.pivot.tools.transformation.test.tests.TestTransformationRegistry;
-import tudresden.ocl20.pivot.tools.transformation.test.util.TestParallelTrans;
-import tudresden.ocl20.pivot.tools.transformation.test.util.TestTrans;
 
 /**
  * This TestSuite runs all Tests testing the package
@@ -49,31 +43,7 @@ import tudresden.ocl20.pivot.tools.transformation.test.util.TestTrans;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestTransformationFactory.class,
-		TestTransformationRegistry.class
-
-})
-public class AllTestsTransformation extends AbstractDresdenOclTest {
-
-	@BeforeClass
-	public static void setUp() throws Exception {
-
-		AbstractDresdenOclTest.setUp();
-		TransformationPlugin.getTransformationRegistry().addTransformation(
-				new TestTrans("", ""));
-		TransformationPlugin.getTransformationRegistry().addTransformation(
-				new TestParallelTrans("", ""));
-	}
-
-	@AfterClass
-	public static void tear_down() {
-
-		TransformationPlugin.getTransformationRegistry().removeTransformation(
-				"TestParallelTrans");
-		TransformationPlugin.getTransformationRegistry().removeTransformation(
-				"TestTrans");
-		TransformationPlugin.getTransformationRegistry().removeTransformation(
-				"TestFalseTrans");
-
-	}
-
+		TestTransformationRegistry.class })
+public class AllTestsTransformation extends AbstractTransformationTest {
+	/* Remains empty. */
 }
