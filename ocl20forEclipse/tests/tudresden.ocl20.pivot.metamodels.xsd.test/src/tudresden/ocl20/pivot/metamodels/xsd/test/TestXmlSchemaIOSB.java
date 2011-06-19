@@ -21,6 +21,7 @@ import java.util.Arrays;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
@@ -63,6 +64,7 @@ public class TestXmlSchemaIOSB extends AbstractDresdenOclTest {
 	}
 
 	@Test
+	@Ignore
 	public void testTypeCAEXFile01() throws Exception {
 		Type type = modelUnderTest.findType(Arrays.asList(new String[] {
 				ModelConstants.ROOT_PACKAGE_NAME, "Iosb", "CAEXFileType" }));
@@ -86,6 +88,7 @@ public class TestXmlSchemaIOSB extends AbstractDresdenOclTest {
 	}
 
 	@Test
+	@Ignore
 	public void testTypeCAEXBasicObject01() throws Exception {
 		Type type = modelUnderTest.findType(Arrays.asList(new String[] {
 				ModelConstants.ROOT_PACKAGE_NAME, "Iosb", "CAEXBasicObject" }));
