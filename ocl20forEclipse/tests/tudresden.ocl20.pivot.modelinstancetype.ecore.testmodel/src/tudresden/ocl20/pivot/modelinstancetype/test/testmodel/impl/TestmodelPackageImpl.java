@@ -15,29 +15,30 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelFactory;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelFactory;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -204,7 +205,7 @@ public class TestmodelPackageImpl extends EPackageImpl implements TestmodelPacka
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#eNS_URI
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

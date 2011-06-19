@@ -22,9 +22,10 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '

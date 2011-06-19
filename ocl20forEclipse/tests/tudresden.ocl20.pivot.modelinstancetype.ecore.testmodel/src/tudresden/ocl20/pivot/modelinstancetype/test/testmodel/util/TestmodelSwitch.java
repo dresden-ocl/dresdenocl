@@ -11,7 +11,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +24,7 @@ import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage
+ * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage
  * @generated
  */
 public class TestmodelSwitch<T> {

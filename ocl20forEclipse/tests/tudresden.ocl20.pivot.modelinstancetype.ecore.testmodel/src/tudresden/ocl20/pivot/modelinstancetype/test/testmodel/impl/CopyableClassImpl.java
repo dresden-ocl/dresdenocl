@@ -10,8 +10,9 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '

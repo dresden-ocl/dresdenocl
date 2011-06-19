@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -18,14 +18,14 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getBagProperty1 <em>Bag Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getOrderedSetProperty1 <em>Ordered Set Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSequenceProperty1 <em>Sequence Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSetProperty1 <em>Set Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getBagProperty1 <em>Bag Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getOrderedSetProperty1 <em>Ordered Set Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSequenceProperty1 <em>Sequence Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass#getSetProperty1 <em>Set Property1</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass()
+ * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass()
  * @model
  * @generated
  */
@@ -40,7 +40,7 @@ public interface CollectionTypeProviderClass extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Bag Property1</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_BagProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_BagProperty1()
 	 * @model unique="false" ordered="false"
 	 * @generated
 	 */
@@ -56,7 +56,7 @@ public interface CollectionTypeProviderClass extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ordered Set Property1</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_OrderedSetProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_OrderedSetProperty1()
 	 * @model
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public interface CollectionTypeProviderClass extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sequence Property1</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_SequenceProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_SequenceProperty1()
 	 * @model unique="false"
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface CollectionTypeProviderClass extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Set Property1</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_SetProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getCollectionTypeProviderClass_SetProperty1()
 	 * @model ordered="false"
 	 * @generated
 	 */

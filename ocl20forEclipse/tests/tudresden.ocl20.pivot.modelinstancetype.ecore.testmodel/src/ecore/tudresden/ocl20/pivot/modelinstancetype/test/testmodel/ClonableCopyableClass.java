@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
 
 
 /**
@@ -13,7 +13,7 @@ package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
  * <!-- end-user-doc -->
  *
  *
- * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClonableCopyableClass()
+ * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClonableCopyableClass()
  * @model
  * @generated
  */

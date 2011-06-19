@@ -20,19 +20,20 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 
 /**
  * <!-- begin-user-doc -->

@@ -34,6 +34,8 @@ import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.xsd.XSDPackage;
 import org.junit.BeforeClass;
 
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
@@ -58,7 +60,6 @@ import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugi
 import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider.EcoreModelInstanceProvider;
 import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 import tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider.XmlModelInstanceProvider;
 import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;

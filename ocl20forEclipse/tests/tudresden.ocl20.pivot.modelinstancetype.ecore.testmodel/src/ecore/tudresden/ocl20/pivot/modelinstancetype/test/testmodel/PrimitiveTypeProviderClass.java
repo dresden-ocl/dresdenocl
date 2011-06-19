@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,14 +16,14 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1 <em>Boolean Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1 <em>Integer Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1 <em>Real Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1 <em>String Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1 <em>Boolean Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1 <em>Integer Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1 <em>Real Property1</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1 <em>String Property1</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass()
+ * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface PrimitiveTypeProviderClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Boolean Property1</em>' attribute.
 	 * @see #setBooleanProperty1(boolean)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_BooleanProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_BooleanProperty1()
 	 * @model
 	 * @generated
 	 */
 	boolean isBooleanProperty1();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1 <em>Boolean Property1</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#isBooleanProperty1 <em>Boolean Property1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Boolean Property1</em>' attribute.
@@ -64,14 +64,14 @@ public interface PrimitiveTypeProviderClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Integer Property1</em>' attribute.
 	 * @see #setIntegerProperty1(int)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_IntegerProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_IntegerProperty1()
 	 * @model
 	 * @generated
 	 */
 	int getIntegerProperty1();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1 <em>Integer Property1</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getIntegerProperty1 <em>Integer Property1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Integer Property1</em>' attribute.
@@ -90,14 +90,14 @@ public interface PrimitiveTypeProviderClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Real Property1</em>' attribute.
 	 * @see #setRealProperty1(float)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_RealProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_RealProperty1()
 	 * @model
 	 * @generated
 	 */
 	float getRealProperty1();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1 <em>Real Property1</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getRealProperty1 <em>Real Property1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Real Property1</em>' attribute.
@@ -116,14 +116,14 @@ public interface PrimitiveTypeProviderClass extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>String Property1</em>' attribute.
 	 * @see #setStringProperty1(String)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_StringProperty1()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getPrimitiveTypeProviderClass_StringProperty1()
 	 * @model
 	 * @generated
 	 */
 	String getStringProperty1();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1 <em>String Property1</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass#getStringProperty1 <em>String Property1</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>String Property1</em>' attribute.

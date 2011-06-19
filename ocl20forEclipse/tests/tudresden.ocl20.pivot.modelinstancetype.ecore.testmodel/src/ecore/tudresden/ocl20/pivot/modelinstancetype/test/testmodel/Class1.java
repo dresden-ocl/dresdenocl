@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -18,23 +18,23 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty <em>Non Multiple Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleUniqueOrderedProperty <em>Multiple Unique Ordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleUniqueUnorderedProperty <em>Multiple Unique Unordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueOrderedProperty <em>Multiple Nonunique Ordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueUnorderedProperty <em>Multiple Nonunique Unordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyBooleanMultiple <em>Argument Property Boolean Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringMultiple <em>Argument Property String Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectMultiple <em>Argument Property Object Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralMultiple <em>Argument Property Enumeration Literal Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty <em>Non Multiple Property</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleUniqueOrderedProperty <em>Multiple Unique Ordered Property</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleUniqueUnorderedProperty <em>Multiple Unique Unordered Property</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueOrderedProperty <em>Multiple Nonunique Ordered Property</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getMultipleNonuniqueUnorderedProperty <em>Multiple Nonunique Unordered Property</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyBooleanMultiple <em>Argument Property Boolean Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringMultiple <em>Argument Property String Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectMultiple <em>Argument Property Object Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}</li>
+ *   <li>{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralMultiple <em>Argument Property Enumeration Literal Multiple</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1()
+ * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1()
  * @model
  * @generated
  */
@@ -49,14 +49,14 @@ public interface Class1 extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Non Multiple Property</em>' attribute.
 	 * @see #setNonMultipleProperty(String)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_NonMultipleProperty()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_NonMultipleProperty()
 	 * @model
 	 * @generated
 	 */
 	String getNonMultipleProperty();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty <em>Non Multiple Property</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getNonMultipleProperty <em>Non Multiple Property</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Non Multiple Property</em>' attribute.
@@ -75,7 +75,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Multiple Unique Ordered Property</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleUniqueOrderedProperty()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleUniqueOrderedProperty()
 	 * @model
 	 * @generated
 	 */
@@ -91,7 +91,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Multiple Unique Unordered Property</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleUniqueUnorderedProperty()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleUniqueUnorderedProperty()
 	 * @model ordered="false"
 	 * @generated
 	 */
@@ -107,7 +107,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Multiple Nonunique Ordered Property</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleNonuniqueOrderedProperty()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleNonuniqueOrderedProperty()
 	 * @model unique="false"
 	 * @generated
 	 */
@@ -123,7 +123,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Multiple Nonunique Unordered Property</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleNonuniqueUnorderedProperty()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_MultipleNonuniqueUnorderedProperty()
 	 * @model unique="false" ordered="false"
 	 * @generated
 	 */
@@ -139,14 +139,14 @@ public interface Class1 extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property Boolean Non Multiple</em>' attribute.
 	 * @see #setArgumentPropertyBooleanNonMultiple(boolean)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyBooleanNonMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyBooleanNonMultiple()
 	 * @model
 	 * @generated
 	 */
 	boolean isArgumentPropertyBooleanNonMultiple();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Argument Property Boolean Non Multiple</em>' attribute.
@@ -165,14 +165,14 @@ public interface Class1 extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property String Non Multiple</em>' attribute.
 	 * @see #setArgumentPropertyStringNonMultiple(String)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyStringNonMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyStringNonMultiple()
 	 * @model
 	 * @generated
 	 */
 	String getArgumentPropertyStringNonMultiple();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Argument Property String Non Multiple</em>' attribute.
@@ -191,7 +191,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property Boolean Multiple</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyBooleanMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyBooleanMultiple()
 	 * @model
 	 * @generated
 	 */
@@ -207,7 +207,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property String Multiple</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyStringMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyStringMultiple()
 	 * @model
 	 * @generated
 	 */
@@ -223,14 +223,14 @@ public interface Class1 extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property Object Non Multiple</em>' reference.
 	 * @see #setArgumentPropertyObjectNonMultiple(Class1)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyObjectNonMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyObjectNonMultiple()
 	 * @model
 	 * @generated
 	 */
 	Class1 getArgumentPropertyObjectNonMultiple();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}' reference.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Argument Property Object Non Multiple</em>' reference.
@@ -241,7 +241,7 @@ public interface Class1 extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Argument Property Object Multiple</b></em>' reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1}.
+	 * The list contents are of type {@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument Property Object Multiple</em>' reference list isn't clear,
@@ -249,7 +249,7 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property Object Multiple</em>' reference list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyObjectMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyObjectMultiple()
 	 * @model
 	 * @generated
 	 */
@@ -257,7 +257,7 @@ public interface Class1 extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Argument Property Enumeration Literal Non Multiple</b></em>' attribute.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1}.
+	 * The literals are from the enumeration {@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument Property Enumeration Literal Non Multiple</em>' attribute isn't clear,
@@ -265,20 +265,20 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property Enumeration Literal Non Multiple</em>' attribute.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1
 	 * @see #setArgumentPropertyEnumerationLiteralNonMultiple(Enumeration1)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyEnumerationLiteralNonMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyEnumerationLiteralNonMultiple()
 	 * @model
 	 * @generated
 	 */
 	Enumeration1 getArgumentPropertyEnumerationLiteralNonMultiple();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}' attribute.
+	 * Sets the value of the '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Argument Property Enumeration Literal Non Multiple</em>' attribute.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1
 	 * @see #getArgumentPropertyEnumerationLiteralNonMultiple()
 	 * @generated
 	 */
@@ -286,8 +286,8 @@ public interface Class1 extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Argument Property Enumeration Literal Multiple</b></em>' attribute list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1}.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1}.
+	 * The list contents are of type {@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1}.
+	 * The literals are from the enumeration {@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument Property Enumeration Literal Multiple</em>' attribute list isn't clear,
@@ -295,8 +295,8 @@ public interface Class1 extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Argument Property Enumeration Literal Multiple</em>' attribute list.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyEnumerationLiteralMultiple()
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getClass1_ArgumentPropertyEnumerationLiteralMultiple()
 	 * @model
 	 * @generated
 	 */

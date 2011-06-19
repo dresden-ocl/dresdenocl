@@ -15,7 +15,8 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+
 
 /**
  * <!-- begin-user-doc -->

@@ -13,14 +13,15 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage
+ * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage
  * @generated
  */
 public class TestmodelAdapterFactory extends AdapterFactoryImpl {
@@ -172,13 +173,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass <em>Container Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass <em>Container Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass
 	 * @generated
 	 */
 	public Adapter createContainerClassAdapter() {
@@ -186,13 +187,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass <em>Primitive Type Provider Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass <em>Primitive Type Provider Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass
 	 * @generated
 	 */
 	public Adapter createPrimitiveTypeProviderClassAdapter() {
@@ -200,13 +201,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass <em>Collection Type Provider Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass <em>Collection Type Provider Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass
 	 * @generated
 	 */
 	public Adapter createCollectionTypeProviderClassAdapter() {
@@ -214,13 +215,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass <em>Enumeration Literal Provider Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass <em>Enumeration Literal Provider Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass
 	 * @generated
 	 */
 	public Adapter createEnumerationLiteralProviderClassAdapter() {
@@ -228,13 +229,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1 <em>Class1</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1 <em>Class1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1
 	 * @generated
 	 */
 	public Adapter createClass1Adapter() {
@@ -242,13 +243,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2 <em>Class2</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2 <em>Class2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2
 	 * @generated
 	 */
 	public Adapter createClass2Adapter() {
@@ -256,13 +257,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1 <em>Interface1</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1
 	 * @generated
 	 */
 	public Adapter createInterface1Adapter() {
@@ -270,13 +271,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2 <em>Interface2</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2
 	 * @generated
 	 */
 	public Adapter createInterface2Adapter() {
@@ -284,13 +285,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3 <em>Interface3</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3
 	 * @generated
 	 */
 	public Adapter createInterface3Adapter() {
@@ -298,13 +299,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass <em>Copyable Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass <em>Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass
 	 * @generated
 	 */
 	public Adapter createCopyableClassAdapter() {
@@ -312,13 +313,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation <em>C1 Implementation</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation <em>C1 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation
 	 * @generated
 	 */
 	public Adapter createC1ImplementationAdapter() {
@@ -326,13 +327,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation <em>I1I2 Implementation</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation <em>I1I2 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation
 	 * @generated
 	 */
 	public Adapter createI1I2ImplementationAdapter() {
@@ -340,13 +341,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation <em>I1 Implementation</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation <em>I1 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation
 	 * @generated
 	 */
 	public Adapter createI1ImplementationAdapter() {
@@ -354,13 +355,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation <em>I2C1 Implementation</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation <em>I2C1 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation
 	 * @generated
 	 */
 	public Adapter createI2C1ImplementationAdapter() {
@@ -368,13 +369,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation <em>I3C2 Implementation</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation <em>I3C2 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation
 	 * @generated
 	 */
 	public Adapter createI3C2ImplementationAdapter() {
@@ -382,13 +383,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation <em>I3 Implementation</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation <em>I3 Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation
 	 * @generated
 	 */
 	public Adapter createI3ImplementationAdapter() {
@@ -396,13 +397,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass <em>Clonable Copyable Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass <em>Clonable Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass
 	 * @generated
 	 */
 	public Adapter createClonableCopyableClassAdapter() {
@@ -410,13 +411,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass <em>Initializable Copyable Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass <em>Initializable Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass
 	 * @generated
 	 */
 	public Adapter createInitializableCopyableClassAdapter() {
@@ -424,13 +425,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass <em>Non Copyable Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass <em>Non Copyable Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass
 	 * @generated
 	 */
 	public Adapter createNonCopyableClassAdapter() {
@@ -438,13 +439,13 @@ public class TestmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass <em>Static Property And Operation Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass <em>Static Property And Operation Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass
+	 * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass
 	 * @generated
 	 */
 	public Adapter createStaticPropertyAndOperationClassAdapter() {
