@@ -681,43 +681,32 @@ public class JavaModelInstance extends AbstractModelInstance {
 			}
 			// no else.
 
-			/* Probably create the contained elements. */
-			if (result != null) {
+			/* Create the contained elements. */
+			Class<?> elementClassType;
 
-				Class<?> elementClassType;
-
-				/*
-				 * TODO: The question how to retrieve the generic type of a List
-				 * (if any exists) should be investigated very soon.
-				 */
-				/* Try to get the elements class. */
-				if (clazzType.getTypeParameters().length == 1
-						&& clazzType.getTypeParameters()[0].getBounds().length == 1
-						&& clazzType.getTypeParameters()[0].getBounds()[0] instanceof Class) {
-					elementClassType = (Class<?>) clazzType.getTypeParameters()[0]
-							.getBounds()[0];
-				}
-
-				else {
-					elementClassType = Object.class;
-				}
-
-				/* Create the value for all elements. */
-				for (IModelInstanceElement anElement : modelInstanceCollection
-						.getCollection()) {
-					result.add(createAdaptedElement(anElement,
-							elementClassType, classLoaders));
-				}
-				// end for.
+			/*
+			 * TODO: The question how to retrieve the generic type of a List (if
+			 * any exists) should be investigated very soon.
+			 */
+			/* Try to get the elements class. */
+			if (clazzType.getTypeParameters().length == 1
+					&& clazzType.getTypeParameters()[0].getBounds().length == 1
+					&& clazzType.getTypeParameters()[0].getBounds()[0] instanceof Class) {
+				elementClassType = (Class<?>) clazzType.getTypeParameters()[0]
+						.getBounds()[0];
 			}
 
-			/* Else throw an exception. */
 			else {
-				String msg;
-				msg = JavaModelInstanceTypeMessages.JavaModelInstance_CannotRecreateCollection;
-
-				throw new IllegalArgumentException(msg);
+				elementClassType = Object.class;
 			}
+
+			/* Create the value for all elements. */
+			for (IModelInstanceElement anElement : modelInstanceCollection
+					.getCollection()) {
+				result.add(createAdaptedElement(anElement, elementClassType,
+						classLoaders));
+			}
+			// end for.
 		}
 
 		/* Else throw an exception. */
@@ -781,9 +770,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 				msg = JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
 				msg = NLS
-						.bind(
-								modelInstanceEnumerationLiteral.getLiteral()
-										.getQualifiedName(),
+						.bind(modelInstanceEnumerationLiteral.getLiteral()
+								.getQualifiedName(),
 								"The enumeration literal could not be adapted to any constant of the given Enum class.");
 
 				throw new IllegalArgumentException(msg);
@@ -838,10 +826,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 
 						msg = JavaModelInstanceTypeMessages.JavaModelInstance_EnumerationLiteralNotFound;
 						msg = NLS
-								.bind(
-										modelInstanceEnumerationLiteral
-												.getLiteral()
-												.getQualifiedName(),
+								.bind(modelInstanceEnumerationLiteral
+										.getLiteral().getQualifiedName(),
 										"The enumeration literal could not be adapted to any constant of the given Enum class.");
 
 						throw new IllegalArgumentException(msg);
@@ -1368,8 +1354,8 @@ public class JavaModelInstance extends AbstractModelInstance {
 			String msg;
 
 			msg = JavaModelInstanceTypeMessages.JavaModelInstance_ObjectDoesNoMatchToModel;
-			msg = NLS.bind(msg, anObject.getClass(), this.myModel
-					.getDisplayName());
+			msg = NLS.bind(msg, anObject.getClass(),
+					this.myModel.getDisplayName());
 
 			LOGGER.error(msg);
 			throw new TypeNotFoundInModelException(msg);
