@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.views">
+   		<view id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
+   			name="TracerView"
+   			class="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"/>
+   </extension>
+
+</plugin>
