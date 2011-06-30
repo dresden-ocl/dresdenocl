@@ -28,6 +28,9 @@ Release 3.x (not scheduled yet)
   
 * Changes on OCL2SQL
   - Closure iterator is now supported.
+  
+* Bug fixes on OCL2AspectJ
+  - SortedBy iterator is now supported correctly (requires at least AspectJ 1.6.12.M1).
 
 GUI
 ===
