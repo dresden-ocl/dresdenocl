@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_staticDefOperation01 {
      * <code>context Class1
      *       static def: staticDefOperation01(): Integer =  42</code></p>
      */
-    public static Integer testpackage.Class1.staticDefOperation01( ) {
+    public static Integer testpackage.Class1.staticDefOperation01() {
         return new Integer(42);
     }
 }

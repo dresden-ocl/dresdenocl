@@ -13,7 +13,7 @@ public privileged aspect Class1_DeriveAspect_staticDeriveProperty01 {
      */
     protected pointcut staticDeriveProperty01Getter() :
     	get(static * testpackage.Class1.staticDeriveProperty01);
-    
+
     /**
      * <p>Derives the attribute staticDeriveProperty01 defined by the constraint
      * <code>context Class1

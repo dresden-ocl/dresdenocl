@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testEnumerationLiteralExp01 {
      * <code>context Class1
      *       def: testEnumerationLiteralExp01(): Enumeration1 = Enumeration1::literal1</code></p>
      */
-    public Enum testpackage.Class1.testEnumerationLiteralExp01( ) {
+    public Enum testpackage.Class1.testEnumerationLiteralExp01() {
         return testpackage.Enumeration1.literal1;
     }
 }

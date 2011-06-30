@@ -13,20 +13,20 @@ public privileged aspect Class1_DefAspect_testInvalidLiteralExp02 {
      * <code>context Class1
      *       def: testInvalidLiteralExp02(): Boolean = invalid.oclIsInvalid()</code></p>
      */
-    public Boolean testpackage.Class1.testInvalidLiteralExp02( ) {
+    public Boolean testpackage.Class1.testInvalidLiteralExp02() {
         Boolean result1;
-        
+
         /* Check if the expression results in invalid. */
         try {
             /* DUMMY variable is necessary to form literals into a statement. */
             Object DUMMY = (Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral(); 
             result1 = false;
         }
-        
+
         catch (Exception e) {
             result1 = true;
         }
-    
+
         return result1;
     }
 }

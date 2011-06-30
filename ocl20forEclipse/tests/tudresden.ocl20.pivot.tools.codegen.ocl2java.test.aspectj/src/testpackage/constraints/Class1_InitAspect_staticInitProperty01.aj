@@ -13,7 +13,7 @@ public privileged aspect Class1_InitAspect_staticInitProperty01 {
      */
     protected pointcut staticClass1Init():
         staticinitialization(testpackage.Class1);
-    
+
     /**
      * <p><code>Initializes the static attribute staticInitProperty01 defined by the constraint
      * <code>context Class1::staticInitProperty01

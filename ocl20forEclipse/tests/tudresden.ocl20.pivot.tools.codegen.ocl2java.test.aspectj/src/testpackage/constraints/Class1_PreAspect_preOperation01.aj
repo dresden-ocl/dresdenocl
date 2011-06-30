@@ -14,7 +14,7 @@ public privileged aspect Class1_PreAspect_preOperation01 {
     protected pointcut preOperation01Caller(testpackage.Class1 aClass, Integer anInt):
     	call(* testpackage.Class1.preOperation01(Integer))
     	&& target(aClass) && args(anInt);
-    
+
     /**
      * <p>Checks a precondition for the {@link Class1#preOperation01(, Integer anInt)} defined by the constraint
      * <code>context Class1::preOperation01(anInt: Integer) : Integer

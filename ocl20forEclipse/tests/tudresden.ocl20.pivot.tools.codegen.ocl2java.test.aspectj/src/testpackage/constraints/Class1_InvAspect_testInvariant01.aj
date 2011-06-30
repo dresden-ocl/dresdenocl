@@ -13,13 +13,13 @@ public privileged aspect Class1_InvAspect_testInvariant01 {
      */
     protected pointcut allClass1Constructors(testpackage.Class1 aClass):
         execution(testpackage.Class1.new(..)) && this(aClass);
-    
+
     /**
      * <p>Pointcut for all changes of the attribute {@link testpackage.Class1#isInvariant01Violated}.</p>
      */
     protected pointcut isInvariant01ViolatedSetter(testpackage.Class1 aClass) :
         set(* testpackage.Class1.isInvariant01Violated) && target(aClass); 
-    
+
     /**
      * <p>Pointcut to collect all attributeSetters.</p>
      */

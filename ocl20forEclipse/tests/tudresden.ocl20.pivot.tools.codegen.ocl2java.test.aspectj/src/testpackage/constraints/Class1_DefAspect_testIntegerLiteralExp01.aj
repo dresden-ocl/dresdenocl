@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testIntegerLiteralExp01 {
      * <code>context Class1
      *       def: testIntegerLiteralExp01(): Integer = 42</code></p>
      */
-    public Integer testpackage.Class1.testIntegerLiteralExp01( ) {
+    public Integer testpackage.Class1.testIntegerLiteralExp01() {
         return new Integer(42);
     }
 }

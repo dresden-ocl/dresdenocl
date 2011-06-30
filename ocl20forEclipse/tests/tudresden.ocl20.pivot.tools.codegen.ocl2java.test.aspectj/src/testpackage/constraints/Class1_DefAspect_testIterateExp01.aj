@@ -13,10 +13,10 @@ public privileged aspect Class1_DefAspect_testIterateExp01 {
      * <code>context Class1
      *       def: testIterateExp01() : Integer = Set{1, 2, 3}->iterate(i: Integer; sum: Integer = 0 | sum + i)</code></p>
      */
-    public Integer testpackage.Class1.testIterateExp01( ) {
+    public Integer testpackage.Class1.testIterateExp01() {
         java.util.HashSet<Integer> collection1;
         collection1 = new java.util.HashSet<Integer>();
-        
+
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
         collection1.add(new Integer(3));
@@ -26,7 +26,7 @@ public privileged aspect Class1_DefAspect_testIterateExp01 {
         for (Integer anElement1 : collection1) {
             result1 = (result1 + anElement1);
         }
-    
+
         return result1;
     }
 }

@@ -13,16 +13,16 @@ public privileged aspect Class1_DefAspect_testAnyIteratorExp01 {
      * <code>context Class1
      *       def: testAnyIteratorExp01() : Integer = Set{1, 2, 3}->any(i: Integer | i = 2)</code></p>
      */
-    public Integer testpackage.Class1.testAnyIteratorExp01( ) {
+    public Integer testpackage.Class1.testAnyIteratorExp01() {
         java.util.HashSet<Integer> collection1;
         collection1 = new java.util.HashSet<Integer>();
-        
+
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
         collection1.add(new Integer(3));
         Integer result1;
         result1 = null;
-        
+
         /* Iterator Any: Iterate through the elements and return one element that fulfills the condition. */
         for (Integer anElement1 : collection1) {
             if (((Object) anElement1).equals(new Integer(2))) {
@@ -31,7 +31,7 @@ public privileged aspect Class1_DefAspect_testAnyIteratorExp01 {
             }
             // no else
         }
-    
+
         return result1;
     }
 }

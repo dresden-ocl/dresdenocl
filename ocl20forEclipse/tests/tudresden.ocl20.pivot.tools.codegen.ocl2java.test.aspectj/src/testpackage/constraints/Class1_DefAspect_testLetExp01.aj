@@ -13,11 +13,11 @@ public privileged aspect Class1_DefAspect_testLetExp01 {
      * <code>context Class1
      *       def: testLetExp01(): Integer = let senseOfLife = 42 in senseOfLife</code></p>
      */
-    public Integer testpackage.Class1.testLetExp01( ) {
+    public Integer testpackage.Class1.testLetExp01() {
         Integer senseOfLife;
         senseOfLife = new Integer(42);
-        
-    
+
+
         return senseOfLife;
     }
 }

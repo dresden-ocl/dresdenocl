@@ -14,7 +14,7 @@ public privileged aspect Class1_DefAspect_defProperty01 {
      *       def: defProperty01: Integer =  42</code></p>
      */
     public Integer testpackage.Class1.defProperty01;
-    
+
     /**
      * <p>Getter method for the attribute defProperty01.</p>
      */
@@ -26,7 +26,7 @@ public privileged aspect Class1_DefAspect_defProperty01 {
      */
     protected pointcut defProperty01Getter(testpackage.Class1 aClass) :
     	get(* defProperty01) && target(aClass);
-    
+
     /**
      * <p>Initializes the attribute defProperty01 defined by the constraint
      * <code>context Class1

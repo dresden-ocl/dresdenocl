@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testInvalidLiteralExp01 {
      * <code>context Class1
      *       def: testInvalidLiteralExp01(): Integer = invalid</code></p>
      */
-    public Integer testpackage.Class1.testInvalidLiteralExp01( ) {
+    public Integer testpackage.Class1.testInvalidLiteralExp01() {
         return (Integer) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
     }
 }

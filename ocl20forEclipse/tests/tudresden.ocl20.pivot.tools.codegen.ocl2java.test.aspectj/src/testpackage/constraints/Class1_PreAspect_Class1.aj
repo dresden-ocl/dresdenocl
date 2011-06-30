@@ -13,7 +13,7 @@ public privileged aspect Class1_PreAspect_Class1 {
      */
     protected pointcut Class1Caller(Integer anInt):
     	execution(testpackage.Class1.new(Integer)) && args(anInt);
-    
+
     /**
      * <p>Checks a precondition for the {@link Class1#Class1(, Integer anInt)} defined by the constraint
      * <code>context Class1::Class1(anInt: Integer) : 

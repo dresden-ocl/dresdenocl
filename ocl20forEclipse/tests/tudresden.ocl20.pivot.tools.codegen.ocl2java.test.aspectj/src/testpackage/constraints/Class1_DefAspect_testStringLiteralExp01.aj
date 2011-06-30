@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testStringLiteralExp01 {
      * <code>context Class1
      *       def: testStringLiteralExp01(): String = 'some'</code></p>
      */
-    public String testpackage.Class1.testStringLiteralExp01( ) {
+    public String testpackage.Class1.testStringLiteralExp01() {
         return "some";
     }
 }

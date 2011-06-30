@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testOclTypeAllInstances02 {
      * <code>context Class1
      *       def: testOclTypeAllInstances02(): Set(OclVoid) = OclVoid.allInstances()</code></p>
      */
-    public java.util.Set testpackage.Class1.testOclTypeAllInstances02( ) {
+    public java.util.Set testpackage.Class1.testOclTypeAllInstances02() {
         java.util.Set<Object> result1 = new java.util.HashSet<Object>();
         result1.add(null);
         return result1;

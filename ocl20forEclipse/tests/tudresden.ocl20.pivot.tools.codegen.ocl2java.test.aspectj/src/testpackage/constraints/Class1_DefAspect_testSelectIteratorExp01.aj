@@ -13,16 +13,16 @@ public privileged aspect Class1_DefAspect_testSelectIteratorExp01 {
      * <code>context Class1
      *       def: testSelectIteratorExp01() : Set(Integer) = Set{1, 2, 3}->select(i: Integer | i = 2)</code></p>
      */
-    public java.util.Set<Integer> testpackage.Class1.testSelectIteratorExp01( ) {
+    public java.util.Set<Integer> testpackage.Class1.testSelectIteratorExp01() {
         java.util.HashSet<Integer> collection1;
         collection1 = new java.util.HashSet<Integer>();
-        
+
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
         collection1.add(new Integer(3));
         java.util.HashSet<Integer> result1;
         result1 = new java.util.HashSet<Integer>();
-        
+
         /* Iterator Select: Select all elements which fulfill the condition. */
         for (Integer anElement1 : collection1) {
             if (((Object) anElement1).equals(new Integer(2))) {
@@ -30,7 +30,7 @@ public privileged aspect Class1_DefAspect_testSelectIteratorExp01 {
             }
             // no else
         }
-    
+
         return result1;
     }
 }

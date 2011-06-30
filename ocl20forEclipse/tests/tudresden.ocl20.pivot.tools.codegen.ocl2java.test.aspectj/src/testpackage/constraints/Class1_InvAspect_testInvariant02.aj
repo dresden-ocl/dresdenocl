@@ -13,13 +13,13 @@ public privileged aspect Class1_InvAspect_testInvariant02 {
      */
     protected pointcut allClass1Constructors(testpackage.Class1 aClass):
         execution(testpackage.Class1.new(..)) && this(aClass);
-    
+
     /**
      * <p>Describes all public methods of the class {@link testpackage.Class1}.</p>
      */
     protected pointcut allClass1PublicMethods(testpackage.Class1 aClass):
         execution(public * testpackage.Class1.*(..)) && this(aClass);
-    
+
     /**
      * <p><code>Checks an invariant on the class Class1 defined by the constraint
      * <code>context Class1
@@ -38,7 +38,7 @@ public privileged aspect Class1_InvAspect_testInvariant02 {
         }
         // no else.
     }
-    
+
     /**
      * <p><code>Checks an invariant on the class Class1 defined by the constraint
      * <code>context Class1
@@ -57,7 +57,7 @@ public privileged aspect Class1_InvAspect_testInvariant02 {
         }
         // no else.
     }
-    
+
     /**
      * <p><code>Checks an invariant on the class Class1 defined by the constraint
      * <code>context Class1

@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testPropertyCallExp02 {
      * <code>context Class1
      *       def: testPropertyCallExp02(): Integer = Class1::aStaticInteger01</code></p>
      */
-    public Integer testpackage.Class1.testPropertyCallExp02( ) {
+    public Integer testpackage.Class1.testPropertyCallExp02() {
         return testpackage.Class1.aStaticInteger01;
     }
 }

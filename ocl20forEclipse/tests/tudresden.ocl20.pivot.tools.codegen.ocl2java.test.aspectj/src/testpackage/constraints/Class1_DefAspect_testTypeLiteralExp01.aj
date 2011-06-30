@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testTypeLiteralExp01 {
      * <code>context Class1
      *       def: testTypeLiteralExp01(): OclType = Class1</code></p>
      */
-    public Class<?> testpackage.Class1.testTypeLiteralExp01( ) {
+    public Class<?> testpackage.Class1.testTypeLiteralExp01() {
         return testpackage.Class1.class;
     }
 }

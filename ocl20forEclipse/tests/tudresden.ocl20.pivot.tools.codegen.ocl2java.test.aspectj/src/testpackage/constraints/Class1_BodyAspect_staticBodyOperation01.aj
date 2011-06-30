@@ -13,7 +13,7 @@ public privileged aspect Class1_BodyAspect_staticBodyOperation01 {
      */
     protected pointcut staticBodyOperation01Caller():
     	execution(* testpackage.Class1.staticBodyOperation01());
-    
+
     /**
      * <p>Defines the body of the method staticBodyOperation01() defined by the constraint
      * <code>context Class1::staticBodyOperation01(): Integer

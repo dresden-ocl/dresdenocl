@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
@@ -286,13 +285,7 @@ public abstract class AbstractDiffTest extends AbstractDresdenOclTest {
 			List<String[]> fileNames, IOcl2JavaSettings settings)
 			throws Exception {
 
-		/* Get the bundle location for the model files. */
-		String sourceDirectory;
-		sourceDirectory = Platform.getBundle(targetBundleId).getLocation();
-
-		/* Remove the 'reference:file:' from the beginning. */
-		sourceDirectory = sourceDirectory.substring(15);
-		sourceDirectory += "src/";
+		String sourceDirectory = getFile("src/", targetBundleId).getAbsolutePath();
 
 		settings.setSourceDirectory(sourceDirectory);
 		settings.setSaveCode(true);

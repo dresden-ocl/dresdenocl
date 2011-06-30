@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testOperationCallExp02 {
      * <code>context Class1
      *       def: testOperationCallExp02(): Integer = Class1::getStaticInteger()</code></p>
      */
-    public Integer testpackage.Class1.testOperationCallExp02( ) {
+    public Integer testpackage.Class1.testOperationCallExp02() {
         return testpackage.Class1.getStaticInteger();
     }
 }

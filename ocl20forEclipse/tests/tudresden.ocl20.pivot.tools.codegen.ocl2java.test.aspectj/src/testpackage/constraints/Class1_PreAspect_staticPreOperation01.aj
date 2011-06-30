@@ -13,7 +13,7 @@ public privileged aspect Class1_PreAspect_staticPreOperation01 {
      */
     protected pointcut staticPreOperation01Caller(Integer anInt):
     	execution(* testpackage.Class1.staticPreOperation01(Integer)) && args(anInt);
-    
+
     /**
      * <p>Checks a precondition for the {@link Class1#staticPreOperation01(, Integer anInt)} defined by the constraint
      * <code>context Class1::staticPreOperation01(anInt: Integer) : Integer

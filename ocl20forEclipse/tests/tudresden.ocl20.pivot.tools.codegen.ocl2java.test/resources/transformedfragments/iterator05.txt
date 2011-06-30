@@ -12,9 +12,9 @@ comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
         result3 = 0;
 
         if (anElement1.number < anElement2.number) {
-            result3 = -1;
-        } else if (anElement1.number > anElement2.number) {
             result3 = 1;
+        } else if (anElement1.number > anElement2.number) {
+            result3 = -1;
         }
 
         return result3;
@@ -36,9 +36,9 @@ comparator2 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
         result4 = 0;
 
         if (anElement3.number < anElement4.number) {
-            result4 = -1;
-        } else if (anElement3.number > anElement4.number) {
             result4 = 1;
+        } else if (anElement3.number > anElement4.number) {
+            result4 = -1;
         }
 
         return result4;

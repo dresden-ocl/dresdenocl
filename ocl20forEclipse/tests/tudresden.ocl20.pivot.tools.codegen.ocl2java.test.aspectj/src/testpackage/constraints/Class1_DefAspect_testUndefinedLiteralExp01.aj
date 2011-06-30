@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testUndefinedLiteralExp01 {
      * <code>context Class1
      *       def: testUndefinedLiteralExp01(): Integer = null</code></p>
      */
-    public Integer testpackage.Class1.testUndefinedLiteralExp01( ) {
+    public Integer testpackage.Class1.testUndefinedLiteralExp01() {
         return null;
     }
 }

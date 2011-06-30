@@ -9,7 +9,7 @@ package testpackage.constraints;
 public privileged aspect Class1_InvAspect_testInvariant03 {
 
     declare parents: testpackage.Class1 implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
-    
+
     public void testpackage.Class1.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
@@ -19,7 +19,7 @@ public privileged aspect Class1_InvAspect_testInvariant03 {
     protected pointcut checkInvariantsCaller(testpackage.Class1 aClass):
     	call(void checkInvariants())
     	&& target(aClass);
-    
+
     /**
      * <p><code>Checks an invariant on the class Class1 defined by the constraint
      * <code>context Class1

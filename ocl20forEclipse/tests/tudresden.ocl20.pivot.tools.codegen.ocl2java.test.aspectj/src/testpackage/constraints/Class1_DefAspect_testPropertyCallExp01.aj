@@ -13,7 +13,7 @@ public privileged aspect Class1_DefAspect_testPropertyCallExp01 {
      * <code>context Class1
      *       def: testPropertyCallExp01(): Integer = self.anInteger01</code></p>
      */
-    public Integer testpackage.Class1.testPropertyCallExp01( ) {
+    public Integer testpackage.Class1.testPropertyCallExp01() {
     	/* Self variable probably used within the definition. */
     	testpackage.Class1 aClass = this;
     	

@@ -14,7 +14,7 @@ public privileged aspect Class1_BodyAspect_bodyOperation01 {
     protected pointcut bodyOperation01Caller(testpackage.Class1 aClass):
     	call(* testpackage.Class1.bodyOperation01())
     	&& target(aClass);
-    
+
     /**
      * <p>Defines the body of the method bodyOperation01() defined by the constraint
      * <code>context Class1::bodyOperation01(): Integer

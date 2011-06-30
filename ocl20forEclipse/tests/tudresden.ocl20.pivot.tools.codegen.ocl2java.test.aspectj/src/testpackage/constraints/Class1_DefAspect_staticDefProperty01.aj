@@ -14,7 +14,7 @@ public privileged aspect Class1_DefAspect_staticDefProperty01 {
      *       static def: staticDefProperty01: Integer =  42</code></p>
      */
     public static Integer testpackage.Class1.staticDefProperty01;
-    
+
     /**
      * <p>Getter method for the attribute staticDefProperty01.</p>
      */
@@ -26,7 +26,7 @@ public privileged aspect Class1_DefAspect_staticDefProperty01 {
      */
     protected pointcut staticDefProperty01Getter() :
     	get(static * testpackage.Class1.staticDefProperty01);
-    
+
     /**
      * <p>Initializes the attribute staticDefProperty01 defined by the constraint
      * <code>context Class1

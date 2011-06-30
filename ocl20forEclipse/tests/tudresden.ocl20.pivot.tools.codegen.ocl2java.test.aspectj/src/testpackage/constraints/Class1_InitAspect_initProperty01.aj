@@ -13,7 +13,7 @@ public privileged aspect Class1_InitAspect_initProperty01 {
      */
     protected pointcut allClass1Constructors(testpackage.Class1 aClass):
         execution(testpackage.Class1.new(..)) && this(aClass);
-    
+
     /**
      * <p><code>Initializes the attribute initProperty01 defined by the constraint
      * <code>context Class1::initProperty01

@@ -13,16 +13,16 @@ public privileged aspect Class1_DefAspect_testForAllIteratorExp01 {
      * <code>context Class1
      *       def: testForAllIteratorExp01() : Boolean = Set{1, 2, 3}->forAll(i: Integer | i > 0)</code></p>
      */
-    public Boolean testpackage.Class1.testForAllIteratorExp01( ) {
+    public Boolean testpackage.Class1.testForAllIteratorExp01() {
         java.util.HashSet<Integer> collection1;
         collection1 = new java.util.HashSet<Integer>();
-        
+
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
         collection1.add(new Integer(3));
         Boolean result1;
         result1 = true;
-        
+
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
         for (Integer anElement1 : collection1) {
             if (!(anElement1 > new Integer(0))) {
@@ -31,7 +31,7 @@ public privileged aspect Class1_DefAspect_testForAllIteratorExp01 {
             }
             // no else
         }
-    
+
         return result1;
     }
 }

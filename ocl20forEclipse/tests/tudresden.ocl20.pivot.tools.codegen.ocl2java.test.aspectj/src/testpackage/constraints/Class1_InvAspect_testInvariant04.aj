@@ -14,7 +14,7 @@ public privileged aspect Class1_InvAspect_testInvariant04 {
     protected pointcut checkInvariantsCaller(testpackage.Class1 aClass):
     	call(void checkInvariants())
     	&& target(aClass);
-    
+
     /**
      * <p><code>Checks an invariant on the class Class1 defined by the constraint
      * <code>context Class1

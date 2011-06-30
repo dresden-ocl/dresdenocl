@@ -13,14 +13,14 @@ public privileged aspect Class1_DefAspect_testCollectionLiteralExp05 {
      * <code>context Class1
      *       def: testCollectionLiteralExp05():    Set(Integer) = Set { 0, 1, 2 }</code></p>
      */
-    public java.util.Set<Integer> testpackage.Class1.testCollectionLiteralExp05( ) {
+    public java.util.Set<Integer> testpackage.Class1.testCollectionLiteralExp05() {
         java.util.HashSet<Integer> collection1;
         collection1 = new java.util.HashSet<Integer>();
-        
+
         collection1.add(new Integer(0));
         collection1.add(new Integer(1));
         collection1.add(new Integer(2));
-    
+
         return collection1;
     }
 }
