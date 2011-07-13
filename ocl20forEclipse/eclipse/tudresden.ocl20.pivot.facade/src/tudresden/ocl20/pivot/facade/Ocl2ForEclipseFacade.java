@@ -29,6 +29,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import org.dresdenocl.metrics.OclMetrics;
+import org.dresdenocl.metrics.metric.Metric;
 import org.eclipse.emf.common.util.URI;
 
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
@@ -553,6 +555,40 @@ public class Ocl2ForEclipseFacade {
 
 		return new HashSet<IMetamodel>(Arrays.asList(ModelBusPlugin
 				.getMetamodelRegistry().getMetamodels()));
+	}
+
+	/**
+	 * Computes a {@link Metric} object containing metrics for a given
+	 * {@link Constraint}.
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} for which the {@link Metric} object
+	 *            shall be computed.
+	 * @return A {@link Metric} object containing metrics for the given
+	 *         {@link Constraint}.
+	 */
+	public static Metric getMetrics(Constraint constraint) {
+		return OclMetrics.computeMetric(constraint);
+	}
+
+	/**
+	 * Computes a {@link Metric} object containing metrics for a given
+	 * {@link Constraint}.
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint} for which the {@link Metric} object
+	 *            shall be computed.
+	 * @return A {@link Metric} object containing metrics for the given
+	 *         {@link Constraint}.
+	 */
+	public static Metric getMetrics(IModel model) {
+		try {
+			return OclMetrics.computeMetric(model.getConstraints());
+		} catch (ModelAccessException e) {
+			throw new IllegalStateException(
+					"Exception during computation of metric for the given model.",
+					e);
+		}
 	}
 
 	/**
@@ -1406,43 +1442,6 @@ public class Ocl2ForEclipseFacade {
 
 		return parseConstraints(uri, model, addToModel);
 	}
-
-	// FIXME Michael: TBD
-	// /**
-	// * <p>
-	// * Parses a {@link List} of OCL {@link Constraint}s that are provided by a
-	// * given {@link String}.
-	// * </p>
-	// *
-	// * @param string
-	// * The {@link String} providing the {@link Constraint}s to be
-	// * parsed.
-	// * @param model
-	// * The {@link IModel} for which the {@link Constraint}s shall be
-	// * parsed.
-	// * @param addToModel
-	// * Indicates whether or not the parsed {@link Constraint}s, its
-	// * defined fields and functions to the given {@link IModel}.
-	// * @return The parsed {@link Constraint}s as a {@link List}.
-	// * @throws ParseException
-	// * Thrown, if the parsing fails.
-	// * @throws IllegalArgumentException
-	// * Thrown, if at least one parameter is invalid.
-	// */
-	// public static List<Constraint> parseConstraints(String string,
-	// IModel model, boolean addToModel) throws ParseException,
-	// IllegalArgumentException {
-	//
-	// if (string == null) {
-	// throw new IllegalAccessError("Parameter 'string' must not be null.");
-	// }
-	// // no else.
-	//
-	// Reader reader;
-	// reader = new StringReader(string);
-	//
-	// return parseConstraints(reader, model, addToModel);
-	// }
 
 	/**
 	 * <p>
