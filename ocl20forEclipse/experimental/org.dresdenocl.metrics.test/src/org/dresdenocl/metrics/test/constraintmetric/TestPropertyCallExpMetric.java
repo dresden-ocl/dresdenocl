@@ -2,6 +2,10 @@ package org.dresdenocl.metrics.test.constraintmetric;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
 
 import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
@@ -35,7 +39,7 @@ public class TestPropertyCallExpMetric extends AbstractMetricTest {
 	public void testConstraintMetric01() throws Exception {
 
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class inv: isActive",
+				"context Type1 inv: prop1",
 				modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 
@@ -45,13 +49,24 @@ public class TestPropertyCallExpMetric extends AbstractMetricTest {
 		assertEquals(constraint, metric.getReferredConstraint());
 		assertEquals(2, metric.getExpressionCount());
 		assertEquals(2, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNull(metric.getCalledOperations());
+		assertNull(metric.getUsedLiterals());
+		assertNull(metric.getUsedIterators());
+
+		Map<String, Integer> calledProperties = metric.getCalledProperties();
+		assertEquals(1, calledProperties.size());
+		assertTrue(calledProperties.containsKey("root::pack1::Type1::prop1"));
+		assertEquals(new Integer(1), calledProperties.get("root::pack1::Type1::prop1"));
 	}
 
 	@Test
 	public void testConstraintMetric02() throws Exception {
 	
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class inv: self.isActive",
+				"context Type1 inv: self.prop1",
 				modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 	
@@ -61,5 +76,16 @@ public class TestPropertyCallExpMetric extends AbstractMetricTest {
 		assertEquals(constraint, metric.getReferredConstraint());
 		assertEquals(2, metric.getExpressionCount());
 		assertEquals(2, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNull(metric.getCalledOperations());
+		assertNull(metric.getUsedLiterals());
+		assertNull(metric.getUsedIterators());
+
+		Map<String, Integer> calledProperties = metric.getCalledProperties();
+		assertEquals(1, calledProperties.size());
+		assertTrue(calledProperties.containsKey("root::pack1::Type1::prop1"));
+		assertEquals(new Integer(1), calledProperties.get("root::pack1::Type1::prop1"));
 	}
 }

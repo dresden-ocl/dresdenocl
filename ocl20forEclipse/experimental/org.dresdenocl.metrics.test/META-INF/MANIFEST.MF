@@ -11,3 +11,4 @@ Require-Bundle: org.junit,
  tudresden.ocl20.pivot.facade,
  tudresden.ocl20.pivot.metamodels.ecore,
  org.dresdenocl.testsuite.abstract
+Export-Package: org.dresdenocl.metrics.test

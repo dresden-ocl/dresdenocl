@@ -862,7 +862,8 @@ public class OclMetrics {
 		metric.setExpressionCount(metric.getExpressionCount() + 1);
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
 
-		visitVariable(exp.getReferredVariable(), metric);
+		/* Variables must only be visited when used in let expressions. */
+		//visitVariable(exp.getReferredVariable(), metric);
 	}
 
 	/**

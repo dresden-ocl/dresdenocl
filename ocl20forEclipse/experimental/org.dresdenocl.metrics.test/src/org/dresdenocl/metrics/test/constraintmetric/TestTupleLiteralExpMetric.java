@@ -2,6 +2,10 @@ package org.dresdenocl.metrics.test.constraintmetric;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
 
 import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
@@ -35,7 +39,7 @@ public class TestTupleLiteralExpMetric extends AbstractMetricTest {
 	public void testConstraintMetric01() throws Exception {
 
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class def: tupleVal = Tuple { name : String = 'a' }",
+				"context Type1 def: tupleVal = Tuple { name : String = 'a' }",
 				modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 
@@ -45,5 +49,20 @@ public class TestTupleLiteralExpMetric extends AbstractMetricTest {
 		assertEquals(constraint, metric.getReferredConstraint());
 		assertEquals(2, metric.getExpressionCount());
 		assertEquals(2, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNull(metric.getCalledOperations());
+		assertNull(metric.getCalledProperties());
+		assertNull(metric.getUsedIterators());
+
+		Map<String, Integer> usedLiterals = metric.getUsedLiterals();
+		assertEquals(3, usedLiterals.size());
+		assertTrue(usedLiterals.containsKey("Tuple"));
+		assertEquals(new Integer(1), usedLiterals.get("Tuple"));
+		assertTrue(usedLiterals.containsKey("String"));
+		assertEquals(new Integer(1), usedLiterals.get("String"));
+		assertTrue(usedLiterals.containsKey("Tuple: Tuple(name:String)"));
+		assertEquals(new Integer(1), usedLiterals.get("Tuple: Tuple(name:String)"));
 	}
 }

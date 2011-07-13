@@ -2,6 +2,10 @@ package org.dresdenocl.metrics.test.constraintmetric;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
 
 import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
@@ -35,7 +39,7 @@ public class TestIterateExpMetric extends AbstractMetricTest {
 	public void testConstraintMetric01() throws Exception {
 
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class def: iterateVal01 = Set { true } -> iterate(a : Boolean ; res : Boolean = false | res and a)",
+				"context Type1 def: iterateVal01 = Set { true } -> iterate(a : Boolean ; res : Boolean = false | res and a)",
 				modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 
@@ -43,7 +47,18 @@ public class TestIterateExpMetric extends AbstractMetricTest {
 
 		assertNotNull(metric);
 		assertEquals(constraint, metric.getReferredConstraint());
-		assertEquals(8, metric.getExpressionCount());
-		assertEquals(4, metric.getExpressionDepth());
+		assertEquals(7, metric.getExpressionCount());
+		assertEquals(3, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNotNull(metric.getCalledOperations());
+		assertNull(metric.getCalledProperties());
+		assertNotNull(metric.getUsedLiterals());
+
+		Map<String, Integer> usedIterators = metric.getUsedIterators();
+		assertEquals(1, usedIterators.size());
+		assertTrue(usedIterators.containsKey("iterate"));
+		assertEquals(new Integer(1), usedIterators.get("iterate"));
 	}
 }

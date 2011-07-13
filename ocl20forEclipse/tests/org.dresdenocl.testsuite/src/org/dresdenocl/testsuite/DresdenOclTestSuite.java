@@ -12,6 +12,7 @@
  */
 package org.dresdenocl.testsuite;
 
+import org.dresdenocl.metrics.test.AllMetricsTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -55,6 +56,9 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 
 		/* Parser tests: */
 		AllOCL2ParserTests.class,
+
+		/* Metrics tests: */
+		AllMetricsTests.class,
 
 		/* Model Instance Type tests: */
 		AllEcoreModelInstanceTypeTests.class,

@@ -2,6 +2,10 @@ package org.dresdenocl.metrics.test.constraintmetric;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
 
 import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
@@ -35,7 +39,7 @@ public class TestOperationCallExpMetric extends AbstractMetricTest {
 	public void testConstraintMetric01() throws Exception {
 
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class inv: not true", modelUnderTest);
+				"context Type1 inv: not true", modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 
 		ConstraintMetric metric = OclMetrics.computeMetric(constraint);
@@ -44,13 +48,24 @@ public class TestOperationCallExpMetric extends AbstractMetricTest {
 		assertEquals(constraint, metric.getReferredConstraint());
 		assertEquals(2, metric.getExpressionCount());
 		assertEquals(2, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNull(metric.getCalledProperties());
+		assertNotNull(metric.getUsedLiterals());
+		assertNull(metric.getUsedIterators());
+
+		Map<String, Integer> calledOperations = metric.getCalledOperations();
+		assertEquals(1, calledOperations.size());
+		assertTrue(calledOperations.containsKey("Boolean.not(..)"));
+		assertEquals(new Integer(1), calledOperations.get("Boolean.not(..)"));
 	}
 
 	@Test
 	public void testConstraintMetric02() throws Exception {
 
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class inv: true or false", modelUnderTest);
+				"context Type1 inv: true or false", modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 
 		ConstraintMetric metric = OclMetrics.computeMetric(constraint);
@@ -59,5 +74,16 @@ public class TestOperationCallExpMetric extends AbstractMetricTest {
 		assertEquals(constraint, metric.getReferredConstraint());
 		assertEquals(3, metric.getExpressionCount());
 		assertEquals(2, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNull(metric.getCalledProperties());
+		assertNotNull(metric.getUsedLiterals());
+		assertNull(metric.getUsedIterators());
+
+		Map<String, Integer> calledOperations = metric.getCalledOperations();
+		assertEquals(1, calledOperations.size());
+		assertTrue(calledOperations.containsKey("Boolean.or(..)"));
+		assertEquals(new Integer(1), calledOperations.get("Boolean.or(..)"));
 	}
 }

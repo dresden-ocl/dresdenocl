@@ -27,6 +27,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.transformation.test,
  tudresden.ocl20.pivot.tools.transformation.pivot2sql.test,
  tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test,
- tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="3.1.0"
+ tudresden.ocl20.pivot.modelinstancetype.ecore;bundle-version="3.1.0",
+ org.dresdenocl.metrics.test
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

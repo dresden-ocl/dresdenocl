@@ -2,6 +2,10 @@ package org.dresdenocl.metrics.test.constraintmetric;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Map;
 
 import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
@@ -35,7 +39,7 @@ public class TestIntegerLiteralExpMetric extends AbstractMetricTest {
 	public void testConstraintMetric01() throws Exception {
 
 		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
-				"context Class def: intVal = 42", modelUnderTest);
+				"context Type1 def: intVal = 42", modelUnderTest);
 		Constraint constraint = constraintsUnderTest.get(0);
 
 		ConstraintMetric metric = OclMetrics.computeMetric(constraint);
@@ -44,5 +48,16 @@ public class TestIntegerLiteralExpMetric extends AbstractMetricTest {
 		assertEquals(constraint, metric.getReferredConstraint());
 		assertEquals(1, metric.getExpressionCount());
 		assertEquals(1, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+
+		assertNull(metric.getCalledOperations());
+		assertNull(metric.getCalledProperties());
+		assertNull(metric.getUsedIterators());
+
+		Map<String, Integer> usedLiterals = metric.getUsedLiterals();
+		assertEquals(1, usedLiterals.size());
+		assertTrue(usedLiterals.containsKey("Integer"));
+		assertEquals(new Integer(1), usedLiterals.get("Integer"));
 	}
 }

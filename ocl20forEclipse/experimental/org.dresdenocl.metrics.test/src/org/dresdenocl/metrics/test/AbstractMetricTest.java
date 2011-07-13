@@ -16,7 +16,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * @author Claas Wilke
  * 
  */
-public class AbstractMetricTest {
+public class AbstractMetricTest extends AbstractDresdenOclTest {
 
 	/** The {@link IModel} under test. */
 	protected static IModel modelUnderTest;
@@ -25,12 +25,12 @@ public class AbstractMetricTest {
 	protected static List<Constraint> constraintsUnderTest;
 
 	/** Setup method that should be called by concrete test classes. */
-	protected static void setUp() throws Exception {
+	public static void setUp() throws Exception {
 
 		AbstractDresdenOclTest.setUp();
-		
-		File modelFile = AbstractDresdenOclTest.getFile("model/UML.ecore",
-				"org.dresdenocl.examples.uml");
+
+		File modelFile = AbstractDresdenOclTest.getFile("resources/testmodel.ecore",
+				"org.dresdenocl.metrics.test");
 		org.junit.Assert.assertTrue(modelFile.exists());
 
 		modelUnderTest = Ocl2ForEclipseFacade.getModel(modelFile,
@@ -40,6 +40,7 @@ public class AbstractMetricTest {
 
 	/** TeardDown method that should be called by concrete test classes. */
 	protected static void tearDown() {
+
 		modelUnderTest = null;
 		constraintsUnderTest = null;
 	}

@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ AllConstraintMetricsTests.class, TestOclMetrics.class })
+@Suite.SuiteClasses({ AllConstraintMetricsTests.class, TestConstraintMetrics.class })
 public class AllMetricsTests extends AbstractDresdenOclTest {
 	/* Remains empty. */
 }
