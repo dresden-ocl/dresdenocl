@@ -153,6 +153,37 @@ public class TestInvalidLiteralExp extends AbstractDiffTest {
 	@Test
 	public void testInvalid07() throws Exception {
 
+		/*
+		 * TODO This failure is associated to the bug
+		 * tudresden.ocl20.pivot.ocl2parser
+		 * .test.expressions.TestInvalidLiterals.testInvalidPositive02()
+		 */
 		this.compareFragmentCodeGeneration("expressions/literals", "invalid07");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid08() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid08");
+	}
+
+	/**
+	 * <p>
+	 * Tests the fragment code generation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testInvalid09() throws Exception {
+
+		this.compareFragmentCodeGeneration("expressions/literals", "invalid09");
 	}
 }
