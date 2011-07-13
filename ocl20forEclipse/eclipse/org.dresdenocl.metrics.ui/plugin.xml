@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="tudresden.ocl20.views.category"
+            name="Dresden OCL">
+      </category>
+      <view
+            category="tudresden.ocl20.views.category"
+            class="org.dresdenocl.metrics.ui.MetricsView"
+            icon="icons/dresdenocl.gif"
+            id="org.dresdenocl.metrics.view"
+            name="Dresden OCL Metrics View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="tudresden.ocl20.pivot.ui.perspective">
+         <view
+               id="org.dresdenocl.metrics.view"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.views.PropertySheet">
+         </view>
+         <viewShortcut
+               id="org.dresdenocl.metrics.view">
+         </viewShortcut>
+      </perspectiveExtension>
+   </extension>
+
+</plugin>

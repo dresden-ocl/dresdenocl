@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL Metrics UI Plugin
+Bundle-SymbolicName: org.dresdenocl.metrics.ui;singleton:=true
+Bundle-Version: 3.1.0.qualifier
+Bundle-Activator: org.dresdenocl.metrics.ui.MetricsUiPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.pivotmodel,
+ org.dresdenocl.metrics,
+ tudresden.ocl20.pivot.modelbus
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
