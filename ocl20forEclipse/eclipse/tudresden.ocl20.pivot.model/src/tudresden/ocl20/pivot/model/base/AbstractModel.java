@@ -162,15 +162,15 @@ public abstract class AbstractModel implements IModel {
 		}
 		// no else.
 
-		/* Clone the path name to avoid side effects. */
-		pathName = new ArrayList<String>(pathName);
-
 		/* The path name must not be null. */
 		if (pathName == null) {
 			throw new IllegalArgumentException(
 					"The path name must not be null."); //$NON-NLS-1$
 		}
 		// no else.
+
+		/* Clone the path name to avoid side effects. */
+		pathName = new ArrayList<String>(pathName);
 
 		/* By default search in the root name space. */
 		Namespace namespace = getRootNamespace();
