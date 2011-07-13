@@ -318,11 +318,11 @@ public class Ocl2SqlTest {
 		assertEquals(2, files.length);
 		testStringList(
 				parseFile(sourcePath + "/" + files[0]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/schema.sql",
+				parseFile(AbstractDresdenOclTest.getFile("solution/schema_para.sql",
 						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 		testStringList(
 				parseFile(sourcePath + "/" + files[1]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/view.sql",
+				parseFile(AbstractDresdenOclTest.getFile("solution/view_para.sql",
 						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
 

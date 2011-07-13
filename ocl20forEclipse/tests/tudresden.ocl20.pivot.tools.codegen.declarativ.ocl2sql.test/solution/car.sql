@@ -21,10 +21,11 @@ INNER JOIN ASS_ownedCars_owner AS temp3 ON temp2.FK_owner = temp3.FK_owner
 -- Expression: inv carOcl03: Car.allInstances().owner.ownedCars->collect(x|x.color <> 'black')->size() = 1
 CREATE OR REPLACE VIEW carOcl03 AS
 (SELECT * FROM OV_Car AS self
-WHERE NOT (((SELECT IFNULL(COUNT(NOT (temp1.color = 'black')),0)
-FROM OV_Car AS temp1
-INNER JOIN ASS_ownedCars_owner AS temp2 ON temp1.PK_Car = temp2.FK_ownedCars
-INNER JOIN ASS_ownedCars_owner AS temp3 ON temp2.FK_owner = temp3.FK_owner
+WHERE NOT (((SELECT IFNULL(COUNT(NOT ((SELECT temp3.color
+FROM OV_Car AS temp3
+WHERE temp3.PK_Car = temp1.FK_ownedCars) = 'black')),0)
+FROM ASS_ownedCars_owner AS temp1
+INNER JOIN ASS_ownedCars_owner AS temp2 ON temp1.FK_owner = temp2.FK_owner
 ) = 1)));
 
 -- Context: Car
