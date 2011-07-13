@@ -10,6 +10,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemanticsException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 public class OclStaticSemanticsPostProcessor implements
@@ -26,6 +27,13 @@ public class OclStaticSemanticsPostProcessor implements
 						.getStaticSemantics(resource);
 
 				List<Constraint> result = oclStaticSemantics.cs2EssentialOcl(root);
+				
+				/* Probably notify listeners of the model that constraints have been reparsed. */
+				if (result.size() > 0) {
+					ModelBusPlugin.getModelRegistry().getActiveModel().setChanged();
+					ModelBusPlugin.getModelRegistry().getActiveModel().notifiyListeners();
+				}
+				// no else.
 
 				//printResult(result);
 

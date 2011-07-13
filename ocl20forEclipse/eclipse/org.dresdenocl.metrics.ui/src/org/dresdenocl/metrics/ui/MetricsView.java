@@ -27,7 +27,6 @@ import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.Metric;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.swt.SWT;
@@ -37,16 +36,16 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
+import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.IModelListener;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
 import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
 import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -58,16 +57,13 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * @author Claas Wilke
  */
 public class MetricsView extends ViewPart implements ISelectionListener,
-		IModelRegistryListener {
+		IModelRegistryListener, IModelListener {
 
 	/**
 	 * The currently selected {@link Constraint}s for that the metrics shall be
 	 * displayed.
 	 */
 	private Set<Constraint> currentlySelectedConstraints = new HashSet<Constraint>();
-
-	/** The currently selected rows of this {@link IViewActionDelegate}. */
-	private Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
 
 	/** The {@link Metric} of this {@link MetricsView}. */
 	private Metric myResult;
@@ -79,6 +75,11 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	private TableViewer myTableViewer;
 
 	/**
+	 * The current {@link IModel} of this {@link MetricsView}.
+	 */
+	private IModel myCurrentModel;
+
+	/**
 	 * <p>
 	 * Creates a new {@link MetricsView}.
 	 * </p>
@@ -87,6 +88,12 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 
 		/* Register this view as a model listener. */
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
+
+		if (ModelBusPlugin.getModelRegistry().getActiveModel() != null) {
+			this.myCurrentModel = ModelBusPlugin.getModelRegistry()
+					.getActiveModel();
+			this.myCurrentModel.addListener(this);
+		}
 	}
 
 	/*
@@ -114,7 +121,16 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
 
+		if (this.myCurrentModel != null)
+			this.myCurrentModel.removeListener(this);
+		// no else.
+
 		this.clearResults();
+		this.myCurrentModel = ModelBusPlugin.getModelRegistry()
+				.getActiveModel();
+		if (this.myCurrentModel != null)
+			this.myCurrentModel.addListener(this);
+		// no else.
 	}
 
 	/**
@@ -219,38 +235,6 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 			}
 			// no else (no tree selection, could not happen).
 		}
-
-		/* Else check if the selection of the interpreter view changed. */
-		else if (part instanceof MetricsView) {
-
-			/* Check if the selection is a structured selection. */
-			if (selection instanceof StructuredSelection) {
-
-				/* Get an iterator to iterate over the selection. */
-				Iterator<?> selectionIt;
-				selectionIt = ((StructuredSelection) selection).iterator();
-
-				/* Clear the currently selected model results. */
-				this.currentlySelectedRows.clear();
-
-				while (selectionIt.hasNext()) {
-
-					Object anObject;
-					anObject = selectionIt.next();
-
-					/* Check if the selected entry is an array. */
-					if (anObject.getClass().isArray()) {
-						Object[] aRow;
-						aRow = (Object[]) anObject;
-
-						this.currentlySelectedRows.add(aRow);
-					}
-					// no else.
-				}
-				// end while
-			}
-			// no else (no structured selection, could not happen).
-		}
 		// no else (nothing has to be updated).
 	}
 
@@ -282,16 +266,6 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	 * {@link Constraint}s.
 	 * </p>
 	 */
-	public void clearResultsForSelection() {
-
-		// this.myResult.removeResults(new ArrayList<IModelInstanceElement>(
-		// this.currentlySelectedModelInstanceElements),
-		// new ArrayList<Constraint>(this.currentlySelectedConstraints));
-		//
-		// this.myResult.removeResults(this.currentlySelectedRows);
-		// TODO Implement this if necessary.
-	}
-
 	/**
 	 * <p>
 	 * Returns the currently selected {@link Constraint}s that shall be
@@ -318,18 +292,6 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	public TableViewer getTableViewer() {
 
 		return this.myTableViewer;
-	}
-
-	/**
-	 * <p>
-	 * Returs the {@link Metric} of this {@link MetricsView}.
-	 * </p>
-	 * 
-	 * @return The {@link Metric} of this {@link MetricsView}.
-	 */
-	public Metric getResults() {
-
-		return this.myResult;
 	}
 
 	/**
@@ -416,5 +378,16 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	private void clearConstraintSelection() {
 
 		this.currentlySelectedConstraints.clear();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * tudresden.ocl20.pivot.model.IModelListener#modelChanged(tudresden.ocl20
+	 * .pivot.model.IModel)
+	 */
+	public void modelChanged(IModel model) {
+		this.refreshView();
 	}
 }
