@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Operation</b></em>'.

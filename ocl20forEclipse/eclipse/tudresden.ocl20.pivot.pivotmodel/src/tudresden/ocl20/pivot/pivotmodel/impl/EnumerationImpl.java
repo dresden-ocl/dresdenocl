@@ -45,8 +45,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Enumeration</b></em>'.

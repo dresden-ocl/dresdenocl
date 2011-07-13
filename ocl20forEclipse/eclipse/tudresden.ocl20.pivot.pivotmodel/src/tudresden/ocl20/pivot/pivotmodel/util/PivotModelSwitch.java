@@ -37,7 +37,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;

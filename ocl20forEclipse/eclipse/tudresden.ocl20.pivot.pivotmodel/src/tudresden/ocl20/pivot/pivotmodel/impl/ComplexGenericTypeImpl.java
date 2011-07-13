@@ -48,8 +48,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;

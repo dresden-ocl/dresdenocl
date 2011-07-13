@@ -32,7 +32,6 @@
  */
 package tudresden.ocl20.pivot.pivotmodel;
 
-import org.eclipse.emf.common.util.EList;
 import java.util.List;
 
 /**

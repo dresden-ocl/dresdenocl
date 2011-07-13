@@ -37,13 +37,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
-
 import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;

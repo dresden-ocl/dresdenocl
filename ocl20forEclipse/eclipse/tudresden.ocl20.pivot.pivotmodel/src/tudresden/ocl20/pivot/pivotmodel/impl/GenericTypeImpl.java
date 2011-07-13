@@ -38,8 +38,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;

@@ -42,7 +42,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectEList;
@@ -55,8 +54,8 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Constraint</b></em>'.

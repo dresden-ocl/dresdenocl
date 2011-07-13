@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.pivotmodel;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import org.eclipse.emf.common.util.Enumerator;
 
 /**

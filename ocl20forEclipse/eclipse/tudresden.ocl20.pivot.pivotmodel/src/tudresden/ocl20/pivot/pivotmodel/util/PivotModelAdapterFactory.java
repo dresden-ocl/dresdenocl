@@ -37,7 +37,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
 import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;

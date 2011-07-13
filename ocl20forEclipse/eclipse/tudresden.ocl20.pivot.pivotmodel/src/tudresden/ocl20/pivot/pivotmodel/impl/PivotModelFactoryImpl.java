@@ -39,7 +39,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
@@ -52,6 +52,7 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
 import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
 import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Property;
