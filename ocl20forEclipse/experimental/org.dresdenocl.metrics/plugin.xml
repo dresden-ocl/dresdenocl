@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.dresden-ocl.org/metrics/"
-            class="metric.MetricPackage"
+            class="org.dresdenocl.metrics.metric.MetricPackage"
             genModel="metamodel/oclmetric.genmodel"/>
    </extension>
 

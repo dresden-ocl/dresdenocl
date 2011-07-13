@@ -1,8 +1,20 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
+/*
+Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de)
+
+This file is part of Dresden OCL.
+
+Dresden OCL is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.dresdenocl.metrics.metric;
 
@@ -86,7 +98,7 @@ public interface MetricPackage extends EPackage {
 	 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getConstraintMetric()
 	 * @generated
 	 */
-	int CONSTRAINT_METRIC = 3;
+	int CONSTRAINT_METRIC = 2;
 
 	/**
 	 * The feature id for the '<em><b>Expression Count</b></em>' attribute.
@@ -179,14 +191,14 @@ public interface MetricPackage extends EPackage {
 	int CONSTRAINT_METRIC_FEATURE_COUNT = METRIC_FEATURE_COUNT + 9;
 
 	/**
-	 * The meta object id for the '{@link org.dresdenocl.metrics.metric.impl.ModelMetricImpl <em>Model Metric</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl <em>Constraint Metrics</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.dresdenocl.metrics.metric.impl.ModelMetricImpl
-	 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getModelMetric()
+	 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl
+	 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getConstraintMetrics()
 	 * @generated
 	 */
-	int MODEL_METRIC = 1;
+	int CONSTRAINT_METRICS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Expression Count</b></em>' attribute.
@@ -195,7 +207,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__EXPRESSION_COUNT = CONSTRAINT_METRIC__EXPRESSION_COUNT;
+	int CONSTRAINT_METRICS__EXPRESSION_COUNT = CONSTRAINT_METRIC__EXPRESSION_COUNT;
 
 	/**
 	 * The feature id for the '<em><b>Expression Depth</b></em>' attribute.
@@ -204,7 +216,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__EXPRESSION_DEPTH = CONSTRAINT_METRIC__EXPRESSION_DEPTH;
+	int CONSTRAINT_METRICS__EXPRESSION_DEPTH = CONSTRAINT_METRIC__EXPRESSION_DEPTH;
 
 	/**
 	 * The feature id for the '<em><b>Called Operations</b></em>' attribute.
@@ -213,7 +225,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__CALLED_OPERATIONS = CONSTRAINT_METRIC__CALLED_OPERATIONS;
+	int CONSTRAINT_METRICS__CALLED_OPERATIONS = CONSTRAINT_METRIC__CALLED_OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Called Properties</b></em>' attribute.
@@ -222,7 +234,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__CALLED_PROPERTIES = CONSTRAINT_METRIC__CALLED_PROPERTIES;
+	int CONSTRAINT_METRICS__CALLED_PROPERTIES = CONSTRAINT_METRIC__CALLED_PROPERTIES;
 
 	/**
 	 * The feature id for the '<em><b>Referred Constraint</b></em>' reference.
@@ -231,7 +243,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__REFERRED_CONSTRAINT = CONSTRAINT_METRIC__REFERRED_CONSTRAINT;
+	int CONSTRAINT_METRICS__REFERRED_CONSTRAINT = CONSTRAINT_METRIC__REFERRED_CONSTRAINT;
 
 	/**
 	 * The feature id for the '<em><b>Number Of If Expressions</b></em>' attribute.
@@ -240,7 +252,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__NUMBER_OF_IF_EXPRESSIONS = CONSTRAINT_METRIC__NUMBER_OF_IF_EXPRESSIONS;
+	int CONSTRAINT_METRICS__NUMBER_OF_IF_EXPRESSIONS = CONSTRAINT_METRIC__NUMBER_OF_IF_EXPRESSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Number Of Let Expressions</b></em>' attribute.
@@ -249,7 +261,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__NUMBER_OF_LET_EXPRESSIONS = CONSTRAINT_METRIC__NUMBER_OF_LET_EXPRESSIONS;
+	int CONSTRAINT_METRICS__NUMBER_OF_LET_EXPRESSIONS = CONSTRAINT_METRIC__NUMBER_OF_LET_EXPRESSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Used Iterators</b></em>' attribute.
@@ -258,7 +270,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__USED_ITERATORS = CONSTRAINT_METRIC__USED_ITERATORS;
+	int CONSTRAINT_METRICS__USED_ITERATORS = CONSTRAINT_METRIC__USED_ITERATORS;
 
 	/**
 	 * The feature id for the '<em><b>Used Literals</b></em>' attribute.
@@ -267,25 +279,7 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__USED_LITERALS = CONSTRAINT_METRIC__USED_LITERALS;
-
-	/**
-	 * The feature id for the '<em><b>Referred Model Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_METRIC__REFERRED_MODEL_ID = CONSTRAINT_METRIC_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Constraint Count Per Kind</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND = CONSTRAINT_METRIC_FEATURE_COUNT + 1;
+	int CONSTRAINT_METRICS__USED_LITERALS = CONSTRAINT_METRIC__USED_LITERALS;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Metrics</b></em>' containment reference list.
@@ -294,54 +288,34 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC__CONSTRAINT_METRICS = CONSTRAINT_METRIC_FEATURE_COUNT + 2;
+	int CONSTRAINT_METRICS__CONSTRAINT_METRICS = CONSTRAINT_METRIC_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Model Metric</em>' class.
+	 * The feature id for the '<em><b>Constraints</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_METRIC_FEATURE_COUNT = CONSTRAINT_METRIC_FEATURE_COUNT + 3;
+	int CONSTRAINT_METRICS__CONSTRAINTS = CONSTRAINT_METRIC_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.dresdenocl.metrics.metric.impl.ConstraintCountImpl <em>Constraint Count</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.dresdenocl.metrics.metric.impl.ConstraintCountImpl
-	 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getConstraintCount()
-	 * @generated
-	 */
-	int CONSTRAINT_COUNT = 2;
-
-	/**
-	 * The feature id for the '<em><b>Kind</b></em>' attribute.
+	 * The feature id for the '<em><b>Number Of Constraints By Kind</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_COUNT__KIND = 0;
+	int CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND = CONSTRAINT_METRIC_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Count</b></em>' attribute.
+	 * The number of structural features of the '<em>Constraint Metrics</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_COUNT__COUNT = 1;
-
-	/**
-	 * The number of structural features of the '<em>Constraint Count</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRAINT_COUNT_FEATURE_COUNT = 2;
-
+	int CONSTRAINT_METRICS_FEATURE_COUNT = CONSTRAINT_METRIC_FEATURE_COUNT + 3;
 
 	/**
 	 * Returns the meta object for class '{@link org.dresdenocl.metrics.metric.Metric <em>Metric</em>}'.
@@ -354,79 +328,47 @@ public interface MetricPackage extends EPackage {
 	EClass getMetric();
 
 	/**
-	 * Returns the meta object for class '{@link org.dresdenocl.metrics.metric.ModelMetric <em>Model Metric</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.metrics.metric.ConstraintMetrics <em>Constraint Metrics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Model Metric</em>'.
-	 * @see org.dresdenocl.metrics.metric.ModelMetric
+	 * @return the meta object for class '<em>Constraint Metrics</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetrics
 	 * @generated
 	 */
-	EClass getModelMetric();
+	EClass getConstraintMetrics();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ModelMetric#getReferredModelId <em>Referred Model Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Referred Model Id</em>'.
-	 * @see org.dresdenocl.metrics.metric.ModelMetric#getReferredModelId()
-	 * @see #getModelMetric()
-	 * @generated
-	 */
-	EAttribute getModelMetric_ReferredModelId();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.dresdenocl.metrics.metric.ModelMetric#getConstraintCountPerKind <em>Constraint Count Per Kind</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Constraint Count Per Kind</em>'.
-	 * @see org.dresdenocl.metrics.metric.ModelMetric#getConstraintCountPerKind()
-	 * @see #getModelMetric()
-	 * @generated
-	 */
-	EReference getModelMetric_ConstraintCountPerKind();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.metrics.metric.ModelMetric#getConstraintMetrics <em>Constraint Metrics</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getConstraintMetrics <em>Constraint Metrics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Constraint Metrics</em>'.
-	 * @see org.dresdenocl.metrics.metric.ModelMetric#getConstraintMetrics()
-	 * @see #getModelMetric()
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetrics#getConstraintMetrics()
+	 * @see #getConstraintMetrics()
 	 * @generated
 	 */
-	EReference getModelMetric_ConstraintMetrics();
+	EReference getConstraintMetrics_ConstraintMetrics();
 
 	/**
-	 * Returns the meta object for class '{@link org.dresdenocl.metrics.metric.ConstraintCount <em>Constraint Count</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getConstraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constraint Count</em>'.
-	 * @see org.dresdenocl.metrics.metric.ConstraintCount
+	 * @return the meta object for the reference list '<em>Constraints</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetrics#getConstraints()
+	 * @see #getConstraintMetrics()
 	 * @generated
 	 */
-	EClass getConstraintCount();
+	EReference getConstraintMetrics_Constraints();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintCount#getKind <em>Kind</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getNumberOfConstraintsByKind <em>Number Of Constraints By Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see org.dresdenocl.metrics.metric.ConstraintCount#getKind()
-	 * @see #getConstraintCount()
+	 * @return the meta object for the attribute '<em>Number Of Constraints By Kind</em>'.
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetrics#getNumberOfConstraintsByKind()
+	 * @see #getConstraintMetrics()
 	 * @generated
 	 */
-	EAttribute getConstraintCount_Kind();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.dresdenocl.metrics.metric.ConstraintCount#getCount <em>Count</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Count</em>'.
-	 * @see org.dresdenocl.metrics.metric.ConstraintCount#getCount()
-	 * @see #getConstraintCount()
-	 * @generated
-	 */
-	EAttribute getConstraintCount_Count();
+	EAttribute getConstraintMetrics_NumberOfConstraintsByKind();
 
 	/**
 	 * Returns the meta object for class '{@link org.dresdenocl.metrics.metric.ConstraintMetric <em>Constraint Metric</em>}'.
@@ -570,30 +512,14 @@ public interface MetricPackage extends EPackage {
 		EClass METRIC = eINSTANCE.getMetric();
 
 		/**
-		 * The meta object literal for the '{@link org.dresdenocl.metrics.metric.impl.ModelMetricImpl <em>Model Metric</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl <em>Constraint Metrics</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.dresdenocl.metrics.metric.impl.ModelMetricImpl
-		 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getModelMetric()
+		 * @see org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl
+		 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getConstraintMetrics()
 		 * @generated
 		 */
-		EClass MODEL_METRIC = eINSTANCE.getModelMetric();
-
-		/**
-		 * The meta object literal for the '<em><b>Referred Model Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MODEL_METRIC__REFERRED_MODEL_ID = eINSTANCE.getModelMetric_ReferredModelId();
-
-		/**
-		 * The meta object literal for the '<em><b>Constraint Count Per Kind</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND = eINSTANCE.getModelMetric_ConstraintCountPerKind();
+		EClass CONSTRAINT_METRICS = eINSTANCE.getConstraintMetrics();
 
 		/**
 		 * The meta object literal for the '<em><b>Constraint Metrics</b></em>' containment reference list feature.
@@ -601,33 +527,23 @@ public interface MetricPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_METRIC__CONSTRAINT_METRICS = eINSTANCE.getModelMetric_ConstraintMetrics();
+		EReference CONSTRAINT_METRICS__CONSTRAINT_METRICS = eINSTANCE.getConstraintMetrics_ConstraintMetrics();
 
 		/**
-		 * The meta object literal for the '{@link org.dresdenocl.metrics.metric.impl.ConstraintCountImpl <em>Constraint Count</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.dresdenocl.metrics.metric.impl.ConstraintCountImpl
-		 * @see org.dresdenocl.metrics.metric.impl.MetricPackageImpl#getConstraintCount()
-		 * @generated
-		 */
-		EClass CONSTRAINT_COUNT = eINSTANCE.getConstraintCount();
-
-		/**
-		 * The meta object literal for the '<em><b>Kind</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Constraints</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONSTRAINT_COUNT__KIND = eINSTANCE.getConstraintCount_Kind();
+		EReference CONSTRAINT_METRICS__CONSTRAINTS = eINSTANCE.getConstraintMetrics_Constraints();
 
 		/**
-		 * The meta object literal for the '<em><b>Count</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Number Of Constraints By Kind</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONSTRAINT_COUNT__COUNT = eINSTANCE.getConstraintCount_Count();
+		EAttribute CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND = eINSTANCE.getConstraintMetrics_NumberOfConstraintsByKind();
 
 		/**
 		 * The meta object literal for the '{@link org.dresdenocl.metrics.metric.impl.ConstraintMetricImpl <em>Constraint Metric</em>}' class.

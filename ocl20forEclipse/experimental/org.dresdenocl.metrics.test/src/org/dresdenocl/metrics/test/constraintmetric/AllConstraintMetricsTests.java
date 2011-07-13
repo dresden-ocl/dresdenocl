@@ -1,5 +1,6 @@
 package org.dresdenocl.metrics.test.constraintmetric;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -20,6 +21,6 @@ import org.junit.runners.Suite;
 		TestTupleLiteralExpMetric.class, TestTypeLiteralExpMetric.class,
 		TestRealLiteralExpMetric.class, TestUndefinedLiteralExpMetric.class,
 		TestVariableExpMetric.class })
-public class AllConstraintMetricsTests {
+public class AllConstraintMetricsTests extends AbstractDresdenOclTest {
 	/* Remains empty. */
 }

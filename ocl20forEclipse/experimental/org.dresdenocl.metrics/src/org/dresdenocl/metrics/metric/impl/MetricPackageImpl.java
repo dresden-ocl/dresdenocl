@@ -1,28 +1,36 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
+/*
+Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de)
+
+This file is part of Dresden OCL.
+
+Dresden OCL is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.dresdenocl.metrics.metric.impl;
 
-import org.dresdenocl.metrics.metric.ConstraintCount;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
+import org.dresdenocl.metrics.metric.ConstraintMetrics;
 import org.dresdenocl.metrics.metric.Metric;
 import org.dresdenocl.metrics.metric.MetricFactory;
 import org.dresdenocl.metrics.metric.MetricPackage;
-import org.dresdenocl.metrics.metric.ModelMetric;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
-
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
@@ -44,14 +52,7 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass modelMetricEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass constraintCountEClass = null;
+	private EClass constraintMetricsEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -139,8 +140,8 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getModelMetric() {
-		return modelMetricEClass;
+	public EClass getConstraintMetrics() {
+		return constraintMetricsEClass;
 	}
 
 	/**
@@ -148,8 +149,8 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getModelMetric_ReferredModelId() {
-		return (EAttribute)modelMetricEClass.getEStructuralFeatures().get(0);
+	public EReference getConstraintMetrics_ConstraintMetrics() {
+		return (EReference)constraintMetricsEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -157,8 +158,8 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelMetric_ConstraintCountPerKind() {
-		return (EReference)modelMetricEClass.getEStructuralFeatures().get(1);
+	public EReference getConstraintMetrics_Constraints() {
+		return (EReference)constraintMetricsEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -166,35 +167,8 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getModelMetric_ConstraintMetrics() {
-		return (EReference)modelMetricEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getConstraintCount() {
-		return constraintCountEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConstraintCount_Kind() {
-		return (EAttribute)constraintCountEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getConstraintCount_Count() {
-		return (EAttribute)constraintCountEClass.getEStructuralFeatures().get(1);
+	public EAttribute getConstraintMetrics_NumberOfConstraintsByKind() {
+		return (EAttribute)constraintMetricsEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -317,14 +291,10 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 		// Create classes and their features
 		metricEClass = createEClass(METRIC);
 
-		modelMetricEClass = createEClass(MODEL_METRIC);
-		createEAttribute(modelMetricEClass, MODEL_METRIC__REFERRED_MODEL_ID);
-		createEReference(modelMetricEClass, MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND);
-		createEReference(modelMetricEClass, MODEL_METRIC__CONSTRAINT_METRICS);
-
-		constraintCountEClass = createEClass(CONSTRAINT_COUNT);
-		createEAttribute(constraintCountEClass, CONSTRAINT_COUNT__KIND);
-		createEAttribute(constraintCountEClass, CONSTRAINT_COUNT__COUNT);
+		constraintMetricsEClass = createEClass(CONSTRAINT_METRICS);
+		createEReference(constraintMetricsEClass, CONSTRAINT_METRICS__CONSTRAINT_METRICS);
+		createEReference(constraintMetricsEClass, CONSTRAINT_METRICS__CONSTRAINTS);
+		createEAttribute(constraintMetricsEClass, CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND);
 
 		constraintMetricEClass = createEClass(CONSTRAINT_METRIC);
 		createEAttribute(constraintMetricEClass, CONSTRAINT_METRIC__EXPRESSION_COUNT);
@@ -369,7 +339,7 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		modelMetricEClass.getESuperTypes().add(this.getConstraintMetric());
+		constraintMetricsEClass.getESuperTypes().add(this.getConstraintMetric());
 		constraintMetricEClass.getESuperTypes().add(this.getMetric());
 
 		// Initialize classes and features; add operations and parameters
@@ -377,40 +347,41 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 
 		addEOperation(metricEClass, ecorePackage.getEString(), "getReport", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(modelMetricEClass, ModelMetric.class, "ModelMetric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModelMetric_ReferredModelId(), ecorePackage.getEString(), "referredModelId", null, 0, 1, ModelMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelMetric_ConstraintCountPerKind(), this.getConstraintCount(), null, "constraintCountPerKind", null, 0, 1, ModelMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelMetric_ConstraintMetrics(), this.getConstraintMetric(), null, "constraintMetrics", null, 0, -1, ModelMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(constraintMetricsEClass, ConstraintMetrics.class, "ConstraintMetrics", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraintMetrics_ConstraintMetrics(), this.getConstraintMetric(), null, "constraintMetrics", null, 0, -1, ConstraintMetrics.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraintMetrics_Constraints(), thePivotModelPackage.getConstraint(), null, "constraints", null, 0, -1, ConstraintMetrics.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(thePivotModelPackage.getConstraintKind());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEIntegerObject());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getConstraintMetrics_NumberOfConstraintsByKind(), g1, "numberOfConstraintsByKind", null, 0, 1, ConstraintMetrics.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getConstraintCount", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getConstraintCount", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEFloat(), "getAvgExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEFloat(), "getAvgExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEFloat(), "getAvgExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEFloat(), "getAvgExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getMinExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getMinExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getMinExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getMinExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getMaxExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getMaxExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getMaxExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getMaxExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getMeanExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getMeanExpressionCount", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		addEOperation(modelMetricEClass, ecorePackage.getEInt(), "getMeanExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(constraintCountEClass, ConstraintCount.class, "ConstraintCount", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConstraintCount_Kind(), thePivotModelPackage.getConstraintKind(), "kind", null, 0, 1, ConstraintCount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConstraintCount_Count(), ecorePackage.getEInt(), "count", null, 0, 1, ConstraintCount.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		addEOperation(constraintMetricsEClass, ecorePackage.getEInt(), "getMeanExpressionDepth", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(constraintMetricEClass, ConstraintMetric.class, "ConstraintMetric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConstraintMetric_ExpressionCount(), ecorePackage.getEInt(), "expressionCount", null, 0, 1, ConstraintMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConstraintMetric_ExpressionDepth(), ecorePackage.getEInt(), "expressionDepth", null, 0, 1, ConstraintMetric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
-		EGenericType g2 = createEGenericType(ecorePackage.getEString());
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(ecorePackage.getEIntegerObject());
 		g1.getETypeArguments().add(g2);

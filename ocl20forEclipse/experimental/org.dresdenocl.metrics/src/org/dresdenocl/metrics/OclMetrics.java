@@ -1,11 +1,30 @@
+/*
+Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de)
+
+This file is part of Dresden OCL.
+
+Dresden OCL is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.dresdenocl.metrics;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.dresdenocl.metrics.metric.ConstraintMetric;
+import org.dresdenocl.metrics.metric.ConstraintMetrics;
 import org.dresdenocl.metrics.metric.Metric;
 import org.dresdenocl.metrics.metric.MetricFactory;
-import org.dresdenocl.metrics.metric.ModelMetric;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
@@ -72,19 +91,21 @@ public class OclMetrics {
 	}
 
 	/**
-	 * Computes a {@link Metric} for a given {@link IModel}.
+	 * Computes a {@link Metric} for a given {@link Collection} of
+	 * {@link Constraint}s.
 	 * 
-	 * @param model
-	 *            The {@link IModel}.
+	 * @param constraints
+	 *            The {@link Constraint}s.
 	 * @return The computed {@link Metric}.
 	 */
-	public static ModelMetric computeMetric(IModel model)
-			throws ModelAccessException {
+	public static ConstraintMetrics computeMetric(
+			Collection<Constraint> constraints) throws ModelAccessException {
 
-		ModelMetric result = MetricFactory.eINSTANCE.createModelMetric();
-		result.setReferredModelId(model.getDisplayName());
+		ConstraintMetrics result = MetricFactory.eINSTANCE
+				.createConstraintMetrics();
+		result.getConstraints().addAll(constraints);
 
-		for (Constraint constraint : model.getConstraints()) {
+		for (Constraint constraint : constraints) {
 			ConstraintMetric constraintMetric = computeMetric(constraint);
 			result.getConstraintMetrics().add(constraintMetric);
 		}

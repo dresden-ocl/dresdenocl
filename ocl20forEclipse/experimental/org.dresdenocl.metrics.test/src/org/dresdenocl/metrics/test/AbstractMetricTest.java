@@ -3,13 +3,11 @@ package org.dresdenocl.metrics.test;
 import java.io.File;
 import java.util.List;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
+
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.ecore.internal.provider.EcoreModelProvider;
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
@@ -29,30 +27,10 @@ public class AbstractMetricTest {
 	/** Setup method that should be called by concrete test classes. */
 	protected static void setUp() throws Exception {
 
-		/* Probably register the metamodel when running as standalone test. */
-		if (ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-				EcoreMetamodelPlugin.ID) == null) {
-			IMetamodel ecoreMM = new IMetamodel() {
-
-				private EcoreModelProvider provider = new EcoreModelProvider();
-
-				public String getName() {
-					return EcoreMetamodelPlugin.ID;
-				}
-
-				public IModelProvider getModelProvider() {
-					return provider;
-				}
-
-				public String getId() {
-					return EcoreMetamodelPlugin.ID;
-				}
-			};
-			ModelBusPlugin.getMetamodelRegistry().addMetamodel(ecoreMM);
-		}
-
-		File modelFile = new File(
-				"./../org.dresdenocl.examples.uml/model/UML.ecore");
+		AbstractDresdenOclTest.setUp();
+		
+		File modelFile = AbstractDresdenOclTest.getFile("model/UML.ecore",
+				"org.dresdenocl.examples.uml");
 		org.junit.Assert.assertTrue(modelFile.exists());
 
 		modelUnderTest = Ocl2ForEclipseFacade.getModel(modelFile,

@@ -7,15 +7,22 @@
   <foreignModel>metric.ecore</foreignModel>
   <genPackages prefix="Metric" basePackage="org.dresdenocl.metrics" disposableProviderFactory="true"
       ecorePackage="metric.ecore#/">
-    <genClasses ecoreClass="metric.ecore#//Metric"/>
-    <genClasses ecoreClass="metric.ecore#//ModelMetric">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ModelMetric/referredModelId"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metric.ecore#//ModelMetric/constraintCountPerKind"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metric.ecore#//ModelMetric/constraintMetrics"/>
-      <genOperations ecoreOperation="metric.ecore#//ModelMetric/getConstraintCount"/>
-      <genOperations ecoreOperation="metric.ecore#//ModelMetric/getExpressionCount"/>
-      <genOperations ecoreOperation="metric.ecore#//ModelMetric/getAvgExpressionCount"/>
-      <genOperations ecoreOperation="metric.ecore#//ModelMetric/getAvgExpressionDepth"/>
+    <genClasses ecoreClass="metric.ecore#//Metric">
+      <genOperations ecoreOperation="metric.ecore#//Metric/getReport"/>
+    </genClasses>
+    <genClasses ecoreClass="metric.ecore#//ConstraintMetrics">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metric.ecore#//ConstraintMetrics/constraintMetrics"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metric.ecore#//ConstraintMetrics/constraints"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getConstraintCount"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getExpressionCount"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getAvgExpressionCount"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getAvgExpressionDepth"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getMinExpressionCount"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getMinExpressionDepth"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getMaxExpressionCount"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getMaxExpressionDepth"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getMeanExpressionCount"/>
+      <genOperations ecoreOperation="metric.ecore#//ConstraintMetrics/getMeanExpressionDepth"/>
     </genClasses>
     <genClasses ecoreClass="metric.ecore#//ConstraintCount">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintCount/kind"/>
@@ -24,7 +31,13 @@
     <genClasses ecoreClass="metric.ecore#//ConstraintMetric">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/expressionCount"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/expressionDepth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/calledOperations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/calledProperties"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metric.ecore#//ConstraintMetric/referredConstraint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/numberOfIfExpressions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/numberOfLetExpressions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/usedIterators"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//ConstraintMetric/usedLiterals"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

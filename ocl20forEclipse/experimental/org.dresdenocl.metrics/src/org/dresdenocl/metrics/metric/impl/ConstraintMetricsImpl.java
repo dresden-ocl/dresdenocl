@@ -13,10 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.dresdenocl.metrics.metric.ConstraintCount;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
+import org.dresdenocl.metrics.metric.ConstraintMetrics;
 import org.dresdenocl.metrics.metric.MetricPackage;
-import org.dresdenocl.metrics.metric.ModelMetric;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -24,63 +23,34 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
- * <em><b>Model Metric</b></em>'. <!-- end-user-doc -->
+ * <em><b>Constraint Metrics</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link org.dresdenocl.metrics.metric.impl.ModelMetricImpl#getReferredModelId
- * <em>Referred Model Id</em>}</li>
- * <li>
- * {@link org.dresdenocl.metrics.metric.impl.ModelMetricImpl#getConstraintCountPerKind
- * <em>Constraint Count Per Kind</em>}</li>
- * <li>
- * {@link org.dresdenocl.metrics.metric.impl.ModelMetricImpl#getConstraintMetrics
+ * {@link org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl#getConstraintMetrics
  * <em>Constraint Metrics</em>}</li>
+ * <li>
+ * {@link org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl#getConstraints
+ * <em>Constraints</em>}</li>
+ * <li>
+ * {@link org.dresdenocl.metrics.metric.impl.ConstraintMetricsImpl#getNumberOfConstraintsByKind
+ * <em>Number Of Constraints By Kind</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class ModelMetricImpl extends ConstraintMetricImpl implements
-		ModelMetric {
-	/**
-	 * The default value of the '{@link #getReferredModelId()
-	 * <em>Referred Model Id</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @see #getReferredModelId()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String REFERRED_MODEL_ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getReferredModelId()
-	 * <em>Referred Model Id</em>}' attribute. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @see #getReferredModelId()
-	 * @generated
-	 * @ordered
-	 */
-	protected String referredModelId = REFERRED_MODEL_ID_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getConstraintCountPerKind()
-	 * <em>Constraint Count Per Kind</em>}' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #getConstraintCountPerKind()
-	 * @generated
-	 * @ordered
-	 */
-	protected ConstraintCount constraintCountPerKind;
-
+public class ConstraintMetricsImpl extends ConstraintMetricImpl implements
+		ConstraintMetrics {
 	/**
 	 * The cached value of the '{@link #getConstraintMetrics()
 	 * <em>Constraint Metrics</em>}' containment reference list. <!--
@@ -93,11 +63,32 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	protected EList<ConstraintMetric> constraintMetrics;
 
 	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}'
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Constraint> constraints;
+
+	/**
+	 * The cached value of the '{@link #getNumberOfConstraintsByKind()
+	 * <em>Number Of Constraints By Kind</em>}' attribute. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @see #getNumberOfConstraintsByKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected Map<ConstraintKind, Integer> numberOfConstraintsByKind;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
-	protected ModelMetricImpl() {
+	protected ConstraintMetricsImpl() {
 		super();
 	}
 
@@ -108,94 +99,7 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MetricPackage.Literals.MODEL_METRIC;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public String getReferredModelId() {
-		return referredModelId;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public void setReferredModelId(String newReferredModelId) {
-		String oldReferredModelId = referredModelId;
-		referredModelId = newReferredModelId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					MetricPackage.MODEL_METRIC__REFERRED_MODEL_ID,
-					oldReferredModelId, referredModelId));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public ConstraintCount getConstraintCountPerKind() {
-		return constraintCountPerKind;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public NotificationChain basicSetConstraintCountPerKind(
-			ConstraintCount newConstraintCountPerKind, NotificationChain msgs) {
-		ConstraintCount oldConstraintCountPerKind = constraintCountPerKind;
-		constraintCountPerKind = newConstraintCountPerKind;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND,
-					oldConstraintCountPerKind, newConstraintCountPerKind);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public void setConstraintCountPerKind(
-			ConstraintCount newConstraintCountPerKind) {
-		if (newConstraintCountPerKind != constraintCountPerKind) {
-			NotificationChain msgs = null;
-			if (constraintCountPerKind != null)
-				msgs = ((InternalEObject) constraintCountPerKind)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND,
-								null, msgs);
-			if (newConstraintCountPerKind != null)
-				msgs = ((InternalEObject) newConstraintCountPerKind)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND,
-								null, msgs);
-			msgs = basicSetConstraintCountPerKind(newConstraintCountPerKind,
-					msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND,
-					newConstraintCountPerKind, newConstraintCountPerKind));
+		return MetricPackage.Literals.CONSTRAINT_METRICS;
 	}
 
 	/**
@@ -207,9 +111,66 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 		if (constraintMetrics == null) {
 			constraintMetrics = new EObjectContainmentEList<ConstraintMetric>(
 					ConstraintMetric.class, this,
-					MetricPackage.MODEL_METRIC__CONSTRAINT_METRICS);
+					MetricPackage.CONSTRAINT_METRICS__CONSTRAINT_METRICS);
 		}
 		return constraintMetrics;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EList<Constraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectResolvingEList<Constraint>(
+					Constraint.class, this,
+					MetricPackage.CONSTRAINT_METRICS__CONSTRAINTS);
+		}
+		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Map<ConstraintKind, Integer> getNumberOfConstraintsByKind() {
+		Map<ConstraintKind, Integer> result = new HashMap<ConstraintKind, Integer>();
+
+		for (ConstraintMetric metric : this.getConstraintMetrics()) {
+
+			Integer consCount = result.get(metric.getReferredConstraint()
+					.getKind());
+
+			if (consCount == null)
+				consCount = 0;
+			// no else.
+
+			consCount++;
+
+			result.put(metric.getReferredConstraint().getKind(), consCount);
+		}
+		// end for.
+
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setNumberOfConstraintsByKind(
+			Map<ConstraintKind, Integer> newNumberOfConstraintsByKind) {
+		Map<ConstraintKind, Integer> oldNumberOfConstraintsByKind = numberOfConstraintsByKind;
+		numberOfConstraintsByKind = newNumberOfConstraintsByKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(
+					this,
+					Notification.SET,
+					MetricPackage.CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND,
+					oldNumberOfConstraintsByKind, numberOfConstraintsByKind));
 	}
 
 	/**
@@ -400,9 +361,7 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND:
-			return basicSetConstraintCountPerKind(null, msgs);
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_METRICS:
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINT_METRICS:
 			return ((InternalEList<?>) getConstraintMetrics()).basicRemove(
 					otherEnd, msgs);
 		}
@@ -417,12 +376,12 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case MetricPackage.MODEL_METRIC__REFERRED_MODEL_ID:
-			return getReferredModelId();
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND:
-			return getConstraintCountPerKind();
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_METRICS:
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINT_METRICS:
 			return getConstraintMetrics();
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINTS:
+			return getConstraints();
+		case MetricPackage.CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND:
+			return getNumberOfConstraintsByKind();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -436,16 +395,18 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case MetricPackage.MODEL_METRIC__REFERRED_MODEL_ID:
-			setReferredModelId((String) newValue);
-			return;
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND:
-			setConstraintCountPerKind((ConstraintCount) newValue);
-			return;
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_METRICS:
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINT_METRICS:
 			getConstraintMetrics().clear();
 			getConstraintMetrics().addAll(
 					(Collection<? extends ConstraintMetric>) newValue);
+			return;
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINTS:
+			getConstraints().clear();
+			getConstraints()
+					.addAll((Collection<? extends Constraint>) newValue);
+			return;
+		case MetricPackage.CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND:
+			setNumberOfConstraintsByKind((Map<ConstraintKind, Integer>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -459,14 +420,14 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case MetricPackage.MODEL_METRIC__REFERRED_MODEL_ID:
-			setReferredModelId(REFERRED_MODEL_ID_EDEFAULT);
-			return;
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND:
-			setConstraintCountPerKind((ConstraintCount) null);
-			return;
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_METRICS:
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINT_METRICS:
 			getConstraintMetrics().clear();
+			return;
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINTS:
+			getConstraints().clear();
+			return;
+		case MetricPackage.CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND:
+			setNumberOfConstraintsByKind((Map<ConstraintKind, Integer>) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -480,13 +441,12 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case MetricPackage.MODEL_METRIC__REFERRED_MODEL_ID:
-			return REFERRED_MODEL_ID_EDEFAULT == null ? referredModelId != null
-					: !REFERRED_MODEL_ID_EDEFAULT.equals(referredModelId);
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_COUNT_PER_KIND:
-			return constraintCountPerKind != null;
-		case MetricPackage.MODEL_METRIC__CONSTRAINT_METRICS:
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINT_METRICS:
 			return constraintMetrics != null && !constraintMetrics.isEmpty();
+		case MetricPackage.CONSTRAINT_METRICS__CONSTRAINTS:
+			return constraints != null && !constraints.isEmpty();
+		case MetricPackage.CONSTRAINT_METRICS__NUMBER_OF_CONSTRAINTS_BY_KIND:
+			return numberOfConstraintsByKind != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -503,9 +463,7 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 
 		StringBuffer resultBuffer = new StringBuffer();
 
-		resultBuffer.append("= Model Metric =\n");
-		resultBuffer.append("model: " + this.getReferredModelId() + "\n");
-		resultBuffer.append("\n");
+		resultBuffer.append("= Constraints Metrics =\n");
 
 		resultBuffer.append("== Constraints ==\n");
 		resultBuffer.append("# constraints, " + this.getConstraintCount()
@@ -600,8 +558,8 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (referredModelId: ");
-		result.append(referredModelId);
+		result.append(" (numberOfConstraintsByKind: ");
+		result.append(numberOfConstraintsByKind);
 		result.append(')');
 		return result.toString();
 	}
@@ -777,4 +735,4 @@ public class ModelMetricImpl extends ConstraintMetricImpl implements
 
 		return result;
 	}
-} // ModelMetricImpl
+} // ConstraintMetricsImpl

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Dresden OCL Metrics
 Bundle-SymbolicName: org.dresdenocl.metrics;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 3.1.0
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,

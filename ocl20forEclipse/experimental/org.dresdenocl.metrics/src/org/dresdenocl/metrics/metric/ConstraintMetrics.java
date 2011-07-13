@@ -6,79 +6,32 @@
  */
 package org.dresdenocl.metrics.metric;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
+
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model Metric</b></em>'.
+ * A representation of the model object '<em><b>Constraint Metrics</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.dresdenocl.metrics.metric.ModelMetric#getReferredModelId <em>Referred Model Id</em>}</li>
- *   <li>{@link org.dresdenocl.metrics.metric.ModelMetric#getConstraintCountPerKind <em>Constraint Count Per Kind</em>}</li>
- *   <li>{@link org.dresdenocl.metrics.metric.ModelMetric#getConstraintMetrics <em>Constraint Metrics</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getConstraintMetrics <em>Constraint Metrics</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getNumberOfConstraintsByKind <em>Number Of Constraints By Kind</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.dresdenocl.metrics.metric.MetricPackage#getModelMetric()
+ * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetrics()
  * @model
  * @generated
  */
-public interface ModelMetric extends ConstraintMetric {
-	/**
-	 * Returns the value of the '<em><b>Referred Model Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referred Model Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referred Model Id</em>' attribute.
-	 * @see #setReferredModelId(String)
-	 * @see org.dresdenocl.metrics.metric.MetricPackage#getModelMetric_ReferredModelId()
-	 * @model
-	 * @generated
-	 */
-	String getReferredModelId();
-
-	/**
-	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ModelMetric#getReferredModelId <em>Referred Model Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referred Model Id</em>' attribute.
-	 * @see #getReferredModelId()
-	 * @generated
-	 */
-	void setReferredModelId(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Constraint Count Per Kind</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Constraint Count Per Kind</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constraint Count Per Kind</em>' containment reference.
-	 * @see #setConstraintCountPerKind(ConstraintCount)
-	 * @see org.dresdenocl.metrics.metric.MetricPackage#getModelMetric_ConstraintCountPerKind()
-	 * @model containment="true"
-	 * @generated
-	 */
-	ConstraintCount getConstraintCountPerKind();
-
-	/**
-	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ModelMetric#getConstraintCountPerKind <em>Constraint Count Per Kind</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Constraint Count Per Kind</em>' containment reference.
-	 * @see #getConstraintCountPerKind()
-	 * @generated
-	 */
-	void setConstraintCountPerKind(ConstraintCount value);
-
+public interface ConstraintMetrics extends ConstraintMetric {
 	/**
 	 * Returns the value of the '<em><b>Constraint Metrics</b></em>' containment reference list.
 	 * The list contents are of type {@link org.dresdenocl.metrics.metric.ConstraintMetric}.
@@ -89,11 +42,53 @@ public interface ModelMetric extends ConstraintMetric {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Constraint Metrics</em>' containment reference list.
-	 * @see org.dresdenocl.metrics.metric.MetricPackage#getModelMetric_ConstraintMetrics()
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetrics_ConstraintMetrics()
 	 * @model containment="true"
 	 * @generated
 	 */
 	EList<ConstraintMetric> getConstraintMetrics();
+
+	/**
+	 * Returns the value of the '<em><b>Constraints</b></em>' reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.Constraint}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraints</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraints</em>' reference list.
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetrics_Constraints()
+	 * @model
+	 * @generated
+	 */
+	EList<Constraint> getConstraints();
+
+	/**
+	 * Returns the value of the '<em><b>Number Of Constraints By Kind</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Number Of Constraints By Kind</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Number Of Constraints By Kind</em>' attribute.
+	 * @see #setNumberOfConstraintsByKind(Map)
+	 * @see org.dresdenocl.metrics.metric.MetricPackage#getConstraintMetrics_NumberOfConstraintsByKind()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<ConstraintKind, Integer> getNumberOfConstraintsByKind();
+
+	/**
+	 * Sets the value of the '{@link org.dresdenocl.metrics.metric.ConstraintMetrics#getNumberOfConstraintsByKind <em>Number Of Constraints By Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Number Of Constraints By Kind</em>' attribute.
+	 * @see #getNumberOfConstraintsByKind()
+	 * @generated
+	 */
+	void setNumberOfConstraintsByKind(Map<ConstraintKind, Integer> value);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -191,4 +186,4 @@ public interface ModelMetric extends ConstraintMetric {
 	 */
 	int getMeanExpressionDepth();
 
-} // ModelMetric
+} // ConstraintMetrics

@@ -7,7 +7,9 @@ import static org.junit.Assert.assertNull;
 import java.io.File;
 
 import org.dresdenocl.metrics.OclMetrics;
-import org.dresdenocl.metrics.metric.ModelMetric;
+import org.dresdenocl.metrics.metric.ConstraintMetric;
+import org.dresdenocl.metrics.metric.ConstraintMetrics;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,10 +35,10 @@ public class TestOclMetrics extends AbstractMetricTest {
 	}
 
 	@Test
-	public void testModelMetric01() throws Exception {
+	public void testConstriantMetrics01() throws Exception {
 
-		File constraintFile = new File(
-				"./../org.dresdenocl.examples.uml/constraints/uml_wfrs.ocl");
+		File constraintFile = AbstractDresdenOclTest.getFile(
+				"constraints/uml_wfrs.ocl", "org.dresdenocl.examples.uml");
 		org.junit.Assert.assertTrue(constraintFile.exists());
 
 		modelUnderTest.removeAllConstraints();
@@ -44,18 +46,31 @@ public class TestOclMetrics extends AbstractMetricTest {
 				constraintFile, modelUnderTest, true);
 		org.junit.Assert.assertNotNull(constraintsUnderTest);
 
-		ModelMetric metric = OclMetrics.computeMetric(modelUnderTest);
+		ConstraintMetrics metric = OclMetrics.computeMetric(modelUnderTest
+				.getConstraints());
 
 		assertNotNull(metric);
 		assertNull(metric.getReferredConstraint());
 
 		System.out.println(metric.getReport());
 
+		StringBuffer complexity = new StringBuffer();
+		complexity.append("\n\n");
+		complexity.append("Complexity Stats:\n");
+		complexity.append("# Expressions, Expression Tree Depth\n");
+
+		for (ConstraintMetric constraintMetric : metric.getConstraintMetrics()) {
+			complexity.append(constraintMetric.getExpressionCount());
+			complexity.append(",");
+			complexity.append(constraintMetric.getExpressionDepth());
+			complexity.append("\n");
+		}
+		System.out.println(complexity);
+
 		// TODO
 		assertEquals(0, metric.getExpressionDepth());
 		// TODO
-		metric.getConstraintCountPerKind();
+		// metric.getConstraintCountPerKind();
 		// TODO
-		metric.getReferredModelId();
 	}
 }

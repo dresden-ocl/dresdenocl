@@ -1,18 +1,30 @@
-/**
- * <copyright>
- * </copyright>
- *
- * $Id$
+/*
+Copyright (C) 2011 by Claas Wilke (claas.wilke@tu-dresden.de)
+
+This file is part of Dresden OCL.
+
+Dresden OCL is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.dresdenocl.metrics.metric.util;
 
-import org.dresdenocl.metrics.metric.*;
-
+import org.dresdenocl.metrics.metric.ConstraintMetric;
+import org.dresdenocl.metrics.metric.ConstraintMetrics;
+import org.dresdenocl.metrics.metric.Metric;
+import org.dresdenocl.metrics.metric.MetricPackage;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -76,12 +88,8 @@ public class MetricAdapterFactory extends AdapterFactoryImpl {
 				return createMetricAdapter();
 			}
 			@Override
-			public Adapter caseModelMetric(ModelMetric object) {
-				return createModelMetricAdapter();
-			}
-			@Override
-			public Adapter caseConstraintCount(ConstraintCount object) {
-				return createConstraintCountAdapter();
+			public Adapter caseConstraintMetrics(ConstraintMetrics object) {
+				return createConstraintMetricsAdapter();
 			}
 			@Override
 			public Adapter caseConstraintMetric(ConstraintMetric object) {
@@ -122,30 +130,16 @@ public class MetricAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.dresdenocl.metrics.metric.ModelMetric <em>Model Metric</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.metrics.metric.ConstraintMetrics <em>Constraint Metrics</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.dresdenocl.metrics.metric.ModelMetric
+	 * @see org.dresdenocl.metrics.metric.ConstraintMetrics
 	 * @generated
 	 */
-	public Adapter createModelMetricAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.dresdenocl.metrics.metric.ConstraintCount <em>Constraint Count</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.dresdenocl.metrics.metric.ConstraintCount
-	 * @generated
-	 */
-	public Adapter createConstraintCountAdapter() {
+	public Adapter createConstraintMetricsAdapter() {
 		return null;
 	}
 
