@@ -86,4 +86,32 @@ public class TestOperationCallExpMetric extends AbstractMetricTest {
 		assertTrue(calledOperations.containsKey("Boolean.or(..)"));
 		assertEquals(new Integer(1), calledOperations.get("Boolean.or(..)"));
 	}
+
+	@Test
+	public void testConstraintMetric03() throws Exception {
+	
+		constraintsUnderTest = Ocl22Parser.INSTANCE.parseOclString(
+				"context Type1::op1() post: prop1 = prop1@pre", modelUnderTest);
+		Constraint constraint = constraintsUnderTest.get(0);
+	
+		ConstraintMetric metric = OclMetrics.computeMetric(constraint);
+	
+		assertNotNull(metric);
+		assertEquals(constraint, metric.getReferredConstraint());
+		assertEquals(6, metric.getExpressionCount());
+		assertEquals(4, metric.getExpressionDepth());
+		assertEquals(0, metric.getNumberOfIfExpressions());
+		assertEquals(0, metric.getNumberOfLetExpressions());
+	
+		assertNotNull(metric.getCalledProperties());
+		assertNull(metric.getUsedLiterals());
+		assertNull(metric.getUsedIterators());
+	
+		Map<String, Integer> calledOperations = metric.getCalledOperations();
+		assertEquals(2, calledOperations.size());
+		assertTrue(calledOperations.containsKey("OclAny@pre()"));
+		assertEquals(new Integer(1), calledOperations.get("OclAny@pre()"));
+		assertTrue(calledOperations.containsKey("OclAny.=(..)"));
+		assertEquals(new Integer(1), calledOperations.get("OclAny.=(..)"));
+	}
 }

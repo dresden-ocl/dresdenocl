@@ -607,17 +607,21 @@ public class OclMetrics {
 
 		String opName = "";
 
-		if (exp.getReferredOperation().getOwningType() != null)
-			opName = exp.getReferredOperation().getOwningType()
-					.getQualifiedName();
-		// no else.
+		if (exp.getReferredOperation() == null && exp.getName().equals("atPre"))
+			opName = "OclAny@pre()";
+		else {
+			if (exp.getReferredOperation().getOwningType() != null)
+				opName = exp.getReferredOperation().getOwningType()
+						.getQualifiedName();
+			// no else.
 
-		/* Probably remove generics. */
-		if (opName.contains("("))
-			opName = opName.substring(0, opName.indexOf("("));
-		// no else.
+			/* Probably remove generics. */
+			if (opName.contains("("))
+				opName = opName.substring(0, opName.indexOf("("));
+			// no else.
 
-		opName += "." + exp.getReferredOperation().getName() + "(..)";
+			opName += "." + exp.getReferredOperation().getName() + "(..)";
+		}
 
 		Integer oldCount = metric.getCalledOperations().get(opName);
 
@@ -863,7 +867,7 @@ public class OclMetrics {
 		metric.setExpressionDepth(metric.getExpressionDepth() + 1);
 
 		/* Variables must only be visited when used in let expressions. */
-		//visitVariable(exp.getReferredVariable(), metric);
+		// visitVariable(exp.getReferredVariable(), metric);
 	}
 
 	/**
