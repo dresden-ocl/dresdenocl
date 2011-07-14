@@ -213,6 +213,7 @@ Library.
       <import plugin="tudresden.ocl20.pivot.tools.template.sql"/>
       <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
       <import plugin="tudresden.ocl20.pivot.tools.transformation.pivot2sql"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel"/>
    </requires>
 
    <plugin
