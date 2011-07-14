@@ -12,10 +12,13 @@
  */
 package org.dresdenocl.testsuite;
 
-import org.dresdenocl.metrics.test.AllMetricsTests;
+import java.io.File;
+
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import org.dresdenocl.metrics.test.AllMetricsTests;
 import tudresden.ocl20.pivot.essentialocl.types.tests.EssentialOCLAllTests;
 import tudresden.ocl20.pivot.examples.pain.test.AllPainTests;
 import tudresden.ocl20.pivot.examples.royalsandloyals.test.AllRoyalAndLoyalAspectJTests;
@@ -83,4 +86,13 @@ public class DresdenOclTestSuite {
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.
 	 */
+	
+  @BeforeClass
+  public static void setUp() throws Exception {
+  	  File currentTestLocation = new File("../");
+      System.setProperty("DRESDENOCL_LOCATION_TESTS", currentTestLocation.getCanonicalFile().getAbsolutePath()+File.separator);
+  	  File currentEclipseLocation = new File("../../eclipse");
+      System.setProperty("DRESDENOCL_LOCATION_ECLIPSE", currentEclipseLocation.getCanonicalFile().getAbsolutePath()+File.separator);
+  }
+  
 }

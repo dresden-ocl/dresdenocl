@@ -113,22 +113,16 @@ public class SQLTemplate {
 		}
 
 		else {
-			File currentLocation = new File("./");
+			File testLocation = new File(System.getProperty("DRESDENOCL_LOCATION_TESTS") + SQLTemplatePlugin.ID);
+			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + SQLTemplatePlugin.ID);
+			
 			File bundleFile = null;
 
-			while (currentLocation != null && currentLocation.exists()
-					&& currentLocation.isDirectory()) {
-				bundleFile = new File(currentLocation.getAbsolutePath()
-						+ File.separator + SQLTemplatePlugin.ID);
-
-				if (bundleFile.exists() && bundleFile.isDirectory())
-					break;
-				else {
-					bundleFile = null;
-					currentLocation = new File(
-							currentLocation.getAbsolutePath() + File.separator
-									+ ".." + File.separator);
-				}
+			
+			if (testLocation != null && testLocation.exists() && testLocation.isDirectory()) {
+				bundleFile = testLocation;
+			} else if (eclipseLocation != null && eclipseLocation.exists() && eclipseLocation.isDirectory()) {
+				bundleFile = eclipseLocation;
 			}
 
 			if (bundleFile != null)

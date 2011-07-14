@@ -456,27 +456,20 @@ public final class MetaModelTestServices {
 
 		/* If started head less, try to find the bundle's location anyway. */
 		else {
-			File currentLocation = new File("./");
+			File testLocation = new File(System.getProperty("DRESDENOCL_LOCATION_TESTS") + myTestModelBundleId);
+			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + myTestModelBundleId);
+			
 			File bundleFile = null;
 
-			while (currentLocation != null && currentLocation.exists()
-					&& currentLocation.isDirectory()) {
-				bundleFile = new File(currentLocation.getAbsolutePath()
-						+ File.separator + myTestModelBundleId);
-
-				if (bundleFile.exists() && bundleFile.isDirectory())
-					break;
-				else {
-					bundleFile = null;
-					currentLocation = new File(
-							currentLocation.getAbsolutePath() + File.separator
-									+ ".." + File.separator);
-				}
+			
+			if (testLocation != null && testLocation.exists() && testLocation.isDirectory()) {
+				bundleFile = testLocation;
+			} else if (eclipseLocation != null && eclipseLocation.exists() && eclipseLocation.isDirectory()) {
+				bundleFile = eclipseLocation;
 			}
 
 			if (bundleFile != null)
-				modelFile = new File(bundleFile + File.separator
-						+ myTestModelPath);
+				modelFile = new File(bundleFile + File.separator + myTestModelPath);
 
 			else
 				throw new RuntimeException("Bundle or directory '"
