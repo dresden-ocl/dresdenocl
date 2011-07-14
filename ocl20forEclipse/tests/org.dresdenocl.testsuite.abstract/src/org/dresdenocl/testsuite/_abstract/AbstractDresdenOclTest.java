@@ -97,6 +97,14 @@ public class AbstractDresdenOclTest {
 	@BeforeClass
 	public static void setUp() throws Exception {
 
+		File currentTestLocation = new File("../");
+		System.setProperty("DRESDENOCL_LOCATION_TESTS", currentTestLocation
+				.getCanonicalFile().getAbsolutePath() + File.separator);
+		File currentEclipseLocation = new File("../../eclipse");
+		System.setProperty("DRESDENOCL_LOCATION_ECLIPSE",
+				currentEclipseLocation.getCanonicalFile().getAbsolutePath()
+						+ File.separator);
+
 		/* Initializes Dresden OCL when tests were started headless. */
 		if (!Platform.isRunning() && !isInitialized) {
 			initializeLogging();
@@ -292,25 +300,22 @@ public class AbstractDresdenOclTest {
 					OclPackage.eINSTANCE);
 		}
 		// no else.
-		
-		/* Probably register the Testmodel resource for EMF. */
-		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-				.get(TestmodelPackage.eNS_PREFIX) == null) {
 
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap()
-					.put(TestmodelPackage.eNS_PREFIX,
-							new XMIResourceFactoryImpl() {
-								public Resource createResource(URI uri) {
-									XMIResource xmiResource = new XMIResourceImpl(
-											uri);
-									return xmiResource;
-								}
-							});
+		/* Probably register the Testmodel resource for EMF. */
+		if (Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().get(
+				TestmodelPackage.eNS_PREFIX) == null) {
+
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+					TestmodelPackage.eNS_PREFIX, new XMIResourceFactoryImpl() {
+						public Resource createResource(URI uri) {
+							XMIResource xmiResource = new XMIResourceImpl(uri);
+							return xmiResource;
+						}
+					});
 		}
 		// no else.
 
-		if (EPackage.Registry.INSTANCE
-				.getEPackage(TestmodelPackage.eNS_URI) == null) {
+		if (EPackage.Registry.INSTANCE.getEPackage(TestmodelPackage.eNS_URI) == null) {
 			EPackage.Registry.INSTANCE.put(TestmodelPackage.eNS_PREFIX,
 					TestmodelPackage.eINSTANCE);
 		}
@@ -522,15 +527,19 @@ public class AbstractDresdenOclTest {
 		}
 
 		else {
-			File testLocation = new File(System.getProperty("DRESDENOCL_LOCATION_TESTS") + bundleId);
-			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + bundleId);
-			
+			File testLocation = new File(
+					System.getProperty("DRESDENOCL_LOCATION_TESTS") + bundleId);
+			File eclipseLocation = new File(
+					System.getProperty("DRESDENOCL_LOCATION_ECLIPSE")
+							+ bundleId);
+
 			File bundleFile = null;
 
-			
-			if (testLocation != null && testLocation.exists() && testLocation.isDirectory()) {
+			if (testLocation != null && testLocation.exists()
+					&& testLocation.isDirectory()) {
 				bundleFile = testLocation;
-			} else if (eclipseLocation != null && eclipseLocation.exists() && eclipseLocation.isDirectory()) {
+			} else if (eclipseLocation != null && eclipseLocation.exists()
+					&& eclipseLocation.isDirectory()) {
 				bundleFile = eclipseLocation;
 			}
 
@@ -538,8 +547,8 @@ public class AbstractDresdenOclTest {
 				file = new File(bundleFile + File.separator + path);
 
 			else
-				throw new RuntimeException("Bundle or directory '"
-						+ bundleId + "' was not found.");
+				throw new RuntimeException("Bundle or directory '" + bundleId
+						+ "' was not found.");
 		}
 
 		assertTrue(file.exists());
