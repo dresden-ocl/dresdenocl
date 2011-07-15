@@ -4,6 +4,6 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="package3"
     nsURI="package3" nsPrefix="">
   <eClassifiers xsi:type="ecore:EClass" name="TestReferredType">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="testTypeClass1" eType="ecore:EClass testModel01.ecore#//TestTypeClass1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testTypeClass1" eType="ecore:EClass testModel.ecore#//TestTypeClass1"/>
   </eClassifiers>
 </ecore:EPackage>

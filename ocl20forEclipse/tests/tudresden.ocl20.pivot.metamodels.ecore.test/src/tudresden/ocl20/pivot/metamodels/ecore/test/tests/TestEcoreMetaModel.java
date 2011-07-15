@@ -40,7 +40,7 @@ public class TestEcoreMetaModel extends MetaModelTestSuite {
 	private static final String META_MODEL_ID = EcoreMetamodelPlugin.ID;
 
 	/** The path of the model which shall be tested. */
-	private static final String TEST_MODEL_PATH = "model/testmodel.ecore";
+	private static final String TEST_MODEL_PATH = "model/testModel.ecore";
 
 	/**
 	 * <p>
