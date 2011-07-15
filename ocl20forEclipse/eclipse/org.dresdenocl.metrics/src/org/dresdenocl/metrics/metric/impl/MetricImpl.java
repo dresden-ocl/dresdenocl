@@ -28,13 +28,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <em><b>Metric</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class MetricImpl extends EObjectImpl implements Metric {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected MetricImpl() {
@@ -43,7 +42,6 @@ public class MetricImpl extends EObjectImpl implements Metric {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

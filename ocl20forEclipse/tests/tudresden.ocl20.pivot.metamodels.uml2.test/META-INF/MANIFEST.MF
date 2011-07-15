@@ -5,13 +5,13 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.uml2.test;singleton:=true
 Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4;bundle-version="4.0.0",
+ org.junit4,
  tudresden.ocl20.pivot.metamodels.test,
  tudresden.ocl20.pivot.metamodels.uml2,
  tudresden.ocl20.pivot.facade,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.uml2.uml,
- org.eclipse.uml2.uml.resources;bundle-version="3.1.1"
+ org.eclipse.uml2.uml.resources
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: TU Dresden, Software Technology Group

@@ -97,16 +97,16 @@ public class AbstractDresdenOclTest {
 	@BeforeClass
 	public static void setUp() throws Exception {
 
-		File currentTestLocation = new File("../");
-		System.setProperty("DRESDENOCL_LOCATION_TESTS", currentTestLocation
-				.getCanonicalFile().getAbsolutePath() + File.separator);
-		File currentEclipseLocation = new File("../../eclipse");
-		System.setProperty("DRESDENOCL_LOCATION_ECLIPSE",
-				currentEclipseLocation.getCanonicalFile().getAbsolutePath()
-						+ File.separator);
-
 		/* Initializes Dresden OCL when tests were started headless. */
 		if (!Platform.isRunning() && !isInitialized) {
+			File currentTestLocation = new File("../");
+			System.setProperty("DRESDENOCL_LOCATION_TESTS", currentTestLocation
+					.getCanonicalFile().getAbsolutePath() + File.separator);
+			File currentEclipseLocation = new File("../../eclipse");
+			System.setProperty("DRESDENOCL_LOCATION_ECLIPSE",
+					currentEclipseLocation.getCanonicalFile().getAbsolutePath()
+							+ File.separator);
+			
 			initializeLogging();
 			registerEmfResourceFactories();
 			registerMetamodels();

@@ -18,6 +18,7 @@ with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.dresdenocl.metrics.metric.util;
 
+import org.dresdenocl.metrics.metric.*;
 import org.dresdenocl.metrics.metric.ConstraintMetric;
 import org.dresdenocl.metrics.metric.ConstraintMetrics;
 import org.dresdenocl.metrics.metric.Metric;

@@ -4,4 +4,4 @@ Bundle-Name: UML WFR Example
 Bundle-SymbolicName: org.dresdenocl.examples.uml
 Bundle-Version: 3.1.0.qualifier
 Bundle-Vendor: TU Dresden, Software Technology Group
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
