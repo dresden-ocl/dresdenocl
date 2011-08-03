@@ -75,7 +75,7 @@ public class Ocl22Parser implements IOclParser {
 				model.removeConstraints(newConstraints);
 				throw new ParseException(e.getMessage(), e);
 			}
-			
+
 			catch (ParseException e) {
 				/* Probably remove newly parsed constraints. */
 				Collection<Constraint> newConstraints = model.getConstraints();
@@ -105,16 +105,55 @@ public class Ocl22Parser implements IOclParser {
 
 	public List<Constraint> parseOclString(String oclCode, IModel model,
 			boolean addToModel) throws ParseException {
-		ResourceSet rs = new ResourceSetImpl();
-		OclResource resource = new OclResource(URI.createFileURI("temp.ocl"));
-		rs.getResources().add(resource);
-		resource.setModel(model);
 		try {
-			resource.load(new ByteArrayInputStream(oclCode.getBytes()), null);
+			Collection<Constraint> alreadyParsedConstraints = model
+					.getConstraints();
+			ResourceSet rs = new ResourceSetImpl();
+			OclResource resource = new OclResource(
+					URI.createFileURI("temp.ocl"));
+			rs.getResources().add(resource);
+			resource.setModel(model);
+			try {
+				resource.load(new ByteArrayInputStream(oclCode.getBytes()),
+						null);
 
-			return staticSemanticsAnalysis(resource);
-		} catch (IOException e) {
-			throw new ParseException("Unable to load OCL file.", e);
+				List<Constraint> result = staticSemanticsAnalysis(resource);
+
+				/* Probably remove the constraints from the model again. */
+				if (!addToModel)
+					model.removeConstraints(result);
+				// no else.
+
+				return result;
+			}
+
+			catch (IOException e) {
+				/* Probably remove newly parsed constraints. */
+				Collection<Constraint> newConstraints = model.getConstraints();
+				newConstraints.removeAll(alreadyParsedConstraints);
+				model.removeConstraints(newConstraints);
+				throw new ParseException(e.getMessage(), e);
+			}
+
+			catch (ParseException e) {
+				/* Probably remove newly parsed constraints. */
+				Collection<Constraint> newConstraints = model.getConstraints();
+				newConstraints.removeAll(alreadyParsedConstraints);
+				model.removeConstraints(newConstraints);
+				throw e;
+			}
+		}
+
+		catch (IllegalArgumentException e) {
+			throw new ParseException(
+					"Was unable to remove parsed constraints from the given IModel again.",
+					e);
+		}
+
+		catch (ModelAccessException e) {
+			throw new ParseException(
+					"Was unable to remove parsed constraints from the given IModel again.",
+					e);
 		}
 	}
 

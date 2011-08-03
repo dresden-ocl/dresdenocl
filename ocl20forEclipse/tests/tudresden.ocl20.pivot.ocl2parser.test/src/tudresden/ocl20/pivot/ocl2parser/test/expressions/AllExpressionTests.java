@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.osgi.framework.Bundle;
@@ -36,7 +37,7 @@ import tudresden.ocl20.pivot.model.IModel;
 /* Specify a runner class: Suite.class. */
 @RunWith(Suite.class)
 /* Specify an array of test classes. */
-@Suite.SuiteClasses( { TestBooleanLiterals.class, TestCollectionLiterals.class,
+@Suite.SuiteClasses({ TestBooleanLiterals.class, TestCollectionLiterals.class,
 		TestEnumerationLiterals.class, TestIfExpressions.class,
 		TestIntegerLiterals.class, TestInvalidLiterals.class,
 		TestIterateExpressions.class, TestLetExpressions.class,
@@ -44,7 +45,7 @@ import tudresden.ocl20.pivot.model.IModel;
 		TestPropertyCallExpressions.class, TestRealLiterals.class,
 		TestStringLiterals.class, TestTupleLiterals.class,
 		TestTypeExpressions.class, TestVariableExpressions.class })
-public class AllExpressionTests {
+public class AllExpressionTests extends AbstractDresdenOclTest {
 
 	/**
 	 * The name of the {@link Bundle} that provides the model used during

@@ -19,8 +19,10 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.expressions;
 
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
+import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
 import tudresden.ocl20.pivot.parser.SemanticException;
 
@@ -32,7 +34,7 @@ import tudresden.ocl20.pivot.parser.SemanticException;
  * 
  * @author Claas Wilke
  */
-public class TestPropertyCallExpressions {
+public class TestPropertyCallExpressions extends AbstractDresdenOclTest {
 
 	/**
 	 * <p>
@@ -182,22 +184,22 @@ public class TestPropertyCallExpressions {
 	 */
 	@Test
 	public void testPropertyCallExpressionPositive06() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "expressions/calls/propertyPositive06.ocl";
 		modelFileName = "testmodel03.uml";
-	
+
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(
 				AllExpressionTests.META_MODEL_ID,
 				AllExpressionTests.MODEL_BUNDLE,
 				AllExpressionTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -284,5 +286,46 @@ public class TestPropertyCallExpressions {
 
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
+	}
+
+	/**
+	 * <p>
+	 * A test case to check that a PropertyCallExpression is not parsed
+	 * appropriately.
+	 * </p>
+	 */
+	@Test(expected = SemanticException.class)
+	public void testPropertyCallExpressionNegative04() throws Exception {
+
+		TestPerformer testPerformer;
+
+		String modelFileName;
+		String oclFileName;
+
+		oclFileName = "expressions/calls/propertyNegative04.ocl";
+		modelFileName = "testmodel.uml";
+
+		/* Try to get the TestPerformer. */
+		testPerformer = TestPerformer.getInstance(
+				AllExpressionTests.META_MODEL_ID,
+				AllExpressionTests.MODEL_BUNDLE,
+				AllExpressionTests.MODEL_DIRECTORY);
+		testPerformer.setModel(modelFileName);
+
+		/* Try to parse the constraint file. */
+		// testPerformer.parseFile(oclFileName);
+
+		StringBuffer code = new StringBuffer();
+		code.append("package package1::package2\n");
+		code.append("\n");
+		code.append("-- Should fail. The second def contains a type error?\n");
+		code.append("context Type1\n");
+		code.append("def: mydefine : Integer = 100\n");
+		code.append("\n");
+		code.append("def: mystring : Integ = mydefine + 50\n");
+		code.append("\n");
+		code.append("endpackage\n");
+		Ocl22Parser.INSTANCE.parseOclString(code.toString(),
+				testPerformer.getCurrentModel(), false);
 	}
 }
