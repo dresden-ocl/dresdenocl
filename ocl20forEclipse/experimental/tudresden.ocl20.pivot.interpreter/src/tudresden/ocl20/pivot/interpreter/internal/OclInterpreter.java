@@ -806,7 +806,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(booleanLiteralExp, result);
+					.firePartialInterpretionResult(booleanLiteralExp, result);
 		}
 		// no else.
 
@@ -828,6 +828,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret CollectionItem.");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -839,6 +841,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset
 					+ "Interpreted CollectionItem. Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(collectionItem.getItem(), result);
 		}
 		// no else.
 
@@ -861,6 +869,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret CollectionLiteral.");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 
 		/*
@@ -911,6 +921,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset
 					+ "Interpreted CollectionLiteral. Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(collectionLiteralExp, result);
 		}
 		// no else.
 
@@ -1025,6 +1041,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret ExpressionInOcl "
 					+ expressionInOcl.getBody());
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -1036,6 +1054,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset
 					+ "Interpreted ExpressionInOcl. Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(expressionInOcl.getBodyExpression(), result);
 		}
 		// no else.
 
@@ -1056,6 +1080,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret If.");
 			this.pushLogOffset();
+			
+			/* Propagate to the tracer */
+			increaseTracerTreeDepth();	
 		}
 		// no else.
 
@@ -1116,6 +1143,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset + "Interpreted If. Result = " + result);
+			
+			decreaseTracerTreeDepth();
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
@@ -1209,6 +1238,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret Iterate.");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -1253,6 +1284,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset + "Interpreted Iterate. Result = "
 					+ result);
+			
+			decreaseTracerTreeDepth();
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
@@ -1365,6 +1398,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret Iterator "
 					+ iteratorExp.getName() + ".");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -1640,6 +1675,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset + "Interpreted Iterator "
 					+ iteratorExp.getName() + ". Result = " + result);
+			
+			decreaseTracerTreeDepth();
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
@@ -2795,6 +2832,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret Let of Variable "
 					+ letExp.getVariable().getName() + ".");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -2823,6 +2862,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset + "Interpreted Let of Variable "
 					+ letExp.getVariable().getName() + ". Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(letExp, result);
 		}
 		// no else.
 
@@ -2855,6 +2900,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			LOGGER.debug(msg);
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -2885,6 +2932,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			msg += ". Result = " + result;
 
 			LOGGER.debug(msg);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(operationCallExp, result);
 		}
 		// no else.
 
@@ -3434,6 +3487,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret PropertyCall on Property "
 					+ propertyCallExp.getReferredProperty().getName() + ".");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -3457,6 +3512,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted PropertyCall on Property "
 					+ propertyCallExp.getReferredProperty().getName()
 					+ ". Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(propertyCallExp, result);
 		}
 		// no else.
 
@@ -3653,7 +3714,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 									+ referredProperty
 									+ " on a non static source."));
 		}
-
+		/* TODO Lars: What to and whether to output from this method? */
 		return result;
 	}
 
@@ -3682,6 +3743,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpreted RealLiteral. Result = "
 					+ result);
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(realLiteralExp, result);
 		}
 		// no else.
 
@@ -3713,6 +3778,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset
 					+ "Interpreted StringLiteral. Result = " + result);
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(stringLiteralExp, result);
 		}
 		// no else.
 
@@ -3734,6 +3803,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret TupleLiteral.");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -3772,6 +3843,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset + "Interpreted TupleLiteral. Result = "
 					+ result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(tupleLiteralExp, result);
 		}
 		// no else.
 
@@ -3794,6 +3871,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug("Intepret TuplePart " + tupleLiteralPart.getName()
 					+ ".");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else;
 
@@ -3805,6 +3884,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug("Interpreted TuplePart " + tupleLiteralPart.getName()
 					+ ". Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(tupleLiteralPart.getValue(), result);
 
 		}
 		// no else;
@@ -3837,6 +3922,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpreted TypeLiteral. Result = "
 					+ result);
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(typeLiteralExp, result);
 		}
 		// no else.
 
@@ -3870,6 +3959,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset
 					+ "Interpreted UndefinedLiteral. Result = " + result);
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(undefinedLiteralExp, result);
 		}
 		// no else.
 
@@ -3889,6 +3982,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret Variable "
 					+ variable.getName());
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth();
 		}
 		// no else.
 
@@ -3934,6 +4029,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug(this.logOffset + "Interpreted Variable "
 					+ variable.getName() + ". Result = " + result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(variable.getInitExpression(), result);
 		}
 
 		return result;
@@ -3983,10 +4084,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					this.logOffset.length() - 2);
 		}
 		// no else.
-		
-		/* set the offset for the tree structure */
-		OclInterpreterPlugin.getInterpreterRegistry()
-			.fireInterpretationDepthDecreased();
 	}
 
 	/**
@@ -4038,9 +4135,27 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	protected void pushLogOffset() {
 		this.logOffset += ". ";
-		
+	}
+	
+	/**
+	 * <p>
+	 * Fires a notification to the observers that the tree depth has increased
+	 * </p>
+	 */
+	protected void increaseTracerTreeDepth() {
 		/* set the offset for the tree structure */
 		OclInterpreterPlugin.getInterpreterRegistry()
 			.fireInterpretationDepthIncreased();
+	}
+	
+	/**
+	 * <p>
+	 * Fires a notification to the observers that the tree depth has decreased
+	 * </p>
+	 */
+	protected void decreaseTracerTreeDepth() {
+		/* set the offset for the tree structure */
+		OclInterpreterPlugin.getInterpreterRegistry()
+			.fireInterpretationDepthDecreased();
 	}
 }

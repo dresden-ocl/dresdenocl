@@ -18,16 +18,13 @@ public class TracerView extends ViewPart {
 	public TracerView() {
 		super();
 		tree = TracerPlugin.getInterpreterTraceListener().getTree();
-		/* DEBUG */
-		System.out.println("MOEP");
-		/* DEBUG */
 	}
 	
 	@Override
 	public void createPartControl(Composite parent) {
 		myTreeViewer = new TreeViewer(parent);
 		myTreeViewer.setContentProvider(new TracerContentProvider());
-		myTreeViewer.setLabelProvider(new LabelProvider());
+		myTreeViewer.setLabelProvider(new TracerLabelProvider());
 		myTreeViewer.setInput((tree == null) ? null : tree.getRootElement());
 	}
 

@@ -3,7 +3,9 @@ package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
+import tudresden.ocl20.pivot.tracer.model.TracerItem;
 import tudresden.ocl20.pivot.tracer.model.TracerNode;
+import tudresden.ocl20.pivot.tracer.model.TracerTree;
 
 public class TracerContentProvider implements ITreeContentProvider {
 
@@ -13,30 +15,30 @@ public class TracerContentProvider implements ITreeContentProvider {
 	}
 
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		oldInput = newInput;
 		/* DEBUG */
 		System.out.println("oldInput: " + oldInput
-				+ "newInput: " + newInput);
+				+ " newInput: " + newInput);
 		/* DEBUG */
+		
+		oldInput = newInput;
 	}
 
 	public Object[] getElements(Object inputElement) {
-		Object[] result = new Object[3];
-		if(inputElement instanceof TracerNode) {
-			//result[0] = ((TracerNode) inputElement).getTracerItem()
-				//.getExpression();
+		if(inputElement instanceof TracerTree) {
+			return ((TracerTree) inputElement).getRootElement().getChildren();
 		}
-		return result;
+		if(inputElement instanceof TracerNode) {
+			return ((TracerNode) inputElement).getChildren();
+		}
+		return new Object[0];
 	}
 
 	public Object[] getChildren(Object parentElement) {
-		/* DEBUG */
-		System.out.println("getChildren: parentElement.className = "
-				+ parentElement.getClass().getName());
-		/* DEBUG */
-		
 		if(parentElement instanceof TracerNode) {
 			return ((TracerNode) parentElement).getChildren();
+		}
+		if(parentElement instanceof TracerTree) {
+			return ((TracerTree) parentElement).getRootElement().getChildren();
 		}
 		return new Object[0];
 	}
@@ -49,7 +51,14 @@ public class TracerContentProvider implements ITreeContentProvider {
 	}
 
 	public boolean hasChildren(Object element) {
-		return ((TracerNode) element).getChildren().length > 0;
+		if(element instanceof TracerNode) {
+			return ((TracerNode) element).getChildren().length > 0;
+		}
+		else {
+			if(element instanceof String)
+				return false;
+		}
+		return false;
 	}
 
 }

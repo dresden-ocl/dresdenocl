@@ -4,6 +4,9 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.tracer.model.TracerNode;
+
 public class TracerLabelProvider implements ILabelProvider {
 
 	public void addListener(ILabelProviderListener listener) {
@@ -30,9 +33,15 @@ public class TracerLabelProvider implements ILabelProvider {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	public String getText(Object element) {
-		return null;
+		if(element instanceof TracerNode) {
+			OclExpression expr = ((TracerNode) element).getTracerItem().getExpression();
+			if(expr != null) return expr.toString();
+			else return "moep";
+			/* TODO Lars: Change me! */
+		}
+		return "narf";
 	}
 
 }
