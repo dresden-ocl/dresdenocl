@@ -36,10 +36,12 @@ public class TracerLabelProvider implements ILabelProvider {
 	
 	public String getText(Object element) {
 		if(element instanceof TracerNode) {
-			OclExpression expr = ((TracerNode) element).getTracerItem().getExpression();
-			if(expr != null) return expr.toString();
-			else return "moep";
-			/* TODO Lars: Change me! */
+			try {
+				return ((TracerNode) element).getTracerItem().toString();
+			} catch (NullPointerException e) {
+				/* TODO Lars: FIXME */
+				return "NULLPOINTEREXCEPTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+			}
 		}
 		return "narf";
 	}

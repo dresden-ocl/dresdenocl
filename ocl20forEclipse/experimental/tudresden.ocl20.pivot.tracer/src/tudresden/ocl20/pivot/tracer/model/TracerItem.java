@@ -1,22 +1,27 @@
 package tudresden.ocl20.pivot.tracer.model;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 
 public class TracerItem {
 	private OclAny result;
-	private OclExpression expression;
+	private EObject expression;
 	
-	public TracerItem(OclExpression expression, OclAny result) {
+	public TracerItem(EObject expression, OclAny result) {
 		this.result = result;
 		this.expression = expression;
 	}
 	
-	public OclExpression getExpression() {
+	public EObject getExpression() {
 		return expression;
 	}
 	
 	public OclAny getResult() {
 		return result;
+	}
+	
+	public void setResult(OclAny result) {
+		this.result = result;
 	}
 }

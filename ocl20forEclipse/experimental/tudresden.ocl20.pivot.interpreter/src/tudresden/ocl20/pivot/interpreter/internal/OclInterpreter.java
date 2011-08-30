@@ -182,6 +182,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug("Entry interpretConstraint(constraint = " + constraint
 					+ ", modelInstanceElement = " + modelInstanceElement + ")");
 			this.pushLogOffset();
+			
+			increaseTracerTreeDepth(constraint.hashCode());
 		}
 		// no else.
 
@@ -232,6 +234,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug("Exit interpretConstraint(Constraint, IModelInstanceElement) - Result = "
 					+ result);
+			
+			decreaseTracerTreeDepth();
+			
+			/* Propagate tracer information for partial interpretation */
+			OclAny res = (result == null) ? null : result.getResult();
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.firePartialInterpretionResult(constraint, res);
 		}
 		// no else.
 
@@ -321,6 +330,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ ", parameterValues = " + parameterValues
 					+ ", preConditions = " + preConditions + ")");
 			this.pushLogOffset();
+			
 		}
 		// no else.
 
@@ -829,7 +839,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret CollectionItem.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(collectionItem.getItem().hashCode());
 		}
 		// no else.
 
@@ -846,7 +856,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(collectionItem.getItem(), result);
+					.firePartialInterpretionResult(collectionItem, result);
 		}
 		// no else.
 
@@ -870,7 +880,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret CollectionLiteral.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(collectionLiteralExp.hashCode());
 		}
 
 		/*
@@ -1042,7 +1052,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ expressionInOcl.getBody());
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(expressionInOcl.getBodyExpression().hashCode());
 		}
 		// no else.
 
@@ -1082,7 +1092,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 			
 			/* Propagate to the tracer */
-			increaseTracerTreeDepth();	
+			increaseTracerTreeDepth(ifExp.hashCode());	
 		}
 		// no else.
 
@@ -1239,7 +1249,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret Iterate.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(iterateExp.hashCode());
 		}
 		// no else.
 
@@ -1399,7 +1409,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ iteratorExp.getName() + ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(iteratorExp.hashCode());
 		}
 		// no else.
 
@@ -2833,7 +2843,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ letExp.getVariable().getName() + ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(letExp.hashCode());
 		}
 		// no else.
 
@@ -2901,7 +2911,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(msg);
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(operationCallExp.hashCode());
 		}
 		// no else.
 
@@ -3488,7 +3498,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ propertyCallExp.getReferredProperty().getName() + ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(propertyCallExp.hashCode());
 		}
 		// no else.
 
@@ -3804,7 +3814,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret TupleLiteral.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(tupleLiteralExp.hashCode());
 		}
 		// no else.
 
@@ -3872,7 +3882,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(tupleLiteralPart.getValue().hashCode());
 		}
 		// no else;
 
@@ -3983,7 +3993,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ variable.getName());
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth();
+			increaseTracerTreeDepth(variable.hashCode());
 		}
 		// no else.
 
@@ -4142,10 +4152,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * Fires a notification to the observers that the tree depth has increased
 	 * </p>
 	 */
-	protected void increaseTracerTreeDepth() {
+	protected void increaseTracerTreeDepth(int hash) {
 		/* set the offset for the tree structure */
 		OclInterpreterPlugin.getInterpreterRegistry()
-			.fireInterpretationDepthIncreased();
+			.fireInterpretationDepthIncreased(hash);
 	}
 	
 	/**

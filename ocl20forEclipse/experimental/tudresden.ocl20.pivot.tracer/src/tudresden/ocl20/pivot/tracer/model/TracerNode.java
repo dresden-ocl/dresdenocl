@@ -6,11 +6,13 @@ public class TracerNode {
 	private ArrayList<TracerNode> children;
 	private TracerItem tracerItem;
 	private TracerNode parent;
+	private int recognizingHash;
 	
-	public TracerNode(TracerNode parent, TracerItem tracerItem) {
+	public TracerNode(TracerNode parent, TracerItem tracerItem, int recognizingHash) {
 		this.tracerItem = tracerItem;
 		this.parent = parent;
-		children = null;
+		this.children = null;
+		this.recognizingHash = recognizingHash;
 	}
 	
 	public void addChild(TracerNode node) {
@@ -30,12 +32,27 @@ public class TracerNode {
 		return parent;
 	}
 	
-	public Object[] getChildren() {
+	public TracerNode[] getChildren() {
 		if(children == null) {
-			return new Object[0];
+			return new TracerNode[0];
 		}
-		else {
-			return children.toArray();
-		}
+		
+		TracerNode[] result = new TracerNode[children.size()];
+		result = children.toArray(result);
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param compareToHash int to compare with
+	 * @return true if the local stored hash has the same value as compareToHash
+	 * 	otherwise false
+	 */
+	public boolean isRecognizedByHash(int compareToHash) {
+		return recognizingHash == compareToHash;
+	}
+	
+	public void setTracerItem(TracerItem item) {
+		this.tracerItem = item;
 	}
 }

@@ -30,11 +30,11 @@
  */
 package tudresden.ocl20.pivot.interpreter;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
-import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 
 
 /**
@@ -61,9 +61,9 @@ public interface IInterpreterRegistry {
 	public void addInterpreterTraceListener(IInterpreterTraceListener listener);
 	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
 
-	public void fireInterpretationDepthIncreased();
+	public void fireInterpretationDepthIncreased(int hash);
 	public void fireInterpretationDepthDecreased();
-	public void firePartialInterpretionResult(OclExpression expression, OclAny result);
+	public void firePartialInterpretionResult(EObject expression, OclAny result);
 	
 	
 	/**

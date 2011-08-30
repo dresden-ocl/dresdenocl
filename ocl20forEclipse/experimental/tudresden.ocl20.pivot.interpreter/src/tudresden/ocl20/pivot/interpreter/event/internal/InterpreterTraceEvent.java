@@ -2,7 +2,8 @@ package tudresden.ocl20.pivot.interpreter.event.internal;
 
 import java.util.EventObject;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
 
@@ -16,9 +17,9 @@ public class InterpreterTraceEvent extends EventObject{
 	private static final long serialVersionUID = -7975866761417314905L;
 	
 	private OclAny result;
-	private OclExpression expression;
+	private EObject expression;
 
-	public InterpreterTraceEvent(IInterpreterRegistry source, OclExpression expression, OclAny result) {
+	public InterpreterTraceEvent(IInterpreterRegistry source, EObject expression, OclAny result) {
 		super(source);
 		
 		this.expression = expression;
@@ -29,7 +30,7 @@ public class InterpreterTraceEvent extends EventObject{
 		return this.result;
 	}
 	
-	public OclExpression getExpression() {
+	public EObject getExpression() {
 		return this.expression;
 	}
 	

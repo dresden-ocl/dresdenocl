@@ -31,8 +31,8 @@
 package tudresden.ocl20.pivot.interpreter.internal;
 
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
@@ -77,7 +77,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	 * TODO: Ronny: Document this
 	 */
 	@Override
-	public void fireInterpretationDepthIncreased() {
+	public void fireInterpretationDepthIncreased(int hash) {
 		
 		if (this.traceListeners != null) {
 			Object[] listeners;
@@ -88,7 +88,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 		
 				/* Inform the listeners that the interpretation did finish. */
 				((IInterpreterTraceListener) listeners[i])
-						.interpretationTreeDepthIncreased();
+						.interpretationTreeDepthIncreased(hash);
 			}
 		}
 		// no else.
@@ -121,7 +121,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	 * TODO: Ronny: Document this
 	 */
 	@Override
-	public void firePartialInterpretionResult(OclExpression expression,
+	public void firePartialInterpretionResult(EObject expression,
 			OclAny result) {
 		
 		InterpreterTraceEvent event;

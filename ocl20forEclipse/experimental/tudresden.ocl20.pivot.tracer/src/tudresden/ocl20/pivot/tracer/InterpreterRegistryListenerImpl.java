@@ -1,5 +1,6 @@
 package tudresden.ocl20.pivot.tracer;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 import tudresden.ocl20.pivot.tracer.model.TracerItem;
@@ -9,16 +10,34 @@ import tudresden.ocl20.pivot.tracer.model.TracerTree;
 public class InterpreterRegistryListenerImpl implements IInterpreterTraceListener {
 	private TracerTree tree;
 	private TracerNode currentParent;
-	private boolean nextInsertIsNewParent;
 	
 	public InterpreterRegistryListenerImpl() {
 		tree = null;
 		currentParent = null;
-		nextInsertIsNewParent = false;
 	}
-
-	public void interpretationTreeDepthIncreased() {
-		nextInsertIsNewParent = true;
+	
+	
+	/*
+	 * This method places dummy entries into the tree to
+	 * set up the tree structure. Each entry is recognized
+	 * by a hash.
+	 * This has to be done since the results for this entry
+	 * are sent later on with the @see{partialInterpretationFinished}
+	 * notification to be completed with information regarding
+	 * this interpretation.
+	 */
+	public void interpretationTreeDepthIncreased(int hash) {
+		/* Add a dummy node to the tree */
+		TracerNode dummyNode = new TracerNode(currentParent, null, hash);
+		
+		/* This is the first item inserted into the tree */
+		if(tree == null) {
+			tree = new TracerTree(dummyNode);
+		}
+		else {
+			currentParent.addChild(dummyNode);
+		}
+		currentParent = dummyNode;
 	}
 	
 	public void interpretationTreeDepthDecreased() {
@@ -34,31 +53,22 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	}
 
 	public void partialInterpretationFinished(InterpreterTraceEvent event) {
-		TracerItem item = new TracerItem(
-				event.getExpression(), event.getResult());
-		/* DEBUG */
-		System.out.println(event.getExpression());
-		/* DEBUG */
+		TracerNode[] tmpArray = currentParent.getChildren();
+		TracerItem item = new TracerItem(event.getExpression(), event.getResult());
+		boolean found = false;
 		
-		/* This is the first item inserted into the tree */
-		if(tree == null) {
-			TracerNode node = new TracerNode(null, item);
-			tree = new TracerTree(node);
-			currentParent = node;
-		}
-		else {
-			TracerNode node = new TracerNode(currentParent, item);
-			/* DEBUG */
-			System.out.println(currentParent);
-			/* DEBUG */
-			currentParent.addChild(node);
-			
-			/* Item is new actual parent */
-			if(nextInsertIsNewParent) {
-				currentParent = node;
-				nextInsertIsNewParent = false;
+		for(TracerNode n : tmpArray) {
+			/* check which child is recognized by this expression*/
+			if(n.isRecognizedByHash(event.getExpression().hashCode())) {
+				/* set the item into the dummy */
+				n.setTracerItem(item);
+				found = true;
 			}
-			// no else			
+		}
+		/* Check if the item has to be added in the current level */
+		if(!found) {
+			TracerNode node = new TracerNode(currentParent, item, event.getExpression().hashCode());
+			currentParent.addChild(node);
 		}
 	}
 	

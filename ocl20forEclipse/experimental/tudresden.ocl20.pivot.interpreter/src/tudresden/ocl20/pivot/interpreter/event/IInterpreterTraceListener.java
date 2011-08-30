@@ -11,9 +11,10 @@ import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 public interface IInterpreterTraceListener {
 	
 	/**
+	 * @param hash 
 	 * 
 	 */
-	void interpretationTreeDepthIncreased();
+	void interpretationTreeDepthIncreased(int hash);
 	
 	void interpretationTreeDepthDecreased();
 	
