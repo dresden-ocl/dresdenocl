@@ -198,17 +198,17 @@ trait OclLookUpFunctions { selfType : OclStaticSemantics =>
   }
   
   private def getPropertyFromVariableDeclaration(vd : VariableDeclarationWithInitCS, t : Type, name : String) : Box[Property] = {
-    if (vd.getTypeName != null) {
+    (if (vd.getTypeName != null) {
       (vd->propertyForVariableDeclarationWithInit).flatMap{property =>
         if (property.getType == null) {
           // this can happen for not fully qualified collections, e.g., Set instead of Set(Integer)
           resolveTypeByComputingFeature(vd, name, t)
-        } else 
-        	Full(property)
+        } else
+          Full(property)
       }
     } else {
       resolveTypeByComputingFeature(vd, name, t)
-    }.flatMap{property =>
+    }).flatMap{property =>
       definedPropertysType.put(property, t)
       Full(property)
     }
