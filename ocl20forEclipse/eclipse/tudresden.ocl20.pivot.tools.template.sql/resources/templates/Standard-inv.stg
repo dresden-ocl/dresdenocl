@@ -1,4 +1,5 @@
 group sql;
+delimiters "$","$"
 
 // --- OCL INVARIANT --- 
 constraint_invariant(common_table,constraint_name,context,context_alias,expression) ::= <<
@@ -20,7 +21,6 @@ $non_recursive$
 UNION 
 $recursive$
 )
-
 >>
 
 check_database_references() ::= <<
@@ -28,31 +28,30 @@ true
 >>
 
 // --- NAVIGATION (CLASS AND ATTRIBUTE) --- 
-feature_call_navigation_select(object,from,alias,join,where) ::= <<
-(SELECT $object$
+feature_call_navigation_select(select,from,alias,join,where) ::= <<
+(SELECT $select$
 FROM $from$ AS $alias$
 $join$
 $if(where)$WHERE $where$$endif$)
 >>
 
-feature_call_navigation_join(object,from,alias,join,where) ::= <<
+feature_call_navigation_join(from,alias,join,where) ::= <<
 INNER JOIN $from$ AS $alias$ $if(where)$ON $where$$endif$$if(join)$
-
 $join$$endif$
 >>
 
-feature_call_navigation_where(alias1,where,alias2,object) ::= <<
-$feature_call_attribute_context(alias=alias1,attribute=where)$ = $feature_call_attribute_context(alias=alias2,attribute=object)$
+feature_call_navigation_where(alias1,where,alias2,select) ::= <<
+$feature_call_attribute_context(alias=alias1,attribute=where)$ = $feature_call_attribute_context(alias=alias2,attribute=select)$
 >>
 
-feature_call_navigation_from(object,where,from) ::= <<
-(SELECT $object$$if(where)$,$where$$endif$ FROM $from$)
+feature_call_navigation_from(select,where,from) ::= <<
+(SELECT $select$$if(where)$,$where$$endif$ FROM $from$)
 >>
 
 
 // --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
-feature_call_attribute_context(alias,attribute,alias2,attribute2) ::= <<
-$if(alias)$$alias$.$endif$$attribute$$if(attribute2)$, $alias2$.$attribute2$$endif$
+feature_call_attribute_context(alias,attribute,alias2=false,attribute2=false) ::= <<
+$alias$.$attribute$$if(attribute2)$, $alias2$.$attribute2$$endif$
 >>
 
 
@@ -112,7 +111,7 @@ literal_collection_sequence(items) ::= <<
 $items:literal_collection_sequence_item(); separator="\nUNION\n"$
 >>
 
-literal_collection_sequence_item(item) ::= <<
+literal_collection_sequence_item(item,i) ::= <<
 SELECT elem, seqno FROM (values ($item$, $i$) AS SEQ)(elem, seqno)
 >>
 
@@ -190,21 +189,21 @@ $operand$
 >>
 
 // --- OCLISTYPEOF (CLASS AND ATTRIBUTE) ---
-feature_call_oclistypeof(from,object,object2,alias) ::= <<
+feature_call_oclistypeof(from,select,object2,alias) ::= <<
 EXISTS(
-  SELECT $alias$.$object$ FROM $from$ AS $alias$
-  WHERE $alias$.$object$ = $object2$)
+  SELECT $alias$.$select$ FROM $from$ AS $alias$
+  WHERE $alias$.$select$ = $object2$)
 >>
   
 // --- OCLISKINDOF (CLASS AND ATTRIBUTE) ---
-feature_call_ocliskindof(from,from2,object,alias) ::= <<
+feature_call_ocliskindof(from,from2,select,alias) ::= <<
 EXISTS(
-  SELECT $object$ FROM $from$
-  WHERE $object$ = $alias$.$object$)
+  SELECT $select$ FROM $from$
+  WHERE $select$ = $alias$.$select$)
 $if(from2)$
   AND NOT EXISTS(
-  SELECT $object$ FROM $from2$
-  WHERE $object$ = $alias$.$object$)
+  SELECT $select$ FROM $from2$
+  WHERE $select$ = $alias$.$select$)
 $endif$
 >>
 
@@ -357,50 +356,50 @@ logical_expression_implies(operand1,operand2) ::= <<
 >>
 
 // --- COLLECTION RELATED OPERATIONS ---
-feature_call_count(object) ::= <<
+feature_call_count(select) ::= <<
 CASE
-  WHEN COUNT($object$) IS NULL THEN 0
-  ELSE COUNT($object$)
+  WHEN COUNT($select$) IS NULL THEN 0
+  ELSE COUNT($select$)
 END
 >>
 
-feature_call_min(object) ::= <<
+feature_call_min(select) ::= <<
 MIN($object$)
 >>
 
-feature_call_max(object) ::= <<
-MAX($object$)
+feature_call_max(select) ::= <<
+MAX($select$)
 >>
 
-feature_call_size(object) ::= <<
+feature_call_size(select) ::= <<
 CASE
-  WHEN COUNT($object$) IS NULL THEN 0
-  ELSE COUNT($object$)
+  WHEN COUNT($select$) IS NULL THEN 0
+  ELSE COUNT($select$)
 END
 >>
 
-feature_call_count_select(object) ::= <<
+feature_call_count_select(select) ::= <<
 CASE
-  WHEN $object$ IS NULL THEN NULL
+  WHEN $select$ IS NULL THEN NULL
   ELSE 1
 END
 >>
 
-feature_call_size_select(object) ::= <<
+feature_call_size_select(select) ::= <<
 CASE
-  WHEN $object$ IS NULL THEN NULL
+  WHEN $select$ IS NULL THEN NULL
   ELSE 1
 END
 >>
 
-feature_call_sum_select(object) ::= <<
-$object$
+feature_call_sum_select(select) ::= <<
+$select$
 >>
 
-feature_call_sum(object) ::= <<
+feature_call_sum(select) ::= <<
 CASE
-  WHEN SUM($object$) IS NULL THEN 0
-  ELSE SUM($object$)
+  WHEN SUM($select$) IS NULL THEN 0
+  ELSE SUM($select$)
 END
 >>
 
@@ -486,19 +485,19 @@ feature_call_excluding_set(operand1,operand2,element) ::= <<
   ($operand2$))
 >>
 
-feature_call_union_bag(operand1,operand2,object) ::= <<
+feature_call_union_bag(operand1,operand2,select) ::= <<
 ($operand1$ UNION ALL
   $operand2$)
 >>
 
-feature_call_union_sequence(operand1,operand2,object) ::= <<
+feature_call_union_sequence(operand1,operand2,select) ::= <<
 ($operand1$)
   UNION
-  (SELECT $object$, (SELECT MAX(SEQNO) FROM ($operand1$)) AS SEQNO
+  (SELECT $select$, (SELECT MAX(SEQNO) FROM ($operand1$)) AS SEQNO
    FROM $operand2$)
 >>
 
-feature_call_union_set(operand1,operand2,object) ::= <<
+feature_call_union_set(operand1,operand2,select) ::= <<
 ($operand1$ UNION
   $operand2$)
 >>

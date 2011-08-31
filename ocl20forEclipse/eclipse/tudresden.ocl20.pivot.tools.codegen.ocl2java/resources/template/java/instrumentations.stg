@@ -1,4 +1,5 @@
 group javaInstrumentations;
+delimiters "$","$"
 
 // ---- TEMPLATES FOR JAVA INSTRUMENTATION ----
 // --------------------------------------------
@@ -20,14 +21,12 @@ $if(allInstanceClasses)$
     protected static java.util.Map<String, java.util.Map> allInstances = new java.util.HashMap<String, java.util.Map>();
 
     $allInstanceClasses:allInstancesAdvice(); separator = "\n\n"$
-
 $endif$
 
 $if(isNewClasses)$
     protected java.util.Map<Object, Object> newInstances = new java.util.WeakHashMap<Object, Object>();
 
     $isNewClasses:newInstancesAdvice(); separator = "\n\n"$
-
 $endif$
 
     $advice; separator="\n\n"$
@@ -192,7 +191,7 @@ protected pointcut $atName$Getter() :
 
 
 // --- Pointcut to describe all calls of a static Method ---
-staticMethodCallPointcut(class, package, method, args, argTypes, returnType, opIsConstructor) ::= <<
+staticMethodCallPointcut(class, package, method, args, argTypes, returnType, opIsConstructor=false) ::= <<
 /**
  * <p>Pointcut for all calls on {@link $package$.$class$#$method$($if(args)$$args, argTypes:{arg, type | $type$ $arg$}; separator = ", "$$endif$)}.</p>
  */
@@ -209,10 +208,8 @@ bodyInstrumentation(class, package, constCode, constExp, oclBody, method, args, 
 $if(opIsStatic)$
 $staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
 
-
 $else$
 $methodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
-
 
 $endif$
 /**
@@ -252,9 +249,7 @@ $else$
     return this.$attribute$;    
 $endif$
 
-}
-
-$endif$
+}$endif$
 $if(isStatic)$
 $staticGetterPointcut(class = class, package = package, atName = attribute, atType = attributeType)$
 
@@ -266,8 +261,7 @@ $staticGetterPointcut(class = class, package = package, atName = attribute, atTy
 before(): $attribute$Getter() {
     $constCode$
     $package$.$class$.$attribute$ = $constExp$;
-}
-$else$
+}$else$
 $getterPointcut(class = class, package = package, atName = attribute, atType = attributeType)$
 
 /**
@@ -278,8 +272,7 @@ $getterPointcut(class = class, package = package, atName = attribute, atType = a
 before($package$.$class$ $selfVariable()$): $attribute$Getter($selfVariable()$) {
     $constCode$
     $selfVariable()$.$attribute$ = $constExp$;
-}
-$endif$
+}$endif$
 >>
 
 
@@ -311,10 +304,8 @@ deriveInstrumentation(class, package, superClass, constCode, constExp, oclBody, 
 $if(attIsStatic)$
 $staticGetterPointcut(class = class, package = package, atName = attribute, atType = attributeType)$
 
-
 $else$
 $getterPointcut(class = class, package = package, atName = attribute, atType = attributeType)$
-
 
 $endif$
 /**
@@ -347,7 +338,6 @@ after($package$.$class$ $selfVariable()$) : all$class$Constructors($selfVariable
     $selfVariable()$.$attribute$ = $constExp$;
 }
 >>
-
 
 // --- Instrumentation Code for Invariants with validation variant 1 ---
 invInstrumentation1(class, package, attribute, attributeType, constCode, constExp, oclBody, errorCode, disableInheritance, calledAttPaths, calledAttNames) ::= <<
@@ -507,10 +497,8 @@ preInstrumentation(class, package, constCode, constExp, oclBody, method, args, a
 $if(opIsStatic)$
 $staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType, opIsConstructor = opIsConstructor)$
 
-
 $else$
 $methodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
-
 
 $endif$
 /**
@@ -548,15 +536,12 @@ postInstrumentation(class, package, constCode, constExp, oclBody, method, args, 
 $if(atPreTypeSet)$
 $atPreTypeSet: { type | $deepCopyMethod(class = type)$ }; separator = "\n\n"$
 
-
 $endif$
 $if(opIsStatic)$
 $staticMethodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType, opIsConstructor = opIsConstructor)$
 
-
 $else$
 $methodCallPointcut(class = class, package = package, method = method, args = args, argTypes = argTypes, returnType = returnType)$
-
 
 $endif$
 /**
@@ -583,15 +568,15 @@ $if(returnType)$$returnType$$else$void$endif$ around($if(opIsStatic)$$else$$pack
     $if(oclIsNewUsed)$
 
     // Reset Map which collects new instances.
-    this.newInstances.clear();
-    $endif$
+    this.newInstances.clear();$endif$
+
 
     $if(returnType)$
     $returnType$ $resultVariable()$;
     $resultVariable()$ = proceed($if(opIsStatic)$$else$$selfVariable()$$if(args)$, $endif$$endif$$args:{arg | $arg$};separator=", "$);
     $else$
-    proceed($if(opIsStatic)$$else$$selfVariable()$$if(args)$, $endif$$endif$$args:{arg | $arg$};separator=", "$);
-    $endif$
+    proceed($if(opIsStatic)$$else$$selfVariable()$$if(args)$, $endif$$endif$$args:{arg | $arg$};separator=", "$);$endif$
+
 
     $constCode$
     if (!$constExp$) {

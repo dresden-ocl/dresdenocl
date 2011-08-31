@@ -1,5 +1,5 @@
 group javaOperations;
-
+delimiters "$","$"
 // ---- TEMPLATES FOR JAVA OPERATIONS ----
 // ---------------------------------------
 
@@ -130,8 +130,7 @@ $sequenceUtility()$.asSequence($sourceExp$)
 asSetOperationOnOclAny(sourceExp, argsExp, elementType, resultVar) ::= <<
 $setType()$<$elementType$> $resultVar$;
 $resultVar$ = new $setTypeInitialization()$<$elementType$>();
-$resultVar$.$addOperationName()$($sourceExp$);
->>
+$resultVar$.$addOperationName()$($sourceExp$);>>
 
 // --- Bag.asSet() ---
 asSetOperationOnBag(sourceExp, argsExp) ::= <<

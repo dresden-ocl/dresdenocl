@@ -9,17 +9,18 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 public privileged aspect Membership_InvAspect_correctCard {
 
     declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.Membership implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
-    
+
     public void tudresden.ocl20.pivot.examples.royalsandloyals.Membership.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
+
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass):
     	call(void checkInvariants())
     	&& target(aClass);
-    
+
     /**
      * <p><code>Checks an invariant on the class Membership defined by the constraint
      * <code>context Membership

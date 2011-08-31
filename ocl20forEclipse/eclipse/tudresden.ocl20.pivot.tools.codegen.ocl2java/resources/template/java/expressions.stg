@@ -1,4 +1,5 @@
 group javaExpressions;
+delimiters "$","$"
 
 // ---- TEMPLATES FOR JAVA EXPRESSIONS ----
 // ----------------------------------------
@@ -11,8 +12,8 @@ $collectionType$ $collectionName$;
 $collectionName$ = new $collectionType$();
 $if(elementExps)$
 
-$elementCodes, elementExps:{code, exp | $if(code)$$code$$endif$$exp$}; separator = "\n"$$endif$
-
+$elementCodes, elementExps:{code, exp | $if(code)$$code$$endif$$exp$}; separator = "\n"$
+$endif$
 >>
 
 
@@ -51,8 +52,7 @@ $ifCode$if ($ifExp$) {
 
 // --- InvalidLiteralExp ---
 invalidLiteralExp(resultType) ::= <<
-$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()
->>
+$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()>>
 
 
 // --- IterateExp ---
@@ -305,10 +305,8 @@ $varType$ $varName$;
 $if(initCode)$
 $initCode$
 $endif$
-
 $if(initExp)$
 $varName$ = $initExp$;
-
 
 $endif$
 $inCode$
@@ -347,9 +345,7 @@ $tupleName$ = new $tupleType()$();
 $if(argNames)$
 
 $argNames, argCodes, argExps:{name, code, exp | $if(code)$$code$$endif$$tupleName$.put("$name$", $exp$);}; separator = "\n"$
-
 $endif$
-
 >>
 
 

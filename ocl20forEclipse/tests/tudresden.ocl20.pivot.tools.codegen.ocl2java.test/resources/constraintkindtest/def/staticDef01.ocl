@@ -1,7 +1,6 @@
 package testpackage
 
 context Class1
-static def: staticDefProperty01: Integer = 
-42
+static def: staticDefProperty01: Integer = 42
 
 endpackage

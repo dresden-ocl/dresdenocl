@@ -17,9 +17,9 @@ public class SQLTemplate {
 
 	public static void loadSQLTemplates() {
 
-		List<URL> streams = new LinkedList<URL>();
-		URL stream = null;
-		URL stream2 = null;
+		List<String> streams = new LinkedList<String>();
+		String stream = null;
+		String stream2 = null;
 		ITemplateGroup standardGroup = null;
 
 		try {
@@ -41,7 +41,7 @@ public class SQLTemplate {
 		try {
 			stream = getUrl("/resources/templates/MySQL.stg");
 			stream2 = getUrl("/resources/templates/MySQL-inv.stg");
-			streams = new LinkedList<URL>();
+			streams = new LinkedList<String>();
 			streams.add(stream);
 			streams.add(stream2);
 			ITemplateGroup mysqlGroup;
@@ -57,9 +57,25 @@ public class SQLTemplate {
 		}
 
 		try {
+			stream = getUrl("/resources/templates/MySQL55.stg");
+			streams = new LinkedList<String>();
+			streams.add(stream);
+			ITemplateGroup mysqlGroup;
+			mysqlGroup = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup("MySQL ab 5.5(SQL)", TemplatePlugin.getTemplateGroupRegistry().getTemplateGroup("MySQL(SQL)"));
+			mysqlGroup.addFiles(streams);
+		} catch (TemplateException e) {
+			/* FIXME Replace with logging message. */
+			e.printStackTrace();
+		} catch (IOException e) {
+			/* FIXME Replace with logging message. */
+			e.printStackTrace();
+		}
+		
+		try {
 			stream = getUrl("/resources/templates/Oracle8i.stg");
 			stream2 = getUrl("/resources/templates/Oracle8i-inv.stg");
-			streams = new LinkedList<URL>();
+			streams = new LinkedList<String>();
 			streams.add(stream);
 			streams.add(stream2);
 			ITemplateGroup oracleGroup;
@@ -76,7 +92,7 @@ public class SQLTemplate {
 
 		try {
 			stream = getUrl("/resources/templates/PostgreSQL81.stg");
-			streams = new LinkedList<URL>();
+			streams = new LinkedList<String>();
 			streams.add(stream);
 			streams.add(stream2);
 			ITemplateGroup postgreGroup;
@@ -100,7 +116,7 @@ public class SQLTemplate {
 	 *            The path of the resource.
 	 * @throws IOException
 	 */
-	private static URL getUrl(String path) throws IOException {
+	private static String getUrl(String path) throws IOException {
 
 		URL fileLocation;
 		File file;
@@ -133,6 +149,6 @@ public class SQLTemplate {
 						+ SQLTemplatePlugin.ID + "' was not found.");
 		}
 
-		return file.toURI().toURL();
+		return file.getAbsolutePath();
 	}
 }

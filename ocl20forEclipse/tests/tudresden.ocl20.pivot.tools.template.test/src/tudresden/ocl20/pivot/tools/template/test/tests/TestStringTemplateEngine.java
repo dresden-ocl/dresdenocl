@@ -32,7 +32,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.LinkedList;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
@@ -67,11 +66,11 @@ public class TestStringTemplateEngine extends AbstractDresdenOclTest {
 	public void run1() throws MalformedURLException, IOException {
 
 		// Create a List with templates and add the first template
-		LinkedList<URL> groups = new LinkedList<URL>();
+		LinkedList<String> groups = new LinkedList<String>();
 
 		groups.add(AbstractDresdenOclTest
 				.getFile("/resources/templates/testGeneral.stg",
-						TemplateTestPlugin.ID).toURI().toURL());
+						TemplateTestPlugin.ID).getAbsolutePath());
 
 		// Create DeclarativeTemplateEngine with the List containing one
 		// template
@@ -100,7 +99,7 @@ public class TestStringTemplateEngine extends AbstractDresdenOclTest {
 		// Add the second template to the List of templates and create a new
 		groups.add(AbstractDresdenOclTest
 				.getFile("/resources/templates/testSpecific.stg",
-						TemplateTestPlugin.ID).toURI().toURL());
+						TemplateTestPlugin.ID).getAbsolutePath());
 		ITemplateGroup specific = null;
 		try {
 			specific = TemplatePlugin.getTemplateGroupRegistry()

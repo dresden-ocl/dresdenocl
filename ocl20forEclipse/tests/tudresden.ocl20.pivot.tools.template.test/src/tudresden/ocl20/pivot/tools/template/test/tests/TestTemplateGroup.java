@@ -35,7 +35,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -69,10 +68,10 @@ public class TestTemplateGroup {
 	@BeforeClass
 	public static void class_setup() throws MalformedURLException, IOException {
 
-		LinkedList<URL> groups = new LinkedList<URL>();
+		LinkedList<String> groups = new LinkedList<String>();
 		groups.add(AbstractDresdenOclTest
 				.getFile("/resources/templates/testGeneral.stg",
-						TemplateTestPlugin.ID).toURI().toURL());
+						TemplateTestPlugin.ID).getAbsolutePath());
 		tempGroup = TemplatePlugin.getTemplateGroupRegistry()
 				.getTemplateGroups();
 		for (ITemplateGroup tg : tempGroup) {
@@ -222,9 +221,9 @@ public class TestTemplateGroup {
 		ITemplate temp = general.getTemplate("specific");
 		assertEquals("generalTemplate", temp.toString());
 
-		URL secondTemp = AbstractDresdenOclTest
+		String secondTemp = AbstractDresdenOclTest
 				.getFile("/resources/templates/testSpecific.stg",
-						TemplateTestPlugin.ID).toURI().toURL();
+						TemplateTestPlugin.ID).getAbsolutePath();
 		ITemplateGroup testSuper1 = null;
 		try {
 			testSuper1 = TemplatePlugin.getTemplateGroupRegistry()
@@ -246,7 +245,7 @@ public class TestTemplateGroup {
 					.addDefaultTemplateGroup("TestSuper2", testSuper1);
 			testSuper2.addFile(AbstractDresdenOclTest
 					.getFile("/resources/templates/testGeneral.stg",
-							TemplateTestPlugin.ID).toURI().toURL());
+							TemplateTestPlugin.ID).getAbsolutePath());
 		} catch (TemplateException e) {
 			fail("Can't set TemplateGroup testSuper2");
 		}

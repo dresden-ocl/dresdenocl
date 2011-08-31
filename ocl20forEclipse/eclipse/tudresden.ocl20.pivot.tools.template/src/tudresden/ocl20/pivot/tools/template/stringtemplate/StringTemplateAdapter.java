@@ -25,6 +25,7 @@
 package tudresden.ocl20.pivot.tools.template.stringtemplate;
 
 import org.antlr.stringtemplate.StringTemplate;
+import org.stringtemplate.v4.ST;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 
@@ -43,7 +44,7 @@ public class StringTemplateAdapter implements ITemplate {
 	 * The adapted template object.
 	 * </p>
 	 */
-	private StringTemplate template;
+	private ST template;
 
 	/**
 	 * <p>
@@ -51,9 +52,9 @@ public class StringTemplateAdapter implements ITemplate {
 	 * </p>
 	 * 
 	 * @param template
-	 *          The adapted {@link StringTemplate} object.
+	 *          The adapted {@link ST} object.
 	 */
-	public StringTemplateAdapter(StringTemplate template) {
+	public StringTemplateAdapter(ST template) {
 
 		this.template = template;
 	}
@@ -70,22 +71,24 @@ public class StringTemplateAdapter implements ITemplate {
 	 *          The value of the attribute which shall be set.
 	 */
 	public void setAttribute(String name, Object value) {
-
-		template.setAttribute(name, value);
+		try {
+			template.add(name, value);
+		} catch (IllegalArgumentException e) {
+			 throw new IllegalArgumentException("No such attribute "+name+" in template "+getName(),e);
+		}
 	}
 
 	/**
 	 * @return The evaluated template as a {@link String}.
 	 */
 	public String toString() {
-
-		return template.toString();
+		String s =  template.render();
+		
+		return s;
 	}
 
 	public void reset() {
-
-		template.reset();
-
+		template = template.groupThatCreatedThisInstance.getInstanceOf(getName());
 	}
 
 	public String getName() {

@@ -25,15 +25,16 @@
 
 package tudresden.ocl20.pivot.tools.template.stringtemplate;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.antlr.stringtemplate.StringTemplateGroup;
-import org.antlr.stringtemplate.language.DefaultTemplateLexer;
+import org.stringtemplate.v4.ST;
+import org.stringtemplate.v4.STGroup;
+import org.stringtemplate.v4.STGroupFile;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
@@ -55,7 +56,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	/**
 	 * The adapted template group.
 	 */
-	private StringTemplateGroup templateGroup;
+	private STGroup templateGroup;
 
 	/**
 	 * The name of the TemplateEngine
@@ -82,7 +83,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * @throws TemplateException
 	 *             Thrown, if a given File name can not be found.
 	 */
-	public StringTemplateEngine(LinkedList<URL> groupFiles)
+	public StringTemplateEngine(LinkedList<String> groupFiles)
 			throws TemplateException {
 
 		this();
@@ -101,7 +102,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	 * @throws TemplateException
 	 *             Thrown, if a given File name can not be found.
 	 */
-	public StringTemplateEngine(URL file) throws TemplateException {
+	public StringTemplateEngine(String file) throws TemplateException {
 
 		this();
 		addFile(file);
@@ -113,8 +114,8 @@ public class StringTemplateEngine implements ITemplateEngine {
 	public ITemplate getTemplate(String name) {
 
 		try {
-			StringTemplate stringTemplate = templateGroup.getInstanceOf(name);
-
+			ST stringTemplate = templateGroup.getInstanceOf(name);
+			
 			if (stringTemplate != null)
 				return new StringTemplateAdapter(stringTemplate);
 			else
@@ -146,60 +147,38 @@ public class StringTemplateEngine implements ITemplateEngine {
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFile(URL)
 	 */
-	public void addFile(URL file) throws TemplateException {
+	public void addFile(String file) throws TemplateException {
 
-		LinkedList<URL> files = new LinkedList<URL>();
-		files.add(file);
-		addFiles(files);
+		addFiles(Arrays.asList(file));
 
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFiles(LinkedList)
 	 */
-	public void addFiles(LinkedList<URL> files) throws TemplateException {
+	public void addFiles(List<String> files) throws TemplateException {
 
 		assert (files.size() > 0);
 
-		Reader groupReader = null;
-		StringTemplateGroup lastGroup;
-
-		try {
-			groupReader = new InputStreamReader(files.getLast().openStream());
-		} catch (IOException e) {
-			throw new TemplateException("Files not correctly added");
-		}
-
+		STGroup lastGroup;
+		
 		if (templateGroup == null) {
-			templateGroup = new StringTemplateGroup(groupReader,
-					DefaultTemplateLexer.class);
+			templateGroup = new STGroupFile(files.get(0));
 
 		} else {
 			lastGroup = templateGroup;
-			templateGroup = new StringTemplateGroup(groupReader,
-					DefaultTemplateLexer.class);
-			templateGroup.setSuperGroup(lastGroup);
+			templateGroup = new STGroupFile(files.get(0));
+			templateGroup.importTemplates(lastGroup);
 		}
 
 		lastGroup = templateGroup;
-
 		for (int i = 1; i < files.size(); i++) {
 
-			StringTemplateGroup superGroup;
-			URL templatePath;
+			STGroupFile superGroup;
 
-			templatePath = files.get(files.size() - i - 1);
+			superGroup = new STGroupFile(files.get(i));
 
-			try {
-				groupReader = new InputStreamReader(templatePath.openStream());
-			} catch (IOException e) {
-				throw new TemplateException("Files not correctly added");
-			}
-
-			superGroup = new StringTemplateGroup(groupReader,
-					DefaultTemplateLexer.class);
-
-			lastGroup.setSuperGroup(superGroup);
+			superGroup.importTemplates(lastGroup);
 			lastGroup = superGroup;
 		}
 

@@ -13,7 +13,7 @@ public privileged aspect CustomerCard_InvAspect_checkDates {
      */
     protected pointcut allCustomerCardConstructors(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass):
         execution(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.new(..)) && this(aClass);
-    
+
     /**
      * <p>Pointcut for all changes of the attribute {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#validFrom}.</p>
      */
@@ -32,6 +32,7 @@ public privileged aspect CustomerCard_InvAspect_checkDates {
     protected pointcut allSetters(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) :
     	validFromSetter(aClass)
     	|| validThruSetter(aClass);
+
     /**
      * <p><code>Checks an invariant on the class CustomerCard defined by the constraint
      * <code>context CustomerCard

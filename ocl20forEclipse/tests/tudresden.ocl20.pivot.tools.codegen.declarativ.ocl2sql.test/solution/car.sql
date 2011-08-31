@@ -94,7 +94,7 @@ INNER JOIN ASS_ownedCars_owner AS temp5 ON temp4.FK_owner = temp5.FK_owner
 -- Expression: inv carOcl09: Car.allInstances().owner.ownedCars->collect(x|x.owner.ownedCars.color->size())->sum() = 1
 CREATE OR REPLACE VIEW carOcl09 AS
 (SELECT * FROM OV_Car AS self
-WHERE NOT (((SELECT IFNULL(SUM(IF(temp1.color IS NULL,NULL,1)),0)
+WHERE NOT (((SELECT IFNULL(SUM(IFNULL(COUNT(temp1.color),0)),0)
 FROM OV_Car AS temp1
 INNER JOIN ASS_ownedCars_owner AS temp2 ON temp1.PK_Car = temp2.FK_ownedCars
 INNER JOIN ASS_ownedCars_owner AS temp3 ON temp2.FK_owner = temp3.FK_owner

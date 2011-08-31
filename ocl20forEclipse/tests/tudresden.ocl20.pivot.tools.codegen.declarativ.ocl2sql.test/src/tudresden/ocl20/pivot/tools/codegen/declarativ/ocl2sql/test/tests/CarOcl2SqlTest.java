@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -57,9 +56,8 @@ public class CarOcl2SqlTest {
 				"solution/car-nop.sql", Ocl2SqlTestPlugin.PLUGIN_ID)
 				.getAbsolutePath());
 
-		URL stream = AbstractDresdenOclTest
-				.getFile("/template/standard.stg", Ocl2SqlTestPlugin.PLUGIN_ID)
-				.toURI().toURL();
+		String stream = AbstractDresdenOclTest
+				.getFile("/template/standard.stg", Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath();
 		ITemplateGroup standardGroup = null;
 		try {
 			standardGroup = TemplatePlugin.getTemplateGroupRegistry()

@@ -29,7 +29,7 @@ public class TemplatePlugin extends Plugin {
 
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreMetamodelPlugin}.
+	 * Creates a new {@link TemplatePlugin}.
 	 * </p>
 	 */
 	public TemplatePlugin() {

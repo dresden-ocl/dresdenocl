@@ -1,0 +1,7 @@
+group mysql;
+
+createTable(tablename, columns) ::= <<
+CREATE TABLE `<tablename>` (
+<columns>
+) ENGINE = InnoDB;
+>>

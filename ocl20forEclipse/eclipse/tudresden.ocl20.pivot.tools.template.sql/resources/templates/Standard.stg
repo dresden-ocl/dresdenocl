@@ -1,4 +1,5 @@
 group sql;
+delimiters "$","$"
 
 typeMap ::= [
         "Integer":"INT",
@@ -29,8 +30,7 @@ selectStmt(columns, tables, where) ::= <<
 SELECT $columns$
 FROM $tables$
 $if(where)$
-WHERE $where$
-$endif$
+WHERE $where$$endif$
 >>
 
 createView(viewname, body) ::= <<

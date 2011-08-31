@@ -4,7 +4,6 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
@@ -34,9 +33,9 @@ public class SingleOcl2Sql_notoptimizeTest extends SingleOcl2SqlTest {
 				"solution/view_nop.sql", Ocl2SqlTestPlugin.PLUGIN_ID)
 				.getAbsolutePath());
 
-		URL stream = AbstractDresdenOclTest
+		String stream = AbstractDresdenOclTest
 				.getFile("/template/standard.stg", Ocl2SqlTestPlugin.PLUGIN_ID)
-				.toURI().toURL();
+				.getAbsolutePath();
 		ITemplateGroup standardGroup = null;
 		try {
 			standardGroup = TemplatePlugin.getTemplateGroupRegistry()

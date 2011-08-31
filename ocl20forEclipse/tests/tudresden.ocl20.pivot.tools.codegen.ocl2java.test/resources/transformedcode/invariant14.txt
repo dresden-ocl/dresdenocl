@@ -13,18 +13,19 @@ public privileged aspect LoyaltyAccount_InvAspect_oneOwner {
      */
     protected pointcut allLoyaltyAccountConstructors(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
         execution(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.new(..)) && this(aClass);
-    
+
     /**
      * <p>Pointcut for all changes of the attribute {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#transactions}.</p>
      */
     protected pointcut transactionsSetter(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) :
         set(* tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.transactions) && target(aClass); 
-    
+
     /**
      * <p>Pointcut to collect all attributeSetters.</p>
      */
     protected pointcut allSetters(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) :
     	transactionsSetter(aClass);
+
     /**
      * <p><code>Checks an invariant on the class LoyaltyAccount defined by the constraint
      * <code>context LoyaltyAccount

@@ -2,6 +2,7 @@ package tudresden.ocl20.pivot.tools.template.test.tests;
 
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.List;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
@@ -25,14 +26,14 @@ public class SmallTemplateEngine implements ITemplateEngine {
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFile(URL)
 	 */
-	public void addFile(URL file) throws TemplateException {
+	public void addFile(String file) throws TemplateException {
 
 	}
 
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFiles(LinkedList)
 	 */
-	public void addFiles(LinkedList<URL> files) throws TemplateException {
+	public void addFiles(List<String> files) throws TemplateException {
 
 	}
 

@@ -9,17 +9,18 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 public privileged aspect ProgramPartner_InvAspect_nrOfParticipants {
 
     declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
-    
+
     public void tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
+
     /**
      * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner#checkInvariants()}.</p>
      */
     protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass):
     	call(void checkInvariants())
     	&& target(aClass);
-    
+
     /**
      * <p><code>Checks an invariant on the class ProgramPartner defined by the constraint
      * <code>context ProgramPartner

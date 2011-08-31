@@ -2115,15 +2115,15 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 
 		/* Try to load the template engine. */
 		try {
-			LinkedList<URL> templatePaths = new LinkedList<URL>();
+			LinkedList<String> templatePaths = new LinkedList<String>();
 
-			templatePaths.add(this.getUrl(TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
-			templatePaths.add(this.getUrl(TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
-			templatePaths.add(this.getUrl(TEMPLATE_PATH
+			templatePaths.add(getUrl(TEMPLATE_PATH + JAVA_TEMPLATE_FILE));
+			templatePaths.add(getUrl(TEMPLATE_PATH + TYPE_TEMPLATE_FILE));
+			templatePaths.add(getUrl(TEMPLATE_PATH
 					+ OPERATION_TEMPLATE_FILE));
-			templatePaths.add(this.getUrl(TEMPLATE_PATH
+			templatePaths.add(getUrl(TEMPLATE_PATH
 					+ EXPRESSION_TEMPLATE_FILE));
-			templatePaths.add(this.getUrl(TEMPLATE_PATH
+			templatePaths.add(getUrl(TEMPLATE_PATH
 					+ INSTRUMENTATION_TEMPLATE_FILE));
 
 			TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
@@ -2163,7 +2163,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 *            The path of the resource.
 	 * @throws IOException
 	 */
-	private URL getUrl(String path) throws IOException {
+	private String getUrl(String path) throws IOException {
 
 		URL fileLocation;
 		File file;
@@ -2196,7 +2196,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 						+ Ocl2JavaPlugin.PLUGIN_ID + "' was not found.");
 		}
 
-		return file.toURI().toURL();
+		return file.getAbsolutePath();
 	}
 
 	/**

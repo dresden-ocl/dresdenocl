@@ -13,13 +13,13 @@ public privileged aspect Customer_InvAspect_ofAge {
      */
     protected pointcut allCustomerConstructors(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass):
         execution(tudresden.ocl20.pivot.examples.royalsandloyals.Customer.new(..)) && this(aClass);
-    
+
     /**
      * <p>Describes all public methods of the class {@link tudresden.ocl20.pivot.examples.royalsandloyals.Customer}.</p>
      */
     protected pointcut allCustomerPublicMethods(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass):
         execution(public * tudresden.ocl20.pivot.examples.royalsandloyals.Customer.*(..)) && this(aClass);
-    
+
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
@@ -38,7 +38,7 @@ public privileged aspect Customer_InvAspect_ofAge {
         }
         // no else.
     }
-    
+
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer
@@ -57,7 +57,7 @@ public privileged aspect Customer_InvAspect_ofAge {
         }
         // no else.
     }
-    
+
     /**
      * <p><code>Checks an invariant on the class Customer defined by the constraint
      * <code>context Customer

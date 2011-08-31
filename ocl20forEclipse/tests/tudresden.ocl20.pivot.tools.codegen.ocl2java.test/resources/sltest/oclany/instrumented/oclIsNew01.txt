@@ -25,7 +25,7 @@ public privileged aspect Class1_PostAspect_postOperation03 {
     protected pointcut postOperation03Caller(testpackage.Class1 aClass):
     	call(* testpackage.Class1.postOperation03())
     	&& target(aClass);
-    
+
     /**
      * <p>Checks a postcondition for the operation {@link Class1#postOperation03()} defined by the constraint
      * <code>context Class1::postOperation03() : testpackage.Class1
@@ -34,23 +34,23 @@ public privileged aspect Class1_PostAspect_postOperation03 {
     testpackage.Class1 around(testpackage.Class1 aClass): postOperation03Caller(aClass) {
         /* Disable this constraint for subclasses of Class1. */
         if (aClass.getClass().getCanonicalName().equals("testpackage.Class1")) {
-    
+
         // Reset Map which collects new instances.
         this.newInstances.clear();
-    
+
         testpackage.Class1 result;
         result = proceed(aClass);
-    
+  
         if (!this.newInstances.containsKey(result)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'testOclIsNew' (post testOclIsNew: result.oclIsNew()) was violated for Object " + aClass.toString() + ".";
         	throw new RuntimeException(msg);
         }
         // no else.
-    
+
         return result;
         }
-    
+ 
         else {
             return proceed(aClass);
         }

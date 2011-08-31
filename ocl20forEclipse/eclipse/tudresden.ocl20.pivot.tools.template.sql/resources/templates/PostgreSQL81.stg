@@ -14,17 +14,17 @@ typeMap ::= [
 ]
 
 createType(type) ::= <<
-$typeMap.(type)$
+<typeMap.(type)>
 >>
 
 createSubType(type) ::= <<
-type = '$type$'
+type = '<type>'
 >>
 
 selectStmt(columns, tables, where) ::= <<
-SELECT $columns; separator=", "$ 
-FROM $tables; separator=", "$
-$if(where)$
-WHERE $where$
-$endif$
+SELECT <columns; separator=", ">
+FROM <tables; separator=", ">
+<if(where)>
+WHERE <where>
+<endif>
 >>
