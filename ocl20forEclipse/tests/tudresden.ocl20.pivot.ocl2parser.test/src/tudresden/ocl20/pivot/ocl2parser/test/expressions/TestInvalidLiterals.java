@@ -98,7 +98,7 @@ public class TestInvalidLiterals {
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
-		List<Constraint> constraints = testPerformer.parseFile(oclFileName);
+		List<Constraint> constraints = testPerformer.parseFile(oclFileName, true);
 		assertNotNull(constraints);
 		assertEquals(1, constraints.size());
 
@@ -114,11 +114,11 @@ public class TestInvalidLiterals {
 		assertNotNull(op);
 
 		/*
-		 * Operation should be owned by OclInteger althoug invoked on
-		 * OclInvalid.
+		 * Change(mt): The type of the whole expression is InvalidType which should 
+		 * conform to the expected IntegerType.
 		 */
 		assertEquals("+", op.getName());
-		assertEquals(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
-				.getOclInteger(), op.getOwner());
+		assertTrue(op.getType().conformsTo(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+				.getOclInteger()));
 	}
 }
