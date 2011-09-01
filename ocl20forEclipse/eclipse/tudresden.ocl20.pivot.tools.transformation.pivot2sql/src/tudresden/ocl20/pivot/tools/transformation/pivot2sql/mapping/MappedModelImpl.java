@@ -21,7 +21,6 @@ public class MappedModelImpl implements IMappedModel {
 
 	private static final String NO_CLASS_FOR_NAME =
 			"There is no class for the given name ";
-	private int id = 0;
 	private Map<String, IMappedClass> name2mClass;
 
 	/**
@@ -69,22 +68,4 @@ public class MappedModelImpl implements IMappedModel {
 		name2mClass.put(name, mClass);
 	}
 
-	/**
-	 * Returns a unique alias which may be used in the declarative target language
-	 * 
-	 * @return unique alias which may be used in the declarative target language
-	 */
-	public String getUniqueAlias() {
-
-		id++;
-		if (id == 1) {
-			return "self";
-		}
-		return "alias" + id;
-	}
-
-	public void resetUniqueAlias() {
-		id = 0;
-	}
-	
 }

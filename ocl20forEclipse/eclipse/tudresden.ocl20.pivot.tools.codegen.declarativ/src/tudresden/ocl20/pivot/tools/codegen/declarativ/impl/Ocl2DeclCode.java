@@ -73,9 +73,10 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.code.ISQLCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.code.SQLCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.code.SQLString;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.ICode;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.IComplexCode;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.impl.Code;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.code.impl.CodeString;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedClass;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
@@ -108,7 +109,7 @@ import tudresden.ocl20.pivot.tools.template.ITemplate;
  * @see tudresden.ocl20.codegen.decl.mapping.IMappedClass
  * @see tudresden.ocl20.codegen.decl.mapping.Guide
  */
-public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
+public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		IOcl2DeclCode {
 
 	/** The Logger for this class. */
@@ -127,6 +128,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * This map mapped a variable Name to a Guide.
 	 */
 	private Map<String, Guide> variableMap;
+	
+	@Deprecated
+	private int uniqueAlias;
 
 	/**
 	 * If the variable true, than generated no allInstances code.
@@ -138,7 +142,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	/**
 	 * 
 	 */
-	private List<ISQLCode> commonTableExpressions;
+	private List<ICode> commonTableExpressions;
 
 	private String constraintName;
 
@@ -208,7 +212,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		navigationMap = new HashMap<OclExpression, List<Guide>>();
 		variableMap = new HashMap<String, Guide>();
 		useVariable = false;
-		commonTableExpressions = new LinkedList<ISQLCode>();
+		commonTableExpressions = new LinkedList<ICode>();
 		constraintName = "";
 		closure = false;
 	}
@@ -294,7 +298,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 			constraintName = getUniqueConstraintName();
 		}
 
-		ISQLCode bodyExpression;
+		ICode bodyExpression;
 		Expression anExpression;
 
 		anExpression = aConstraint.getSpecification();
@@ -346,23 +350,23 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseBooleanLiteralExp(BooleanLiteralExp)
 	 */
-	public ISQLCode caseBooleanLiteralExp(BooleanLiteralExp aBooleanLiteralExp) {
+	public ICode caseBooleanLiteralExp(BooleanLiteralExp aBooleanLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseBooleanLiteralExp(BooleanLiteralExp) - start");
 		}
 		// no else.
 
-		ISQLCode template;
+		IComplexCode template;
 
 		if (aBooleanLiteralExp.isBooleanSymbol()) {
 			template =
-					new SQLCode(mySettings.getTemplateGroup().getTemplate(
+					new Code(mySettings.getTemplateGroup().getTemplate(
 							"literal_boolean_true"));
 		}
 		else {
 			template =
-					new SQLCode(mySettings.getTemplateGroup().getTemplate(
+					new Code(mySettings.getTemplateGroup().getTemplate(
 							"literal_boolean_false"));
 		}
 		if (LOGGER.isDebugEnabled()) {
@@ -380,12 +384,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * caseCollectionLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
 	 */
-	public ISQLCode caseCollectionLiteralExp(
+	public ICode caseCollectionLiteralExp(
 			CollectionLiteralExp anCollectionLiteralExp) {
 
 		List<CollectionLiteralPart> parts = anCollectionLiteralExp.getPart();
 		String templateName = "";
-		ISQLCode template;
+		IComplexCode template;
 
 		// determine template to use depending on collection kind
 		if (anCollectionLiteralExp.getKind() == CollectionKind.BAG) {
@@ -403,11 +407,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		// get template for items in the collection
 		template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(templateName));
+				new Code(mySettings.getTemplateGroup().getTemplate(templateName));
 
 		// parameterize the template engine
 		for (CollectionLiteralPart clp : parts) {
-			template.addElement("items",
+			template.addCode("items",
 					doSwitch((OclExpression) ((CollectionItem) clp).getItem()));
 		}
 
@@ -420,19 +424,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseEnumLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
 	 */
-	public ISQLCode caseEnumLiteralExp(EnumLiteralExp anEnumLiteralExp) {
+	public ICode caseEnumLiteralExp(EnumLiteralExp anEnumLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseEnumLiteralExp(EnumLiteralExp) - start");
 		}
 		// no else.
 
-		ISQLCode template;
+		IComplexCode template;
 
 		template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate("literal_enum"));
+				new Code(mySettings.getTemplateGroup().getTemplate("literal_enum"));
 
-		template.addElement("value", new SQLString(anEnumLiteralExp
+		template.addCode("value", new CodeString(anEnumLiteralExp
 				.getReferredEnumLiteral().getName()));
 
 		if (LOGGER.isDebugEnabled()) {
@@ -450,7 +454,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseExpressionInOcl
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
 	 */
-	public ISQLCode caseExpressionInOcl(ExpressionInOcl anExpressionInOcl) {
+	public ICode caseExpressionInOcl(ExpressionInOcl anExpressionInOcl) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseExpressionInOcl(ExpressionInOcl) - start");
@@ -463,12 +467,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		Guide classGuide =
 				getSettings().getMappedModel().getClass(constrainedType.getName())
 						.getClassGuide();
-		classGuide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+		classGuide.setAlias(getUniqueAlias());
 		classGuide.reset();
 		variableMap.put(v.getName(), classGuide);
 
 		/* Transform bodyCode. */
-		ISQLCode bodyExpression =
+		ICode bodyExpression =
 				doSwitch((EObject) anExpressionInOcl.getBodyExpression());
 
 		if (LOGGER.isDebugEnabled()) {
@@ -485,22 +489,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * @see tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
 	 */
-	public ISQLCode caseIfExp(IfExp anIfExp) {
+	public ICode caseIfExp(IfExp anIfExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIfExp(IfExp) - start");
 		}
 		// no else.
 
-		ISQLCode template;
+		IComplexCode template;
 
 		OclExpression ifExp;
 		OclExpression thenExp;
 		OclExpression elseExp;
 
-		ISQLCode ifCode;
-		ISQLCode thenCode;
-		ISQLCode elseCode;
+		ICode ifCode;
+		ICode thenCode;
+		ICode elseCode;
 
 		ifExp = anIfExp.getCondition();
 		thenExp = anIfExp.getThenExpression();
@@ -513,10 +517,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		/* Transform ifExp. */
 		template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate("if_expression"));
-		template.addElement("if_branch", ifCode);
-		template.addElement("then_branch", thenCode);
-		template.addElement("else_branch", elseCode);
+				new Code(mySettings.getTemplateGroup().getTemplate("if_expression"));
+		template.addCode("if_branch", ifCode);
+		template.addCode("then_branch", thenCode);
+		template.addCode("else_branch", elseCode);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIfExp(IfExp)" + " - end - return value="
@@ -533,22 +537,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseIntegerLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
 	 */
-	public ISQLCode caseIntegerLiteralExp(IntegerLiteralExp anIntegerLiteralExp) {
+	public ICode caseIntegerLiteralExp(IntegerLiteralExp anIntegerLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIntegerLiteralExp(IntegerLiteralExp) - start");
 		}
 		// no else.
 
-		ISQLCode template;
+		IComplexCode template;
 
 		template =
-				new SQLCode(mySettings.getTemplateGroup()
+				new Code(mySettings.getTemplateGroup()
 						.getTemplate("literal_integer"));
 
-		template.addElement(
+		template.addCode(
 				"value",
-				new SQLString(new Integer(anIntegerLiteralExp.getIntegerSymbol())
+				new CodeString(new Integer(anIntegerLiteralExp.getIntegerSymbol())
 						.toString()));
 
 		if (LOGGER.isDebugEnabled()) {
@@ -566,7 +570,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseIteratorExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
 	 */
-	public ISQLCode caseIteratorExp(IteratorExp anIteratorExp) {
+	public ICode caseIteratorExp(IteratorExp anIteratorExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseIteratorExp(IteratorExp) - start - Iterator"
@@ -578,12 +582,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 			throw new UnsupportedOperationException(
 					"The iterate operation is not supported.");
 		}
-		ISQLCode result = null;
+		ICode result = null;
 
 		OclExpression sourceExp = anIteratorExp.getSource();
 		OclExpression bodyExp = anIteratorExp.getBody();
 		// get code for source expression
-		ISQLCode sourceCode = doSwitch(sourceExp);
+		IComplexCode sourceCode = (IComplexCode) doSwitch(sourceExp);
 		List<Guide> srcGuides = navigationMap.get(sourceExp);
 
 		Guide guideSrc = srcGuides.get(0);
@@ -605,8 +609,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 				variableMap.put(v.getName(), varGuide);
 				if (anIteratorExp.getIterator().size() > 1) {
 					varGuide =
-							new Guide(guideSrc.isNavigation(), mySettings.getMappedModel()
-									.getUniqueAlias());
+							new Guide(guideSrc.isNavigation(), getUniqueAlias());
 					varGuide.add(guideSrc.getSelect(), guideSrc.getFrom(),
 							guideSrc.getWhere());
 					varGuide.reset();
@@ -615,7 +618,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 			boolean saveAllInstances = useVariable;
 			useVariable = false;
-			ISQLCode arg = doSwitch(bodyExp);
+			IComplexCode arg = (IComplexCode) doSwitch(bodyExp);
 			useVariable = saveAllInstances;
 
 			if (operationName.equals("collect")) {
@@ -655,7 +658,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * caseOperationCallExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
-	public ISQLCode caseOperationCallExp(OperationCallExp anOperationCallExp) {
+	public ICode caseOperationCallExp(OperationCallExp anOperationCallExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
@@ -664,13 +667,13 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		// no else.
 
-		ISQLCode resultExp;
+		ICode resultExp;
 
 		OclExpression sourceExp;
-		ISQLCode sourceCode;
+		ICode sourceCode;
 
 		List<OclExpression> arguments = anOperationCallExp.getArgument();
-		List<ISQLCode> args = new ArrayList<ISQLCode>();
+		List<ICode> args = new ArrayList<ICode>();
 		for (OclExpression oe : arguments) {
 			args.add(doSwitch(oe));
 		}
@@ -702,14 +705,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #casePropertyCallExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
 	 */
-	public ISQLCode casePropertyCallExp(PropertyCallExp anPropertyCallExp) {
+	public ICode casePropertyCallExp(PropertyCallExp anPropertyCallExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("casePropertyCallExp(PropertyCallExp) - start");
 		}
 
 		List<Guide> guides = assignGuides(anPropertyCallExp);
-		ISQLCode result;
+		ICode result;
 		result =
 				handlePropProperty(anPropertyCallExp.getReferredProperty(), guides);
 
@@ -726,21 +729,21 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseRealLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
 	 */
-	public ISQLCode caseRealLiteralExp(RealLiteralExp aRealLiteralExp) {
+	public ICode caseRealLiteralExp(RealLiteralExp aRealLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseRealLiteralExp(RealLiteralExp) - start");
 		}
 		// no else.
 
-		ISQLCode template;
+		IComplexCode template;
 
 		template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate("literal_real"));
+				new Code(mySettings.getTemplateGroup().getTemplate("literal_real"));
 
 		// parameterize the template engine
-		template.addElement("value",
-				new SQLString(new Double(aRealLiteralExp.getRealSymbol()).toString()));
+		template.addCode("value",
+				new CodeString(new Double(aRealLiteralExp.getRealSymbol()).toString()));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseRealLiteralExp(RealLiteralExp)"
@@ -757,19 +760,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseStringLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
 	 */
-	public ISQLCode caseStringLiteralExp(StringLiteralExp aStringLiteralExp) {
+	public ICode caseStringLiteralExp(StringLiteralExp aStringLiteralExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseStringLiteralExp(StringLiteralExp) - start");
 		}
 		// no else.
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate("literal_string"));
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate("literal_string"));
 
 		// parameterize the template engine
-		template.addElement("value",
-				new SQLString(aStringLiteralExp.getStringSymbol()));
+		template.addCode("value",
+				new CodeString(aStringLiteralExp.getStringSymbol()));
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseStringLiteralExp(StringLiteralExp)"
@@ -786,10 +789,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * caseTypeLiteralExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
 	 */
-	public ISQLCode caseTypeLiteralExp(TypeLiteralExp anTypeLiteralExp) {
+	public ICode caseTypeLiteralExp(TypeLiteralExp anTypeLiteralExp) {
 
 		assignClassGuide(anTypeLiteralExp, anTypeLiteralExp.getReferredType());
-		return new SQLString(anTypeLiteralExp.getReferredType().getName());
+		return new CodeString(anTypeLiteralExp.getReferredType().getName());
 	}
 
 	/*
@@ -798,7 +801,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * #caseVariableExp
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
 	 */
-	public ISQLCode caseVariableExp(VariableExp aVariableExp) {
+	public ICode caseVariableExp(VariableExp aVariableExp) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("caseVariableExp(VariableExp) - start - Variable:"
@@ -806,11 +809,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		// no else.
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"literal_variable"));
 
-		template.addElement("value", createObjectValue(variableMap.get(aVariableExp
+		template.addCode("value", createObjectValue(variableMap.get(aVariableExp
 				.getReferredVariable().getName())));
 
 		if (aVariableExp.getType() instanceof Type
@@ -847,8 +850,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the code of the argument expression (argument 2)
 	 * @return declarative code fragment for the arithmetic operation
 	 */
-	protected ISQLCode handleArithmeticOperation(String name,
-			ISQLCode sourceCode, ISQLCode firstArg) {
+	protected ICode handleArithmeticOperation(String name,
+			ICode sourceCode, ICode firstArg) {
 
 		return createTwoOperandOperation("arithmetic_expression_" + name,
 				sourceCode, firstArg);
@@ -871,12 +874,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the arguments of the operation
 	 * @return the generated code
 	 */
-	protected ISQLCode handleAllOperations(String operationName, Type type,
-			OclExpression sourceExp, ISQLCode sourceCode, List<ISQLCode> args,
+	protected ICode handleAllOperations(String operationName, Type type,
+			OclExpression sourceExp, ICode sourceCode, List<ICode> args,
 			List<OclExpression> arguments) {
 
-		ISQLCode resultExp = null;
-		ISQLCode firstArg = null;
+		ICode resultExp = null;
+		ICode firstArg = null;
 		if (args.size() > 0) {
 			firstArg = args.get(0);
 		}
@@ -945,13 +948,13 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 
 		// collection related operations - BASIC VALUE
 		else if (operationName.equals("count")) {
-			resultExp = handleCollCount(sourceCode, firstArg);
+			resultExp = handleCollCount((IComplexCode) sourceCode, firstArg);
 		}
 		else if ((operationName.equals("size") && !(sourceExp.getType() instanceof PrimitiveType))) {
-			resultExp = handleCollObjectChange("size", sourceCode);
+			resultExp = handleCollObjectChange("size", (IComplexCode) sourceCode);
 		}
 		else if (operationName.equals("sum")) {
-			resultExp = handleCollObjectChange("sum", sourceCode);
+			resultExp = handleCollObjectChange("sum", (IComplexCode) sourceCode);
 		}
 
 		// collection related operations - COMPLEX PREDICATE
@@ -1029,7 +1032,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		else if (operationName.equals("max")) {
 			if (sourceExp.getType() instanceof CollectionType && firstArg == null) {
-				resultExp = handleCollObjectChange("max", sourceCode);
+				resultExp = handleCollObjectChange("max", (IComplexCode) sourceCode);
 			}
 			else {
 				resultExp = handleIntExpression("max", sourceCode, firstArg);
@@ -1037,7 +1040,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		else if (operationName.equals("min")) {
 			if (sourceExp.getType() instanceof CollectionType && firstArg == null) {
-				resultExp = handleCollObjectChange("min", sourceCode);
+				resultExp = handleCollObjectChange("min", (IComplexCode) sourceCode);
 			}
 			else {
 				resultExp = handleIntExpression("min", sourceCode, firstArg);
@@ -1093,7 +1096,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * 
 	 * @return declarative code fragment for the allInstances operation
 	 */
-	protected ISQLCode handleAllInstances(Guide guide) {
+	protected ICode handleAllInstances(Guide guide) {
 
 		useVariable = true;
 		// return null;
@@ -1112,34 +1115,34 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          object
 	 * @return declarative code fragment for the count operation
 	 */
-	protected ISQLCode handleCollCount(ISQLCode sourceCode, ISQLCode firstArg) {
+	protected ICode handleCollCount(IComplexCode sourceCode, ICode firstArg) {
 
-		// ISQLCode select = createObjectValue(guide);
-		if (sourceCode.getElement("object") != null) {
-			String tempName = sourceCode.getElement("object").getTemplateName();
+		// ICode select = createObjectValue(guide);
+		if (sourceCode.getCode("select") != null) {
+			String tempName = sourceCode.getComplexCode("select").getTemplateName();
 			if ("feature_call_count".equals(tempName)
 					|| "feature_call_sum".equals(tempName)
 					|| "feature_call_size".equals(tempName)) {
-				sourceCode.changeElement("groupby", null);
-				ISQLCode code =
-						new SQLCode(mySettings.getTemplateGroup().getTemplate(
+				sourceCode.changeCode("groupby", null);
+				IComplexCode code =
+						new Code(mySettings.getTemplateGroup().getTemplate(
 								tempName + "_select"));
-				code.addElement("object",
-						sourceCode.getElement("object").getElement("object"));
-				sourceCode.changeElement("object", code);
+				code.addCode("select",
+						sourceCode.getComplexCode("select").getCode("select"));
+				sourceCode.changeCode("select", code);
 			}
 		}
-		ISQLCode sqlCode =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode sqlCode =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_count"));
-		sqlCode.addElement("object", sourceCode.getElement("object"));
+		sqlCode.addCode("select", sourceCode.getCode("select"));
 
-		ISQLCode where1 =
+		ICode where1 =
 				createTwoOperandOperation("relational_expression_equals_any",
-						sourceCode.getElement("object"), firstArg);
+						sourceCode.getCode("select"), firstArg);
 
 		changeWhereStatement(sourceCode, where1);
-		sourceCode.changeElement("object", sqlCode);
+		sourceCode.changeCode("select", sqlCode);
 		return sourceCode;
 	}
 
@@ -1153,14 +1156,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          object
 	 * @return declarative code fragment for the excludes operation
 	 */
-	protected ISQLCode handleCollExcludes(ISQLCode sourceCode, ISQLCode firstArg) {
+	protected ICode handleCollExcludes(ICode sourceCode, ICode firstArg) {
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_excludes"));
 
-		template.addElement("operand1", sourceCode);
-		template.changeElement("operand2", firstArg);
+		template.addCode("operand1", sourceCode);
+		template.changeCode("operand2", firstArg);
 
 		return template;
 	}
@@ -1175,8 +1178,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          collection
 	 * @return declarative code fragment for the excludesAll operation
 	 */
-	protected ISQLCode handleCollExcludesAll(ISQLCode sourceCode,
-			ISQLCode firstArg) {
+	protected ICode handleCollExcludesAll(ICode sourceCode,
+			ICode firstArg) {
 
 		return createTwoOperandOperation("feature_call_excludesall", sourceCode,
 				firstArg);
@@ -1195,8 +1198,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          SequenceType, SetType)
 	 * @return declarative code fragment for the excluding operation
 	 */
-	protected ISQLCode handleCollExcluding(ISQLCode sourceCode,
-			ISQLCode firstArg, CollectionType collType) {
+	protected ICode handleCollExcluding(ICode sourceCode,
+			ICode firstArg, CollectionType collType) {
 
 		assert (collType != null) : "including() collType may not be null";
 
@@ -1222,14 +1225,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					"Unhandled collection type for excluding operation!");
 		}
 
-		ISQLCode returnValue = new SQLCode(template);
+		IComplexCode returnValue = new Code(template);
 		Guide guide =
 				mySettings.getMappedModel()
 						.getClass(collType.getElementType().getName()).getClassGuide();
 		guide.reset();
-		returnValue.addElement("operand2", firstArg);
-		returnValue.addElement("element", new SQLString(guide.getSelect()));
-		returnValue.addElement("operand1", sourceCode);
+		returnValue.addCode("operand2", firstArg);
+		returnValue.addCode("element", new CodeString(guide.getSelect()));
+		returnValue.addCode("operand1", sourceCode);
 
 		return returnValue;
 	}
@@ -1244,14 +1247,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          object
 	 * @return declarative code fragment for the includes operation
 	 */
-	protected ISQLCode handleCollIncludes(ISQLCode sourceCode, ISQLCode firstArg) {
+	protected ICode handleCollIncludes(ICode sourceCode, ICode firstArg) {
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_includes"));
 
-		template.addElement("operand1", sourceCode);
-		template.addElement("operand2", firstArg);
+		template.addCode("operand1", sourceCode);
+		template.addCode("operand2", firstArg);
 
 		return template;
 	}
@@ -1266,8 +1269,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          collection
 	 * @return declarative code fragment for the includesAll operation
 	 */
-	protected ISQLCode handleCollIncludesAll(ISQLCode sourceCode,
-			ISQLCode firstArg) {
+	protected ICode handleCollIncludesAll(ICode sourceCode,
+			ICode firstArg) {
 
 		return createTwoOperandOperation("feature_call_includesall", sourceCode,
 				firstArg);
@@ -1286,8 +1289,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          SequenceType, SetType)
 	 * @return declarative code fragment for the including operation
 	 */
-	protected ISQLCode handleCollIncluding(ISQLCode sourceCode,
-			ISQLCode firstArg, CollectionType collType) {
+	protected ICode handleCollIncluding(ICode sourceCode,
+			ICode firstArg, CollectionType collType) {
 
 		assert (collType != null) : "including() collType may not be null";
 
@@ -1313,10 +1316,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					"Unhandled collection type for including operation!");
 		}
 
-		ISQLCode result = new SQLCode(template);
+		IComplexCode result = new Code(template);
 
-		result.addElement("operand2", firstArg);
-		result.addElement("operand1", sourceCode);
+		result.addCode("operand2", firstArg);
+		result.addCode("operand1", sourceCode);
 
 		return result;
 	}
@@ -1334,8 +1337,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          SetType)
 	 * @return declarative code fragment for the intersection operation
 	 */
-	protected ISQLCode handleCollIntersection(ISQLCode sourceCode,
-			ISQLCode firstArg, CollectionType collType) {
+	protected ICode handleCollIntersection(ICode sourceCode,
+			ICode firstArg, CollectionType collType) {
 
 		assert (collType != null) : "intersection() collType may not be null";
 
@@ -1362,7 +1365,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the declarative code fragment representing the source collection
 	 * @return declarative code fragment for the isEmpty operation
 	 */
-	protected ISQLCode handleCollIsEmpty(ISQLCode sourceCode) {
+	protected ICode handleCollIsEmpty(ICode sourceCode) {
 
 		return createOperandOperation("feature_call_isempty", sourceCode);
 	}
@@ -1374,7 +1377,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the declarative code fragment representing the source collection
 	 * @return declarative code fragment for the notEmpty operation
 	 */
-	protected ISQLCode handleCollNotEmpty(ISQLCode sourceCode) {
+	protected ICode handleCollNotEmpty(ICode sourceCode) {
 
 		return createOperandOperation("feature_call_notempty", sourceCode);
 	}
@@ -1386,42 +1389,42 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the declarative code fragment representing the source collection
 	 * @return declarative code fragment for the collection operation
 	 */
-	protected ISQLCode handleCollObjectChange(String name, ISQLCode sourceCode) {
+	protected ICode handleCollObjectChange(String name, IComplexCode sourceCode) {
 
 		assert (sourceCode != null) : "handleCollObjectChange(): sourceCode may not be null";
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER
-					.debug("handleCollObjectChange(String name, ISQLCode sourceCode) - start - Type:"
+					.debug("handleCollObjectChange(String name, ICode sourceCode) - start - Type:"
 							+ name + ", Code:" + sourceCode);
 		}
 
-		if (sourceCode.getElement("object") != null) {
-			String tempName = sourceCode.getElement("object").getTemplateName();
+		if (sourceCode.getCode("select") != null) {
+			String tempName = sourceCode.getComplexCode("select").getTemplateName();
 			if ((name.equals("sum") || name.equals("size"))
 					&& ("feature_call_count".equals(tempName)
 							|| "feature_call_sum".equals(tempName) || "feature_call_size"
 							.equals(tempName))) {
-				ISQLCode code =
-						new SQLCode(mySettings.getTemplateGroup().getTemplate(
+				IComplexCode code =
+						new Code(mySettings.getTemplateGroup().getTemplate(
 								tempName + "_select"));
-				code.addElement("object",
-						sourceCode.getElement("object").getElement("object"));
-				sourceCode.changeElement("object", code);
+				code.addCode("select",
+						sourceCode.getComplexCode("select").getCode("select"));
+				sourceCode.changeCode("select", code);
 			}
 		}
-		if (sourceCode.getElement("object") != null) {
+		if (sourceCode.getCode("select") != null) {
 			changeObjectVariable("feature_call_" + name, sourceCode);
 			return sourceCode;
 		}
-		else if (sourceCode.getElement("operand") != null) {
+		else if (sourceCode.getCode("operand") != null) {
 			return createOperandOperation("feature_call_" + name, sourceCode);
 		}
 		else {
-			ISQLCode code =
-					new SQLCode(mySettings.getTemplateGroup().getTemplate(
+			IComplexCode code =
+					new Code(mySettings.getTemplateGroup().getTemplate(
 							"feature_call_" + name));
-			code.addElement("object", sourceCode);
+			code.addCode("select", sourceCode);
 			return code;
 		}
 
@@ -1438,8 +1441,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          difference
 	 * @return declarative code fragment for the symmetricDifference operation
 	 */
-	protected ISQLCode handleCollSymmetricDifference(ISQLCode sourceCode,
-			ISQLCode firstArg) {
+	protected ICode handleCollSymmetricDifference(ICode sourceCode,
+			ICode firstArg) {
 
 		return createTwoOperandOperation("feature_call_symmetricdifference",
 				sourceCode, firstArg);
@@ -1459,7 +1462,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          SequenceType, SetType)
 	 * @return declarative code fragment for the union operation
 	 */
-	protected ISQLCode handleCollUnion(ISQLCode sourceCode, ISQLCode firstArg,
+	protected ICode handleCollUnion(ICode sourceCode, ICode firstArg,
 			CollectionType collType, Guide guide) {
 
 		assert (collType != null) : "including() collType may not be null";
@@ -1482,9 +1485,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					"Unhandled collection type for union operation!");
 		}
 
-		ISQLCode result = createTwoOperandOperation(template, sourceCode, firstArg);
-		ISQLCode object = createObjectValue(guide);
-		result.addElement("object", object);
+		IComplexCode result = createTwoOperandOperation(template, sourceCode, firstArg);
+		ICode object = createObjectValue(guide);
+		result.addCode("select", object);
 
 		return result;
 	}
@@ -1500,8 +1503,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the second code operand
 	 * @return generated code for the int operations.
 	 */
-	protected ISQLCode handleIntExpression(String name, ISQLCode sourceCode,
-			ISQLCode firstArg) {
+	protected ICode handleIntExpression(String name, ICode sourceCode,
+			ICode firstArg) {
 
 		return createTwoOperandOperation("feature_call_int_" + name, sourceCode,
 				firstArg);
@@ -1524,9 +1527,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the generated source code
 	 * @return declarative code fragment for the collect iterator
 	 */
-	protected ISQLCode handleIterCollect(IteratorExp anIteratorExp,
-			OclExpression bodyExp, ISQLCode arg, Guide guideSrc,
-			List<Guide> srcGuides, ISQLCode sourceCode) {
+	protected ICode handleIterCollect(IteratorExp anIteratorExp,
+			OclExpression bodyExp, IComplexCode arg, Guide guideSrc,
+			List<Guide> srcGuides, IComplexCode sourceCode) {
 
 		// TODO: optimize collect for the optimize way
 		List<Guide> nav = new LinkedList<Guide>();
@@ -1545,9 +1548,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 						.getTemplate("check_database_references").toString());
 		if (temp && guideSrc.getAlias().equals(guideBody.getAlias())
 				&& !guideSrc.getFrom().equals(guideBody.getFrom())) {
-			guideBody.setAlias(mySettings.getMappedModel().getUniqueAlias());
+			guideBody.setAlias(getUniqueAlias());
 			arg = createSelectStatement(navigationMap.get(bodyExp));
-			arg.changeElement("object", doSwitch(bodyExp));
+			arg.changeCode("select", doSwitch(bodyExp));
 		}
 		else if (!temp) {
 			guideSrc = srcGuides.get(0);
@@ -1570,25 +1573,25 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          all iteratpr variables
 	 * @return declarative code fragment for the collect iterator
 	 */
-	protected ISQLCode handleIterForAllExits(String operationName,
-			ISQLCode srcCode, ISQLCode where, List<Guide> srcGuides,
+	protected ICode handleIterForAllExits(String operationName,
+			IComplexCode srcCode, ICode where, List<Guide> srcGuides,
 			List<Variable> variables) {
 
 		where = handleIterOperation(operationName + "_where", where);
 
-		ISQLCode join = srcCode.getElement("join");
+		IComplexCode join = srcCode.getComplexCode("join");
 		if (variables.size() > 1) {
 			for (int i = 1; i < variables.size(); i++) {
 				if (join != null) {
-					ISQLCode newJoin =
+					IComplexCode newJoin =
 							createJoinStatement(variableMap.get(variables.get(i).getName()),
 									srcGuides.get(1));
-					newJoin.changeElement("join", join.getElement("join"));
-					join.changeElement("join", newJoin);
+					newJoin.changeCode("join", join.getCode("join"));
+					join.changeCode("join", newJoin);
 					join = newJoin;
 				}
 				else {	
-					ISQLCode newJoin;
+					IComplexCode newJoin;
 					if (srcGuides.size() > 1) {
 					newJoin = createJoinStatement(variableMap.get(variables.get(i).getName()),
 								srcGuides.get(1));
@@ -1597,7 +1600,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 								null);
 					}
 							
-					srcCode.changeElement("join", newJoin);
+					srcCode.changeCode("join", newJoin);
 					join = newJoin;
 				}
 			}
@@ -1621,11 +1624,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the body expression
 	 * @return declarative code fragment for the collect iterator
 	 */
-	protected ISQLCode handleIterSelectReject(String operationName,
-			ISQLCode sourceCode, ISQLCode where, IteratorExp anIteratorExp,
+	protected ICode handleIterSelectReject(String operationName,
+			IComplexCode sourceCode, ICode where, IteratorExp anIteratorExp,
 			OclExpression bodyExp) {
 
-		ISQLCode expression = handleIterOperation(operationName, where);
+		ICode expression = handleIterOperation(operationName, where);
 		navigationMap.put(anIteratorExp, navigationMap.get(bodyExp));
 		changeWhereStatement(sourceCode, expression);
 		return sourceCode;
@@ -1644,20 +1647,20 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the source guides
 	 * @return declarative code fragment for the collect iterator
 	 */
-	protected ISQLCode handleIterClosure(IteratorExp anIteratorExp,
+	protected ICode handleIterClosure(IteratorExp anIteratorExp,
 			OclExpression bodyExp, Guide guideSrc, List<Guide> srcGuides) {
 
 		String alias = guideSrc.getAlias();
-		guideSrc.setAlias(mySettings.getMappedModel().getUniqueAlias());
+		guideSrc.setAlias(getUniqueAlias());
 
 		closure = true;
-		ISQLCode code =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode code =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"common_table_expression"));
 		commonTableExpressions.add(code);
-		ISQLCode cteName = new SQLString(constraintName + "_" + cteNumber++);
+		ICode cteName = new CodeString(constraintName + "_" + cteNumber++);
 		Guide closureGuide =
-				new Guide(false, mySettings.getMappedModel().getUniqueAlias());
+				new Guide(false, getUniqueAlias());
 		closureGuide.add("variable2", cteName.getResult(), "variable1");
 		closureGuide.reset();
 
@@ -1669,11 +1672,11 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		for (Variable v : anIteratorExp.getIterator()) {
 			variableMap.put(v.getName(), guideSrc);
 		}
-		ISQLCode arg1 = doSwitch(bodyExp);
-		if (arg1.getElement("object") == null) {
+		IComplexCode arg1 = (IComplexCode)doSwitch(bodyExp);
+		if (arg1.getCode("select") == null) {
 			arg1 = createSelectStatement(Arrays.asList(guideSrc));
 		}
-		arg1.changeElement("object",
+		arg1.changeCode("select",
 				createObjectValue(navigationMap.get(bodyExp).get(0), guideSrc));
 		navigationMap.clear();
 		navigationMap.putAll(navMap);
@@ -1683,19 +1686,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		for (Variable v : anIteratorExp.getIterator()) {
 			variableMap.put(v.getName(), closureGuide);
 		}
-		ISQLCode arg2 = doSwitch(bodyExp);
+		IComplexCode arg2 = (IComplexCode) doSwitch(bodyExp);
 		closureGuide.reset();
 		Guide closureGuide1 = new Guide(false, closureGuide.getAlias());
 		closureGuide1.add("variable1", cteName.getResult(), "variable2");
 		closureGuide1.reset();
-		arg2.changeElement("object", this.createObjectValue(
+		arg2.changeCode("select", this.createObjectValue(
 				navigationMap.get(bodyExp).get(0), closureGuide1));
 		useVariable = saveAllInstances;
 		guideSrc.setAlias(alias);
 		navMap.clear();
-		code.addElement("constraint_name", cteName);
-		code.addElement("recursive", arg2);
-		code.addElement("non_recursive", arg1);
+		code.addCode("constraint_name", cteName);
+		code.addCode("recursive", arg2);
+		code.addCode("non_recursive", arg1);
 
 		LinkedList<Guide> guides = new LinkedList<Guide>();
 		guides.add(closureGuide);
@@ -1716,7 +1719,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          argument passed to the iterator
 	 * @return declarative code fragment for the select iterator
 	 */
-	protected ISQLCode handleIterOperation(String name, ISQLCode arg) {
+	protected ICode handleIterOperation(String name, ICode arg) {
 
 		return createOperandOperation("feature_call_" + name, arg);
 	}
@@ -1732,8 +1735,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          declarative code fragment of the second expression
 	 * @return declarative code fragment for the logical expression
 	 */
-	protected ISQLCode handleLogicalExpression(String name, ISQLCode sourceCode,
-			ISQLCode firstArg) {
+	protected ICode handleLogicalExpression(String name, ICode sourceCode,
+			ICode firstArg) {
 
 		return createTwoOperandOperation("logical_expression_" + name, sourceCode,
 				firstArg);
@@ -1746,18 +1749,18 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guide to the classifier type
 	 * @return declarative code fragment for the oclIsKindOf feature call
 	 */
-	protected ISQLCode handleOclIsTypeOf(Guide guide, ISQLCode sourceCode) {
+	protected ICode handleOclIsTypeOf(Guide guide, ICode sourceCode) {
 
 		guide.reset();
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_oclistypeof"));
 
-		template.addElement("from", new SQLString(guide.getFrom()));
-		template.addElement("object", new SQLString(guide.getSelect()));
-		template.addElement("object2", sourceCode);
-		template.addElement("alias", new SQLString(guide.getAlias()));
+		template.addCode("from", new CodeString(guide.getFrom()));
+		template.addCode("select", new CodeString(guide.getSelect()));
+		template.addCode("object2", sourceCode);
+		template.addCode("alias", new CodeString(guide.getAlias()));
 
 		return template;
 	}
@@ -1771,20 +1774,20 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guide to the classifiers supertype
 	 * @return declarative code fragment for the oclIsTypeOf feature call
 	 */
-	protected ISQLCode handleOclIsKindOf(Guide typeGuide, Guide supertypeGuide) {
+	protected ICode handleOclIsKindOf(Guide typeGuide, Guide supertypeGuide) {
 
 		typeGuide.reset();
 		if (supertypeGuide != null)
 			supertypeGuide.reset();
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_ocliskindof"));
 
-		template.addElement("from", new SQLString(typeGuide.getFrom()));
-		template.addElement("object", new SQLString(typeGuide.getSelect()));
-		template.addElement("alias", new SQLString(typeGuide.getAlias()));
-		template.addElement("from2", (supertypeGuide != null) ? new SQLString(
+		template.addCode("from", new CodeString(typeGuide.getFrom()));
+		template.addCode("select", new CodeString(typeGuide.getSelect()));
+		template.addCode("alias", new CodeString(typeGuide.getAlias()));
+		template.addCode("from2", (supertypeGuide != null) ? new CodeString(
 				supertypeGuide.getFrom()) : null);
 
 		return template;
@@ -1805,8 +1808,8 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          declarative code fragment of the second operand
 	 * @return declarative code fragment for the equals operation
 	 */
-	protected ISQLCode handleRelExpression(String name, OclExpression srcExp,
-			ISQLCode operand1, ISQLCode operand2) {
+	protected ICode handleRelExpression(String name, OclExpression srcExp,
+			ICode operand1, ICode operand2) {
 
 		StringBuffer templateName = new StringBuffer("relational_expression_");
 		Type attrType = null;
@@ -1879,7 +1882,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          string)
 	 * @return declarative code fragment for the concat operation
 	 */
-	protected ISQLCode handleStringConcat(ISQLCode sourceCode, ISQLCode firstArg) {
+	protected ICode handleStringConcat(ICode sourceCode, ICode firstArg) {
 
 		return createTwoOperandOperation("feature_call_string_concat", sourceCode,
 				firstArg);
@@ -1893,7 +1896,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          size from)
 	 * @return declarative code fragment for the size operation
 	 */
-	protected ISQLCode handleStringSize(ISQLCode sourceCode) {
+	protected ICode handleStringSize(ICode sourceCode) {
 
 		return createOperandOperation("feature_call_string_size", sourceCode);
 	}
@@ -1906,17 +1909,17 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          substring from)
 	 * @param firstArg
 	 *          the start of the substring
-	 * @param isqlCode
+	 * @param ICode
 	 *          the end of the substring
 	 * @return declarative code fragment for the substring operation
 	 */
-	protected ISQLCode handleStringSubstring(ISQLCode sourceCode,
-			ISQLCode firstArg, ISQLCode isqlCode) {
+	protected ICode handleStringSubstring(ICode sourceCode,
+			ICode firstArg, ICode ICode) {
 
-		ISQLCode template =
+		IComplexCode template =
 				createOperandOperation("feature_call_string_substring", sourceCode);
-		template.addElement("start", firstArg);
-		template.addElement("end", isqlCode);
+		template.addCode("start", firstArg);
+		template.addCode("end", ICode);
 
 		return template;
 	}
@@ -1928,7 +1931,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the toLower operation
 	 */
-	protected ISQLCode handleStringToLower(ISQLCode sourceCode) {
+	protected ICode handleStringToLower(ICode sourceCode) {
 
 		return createOperandOperation("feature_call_string_tolower", sourceCode);
 	}
@@ -1940,7 +1943,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the toUpper operation
 	 */
-	protected ISQLCode handleStringToUpper(ISQLCode sourceCode) {
+	protected ICode handleStringToUpper(ICode sourceCode) {
 
 		return createOperandOperation("feature_call_string_toupper", sourceCode);
 	}
@@ -1952,7 +1955,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the unary minus operation
 	 */
-	protected ISQLCode handleUnaryMinus(ISQLCode sourceCode) {
+	protected ICode handleUnaryMinus(ICode sourceCode) {
 
 		return createOperandOperation("unary_expression_minus", sourceCode);
 	}
@@ -1964,7 +1967,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          declarative code fragment of the operand
 	 * @return declarative code fragment for the unary not operation
 	 */
-	protected ISQLCode handleUnaryNot(ISQLCode sourceCode) {
+	protected ICode handleUnaryNot(ICode sourceCode) {
 
 		return createOperandOperation("unary_expression_not", sourceCode);
 	}
@@ -1978,22 +1981,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guides for the property
 	 * @return the generated code
 	 */
-	protected ISQLCode handlePropProperty(Property property, List<Guide> guides) {
+	protected ICode handlePropProperty(Property property, List<Guide> guides) {
 
 		Guide guide = guides.get(0);
 		guide.reset();
 		// attribute access without navigation
 		if (guides.size() == 1) {
-			ISQLCode template = createObjectValue(guide);
+			IComplexCode template = createObjectValue(guide);
 
 			// special case for Boolean attributes: e.g. expand 'attribute' to
 			// 'attribute = 1' in SQL
 			if (property.getType().getName().equals("Boolean")) {
-				ISQLCode attr = template;
+				ICode attr = template;
 				template =
-						new SQLCode(mySettings.getTemplateGroup().getTemplate(
+						new Code(mySettings.getTemplateGroup().getTemplate(
 								"feature_call_attribute_boolean"));
-				template.addElement("attribute", attr);
+				template.addCode("attribute", attr);
 			}
 
 			return template;
@@ -2010,7 +2013,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 */
 	public void reset() {
 
-		mySettings.getMappedModel().resetUniqueAlias();
+		resetUniqueAlias();
 		navigationMap.clear();
 		variableMap.clear();
 		useVariable = false;
@@ -2073,7 +2076,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 			saveAlias = guide.getAlias();
 		} catch (NullPointerException e) {
 		}
-		guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+		guide.setAlias(getUniqueAlias());
 		Guide guide1 = new Guide(guide);
 		guide.setAlias(saveAlias);
 		List<Guide> guides = new LinkedList<Guide>();
@@ -2095,10 +2098,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * @param where
 	 *          the extra where code
 	 */
-	protected void changeWhereStatement(ISQLCode select, ISQLCode where) {
+	protected void changeWhereStatement(IComplexCode select, ICode where) {
 
-		select.changeElement("where",
-				combinedWhereStatement(where, select.getElement("where")));
+		select.changeCode("where",
+				combinedWhereStatement(where, select.getCode("where")));
 	}
 
 	/**
@@ -2110,15 +2113,15 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the second argument
 	 * @return the where statement
 	 */
-	protected ISQLCode createWhereStatement(Guide guide1, Guide guide2) {
+	protected ICode createWhereStatement(Guide guide1, Guide guide2) {
 
-		ISQLCode where =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode where =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_where"));
-		where.addElement("alias1", new SQLString(guide2.getAlias()));
-		where.addElement("where", new SQLString(guide2.getWhere()));
-		where.addElement("alias2", new SQLString(guide1.getAlias()));
-		where.addElement("object", new SQLString(guide1.getSelect()));
+		where.addCode("alias", new CodeString(guide2.getAlias()));
+		where.addCode("where", new CodeString(guide2.getWhere()));
+		where.addCode("alias2", new CodeString(guide1.getAlias()));
+		where.addCode("select", new CodeString(guide1.getSelect()));
 		return where;
 	}
 
@@ -2131,7 +2134,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the operand which will be exists
 	 * @return the new where clause
 	 */
-	protected ISQLCode combinedWhereStatement(ISQLCode where1, ISQLCode where2) {
+	protected ICode combinedWhereStatement(ICode where1, ICode where2) {
 
 		if (where2 != null) {
 			return handleLogicalExpression("and", where2, where1);
@@ -2150,22 +2153,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guide to bind the two tables
 	 * @return the join statement
 	 */
-	protected ISQLCode createJoinStatement(Guide from, Guide where) {
+	protected IComplexCode createJoinStatement(Guide from, Guide where) {
 
-		ISQLCode template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode template =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_join"));
-		ISQLCode fromCode =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode fromCode =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_from"));
-		fromCode.addElement("from", new SQLString(from.getFrom()));
-		fromCode.addElement("object", new SQLString(from.getSelect()));
+		fromCode.addCode("from", new CodeString(from.getFrom()));
+		fromCode.addCode("select", new CodeString(from.getSelect()));
 		if (!from.getWhere().equals(from.getSelect())) {
-			fromCode.addElement("where", new SQLString(from.getWhere()));
+			fromCode.addCode("where", new CodeString(from.getWhere()));
 		}
-		template.addElement("alias", new SQLString(from.getAlias()));
-		template.addElement("from", fromCode);
-		if (where != null) template.addElement("where", createWhereStatement(from, where));
+		template.addCode("alias", new CodeString(from.getAlias()));
+		template.addCode("from", fromCode);
+		if (where != null) template.addCode("where", createWhereStatement(from, where));
 		return template;
 	}
 
@@ -2176,15 +2179,15 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guides
 	 * @return the join statement from guides.get(0) with the subjoins
 	 */
-	protected ISQLCode createJoinStatements(List<Guide> guides) {
+	protected ICode createJoinStatements(List<Guide> guides) {
 
-		ISQLCode joinTemplate = null;
+		ICode joinTemplate = null;
 		for (int i = guides.size() - 1; i > 0; i--) {
 			Guide guide = guides.get(i);
 			guide.reset();
-			ISQLCode template = createJoinStatement(guide, guides.get(i - 1));
+			IComplexCode template = createJoinStatement(guide, guides.get(i - 1));
 			if (joinTemplate != null) {
-				template.addElement("join", joinTemplate);
+				template.addCode("join", joinTemplate);
 			}
 			joinTemplate = template;
 		}
@@ -2198,14 +2201,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guide for object
 	 * @return the code fragment.
 	 */
-	protected ISQLCode createObjectValue(Guide guide) {
+	protected IComplexCode createObjectValue(Guide guide) {
 
 		guide.reset();
-		ISQLCode select =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+		IComplexCode select =
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_attribute_context"));
-		select.addElement("alias", new SQLString(guide.getAlias()));
-		select.addElement("attribute", new SQLString(guide.getSelect()));
+		select.addCode("alias", new CodeString(guide.getAlias()));
+		select.addCode("attribute", new CodeString(guide.getSelect()));
 		return select;
 	}
 
@@ -2218,12 +2221,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guide for object
 	 * @return the code fragment.
 	 */
-	protected ISQLCode createObjectValue(Guide guide1, Guide guide2) {
+	protected ICode createObjectValue(Guide guide1, Guide guide2) {
 
 		guide1.reset();
-		ISQLCode select = createObjectValue(guide2);
-		select.addElement("alias2", new SQLString(guide1.getAlias()));
-		select.addElement("attribute2", new SQLString(guide1.getSelect()));
+		IComplexCode select = createObjectValue(guide2);
+		select.addCode("alias2", new CodeString(guide1.getAlias()));
+		select.addCode("attribute2", new CodeString(guide1.getSelect()));
 		return select;
 	}
 
@@ -2235,14 +2238,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the guides which are describing the navigation
 	 * @return declarative code fragment for a navigation in the target model
 	 */
-	protected ISQLCode createSelectStatement(List<Guide> guides) {
+	protected IComplexCode createSelectStatement(List<Guide> guides) {
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("createNavigation(List<Guide> guides) - start - Guides:"
 					+ guides);
 		}
 
-		ISQLCode template;
+		IComplexCode template;
 
 		LinkedList<Guide> steps = new LinkedList<Guide>();
 		LinkedList<String> aliase = new LinkedList<String>();
@@ -2250,14 +2253,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		if (guides.size() > 1
 				&& aliase.contains(guides.get(guides.size() - 1).getAlias())) {
 			guides.get(guides.size() - 1).setAlias(
-					mySettings.getMappedModel().getUniqueAlias());
+					getUniqueAlias());
 		}
 		aliase.add(guides.get(guides.size() - 1).getAlias());
 		for (Guide guide : guides) {
 			guide.reset();
 			if (aliase.contains(guide.getAlias()) && guides.indexOf(guide) != 0
 					&& guides.indexOf(guide) != guides.size() - 1) {
-				guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+				guide.setAlias(getUniqueAlias());
 			}
 			aliase.add(guide.getAlias());
 			for (int k = 0; k < guide.numberOfSteps(); k++, guide.next()) {
@@ -2276,14 +2279,14 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		if (!closure)
 			joinGuides.removeLast();
 		template =
-				new SQLCode(mySettings.getTemplateGroup().getTemplate(
+				new Code(mySettings.getTemplateGroup().getTemplate(
 						"feature_call_navigation_select"));
-		template.addElement("object", createObjectValue(guide));
-		template.addElement("alias", new SQLString(guide.getAlias()));
-		template.addElement("join", createJoinStatements(joinGuides));
-		template.addElement("from", new SQLString(guide.getFrom()));
+		template.addCode("select", createObjectValue(guide));
+		template.addCode("alias", new CodeString(guide.getAlias()));
+		template.addCode("join", createJoinStatements(joinGuides));
+		template.addCode("from", new CodeString(guide.getFrom()));
 		if (!useVariable && steps.size() >= 2) {
-			template.addElement(
+			template.addCode(
 					"where",
 					createWhereStatement(steps.get(steps.size() - 1),
 							steps.get(steps.size() - 2)));
@@ -2355,7 +2358,7 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 				/*
 				 * if (!guide.isNavigation()) { guide.reset(); Guide varGuide =
 				 * guides.getLast(); varGuide.reset();
-				 * guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+				 * guide.setAlias(getUniqueAlias());
 				 * //guides.getLast().reset();
 				 * //guide.setAlias(guides.removeLast().getAlias()); } else {
 				 */
@@ -2367,12 +2370,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 					guide.setAlias(guides.removeLast().getAlias());
 				}
 				else {
-					guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+					guide.setAlias(getUniqueAlias());
 				}
 				// }
 			}
 			else {
-				guide.setAlias(mySettings.getMappedModel().getUniqueAlias());
+				guide.setAlias(getUniqueAlias());
 			}
 		}
 		else if (exp instanceof VariableExp) {
@@ -2400,15 +2403,15 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the second argument
 	 * @return the fragment code
 	 */
-	private ISQLCode createTwoOperandOperation(String templateName,
-			ISQLCode operand1, ISQLCode operand2) {
+	private IComplexCode createTwoOperandOperation(String templateName,
+			ICode operand1, ICode operand2) {
 
 		ITemplate template =
 				mySettings.getTemplateGroup().getTemplate(templateName);
-		ISQLCode code = new SQLCode(template);
-		code.addElement("operand1", operand1);
+		IComplexCode code = new Code(template);
+		code.addCode("operand1", operand1);
 		if (operand2 != null) {
-			code.addElement("operand2", operand2);
+			code.addCode("operand2", operand2);
 		}
 		return code;
 	}
@@ -2422,12 +2425,12 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the argument
 	 * @return the fragment code
 	 */
-	private ISQLCode createOperandOperation(String templateName, ISQLCode operand) {
+	private IComplexCode createOperandOperation(String templateName, ICode operand) {
 
 		ITemplate template =
 				mySettings.getTemplateGroup().getTemplate(templateName);
-		ISQLCode code = new SQLCode(template);
-		code.addElement("operand", operand);
+		IComplexCode code = new Code(template);
+		code.addCode("operand", operand);
 		return code;
 	}
 
@@ -2440,27 +2443,27 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the body of the collect statement
 	 * @return the fragment code
 	 */
-	private ISQLCode createCollectStatement(ISQLCode sourceCode,
-			ISQLCode bodyCode, Guide srcGuide, Guide bodyGuide) {
+	private ICode createCollectStatement(IComplexCode sourceCode,
+			IComplexCode bodyCode, Guide srcGuide, Guide bodyGuide) {
 
-		ISQLCode result = null;
+		IComplexCode result = null;
 		boolean temp =
 				Boolean.valueOf(mySettings.getTemplateGroup()
 						.getTemplate("check_database_references").toString());
 
-		if (bodyCode != null && bodyCode.getElement("from") != null) {
+		if (bodyCode != null && bodyCode.getCode("from") != null) {
 			result = bodyCode;
-			ISQLCode join = result;
-			while (join.getElement("join") != null) {
-				join = join.getElement("join");
+			IComplexCode join = result;
+			while (join.getComplexCode("join") != null) {
+				join = join.getComplexCode("join");
 			}
-			if (result.getElement("where") != null) {
-				if (result.getElement("where").getElement("operand1") != null) {
-					result.changeElement("where",
-							result.getElement("where").getElement("operand2"));
+			if (result.getComplexCode("where") != null) {
+				if (result.getComplexCode("where").getCode("operand1") != null) {
+					result.changeCode("where",
+							result.getComplexCode("where").getCode("operand2"));
 				}
 				else {
-					result.changeElement("where", null);
+					result.changeCode("where", null);
 				}
 			}
 			if (sourceCode != null) {
@@ -2468,19 +2471,19 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 				bodyGuide.reset();
 				if (temp) {
 					if (srcGuide.equals(bodyGuide)) {
-						join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
-						join = join.getElement("join");
+						join.changeCode("join", createJoinStatement(srcGuide, bodyGuide));
+						join = join.getComplexCode("join");
 					}
 					else {
-						if (sourceCode.getElement("join") != null
+						if (sourceCode.getComplexCode("join") != null
 								&& srcGuide.getSelect().equals(bodyGuide.getSelect())) {
-							sourceCode.getElement("join").getElement("where")
-									.changeElement("alias1", join.getElement("alias"));
+							sourceCode.getComplexCode("join").getComplexCode("where")
+									.changeCode("alias", join.getCode("alias"));
 						}
 						else {
-							join.changeElement("join",
+							join.changeCode("join",
 									createJoinStatement(srcGuide, bodyGuide));
-							join = join.getElement("join");
+							join = join.getComplexCode("join");
 						}
 					}
 				}
@@ -2490,20 +2493,20 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 						while (bodyGuide.hasNext()) {
 							bodyGuide.next();
 						}
-						join.changeElement("join", createJoinStatement(srcGuide, bodyGuide));
-						join = join.getElement("join");
+						join.changeCode("join", createJoinStatement(srcGuide, bodyGuide));
+						join = join.getComplexCode("join");
 					}
 					else {
-						sourceCode.getElement("join").getElement("where")
-								.changeElement("alias1", join.getElement("alias"));
+						sourceCode.getComplexCode("join").getComplexCode("where")
+								.changeCode("alias", join.getCode("alias"));
 					}
 				}
-				join.changeElement("join", sourceCode.getElement("join"));
-				changeWhereStatement(result, sourceCode.getElement("where"));
+				join.changeCode("join", sourceCode.getCode("join"));
+				changeWhereStatement(result, sourceCode.getCode("where"));
 			}
 		}
 		else {
-			sourceCode.changeElement("object", bodyCode);
+			sourceCode.changeCode("select", bodyCode);
 			result = sourceCode;
 		}
 
@@ -2518,18 +2521,18 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 * @param code
 	 *          the select code with the object
 	 */
-	private void changeObjectVariable(String templateName, ISQLCode code) {
+	private void changeObjectVariable(String templateName, IComplexCode code) {
 
-		ISQLCode sqlCode;
+		IComplexCode sqlCode;
 		if (templateName != null) {
 			sqlCode =
-					new SQLCode(mySettings.getTemplateGroup().getTemplate(templateName));
-			sqlCode.addElement("object", code.getElement("object"));
+					new Code(mySettings.getTemplateGroup().getTemplate(templateName));
+			sqlCode.addCode("select", code.getCode("select"));
 		}
 		else {
 			sqlCode = code;
 		}
-		code.changeElement("object", sqlCode);
+		code.changeCode("select", sqlCode);
 	}
 
 	/**
@@ -2545,10 +2548,10 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 	 *          the body expression
 	 * @return the fragment code
 	 */
-	protected ISQLCode createCollectStatement(ISQLCode arg, ISQLCode sourceCode,
+	protected ICode createCollectStatement(IComplexCode arg, IComplexCode sourceCode,
 			Guide guideSrc, OclExpression bodyExp) {
 
-		ISQLCode result = null;
+		ICode result = null;
 		Guide guideBody;
 
 		if (navigationMap.get(bodyExp).size() >= 2) {
@@ -2560,6 +2563,25 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ISQLCode> implements
 		}
 		result = createCollectStatement(sourceCode, arg, guideSrc, guideBody);
 		return result;
+	}
+	
+	/**
+	 * Returns a unique alias which may be used in the declarative target language
+	 * 
+	 * @return unique alias which may be used in the declarative target language
+	 */
+	@Deprecated
+	public String getUniqueAlias() {
+		
+		uniqueAlias++;
+		if (uniqueAlias == 1) {
+			return "self";
+		}
+		return "alias" + uniqueAlias;
+	}
+
+	public void resetUniqueAlias() {
+		uniqueAlias = 0;
 	}
 
 }

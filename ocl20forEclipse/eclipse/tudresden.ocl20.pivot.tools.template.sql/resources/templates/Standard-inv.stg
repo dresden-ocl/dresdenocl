@@ -40,8 +40,8 @@ INNER JOIN $from$ AS $alias$ $if(where)$ON $where$$endif$$if(join)$
 $join$$endif$
 >>
 
-feature_call_navigation_where(alias1,where,alias2,select) ::= <<
-$feature_call_attribute_context(alias=alias1,attribute=where)$ = $feature_call_attribute_context(alias=alias2,attribute=select)$
+feature_call_navigation_where(alias,where,alias2,select) ::= <<
+$feature_call_attribute_context(alias=alias,attribute=where)$ = $feature_call_attribute_context(alias=alias2,attribute=select)$
 >>
 
 feature_call_navigation_from(select,where,from) ::= <<

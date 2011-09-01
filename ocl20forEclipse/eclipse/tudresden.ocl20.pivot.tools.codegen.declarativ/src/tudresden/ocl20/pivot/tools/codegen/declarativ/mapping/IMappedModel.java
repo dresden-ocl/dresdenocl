@@ -55,9 +55,9 @@ public interface IMappedModel {
 	 * 
 	 * @return unique alias which may be used in the declarative target language
 	 */
-	public String getUniqueAlias();
+	//TODO: delete spublic String getUniqueAlias();
 
 	public boolean isClass(String classname);
 
-	public void resetUniqueAlias();
+	//TODO: delete public void resetUniqueAlias();
 }

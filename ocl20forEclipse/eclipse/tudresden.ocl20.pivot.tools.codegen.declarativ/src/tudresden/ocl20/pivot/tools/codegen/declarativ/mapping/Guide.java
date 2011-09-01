@@ -82,8 +82,10 @@ public class Guide {
 	 *          true if the guide describes a navigation, false otherwise
 	 */
 	public Guide(boolean navigation) {
-
-		this(navigation, null);
+		steps = new ArrayList<Step>();
+		isNavigation = navigation;
+		pointer = -1;
+		contextAlias = null;
 	}
 
 	/**
@@ -109,12 +111,11 @@ public class Guide {
 	 * @param contextAlias
 	 *          the context alias of the MappedClass to start from
 	 */
+	@Deprecated
 	public Guide(boolean navigation, String contextAlias) {
-
-		steps = new ArrayList<Step>();
-		isNavigation = navigation;
+		this(navigation);
 		this.contextAlias = contextAlias;
-		pointer = -1;
+
 	}
 
 	/**
@@ -148,6 +149,7 @@ public class Guide {
 	 * @exception NullPointerException
 	 *              if no context alias is specified
 	 */
+	@Deprecated
 	public String getAlias() throws NullPointerException {
 
 		if (contextAlias == null) {
@@ -248,7 +250,7 @@ public class Guide {
 	 */
 	public void next() throws IllegalStateException {
 
-		if (pointer < (steps.size()/* - 1 */)) {
+		if (pointer < (steps.size())) {
 			pointer++;
 		}
 		else {
@@ -281,6 +283,7 @@ public class Guide {
 	 * @param contextAlias
 	 *          the context alias
 	 */
+	@Deprecated
 	public void setAlias(String contextAlias) {
 
 		this.contextAlias = contextAlias;
@@ -299,6 +302,7 @@ public class Guide {
 		result.append("Guide(");
 		result.append(isNavigation());
 		result.append(",");
+		//TODO: remove
 		result.append(contextAlias + "):");
 		result.append(lineSeperator);
 
