@@ -503,21 +503,21 @@ public class TestContext {
 	 */
 	@Test
 	public void testContextPositive18() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "context/contextPositive18.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(
 				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
 				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -529,21 +529,21 @@ public class TestContext {
 	 */
 	@Test
 	public void testContextPositive19() throws Exception {
-	
+
 		TestPerformer testPerformer;
-	
+
 		String modelFileName;
 		String oclFileName;
-	
+
 		oclFileName = "context/contextPositive19.ocl";
 		modelFileName = "testmodel.uml";
-	
+
 		/* Try to get the TestPerformer. */
 		testPerformer = TestPerformer.getInstance(
 				AllContextTests.META_MODEL_ID, AllContextTests.MODEL_BUNDLE,
 				AllContextTests.MODEL_DIRECTORY);
 		testPerformer.setModel(modelFileName);
-	
+
 		/* Try to parse the constraint file. */
 		testPerformer.parseFile(oclFileName);
 	}
@@ -761,7 +761,13 @@ public class TestContext {
 	 * A test case to parse a context that should not be parsed appropriately.
 	 * </p>
 	 */
-	@Test(expected = SemanticException.class)
+	// FIXME: the standard is not accurate regarding lookup (p. 93), the lookup
+	// for elements says "search in surrounding namespace" which is currently
+	// done in Dresden OCL. Unfortunately, the OCL code in the standard does not
+	// do what the comment says. Will stick with the comment version though.
+	
+	// change: removed expected exception
+	@Test //(expected = SemanticException.class)
 	public void testContextNegative09() throws Exception {
 
 		TestPerformer testPerformer;
