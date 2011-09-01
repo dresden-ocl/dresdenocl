@@ -145,10 +145,10 @@ public class TestPackage {
 	/**
 	 * <p>
 	 * A test case to check that the package declaration is parsed
-	 * appropriately.
+	 * appropriately. Packages can be left out. (OCL 2.2 standard, p.173)
 	 * </p>
 	 */
-	@Test(expected = ParseException.class)
+	@Test
 	public void testPackageNegative03() throws Exception {
 
 		TestPerformer testPerformer;
