@@ -207,7 +207,7 @@ public class TestDefinition extends AbstractDresdenOclTest {
 		testPerformer.setModel(modelFileName);
 
 		/* Try to parse the constraint file. */
-		List<Constraint> constraints = testPerformer.parseFile(oclFileName);
+		List<Constraint> constraints = testPerformer.parseFile(oclFileName, true);
 
 		assertNotNull(constraints);
 		assertEquals(1, constraints.size());

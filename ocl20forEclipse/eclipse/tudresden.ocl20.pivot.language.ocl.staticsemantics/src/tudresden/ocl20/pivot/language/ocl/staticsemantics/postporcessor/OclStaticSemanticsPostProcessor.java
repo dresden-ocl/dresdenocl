@@ -26,19 +26,28 @@ public class OclStaticSemanticsPostProcessor implements
 				tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics oclStaticSemantics = OclStaticSemanticsProvider
 						.getStaticSemantics(resource);
 
-				List<Constraint> result = oclStaticSemantics.cs2EssentialOcl(root);
-				
-				/* Probably notify listeners of the model that constraints have been reparsed. */
+				List<Constraint> result = oclStaticSemantics
+						.cs2EssentialOcl(root);
+
+				/*
+				 * Probably notify listeners of the model that constraints have
+				 * been reparsed.
+				 */
 				if (result.size() > 0) {
-					ModelBusPlugin.getModelRegistry().getActiveModel().setChanged();
-					ModelBusPlugin.getModelRegistry().getActiveModel().notifiyListeners();
+					if (ModelBusPlugin.getModelRegistry().getActiveModel() != null) {
+						ModelBusPlugin.getModelRegistry().getActiveModel()
+								.setChanged();
+						ModelBusPlugin.getModelRegistry().getActiveModel()
+								.notifiyListeners();
+					}
+					// no else.
 				}
 				// no else.
 
-				//printResult(result);
+				// printResult(result);
 
 			} catch (OclStaticSemanticsException e) {
-//				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 
