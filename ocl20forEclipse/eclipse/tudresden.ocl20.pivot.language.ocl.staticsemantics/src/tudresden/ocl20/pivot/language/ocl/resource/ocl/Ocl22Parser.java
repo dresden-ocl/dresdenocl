@@ -63,6 +63,10 @@ public class Ocl22Parser implements IOclParser {
 				/* Probably remove the constraints from the model again. */
 				if (!addToModel)
 					model.removeConstraints(result);
+				else if (result.size() > 0) {
+					model.setChanged();
+					model.notifiyListeners();
+				}
 				// no else.
 
 				return result;
