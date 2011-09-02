@@ -484,20 +484,6 @@
         </genericType>
       </ownedParameter>
     </ownedOperation>
-    <ownedOperation name="union">
-      <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclSequence">
-        <typeArgument>
-          <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
-        </typeArgument>
-      </genericType>
-      <ownedParameter name="o">
-        <genericType xsi:type="pivot:ComplexGenericType" unboundType="//@oclOrderedSet">
-          <typeArgument>
-            <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
-          </typeArgument>
-        </genericType>
-      </ownedParameter>
-    </ownedOperation>
     <genericSuperType xsi:type="pivot:ComplexGenericType" unboundType="//@oclCollection">
       <typeArgument>
         <genericType xsi:type="pivot:ParameterGenericType" typeParameter="//@oclSequence/@ownedTypeParameter.0"/>
