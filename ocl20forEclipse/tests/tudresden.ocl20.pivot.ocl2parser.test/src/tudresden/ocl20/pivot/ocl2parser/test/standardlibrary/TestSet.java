@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 
 package tudresden.ocl20.pivot.ocl2parser.test.standardlibrary;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
@@ -287,6 +288,11 @@ public class TestSet {
 	 * A test case testing the method <code>Collection->-(Collection(T))</code>.
 	 * </p>
 	 */
+	// TODO: This tests whether "-" for set difference can be applied with "->", 
+	// but the only way it is used in the standard is as an infix operation. 
+	// Therefore ignore for now, but activate again in the future when the notation is
+	// clearified.
+	@Ignore
 	@Test
 	public void testMinusPositive01() throws Exception {
 
