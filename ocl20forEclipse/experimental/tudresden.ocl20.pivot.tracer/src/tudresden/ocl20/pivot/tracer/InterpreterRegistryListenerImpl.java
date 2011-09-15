@@ -1,5 +1,7 @@
 package tudresden.ocl20.pivot.tracer;
 
+import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
@@ -11,7 +13,15 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	private TracerTree tree;
 	private TracerNode currentParent;
 	
+	//Just for debugging
+	//TODO: Ronny: REMOVE, Just for debugging purposes!
+	private int depth;
+	
 	public InterpreterRegistryListenerImpl() {
+		System.out.println("Tracer: New!");
+		
+		//TODO: Remove!
+		depth=0;
 		tree = null;
 		currentParent = null;
 	}
@@ -26,9 +36,12 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	 * notification to be completed with information regarding
 	 * this interpretation.
 	 */
-	public void interpretationTreeDepthIncreased(int hash) {
+	public void interpretationTreeDepthIncreased(EObject reference) {
+		
+		System.out.println("Tracer: Increase[" + ++depth + "]" );
+		
 		/* Add a dummy node to the tree */
-		TracerNode dummyNode = new TracerNode(currentParent, null, hash);
+		TracerNode dummyNode = new TracerNode(currentParent, null, reference);
 		
 		/* This is the first item inserted into the tree */
 		if(tree == null) {
@@ -41,6 +54,9 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	}
 	
 	public void interpretationTreeDepthDecreased() {
+	
+		System.out.println("Tracer: Decrease[" + --depth + "]" );
+		
 		if(currentParent != null) {
 			if(currentParent.getParent() != null) {
 				currentParent = currentParent.getParent();
@@ -53,13 +69,16 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	}
 
 	public void partialInterpretationFinished(InterpreterTraceEvent event) {
+		
+		System.out.println("Tracer: " + (event==null?"null":event.getResult()) + "[" +depth+ "]");
+		
 		TracerNode[] tmpArray = currentParent.getChildren();
 		TracerItem item = new TracerItem(event.getExpression(), event.getResult());
 		boolean found = false;
 		
 		for(TracerNode n : tmpArray) {
 			/* check which child is recognized by this expression*/
-			if(n.isRecognizedByHash(event.getExpression().hashCode())) {
+			if(n.isReference(event.getExpression())) {
 				/* set the item into the dummy */
 				n.setTracerItem(item);
 				found = true;
@@ -67,7 +86,7 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 		}
 		/* Check if the item has to be added in the current level */
 		if(!found) {
-			TracerNode node = new TracerNode(currentParent, item, event.getExpression().hashCode());
+			TracerNode node = new TracerNode(currentParent, item, event.getExpression());
 			currentParent.addChild(node);
 		}
 	}

@@ -5,6 +5,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import tudresden.ocl20.pivot.tracer.model.TracerItem;
 import tudresden.ocl20.pivot.tracer.model.TracerNode;
 
 public class TracerLabelProvider implements ILabelProvider {
@@ -37,7 +38,17 @@ public class TracerLabelProvider implements ILabelProvider {
 	public String getText(Object element) {
 		if(element instanceof TracerNode) {
 			try {
-				return ((TracerNode) element).getTracerItem().toString();
+				TracerItem item = ((TracerNode) element).getTracerItem();
+				
+				String result;
+				
+				result = item.getExpression().toString();
+				result += "\n\n";
+				result += item.getResult().toString();
+				
+				return result;
+				
+				//return ((TracerNode) element).getTracerItem().toString();
 			} catch (NullPointerException e) {
 				/* TODO Lars: FIXME */
 				return "NULLPOINTEREXCEPTION !!!!!!!!!!!!!!!!!!!!!!!!!!!!";
