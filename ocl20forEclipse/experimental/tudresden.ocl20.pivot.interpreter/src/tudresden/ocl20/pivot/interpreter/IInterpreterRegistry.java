@@ -61,7 +61,7 @@ public interface IInterpreterRegistry {
 	public void addInterpreterTraceListener(IInterpreterTraceListener listener);
 	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
 
-	public void fireInterpretationDepthIncreased(int hash);
+	public void fireInterpretationDepthIncreased(EObject expression);
 	public void fireInterpretationDepthDecreased();
 	public void firePartialInterpretionResult(EObject expression, OclAny result);
 	

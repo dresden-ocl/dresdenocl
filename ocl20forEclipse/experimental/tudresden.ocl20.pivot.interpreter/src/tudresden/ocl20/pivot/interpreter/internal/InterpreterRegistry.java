@@ -77,7 +77,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	 * TODO: Ronny: Document this
 	 */
 	@Override
-	public void fireInterpretationDepthIncreased(int hash) {
+	public void fireInterpretationDepthIncreased(EObject expression) {
 		
 		if (this.traceListeners != null) {
 			Object[] listeners;
@@ -88,7 +88,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 		
 				/* Inform the listeners that the interpretation did finish. */
 				((IInterpreterTraceListener) listeners[i])
-						.interpretationTreeDepthIncreased(hash);
+						.interpretationTreeDepthIncreased(expression);
 			}
 		}
 		// no else.

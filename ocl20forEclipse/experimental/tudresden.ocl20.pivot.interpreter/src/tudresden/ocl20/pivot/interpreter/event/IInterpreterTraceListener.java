@@ -1,5 +1,7 @@
 package tudresden.ocl20.pivot.interpreter.event;
 
+import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 
 
@@ -11,10 +13,10 @@ import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 public interface IInterpreterTraceListener {
 	
 	/**
-	 * @param hash 
-	 * 
+	 * @param expression
+	 * The expression (EObject in general) which is eveluated as reference
 	 */
-	void interpretationTreeDepthIncreased(int hash);
+	void interpretationTreeDepthIncreased(EObject expression);
 	
 	void interpretationTreeDepthDecreased();
 	
