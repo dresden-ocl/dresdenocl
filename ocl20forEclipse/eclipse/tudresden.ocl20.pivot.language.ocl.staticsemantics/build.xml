@@ -1,13 +1,9 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
-	<import file="./../tudresden.ocl20.pivot.language.ocl.semantics/build.xml"/>
+	<import file="./../tudresden.attributegrammar.integration.kiama/build.xml"/>
 	
 	<property name="oclStaticSemanticsBin" value="./../tudresden.ocl20.pivot.language.ocl.staticsemantics/bin"/>
 	<property name="oclStaticSemanticsSrc" value="./../tudresden.ocl20.pivot.language.ocl.staticsemantics/src"/>
-	
-	<target name="Clean all" depends="Clean all tudresden.ocl20.pivot.language.ocl.semantics">
-		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" />
-	</target>
 	
 	<target name="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" >
 		<mkdir dir="${oclStaticSemanticsBin}"/>
@@ -19,18 +15,18 @@
 		<antcall target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" />
 	</target>
 	
-	<target name="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" depends="Scala Compiler Init">		
+	<target name="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" depends="Compile tudresden.attributegrammar.integration.kiama">		
 
 		<mkdir dir="${oclStaticSemanticsBin}"/>
 		<echo message="Compile OclStaticSemanticsException.java" />
 		<javac
-			target="1.5"
+			target="1.6"
 			srcdir="${oclStaticSemanticsSrc}"
 			destdir="${oclStaticSemanticsBin}"
 			classpathref="build.classpath"
 			debug="on"
 			includes="**/OclStaticSemanticsException.java">
-			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.5 -g -warn:+boxing"/>
+			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.6 -g -warn:+boxing"/>
 		</javac>
 		
 		<echo message="Compile Scala Code" />
@@ -43,14 +39,14 @@
 		
 		<echo message="Compile Java Code" />
 		<javac
-			target="1.5"
+			target="1.6"
 			srcdir="${oclStaticSemanticsSrc}"
 			destdir="${oclStaticSemanticsBin}"
 			classpathref="build.classpath"
 			debug="on"
 			includes="**/*.java"
 			excludes="**/OclStaticSemanticsException.java">
-			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.5 -g -warn:+boxing"/>
+			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.6 -g -warn:+boxing"/>
 		</javac>
 		
 		<!-- delete scala source files in output folder -->

@@ -24,8 +24,10 @@
 			<dirset dir="./..">
       	<include name="tudresden.ocl20.**/bin"/>
 				<include name="org.kiama.**/bin"/>
+				<include name="tudresden.attributegrammar.integration.kiama/bin"/>
 				<include name="org.emftext.**/bin"/>
       </dirset>
+			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar"/>
 			<pathelement location="./../tudresden.ocl20.logging/lib/log4j-1.2.14.jar" />
     </path>
 

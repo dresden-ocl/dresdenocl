@@ -5,9 +5,13 @@ Bundle-SymbolicName: org.kiama.attribution
 Bundle-Version: 3.1.0.qualifier
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: scala.library;bundle-version="2.7.7",
- org.eclipse.core.runtime,
- org.eclipse.emf.ecore
-Export-Package: org.kiama.attribution,
- tudresden.attributegrammar.integration.kiama,
- tudresden.attributegrammar.integration.kiama.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ scala.library;bundle-version="2.9.1"
+Bundle-ClassPath: lib/kiama_2.9.0-1.1.0.jar,
+ .
+Export-Package: org.kiama,
+ org.kiama.attribution,
+ org.kiama.machine,
+ org.kiama.rewriting,
+ org.kiama.util

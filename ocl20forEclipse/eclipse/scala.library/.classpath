@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/scala-compiler.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry exported="true" kind="lib" path="scala.library_2.7.7.final.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/scala-library.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

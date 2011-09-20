@@ -1,24 +1,28 @@
 package tudresden.ocl20.pivot.language.ocl.staticsemantics.impl
 
+import collection.JavaConversions._
+
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.util._
 import tudresden.attributegrammar.integration.kiama._
-import tudresden.ocl20.pivot.language.ocl.semantics._
+import tudresden.ocl20.pivot.language.ocl._
 import tudresden.ocl20.pivot.pivotmodel._
-import tudresden.ocl20.pivot.pivotmodel.semantics._
 import tudresden.ocl20.pivot.essentialocl._
 import expressions._
 import types._
 import factory._
 import tudresden.ocl20.pivot.model._
-import Box._
+import tudresden.ocl20.pivot.language.ocl.staticsemantics._
+import tudresden.ocl20.pivot.language.ocl.staticsemantics.Box._
 
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
 
-import tudresden.attributegrammar.integration.kiama.util.CollectionConverterS2J._
-import tudresden.attributegrammar.integration.kiama.util.CollectionConverterJ2S._
+import org.kiama._
+import attribution._
+import Attribution._
 
-import org.kiama.attribution.Attribution._
+
+import AttributableEObject._
 
 
 trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
@@ -26,23 +30,23 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   abstract override def __isMultipleNavigationCall : Attributable ==> Box[Boolean] = {
   	childAttr {
       case child : AttributableEObject => {
-        case n@NavigationCallExp(source, featureCalls, ops) if child != source => {
-          featureCalls.zip(ops).find(child == _._1) match {
+        case n : NavigationCallExp if child != n.getSource => {
+          n.getFeatureCalls.zip(n.getNavigationOperator).find(child == _._1) match {
             case Some(fc) => Full(fc._2 == "->")
             case None => Empty
           }
         }
         // arguments of a chained operation call are not considered to be multiple
-        case i@ImplicitOperationCallCS(arguments, _) if arguments.contains(child.getEObject) => {
+        case i : ImplicitOperationCallCS if i.getArguments.contains(child.eObject) => {
           Full(false)
         }
-        case i@IteratorExpCS(_, `child`, _) => {
+        case i : IteratorExpCS if child == i.getBodyExpression => {
           Full(false)
         }
-        case i@IterateExpCS(_, _, `child`) => {
+        case i : IterateExpCS if child == i.getBodyExpression => {
           Full(false)
         }
-        case i : ImplicitFeatureCallCS => i->isMultipleNavigationCall
+        case i : ImplicitFeatureCallCS => isMultipleNavigationCall(i)
         case _ => super.__isMultipleNavigationCall(child)
       }
     }
@@ -51,17 +55,17 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   abstract override def __namespace : Attributable ==> Box[Namespace] = { 
     childAttr {
       case child => {
-        case PackageDeclarationWithNamespaceCS(_, namespace) if child != namespace => {
-          namespace->lastNamespace
+        case p : PackageDeclarationWithNamespaceCS if child != p.getNestedNamespace => {
+          lastNamespace(p.getNestedNamespace)
         }
-        case p@PackageDeclarationNestedNamespaceCS(_) => {
+        case p : PackageDeclarationNestedNamespaceCS => {
           val namespace = p.getNamespace
           if (namespace.eIsProxy)
           	Empty
           else
             Full(namespace)
         }
-        case t@TypePathNameNestedCS(_) => {
+        case t : TypePathNameNestedCS => {
           val namespace = t.getNamespace
           if (namespace.eIsProxy)
             Empty
@@ -75,15 +79,15 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   
   abstract override def __lastNamespace : Attributable ==> Box[Namespace] = {
     attr {
-      case p@PackageDeclarationNestedNamespaceCS(nestedNamespace) => {
-        if (nestedNamespace == null) {
+      case p : PackageDeclarationNestedNamespaceCS => {
+        if (p.getNestedNamespace == null) {
           val namespace = p.getNamespace
           if (namespace.eIsProxy)
             Empty
           else
             Full(namespace)
         } else
-          nestedNamespace->lastNamespace
+          lastNamespace(p.getNestedNamespace)
       }
       case unknown => super.__lastNamespace(unknown)
     }
@@ -93,8 +97,8 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
     childAttr {
       case child => {
         
-        case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS => {
-          (typeCS->oclType).flatMap{selfType =>
+        case c : ClassifierContextDeclarationCS if child != c.getTypeName => {
+          oclType(c.getTypeName).flatMap{selfType =>
 	          if (selfType.eIsProxy)
 	            Empty
 	          else
@@ -102,8 +106,8 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           }
         }
         
-        case o@OperationContextDeclarationCS(operation, _) if child != operation => {
-          val op = operation.getOperation
+        case o : OperationContextDeclarationCS if child != o.getOperation => {
+          val op = o.getOperation.getOperation
           if (op.eIsProxy)
             Empty
           else {
@@ -117,8 +121,8 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           }
         }
         
-        case o@AttributeContextDeclarationCS(typeName, _, _) if child != typeName => {
-          (typeName->oclType).flatMap{tipe =>
+        case a : AttributeContextDeclarationCS if child != a.getTypeName => {
+          oclType(a.getTypeName).flatMap{tipe =>
             Full(factory.createVariable("self", tipe, null))
           }
         }
@@ -131,9 +135,9 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   abstract override def __context : Attributable ==> Box[ConstrainableElement] = {
     childAttr {
       case child => {
-        case ClassifierContextDeclarationCS(typeCS, _) => typeCS->oclType
-        case OperationContextDeclarationCS(operation, _) => {
-          val op = operation.getOperation
+        case c : ClassifierContextDeclarationCS => oclType(c.getTypeName)
+        case o : OperationContextDeclarationCS => {
+          val op = o.getOperation.getOperation
           if (op.eIsProxy)
             Empty
           else
@@ -155,12 +159,12 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
     childAttr {
       case child : AttributableEObject => {
         
-        case c@ClassifierContextDeclarationCS(typeCS, _) if child != typeCS =>
-          for (self <- child->self) yield (List(self), List())
+        case c : ClassifierContextDeclarationCS if child != c.getTypeName =>
+          for (self <- self(child)) yield (List(self), List())
         
-        case o@OperationContextDeclarationCS(operation, _) if child != operation => {
-          (child->self).flatMap{self =>
-	          val parametersEOcl = operation.getParameters.map(p => p.getParameter)
+        case o : OperationContextDeclarationCS if child != o.getOperation => {
+          self(child).flatMap{self =>
+	          val parametersEOcl = o.getOperation.getParameters.map(p => p.getParameter)
 				    parametersEOcl.find(_.eIsProxy) match {
 				      case Some(couldNotResolve) => Empty
 				      case None => {
@@ -169,21 +173,21 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
 					        variable.setName(param.getName)
 					        variable.setRepresentedParameter(param)
 					        variable
-				        }
-				        Full(List(self), newVars)
+				        }.toList
+				        Full((List(self), newVars))
 				      }
 		        }
           }
         }
         
         case a : AttributeContextDeclarationCS =>
-          for (self <- child->self) yield (List(self), List())
+          for (self <- self(child)) yield (List(self), List())
         
         case p : PostConditionDeclarationCS => {
-          (p->context).flatMap {context =>
+          context(p).flatMap {context =>
 	          context match {
 	            case o : Operation => {
-	              (p->variables).flatMap{case (implicitVariables, explicitVariables) =>
+	              variables(p).flatMap{case (implicitVariables, explicitVariables) =>
 		              val result = ExpressionsFactory.INSTANCE.createVariable
 				          result.setName("result")
 				          result.setType(o.getType)
@@ -196,9 +200,9 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           }
         }
         
-        case d@DefinitionExpOperationCS(operation, _, _) => {
-          (d->variables).flatMap{case (implicitVariables, explicitVariables) =>
-	          val parametersEOcl = operation.getParameters.map(p => p.getParameter)
+        case d : DefinitionExpOperationCS => {
+          variables(d).flatMap{case (implicitVariables, explicitVariables) =>
+	          val parametersEOcl = d.getOperation.getParameters.map(p => p.getParameter)
 				    parametersEOcl.find(_.eIsProxy) match {
 				      case Some(couldNotResolve) => Empty
 				      case None => {
@@ -207,17 +211,17 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
 					        variable.setName(param.getName)
 					        variable.setRepresentedParameter(param)
 					        variable
-				        }
+				        }.toList
 				        Full(implicitVariables, newVars:::explicitVariables)
 				      }
 		        }
           }
         }
         
-        case l@LetExpCS(variableDeclarations, _) if !variableDeclarations.contains(child.getEObject) => {
-          val last = variableDeclarations.last
-          (last->variables).flatMap{case (implicitVariables, explicitVariables) =>
-            (last.getInitialization->computeOclExpression).flatMap{initExp =>
+        case l : LetExpCS if !l.getVariableDeclarations.contains(child.eObject) => {
+          val last = l.getVariableDeclarations.last
+          variables(last).flatMap{case (implicitVariables, explicitVariables) =>
+            computeOclExpression(last.getInitialization).flatMap{initExp =>
 	            checkVariableDeclarationType(last).flatMap{tipe =>
 	              Full(implicitVariables, factory.createVariable(last.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
 	            }
@@ -226,13 +230,13 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
         }
         
         // a let exp with multiple variables can have references to previously defined vars
-        case l@LetExpCS(variableDeclarations, _) => {
+        case l : LetExpCS => {
           if (child.isFirst)
-            l->variables
+            variables(l)
           else {
             val prev = child.prev.asInstanceOf[VariableDeclarationWithInitCS]
-            ((prev)->variables).flatMap{ case (implicitVariables, explicitVariables) =>
-              (prev.getInitialization->computeOclExpression).flatMap{initExp =>
+            variables(prev).flatMap{ case (implicitVariables, explicitVariables) =>
+              computeOclExpression(prev.getInitialization).flatMap{initExp =>
 		            checkVariableDeclarationType(prev).flatMap{tipe =>
 		              Full(implicitVariables, factory.createVariable(prev.getVariableName.getSimpleName, tipe, initExp)::explicitVariables)
 		            }
@@ -241,12 +245,12 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
           }
         }
         
-        case i@IteratorExpCS(iteratorVariables, _, _) => {
-        	(i->sourceExpression).flatMap{se =>
-	          (i->variables).flatMap{case (implicitVariables, explicitVariables) =>
-	            val iteratorVariablesEOcl = iteratorVariables.flatMap{iv =>
+        case i : IteratorExpCS => {
+        	sourceExpression(i).flatMap{se =>
+	          variables(i).flatMap{case (implicitVariables, explicitVariables) =>
+	            val iteratorVariablesEOcl = i.getIteratorVariables.flatMap{iv =>
 	              if (iv.getTypeName != null) {
-		              (iv.getTypeName->oclType).flatMap{tipe =>
+		              oclType(iv.getTypeName).flatMap{tipe =>
 			              if (!tipe.conformsTo(determineTypeOf(se)))
 			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
 	                                determineTypeOf(se).getName, iv)
@@ -258,61 +262,61 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
 	                Full(factory.createVariable(iv.getVariableName.getSimpleName, determineTypeOf(se), null))
 	            }
 	            // if something went wrong on iterator variable evaluation, return Empty
-	            if (iteratorVariablesEOcl.size != iteratorVariables.size)
+	            if (iteratorVariablesEOcl.size != i.getIteratorVariables.size)
                 Empty
               else
-		            Full(
+		            Full((
 		              // implicit variables
-		            	if (iteratorVariables.isEmpty)
+		            	if (i.getIteratorVariables.isEmpty)
 			            	(factory.createVariable("$implicitVariable" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))::implicitVariables
 			            else
 		                implicitVariables
 		              ,
 		              // explicit variables
-		              if (iteratorVariables.size == 2)
+		              if (i.getIteratorVariables.size == 2)
 	                  iteratorVariablesEOcl.first::iteratorVariablesEOcl.get(1)::explicitVariables
 	                else
-	                  if (iteratorVariables.isEmpty)
+	                  if (i.getIteratorVariables.isEmpty)
 	                  	explicitVariables
                     else
                       iteratorVariablesEOcl.first::explicitVariables
-			          )
+			          ))
 	          }
 	        }
         }
         
-        case i@IterateExpCS(iteratorVariable, resultVariable, _) if child != resultVariable => {
-          (i->variables).flatMap{case (implicitVariables, explicitVariables) =>
-            (i->sourceExpression).flatMap{se =>
-              if (iteratorVariable != null) {
-	              if (iteratorVariable.getTypeName != null) {
-		              (iteratorVariable.getTypeName->oclType).flatMap{tipe =>
+        case i: IterateExpCS if child != i.getResultVariable => {
+          variables(i).flatMap{case (implicitVariables, explicitVariables) =>
+            sourceExpression(i).flatMap{se =>
+              if (i.getIteratorVariable != null) {
+	              if (i.getIteratorVariable.getTypeName != null) {
+		              oclType(i.getIteratorVariable.getTypeName).flatMap{tipe =>
 			              if (!tipe.conformsTo(determineTypeOf(se)))
 			              	yieldFailure("Expected type " + tipe.getName + ", but found " + 
-	                                determineTypeOf(se).getName, iteratorVariable)
+	                                determineTypeOf(se).getName, i.getIteratorVariable)
 			              else
-			              	Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, tipe, null))
+			              	Full(factory.createVariable(i.getIteratorVariable.getVariableName.getSimpleName, tipe, null))
 			            }
 	              }
 	              else
-	                Full(factory.createVariable(iteratorVariable.getVariableName.getSimpleName, determineTypeOf(se), null))
+	                Full(factory.createVariable(i.getIteratorVariable.getVariableName.getSimpleName, determineTypeOf(se), null))
               } else {
               	Full(factory.createVariable("$implicitIterateVar" + ImplicitVariableNumberGenerator.getNumber + "$", determineTypeOf(se), null))
               }
             }.flatMap{iv =>
-              (resultVariable.getInitialization->computeOclExpression).flatMap{initExp =>
-	              checkVariableDeclarationType(resultVariable).flatMap{tipe =>
-	              	Full(
-	              	  if (iteratorVariable != null)
+              computeOclExpression(i.getResultVariable.getInitialization).flatMap{initExp =>
+	              checkVariableDeclarationType(i.getResultVariable).flatMap{tipe =>
+	              	Full((
+	              	  if (i.getIteratorVariable != null)
 	              	  	implicitVariables
 	              	  else
 	              	  	iv::implicitVariables
                     ,
-                    if (iteratorVariable != null)
-                    	iv::factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables
+                    if (i.getIteratorVariable != null)
+                    	iv::factory.createVariable(i.getResultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables
                     else
-                      factory.createVariable(resultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables
-	              	)
+                      factory.createVariable(i.getResultVariable.getVariableName.getSimpleName, tipe, initExp)::explicitVariables
+	              	))
 	              }
               }
             }
@@ -326,7 +330,7 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   
   abstract override def __oclType : Attributable ==> Box[Type] = {
     attr {
-      case v@NamedLiteralExpCS() => {
+      case v : NamedLiteralExpCS => {
         val namedElement = v.getNamedElement
         if (namedElement.eIsProxy)
           Empty
@@ -336,34 +340,34 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
             case t : Type => Full(t)
           }
       }
-      case t@TypePathNameSimpleCS() => {
+      case t : TypePathNameSimpleCS => {
         val `type` = t.getTypeName
         if (`type`.eIsProxy)
           Empty
         else
           Full(`type`)
       }
-      case t@TypePathNameNestedCS(typePathName) => {
-        typePathName->oclType
+      case t : TypePathNameNestedCS => {
+        oclType(t.getTypePathName)
       }
-      case t@TupleTypeCS(variableDeclarationList) => {
-        val properties = variableDeclarationList.getVariableDeclarations.flatMap{vd =>
-          (vd->computeFeature).flatMap{case (feature, _) =>
+      case t : TupleTypeCS => {
+        val properties = t.getVariableDeclarationList.getVariableDeclarations.flatMap{vd =>
+          computeFeature(vd).flatMap{case (feature, _) =>
             Full(feature.asInstanceOf[Property])
           }
         }
-        if (variableDeclarationList.getVariableDeclarations.size != properties.size)
+        if (t.getVariableDeclarationList.getVariableDeclarations.size != properties.size)
           Empty
         else
         	Full(oclLibrary.makeTupleType(properties))
       }
-      case c@CollectionTypeIdentifierCS(genericType) => {
+      case c : CollectionTypeIdentifierCS => {
         val `type` = c.getTypeName
         if (`type`.eIsProxy)
           Empty
         else {
-          if (genericType != null) {
-            (genericType->oclType).flatMap{gt =>
+          if (c.getGenericType != null) {
+            oclType(c.getGenericType).flatMap{gt =>
               `type` match {
                 case b : BagType => Full(oclLibrary.getBagType(gt))
                 case s : SetType => Full(oclLibrary.getSetType(gt))
@@ -376,79 +380,79 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
             Full(`type`)
         }
       }
-      case v@VariableDeclarationWithInitCS(_, typeName, init, _) => {
+      case v : VariableDeclarationWithInitCS => {
         // TODO: should this always have a type?
-        if (typeName != null)
-          typeName->oclType
+        if (v.getTypeName != null)
+          oclType(v.getTypeName)
         else
-          for (initExp <- init->computeOclExpression;
-               `type` <- initExp->oclType) 
+          for (initExp <- computeOclExpression(v.getInitialization);
+               `type` <- oclType(initExp)) 
             yield `type`
       }
-      case v@VariableDeclarationWithoutInitCS(_, typeName) => {
-        typeName->oclType
+      case v : VariableDeclarationWithoutInitCS => {
+        oclType(v.getTypeName)
       }
-      case c@CollectionLiteralExpCS(collectionType, _) => {
-        collectionType->oclType
+      case c : CollectionLiteralExpCS => {
+        oclType(c.getCollectionType)
       }
-      case c@CollectionLiteralPartsOclExpCS(oclExpression) => {
-        oclExpression->oclType
+      case c : CollectionLiteralPartsOclExpCS => {
+        oclType(c.getOclExpression)
       }
-      case c@CollectionRangeCS(from, to) => {
-        for (fromType <- from->oclType;
-             toType <- to->oclType
+      case c : CollectionRangeCS => {
+        for (fromType <- oclType(c.getFrom);
+             toType <- oclType(c.getTo)
         		 if (fromType.conformsTo(toType)))
 	        yield {
 	          fromType.commonSuperType(toType)
 	        }
       }
-      case NavigationCallExp(source, featureCalls, op) => {
-        if (featureCalls.isEmpty)
-          source->oclType
+      case n : NavigationCallExp => {
+        if (n.getFeatureCalls.isEmpty)
+          oclType(n.getSource)
         else
-          featureCalls.last->oclType
+          oclType(n.getFeatureCalls.last)
       }
-      case i@ImplicitPropertyCallCS(_) => {
+      case i : ImplicitPropertyCallCS => {
         val property = i.getProperty
         if (property.eIsProxy)
           Empty
         else
           Full(property.getType)
       }
-      case i@ImplicitOperationCallCS(_, _) => {
+      case i : ImplicitOperationCallCS => {
         val operation = i.getOperationName
         if (operation.eIsProxy)
           Empty
         else
           Full(operation.getType)
       }
-      case o@OperationCallBinaryExpCS(source, target, _, operationName) => {
-        for (sourceType <- source->oclType;
-        		 targetType <- target->oclType;
-        		 operation <- !!(sourceType.lookupOperation(operationName, Array(targetType))))
+      case o : OperationCallBinaryExpCS => {
+        for (sourceType <- oclType(o.getSource);
+        		 targetType <- oclType(o.getTarget);
+        		 operation <- !!(sourceType.lookupOperation(o.getOperationName, List(targetType))))
           yield {
         		operation.getType
         	}
       }
-      case IntegerLiteralExpCS(_) => {
+      case _ : IntegerLiteralExpCS => {
         Full(oclLibrary.getOclInteger)
       }
-      case RealLiteralExpCS(_, _, _) => {
+      case _ : RealLiteralExpCS => {
         Full(oclLibrary.getOclReal)
       }
-      case BooleanLiteralExpCS(_) => {
+      case _ : BooleanLiteralExpCS => {
         Full(oclLibrary.getOclBoolean)
       }
-      case StringLiteralExpCS(_) => {
+      case _ : StringLiteralExpCS => {
         Full(oclLibrary.getOclString)
       }
-      case IterateExpCS(_, resultVariable, _) => {
-        for (innerType <- resultVariable->oclType) yield {
+      case i : IterateExpCS => {
+        for (innerType <- oclType(i.getResultVariable)) yield {
           innerType
         }
       }
-      case IteratorExpCS(_, _, name) => {
-        name match {
+      case i : IteratorExpCS => {
+        i.getIteratorName match {
           // FIXME: how to determine source type?
           case "select" => Empty
         }
@@ -460,25 +464,25 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   abstract override def __sourceExpression : Attributable ==> Box[OclExpression] = {
     childAttr {
       case child : AttributableEObject => {
-        case c : ContextDeclarationCS =>  for (self <- child->self) yield factory.createVariableExp(self)
-        case n@NavigationCallExp(source, featureCalls, op) if child != source => {
+        case c : ContextDeclarationCS =>  for (self <- self(child)) yield factory.createVariableExp(self)
+        case n : NavigationCallExp if child != n.getSource => {
           if (child.isFirst)
-            source->computeOclExpression
+            computeOclExpression(n.getSource)
           else
-            child.prev->computeOclExpression
+            computeOclExpression(child.prev[AttributableEObject])
         }
-        case o@OperationCallBaseExpCS(arguments, _) if arguments.contains(child.getEObject) => {
-          (child->variables).flatMap{case (implicitVariables, explicitVariables) =>
+        case o : OperationCallBaseExpCS if o.getArguments.contains(child.eObject) => {
+          variables(child).flatMap{case (implicitVariables, explicitVariables) =>
             Full(factory.createVariableExp(implicitVariables.first))
           }
         }
-        case i@IteratorExpCS(iteratorVariables, bodyExpression, _) if child == bodyExpression => {
-          (child->variables).flatMap{case (implicitVariables, explicitVariables) =>
+        case i : IteratorExpCS if child == i.getBodyExpression => {
+          variables(child).flatMap{case (implicitVariables, explicitVariables) =>
             Full(factory.createVariableExp(implicitVariables.first))
           }
         }
-        case i@IterateExpCS(_, resultVariable, bodyExpression) if child == bodyExpression || child == resultVariable => {
-          (child->variables).flatMap{case (implicitVariables, explicitVariables) =>
+        case i : IterateExpCS if (child == i.getBodyExpression) || (child == i.getResultVariable) => {
+          variables(child).flatMap{case (implicitVariables, explicitVariables) =>
             Full(factory.createVariableExp(implicitVariables.first))
           }
         }
@@ -499,9 +503,9 @@ trait OclAttributesImpl extends OclAttributes {selfType : OclStaticSemantics =>
   abstract override def __isInStaticContext : Attributable ==> Boolean = {
     childAttr {
       case child => {
-        case DefinitionExpCS(_, true) => true
-        case OperationContextDeclarationCS(operationDefinition, _) => {
-          val operation = operationDefinition.getOperation
+        case d : DefinitionExpCS => d.isStatic
+        case o : OperationContextDeclarationCS => {
+          val operation = o.getOperation.getOperation
           if (operation.eIsProxy)
             false
           else
