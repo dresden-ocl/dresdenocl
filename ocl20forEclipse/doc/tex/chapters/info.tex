@@ -232,6 +232,12 @@ contains \code{null} values but the condition results in \code{true} or
 \code{false} (e.g., \code{oclIsUndefined()}), the result will not be 
 \code{invalid}.
 
+A further difference between the \acs{OCL} specification and the semantics in
+Dresden \acs{OCL} exists for the \texttt{closure()} iterator. According to the
+specification, the \texttt{closure()} iterator computes its result based on a
+depth-first search~\cite[Sect.~7.6.5]{spec:OCL2-3}, whereas results in Dresden
+\acs{OCL} are computed based on breadth-first search, due to performance reasons.
+
 
 \subsubsection{Handling of Null values}
 
