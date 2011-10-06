@@ -1,17 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tracer
+Bundle-Name: %pluginName
 Bundle-SymbolicName: tudresden.ocl20.pivot.tracer;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.tracer.TracerPlugin
-Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.pivotmodel;bundle-version="3.1.0"
-Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: tudresden.ocl20.pivot.essentialocl.expressions,
- tudresden.ocl20.pivot.essentialocl.standardlibrary,
+export-package: tudresden.ocl20.pivot.tracer,
+ tudresden.ocl20.pivot.tracer.model,
+ tudresden.ocl20.pivot.tracer.tracermodel
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ tudresden.ocl20.pivot.essentialocl;visibility:=reexport,
+ tudresden.ocl20.pivot.pivotmodel;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Import-Package: tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.interpreter,
  tudresden.ocl20.pivot.interpreter.event,
  tudresden.ocl20.pivot.interpreter.event.internal
-Export-Package: tudresden.ocl20.pivot.tracer,
- tudresden.ocl20.pivot.tracer.model

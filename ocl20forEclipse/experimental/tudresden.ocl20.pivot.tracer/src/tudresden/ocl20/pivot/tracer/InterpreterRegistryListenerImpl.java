@@ -1,97 +1,73 @@
 package tudresden.ocl20.pivot.tracer;
 
+import java.util.Iterator;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
-import tudresden.ocl20.pivot.tracer.model.TracerItem;
-import tudresden.ocl20.pivot.tracer.model.TracerNode;
-import tudresden.ocl20.pivot.tracer.model.TracerTree;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
 
 public class InterpreterRegistryListenerImpl implements IInterpreterTraceListener {
-	private TracerTree tree;
-	private TracerNode currentParent;
-	
-	//Just for debugging
-	//TODO: Ronny: REMOVE, Just for debugging purposes!
-	private int depth;
+	private TracerItem root;
+	private TracerItem currentParent;
+	private TracermodelFactory factory;
 	
 	public InterpreterRegistryListenerImpl() {
-		System.out.println("Tracer: New!");
-		
-		//TODO: Remove!
-		depth=0;
-		tree = null;
-		currentParent = null;
+		root = currentParent = null;
+		factory = TracermodelFactory.eINSTANCE;
 	}
 	
-	
-	/*
-	 * This method places dummy entries into the tree to
-	 * set up the tree structure. Each entry is recognized
-	 * by a hash.
-	 * This has to be done since the results for this entry
-	 * are sent later on with the @see{partialInterpretationFinished}
-	 * notification to be completed with information regarding
-	 * this interpretation.
-	 */
 	public void interpretationTreeDepthIncreased(EObject reference) {
+		TracerItem dummy = factory.createTracerItem();
+		dummy.setExpression(reference);
 		
-		System.out.println("Tracer: Increase[" + ++depth + "]" );
-		
-		/* Add a dummy node to the tree */
-		TracerNode dummyNode = new TracerNode(currentParent, null, reference);
-		
-		/* This is the first item inserted into the tree */
-		if(tree == null) {
-			tree = new TracerTree(dummyNode);
+		if(currentParent == null) {
+			//there has been no insertion before
+			//this is the first item in the tree
+			root = currentParent = dummy;
+		} else {
+			currentParent.getChildren().add(dummy);
+			dummy.setParent(currentParent);
+			currentParent = dummy;
 		}
-		else {
-			currentParent.addChild(dummyNode);
-		}
-		currentParent = dummyNode;
 	}
 	
 	public void interpretationTreeDepthDecreased() {
-	
-		System.out.println("Tracer: Decrease[" + --depth + "]" );
-		
 		if(currentParent != null) {
 			if(currentParent.getParent() != null) {
-				currentParent = currentParent.getParent();
-			}
-			else {
-				currentParent = tree.getRootElement();
+				if(currentParent.getParent() instanceof TracerItem) {
+					currentParent = (TracerItem)currentParent.getParent();
+				}
+				//no else
+			} else {
+				currentParent = root;
 			}
 		}
 		//no else
 	}
 
 	public void partialInterpretationFinished(InterpreterTraceEvent event) {
-		
-		System.out.println("Tracer: " + (event==null?"null":event.getResult()) + "[" +depth+ "]");
-		
-		TracerNode[] tmpArray = currentParent.getChildren();
-		TracerItem item = new TracerItem(event.getExpression(), event.getResult());
+		EList<TracerItem> list = currentParent.getChildren();
+		Iterator<TracerItem> it = list.iterator();
 		boolean found = false;
 		
-		for(TracerNode n : tmpArray) {
-			/* check which child is recognized by this expression*/
-			if(n.isReference(event.getExpression())) {
-				/* set the item into the dummy */
-				n.setTracerItem(item);
+		while(it.hasNext() && !found) {
+			TracerItem item = it.next();
+			if(item.getExpression().equals(event.getExpression())) {
+				item.setResult(event.getResult());
 				found = true;
 			}
+			//no else
 		}
-		/* Check if the item has to be added in the current level */
 		if(!found) {
-			TracerNode node = new TracerNode(currentParent, item, event.getExpression());
-			currentParent.addChild(node);
+			System.out.println("KEINE UEBEREINSTIMMUNG GEFUNDEN");
 		}
 	}
 	
-	public TracerTree getTree() {
-		return tree;
+	public TracerItem getTree() {
+		return root;
 	}
 }

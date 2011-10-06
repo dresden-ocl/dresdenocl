@@ -44,18 +44,17 @@ public class TracerNode {
 		return result;
 	}
 	
-	/**
-	 * 
-	 * @param compareToHash int to compare with
-	 * @return true if the local stored hash has the same value as compareToHash
-	 * 	otherwise false
-	 */
 	public boolean isReference(EObject reference) {
 		//TODO: remove reference == null
-		return this.reference==null?false:this.reference.equals(reference);
+		//return this.reference==null?false:this.reference.equals(reference);
+		return this.reference.equals(reference);
 	}
 	
 	public void setTracerItem(TracerItem item) {
 		this.tracerItem = item;
+	}
+	
+	public EObject getReference() {
+		return this.reference;
 	}
 }

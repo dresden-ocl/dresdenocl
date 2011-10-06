@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.tracer/src"
+    editDirectory="/tudresden.ocl20.pivot.tracer/src" modelPluginID="tudresden.ocl20.pivot.tracer"
+    modelName="Tracermodel" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
+    copyrightFields="false">
+  <foreignModel>tracermodel.ecore</foreignModel>
+  <genPackages prefix="Tracermodel" basePackage="tudresden.ocl20.pivot.tracer" disposableProviderFactory="true"
+      ecorePackage="tracermodel.ecore#/">
+    <genDataTypes ecoreDataType="tracermodel.ecore#//OclAny"/>
+    <genClasses ecoreClass="tracermodel.ecore#//TracerItem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/expression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute tracermodel.ecore#//TracerItem/result"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/parent"/>
+      <genOperations ecoreOperation="tracermodel.ecore#//TracerItem/hasChildren"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

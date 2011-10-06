@@ -1069,7 +1069,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(expressionInOcl.getBodyExpression(), result);
+				.firePartialInterpretionResult(expressionInOcl, result);
 		}
 		// no else.
 
@@ -4045,7 +4045,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(variable.getInitExpression(), result);
+				.firePartialInterpretionResult(variable, result);
 		}
 
 		return result;
