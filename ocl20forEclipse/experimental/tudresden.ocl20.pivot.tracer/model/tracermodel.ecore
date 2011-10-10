@@ -4,13 +4,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracermodel"
     nsURI="http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel" nsPrefix="tracermodel">
   <eClassifiers xsi:type="ecore:EClass" name="TracerItem">
-    <eOperations name="hasChildren" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="result" eType="#//OclAny"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//TracerItem"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//TracerItem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
+        upperBound="-1" eType="#//TracerItem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="OclAny" instanceClassName="tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny"/>
 </ecore:EPackage>

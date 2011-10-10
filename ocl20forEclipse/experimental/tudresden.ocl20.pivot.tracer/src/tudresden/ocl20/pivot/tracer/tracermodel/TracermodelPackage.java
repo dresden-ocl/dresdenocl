@@ -89,22 +89,22 @@ public interface TracermodelPackage extends EPackage {
 	int TRACER_ITEM__RESULT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRACER_ITEM__CHILDREN = 2;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACER_ITEM__PARENT = 3;
+	int TRACER_ITEM__PARENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACER_ITEM__CHILDREN = 3;
 
 	/**
 	 * The number of structural features of the '<em>Tracer Item</em>' class.
@@ -159,17 +159,6 @@ public interface TracermodelPackage extends EPackage {
 	EAttribute getTracerItem_Result();
 
 	/**
-	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Children</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren()
-	 * @see #getTracerItem()
-	 * @generated
-	 */
-	EReference getTracerItem_Children();
-
-	/**
 	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,6 +168,17 @@ public interface TracermodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTracerItem_Parent();
+
+	/**
+	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Children</em>'.
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren()
+	 * @see #getTracerItem()
+	 * @generated
+	 */
+	EReference getTracerItem_Children();
 
 	/**
 	 * Returns the meta object for data type '{@link tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny <em>Ocl Any</em>}'.
@@ -240,20 +240,20 @@ public interface TracermodelPackage extends EPackage {
 		EAttribute TRACER_ITEM__RESULT = eINSTANCE.getTracerItem_Result();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TRACER_ITEM__CHILDREN = eINSTANCE.getTracerItem_Children();
-
-		/**
 		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRACER_ITEM__PARENT = eINSTANCE.getTracerItem_Parent();
+
+		/**
+		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACER_ITEM__CHILDREN = eINSTANCE.getTracerItem_Children();
 
 		/**
 		 * The meta object literal for the '<em>Ocl Any</em>' data type.

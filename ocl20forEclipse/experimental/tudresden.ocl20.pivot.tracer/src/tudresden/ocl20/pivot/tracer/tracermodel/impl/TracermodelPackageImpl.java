@@ -134,7 +134,7 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTracerItem_Children() {
+	public EReference getTracerItem_Parent() {
 		return (EReference)tracerItemEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -143,7 +143,7 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTracerItem_Parent() {
+	public EReference getTracerItem_Children() {
 		return (EReference)tracerItemEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -187,8 +187,8 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 		tracerItemEClass = createEClass(TRACER_ITEM);
 		createEReference(tracerItemEClass, TRACER_ITEM__EXPRESSION);
 		createEAttribute(tracerItemEClass, TRACER_ITEM__RESULT);
-		createEReference(tracerItemEClass, TRACER_ITEM__CHILDREN);
 		createEReference(tracerItemEClass, TRACER_ITEM__PARENT);
+		createEReference(tracerItemEClass, TRACER_ITEM__CHILDREN);
 
 		// Create data types
 		oclAnyEDataType = createEDataType(OCL_ANY);
@@ -227,10 +227,8 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 		initEClass(tracerItemEClass, TracerItem.class, "TracerItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTracerItem_Expression(), ecorePackage.getEObject(), null, "expression", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTracerItem_Result(), this.getOclAny(), "result", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTracerItem_Children(), this.getTracerItem(), null, "children", null, 0, -1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTracerItem_Parent(), this.getTracerItem(), null, "parent", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(tracerItemEClass, ecorePackage.getEBoolean(), "hasChildren", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEReference(getTracerItem_Children(), this.getTracerItem(), null, "children", null, 0, -1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(oclAnyEDataType, OclAny.class, "OclAny", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

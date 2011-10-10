@@ -41,7 +41,7 @@ public class TracerContentProvider implements ITreeContentProvider {
 
 	public boolean hasChildren(Object element) {
 		if(element instanceof TracerItem) {
-			return ((TracerItem) element).hasChildren();
+			return ((TracerItem)element).getChildren().size() > 0;
 		} else {
 			return false;
 		}

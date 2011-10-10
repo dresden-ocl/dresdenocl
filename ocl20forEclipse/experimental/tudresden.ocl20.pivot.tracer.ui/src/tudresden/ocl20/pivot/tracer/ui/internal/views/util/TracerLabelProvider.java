@@ -41,37 +41,37 @@ public class TracerLabelProvider implements ILabelProvider {
 	public String getText(Object element) {
 		String result = new String();
 		
-		if(element instanceof TracerItem) {
-			EObject ref = ((TracerItem)element).getExpression();
+		if(element instanceof TracerNode) {
+			EObject expr = ((TracerItem)element).getExpression();
 			OclAny res = ((TracerItem)element).getResult();
 			
 			//check the type of the expression
-			if(ref instanceof Variable) {
-				result = ((Variable)ref).getName();
+			if(expr instanceof Variable) {
+				result = ((Variable)expr).getName();
 			}
-			else if(ref instanceof PropertyCallExp) {
-				result = ((PropertyCallExp)ref)
+			else if(expr instanceof PropertyCallExp) {
+				result = ((PropertyCallExp)expr)
 						.getReferredProperty().getName();
 			}
-			else if(ref instanceof OperationCallExp) {
-				OperationCallExp tmp = (OperationCallExp)ref;
+			else if(expr instanceof OperationCallExp) {
+				OperationCallExp tmp = (OperationCallExp)expr;
 				result = (tmp.getReferredOperation() != null) ?
 						tmp.getReferredOperation().getName() : tmp.getName();
 			}
-			else if(ref instanceof BooleanLiteralExp) {
-				result = ((BooleanLiteralExp)ref).getName();
+			else if(expr instanceof BooleanLiteralExp) {
+				result = ((BooleanLiteralExp)expr).getName();
 			}
-			else if(ref instanceof ExpressionInOcl) {
-				result = ((ExpressionInOcl)ref)
-						.getBody().substring(2);
+			else if(expr instanceof ExpressionInOcl) {
+				result = ((ExpressionInOcl)expr)
+						.getBody().trim();
 			}
-			else if(ref instanceof Constraint) {
-				result = ((Constraint)ref)
+			else if(expr instanceof Constraint) {
+				result = ((Constraint)expr)
 						.getSpecification().getBody().trim();
 			}
 			/* Show the canonical class name for debug purpose */
 			else {
-				result = ref.getClass().getCanonicalName();
+				result = expr.getClass().getCanonicalName();
 			}
 			
 			if(res != null) {

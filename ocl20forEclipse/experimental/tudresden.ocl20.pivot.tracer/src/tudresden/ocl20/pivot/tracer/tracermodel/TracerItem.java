@@ -22,8 +22,8 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression <em>Expression</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult <em>Result</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}</li>
  * </ul>
  * </p>
  *
@@ -85,32 +85,12 @@ public interface TracerItem extends EObject {
 	void setResult(OclAny value);
 
 	/**
-	 * Returns the value of the '<em><b>Children</b></em>' reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Children</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Children</em>' reference list.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_Children()
-	 * @model
-	 * @generated
-	 */
-	EList<TracerItem> getChildren();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model
-	 * @generated
-	 */
-	boolean hasChildren();
-
-	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' reference.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parent</em>' reference.
 	 * @see #setParent(TracerItem)
@@ -129,5 +109,21 @@ public interface TracerItem extends EObject {
 	 * @generated
 	 */
 	void setParent(TracerItem value);
+
+	/**
+	 * Returns the value of the '<em><b>Children</b></em>' reference list.
+	 * The list contents are of type {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Children</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Children</em>' reference list.
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_Children()
+	 * @model ordered="false"
+	 * @generated
+	 */
+	EList<TracerItem> getChildren();
 
 } // TracerItem

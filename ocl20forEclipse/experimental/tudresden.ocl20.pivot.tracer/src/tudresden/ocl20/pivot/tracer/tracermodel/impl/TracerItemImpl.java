@@ -36,8 +36,8 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getResult <em>Result</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,16 +75,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	protected OclAny result = RESULT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<TracerItem> children;
-
-	/**
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,6 +83,16 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @ordered
 	 */
 	protected TracerItem parent;
+
+	/**
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TracerItem> children;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -182,18 +182,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TracerItem> getChildren() {
-		if (children == null) {
-			children = new EObjectResolvingEList<TracerItem>(TracerItem.class, this, TracermodelPackage.TRACER_ITEM__CHILDREN);
-		}
-		return children;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public TracerItem getParent() {
 		if (parent != null && parent.eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject)parent;
@@ -204,15 +192,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			}
 		}
 		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public boolean hasChildren() {
-		return this.getChildren().size() > 0;
 	}
 
 	/**
@@ -241,6 +220,18 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<TracerItem> getChildren() {
+		if (children == null) {
+			children = new EObjectResolvingEList<TracerItem>(TracerItem.class, this, TracermodelPackage.TRACER_ITEM__CHILDREN);
+		}
+		return children;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -262,11 +253,11 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 				return getExpression();
 			case TracermodelPackage.TRACER_ITEM__RESULT:
 				return getResult();
-			case TracermodelPackage.TRACER_ITEM__CHILDREN:
-				return getChildren();
 			case TracermodelPackage.TRACER_ITEM__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
+			case TracermodelPackage.TRACER_ITEM__CHILDREN:
+				return getChildren();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -286,12 +277,12 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			case TracermodelPackage.TRACER_ITEM__RESULT:
 				setResult((OclAny)newValue);
 				return;
+			case TracermodelPackage.TRACER_ITEM__PARENT:
+				setParent((TracerItem)newValue);
+				return;
 			case TracermodelPackage.TRACER_ITEM__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends TracerItem>)newValue);
-				return;
-			case TracermodelPackage.TRACER_ITEM__PARENT:
-				setParent((TracerItem)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -311,11 +302,11 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			case TracermodelPackage.TRACER_ITEM__RESULT:
 				setResult(RESULT_EDEFAULT);
 				return;
-			case TracermodelPackage.TRACER_ITEM__CHILDREN:
-				getChildren().clear();
-				return;
 			case TracermodelPackage.TRACER_ITEM__PARENT:
 				setParent((TracerItem)null);
+				return;
+			case TracermodelPackage.TRACER_ITEM__CHILDREN:
+				getChildren().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -333,10 +324,10 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 				return expression != null;
 			case TracermodelPackage.TRACER_ITEM__RESULT:
 				return RESULT_EDEFAULT == null ? result != null : !RESULT_EDEFAULT.equals(result);
-			case TracermodelPackage.TRACER_ITEM__CHILDREN:
-				return children != null && !children.isEmpty();
 			case TracermodelPackage.TRACER_ITEM__PARENT:
 				return parent != null;
+			case TracermodelPackage.TRACER_ITEM__CHILDREN:
+				return children != null && !children.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

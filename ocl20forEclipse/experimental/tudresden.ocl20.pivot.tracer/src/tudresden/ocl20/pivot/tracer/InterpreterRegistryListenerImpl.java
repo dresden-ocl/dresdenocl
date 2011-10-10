@@ -10,6 +10,7 @@ import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
 
+
 public class InterpreterRegistryListenerImpl implements IInterpreterTraceListener {
 	private TracerItem root;
 	private TracerItem currentParent;
@@ -48,12 +49,24 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 		}
 		//no else
 	}
-
+	
+	
+	
 	public void partialInterpretationFinished(InterpreterTraceEvent event) {
-		EList<TracerItem> list = currentParent.getChildren();
-		Iterator<TracerItem> it = list.iterator();
+		//Iterator<TracerItem> it = currentParent.getChildren().iterator();
 		boolean found = false;
+		TracerItem[] list = new TracerItem[currentParent.getChildren().size()];
+		list = currentParent.getChildren().toArray(list);
 		
+		for(int i = 0; (i < list.length) && !found; i++) {
+			TracerItem item = list[i];
+			if(item.getExpression().equals(event.getExpression())) {
+				item.setResult(event.getResult());
+				found = true;
+			}
+			//no else
+		}
+		/*
 		while(it.hasNext() && !found) {
 			TracerItem item = it.next();
 			if(item.getExpression().equals(event.getExpression())) {
@@ -62,6 +75,7 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 			}
 			//no else
 		}
+		*/
 		if(!found) {
 			System.out.println("KEINE UEBEREINSTIMMUNG GEFUNDEN");
 		}
