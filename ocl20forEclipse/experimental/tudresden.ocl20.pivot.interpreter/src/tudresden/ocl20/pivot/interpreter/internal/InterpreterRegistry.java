@@ -233,4 +233,25 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 		return this.listeners;
 	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void fireInterpretationCleared() {
+		
+		if (this.traceListeners!= null) {
+			Object[] listeners;
+	
+			listeners = this.traceListeners.getListeners();
+	
+			for (int i = 0; i < listeners.length; i++) {
+		
+				/* Inform the listeners that the interpretation did finish. */
+				((IInterpreterTraceListener) listeners[i])
+						.interpretationCleared();
+			}
+		}
+		// no else.
+	}
 }

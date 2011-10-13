@@ -802,6 +802,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret BooleanLiteral.");
+			
+			increaseTracerTreeDepth(booleanLiteralExp);
 		}
 		// no else.
 
@@ -814,6 +816,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset
 					+ "Interpreted BooleanLiteral. Result = " + result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 					.firePartialInterpretionResult(booleanLiteralExp, result);
@@ -1014,6 +1017,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret EnumerationLiteral.");
+			
+			increaseTracerTreeDepth(enumLiteralExp);
 		}
 		// no else.
 
@@ -1026,6 +1031,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset
 					+ "Interpreted EnumerationLiteral. Result = " + result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(enumLiteralExp, result);
@@ -1177,6 +1183,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret IntegerLiteral.");
+			/* Propagate to the tracer */
+			increaseTracerTreeDepth(integerLiteralExp);	
 		}
 		// no else.
 
@@ -1188,6 +1196,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset
 					+ "Interpreted IntegerLiteral. Result = " + result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(integerLiteralExp, result);
@@ -1211,6 +1220,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret InvalidLiteral.");
+			increaseTracerTreeDepth(invalidLiteralExp);
 		}
 		// no else.
 
@@ -1223,6 +1233,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset
 					+ "Interpreted InvalidLiteral. Result = " + result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(invalidLiteralExp, result);
@@ -3229,7 +3240,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			OclExpression exp;
 			OclAny param;
 			String parameterName;
-
+			
 			exp = argIterator.next();
 			param = doSwitch((EObject) exp);
 

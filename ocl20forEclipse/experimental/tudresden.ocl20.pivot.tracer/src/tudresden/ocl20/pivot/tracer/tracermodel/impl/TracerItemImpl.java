@@ -127,33 +127,11 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(EObject newExpression, NotificationChain msgs) {
+	public void setExpression(EObject newExpression) {
 		EObject oldExpression = expression;
 		expression = newExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TracermodelPackage.TRACER_ITEM__EXPRESSION, oldExpression, newExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExpression(EObject newExpression) {
-		if (newExpression != expression) {
-			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TracermodelPackage.TRACER_ITEM__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TracermodelPackage.TRACER_ITEM__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TracermodelPackage.TRACER_ITEM__EXPRESSION, newExpression, newExpression));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracermodelPackage.TRACER_ITEM__EXPRESSION, oldExpression, expression));
 	}
 
 	/**
@@ -225,20 +203,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			children = new EObjectResolvingEList<TracerItem>(TracerItem.class, this, TracermodelPackage.TRACER_ITEM__CHILDREN);
 		}
 		return children;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TracermodelPackage.TRACER_ITEM__EXPRESSION:
-				return basicSetExpression(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

@@ -21,4 +21,6 @@ public interface IInterpreterTraceListener {
 	void interpretationTreeDepthDecreased();
 	
 	void partialInterpretationFinished(InterpreterTraceEvent event);
+	
+	void interpretationCleared();
 }

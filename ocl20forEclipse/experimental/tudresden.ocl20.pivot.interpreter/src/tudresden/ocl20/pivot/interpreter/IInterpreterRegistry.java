@@ -86,4 +86,6 @@ public interface IInterpreterRegistry {
 	 */
 	public void removeInterpreterRegistryListener(
 			IInterpreterRegistryListener listener);
+
+	public void fireInterpretationCleared();
 }

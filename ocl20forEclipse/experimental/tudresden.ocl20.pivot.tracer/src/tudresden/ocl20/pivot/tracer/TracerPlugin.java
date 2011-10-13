@@ -25,7 +25,7 @@ public class TracerPlugin implements BundleActivator {
 	
 	public static InterpreterRegistryListenerImpl getInterpreterTraceListener() {
 		if(plugin == null) {
-			System.out.println("The Tracer has not been activated. Initialized it manually.");
+			//System.out.println("The Tracer has not been activated. Initialized it manually.");
 			plugin = new TracerPlugin();
 		}
 		//no else
@@ -35,16 +35,18 @@ public class TracerPlugin implements BundleActivator {
 			
 			/* add the listener object to the registry */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.addInterpreterTraceListener(plugin.listener);
-			
-			/* DEBUG */
-			System.out.println("ADDED TRACER TO REGISTRY");
-			/* DEBUG */
-			
+				.addInterpreterTraceListener(plugin.listener);		
 		}
 		//no else
 		
 		return plugin.listener;
+	}
+	
+	public static void disposeInterpreterTraceListener() {
+		if(plugin.listener != null) {
+			OclInterpreterPlugin.getInterpreterRegistry()
+				.removeInterpreterTraceListener(plugin.listener);
+		}
 	}
 	
 	public static TracerPlugin getDefault() {

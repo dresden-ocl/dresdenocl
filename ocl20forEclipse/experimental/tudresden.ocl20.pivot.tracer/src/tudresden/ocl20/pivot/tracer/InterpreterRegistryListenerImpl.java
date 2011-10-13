@@ -9,6 +9,7 @@ import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
+import tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl;
 
 
 public class InterpreterRegistryListenerImpl implements IInterpreterTraceListener {
@@ -17,7 +18,9 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	private TracermodelFactory factory;
 	
 	public InterpreterRegistryListenerImpl() {
-		root = currentParent = null;
+		root = null;
+		currentParent = null;
+		TracermodelPackageImpl.init();
 		factory = TracermodelFactory.eINSTANCE;
 	}
 	
@@ -25,11 +28,13 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 		TracerItem dummy = factory.createTracerItem();
 		dummy.setExpression(reference);
 		
-		if(currentParent == null) {
+		if((currentParent == null) && (root == null)) {
 			//there has been no insertion before
 			//this is the first item in the tree
-			root = currentParent = dummy;
-		} else {
+			root = dummy;
+			currentParent = dummy;
+		}
+		else {
 			currentParent.getChildren().add(dummy);
 			dummy.setParent(currentParent);
 			currentParent = dummy;
@@ -37,13 +42,13 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	}
 	
 	public void interpretationTreeDepthDecreased() {
+		//check if the tree has been initialized
 		if(currentParent != null) {
+			//check if currentParent is the root element
 			if(currentParent.getParent() != null) {
-				if(currentParent.getParent() instanceof TracerItem) {
-					currentParent = (TracerItem)currentParent.getParent();
-				}
-				//no else
-			} else {
+				currentParent = currentParent.getParent();
+			}
+			else {
 				currentParent = root;
 			}
 		}
@@ -53,35 +58,41 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	
 	
 	public void partialInterpretationFinished(InterpreterTraceEvent event) {
-		//Iterator<TracerItem> it = currentParent.getChildren().iterator();
-		boolean found = false;
-		TracerItem[] list = new TracerItem[currentParent.getChildren().size()];
-		list = currentParent.getChildren().toArray(list);
-		
-		for(int i = 0; (i < list.length) && !found; i++) {
-			TracerItem item = list[i];
-			if(item.getExpression().equals(event.getExpression())) {
-				item.setResult(event.getResult());
-				found = true;
+		//check if it is the root element
+		if(currentParent == root) {
+			if(currentParent.getExpression() == event.getExpression()) {
+				currentParent.setResult(event.getResult());
 			}
 			//no else
 		}
-		/*
-		while(it.hasNext() && !found) {
-			TracerItem item = it.next();
-			if(item.getExpression().equals(event.getExpression())) {
-				item.setResult(event.getResult());
-				found = true;
+		else {
+			Iterator<TracerItem> it = currentParent.getChildren().iterator();
+			boolean found = false;
+			
+			while(it.hasNext() && !found) {
+				TracerItem item = it.next();
+				if(item.getExpression() == event.getExpression()) {
+					item.setResult(event.getResult());
+					found = true;
+				}
+				//no else
 			}
-			//no else
-		}
-		*/
-		if(!found) {
-			System.out.println("KEINE UEBEREINSTIMMUNG GEFUNDEN");
 		}
 	}
 	
 	public TracerItem getTree() {
 		return root;
+	}
+
+	public void interpretationCleared() {	
+		Iterator<EObject> it = factory.eContents().iterator();
+		
+		//clear all saved TracerItems due to memory leaks
+		while(it.hasNext()) {
+			it.remove();
+		}
+
+		root = null;
+		currentParent = null;		
 	}
 }
