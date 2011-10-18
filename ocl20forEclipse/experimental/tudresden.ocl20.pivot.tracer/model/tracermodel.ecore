@@ -12,4 +12,8 @@
         upperBound="-1" eType="#//TracerItem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="OclAny" instanceClassName="tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TracerRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootItems" upperBound="-1"
+        eType="#//TracerItem"/>
+  </eClassifiers>
 </ecore:EPackage>

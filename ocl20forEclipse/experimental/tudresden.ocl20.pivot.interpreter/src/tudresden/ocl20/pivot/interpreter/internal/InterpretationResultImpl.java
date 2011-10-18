@@ -102,4 +102,8 @@ public class InterpretationResultImpl implements IInterpretationResult {
 
 		return myConstraint;
 	}
+	
+	public String toString() {
+		return myResult.toString();
+	}
 }

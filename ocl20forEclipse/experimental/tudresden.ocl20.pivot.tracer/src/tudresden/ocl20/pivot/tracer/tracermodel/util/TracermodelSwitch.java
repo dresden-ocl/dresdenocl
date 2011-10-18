@@ -76,6 +76,12 @@ public class TracermodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TracermodelPackage.TRACER_ROOT: {
+				TracerRoot tracerRoot = (TracerRoot)theEObject;
+				T result = caseTracerRoot(tracerRoot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -92,6 +98,21 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTracerItem(TracerItem object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tracer Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tracer Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTracerRoot(TracerRoot object) {
 		return null;
 	}
 

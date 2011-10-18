@@ -15,5 +15,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/parent"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/children"/>
     </genClasses>
+    <genClasses ecoreClass="tracermodel.ecore#//TracerRoot">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerRoot/rootItems"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

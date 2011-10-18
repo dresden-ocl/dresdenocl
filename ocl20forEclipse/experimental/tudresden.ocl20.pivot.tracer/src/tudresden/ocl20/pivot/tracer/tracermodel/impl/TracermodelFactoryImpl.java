@@ -64,6 +64,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements TracermodelF
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case TracermodelPackage.TRACER_ITEM: return createTracerItem();
+			case TracermodelPackage.TRACER_ROOT: return createTracerRoot();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -107,6 +108,16 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements TracermodelF
 	public TracerItem createTracerItem() {
 		TracerItemImpl tracerItem = new TracerItemImpl();
 		return tracerItem;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TracerRoot createTracerRoot() {
+		TracerRootImpl tracerRoot = new TracerRootImpl();
+		return tracerRoot;
 	}
 
 	/**

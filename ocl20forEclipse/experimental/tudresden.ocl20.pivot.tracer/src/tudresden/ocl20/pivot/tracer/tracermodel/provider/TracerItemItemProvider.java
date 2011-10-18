@@ -232,6 +232,11 @@ public class TracerItemItemProvider
 			(createChildParameter
 				(TracermodelPackage.Literals.TRACER_ITEM__EXPRESSION,
 				 TracermodelFactory.eINSTANCE.createTracerItem()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TracermodelPackage.Literals.TRACER_ITEM__EXPRESSION,
+				 TracermodelFactory.eINSTANCE.createTracerRoot()));
 	}
 
 	/**

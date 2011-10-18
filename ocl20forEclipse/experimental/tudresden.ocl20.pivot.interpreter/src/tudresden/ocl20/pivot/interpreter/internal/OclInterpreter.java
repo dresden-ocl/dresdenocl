@@ -330,7 +330,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ ", parameterValues = " + parameterValues
 					+ ", preConditions = " + preConditions + ")");
 			this.pushLogOffset();
-			
 		}
 		// no else.
 
@@ -1220,6 +1219,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret InvalidLiteral.");
+			
 			increaseTracerTreeDepth(invalidLiteralExp);
 		}
 		// no else.
@@ -3753,6 +3753,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret RealLiteral.");
+			
+			increaseTracerTreeDepth(realLiteralExp);
 		}
 		// no else.
 
@@ -3765,6 +3767,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpreted RealLiteral. Result = "
 					+ result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(realLiteralExp, result);
@@ -3788,6 +3791,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret StringLiteral.");
+			
+			increaseTracerTreeDepth(stringLiteralExp);
 		}
 		// no else.
 
@@ -3800,6 +3805,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset
 					+ "Interpreted StringLiteral. Result = " + result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(stringLiteralExp, result);
@@ -3908,8 +3914,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			decreaseTracerTreeDepth();
 			
-			/* Propagate tracer information for partial interpretation 
-			 * TODO: Ronny: tupleLiteralPart or tupleLiteralPart.getValue?*/
+			/* Propagate tracer information for partial interpretation*/
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(tupleLiteralPart, result);
 
@@ -3933,6 +3938,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret TypeLiteral.");
+			
+			increaseTracerTreeDepth(typeLiteralExp);
 		}
 		// no else.
 
@@ -3945,6 +3952,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpreted TypeLiteral. Result = "
 					+ result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(typeLiteralExp, result);
@@ -3969,6 +3977,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret UndefinedLiteral.");
+			
+			increaseTracerTreeDepth(undefinedLiteralExp);
 		}
 		// no else.
 
@@ -3982,6 +3992,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset
 					+ "Interpreted UndefinedLiteral. Result = " + result);
 			
+			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
 				.firePartialInterpretionResult(undefinedLiteralExp, result);

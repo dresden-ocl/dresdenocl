@@ -116,6 +116,34 @@ public interface TracermodelPackage extends EPackage {
 	int TRACER_ITEM_FEATURE_COUNT = 4;
 
 	/**
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
+	 * @generated
+	 */
+	int TRACER_ROOT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Root Items</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACER_ROOT__ROOT_ITEMS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Tracer Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACER_ROOT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '<em>Ocl Any</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,7 +151,7 @@ public interface TracermodelPackage extends EPackage {
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getOclAny()
 	 * @generated
 	 */
-	int OCL_ANY = 1;
+	int OCL_ANY = 2;
 
 
 	/**
@@ -179,6 +207,27 @@ public interface TracermodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTracerItem_Children();
+
+	/**
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot <em>Tracer Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tracer Root</em>'.
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot
+	 * @generated
+	 */
+	EClass getTracerRoot();
+
+	/**
+	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Root Items</em>'.
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems()
+	 * @see #getTracerRoot()
+	 * @generated
+	 */
+	EReference getTracerRoot_RootItems();
 
 	/**
 	 * Returns the meta object for data type '{@link tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny <em>Ocl Any</em>}'.
@@ -254,6 +303,24 @@ public interface TracermodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRACER_ITEM__CHILDREN = eINSTANCE.getTracerItem_Children();
+
+		/**
+		 * The meta object literal for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
+		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
+		 * @generated
+		 */
+		EClass TRACER_ROOT = eINSTANCE.getTracerRoot();
+
+		/**
+		 * The meta object literal for the '<em><b>Root Items</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACER_ROOT__ROOT_ITEMS = eINSTANCE.getTracerRoot_RootItems();
 
 		/**
 		 * The meta object literal for the '<em>Ocl Any</em>' data type.

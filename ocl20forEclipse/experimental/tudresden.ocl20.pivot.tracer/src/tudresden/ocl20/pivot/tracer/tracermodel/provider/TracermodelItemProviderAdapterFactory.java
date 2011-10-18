@@ -99,6 +99,29 @@ public class TracermodelItemProviderAdapterFactory extends TracermodelAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TracerRootItemProvider tracerRootItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTracerRootAdapter() {
+		if (tracerRootItemProvider == null) {
+			tracerRootItemProvider = new TracerRootItemProvider(this);
+		}
+
+		return tracerRootItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,6 +221,7 @@ public class TracermodelItemProviderAdapterFactory extends TracermodelAdapterFac
 	 */
 	public void dispose() {
 		if (tracerItemItemProvider != null) tracerItemItemProvider.dispose();
+		if (tracerRootItemProvider != null) tracerRootItemProvider.dispose();
 	}
 
 }
