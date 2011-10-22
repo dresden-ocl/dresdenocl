@@ -50,6 +50,13 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 	private EDataType oclAnyEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType uuidEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -160,6 +167,15 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTracerItem_Guid() {
+		return (EAttribute)tracerItemEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTracerRoot() {
 		return tracerRootEClass;
 	}
@@ -180,6 +196,15 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 	 */
 	public EDataType getOclAny() {
 		return oclAnyEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getUUID() {
+		return uuidEDataType;
 	}
 
 	/**
@@ -215,12 +240,14 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 		createEAttribute(tracerItemEClass, TRACER_ITEM__RESULT);
 		createEReference(tracerItemEClass, TRACER_ITEM__PARENT);
 		createEReference(tracerItemEClass, TRACER_ITEM__CHILDREN);
+		createEAttribute(tracerItemEClass, TRACER_ITEM__GUID);
 
 		tracerRootEClass = createEClass(TRACER_ROOT);
 		createEReference(tracerRootEClass, TRACER_ROOT__ROOT_ITEMS);
 
 		// Create data types
 		oclAnyEDataType = createEDataType(OCL_ANY);
+		uuidEDataType = createEDataType(UUID);
 	}
 
 	/**
@@ -258,12 +285,14 @@ public class TracermodelPackageImpl extends EPackageImpl implements TracermodelP
 		initEAttribute(getTracerItem_Result(), this.getOclAny(), "result", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTracerItem_Parent(), this.getTracerItem(), null, "parent", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTracerItem_Children(), this.getTracerItem(), null, "children", null, 0, -1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getTracerItem_Guid(), this.getUUID(), "guid", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tracerRootEClass, TracerRoot.class, "TracerRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTracerRoot_RootItems(), this.getTracerItem(), null, "rootItems", null, 0, -1, TracerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(oclAnyEDataType, OclAny.class, "OclAny", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(uuidEDataType, java.util.UUID.class, "UUID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

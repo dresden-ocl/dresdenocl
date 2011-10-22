@@ -72,6 +72,7 @@ public class TracerItemItemProvider
 			addResultPropertyDescriptor(object);
 			addParentPropertyDescriptor(object);
 			addChildrenPropertyDescriptor(object);
+			addGuidPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -138,6 +139,28 @@ public class TracerItemItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Guid feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addGuidPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TracerItem_guid_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TracerItem_guid_feature", "_UI_TracerItem_type"),
+				 TracermodelPackage.Literals.TRACER_ITEM__GUID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -210,6 +233,9 @@ public class TracerItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TracerItem.class)) {
+			case TracermodelPackage.TRACER_ITEM__GUID:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case TracermodelPackage.TRACER_ITEM__EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

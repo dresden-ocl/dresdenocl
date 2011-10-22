@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -171,19 +172,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public IInterpretationResult interpretConstraint(Constraint constraint,
 			IModelInstanceElement modelInstanceElement) {
-
 		if (constraint == null)
 			throw new IllegalArgumentException(
 					"Parameter 'constraint' must not be null.");
 		// no else.
-
+		
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Entry interpretConstraint(constraint = " + constraint
 					+ ", modelInstanceElement = " + modelInstanceElement + ")");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(constraint);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -240,7 +241,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* Propagate tracer information for partial interpretation */
 			OclAny res = (result == null) ? null : result.getResult();
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(constraint, res);
+				.firePartialInterpretionResult(constraint, res, guid);
 		}
 		// no else.
 
@@ -797,12 +798,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseBooleanLiteralExp(BooleanLiteralExp booleanLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret BooleanLiteral.");
 			
-			increaseTracerTreeDepth(booleanLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -818,7 +819,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(booleanLiteralExp, result);
+					.firePartialInterpretionResult(booleanLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -835,13 +836,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseCollectionItem(CollectionItem collectionItem) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret CollectionItem.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(collectionItem);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -858,7 +859,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(collectionItem, result);
+					.firePartialInterpretionResult(collectionItem, result, guid);
 		}
 		// no else.
 
@@ -876,13 +877,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	@Override
 	public OclAny caseCollectionLiteralExp(
 			CollectionLiteralExp collectionLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret CollectionLiteral.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(collectionLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 
 		/*
@@ -938,7 +939,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(collectionLiteralExp, result);
+				.firePartialInterpretionResult(collectionLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -1012,12 +1013,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseEnumLiteralExp(EnumLiteralExp enumLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret EnumerationLiteral.");
 			
-			increaseTracerTreeDepth(enumLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -1033,7 +1034,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(enumLiteralExp, result);
+				.firePartialInterpretionResult(enumLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -1050,14 +1051,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret ExpressionInOcl "
 					+ expressionInOcl.getBody());
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(expressionInOcl);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -1074,7 +1075,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(expressionInOcl, result);
+				.firePartialInterpretionResult(expressionInOcl, result, guid);
 		}
 		// no else.
 
@@ -1090,14 +1091,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseIfExp(IfExp ifExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret If.");
 			this.pushLogOffset();
 			
 			/* Propagate to the tracer */
-			increaseTracerTreeDepth(ifExp);	
+			increaseTracerTreeDepth(guid);	
 		}
 		// no else.
 
@@ -1163,7 +1164,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(ifExp, result);
+				.firePartialInterpretionResult(ifExp, result, guid);
 		}
 		// no else.
 
@@ -1179,11 +1180,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
 	 */
 	public OclAny caseIntegerLiteralExp(IntegerLiteralExp integerLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret IntegerLiteral.");
 			/* Propagate to the tracer */
-			increaseTracerTreeDepth(integerLiteralExp);	
+			increaseTracerTreeDepth(guid);	
 		}
 		// no else.
 
@@ -1198,7 +1199,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(integerLiteralExp, result);
+				.firePartialInterpretionResult(integerLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -1215,12 +1216,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseInvalidLiteralExp(InvalidLiteralExp invalidLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret InvalidLiteral.");
 			
-			increaseTracerTreeDepth(invalidLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -1236,7 +1237,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(invalidLiteralExp, result);
+				.firePartialInterpretionResult(invalidLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -1254,13 +1255,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public OclAny caseIterateExp(IterateExp iterateExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret Iterate.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(iterateExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -1310,7 +1311,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(iterateExp, result);
+				.firePartialInterpretionResult(iterateExp, result, guid);
 		}
 		// no else.
 
@@ -1413,14 +1414,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public OclAny caseIteratorExp(IteratorExp iteratorExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret Iterator "
 					+ iteratorExp.getName() + ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(iteratorExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -1701,7 +1702,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(iteratorExp, result);
+				.firePartialInterpretionResult(iteratorExp, result, guid);
 		}
 		// no else.
 
@@ -2847,14 +2848,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseLetExp(LetExp letExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret Let of Variable "
 					+ letExp.getVariable().getName() + ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(letExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -2888,7 +2889,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(letExp, result);
+				.firePartialInterpretionResult(letExp, result, guid);
 		}
 		// no else.
 
@@ -2906,7 +2907,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
 
 		OclAny result;
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg = this.logOffset
@@ -2922,7 +2923,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(msg);
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(operationCallExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -2958,7 +2959,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(operationCallExp, result);
+				.firePartialInterpretionResult(operationCallExp, result, guid);
 		}
 		// no else.
 
@@ -3502,14 +3503,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
 	 */
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret PropertyCall on Property "
 					+ propertyCallExp.getReferredProperty().getName() + ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(propertyCallExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -3538,7 +3539,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(propertyCallExp, result);
+				.firePartialInterpretionResult(propertyCallExp, result, guid);
 		}
 		// no else.
 
@@ -3749,12 +3750,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseRealLiteralExp(RealLiteralExp realLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret RealLiteral.");
 			
-			increaseTracerTreeDepth(realLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -3770,7 +3771,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(realLiteralExp, result);
+				.firePartialInterpretionResult(realLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -3787,12 +3788,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseStringLiteralExp(StringLiteralExp stringLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret StringLiteral.");
 			
-			increaseTracerTreeDepth(stringLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -3808,7 +3809,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(stringLiteralExp, result);
+				.firePartialInterpretionResult(stringLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -3825,13 +3826,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseTupleLiteralExp(TupleLiteralExp tupleLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret TupleLiteral.");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(tupleLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -3875,7 +3876,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(tupleLiteralExp, result);
+				.firePartialInterpretionResult(tupleLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -3892,14 +3893,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseTupleLiteralPart(TupleLiteralPart tupleLiteralPart) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Intepret TuplePart " + tupleLiteralPart.getName()
 					+ ".");
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(tupleLiteralPart);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else;
 
@@ -3916,7 +3917,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation*/
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(tupleLiteralPart, result);
+				.firePartialInterpretionResult(tupleLiteralPart, result, guid);
 
 		}
 		// no else;
@@ -3934,12 +3935,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseTypeLiteralExp(TypeLiteralExp typeLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret TypeLiteral.");
 			
-			increaseTracerTreeDepth(typeLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -3955,7 +3956,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(typeLiteralExp, result);
+				.firePartialInterpretionResult(typeLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -3973,12 +3974,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	@Override
 	public OclAny caseUndefinedLiteralExp(
 			UndefinedLiteralExp undefinedLiteralExp) {
-
+		UUID guid = UUID.randomUUID();
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret UndefinedLiteral.");
 			
-			increaseTracerTreeDepth(undefinedLiteralExp);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -3995,7 +3996,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			decreaseTracerTreeDepth();
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(undefinedLiteralExp, result);
+				.firePartialInterpretionResult(undefinedLiteralExp, result, guid);
 		}
 		// no else.
 
@@ -4010,13 +4011,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * #caseVariable(tudresden.ocl20.pivot.essentialocl.expressions.Variable)
 	 */
 	public OclAny caseVariable(Variable variable) {
-
+		UUID guid = UUID.randomUUID();
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret Variable "
 					+ variable.getName());
 			this.pushLogOffset();
 			
-			increaseTracerTreeDepth(variable);
+			increaseTracerTreeDepth(guid);
 		}
 		// no else.
 
@@ -4067,7 +4068,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			
 			/* Propagate tracer information for partial interpretation */
 			OclInterpreterPlugin.getInterpreterRegistry()
-				.firePartialInterpretionResult(variable, result);
+				.firePartialInterpretionResult(variable, result, guid);
 		}
 
 		return result;
@@ -4175,10 +4176,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * Fires a notification to the observers that the tree depth has increased
 	 * </p>
 	 */
-	protected void increaseTracerTreeDepth(EObject reference) {
+	protected void increaseTracerTreeDepth(UUID guid) {
 		/* set the offset for the tree structure */
 		OclInterpreterPlugin.getInterpreterRegistry()
-			.fireInterpretationDepthIncreased(reference);
+			.fireInterpretationDepthIncreased(guid);
 	}
 	
 	/**

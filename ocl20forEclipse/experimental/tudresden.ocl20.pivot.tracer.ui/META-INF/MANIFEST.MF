@@ -10,7 +10,9 @@ Require-Bundle: tudresden.ocl20.pivot.pivotmodel,
  org.eclipse.core.runtime,
  org.eclipse.emf.edit.ui,
  tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.essentialocl.standardlibrary;bundle-version="3.1.0"
+ tudresden.ocl20.pivot.essentialocl.standardlibrary;bundle-version="3.1.0",
+ tudresden.ocl20.pivot.interpreter.ui;bundle-version="3.1.0",
+ tudresden.ocl20.pivot.standardlibrary.java;bundle-version="3.1.0"
 Export-Package: tudresden.ocl20.pivot.tracer.ui,
  tudresden.ocl20.pivot.tracer.ui.internal.views;x-internal:=true,
  tudresden.ocl20.pivot.tracer.ui.internal.views.util;x-internal:=true

@@ -1,6 +1,7 @@
 package tudresden.ocl20.pivot.tracer;
 
 import java.util.Iterator;
+import java.util.UUID;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -24,9 +25,9 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 		factory = TracermodelFactory.eINSTANCE;
 	}
 	
-	public void interpretationTreeDepthIncreased(EObject reference) {
+	public void interpretationTreeDepthIncreased(UUID guid) {
 		TracerItem dummy = factory.createTracerItem();
-		dummy.setExpression(reference);
+		dummy.setGuid(guid);
 		
 		if((currentParent == null) && (roots == null)) {
 			//there has been no insertion before
@@ -68,9 +69,20 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 	
 	
 	public void partialInterpretationFinished(InterpreterTraceEvent event) {
-		if(event.getResult() == null) {
-			System.out.println("event.getResult == null");
-			return;
+		if((event.getResult() == null) && (event.getExpression() == null)) {
+			//TODO: Why it happens that either expression and
+			//result is null and the interpreter just leave interpretConstraint
+			//
+			//find now the element and delete it
+			Iterator<TracerItem> iter = roots.getRootItems().iterator();
+			
+			while(iter.hasNext()) {
+				TracerItem item = iter.next();
+				if(item.getGuid() == event.getUUID()) {
+					iter.remove();
+				}
+				//no else
+			}
 		}
 		
 		Iterator<TracerItem> iterator;
@@ -80,7 +92,10 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 			iterator = roots.getRootItems().iterator();
 			while(!found && iterator.hasNext()) {
 				TracerItem item = iterator.next();
-				if(item.getExpression() == event.getExpression()) {
+				if(item.getGuid() == event.getUUID()) {
+					//set the values for this item
+					//
+					item.setExpression(event.getExpression());
 					item.setResult(event.getResult());
 					found = true;
 				}
@@ -89,7 +104,8 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 			//end while
 		}
 		else {		
-			if(!found && (currentParent.getExpression() == event.getExpression())) {
+			if(!found && (currentParent.getGuid() == event.getUUID())) {
+				currentParent.setExpression(event.getExpression());
 				currentParent.setResult(event.getResult());
 				found = true;
 			}
@@ -99,7 +115,8 @@ public class InterpreterRegistryListenerImpl implements IInterpreterTraceListene
 			
 			while(!found && iterator.hasNext()) {
 				TracerItem item = iterator.next();
-				if(item.getExpression() == event.getExpression()) {
+				if(item.getGuid() == event.getUUID()) {
+					item.setExpression(event.getExpression());
 					item.setResult(event.getResult());
 					found = true;
 				}

@@ -30,6 +30,8 @@
  */
 package tudresden.ocl20.pivot.interpreter.internal;
 
+import java.util.UUID;
+
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -77,7 +79,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	 * TODO: Ronny: Document this
 	 */
 	@Override
-	public void fireInterpretationDepthIncreased(EObject expression) {
+	public void fireInterpretationDepthIncreased(UUID guid) {
 		
 		if (this.traceListeners != null) {
 			Object[] listeners;
@@ -88,7 +90,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 		
 				/* Inform the listeners that the interpretation did finish. */
 				((IInterpreterTraceListener) listeners[i])
-						.interpretationTreeDepthIncreased(expression);
+						.interpretationTreeDepthIncreased(guid);
 			}
 		}
 		// no else.
@@ -122,7 +124,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	 */
 	@Override
 	public void firePartialInterpretionResult(EObject expression,
-			OclAny result) {
+			OclAny result, UUID guid) {
 		
 		InterpreterTraceEvent event;
 		
@@ -137,7 +139,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 	
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new InterpreterTraceEvent(this, expression, result);
+					event = new InterpreterTraceEvent(this, expression, result, guid);
 				}
 				// no else.
 	

@@ -6,6 +6,7 @@
  */
 package tudresden.ocl20.pivot.tracer.tracermodel.impl;
 
+import java.util.UUID;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -80,6 +81,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements TracermodelF
 		switch (eDataType.getClassifierID()) {
 			case TracermodelPackage.OCL_ANY:
 				return createOclAnyFromString(eDataType, initialValue);
+			case TracermodelPackage.UUID:
+				return createUUIDFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -95,6 +98,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements TracermodelF
 		switch (eDataType.getClassifierID()) {
 			case TracermodelPackage.OCL_ANY:
 				return convertOclAnyToString(eDataType, instanceValue);
+			case TracermodelPackage.UUID:
+				return convertUUIDToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -135,6 +140,24 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements TracermodelF
 	 * @generated
 	 */
 	public String convertOclAnyToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UUID createUUIDFromString(EDataType eDataType, String initialValue) {
+		return (UUID)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

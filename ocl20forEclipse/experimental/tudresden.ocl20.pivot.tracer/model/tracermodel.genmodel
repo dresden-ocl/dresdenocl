@@ -9,11 +9,13 @@
   <genPackages prefix="Tracermodel" basePackage="tudresden.ocl20.pivot.tracer" disposableProviderFactory="true"
       ecorePackage="tracermodel.ecore#/">
     <genDataTypes ecoreDataType="tracermodel.ecore#//OclAny"/>
+    <genDataTypes ecoreDataType="tracermodel.ecore#//UUID"/>
     <genClasses ecoreClass="tracermodel.ecore#//TracerItem">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/expression"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute tracermodel.ecore#//TracerItem/result"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/parent"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracermodel.ecore#//TracerItem/guid"/>
     </genClasses>
     <genClasses ecoreClass="tracermodel.ecore#//TracerRoot">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerRoot/rootItems"/>

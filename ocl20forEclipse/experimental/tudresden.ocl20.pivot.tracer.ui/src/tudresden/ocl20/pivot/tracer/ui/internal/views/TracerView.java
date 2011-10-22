@@ -18,6 +18,7 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 
 import tudresden.ocl20.pivot.tracer.TracerPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.provider.TracermodelItemProviderAdapterFactory;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryContentProvider;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryLabelProvider;
@@ -25,7 +26,7 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFact
 public class TracerView extends ViewPart {
 	
 	private TreeViewer myTreeViewer;
-	private TracerItem root;
+	private TracerRoot root;
 	private Action refreshAction;
 	private ComposedAdapterFactory myAdapterFactory;
 	
@@ -77,5 +78,10 @@ public class TracerView extends ViewPart {
 		};
 		IMenuManager mgr = getViewSite().getActionBars().getMenuManager();
         mgr.add(refreshAction);
+	}
+	
+	public void setInputSource(TracerItem source) {
+		myTreeViewer.setInput(source);
+		myTreeViewer.expandAll();
 	}
 }

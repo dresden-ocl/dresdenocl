@@ -30,6 +30,8 @@
  */
 package tudresden.ocl20.pivot.interpreter;
 
+import java.util.UUID;
+
 import org.eclipse.emf.ecore.EObject;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -61,9 +63,9 @@ public interface IInterpreterRegistry {
 	public void addInterpreterTraceListener(IInterpreterTraceListener listener);
 	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
 
-	public void fireInterpretationDepthIncreased(EObject expression);
+	public void fireInterpretationDepthIncreased(UUID guid);
 	public void fireInterpretationDepthDecreased();
-	public void firePartialInterpretionResult(EObject expression, OclAny result);
+	public void firePartialInterpretionResult(EObject expression, OclAny result, UUID guid);
 	
 	
 	/**

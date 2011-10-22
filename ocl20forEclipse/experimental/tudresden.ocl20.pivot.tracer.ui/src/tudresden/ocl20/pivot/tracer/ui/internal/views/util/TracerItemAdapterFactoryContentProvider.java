@@ -3,6 +3,9 @@ package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 public class TracerItemAdapterFactoryContentProvider extends
@@ -13,7 +16,10 @@ public class TracerItemAdapterFactoryContentProvider extends
 	}
 	
 	public Object[] getElements(Object object) {
-		return this.getChildren(object);
+		if(object instanceof TracerRoot) {
+			return ((TracerRoot)object).getRootItems().toArray();
+		}
+		return super.getElements(object);
 	}
 	
 	public Object[] getChildren(Object object) {

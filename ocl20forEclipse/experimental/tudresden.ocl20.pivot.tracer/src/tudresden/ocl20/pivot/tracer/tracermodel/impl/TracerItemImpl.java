@@ -8,6 +8,7 @@ package tudresden.ocl20.pivot.tracer.tracermodel.impl;
 
 import java.util.Collection;
 
+import java.util.UUID;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -38,6 +39,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getResult <em>Result</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getGuid <em>Guid</em>}</li>
  * </ul>
  * </p>
  *
@@ -93,6 +95,26 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @ordered
 	 */
 	protected EList<TracerItem> children;
+
+	/**
+	 * The default value of the '{@link #getGuid() <em>Guid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGuid()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final UUID GUID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGuid() <em>Guid</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGuid()
+	 * @generated
+	 * @ordered
+	 */
+	protected UUID guid = GUID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,6 +232,27 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public UUID getGuid() {
+		return guid;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGuid(UUID newGuid) {
+		UUID oldGuid = guid;
+		guid = newGuid;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TracermodelPackage.TRACER_ITEM__GUID, oldGuid, guid));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -222,6 +265,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 				return basicGetParent();
 			case TracermodelPackage.TRACER_ITEM__CHILDREN:
 				return getChildren();
+			case TracermodelPackage.TRACER_ITEM__GUID:
+				return getGuid();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -248,6 +293,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends TracerItem>)newValue);
 				return;
+			case TracermodelPackage.TRACER_ITEM__GUID:
+				setGuid((UUID)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -272,6 +320,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			case TracermodelPackage.TRACER_ITEM__CHILDREN:
 				getChildren().clear();
 				return;
+			case TracermodelPackage.TRACER_ITEM__GUID:
+				setGuid(GUID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -292,6 +343,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 				return parent != null;
 			case TracermodelPackage.TRACER_ITEM__CHILDREN:
 				return children != null && !children.isEmpty();
+			case TracermodelPackage.TRACER_ITEM__GUID:
+				return GUID_EDEFAULT == null ? guid != null : !GUID_EDEFAULT.equals(guid);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -308,6 +361,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (result: ");
 		result.append(result);
+		result.append(", guid: ");
+		result.append(guid);
 		result.append(')');
 		return result.toString();
 	}

@@ -107,13 +107,22 @@ public interface TracermodelPackage extends EPackage {
 	int TRACER_ITEM__CHILDREN = 3;
 
 	/**
+	 * The feature id for the '<em><b>Guid</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACER_ITEM__GUID = 4;
+
+	/**
 	 * The number of structural features of the '<em>Tracer Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRACER_ITEM_FEATURE_COUNT = 4;
+	int TRACER_ITEM_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
@@ -152,6 +161,17 @@ public interface TracermodelPackage extends EPackage {
 	 * @generated
 	 */
 	int OCL_ANY = 2;
+
+
+	/**
+	 * The meta object id for the '<em>UUID</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.UUID
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
+	 * @generated
+	 */
+	int UUID = 3;
 
 
 	/**
@@ -209,6 +229,17 @@ public interface TracermodelPackage extends EPackage {
 	EReference getTracerItem_Children();
 
 	/**
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getGuid <em>Guid</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Guid</em>'.
+	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getGuid()
+	 * @see #getTracerItem()
+	 * @generated
+	 */
+	EAttribute getTracerItem_Guid();
+
+	/**
 	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot <em>Tracer Root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -239,6 +270,17 @@ public interface TracermodelPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getOclAny();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.UUID <em>UUID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>UUID</em>'.
+	 * @see java.util.UUID
+	 * @model instanceClass="java.util.UUID"
+	 * @generated
+	 */
+	EDataType getUUID();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -305,6 +347,14 @@ public interface TracermodelPackage extends EPackage {
 		EReference TRACER_ITEM__CHILDREN = eINSTANCE.getTracerItem_Children();
 
 		/**
+		 * The meta object literal for the '<em><b>Guid</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRACER_ITEM__GUID = eINSTANCE.getTracerItem_Guid();
+
+		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -331,6 +381,16 @@ public interface TracermodelPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType OCL_ANY = eINSTANCE.getOclAny();
+
+		/**
+		 * The meta object literal for the '<em>UUID</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.UUID
+		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
+		 * @generated
+		 */
+		EDataType UUID = eINSTANCE.getUUID();
 
 	}
 
