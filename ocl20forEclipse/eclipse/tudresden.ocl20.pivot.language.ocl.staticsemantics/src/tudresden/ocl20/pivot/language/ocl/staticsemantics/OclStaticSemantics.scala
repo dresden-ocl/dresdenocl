@@ -172,9 +172,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
 
   @throws(classOf[OclStaticSemanticsException])
   def cs2EssentialOcl(root: EObject): java.util.List[Constraint] = {
-    if (root ne lastRoot) {
-      resetMemo
-      clearCache
+    if (root ne lastRoot) {      
       model.getRootNamespace
       OclStaticSemanticsTransactions.startStaticSemanticsAnalysis(this, iResource.getContents.get(0))
       val constraints = computeConstraints(root)

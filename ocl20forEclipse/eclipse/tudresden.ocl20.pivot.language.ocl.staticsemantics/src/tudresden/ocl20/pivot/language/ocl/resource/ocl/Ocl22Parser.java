@@ -52,6 +52,15 @@ public class Ocl22Parser implements IOclParser {
 			Collection<Constraint> alreadyParsedConstraints = model
 					.getConstraints();
 			try {
+				// FIXME mt: is this the right place to do this?
+				// It is wrong inside the static semantics module as the reference resolver can
+				// activate the computation of certain attributes before the overall static
+				// semantics is computed.
+				
+				// clear all caches first
+				org.kiama.attribution.Attribution$.MODULE$.resetMemo();
+				tudresden.attributegrammar.integration.kiama.AttributableEObject$.MODULE$.clearCache();
+				
 				ResourceSet rs = new ResourceSetImpl();
 				OclResource resource = new OclResource(uri);
 				rs.getResources().add(resource);
