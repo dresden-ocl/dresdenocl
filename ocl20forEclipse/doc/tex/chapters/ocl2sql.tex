@@ -6,7 +6,8 @@
 \end{flushright}
 
 This chapter describes how the SQL Code Generator \keyword{OCL2SQL} provided 
-with Dresden OCL can be used. A general introduction into Dresden OCL cais provided in Chapter~\ref{chapter:introduction}. 
+with Dresden OCL can be used. A general introduction into Dresden OCL is
+provided in Chapter~\ref{chapter:introduction}.
 
 The SQL Code Generator is able to generate the following code of SQL dialects (target languages):
 \begin{itemize}
@@ -17,19 +18,20 @@ The SQL Code Generator is able to generate the following code of SQL dialects (t
 \end{itemize}
 
 \section{Code Generator Preparation}
-In the following the \keyword{University Example} is used ( Figure~\ref{pic:example:university01}). To
-import the University Example into the Eclipse workspace we simply have to use
-the wizard \emph{File -> New -> Other\ldots -> Dresden OCL Examples ->
-University Example (UML)}. Afterwards, the project 
+In the following the \keyword{University Example} is used
+(Figure~\ref{pic:example:university01}). To import the University Example into
+the Eclipse workspace have to use the wizard \emph{File -> New -> Other\ldots
+-> Dresden OCL Examples -> University Example (UML)}. Afterwards, the project 
 \model{tudresden.ocl20.pivot.\linebreak[0]examp\-les.\linebreak[0]university}
 should be available within the workspace.
 
-The project provides a model file which contains the university class model (
-\model{/model/university.uml}) and the constraint file we want to generate code for 
+The project provides a model file which contains the university class model
+(\model{/model/university\linebreak[0].uml}) and the constraint file we want to
+generate code for
 (\model{/con\-straints/\linebreak[0]uni\-ver\-si\-ty\linebreak[0].ocl}). One
-invariant is shown in Listing~\ref{lst:codegen:universityInvariant}. The invariant specifies, that the
-\model{grade} of any \model{Person}'s supervisor must be greater than its own
-\model{grade}.
+invariant is shown in Listing~\ref{lst:codegen:universityInvariant}. The
+invariant specifies, that the \model{grade} of any \model{Person}'s supervisor
+must be greater than its own \model{grade}.
 
 \begin{figure}[!t]
 	\centering
@@ -53,8 +55,8 @@ To prepare the code generation we have to import the model
 \model{model/university.uml} into the \eclipse{Model Browser}. We use the model
 import wizard of Dresden OCL to import the model. This procedure is explained in
 Chapter~\ref{chapter:introduction}. Afterwards, we have to open the constraint
-file \model{con\-straints/\linebreak[0]university.ocl}. After the 
-import the \eclipse{Model Browser} should look like illustrated in 
+file \model{con\-straints/\linebreak[0]university.ocl}. Afterwards, import the
+\eclipse{Model Browser} should look like illustrated in
 Figure~\ref{pic:codegen:modelBrowserSQL}. Now we can start the code generation.
 By selecting the item \eclipse{Generate SQL Code} of the menu \eclipse{Dresden
 OCL} the SQL code generation can be started.
@@ -68,9 +70,9 @@ OCL} the SQL code generation can be started.
 
 
 \subsection{Selecting a Model}
-At first a wizard is opened and we have to select a model for code generation (cf. 
-Fig.~\ref{pic:codegen:codegen01SQL}). We select the \model{university.uml} model
-and click the \eclipse{Next} button.
+At first, a wizard is opened and we have to select a model for code generation
+(cf. Fig.~\ref{pic:codegen:codegen01SQL}). We select the \model{university.uml}
+model and click the \eclipse{Next} button.
 
 \begin{figure}[!p]
 	\centering
@@ -89,7 +91,7 @@ and click the \eclipse{Next} button.
 \subsection{Selecting Constraints}
 As a second step we have to select the constraints we want to
 generate code for. We only select the constraints \model{inv: oclInv1} and
-\model{inv: oclInv2}. After selecting the constraints we click on the
+\model{inv: oclInv2}. After selecting the constraints, we click on the
 \eclipse{Next} button (cf. Fig.~\ref{pic:codegen:codegen02SQL}).
 
 \begin{figure}[!p]
@@ -111,32 +113,36 @@ generate code for. We only select the constraints \model{inv: oclInv1} and
 Now, we have to choose the directory where the generated code will be saved.
 We select the folder \model{sql} in this project (which is 
 \model{tudresden.\linebreak[0]ocl20.pivot.examples.university/\linebreak[0]sql})
-(cf. Fig.~\ref{pic:codegen:codegen03SQL}). Then we click the \eclipse{Next}
+(cf. Fig.~\ref{pic:codegen:codegen03SQL}). Then, we click the \eclipse{Next}
 button.
 
 \subsection{General Settings}
 On the following page of the wizard we specify general settings for the code
 generation (cf. Fig.~\ref{pic:codegen:codegen04SQL}). We can choose a SQL
-dialect for the generated code.
-The modus of SQL generation decides how inheritance relationships are described 
-in the SQL schema.  In the \model{typed modus} all classes of an inheritance tree will be mapped in one big table. With a extra column for different the classes of the inheritance tree.
-In the other modus, \model{vertical modus}, any class have a mapped table.\\
-If you wish only to generate the code for invariant you must choice \emph{Only
-Integrity View} otherwiese the table schema will be generated as well.\\
- The other parameters for the generation will set the prefix for the different parts(table,association table, view, primary key, foreign key) of the SQL schema. We can
-finish the settings and start the code generation with the \eclipse{Finish} button.
+dialect for the generated code. The modus of SQL generation decides how
+inheritance relationships are described in the SQL schema. In the \model{typed
+modus} all classes of an inheritance tree will be mapped in one big table, with
+an extra column for different the classes of the inheritance tree. In the 
+\model{vertical modus}, any class gets is own table. If you wish only
+to generate the code for invariant only, you must choice \emph{Only Integrity
+View}. Otherwise, the table schema will be generated as well. The other
+parameters for the generation will set the prefix for the different parts
+(table, association table, view, primary key, foreign key) of the SQL schema. We
+can finish the settings and start the code generation with the \eclipse{Finish}
+button.
 
 \section{The Generated Code}
 After finishing the wizard, the code for the selected constraints will be 
 generated. To investigate the results it can be necessary to refresh the
-project (F5). Our example project contains two new SQL files in the folder \texttt{sql}
-(cf. Fig.~\ref{pic:codegen:projectExplorerSQL}). The file 
+project (F5). Our example project contains two new SQL files in the folder
+\texttt{sql} (cf. Fig.~\ref{pic:codegen:projectExplorerSQL}). The file 
 \texttt{2010-09-29-09-34\_schema.sql} contains the table and view schema of the
 model. Every class of the model has its own view. Over this view the
-data(object) of the class can be accesssed. The other file
+data (i.e., instances) of the class can be accesssed. The other file
 \texttt{2010-09-29-09-34\_view.sql} has the views for the invariants (cf.
-Fig.~\ref{pic:codegen:generateSQL}). A call of the generated views contain all objects that
-violate the specific invariant.(cf. Listing~\ref{lst:codegen:sqlInvariant}).
+Fig.~\ref{pic:codegen:generateSQL}). A call of the generated views contain all
+objects that violate the specific invariant (cf.
+Listing~\ref{lst:codegen:sqlInvariant}).
 
 \begin{figure}[!p]
 	\centering
@@ -169,9 +175,9 @@ WHERE NOT (((SELECT value FROM OV_Grade
 \end{figure}
 
 \section{Summary}
-A generate SQL code using the 
-\keyword{OCL2SQL} code generator of Dresden OCL was described in this chapter.
-Besides the use of \keyword{OCL2SQL} via Dresden OCL's GUI, you can also invoke
-OCL2SQL via Dresden OCL's \acs{API}. The easiest way to connect to Dresden OCL
-is via its \emph{Facade} providing interfaces for all services of Dresden OCL. 
-How to use Dresden OCL's facade is documented in Chapter~\ref{chapter:integration}.
+In this chapter how to generate SQL code using the \keyword{OCL2SQL} code
+generator of Dresden OCL was described. Besides the use of \keyword{OCL2SQL}
+via Dresden OCL's GUI, you can also invoke OCL2SQL via Dresden OCL's \acs{API}.
+The easiest way to connect to Dresden OCL is via its \emph{Facade} providing
+interfaces for all services of Dresden OCL. How to use Dresden OCL's facade is
+documented in Chapter~\ref{chapter:integration}.
