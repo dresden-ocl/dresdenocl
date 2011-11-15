@@ -39,8 +39,8 @@
     	<!-- TODO: add modelling components? -->
   	</searchPath>
 
-	<locator searchPathRef="dresdenocl.features" pattern="^(tudresden\.ocl20(\..+)? | org\.dresdenocl(\..+))"/>
-	<locator searchPathRef="dresdenocl.plugins" pattern="^(tudresden(\..+)? | org(\..+) | scala.library)"/>
+	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20(\..+)?"/>
+	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?"/>
   	<locator searchPathRef="target.platform"/>
 	
 </rmap>
