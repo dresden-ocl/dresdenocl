@@ -7,7 +7,7 @@
 <project default="compile.and.create.update.site" name="Build, test and deploy Dresden OCL.">
 
 	<import file="ant_common.xml" />
-	
+
 	<property environment="env" />
 
 	<tstamp>
@@ -24,6 +24,10 @@
 	<!-- Specify whether the tools (i.e., director and buckminster) should be cleaned and downloaded again.-->
 	<condition property="clean.tools" value="true">
 		<equals arg1="${env.CLEAN_TOOLS}" arg2="true" />
+	</condition>
+
+	<condition property="buckminster.loglevel" value="${env.BUCKMINSTER_LOGLEVEL}" else="info">
+		<isset property="env.BUCKMINSTER_LOGLEVEL" />
 	</condition>
 
 	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />

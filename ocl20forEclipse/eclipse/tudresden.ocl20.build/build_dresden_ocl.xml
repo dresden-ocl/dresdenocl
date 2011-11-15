@@ -44,6 +44,13 @@
 				<arg value="${basedir}/dresdenocl.mspec" />
 			</cmdargs>
 		</buckminster>
+
+		<echo message="Building" />
+		<buckminster command="build" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="--thorough" />
+			</cmdargs>
+		</buckminster>
 	</target>
 
 </project>
