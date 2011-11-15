@@ -98,7 +98,7 @@
          ================================= -->
 	<target name="init" description="Clean old build data. Try to install Director and Buckminster on the Build Server.">
 		<!-- TODO: clean older build and create folders -->
-		<mkdir dir="${toolspath}" />
+		<mkdir dir="${toolsPath}" />
 	</target>
 
 
