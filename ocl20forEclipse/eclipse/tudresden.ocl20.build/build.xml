@@ -1,0 +1,112 @@
+<!-- 
+	Copied important parts from Teneo Hudson Build setup
+	(http://git.eclipse.org/c/teneo/org.eclipse.emf.teneo.git/tree/build/org.eclipse.emf.teneo.releng.buckminster/build.xml)
+	
+	Author: Michael Thiele
+-->
+<project default="compile.and.create.update.site" name="Build Dresden OCL">
+
+	<property environment="env" />
+
+	<tstamp>
+		<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
+	</tstamp>
+
+	<property file="buckminster.properties" />
+
+	<!-- TODO -->
+	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
+		<isset property="env.WORKSPACE" />
+	</condition>
+
+	<!-- Specify whether the tools (i.e., director and buckminster) should be cleaned and downloaded again.-->
+	<condition property="clean.tools" value="true">
+		<equals arg1="${env.CLEAN_TOOLS}" arg2="true" />
+	</condition>
+
+	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />
+	<property name="rootPath" location="${buildPath}" />
+	<property name="toolsPath" location="${rootPath}/tools" />
+
+
+	<!-- ================================= 
+	          target: init.clean.tools              
+	         ================================= -->
+	<target name="init.clean.tools" if="clean.tools">
+		<delete dir="${toolsPath}" failonerror="true" quiet="true" />
+	</target>
+
+	<!-- ================================= 
+	          target: init.checks              
+	         ================================= -->
+	<target name="init.checks" depends="init.clean.tools">
+		<available file="${toolsPath}/director/director" property="director.exists" />
+		<available file="${toolsPath}/buckminster/buckminster" property="buckminster.exists" />
+	</target>
+
+	<!-- ================================= 
+	          target: install.director              
+	         ================================= -->
+	<target name="install.director" unless="director.exists">
+		<echo message="Fetching headless director application" />
+		<tempfile destdir="${java.io.tmpdir}" prefix="director-" suffix=".zip" property="director.zip" deleteonexit="true" />
+		<get src="${director.url}" dest="${director.zip}" />
+		<mkdir dir="${tools}" />
+		<unzip src="${director.zip}" dest="${toolsPath}" />
+		<delete file="${director.zip}" />
+	</target>
+
+	<!-- ================================= 
+	          target: install.buckminster              
+	         ================================= -->
+	<target name="install.buckminster" unless="buckminster.exists" depends="install.director">
+		<echo message="Configuring headless buckminster with needed features" />
+		<eclipse.launch app="director">
+			<args>
+				<jvmarg value="-Declipse.p2.mirrors=false" />
+				<!--jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${org.eclipse.update.jarprocessor.pack200}" /-->
+				<arg value="-r" />
+				<arg value="${buckminster.p2.site}" />
+				<arg value="-d" />
+				<arg value="${toolsPath}/buckminster" />
+				<arg value="-p" />
+				<arg value="Buckminster" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.cmdline.product" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.core.headless.feature.feature.group" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.pde.headless.feature.feature.group" />
+			</args>
+		</eclipse.launch>
+		<eclipse.launch app="director">
+			<args>
+				<arg value="-r" />
+				<arg value="${buckminster.p2.site.svn}" />
+				<arg value="-d" />
+				<arg value="${toolsPath}/buckminster" />
+				<arg value="-p" />
+				<arg value="Buckminster" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.subversive.headless.feature.feature.group" />
+			</args>
+		</eclipse.launch>
+	</target>
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init" description="Clean old build data. Try to install Director and Buckminster on the Build Server.">
+		<!-- TODO: clean older build and create folders -->
+		<mkdir dir="${toolspath}" />
+	</target>
+
+
+	<!-- ================================= 
+          target: compile.and.create.update.site              
+         ================================= -->
+	<target name="compile.and.create.update.site" depends="init, init.checks, install.buckminster" description="Compiles all the Dresden OCL plug-ins, executes all JUnit tests and creates a new update site.">
+
+	</target>
+
+</project>
