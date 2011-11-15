@@ -1,5 +1,20 @@
-/**
- * 
+/*
+Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+
+This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
+
+Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify 
+it under the terms of the GNU Lesser General Public License as published by the 
+Free Software Foundation, either version 3 of the License, or (at your option)
+any later version.
+
+Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License 
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License along 
+with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 
@@ -43,216 +58,217 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 /**
- * @author Lars Sch�tze
- *
+ * @author Lars Schütze
+ * 
  */
 public class TracerExpressionsSwitch extends ExpressionsSwitch<String> {
 
-	@Override
-	public String caseVariableExp(VariableExp object) {
-		// TODO Auto-generated method stub
-		return super.caseVariableExp(object);
-	}
+    @Override
+    public String caseVariableExp(VariableExp object) {
+	// TODO Auto-generated method stub
+	return super.caseVariableExp(object);
+    }
 
-	@Override
-	public String caseVariable(Variable object) {
-		return object.getName();
-	}
+    @Override
+    public String caseVariable(Variable object) {
+	return object.getName();
+    }
 
-	@Override
-	public String caseUnlimitedNaturalExp(UnlimitedNaturalExp object) {
-		// TODO Auto-generated method stub
-		return super.caseUnlimitedNaturalExp(object);
-	}
+    @Override
+    public String caseUnlimitedNaturalExp(UnlimitedNaturalExp object) {
+	// TODO Auto-generated method stub
+	return super.caseUnlimitedNaturalExp(object);
+    }
 
-	@Override
-	public String caseTypeLiteralExp(TypeLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseTypeLiteralExp(object);
-	}
+    @Override
+    public String caseTypeLiteralExp(TypeLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseTypeLiteralExp(object);
+    }
 
-	@Override
-	public String caseTupleLiteralPart(TupleLiteralPart object) {
-		// TODO Auto-generated method stub
-		return super.caseTupleLiteralPart(object);
-	}
+    @Override
+    public String caseTupleLiteralPart(TupleLiteralPart object) {
+	// TODO Auto-generated method stub
+	return super.caseTupleLiteralPart(object);
+    }
 
-	@Override
-	public String caseTupleLiteralExp(TupleLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseTupleLiteralExp(object);
-	}
+    @Override
+    public String caseTupleLiteralExp(TupleLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseTupleLiteralExp(object);
+    }
 
-	@Override
-	public String caseStringLiteralExp(StringLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseStringLiteralExp(object);
-	}
+    @Override
+    public String caseStringLiteralExp(StringLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseStringLiteralExp(object);
+    }
 
-	@Override
-	public String caseRealLiteralExp(RealLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseRealLiteralExp(object);
-	}
+    @Override
+    public String caseRealLiteralExp(RealLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseRealLiteralExp(object);
+    }
 
-	@Override
-	public String casePropertyCallExp(PropertyCallExp object) {
-		return object.getReferredProperty().getName();
-	}
+    @Override
+    public String casePropertyCallExp(PropertyCallExp object) {
+	return object.getReferredProperty().getName();
+    }
 
-	@Override
-	public String casePrimitiveLiteralExp(PrimitiveLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.casePrimitiveLiteralExp(object);
-	}
+    @Override
+    public String casePrimitiveLiteralExp(PrimitiveLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.casePrimitiveLiteralExp(object);
+    }
 
-	@Override
-	public String caseOperationCallExp(OperationCallExp object) {
-		return (object.getReferredOperation() != null) ?
-				object.getReferredOperation().getName() : object.getName();
-	}
+    @Override
+    public String caseOperationCallExp(OperationCallExp object) {
+	return (object.getReferredOperation() != null) ? object
+		.getReferredOperation().getName() : object.getName();
+    }
 
-	@Override
-	public String caseOclExpression(OclExpression object) {
-		// TODO Auto-generated method stub
-		return super.caseOclExpression(object);
-	}
+    @Override
+    public String caseOclExpression(OclExpression object) {
+	// TODO Auto-generated method stub
+	return super.caseOclExpression(object);
+    }
 
-	@Override
-	public String caseNumericLiteralExp(NumericLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseNumericLiteralExp(object);
-	}
+    @Override
+    public String caseNumericLiteralExp(NumericLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseNumericLiteralExp(object);
+    }
 
-	@Override
-	public String caseUndefinedLiteralExp(UndefinedLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseUndefinedLiteralExp(object);
-	}
+    @Override
+    public String caseUndefinedLiteralExp(UndefinedLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseUndefinedLiteralExp(object);
+    }
 
-	@Override
-	public String caseLoopExp(LoopExp object) {
-		// TODO Auto-generated method stub
-		return super.caseLoopExp(object);
-	}
+    @Override
+    public String caseLoopExp(LoopExp object) {
+	// TODO Auto-generated method stub
+	return super.caseLoopExp(object);
+    }
 
-	@Override
-	public String caseLiteralExp(LiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseLiteralExp(object);
-	}
+    @Override
+    public String caseLiteralExp(LiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseLiteralExp(object);
+    }
 
-	@Override
-	public String caseLetExp(LetExp object) {
-		// TODO Auto-generated method stub
-		return super.caseLetExp(object);
-	}
+    @Override
+    public String caseLetExp(LetExp object) {
+	// TODO Auto-generated method stub
+	return super.caseLetExp(object);
+    }
 
-	@Override
-	public String caseIteratorExp(IteratorExp object) {
-		// TODO Auto-generated method stub
-		return super.caseIteratorExp(object);
-	}
+    @Override
+    public String caseIteratorExp(IteratorExp object) {
+	// TODO Auto-generated method stub
+	return super.caseIteratorExp(object);
+    }
 
-	@Override
-	public String caseIterateExp(IterateExp object) {
-		// TODO Auto-generated method stub
-		return super.caseIterateExp(object);
-	}
+    @Override
+    public String caseIterateExp(IterateExp object) {
+	// TODO Auto-generated method stub
+	return super.caseIterateExp(object);
+    }
 
-	@Override
-	public String caseInvalidLiteralExp(InvalidLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseInvalidLiteralExp(object);
-	}
+    @Override
+    public String caseInvalidLiteralExp(InvalidLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseInvalidLiteralExp(object);
+    }
 
-	@Override
-	public String caseIntegerLiteralExp(IntegerLiteralExp object) {
-		return Integer.toString(object.getIntegerSymbol());
-	}
+    @Override
+    public String caseIntegerLiteralExp(IntegerLiteralExp object) {
+	return Integer.toString(object.getIntegerSymbol());
+    }
 
-	@Override
-	public String caseIfExp(IfExp object) {
-		// TODO Auto-generated method stub
-		return super.caseIfExp(object);
-	}
+    @Override
+    public String caseIfExp(IfExp object) {
+	// TODO Auto-generated method stub
+	return super.caseIfExp(object);
+    }
 
-	@Override
-	public String caseFeatureCallExp(FeatureCallExp object) {
-		// TODO Auto-generated method stub
-		return super.caseFeatureCallExp(object);
-	}
+    @Override
+    public String caseFeatureCallExp(FeatureCallExp object) {
+	// TODO Auto-generated method stub
+	return super.caseFeatureCallExp(object);
+    }
 
-	@Override
-	public String caseBooleanLiteralExp(BooleanLiteralExp object) {
-		return object.getName();
-	}
+    @Override
+    public String caseBooleanLiteralExp(BooleanLiteralExp object) {
+	return object.getName();
+    }
 
-	@Override
-	public String caseCallExp(CallExp object) {
-		// TODO Auto-generated method stub
-		return super.caseCallExp(object);
-	}
+    @Override
+    public String caseCallExp(CallExp object) {
+	// TODO Auto-generated method stub
+	return super.caseCallExp(object);
+    }
 
-	@Override
-	public String caseCollectionItem(CollectionItem object) {
-		// TODO Auto-generated method stub
-		return super.caseCollectionItem(object);
-	}
+    @Override
+    public String caseCollectionItem(CollectionItem object) {
+	// TODO Auto-generated method stub
+	return super.caseCollectionItem(object);
+    }
 
-	@Override
-	public String caseCollectionLiteralExp(CollectionLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseCollectionLiteralExp(object);
-	}
+    @Override
+    public String caseCollectionLiteralExp(CollectionLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseCollectionLiteralExp(object);
+    }
 
-	@Override
-	public String caseCollectionLiteralPart(CollectionLiteralPart object) {
-		// TODO Auto-generated method stub
-		return super.caseCollectionLiteralPart(object);
-	}
+    @Override
+    public String caseCollectionLiteralPart(CollectionLiteralPart object) {
+	// TODO Auto-generated method stub
+	return super.caseCollectionLiteralPart(object);
+    }
 
-	@Override
-	public String caseCollectionRange(CollectionRange object) {
-		// TODO Auto-generated method stub
-		return super.caseCollectionRange(object);
-	}
+    @Override
+    public String caseCollectionRange(CollectionRange object) {
+	// TODO Auto-generated method stub
+	return super.caseCollectionRange(object);
+    }
 
-	@Override
-	public String caseEnumLiteralExp(EnumLiteralExp object) {
-		// TODO Auto-generated method stub
-		return super.caseEnumLiteralExp(object);
-	}
+    @Override
+    public String caseEnumLiteralExp(EnumLiteralExp object) {
+	// TODO Auto-generated method stub
+	return super.caseEnumLiteralExp(object);
+    }
 
-	@Override
-	public String caseExpressionInOcl(ExpressionInOcl object) {
-		return object.getBody().trim();
-	}
+    @Override
+    public String caseExpressionInOcl(ExpressionInOcl object) {
+	return object.getBody().trim();
+    }
 
-	@Override
-	public String caseTypedElement(TypedElement object) {
-		// TODO Auto-generated method stub
-		return super.caseTypedElement(object);
-	}
+    @Override
+    public String caseTypedElement(TypedElement object) {
+	// TODO Auto-generated method stub
+	return super.caseTypedElement(object);
+    }
 
-	@Override
-	public String caseNamedElement(NamedElement object) {
-		// TODO Auto-generated method stub
-		return super.caseNamedElement(object);
-	}
+    @Override
+    public String caseNamedElement(NamedElement object) {
+	// TODO Auto-generated method stub
+	return super.caseNamedElement(object);
+    }
 
-	@Override
-	public String caseExpression(Expression object) {
-		// TODO Auto-generated method stub
-		return super.caseExpression(object);
-	}
+    @Override
+    public String caseExpression(Expression object) {
+	// TODO Auto-generated method stub
+	return super.caseExpression(object);
+    }
 
-	@Override
-	public String defaultCase(EObject object) {
-		if(object instanceof Constraint) {
-			return ((Constraint)object).getSpecification().getBody().trim();
-		}
-		else return object.getClass().getCanonicalName() + " NOT IMPLEMENTED YET";
-	}
-	
+    @Override
+    public String defaultCase(EObject object) {
+	if (object instanceof Constraint) {
+	    return ((Constraint) object).getSpecification().getBody().trim();
+	} else
+	    return object.getClass().getCanonicalName()
+		    + " NOT IMPLEMENTED YET";
+    }
+
 }

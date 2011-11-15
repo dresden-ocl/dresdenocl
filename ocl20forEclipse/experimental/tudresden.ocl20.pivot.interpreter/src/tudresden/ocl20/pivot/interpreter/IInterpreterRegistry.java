@@ -30,6 +30,7 @@
  */
 package tudresden.ocl20.pivot.interpreter;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.eclipse.emf.ecore.EObject;
@@ -37,7 +38,6 @@ import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
-
 
 /**
  * <p>
@@ -49,45 +49,57 @@ import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
  */
 public interface IInterpreterRegistry {
 
-	/**
-	 * <p>
-	 * Adds an {@link IInterpreterRegistryListener}.
-	 * </p>
-	 * 
-	 * @param listener
-	 *          The {@link IInterpreterRegistryListener} which shall be added.
-	 */
-	public void addInterpreterRegistryListener(
-			IInterpreterRegistryListener listener);
-	
-	public void addInterpreterTraceListener(IInterpreterTraceListener listener);
-	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
+    /**
+     * <p>
+     * Adds an {@link IInterpreterRegistryListener}.
+     * </p>
+     * 
+     * @param listener
+     *            The {@link IInterpreterRegistryListener} which shall be added.
+     */
+    public void addInterpreterRegistryListener(
+	    IInterpreterRegistryListener listener);
 
-	public void fireInterpretationDepthIncreased(UUID guid);
-	public void fireInterpretationDepthDecreased();
-	public void firePartialInterpretionResult(EObject expression, OclAny result, UUID guid);
-	
-	
-	/**
-	 * <p>
-	 * Fires an interpretation finished event.
-	 * </p>
-	 * 
-	 * @param interpretationResult
-	 *          The {@link IInterpretationResult} that shall be sent.
-	 */
-	public void fireInterpretationFinished(
-			IInterpretationResult interpretationResult);
+    public void addInterpreterTraceListener(IInterpreterTraceListener listener);
 
-	/**
-	 * <p>
-	 * Removes an {@link IInterpreterRegistryListener}.
-	 * 
-	 * @param listener
-	 *          The {@link IInterpreterRegistryListener} which shall be removed.
-	 */
-	public void removeInterpreterRegistryListener(
-			IInterpreterRegistryListener listener);
+    public void removeInterpreterTraceListener(
+	    IInterpreterTraceListener listener);
 
-	public void fireInterpretationCleared();
+    public void fireInterpretationDepthIncreased(UUID guid);
+
+    public void fireInterpretationDepthDecreased();
+
+    public void firePartialInterpretionResult(EObject expression,
+	    OclAny result, UUID guid);
+
+    public void fireTraceSelectedConstraints(List<Object[]> constraints);
+
+    /**
+     * <p>
+     * Fires an interpretation finished event.
+     * </p>
+     * 
+     * @param interpretationResult
+     *            The {@link IInterpretationResult} that shall be sent.
+     */
+    public void fireInterpretationFinished(
+	    IInterpretationResult interpretationResult);
+
+    /**
+     * <p>
+     * Removes an {@link IInterpreterRegistryListener}.
+     * 
+     * @param listener
+     *            The {@link IInterpreterRegistryListener} which shall be
+     *            removed.
+     */
+    public void removeInterpreterRegistryListener(
+	    IInterpreterRegistryListener listener);
+
+    /**
+     * <p>
+     * Fires an interpretation cleared event.
+     * </p>
+     */
+    public void fireInterpretationCleared();
 }

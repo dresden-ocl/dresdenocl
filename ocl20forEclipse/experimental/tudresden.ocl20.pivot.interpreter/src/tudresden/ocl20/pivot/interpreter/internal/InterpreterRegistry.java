@@ -30,6 +30,7 @@
  */
 package tudresden.ocl20.pivot.interpreter.internal;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.eclipse.core.runtime.ListenerList;
@@ -54,206 +55,223 @@ import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
  */
 public class InterpreterRegistry implements IInterpreterRegistry {
 
-	/** The listeners of this {@link InterpreterRegistry}. */
-	private ListenerList listeners;
-	/** TODO: Ronny: document this */
-	private ListenerList traceListeners;
+    /** The listeners of this {@link InterpreterRegistry}. */
+    private ListenerList listeners;
 
-	public void addInterpreterTraceListener(IInterpreterTraceListener listener) {
-		getTraceListeners().add(listener);
-	}
-	
+    /**
+     * The listeners {@link IInterpreterTraceListener} of this
+     * {@link InterpreterRegistry 
+     */
+    private ListenerList traceListeners;
 
-	/**
-	 * 
-	 * TODO: Ronny: Document this
-	 */
-	public void removeInterpreterTraceListener(
-			IInterpreterTraceListener listener) {
-		getTraceListeners().remove(listener);
-		
-	}
-	
-	/**
-	 * 
-	 * TODO: Ronny: Document this
-	 */
-	@Override
-	public void fireInterpretationDepthIncreased(UUID guid) {
-		
-		if (this.traceListeners != null) {
-			Object[] listeners;
-	
-			listeners = this.traceListeners.getListeners();
-	
-			for (int i = 0; i < listeners.length; i++) {
-		
-				/* Inform the listeners that the interpretation did finish. */
-				((IInterpreterTraceListener) listeners[i])
-						.interpretationTreeDepthIncreased(guid);
-			}
-		}
-		// no else.
-	}
-	
-	/**
-	 * 
-	 * TODO: Ronny: Document this
-	 */
-	@Override
-	public void fireInterpretationDepthDecreased() {
-		
-		if (this.traceListeners!= null) {
-			Object[] listeners;
-	
-			listeners = this.traceListeners.getListeners();
-	
-			for (int i = 0; i < listeners.length; i++) {
-		
-				/* Inform the listeners that the interpretation did finish. */
-				((IInterpreterTraceListener) listeners[i])
-						.interpretationTreeDepthDecreased();
-			}
-		}
-		// no else.
-	}
-	
-	/**
-	 * 
-	 * TODO: Ronny: Document this
-	 */
-	@Override
-	public void firePartialInterpretionResult(EObject expression,
-			OclAny result, UUID guid) {
-		
-		InterpreterTraceEvent event;
-		
-		event = null;
-	
-		if (this.traceListeners != null) {
-			Object[] listeners;
-	
-			listeners = this.traceListeners.getListeners();
-	
-			for (int i = 0; i < listeners.length; i++) {
-	
-				/* Lazily create the event. */
-				if (event == null) {
-					event = new InterpreterTraceEvent(this, expression, result, guid);
-				}
-				// no else.
-	
-				/* Inform the listeners that the interpretation did finish. */
-				((IInterpreterTraceListener) listeners[i])
-						.partialInterpretationFinished(event);
-			}
-		}
-		// no else.
-		
-		
-	}
-	
-	public ListenerList getTraceListeners() {
+    public void addInterpreterTraceListener(IInterpreterTraceListener listener) {
+	getTraceListeners().add(listener);
+    }
 
-		if (this.traceListeners == null) {
-			this.traceListeners = new ListenerList(ListenerList.IDENTITY);
+    /**
+     * 
+     * TODO: Ronny: Document this
+     */
+    public void removeInterpreterTraceListener(
+	    IInterpreterTraceListener listener) {
+	getTraceListeners().remove(listener);
+
+    }
+
+    /**
+	 * 
+	 */
+    public void fireInterpretationDepthIncreased(UUID guid) {
+
+	if (this.traceListeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.traceListeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Inform the listeners that the interpretation did finish. */
+		((IInterpreterTraceListener) listeners[i])
+			.interpretationTreeDepthIncreased(guid);
+	    }
+	}
+	// no else.
+    }
+
+    /**
+	 * 
+	 */
+    public void fireInterpretationDepthDecreased() {
+
+	if (this.traceListeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.traceListeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Inform the listeners that the interpretation did finish. */
+		((IInterpreterTraceListener) listeners[i])
+			.interpretationTreeDepthDecreased();
+	    }
+	}
+	// no else.
+    }
+
+    /**
+	 * 
+	 */
+    public void firePartialInterpretionResult(EObject expression,
+	    OclAny result, UUID guid) {
+
+	InterpreterTraceEvent event;
+
+	event = null;
+
+	if (this.traceListeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.traceListeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Lazily create the event. */
+		if (event == null) {
+		    event = new InterpreterTraceEvent(this, expression, result,
+			    guid);
 		}
 		// no else.
 
-		return this.traceListeners;
+		/* Inform the listeners that the interpretation did finish. */
+		((IInterpreterTraceListener) listeners[i])
+			.partialInterpretationFinished(event);
+	    }
 	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
-	 * addInterpreterRegistryListener
-	 * (tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener)
-	 */
-	public void addInterpreterRegistryListener(
-			IInterpreterRegistryListener listener) {
-		getListeners().add(listener);
-	}
+	// no else.
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IInterpreterRegistry#fireInterpretationFinished(tudresden.ocl20.pivot.interpreter.IInterpretationResult)
-	 */
-	public void fireInterpretationFinished(
-			IInterpretationResult interpretationResult) {
-	
-		InterpreterRegistryEvent event;
-		
-		event = null;
-	
-		if (this.listeners != null) {
-			Object[] listeners;
-	
-			listeners = this.listeners.getListeners();
-	
-			for (int i = 0; i < listeners.length; i++) {
-	
-				/* Lazily create the event. */
-				if (event == null) {
-					event = new InterpreterRegistryEvent(this, interpretationResult);
-				}
-				// no else.
-	
-				/* Inform the listeners that the interpretation did finish. */
-				((IInterpreterRegistryListener) listeners[i])
-						.interpretationFinished(event);
-			}
+    }
+
+    public void fireTraceSelectedConstraints(List<Object[]> constraints) {
+
+	if (this.traceListeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.traceListeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Inform the listeners that the interpretation did finish. */
+		((IInterpreterTraceListener) listeners[i])
+			.traceSelectedConstraints(constraints);
+	    }
+	}
+	// no else.
+    }
+
+    public ListenerList getTraceListeners() {
+
+	if (this.traceListeners == null) {
+	    this.traceListeners = new ListenerList(ListenerList.IDENTITY);
+	}
+	// no else.
+
+	return this.traceListeners;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
+     * addInterpreterRegistryListener
+     * (tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener)
+     */
+    public void addInterpreterRegistryListener(
+	    IInterpreterRegistryListener listener) {
+	getListeners().add(listener);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.interpreter.IInterpreterRegistry#
+     * fireInterpretationFinished
+     * (tudresden.ocl20.pivot.interpreter.IInterpretationResult)
+     */
+    public void fireInterpretationFinished(
+	    IInterpretationResult interpretationResult) {
+
+	InterpreterRegistryEvent event;
+
+	event = null;
+
+	if (this.listeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.listeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Lazily create the event. */
+		if (event == null) {
+		    event = new InterpreterRegistryEvent(this,
+			    interpretationResult);
 		}
 		// no else.
-	}
 
-	/*
-	 * (non-Javadoc)
+		/* Inform the listeners that the interpretation did finish. */
+		((IInterpreterRegistryListener) listeners[i])
+			.interpretationFinished(event);
+	    }
+	}
+	// no else.
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
+     * removeInterpreterRegistryListener
+     * (tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener)
+     */
+    public void removeInterpreterRegistryListener(
+	    IInterpreterRegistryListener listener) {
+	getListeners().remove(listener);
+    }
+
+    /**
+     * <p>
+     * Gets the listeners of this {@link InterpreterRegistry}.
+     * </p>
+     * 
+     * @return The listeners of this {@link InterpreterRegistry}.
+     */
+    private ListenerList getListeners() {
+
+	if (this.listeners == null) {
+	    this.listeners = new ListenerList(ListenerList.IDENTITY);
+	}
+	// no else.
+
+	return this.listeners;
+    }
+
+    /**
 	 * 
-	 * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
-	 * removeInterpreterRegistryListener
-	 * (tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener)
 	 */
-	public void removeInterpreterRegistryListener(
-			IInterpreterRegistryListener listener) {
-		getListeners().remove(listener);
+    public void fireInterpretationCleared() {
+
+	if (this.traceListeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.traceListeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Inform the listeners that the interpretation did finish. */
+		((IInterpreterTraceListener) listeners[i])
+			.interpretationCleared();
+	    }
 	}
-
-	/**
-	 * <p>
-	 * Gets the listeners of this {@link InterpreterRegistry}.
-	 * </p>
-	 * 
-	 * @return The listeners of this {@link InterpreterRegistry}.
-	 */
-	private ListenerList getListeners() {
-
-		if (this.listeners == null) {
-			this.listeners = new ListenerList(ListenerList.IDENTITY);
-		}
-		// no else.
-
-		return this.listeners;
-	}
-
-	/**
-	 * 
-	 */
-	@Override
-	public void fireInterpretationCleared() {
-		
-		if (this.traceListeners!= null) {
-			Object[] listeners;
-	
-			listeners = this.traceListeners.getListeners();
-	
-			for (int i = 0; i < listeners.length; i++) {
-		
-				/* Inform the listeners that the interpretation did finish. */
-				((IInterpreterTraceListener) listeners[i])
-						.interpretationCleared();
-			}
-		}
-		// no else.
-	}
+	// no else.
+    }
 }

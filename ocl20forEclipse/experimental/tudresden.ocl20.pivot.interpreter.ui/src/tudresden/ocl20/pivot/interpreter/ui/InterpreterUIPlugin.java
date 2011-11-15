@@ -43,68 +43,68 @@ import tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView;
  */
 public class InterpreterUIPlugin extends AbstractUIPlugin {
 
-	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter.ui";
+    /** The plug-in ID. */
+    public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter.ui";
 
-	/** The ID of the {@link InterpreterView}. */
-	public static final String INTERPRETER_VIEW_ID = "tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView";
+    /** The ID of the {@link InterpreterView}. */
+    public static final String INTERPRETER_VIEW_ID = "tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView";
 
-	/** The shared instance of this plug-in. */
-	private static InterpreterUIPlugin plugin;
+    /** The shared instance of this plug-in. */
+    private static InterpreterUIPlugin plugin;
 
-	/**
-	 * <p>
-	 * Creates a new {@link InterpreterUIPlugin}.
-	 * </p>
-	 */
-	public InterpreterUIPlugin() {
-	}
+    /**
+     * <p>
+     * Creates a new {@link InterpreterUIPlugin}.
+     * </p>
+     */
+    public InterpreterUIPlugin() {
+    }
 
-	/**
-	 * <p>
-	 * Returns an image descriptor for the image file at the given plug-in
-	 * relative path.
-	 * </p>
-	 * 
-	 * @param path
-	 *            the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
+    /**
+     * <p>
+     * Returns an image descriptor for the image file at the given plug-in
+     * relative path.
+     * </p>
+     * 
+     * @param path
+     *            the path
+     * @return the image descriptor
+     */
+    public static ImageDescriptor getImageDescriptor(String path) {
+	return imageDescriptorFromPlugin(PLUGIN_ID, path);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-	 * )
-	 */
-	public void start(BundleContext context) throws Exception {
-		super.start(context);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+     * )
+     */
+    public void start(BundleContext context) throws Exception {
+	super.start(context);
 
-		plugin = this;
-	}
+	plugin = this;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-	 * )
-	 */
-	public void stop(BundleContext context) throws Exception {
-		plugin = null;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+     * )
+     */
+    public void stop(BundleContext context) throws Exception {
+	plugin = null;
 
-		super.stop(context);
-	}
+	super.stop(context);
+    }
 
-	/**
-	 * @return The shared instance of this plug-in.
-	 */
-	public static InterpreterUIPlugin getDefault() {
-		return plugin;
-	}
+    /**
+     * @return The shared instance of this plug-in.
+     */
+    public static InterpreterUIPlugin getDefault() {
+	return plugin;
+    }
 
 }

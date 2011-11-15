@@ -45,273 +45,274 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public class InterpretationEnvironment implements IInterpretationEnvironment {
 
-	/**
-	 * {@link Map} to store @pre values used during postcondition evaluation.
-	 * Uses {@link IModelInstanceElement}s as key to store the values for each
-	 * specific {@link IModelInstanceObject} seperately. This {@link Map} is
-	 * created lazily since children {@link InterpretationEnvironment}s delegate
-	 * their requests to their parent.
-	 */
-	protected Map<IModelInstanceElement, Map<OperationCallExp, OclAny>> atPreValues;
+    /**
+     * {@link Map} to store @pre values used during postcondition evaluation.
+     * Uses {@link IModelInstanceElement}s as key to store the values for each
+     * specific {@link IModelInstanceObject} seperately. This {@link Map} is
+     * created lazily since children {@link InterpretationEnvironment}s delegate
+     * their requests to their parent.
+     */
+    protected Map<IModelInstanceElement, Map<OperationCallExp, OclAny>> atPreValues;
 
-	/** The {@link IModelInstance} of this {@link InterpretationEnvironment}. */
-	protected IModelInstance modelInstance;
+    /** The {@link IModelInstance} of this {@link InterpretationEnvironment}. */
+    protected IModelInstance modelInstance;
 
-	/**
-	 * Saved instances of {@link Type}s existing at the latest
-	 * {@link Constraint}'s preparation (required for <code>oclIsNew()</code>).
-	 * This {@link Map} is initialized lazily since children
-	 * {@link InterpretationEnvironment}s do not need such a {@link Map}.
-	 */
-	protected Map<Type, Set<IModelInstanceObject>> oldInstancesByType;
+    /**
+     * Saved instances of {@link Type}s existing at the latest
+     * {@link Constraint}'s preparation (required for <code>oclIsNew()</code>).
+     * This {@link Map} is initialized lazily since children
+     * {@link InterpretationEnvironment}s do not need such a {@link Map}.
+     */
+    protected Map<Type, Set<IModelInstanceObject>> oldInstancesByType;
 
-	/**
-	 * A probably existing parent {@link InterpretationEnvironment} of this
-	 * {@link InterpretationEnvironment}.
-	 */
-	protected InterpretationEnvironment parentEnvironment = null;
+    /**
+     * A probably existing parent {@link InterpretationEnvironment} of this
+     * {@link InterpretationEnvironment}.
+     */
+    protected InterpretationEnvironment parentEnvironment = null;
 
-	/** Containes variables already computed {@link Variable}'s values. */
-	protected HashMap<String, OclAny> visibleVariableValues = new HashMap<String, OclAny>();
+    /** Containes variables already computed {@link Variable}'s values. */
+    protected HashMap<String, OclAny> visibleVariableValues = new HashMap<String, OclAny>();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#
-	 * createChildEnvironment()
-	 */
-	public IInterpretationEnvironment createChildEnvironment() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#
+     * createChildEnvironment()
+     */
+    public IInterpretationEnvironment createChildEnvironment() {
 
-		InterpretationEnvironment result = new InterpretationEnvironment();
-		result.parentEnvironment = this;
+	InterpretationEnvironment result = new InterpretationEnvironment();
+	result.parentEnvironment = this;
 
-		result.modelInstance = this.modelInstance;
+	result.modelInstance = this.modelInstance;
 
-		return result;
+	return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IEnvironment#getPostconditionValue(
+     * tudresden .ocl20.pivot.essentialocl.expressions.OperationCallExp)
+     */
+    public OclAny getAtPreValue(OperationCallExp operationCallExp) {
+
+	OclAny result;
+	OclAny contextObject;
+
+	result = null;
+
+	/* Probably delegate to parent environment. */
+	if (this.parentEnvironment != null) {
+	    this.parentEnvironment.getAtPreValue(operationCallExp);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#getPostconditionValue(
-	 * tudresden .ocl20.pivot.essentialocl.expressions.OperationCallExp)
-	 */
-	public OclAny getAtPreValue(OperationCallExp operationCallExp) {
+	else {
+	    /* Try to get the @pre values for the current 'self' object. */
+	    if (this.atPreValues != null) {
 
-		OclAny result;
-		OclAny contextObject;
-
-		result = null;
-
-		/* Probably delegate to parent environment. */
-		if (this.parentEnvironment != null) {
-			this.parentEnvironment.getAtPreValue(operationCallExp);
-		}
-
-		else {
-			/* Try to get the @pre values for the current 'self' object. */
-			if (this.atPreValues != null) {
-
-				Map<OperationCallExp, OclAny> instanceElementSpecificAtPreValues;
-
-				/*
-				 * Get the ModelInstanceObject for which the postcondition is
-				 * currently evaluated.
-				 */
-				contextObject = this
-						.getVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
-
-				instanceElementSpecificAtPreValues = this.atPreValues
-						.get(contextObject.getModelInstanceElement());
-
-				/* Try to get the value for the given expression. */
-				if (instanceElementSpecificAtPreValues != null) {
-					result = instanceElementSpecificAtPreValues
-							.get(operationCallExp);
-				}
-				// no else.
-			}
-			// no else.
-		}
-
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getModelInstance
-	 * ()
-	 */
-	public IModelInstance getModelInstance() {
-
-		return this.modelInstance;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getVariableValue
-	 * (java.lang.String)
-	 */
-	public OclAny getVariableValue(String identifier) {
-
-		OclAny result = visibleVariableValues.get(identifier);
+		Map<OperationCallExp, OclAny> instanceElementSpecificAtPreValues;
 
 		/*
-		 * Probably delegate to parent environment (Variables are visible for
-		 * children as well).
+		 * Get the ModelInstanceObject for which the postcondition is
+		 * currently evaluated.
 		 */
-		if (result == null && this.parentEnvironment != null) {
-			result = this.parentEnvironment.getVariableValue(identifier);
+		contextObject = this
+			.getVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
+
+		instanceElementSpecificAtPreValues = this.atPreValues
+			.get(contextObject.getModelInstanceElement());
+
+		/* Try to get the value for the given expression. */
+		if (instanceElementSpecificAtPreValues != null) {
+		    result = instanceElementSpecificAtPreValues
+			    .get(operationCallExp);
 		}
 		// no else.
+	    }
+	    // no else.
+	}
 
-		return result;
+	return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getModelInstance
+     * ()
+     */
+    public IModelInstance getModelInstance() {
+
+	return this.modelInstance;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getVariableValue
+     * (java.lang.String)
+     */
+    public OclAny getVariableValue(String identifier) {
+
+	OclAny result = visibleVariableValues.get(identifier);
+
+	/*
+	 * Probably delegate to parent environment (Variables are visible for
+	 * children as well).
+	 */
+	if (result == null && this.parentEnvironment != null) {
+	    result = this.parentEnvironment.getVariableValue(identifier);
+	}
+	// no else.
+
+	return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#isNewInstance
+     * (tudresden
+     * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
+     */
+    public boolean isNewInstance(OclModelInstanceObject object) {
+
+	boolean result;
+	IModelInstanceObject imiObject;
+
+	imiObject = (IModelInstanceObject) object.getModelInstanceElement();
+
+	/* Probably check the parent environment. */
+	if (this.parentEnvironment != null) {
+	    result = this.parentEnvironment.isNewInstance(object);
 	}
 
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#isNewInstance
-	 * (tudresden
-	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
+	 * If any imiObject's type's instances contains the imiObject, return
+	 * false. Else return true.
 	 */
-	public boolean isNewInstance(OclModelInstanceObject object) {
-
-		boolean result;
-		IModelInstanceObject imiObject;
-
-		imiObject = (IModelInstanceObject) object.getModelInstanceElement();
-
-		/* Probably check the parent environment. */
-		if (this.parentEnvironment != null) {
-			result = this.parentEnvironment.isNewInstance(object);
-		}
-
-		/*
-		 * If any imiObject's type's instances contains the imiObject, return
-		 * false. Else return true.
-		 */
-		else if (this.oldInstancesByType != null
-				&& this.oldInstancesByType.containsKey(imiObject.getType())) {
-			result = !this.oldInstancesByType.get(imiObject.getType())
-					.contains(imiObject);
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
+	else if (this.oldInstancesByType != null
+		&& this.oldInstancesByType.containsKey(imiObject.getType())) {
+	    result = !this.oldInstancesByType.get(imiObject.getType())
+		    .contains(imiObject);
 	}
+
+	else {
+	    result = false;
+	}
+
+	return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IEnvironment#savePostconditionValue
+     * (tudresden .ocl20.pivot.essentialocl.expressions.OperationCallExp,
+     * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+     */
+    public void saveAtPreValue(OperationCallExp anOperationCallExp, OclAny value) {
+
+	/* Probably delegate to parent environment. */
+	if (this.parentEnvironment != null) {
+	    this.parentEnvironment.saveAtPreValue(anOperationCallExp, value);
+	}
+
+	else {
+	    Map<OperationCallExp, OclAny> instanceObjectSpecificValues;
+	    OclAny contextObject;
+
+	    /* Check if any @pre values have been stored yet. */
+	    if (this.atPreValues == null) {
+		this.atPreValues = new WeakHashMap<IModelInstanceElement, Map<OperationCallExp, OclAny>>();
+	    }
+	    // no else.
+
+	    /*
+	     * Get the ModelInstanceObject for which a @pre value shall be
+	     * stored.
+	     */
+	    contextObject = this
+		    .getVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
+
+	    instanceObjectSpecificValues = this.atPreValues.get(contextObject
+		    .getModelInstanceElement());
+
+	    /* Probably initialize the ModelInstanceObject specific @pre values. */
+	    if (instanceObjectSpecificValues == null) {
+		instanceObjectSpecificValues = new HashMap<OperationCallExp, OclAny>();
+	    }
+	    // no else.
+
+	    /* Store the postcondition value. */
+	    instanceObjectSpecificValues.put(anOperationCallExp, value);
+
+	    /* Store the specific values. */
+	    this.atPreValues.put(contextObject.getModelInstanceElement(),
+		    instanceObjectSpecificValues);
+	}
+	// end else.
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#saveOldInstances
+     * (tudresden.ocl20.pivot.pivotmodel.Type)
+     */
+    public void saveOldInstances(Type type) {
 
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IEnvironment#savePostconditionValue
-	 * (tudresden .ocl20.pivot.essentialocl.expressions.OperationCallExp,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * If possible use the parent environment to avoid duplicate entries
+	 * causing memory overhead.
 	 */
-	public void saveAtPreValue(OperationCallExp anOperationCallExp,
-			OclAny value) {
-	
-		/* Probably delegate to parent environment. */
-		if (this.parentEnvironment != null) {
-			this.parentEnvironment.saveAtPreValue(anOperationCallExp,
-					value);
-		}
-	
-		else {
-			Map<OperationCallExp, OclAny> instanceObjectSpecificValues;
-			OclAny contextObject;
-	
-			/* Check if any @pre values have been stored yet. */
-			if (this.atPreValues == null) {
-				this.atPreValues = new WeakHashMap<IModelInstanceElement, Map<OperationCallExp, OclAny>>();
-			}
-			// no else.
-	
-			/* Get the ModelInstanceObject for which a @pre value shall be stored. */
-			contextObject = this
-					.getVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
-	
-			instanceObjectSpecificValues = this.atPreValues.get(contextObject
-					.getModelInstanceElement());
-	
-			/* Probably initialize the ModelInstanceObject specific @pre values. */
-			if (instanceObjectSpecificValues == null) {
-				instanceObjectSpecificValues = new HashMap<OperationCallExp, OclAny>();
-			}
-			// no else.
-	
-			/* Store the postcondition value. */
-			instanceObjectSpecificValues.put(anOperationCallExp, value);
-	
-			/* Store the specific values. */
-			this.atPreValues.put(contextObject.getModelInstanceElement(),
-					instanceObjectSpecificValues);
-		}
-		// end else.
+	if (this.parentEnvironment == null) {
+
+	    /* Lazy initialization. */
+	    if (this.oldInstancesByType == null) {
+		this.oldInstancesByType = new WeakHashMap<Type, Set<IModelInstanceObject>>();
+	    }
+	    // no else.
+
+	    this.oldInstancesByType.put(type,
+		    this.modelInstance.getAllInstances(type));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#saveOldInstances
-	 * (tudresden.ocl20.pivot.pivotmodel.Type)
-	 */
-	public void saveOldInstances(Type type) {
-
-		/*
-		 * If possible use the parent environment to avoid duplicate entries
-		 * causing memory overhead.
-		 */
-		if (this.parentEnvironment == null) {
-
-			/* Lazy initialization. */
-			if (this.oldInstancesByType == null) {
-				this.oldInstancesByType = new WeakHashMap<Type, Set<IModelInstanceObject>>();
-			}
-			// no else.
-
-			this.oldInstancesByType.put(type,
-					this.modelInstance.getAllInstances(type));
-		}
-
-		else {
-			this.parentEnvironment.saveOldInstances(type);
-		}
+	else {
+	    this.parentEnvironment.saveOldInstances(type);
 	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setModelInstance
-	 * (tudresden.ocl20.pivot.modelinstance.IModelInstance)
-	 */
-	public void setModelInstance(IModelInstance modelInstance) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setModelInstance
+     * (tudresden.ocl20.pivot.modelinstance.IModelInstance)
+     */
+    public void setModelInstance(IModelInstance modelInstance) {
 
-		this.modelInstance = modelInstance;
-	}
+	this.modelInstance = modelInstance;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setVariableValue
-	 * (java.lang.String,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
-	 */
-	public void setVariableValue(String identifier, OclAny oclRoot) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setVariableValue
+     * (java.lang.String,
+     * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+     */
+    public void setVariableValue(String identifier, OclAny oclRoot) {
 
-		this.visibleVariableValues.put(identifier, oclRoot);
-	}
+	this.visibleVariableValues.put(identifier, oclRoot);
+    }
 }

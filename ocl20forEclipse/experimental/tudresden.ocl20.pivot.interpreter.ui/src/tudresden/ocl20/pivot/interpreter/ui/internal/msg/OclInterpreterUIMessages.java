@@ -29,98 +29,102 @@ import org.eclipse.osgi.util.NLS;
  */
 public class OclInterpreterUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.interpreter.ui.internal.msg.messages";
+    private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.interpreter.ui.internal.msg.messages";
 
-	public static String InterpreterView_ObjectColumn;
+    public static String InterpreterView_ObjectColumn;
 
-	public static String InterpreterView_ConstraintColumn;
+    public static String InterpreterView_ConstraintColumn;
 
-	public static String InterpreterView_ResultColumn;
+    public static String InterpreterView_ResultColumn;
 
-	public static String InterpreterView_ResultSelection;
+    public static String InterpreterView_ResultSelection;
 
-	public static String InterpreterView_InterpreterResults;
-	
-	public static String InterpreterView_UseCache;
+    public static String InterpreterView_InterpreterResults;
 
-	public static String InterpreterView_Menu_Body;
+    public static String InterpreterView_UseCache;
 
-	public static String InterpreterView_Menu_Def;
+    public static String InterpreterView_Menu_Body;
 
-	public static String InterpreterView_Menu_Derive;
+    public static String InterpreterView_Menu_Def;
 
-	public static String InterpreterView_Menu_Init;
+    public static String InterpreterView_Menu_Derive;
 
-	public static String InterpreterView_Menu_Post;
+    public static String InterpreterView_Menu_Init;
 
-	public static String InterpreterView_Menu_Inv;
+    public static String InterpreterView_Menu_Post;
 
-	public static String InterpreterView_Menu_Pre;
+    public static String InterpreterView_Menu_Inv;
 
-	public static String InterpreterView_ActionError_NoConstraintSelected;
+    public static String InterpreterView_Menu_Pre;
 
-	public static String InterpreterView_ActionError_NoModelObectSelected;
+    public static String InterpreterView_Menu_Trace;
 
-	public static String InterpreterView_Error_NoActiveModel;
+    public static String InterpreterView_ActionError_NoConstraintSelected;
 
-	public static String InterpreterView_Error_NoActiveModelInstance;
+    public static String InterpreterView_ActionError_NoModelObectSelected;
 
-	public static String InterpreterView_Error_WrongTypeOfResult;
+    public static String InterpreterView_Error_NoActiveModel;
 
-	public static String InterpreterView_Error_NullResult;
+    public static String InterpreterView_Error_NoActiveModelInstance;
 
-	public static String InterpreterView_Error_WrongIndex;
+    public static String InterpreterView_Error_WrongTypeOfResult;
 
-	public static String InterpreterView_AddVariable_Title;
+    public static String InterpreterView_Error_NullResult;
 
-	public static String InterpreterView_AddVariable_VariableLabel;
+    public static String InterpreterView_Error_WrongIndex;
 
-	public static String InterpreterView_AddVariable_TypeLabel;
+    public static String InterpreterView_AddVariable_Title;
 
-	public static String InterpreterView_AddVariable_ValueLabel;
+    public static String InterpreterView_AddVariable_VariableLabel;
 
-	public static String InterpreterView_AddVariable_ResultLabel;
+    public static String InterpreterView_AddVariable_TypeLabel;
 
-	public static String InterpreterView_AddVariable_Error_NoValue;
+    public static String InterpreterView_AddVariable_ValueLabel;
 
-	public static String InterpreterView_AddVariable_Error_NoIntegerValue;
+    public static String InterpreterView_AddVariable_ResultLabel;
 
-	public static String InterpreterView_AddVariable_Error_NoRealValue;
+    public static String InterpreterView_AddVariable_Error_NoValue;
 
-	public static String InterpreterView_AddVariable_Error_NoBooleanValue;
+    public static String InterpreterView_AddVariable_Error_NoIntegerValue;
 
-	public static String InterpreterView_AddVariable_Error_NoResult;
+    public static String InterpreterView_AddVariable_Error_NoRealValue;
 
-	public static String InterpreterView_AddVariable_Error_NoPathName;
+    public static String InterpreterView_AddVariable_Error_NoBooleanValue;
 
-	public static String InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
+    public static String InterpreterView_AddVariable_Error_NoResult;
 
-	public static String InterpretAction_InterpretSelectedConstraintsForAllModelObjects;
+    public static String InterpreterView_AddVariable_Error_NoPathName;
 
-	public static String InterpretAction_InterpretAllConstraintsForSelectedModelObjects;
+    public static String InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects;
 
-	public static String InterpretAction_InterpretAllConstraintsForAllModelObjects;
+    public static String InterpretAction_InterpretSelectedConstraintsForAllModelObjects;
 
-	public static String InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
+    public static String InterpretAction_InterpretAllConstraintsForSelectedModelObjects;
 
-	public static String InterpretAction_ClearSelectedConstraintsForAllModelObjects;
+    public static String InterpretAction_InterpretAllConstraintsForAllModelObjects;
 
-	public static String InterpretAction_ClearAllConstraintsForSelectedModelObjects;
+    public static String InterpretAction_ClearSelectedConstraintsForSelectedModelObjects;
 
-	public static String InterpretAction_ClearAllConstraintsForAllModelObjects;
+    public static String InterpretAction_ClearSelectedConstraintsForAllModelObjects;
 
-	public static String InterpretAction_PrepareSelectedConstraints;
+    public static String InterpretAction_ClearAllConstraintsForSelectedModelObjects;
 
-	public static String InterpretAction_PrepareAllConstraints;
+    public static String InterpretAction_ClearAllConstraintsForAllModelObjects;
 
-	public static String InterpretAction_RemoveSelectedResults;
+    public static String InterpretAction_PrepareSelectedConstraints;
 
-	static {
-		/* Initialize resource bundle. */
-		NLS.initializeMessages(BUNDLE_NAME, OclInterpreterUIMessages.class);
-	}
+    public static String InterpretAction_PrepareAllConstraints;
 
-	private OclInterpreterUIMessages() {
-		/* No implementation necessary. */
-	}
+    public static String InterpretAction_RemoveSelectedResults;
+
+    public static String InterpretAction_TraceSelectedConstraints;
+
+    static {
+	/* Initialize resource bundle. */
+	NLS.initializeMessages(BUNDLE_NAME, OclInterpreterUIMessages.class);
+    }
+
+    private OclInterpreterUIMessages() {
+	/* No implementation necessary. */
+    }
 }

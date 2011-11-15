@@ -49,114 +49,114 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstance;
  */
 public class OclInterpreterPlugin extends Plugin {
 
-	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter";
+    /** The plug-in ID. */
+    public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter";
 
-	/** The shared instance. */
-	private static OclInterpreterPlugin plugin;
+    /** The shared instance. */
+    private static OclInterpreterPlugin plugin;
 
-	/**
-	 * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener}
-	 * s of the {@link IOclInterpreter}.
-	 */
-	private IInterpreterRegistry interpreterRegistry;
+    /**
+     * The {@link IInterpreterRegistry} for {@link IInterpreterRegistryListener}
+     * s of the {@link IOclInterpreter}.
+     */
+    private IInterpreterRegistry interpreterRegistry;
 
-	/**
-	 * <p>
-	 * Creates a new {@link OclInterpreterPlugin}.
-	 * </p>
-	 */
-	public OclInterpreterPlugin() {
+    /**
+     * <p>
+     * Creates a new {@link OclInterpreterPlugin}.
+     * </p>
+     */
+    public OclInterpreterPlugin() {
 
-		plugin = this;
+	plugin = this;
+    }
+
+    /**
+     * <p>
+     * Creates a new {@link IOclInterpreter}.
+     * </p>
+     * 
+     * @param aModelInstance
+     *            The {@link IModelInstance} used during interpretation.
+     */
+    public static IOclInterpreter createInterpreter(
+	    IModelInstance aModelInstance) {
+
+	return new OclInterpreter(aModelInstance);
+    }
+
+    /**
+     * @return The shared instance.
+     */
+    public static OclInterpreterPlugin getDefault() {
+
+	return plugin;
+    }
+
+    /**
+     * <p>
+     * Facade method for the classes in this plug-in that hides the dependency
+     * from the <code>tudresden.ocl20.logging</code> plug-in.
+     * </p>
+     * 
+     * @param clazz
+     *            The {@link Class} to return the {@link Logger} for.
+     * 
+     * @return A log4j {@link Logger}> instance.
+     * 
+     * @generated NOT
+     */
+    public static Logger getLogger(Class<?> clazz) {
+
+	return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+    }
+
+    /**
+     * @return The {@link IInterpreterRegistry} of this
+     *         {@link OclInterpreterPlugin}.
+     */
+    public static IInterpreterRegistry getInterpreterRegistry() {
+
+	/* Check if the plug-in has been activated. */
+	if (plugin == null) {
+	    System.out
+		    .println("The Interpreter plugin has not been activated. Initialized it manually.");
+	    plugin = new OclInterpreterPlugin();
 	}
+	// no else.
 
-	/**
-	 * <p>
-	 * Creates a new {@link IOclInterpreter}.
-	 * </p>
-	 * 
-	 * @param aModelInstance
-	 *            The {@link IModelInstance} used during interpretation.
-	 */
-	public static IOclInterpreter createInterpreter(
-			IModelInstance aModelInstance) {
-
-		return new OclInterpreter(aModelInstance);
+	/* Lazily create the registry. */
+	if (plugin.interpreterRegistry == null) {
+	    plugin.interpreterRegistry = new InterpreterRegistry();
 	}
+	// no else.
 
-	/**
-	 * @return The shared instance.
-	 */
-	public static OclInterpreterPlugin getDefault() {
+	return plugin.interpreterRegistry;
+    }
 
-		return plugin;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
+     */
+    public void start(BundleContext context) throws Exception {
 
-	/**
-	 * <p>
-	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
-	 * </p>
-	 * 
-	 * @param clazz
-	 *            The {@link Class} to return the {@link Logger} for.
-	 * 
-	 * @return A log4j {@link Logger}> instance.
-	 * 
-	 * @generated NOT
-	 */
-	public static Logger getLogger(Class<?> clazz) {
+	super.start(context);
 
-		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
-	}
+	LoggingPlugin.configureDefaultLogging(plugin);
+    }
 
-	/**
-	 * @return The {@link IInterpreterRegistry} of this
-	 *         {@link OclInterpreterPlugin}.
-	 */
-	public static IInterpreterRegistry getInterpreterRegistry() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+     */
+    public void stop(BundleContext context) throws Exception {
 
-		/* Check if the plug-in has been activated. */
-		if (plugin == null) {
-			System.out
-					.println("The Interpreter plugin has not been activated. Initialized it manually.");
-			plugin = new OclInterpreterPlugin();
-		}
-		// no else.
+	plugin = null;
 
-		/* Lazily create the registry. */
-		if (plugin.interpreterRegistry == null) {
-			plugin.interpreterRegistry = new InterpreterRegistry();
-		}
-		// no else.
-
-		return plugin.interpreterRegistry;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
-	 */
-	public void start(BundleContext context) throws Exception {
-
-		super.start(context);
-
-		LoggingPlugin.configureDefaultLogging(plugin);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
-	 */
-	public void stop(BundleContext context) throws Exception {
-
-		plugin = null;
-
-		super.stop(context);
-	}
+	super.stop(context);
+    }
 }

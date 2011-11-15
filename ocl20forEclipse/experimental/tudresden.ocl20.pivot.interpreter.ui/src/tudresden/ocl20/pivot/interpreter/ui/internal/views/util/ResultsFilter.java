@@ -35,92 +35,99 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  */
 public class ResultsFilter extends ViewerFilter {
 
-	/** The {@link InterpreterView} this {@link ResultsFilter} belongs to. */
-	private InterpreterView myInterpreterView;
+    /** The {@link InterpreterView} this {@link ResultsFilter} belongs to. */
+    private InterpreterView myInterpreterView;
 
-	/**
-	 * <p>
-	 * Creates a new {@link ResultsFilter}.
-	 * </p>
-	 * 
-	 * @param interpreterView
-	 *          The {@link InterpreterView} this {@link ResultsFilter} belongs to.
-	 */
-	public ResultsFilter(InterpreterView interpreterView) {
+    /**
+     * <p>
+     * Creates a new {@link ResultsFilter}.
+     * </p>
+     * 
+     * @param interpreterView
+     *            The {@link InterpreterView} this {@link ResultsFilter} belongs
+     *            to.
+     */
+    public ResultsFilter(InterpreterView interpreterView) {
 
-		this.myInterpreterView = interpreterView;
-	}
+	this.myInterpreterView = interpreterView;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers
-	 * .Viewer, java.lang.Object, java.lang.Object)
-	 */
-	public boolean select(Viewer viewer, Object parentElement, Object element) {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers
+     * .Viewer, java.lang.Object, java.lang.Object)
+     */
+    public boolean select(Viewer viewer, Object parentElement, Object element) {
 
-		boolean result;
+	boolean result;
 
-		/* Check if the given Object is an array. */
-		if (element.getClass().isArray()) {
+	/* Check if the given Object is an array. */
+	if (element.getClass().isArray()) {
 
-			Object[] aRow;
-			aRow = (Object[]) element;
+	    Object[] aRow;
+	    aRow = (Object[]) element;
 
-			/* By default the element will be displayed. */
-			result = true;
+	    /* By default the element will be displayed. */
+	    result = true;
 
-			/* Check if the element is contained in the filtered model objects. */
-			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements().size() > 0) {
+	    /* Check if the element is contained in the filtered model objects. */
+	    if (this.myInterpreterView
+		    .getCurrentlySelectedModelInstanceElements().size() > 0) {
 
-				if (aRow.length >= ResultsContentProvider.MODELOBJECT) {
+		if (aRow.length >= ResultsContentProvider.MODELOBJECT) {
 
-					if (aRow[ResultsContentProvider.MODELOBJECT] instanceof IModelInstanceElement) {
-						IModelInstanceElement modelObject;
-						modelObject =
-								(IModelInstanceElement) aRow[ResultsContentProvider.MODELOBJECT];
+		    if (aRow[ResultsContentProvider.MODELOBJECT] instanceof IModelInstanceElement) {
+			IModelInstanceElement modelObject;
+			modelObject = (IModelInstanceElement) aRow[ResultsContentProvider.MODELOBJECT];
 
-						result &= this.myInterpreterView.getCurrentlySelectedModelInstanceElements().contains(modelObject);
-					}
-					else {
-						result = false;
-					}
-
-				}
-				else {
-					result = false;
-				}
-			}
-			// no else.
-
-			/* Check if the element is contained in the filtered constraint objects. */
-			if (result && this.myInterpreterView.getCurrentlySelectedConstraints().size() > 0) {
-
-				if (aRow.length >= ResultsContentProvider.CONSTRAINT) {
-
-					if (aRow[ResultsContentProvider.CONSTRAINT] instanceof Constraint) {
-						Constraint constraint;
-						constraint = (Constraint) aRow[ResultsContentProvider.CONSTRAINT];
-
-						result &= this.myInterpreterView.getCurrentlySelectedConstraints().contains(constraint);
-					}
-					else {
-						result = false;
-					}
-
-				}
-				else {
-					result = false;
-				}
-			}
-
-		}
-
-		/* Else the element will not be displayed. */
-		else {
+			result &= this.myInterpreterView
+				.getCurrentlySelectedModelInstanceElements()
+				.contains(modelObject);
+		    } else {
 			result = false;
-		}
+		    }
 
-		return result;
+		} else {
+		    result = false;
+		}
+	    }
+	    // no else.
+
+	    /*
+	     * Check if the element is contained in the filtered constraint
+	     * objects.
+	     */
+	    if (result
+		    && this.myInterpreterView.getCurrentlySelectedConstraints()
+			    .size() > 0) {
+
+		if (aRow.length >= ResultsContentProvider.CONSTRAINT) {
+
+		    if (aRow[ResultsContentProvider.CONSTRAINT] instanceof Constraint) {
+			Constraint constraint;
+			constraint = (Constraint) aRow[ResultsContentProvider.CONSTRAINT];
+
+			result &= this.myInterpreterView
+				.getCurrentlySelectedConstraints().contains(
+					constraint);
+		    } else {
+			result = false;
+		    }
+
+		} else {
+		    result = false;
+		}
+	    }
+
 	}
+
+	/* Else the element will not be displayed. */
+	else {
+	    result = false;
+	}
+
+	return result;
+    }
 }

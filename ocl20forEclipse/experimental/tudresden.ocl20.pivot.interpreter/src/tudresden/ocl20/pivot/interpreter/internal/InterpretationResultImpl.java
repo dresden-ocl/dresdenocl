@@ -35,75 +35,82 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  */
 public class InterpretationResultImpl implements IInterpretationResult {
 
-	/** The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}. */
-	private IModelInstanceElement myModelObject;
+    /**
+     * The {@link IModelInstanceElement} of this
+     * {@link InterpretationResultImpl}.
+     */
+    private IModelInstanceElement myModelObject;
 
-	/** The result of this {@link InterpretationResultImpl} as {@link OclAny}. */
-	private OclAny myResult;
+    /** The result of this {@link InterpretationResultImpl} as {@link OclAny}. */
+    private OclAny myResult;
 
-	/** The {@link Constraint} of this {@link InterpretationResultImpl}. */
-	private Constraint myConstraint;
+    /** The {@link Constraint} of this {@link InterpretationResultImpl}. */
+    private Constraint myConstraint;
 
-	/**
-	 * <p>
-	 * Creates a new {@link InterpretationResultImpl}.
-	 * </p>
-	 * 
-	 * @param modelObject
-	 *          The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
-	 * @param constraint
-	 *          The {@link Constraint} of this {@link InterpretationResultImpl}.
-	 * @param result
-	 *          The result of this {@link InterpretationResultImpl} as
-	 *          {@link OclAny}.
-	 */
-	public InterpretationResultImpl(IModelInstanceElement modelObject,
-			Constraint constraint, OclAny result) {
+    /**
+     * <p>
+     * Creates a new {@link InterpretationResultImpl}.
+     * </p>
+     * 
+     * @param modelObject
+     *            The {@link IModelInstanceElement} of this
+     *            {@link InterpretationResultImpl}.
+     * @param constraint
+     *            The {@link Constraint} of this
+     *            {@link InterpretationResultImpl}.
+     * @param result
+     *            The result of this {@link InterpretationResultImpl} as
+     *            {@link OclAny}.
+     */
+    public InterpretationResultImpl(IModelInstanceElement modelObject,
+	    Constraint constraint, OclAny result) {
 
-		this.myConstraint = constraint;
-		this.myModelObject = modelObject;
-		this.myResult = result;
-	}
+	this.myConstraint = constraint;
+	this.myModelObject = modelObject;
+	this.myResult = result;
+    }
 
-	/**
-	 * <p>
-	 * Returns the {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
-	 * </p>
-	 * 
-	 * @return The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
-	 */
-	public IModelInstanceElement getModelObject() {
+    /**
+     * <p>
+     * Returns the {@link IModelInstanceElement} of this
+     * {@link InterpretationResultImpl}.
+     * </p>
+     * 
+     * @return The {@link IModelInstanceElement} of this
+     *         {@link InterpretationResultImpl}.
+     */
+    public IModelInstanceElement getModelObject() {
 
-		return myModelObject;
-	}
+	return myModelObject;
+    }
 
-	/**
-	 * <p>
-	 * Returns the result of this {@link InterpretationResultImpl} as
-	 * {@link OclAny} .
-	 * </p>
-	 * 
-	 * @return The result of this {@link InterpretationResultImpl} as
-	 *         {@link OclAny} .
-	 */
-	public OclAny getResult() {
+    /**
+     * <p>
+     * Returns the result of this {@link InterpretationResultImpl} as
+     * {@link OclAny} .
+     * </p>
+     * 
+     * @return The result of this {@link InterpretationResultImpl} as
+     *         {@link OclAny} .
+     */
+    public OclAny getResult() {
 
-		return myResult;
-	}
+	return myResult;
+    }
 
-	/**
-	 * <p>
-	 * Returns the {@link Constraint} of this {@link InterpretationResultImpl}.
-	 * </p>
-	 * 
-	 * @return The {@link Constraint} of this {@link InterpretationResultImpl}.
-	 */
-	public Constraint getConstraint() {
+    /**
+     * <p>
+     * Returns the {@link Constraint} of this {@link InterpretationResultImpl}.
+     * </p>
+     * 
+     * @return The {@link Constraint} of this {@link InterpretationResultImpl}.
+     */
+    public Constraint getConstraint() {
 
-		return myConstraint;
-	}
-	
-	public String toString() {
-		return myResult.toString();
-	}
+	return myConstraint;
+    }
+
+    public String toString() {
+	return myResult.toString();
+    }
 }
