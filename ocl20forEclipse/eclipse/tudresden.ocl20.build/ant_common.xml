@@ -73,4 +73,28 @@ http://dev.eclipse.org/viewsvn/index.cgi/trunk/org.eclipse.buckminster.releng/bu
 		</sequential>
 	</macrodef>
 
+	<!-- ================================= 
+          target: init.build.properties              
+         ================================= -->
+	<target name="init.build.properties">
+		<!-- Echo relevant properties to a temporary file so that Buckminster can read them
+			  -->
+		<tempfile destdir="${java.io.tmpdir}" prefix="build-" suffix=".properties" deleteonexit="true" property="properties.tmp" />
+		<echoproperties destfile="${properties.tmp}">
+			<!-- We don't want these. basedir in particular will cause problems if passed explicitly -->
+			<propertyset negate="true">
+				<propertyref name="basedir" />
+				<propertyref name="eclipse.home" />
+				<propertyref name="properties.tmp" />
+				<propertyref name="line.separator" />
+				<propertyref name="path.separator" />
+				<propertyref prefix="ant." />
+				<propertyref prefix="file." />
+				<propertyref prefix="java." />
+				<propertyref prefix="sun." />
+				<propertyref prefix="user." />
+			</propertyset>
+		</echoproperties>
+	</target>
+
 </project>

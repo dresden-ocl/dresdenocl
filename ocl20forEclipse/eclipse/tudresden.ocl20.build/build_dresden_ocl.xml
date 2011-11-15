@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project default="run" name="Build Dresden OCL.">
+
+	<import file="./ant_common.xml" />
+
+	<property environment="env" />
+
+	<property name="targetPlatformPath" location="${buildRoot}/tp" />
+	<property name="workspacePath" location="${buildRoot}/workspace" />
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init">
+		<mkdir dir="${targetPlatformPath}" />
+		<mkdir dir="${workspacePath}" />
+	</target>
+
+	<!-- ================================= 
+          target: run              
+         ================================= -->
+	<target name="run" depends="init,init.build.properties" description="Builds Dresden OCL plug-ins.">
+		<echo message="Using workspace ${workspacePath}" />
+
+		<echo message="Setting jre to ${env.JAVA_HOME}" />
+		<buckminster command="installJRE" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="--location" />
+				<arg value="${env.JAVA_HOME}" />
+			</cmdargs>
+		</buckminster>
+
+		<echo message="Setting targetPlatformPath to ${targetPlatformPath}" />
+		<buckminster command="setpref" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="targetPlatformPath=${targetPlatformPath}" />
+			</cmdargs>
+		</buckminster>
+
+		<echo message="Importing projects into workspace ${workspacePath}" />
+		<echo message="Importing binaries into target platform ${targetPlatformPath}" />
+		<buckminster command="import" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="${basedir}/dresdenocl.mspec" />
+			</cmdargs>
+		</buckminster>
+	</target>
+
+</project>

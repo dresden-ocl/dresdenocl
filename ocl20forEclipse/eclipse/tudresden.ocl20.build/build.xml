@@ -4,7 +4,7 @@
 	
 	Author: Michael Thiele
 -->
-<project default="compile.and.create.update.site" name="Build Dresden OCL">
+<project default="compile.and.create.update.site" name="Build, test and deploy Dresden OCL.">
 
 	<import file="ant_common.xml" />
 	
@@ -32,35 +32,35 @@
 
 
 	<!-- ================================= 
-	          target: init.clean.tools              
-	         ================================= -->
+          target: init.clean.tools              
+         ================================= -->
 	<target name="init.clean.tools" if="clean.tools">
 		<delete dir="${toolsPath}" failonerror="true" quiet="true" />
 	</target>
 
 	<!-- ================================= 
-	          target: init.checks              
-	         ================================= -->
+          target: init.checks              
+         ================================= -->
 	<target name="init.checks" depends="init.clean.tools">
 		<available file="${toolsPath}/director/director" property="director.exists" />
 		<available file="${toolsPath}/buckminster/buckminster" property="buckminster.exists" />
 	</target>
 
 	<!-- ================================= 
-	          target: install.director              
-	         ================================= -->
+          target: install.director              
+         ================================= -->
 	<target name="install.director" unless="director.exists">
 		<echo message="Fetching headless director application" />
 		<tempfile destdir="${java.io.tmpdir}" prefix="director-" suffix=".zip" property="director.zip" deleteonexit="true" />
 		<get src="${director.url}" dest="${director.zip}" />
-		<mkdir dir="${tools}" />
+		<mkdir dir="${toolsPath}" />
 		<unzip src="${director.zip}" dest="${toolsPath}" />
 		<delete file="${director.zip}" />
 	</target>
 
 	<!-- ================================= 
-	          target: install.buckminster              
-	         ================================= -->
+          target: install.buckminster              
+         ================================= -->
 	<target name="install.buckminster" unless="buckminster.exists" depends="install.director">
 		<echo message="Configuring headless buckminster with needed features" />
 		<eclipse.launch app="director">
