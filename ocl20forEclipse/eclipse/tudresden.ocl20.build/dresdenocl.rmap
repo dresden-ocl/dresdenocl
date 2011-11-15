@@ -1,46 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rmap xmlns="http://www.eclipse.org/buckminster/RMap-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:pmp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0"
+<rmap xmlns="http://www.eclipse.org/buckminster/RMap-1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pmp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
 
- 	<property key="build.type" mutable="true" value="N"/>
- 
+	<property key="build.type" mutable="true" value="N" />
+
 	<searchPath name="dresdenocl.plugins">
-		<provider componentTypes="osgi.bundle" readerType="svn" source="true">
-			<uri format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/{0}">
-			<bc:propertyRef key="buckminster.component" />
-		</uri>
-		</provider>
-	</searchPath>
-	
-	<searchPath name="dresdenocl.features">
-		<provider componentTypes="eclipse.feature" readerType="svn" source="true" mutable="false">
-			<uri format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/updatesite/{0}">
+		<provider componentTypes="osgi.bundle" readerType="svn"
+			source="true">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/{0}">
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-  	</searchPath>
+	</searchPath>
 
-  	<searchPath name="target.platform">
-    	<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false" resolutionFilter="(build.type=N)">
-      		<uri format="http://download.eclipse.org/releases/indigo"/>
-    	</provider>
-    	<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false" resolutionFilter="(|(build.type=N)(build.type=R))">
-      		<uri format="http://download.eclipse.org/eclipse/updates/3.7"/>
-    	</provider>
-		<!-- 
-		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false" resolutionFilter="(build.type=N)">
-      		<uri format="http://download.eclipse.org/releases/helios"/>
-    	</provider>
-    	<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false" resolutionFilter="(|(build.type=N)(build.type=R))">
-      		<uri format="http://download.eclipse.org/eclipse/updates/3.6"/>
-    	</provider>
-    	-->
-    	<!-- TODO: add modelling components? -->
-  	</searchPath>
+	<searchPath name="dresdenocl.features">
+		<provider componentTypes="eclipse.feature" readerType="svn"
+			source="true" mutable="false">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/updatesite/{0}">
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
 
-	<locator searchPathRef="dresdenocl.features" pattern=".+\.feature(\..+)?"/>
-	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?"/>
-  	<locator searchPathRef="target.platform"/>
-	
+	<searchPath name="dresdenocl.tests">
+		<provider componentTypes="osgi.bundle" readerType="svn"
+			source="true">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/tests/{0}">
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="target.platform">
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false" resolutionFilter="(build.type=N)">
+			<uri format="http://download.eclipse.org/releases/indigo" />
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false"
+			resolutionFilter="(|(build.type=N)(build.type=R))">
+			<uri format="http://download.eclipse.org/eclipse/updates/3.7" />
+		</provider>
+		<!-- <provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" 
+			source="false" mutable="false" resolutionFilter="(build.type=N)"> <uri format="http://download.eclipse.org/releases/helios"/> 
+			</provider> <provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" 
+			source="false" mutable="false" resolutionFilter="(|(build.type=N)(build.type=R))"> 
+			<uri format="http://download.eclipse.org/eclipse/updates/3.6"/> </provider> -->
+		<!-- TODO: add modelling components? -->
+	</searchPath>
+
+	<locator searchPathRef="dresdenocl.features" pattern=".+\.feature(\..+)?" />
+	<locator searchPathRef="dresdenocl.tests" pattern=".+\.test(.*)" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^org.dresdenocl(\..+)?" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^org.kiama.attribution" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^scala.library" />
+	<locator searchPathRef="target.platform" />
+
 </rmap>
