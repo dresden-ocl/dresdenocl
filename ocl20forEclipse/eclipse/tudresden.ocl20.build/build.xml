@@ -6,6 +6,8 @@
 -->
 <project default="compile.and.create.update.site" name="Build Dresden OCL">
 
+	<import file="ant_common.xml" />
+	
 	<property environment="env" />
 
 	<tstamp>
