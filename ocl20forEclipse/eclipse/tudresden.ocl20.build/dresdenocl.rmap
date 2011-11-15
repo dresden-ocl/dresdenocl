@@ -6,7 +6,7 @@
  	<property key="build.type" mutable="true" value="N"/>
  
 	<searchPath name="dresdenocl.plugins">
-		<provider componentTypes="osgi.bundle" readerType="svn" source="true">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn" source="true">
 			<uri format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/{0}">
 			<bc:propertyRef key="buckminster.component" />
 		</uri>
@@ -14,7 +14,7 @@
 	</searchPath>
 	
 	<searchPath name="dresdenocl.features">
-		<provider componentTypes="eclipse.feature" readerType="svn" source="true" mutable="false">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn" source="true" mutable="false">
 			<uri format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/updatesite/{0}">
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
