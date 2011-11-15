@@ -108,7 +108,8 @@
           target: compile.and.create.update.site              
          ================================= -->
 	<target name="compile.and.create.update.site" depends="init, init.checks, install.buckminster" description="Compiles all the Dresden OCL plug-ins, executes all JUnit tests and creates a new update site.">
-
+		<echo message="Building" />
+		<ant dir="${basedir}" antfile="build_dresden_ocl.xml" target="run" inheritRefs="true" />
 	</target>
 
 </project>
