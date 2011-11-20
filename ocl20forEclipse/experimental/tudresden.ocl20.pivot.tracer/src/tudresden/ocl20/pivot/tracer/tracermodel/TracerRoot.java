@@ -6,6 +6,8 @@
  */
 package tudresden.ocl20.pivot.tracer.tracermodel;
 
+import java.util.UUID;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -13,15 +15,14 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Tracer Root</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems
- * <em>Root Items</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerRoot()
  * @model
  * @generated

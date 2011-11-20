@@ -7,6 +7,7 @@
 package tudresden.ocl20.pivot.tracer.tracermodel;
 
 import java.util.UUID;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -16,57 +17,47 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Tracer Item</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression
- * <em>Expression</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult <em>
- * Result</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>
- * Parent</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren
- * <em>Children</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getGuid <em>
- * Guid</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression <em>Expression</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult <em>Result</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID <em>UUID</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem()
  * @model
  * @generated
  */
 public interface TracerItem extends EObject {
     /**
-     * Returns the value of the '<em><b>Expression</b></em>' containment
-     * reference. <!-- begin-user-doc -->
+         * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+         * <!-- begin-user-doc -->
      * <p>
      * If the meaning of the '<em>Expression</em>' containment reference isn't
      * clear, there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Expression</em>' containment reference.
-     * @see #setExpression(EObject)
-     * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_Expression()
-     * @model containment="true"
-     * @generated
-     */
+         * @return the value of the '<em>Expression</em>' containment reference.
+         * @see #setExpression(EObject)
+         * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_Expression()
+         * @model containment="true"
+         * @generated
+         */
     EObject getExpression();
 
     /**
-     * Sets the value of the '
-     * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression
-     * <em>Expression</em>}' containment reference. <!-- begin-user-doc --> <!--
+         * Sets the value of the '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression <em>Expression</em>}' containment reference.
+         * <!-- begin-user-doc --> <!--
      * end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Expression</em>' containment
-     *            reference.
-     * @see #getExpression()
-     * @generated
-     */
+         * @param value the new value of the '<em>Expression</em>' containment reference.
+         * @see #getExpression()
+         * @generated
+         */
     void setExpression(EObject value);
 
     /**
@@ -148,32 +139,29 @@ public interface TracerItem extends EObject {
     EList<TracerItem> getChildren();
 
     /**
-     * Returns the value of the '<em><b>Guid</b></em>' attribute. <!--
-     * begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Guid</em>' attribute isn't clear, there really
-     * should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * 
-     * @return the value of the '<em>Guid</em>' attribute.
-     * @see #setGuid(UUID)
-     * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_Guid()
-     * @model dataType="tudresden.ocl20.pivot.tracer.tracermodel.UUID"
-     * @generated
-     */
-    UUID getGuid();
+         * Returns the value of the '<em><b>UUID</b></em>' attribute.
+         * <!-- begin-user-doc -->
+         * <p>
+         * If the meaning of the '<em>UUID</em>' attribute isn't clear,
+         * there really should be more of a description here...
+         * </p>
+         * <!-- end-user-doc -->
+         * @return the value of the '<em>UUID</em>' attribute.
+         * @see #setUUID(UUID)
+         * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_UUID()
+         * @model dataType="tudresden.ocl20.pivot.tracer.tracermodel.UUID"
+         * @generated
+         */
+        UUID getUUID();
 
-    /**
-     * Sets the value of the '
-     * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getGuid
-     * <em>Guid</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-     * 
-     * @param value
-     *            the new value of the '<em>Guid</em>' attribute.
-     * @see #getGuid()
-     * @generated
-     */
-    void setGuid(UUID value);
+/**
+         * Sets the value of the '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID <em>UUID</em>}' attribute.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @param value the new value of the '<em>UUID</em>' attribute.
+         * @see #getUUID()
+         * @generated
+         */
+        void setUUID(UUID value);
 
 } // TracerItem

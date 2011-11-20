@@ -15,10 +15,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute tracermodel.ecore#//TracerItem/result"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/parent"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerItem/children"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracermodel.ecore#//TracerItem/guid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracermodel.ecore#//TracerItem/UUID"/>
     </genClasses>
     <genClasses ecoreClass="tracermodel.ecore#//TracerRoot">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//TracerRoot/rootItems"/>
+    </genClasses>
+    <genClasses ecoreClass="tracermodel.ecore#//UUIDToTracerItemMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracermodel.ecore#//UUIDToTracerItemMap/key"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference tracermodel.ecore#//UUIDToTracerItemMap/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

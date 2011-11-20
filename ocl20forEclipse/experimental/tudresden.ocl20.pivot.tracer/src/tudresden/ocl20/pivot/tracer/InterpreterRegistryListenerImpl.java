@@ -21,6 +21,7 @@ package tudresden.ocl20.pivot.tracer;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -47,7 +48,10 @@ public class InterpreterRegistryListenerImpl implements
 
     /** The factory to create new instances */
     private TracermodelFactory factory;
-
+    
+    /** This map holds the TracerItems in a cache for fast access */
+    private WeakHashMap<UUID, TracerItem> cachedItems;
+    
     /** Holds all root elements of the forst that have been selected */
     private TracerRoot tracedRoots;
 
@@ -59,6 +63,7 @@ public class InterpreterRegistryListenerImpl implements
 	roots = null;
 	currentParent = null;
 	isTracingSelection = false;
+	cachedItems = new WeakHashMap<UUID, TracerItem>();
 	TracermodelPackageImpl.init();
 	factory = TracermodelFactory.eINSTANCE;
     }
@@ -69,13 +74,17 @@ public class InterpreterRegistryListenerImpl implements
      * to be filled later by calling {@link partialInterpretationFinished}.
      * </p>
      * 
-     * @param guid
+     * @param uuid
      *            The UUID which identifies this entry later.
      */
-    public void interpretationTreeDepthIncreased(UUID guid) {
+    public void interpretationTreeDepthIncreased(UUID uuid) {
 	TracerItem dummy = factory.createTracerItem();
-	dummy.setGuid(guid);
-
+	dummy.setUUID(uuid);
+	
+	/* Add the dummy to the cache to be localized easier later */
+	cachedItems.put(uuid, dummy);
+	
+	/* Add the dummy to the tree structure */
 	if ((currentParent == null) && (roots == null)) {
 	    // there has been no insertion before
 	    // this is the first item in the tree
@@ -117,6 +126,37 @@ public class InterpreterRegistryListenerImpl implements
     }
 
     public void partialInterpretationFinished(InterpreterTraceEvent event) {
+	
+	/* TODO Lars: Debug the OclInterpreter to identify which
+	 * method returns this null result.
+	 * It seems that on some OCL Expressions the interpreter just
+	 * begins to interprete and returns immediatelly. 
+	 */
+	/* Check if the result is empty. */
+	if(event.getResult() == null) {
+	    roots.getRootItems().remove(cachedItems.get(event.getUUID()));
+	    /*
+	    for(TracerItem i : roots.getRootItems()) {
+		if(i.getUUID() == event.getUUID()) {
+		    roots.getRootItems().remove(i);
+		    
+		    return;
+		}
+	    }
+	    */
+	}
+	
+	/* Search the corresponding TracerItem */
+	TracerItem item = cachedItems.get(event.getUUID());
+	
+	/* Probably check for null reference */
+	if(item != null) {
+	    item.setExpression(event.getExpression());
+	    item.setResult(event.getResult());
+	    return;
+	}
+	
+	/*
 	Iterator<TracerItem> iterator;
 	boolean found = false;
 
@@ -156,6 +196,7 @@ public class InterpreterRegistryListenerImpl implements
 	    // end while
 	}
 	// end else
+	*/
     }
 
     /**
@@ -179,7 +220,7 @@ public class InterpreterRegistryListenerImpl implements
 	currentParent = null;
 	tracedRoots = null;
     }
-
+    
     public void traceSelectedConstraints(List<Object[]> constraints) {
 	isTracingSelection = true;
 	tracedRoots = factory.createTracerRoot();
@@ -192,7 +233,7 @@ public class InterpreterRegistryListenerImpl implements
 	     * Now we need to find the specific element in our tree and return
 	     * its subtree
 	     */
-
+    
 	    for (TracerItem i : roots.getRootItems()) {
 		if ((i.getExpression() == aRow[1])
 			&& (i.getResult() == aRow[2])) {
@@ -231,7 +272,7 @@ public class InterpreterRegistryListenerImpl implements
 	if (node.getResult() instanceof JavaOclModelInstanceObject) {
 	    IModelInstanceObject nodeResult = ((OclModelInstanceObject) node
 		    .getResult()).getModelInstanceObject();
-	    if (nodeResult == obj) {
+	    if (nodeResult.equals(obj)) {
 		return true;
 	    }
 	    // no else
