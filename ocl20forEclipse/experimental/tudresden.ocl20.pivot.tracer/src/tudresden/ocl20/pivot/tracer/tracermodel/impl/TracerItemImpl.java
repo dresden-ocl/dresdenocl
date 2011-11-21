@@ -22,7 +22,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
 
 /**
@@ -36,6 +38,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getUUID <em>UUID</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getModelInstanceElement <em>Model Instance Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,6 +109,26 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
          * @ordered
          */
         protected UUID uuid = UUID_EDEFAULT;
+
+/**
+         * The default value of the '{@link #getModelInstanceElement() <em>Model Instance Element</em>}' attribute.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see #getModelInstanceElement()
+         * @generated
+         * @ordered
+         */
+        protected static final IModelInstanceElement MODEL_INSTANCE_ELEMENT_EDEFAULT = null;
+
+/**
+         * The cached value of the '{@link #getModelInstanceElement() <em>Model Instance Element</em>}' attribute.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see #getModelInstanceElement()
+         * @generated
+         * @ordered
+         */
+        protected IModelInstanceElement modelInstanceElement = MODEL_INSTANCE_ELEMENT_EDEFAULT;
 
 /**
          * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -230,6 +253,27 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
         }
 
 /**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public IModelInstanceElement getModelInstanceElement() {
+                return modelInstanceElement;
+        }
+
+/**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public void setModelInstanceElement(IModelInstanceElement newModelInstanceElement) {
+                IModelInstanceElement oldModelInstanceElement = modelInstanceElement;
+                modelInstanceElement = newModelInstanceElement;
+                if (eNotificationRequired())
+                        eNotify(new ENotificationImpl(this, Notification.SET, TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT, oldModelInstanceElement, modelInstanceElement));
+        }
+
+/**
          * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @generated
          */
@@ -247,6 +291,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
                                 return getChildren();
                         case TracermodelPackage.TRACER_ITEM__UUID:
                                 return getUUID();
+                        case TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT:
+                                return getModelInstanceElement();
                 }
                 return super.eGet(featureID, resolve, coreType);
         }
@@ -275,6 +321,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
                         case TracermodelPackage.TRACER_ITEM__UUID:
                                 setUUID((UUID)newValue);
                                 return;
+                        case TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT:
+                                setModelInstanceElement((IModelInstanceElement)newValue);
+                                return;
                 }
                 super.eSet(featureID, newValue);
         }
@@ -301,6 +350,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
                         case TracermodelPackage.TRACER_ITEM__UUID:
                                 setUUID(UUID_EDEFAULT);
                                 return;
+                        case TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT:
+                                setModelInstanceElement(MODEL_INSTANCE_ELEMENT_EDEFAULT);
+                                return;
                 }
                 super.eUnset(featureID);
         }
@@ -322,6 +374,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
                                 return children != null && !children.isEmpty();
                         case TracermodelPackage.TRACER_ITEM__UUID:
                                 return UUID_EDEFAULT == null ? uuid != null : !UUID_EDEFAULT.equals(uuid);
+                        case TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT:
+                                return MODEL_INSTANCE_ELEMENT_EDEFAULT == null ? modelInstanceElement != null : !MODEL_INSTANCE_ELEMENT_EDEFAULT.equals(modelInstanceElement);
                 }
                 return super.eIsSet(featureID);
         }
@@ -339,6 +393,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
                 result.append(result);
                 result.append(", UUID: ");
                 result.append(uuid);
+                result.append(", modelInstanceElement: ");
+                result.append(modelInstanceElement);
                 result.append(')');
                 return result.toString();
         }

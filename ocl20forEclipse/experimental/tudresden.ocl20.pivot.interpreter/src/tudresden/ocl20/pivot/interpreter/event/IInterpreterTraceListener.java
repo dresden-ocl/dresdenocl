@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * 
@@ -19,9 +20,24 @@ public interface IInterpreterTraceListener {
      * </p>
      * 
      * @param guid
-     *            The {@link UUID} which is eveluated as reference
+     *            The {@link UUID} which is evaluated as reference.
      */
-    void interpretationTreeDepthIncreased(UUID guid);
+    void interpretationTreeDepthIncreased(UUID uuid);
+    
+    /**
+     * <p>
+     * Fires an event to identify that the current parent has to be set to the
+     * next level. Furthermore this function is thought to be used to get the
+     * tracer
+     * </p>
+     * @param uuid
+     * 		The {@link UUID} which is evaluated as reference.
+     * 
+     * @param modelInstanceElement
+     * 		The {@link IModelInstanceElement} on which the constraint
+     * 		is evaluated.
+     */
+    void interpretationTreeDepthIncreased(UUID uuid, IModelInstanceElement modelInstanceElement);
 
     /**
      * <p>

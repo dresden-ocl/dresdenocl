@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
@@ -46,7 +47,7 @@ public class TracermodelPackageImpl extends EPackageImpl implements
          * <!-- end-user-doc -->
          * @generated
          */
-        private EClass uuidToTracerItemMapEClass = null;
+        private EDataType iModelInstanceElementEDataType = null;
 
 /**
          * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -173,6 +174,15 @@ public class TracermodelPackageImpl extends EPackageImpl implements
         }
 
 /**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public EAttribute getTracerItem_ModelInstanceElement() {
+                return (EAttribute)tracerItemEClass.getEStructuralFeatures().get(5);
+        }
+
+/**
          * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @generated
          */
@@ -193,26 +203,8 @@ public class TracermodelPackageImpl extends EPackageImpl implements
          * <!-- end-user-doc -->
          * @generated
          */
-        public EClass getUUIDToTracerItemMap() {
-                return uuidToTracerItemMapEClass;
-        }
-
-/**
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        public EAttribute getUUIDToTracerItemMap_Key() {
-                return (EAttribute)uuidToTracerItemMapEClass.getEStructuralFeatures().get(0);
-        }
-
-/**
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        public EReference getUUIDToTracerItemMap_Value() {
-                return (EReference)uuidToTracerItemMapEClass.getEStructuralFeatures().get(1);
+        public EDataType getIModelInstanceElement() {
+                return iModelInstanceElementEDataType;
         }
 
 /**
@@ -263,15 +255,13 @@ public class TracermodelPackageImpl extends EPackageImpl implements
                 createEReference(tracerItemEClass, TRACER_ITEM__PARENT);
                 createEReference(tracerItemEClass, TRACER_ITEM__CHILDREN);
                 createEAttribute(tracerItemEClass, TRACER_ITEM__UUID);
+                createEAttribute(tracerItemEClass, TRACER_ITEM__MODEL_INSTANCE_ELEMENT);
 
                 tracerRootEClass = createEClass(TRACER_ROOT);
                 createEReference(tracerRootEClass, TRACER_ROOT__ROOT_ITEMS);
 
-                uuidToTracerItemMapEClass = createEClass(UUID_TO_TRACER_ITEM_MAP);
-                createEAttribute(uuidToTracerItemMapEClass, UUID_TO_TRACER_ITEM_MAP__KEY);
-                createEReference(uuidToTracerItemMapEClass, UUID_TO_TRACER_ITEM_MAP__VALUE);
-
                 // Create data types
+                iModelInstanceElementEDataType = createEDataType(IMODEL_INSTANCE_ELEMENT);
                 oclAnyEDataType = createEDataType(OCL_ANY);
                 uuidEDataType = createEDataType(UUID);
         }
@@ -311,15 +301,13 @@ public class TracermodelPackageImpl extends EPackageImpl implements
                 initEReference(getTracerItem_Parent(), this.getTracerItem(), null, "parent", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
                 initEReference(getTracerItem_Children(), this.getTracerItem(), null, "children", null, 0, -1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
                 initEAttribute(getTracerItem_UUID(), this.getUUID(), "UUID", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+                initEAttribute(getTracerItem_ModelInstanceElement(), this.getIModelInstanceElement(), "modelInstanceElement", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
                 initEClass(tracerRootEClass, TracerRoot.class, "TracerRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
                 initEReference(getTracerRoot_RootItems(), this.getTracerItem(), null, "rootItems", null, 0, -1, TracerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-                initEClass(uuidToTracerItemMapEClass, Map.Entry.class, "UUIDToTracerItemMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-                initEAttribute(getUUIDToTracerItemMap_Key(), this.getUUID(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-                initEReference(getUUIDToTracerItemMap_Value(), this.getTracerItem(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
                 // Initialize data types
+                initEDataType(iModelInstanceElementEDataType, IModelInstanceElement.class, "IModelInstanceElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
                 initEDataType(oclAnyEDataType, OclAny.class, "OclAny", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
                 initEDataType(uuidEDataType, java.util.UUID.class, "UUID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 

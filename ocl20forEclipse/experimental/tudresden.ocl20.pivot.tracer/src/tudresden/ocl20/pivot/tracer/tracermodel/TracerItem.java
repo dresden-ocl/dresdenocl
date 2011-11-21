@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -26,6 +27,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID <em>UUID</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement <em>Model Instance Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -163,5 +165,31 @@ public interface TracerItem extends EObject {
          * @generated
          */
         void setUUID(UUID value);
+
+/**
+         * Returns the value of the '<em><b>Model Instance Element</b></em>' attribute.
+         * <!-- begin-user-doc -->
+         * <p>
+         * If the meaning of the '<em>Model Instance Element</em>' attribute isn't clear,
+         * there really should be more of a description here...
+         * </p>
+         * <!-- end-user-doc -->
+         * @return the value of the '<em>Model Instance Element</em>' attribute.
+         * @see #setModelInstanceElement(IModelInstanceElement)
+         * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerItem_ModelInstanceElement()
+         * @model dataType="tudresden.ocl20.pivot.tracer.tracermodel.IModelInstanceElement"
+         * @generated
+         */
+        IModelInstanceElement getModelInstanceElement();
+
+/**
+         * Sets the value of the '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement <em>Model Instance Element</em>}' attribute.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @param value the new value of the '<em>Model Instance Element</em>' attribute.
+         * @see #getModelInstanceElement()
+         * @generated
+         */
+        void setModelInstanceElement(IModelInstanceElement value);
 
 } // TracerItem

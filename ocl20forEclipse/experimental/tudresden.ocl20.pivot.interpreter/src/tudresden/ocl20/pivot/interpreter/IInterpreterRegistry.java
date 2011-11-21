@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * <p>
@@ -60,18 +61,50 @@ public interface IInterpreterRegistry {
     public void addInterpreterRegistryListener(
 	    IInterpreterRegistryListener listener);
 
-    public void addInterpreterTraceListener(IInterpreterTraceListener listener);
+    /**
+     * <p>
+     * Adds an {@link IInterpreterTraceListener}.
+     * </p>
+     * 
+     * @param listener
+     *            The {@link IInterpreterTraceListener} which shall be added.
+     */
+    public void addInterpreterTraceListener(
+	    IInterpreterTraceListener listener);
 
+    
+    /**
+     * <p>
+     * Removes an {@link IInterpreterTraceListener}.
+     * </p>
+     * 
+     * @param listener
+     *            The {@link IInterpreterTraceListener} which shall be removed.
+     */
     public void removeInterpreterTraceListener(
 	    IInterpreterTraceListener listener);
 
+    
     public void fireInterpretationDepthIncreased(UUID guid);
 
+    public void fireInterpretationDepthIncreased(UUID guid,
+	    IModelInstanceElement modelInstanceElement); 
+    
     public void fireInterpretationDepthDecreased();
 
     public void firePartialInterpretionResult(EObject expression,
 	    OclAny result, UUID guid);
 
+    /**
+     * <p>
+     * Fires an event that holds the {@link IModelInstanceElement},
+     * the {@link Constraint} and the {@link Expression} to determine
+     * which elements have been selected in the {@link InterpreterView}.
+     * </p>
+     * TODO Lars: Document here and make this to a good event
+     * @param interpretationResult
+     *            The {@link IInterpretationResult} that shall be sent.
+     */
     public void fireTraceSelectedConstraints(List<Object[]> constraints);
 
     /**

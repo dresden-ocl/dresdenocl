@@ -11,15 +11,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
         upperBound="-1" eType="#//TracerItem"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="UUID" eType="#//UUID"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelInstanceElement" eType="#//IModelInstanceElement"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IModelInstanceElement" instanceClassName="tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement"/>
   <eClassifiers xsi:type="ecore:EDataType" name="OclAny" instanceClassName="tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny"/>
   <eClassifiers xsi:type="ecore:EClass" name="TracerRoot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rootItems" upperBound="-1"
         eType="#//TracerItem"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
-  <eClassifiers xsi:type="ecore:EClass" name="UUIDToTracerItemMap" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//UUID"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//TracerItem"/>
-  </eClassifiers>
 </ecore:EPackage>

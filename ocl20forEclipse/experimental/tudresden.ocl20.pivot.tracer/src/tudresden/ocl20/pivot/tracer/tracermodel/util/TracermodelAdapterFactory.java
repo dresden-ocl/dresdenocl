@@ -79,10 +79,6 @@ public class TracermodelAdapterFactory extends AdapterFactoryImpl {
                                 return createTracerRootAdapter();
                         }
                         @Override
-                        public Adapter caseUUIDToTracerItemMap(Map.Entry<UUID, TracerItem> object) {
-                                return createUUIDToTracerItemMapAdapter();
-                        }
-                        @Override
                         public Adapter defaultCase(EObject object) {
                                 return createEObjectAdapter();
                         }
@@ -130,20 +126,6 @@ public class TracermodelAdapterFactory extends AdapterFactoryImpl {
         }
 
     /**
-         * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>UUID To Tracer Item Map</em>}'.
-         * <!-- begin-user-doc -->
-         * This default implementation returns null so that we can easily ignore cases;
-         * it's useful to ignore a case when inheritance will catch all the cases anyway.
-         * <!-- end-user-doc -->
-         * @return the new adapter.
-         * @see java.util.Map.Entry
-         * @generated
-         */
-        public Adapter createUUIDToTracerItemMapAdapter() {
-                return null;
-        }
-
-/**
          * Creates a new adapter for the default case.
          * <!-- begin-user-doc --> This
      * default implementation returns null. <!-- end-user-doc -->

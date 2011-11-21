@@ -43,6 +43,7 @@ import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterRegistryEvent;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * <p>
@@ -78,9 +79,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
     }
 
-    /**
-	 * 
-	 */
+
     public void fireInterpretationDepthIncreased(UUID guid) {
 
 	if (this.traceListeners != null) {
@@ -90,7 +89,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	    for (int i = 0; i < listeners.length; i++) {
 
-		/* Inform the listeners that the interpretation did finish. */
+		/* Inform the listeners */
 		((IInterpreterTraceListener) listeners[i])
 			.interpretationTreeDepthIncreased(guid);
 	    }
@@ -110,7 +109,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	    for (int i = 0; i < listeners.length; i++) {
 
-		/* Inform the listeners that the interpretation did finish. */
+		/* Inform the listeners */
 		((IInterpreterTraceListener) listeners[i])
 			.interpretationTreeDepthDecreased();
 	    }
@@ -160,7 +159,7 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	    for (int i = 0; i < listeners.length; i++) {
 
-		/* Inform the listeners that the interpretation did finish. */
+		/* Inform the listeners */
 		((IInterpreterTraceListener) listeners[i])
 			.traceSelectedConstraints(constraints);
 	    }
@@ -270,6 +269,26 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 		/* Inform the listeners that the interpretation did finish. */
 		((IInterpreterTraceListener) listeners[i])
 			.interpretationCleared();
+	    }
+	}
+	// no else.
+    }
+
+    @Override
+    public void fireInterpretationDepthIncreased(UUID guid,
+	    IModelInstanceElement modelInstanceElement) {
+
+	if (this.traceListeners != null) {
+	    Object[] listeners;
+
+	    listeners = this.traceListeners.getListeners();
+
+	    for (int i = 0; i < listeners.length; i++) {
+
+		/* Inform the listeners */
+		((IInterpreterTraceListener) listeners[i])
+			.interpretationTreeDepthIncreased(guid,
+				modelInstanceElement);
 	    }
 	}
 	// no else.

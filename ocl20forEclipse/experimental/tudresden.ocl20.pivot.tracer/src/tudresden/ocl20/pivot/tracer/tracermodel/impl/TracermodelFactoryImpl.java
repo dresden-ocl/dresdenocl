@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.tracer.tracermodel.*;
 
 /**
@@ -66,7 +67,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
                 switch (eClass.getClassifierID()) {
                         case TracermodelPackage.TRACER_ITEM: return createTracerItem();
                         case TracermodelPackage.TRACER_ROOT: return createTracerRoot();
-                        case TracermodelPackage.UUID_TO_TRACER_ITEM_MAP: return (EObject)createUUIDToTracerItemMap();
                         default:
                                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
                 }
@@ -79,6 +79,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
     @Override
     public Object createFromString(EDataType eDataType, String initialValue) {
                 switch (eDataType.getClassifierID()) {
+                        case TracermodelPackage.IMODEL_INSTANCE_ELEMENT:
+                                return createIModelInstanceElementFromString(eDataType, initialValue);
                         case TracermodelPackage.OCL_ANY:
                                 return createOclAnyFromString(eDataType, initialValue);
                         case TracermodelPackage.UUID:
@@ -95,6 +97,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
     @Override
     public String convertToString(EDataType eDataType, Object instanceValue) {
                 switch (eDataType.getClassifierID()) {
+                        case TracermodelPackage.IMODEL_INSTANCE_ELEMENT:
+                                return convertIModelInstanceElementToString(eDataType, instanceValue);
                         case TracermodelPackage.OCL_ANY:
                                 return convertOclAnyToString(eDataType, instanceValue);
                         case TracermodelPackage.UUID:
@@ -127,9 +131,17 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
          * <!-- end-user-doc -->
          * @generated
          */
-        public Map.Entry<UUID, TracerItem> createUUIDToTracerItemMap() {
-                UUIDToTracerItemMapImpl uuidToTracerItemMap = new UUIDToTracerItemMapImpl();
-                return uuidToTracerItemMap;
+        public IModelInstanceElement createIModelInstanceElementFromString(EDataType eDataType, String initialValue) {
+                return (IModelInstanceElement)super.createFromString(eDataType, initialValue);
+        }
+
+/**
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        public String convertIModelInstanceElementToString(EDataType eDataType, Object instanceValue) {
+                return super.convertToString(eDataType, instanceValue);
         }
 
 /**

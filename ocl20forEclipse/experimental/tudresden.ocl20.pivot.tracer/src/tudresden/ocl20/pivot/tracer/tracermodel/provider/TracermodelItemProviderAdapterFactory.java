@@ -124,29 +124,6 @@ public class TracermodelItemProviderAdapterFactory extends
         }
 
     /**
-         * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        protected UUIDToTracerItemMapItemProvider uuidToTracerItemMapItemProvider;
-
-/**
-         * This creates an adapter for a {@link java.util.Map.Entry}.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        @Override
-        public Adapter createUUIDToTracerItemMapAdapter() {
-                if (uuidToTracerItemMapItemProvider == null) {
-                        uuidToTracerItemMapItemProvider = new UUIDToTracerItemMapItemProvider(this);
-                }
-
-                return uuidToTracerItemMapItemProvider;
-        }
-
-/**
      * This returns the root adapter factory that contains this factory. <!--
      * begin-user-doc --> <!-- end-user-doc -->
      * 
@@ -244,7 +221,6 @@ public class TracermodelItemProviderAdapterFactory extends
     public void dispose() {
                 if (tracerItemItemProvider != null) tracerItemItemProvider.dispose();
                 if (tracerRootItemProvider != null) tracerRootItemProvider.dispose();
-                if (uuidToTracerItemMapItemProvider != null) uuidToTracerItemMapItemProvider.dispose();
         }
 
 }

@@ -78,7 +78,6 @@ import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
@@ -177,15 +176,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	    throw new IllegalArgumentException(
 		    "Parameter 'constraint' must not be null.");
 	// no else.
-
-	UUID guid = null;
-	/* Probably trace the entry into this method */
-	if (!isPreparationRun) {
-	    guid = UUID.randomUUID();
-	    increaseTracerTreeDepth(guid);
-	}
-	// no else
-
+	
 	/* Probably log the entry into this method. */
 	if (LOGGER.isDebugEnabled()) {
 	    LOGGER.debug("Entry interpretConstraint(constraint = " + constraint
@@ -195,9 +186,18 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	// no else.
 
 	IInterpretationResult result;
+	UUID guid = null;
 
 	/* Check if the constraint has a static context. */
 	if (this.hasStaticContext(constraint)) {
+	    
+	    /* Probably trace the entry into this method */
+	    if (!isPreparationRun) {
+		guid = UUID.randomUUID();
+		increaseTracerTreeDepth(guid, modelInstanceElement);
+	    }
+	    // no else
+	    
 	    OclAny context = myStandardLibraryFactory.createOclUndefined(
 		    EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
 			    .getOclAny(), "Static context.");
@@ -219,6 +219,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		    "Parameter 'modelInstanceElement' cannot be null for constraints not defined in a static context.");
 
 	else if (this.isConstrained(modelInstanceElement, constraint)) {
+	   
+	    /* Probably trace the entry into this method */
+	    if (!isPreparationRun) {
+		guid = UUID.randomUUID();
+		increaseTracerTreeDepth(guid, modelInstanceElement);
+	    }
+	    // no else
 
 	    OclAny context = myStandardLibraryFactory
 		    .createOclAny(modelInstanceElement);
@@ -245,13 +252,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	// no else.
 
 	/* Probably trace the exit of this method. */
-	if (!isPreparationRun) {
+	if (!isPreparationRun && (guid != null)) {
 	    decreaseTracerTreeDepth();
 
-	    /* Propagate tracer information for partial interpretation */
-	    OclAny res = (result == null) ? null : result.getResult();
+	    /* Propagate tracer information for partial interpretation.
+	     * The uuid will be null iff the constraint could not be
+	     * applied to any context or instance */
 	    OclInterpreterPlugin.getInterpreterRegistry()
-		    .firePartialInterpretionResult(constraint, res, guid);
+		.firePartialInterpretionResult(constraint, result.getResult(), guid);
 	}
 
 	return result;
@@ -4402,6 +4410,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	/* set the offset for the tree structure */
 	OclInterpreterPlugin.getInterpreterRegistry()
 		.fireInterpretationDepthIncreased(guid);
+    }
+
+    /**
+     * <p>
+     * Fires a notification to the observers that the tree depth has increased.
+     * </p>
+     */
+    
+    protected void increaseTracerTreeDepth(UUID guid,
+	    IModelInstanceElement modelInstanceElement) {
+	/* set the offset for the tree structure */
+	OclInterpreterPlugin.getInterpreterRegistry()
+		.fireInterpretationDepthIncreased(guid, modelInstanceElement);
     }
 
     /**

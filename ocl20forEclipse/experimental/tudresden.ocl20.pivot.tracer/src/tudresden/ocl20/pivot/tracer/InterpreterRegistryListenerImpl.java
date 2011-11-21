@@ -25,11 +25,9 @@ import java.util.WeakHashMap;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclModelInstanceObject;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
@@ -102,6 +100,27 @@ public class InterpreterRegistryListenerImpl implements
 	    }
 	}
     }
+    
+    /**
+     * <p>
+     * This method overloads the
+     * {@link InterpreterRegistryListenerImpl#interpretationTreeDepthIncreased(UUID)}
+     * and adds the {@link IModelInstanceElement} to the resulting
+     * {@link TracerItem} in the tree.
+     * </p>
+     */
+    public void interpretationTreeDepthIncreased(UUID uuid,
+	    IModelInstanceElement modelInstanceElement) {
+	
+	/* Call this method since it overloads this method */
+	interpretationTreeDepthIncreased(uuid);
+	
+	/* Set the modelInstanceElement from the 
+	 * just added item
+	 */
+	TracerItem item = cachedItems.get(uuid);
+	item.setModelInstanceElement(modelInstanceElement);
+    }
 
     /**
      * <p>
@@ -127,25 +146,6 @@ public class InterpreterRegistryListenerImpl implements
 
     public void partialInterpretationFinished(InterpreterTraceEvent event) {
 	
-	/* TODO Lars: Debug the OclInterpreter to identify which
-	 * method returns this null result.
-	 * It seems that on some OCL Expressions the interpreter just
-	 * begins to interprete and returns immediatelly. 
-	 */
-	/* Check if the result is empty. */
-	if(event.getResult() == null) {
-	    roots.getRootItems().remove(cachedItems.get(event.getUUID()));
-	    /*
-	    for(TracerItem i : roots.getRootItems()) {
-		if(i.getUUID() == event.getUUID()) {
-		    roots.getRootItems().remove(i);
-		    
-		    return;
-		}
-	    }
-	    */
-	}
-	
 	/* Search the corresponding TracerItem */
 	TracerItem item = cachedItems.get(event.getUUID());
 	
@@ -155,48 +155,6 @@ public class InterpreterRegistryListenerImpl implements
 	    item.setResult(event.getResult());
 	    return;
 	}
-	
-	/*
-	Iterator<TracerItem> iterator;
-	boolean found = false;
-
-	if (currentParent == null) {
-	    iterator = roots.getRootItems().iterator();
-	    while (!found && iterator.hasNext()) {
-		TracerItem item = iterator.next();
-		if (item.getGuid() == event.getUUID()) {
-		    // set the values for this item
-		    //
-		    item.setExpression(event.getExpression());
-		    item.setResult(event.getResult());
-		    found = true;
-		}
-		// no else
-	    }
-	    // end while
-	} else {
-	    if (!found && (currentParent.getGuid() == event.getUUID())) {
-		currentParent.setExpression(event.getExpression());
-		currentParent.setResult(event.getResult());
-		found = true;
-	    }
-	    // no else
-
-	    iterator = currentParent.getChildren().iterator();
-
-	    while (!found && iterator.hasNext()) {
-		TracerItem item = iterator.next();
-		if (item.getGuid() == event.getUUID()) {
-		    item.setExpression(event.getExpression());
-		    item.setResult(event.getResult());
-		    found = true;
-		}
-		// no else
-	    }
-	    // end while
-	}
-	// end else
-	*/
     }
 
     /**
@@ -236,56 +194,15 @@ public class InterpreterRegistryListenerImpl implements
     
 	    for (TracerItem i : roots.getRootItems()) {
 		if ((i.getExpression() == aRow[1])
-			&& (i.getResult() == aRow[2])) {
-		    /* It is always a JavaModelInstanceObject in aRow[0] */
-		    IModelInstanceObject obj = (IModelInstanceObject) aRow[0];
-
-		    if (DFS(i, obj)) {
-			/* Add the item to be displayed later */
-			tracedRoots.getRootItems().add(i);
-		    }
-		    // no else
+			&& (i.getResult() == aRow[2])
+			&& (i.getModelInstanceElement() == aRow[0]))
+		{
+		    tracedRoots.getRootItems().add(i);
 		}
-		// no else
+		//no else
 	    }
 	    // end for
 	}
 	// end for
-    }
-
-    /**
-     * <p>
-     * Deep first search (DFS) searching for the specified
-     * {@link IModelInstanceObject}.
-     * </p>
-     * 
-     * @param node
-     *            The {@link TracerItem} to be searched.
-     * @param obj
-     *            The {@link IModelInstanceObject} for what is searched.
-     * @return true if the node's result equals the obj<br />
-     *         false otherwise
-     */
-    private boolean DFS(TracerItem node, IModelInstanceObject obj) {
-
-	/* Check whether the current node fits the abort criteria */
-	if (node.getResult() instanceof JavaOclModelInstanceObject) {
-	    IModelInstanceObject nodeResult = ((OclModelInstanceObject) node
-		    .getResult()).getModelInstanceObject();
-	    if (nodeResult.equals(obj)) {
-		return true;
-	    }
-	    // no else
-	} else {
-	    boolean result = false;
-	    Iterator<TracerItem> it = node.getChildren().iterator();
-	    while (!result && it.hasNext()) {
-		result = DFS(it.next(), obj);
-	    }
-	    // end while
-	    return result;
-	}
-	// end else
-	return false;
     }
 }

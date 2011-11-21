@@ -68,6 +68,7 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
                         addParentPropertyDescriptor(object);
                         addChildrenPropertyDescriptor(object);
                         addUUIDPropertyDescriptor(object);
+                        addModelInstanceElementPropertyDescriptor(object);
                 }
                 return itemPropertyDescriptors;
         }
@@ -161,6 +162,28 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
         }
 
 /**
+         * This adds a property descriptor for the Model Instance Element feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        protected void addModelInstanceElementPropertyDescriptor(Object object) {
+                itemPropertyDescriptors.add
+                        (createItemPropertyDescriptor
+                                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                                 getResourceLocator(),
+                                 getString("_UI_TracerItem_modelInstanceElement_feature"),
+                                 getString("_UI_PropertyDescriptor_description", "_UI_TracerItem_modelInstanceElement_feature", "_UI_TracerItem_type"),
+                                 TracermodelPackage.Literals.TRACER_ITEM__MODEL_INSTANCE_ELEMENT,
+                                 true,
+                                 false,
+                                 false,
+                                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                                 null,
+                                 null));
+        }
+
+/**
          * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
          * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
          * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -228,6 +251,7 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 
                 switch (notification.getFeatureID(TracerItem.class)) {
                         case TracermodelPackage.TRACER_ITEM__UUID:
+                        case TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT:
                                 fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
                                 return;
                         case TracermodelPackage.TRACER_ITEM__EXPRESSION:
@@ -258,11 +282,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
                         (createChildParameter
                                 (TracermodelPackage.Literals.TRACER_ITEM__EXPRESSION,
                                  TracermodelFactory.eINSTANCE.createTracerRoot()));
-
-                newChildDescriptors.add
-                        (createChildParameter
-                                (TracermodelPackage.Literals.TRACER_ITEM__EXPRESSION,
-                                 TracermodelFactory.eINSTANCE.create(TracermodelPackage.Literals.UUID_TO_TRACER_ITEM_MAP)));
         }
 
     /**

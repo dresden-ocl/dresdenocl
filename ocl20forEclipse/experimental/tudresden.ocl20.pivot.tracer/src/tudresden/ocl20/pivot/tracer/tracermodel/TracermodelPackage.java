@@ -113,12 +113,21 @@ public interface TracermodelPackage extends EPackage {
         int TRACER_ITEM__UUID = 4;
 
 /**
+         * The feature id for the '<em><b>Model Instance Element</b></em>' attribute.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         * @ordered
+         */
+        int TRACER_ITEM__MODEL_INSTANCE_ELEMENT = 5;
+
+/**
          * The number of structural features of the '<em>Tracer Item</em>' class.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @generated
          * @ordered
          */
-    int TRACER_ITEM_FEATURE_COUNT = 5;
+    int TRACER_ITEM_FEATURE_COUNT = 6;
 
     /**
      * The meta object id for the '
@@ -150,41 +159,14 @@ public interface TracermodelPackage extends EPackage {
     int TRACER_ROOT_FEATURE_COUNT = 1;
 
     /**
-         * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.UUIDToTracerItemMapImpl <em>UUID To Tracer Item Map</em>}' class.
+         * The meta object id for the '<em>IModel Instance Element</em>' data type.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.UUIDToTracerItemMapImpl
-         * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUIDToTracerItemMap()
+         * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+         * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
          * @generated
          */
-        int UUID_TO_TRACER_ITEM_MAP = 2;
-
-/**
-         * The feature id for the '<em><b>Key</b></em>' attribute.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         * @ordered
-         */
-        int UUID_TO_TRACER_ITEM_MAP__KEY = 0;
-
-/**
-         * The feature id for the '<em><b>Value</b></em>' reference.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         * @ordered
-         */
-        int UUID_TO_TRACER_ITEM_MAP__VALUE = 1;
-
-/**
-         * The number of structural features of the '<em>UUID To Tracer Item Map</em>' class.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         * @ordered
-         */
-        int UUID_TO_TRACER_ITEM_MAP_FEATURE_COUNT = 2;
+        int IMODEL_INSTANCE_ELEMENT = 2;
 
 /**
      * The meta object id for the '<em>Ocl Any</em>' data type. <!--
@@ -267,6 +249,17 @@ public interface TracermodelPackage extends EPackage {
         EAttribute getTracerItem_UUID();
 
 /**
+         * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement <em>Model Instance Element</em>}'.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @return the meta object for the attribute '<em>Model Instance Element</em>'.
+         * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement()
+         * @see #getTracerItem()
+         * @generated
+         */
+        EAttribute getTracerItem_ModelInstanceElement();
+
+/**
          * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot <em>Tracer Root</em>}'.
          * <!-- begin-user-doc --> <!-- end-user-doc -->
          * @return the meta object for class '<em>Tracer Root</em>'.
@@ -286,38 +279,15 @@ public interface TracermodelPackage extends EPackage {
     EReference getTracerRoot_RootItems();
 
     /**
-         * Returns the meta object for class '{@link java.util.Map.Entry <em>UUID To Tracer Item Map</em>}'.
+         * Returns the meta object for data type '{@link tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement <em>IModel Instance Element</em>}'.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
-         * @return the meta object for class '<em>UUID To Tracer Item Map</em>'.
-         * @see java.util.Map.Entry
-         * @model keyDataType="tudresden.ocl20.pivot.tracer.tracermodel.UUID"
-         *        valueType="tudresden.ocl20.pivot.tracer.tracermodel.TracerItem"
+         * @return the meta object for data type '<em>IModel Instance Element</em>'.
+         * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+         * @model instanceClass="tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement"
          * @generated
          */
-        EClass getUUIDToTracerItemMap();
-
-/**
-         * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @return the meta object for the attribute '<em>Key</em>'.
-         * @see java.util.Map.Entry
-         * @see #getUUIDToTracerItemMap()
-         * @generated
-         */
-        EAttribute getUUIDToTracerItemMap_Key();
-
-/**
-         * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @return the meta object for the reference '<em>Value</em>'.
-         * @see java.util.Map.Entry
-         * @see #getUUIDToTracerItemMap()
-         * @generated
-         */
-        EReference getUUIDToTracerItemMap_Value();
+        EDataType getIModelInstanceElement();
 
 /**
          * Returns the meta object for data type '{@link tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny <em>Ocl Any</em>}'.
@@ -409,6 +379,14 @@ public interface TracermodelPackage extends EPackage {
                 EAttribute TRACER_ITEM__UUID = eINSTANCE.getTracerItem_UUID();
 
         /**
+                 * The meta object literal for the '<em><b>Model Instance Element</b></em>' attribute feature.
+                 * <!-- begin-user-doc -->
+                 * <!-- end-user-doc -->
+                 * @generated
+                 */
+                EAttribute TRACER_ITEM__MODEL_INSTANCE_ELEMENT = eINSTANCE.getTracerItem_ModelInstanceElement();
+
+        /**
                  * The meta object literal for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
                  * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -426,30 +404,14 @@ public interface TracermodelPackage extends EPackage {
 	EReference TRACER_ROOT__ROOT_ITEMS = eINSTANCE.getTracerRoot_RootItems();
 
 	/**
-                 * The meta object literal for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.UUIDToTracerItemMapImpl <em>UUID To Tracer Item Map</em>}' class.
+                 * The meta object literal for the '<em>IModel Instance Element</em>' data type.
                  * <!-- begin-user-doc -->
                  * <!-- end-user-doc -->
-                 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.UUIDToTracerItemMapImpl
-                 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUIDToTracerItemMap()
+                 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+                 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
                  * @generated
                  */
-                EClass UUID_TO_TRACER_ITEM_MAP = eINSTANCE.getUUIDToTracerItemMap();
-
-        /**
-                 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-                 * <!-- begin-user-doc -->
-                 * <!-- end-user-doc -->
-                 * @generated
-                 */
-                EAttribute UUID_TO_TRACER_ITEM_MAP__KEY = eINSTANCE.getUUIDToTracerItemMap_Key();
-
-        /**
-                 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
-                 * <!-- begin-user-doc -->
-                 * <!-- end-user-doc -->
-                 * @generated
-                 */
-                EReference UUID_TO_TRACER_ITEM_MAP__VALUE = eINSTANCE.getUUIDToTracerItemMap_Value();
+                EDataType IMODEL_INSTANCE_ELEMENT = eINSTANCE.getIModelInstanceElement();
 
         /**
 	 * The meta object literal for the '<em>Ocl Any</em>' data type. <!--
