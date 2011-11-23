@@ -575,27 +575,30 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 				.getModelInstanceTypes();
 
 		if (miTypes.length > 0) {
+		    
 		    IModelInstanceType miType = null;
 		    
-		    /* Check whether the model instance file is a .class file */
-		    if(fileExtension.equalsIgnoreCase("class")) {
-			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
-				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.java");
-			
-			isApplicable = true;
-			
-		    }
-		    else if(fileExtension.equalsIgnoreCase("pml")) {
-			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
-				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.ecore");
-			
-			isApplicable = true;
-		    }
-		    else if(fileExtension.equalsIgnoreCase("xml")) {
-			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
-				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.xml");
-			
-			isApplicable = true;
+		    if(fileExtension != null) {    		    
+        		    /* Check whether the model instance file is a .class file */
+        		    if(fileExtension.equalsIgnoreCase("class")) {
+        			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+        				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.java");
+        			
+        			isApplicable = true;
+        			
+        		    }
+        		    else if(fileExtension.equalsIgnoreCase("pml")) {
+        			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+        				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.ecore");
+        			
+        			isApplicable = true;
+        		    }
+        		    else if(fileExtension.equalsIgnoreCase("xml")) {
+        			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+        				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.xml");
+        			
+        			isApplicable = true;
+        		    }
 		    }
 		    
 		    if(isApplicable && (miType != null)) {

@@ -444,33 +444,36 @@ public class LoadModelPage extends AbstractModelBusPage {
 		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
 		if (metaModels.length > 0) {
+		    
 		    IMetamodel mmType = null;
 		    
-		    /* Check which meta model can be applied */
-		    if(fileExtension.equalsIgnoreCase("class")
-			    || fileExtension.equalsIgnoreCase("javamodel")) {
-			mmType = ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel("tudresden.ocl20.pivot.metamodels.java");
-			
-			isApplicable = true;
-		    }
-		    else if(fileExtension.equalsIgnoreCase("uml")) {
-			mmType = ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel("tudresden.ocl20.pivot.metamodels.uml2");
-			
-			isApplicable = true;
-		    }
-		    else if(fileExtension.equalsIgnoreCase("ecore")) {
-			mmType = ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel("tudresden.ocl20.pivot.metamodels.ecore");
-			
-			isApplicable = true;
-		    }
-		    else if(fileExtension.equalsIgnoreCase("xsd")) {
-			mmType = ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel("tudresden.ocl20.pivot.metamodels.xsd");
-			
-			isApplicable = true;
+    		    if(fileExtension != null) {		    
+        		    /* Check which meta model can be applied */
+        		    if(fileExtension.equalsIgnoreCase("class")
+        			    || fileExtension.equalsIgnoreCase("javamodel")) {
+        			mmType = ModelBusPlugin.getMetamodelRegistry()
+        				.getMetamodel("tudresden.ocl20.pivot.metamodels.java");
+        			
+        			isApplicable = true;
+        		    }
+        		    else if(fileExtension.equalsIgnoreCase("uml")) {
+        			mmType = ModelBusPlugin.getMetamodelRegistry()
+        				.getMetamodel("tudresden.ocl20.pivot.metamodels.uml2");
+        			
+        			isApplicable = true;
+        		    }
+        		    else if(fileExtension.equalsIgnoreCase("ecore")) {
+        			mmType = ModelBusPlugin.getMetamodelRegistry()
+        				.getMetamodel("tudresden.ocl20.pivot.metamodels.ecore");
+        			
+        			isApplicable = true;
+        		    }
+        		    else if(fileExtension.equalsIgnoreCase("xsd")) {
+        			mmType = ModelBusPlugin.getMetamodelRegistry()
+        				.getMetamodel("tudresden.ocl20.pivot.metamodels.xsd");
+        			
+        			isApplicable = true;
+        		    }
 		    }
 		    
 		    /* Search for the meta model and select it */
