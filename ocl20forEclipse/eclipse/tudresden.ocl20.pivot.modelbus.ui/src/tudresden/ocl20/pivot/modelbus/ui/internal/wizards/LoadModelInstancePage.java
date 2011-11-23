@@ -31,6 +31,8 @@
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -529,6 +531,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		Object selectedObject;
 		IResource selectedResource;
 		String fileTextBoxContent;
+		String fileExtension = null;
 
 		IModel activeModel;
 		IModelInstanceType[] miTypes;
@@ -549,6 +552,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 					fileTextBoxContent = selectedResource.getRawLocation()
 							.toString();
 					modelInstanceFileTextBox.setText(fileTextBoxContent);
+					fileExtension = selectedResource.getFileExtension();
 				}
 				// no else
 			}
@@ -564,12 +568,50 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		}
 		// no else.
 
-		/* By default select the first model instance type. */
+		/* By default try to select a model instance type we know
+		 * that it can be applied to the file */
+		boolean isApplicable = false;
 		miTypes = ModelBusPlugin.getModelInstanceTypeRegistry()
 				.getModelInstanceTypes();
 
 		if (miTypes.length > 0) {
+		    IModelInstanceType miType = null;
+		    
+		    /* Check whether the model instance file is a .class file */
+		    if(fileExtension.equalsIgnoreCase("class")) {
+			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.java");
+			
+			isApplicable = true;
+			
+		    }
+		    else if(fileExtension.equalsIgnoreCase("pml")) {
+			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.ecore");
+			
+			isApplicable = true;
+		    }
+		    else if(fileExtension.equalsIgnoreCase("xml")) {
+			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.xml");
+			
+			isApplicable = true;
+		    }
+		    
+		    if(isApplicable && (miType != null)) {
+			/* Search for the model instance type and select it */
+			List<IModelInstanceType> miList = Arrays.asList(miTypes);
+			int i = miList.indexOf(miType);
+			
+			if(i >= 0) {
+			    this.miTypeViewer.setSelection(new StructuredSelection(miList.get(i)));
+			}
+			//no else
+		    }
+		    else {
+		    /* If there is no applicable model instance type select the first */
 			this.miTypeViewer.setSelection(new StructuredSelection(miTypes[0]));
+		    }
 		}
 		// no else.
 	}

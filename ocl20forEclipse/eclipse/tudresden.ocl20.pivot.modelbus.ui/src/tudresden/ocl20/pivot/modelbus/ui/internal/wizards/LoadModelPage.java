@@ -33,6 +33,8 @@
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -414,6 +416,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	private void initializeFromSelection() {
 
 		IMetamodel[] metaModels;
+		String fileExtension = null;
 
 		if (this.selection != null) {
 			Object selectedObject = this.selection.getFirstElement();
@@ -423,6 +426,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 				IResource selectedResource;
 
 				selectedResource = (IResource) selectedObject;
+				fileExtension = selectedResource.getFileExtension();
 
 				if (selectedResource.getType() == IResource.FILE) {
 					modelFileTextBox.setText(selectedResource.getRawLocation()
@@ -434,12 +438,57 @@ public class LoadModelPage extends AbstractModelBusPage {
 		}
 		// no else.
 
-		/* By default select the first meta model. */
+		/* By default try to select a meta model we know
+		 * that it can be applied to the file */
+		boolean isApplicable = false;
 		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
 		if (metaModels.length > 0) {
+		    IMetamodel mmType = null;
+		    
+		    /* Check which meta model can be applied */
+		    if(fileExtension.equalsIgnoreCase("class")
+			    || fileExtension.equalsIgnoreCase("javamodel")) {
+			mmType = ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel("tudresden.ocl20.pivot.metamodels.java");
+			
+			isApplicable = true;
+		    }
+		    else if(fileExtension.equalsIgnoreCase("uml")) {
+			mmType = ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel("tudresden.ocl20.pivot.metamodels.uml2");
+			
+			isApplicable = true;
+		    }
+		    else if(fileExtension.equalsIgnoreCase("ecore")) {
+			mmType = ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel("tudresden.ocl20.pivot.metamodels.ecore");
+			
+			isApplicable = true;
+		    }
+		    else if(fileExtension.equalsIgnoreCase("xsd")) {
+			mmType = ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel("tudresden.ocl20.pivot.metamodels.xsd");
+			
+			isApplicable = true;
+		    }
+		    
+		    /* Search for the meta model and select it */
+		    if(isApplicable && (mmType != null)) {
+			List<IMetamodel> mmList = Arrays.asList(metaModels);
+			int i = mmList.indexOf(mmType);
+			
+			if(i >= 0) {
+			    this.metamodelViewer.setSelection(new StructuredSelection(
+					mmList.get(i)));
+			}
+			//no else
+		    }
+		    else { 	    
+		    /* If there is no applicable model instance type select the first */
 			this.metamodelViewer.setSelection(new StructuredSelection(
 					metaModels[0]));
+		    }
 		}
 		// no else.
 	}
