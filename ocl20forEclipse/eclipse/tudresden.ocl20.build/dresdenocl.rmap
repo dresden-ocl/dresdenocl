@@ -53,8 +53,9 @@
 		<!-- TODO: add modelling components? -->
 	</searchPath>
 
-	<locator searchPathRef="dresdenocl.features" pattern=".+\.feature(\..+)?" />
-	<locator searchPathRef="dresdenocl.tests" pattern=".+\.test(.*)" />
+	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.feature(\..+)?" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\ocl20\..+\.test(\..+)?" failOnError="false"/>
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?" failOnError="false"/>
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org.kiama.attribution" />
