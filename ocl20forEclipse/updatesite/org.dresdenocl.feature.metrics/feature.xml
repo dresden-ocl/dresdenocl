@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.dresdenocl.metric"
+      id="org.dresdenocl.feature.metrics"
       label="Dresden OCL Metrics"
       version="3.1.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">

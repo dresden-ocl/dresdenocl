@@ -71,7 +71,7 @@
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
-	<locator searchPathRef="org.emftext" pattern="^org.emfttext(\..+)?" />
+	<locator searchPathRef="org.emftext" pattern="^org.emftext(\..+)?" />
 	<locator searchPathRef="target.platform" />
 
 </rmap>

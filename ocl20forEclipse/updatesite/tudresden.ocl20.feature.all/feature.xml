@@ -182,10 +182,6 @@ Library.
    </license>
 
    <includes
-         id="org.dresdenocl.metric"
-         version="0.0.0"/>
-
-   <includes
          id="tudresden.ocl20.feature.codegen"
          version="0.0.0"/>
 
@@ -227,6 +223,10 @@ Library.
 
    <includes
          id="tudresden.ocl20.feature.parser"
+         version="0.0.0"/>
+
+   <includes
+         id="org.dresdenocl.feature.metrics"
          version="0.0.0"/>
 
 </feature>
