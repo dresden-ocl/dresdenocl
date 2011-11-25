@@ -49,13 +49,12 @@
 	</searchPath>
 
 	<searchPath name="target.platform">
-		<provider componentTypes="eclipse.feature,osgi.bundle"
+<!--		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false" resolutionFilter="(build.type=N)">
 			<uri format="http://download.eclipse.org/releases/indigo" />
-		</provider>
+		</provider> -->
 		<provider componentTypes="eclipse.feature,osgi.bundle"
-			readerType="p2" source="false" mutable="false"
-			resolutionFilter="(|(build.type=N)(build.type=R))">
+			readerType="p2" source="false" mutable="false">
 			<uri format="http://download.eclipse.org/eclipse/updates/3.7" />
 		</provider>
 		<!-- <provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" 
