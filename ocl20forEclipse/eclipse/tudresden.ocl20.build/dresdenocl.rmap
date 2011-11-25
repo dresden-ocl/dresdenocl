@@ -42,6 +42,12 @@
 		</provider>
 	</searchPath>
 
+	<searchPath name="org.aspectj">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/tools/ajdt/37/update"/>
+		</provider>
+	</searchPath>
+
 	<searchPath name="target.platform">
 		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false" resolutionFilter="(build.type=N)">
@@ -66,12 +72,13 @@
 		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
 		failOnError="false" />
-	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\.testsuite(\..+)?" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
 	<locator searchPathRef="org.emftext" pattern="^org.emftext(\..+)?" />
+	<locator searchPathRef="org.aspectj" pattern="^org.aspectj(\..+)?" />
 	<locator searchPathRef="target.platform" />
 
 </rmap>
