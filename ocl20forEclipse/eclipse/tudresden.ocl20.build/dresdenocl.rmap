@@ -57,9 +57,9 @@
 	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\..+\.test(\..+)?" failOnError="false"/>
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?" failOnError="false"/>
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
-	<locator searchPathRef="dresdenocl.plugins" pattern="^org.dresdenocl(\..+)?" />
-	<locator searchPathRef="dresdenocl.plugins" pattern="^org.kiama.attribution" />
-	<locator searchPathRef="dresdenocl.plugins" pattern="^scala.library" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
+	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
 	<locator searchPathRef="target.platform" />
 
 </rmap>
