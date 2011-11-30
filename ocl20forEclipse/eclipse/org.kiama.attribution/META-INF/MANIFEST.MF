@@ -1,17 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kiama Attribution
-Bundle-SymbolicName: org.kiama.attribution
+Bundle-SymbolicName: org.kiama.attribution;singleton:=true
 Bundle-Version: 3.1.0.qualifier
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  scala.library;bundle-version="2.9.1"
-Bundle-ClassPath: lib/kiama_2.9.0-1.1.0.jar,
- .
+Bundle-ClassPath: lib/kiama_2.9.0-1.1.0.jar
 Export-Package: org.kiama,
  org.kiama.attribution,
  org.kiama.machine,
  org.kiama.rewriting,
  org.kiama.util
+Bundle-ActivationPolicy: lazy
