@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kiama Integration
-Bundle-SymbolicName: tudresden.attributegrammar.integration.kiama
+Bundle-SymbolicName: tudresden.attributegrammar.integration.kiama;singleton:=true
 Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.attributegrammar.integration.kiama.KiamaIntegrationPlugin
 Require-Bundle: org.eclipse.core.runtime,

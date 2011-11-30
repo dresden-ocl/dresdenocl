@@ -31,3 +31,11 @@ After the installation you have to manually change the builder of the projects
 to the Scala IDE builder. Right-click on the project and go to the properties panel.
 There, go to Builders, de-select the ANT script and select the Scala IDE builder.
 Just to be safe, clean both projects.
+
+
+UPDATE-SITE
+-----------
+PDE does not recognise Scala sources and therefore will not compile them. Instead,
+we have to copy all the compiled .class files to the .jar. To do the trick, include
+"source.. = bin/" in the build.properties. Eclipse will complain with a warning, but
+this seems to do the trick.
