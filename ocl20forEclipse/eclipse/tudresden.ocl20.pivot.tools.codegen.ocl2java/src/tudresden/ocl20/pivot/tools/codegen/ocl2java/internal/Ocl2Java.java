@@ -2196,7 +2196,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 						+ Ocl2JavaPlugin.PLUGIN_ID + "' was not found.");
 		}
 
-		return file.getAbsolutePath();
+		return file.getPath();
 	}
 
 	/**

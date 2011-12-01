@@ -149,6 +149,6 @@ public class SQLTemplate {
 						+ SQLTemplatePlugin.ID + "' was not found.");
 		}
 
-		return file.getAbsolutePath();
+		return file.getPath();
 	}
 }
