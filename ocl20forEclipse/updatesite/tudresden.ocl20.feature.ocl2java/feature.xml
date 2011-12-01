@@ -201,8 +201,7 @@ Library.
          id="tudresden.ocl20.pivot.tools.codegen.ocl2java"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="tudresden.ocl20.pivot.tools.codegen.ocl2java.types"

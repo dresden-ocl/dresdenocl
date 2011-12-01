@@ -239,8 +239,7 @@ Library.
          id="tudresden.ocl20.pivot.tools.template.sql"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="tudresden.ocl20.pivot.tools.transformation.pivot2sql"
