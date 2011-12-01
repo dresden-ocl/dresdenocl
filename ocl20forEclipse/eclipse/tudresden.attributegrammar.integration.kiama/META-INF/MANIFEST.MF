@@ -7,6 +7,8 @@ Bundle-Activator: tudresden.attributegrammar.integration.kiama.KiamaIntegrationP
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.kiama.attribution;visibility:=reexport,
+ tudresden.ocl20.pivot.language.ocl;bundle-version="3.1.0",
+ tudresden.ocl20.pivot.pivotmodel;bundle-version="3.1.0",
  scala.library;bundle-version="2.9.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
