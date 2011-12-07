@@ -107,13 +107,13 @@
 		<!-- TODO: clean older build and create folders -->
 		<echo message="Removing old build" />
 		<delete dir="${buildRoot}" quiet="true" />
+		<delete dir="${buildPath}" quiet="true" />
 		
 		<echo message="Creating main directories" />
 		<echo message="rootPath: ${rootPath}" />
-		<echo message="buildRoot: ${buildRoot}" />
+		<echo message="buildRoot: ${buildPath}" />
 		<mkdir dir="${rootPath}" />
-		<mkdir dir="${buildRoot}" />
-
+		<mkdir dir="${buildPath}" />
 		<mkdir dir="${toolsPath}" />
 	</target>
 
