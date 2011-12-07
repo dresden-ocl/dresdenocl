@@ -5,8 +5,8 @@
 
 	<property environment="env" />
 
-	<property name="targetPlatformPath" location="${buildPath}/tp" />
-	<property name="workspacePath" location="${buildPath}/workspace" />
+	<property name="targetPlatformPath" location="${buildRoot}/tp" />
+	<property name="workspacePath" location="${buildRoot}/workspace" />
 
 	<!-- ================================= 
           target: init              

@@ -32,6 +32,7 @@
 
 	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />
 	<property name="rootPath" location="${buildPath}" />
+	<property name="buildRoot" location="${rootPath}/build"/>
 	<property name="toolsPath" location="${rootPath}/tools" />
 
 
@@ -107,14 +108,12 @@
 		<!-- TODO: clean older build and create folders -->
 		<echo message="Removing old build" />
 		<delete dir="${buildRoot}" quiet="true" />
-		<delete dir="${buildPath}" quiet="true" />
 		
 		<echo message="Creating main directories" />
 		<echo message="rootPath: ${rootPath}" />
-		<echo message="buildRoot: ${buildPath}" />
+		<echo message="buildRoot: ${buildRoot}" />
 		<mkdir dir="${rootPath}" />
-		<mkdir dir="${buildPath}" />
-		<mkdir dir="${toolsPath}" />
+		<mkdir dir="${buildRoot}" />
 	</target>
 
 
