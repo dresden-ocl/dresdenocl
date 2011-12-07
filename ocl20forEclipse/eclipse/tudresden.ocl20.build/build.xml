@@ -103,7 +103,17 @@
           target: init              
          ================================= -->
 	<target name="init" description="Clean old build data. Try to install Director and Buckminster on the Build Server.">
+		
 		<!-- TODO: clean older build and create folders -->
+		<echo message="Removing old build" />
+		<delete dir="${buildRoot}" quiet="true" />
+		
+		<echo message="Creating main directories" />
+		<echo message="rootPath: ${rootPath}" />
+		<echo message="buildRoot: ${buildRoot}" />
+		<mkdir dir="${rootPath}" />
+		<mkdir dir="${buildRoot}" />
+
 		<mkdir dir="${toolsPath}" />
 	</target>
 
