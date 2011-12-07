@@ -43,16 +43,30 @@
 	</searchPath>
 
 	<searchPath name="org.aspectj">
-		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
-			<uri format="http://download.eclipse.org/tools/ajdt/37/update"/>
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/tools/ajdt/37/update" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="eclipse.modeling.emf">
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/modeling/emf/updates/releases/" />
+		</provider>
+	</searchPath>
+
+	<searchPath name="eclipse.modeling.uml">
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/modeling/mdt/updates/releases/" />
 		</provider>
 	</searchPath>
 
 	<searchPath name="target.platform">
-<!--		<provider componentTypes="eclipse.feature,osgi.bundle"
-			readerType="p2" source="false" mutable="false" resolutionFilter="(build.type=N)">
-			<uri format="http://download.eclipse.org/releases/indigo" />
-		</provider> -->
+		<!-- <provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" 
+			source="false" mutable="false" resolutionFilter="(build.type=N)"> <uri format="http://download.eclipse.org/releases/indigo" 
+			/> </provider> -->
 		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false">
 			<uri format="http://download.eclipse.org/eclipse/updates/3.7" />
@@ -76,8 +90,11 @@
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
-	<locator searchPathRef="org.emftext" pattern="^org.emftext(\..+)?" />
-	<locator searchPathRef="org.aspectj" pattern="^org.aspectj(\..+)?" />
+	<locator searchPathRef="org.emftext" pattern="^org\.emftext(\..+)?" />
+	<locator searchPathRef="org.aspectj" pattern="^org\.aspectj(\..+)?" />
+	<locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.emf(\..+)?" />
+	<locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.xsd(\..+)?" />
+	<locator searchPathRef="eclipse.modeling.uml" pattern="^org\.eclipse\.uml2(\..+)?" />
 	<locator searchPathRef="target.platform" />
 
 </rmap>
