@@ -54,19 +54,19 @@
 		<echo message="Setting Preferences" />
 		<buckminster command="setpreference" workspace="${workspacePath}">
 			<cmdargs>
-				<arg value="target.os=${target.os}" />
+				<arg value="org.eclipse.buckminster.pde.targetOS=${target.os}" />
 			</cmdargs>
 		</buckminster>
 
 		<buckminster command="setpreference" workspace="${workspacePath}">
 			<cmdargs>
-				<arg value="target.ws=${target.ws}" />
+				<arg value="org.eclipse.buckminster.pde.targetWS=${target.ws}" />
 			</cmdargs>
 		</buckminster>
 
 		<buckminster command="setpreference" workspace="${workspacePath}">
 			<cmdargs>
-				<arg value="target.arch=${target.arch}" />
+				<arg value="org.eclipse.buckminster.pde.targetArch=${target.arch}" />
 			</cmdargs>
 		</buckminster>
 
