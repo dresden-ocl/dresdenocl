@@ -9,15 +9,18 @@
 	<property name="targetPlatformPath" location="${buildRoot}/tp" />
 	<property name="workspacePath" location="${buildRoot}/workspace" />
 
+	<property name="buckminster.output.root" location="${buildRoot}/output" />
+	<property name="buckminster.temp.root" location="${buildRoot}/temp" />
+
 	<!-- ================================= 
           target: init              
          ================================= -->
 	<target name="init">
-		
+
 		<echo message="Removing old build" />
 		<!-- only remove old workspace, so that Eclipse is not materialised every time... -->
 		<delete dir="${workspacePath}" quiet="true" />
-		
+
 		<mkdir dir="${targetPlatformPath}" />
 		<mkdir dir="${workspacePath}" />
 	</target>
@@ -76,6 +79,26 @@
 				<arg value="--thorough" />
 			</cmdargs>
 		</buckminster>
+
+		<echo message="Creating p2 site" />
+		<buckminster command="setpreference" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="buckminster.output.root=${buckminster.output.root}" />
+			</cmdargs>
+		</buckminster>
+		<buckminster command="setpreference" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="buckminster.temp.root=${buckminster.temp.root}" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="perform" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="tudresden.ocl20.updatesite:eclipse.feature#site.p2" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="" />
 	</target>
 
 </project>
