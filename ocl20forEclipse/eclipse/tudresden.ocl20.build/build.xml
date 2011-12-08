@@ -105,7 +105,7 @@
          ================================= -->
 	<target name="init" description="Clean old build data. Try to install Director and Buckminster on the Build Server.">
 		
-		<!-- TODO: clean older build and create folders -->
+		<!-- TODO: Let the Target Platform reside in Jenkins; otherwise it has to be reloaded every time -->
 		<echo message="Removing old build" />
 		<delete dir="${buildRoot}" quiet="true" />
 		

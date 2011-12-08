@@ -46,6 +46,8 @@ http://dev.eclipse.org/viewsvn/index.cgi/trunk/org.eclipse.buckminster.releng/bu
 		</sequential>
 	</macrodef>
 
+	<property file="buckminster.properties" />
+	
 	<macrodef name="buckminster">
 		<attribute name="command" />
 		<attribute name="workspace" />
@@ -58,6 +60,9 @@ http://dev.eclipse.org/viewsvn/index.cgi/trunk/org.eclipse.buckminster.releng/bu
 					<jvmarg value="-Dbugfix.288796=true" />
 					<jvmarg value="-Declipse.p2.mirrors=false" />
 					<jvmarg value="-Declipse.p2.unsignedPolicy=allow" />
+					<jvmarg value="-Dtarget.os=${target.os}" />
+					<jvmarg value="-Dtarget.ws=${target.ws}" />
+					<jvmarg value="-Dtarget.arch=${target.arch}" />
 					<arg value="-data" />
 					<arg value="@{workspace}" />
 					<arg value="--loglevel" />
