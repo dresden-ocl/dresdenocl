@@ -4,6 +4,7 @@
 	<import file="./ant_common.xml" />
 
 	<property environment="env" />
+	<property file="buckminster.properties" />
 
 	<property name="targetPlatformPath" location="${buildRoot}/tp" />
 	<property name="workspacePath" location="${buildRoot}/workspace" />
@@ -12,6 +13,11 @@
           target: init              
          ================================= -->
 	<target name="init">
+		
+		<echo message="Removing old build" />
+		<!-- only remove old workspace, so that Eclipse is not materialised every time... -->
+		<delete dir="${workspacePath}" quiet="true" />
+		
 		<mkdir dir="${targetPlatformPath}" />
 		<mkdir dir="${workspacePath}" />
 	</target>
@@ -42,6 +48,25 @@
 		<buckminster command="import" workspace="${workspacePath}">
 			<cmdargs>
 				<arg value="${basedir}/dresdenocl.mspec" />
+			</cmdargs>
+		</buckminster>
+
+		<echo message="Setting Preferences" />
+		<buckminster command="setpreference" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="target.os=${target.os}" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="setpreference" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="target.ws=${target.ws}" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="setpreference" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="target.arch=${target.arch}" />
 			</cmdargs>
 		</buckminster>
 
