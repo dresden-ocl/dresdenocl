@@ -81,16 +81,16 @@
 		</buckminster>
 
 		<echo message="Creating p2 site" />
-		<buckminster command="setpreference" workspace="${workspacePath}">
-			<cmdargs>
-				<arg value="buckminster.output.root=${buckminster.output.root}" />
-			</cmdargs>
-		</buckminster>
-		<buckminster command="setpreference" workspace="${workspacePath}">
-			<cmdargs>
-				<arg value="buckminster.temp.root=${buckminster.temp.root}" />
-			</cmdargs>
-		</buckminster>
+<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
+<!-- 			<cmdargs> -->
+<!-- 				<arg value="buckminster.output.root=${buckminster.output.root}" /> -->
+<!-- 			</cmdargs> -->
+<!-- 		</buckminster> -->
+<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
+<!-- 			<cmdargs> -->
+<!-- 				<arg value="buckminster.temp.root=${buckminster.temp.root}" /> -->
+<!-- 			</cmdargs> -->
+<!-- 		</buckminster> -->
 
 		<buckminster command="perform" workspace="${workspacePath}">
 			<cmdargs>
