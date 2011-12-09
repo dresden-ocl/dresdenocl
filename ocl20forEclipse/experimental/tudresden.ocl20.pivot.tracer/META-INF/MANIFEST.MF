@@ -8,7 +8,6 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: tudresden.ocl20.pivot.tracer,
- tudresden.ocl20.pivot.tracer.model,
  tudresden.ocl20.pivot.tracer.tracermodel,
  tudresden.ocl20.pivot.tracer.tracermodel.impl,
  tudresden.ocl20.pivot.tracer.tracermodel.provider,
