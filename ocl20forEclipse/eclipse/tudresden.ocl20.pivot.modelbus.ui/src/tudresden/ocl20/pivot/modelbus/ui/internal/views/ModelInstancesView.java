@@ -496,7 +496,7 @@ public class ModelInstancesView extends ViewPart implements
 			}
 			// no else.
 		}
-
+		
 		/*
 		 * Add an action to the tool bar to remove the currently selected model
 		 * instance.
@@ -527,6 +527,33 @@ public class ModelInstancesView extends ViewPart implements
 
 		this.getViewSite().getActionBars().getToolBarManager().add(
 				myActionRemoveModelInstance);
+		
+		
+		/*
+		 * Update the currently active model instance.
+		 */
+		updateActiveModelInstance();
+	}
+
+	/**
+	 * <p>
+	 * If there is an active {@link IModelInstance} the viewer will be updated
+	 * to show it properly.
+	 * </p>
+	 */
+	private void updateActiveModelInstance() {
+		IModel activeModel;
+		IModelInstance activeModelInstance;
+		
+		activeModel = ModelBusPlugin.getModelRegistry()
+				.getActiveModel();
+		
+		activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
+				.getActiveModelInstance(activeModel);
+		
+		if(activeModelInstance != null)	{
+			this.setActiveModelInstance(activeModelInstance);
+		}
 	}
 
 	/**
