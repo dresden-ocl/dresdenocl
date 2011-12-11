@@ -2,6 +2,7 @@
 <project default="run" name="Build Dresden OCL.">
 
 	<import file="./ant_common.xml" />
+	<import file="../tudresden.ocl20.pivot.language.ocl.staticsemantics/build.xml" />
 
 	<property environment="env" />
 	<property file="buckminster.properties" />
@@ -73,6 +74,9 @@
 			</cmdargs>
 		</buckminster>
 
+		<!-- This is kind of hacky: first, build Java Sources, then build Scala sources and then Java again. Maybe, 
+		the dependencies between the Scala and Java projects can be stated explicitly so that not everything has to 
+		be compiled again.-->
 		<echo message="Building" />
 		<buckminster command="build" workspace="${workspacePath}">
 			<cmdargs>
@@ -80,17 +84,25 @@
 			</cmdargs>
 		</buckminster>
 
+		<antcall target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" />
+
+		<buckminster command="build" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="--thorough" />
+			</cmdargs>
+		</buckminster>
+
 		<echo message="Creating p2 site" />
-<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
-<!-- 			<cmdargs> -->
-<!-- 				<arg value="buckminster.output.root=${buckminster.output.root}" /> -->
-<!-- 			</cmdargs> -->
-<!-- 		</buckminster> -->
-<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
-<!-- 			<cmdargs> -->
-<!-- 				<arg value="buckminster.temp.root=${buckminster.temp.root}" /> -->
-<!-- 			</cmdargs> -->
-<!-- 		</buckminster> -->
+		<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
+		<!-- 			<cmdargs> -->
+		<!-- 				<arg value="buckminster.output.root=${buckminster.output.root}" /> -->
+		<!-- 			</cmdargs> -->
+		<!-- 		</buckminster> -->
+		<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
+		<!-- 			<cmdargs> -->
+		<!-- 				<arg value="buckminster.temp.root=${buckminster.temp.root}" /> -->
+		<!-- 			</cmdargs> -->
+		<!-- 		</buckminster> -->
 
 		<buckminster command="perform" workspace="${workspacePath}">
 			<cmdargs>
@@ -98,7 +110,6 @@
 			</cmdargs>
 		</buckminster>
 
-		<buckminster command="" />
 	</target>
 
 </project>
