@@ -1,42 +1,58 @@
 <project>
 
-	<target name="Scala Compiler Init">
-		<property
-			name="scala.home"
-			value="./../scala.library"
-		/>
-		<property
-      name="scala-library.jar"
-      value="${scala.home}/lib/scala-library.jar"
-    />
-		<property
-			name="scala-compiler.jar"
-			value="${scala.home}/lib/scala-compiler.jar">
-		</property>
-		
+	<target name="Init Properties">
+		<property name="scala.home" value="./../scala.library" />
+		<property name="scala-library.jar" value="${scala.home}/lib/scala-library.jar" />
+		<property name="scala-compiler.jar" value="${scala.home}/lib/scala-compiler.jar" />
+	</target>
+
+	<!-- This requires ANT v.1.8 or higher -->
+	<target name="Init Build Path (headless)" if="${headless}" depends="Init Properties">
+		<echo message="headless" />
+		<property name="target.platform" value="${basedir}/../../../build/build/tp" />
 		<path id="build.classpath">
-      <pathelement location="${scala-library.jar}"   />
+			<pathelement location="${scala-library.jar}" />
+			<dirset dir="${target.platform}">
+				<include name="org.eclipse.*.jar" />
+				<include name="org.emftext.access*.jar" />
+			</dirset>
+			<dirset dir="./..">
+				<include name="tudresden.ocl20.**/bin" />
+				<include name="tudresden.attributegrammar.integration.kiama/bin" />
+				<include name="org.emftext.**/bin" />
+			</dirset>
+			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar" />
+			<pathelement location="./../tudresden.ocl20.logging/lib/log4j-1.2.14.jar" />
+		</path>
+	</target>
+
+	<target name="Init Build Path (Eclipse)" unless="${headless}" depends="Init Properties">
+		<echo message="Eclipse" />
+		<path id="build.classpath">
+			<pathelement location="${scala-library.jar}" />
 			<fileset dir="${eclipse.home}">
 				<include name="plugins/org.eclipse.*.jar" />
 				<include name="plugins/org.emftext.access*.jar" />
 				<include name="dropins/*/org.emftext.access*.jar" />
 			</fileset>
 			<dirset dir="./..">
-      	<include name="tudresden.ocl20.**/bin"/>
-				<include name="org.kiama.**/bin"/>
-				<include name="tudresden.attributegrammar.integration.kiama/bin"/>
-				<include name="org.emftext.**/bin"/>
-      </dirset>
-			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar"/>
+				<include name="tudresden.ocl20.**/bin" />
+				<include name="tudresden.attributegrammar.integration.kiama/bin" />
+				<include name="org.emftext.**/bin" />
+			</dirset>
+			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar" />
 			<pathelement location="./../tudresden.ocl20.logging/lib/log4j-1.2.14.jar" />
-    </path>
+		</path>
+	</target>
+
+	<target name="Scala Compiler Init" depends="Init Build Path (Eclipse), Init Build Path (headless)">
 
 		<taskdef resource="scala/tools/ant/antlib.xml">
-      <classpath>
-        <pathelement location="${scala-compiler.jar}"   />
-        <pathelement location="${scala-library.jar}"   />
-      </classpath>
-    </taskdef>
+			<classpath>
+				<pathelement location="${scala-compiler.jar}" />
+				<pathelement location="${scala-library.jar}" />
+			</classpath>
+		</taskdef>
 	</target>
-	
+
 </project>
