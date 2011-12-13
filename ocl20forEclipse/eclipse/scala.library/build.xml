@@ -26,6 +26,7 @@
 			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar" />
 			<pathelement location="./../tudresden.ocl20.logging/lib/log4j-1.2.14.jar" />
 		</path>
+		<echo message="${toString:build.classpath}"/>
 	</target>
 
 	<target name="Init Build Path (Eclipse)" unless="${headless}" depends="Init Properties">
