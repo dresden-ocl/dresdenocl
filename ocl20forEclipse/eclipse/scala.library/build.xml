@@ -6,17 +6,17 @@
 		<property name="scala-compiler.jar" value="${scala.home}/lib/scala-compiler.jar" />
 	</target>
 
+	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
+		<isset property="env.WORKSPACE" />
+	</condition>
+	
+	<property name="buildPath" value="${hudsonWorkSpacePath}/build/build"/>
+	<property name="target.platform" value="${buildPath}/tp/plugins" />
+	<property name="workspace" value="${buildPath}/workspace/plugins"/>
+	
 	<!-- This requires ANT v.1.8 or higher -->
 	<target name="Init Build Path (headless)" if="${headless}" depends="Init Properties">
 		<echo message="headless" />
-		<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
-			<isset property="env.WORKSPACE" />
-		</condition>
-		
-		<property name="buildPath" value="${hudsonWorkSpacePath}/build/build"/>
-		<property name="target.platform" value="${buildPath}/tp/plugins" />
-		<property name="workspace" value="${buildPath}/workspace/plugins"/>
-
 		
 		<path id="build.classpath">
 			<pathelement location="${scala-library.jar}" />
@@ -31,7 +31,6 @@
 			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar" />
 			<pathelement location="./../tudresden.ocl20.logging/lib/log4j-1.2.14.jar" />
 		</path>
-		<echo message="${toString:build.classpath}"/>
 	</target>
 
 	<target name="Init Build Path (Eclipse)" unless="${headless}" depends="Init Properties">
