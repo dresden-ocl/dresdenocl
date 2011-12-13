@@ -1,9 +1,16 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
 	
-	<property name="attributableEObjectBin" value="./../tudresden.attributegrammar.integration.kiama/bin"/>
-	<property name="attributableEObjectSrc" value="./../tudresden.attributegrammar.integration.kiama/src"/>
+	<property name="integrationPlugin" value="tudresden.attributegrammar.integration.kiama"/>
 	
+	<condition property="attributableEObjectBin" value="${workspace}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
+		<isset property="headless"/>
+	</condition>
+	
+	<condition property="attributableEObjectSrc" value="${workspace}/${integrationPlugin}/src" else="./../${integrationPlugin}/src">
+		<isset property="headless"/>
+	</condition>
+		
 	<target name="Clean tudresden.attributegrammar.integration.kiama" >
 		<mkdir dir="${attributableEObjectBin}"/>
 		<delete>

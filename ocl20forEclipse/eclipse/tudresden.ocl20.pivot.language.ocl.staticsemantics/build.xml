@@ -2,8 +2,15 @@
 	<import file="./../scala.library/build.xml"/>
 	<import file="./../tudresden.attributegrammar.integration.kiama/build.xml"/>
 	
-	<property name="oclStaticSemanticsBin" value="./../tudresden.ocl20.pivot.language.ocl.staticsemantics/bin"/>
-	<property name="oclStaticSemanticsSrc" value="./../tudresden.ocl20.pivot.language.ocl.staticsemantics/src"/>
+	<property name="staticSemanticsPlugin" value="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+	
+	<condition property="oclStaticSemanticsBin" value="${workspace}/${staticSemanticsPlugin}/bin" else="./../${staticSemanticsPlugin}/bin">
+		<isset property="headless"/>
+	</condition>
+	
+	<condition property="oclStaticSemanticsSrc" value="${workspace}/${staticSemanticsPlugin}/src" else="./../${staticSemanticsPlugin}/src">
+		<isset property="headless"/>
+	</condition>
 	
 	<target name="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" depends="Clean tudresden.attributegrammar.integration.kiama">
 		<mkdir dir="${oclStaticSemanticsBin}"/>
