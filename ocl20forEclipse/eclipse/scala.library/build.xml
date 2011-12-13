@@ -16,7 +16,7 @@
 		<path id="build.classpath">
 			<pathelement location="${scala-library.jar}" />
 			<dirset dir="${target.platform}">
-				<include name="org.eclipse.*.jar" />
+				<include name="org.eclipse.**.jar" />
 				<include name="org.emftext.access*.jar" />
 			</dirset>
 			<dirset dir="./..">
