@@ -9,7 +9,10 @@
 	<!-- This requires ANT v.1.8 or higher -->
 	<target name="Init Build Path (headless)" if="${headless}" depends="Init Properties">
 		<echo message="headless" />
-		<property name="target.platform" value="${basedir}/../../../build/build/tp" />
+		<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
+			<isset property="env.WORKSPACE" />
+		</condition>
+		<property name="target.platform" value="${hudsonWorkSpacePath}/build/build/tp/plugins" />
 		<path id="build.classpath">
 			<pathelement location="${scala-library.jar}" />
 			<dirset dir="${target.platform}">
