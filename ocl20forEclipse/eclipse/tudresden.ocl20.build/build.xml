@@ -32,7 +32,7 @@
 
 	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />
 	<property name="rootPath" location="${buildPath}" />
-	<property name="buildRoot" location="${rootPath}/build"/>
+	<property name="buildRoot" location="${rootPath}/build" />
 	<property name="toolsPath" location="${rootPath}/tools" />
 
 
@@ -104,12 +104,26 @@
           target: init              
          ================================= -->
 	<target name="init" description="Clean old build data. Try to install Director and Buckminster on the Build Server.">
-		
+
 		<echo message="Creating main directories" />
 		<echo message="rootPath: ${rootPath}" />
 		<echo message="buildRoot: ${buildRoot}" />
 		<mkdir dir="${rootPath}" />
 		<mkdir dir="${buildRoot}" />
+	</target>
+
+	<!-- only for testing purposes! -->
+	<property file="/home/hudson/build_server/upload.build.properties" />
+	<!-- ================================= 
+          target: Copy update site              
+         ================================= -->
+	<target name="Copy Update Site">
+		<echo message="Copying update site to ST server" />
+		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
+			<fileset dir="${buckminster.output.root}">
+				<include name="*updatesite*/site.p2/**" />
+			</fileset>
+		</scp>
 	</target>
 
 
