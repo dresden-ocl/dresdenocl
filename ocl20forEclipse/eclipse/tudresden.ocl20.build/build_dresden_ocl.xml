@@ -2,7 +2,7 @@
 <project default="run" name="Build Dresden OCL.">
 
 	<import file="./ant_common.xml" />
-	
+
 	<property environment="env" />
 	<property file="buckminster.properties" />
 
@@ -99,6 +99,14 @@
 				<arg value="tudresden.ocl20.updatesite:eclipse.feature#site.p2" />
 			</cmdargs>
 		</buckminster>
+
+		<echo message="Copying update site to ST server" />
+		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
+			<fileset dir="${buckminster.output.root}">
+				<include name="**/*" />
+				<include name="**" />
+			</fileset>
+		</scp>
 
 	</target>
 
