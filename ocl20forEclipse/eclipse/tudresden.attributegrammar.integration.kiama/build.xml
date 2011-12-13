@@ -4,11 +4,11 @@
 	<property name="integrationPlugin" value="tudresden.attributegrammar.integration.kiama"/>
 	
 	<condition property="attributableEObjectBin" value="${workspace}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
-		<equals arg1="${headless}" arg2="true"/>
+		<istrue value="${headless}"/>
 	</condition>
 	
 	<condition property="attributableEObjectSrc" value="${workspace}/${integrationPlugin}/src" else="./../${integrationPlugin}/src">
-		<equals arg1="${headless}" arg2="true"/>
+		<istrue value="${headless}"/>
 	</condition>
 		
 	<target name="Clean tudresden.attributegrammar.integration.kiama" >
