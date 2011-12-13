@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project default="run" name="Build Dresden OCL.">
 
+	<!-- Nice little hack to ensure the headless property is set even BEFORE the task is executed so that all 
+			properties are initialsed correctly. -->
+	<property name="headless" value="true" />
+
 	<import file="./ant_common.xml" />
 	<import file="../tudresden.ocl20.pivot.language.ocl.staticsemantics/build.xml" />
 
@@ -84,11 +88,8 @@
 			</cmdargs>
 		</buckminster>
 
-		<!-- Nice little hack to ensure the headless property is set even BEFORE the task is executed so that all 
-		properties are initialsed correctly. -->
-		<property name="headless" value="true"/>
-		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" >
-			<param name="headless" value="true" />	
+		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics">
+			<param name="headless" value="true" />
 		</antcall>
 
 		<buckminster command="build" workspace="${workspacePath}">
