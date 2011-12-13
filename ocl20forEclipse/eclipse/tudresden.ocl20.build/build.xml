@@ -112,21 +112,6 @@
 		<mkdir dir="${buildRoot}" />
 	</target>
 
-	<!-- only for testing purposes! -->
-	<property file="/home/hudson/build_server/upload.build.properties" />
-	<!-- ================================= 
-          target: Copy update site              
-         ================================= -->
-	<target name="Copy Update Site">
-		<echo message="Copying update site to ST server" />
-		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
-			<fileset dir="${buckminster.output.root}">
-				<include name="*updatesite*/site.p2/**" />
-			</fileset>
-		</scp>
-	</target>
-
-
 	<!-- ================================= 
           target: compile.and.create.update.site              
          ================================= -->
