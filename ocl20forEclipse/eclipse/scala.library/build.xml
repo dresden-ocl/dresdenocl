@@ -6,7 +6,7 @@
 		<property name="scala-compiler.jar" value="${scala.home}/lib/scala-compiler.jar" />
 	</target>
 
-	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
+	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../..">
 		<isset property="env.WORKSPACE" />
 	</condition>
 	

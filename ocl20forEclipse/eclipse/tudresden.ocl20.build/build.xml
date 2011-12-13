@@ -17,7 +17,7 @@
 	<property file="buckminster.properties" />
 
 	<!-- TODO -->
-	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
+	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../..">
 		<isset property="env.WORKSPACE" />
 	</condition>
 
