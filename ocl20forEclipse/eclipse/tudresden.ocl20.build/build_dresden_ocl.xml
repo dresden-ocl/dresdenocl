@@ -84,7 +84,9 @@
 			</cmdargs>
 		</buckminster>
 
-		<antcall target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" />
+		<antcall target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" >
+			<param name="headless" value="true" />	
+		</antcall>
 
 		<buckminster command="build" workspace="${workspacePath}">
 			<cmdargs>
