@@ -12,14 +12,19 @@
 		<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../../">
 			<isset property="env.WORKSPACE" />
 		</condition>
-		<property name="target.platform" value="${hudsonWorkSpacePath}/build/build/tp/plugins" />
+		
+		<property name="buildPath" value="${hudsonWorkSpacePath}/build/build"/>
+		<property name="target.platform" value="${buildPath}/tp/plugins" />
+		<property name="workspace" value="${buildPath}/workspace/plugins"/>
+
+		
 		<path id="build.classpath">
 			<pathelement location="${scala-library.jar}" />
 			<fileset dir="${target.platform}">
 				<include name="org.eclipse.**.jar" />
 				<include name="org.emftext.**.jar" />
 			</fileset>
-			<dirset dir="./..">
+			<dirset dir="${workspace}">
 				<include name="tudresden.ocl20.**/bin" />
 				<include name="tudresden.attributegrammar.integration.kiama/bin" />
 			</dirset>
@@ -38,7 +43,7 @@
 				<include name="plugins/org.emftext.access*.jar" />
 				<include name="dropins/*/org.emftext.access*.jar" />
 			</fileset>
-			<dirset dir="./..">
+			<dirset dir="${hudsonWorkSpacePath}/build/build">
 				<include name="tudresden.ocl20.**/bin" />
 				<include name="tudresden.attributegrammar.integration.kiama/bin" />
 				<include name="org.emftext.**/bin" />
