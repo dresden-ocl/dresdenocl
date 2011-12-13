@@ -3,10 +3,6 @@
 
 	<import file="./ant_common.xml" />
 	
-	<!-- Nice little hack to ensure the headless property is set even BEFORE the task is executed so that all 
-			properties are initialsed correctly. -->
-	<property name="headless" value="true" />
-
 	<property environment="env" />
 	<property file="buckminster.properties" />
 
@@ -15,8 +11,6 @@
 
 	<property name="buckminster.output.root" location="${buildRoot}/output" />
 	<property name="buckminster.temp.root" location="${buildRoot}/temp" />
-
-	<import file="../tudresden.ocl20.pivot.language.ocl.staticsemantics/build.xml" />
 
 	<!-- ================================= 
           target: init              
@@ -89,9 +83,9 @@
 			</cmdargs>
 		</buckminster>
 
-		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics">
-			<param name="headless" value="true" />
-		</antcall>
+		<ant dir="./../tudresden.ocl20.pivot.language.ocl.staticsemantics" antfile="build.xml" target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" inheritall="true">
+			<property name="headless" value="true" />
+		</ant>
 
 		<buckminster command="build" workspace="${workspacePath}">
 			<cmdargs>
@@ -100,17 +94,6 @@
 		</buckminster>
 
 		<echo message="Creating p2 site" />
-		<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
-		<!-- 			<cmdargs> -->
-		<!-- 				<arg value="buckminster.output.root=${buckminster.output.root}" /> -->
-		<!-- 			</cmdargs> -->
-		<!-- 		</buckminster> -->
-		<!-- 		<buckminster command="setpreference" workspace="${workspacePath}"> -->
-		<!-- 			<cmdargs> -->
-		<!-- 				<arg value="buckminster.temp.root=${buckminster.temp.root}" /> -->
-		<!-- 			</cmdargs> -->
-		<!-- 		</buckminster> -->
-
 		<buckminster command="perform" workspace="${workspacePath}">
 			<cmdargs>
 				<arg value="tudresden.ocl20.updatesite:eclipse.feature#site.p2" />
