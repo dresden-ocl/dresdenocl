@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project default="run" name="Build Dresden OCL.">
 
+	<import file="./ant_common.xml" />
+	
 	<!-- Nice little hack to ensure the headless property is set even BEFORE the task is executed so that all 
 			properties are initialsed correctly. -->
 	<property name="headless" value="true" />
-
-	<import file="./ant_common.xml" />
-	<import file="../tudresden.ocl20.pivot.language.ocl.staticsemantics/build.xml" />
 
 	<property environment="env" />
 	<property file="buckminster.properties" />
@@ -16,6 +15,8 @@
 
 	<property name="buckminster.output.root" location="${buildRoot}/output" />
 	<property name="buckminster.temp.root" location="${buildRoot}/temp" />
+
+	<import file="../tudresden.ocl20.pivot.language.ocl.staticsemantics/build.xml" />
 
 	<!-- ================================= 
           target: init              
