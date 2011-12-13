@@ -5,6 +5,7 @@
 
 	<property environment="env" />
 	<property file="buckminster.properties" />
+	<property file="/home/hudson/build_server/upload.build.properties"/>
 
 	<property name="targetPlatformPath" location="${buildRoot}/tp" />
 	<property name="workspacePath" location="${buildRoot}/workspace" />
@@ -100,13 +101,17 @@
 			</cmdargs>
 		</buckminster>
 
+		<antcall target="Copy Update Site" />
+
+	</target>
+	
+	<target name="Copy Update Site">
 		<echo message="Copying update site to ST server" />
 		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
 			<fileset dir="${buckminster.output.root}">
 				<include name="*updatesite*/site.p2/**" />
 			</fileset>
 		</scp>
-
 	</target>
 
 </project>
