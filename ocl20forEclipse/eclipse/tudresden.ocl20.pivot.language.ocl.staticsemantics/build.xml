@@ -4,11 +4,11 @@
 	
 	<property name="staticSemanticsPlugin" value="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
 	
-	<condition property="oclStaticSemanticsBin" value="${workspace}/${staticSemanticsPlugin}/bin" else="./../${staticSemanticsPlugin}/bin">
+	<condition property="oclStaticSemanticsBin" value="${workspacePath}/${staticSemanticsPlugin}/bin" else="./../${staticSemanticsPlugin}/bin">
 		<isset property="headless"/>
 	</condition>
 	
-	<condition property="oclStaticSemanticsSrc" value="${workspace}/${staticSemanticsPlugin}/src" else="./../${staticSemanticsPlugin}/src">
+	<condition property="oclStaticSemanticsSrc" value="${workspacePath}/${staticSemanticsPlugin}/src" else="./../${staticSemanticsPlugin}/src">
 		<isset property="headless"/>
 	</condition>
 	

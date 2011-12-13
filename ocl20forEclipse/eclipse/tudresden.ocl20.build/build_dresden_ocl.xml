@@ -84,6 +84,9 @@
 			</cmdargs>
 		</buckminster>
 
+		<!-- Nice little hack to ensure the headless property is set even BEFORE the task is executed so that all 
+		properties are initialsed correctly. -->
+		<property name="headless" value="true"/>
 		<antcall target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" >
 			<param name="headless" value="true" />	
 		</antcall>
