@@ -9,10 +9,8 @@
 	<!-- ================================= 
           target: run.all              
          ================================= -->
-    <target name="run.all" description="Builds and tests Dresden OCL and will create the Update Site.">
-        <antcall target="build" />
-    	<antcall target="test" />
-    	<antcall target="create.update.site" />
+    <target name="run.all" depends="build,test,create.update.site" description="Builds and tests Dresden OCL and will create the Update Site.">
+    
     </target>
 
 	
