@@ -84,7 +84,7 @@
 			</cmdargs>
 		</buckminster>
 
-		<ant dir="./../tudresden.ocl20.pivot.language.ocl.staticsemantics" antfile="build.xml" target="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" inheritall="true">
+		<ant dir="./../tudresden.ocl20.pivot.language.ocl.staticsemantics" antfile="build.xml" target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" inheritall="true">
 			<property name="headless" value="true" />
 		</ant>
 
@@ -108,12 +108,20 @@
 	<!-- ================================= 
           target: Copy update site              
          ================================= -->
+	
+	<property name="updatesite" value="${buckminster.output.root}/updatesite"/>
+
+	<mkdir dir="${updatesite}"/>
+	<copy todir="${updatesite}" flatten="true">
+		<fileset dir="${buckminster.output.root}">
+			<include name="*updatesite*/site.p2/**" />
+		</fileset>
+	</copy>
+	
 	<target name="Copy Update Site">
 		<echo message="Copying update site to ST server" />
-		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
-			<fileset dir="${buckminster.output.root}">
-				<include name="*updatesite*/site.p2/**" />
-			</fileset>
+		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true" >
+			<fileset dir="${updatesite}" />
 		</scp>
 	</target>
 
