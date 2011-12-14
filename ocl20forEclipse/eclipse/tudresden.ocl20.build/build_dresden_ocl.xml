@@ -21,9 +21,14 @@
 		<echo message="Removing old build" />
 		<!-- only remove old workspace, so that Eclipse is not materialised every time... -->
 		<delete dir="${workspacePath}" quiet="true" />
+		<delete dir="${buckminster.output.root}" />
+		<delete dir="${buckminster.temp.root}" />
 
 		<mkdir dir="${targetPlatformPath}" />
 		<mkdir dir="${workspacePath}" />
+		<mkdir dir="${buckminster.output.root}" />
+		<mkdir dir="${buckminster.temp.root}" />
+
 	</target>
 
 	<!-- ================================= 
@@ -108,20 +113,36 @@
 	<!-- ================================= 
           target: Copy update site              
          ================================= -->
-	
-	<property name="updatesite" value="${buckminster.output.root}/updatesite"/>
 
-	<mkdir dir="${updatesite}"/>
+	<property name="updatesite" value="${buckminster.output.root}/updatesite" />
+
+	<mkdir dir="${updatesite}" />
+
+	<!-- locally copy the updatesite as flatten cannot be used in a nice way and not with scp -->
 	<copy todir="${updatesite}" flatten="true">
 		<fileset dir="${buckminster.output.root}">
-			<include name="*updatesite*/site.p2/**" />
+			<include name="*updatesite*/site.p2/*" />
 		</fileset>
 	</copy>
-	
+
+	<copy todir="${updatesite}/plugins" flatten="true">
+		<fileset dir="${buckminster.output.root}">
+			<include name="*updatesite*/site.p2/plugins/*" />
+		</fileset>
+	</copy>
+
+	<copy todir="${updatesite}/features" flatten="true">
+		<fileset dir="${buckminster.output.root}">
+			<include name="*updatesite*/site.p2/features/*" />
+		</fileset>
+	</copy>
+
 	<target name="Copy Update Site">
 		<echo message="Copying update site to ST server" />
-		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true" >
-			<fileset dir="${updatesite}" />
+		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
+			<fileset dir="${updatesite}">
+				<include name="**" />
+			</fileset>
 		</scp>
 	</target>
 
