@@ -162,7 +162,7 @@
 		<buckminster command="junit" workspace="${workspacePath}">
 			<cmdargs>
 				<arg value="-l" />
-				<arg value="org.dresdenocl.testsuite/DresdenOCLTestSuite.launch" />
+				<arg value="org.dresdenocl.testsuite/DresdenOclTestSuite.launch" />
 				<arg value="-o" />
 				<arg value="${testResultsPath}/test-results.xml" />
 				<arg value="--stdout" />
