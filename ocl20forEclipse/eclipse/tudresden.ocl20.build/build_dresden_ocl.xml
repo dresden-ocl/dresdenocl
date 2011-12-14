@@ -7,6 +7,16 @@
 	<property file="/home/hudson/build_server/upload.build.properties" />
 
 	<!-- ================================= 
+          target: run.all              
+         ================================= -->
+    <target name="run.all" description="Builds and tests Dresden OCL and will create the Update Site.">
+        <antcall target="build" />
+    	<antcall target="test" />
+    	<antcall target="create.update.site" />
+    </target>
+
+	
+	<!-- ================================= 
           target: init              
          ================================= -->
 	<target name="init">
@@ -16,11 +26,13 @@
 		<delete dir="${workspacePath}" quiet="true" />
 		<delete dir="${buckminster.output.root}" />
 		<delete dir="${buckminster.temp.root}" />
+		<delete dir="${testResultsPath}" />
 
 		<mkdir dir="${targetPlatformPath}" />
 		<mkdir dir="${workspacePath}" />
 		<mkdir dir="${buckminster.output.root}" />
 		<mkdir dir="${buckminster.temp.root}" />
+		<mkdir dir="${testResultsPath}"/>
 
 	</target>
 
@@ -142,7 +154,26 @@
 
 		<echo message="Clean up old build" />
 		<sshexec host="lars.inf.tu-dresden.de" port="22" trust="true" username="${usr}" password="${pwd}" command="/home/hudson/clean_up_dresdenocl.sh" />
-		
+
+	</target>
+
+	<!-- ================================= 
+          target: test              
+         ================================= -->
+	<target name="test" depends="build" description="Runs the Dresden OCL Test Suite">
+		<buckminster command="junit" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="-l" />
+				<arg value="org.dresdenocl.testsuite/DresdenOCLTestSuite.launch" />
+				<arg value="-o" />
+				<arg value="${testResultsPath}/test-results.xml" />
+				<arg value="--stdout" />
+				<arg value="${testResultsPath}/stdout.txt" />
+				<arg value="--stderr" />
+				<arg value="${testResultsPath}/stderr.txt" />
+				<arg value="--flatXML" />
+			</cmdargs>
+		</buckminster>
 	</target>
 
 </project>

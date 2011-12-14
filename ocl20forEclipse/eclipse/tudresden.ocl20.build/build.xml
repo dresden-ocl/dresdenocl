@@ -7,7 +7,7 @@
 <project default="compile.and.create.update.site" name="Build, test and deploy Dresden OCL.">
 
 	<import file="ant_common.xml" />
-	<import file="build_common_properties.xml"/>
+	<import file="build_common_properties.xml" />
 
 	<tstamp>
 		<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
@@ -93,10 +93,7 @@
           target: compile.and.create.update.site              
          ================================= -->
 	<target name="compile.and.create.update.site" depends="init, init.checks, install.buckminster" description="Compiles all the Dresden OCL plug-ins, executes all JUnit tests and creates a new update site.">
-		<echo message="Building" />
-		<ant dir="${basedir}" antfile="build_dresden_ocl.xml" target="build" inheritRefs="true" />
-		<ant dir="${basedir}" antfile="test_dresden_ocl.xml" target="test" inheritRefs="true" />
-		<ant dir="${basedir}" antfile="build_dresden_ocl.xml" target="create.update.site" inheritRefs="true" />
+		<ant dir="${basedir}" antfile="build_dresden_ocl.xml" target="run.all" inheritRefs="true" />
 	</target>
 
 </project>
