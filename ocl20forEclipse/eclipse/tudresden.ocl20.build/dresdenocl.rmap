@@ -98,7 +98,7 @@
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
 		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
-	<locator searchPathRef="dresdenocl.experimental" pattern="^org.\.dresdenocl\.examples\.uml" />
+	<locator searchPathRef="dresdenocl.experimental" pattern="^org\.dresdenocl\.examples\.uml(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
