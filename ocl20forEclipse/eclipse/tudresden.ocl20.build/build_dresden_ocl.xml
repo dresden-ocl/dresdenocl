@@ -163,6 +163,8 @@
 			<cmdargs>
 				<arg value="-l" />
 				<arg value="org.dresdenocl.testsuite/DresdenOclTestSuite.launch" />
+				<arg value="--maxTimeAwaitJunitReport" />
+				<arg value="20" />
 				<arg value="-o" />
 				<arg value="${testResultsPath}/test-results.xml" />
 				<arg value="--stdout" />
