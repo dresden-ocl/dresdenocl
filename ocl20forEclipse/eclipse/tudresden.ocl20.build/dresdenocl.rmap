@@ -25,6 +25,16 @@
 		</provider>
 	</searchPath>
 
+	<searchPath name="dresdenocl.experimental">
+		<provider componentTypes="osgi.bundle" readerType="svn"
+			source="true">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/experimental/{0}">
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
+
 	<searchPath name="dresdenocl.tests">
 		<provider componentTypes="osgi.bundle" readerType="svn"
 			source="true">
@@ -49,12 +59,13 @@
 		</provider>
 	</searchPath>
 
-<!-- 	<searchPath name="eclipse.modeling.emf"> -->
-<!-- 		<provider componentTypes="eclipse.feature,osgi.bundle" -->
-<!-- 			readerType="p2" source="false" mutable="false"> -->
-<!-- 			<uri format="http://download.eclipse.org/modeling/emf/updates/releases/" /> -->
-<!-- 		</provider> -->
-<!-- 	</searchPath> -->
+	<!-- <searchPath name="eclipse.modeling.emf"> -->
+	<!-- <provider componentTypes="eclipse.feature,osgi.bundle" -->
+	<!-- readerType="p2" source="false" mutable="false"> -->
+	<!-- <uri format="http://download.eclipse.org/modeling/emf/updates/releases/" 
+		/> -->
+	<!-- </provider> -->
+	<!-- </searchPath> -->
 
 	<searchPath name="eclipse.modeling.uml">
 		<provider componentTypes="eclipse.feature,osgi.bundle"
@@ -87,14 +98,17 @@
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
 		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
+	<locator searchPathRef="dresdenocl.experimental" pattern="^org.\.dresdenocl\.examples\.uml" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
 	<locator searchPathRef="org.emftext" pattern="^org\.emftext(\..+)?" />
 	<locator searchPathRef="org.aspectj" pattern="^org\.aspectj(\..+)?" />
-<!-- 	<locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.emf(\..+)?" /> -->
-<!-- 	<locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.xsd(\..+)?" /> -->
+	<!-- <locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.emf(\..+)?" 
+		/> -->
+	<!-- <locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.xsd(\..+)?" 
+		/> -->
 	<locator searchPathRef="eclipse.modeling.uml" pattern="^org\.eclipse\.uml2(\..+)?" />
 	<locator searchPathRef="target.platform" />
 
