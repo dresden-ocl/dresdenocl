@@ -1,0 +1,35 @@
+<project>
+	<property environment="env" />
+
+	<property file="buckminster.properties" />
+
+
+	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../..">
+		<isset property="env.WORKSPACE" />
+	</condition>
+
+	<!-- Specify whether the tools (i.e., director and buckminster) should be cleaned and downloaded again.-->
+	<condition property="clean.tools" value="true">
+		<equals arg1="${env.CLEAN_TOOLS}" arg2="true" />
+	</condition>
+
+	<condition property="buckminster.loglevel" value="${env.BUCKMINSTER_LOGLEVEL}" else="info">
+		<isset property="env.BUCKMINSTER_LOGLEVEL" />
+	</condition>
+
+	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />
+	<property name="rootPath" location="${buildPath}" />
+
+	<property name="buildRoot" location="${rootPath}/build" />
+	<property name="toolsPath" location="${rootPath}/tools" />
+
+	<property name="targetPlatformPath" location="${buildRoot}/tp" />
+	<property name="workspacePath" location="${buildRoot}/workspace" />
+
+	<property name="buckminster.output.root" location="${buildRoot}/output" />
+	<property name="buckminster.temp.root" location="${buildRoot}/temp" />
+	<property name="testResultsPath" value="${buildRoot}/tests"/>
+	
+	<property name="updatesite" value="${buckminster.output.root}/updatesite" />
+
+</project>

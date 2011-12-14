@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project default="run" name="Build Dresden OCL.">
+<project default="build" name="Build Dresden OCL.">
 
 	<import file="./ant_common.xml" />
+	<import file="./build_common_properties.xml" />
 
-	<property environment="env" />
-	<property file="buckminster.properties" />
 	<property file="/home/hudson/build_server/upload.build.properties" />
-
-	<property name="targetPlatformPath" location="${buildRoot}/tp" />
-	<property name="workspacePath" location="${buildRoot}/workspace" />
-
-	<property name="buckminster.output.root" location="${buildRoot}/output" />
-	<property name="buckminster.temp.root" location="${buildRoot}/temp" />
 
 	<!-- ================================= 
           target: init              
@@ -32,9 +25,9 @@
 	</target>
 
 	<!-- ================================= 
-          target: run              
+          target: init.buckminster              
          ================================= -->
-	<target name="run" depends="init,init.build.properties" description="Builds Dresden OCL plug-ins.">
+	<target name="init.buckminster" depends="init">
 		<echo message="Using workspace ${workspacePath}" />
 
 		<echo message="Setting jre to ${env.JAVA_HOME}" />
@@ -78,6 +71,12 @@
 				<arg value="org.eclipse.buckminster.pde.targetArch=${target.arch}" />
 			</cmdargs>
 		</buckminster>
+	</target>
+
+	<!-- ================================= 
+          target: build              
+         ================================= -->
+	<target name="build" depends="init,init.build.properties,init.buckminster" description="Builds Dresden OCL plug-ins.">
 
 		<!-- This is kind of hacky: first, build Java Sources, then build Scala sources and then Java again. Maybe, 
 		the dependencies between the Scala and Java projects can be stated explicitly so that not everything has to 
@@ -99,6 +98,13 @@
 			</cmdargs>
 		</buckminster>
 
+	</target>
+
+	<!-- ================================= 
+          target: create.update.site              
+         ================================= -->
+	<target name="create.update.site" depends="init.buckminster">
+
 		<echo message="Creating p2 site" />
 		<buckminster command="perform" workspace="${workspacePath}">
 			<cmdargs>
@@ -106,44 +112,37 @@
 			</cmdargs>
 		</buckminster>
 
-		<antcall target="Copy Update Site" />
+		<mkdir dir="${updatesite}" />
 
-	</target>
+		<!-- locally copy the updatesite as flatten cannot be used in a nice way and not with scp -->
+		<copy todir="${updatesite}" flatten="true">
+			<fileset dir="${buckminster.output.root}">
+				<include name="*updatesite*/site.p2/*" />
+			</fileset>
+		</copy>
 
-	<!-- ================================= 
-          target: Copy update site              
-         ================================= -->
+		<copy todir="${updatesite}/plugins" flatten="true">
+			<fileset dir="${buckminster.output.root}">
+				<include name="*updatesite*/site.p2/plugins/*" />
+			</fileset>
+		</copy>
 
-	<property name="updatesite" value="${buckminster.output.root}/updatesite" />
+		<copy todir="${updatesite}/features" flatten="true">
+			<fileset dir="${buckminster.output.root}">
+				<include name="*updatesite*/site.p2/features/*" />
+			</fileset>
+		</copy>
 
-	<mkdir dir="${updatesite}" />
-
-	<!-- locally copy the updatesite as flatten cannot be used in a nice way and not with scp -->
-	<copy todir="${updatesite}" flatten="true">
-		<fileset dir="${buckminster.output.root}">
-			<include name="*updatesite*/site.p2/*" />
-		</fileset>
-	</copy>
-
-	<copy todir="${updatesite}/plugins" flatten="true">
-		<fileset dir="${buckminster.output.root}">
-			<include name="*updatesite*/site.p2/plugins/*" />
-		</fileset>
-	</copy>
-
-	<copy todir="${updatesite}/features" flatten="true">
-		<fileset dir="${buckminster.output.root}">
-			<include name="*updatesite*/site.p2/features/*" />
-		</fileset>
-	</copy>
-
-	<target name="Copy Update Site">
 		<echo message="Copying update site to ST server" />
-		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true">
+		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true" failonerror="true">
 			<fileset dir="${updatesite}">
 				<include name="**" />
 			</fileset>
 		</scp>
+
+		<echo message="Clean up old build" />
+		<sshexec host="lars.inf.tu-dresden.de" port="22" trust="true" username="${usr}" password="${pwd}" command="/home/hudson/clean_up_dresdenocl.sh" />
+		
 	</target>
 
 </project>
