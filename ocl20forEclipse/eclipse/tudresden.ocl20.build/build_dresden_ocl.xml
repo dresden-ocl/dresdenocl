@@ -9,11 +9,11 @@
 	<!-- ================================= 
           target: run.all              
          ================================= -->
-    <target name="run.all" depends="build,test,create.update.site" description="Builds and tests Dresden OCL and will create the Update Site.">
-    
-    </target>
+	<target name="run.all" depends="build,test,create.update.site" description="Builds and tests Dresden OCL and will create the Update Site.">
 
-	
+	</target>
+
+
 	<!-- ================================= 
           target: init              
          ================================= -->
@@ -30,7 +30,7 @@
 		<mkdir dir="${workspacePath}" />
 		<mkdir dir="${buckminster.output.root}" />
 		<mkdir dir="${buckminster.temp.root}" />
-		<mkdir dir="${testResultsPath}"/>
+		<mkdir dir="${testResultsPath}" />
 
 	</target>
 
@@ -60,6 +60,12 @@
 		<buckminster command="import" workspace="${workspacePath}">
 			<cmdargs>
 				<arg value="${basedir}/dresdenocl.mspec" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="import" workspace="${workspacePath}">
+			<cmdargs>
+				<arg value="${basedir}/dresdenocl_tests.mspec" />
 			</cmdargs>
 		</buckminster>
 
