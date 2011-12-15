@@ -25,7 +25,15 @@
 		</provider>
 	</searchPath>
 
-
+	<searchPath name="dresdenocl.tests">
+		<provider componentTypes="osgi.bundle" readerType="svn"
+			source="true">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/tests/{0}">
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
 
 	<searchPath name="org.emftext">
 		<provider componentTypes="eclipse.feature,osgi.bundle"
@@ -79,6 +87,7 @@
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
 	<locator searchPathRef="org.emftext" pattern="^org\.emftext(\..+)?" />
 	<locator searchPathRef="org.aspectj" pattern="^org\.aspectj(\..+)?" />
 	<!-- <locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.emf(\..+)?" 
