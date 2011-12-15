@@ -83,11 +83,11 @@
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^org\.dresdenocl\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.updatesite" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
-	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
 	<locator searchPathRef="org.emftext" pattern="^org\.emftext(\..+)?" />
 	<locator searchPathRef="org.aspectj" pattern="^org\.aspectj(\..+)?" />
 	<!-- <locator searchPathRef="eclipse.modeling.emf" pattern="^org\.eclipse\.emf(\..+)?" 
