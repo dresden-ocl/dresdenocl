@@ -3630,7 +3630,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 *            The {@link Type} for which code shall be returned.
 	 * @return The code for a given {@link Type}.
 	 */
-	private ITransformedType transformInitializableType(Type aType) {
+	protected ITransformedType transformInitializableType(Type aType) {
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3847,7 +3847,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 *            The {@link Type} for which code shall be returned.
 	 * @return The {@link ITransformedType} for a given {@link Type}.
 	 */
-	private ITransformedType transformType(Type aType) {
+	protected ITransformedType transformType(Type aType) {
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
