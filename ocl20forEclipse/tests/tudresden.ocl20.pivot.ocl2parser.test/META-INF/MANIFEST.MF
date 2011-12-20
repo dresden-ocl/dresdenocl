@@ -6,7 +6,6 @@ Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.ocl2parser.test.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.junit4;bundle-version="4.0.0",
- tudresden.ocl20.pivot.testsuite,
  tudresden.ocl20.pivot.facade,
  tudresden.ocl20.pivot.language.ocl.staticsemantics,
  tudresden.ocl20.pivot.language.ocl.resource.ocl,

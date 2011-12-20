@@ -3,12 +3,6 @@
 <plugin
 >
    <extension
-         point="tudresden.ocl20.pivot.testsuite">
-      <testSuites
-            testSuite="tudresden.ocl20.pivot.tools.transformation.test.AllTestsTransformation">
-      </testSuites>
-   </extension>
-   <extension
          point="tudresden.ocl20.pivot.tools.transformation.transformations">
       <transformation
             class="tudresden.ocl20.pivot.tools.transformation.test.util.TestFalseTrans">

@@ -9,7 +9,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: tudresden.ocl20.logging,
  org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.template,
- tudresden.ocl20.pivot.testsuite,
  org.junit4;bundle-version="4.0.0",
  org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy

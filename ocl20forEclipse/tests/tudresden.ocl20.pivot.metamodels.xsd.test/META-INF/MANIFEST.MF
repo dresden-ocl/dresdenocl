@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.xsd,
- tudresden.ocl20.pivot.testsuite,
  tudresden.ocl20.pivot.facade
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
