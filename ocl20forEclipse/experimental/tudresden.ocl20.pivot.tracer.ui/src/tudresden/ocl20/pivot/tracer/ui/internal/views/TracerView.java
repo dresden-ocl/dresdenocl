@@ -28,10 +28,13 @@ import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.viewers.TableTreeViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Tree;
+import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 
 import tudresden.ocl20.pivot.tracer.TracerPlugin;
@@ -100,8 +103,22 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	@Override
 	public void createPartControl(Composite parent) {
 
-		myTreeViewer =
-				new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		Tree myTracerTree =
+				new Tree(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		myTracerTree.setHeaderVisible(true);
+		myTracerTree.setLinesVisible(true);
+
+		TreeColumn column1 = new TreeColumn(myTracerTree, SWT.LEFT);
+		column1.setAlignment(SWT.LEFT);
+		column1.setText("Constraint type");
+		column1.setWidth(300);
+
+		TreeColumn column2 = new TreeColumn(myTracerTree, SWT.RIGHT);
+		column2.setAlignment(SWT.LEFT);
+		column2.setText("Result");
+		column2.setWidth(300);
+
+		myTreeViewer = new TreeViewer(myTracerTree);
 		myTreeViewer
 				.setContentProvider(new TracerItemAdapterFactoryContentProvider(
 						myAdapterFactory));
