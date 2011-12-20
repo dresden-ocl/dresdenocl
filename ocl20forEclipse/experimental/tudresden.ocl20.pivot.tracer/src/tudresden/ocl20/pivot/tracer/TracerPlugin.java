@@ -4,6 +4,9 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
+import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistry;
+import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryListener;
+import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.impl.TracerRegistryImpl;
 
 public class TracerPlugin implements BundleActivator {
 
@@ -18,6 +21,15 @@ public class TracerPlugin implements BundleActivator {
 	/** the listener who is holding the tree structure */
 	private InterpreterRegistryListenerImpl listener;
 
+	/**
+	 * The {@link TracerRegistry} for the {@link TracerRegistryListener}s of the
+	 * {@link InterpreterRegistryListenerImpl}.
+	 */
+	private TracerRegistry tracerRegistry;
+
+	/**
+	 * 
+	 */
 	public TracerPlugin() {
 
 		plugin = this;
@@ -26,7 +38,8 @@ public class TracerPlugin implements BundleActivator {
 	public static InterpreterRegistryListenerImpl getInterpreterTraceListener() {
 
 		if (plugin == null) {
-			System.out.println("The Tracer has not been activated. Initialized it manually.");
+			System.out
+					.println("The Tracer plugin has not been activated. Initialized it manually.");
 			plugin = new TracerPlugin();
 		}
 		// no else
@@ -41,6 +54,29 @@ public class TracerPlugin implements BundleActivator {
 		// no else
 
 		return plugin.listener;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static TracerRegistry getTracerRegistry() {
+
+		/* Check if the plug-in has been activated. */
+		if (plugin == null) {
+			System.out
+					.println("The Tracer plugin has not been activated. Initialized it manually.");
+			plugin = new TracerPlugin();
+		}
+		// no else.
+
+		/* Lazily create the registry. */
+		if (plugin.tracerRegistry == null) {
+			plugin.tracerRegistry = new TracerRegistryImpl();
+		}
+		// no else.
+
+		return plugin.tracerRegistry;
 	}
 
 	public static void disposeInterpreterTraceListener() {

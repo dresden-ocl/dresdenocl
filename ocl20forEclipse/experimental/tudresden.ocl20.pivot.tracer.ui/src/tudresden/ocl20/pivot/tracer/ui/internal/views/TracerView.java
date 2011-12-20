@@ -31,11 +31,14 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.part.ViewPart;
 
 import tudresden.ocl20.pivot.tracer.TracerPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.provider.TracermodelItemProviderAdapterFactory;
+import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryEvent;
+import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryListener;
 import tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin;
 import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuAction;
 import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuActionType;
@@ -46,165 +49,152 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFact
  * @author Lars Schütze
  * 
  */
-public class TracerView extends ViewPart {
-    /** Icon to clear the view. */
-    public static String CLEAR_IMAGE = "icons/remove.gif";
-    
-    /** Icon to refresh the view. */
-    public static String REFRESH_IMAGE = "icons/refresh.gif";
+public class TracerView extends ViewPart implements TracerRegistryListener {
 
-    /** The {@link TreeViewer} for this {@link TracerView}. */
-    private TreeViewer myTreeViewer;
+	/** Icon to clear the view. */
+	public static String CLEAR_IMAGE = "icons/remove.gif";
 
-    /** The {@link TracerRoot} of the tree. */
-    private TracerRoot root;
+	/** Icon to refresh the view. */
+	public static String REFRESH_IMAGE = "icons/refresh.gif";
 
-    /** The {@link ComposedAdapterFactory} of the {@link tracer}. */
-    private ComposedAdapterFactory myAdapterFactory;
+	/** The {@link TreeViewer} for this {@link TracerView}. */
+	private TreeViewer myTreeViewer;
 
-    /** The {@link IMenuManager} of this {@link TracerView}. */
-    private IToolBarManager myToolBarManager;
-    
-    /**
-     * 
-     */
-    //TracerRootListener myRootListener;
+	/** The {@link TracerRoot} of the tree. */
+	private TracerRoot root;
 
-    /**
-     * <p>
-     * Instantiates this view.
-     * </p>
-     */
-    @SuppressWarnings("unchecked")
-    public TracerView() {
-	super();
+	/** The {@link ComposedAdapterFactory} of the {@link tracer}. */
+	private ComposedAdapterFactory myAdapterFactory;
 
-	List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
-	Collections.addAll(factories,
-		new TracermodelItemProviderAdapterFactory(),
-		new ReflectiveItemProviderAdapterFactory(),
-		new ResourceItemProviderAdapterFactory());
+	/** The {@link IMenuManager} of this {@link TracerView}. */
+	private IToolBarManager myToolBarManager;
 
-	myAdapterFactory = new ComposedAdapterFactory(factories);
-	root = getRoot();
-    }
-
-    public void dispose() {
-	myAdapterFactory.dispose();
-	TracerPlugin.disposeInterpreterTraceListener();
-	super.dispose();
-    }
-
-    @Override
-    public void createPartControl(Composite parent) {
-
-	myTreeViewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL
-		| SWT.V_SCROLL);
-	myTreeViewer
-		.setContentProvider(new TracerItemAdapterFactoryContentProvider(
-			myAdapterFactory));
-	myTreeViewer
-		.setLabelProvider(new TracerItemAdapterFactoryLabelProvider(
-			myAdapterFactory));
-	
-	root = getRoot();
-	myTreeViewer.setInput(root);
-
-	this.initMenu();
-	/*
-	 * Try to initialize the listeners so that the view is updating/refreshing
-	 * automatically by changes to the model
-	this.initListeners();
-	*/
-    }
-    /*
-    private void initListeners() {
-	myRootListener = new TracerRootListener();
-	getRoot().eAdapters().add(myRootListener);
-    }
-    */
-
-    private TracerRoot getRoot() {
-	return TracerPlugin.getInterpreterTraceListener().getTree();
-    }
-
-    /**
-     * <p>
-     * Creates the menu of this {@link TracerView}.
-     * </p>
-     */
-    private void initMenu() {
-	TracerViewMenuAction clearAllTracedElements;
-	TracerViewMenuAction refreshTheView;
-	
-	/*
-	 * --- TOOLBAR 
+	/**
+	 * <p>
+	 * Instantiates this view.
+	 * </p>
 	 */
-	myToolBarManager = this.getToolBarManager();
-	
-	/* Add the refresh button to the toolbar */
-	{
-	    refreshTheView = new TracerViewMenuAction(
-		    TracerViewMenuActionType.TRACER_VIEW_REFRESH, this);
-	    
-	    refreshTheView.setImageDescriptor(TracerUIPlugin
-		    .getImageDescriptor(REFRESH_IMAGE));
-	    
-	    myToolBarManager.add(refreshTheView);
+	@SuppressWarnings("unchecked")
+	public TracerView() {
+
+		super();
+
+		List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
+		Collections.addAll(factories, new TracermodelItemProviderAdapterFactory(),
+				new ReflectiveItemProviderAdapterFactory(),
+				new ResourceItemProviderAdapterFactory());
+
+		myAdapterFactory = new ComposedAdapterFactory(factories);
+		TracerPlugin.getTracerRegistry().addTracerRegistryListener(this);
+		getRoot();
 	}
-	
-	/* Add the clear all traced elements button to the toolbar */
-	{
-	    clearAllTracedElements = new TracerViewMenuAction(
-		    TracerViewMenuActionType.CLEAR_ALL_ELEMTENTS, this);
 
-	    clearAllTracedElements.setImageDescriptor(TracerUIPlugin
-		    .getImageDescriptor(CLEAR_IMAGE));
+	public void dispose() {
 
-	    myToolBarManager.add(clearAllTracedElements);
+		myAdapterFactory.dispose();
+		TracerPlugin.disposeInterpreterTraceListener();
+		TracerPlugin.getTracerRegistry().removeTracerRegistryListener(this);
+		super.dispose();
 	}
-    }
 
-    private IToolBarManager getToolBarManager() {
-	if (myToolBarManager == null) {
-	    myToolBarManager = this.getViewSite().getActionBars()
-		    .getToolBarManager();
-	}
-	return myToolBarManager;
-    }
-
-    @Override
-    public void setFocus() {
-	myTreeViewer.getControl().setFocus();
-    }
-
-    public TracerView getTracerView() {
-	return this;
-    }
-
-    public void clearTracerView() {
-	myTreeViewer.setInput(null);
-    }
-    /*
-    private final class TracerRootListener extends AdapterImpl {
 	@Override
-	public void notifyChanged(Notification msg) {
-	    if(msg.getFeature().equals(
-		   TracermodelPackage.eINSTANCE.getTracerRoot_RootItems())) {
-		myTreeViewer.setInput(getRoot());
-	    }
-	    super.notifyChanged(msg);
+	public void createPartControl(Composite parent) {
+
+		myTreeViewer =
+				new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		myTreeViewer
+				.setContentProvider(new TracerItemAdapterFactoryContentProvider(
+						myAdapterFactory));
+		myTreeViewer.setLabelProvider(new TracerItemAdapterFactoryLabelProvider(
+				myAdapterFactory));
+
+		refreshTreeView();
+		initMenu();
 	}
-    }
-    */
-    
-    /**
-     * <p>
-     * This method will just be here until the tree viewer can refresh
-     * itself automatically
-     * </p>
-     */
-    public void refreshTreeView() {
-	myTreeViewer.setInput(this.getRoot());
-    }
+
+	/**
+	 * <p>
+	 * Creates the menu of this {@link TracerView}.
+	 * </p>
+	 */
+	private void initMenu() {
+
+		TracerViewMenuAction clearAllTracedElements;
+
+		/*
+		 * --- TOOLBAR
+		 */
+		myToolBarManager = this.getToolBarManager();
+
+		/* Add the clear all traced elements button to the tool bar */
+		{
+			clearAllTracedElements =
+					new TracerViewMenuAction(
+							TracerViewMenuActionType.CLEAR_ALL_ELEMTENTS, this);
+
+			clearAllTracedElements.setImageDescriptor(TracerUIPlugin
+					.getImageDescriptor(CLEAR_IMAGE));
+
+			myToolBarManager.add(clearAllTracedElements);
+		}
+	}
+
+	private IToolBarManager getToolBarManager() {
+
+		if (myToolBarManager == null) {
+			myToolBarManager = this.getViewSite().getActionBars().getToolBarManager();
+		}
+		return myToolBarManager;
+	}
+
+	@Override
+	public void setFocus() {
+
+		myTreeViewer.getControl().setFocus();
+	}
+
+	public TracerView getTracerView() {
+
+		return this;
+	}
+
+	public void clearTracerView() {
+
+		root = null;
+		myTreeViewer.setInput(null);
+	}
+
+	private TracerRoot getRoot() {
+
+		root = TracerPlugin.getInterpreterTraceListener().getCurrentRoot();
+		return root;
+	}
+
+	/**
+	 * <p>
+	 * This method will just be here until the tree viewer can refresh itself
+	 * automatically
+	 * </p>
+	 */
+	private void refreshTreeView() {
+
+		myTreeViewer.setInput(this.getRoot());
+	}
+
+	/**
+	 * 
+	 */
+	public void updateTrace(TracerRegistryEvent event) {
+
+		root = event.getTrace();
+		Runnable r = new Runnable() {
+
+			public void run() {
+
+				myTreeViewer.setInput(root);
+			}
+		};
+		Display display = getViewSite().getShell().getDisplay();
+		display.asyncExec(r);
+	}
 }

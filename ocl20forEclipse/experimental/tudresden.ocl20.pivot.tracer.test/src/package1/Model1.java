@@ -20,8 +20,7 @@ package package1;
 
 /**
  * <p>
- * A model main class of a simple test model.
- * This class is copied from the
+ * A model main class of a simple test model. This class is copied from the
  * {@link tudresden.ocl20.pivot.interpreter.test} plugin.
  * </p>
  * 

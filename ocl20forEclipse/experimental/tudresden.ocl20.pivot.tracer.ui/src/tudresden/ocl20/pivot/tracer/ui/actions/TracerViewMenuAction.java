@@ -30,69 +30,62 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
  */
 public class TracerViewMenuAction extends Action implements IAction {
 
-    /** The {@link TracerView} of this {@link TracerViewMenuAction}. */
-    private TracerView myTracerView;
+	/** The {@link TracerView} of this {@link TracerViewMenuAction}. */
+	private TracerView myTracerView;
 
-    /**
-     * The {@link TracerViewMenuActionType} of this {@link TracerViewMenuAction}
-     * .
-     */
-    private TracerViewMenuActionType myType;
+	/**
+	 * The {@link TracerViewMenuActionType} of this {@link TracerViewMenuAction} .
+	 */
+	private TracerViewMenuActionType myType;
 
-    /**
-     * <p>
-     * Instantiates an {@link TracerViewMenuAction}.
-     * </p>
-     * 
-     * @param type
-     *            The {@link TracerViewMenuActionType}.
-     * @param view
-     *            The {@link TracerView} on which the action shall be performed.
-     */
-    public TracerViewMenuAction(TracerViewMenuActionType actionType,
-	    TracerView tracerView) {
-	super(null, IAction.AS_PUSH_BUTTON);
+	/**
+	 * <p>
+	 * Instantiates an {@link TracerViewMenuAction}.
+	 * </p>
+	 * 
+	 * @param type
+	 *          The {@link TracerViewMenuActionType}.
+	 * @param view
+	 *          The {@link TracerView} on which the action shall be performed.
+	 */
+	public TracerViewMenuAction(TracerViewMenuActionType actionType,
+			TracerView tracerView) {
 
-	myTracerView = tracerView;
-	myType = actionType;
+		super(null, IAction.AS_PUSH_BUTTON);
 
-	setText(toString());
-    }
+		myTracerView = tracerView;
+		myType = actionType;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-	String result;
-
-	switch (myType) {
-	case CLEAR_ALL_ELEMTENTS:
-	    result = OclTracerUIMessages.TracerView_Menu_Clear;
-	    break;
-	    
-	case TRACER_VIEW_REFRESH:
-	    result = OclTracerUIMessages.TracerView_Menu_Refresh;
-	    break;
-
-	default:
-	    result = "No action selected.";
+		setText(toString());
 	}
 
-	return result;
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
 
-    public void run() {
-	/* Depending on the type we have to do different things */
-	switch (myType) {
-	case CLEAR_ALL_ELEMTENTS:
-	    myTracerView.clearTracerView();
-	    break;
-	    
-	case TRACER_VIEW_REFRESH:
-	    myTracerView.refreshTreeView();
-	    break;
+		String result;
+
+		switch (myType) {
+		case CLEAR_ALL_ELEMTENTS:
+			result = OclTracerUIMessages.TracerView_Menu_Clear;
+			break;
+
+		default:
+			result = "No action selected.";
+		}
+
+		return result;
 	}
-    }
+
+	public void run() {
+
+		/* Depending on the type we have to do different things */
+		switch (myType) {
+		case CLEAR_ALL_ELEMTENTS:
+			myTracerView.clearTracerView();
+			break;
+		}
+	}
 }

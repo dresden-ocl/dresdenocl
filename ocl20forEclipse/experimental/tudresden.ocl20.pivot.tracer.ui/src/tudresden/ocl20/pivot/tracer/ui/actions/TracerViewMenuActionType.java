@@ -27,6 +27,5 @@ package tudresden.ocl20.pivot.tracer.ui.actions;
  * @author Lars Schütze
  */
 public enum TracerViewMenuActionType {
-    CLEAR_ALL_ELEMTENTS,
-    TRACER_VIEW_REFRESH
+	CLEAR_ALL_ELEMTENTS
 }

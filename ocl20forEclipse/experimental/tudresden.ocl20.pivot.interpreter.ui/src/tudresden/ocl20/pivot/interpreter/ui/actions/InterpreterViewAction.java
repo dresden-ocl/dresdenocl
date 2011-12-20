@@ -33,71 +33,75 @@ import org.eclipse.ui.PartInitException;
  */
 public class InterpreterViewAction implements IWorkbenchWindowActionDelegate {
 
-    /** The window belonging to this Action. */
-    private IWorkbenchWindow window;
+	/** The window belonging to this Action. */
+	private IWorkbenchWindow window;
 
-    /**
-     * <p>
-     * Creates a new {@link InterpreterViewAction}.
-     * </p>
-     */
-    public InterpreterViewAction() {
-    }
+	/**
+	 * <p>
+	 * Creates a new {@link InterpreterViewAction}.
+	 * </p>
+	 */
+	public InterpreterViewAction() {
 
-    /**
-     * <p>
-     * The action has been activated. The argument of the method represents the
-     * 'real' action sitting in the workbench UI.
-     * <p>
-     * 
-     * @see IWorkbenchWindowActionDelegate#run
-     */
-    public void run(IAction action) {
-
-	try {
-	    this.window
-		    .getActivePage()
-		    .showView(
-			    "tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView");
 	}
 
-	catch (PartInitException e) {
-	    e.printStackTrace();
+	/**
+	 * <p>
+	 * The action has been activated. The argument of the method represents the
+	 * 'real' action sitting in the workbench UI.
+	 * <p>
+	 * 
+	 * @see IWorkbenchWindowActionDelegate#run
+	 */
+	public void run(IAction action) {
+
+		try {
+			this.window
+					.getActivePage()
+					.showView(
+							"tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView");
+		}
+
+		catch (PartInitException e) {
+			e.printStackTrace();
+		}
 	}
-    }
 
-    /**
-     * <p>
-     * Selection in the workbench has been changed. We can change the state of
-     * the 'real' action here if we want, but this can only happen after the
-     * delegate has been created.
-     * </p>
-     * 
-     * @see IWorkbenchWindowActionDelegate#selectionChanged
-     */
-    public void selectionChanged(IAction action, ISelection selection) {
-    }
+	/**
+	 * <p>
+	 * Selection in the workbench has been changed. We can change the state of the
+	 * 'real' action here if we want, but this can only happen after the delegate
+	 * has been created.
+	 * </p>
+	 * 
+	 * @see IWorkbenchWindowActionDelegate#selectionChanged
+	 */
+	public void selectionChanged(IAction action, ISelection selection) {
 
-    /**
-     * <p>
-     * We can use this method to dispose of any system resources we previously
-     * allocated.
-     * </p>
-     * 
-     * @see IWorkbenchWindowActionDelegate#dispose
-     */
-    public void dispose() {
-    }
+	}
 
-    /**
-     * <p>
-     * We will cache window object in order to be able to provide parent shell
-     * for the message dialog.
-     * </p>
-     * 
-     * @see IWorkbenchWindowActionDelegate#init
-     */
-    public void init(IWorkbenchWindow window) {
-	this.window = window;
-    }
+	/**
+	 * <p>
+	 * We can use this method to dispose of any system resources we previously
+	 * allocated.
+	 * </p>
+	 * 
+	 * @see IWorkbenchWindowActionDelegate#dispose
+	 */
+	public void dispose() {
+
+	}
+
+	/**
+	 * <p>
+	 * We will cache window object in order to be able to provide parent shell for
+	 * the message dialog.
+	 * </p>
+	 * 
+	 * @see IWorkbenchWindowActionDelegate#init
+	 */
+	public void init(IWorkbenchWindow window) {
+
+		this.window = window;
+	}
 }

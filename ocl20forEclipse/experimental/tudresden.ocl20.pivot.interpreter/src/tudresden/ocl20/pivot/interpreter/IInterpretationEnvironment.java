@@ -36,124 +36,122 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public interface IInterpretationEnvironment extends Cloneable {
 
-    /**
-     * <p>
-     * Creates a new child {@link IInterpretationEnvironment}.
-     * </p>
-     * 
-     * @return A copy of the {@link IInterpretationEnvironment}.
-     */
-    IInterpretationEnvironment createChildEnvironment();
+	/**
+	 * <p>
+	 * Creates a new child {@link IInterpretationEnvironment}.
+	 * </p>
+	 * 
+	 * @return A copy of the {@link IInterpretationEnvironment}.
+	 */
+	IInterpretationEnvironment createChildEnvironment();
 
-    /**
-     * <p>
-     * Returns result for @pre values stored during a postconditions
-     * preparation.
-     * </p>
-     * 
-     * @param anOperationCallExp
-     *            The {@link OperationCallExp} containing the @pre operation
-     *            call whose value shall be returned.
-     * 
-     * @return The @pre value for the given {@link OperationCallExp}.
-     */
-    OclAny getAtPreValue(OperationCallExp anOperationCallExp);
+	/**
+	 * <p>
+	 * Returns result for @pre values stored during a postconditions preparation.
+	 * </p>
+	 * 
+	 * @param anOperationCallExp
+	 *          The {@link OperationCallExp} containing the @pre operation call
+	 *          whose value shall be returned.
+	 * 
+	 * @return The @pre value for the given {@link OperationCallExp}.
+	 */
+	OclAny getAtPreValue(OperationCallExp anOperationCallExp);
 
-    /**
-     * <p>
-     * Returns the {@link IModelInstance} of this
-     * {@link IInterpretationEnvironment}.
-     * </p>
-     * 
-     * @return The {@link IModelInstance} of this
-     *         {@link IInterpretationEnvironment}.
-     */
-    IModelInstance getModelInstance();
+	/**
+	 * <p>
+	 * Returns the {@link IModelInstance} of this
+	 * {@link IInterpretationEnvironment}.
+	 * </p>
+	 * 
+	 * @return The {@link IModelInstance} of this
+	 *         {@link IInterpretationEnvironment}.
+	 */
+	IModelInstance getModelInstance();
 
-    /**
-     * <p>
-     * Gets saved variables with given name.
-     * </p>
-     * 
-     * @param identifier
-     *            The identifier of the variable or simply the name (e.g.
-     *            <code>self</code>).
-     * 
-     * @return Saved variables with given name.
-     */
-    OclAny getVariableValue(String identifier);
+	/**
+	 * <p>
+	 * Gets saved variables with given name.
+	 * </p>
+	 * 
+	 * @param identifier
+	 *          The identifier of the variable or simply the name (e.g.
+	 *          <code>self</code>).
+	 * 
+	 * @return Saved variables with given name.
+	 */
+	OclAny getVariableValue(String identifier);
 
-    /**
-     * <p>
-     * Checks whether or not a given {@link IModelInstanceObject} (represented
-     * by an {@link OclModelInstanceObject}) existed before the execution of the
-     * current interpreted postcondition. This method can be used to interpret
-     * the <code>oclIsNew()</code> operation during the interpretation of a
-     * postcondition.
-     * </p>
-     * 
-     * @param source
-     *            The {@link OclModelInstanceObject} for that the
-     *            <code>oclIsNew()</code> operation shall be evaluated.
-     * @return <code>true</code>, if the given {@link OclModelInstanceObject}
-     *         did not exist before the operation invocation of the current
-     *         interpreted postcondition.
-     */
-    boolean isNewInstance(OclModelInstanceObject source);
+	/**
+	 * <p>
+	 * Checks whether or not a given {@link IModelInstanceObject} (represented by
+	 * an {@link OclModelInstanceObject}) existed before the execution of the
+	 * current interpreted postcondition. This method can be used to interpret the
+	 * <code>oclIsNew()</code> operation during the interpretation of a
+	 * postcondition.
+	 * </p>
+	 * 
+	 * @param source
+	 *          The {@link OclModelInstanceObject} for that the
+	 *          <code>oclIsNew()</code> operation shall be evaluated.
+	 * @return <code>true</code>, if the given {@link OclModelInstanceObject} did
+	 *         not exist before the operation invocation of the current
+	 *         interpreted postcondition.
+	 */
+	boolean isNewInstance(OclModelInstanceObject source);
 
-    /**
-     * <p>
-     * Saves value of an @pre {@link OperationCallExp} during preparation of
-     * postconditions.
-     * </p>
-     * 
-     * @param anOperationCallExp
-     *            The {@link OperationCallExp} containing @pre Operation whose
-     *            value shall be stored.
-     * @param value
-     *            The {@link OclAny} value to be stored.
-     */
-    public void saveAtPreValue(OperationCallExp anOperationCallExp, OclAny value);
+	/**
+	 * <p>
+	 * Saves value of an @pre {@link OperationCallExp} during preparation of
+	 * postconditions.
+	 * </p>
+	 * 
+	 * @param anOperationCallExp
+	 *          The {@link OperationCallExp} containing @pre Operation whose value
+	 *          shall be stored.
+	 * @param value
+	 *          The {@link OclAny} value to be stored.
+	 */
+	public void saveAtPreValue(OperationCallExp anOperationCallExp, OclAny value);
 
-    /**
-     * <p>
-     * Saves a set of all instances of a given {@link Type} that existed during
-     * the preparation of a postcondition. The stored value can be used to call
-     * the method {@link IInterpretationEnvironment#isNewInstance(OclAny)} to
-     * interpret the <code>oclIsNew()</code> operation during the interpretation
-     * of a postcondition.
-     * </p>
-     * 
-     * @param type
-     *            The {@link Type} for which the instances shall be stored.
-     */
-    void saveOldInstances(Type type);
+	/**
+	 * <p>
+	 * Saves a set of all instances of a given {@link Type} that existed during
+	 * the preparation of a postcondition. The stored value can be used to call
+	 * the method {@link IInterpretationEnvironment#isNewInstance(OclAny)} to
+	 * interpret the <code>oclIsNew()</code> operation during the interpretation
+	 * of a postcondition.
+	 * </p>
+	 * 
+	 * @param type
+	 *          The {@link Type} for which the instances shall be stored.
+	 */
+	void saveOldInstances(Type type);
 
-    /**
-     * <p>
-     * Sets the {@link IModelInstance} of this
-     * {@link IInterpretationEnvironment}.
-     * </p>
-     * 
-     * @param modelInstance
-     *            The {@link IModelInstance} of this
-     *            {@link IInterpretationEnvironment}.
-     */
-    void setModelInstance(IModelInstance modelInstance);
+	/**
+	 * <p>
+	 * Sets the {@link IModelInstance} of this {@link IInterpretationEnvironment}.
+	 * </p>
+	 * 
+	 * @param modelInstance
+	 *          The {@link IModelInstance} of this
+	 *          {@link IInterpretationEnvironment}.
+	 */
+	void setModelInstance(IModelInstance modelInstance);
 
-    /**
-     * <p>
-     * Sets the {@link OclAny} value of a {@link Variable} visible in this
-     * {@link IInterpretationEnvironment}. Since the OCL Abstract Syntax handles
-     * parameter values as {@link Variable}s as well, they can be stored iusing
-     * this method as well.
-     * </p>
-     * 
-     * @param identifier
-     *            The identifier of the variable or simply the name (e.g.
-     *            <code>self</code>).
-     * @param value
-     *            The {@link Variable}'s value.
-     */
-    void setVariableValue(String identifier, OclAny value);
+	/**
+	 * <p>
+	 * Sets the {@link OclAny} value of a {@link Variable} visible in this
+	 * {@link IInterpretationEnvironment}. Since the OCL Abstract Syntax handles
+	 * parameter values as {@link Variable}s as well, they can be stored iusing
+	 * this method as well.
+	 * </p>
+	 * 
+	 * @param identifier
+	 *          The identifier of the variable or simply the name (e.g.
+	 *          <code>self</code>).
+	 * @param value
+	 *          The {@link Variable}'s value.
+	 */
+	void setVariableValue(String identifier, OclAny value);
 }

@@ -44,86 +44,83 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  */
 public class ResultsContentProvider implements IStructuredContentProvider {
 
-    /** The list index containing the {@link Constraint}. */
-    public static final int CONSTRAINT = 1;
+	/** The list index containing the {@link Constraint}. */
+	public static final int CONSTRAINT = 1;
 
-    /** The list index containing the {@link IModelInstanceElement}. */
-    public static final int MODELOBJECT = 0;
+	/** The list index containing the {@link IModelInstanceElement}. */
+	public static final int MODELOBJECT = 0;
 
-    /** The list index containing the result. */
-    public static final int RESULT = 2;
+	/** The list index containing the result. */
+	public static final int RESULT = 2;
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.jface.viewers.IContentProvider#dispose()
-     */
-    public void dispose() {
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
+	 */
+	public void dispose() {
 
-	/* Do nothing. */
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
-     * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
-     */
-    public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-
-	/* Do nothing. */
-    }
-
-    /**
-     * <p>
-     * Provides elements as {@link List} containing {@link Constraint},
-     * {@link IModelInstanceElement} and {@link OclRoot} result.
-     * </p>
-     * 
-     * @param interpretationResultCache
-     *            The {@link InterpretationResultCache} whose Elements will be
-     *            provided.
-     * @return An Array of {@link List}s containing {@link Constraint},
-     *         {@link IModelInstanceElement} and {@link OclRoot} results.
-     * 
-     * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
-     */
-    public Object[] getElements(Object interpretationResultCache) {
-
-	Object[] result;
-	List<Object> resultList;
-
-	resultList = new ArrayList<Object>();
-
-	/* Check if the given object is a InterpretationResultCache. */
-	if (interpretationResultCache instanceof InterpretationResultCache) {
-
-	    InterpretationResultCache resultCache;
-
-	    resultCache = (InterpretationResultCache) interpretationResultCache;
-
-	    /* Iterate through all results. */
-	    for (IInterpretationResult aResult : resultCache.getAllResults()) {
-
-		Object[] aResultValue;
-
-		aResultValue = new Object[3];
-
-		aResultValue[ResultsContentProvider.CONSTRAINT] = aResult
-			.getConstraint();
-		aResultValue[ResultsContentProvider.MODELOBJECT] = aResult
-			.getModelObject();
-		aResultValue[ResultsContentProvider.RESULT] = aResult
-			.getResult();
-
-		resultList.add(aResultValue);
-	    }
-
+		/* Do nothing. */
 	}
-	// no else.
 
-	result = resultList.toArray(new Object[0]);
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse
+	 * .jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+	 */
+	public void inputChanged(Viewer v, Object oldInput, Object newInput) {
 
-	return result;
-    }
+		/* Do nothing. */
+	}
+
+	/**
+	 * <p>
+	 * Provides elements as {@link List} containing {@link Constraint},
+	 * {@link IModelInstanceElement} and {@link OclRoot} result.
+	 * </p>
+	 * 
+	 * @param interpretationResultCache
+	 *          The {@link InterpretationResultCache} whose Elements will be
+	 *          provided.
+	 * @return An Array of {@link List}s containing {@link Constraint},
+	 *         {@link IModelInstanceElement} and {@link OclRoot} results.
+	 * 
+	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
+	 */
+	public Object[] getElements(Object interpretationResultCache) {
+
+		Object[] result;
+		List<Object> resultList;
+
+		resultList = new ArrayList<Object>();
+
+		/* Check if the given object is a InterpretationResultCache. */
+		if (interpretationResultCache instanceof InterpretationResultCache) {
+
+			InterpretationResultCache resultCache;
+
+			resultCache = (InterpretationResultCache) interpretationResultCache;
+
+			/* Iterate through all results. */
+			for (IInterpretationResult aResult : resultCache.getAllResults()) {
+
+				Object[] aResultValue;
+
+				aResultValue = new Object[3];
+
+				aResultValue[ResultsContentProvider.CONSTRAINT] =
+						aResult.getConstraint();
+				aResultValue[ResultsContentProvider.MODELOBJECT] =
+						aResult.getModelObject();
+				aResultValue[ResultsContentProvider.RESULT] = aResult.getResult();
+
+				resultList.add(aResultValue);
+			}
+
+		}
+		// no else.
+
+		result = resultList.toArray(new Object[0]);
+
+		return result;
+	}
 }

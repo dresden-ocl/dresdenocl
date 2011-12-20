@@ -24,18 +24,19 @@ import org.eclipse.osgi.util.NLS;
  * @author Lars Schütze
  */
 public class OclTracerUIMessages extends NLS {
-    private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.tracer.ui.internal.msg.messages";
 
-    public static String TracerView_Menu_Clear;
-    
-    public static String TracerView_Menu_Refresh;
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.tracer.ui.internal.msg.messages";
 
-    static {
-	/* Initialize resource bundle. */
-	NLS.initializeMessages(BUNDLE_NAME, OclTracerUIMessages.class);
-    }
+	public static String TracerView_Menu_Clear;
 
-    private OclTracerUIMessages() {
-	// TODO Auto-generated constructor stub
-    }
+	static {
+		/* Initialize resource bundle. */
+		NLS.initializeMessages(BUNDLE_NAME, OclTracerUIMessages.class);
+	}
+
+	private OclTracerUIMessages() {
+
+		// TODO Auto-generated constructor stub
+	}
 }

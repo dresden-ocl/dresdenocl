@@ -50,89 +50,85 @@ import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
  */
 public interface IInterpreterRegistry {
 
-    /**
-     * <p>
-     * Adds an {@link IInterpreterRegistryListener}.
-     * </p>
-     * 
-     * @param listener
-     *            The {@link IInterpreterRegistryListener} which shall be added.
-     */
-    public void addInterpreterRegistryListener(
-	    IInterpreterRegistryListener listener);
+	/**
+	 * <p>
+	 * Adds an {@link IInterpreterRegistryListener}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IInterpreterRegistryListener} which shall be added.
+	 */
+	public void addInterpreterRegistryListener(
+			IInterpreterRegistryListener listener);
 
-    /**
-     * <p>
-     * Adds an {@link IInterpreterTraceListener}.
-     * </p>
-     * 
-     * @param listener
-     *            The {@link IInterpreterTraceListener} which shall be added.
-     */
-    public void addInterpreterTraceListener(
-	    IInterpreterTraceListener listener);
+	/**
+	 * <p>
+	 * Adds an {@link IInterpreterTraceListener}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IInterpreterTraceListener} which shall be added.
+	 */
+	public void addInterpreterTraceListener(IInterpreterTraceListener listener);
 
-    
-    /**
-     * <p>
-     * Removes an {@link IInterpreterTraceListener}.
-     * </p>
-     * 
-     * @param listener
-     *            The {@link IInterpreterTraceListener} which shall be removed.
-     */
-    public void removeInterpreterTraceListener(
-	    IInterpreterTraceListener listener);
+	/**
+	 * <p>
+	 * Removes an {@link IInterpreterTraceListener}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IInterpreterTraceListener} which shall be removed.
+	 */
+	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
 
-    
-    public void fireInterpretationDepthIncreased(UUID guid);
+	public void fireInterpretationDepthIncreased(UUID guid);
 
-    public void fireInterpretationDepthIncreased(UUID guid,
-	    IModelInstanceElement modelInstanceElement); 
-    
-    public void fireInterpretationDepthDecreased();
+	public void fireInterpretationDepthIncreased(UUID guid,
+			IModelInstanceElement modelInstanceElement);
 
-    public void firePartialInterpretionResult(EObject expression,
-	    OclAny result, UUID guid);
+	public void fireInterpretationDepthDecreased();
 
-    /**
-     * <p>
-     * Fires an event that holds the {@link IModelInstanceElement},
-     * the {@link Constraint} and the {@link Expression} to determine
-     * which elements have been selected in the {@link InterpreterView}.
-     * </p>
-     * TODO Lars: Document here and make this to a good event
-     * @param interpretationResult
-     *            The {@link IInterpretationResult} that shall be sent.
-     */
-    public void fireTraceSelectedConstraints(List<Object[]> constraints);
+	public void firePartialInterpretionResult(EObject expression, OclAny result,
+			UUID guid);
 
-    /**
-     * <p>
-     * Fires an interpretation finished event.
-     * </p>
-     * 
-     * @param interpretationResult
-     *            The {@link IInterpretationResult} that shall be sent.
-     */
-    public void fireInterpretationFinished(
-	    IInterpretationResult interpretationResult);
+	/**
+	 * <p>
+	 * Fires an event that holds the {@link IModelInstanceElement}, the
+	 * {@link Constraint} and the {@link Expression} to determine which elements
+	 * have been selected in the {@link InterpreterView}.
+	 * </p>
+	 * TODO Lars: Document here and make this to a good event
+	 * 
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} that shall be sent.
+	 */
+	public void fireTraceSelectedConstraints(List<Object[]> constraints);
 
-    /**
-     * <p>
-     * Removes an {@link IInterpreterRegistryListener}.
-     * 
-     * @param listener
-     *            The {@link IInterpreterRegistryListener} which shall be
-     *            removed.
-     */
-    public void removeInterpreterRegistryListener(
-	    IInterpreterRegistryListener listener);
+	/**
+	 * <p>
+	 * Fires an interpretation finished event.
+	 * </p>
+	 * 
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} that shall be sent.
+	 */
+	public void fireInterpretationFinished(
+			IInterpretationResult interpretationResult);
 
-    /**
-     * <p>
-     * Fires an interpretation cleared event.
-     * </p>
-     */
-    public void fireInterpretationCleared();
+	/**
+	 * <p>
+	 * Removes an {@link IInterpreterRegistryListener}.
+	 * 
+	 * @param listener
+	 *          The {@link IInterpreterRegistryListener} which shall be removed.
+	 */
+	public void removeInterpreterRegistryListener(
+			IInterpreterRegistryListener listener);
+
+	/**
+	 * <p>
+	 * Fires an interpretation cleared event.
+	 * </p>
+	 */
+	public void fireInterpretationCleared();
 }

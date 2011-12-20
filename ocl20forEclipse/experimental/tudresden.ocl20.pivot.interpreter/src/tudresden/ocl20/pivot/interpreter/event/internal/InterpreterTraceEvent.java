@@ -14,36 +14,41 @@ import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
  */
 public class InterpreterTraceEvent extends EventObject {
 
-    private static final long serialVersionUID = -7975866761417314905L;
+	private static final long serialVersionUID = -7975866761417314905L;
 
-    private OclAny result;
-    private EObject expression;
-    private UUID guid;
+	private OclAny result;
+	private EObject expression;
+	private UUID guid;
 
-    public InterpreterTraceEvent(IInterpreterRegistry source,
-	    EObject expression, OclAny result, UUID guid) {
-	super(source);
+	public InterpreterTraceEvent(IInterpreterRegistry source, EObject expression,
+			OclAny result, UUID guid) {
 
-	this.expression = expression;
-	this.result = result;
-	this.guid = guid;
-    }
+		super(source);
 
-    public OclAny getResult() {
-	return this.result;
-    }
+		this.expression = expression;
+		this.result = result;
+		this.guid = guid;
+	}
 
-    public EObject getExpression() {
-	return this.expression;
-    }
+	public OclAny getResult() {
 
-    public UUID getUUID() {
-	return this.guid;
-    }
+		return this.result;
+	}
 
-    @Override
-    public IInterpreterRegistry getSource() {
-	return (IInterpreterRegistry) super.getSource();
-    }
+	public EObject getExpression() {
+
+		return this.expression;
+	}
+
+	public UUID getUUID() {
+
+		return this.guid;
+	}
+
+	@Override
+	public IInterpreterRegistry getSource() {
+
+		return (IInterpreterRegistry) super.getSource();
+	}
 
 }

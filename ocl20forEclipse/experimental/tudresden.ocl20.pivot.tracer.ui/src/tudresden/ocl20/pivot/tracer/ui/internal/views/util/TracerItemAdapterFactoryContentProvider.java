@@ -19,8 +19,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
-import org.eclipse.jface.viewers.Viewer;
 
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
@@ -30,34 +31,46 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
  * @author Lars Schütze
  */
 public class TracerItemAdapterFactoryContentProvider extends
-	AdapterFactoryContentProvider {
+		AdapterFactoryContentProvider {
 
-    public TracerItemAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
-	super(adapterFactory);
-    }
+	public TracerItemAdapterFactoryContentProvider(AdapterFactory adapterFactory) {
 
-    public Object[] getElements(Object object) {
-	if (object instanceof TracerRoot) {
-	    return ((TracerRoot) object).getRootItems().toArray();
+		super(adapterFactory);
 	}
-	return super.getElements(object);
-    }
 
-    public Object[] getChildren(Object object) {
-	if (object instanceof TracerItem) {
-	    return ((TracerItem) object).getChildren().toArray();
-	} else
-	    return super.getChildren(object);
-    }
+	public void notifyChanged(Notification notification) {
 
-    public boolean hasChildren(Object object) {
-	return this.getChildren(object).length > 0;
-    }
+		super.notifyChanged(new ViewerNotification(notification));
+	}
 
-    public Object getParent(Object object) {
-	if (object instanceof TracerItem) {
-	    return ((TracerItem) object).getParent();
-	} else
-	    return super.getParent(object);
-    }
+	public Object[] getElements(Object object) {
+
+		if (object instanceof TracerRoot) {
+			return ((TracerRoot) object).getRootItems().toArray();
+		}
+		return super.getElements(object);
+	}
+
+	public Object[] getChildren(Object object) {
+
+		if (object instanceof TracerItem) {
+			return ((TracerItem) object).getChildren().toArray();
+		}
+		else
+			return super.getChildren(object);
+	}
+
+	public boolean hasChildren(Object object) {
+
+		return this.getChildren(object).length > 0;
+	}
+
+	public Object getParent(Object object) {
+
+		if (object instanceof TracerItem) {
+			return ((TracerItem) object).getParent();
+		}
+		else
+			return super.getParent(object);
+	}
 }

@@ -29,34 +29,34 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  */
 public interface IInterpretationResult {
 
-    /**
-     * <p>
-     * Returns the {@link IModelInstanceElement} of this
-     * {@link InterpretationResultImpl}.
-     * </p>
-     * 
-     * @return The {@link IModelInstanceElement} of this
-     *         {@link InterpretationResultImpl}.
-     */
-    public IModelInstanceElement getModelObject();
+	/**
+	 * <p>
+	 * Returns the {@link IModelInstanceElement} of this
+	 * {@link InterpretationResultImpl}.
+	 * </p>
+	 * 
+	 * @return The {@link IModelInstanceElement} of this
+	 *         {@link InterpretationResultImpl}.
+	 */
+	public IModelInstanceElement getModelObject();
 
-    /**
-     * <p>
-     * Returns the result of this {@link InterpretationResultImpl} as
-     * {@link OclRoot} .
-     * </p>
-     * 
-     * @return The result of this {@link InterpretationResultImpl} as
-     *         {@link OclRoot} .
-     */
-    public OclAny getResult();
+	/**
+	 * <p>
+	 * Returns the result of this {@link InterpretationResultImpl} as
+	 * {@link OclRoot} .
+	 * </p>
+	 * 
+	 * @return The result of this {@link InterpretationResultImpl} as
+	 *         {@link OclRoot} .
+	 */
+	public OclAny getResult();
 
-    /**
-     * <p>
-     * Returns the {@link Constraint} of this {@link InterpretationResultImpl}.
-     * </p>
-     * 
-     * @return The {@link Constraint} of this {@link InterpretationResultImpl}.
-     */
-    public Constraint getConstraint();
+	/**
+	 * <p>
+	 * Returns the {@link Constraint} of this {@link InterpretationResultImpl}.
+	 * </p>
+	 * 
+	 * @return The {@link Constraint} of this {@link InterpretationResultImpl}.
+	 */
+	public Constraint getConstraint();
 }

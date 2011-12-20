@@ -1,7 +1,6 @@
 package package1
 
 context Class1
-def: intProperty = 0
 inv: self.intProperty = 0
 
 endpackage 

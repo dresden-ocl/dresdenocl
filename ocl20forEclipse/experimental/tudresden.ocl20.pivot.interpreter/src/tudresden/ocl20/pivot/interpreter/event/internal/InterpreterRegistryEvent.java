@@ -44,55 +44,53 @@ import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
  */
 public class InterpreterRegistryEvent extends EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -3333654204524166122L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -3333654204524166122L;
 
-    /**
-     * The {@link IInterpretationResult} that belongs to this
-     * {@link InterpreterRegistryEvent}.
-     */
-    private IInterpretationResult interpretationResult;
+	/**
+	 * The {@link IInterpretationResult} that belongs to this
+	 * {@link InterpreterRegistryEvent}.
+	 */
+	private IInterpretationResult interpretationResult;
 
-    /**
-     * <p>
-     * Instantiates a new {@link InterpreterRegistryEvent}.
-     * </p>
-     * 
-     * @param source
-     *            The {@link IInterpreterRegistry} source of the event.
-     * @param interpretationResult
-     *            The {@link IInterpretationResult} of this
-     *            {@link InterpreterRegistryEvent}.
-     */
-    public InterpreterRegistryEvent(IInterpreterRegistry source,
-	    IInterpretationResult interpretationResult) {
+	/**
+	 * <p>
+	 * Instantiates a new {@link InterpreterRegistryEvent}.
+	 * </p>
+	 * 
+	 * @param source
+	 *          The {@link IInterpreterRegistry} source of the event.
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} of this
+	 *          {@link InterpreterRegistryEvent}.
+	 */
+	public InterpreterRegistryEvent(IInterpreterRegistry source,
+			IInterpretationResult interpretationResult) {
 
-	super(source);
+		super(source);
 
-	this.interpretationResult = interpretationResult;
-    }
+		this.interpretationResult = interpretationResult;
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.util.EventObject#getSource()
-     */
-    public IInterpreterRegistry getSource() {
+	/*
+	 * (non-Javadoc)
+	 * @see java.util.EventObject#getSource()
+	 */
+	public IInterpreterRegistry getSource() {
 
-	return (IInterpreterRegistry) this.source;
-    }
+		return (IInterpreterRegistry) this.source;
+	}
 
-    /**
-     * <p>
-     * The {@link IInterpretationResult} of this
-     * {@link InterpreterRegistryEvent}.
-     * </p>
-     * 
-     * @return The {@link IInterpretationResult} of this
-     *         {@link InterpreterRegistryEvent}.
-     */
-    public IInterpretationResult getInterpreationResult() {
+	/**
+	 * <p>
+	 * The {@link IInterpretationResult} of this {@link InterpreterRegistryEvent}.
+	 * </p>
+	 * 
+	 * @return The {@link IInterpretationResult} of this
+	 *         {@link InterpreterRegistryEvent}.
+	 */
+	public IInterpretationResult getInterpreationResult() {
 
-	return this.interpretationResult;
-    }
+		return this.interpretationResult;
+	}
 }

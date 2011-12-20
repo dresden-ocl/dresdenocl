@@ -11,7 +11,8 @@ Export-Package: tudresden.ocl20.pivot.tracer,
  tudresden.ocl20.pivot.tracer.tracermodel,
  tudresden.ocl20.pivot.tracer.tracermodel.impl,
  tudresden.ocl20.pivot.tracer.tracermodel.provider,
- tudresden.ocl20.pivot.tracer.tracermodel.util
+ tudresden.ocl20.pivot.tracer.tracermodel.util,
+ tudresden.ocl20.pivot.tracer.tracermodel.util.listener
 Import-Package: org.eclipse.emf.common,
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.notify.impl,

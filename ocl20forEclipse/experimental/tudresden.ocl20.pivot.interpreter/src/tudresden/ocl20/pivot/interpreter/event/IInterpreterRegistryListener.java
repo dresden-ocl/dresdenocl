@@ -50,13 +50,13 @@ import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterRegistryEvent
  */
 public interface IInterpreterRegistryListener {
 
-    /**
-     * <p>
-     * Invoked when the interpretation finished.
-     * </p>
-     * 
-     * @param event
-     *            The {@link InterpreterRegistryEvent} that is fired.
-     */
-    void interpretationFinished(InterpreterRegistryEvent event);
+	/**
+	 * <p>
+	 * Invoked when the interpretation finished.
+	 * </p>
+	 * 
+	 * @param event
+	 *          The {@link InterpreterRegistryEvent} that is fired.
+	 */
+	void interpretationFinished(InterpreterRegistryEvent event);
 }

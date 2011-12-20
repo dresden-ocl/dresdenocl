@@ -87,8 +87,10 @@ public class InterpreterRegistryListenerImpl implements
 
 		/* Add the dummy to the tree structure */
 		if ((currentParent == null) && (roots == null)) {
-			// there has been no insertion before
-			// this is the first item in the tree
+			/* Set the tracer to send all elements to its listeners. */
+			isTracingSelection = false;
+			
+			/* This is the first item in the tree. */
 			roots = factory.createTracerRoot();
 			roots.getRootItems().add(dummy);
 			currentParent = dummy;
@@ -142,6 +144,12 @@ public class InterpreterRegistryListenerImpl implements
 			}
 			else {
 				currentParent = null;
+				/*
+				 * To reduce events fired by the registry we just fire the event when a
+				 * new root element is reached.
+				 */
+				/* Inform all listeners that the root object has been changed */
+				TracerPlugin.getTracerRegistry().fireUpdateTrace(this.getCurrentRoot());
 			}
 		}
 		// no else
@@ -168,7 +176,7 @@ public class InterpreterRegistryListenerImpl implements
 	 * 
 	 * @return Returns the root object {@link TracerRoot} of the tree.
 	 */
-	public TracerRoot getTree() {
+	public TracerRoot getCurrentRoot() {
 
 		return isTracingSelection ? tracedRoots : roots;
 	}
@@ -186,6 +194,9 @@ public class InterpreterRegistryListenerImpl implements
 		roots = null;
 		currentParent = null;
 		tracedRoots = null;
+
+		/* Inform all listeners that the root object has been changed */
+		TracerPlugin.getTracerRegistry().fireUpdateTrace(this.getCurrentRoot());
 	}
 
 	public void traceSelectedConstraints(List<Object[]> constraints) {
@@ -210,5 +221,8 @@ public class InterpreterRegistryListenerImpl implements
 			// end for
 		}
 		// end for
+
+		/* Inform all listeners that the root object has been changed */
+		TracerPlugin.getTracerRegistry().fireUpdateTrace(this.getCurrentRoot());
 	}
 }
