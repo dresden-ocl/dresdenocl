@@ -47,7 +47,7 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 		File modelFile;
 		try {
 			modelFile =
-					AbstractTracerTest.getFile("bin/package1/Model1.class",
+					AbstractTracerTest.getFile("bin/tudresden/ocl20/pivot/tracer/test/package01/Model01.class",
 							TracerTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
@@ -62,7 +62,7 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 
 		/* Find the type for the IMIObjects to test. */
 		Type objectType;
-		objectType = model.findType(Arrays.asList(new String[] { "Class1" }));
+		objectType = model.findType(Arrays.asList(new String[] { "Class01" }));
 
 		assertNotNull(objectType);
 
@@ -94,7 +94,7 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 		File instanceFile;
 		try {
 			instanceFile =
-					AbstractTracerTest.getFile("bin/package1/Instance1.class",
+					AbstractTracerTest.getFile("bin/tudresden/ocl20/pivot/tracer/test/package01/Instance01.class",
 							TracerTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
