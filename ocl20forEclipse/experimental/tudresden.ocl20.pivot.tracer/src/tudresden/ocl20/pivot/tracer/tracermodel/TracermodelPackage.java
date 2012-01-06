@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
  * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory
  * @model kind="package"
  * @generated
@@ -30,30 +29,38 @@ import org.eclipse.emf.ecore.EReference;
 public interface TracermodelPackage extends EPackage {
 
 	/**
-	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
+	 * The package name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNAME = "tracermodel";
 
 	/**
-	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace URI.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_URI = "http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel";
 
 	/**
-	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_PREFIX = "tracermodel";
 
 	/**
-	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	TracermodelPackage eINSTANCE =
@@ -61,10 +68,8 @@ public interface TracermodelPackage extends EPackage {
 					.init();
 
 	/**
-	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl
-	 * <em>Tracer Item</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl <em>Tracer Item</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerItem()
 	 * @generated
@@ -72,9 +77,8 @@ public interface TracermodelPackage extends EPackage {
 	int TRACER_ITEM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expression</b></em>' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -119,7 +123,6 @@ public interface TracermodelPackage extends EPackage {
 	/**
 	 * The feature id for the '<em><b>Model Instance Element</b></em>' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 * @ordered
 	 */
@@ -135,10 +138,8 @@ public interface TracermodelPackage extends EPackage {
 	int TRACER_ITEM_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
-	 * <em>Tracer Root</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
 	 * @generated
@@ -166,7 +167,6 @@ public interface TracermodelPackage extends EPackage {
 	/**
 	 * The meta object id for the '<em>IModel Instance Element</em>' data type.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
 	 * @generated
@@ -184,9 +184,9 @@ public interface TracermodelPackage extends EPackage {
 	int OCL_ANY = 3;
 
 	/**
-	 * The meta object id for the '<em>UUID</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>UUID</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see java.util.UUID
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
 	 * @generated
@@ -194,10 +194,8 @@ public interface TracermodelPackage extends EPackage {
 	int UUID = 4;
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem
-	 * <em>Tracer Item</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem <em>Tracer Item</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tracer Item</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem
 	 * @generated
@@ -205,12 +203,9 @@ public interface TracermodelPackage extends EPackage {
 	EClass getTracerItem();
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression
-	 * <em>Expression</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Expression</em>
-	 *         '.
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Expression</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression()
 	 * @see #getTracerItem()
 	 * @generated
@@ -218,10 +213,8 @@ public interface TracermodelPackage extends EPackage {
 	EReference getTracerItem_Expression();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult
-	 * <em>Result</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult <em>Result</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Result</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult()
 	 * @see #getTracerItem()
@@ -230,10 +223,8 @@ public interface TracermodelPackage extends EPackage {
 	EAttribute getTracerItem_Result();
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent
-	 * <em>Parent</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Parent</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent()
 	 * @see #getTracerItem()
@@ -242,11 +233,9 @@ public interface TracermodelPackage extends EPackage {
 	EReference getTracerItem_Parent();
 
 	/**
-	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren
-	 * <em>Children</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference list '<em>Children</em>'.
+	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Children</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren()
 	 * @see #getTracerItem()
 	 * @generated
@@ -254,10 +243,8 @@ public interface TracermodelPackage extends EPackage {
 	EReference getTracerItem_Children();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID
-	 * <em>UUID</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID <em>UUID</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>UUID</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID()
 	 * @see #getTracerItem()
@@ -266,13 +253,10 @@ public interface TracermodelPackage extends EPackage {
 	EAttribute getTracerItem_UUID();
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement
-	 * <em>Model Instance Element</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement <em>Model Instance Element</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @return the meta object for the attribute '<em>Model Instance Element</em>
-	 *         '.
+	 * @return the meta object for the attribute '<em>Model Instance Element</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement()
 	 * @see #getTracerItem()
 	 * @generated
@@ -280,10 +264,8 @@ public interface TracermodelPackage extends EPackage {
 	EAttribute getTracerItem_ModelInstanceElement();
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot
-	 * <em>Tracer Root</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot <em>Tracer Root</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tracer Root</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot
 	 * @generated
@@ -291,11 +273,9 @@ public interface TracermodelPackage extends EPackage {
 	EClass getTracerRoot();
 
 	/**
-	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems
-	 * <em>Root Items</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the reference list '<em>Root Items</em>'.
+	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Root Items</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems()
 	 * @see #getTracerRoot()
 	 * @generated
@@ -303,36 +283,29 @@ public interface TracermodelPackage extends EPackage {
 	EReference getTracerRoot_RootItems();
 
 	/**
-	 * Returns the meta object for data type '
-	 * {@link tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * <em>IModel Instance Element</em>}'. <!-- begin-user-doc --> <!--
+	 * Returns the meta object for data type '{@link tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement <em>IModel Instance Element</em>}'.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the meta object for data type '<em>IModel Instance Element</em>'.
 	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * @model instanceClass=
-	 *        "tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement"
+	 * @model instanceClass="tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement"
 	 * @generated
 	 */
 	EDataType getIModelInstanceElement();
 
 	/**
-	 * Returns the meta object for data type '
-	 * {@link tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny
-	 * <em>Ocl Any</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny <em>Ocl Any</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Ocl Any</em>'.
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny
-	 * @model 
-	 *        instanceClass="tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny"
+	 * @model instanceClass="tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny"
 	 * @generated
 	 */
 	EDataType getOclAny();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.UUID <em>UUID</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.UUID <em>UUID</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>UUID</em>'.
 	 * @see java.util.UUID
 	 * @model instanceClass="java.util.UUID"
@@ -359,7 +332,6 @@ public interface TracermodelPackage extends EPackage {
 	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	interface Literals {
@@ -377,33 +349,29 @@ public interface TracermodelPackage extends EPackage {
 		EClass TRACER_ITEM = eINSTANCE.getTracerItem();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment
-		 * reference feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Expression</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRACER_ITEM__EXPRESSION = eINSTANCE.getTracerItem_Expression();
 
 		/**
-		 * The meta object literal for the '<em><b>Result</b></em>' attribute
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Result</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute TRACER_ITEM__RESULT = eINSTANCE.getTracerItem_Result();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRACER_ITEM__PARENT = eINSTANCE.getTracerItem_Parent();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' reference list
-		 * feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRACER_ITEM__CHILDREN = eINSTANCE.getTracerItem_Children();
@@ -411,15 +379,13 @@ public interface TracermodelPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em><b>UUID</b></em>' attribute feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @generated
 		 */
 		EAttribute TRACER_ITEM__UUID = eINSTANCE.getTracerItem_UUID();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Instance Element</b></em>'
-		 * attribute feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Model Instance Element</b></em>' attribute feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute TRACER_ITEM__MODEL_INSTANCE_ELEMENT = eINSTANCE
@@ -438,17 +404,15 @@ public interface TracermodelPackage extends EPackage {
 		EClass TRACER_ROOT = eINSTANCE.getTracerRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>Root Items</b></em>' reference
-		 * list feature. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Root Items</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TRACER_ROOT__ROOT_ITEMS = eINSTANCE.getTracerRoot_RootItems();
 
 		/**
-		 * The meta object literal for the '<em>IModel Instance Element</em>' data
-		 * type. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em>IModel Instance Element</em>' data type.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
 		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
 		 * @generated

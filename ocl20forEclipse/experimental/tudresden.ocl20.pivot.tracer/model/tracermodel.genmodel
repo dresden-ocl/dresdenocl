@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.tracer/src"
-    editDirectory="/tudresden.ocl20.pivot.tracer/src" modelPluginID="tudresden.ocl20.pivot.tracer"
-    modelName="Tracermodel" importerID="org.eclipse.emf.importer.ecore" suppressContainment="true"
-    complianceLevel="5.0" copyrightFields="false" providerRootExtendsClass="" editPluginID="tudresden.ocl20.pivot.tracer">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)&#xA;&#xA;This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.&#xA;&#xA;Dresden OCL2 for Eclipse is free software: you can redistribute it and/or modify &#xA;it under the terms of the GNU Lesser General Public License as published by the &#xA;Free Software Foundation, either version 3 of the License, or (at your option)&#xA;any later version.&#xA;&#xA;Dresden OCL2 for Eclipse is distributed in the hope that it will be useful,&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY &#xA;or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License &#xA;for more details.&#xA;&#xA;You should have received a copy of the GNU Lesser General Public License along &#xA;with Dresden OCL2 for Eclipse. If not, see &lt;http://www.gnu.org/licenses/>."
+    modelDirectory="/tudresden.ocl20.pivot.tracer/src" creationIcons="false" editDirectory="/tudresden.ocl20.pivot.tracer/src"
+    modelPluginID="tudresden.ocl20.pivot.tracer" modelName="Tracermodel" nonNLSMarkers="true"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
+    complianceLevel="5.0" providerRootExtendsClass="" editPluginID="tudresden.ocl20.pivot.tracer"
+    classNamePattern="">
   <foreignModel>tracermodel.ecore</foreignModel>
   <genPackages prefix="Tracermodel" basePackage="tudresden.ocl20.pivot.tracer" disposableProviderFactory="true"
       ecorePackage="tracermodel.ecore#/">

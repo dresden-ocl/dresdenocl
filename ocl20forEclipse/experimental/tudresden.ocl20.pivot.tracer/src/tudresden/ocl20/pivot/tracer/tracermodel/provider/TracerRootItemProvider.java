@@ -37,6 +37,14 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -72,34 +80,46 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addRootItemsPropertyDescriptor(Object object) {
 
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TracerRoot_rootItems_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TracerRoot_rootItems_feature", "_UI_TracerRoot_type"),
-				TracermodelPackage.Literals.TRACER_ROOT__ROOT_ITEMS, true, false, true,
-				null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TracerRoot_rootItems_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TracerRoot_rootItems_feature", "_UI_TracerRoot_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TracermodelPackage.Literals.TRACER_ROOT__ROOT_ITEMS, true, false,
+						true, null, null, null));
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+
+		return true;
+	}
+
+	/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object) {
 
-		return getString("_UI_TracerRoot_type");
+		return getString("_UI_TracerRoot_type"); //$NON-NLS-1$
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which it
-	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -110,10 +130,10 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

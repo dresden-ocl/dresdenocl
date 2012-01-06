@@ -19,23 +19,31 @@ import org.eclipse.emf.common.util.ResourceLocator;
 public final class TracermodelEditPlugin extends EMFPlugin {
 
 	/**
-	 * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
+	 * Keep track of the singleton.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final TracermodelEditPlugin INSTANCE =
 			new TracermodelEditPlugin();
 
 	/**
-	 * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Keep track of the singleton.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static Implementation plugin;
 
 	/**
-	 * Create the instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Create the instance.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public TracermodelEditPlugin() {
@@ -44,9 +52,9 @@ public final class TracermodelEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+	 * Returns the singleton instance of the Eclipse plugin.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -57,9 +65,9 @@ public final class TracermodelEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+	 * Returns the singleton instance of the Eclipse plugin.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -69,16 +77,16 @@ public final class TracermodelEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * The actual implementation of the Eclipse <b>Plugin</b>. <!-- begin-user-doc
+	 * The actual implementation of the Eclipse <b>Plugin</b>.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static class Implementation extends EclipsePlugin {
 
 		/**
-		 * Creates an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * Creates an instance.
+		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
 		public Implementation() {

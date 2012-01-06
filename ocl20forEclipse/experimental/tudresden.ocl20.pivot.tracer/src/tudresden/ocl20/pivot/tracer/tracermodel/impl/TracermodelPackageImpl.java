@@ -26,43 +26,45 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class TracermodelPackageImpl extends EPackageImpl implements
 		TracermodelPackage {
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass tracerItemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EClass tracerRootEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType iModelInstanceElementEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType oclAnyEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private EDataType uuidEDataType = null;
@@ -89,7 +91,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private static boolean isInited = false;
@@ -139,7 +140,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getTracerItem() {
@@ -149,7 +149,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getTracerItem_Expression() {
@@ -159,7 +158,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getTracerItem_Result() {
@@ -169,7 +167,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getTracerItem_Parent() {
@@ -179,7 +176,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getTracerItem_Children() {
@@ -189,7 +185,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getTracerItem_UUID() {
@@ -199,7 +194,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EAttribute getTracerItem_ModelInstanceElement() {
@@ -209,7 +203,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EClass getTracerRoot() {
@@ -219,7 +212,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EReference getTracerRoot_RootItems() {
@@ -229,7 +221,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getIModelInstanceElement() {
@@ -239,7 +230,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getOclAny() {
@@ -249,7 +239,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EDataType getUUID() {
@@ -259,7 +248,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TracermodelFactory getTracermodelFactory() {
@@ -269,16 +257,15 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isCreated = false;
 
 	/**
-	 * Creates the meta-model objects for the package. This method is guarded to
-	 * have no affect on any invocation but its first. <!-- begin-user-doc -->
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -307,7 +294,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -337,45 +323,51 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(tracerItemEClass, TracerItem.class, "TracerItem", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTracerItem_Expression(), ecorePackage.getEObject(), null,
-				"expression", null, 0, 1, TracerItem.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTracerItem_Result(), this.getOclAny(), "result", null, 0,
-				1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTracerItem_Parent(), this.getTracerItem(), null,
-				"parent", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTracerItem_Children(), this.getTracerItem(), null,
-				"children", null, 0, -1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE,
-				IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getTracerItem_UUID(), this.getUUID(), "UUID", null, 0, 1,
-				TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTracerItem_ModelInstanceElement(),
-				this.getIModelInstanceElement(), "modelInstanceElement", null, 0, 1,
-				TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-				!IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tracerItemEClass, TracerItem.class,
+				"TracerItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(
+				getTracerItem_Expression(),
+				ecorePackage.getEObject(),
+				null,
+				"expression", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(
+				getTracerItem_Result(),
+				this.getOclAny(),
+				"result", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+				getTracerItem_Parent(),
+				this.getTracerItem(),
+				null,
+				"parent", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(
+				getTracerItem_Children(),
+				this.getTracerItem(),
+				null,
+				"children", null, 0, -1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(
+				getTracerItem_UUID(),
+				this.getUUID(),
+				"UUID", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(
+				getTracerItem_ModelInstanceElement(),
+				this.getIModelInstanceElement(),
+				"modelInstanceElement", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(tracerRootEClass, TracerRoot.class, "TracerRoot", !IS_ABSTRACT,
-				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTracerRoot_RootItems(), this.getTracerItem(), null,
-				"rootItems", null, 0, -1, TracerRoot.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(tracerRootEClass, TracerRoot.class,
+				"TracerRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(
+				getTracerRoot_RootItems(),
+				this.getTracerItem(),
+				null,
+				"rootItems", null, 0, -1, TracerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize data types
 		initEDataType(iModelInstanceElementEDataType, IModelInstanceElement.class,
-				"IModelInstanceElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(oclAnyEDataType, OclAny.class, "OclAny", IS_SERIALIZABLE,
-				!IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(uuidEDataType, java.util.UUID.class, "UUID", IS_SERIALIZABLE,
-				!IS_GENERATED_INSTANCE_CLASS);
+				"IModelInstanceElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(oclAnyEDataType, OclAny.class,
+				"OclAny", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEDataType(uuidEDataType, java.util.UUID.class,
+				"UUID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);

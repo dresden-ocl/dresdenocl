@@ -45,6 +45,14 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -77,39 +85,43 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Result feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Result feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addResultPropertyDescriptor(Object object) {
 
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TracerItem_result_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TracerItem_result_feature", "_UI_TracerItem_type"),
-				TracermodelPackage.Literals.TRACER_ITEM__RESULT, true, false, true,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TracerItem_result_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TracerItem_result_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TracermodelPackage.Literals.TRACER_ITEM__RESULT, true, false, true,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Parent feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addParentPropertyDescriptor(Object object) {
 
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TracerItem_parent_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TracerItem_parent_feature", "_UI_TracerItem_type"),
-				TracermodelPackage.Literals.TRACER_ITEM__PARENT, true, false, true,
-				null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TracerItem_parent_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TracerItem_parent_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TracermodelPackage.Literals.TRACER_ITEM__PARENT, true, false, true,
+						null, null, null));
 	}
 
 	/**
@@ -120,61 +132,63 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	protected void addChildrenPropertyDescriptor(Object object) {
 
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TracerItem_children_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TracerItem_children_feature", "_UI_TracerItem_type"),
-				TracermodelPackage.Literals.TRACER_ITEM__CHILDREN, true, false, true,
-				null, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TracerItem_children_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TracerItem_children_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TracermodelPackage.Literals.TRACER_ITEM__CHILDREN, true, false,
+						true, null, null, null));
 	}
 
 	/**
-	 * This adds a property descriptor for the UUID feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the UUID feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addUUIDPropertyDescriptor(Object object) {
 
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TracerItem_UUID_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TracerItem_UUID_feature", "_UI_TracerItem_type"),
-				TracermodelPackage.Literals.TRACER_ITEM__UUID, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TracerItem_UUID_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TracerItem_UUID_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TracermodelPackage.Literals.TRACER_ITEM__UUID, true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Model Instance Element feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addModelInstanceElementPropertyDescriptor(Object object) {
 
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TracerItem_modelInstanceElement_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TracerItem_modelInstanceElement_feature",
-						"_UI_TracerItem_type"),
-				TracermodelPackage.Literals.TRACER_ITEM__MODEL_INSTANCE_ELEMENT, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(
+						((ComposeableAdapterFactory) adapterFactory)
+								.getRootAdapterFactory(),
+						getResourceLocator(),
+						getString("_UI_TracerItem_modelInstanceElement_feature"), //$NON-NLS-1$
+						getString(
+								"_UI_PropertyDescriptor_description", "_UI_TracerItem_modelInstanceElement_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						TracermodelPackage.Literals.TRACER_ITEM__MODEL_INSTANCE_ELEMENT,
+						true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce
-	 * an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -190,23 +204,32 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
+	 * @generated
+	 */
+	@Override
+	protected boolean shouldComposeCreationImage() {
+
+		return true;
+	}
+
+	/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -214,16 +237,15 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 
 		OclAny labelValue = ((TracerItem) object).getResult();
 		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ? getString("_UI_TracerItem_type")
-				: getString("_UI_TracerItem_type") + " " + label;
+		return label == null || label.length() == 0 ? getString("_UI_TracerItem_type") : //$NON-NLS-1$
+				getString("_UI_TracerItem_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which it
-	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -246,10 +268,10 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

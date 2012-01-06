@@ -25,16 +25,23 @@ import tudresden.ocl20.pivot.tracer.tracermodel.*;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class TracermodelFactoryImpl extends EFactoryImpl implements
 		TracermodelFactory {
 
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static TracermodelFactory init() {
@@ -42,7 +49,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 		try {
 			TracermodelFactory theTracermodelFactory =
 					(TracermodelFactory) EPackage.Registry.INSTANCE
-							.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel");
+							.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel"); //$NON-NLS-1$ 
 			if (theTracermodelFactory != null) {
 				return theTracermodelFactory;
 			}
@@ -53,9 +60,9 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TracermodelFactoryImpl() {
@@ -65,7 +72,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -77,14 +83,13 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 		case TracermodelPackage.TRACER_ROOT:
 			return createTracerRoot();
 		default:
-			throw new IllegalArgumentException("The class '" + eClass.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException(
+					"The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -98,14 +103,13 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 		case TracermodelPackage.UUID:
 			return createUUIDFromString(eDataType, initialValue);
 		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -119,14 +123,13 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 		case TracermodelPackage.UUID:
 			return convertUUIDToString(eDataType, instanceValue);
 		default:
-			throw new IllegalArgumentException("The datatype '" + eDataType.getName()
-					+ "' is not a valid classifier");
+			throw new IllegalArgumentException(
+					"The datatype '" + eDataType.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TracerItem createTracerItem() {
@@ -137,7 +140,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TracerRoot createTracerRoot() {
@@ -148,7 +150,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public IModelInstanceElement createIModelInstanceElementFromString(
@@ -160,7 +161,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertIModelInstanceElementToString(EDataType eDataType,
@@ -171,7 +171,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OclAny createOclAnyFromString(EDataType eDataType, String initialValue) {
@@ -181,7 +180,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertOclAnyToString(EDataType eDataType, Object instanceValue) {
@@ -191,7 +189,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public UUID createUUIDFromString(EDataType eDataType, String initialValue) {
@@ -201,7 +198,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
@@ -211,7 +207,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TracermodelPackage getTracermodelPackage() {
@@ -221,7 +216,6 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */

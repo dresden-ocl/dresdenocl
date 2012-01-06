@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
@@ -18,6 +19,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 
@@ -33,35 +37,30 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getExpression
- * <em>Expression</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getResult
- * <em>Result</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getParent
- * <em>Parent</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren
- * <em>Children</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getUUID
- * <em>UUID</em>}</li>
- * <li>
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getModelInstanceElement
- * <em>Model Instance Element</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getUUID <em>UUID</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getModelInstanceElement <em>Model Instance Element</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+
+	/**
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getExpression()
 	 * @generated
 	 * @ordered
@@ -71,7 +70,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	/**
 	 * The default value of the '{@link #getResult() <em>Result</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getResult()
 	 * @generated
 	 * @ordered
@@ -81,7 +79,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	/**
 	 * The cached value of the '{@link #getResult() <em>Result</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getResult()
 	 * @generated
 	 * @ordered
@@ -91,7 +88,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	/**
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getParent()
 	 * @generated
 	 * @ordered
@@ -99,9 +95,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	protected TracerItem parent;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getChildren()
 	 * @generated
 	 * @ordered
@@ -129,10 +124,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	protected UUID uuid = UUID_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getModelInstanceElement()
-	 * <em>Model Instance Element</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getModelInstanceElement() <em>Model Instance Element</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getModelInstanceElement()
 	 * @generated
 	 * @ordered
@@ -141,10 +135,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			null;
 
 	/**
-	 * The cached value of the '{@link #getModelInstanceElement()
-	 * <em>Model Instance Element</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getModelInstanceElement() <em>Model Instance Element</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getModelInstanceElement()
 	 * @generated
 	 * @ordered
@@ -154,7 +147,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TracerItemImpl() {
@@ -164,7 +156,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -175,17 +166,35 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EObject getExpression() {
+
+		if (expression != null && expression.eIsProxy()) {
+			InternalEObject oldExpression = (InternalEObject) expression;
+			expression = eResolveProxy(oldExpression);
+			if (expression != oldExpression) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+							TracermodelPackage.TRACER_ITEM__EXPRESSION, oldExpression,
+							expression));
+			}
+		}
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EObject basicGetExpression() {
 
 		return expression;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setExpression(EObject newExpression) {
@@ -199,7 +208,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public OclAny getResult() {
@@ -209,7 +217,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setResult(OclAny newResult) {
@@ -223,7 +230,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TracerItem getParent() {
@@ -241,8 +247,8 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public TracerItem basicGetParent() {
@@ -252,7 +258,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setParent(TracerItem newParent) {
@@ -266,14 +271,13 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<TracerItem> getChildren() {
 
 		if (children == null) {
 			children =
-					new EObjectResolvingEList<TracerItem>(TracerItem.class, this,
+					new EObjectContainmentEList<TracerItem>(TracerItem.class, this,
 							TracermodelPackage.TRACER_ITEM__CHILDREN);
 		}
 		return children;
@@ -281,7 +285,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public UUID getUUID() {
@@ -291,7 +294,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setUUID(UUID newUUID) {
@@ -305,7 +307,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public IModelInstanceElement getModelInstanceElement() {
@@ -315,7 +316,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setModelInstanceElement(
@@ -330,8 +330,23 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd,
+			int featureID, NotificationChain msgs) {
+
+		switch (featureID) {
+		case TracermodelPackage.TRACER_ITEM__CHILDREN:
+			return ((InternalEList<?>) getChildren()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -339,7 +354,9 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ITEM__EXPRESSION:
-			return getExpression();
+			if (resolve)
+				return getExpression();
+			return basicGetExpression();
 		case TracermodelPackage.TRACER_ITEM__RESULT:
 			return getResult();
 		case TracermodelPackage.TRACER_ITEM__PARENT:
@@ -358,7 +375,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -391,7 +407,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -422,7 +437,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -449,7 +463,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -459,11 +472,11 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (result: ");
+		result.append(" (result: "); //$NON-NLS-1$
 		result.append(result);
-		result.append(", UUID: ");
+		result.append(", UUID: "); //$NON-NLS-1$
 		result.append(uuid);
-		result.append(", modelInstanceElement: ");
+		result.append(", modelInstanceElement: "); //$NON-NLS-1$
 		result.append(modelInstanceElement);
 		result.append(')');
 		return result.toString();
