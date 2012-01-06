@@ -5,16 +5,27 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
@@ -127,5 +138,23 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 
 		assertNotNull(tracedRoot);
 		assertTrue(tracedRoot.getRootItems().size() >= 1);
+		
+		
+		/*
+		 * Save the resource
+		 * Source: http://wiki.eclipse.org/EMF/FAQ#How_can_I_retrieve_an_object_and_all_of_the_objects_it_references.28regardless_of_the_kind_of_reference.29_and_save__them_as_a_single_resource.3F
+		 */
+		
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+	  m.put("tracermodel", new XMIResourceFactoryImpl());
+
+	  ResourceSet resourceSet = new ResourceSetImpl();
+	  
+		Resource resource = resourceSet.createResource(URI.createURI(
+				new File("resources/temp.tracermodel").getAbsolutePath()));
+		
+		resource.getContents().add(tracedRoot);
+		resource.save(Collections.EMPTY_MAP);
 	}
 }
