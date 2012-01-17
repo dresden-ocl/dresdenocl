@@ -1,6 +1,5 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
+package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.fast;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -16,6 +15,7 @@ import java.util.List;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,26 +33,43 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
 import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
 
-public class Ocl2SqlTest {
+public class CarOcl2SqlTest {
 
 	private String sourcePath = System.getProperty("java.io.tmpdir")
 			+ "/ocl2sqltest";
 
-	private static List<String> expected;
-
 	private IModel model;
 	public List<Constraint> constraints = null;
-
+	
+	
+	private static ITemplateGroup standardGroup = null;
+	
 	@BeforeClass
 	public static void setUpClass() throws IOException {
 
-		expected = parseFile(AbstractDresdenOclTest.getFile(
-				"solution/view.sql", Ocl2SqlTestPlugin.PLUGIN_ID)
-				.getAbsolutePath());
+		String stream = AbstractDresdenOclTest
+				.getFile("/template/standard.stg", Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath();
+		try {
+			standardGroup = TemplatePlugin.getTemplateGroupRegistry()
+					.addDefaultTemplateGroup(
+							"StandardTest(SQL)",
+							TemplatePlugin.getTemplateGroupRegistry()
+									.getTemplateGroup("MySQL(SQL)"));
+			standardGroup.addFile(stream);
+		} catch (TemplateException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@AfterClass
+	public static void tear_downClass() {
+
+		TemplatePlugin.getTemplateGroupRegistry().removeTemplateGroup(
+				"StandardTest(SQL)");
 	}
 
 	private boolean deleteDir(File dir) {
@@ -80,7 +97,7 @@ public class Ocl2SqlTest {
 					.getModelProvider()
 					.getModel(
 							AbstractDresdenOclTest.getFile(
-									"model/university_complex.uml",
+									"model/car.uml",
 									Ocl2SqlTestPlugin.PLUGIN_ID));
 		} catch (IllegalArgumentException e) {
 			fail("Wrong parameter");
@@ -149,12 +166,7 @@ public class Ocl2SqlTest {
 
 		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
 		settings.setSourceDirectory(sourcePath);
-		try {
-			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-					.getTemplateGroup("Standard(SQL)"));
-		} catch (TemplateException e1) {
-			fail("Can't load Standard SQL template.");
-		}
+		settings.setSaveCode(false);
 		try {
 			model.removeAllConstraints();
 		} catch (IllegalArgumentException e2) {
@@ -180,77 +192,21 @@ public class Ocl2SqlTest {
 	}
 
 	/**
-	 * check throw TransformationEception.
-	 */
-	@Test
-	public void runExceptionTest() {
-
-		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
-				.createOcl2DeclCodeSettings();
-		try {
-			runCodeGenerator(settings);
-		} catch (Ocl2CodeException e1) {
-			fail("A execption throw!");
-		}
-		settings.setSaveCode(true);
-		settings.setModus(0);
-		IOcl2Sql ocl2Sql = Ocl2SQLFactory.getInstance().createSQLCodeGenerator(
-				settings);
-		ocl2Sql.setInputModel(model);
-		try {
-			ocl2Sql.transformFragmentCode(constraints);
-			fail("No TransformationException throw, because no modus are set.");
-		} catch (Ocl2CodeException e) {
-			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because no modus are set.");
-			}
-		}
-		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
-		settings.setObjectViewPrefix("T_");
-		try {
-			ocl2Sql.transformFragmentCode(constraints);
-			fail("No TransformationException throw, because set table prefix and object view prefix to same prefix");
-		} catch (Ocl2CodeException e) {
-			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because "
-						+ e.getCause().getMessage());
-			}
-		}
-		settings.setObjectViewPrefix("OV_");
-		settings.setPrimaryKeyPrefix("");
-		try {
-			ocl2Sql.transformFragmentCode(constraints);
-			fail("No TransformationException throw, because primary key prefix is null");
-		} catch (Ocl2CodeException e) {
-			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because "
-						+ e.getCause().getMessage());
-			}
-		}
-		settings.setPrimaryKeyPrefix("FK_");
-		try {
-			ocl2Sql.transformFragmentCode(constraints);
-			fail("No TransformationException throw, because primary key and foreign key has the same prefix");
-		} catch (Ocl2CodeException e) {
-			if (!(e.getCause() instanceof TransformationException)) {
-				fail("No TransformationException throw, because "
-						+ e.getCause().getMessage());
-			}
-		}
-	}
-
-	/**
 	 * Test if no schema created and check the created views.
 	 * 
 	 * @throws IOException
 	 */
 	@Test
-	public void runTestNotSave() throws IOException {
+	public void runTestCar() throws IOException {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(false);
-		settings.setModus(IOcl2DeclSettings.MODUS_TYPED);
+		try {
+			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
+					.getTemplateGroup("MySQL (SQL)"));
+		} catch (TemplateException e1) {
+			fail("Can't load Standard SQL template.");
+		}
 		List<String> result = null;
 		try {
 			result = runCodeGenerator(settings);
@@ -258,26 +214,21 @@ public class Ocl2SqlTest {
 			fail("Can't generate sql code");
 		}
 		assertNotNull("No result", result);
-		testStringList(removeComments(result), expected);
-		String[] files = (new File(sourcePath)).list();
-		assertEquals(1, files.length);
-		testStringList(
-				parseFile(sourcePath + "/" + files[0]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/view.sql",
-						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
+		testStringList(removeComments(result), parseFile(AbstractDresdenOclTest.getFile("solution/car.sql",
+				Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
-
-	/**
-	 * Test if check the created views and schema.
-	 * 
-	 * @throws IOException
-	 */
+	
 	@Test
-	public void runTestWithSave() throws IOException {
+	public void runTestCarOptimize() throws IOException {
 
 		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
 				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(true);
+		try {
+			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
+					.getTemplateGroup("StandardTest(SQL)"));
+		} catch (TemplateException e1) {
+			fail("Can't load Standard SQL template.");
+		}
 		List<String> result = null;
 		try {
 			result = runCodeGenerator(settings);
@@ -285,45 +236,8 @@ public class Ocl2SqlTest {
 			fail("Can't generate sql code");
 		}
 		assertNotNull("No result", result);
-		testStringList(removeComments(result), expected);
-		String[] files = (new File(sourcePath)).list();
-		assertEquals(2, files.length);
-		testStringList(
-				parseFile(sourcePath + "/" + files[0]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/schema.sql",
-						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
-		testStringList(
-				parseFile(sourcePath + "/" + files[1]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/view.sql",
-						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
-	}
-
-	@Test
-	public void runTestWithSaveAndOtherParameter() throws IOException {
-
-		IOcl2DeclSettings settings = Ocl2DeclCodeFactory.getInstance()
-				.createOcl2DeclCodeSettings();
-		settings.setSaveCode(true);
-		settings.setTablePrefix("TB_");
-		settings.setObjectViewPrefix("O_");
-		settings.setAssociationTablePrefix("AS_");
-		settings.setPrimaryKeyPrefix("P_");
-		settings.setForeignKeyPrefix("F_");
-		try {
-			runCodeGenerator(settings);
-		} catch (Ocl2CodeException e) {
-			fail("Can't generate sql code");
-		}
-		String[] files = (new File(sourcePath)).list();
-		assertEquals(2, files.length);
-		testStringList(
-				parseFile(sourcePath + "/" + files[0]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/schema_para.sql",
-						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
-		testStringList(
-				parseFile(sourcePath + "/" + files[1]),
-				parseFile(AbstractDresdenOclTest.getFile("solution/view_para.sql",
-						Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
+		testStringList(removeComments(result), parseFile(AbstractDresdenOclTest.getFile("solution/car.sql",
+				Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
 
 	private static List<String> parseFile(String file) {

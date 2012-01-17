@@ -25,9 +25,9 @@ import org.junit.runners.Suite;
 
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2SqlTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2Sql_optimizeTest;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.Ocl2SqlTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_notoptimizeTest;
 import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_optimizeTest;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTest;
 
 /**
  * <p>
@@ -42,7 +42,7 @@ import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleO
 @Suite.SuiteClasses({ SingleOcl2Sql_notoptimizeTest.class,
 		SingleOcl2Sql_optimizeTest.class, Ocl2SqlTest.class,
 		CarOcl2SqlTest.class, CarOcl2Sql_optimizeTest.class })
-public class AllOcl2SqlTests extends AbstractDresdenOclTest {
+public class SingleOcl2SqlTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
 	 * above annotations.
