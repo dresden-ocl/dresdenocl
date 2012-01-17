@@ -30,7 +30,7 @@ import tudresden.ocl20.pivot.modelinstancetype.java.test.AllJavaModelInstanceTyp
 import tudresden.ocl20.pivot.modelinstancetype.xml.test.AllXmlInstanceTests;
 import tudresden.ocl20.pivot.ocl2parser.test.AllOCL2ParserTests;
 import tudresden.ocl20.pivot.standardlibrary.java.test.tests.AllStandardLibraryTests;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.AllOcl2SqlTests;
+import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.FastOcl2SqlTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.AllOcl2JavaTests;
 import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.AllAspectJTests;
 import tudresden.ocl20.pivot.tools.template.test.AllTestsTemplate;
@@ -77,7 +77,7 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 
 		/* OCL2SQL tests: */
 		AllTestsTransformation.class, AllTestsPivot2Sql.class,
-		AllOcl2SqlTests.class })
+		FastOcl2SqlTests.class })
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
