@@ -15,9 +15,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
+import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 
+import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
@@ -36,8 +40,7 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright =
-			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -85,7 +88,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	private TracermodelPackageImpl() {
-
 		super(eNS_URI, TracermodelFactory.eINSTANCE);
 	}
 
@@ -111,15 +113,14 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public static TracermodelPackage init() {
-
 		if (isInited)
 			return (TracermodelPackage) EPackage.Registry.INSTANCE
 					.getEPackage(TracermodelPackage.eNS_URI);
 
 		// Obtain or create and register package
-		TracermodelPackageImpl theTracermodelPackage =
-				(TracermodelPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof TracermodelPackageImpl ? EPackage.Registry.INSTANCE
-						.get(eNS_URI) : new TracermodelPackageImpl());
+		TracermodelPackageImpl theTracermodelPackage = (TracermodelPackageImpl) (EPackage.Registry.INSTANCE
+				.get(eNS_URI) instanceof TracermodelPackageImpl ? EPackage.Registry.INSTANCE
+				.get(eNS_URI) : new TracermodelPackageImpl());
 
 		isInited = true;
 
@@ -143,7 +144,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EClass getTracerItem() {
-
 		return tracerItemEClass;
 	}
 
@@ -152,7 +152,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getTracerItem_Expression() {
-
 		return (EReference) tracerItemEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -161,7 +160,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EAttribute getTracerItem_Result() {
-
 		return (EAttribute) tracerItemEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -170,7 +168,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getTracerItem_Parent() {
-
 		return (EReference) tracerItemEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -179,7 +176,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getTracerItem_Children() {
-
 		return (EReference) tracerItemEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -188,7 +184,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EAttribute getTracerItem_UUID() {
-
 		return (EAttribute) tracerItemEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -197,7 +192,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EAttribute getTracerItem_ModelInstanceElement() {
-
 		return (EAttribute) tracerItemEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -206,7 +200,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EClass getTracerRoot() {
-
 		return tracerRootEClass;
 	}
 
@@ -215,7 +208,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EReference getTracerRoot_RootItems() {
-
 		return (EReference) tracerRootEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -224,7 +216,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EDataType getIModelInstanceElement() {
-
 		return iModelInstanceElementEDataType;
 	}
 
@@ -233,7 +224,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EDataType getOclAny() {
-
 		return oclAnyEDataType;
 	}
 
@@ -242,7 +232,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public EDataType getUUID() {
-
 		return uuidEDataType;
 	}
 
@@ -251,7 +240,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public TracermodelFactory getTracermodelFactory() {
-
 		return (TracermodelFactory) getEFactoryInstance();
 	}
 
@@ -269,7 +257,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void createPackageContents() {
-
 		if (isCreated)
 			return;
 		isCreated = true;
@@ -306,7 +293,6 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 	 * @generated
 	 */
 	public void initializePackageContents() {
-
 		if (isInitialized)
 			return;
 		isInitialized = true;
@@ -323,7 +309,9 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(tracerItemEClass, TracerItem.class,
+		initEClass(
+				tracerItemEClass,
+				TracerItem.class,
 				"TracerItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getTracerItem_Expression(),
@@ -353,7 +341,9 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 				this.getIModelInstanceElement(),
 				"modelInstanceElement", null, 0, 1, TracerItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(tracerRootEClass, TracerRoot.class,
+		initEClass(
+				tracerRootEClass,
+				TracerRoot.class,
 				"TracerRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(
 				getTracerRoot_RootItems(),
@@ -362,7 +352,9 @@ public class TracermodelPackageImpl extends EPackageImpl implements
 				"rootItems", null, 0, -1, TracerRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		// Initialize data types
-		initEDataType(iModelInstanceElementEDataType, IModelInstanceElement.class,
+		initEDataType(
+				iModelInstanceElementEDataType,
+				IModelInstanceElement.class,
 				"IModelInstanceElement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEDataType(oclAnyEDataType, OclAny.class,
 				"OclAny", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$

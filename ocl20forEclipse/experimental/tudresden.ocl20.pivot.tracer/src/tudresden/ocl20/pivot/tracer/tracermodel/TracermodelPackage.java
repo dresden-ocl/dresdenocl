@@ -33,8 +33,7 @@ public interface TracermodelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String copyright =
-			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * The package name.
@@ -63,9 +62,8 @@ public interface TracermodelPackage extends EPackage {
 	 * end-user-doc -->
 	 * @generated
 	 */
-	TracermodelPackage eINSTANCE =
-			tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl
-					.init();
+	TracermodelPackage eINSTANCE = tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl
+			.init();
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl <em>Tracer Item</em>}' class.
@@ -353,7 +351,8 @@ public interface TracermodelPackage extends EPackage {
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACER_ITEM__EXPRESSION = eINSTANCE.getTracerItem_Expression();
+		EReference TRACER_ITEM__EXPRESSION = eINSTANCE
+				.getTracerItem_Expression();
 
 		/**
 		 * The meta object literal for the '<em><b>Result</b></em>' attribute feature.
@@ -408,7 +407,8 @@ public interface TracermodelPackage extends EPackage {
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRACER_ROOT__ROOT_ITEMS = eINSTANCE.getTracerRoot_RootItems();
+		EReference TRACER_ROOT__ROOT_ITEMS = eINSTANCE
+				.getTracerRoot_RootItems();
 
 		/**
 		 * The meta object literal for the '<em>IModel Instance Element</em>' data type.
@@ -417,7 +417,8 @@ public interface TracermodelPackage extends EPackage {
 		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
 		 * @generated
 		 */
-		EDataType IMODEL_INSTANCE_ELEMENT = eINSTANCE.getIModelInstanceElement();
+		EDataType IMODEL_INSTANCE_ELEMENT = eINSTANCE
+				.getIModelInstanceElement();
 
 		/**
 		 * The meta object literal for the '<em>Ocl Any</em>' data type. <!--

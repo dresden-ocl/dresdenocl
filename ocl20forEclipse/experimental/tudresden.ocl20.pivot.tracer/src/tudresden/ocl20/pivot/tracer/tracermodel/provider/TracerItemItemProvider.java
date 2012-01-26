@@ -27,8 +27,10 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 
+import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
@@ -49,8 +51,7 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright =
-			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -59,7 +60,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public TracerItemItemProvider(AdapterFactory adapterFactory) {
-
 		super(adapterFactory);
 	}
 
@@ -71,7 +71,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -91,7 +90,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addResultPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -100,7 +98,8 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 						getString("_UI_TracerItem_result_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TracerItem_result_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TracermodelPackage.Literals.TRACER_ITEM__RESULT, true, false, true,
+						TracermodelPackage.Literals.TRACER_ITEM__RESULT, true,
+						false, true,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -111,7 +110,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addParentPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -120,8 +118,8 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 						getString("_UI_TracerItem_parent_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TracerItem_parent_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TracermodelPackage.Literals.TRACER_ITEM__PARENT, true, false, true,
-						null, null, null));
+						TracermodelPackage.Literals.TRACER_ITEM__PARENT, true,
+						false, true, null, null, null));
 	}
 
 	/**
@@ -131,7 +129,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addChildrenPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -140,8 +137,8 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 						getString("_UI_TracerItem_children_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TracerItem_children_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TracermodelPackage.Literals.TRACER_ITEM__CHILDREN, true, false,
-						true, null, null, null));
+						TracermodelPackage.Literals.TRACER_ITEM__CHILDREN,
+						true, false, true, null, null, null));
 	}
 
 	/**
@@ -151,7 +148,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addUUIDPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -160,7 +156,8 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 						getString("_UI_TracerItem_UUID_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TracerItem_UUID_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TracermodelPackage.Literals.TRACER_ITEM__UUID, true, false, false,
+						TracermodelPackage.Literals.TRACER_ITEM__UUID, true,
+						false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
@@ -170,7 +167,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addModelInstanceElementPropertyDescriptor(Object object) {
-
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -180,8 +176,8 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TracerItem_modelInstanceElement_feature", "_UI_TracerItem_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						TracermodelPackage.Literals.TRACER_ITEM__MODEL_INSTANCE_ELEMENT,
-						true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-						null, null));
+						true, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
 	}
 
 	/**
@@ -194,10 +190,10 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
-
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TracermodelPackage.Literals.TRACER_ITEM__EXPRESSION);
+			childrenFeatures
+					.add(TracermodelPackage.Literals.TRACER_ITEM__EXPRESSION);
 		}
 		return childrenFeatures;
 	}
@@ -208,7 +204,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -222,7 +217,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected boolean shouldComposeCreationImage() {
-
 		return true;
 	}
 
@@ -234,7 +228,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public String getText(Object object) {
-
 		OclAny labelValue = ((TracerItem) object).getResult();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ? getString("_UI_TracerItem_type") : //$NON-NLS-1$
@@ -250,7 +243,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
-
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TracerItem.class)) {
@@ -277,7 +269,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
-
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
@@ -297,7 +288,6 @@ public class TracerItemItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
-
 		return TracermodelEditPlugin.INSTANCE;
 	}
 

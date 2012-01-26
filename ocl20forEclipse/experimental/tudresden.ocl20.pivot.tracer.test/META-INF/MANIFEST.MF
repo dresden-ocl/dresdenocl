@@ -15,6 +15,11 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: %providerName
 Import-Package: org.dresdenocl.testsuite._abstract,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi.impl,
  org.junit.runner;version="4.8.2",
  org.junit.runners;version="4.8.2",
  tudresden.ocl20.pivot.facade,

@@ -1,6 +1,6 @@
 package tudresden.ocl20.pivot.tracer;
 
-import org.osgi.framework.BundleActivator;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
@@ -8,7 +8,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistry;
 import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryListener;
 import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.impl.TracerRegistryImpl;
 
-public class TracerPlugin implements BundleActivator {
+public class TracerPlugin extends Plugin {
 
 	private static BundleContext context;
 
@@ -38,8 +38,6 @@ public class TracerPlugin implements BundleActivator {
 	public static InterpreterRegistryListenerImpl getInterpreterTraceListener() {
 
 		if (plugin == null) {
-			System.out
-					.println("The Tracer plugin has not been activated. Initialized it manually.");
 			plugin = new TracerPlugin();
 		}
 		// no else
@@ -64,8 +62,6 @@ public class TracerPlugin implements BundleActivator {
 
 		/* Check if the plug-in has been activated. */
 		if (plugin == null) {
-			System.out
-					.println("The Tracer plugin has not been activated. Initialized it manually.");
 			plugin = new TracerPlugin();
 		}
 		// no else.
@@ -113,8 +109,9 @@ public class TracerPlugin implements BundleActivator {
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
-
-		TracerPlugin.context = null;
+		
+		plugin = null;
+		super.stop(bundleContext);
 	}
 
 }

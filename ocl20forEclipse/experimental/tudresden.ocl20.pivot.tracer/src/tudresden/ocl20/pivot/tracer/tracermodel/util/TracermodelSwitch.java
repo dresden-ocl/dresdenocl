@@ -32,8 +32,7 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright =
-			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -48,7 +47,6 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public TracermodelSwitch() {
-
 		if (modelPackage == null) {
 			modelPackage = TracermodelPackage.eINSTANCE;
 		}
@@ -64,7 +62,6 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected boolean isSwitchFor(EPackage ePackage) {
-
 		return ePackage == modelPackage;
 	}
 
@@ -77,7 +74,6 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-
 		switch (classifierID) {
 		case TracermodelPackage.TRACER_ITEM: {
 			TracerItem tracerItem = (TracerItem) theEObject;
@@ -109,7 +105,6 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTracerItem(TracerItem object) {
-
 		return null;
 	}
 
@@ -124,7 +119,6 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTracerRoot(TracerRoot object) {
-
 		return null;
 	}
 
@@ -140,7 +134,6 @@ public class TracermodelSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	public T defaultCase(EObject object) {
-
 		return null;
 	}
 

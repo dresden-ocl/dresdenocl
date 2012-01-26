@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ui
+Bundle-Name: Dresden OCL Tracer GUI Plug-In
 Bundle-SymbolicName: tudresden.ocl20.pivot.tracer.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin
@@ -18,6 +18,8 @@ Require-Bundle: tudresden.ocl20.pivot.pivotmodel,
 Export-Package: tudresden.ocl20.pivot.tracer.ui,
  tudresden.ocl20.pivot.tracer.ui.internal.views;x-internal:=true,
  tudresden.ocl20.pivot.tracer.ui.internal.views.util;x-internal:=true
-Import-Package: tudresden.ocl20.pivot.tracer,
+Import-Package: tudresden.ocl20.pivot.modelinstancetype.types,
+ tudresden.ocl20.pivot.tracer,
  tudresden.ocl20.pivot.tracer.tracermodel,
  tudresden.ocl20.pivot.tracer.tracermodel.provider
+Bundle-Vendor: TU Dresden, Software Technology Group

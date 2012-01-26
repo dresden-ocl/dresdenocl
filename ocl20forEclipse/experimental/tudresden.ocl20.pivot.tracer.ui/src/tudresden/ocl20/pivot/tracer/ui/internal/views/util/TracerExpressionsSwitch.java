@@ -66,7 +66,7 @@ public class TracerExpressionsSwitch extends ExpressionsSwitch<String> {
 	@Override
 	public String caseVariableExp(VariableExp object) {
 
-		return ((VariableExp) object).getName();
+		return object.getName();
 	}
 
 	@Override

@@ -48,8 +48,7 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright =
-			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 	/**
 	 * The cached value of the '{@link #getRootItems() <em>Root Items</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -64,7 +63,6 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 * @generated
 	 */
 	protected TracerRootImpl() {
-
 		super();
 	}
 
@@ -74,7 +72,6 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TracermodelPackage.Literals.TRACER_ROOT;
 	}
 
@@ -83,11 +80,10 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 * @generated
 	 */
 	public EList<TracerItem> getRootItems() {
-
 		if (rootItems == null) {
-			rootItems =
-					new EObjectContainmentEList.Resolving<TracerItem>(TracerItem.class,
-							this, TracermodelPackage.TRACER_ROOT__ROOT_ITEMS);
+			rootItems = new EObjectContainmentEList.Resolving<TracerItem>(
+					TracerItem.class, this,
+					TracermodelPackage.TRACER_ROOT__ROOT_ITEMS);
 		}
 		return rootItems;
 	}
@@ -100,10 +96,10 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ROOT__ROOT_ITEMS:
-			return ((InternalEList<?>) getRootItems()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getRootItems()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -114,7 +110,6 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ROOT__ROOT_ITEMS:
 			return getRootItems();
@@ -129,7 +124,6 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ROOT__ROOT_ITEMS:
 			getRootItems().clear();
@@ -145,7 +139,6 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ROOT__ROOT_ITEMS:
 			getRootItems().clear();
@@ -160,7 +153,6 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ROOT__ROOT_ITEMS:
 			return rootItems != null && !rootItems.isEmpty();

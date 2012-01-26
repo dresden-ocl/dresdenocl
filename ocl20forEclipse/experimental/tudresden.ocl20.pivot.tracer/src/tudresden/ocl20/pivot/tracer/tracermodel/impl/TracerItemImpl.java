@@ -21,12 +21,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
@@ -55,8 +57,7 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright =
-			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' reference.
@@ -131,8 +132,7 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final IModelInstanceElement MODEL_INSTANCE_ELEMENT_EDEFAULT =
-			null;
+	protected static final IModelInstanceElement MODEL_INSTANCE_ELEMENT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getModelInstanceElement() <em>Model Instance Element</em>}' attribute.
@@ -142,15 +142,13 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 * @ordered
 	 */
-	protected IModelInstanceElement modelInstanceElement =
-			MODEL_INSTANCE_ELEMENT_EDEFAULT;
+	protected IModelInstanceElement modelInstanceElement = MODEL_INSTANCE_ELEMENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected TracerItemImpl() {
-
 		super();
 	}
 
@@ -160,7 +158,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-
 		return TracermodelPackage.Literals.TRACER_ITEM;
 	}
 
@@ -169,15 +166,14 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public EObject getExpression() {
-
 		if (expression != null && expression.eIsProxy()) {
 			InternalEObject oldExpression = (InternalEObject) expression;
 			expression = eResolveProxy(oldExpression);
 			if (expression != oldExpression) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							TracermodelPackage.TRACER_ITEM__EXPRESSION, oldExpression,
-							expression));
+							TracermodelPackage.TRACER_ITEM__EXPRESSION,
+							oldExpression, expression));
 			}
 		}
 		return expression;
@@ -189,21 +185,21 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public EObject basicGetExpression() {
-
 		return expression;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setExpression(EObject newExpression) {
-
 		EObject oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					TracermodelPackage.TRACER_ITEM__EXPRESSION, oldExpression, expression));
+					TracermodelPackage.TRACER_ITEM__EXPRESSION, oldExpression,
+					expression));
 	}
 
 	/**
@@ -211,7 +207,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public OclAny getResult() {
-
 		return result;
 	}
 
@@ -220,7 +215,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public void setResult(OclAny newResult) {
-
 		OclAny oldResult = result;
 		result = newResult;
 		if (eNotificationRequired())
@@ -233,14 +227,14 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public TracerItem getParent() {
-
 		if (parent != null && parent.eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject) parent;
 			parent = (TracerItem) eResolveProxy(oldParent);
 			if (parent != oldParent) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							TracermodelPackage.TRACER_ITEM__PARENT, oldParent, parent));
+							TracermodelPackage.TRACER_ITEM__PARENT, oldParent,
+							parent));
 			}
 		}
 		return parent;
@@ -252,7 +246,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public TracerItem basicGetParent() {
-
 		return parent;
 	}
 
@@ -261,7 +254,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public void setParent(TracerItem newParent) {
-
 		TracerItem oldParent = parent;
 		parent = newParent;
 		if (eNotificationRequired())
@@ -274,11 +266,10 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public EList<TracerItem> getChildren() {
-
 		if (children == null) {
-			children =
-					new EObjectContainmentEList<TracerItem>(TracerItem.class, this,
-							TracermodelPackage.TRACER_ITEM__CHILDREN);
+			children = new EObjectContainmentEList<TracerItem>(
+					TracerItem.class, this,
+					TracermodelPackage.TRACER_ITEM__CHILDREN);
 		}
 		return children;
 	}
@@ -288,7 +279,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public UUID getUUID() {
-
 		return uuid;
 	}
 
@@ -297,7 +287,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public void setUUID(UUID newUUID) {
-
 		UUID oldUUID = uuid;
 		uuid = newUUID;
 		if (eNotificationRequired())
@@ -310,7 +299,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public IModelInstanceElement getModelInstanceElement() {
-
 		return modelInstanceElement;
 	}
 
@@ -320,7 +308,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 */
 	public void setModelInstanceElement(
 			IModelInstanceElement newModelInstanceElement) {
-
 		IModelInstanceElement oldModelInstanceElement = modelInstanceElement;
 		modelInstanceElement = newModelInstanceElement;
 		if (eNotificationRequired())
@@ -337,10 +324,10 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ITEM__CHILDREN:
-			return ((InternalEList<?>) getChildren()).basicRemove(otherEnd, msgs);
+			return ((InternalEList<?>) getChildren()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -351,7 +338,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ITEM__EXPRESSION:
 			if (resolve)
@@ -380,7 +366,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ITEM__EXPRESSION:
 			setExpression((EObject) newValue);
@@ -411,7 +396,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ITEM__EXPRESSION:
 			setExpression((EObject) null);
@@ -441,7 +425,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-
 		switch (featureID) {
 		case TracermodelPackage.TRACER_ITEM__EXPRESSION:
 			return expression != null;
@@ -453,10 +436,12 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 		case TracermodelPackage.TRACER_ITEM__CHILDREN:
 			return children != null && !children.isEmpty();
 		case TracermodelPackage.TRACER_ITEM__UUID:
-			return UUID_EDEFAULT == null ? uuid != null : !UUID_EDEFAULT.equals(uuid);
+			return UUID_EDEFAULT == null ? uuid != null : !UUID_EDEFAULT
+					.equals(uuid);
 		case TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT:
 			return MODEL_INSTANCE_ELEMENT_EDEFAULT == null ? modelInstanceElement != null
-					: !MODEL_INSTANCE_ELEMENT_EDEFAULT.equals(modelInstanceElement);
+					: !MODEL_INSTANCE_ELEMENT_EDEFAULT
+							.equals(modelInstanceElement);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -467,7 +452,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 */
 	@Override
 	public String toString() {
-
 		if (eIsProxy())
 			return super.toString();
 

@@ -2,9 +2,15 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension point="org.eclipse.ui.views">
-   		<view id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
-   			name="TracerView"
-   			class="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"/>
+   		<view
+           category="tudresden.ocl20.views.category"
+           class="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
+           id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
+           name="Dresden OCL Tracer"/>
+     <category
+           id="tudresden.ocl20.views.category"
+           name="Dresden OCL">
+     </category>
    </extension>
 
 </plugin>

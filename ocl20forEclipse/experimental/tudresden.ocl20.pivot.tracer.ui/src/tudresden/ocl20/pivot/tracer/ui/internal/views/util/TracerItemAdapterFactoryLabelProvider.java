@@ -25,12 +25,14 @@ import org.eclipse.swt.graphics.Image;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 
 /**
  * 
- * @author Lars SchÃ¼tze
+ * @author Lars Schütze
  * 
  */
 public class TracerItemAdapterFactoryLabelProvider extends
@@ -60,7 +62,7 @@ public class TracerItemAdapterFactoryLabelProvider extends
 			case 0:
 				return tracerExprSwitch.doSwitch(item.getExpression());
 			case 1:
-				return item.getResult().toString();
+				return resultText(item.getResult());
 			default:
 				return super.getColumnText(element, columnIndex);
 			}
@@ -118,5 +120,28 @@ public class TracerItemAdapterFactoryLabelProvider extends
 	public boolean isLabelProperty(Object element, String property) {
 
 		return false;
+	}
+	
+	private String resultText(OclAny result) {
+		
+		if(result instanceof OclInteger) {
+			return ((OclInteger) result).getModelInstanceInteger().getLong().toString();
+		}
+		if(result instanceof OclBoolean) {
+			return ((OclBoolean) result).getModelInstanceBoolean().getBoolean().toString();
+		}
+		if(result instanceof OclModelInstanceObject) {
+			OclModelInstanceObject obj = (OclModelInstanceObject) result;
+			if(obj.oclIsInvalid().isTrue()) {
+				return "invalid: " + obj.getInvalidReason().getMessage();
+			}
+			else if(obj.oclIsUndefined().isTrue()) {
+				return "undefinied: " + obj.getUndefinedReason();
+			}
+			
+			return obj.getModelInstanceObject().getObject().toString();
+		}
+		
+		return result.toString();
 	}
 }

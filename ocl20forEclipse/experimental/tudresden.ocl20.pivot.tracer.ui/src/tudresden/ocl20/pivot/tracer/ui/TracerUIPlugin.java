@@ -1,11 +1,12 @@
 package tudresden.ocl20.pivot.tracer.ui;
 
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
 
-public class TracerUIPlugin extends AbstractUIPlugin implements BundleActivator {
+import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
+
+public class TracerUIPlugin extends AbstractUIPlugin {
 
 	private static BundleContext context;
 
@@ -13,20 +14,14 @@ public class TracerUIPlugin extends AbstractUIPlugin implements BundleActivator 
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer.ui";
 
 	/** the ID of the {@link TracerView}. */
-	public static final String VIEW_ID =
+	public static final String TRACER_VIEW_ID =
 			"tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView";
 
 	/** the shared instance of this plug-in */
 	private static TracerUIPlugin plugin;
 
-	static BundleContext getContext() {
-
-		return context;
-	}
-
 	public TracerUIPlugin() {
 
-		plugin = this;
 	}
 
 	/*
@@ -36,7 +31,8 @@ public class TracerUIPlugin extends AbstractUIPlugin implements BundleActivator 
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 
-		TracerUIPlugin.context = bundleContext;
+		super.start(bundleContext);
+		plugin = this;
 	}
 
 	/*
@@ -46,7 +42,8 @@ public class TracerUIPlugin extends AbstractUIPlugin implements BundleActivator 
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
 
-		TracerUIPlugin.context = null;
+		plugin = null;
+		super.stop(bundleContext);
 	}
 
 	/**
