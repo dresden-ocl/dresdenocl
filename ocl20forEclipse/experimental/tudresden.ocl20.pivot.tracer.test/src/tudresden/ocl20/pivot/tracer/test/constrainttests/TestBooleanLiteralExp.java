@@ -80,11 +80,6 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 		List<Constraint> constraints;
 		constraints =
 				Ocl2ForEclipseFacade.parseConstraints(constraintFile, model, true);
-		/*
-		 * constraints = Ocl22Parser.INSTANCE.parseOclString(
-		 * "package package1 context Class1 inv: self.intProperty = 0 endpackage",
-		 * model);
-		 */
 
 		assertNotNull(constraints);
 		assertTrue(constraints.size() >= 1);
@@ -126,5 +121,13 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 
 		assertNotNull(tracedRoot);
 		assertTrue(tracedRoot.getRootItems().size() >= 1);
+		
+		/* Write the object to a file */
+		File file1, file2;
+		
+		file1 = saveTracerTree(tracedRoot, "rootfile1");
+		file2 = saveTracerTree(tracedRoot, "rootfile2");
+		
+		assertTrue(compareXmlFiles(file1, file2));
 	}
 }

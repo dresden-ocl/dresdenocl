@@ -22,11 +22,13 @@ Import-Package: org.dresdenocl.testsuite._abstract,
  org.eclipse.emf.ecore.xmi.impl,
  org.junit.runner;version="4.8.2",
  org.junit.runners;version="4.8.2",
+ tudresden.ocl20.pivot.essentialocl.standardlibrary,
  tudresden.ocl20.pivot.facade,
  tudresden.ocl20.pivot.language.ocl.resource.ocl,
  tudresden.ocl20.pivot.metamodels.ecore,
  tudresden.ocl20.pivot.model,
  tudresden.ocl20.pivot.modelinstance,
  tudresden.ocl20.pivot.parser,
- tudresden.ocl20.pivot.pivotmodel
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.tracer.ui.internal.views.util
 Export-Package: tudresden.ocl20.pivot.tracer.test
