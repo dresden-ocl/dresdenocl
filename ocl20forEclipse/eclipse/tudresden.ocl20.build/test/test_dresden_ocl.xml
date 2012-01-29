@@ -1,0 +1,93 @@
+<project default="test" name="Test Dresden OCL">
+
+	<import file="${basedir}/../ant_common.xml" />
+	<import file="${basedir}/../build_common_properties.xml"/>
+
+	<property name="testRoot" location="${rootPath}/test"/>
+	<property name="testPlatformPath" location="${testRoot}/tp" />
+	<property name="testWorkspacePath" location="${testRoot}/workspace"/>
+
+	
+	<!-- ================================= 
+          target: init.buckminster              
+         ================================= -->
+	<target name="init.buckminster" depends="init.build.properties">
+		<echo message="Using workspace ${testWorkspacePath}" />
+
+		<echo message="Setting jre to ${env.JAVA_HOME}" />
+		<buckminster command="installJRE" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="--location" />
+				<arg value="${env.JAVA_HOME}" />
+			</cmdargs>
+		</buckminster>
+
+		<echo message="Setting targetPlatformPath to ${testPlatformPath}" />
+		<buckminster command="setpref" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="targetPlatformPath=${testPlatformPath}" />
+			</cmdargs>
+		</buckminster>
+
+		<echo message="Importing projects into workspace ${testWorkspacePath}" />
+		<echo message="Importing binaries into target platform ${testPlatformPath}" />
+		<buckminster command="import" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="${basedir}/dresdenocl.mspec" />
+			</cmdargs>
+		</buckminster>
+
+		<echo message="Setting Preferences" />
+		<buckminster command="setpreference" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="org.eclipse.buckminster.pde.targetOS=${target.os}" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="setpreference" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="org.eclipse.buckminster.pde.targetWS=${target.ws}" />
+			</cmdargs>
+		</buckminster>
+
+		<buckminster command="setpreference" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="org.eclipse.buckminster.pde.targetArch=${target.arch}" />
+			</cmdargs>
+		</buckminster>
+	</target>
+
+	<!-- ================================= 
+          target: build              
+         ================================= -->
+	<target name="build" depends="init.buckminster">
+		<echo message="Building the test plug-ins" />
+		<buckminster command="build" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="--thorough" />
+			</cmdargs>
+		</buckminster>
+	</target>
+
+	<!-- ================================= 
+          target: test              
+         ================================= -->
+	<target name="test" depends="build" description="Runs the Dresden OCL Test Suite">
+		<buckminster command="junit" workspace="${testWorkspacePath}">
+			<cmdargs>
+				<arg value="-l" />
+				<arg value="org.dresdenocl.testsuite/DresdenOclTestSuite.launch" />
+				<arg value="--maxTimeAwaitJunitReport" />
+				<arg value="120" />
+				<arg value="-o" />
+				<arg value="${testResultsPath}/test-results.xml" />
+				<arg value="--stdout" />
+				<arg value="${testResultsPath}/stdout.txt" />
+				<arg value="--stderr" />
+				<arg value="${testResultsPath}/stderr.txt" />
+				<arg value="--flatXML" />
+			</cmdargs>
+		</buckminster>
+	</target>
+
+</project>

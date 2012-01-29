@@ -9,7 +9,7 @@
 	<!-- ================================= 
           target: run.all              
          ================================= -->
-	<target name="run.all" depends="build,test,create.update.site" description="Builds and tests Dresden OCL and will create the Update Site.">
+	<target name="run.all" depends="build,create.update.site" description="Builds Dresden OCL and will create the Update Site.">
 
 	</target>
 
@@ -153,27 +153,6 @@
 		<echo message="Clean up old build" />
 		<sshexec host="lars.inf.tu-dresden.de" port="22" trust="true" username="${usr}" password="${pwd}" command="/home/hudson/clean_up_dresdenocl.sh" />
 
-	</target>
-
-	<!-- ================================= 
-          target: test              
-         ================================= -->
-	<target name="test" depends="build" description="Runs the Dresden OCL Test Suite">
-		<buckminster command="junit" workspace="${workspacePath}">
-			<cmdargs>
-				<arg value="-l" />
-				<arg value="org.dresdenocl.testsuite/DresdenOclTestSuite.launch" />
-				<arg value="--maxTimeAwaitJunitReport" />
-				<arg value="120" />
-				<arg value="-o" />
-				<arg value="${testResultsPath}/test-results.xml" />
-				<arg value="--stdout" />
-				<arg value="${testResultsPath}/stdout.txt" />
-				<arg value="--stderr" />
-				<arg value="${testResultsPath}/stderr.txt" />
-				<arg value="--flatXML" />
-			</cmdargs>
-		</buckminster>
 	</target>
 
 </project>
