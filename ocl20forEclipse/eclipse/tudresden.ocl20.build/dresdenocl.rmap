@@ -67,16 +67,12 @@
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^org\.dresdenocl\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.updatesite" />
-	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\..+\.test(\..+)?"
-		failOnError="false" />
-	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
-		failOnError="false" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite\.abstract"/>
 	<locator searchPathRef="dresdenocl.experimental" pattern="^org\.dresdenocl\.examples\.uml(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.kiama\.attribution" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^scala\.library" />
-	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite\.abstract"/>
 	<locator searchPathRef="target.platform" />
 
 </rmap>
