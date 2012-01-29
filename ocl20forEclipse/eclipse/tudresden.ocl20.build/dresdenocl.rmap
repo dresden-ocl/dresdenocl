@@ -68,6 +68,7 @@
 	<locator searchPathRef="dresdenocl.features" pattern="^org\.dresdenocl\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.updatesite" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite\.abstract"/>
+	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\.pivot\.modelinstancetype\.ecore\.testmodel"/>
 	<locator searchPathRef="dresdenocl.experimental" pattern="^org\.dresdenocl\.examples\.uml(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
