@@ -16,6 +16,7 @@
 		<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
 			<arg value="s/\ /%20/g"/>
 		</exec>
+		<echo>${updatesiteURI}</echo>
 		
 		<echo message="Using workspace ${testWorkspacePath}" />
 
