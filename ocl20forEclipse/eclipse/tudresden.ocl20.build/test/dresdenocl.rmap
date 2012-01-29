@@ -16,7 +16,7 @@
 	</searchPath>
 
 	<searchPath name="dresdenocl.tests">
-		<provider componentTypes="osgi.bundle" readerType="svn"
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="svn"
 			source="true">
 			<uri
 				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/tests/{0}">
