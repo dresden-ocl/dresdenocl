@@ -5,21 +5,21 @@
 
 	<property key="build.type" mutable="true" value="N" />
 
-	<searchPath name="dresdenocl.plugins">
-		<provider componentTypes="osgi.bundle" readerType="svn"
-			source="true">
+	<searchPath name="dresdenocl.platform">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2"
+			source="false" mutable="false">
 			<uri
-				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/{0}">
-				<bc:propertyRef key="buckminster.component" />
+				format="file:{0}">
+				<bc:propertyRef key="buildPath" />
 			</uri>
 		</provider>
 	</searchPath>
 
-	<searchPath name="dresdenocl.features">
-		<provider componentTypes="eclipse.feature" readerType="svn"
-			source="true" mutable="false">
+	<searchPath name="dresdenocl.tests">
+		<provider componentTypes="osgi.bundle" readerType="svn"
+			source="true">
 			<uri
-				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/updatesite/{0}">
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/tests/{0}">
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
@@ -61,6 +61,7 @@
 		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
 		failOnError="false" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
 	<locator searchPathRef="dresdenocl.experimental" pattern="^org\.dresdenocl\.examples\.uml(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^tudresden(\..+)?" />
 	<locator searchPathRef="dresdenocl.plugins" pattern="^org\.dresdenocl(\..+)?" />
