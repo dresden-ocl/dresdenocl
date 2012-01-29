@@ -57,6 +57,7 @@
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^org\.dresdenocl\.feature(\..+)?" />
 	<locator searchPathRef="dresdenocl.features" pattern="^tudresden\.ocl20\.updatesite" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\.tests" failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\..+\.test(\..+)?"
 		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
