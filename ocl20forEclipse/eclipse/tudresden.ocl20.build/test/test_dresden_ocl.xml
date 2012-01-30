@@ -7,11 +7,21 @@
 	<property name="testPlatformPath" location="${testRoot}/tp" />
 	<property name="testWorkspacePath" location="${testRoot}/workspace"/>
 
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init">
+		<delete dir="${testPlatformPath}" />
+		<delete dir="${testWorkspacePath}" />
+		
+		<mkdir dir="${testPlatformPath}" />
+		<mkdir dir="${testWorkspacePath}" />
+	</target>
 	
 	<!-- ================================= 
           target: init.buckminster              
          ================================= -->
-	<target name="init.buckminster" depends="init.build.properties">
+	<target name="init.buckminster" depends="init.build.properties, init">
 		
 <!--		<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
 			<arg value="s/\ /%20/g"/>
