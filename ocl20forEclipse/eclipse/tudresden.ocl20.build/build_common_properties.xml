@@ -31,5 +31,10 @@
 	<property name="testResultsPath" value="${buildRoot}/tests"/>
 	
 	<property name="updatesite" value="${buckminster.output.root}/updatesite" />
+	
+	<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
+		<arg value="s/\ /%20/g"/>
+	</exec>
+	<echo>${updatesiteURI}</echo>
 
 </project>

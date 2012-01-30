@@ -23,11 +23,6 @@
          ================================= -->
 	<target name="init.buckminster" depends="init.build.properties, init">
 		
-		<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
-			<arg value="s/\ /%20/g"/>
-		</exec>
-		<echo>${updatesiteURI}</echo>
-		
 		<echo message="Using workspace ${testWorkspacePath}" />
 
 		<echo message="Setting jre to ${env.JAVA_HOME}" />
