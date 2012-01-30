@@ -12,7 +12,7 @@ import org.junit.runners.Suite;
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestBooleanLiteralExp.class })
+@Suite.SuiteClasses({ ConstraintTracerTest.class })
 public class AllContraintTracerTests extends AbstractDresdenOclTest {
 	/* Remains Empty */
 }

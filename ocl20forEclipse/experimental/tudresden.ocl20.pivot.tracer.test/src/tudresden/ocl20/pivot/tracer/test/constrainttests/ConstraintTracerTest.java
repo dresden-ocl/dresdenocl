@@ -1,6 +1,5 @@
 package tudresden.ocl20.pivot.tracer.test.constrainttests;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -8,13 +7,22 @@ import java.io.File;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.w3c.dom.Document;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
+import tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugin;
 import tudresden.ocl20.pivot.tracer.test.AbstractTracerTest;
 import tudresden.ocl20.pivot.tracer.test.TracerTestPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 
-public class TestBooleanLiteralExp extends AbstractTracerTest {
+public class ConstraintTracerTest extends AbstractTracerTest {
+
+	private static final String CONSTRAINT_DIRECTORY =
+			"resources/constraints/constraintkind/body/";
+
+	private static File regressionFile;
+
+	private static Document temporaryDocument;
 
 	@BeforeClass
 	public static void setUp() throws Exception {
@@ -29,16 +37,16 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 	}
 
 	@Test
-	public void testConstraintTracer01() throws Exception {
+	public void testBody01() throws Exception {
 
 		/* local variables to be passed */
-		String modelFilePath = "bin/tudresden/ocl20/pivot/tracer/test/package01/Model01.class";
-		String modelInstanceFilePath = "bin/tudresden/ocl20/pivot/tracer/test/package01/Instance01.class";
-		String constraintFilePath = "resources/constraints.ocl";
-		String bundleId = TracerTestPlugin.PLUGIN_ID;
+		String modelFilePath = MODEL2_PATH;
+		String modelInstanceFilePath = INSTANCE4_PATH;
+		String constraintFilePath = CONSTRAINT_DIRECTORY + "body01.ocl";
+		String bundleId = OclInterpreterTestPlugin.PLUGIN_ID;
 		String modelType = Ocl2ForEclipseFacade.JAVA_META_MODEL;
 		String modelInstanceType = Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE;
-		String[] objectTypeNames = {"Class01"};
+		String[] objectTypeNames = { "Class2" };
 
 		TracerRoot tracedRoot;
 		tracedRoot =
@@ -46,15 +54,13 @@ public class TestBooleanLiteralExp extends AbstractTracerTest {
 						constraintFilePath, bundleId, objectTypeNames, modelType,
 						modelInstanceType);
 
-		assertNotNull(tracedRoot);
-		assertTrue(tracedRoot.getRootItems().size() >= 1);
-
 		/* Write the object to a file */
-		File file1, file2;
+		regressionFile =
+				AbstractTracerTest.getFile("resources/body01_regression.xml",
+						TracerTestPlugin.PLUGIN_ID);
 
-		file1 = saveTracerTree(tracedRoot, "rootfile1");
-		file2 = saveTracerTree(tracedRoot, "rootfile2");
+		temporaryDocument = serializeTracerRoot(tracedRoot);
 
-		assertTrue(compareXmlFiles(file1, file2));
+		assertTrue(compareXmlFiles(regressionFile, temporaryDocument));
 	}
 }

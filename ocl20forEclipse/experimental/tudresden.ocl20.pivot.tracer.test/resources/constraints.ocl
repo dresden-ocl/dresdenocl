@@ -1,6 +1,0 @@
-package tudresden::ocl20::pivot::tracer::test::package01
-
-context Class01
-inv: self.intProperty = 0
-
-endpackage 

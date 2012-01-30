@@ -15,13 +15,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
+import org.custommonkey.xmlunit.Diff;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
 import tudresden.ocl20.pivot.model.IModel;
@@ -43,6 +42,28 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
  */
 public class AbstractTracerTest extends AbstractDresdenOclTest {
 
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE1_PATH = "bin/package1/Instance1.class";
+
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE2_PATH = "bin/package1/Instance2.class";
+
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE3_PATH = "bin/package1/Instance3.class";
+
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE4_PATH = "bin/package1/Instance4.class";
+
+	/** The name of a test {@link IModelInstance} for this test suite. */
+	protected static final String INSTANCE5_PATH = "bin/package1/Instance5.class";
+
+	/** The name of a test {@link IModel} for this test suite. */
+	protected static final String MODEL1_PATH = "bin/package1/Model1.class";
+
+	/** The name of a test {@link IModel} for this test suite. */
+	protected static final String MODEL2_PATH = "bin/package1/Model2.class";
+
+	/** The {@link IModel} under test. */
 	private static IModel modelUnderTest;
 
 	/** This cache maps the path of a model instance file to a model instance. */
@@ -54,28 +75,25 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 	/** This cache maps the path of a constraint file to a list of constraints. */
 	private static Map<String, List<Constraint>> constraintCache;
 
-	/** The {@link DocumentBuilder} for the XML files. */
+	/** */
 	private static DocumentBuilder db;
 
 	/** Setup method that should be called by concrete test classes. */
 	public static void setUp() throws Exception {
 
 		AbstractDresdenOclTest.setUp();
-		/*
-		 * Activate the Tracer
-		 */
+		/* Activate the Tracer */
 		org.junit.Assert.assertNotNull(tudresden.ocl20.pivot.tracer.TracerPlugin
 				.getInterpreterTraceListener());
-
-		db = getDocumentBuilder();
 
 		/* Set up all caches */
 		modelInstanceCache = new HashMap<String, IModelInstance>();
 		modelCache = new HashMap<String, IModel>();
 		constraintCache = new HashMap<String, List<Constraint>>();
+		db = getDocumentBuilder();
 	}
 
-	public static DocumentBuilder getDocumentBuilder()
+	protected static DocumentBuilder getDocumentBuilder()
 			throws ParserConfigurationException {
 
 		if (db == null) {
@@ -96,12 +114,12 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 
 		/* nullify all class variables */
 		modelUnderTest = null;
+		db = null;
 
 		/* nullify all caches */
 		modelInstanceCache = null;
 		modelCache = null;
 		constraintCache = null;
-		db = null;
 	}
 
 	/**
@@ -112,16 +130,14 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 	 * 
 	 * @param root
 	 *          the {@TracerRoot} to be serialized
-	 * @param filename
-	 *          the filename
-	 * @return the XML {@link File} object of the filename
+	 * @return
 	 * @throws ParserConfigurationException
 	 * @throws TransformerException
+	 * @throws IOException
 	 */
-	protected static File saveTracerTree(TracerRoot root, String filename)
+	protected static Document serializeTracerRoot(TracerRoot root)
 			throws ParserConfigurationException, TransformerException {
 
-		/* Create the file where the tree is stored in memory */
 		Document document =
 				DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 
@@ -133,12 +149,7 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 			processAllChilds(rootElement, rootItem, document);
 		}
 
-		/* Transform the in-memory file to the file system */
-		File file = new File("resources/" + filename + ".xml");
-		TransformerFactory.newInstance().newTransformer()
-				.transform(new DOMSource(document), new StreamResult(file));
-
-		return file;
+		return document;
 	}
 
 	/**
@@ -179,29 +190,24 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 	 * @param file2
 	 *          A XML file to be compared
 	 * @return True if the two compared XML files are equal or false otherwise
+	 * @throws IOException
+	 * @throws SAXException
+	 * @throws Exception
 	 * @see org.w3c.dom.Node.isEqualNode
 	 */
-	protected static boolean compareXmlFiles(File file1, File file2) {
+	protected static boolean compareXmlFiles(File regressionFile,
+			Document testDocument) throws SAXException, IOException {
 
-		org.junit.Assert.assertTrue(file1 != null);
-		org.junit.Assert.assertTrue(file2 != null);
-		org.junit.Assert.assertTrue(file1.exists());
-		org.junit.Assert.assertTrue(file2.exists());
+		org.junit.Assert.assertTrue(regressionFile != null);
+		org.junit.Assert.assertTrue(testDocument != null);
+		org.junit.Assert.assertTrue(regressionFile.exists());
 
-		boolean result = false;
+		Document regressionDocument;
+		regressionDocument = db.parse(regressionFile);
 
-		try {
-			Document doc1 = db.parse(file1);
-			doc1.normalizeDocument();
+		Diff d = new Diff(regressionDocument, testDocument);
 
-			Document doc2 = db.parse(file2);
-			doc2.normalizeDocument();
-
-			result = doc1.isEqualNode(doc2);
-		} catch (Exception e) {
-			org.junit.Assert.fail(e.getMessage());
-		}
-		return result;
+		return d.similar();
 	}
 
 	/**
@@ -230,6 +236,14 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 			String[] objectTypeNames, String modelType, String modelInstanceType)
 			throws Exception {
 
+		assertNotNull(modelFilePath);
+		assertNotNull(modelInstanceFilePath);
+		assertNotNull(constraintFilePath);
+		assertNotNull(bundleId);
+		assertTrue(objectTypeNames.length >= 1);
+		assertNotNull(modelType);
+		assertNotNull(modelInstanceType);
+
 		modelUnderTest = getModel(modelFilePath, modelType, bundleId);
 		assertNotNull(modelUnderTest);
 
@@ -250,7 +264,6 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 		/* Find the IMIObject(s) to test. */
 		Set<IModelInstanceObject> imiObjects;
 		imiObjects = modelInstance.getAllInstances(objectType);
-
 		assertNotNull(imiObjects);
 
 		/* Send the constraints to the interpreter */
