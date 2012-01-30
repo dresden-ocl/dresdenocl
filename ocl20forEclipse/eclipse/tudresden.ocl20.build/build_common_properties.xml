@@ -13,10 +13,9 @@
 		<equals arg1="${env.CLEAN_TOOLS}" arg2="true" />
 	</condition>
 
-	<condition property="buckminster.loglevel" value="${env.BUCKMINSTER_LOGLEVEL}" else="info">
-		<isset property="env.BUCKMINSTER_LOGLEVEL" />
+	<condition property="buckminster.loglevel" value="${BUCKMINSTER_LOGLEVEL}" else="info">
+		<isset property="BUCKMINSTER_LOGLEVEL" />
 	</condition>
-	<echo>Buckminster loglevel: ${buckminster.loglevel}</echo>
 
 	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />
 	<property name="rootPath" location="${buildPath}" />
