@@ -53,6 +53,13 @@
    		unpack="false" />
    		
    	<plugin
+   		id="tudresden.ocl20.pivot.examples.pain.tests"
+   		download-size="0"
+   		install-size="0"
+   		version="0.0.0"
+   		unpack="false" />
+   		
+   	<plugin
    		id="tudresden.ocl20.pivot.interpreter.test"
    		download-size="0"
    		install-size="0"
