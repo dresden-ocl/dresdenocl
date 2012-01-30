@@ -9,9 +9,7 @@
 		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false">
 			<uri format="file:{0}">
-				<bc:replace pattern=" " quotePattern="true" replacement="%20">				
-					<bc:propertyRef key="updatesite" />
-				</bc:replace>
+				<bc:propertyRef key="updatesiteURI" />
 			</uri>
 		</provider>
 	</searchPath>
