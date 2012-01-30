@@ -13,10 +13,10 @@
          ================================= -->
 	<target name="init.buckminster" depends="init.build.properties">
 		
-		<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
+<!--		<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
 			<arg value="s/\ /%20/g"/>
 		</exec>
-		<echo>${updatesiteURI}</echo>
+		<echo>${updatesiteURI}</echo> -->
 		
 		<echo message="Using workspace ${testWorkspacePath}" />
 
