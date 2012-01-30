@@ -16,6 +16,7 @@
 	<condition property="buckminster.loglevel" value="${env.BUCKMINSTER_LOGLEVEL}" else="info">
 		<isset property="env.BUCKMINSTER_LOGLEVEL" />
 	</condition>
+	<echo>Buckminster loglevel: ${buckminster.loglevel}</echo>
 
 	<property name="buildPath" location="${hudsonWorkSpacePath}/build" />
 	<property name="rootPath" location="${buildPath}" />
