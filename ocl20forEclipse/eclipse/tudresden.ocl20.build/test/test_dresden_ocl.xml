@@ -21,7 +21,7 @@
 		<!-- Additionally, install AJDT to enable the compilation of .aj files -->
 		<echo message="Fetching AJDT and installing it into Buckminster" />
 		<tempfile destdir="${java.io.tmpdir}" prefix="ajdt-" suffix=".zip" property="ajdt.zip" deleteonexit="true" />
-		<get src="${ajdt.url}" dest="${ajdt.zip}" />
+		<get src="http://download.eclipse.org/tools/ajdt/37/update/ajdt_2.1.3_for_eclipse_3.7.zip" dest="${ajdt.zip}" />
 		<mkdir dir="${toolsPath}" />
 		<unzip src="${ajdt.zip}" dest="${toolsPath}/ajdt" />
 		<copy todir="${toolsPath}/buckminster/plugins">
