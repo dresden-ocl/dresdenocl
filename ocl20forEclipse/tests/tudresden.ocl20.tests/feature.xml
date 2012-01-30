@@ -46,7 +46,7 @@
    		unpack="false" />
    		
    	<plugin
-   		id="tudresden.ocl20.pivot.examples.pain.tests"
+   		id="tudresden.ocl20.pivot.examples.pain"
    		download-size="0"
    		install-size="0"
    		version="0.0.0"
