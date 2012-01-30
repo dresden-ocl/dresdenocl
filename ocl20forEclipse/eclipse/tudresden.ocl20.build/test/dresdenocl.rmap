@@ -54,6 +54,9 @@
 	</searchPath>
 
 
+	<!-- the abstract testsuite has already been built -->
+	<locator searchPathRef="dresdenocl.platform" pattern="^org\.dresdenocl\.testsuite\.abstract"
+		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\.tests"
 		failOnError="false" />
 	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\..+\.test(\..+)?"
