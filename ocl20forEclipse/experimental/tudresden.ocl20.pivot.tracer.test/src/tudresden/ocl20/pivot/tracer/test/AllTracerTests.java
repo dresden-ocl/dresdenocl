@@ -1,10 +1,10 @@
 package tudresden.ocl20.pivot.tracer.test;
 
-import tudresden.ocl20.pivot.tracer.test.constrainttests.AllContraintTracerTests;
-
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+
+import tudresden.ocl20.pivot.tracer.test.constrainttests.AllContraintTracerTests;
 
 /**
  * Test suite containing all Dresden OCL Tracer Tests
