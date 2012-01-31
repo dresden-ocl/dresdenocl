@@ -11,11 +11,11 @@
           target: init              
          ================================= -->
 	<target name="init">
-		<delete dir="${testPlatformPath}" />
+		<!-- <delete dir="${testPlatformPath}" />
 		<delete dir="${testWorkspacePath}" />
 		
 		<mkdir dir="${testPlatformPath}" />
-		<mkdir dir="${testWorkspacePath}" />
+		<mkdir dir="${testWorkspacePath}" /> -->
 
 	</target>
 	
