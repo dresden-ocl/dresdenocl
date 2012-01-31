@@ -3,6 +3,11 @@
 	(http://git.eclipse.org/c/teneo/org.eclipse.emf.teneo.git/tree/build/org.eclipse.emf.teneo.releng.buckminster/build.xml)
 	
 	Author: Michael Thiele
+	
+	Usage:
+	******
+	BUCKMINSTER_LOGLEVEL=(info|debug|error)
+	CLEAN_TOOLS=(true|false)					whether to download Director/Buckminster/AJDT and install it
 -->
 <project default="compile.and.create.update.site" name="Build, test and deploy Dresden OCL.">
 
@@ -81,6 +86,8 @@
 			<args>
 				<arg value="-r" />
 				<arg value="${ajdt.url}" />
+				<arg value="-r" />
+				<arg value="${eclipse.url}" />
 				<arg value="-d" />
 				<arg value="${toolsPath}/buckminster" />
 				<arg value="-i" />
