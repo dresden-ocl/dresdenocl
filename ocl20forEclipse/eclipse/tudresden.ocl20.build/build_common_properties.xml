@@ -10,7 +10,7 @@
 
 	<!-- Specify whether the tools (i.e., director and buckminster) should be cleaned and downloaded again.-->
 	<condition property="clean.tools" value="true">
-		<equals arg1="${env.CLEAN_TOOLS}" arg2="true" />
+		<equals arg1="${CLEAN_TOOLS}" arg2="true" />
 	</condition>
 
 	<condition property="buckminster.loglevel" value="${BUCKMINSTER_LOGLEVEL}" else="info">

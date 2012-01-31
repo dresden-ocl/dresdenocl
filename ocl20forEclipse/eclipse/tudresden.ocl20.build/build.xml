@@ -77,7 +77,17 @@
 		</eclipse.launch>
 		<!-- Additionally, install AJDT to enable the compilation of .aj files -->
 		<echo message="Fetching AJDT and installing it into Buckminster" />
-		<tempfile destdir="${java.io.tmpdir}" prefix="ajdt-" suffix=".zip" property="ajdt.zip" deleteonexit="true" />
+		<eclipse.launch app="director">
+			<args>
+				<arg value="-r" />
+				<arg value="${ajdt.url}" />
+				<arg value="-d" />
+				<arg value="${toolsPath}/buckminster" />
+				<arg value="-i" />
+				<arg value="org.eclipse.ajdt.feature.group" />
+			</args>
+		</eclipse.launch>
+		<!-- <tempfile destdir="${java.io.tmpdir}" prefix="ajdt-" suffix=".zip" property="ajdt.zip" deleteonexit="true" />
 		<get src="${ajdt.url}" dest="${ajdt.zip}" />
 		<mkdir dir="${toolsPath}" />
 		<unzip src="${ajdt.zip}" dest="${toolsPath}/ajdt" />
@@ -86,7 +96,7 @@
 				<include name="**" />
 			</fileset>
 		</copy>
-		<delete file="${ajdt.zip}" />
+		<delete file="${ajdt.zip}" /> -->
 	</target>
 
 	<!-- ================================= 
