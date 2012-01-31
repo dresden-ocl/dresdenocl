@@ -91,7 +91,7 @@
 				<arg value="-d" />
 				<arg value="${toolsPath}/buckminster" />
 				<arg value="-i" />
-				<arg value="org.eclipse.ajdt.core" />
+				<arg value="org.aspectj.ajde" />
 			</args>
 		</eclipse.launch>
 		<!-- <tempfile destdir="${java.io.tmpdir}" prefix="ajdt-" suffix=".zip" property="ajdt.zip" deleteonexit="true" />
