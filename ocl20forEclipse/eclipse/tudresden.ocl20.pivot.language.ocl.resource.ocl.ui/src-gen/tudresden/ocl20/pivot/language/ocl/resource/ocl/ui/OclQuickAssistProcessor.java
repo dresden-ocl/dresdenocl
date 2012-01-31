@@ -8,11 +8,13 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
 public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassist.IQuickAssistProcessor {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider;
 	
-	public OclQuickAssistProcessor(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	public OclQuickAssistProcessor(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider) {
 		super();
-		this.editor = editor;
+		this.resourceProvider = resourceProvider;
+		this.annotationModelProvider = annotationModelProvider;
 	}
 	
 	public boolean canAssist(org.eclipse.jface.text.quickassist.IQuickAssistInvocationContext invocationContext) {
@@ -76,7 +78,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 	
 	private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.eclipse.jface.text.source.ISourceViewer sourceViewer, int offset, int length) {
 		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> foundFixes = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
-		org.eclipse.jface.text.source.IAnnotationModel model = getAnnotationModel();
+		org.eclipse.jface.text.source.IAnnotationModel model = annotationModelProvider.getAnnotationModel();
 		
 		if (model == null) {
 			return foundFixes;
@@ -109,13 +111,9 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 		if (annotation instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation markerAnnotation = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation) annotation;
 			org.eclipse.core.resources.IMarker marker = markerAnnotation.getMarker();
-			foundQuickFixes.addAll(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator().getQuickFixes(editor.getResource(), marker));
+			foundQuickFixes.addAll(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator().getQuickFixes(resourceProvider.getResource(), marker));
 		}
 		return foundQuickFixes;
-	}
-	
-	private org.eclipse.jface.text.source.IAnnotationModel getAnnotationModel() {
-		return editor.getDocumentProvider().getAnnotationModel(editor.getEditorInput());
 	}
 	
 	public String getErrorMessage() {

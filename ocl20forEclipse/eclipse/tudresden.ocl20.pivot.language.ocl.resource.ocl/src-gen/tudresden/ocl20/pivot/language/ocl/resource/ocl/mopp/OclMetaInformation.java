@@ -76,4 +76,28 @@ public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.re
 		org.eclipse.emf.ecore.resource.Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(getSyntaxName(), new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResourceFactory());
 	}
 	
+	/**
+	 * Returns the key of the option that can be used to register a preprocessor that
+	 * is used as a pipe when loading resources. This key is language-specific. To
+	 * register one preprocessor for multiple resource types, it must be registered
+	 * individually using all keys.
+	 */
+	public String getInputStreamPreprocessorProviderOptionKey() {
+		return getSyntaxName() + "_" + "INPUT_STREAM_PREPROCESSOR_PROVIDER";
+	}
+	
+	/**
+	 * Returns the key of the option that can be used to register a post-processors
+	 * that are invoked after loading resources. This key is language-specific. To
+	 * register one post-processor for multiple resource types, it must be registered
+	 * individually using all keys.
+	 */
+	public String getResourcePostProcessorProviderOptionKey() {
+		return getSyntaxName() + "_" + "RESOURCE_POSTPROCESSOR_PROVIDER";
+	}
+	
+	public String getLaunchConfigurationType() {
+		return "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.launchConfigurationType";
+	}
+	
 }

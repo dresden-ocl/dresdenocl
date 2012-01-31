@@ -55,7 +55,7 @@ public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 			return;
 		}
 		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxColoring(i)) {
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
 				continue;
 			}
 			

@@ -3,59 +3,19 @@
 	package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 
-import org.antlr.runtime3_2_0.*;
+import org.antlr.runtime3_3_0.*;
 import java.util.HashMap;
 @SuppressWarnings("unused")
 public class OclParser extends OclANTLRParserBase {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "SIMPLE_NAME", "STATIC", "EQUALITY_OPERATOR", "NEQUALITY_OPERATOR", "NOT_OPERATOR", "AND_OPERATOR", "OR_OPERATOR", "XOR_OPERATOR", "IMPLIES_OPERATOR", "IS_MARKED_PRE", "ITERATOR_NAME", "COLLECTION_TYPES", "RELATIONAL_OPERATOR", "ADDITIVE_OPERATOR", "MULT_OPERATOR", "NAVIGATION_OPERATOR", "INTEGER_LITERAL", "INTEGER_0", "BOOLEAN_LITERAL", "QUOTED_39_39", "SL_COMMENT", "ML_COMMENT", "WHITESPACE", "LINEBREAKS", "'package'", "'endpackage'", "'::'", "'context'", "':'", "'init'", "'derive'", "'inv'", "'def'", "'pre'", "'post'", "'body'", "'('", "','", "')'", "'|'", "'iterate'", "';'", "'Tuple'", "'..'", "'{'", "'}'", "'if'", "'then'", "'else'", "'endif'", "'let'", "'in'", "'invalid'", "'null'"
     };
-    public static final int ITERATOR_NAME=14;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int QUOTED_39_39=23;
-    public static final int XOR_OPERATOR=11;
-    public static final int LINEBREAKS=27;
     public static final int EOF=-1;
-    public static final int EQUALITY_OPERATOR=6;
-    public static final int AND_OPERATOR=9;
-    public static final int INTEGER_0=21;
-    public static final int IMPLIES_OPERATOR=12;
-    public static final int T__55=55;
-    public static final int ML_COMMENT=25;
-    public static final int T__56=56;
-    public static final int T__57=57;
-    public static final int T__51=51;
-    public static final int NOT_OPERATOR=8;
-    public static final int T__52=52;
-    public static final int T__53=53;
-    public static final int T__54=54;
-    public static final int T__50=50;
-    public static final int IS_MARKED_PRE=13;
-    public static final int COLLECTION_TYPES=15;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int NAVIGATION_OPERATOR=19;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int STATIC=5;
-    public static final int T__49=49;
-    public static final int MULT_OPERATOR=18;
-    public static final int OR_OPERATOR=10;
-    public static final int WHITESPACE=26;
-    public static final int NEQUALITY_OPERATOR=7;
-    public static final int ADDITIVE_OPERATOR=17;
-    public static final int RELATIONAL_OPERATOR=16;
-    public static final int BOOLEAN_LITERAL=22;
+    public static final int T__28=28;
+    public static final int T__29=29;
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
-    public static final int SIMPLE_NAME=4;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
@@ -63,8 +23,48 @@ public class OclParser extends OclANTLRParserBase {
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__50=50;
+    public static final int T__51=51;
+    public static final int T__52=52;
+    public static final int T__53=53;
+    public static final int T__54=54;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__57=57;
+    public static final int SIMPLE_NAME=4;
+    public static final int STATIC=5;
+    public static final int EQUALITY_OPERATOR=6;
+    public static final int NEQUALITY_OPERATOR=7;
+    public static final int NOT_OPERATOR=8;
+    public static final int AND_OPERATOR=9;
+    public static final int OR_OPERATOR=10;
+    public static final int XOR_OPERATOR=11;
+    public static final int IMPLIES_OPERATOR=12;
+    public static final int IS_MARKED_PRE=13;
+    public static final int ITERATOR_NAME=14;
+    public static final int COLLECTION_TYPES=15;
+    public static final int RELATIONAL_OPERATOR=16;
+    public static final int ADDITIVE_OPERATOR=17;
+    public static final int MULT_OPERATOR=18;
+    public static final int NAVIGATION_OPERATOR=19;
     public static final int INTEGER_LITERAL=20;
+    public static final int INTEGER_0=21;
+    public static final int BOOLEAN_LITERAL=22;
+    public static final int QUOTED_39_39=23;
     public static final int SL_COMMENT=24;
+    public static final int ML_COMMENT=25;
+    public static final int WHITESPACE=26;
+    public static final int LINEBREAKS=27;
 
     // delegates
     // delegators
@@ -92,8 +92,6 @@ public class OclParser extends OclANTLRParserBase {
     	 */
     	private int lastPosition;
     	
-    	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult tokenResolveResult = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
-    	
     	/**
     	 * A flag that indicates whether the parser should remember all expected elements.
     	 * This flag is set to true when using the parse for code completion. Otherwise it
@@ -112,11 +110,10 @@ public class OclParser extends OclANTLRParserBase {
     	private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
     	
     	private int mismatchedTokenRecoveryTries = 0;
-    	private java.util.Map<?, ?> options;
     	/**
     	 * A helper list to allow a lexer to pass errors to its parser
     	 */
-    	protected java.util.List<org.antlr.runtime3_2_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_2_0.RecognitionException>());
+    	protected java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>());
     	
     	/**
     	 * Another helper list to allow a lexer to pass positions of errors to its parser
@@ -133,17 +130,6 @@ public class OclParser extends OclANTLRParserBase {
     	
     	private int stopIncludingHiddenTokens;
     	private int stopExcludingHiddenTokens;
-    	/**
-    	 * A flag to indicate that the parser should stop parsing as soon as possible. The
-    	 * flag is set to false before parsing starts. It can be set to true by invoking
-    	 * the terminateParsing() method from another thread. This feature is used, when
-    	 * documents are parsed in the background (i.e., while editing them). In order to
-    	 * cancel running parsers, the parsing process can be terminated. This is done
-    	 * whenever a document changes, because the previous content of the document is
-    	 * not valid anymore and parsing the old content is not necessary any longer.
-    	 */
-    	private boolean terminateParsing;
-    	
     	private int tokenIndexOfLastCompleteElement;
     	
     	private int expectedElementsIndexOfLastCompleteElement;
@@ -201,41 +187,6 @@ public class OclParser extends OclANTLRParserBase {
     		this.expectedElements.add(expectedElement);
     	}
     	
-    	protected void addMapEntry(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject dummy) {
-    		Object value = element.eGet(structuralFeature);
-    		Object mapKey = dummy.getValueByName("key");
-    		Object mapValue = dummy.getValueByName("value");
-    		if (value instanceof org.eclipse.emf.common.util.EMap<?, ?>) {
-    			org.eclipse.emf.common.util.EMap<Object, Object> valueMap = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMapUtil.castToEMap(value);
-    			if (mapKey != null && mapValue != null) {
-    				valueMap.put(mapKey, mapValue);
-    			}
-    		}
-    	}
-    	
-    	@SuppressWarnings("unchecked")
-    	
-    	public boolean addObjectToList(org.eclipse.emf.ecore.EObject container, int featureID, Object object) {
-    		return ((java.util.List<Object>) container.eGet(container.eClass().getEStructuralFeature(featureID))).add(object);
-    	}
-    	
-    	@SuppressWarnings("unchecked")
-    	
-    	public boolean addObjectToList(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EStructuralFeature feature, Object object) {
-    		return ((java.util.List<Object>) container.eGet(feature)).add(object);
-    	}
-    	
-    	protected org.eclipse.emf.ecore.EObject apply(org.eclipse.emf.ecore.EObject target, java.util.List<org.eclipse.emf.ecore.EObject> dummyEObjects) {
-    		org.eclipse.emf.ecore.EObject currentTarget = target;
-    		for (org.eclipse.emf.ecore.EObject object : dummyEObjects) {
-    			assert(object instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject);
-    			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject dummy = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject) object;
-    			org.eclipse.emf.ecore.EObject newEObject = dummy.applyTo(currentTarget);
-    			currentTarget = newEObject;
-    		}
-    		return currentTarget;
-    	}
-    	
     	protected void collectHiddenTokens(org.eclipse.emf.ecore.EObject element) {
     	}
     	
@@ -256,7 +207,7 @@ public class OclParser extends OclANTLRParserBase {
     		});
     	}
     	
-    	protected void copyLocalizationInfos(final org.antlr.runtime3_2_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
+    	protected void copyLocalizationInfos(final org.antlr.runtime3_3_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
     		postParseCommands.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>() {
     			public boolean execute(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
     				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = resource.getLocationMap();
@@ -298,9 +249,9 @@ public class OclParser extends OclANTLRParserBase {
     	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser createInstance(java.io.InputStream actualInputStream, String encoding) {
     		try {
     			if (encoding == null) {
-    				return new OclParser(new org.antlr.runtime3_2_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_2_0.ANTLRInputStream(actualInputStream))));
+    				return new OclParser(new org.antlr.runtime3_3_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream))));
     			} else {
-    				return new OclParser(new org.antlr.runtime3_2_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_2_0.ANTLRInputStream(actualInputStream, encoding))));
+    				return new OclParser(new org.antlr.runtime3_3_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream, encoding))));
     			}
     		} catch (java.io.IOException e) {
     			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Error while creating parser.", e);
@@ -315,7 +266,7 @@ public class OclParser extends OclANTLRParserBase {
     		super(null);
     	}
     	
-    	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_2_0.RecognitionException {
+    	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_3_0.RecognitionException {
     		this.lastPosition = 0;
     		// required because the lexer class can not be subclassed
     		((OclLexer) getTokenStream().getTokenSource()).lexerExceptions = lexerExceptions;
@@ -431,34 +382,17 @@ public class OclParser extends OclANTLRParserBase {
     		throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclUnexpectedContentTypeException(typeObject);
     	}
     	
-    	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult getFreshTokenResolveResult() {
-    		tokenResolveResult.clear();
-    		return tokenResolveResult;
-    	}
-    	
     	public int getMismatchedTokenRecoveryTries() {
     		return mismatchedTokenRecoveryTries;
     	}
     	
-    	public Object getMissingSymbol(org.antlr.runtime3_2_0.IntStream arg0, org.antlr.runtime3_2_0.RecognitionException arg1, int arg2, org.antlr.runtime3_2_0.BitSet arg3) {
+    	public Object getMissingSymbol(org.antlr.runtime3_3_0.IntStream arg0, org.antlr.runtime3_3_0.RecognitionException arg1, int arg2, org.antlr.runtime3_3_0.BitSet arg3) {
     		mismatchedTokenRecoveryTries++;
     		return super.getMissingSymbol(arg0, arg1, arg2, arg3);
     	}
     	
-    	protected java.util.Map<?,?> getOptions() {
-    		return options;
-    	}
-    	
-    	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation getMetaInformation() {
-    		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
-    	}
-    	
     	public Object getParseToIndexTypeObject() {
     		return parseToIndexTypeObject;
-    	}
-    	
-    	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
-    		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) getMetaInformation().getReferenceResolverSwitch();
     	}
     	
     	protected Object getTypeObject() {
@@ -486,7 +420,7 @@ public class OclParser extends OclANTLRParserBase {
     			if (lexerExceptions.isEmpty()) {
     				parseResult.setRoot(result);
     			}
-    		} catch (org.antlr.runtime3_2_0.RecognitionException re) {
+    		} catch (org.antlr.runtime3_3_0.RecognitionException re) {
     			reportError(re);
     		} catch (java.lang.IllegalArgumentException iae) {
     			if ("The 'no null' constraint is violated".equals(iae.getMessage())) {
@@ -496,7 +430,7 @@ public class OclParser extends OclANTLRParserBase {
     				iae.printStackTrace();
     			}
     		}
-    		for (org.antlr.runtime3_2_0.RecognitionException re : lexerExceptions) {
+    		for (org.antlr.runtime3_3_0.RecognitionException re : lexerExceptions) {
     			reportLexicalError(re);
     		}
     		parseResult.getPostParseCommands().addAll(postParseCommands);
@@ -508,10 +442,10 @@ public class OclParser extends OclANTLRParserBase {
     		this.parseToIndexTypeObject = type;
     		this.cursorOffset = cursorOffset;
     		this.lastStartIncludingHidden = -1;
-    		final org.antlr.runtime3_2_0.CommonTokenStream tokenStream = (org.antlr.runtime3_2_0.CommonTokenStream) getTokenStream();
+    		final org.antlr.runtime3_3_0.CommonTokenStream tokenStream = (org.antlr.runtime3_3_0.CommonTokenStream) getTokenStream();
     		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclParseResult result = parse();
     		for (org.eclipse.emf.ecore.EObject incompleteObject : incompleteObjects) {
-    			org.antlr.runtime3_2_0.Lexer lexer = (org.antlr.runtime3_2_0.Lexer) tokenStream.getTokenSource();
+    			org.antlr.runtime3_3_0.Lexer lexer = (org.antlr.runtime3_3_0.Lexer) tokenStream.getTokenSource();
     			int endChar = lexer.getCharIndex();
     			int endLine = lexer.getLine();
     			setLocalizationEnd(result.getPostParseCommands(), incompleteObject, endChar, endLine);
@@ -541,7 +475,10 @@ public class OclParser extends OclANTLRParserBase {
     		int followSetID = 256;
     		int i;
     		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
-    			org.antlr.runtime3_2_0.CommonToken nextToken = (org.antlr.runtime3_2_0.CommonToken) tokenStream.get(i);
+    			org.antlr.runtime3_3_0.CommonToken nextToken = (org.antlr.runtime3_3_0.CommonToken) tokenStream.get(i);
+    			if (nextToken.getType() < 0) {
+    				break;
+    			}
     			if (nextToken.getChannel() == 99) {
     				// hidden tokens do not reduce the follow set
     			} else {
@@ -586,7 +523,7 @@ public class OclParser extends OclANTLRParserBase {
     			if (index >= input.size()) {
     				break;
     			}
-    			org.antlr.runtime3_2_0.CommonToken tokenAtIndex = (org.antlr.runtime3_2_0.CommonToken) input.get(index);
+    			org.antlr.runtime3_3_0.CommonToken tokenAtIndex = (org.antlr.runtime3_3_0.CommonToken) input.get(index);
     			stopIncludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
     			if (tokenAtIndex.getChannel() != 99) {
     				stopExcludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
@@ -596,7 +533,7 @@ public class OclParser extends OclANTLRParserBase {
     		expectedElement.setPosition(stopExcludingHiddenTokens, stopIncludingHiddenTokens);
     	}
     	
-    	public Object recoverFromMismatchedToken(org.antlr.runtime3_2_0.IntStream input, int ttype, org.antlr.runtime3_2_0.BitSet follow) throws org.antlr.runtime3_2_0.RecognitionException {
+    	public Object recoverFromMismatchedToken(org.antlr.runtime3_3_0.IntStream input, int ttype, org.antlr.runtime3_3_0.BitSet follow) throws org.antlr.runtime3_3_0.RecognitionException {
     		if (!rememberExpectedElements) {
     			return super.recoverFromMismatchedToken(input, ttype, follow);
     		} else {
@@ -607,35 +544,35 @@ public class OclParser extends OclANTLRParserBase {
     	/**
     	 * Translates errors thrown by the parser into human readable messages.
     	 */
-    	public void reportError(final org.antlr.runtime3_2_0.RecognitionException e)  {
+    	public void reportError(final org.antlr.runtime3_3_0.RecognitionException e)  {
     		String message = e.getMessage();
-    		if (e instanceof org.antlr.runtime3_2_0.MismatchedTokenException) {
-    			org.antlr.runtime3_2_0.MismatchedTokenException mte = (org.antlr.runtime3_2_0.MismatchedTokenException) e;
+    		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
+    			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
     			String expectedTokenName = formatTokenName(mte.expecting);
     			String actualTokenName = formatTokenName(e.token.getType());
     			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
-    		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedTreeNodeException) {
-    			org.antlr.runtime3_2_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_2_0.MismatchedTreeNodeException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedTreeNodeException) {
+    			org.antlr.runtime3_3_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_3_0.MismatchedTreeNodeException) e;
     			String expectedTokenName = formatTokenName(mtne.expecting);
     			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
-    		} else if (e instanceof org.antlr.runtime3_2_0.NoViableAltException) {
+    		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
     			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
-    		} else if (e instanceof org.antlr.runtime3_2_0.EarlyExitException) {
+    		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
     			message = "Syntax error on token \"" + e.token.getText() + "\", delete this token";
-    		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedSetException) {
-    			org.antlr.runtime3_2_0.MismatchedSetException mse = (org.antlr.runtime3_2_0.MismatchedSetException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
+    			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
     			message = "mismatched token: " + e.token + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedNotSetException) {
-    			org.antlr.runtime3_2_0.MismatchedNotSetException mse = (org.antlr.runtime3_2_0.MismatchedNotSetException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
+    			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
     			message = "mismatched token: " +  e.token + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_2_0.FailedPredicateException) {
-    			org.antlr.runtime3_2_0.FailedPredicateException fpe = (org.antlr.runtime3_2_0.FailedPredicateException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
+    			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
     			message = "rule " + fpe.ruleName + " failed predicate: {" +  fpe.predicateText + "}?";
     		}
-    		// the resource may be null if the parse is used for code completion
+    		// the resource may be null if the parser is used for code completion
     		final String finalMessage = message;
-    		if (e.token instanceof org.antlr.runtime3_2_0.CommonToken) {
-    			final org.antlr.runtime3_2_0.CommonToken ct = (org.antlr.runtime3_2_0.CommonToken) e.token;
+    		if (e.token instanceof org.antlr.runtime3_3_0.CommonToken) {
+    			final org.antlr.runtime3_3_0.CommonToken ct = (org.antlr.runtime3_3_0.CommonToken) e.token;
     			addErrorToResource(finalMessage, ct.getCharPositionInLine(), ct.getLine(), ct.getStartIndex(), ct.getStopIndex());
     		} else {
     			addErrorToResource(finalMessage, e.token.getCharPositionInLine(), e.token.getLine(), 1, 5);
@@ -645,52 +582,30 @@ public class OclParser extends OclANTLRParserBase {
     	/**
     	 * Translates errors thrown by the lexer into human readable messages.
     	 */
-    	public void reportLexicalError(final org.antlr.runtime3_2_0.RecognitionException e)  {
+    	public void reportLexicalError(final org.antlr.runtime3_3_0.RecognitionException e)  {
     		String message = "";
-    		if (e instanceof org.antlr.runtime3_2_0.MismatchedTokenException) {
-    			org.antlr.runtime3_2_0.MismatchedTokenException mte = (org.antlr.runtime3_2_0.MismatchedTokenException) e;
+    		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
+    			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
     			message = "Syntax error on token \"" + ((char) e.c) + "\", \"" + (char) mte.expecting + "\" expected";
-    		} else if (e instanceof org.antlr.runtime3_2_0.NoViableAltException) {
+    		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
     			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
-    		} else if (e instanceof org.antlr.runtime3_2_0.EarlyExitException) {
-    			org.antlr.runtime3_2_0.EarlyExitException eee = (org.antlr.runtime3_2_0.EarlyExitException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
+    			org.antlr.runtime3_3_0.EarlyExitException eee = (org.antlr.runtime3_3_0.EarlyExitException) e;
     			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
-    		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedSetException) {
-    			org.antlr.runtime3_2_0.MismatchedSetException mse = (org.antlr.runtime3_2_0.MismatchedSetException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
+    			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
     			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedNotSetException) {
-    			org.antlr.runtime3_2_0.MismatchedNotSetException mse = (org.antlr.runtime3_2_0.MismatchedNotSetException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
+    			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
     			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-    		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedRangeException) {
-    			org.antlr.runtime3_2_0.MismatchedRangeException mre = (org.antlr.runtime3_2_0.MismatchedRangeException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedRangeException) {
+    			org.antlr.runtime3_3_0.MismatchedRangeException mre = (org.antlr.runtime3_3_0.MismatchedRangeException) e;
     			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
-    		} else if (e instanceof org.antlr.runtime3_2_0.FailedPredicateException) {
-    			org.antlr.runtime3_2_0.FailedPredicateException fpe = (org.antlr.runtime3_2_0.FailedPredicateException) e;
+    		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
+    			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
     			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
     		}
     		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
-    	}
-    	
-    	private String formatTokenName(int tokenType)  {
-    		String tokenName = "<unknown>";
-    		if (tokenType == org.antlr.runtime3_2_0.Token.EOF) {
-    			tokenName = "EOF";
-    		} else {
-    			if (tokenType < 0) {
-    				return tokenName;
-    			}
-    			tokenName = getTokenNames()[tokenType];
-    			tokenName = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.formatTokenName(tokenName);
-    		}
-    		return tokenName;
-    	}
-    	
-    	public void setOptions(java.util.Map<?,?> options) {
-    		this.options = options;
-    	}
-    	
-    	public void terminate() {
-    		terminateParsing = true;
     	}
     	
     	protected void completedElement(Object object, boolean isContainment) {
@@ -703,53 +618,11 @@ public class OclParser extends OclANTLRParserBase {
     		}
     	}
     	
-    	/**
-    	 * Creates a dynamic Java proxy that mimics the interface of the given class.
-    	 */
-    	@SuppressWarnings("unchecked")
-    	
-    	public <T> T createDynamicProxy(Class<T> clazz) {
-    		Object proxy = java.lang.reflect.Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class<?>[]{clazz, org.eclipse.emf.ecore.EObject.class, org.eclipse.emf.ecore.InternalEObject.class}, new java.lang.reflect.InvocationHandler() {
-    			
-    			private org.eclipse.emf.ecore.EObject dummyObject = new org.eclipse.emf.ecore.impl.EObjectImpl() {};
-    			
-    			public Object invoke(Object object, java.lang.reflect.Method method, Object[] args) throws Throwable {
-    				// search in dummyObject for the requested method
-    				java.lang.reflect.Method[] methodsInDummy = dummyObject.getClass().getMethods();
-    				for (java.lang.reflect.Method methodInDummy : methodsInDummy) {
-    					boolean matches = true;
-    					if (methodInDummy.getName().equals(method.getName())) {
-    						Class<?>[] parameterTypes = method.getParameterTypes();
-    						Class<?>[] parameterTypesInDummy = methodInDummy.getParameterTypes();
-    						if (parameterTypes.length == parameterTypesInDummy.length) {
-    							for (int p = 0; p < parameterTypes.length; p++) {
-    								Class<?> parameterType = parameterTypes[p];
-    								Class<?> parameterTypeInDummy = parameterTypesInDummy[p];
-    								if (!parameterType.equals(parameterTypeInDummy)) {
-    									matches = false;
-    								}
-    							}
-    						} else {
-    							matches = false;
-    						}
-    					} else {
-    						matches = false;
-    					}
-    					if (matches) {
-    						return methodInDummy.invoke(dummyObject, args);
-    					}
-    				}
-    				return null;
-    			}
-    		});
-    		return (T) proxy;
-    	}
-    	
 
 
 
     // $ANTLR start "start"
-    // Ocl.g:689:1: start returns [ org.eclipse.emf.ecore.EObject element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS ) EOF ;
+    // Ocl.g:562:1: start returns [ org.eclipse.emf.ecore.EObject element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS ) EOF ;
     public final org.eclipse.emf.ecore.EObject start() throws RecognitionException {
         org.eclipse.emf.ecore.EObject element =  null;
         int start_StartIndex = input.index();
@@ -760,8 +633,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return element; }
-            // Ocl.g:690:1: ( (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS ) EOF )
-            // Ocl.g:691:2: (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS ) EOF
+            // Ocl.g:563:1: ( (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS ) EOF )
+            // Ocl.g:564:2: (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS ) EOF
             {
             if ( state.backtracking==0 ) {
 
@@ -773,7 +646,7 @@ public class OclParser extends OclANTLRParserBase {
               		expectedElementsIndexOfLastCompleteElement = 0;
               	
             }
-            // Ocl.g:699:2: (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS )
+            // Ocl.g:572:2: (c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -792,7 +665,7 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt1) {
                 case 1 :
-                    // Ocl.g:700:3: c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS
+                    // Ocl.g:573:3: c0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS_in_start82);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS();
@@ -806,7 +679,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:701:8: c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS
+                    // Ocl.g:574:8: c1= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS_in_start96);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS();
@@ -845,7 +718,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS"
-    // Ocl.g:709:1: parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.pivot.language.ocl.SimpleNameCS element = null] : (a0= SIMPLE_NAME ) ;
+    // Ocl.g:582:1: parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.pivot.language.ocl.SimpleNameCS element = null] : (a0= SIMPLE_NAME ) ;
     public final tudresden.ocl20.pivot.language.ocl.SimpleNameCS parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.SimpleNameCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_StartIndex = input.index();
@@ -855,11 +728,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return element; }
-            // Ocl.g:712:1: ( (a0= SIMPLE_NAME ) )
-            // Ocl.g:713:2: (a0= SIMPLE_NAME )
+            // Ocl.g:585:1: ( (a0= SIMPLE_NAME ) )
+            // Ocl.g:586:2: (a0= SIMPLE_NAME )
             {
-            // Ocl.g:713:2: (a0= SIMPLE_NAME )
-            // Ocl.g:714:3: a0= SIMPLE_NAME
+            // Ocl.g:586:2: (a0= SIMPLE_NAME )
+            // Ocl.g:587:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS133); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -878,9 +751,9 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
-              				java.lang.String resolved = (java.lang.String)resolvedObject;
+              				java.lang.String resolved = (java.lang.String) resolvedObject;
               				if (resolved != null) {
               					Object value = resolved;
               					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), value);
@@ -888,7 +761,7 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0_0_0_0, resolved, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
               			}
               		
             }
@@ -928,7 +801,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS"
-    // Ocl.g:761:1: parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS returns [tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element = null] : a0= 'package' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )* a3= 'endpackage' ;
+    // Ocl.g:634:1: parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS returns [tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element = null] : a0= 'package' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )* a3= 'endpackage' ;
     public final tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS_StartIndex = input.index();
@@ -943,8 +816,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return element; }
-            // Ocl.g:764:1: (a0= 'package' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )* a3= 'endpackage' )
-            // Ocl.g:765:2: a0= 'package' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )* a3= 'endpackage'
+            // Ocl.g:637:1: (a0= 'package' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )* a3= 'endpackage' )
+            // Ocl.g:638:2: a0= 'package' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )* a3= 'endpackage'
             {
             a0=(Token)match(input,28,FOLLOW_28_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS169); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -955,7 +828,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -964,8 +837,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_16, 2, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_1);
               	
             }
-            // Ocl.g:779:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS )
-            // Ocl.g:780:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS
+            // Ocl.g:652:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS )
+            // Ocl.g:653:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS187);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS();
@@ -1005,7 +878,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_17, 3);
               	
             }
-            // Ocl.g:808:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )*
+            // Ocl.g:681:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -1018,13 +891,13 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt2) {
             	case 1 :
-            	    // Ocl.g:809:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )
+            	    // Ocl.g:682:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )
             	    {
-            	    // Ocl.g:809:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )
-            	    // Ocl.g:810:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
+            	    // Ocl.g:682:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )
+            	    // Ocl.g:683:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
             	    {
-            	    // Ocl.g:810:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
-            	    // Ocl.g:811:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS
+            	    // Ocl.g:683:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
+            	    // Ocl.g:684:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS220);
             	    a2_0=parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS();
@@ -1094,7 +967,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_5, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -1119,7 +992,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS"
-    // Ocl.g:864:1: parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS returns [tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element = null] : (a0= SIMPLE_NAME ) ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )? ;
+    // Ocl.g:737:1: parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS returns [tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element = null] : (a0= SIMPLE_NAME ) ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS_StartIndex = input.index();
@@ -1132,11 +1005,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return element; }
-            // Ocl.g:867:1: ( (a0= SIMPLE_NAME ) ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )? )
-            // Ocl.g:868:2: (a0= SIMPLE_NAME ) ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )?
+            // Ocl.g:740:1: ( (a0= SIMPLE_NAME ) ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )? )
+            // Ocl.g:741:2: (a0= SIMPLE_NAME ) ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )?
             {
-            // Ocl.g:868:2: (a0= SIMPLE_NAME )
-            // Ocl.g:869:3: a0= SIMPLE_NAME
+            // Ocl.g:741:2: (a0= SIMPLE_NAME )
+            // Ocl.g:742:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS294); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -1155,7 +1028,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Namespace proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -1168,8 +1041,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -1186,7 +1059,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_17, 7);
               	
             }
-            // Ocl.g:912:2: ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )?
+            // Ocl.g:785:2: ( (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1195,10 +1068,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt3) {
                 case 1 :
-                    // Ocl.g:913:3: (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) )
+                    // Ocl.g:786:3: (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) )
                     {
-                    // Ocl.g:913:3: (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) )
-                    // Ocl.g:914:4: a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS )
+                    // Ocl.g:786:3: (a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ) )
+                    // Ocl.g:787:4: a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS )
                     {
                     a1=(Token)match(input,30,FOLLOW_30_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS324); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -1209,7 +1082,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_0, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -1218,8 +1091,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_16, 8, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_2);
                       			
                     }
-                    // Ocl.g:928:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS )
-                    // Ocl.g:929:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS
+                    // Ocl.g:801:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS )
+                    // Ocl.g:802:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS350);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS();
@@ -1294,7 +1167,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS"
-    // Ocl.g:969:1: parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS returns [tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS element = null] : ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )* ;
+    // Ocl.g:842:1: parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS returns [tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS element = null] : ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )* ;
     public final tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS_StartIndex = input.index();
@@ -1305,10 +1178,10 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return element; }
-            // Ocl.g:972:1: ( ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )* )
-            // Ocl.g:973:2: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )*
+            // Ocl.g:845:1: ( ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )* )
+            // Ocl.g:846:2: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )*
             {
-            // Ocl.g:973:2: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )*
+            // Ocl.g:846:2: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS ) )*
             loop4:
             do {
                 int alt4=2;
@@ -1321,10 +1194,10 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt4) {
             	case 1 :
-            	    // Ocl.g:974:3: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
+            	    // Ocl.g:847:3: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
             	    {
-            	    // Ocl.g:974:3: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
-            	    // Ocl.g:975:4: a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS
+            	    // Ocl.g:847:3: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS )
+            	    // Ocl.g:848:4: a0_0= parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS415);
             	    a0_0=parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS();
@@ -1389,7 +1262,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS"
-    // Ocl.g:1005:1: parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS element = null] : a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+ ;
+    // Ocl.g:878:1: parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS element = null] : a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+ ;
     public final tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS_StartIndex = input.index();
@@ -1403,8 +1276,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return element; }
-            // Ocl.g:1008:1: (a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+ )
-            // Ocl.g:1009:2: a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+
+            // Ocl.g:881:1: (a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+ )
+            // Ocl.g:882:2: a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+
             {
             a0=(Token)match(input,31,FOLLOW_31_in_parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS456); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -1415,7 +1288,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -1425,8 +1298,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_20, 12, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_3, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_4);
               	
             }
-            // Ocl.g:1024:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS )
-            // Ocl.g:1025:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS
+            // Ocl.g:897:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS )
+            // Ocl.g:898:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS474);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS();
@@ -1465,7 +1338,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_23, 13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_5);
               	
             }
-            // Ocl.g:1052:2: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+
+            // Ocl.g:925:2: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS ) )+
             int cnt5=0;
             loop5:
             do {
@@ -1479,10 +1352,10 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt5) {
             	case 1 :
-            	    // Ocl.g:1053:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS )
+            	    // Ocl.g:926:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS )
             	    {
-            	    // Ocl.g:1053:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS )
-            	    // Ocl.g:1054:4: a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS
+            	    // Ocl.g:926:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS )
+            	    // Ocl.g:927:4: a2_0= parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS501);
             	    a2_0=parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS();
@@ -1556,7 +1429,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS"
-    // Ocl.g:1088:1: parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element = null] : a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a2= '::' (a3= SIMPLE_NAME ) ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )? ;
+    // Ocl.g:961:1: parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element = null] : a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a2= '::' (a3= SIMPLE_NAME ) ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS_StartIndex = input.index();
@@ -1577,8 +1450,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return element; }
-            // Ocl.g:1091:1: (a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a2= '::' (a3= SIMPLE_NAME ) ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )? )
-            // Ocl.g:1092:2: a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a2= '::' (a3= SIMPLE_NAME ) ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )?
+            // Ocl.g:964:1: (a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a2= '::' (a3= SIMPLE_NAME ) ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )? )
+            // Ocl.g:965:2: a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a2= '::' (a3= SIMPLE_NAME ) ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )?
             {
             a0=(Token)match(input,31,FOLLOW_31_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS542); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -1589,7 +1462,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -1599,8 +1472,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_20, 15, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_6);
               	
             }
-            // Ocl.g:1107:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
-            // Ocl.g:1108:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
+            // Ocl.g:980:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
+            // Ocl.g:981:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS560);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS();
@@ -1646,7 +1519,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -1655,8 +1528,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_25, 17);
               	
             }
-            // Ocl.g:1147:2: (a3= SIMPLE_NAME )
-            // Ocl.g:1148:3: a3= SIMPLE_NAME
+            // Ocl.g:1020:2: (a3= SIMPLE_NAME )
+            // Ocl.g:1021:3: a3= SIMPLE_NAME
             {
             a3=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS596); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -1675,7 +1548,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
@@ -1688,8 +1561,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_3, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, proxy);
               			}
               		
             }
@@ -1704,7 +1577,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_28, 18, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_7);
               	
             }
-            // Ocl.g:1189:2: ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:1062:2: ( (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1713,10 +1586,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt6) {
                 case 1 :
-                    // Ocl.g:1190:3: (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:1063:3: (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
                     {
-                    // Ocl.g:1190:3: (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-                    // Ocl.g:1191:4: a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:1063:3: (a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:1064:4: a4= ':' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
                     {
                     a4=(Token)match(input,32,FOLLOW_32_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS626); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -1727,7 +1600,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_0, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -1739,8 +1612,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_8);
                       			
                     }
-                    // Ocl.g:1208:4: (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-                    // Ocl.g:1209:5: a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+                    // Ocl.g:1081:4: (a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:1082:5: a5_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS652);
                     a5_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -1794,8 +1667,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_28, 21, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_7);
               	
             }
-            // Ocl.g:1243:2: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS )
-            // Ocl.g:1244:3: a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS
+            // Ocl.g:1116:2: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS )
+            // Ocl.g:1117:3: a6_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS697);
             a6_0=parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS();
@@ -1837,7 +1710,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_17, 22);
               	
             }
-            // Ocl.g:1274:2: ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )?
+            // Ocl.g:1147:2: ( (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS ) )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1846,10 +1719,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt7) {
                 case 1 :
-                    // Ocl.g:1275:3: (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS )
+                    // Ocl.g:1148:3: (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS )
                     {
-                    // Ocl.g:1275:3: (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS )
-                    // Ocl.g:1276:4: a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS
+                    // Ocl.g:1148:3: (a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS )
+                    // Ocl.g:1149:4: a7_0= parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS_in_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS724);
                     a7_0=parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS();
@@ -1912,7 +1785,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS"
-    // Ocl.g:1307:1: parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS element = null] : a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+ ;
+    // Ocl.g:1180:1: parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS element = null] : a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+ ;
     public final tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS_StartIndex = input.index();
@@ -1926,8 +1799,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return element; }
-            // Ocl.g:1310:1: (a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+ )
-            // Ocl.g:1311:2: a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+
+            // Ocl.g:1183:1: (a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+ )
+            // Ocl.g:1184:2: a0= 'context' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+
             {
             a0=(Token)match(input,31,FOLLOW_31_in_parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS765); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -1938,7 +1811,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -1950,8 +1823,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 24, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_9);
               	
             }
-            // Ocl.g:1328:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-            // Ocl.g:1329:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+            // Ocl.g:1201:2: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+            // Ocl.g:1202:3: a1_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS783);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -1990,7 +1863,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_33, 25, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_10);
               	
             }
-            // Ocl.g:1356:2: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+
+            // Ocl.g:1229:2: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS ) )+
             int cnt8=0;
             loop8:
             do {
@@ -2004,10 +1877,10 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt8) {
             	case 1 :
-            	    // Ocl.g:1357:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS )
+            	    // Ocl.g:1230:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS )
             	    {
-            	    // Ocl.g:1357:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS )
-            	    // Ocl.g:1358:4: a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS
+            	    // Ocl.g:1230:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS )
+            	    // Ocl.g:1231:4: a2_0= parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS_in_parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS810);
             	    a2_0=parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS();
@@ -2081,7 +1954,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_InitValueCS"
-    // Ocl.g:1392:1: parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pivot.language.ocl.InitValueCS element = null] : a0= 'init' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:1265:1: parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pivot.language.ocl.InitValueCS element = null] : a0= 'init' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.InitValueCS parse_tudresden_ocl20_pivot_language_ocl_InitValueCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.InitValueCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_InitValueCS_StartIndex = input.index();
@@ -2094,8 +1967,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return element; }
-            // Ocl.g:1395:1: (a0= 'init' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:1396:2: a0= 'init' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1268:1: (a0= 'init' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:1269:2: a0= 'init' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,33,FOLLOW_33_in_parse_tudresden_ocl20_pivot_language_ocl_InitValueCS851); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -2106,7 +1979,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2124,7 +1997,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2160,8 +2033,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 28, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_12);
               	
             }
-            // Ocl.g:1451:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:1452:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:1324:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1325:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_InitValueCS883);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -2220,7 +2093,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS"
-    // Ocl.g:1484:1: parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.pivot.language.ocl.DeriveValueCS element = null] : a0= 'derive' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:1357:1: parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.pivot.language.ocl.DeriveValueCS element = null] : a0= 'derive' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.DeriveValueCS parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.DeriveValueCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS_StartIndex = input.index();
@@ -2233,8 +2106,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return element; }
-            // Ocl.g:1487:1: (a0= 'derive' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:1488:2: a0= 'derive' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1360:1: (a0= 'derive' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:1361:2: a0= 'derive' a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,34,FOLLOW_34_in_parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS916); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -2245,7 +2118,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2263,7 +2136,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2299,8 +2172,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 31, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_12);
               	
             }
-            // Ocl.g:1543:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:1544:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:1416:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1417:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS948);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -2359,7 +2232,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS"
-    // Ocl.g:1576:1: parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20.pivot.language.ocl.InvariantExpCS element = null] : a0= 'inv' ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:1449:1: parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20.pivot.language.ocl.InvariantExpCS element = null] : a0= 'inv' ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.InvariantExpCS parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.InvariantExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS_StartIndex = input.index();
@@ -2374,8 +2247,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 11) ) { return element; }
-            // Ocl.g:1579:1: (a0= 'inv' ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:1580:2: a0= 'inv' ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1452:1: (a0= 'inv' ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:1453:2: a0= 'inv' ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,35,FOLLOW_35_in_parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS981); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -2386,7 +2259,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2396,7 +2269,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_5, 33);
               	
             }
-            // Ocl.g:1595:2: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )?
+            // Ocl.g:1468:2: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2405,10 +2278,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt9) {
                 case 1 :
-                    // Ocl.g:1596:3: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:1469:3: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
                     {
-                    // Ocl.g:1596:3: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-                    // Ocl.g:1597:4: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+                    // Ocl.g:1469:3: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:1470:4: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS1004);
                     a1_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -2460,7 +2333,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_3, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2496,8 +2369,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 35, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_18);
               	
             }
-            // Ocl.g:1664:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:1665:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:1537:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1538:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS1048);
             a3_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -2557,7 +2430,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS"
-    // Ocl.g:1698:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element = null] : ( ( (a0= STATIC ) ) )? a1= 'def' a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS ) ;
+    // Ocl.g:1571:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element = null] : ( ( (a0= STATIC ) ) )? a1= 'def' a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.DefinitionExpCS parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.DefinitionExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS_StartIndex = input.index();
@@ -2571,10 +2444,10 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 12) ) { return element; }
-            // Ocl.g:1701:1: ( ( ( (a0= STATIC ) ) )? a1= 'def' a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS ) )
-            // Ocl.g:1702:2: ( ( (a0= STATIC ) ) )? a1= 'def' a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS )
+            // Ocl.g:1574:1: ( ( ( (a0= STATIC ) ) )? a1= 'def' a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS ) )
+            // Ocl.g:1575:2: ( ( (a0= STATIC ) ) )? a1= 'def' a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS )
             {
-            // Ocl.g:1702:2: ( ( (a0= STATIC ) ) )?
+            // Ocl.g:1575:2: ( ( (a0= STATIC ) ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2583,13 +2456,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt10) {
                 case 1 :
-                    // Ocl.g:1703:3: ( (a0= STATIC ) )
+                    // Ocl.g:1576:3: ( (a0= STATIC ) )
                     {
-                    // Ocl.g:1703:3: ( (a0= STATIC ) )
-                    // Ocl.g:1704:4: (a0= STATIC )
+                    // Ocl.g:1576:3: ( (a0= STATIC ) )
+                    // Ocl.g:1577:4: (a0= STATIC )
                     {
-                    // Ocl.g:1704:4: (a0= STATIC )
-                    // Ocl.g:1705:5: a0= STATIC
+                    // Ocl.g:1577:4: (a0= STATIC )
+                    // Ocl.g:1578:5: a0= STATIC
                     {
                     a0=(Token)match(input,STATIC,FOLLOW_STATIC_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS1096); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -2608,9 +2481,9 @@ public class OclParser extends OclANTLRParserBase {
                       						tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), result);
                       						Object resolvedObject = result.getResolvedToken();
                       						if (resolvedObject == null) {
-                      							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                      							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                       						}
-                      						java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+                      						java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
                       						if (resolved != null) {
                       							Object value = resolved;
                       							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), value);
@@ -2618,7 +2491,7 @@ public class OclParser extends OclANTLRParserBase {
                       						}
                       						collectHiddenTokens(element);
                       						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_0_0_0_0, resolved, true);
-                      						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                       					}
                       				
                     }
@@ -2655,7 +2528,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_1, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2673,7 +2546,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_3, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -2683,8 +2556,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_61, 40, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_22, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_21);
               	
             }
-            // Ocl.g:1776:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS )
-            // Ocl.g:1777:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS
+            // Ocl.g:1649:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS )
+            // Ocl.g:1650:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS1174);
             a3_0=parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS();
@@ -2744,7 +2617,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS"
-    // Ocl.g:1810:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ;
+    // Ocl.g:1683:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS_StartIndex = input.index();
@@ -2755,11 +2628,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 13) ) { return element; }
-            // Ocl.g:1813:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
-            // Ocl.g:1814:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            // Ocl.g:1686:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
+            // Ocl.g:1687:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
             {
-            // Ocl.g:1814:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
-            // Ocl.g:1815:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
+            // Ocl.g:1687:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            // Ocl.g:1688:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS1211);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS();
@@ -2819,7 +2692,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS"
-    // Ocl.g:1848:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS ) (a1= EQUALITY_OPERATOR ) (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:1721:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS ) (a1= EQUALITY_OPERATOR ) (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS_StartIndex = input.index();
@@ -2833,11 +2706,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 14) ) { return element; }
-            // Ocl.g:1851:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS ) (a1= EQUALITY_OPERATOR ) (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:1852:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS ) (a1= EQUALITY_OPERATOR ) (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1724:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS ) (a1= EQUALITY_OPERATOR ) (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:1725:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS ) (a1= EQUALITY_OPERATOR ) (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
-            // Ocl.g:1852:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS )
-            // Ocl.g:1853:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS
+            // Ocl.g:1725:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS )
+            // Ocl.g:1726:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS1248);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS();
@@ -2874,8 +2747,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_62, 43);
               	
             }
-            // Ocl.g:1878:2: (a1= EQUALITY_OPERATOR )
-            // Ocl.g:1879:3: a1= EQUALITY_OPERATOR
+            // Ocl.g:1751:2: (a1= EQUALITY_OPERATOR )
+            // Ocl.g:1752:3: a1= EQUALITY_OPERATOR
             {
             a1=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS1270); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -2894,9 +2767,9 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
               				}
-              				java.lang.String resolved = (java.lang.String)resolvedObject;
+              				java.lang.String resolved = (java.lang.String) resolvedObject;
               				if (resolved != null) {
               					Object value = resolved;
               					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), value);
@@ -2904,7 +2777,7 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_1, resolved, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               			}
               		
             }
@@ -2944,8 +2817,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 44, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_23);
               	
             }
-            // Ocl.g:1941:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:1942:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:1814:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1815:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS1295);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -3005,7 +2878,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS"
-    // Ocl.g:1975:1: parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element = null] : a0= 'pre' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:1848:1: parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element = null] : a0= 'pre' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS_StartIndex = input.index();
@@ -3020,8 +2893,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return element; }
-            // Ocl.g:1978:1: (a0= 'pre' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:1979:2: a0= 'pre' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1851:1: (a0= 'pre' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:1852:2: a0= 'pre' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,37,FOLLOW_37_in_parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS1328); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -3032,7 +2905,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3042,7 +2915,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_6, 46);
               	
             }
-            // Ocl.g:1994:2: ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )?
+            // Ocl.g:1867:2: ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -3051,13 +2924,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt11) {
                 case 1 :
-                    // Ocl.g:1995:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
+                    // Ocl.g:1868:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
                     {
-                    // Ocl.g:1995:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
-                    // Ocl.g:1996:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:1868:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
+                    // Ocl.g:1869:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
                     {
-                    // Ocl.g:1996:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-                    // Ocl.g:1997:5: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+                    // Ocl.g:1869:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:1870:5: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS1357);
                     a1_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -3118,7 +2991,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_3, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3154,8 +3027,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 49, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_25);
               	
             }
-            // Ocl.g:2070:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:2071:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:1943:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1944:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS1416);
             a3_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -3215,7 +3088,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS"
-    // Ocl.g:2104:1: parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element = null] : a0= 'post' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:1977:1: parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element = null] : a0= 'post' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS_StartIndex = input.index();
@@ -3230,8 +3103,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return element; }
-            // Ocl.g:2107:1: (a0= 'post' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:2108:2: a0= 'post' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:1980:1: (a0= 'post' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:1981:2: a0= 'post' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,38,FOLLOW_38_in_parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS1449); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -3242,7 +3115,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3252,7 +3125,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_7, 51);
               	
             }
-            // Ocl.g:2123:2: ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )?
+            // Ocl.g:1996:2: ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -3261,13 +3134,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt12) {
                 case 1 :
-                    // Ocl.g:2124:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
+                    // Ocl.g:1997:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
                     {
-                    // Ocl.g:2124:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
-                    // Ocl.g:2125:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:1997:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
+                    // Ocl.g:1998:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
                     {
-                    // Ocl.g:2125:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-                    // Ocl.g:2126:5: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+                    // Ocl.g:1998:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:1999:5: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS1478);
                     a1_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -3328,7 +3201,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_3, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3364,8 +3237,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 54, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_25);
               	
             }
-            // Ocl.g:2199:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:2200:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:2072:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:2073:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS1537);
             a3_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -3425,7 +3298,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS"
-    // Ocl.g:2233:1: parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element = null] : a0= 'body' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:2106:1: parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element = null] : a0= 'body' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS_StartIndex = input.index();
@@ -3440,8 +3313,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return element; }
-            // Ocl.g:2236:1: (a0= 'body' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:2237:2: a0= 'body' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:2109:1: (a0= 'body' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:2110:2: a0= 'body' ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )? a2= ':' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,39,FOLLOW_39_in_parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS1570); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -3452,7 +3325,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3462,7 +3335,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_8, 56);
               	
             }
-            // Ocl.g:2252:2: ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )?
+            // Ocl.g:2125:2: ( ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -3471,13 +3344,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt13) {
                 case 1 :
-                    // Ocl.g:2253:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
+                    // Ocl.g:2126:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
                     {
-                    // Ocl.g:2253:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
-                    // Ocl.g:2254:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:2126:3: ( (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) )
+                    // Ocl.g:2127:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
                     {
-                    // Ocl.g:2254:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-                    // Ocl.g:2255:5: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+                    // Ocl.g:2127:4: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+                    // Ocl.g:2128:5: a1_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS1599);
                     a1_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -3538,7 +3411,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_3, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3574,8 +3447,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 59, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_25);
               	
             }
-            // Ocl.g:2328:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:2329:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:2201:2: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:2202:3: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS1658);
             a3_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -3635,7 +3508,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS"
-    // Ocl.g:2362:1: parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns [tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a7= ')' ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? ;
+    // Ocl.g:2235:1: parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns [tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a7= ')' ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS_StartIndex = input.index();
@@ -3658,11 +3531,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return element; }
-            // Ocl.g:2365:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a7= ')' ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? )
-            // Ocl.g:2366:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a7= ')' ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:2238:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a7= ')' ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? )
+            // Ocl.g:2239:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a7= ')' ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             {
-            // Ocl.g:2366:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
-            // Ocl.g:2367:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
+            // Ocl.g:2239:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
+            // Ocl.g:2240:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1695);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS();
@@ -3708,7 +3581,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3717,8 +3590,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_64, 62);
               	
             }
-            // Ocl.g:2406:2: (a2= SIMPLE_NAME )
-            // Ocl.g:2407:3: a2= SIMPLE_NAME
+            // Ocl.g:2279:2: (a2= SIMPLE_NAME )
+            // Ocl.g:2280:3: a2= SIMPLE_NAME
             {
             a2=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1731); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -3737,7 +3610,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3750,8 +3623,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_4, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
               			}
               		
             }
@@ -3773,7 +3646,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_6, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3783,7 +3656,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_67, 64);
               	
             }
-            // Ocl.g:2461:2: ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )?
+            // Ocl.g:2334:2: ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -3792,13 +3665,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt15) {
                 case 1 :
-                    // Ocl.g:2462:3: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
+                    // Ocl.g:2335:3: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
                     {
-                    // Ocl.g:2462:3: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
-                    // Ocl.g:2463:4: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
+                    // Ocl.g:2335:3: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
+                    // Ocl.g:2336:4: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
                     {
-                    // Ocl.g:2463:4: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
-                    // Ocl.g:2464:5: a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
+                    // Ocl.g:2336:4: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
+                    // Ocl.g:2337:5: a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ParameterCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1781);
                     a4_0=parse_tudresden_ocl20_pivot_language_ocl_ParameterCS();
@@ -3836,7 +3709,7 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_67, 65);
                       			
                     }
-                    // Ocl.g:2490:4: ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
+                    // Ocl.g:2363:4: ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
                     loop14:
                     do {
                         int alt14=2;
@@ -3849,10 +3722,10 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt14) {
                     	case 1 :
-                    	    // Ocl.g:2491:5: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
+                    	    // Ocl.g:2364:5: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
                     	    {
-                    	    // Ocl.g:2491:5: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
-                    	    // Ocl.g:2492:6: a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
+                    	    // Ocl.g:2364:5: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
+                    	    // Ocl.g:2365:6: a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
                     	    {
                     	    a5=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1822); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -3863,7 +3736,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      						}
                     	      						collectHiddenTokens(element);
                     	      						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_1, null, true);
-                    	      						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+                    	      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
                     	      					
                     	    }
                     	    if ( state.backtracking==0 ) {
@@ -3872,8 +3745,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      						addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_66, 66, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_26);
                     	      					
                     	    }
-                    	    // Ocl.g:2506:6: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
-                    	    // Ocl.g:2507:7: a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
+                    	    // Ocl.g:2379:6: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
+                    	    // Ocl.g:2380:7: a6_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ParameterCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1856);
                     	    a6_0=parse_tudresden_ocl20_pivot_language_ocl_ParameterCS();
@@ -3954,7 +3827,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_10, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -3966,7 +3839,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_23, 70, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_5);
               	
             }
-            // Ocl.g:2565:2: ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:2438:2: ( (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -3975,10 +3848,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt16) {
                 case 1 :
-                    // Ocl.g:2566:3: (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:2439:3: (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
                     {
-                    // Ocl.g:2566:3: (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-                    // Ocl.g:2567:4: a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:2439:3: (a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:2440:4: a8= ':' (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
                     {
                     a8=(Token)match(input,32,FOLLOW_32_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1953); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -3989,7 +3862,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_0, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -4001,8 +3874,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 71, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_27);
                       			
                     }
-                    // Ocl.g:2584:4: (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-                    // Ocl.g:2585:5: a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+                    // Ocl.g:2457:4: (a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:2458:5: a9_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS1979);
                     a9_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -4075,7 +3948,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS"
-    // Ocl.g:2623:1: parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element = null] : (a0= SIMPLE_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a5= ')' ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? ;
+    // Ocl.g:2496:1: parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element = null] : (a0= SIMPLE_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a5= ')' ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS_StartIndex = input.index();
@@ -4095,11 +3968,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 19) ) { return element; }
-            // Ocl.g:2626:1: ( (a0= SIMPLE_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a5= ')' ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? )
-            // Ocl.g:2627:2: (a0= SIMPLE_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a5= ')' ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:2499:1: ( (a0= SIMPLE_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a5= ')' ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? )
+            // Ocl.g:2500:2: (a0= SIMPLE_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )? a5= ')' ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             {
-            // Ocl.g:2627:2: (a0= SIMPLE_NAME )
-            // Ocl.g:2628:3: a0= SIMPLE_NAME
+            // Ocl.g:2500:2: (a0= SIMPLE_NAME )
+            // Ocl.g:2501:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS2039); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -4118,7 +3991,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4131,8 +4004,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -4154,7 +4027,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_1, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -4164,7 +4037,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_71, 75);
               	
             }
-            // Ocl.g:2682:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )?
+            // Ocl.g:2555:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* ) )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -4173,13 +4046,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt18) {
                 case 1 :
-                    // Ocl.g:2683:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
+                    // Ocl.g:2556:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
                     {
-                    // Ocl.g:2683:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
-                    // Ocl.g:2684:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
+                    // Ocl.g:2556:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )* )
+                    // Ocl.g:2557:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
                     {
-                    // Ocl.g:2684:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
-                    // Ocl.g:2685:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
+                    // Ocl.g:2557:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
+                    // Ocl.g:2558:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ParameterCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS2089);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_ParameterCS();
@@ -4217,7 +4090,7 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_71, 76);
                       			
                     }
-                    // Ocl.g:2711:4: ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
+                    // Ocl.g:2584:4: ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) ) )*
                     loop17:
                     do {
                         int alt17=2;
@@ -4230,10 +4103,10 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt17) {
                     	case 1 :
-                    	    // Ocl.g:2712:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
+                    	    // Ocl.g:2585:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
                     	    {
-                    	    // Ocl.g:2712:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
-                    	    // Ocl.g:2713:6: a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
+                    	    // Ocl.g:2585:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS ) )
+                    	    // Ocl.g:2586:6: a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
                     	    {
                     	    a3=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS2130); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -4244,7 +4117,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      						}
                     	      						collectHiddenTokens(element);
                     	      						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_0, null, true);
-                    	      						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+                    	      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
                     	      					
                     	    }
                     	    if ( state.backtracking==0 ) {
@@ -4253,8 +4126,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      						addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_66, 77, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_26);
                     	      					
                     	    }
-                    	    // Ocl.g:2727:6: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
-                    	    // Ocl.g:2728:7: a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
+                    	    // Ocl.g:2600:6: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS )
+                    	    // Ocl.g:2601:7: a4_0= parse_tudresden_ocl20_pivot_language_ocl_ParameterCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ParameterCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS2164);
                     	    a4_0=parse_tudresden_ocl20_pivot_language_ocl_ParameterCS();
@@ -4335,7 +4208,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_3, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -4345,7 +4218,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_62, 81);
               	
             }
-            // Ocl.g:2784:2: ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:2657:2: ( (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -4354,10 +4227,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt19) {
                 case 1 :
-                    // Ocl.g:2785:3: (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:2658:3: (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
                     {
-                    // Ocl.g:2785:3: (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-                    // Ocl.g:2786:4: a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:2658:3: (a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:2659:4: a6= ':' (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
                     {
                     a6=(Token)match(input,32,FOLLOW_32_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS2261); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4368,7 +4241,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_0, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -4380,8 +4253,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 82, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_27);
                       			
                     }
-                    // Ocl.g:2803:4: (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-                    // Ocl.g:2804:5: a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+                    // Ocl.g:2676:4: (a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:2677:5: a7_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS2287);
                     a7_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -4450,7 +4323,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_ParameterCS"
-    // Ocl.g:2838:1: parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pivot.language.ocl.ParameterCS element = null] : (a0= SIMPLE_NAME ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ;
+    // Ocl.g:2711:1: parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pivot.language.ocl.ParameterCS element = null] : (a0= SIMPLE_NAME ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.ParameterCS parse_tudresden_ocl20_pivot_language_ocl_ParameterCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.ParameterCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_ParameterCS_StartIndex = input.index();
@@ -4463,11 +4336,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 20) ) { return element; }
-            // Ocl.g:2841:1: ( (a0= SIMPLE_NAME ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-            // Ocl.g:2842:2: (a0= SIMPLE_NAME ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+            // Ocl.g:2714:1: ( (a0= SIMPLE_NAME ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+            // Ocl.g:2715:2: (a0= SIMPLE_NAME ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
             {
-            // Ocl.g:2842:2: (a0= SIMPLE_NAME )
-            // Ocl.g:2843:3: a0= SIMPLE_NAME
+            // Ocl.g:2715:2: (a0= SIMPLE_NAME )
+            // Ocl.g:2716:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_ParameterCS2347); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -4486,7 +4359,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Parameter proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createParameter();
@@ -4499,8 +4372,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -4522,7 +4395,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_1, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -4534,8 +4407,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 86, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_28);
               	
             }
-            // Ocl.g:2899:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-            // Ocl.g:2900:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+            // Ocl.g:2772:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+            // Ocl.g:2773:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_ParameterCS2386);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -4592,7 +4465,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS"
-    // Ocl.g:2930:1: parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element = null] : ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) a8= '(' ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a12= ')' ;
+    // Ocl.g:2803:1: parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element = null] : ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) a8= '(' ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a12= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_StartIndex = input.index();
@@ -4616,10 +4489,10 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 21) ) { return element; }
-            // Ocl.g:2933:1: ( ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) a8= '(' ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a12= ')' )
-            // Ocl.g:2934:2: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) a8= '(' ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a12= ')'
+            // Ocl.g:2806:1: ( ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) a8= '(' ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a12= ')' )
+            // Ocl.g:2807:2: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) a8= '(' ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a12= ')'
             {
-            // Ocl.g:2934:2: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) )
+            // Ocl.g:2807:2: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) )
             int alt20=8;
             switch ( input.LA(1) ) {
             case EQUALITY_OPERATOR:
@@ -4672,10 +4545,10 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt20) {
                 case 1 :
-                    // Ocl.g:2935:3: (a0= EQUALITY_OPERATOR )
+                    // Ocl.g:2808:3: (a0= EQUALITY_OPERATOR )
                     {
-                    // Ocl.g:2935:3: (a0= EQUALITY_OPERATOR )
-                    // Ocl.g:2936:4: a0= EQUALITY_OPERATOR
+                    // Ocl.g:2808:3: (a0= EQUALITY_OPERATOR )
+                    // Ocl.g:2809:4: a0= EQUALITY_OPERATOR
                     {
                     a0=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2428); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4694,7 +4567,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4707,8 +4580,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_0_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
                       				}
                       			
                     }
@@ -4725,10 +4598,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:2976:6: (a1= NEQUALITY_OPERATOR )
+                    // Ocl.g:2849:6: (a1= NEQUALITY_OPERATOR )
                     {
-                    // Ocl.g:2976:6: (a1= NEQUALITY_OPERATOR )
-                    // Ocl.g:2977:4: a1= NEQUALITY_OPERATOR
+                    // Ocl.g:2849:6: (a1= NEQUALITY_OPERATOR )
+                    // Ocl.g:2850:4: a1= NEQUALITY_OPERATOR
                     {
                     a1=(Token)match(input,NEQUALITY_OPERATOR,FOLLOW_NEQUALITY_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2466); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4747,7 +4620,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4760,8 +4633,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_1_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, proxy);
                       				}
                       			
                     }
@@ -4778,10 +4651,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:3017:6: (a2= NOT_OPERATOR )
+                    // Ocl.g:2890:6: (a2= NOT_OPERATOR )
                     {
-                    // Ocl.g:3017:6: (a2= NOT_OPERATOR )
-                    // Ocl.g:3018:4: a2= NOT_OPERATOR
+                    // Ocl.g:2890:6: (a2= NOT_OPERATOR )
+                    // Ocl.g:2891:4: a2= NOT_OPERATOR
                     {
                     a2=(Token)match(input,NOT_OPERATOR,FOLLOW_NOT_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2504); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4800,7 +4673,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4813,8 +4686,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_2_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
                       				}
                       			
                     }
@@ -4831,10 +4704,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:3058:6: (a3= AND_OPERATOR )
+                    // Ocl.g:2931:6: (a3= AND_OPERATOR )
                     {
-                    // Ocl.g:3058:6: (a3= AND_OPERATOR )
-                    // Ocl.g:3059:4: a3= AND_OPERATOR
+                    // Ocl.g:2931:6: (a3= AND_OPERATOR )
+                    // Ocl.g:2932:4: a3= AND_OPERATOR
                     {
                     a3=(Token)match(input,AND_OPERATOR,FOLLOW_AND_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2542); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4853,7 +4726,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4866,8 +4739,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_3_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, proxy);
                       				}
                       			
                     }
@@ -4884,10 +4757,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 5 :
-                    // Ocl.g:3099:6: (a4= OR_OPERATOR )
+                    // Ocl.g:2972:6: (a4= OR_OPERATOR )
                     {
-                    // Ocl.g:3099:6: (a4= OR_OPERATOR )
-                    // Ocl.g:3100:4: a4= OR_OPERATOR
+                    // Ocl.g:2972:6: (a4= OR_OPERATOR )
+                    // Ocl.g:2973:4: a4= OR_OPERATOR
                     {
                     a4=(Token)match(input,OR_OPERATOR,FOLLOW_OR_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2580); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4906,7 +4779,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4919,8 +4792,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_4_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
                       				}
                       			
                     }
@@ -4937,10 +4810,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 6 :
-                    // Ocl.g:3140:6: (a5= XOR_OPERATOR )
+                    // Ocl.g:3013:6: (a5= XOR_OPERATOR )
                     {
-                    // Ocl.g:3140:6: (a5= XOR_OPERATOR )
-                    // Ocl.g:3141:4: a5= XOR_OPERATOR
+                    // Ocl.g:3013:6: (a5= XOR_OPERATOR )
+                    // Ocl.g:3014:4: a5= XOR_OPERATOR
                     {
                     a5=(Token)match(input,XOR_OPERATOR,FOLLOW_XOR_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2618); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -4959,7 +4832,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -4972,8 +4845,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_5_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, proxy);
                       				}
                       			
                     }
@@ -4990,10 +4863,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 7 :
-                    // Ocl.g:3181:6: (a6= IMPLIES_OPERATOR )
+                    // Ocl.g:3054:6: (a6= IMPLIES_OPERATOR )
                     {
-                    // Ocl.g:3181:6: (a6= IMPLIES_OPERATOR )
-                    // Ocl.g:3182:4: a6= IMPLIES_OPERATOR
+                    // Ocl.g:3054:6: (a6= IMPLIES_OPERATOR )
+                    // Ocl.g:3055:4: a6= IMPLIES_OPERATOR
                     {
                     a6=(Token)match(input,IMPLIES_OPERATOR,FOLLOW_IMPLIES_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2656); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -5012,7 +4885,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -5025,8 +4898,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_6_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, proxy);
                       				}
                       			
                     }
@@ -5043,10 +4916,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 8 :
-                    // Ocl.g:3222:6: (a7= SIMPLE_NAME )
+                    // Ocl.g:3095:6: (a7= SIMPLE_NAME )
                     {
-                    // Ocl.g:3222:6: (a7= SIMPLE_NAME )
-                    // Ocl.g:3223:4: a7= SIMPLE_NAME
+                    // Ocl.g:3095:6: (a7= SIMPLE_NAME )
+                    // Ocl.g:3096:4: a7= SIMPLE_NAME
                     {
                     a7=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2694); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -5065,7 +4938,7 @@ public class OclParser extends OclANTLRParserBase {
                       					tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
                       					Object resolvedObject = result.getResolvedToken();
                       					if (resolvedObject == null) {
-                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStopIndex());
+                      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
                       					}
                       					String resolved = (String) resolvedObject;
                       					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -5078,8 +4951,8 @@ public class OclParser extends OclANTLRParserBase {
                       					}
                       					collectHiddenTokens(element);
                       					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_7_0, proxy, true);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
-                      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, proxy);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
+                      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, proxy);
                       				}
                       			
                     }
@@ -5113,7 +4986,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -5150,7 +5023,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_84, 97);
               	
             }
-            // Ocl.g:3310:2: ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )?
+            // Ocl.g:3183:2: ( ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )?
             int alt22=2;
             int LA22_0 = input.LA(1);
 
@@ -5159,13 +5032,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt22) {
                 case 1 :
-                    // Ocl.g:3311:3: ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
+                    // Ocl.g:3184:3: ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
                     {
-                    // Ocl.g:3311:3: ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
-                    // Ocl.g:3312:4: (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
+                    // Ocl.g:3184:3: ( (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
+                    // Ocl.g:3185:4: (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
                     {
-                    // Ocl.g:3312:4: (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-                    // Ocl.g:3313:5: a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+                    // Ocl.g:3185:4: (a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    // Ocl.g:3186:5: a9_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2757);
                     a9_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -5203,7 +5076,7 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_84, 98);
                       			
                     }
-                    // Ocl.g:3339:4: ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
+                    // Ocl.g:3212:4: ( (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
                     loop21:
                     do {
                         int alt21=2;
@@ -5216,10 +5089,10 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt21) {
                     	case 1 :
-                    	    // Ocl.g:3340:5: (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+                    	    // Ocl.g:3213:5: (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
                     	    {
-                    	    // Ocl.g:3340:5: (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-                    	    // Ocl.g:3341:6: a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    	    // Ocl.g:3213:5: (a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+                    	    // Ocl.g:3214:6: a10= ',' (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
                     	    {
                     	    a10=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2798); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -5230,7 +5103,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      						}
                     	      						collectHiddenTokens(element);
                     	      						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_0, null, true);
-                    	      						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
+                    	      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a10, element);
                     	      					
                     	    }
                     	    if ( state.backtracking==0 ) {
@@ -5266,8 +5139,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      						addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 99, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_29);
                     	      					
                     	    }
-                    	    // Ocl.g:3382:6: (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-                    	    // Ocl.g:3383:7: a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+                    	    // Ocl.g:3255:6: (a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    	    // Ocl.g:3256:7: a11_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS2832);
                     	    a11_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -5348,7 +5221,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_5, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a12, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -5412,7 +5285,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS"
-    // Ocl.g:3478:1: parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element = null] : (a0= SIMPLE_NAME ) ( ( (a1= IS_MARKED_PRE ) ) )? ;
+    // Ocl.g:3351:1: parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element = null] : (a0= SIMPLE_NAME ) ( ( (a1= IS_MARKED_PRE ) ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS_StartIndex = input.index();
@@ -5423,11 +5296,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 22) ) { return element; }
-            // Ocl.g:3481:1: ( (a0= SIMPLE_NAME ) ( ( (a1= IS_MARKED_PRE ) ) )? )
-            // Ocl.g:3482:2: (a0= SIMPLE_NAME ) ( ( (a1= IS_MARKED_PRE ) ) )?
+            // Ocl.g:3354:1: ( (a0= SIMPLE_NAME ) ( ( (a1= IS_MARKED_PRE ) ) )? )
+            // Ocl.g:3355:2: (a0= SIMPLE_NAME ) ( ( (a1= IS_MARKED_PRE ) ) )?
             {
-            // Ocl.g:3482:2: (a0= SIMPLE_NAME )
-            // Ocl.g:3483:3: a0= SIMPLE_NAME
+            // Ocl.g:3355:2: (a0= SIMPLE_NAME )
+            // Ocl.g:3356:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS2939); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -5446,7 +5319,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
@@ -5459,8 +5332,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -5512,7 +5385,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_110, 104);
               	
             }
-            // Ocl.g:3561:2: ( ( (a1= IS_MARKED_PRE ) ) )?
+            // Ocl.g:3434:2: ( ( (a1= IS_MARKED_PRE ) ) )?
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -5521,13 +5394,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt23) {
                 case 1 :
-                    // Ocl.g:3562:3: ( (a1= IS_MARKED_PRE ) )
+                    // Ocl.g:3435:3: ( (a1= IS_MARKED_PRE ) )
                     {
-                    // Ocl.g:3562:3: ( (a1= IS_MARKED_PRE ) )
-                    // Ocl.g:3563:4: (a1= IS_MARKED_PRE )
+                    // Ocl.g:3435:3: ( (a1= IS_MARKED_PRE ) )
+                    // Ocl.g:3436:4: (a1= IS_MARKED_PRE )
                     {
-                    // Ocl.g:3563:4: (a1= IS_MARKED_PRE )
-                    // Ocl.g:3564:5: a1= IS_MARKED_PRE
+                    // Ocl.g:3436:4: (a1= IS_MARKED_PRE )
+                    // Ocl.g:3437:5: a1= IS_MARKED_PRE
                     {
                     a1=(Token)match(input,IS_MARKED_PRE,FOLLOW_IS_MARKED_PRE_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS2975); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -5546,9 +5419,9 @@ public class OclParser extends OclANTLRParserBase {
                       						tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), result);
                       						Object resolvedObject = result.getResolvedToken();
                       						if (resolvedObject == null) {
-                      							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+                      							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
                       						}
-                      						java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+                      						java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
                       						if (resolved != null) {
                       							Object value = resolved;
                       							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), value);
@@ -5556,7 +5429,7 @@ public class OclParser extends OclANTLRParserBase {
                       						}
                       						collectHiddenTokens(element);
                       						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_1_0_0_1, resolved, true);
-                      						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+                      						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
                       					}
                       				
                     }
@@ -5677,7 +5550,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS"
-    // Ocl.g:3684:1: parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.pivot.language.ocl.IteratorExpCS element = null] : (a0= ITERATOR_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' ;
+    // Ocl.g:3557:1: parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.pivot.language.ocl.IteratorExpCS element = null] : (a0= ITERATOR_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.IteratorExpCS parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.IteratorExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_StartIndex = input.index();
@@ -5697,11 +5570,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 23) ) { return element; }
-            // Ocl.g:3687:1: ( (a0= ITERATOR_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' )
-            // Ocl.g:3688:2: (a0= ITERATOR_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')'
+            // Ocl.g:3560:1: ( (a0= ITERATOR_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' )
+            // Ocl.g:3561:2: (a0= ITERATOR_NAME ) a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )? (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')'
             {
-            // Ocl.g:3688:2: (a0= ITERATOR_NAME )
-            // Ocl.g:3689:3: a0= ITERATOR_NAME
+            // Ocl.g:3561:2: (a0= ITERATOR_NAME )
+            // Ocl.g:3562:3: a0= ITERATOR_NAME
             {
             a0=(Token)match(input,ITERATOR_NAME,FOLLOW_ITERATOR_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS3040); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -5720,9 +5593,9 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
-              				java.lang.String resolved = (java.lang.String)resolvedObject;
+              				java.lang.String resolved = (java.lang.String) resolvedObject;
               				if (resolved != null) {
               					Object value = resolved;
               					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), value);
@@ -5730,7 +5603,7 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_0, resolved, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
               			}
               		
             }
@@ -5752,7 +5625,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -5789,7 +5662,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 108, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_32);
               	
             }
-            // Ocl.g:3766:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )?
+            // Ocl.g:3639:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' ) )?
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -5802,13 +5675,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt25) {
                 case 1 :
-                    // Ocl.g:3767:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' )
+                    // Ocl.g:3640:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' )
                     {
-                    // Ocl.g:3767:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' )
-                    // Ocl.g:3768:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|'
+                    // Ocl.g:3640:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|' )
+                    // Ocl.g:3641:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )? a5= '|'
                     {
-                    // Ocl.g:3768:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
-                    // Ocl.g:3769:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
+                    // Ocl.g:3641:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
+                    // Ocl.g:3642:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS3090);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS();
@@ -5846,7 +5719,7 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_11, 109);
                       			
                     }
-                    // Ocl.g:3795:4: ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )?
+                    // Ocl.g:3668:4: ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) ) )?
                     int alt24=2;
                     int LA24_0 = input.LA(1);
 
@@ -5855,10 +5728,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     switch (alt24) {
                         case 1 :
-                            // Ocl.g:3796:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) )
+                            // Ocl.g:3669:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) )
                             {
-                            // Ocl.g:3796:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) )
-                            // Ocl.g:3797:6: a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
+                            // Ocl.g:3669:5: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) )
+                            // Ocl.g:3670:6: a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
                             {
                             a3=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS3131); if (state.failed) return element;
                             if ( state.backtracking==0 ) {
@@ -5869,7 +5742,7 @@ public class OclParser extends OclANTLRParserBase {
                               						}
                               						collectHiddenTokens(element);
                               						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_1, null, true);
-                              						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+                              						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
                               					
                             }
                             if ( state.backtracking==0 ) {
@@ -5878,8 +5751,8 @@ public class OclParser extends OclANTLRParserBase {
                               						addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 110, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_30, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_31);
                               					
                             }
-                            // Ocl.g:3811:6: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
-                            // Ocl.g:3812:7: a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
+                            // Ocl.g:3684:6: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
+                            // Ocl.g:3685:7: a4_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
                             {
                             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS3165);
                             a4_0=parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS();
@@ -5940,7 +5813,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_3, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -6018,8 +5891,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 114, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_32);
               	
             }
-            // Ocl.g:3919:2: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:3920:3: a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:3792:2: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:3793:3: a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS3263);
             a6_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -6065,7 +5938,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_7, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6129,7 +6002,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS"
-    // Ocl.g:3999:1: parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.pivot.language.ocl.IterateExpCS element = null] : a0= 'iterate' a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )? (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) a5= '|' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' ;
+    // Ocl.g:3872:1: parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.pivot.language.ocl.IterateExpCS element = null] : a0= 'iterate' a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )? (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) a5= '|' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.IterateExpCS parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.IterateExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS_StartIndex = input.index();
@@ -6149,8 +6022,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 24) ) { return element; }
-            // Ocl.g:4002:1: (a0= 'iterate' a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )? (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) a5= '|' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' )
-            // Ocl.g:4003:2: a0= 'iterate' a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )? (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) a5= '|' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')'
+            // Ocl.g:3875:1: (a0= 'iterate' a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )? (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) a5= '|' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')' )
+            // Ocl.g:3876:2: a0= 'iterate' a1= '(' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )? (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) a5= '|' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a7= ')'
             {
             a0=(Token)match(input,44,FOLLOW_44_in_parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS3310); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -6161,7 +6034,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6179,7 +6052,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6188,7 +6061,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 118, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_30, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_33);
               	
             }
-            // Ocl.g:4031:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )?
+            // Ocl.g:3904:2: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )?
             int alt26=2;
             int LA26_0 = input.LA(1);
 
@@ -6201,13 +6074,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt26) {
                 case 1 :
-                    // Ocl.g:4032:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
+                    // Ocl.g:3905:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
                     {
-                    // Ocl.g:4032:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
-                    // Ocl.g:4033:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';'
+                    // Ocl.g:3905:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
+                    // Ocl.g:3906:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';'
                     {
-                    // Ocl.g:4033:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
-                    // Ocl.g:4034:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
+                    // Ocl.g:3906:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
+                    // Ocl.g:3907:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_in_parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS3353);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS();
@@ -6253,7 +6126,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_2, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -6277,8 +6150,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 121, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_34);
               	
             }
-            // Ocl.g:4080:2: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
-            // Ocl.g:4081:3: a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
+            // Ocl.g:3953:2: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            // Ocl.g:3954:3: a4_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS3418);
             a4_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS();
@@ -6324,7 +6197,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_5, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6360,8 +6233,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 123, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_35);
               	
             }
-            // Ocl.g:4147:2: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:4148:3: a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:4020:2: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:4021:3: a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS3454);
             a6_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -6407,7 +6280,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_8, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6471,7 +6344,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS"
-    // Ocl.g:4227:1: parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS returns [tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? ;
+    // Ocl.g:4100:1: parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS returns [tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_StartIndex = input.index();
@@ -6485,11 +6358,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 25) ) { return element; }
-            // Ocl.g:4230:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? )
-            // Ocl.g:4231:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:4103:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? )
+            // Ocl.g:4104:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             {
-            // Ocl.g:4231:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-            // Ocl.g:4232:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+            // Ocl.g:4104:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+            // Ocl.g:4105:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS3505);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -6529,7 +6402,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_12, 126);
               	
             }
-            // Ocl.g:4260:2: ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:4133:2: ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -6538,10 +6411,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt27) {
                 case 1 :
-                    // Ocl.g:4261:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:4134:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
                     {
-                    // Ocl.g:4261:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-                    // Ocl.g:4262:4: a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:4134:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:4135:4: a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
                     {
                     a1=(Token)match(input,32,FOLLOW_32_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS3532); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -6552,7 +6425,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_0, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -6564,8 +6437,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 127, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_36);
                       			
                     }
-                    // Ocl.g:4279:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-                    // Ocl.g:4280:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+                    // Ocl.g:4152:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:4153:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS3558);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -6638,7 +6511,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS"
-    // Ocl.g:4318:1: parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS returns [tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS element = null] : (a0= SIMPLE_NAME ) ;
+    // Ocl.g:4191:1: parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS returns [tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS element = null] : (a0= SIMPLE_NAME ) ;
     public final tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS_StartIndex = input.index();
@@ -6648,11 +6521,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 26) ) { return element; }
-            // Ocl.g:4321:1: ( (a0= SIMPLE_NAME ) )
-            // Ocl.g:4322:2: (a0= SIMPLE_NAME )
+            // Ocl.g:4194:1: ( (a0= SIMPLE_NAME ) )
+            // Ocl.g:4195:2: (a0= SIMPLE_NAME )
             {
-            // Ocl.g:4322:2: (a0= SIMPLE_NAME )
-            // Ocl.g:4323:3: a0= SIMPLE_NAME
+            // Ocl.g:4195:2: (a0= SIMPLE_NAME )
+            // Ocl.g:4196:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS3618); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -6671,7 +6544,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Type proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createType();
@@ -6684,8 +6557,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -6729,7 +6602,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS"
-    // Ocl.g:4378:1: parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS element = null] : (a0= SIMPLE_NAME ) a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) ;
+    // Ocl.g:4251:1: parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS element = null] : (a0= SIMPLE_NAME ) a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS_StartIndex = input.index();
@@ -6742,11 +6615,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 27) ) { return element; }
-            // Ocl.g:4381:1: ( (a0= SIMPLE_NAME ) a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) )
-            // Ocl.g:4382:2: (a0= SIMPLE_NAME ) a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
+            // Ocl.g:4254:1: ( (a0= SIMPLE_NAME ) a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) )
+            // Ocl.g:4255:2: (a0= SIMPLE_NAME ) a1= '::' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
             {
-            // Ocl.g:4382:2: (a0= SIMPLE_NAME )
-            // Ocl.g:4383:3: a0= SIMPLE_NAME
+            // Ocl.g:4255:2: (a0= SIMPLE_NAME )
+            // Ocl.g:4256:3: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS3658); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -6765,7 +6638,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Namespace proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -6778,8 +6651,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -6801,7 +6674,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6811,8 +6684,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_20, 132, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_37);
               	
             }
-            // Ocl.g:4437:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
-            // Ocl.g:4438:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
+            // Ocl.g:4310:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
+            // Ocl.g:4311:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS3697);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS();
@@ -6880,7 +6753,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS"
-    // Ocl.g:4479:1: parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pivot.language.ocl.TupleTypeCS element = null] : a0= 'Tuple' a1= '(' ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )? a3= ')' ;
+    // Ocl.g:4352:1: parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pivot.language.ocl.TupleTypeCS element = null] : a0= 'Tuple' a1= '(' ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )? a3= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.TupleTypeCS parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TupleTypeCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS_StartIndex = input.index();
@@ -6894,8 +6767,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 28) ) { return element; }
-            // Ocl.g:4482:1: (a0= 'Tuple' a1= '(' ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )? a3= ')' )
-            // Ocl.g:4483:2: a0= 'Tuple' a1= '(' ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )? a3= ')'
+            // Ocl.g:4355:1: (a0= 'Tuple' a1= '(' ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )? a3= ')' )
+            // Ocl.g:4356:2: a0= 'Tuple' a1= '(' ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )? a3= ')'
             {
             a0=(Token)match(input,46,FOLLOW_46_in_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS3730); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -6906,7 +6779,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_0, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6924,7 +6797,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_1, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -6934,7 +6807,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_119, 135);
               	
             }
-            // Ocl.g:4512:2: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )?
+            // Ocl.g:4385:2: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS ) )?
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -6943,10 +6816,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt28) {
                 case 1 :
-                    // Ocl.g:4513:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS )
+                    // Ocl.g:4386:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS )
                     {
-                    // Ocl.g:4513:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS )
-                    // Ocl.g:4514:4: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS
+                    // Ocl.g:4386:3: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS )
+                    // Ocl.g:4387:4: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS_in_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS3767);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS();
@@ -6998,7 +6871,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_5, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -7060,7 +6933,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS"
-    // Ocl.g:4592:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element = null] : (a0= COLLECTION_TYPES ) ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )? ;
+    // Ocl.g:4465:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element = null] : (a0= COLLECTION_TYPES ) ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )? ;
     public final tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_StartIndex = input.index();
@@ -7074,11 +6947,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 29) ) { return element; }
-            // Ocl.g:4595:1: ( (a0= COLLECTION_TYPES ) ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )? )
-            // Ocl.g:4596:2: (a0= COLLECTION_TYPES ) ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )?
+            // Ocl.g:4468:1: ( (a0= COLLECTION_TYPES ) ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )? )
+            // Ocl.g:4469:2: (a0= COLLECTION_TYPES ) ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )?
             {
-            // Ocl.g:4596:2: (a0= COLLECTION_TYPES )
-            // Ocl.g:4597:3: a0= COLLECTION_TYPES
+            // Ocl.g:4469:2: (a0= COLLECTION_TYPES )
+            // Ocl.g:4470:3: a0= COLLECTION_TYPES
             {
             a0=(Token)match(input,COLLECTION_TYPES,FOLLOW_COLLECTION_TYPES_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS3826); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -7097,7 +6970,7 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               				}
               				String resolved = (String) resolvedObject;
               				tudresden.ocl20.pivot.pivotmodel.Type proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createType();
@@ -7110,8 +6983,8 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_0, proxy, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               			}
               		
             }
@@ -7160,7 +7033,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_110, 138);
               	
             }
-            // Ocl.g:4672:2: ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )?
+            // Ocl.g:4545:2: ( (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' ) )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -7169,10 +7042,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt29) {
                 case 1 :
-                    // Ocl.g:4673:3: (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' )
+                    // Ocl.g:4546:3: (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' )
                     {
-                    // Ocl.g:4673:3: (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' )
-                    // Ocl.g:4674:4: a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')'
+                    // Ocl.g:4546:3: (a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')' )
+                    // Ocl.g:4547:4: a1= '(' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) a3= ')'
                     {
                     a1=(Token)match(input,40,FOLLOW_40_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS3856); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -7183,7 +7056,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_1, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -7195,8 +7068,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 139, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_40);
                       			
                     }
-                    // Ocl.g:4691:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-                    // Ocl.g:4692:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+                    // Ocl.g:4564:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:4565:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS3882);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -7242,7 +7115,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_5, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -7353,7 +7226,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS"
-    // Ocl.g:4810:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ;
+    // Ocl.g:4683:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS_StartIndex = input.index();
@@ -7367,11 +7240,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 30) ) { return element; }
-            // Ocl.g:4813:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-            // Ocl.g:4814:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+            // Ocl.g:4686:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+            // Ocl.g:4687:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
             {
-            // Ocl.g:4814:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-            // Ocl.g:4815:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+            // Ocl.g:4687:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+            // Ocl.g:4688:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS3962);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -7417,7 +7290,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -7429,8 +7302,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 144, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_41);
               	
             }
-            // Ocl.g:4857:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-            // Ocl.g:4858:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+            // Ocl.g:4730:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+            // Ocl.g:4731:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS3998);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -7485,7 +7358,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS"
-    // Ocl.g:4886:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )* ;
+    // Ocl.g:4759:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )* ;
     public final tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS_StartIndex = input.index();
@@ -7499,11 +7372,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 31) ) { return element; }
-            // Ocl.g:4889:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )* )
-            // Ocl.g:4890:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )*
+            // Ocl.g:4762:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )* )
+            // Ocl.g:4763:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )*
             {
-            // Ocl.g:4890:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS )
-            // Ocl.g:4891:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS
+            // Ocl.g:4763:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS )
+            // Ocl.g:4764:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS4035);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS();
@@ -7541,7 +7414,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_119, 146);
               	
             }
-            // Ocl.g:4917:2: ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )*
+            // Ocl.g:4790:2: ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) ) )*
             loop30:
             do {
                 int alt30=2;
@@ -7554,10 +7427,10 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt30) {
             	case 1 :
-            	    // Ocl.g:4918:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) )
+            	    // Ocl.g:4791:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) )
             	    {
-            	    // Ocl.g:4918:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) )
-            	    // Ocl.g:4919:4: a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS )
+            	    // Ocl.g:4791:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS ) )
+            	    // Ocl.g:4792:4: a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS )
             	    {
             	    a1=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS4062); if (state.failed) return element;
             	    if ( state.backtracking==0 ) {
@@ -7568,7 +7441,7 @@ public class OclParser extends OclANTLRParserBase {
             	      				}
             	      				collectHiddenTokens(element);
             	      				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_1, null, true);
-            	      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+            	      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
             	      			
             	    }
             	    if ( state.backtracking==0 ) {
@@ -7577,8 +7450,8 @@ public class OclParser extends OclANTLRParserBase {
             	      				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 147, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_38);
             	      			
             	    }
-            	    // Ocl.g:4933:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS )
-            	    // Ocl.g:4934:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS
+            	    // Ocl.g:4806:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS )
+            	    // Ocl.g:4807:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS4088);
             	    a2_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS();
@@ -7652,7 +7525,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS"
-    // Ocl.g:4970:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a3= EQUALITY_OPERATOR ) (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:4843:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a3= EQUALITY_OPERATOR ) (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_StartIndex = input.index();
@@ -7669,11 +7542,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 32) ) { return element; }
-            // Ocl.g:4973:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a3= EQUALITY_OPERATOR ) (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:4974:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a3= EQUALITY_OPERATOR ) (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:4846:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a3= EQUALITY_OPERATOR ) (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:4847:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS ) ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )? (a3= EQUALITY_OPERATOR ) (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
-            // Ocl.g:4974:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
-            // Ocl.g:4975:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
+            // Ocl.g:4847:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS )
+            // Ocl.g:4848:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS4148);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS();
@@ -7711,7 +7584,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_15, 150);
               	
             }
-            // Ocl.g:5001:2: ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
+            // Ocl.g:4874:2: ( (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) ) )?
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -7720,10 +7593,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt31) {
                 case 1 :
-                    // Ocl.g:5002:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:4875:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
                     {
-                    // Ocl.g:5002:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
-                    // Ocl.g:5003:4: a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:4875:3: (a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS ) )
+                    // Ocl.g:4876:4: a1= ':' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
                     {
                     a1=(Token)match(input,32,FOLLOW_32_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS4175); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -7734,7 +7607,7 @@ public class OclParser extends OclANTLRParserBase {
                       				}
                       				collectHiddenTokens(element);
                       				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_0, null, true);
-                      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+                      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
                       			
                     }
                     if ( state.backtracking==0 ) {
@@ -7746,8 +7619,8 @@ public class OclParser extends OclANTLRParserBase {
                       				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_30, 151, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_42);
                       			
                     }
-                    // Ocl.g:5020:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
-                    // Ocl.g:5021:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
+                    // Ocl.g:4893:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS )
+                    // Ocl.g:4894:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_TypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS4201);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_TypeCS();
@@ -7799,8 +7672,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_15, 153);
               	
             }
-            // Ocl.g:5053:2: (a3= EQUALITY_OPERATOR )
-            // Ocl.g:5054:3: a3= EQUALITY_OPERATOR
+            // Ocl.g:4926:2: (a3= EQUALITY_OPERATOR )
+            // Ocl.g:4927:3: a3= EQUALITY_OPERATOR
             {
             a3=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS4246); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -7819,9 +7692,9 @@ public class OclParser extends OclANTLRParserBase {
               				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), result);
               				Object resolvedObject = result.getResolvedToken();
               				if (resolvedObject == null) {
-              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+              					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
               				}
-              				java.lang.String resolved = (java.lang.String)resolvedObject;
+              				java.lang.String resolved = (java.lang.String) resolvedObject;
               				if (resolved != null) {
               					Object value = resolved;
               					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), value);
@@ -7829,7 +7702,7 @@ public class OclParser extends OclANTLRParserBase {
               				}
               				collectHiddenTokens(element);
               				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_2, resolved, true);
-              				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
+              				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
               			}
               		
             }
@@ -7869,8 +7742,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 154, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_43);
               	
             }
-            // Ocl.g:5116:2: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:5117:3: a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:4989:2: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:4990:3: a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS4271);
             a4_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -7935,7 +7808,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS"
-    // Ocl.g:5155:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* ;
+    // Ocl.g:5028:1: parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS returns [tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* ;
     public final tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS_StartIndex = input.index();
@@ -7949,11 +7822,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 33) ) { return element; }
-            // Ocl.g:5158:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* )
-            // Ocl.g:5159:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )*
+            // Ocl.g:5031:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* )
+            // Ocl.g:5032:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )*
             {
-            // Ocl.g:5159:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
-            // Ocl.g:5160:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
+            // Ocl.g:5032:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            // Ocl.g:5033:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS4308);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS();
@@ -7991,7 +7864,7 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_99, 156);
               	
             }
-            // Ocl.g:5186:2: ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )*
+            // Ocl.g:5059:2: ( (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )*
             loop32:
             do {
                 int alt32=2;
@@ -8004,10 +7877,10 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt32) {
             	case 1 :
-            	    // Ocl.g:5187:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
+            	    // Ocl.g:5060:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
             	    {
-            	    // Ocl.g:5187:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
-            	    // Ocl.g:5188:4: a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            	    // Ocl.g:5060:3: (a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
+            	    // Ocl.g:5061:4: a1= ',' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
             	    {
             	    a1=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS4335); if (state.failed) return element;
             	    if ( state.backtracking==0 ) {
@@ -8018,7 +7891,7 @@ public class OclParser extends OclANTLRParserBase {
             	      				}
             	      				collectHiddenTokens(element);
             	      				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_1, null, true);
-            	      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+            	      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
             	      			
             	    }
             	    if ( state.backtracking==0 ) {
@@ -8027,8 +7900,8 @@ public class OclParser extends OclANTLRParserBase {
             	      				addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 157, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_44);
             	      			
             	    }
-            	    // Ocl.g:5202:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
-            	    // Ocl.g:5203:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
+            	    // Ocl.g:5075:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            	    // Ocl.g:5076:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS4361);
             	    a2_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS();
@@ -8102,7 +7975,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS"
-    // Ocl.g:5239:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS returns [tudresden.ocl20.pivot.language.ocl.CollectionRangeCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a1= '..' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:5112:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS returns [tudresden.ocl20.pivot.language.ocl.CollectionRangeCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a1= '..' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.CollectionRangeCS parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.CollectionRangeCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS_StartIndex = input.index();
@@ -8116,11 +7989,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 34) ) { return element; }
-            // Ocl.g:5242:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a1= '..' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:5243:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a1= '..' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:5115:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a1= '..' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:5116:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a1= '..' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
-            // Ocl.g:5243:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:5244:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:5116:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:5117:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS4421);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -8166,7 +8039,7 @@ public class OclParser extends OclANTLRParserBase {
               		}
               		collectHiddenTokens(element);
               		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_2, null, true);
-              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
               	
             }
             if ( state.backtracking==0 ) {
@@ -8202,8 +8075,8 @@ public class OclParser extends OclANTLRParserBase {
               		addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 161, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_45);
               	
             }
-            // Ocl.g:5310:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:5311:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:5183:2: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:5184:3: a2_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS4457);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -8258,7 +8131,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS"
-    // Ocl.g:5339:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:5212:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS_StartIndex = input.index();
@@ -8269,11 +8142,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 35) ) { return element; }
-            // Ocl.g:5342:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:5343:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:5215:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:5216:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
-            // Ocl.g:5343:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:5344:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:5216:2: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:5217:3: a0_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS4494);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -8328,7 +8201,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_4"
-    // Ocl.g:5372:1: parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_5 ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | ) ;
+    // Ocl.g:5245:1: parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_5 ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_4() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_4_StartIndex = input.index();
@@ -8342,15 +8215,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 36) ) { return element; }
-            // Ocl.g:5375:1: (leftArg= parseop_OclExpressionCS_level_5 ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | ) )
-            // Ocl.g:5376:2: leftArg= parseop_OclExpressionCS_level_5 ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | )
+            // Ocl.g:5248:1: (leftArg= parseop_OclExpressionCS_level_5 ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | ) )
+            // Ocl.g:5249:2: leftArg= parseop_OclExpressionCS_level_5 ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_5_in_parseop_OclExpressionCS_level_44527);
             leftArg=parseop_OclExpressionCS_level_5();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:5376:44: ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | )
+            // Ocl.g:5249:44: ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ | )
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -8383,9 +8256,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt34) {
                 case 1 :
-                    // Ocl.g:5376:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
+                    // Ocl.g:5249:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
                     {
-                    // Ocl.g:5376:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
+                    // Ocl.g:5249:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
                     int cnt33=0;
                     loop33:
                     do {
@@ -8405,18 +8278,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt33) {
                     	case 1 :
-                    	    // Ocl.g:5377:3: () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5
+                    	    // Ocl.g:5250:3: () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5
                     	    {
-                    	    // Ocl.g:5377:3: ()
-                    	    // Ocl.g:5377:4: 
+                    	    // Ocl.g:5250:3: ()
+                    	    // Ocl.g:5250:4: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:5379:3: (a0= IMPLIES_OPERATOR )
-                    	    // Ocl.g:5380:4: a0= IMPLIES_OPERATOR
+                    	    // Ocl.g:5252:3: (a0= IMPLIES_OPERATOR )
+                    	    // Ocl.g:5253:4: a0= IMPLIES_OPERATOR
                     	    {
                     	    a0=(Token)match(input,IMPLIES_OPERATOR,FOLLOW_IMPLIES_OPERATOR_in_parseop_OclExpressionCS_level_44552); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -8435,9 +8308,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      					tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      					Object resolvedObject = result.getResolvedToken();
                     	      					if (resolvedObject == null) {
-                    	      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      					}
-                    	      					java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      					java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      					if (resolved != null) {
                     	      						Object value = resolved;
                     	      						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -8445,7 +8318,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      					}
                     	      					collectHiddenTokens(element);
                     	      					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_1, resolved, true);
-                    	      					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      				}
                     	      			
                     	    }
@@ -8553,7 +8426,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:5481:21: 
+                    // Ocl.g:5354:21: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -8581,7 +8454,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_5"
-    // Ocl.g:5486:1: parseop_OclExpressionCS_level_5 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_6 ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | ) ;
+    // Ocl.g:5359:1: parseop_OclExpressionCS_level_5 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_6 ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_5() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_5_StartIndex = input.index();
@@ -8595,15 +8468,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 37) ) { return element; }
-            // Ocl.g:5489:1: (leftArg= parseop_OclExpressionCS_level_6 ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | ) )
-            // Ocl.g:5490:1: leftArg= parseop_OclExpressionCS_level_6 ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | )
+            // Ocl.g:5362:1: (leftArg= parseop_OclExpressionCS_level_6 ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | ) )
+            // Ocl.g:5363:1: leftArg= parseop_OclExpressionCS_level_6 ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_6_in_parseop_OclExpressionCS_level_54625);
             leftArg=parseop_OclExpressionCS_level_6();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:5490:42: ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | )
+            // Ocl.g:5363:42: ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ | )
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -8636,9 +8509,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt36) {
                 case 1 :
-                    // Ocl.g:5490:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
+                    // Ocl.g:5363:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
                     {
-                    // Ocl.g:5490:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
+                    // Ocl.g:5363:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
                     int cnt35=0;
                     loop35:
                     do {
@@ -8658,18 +8531,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt35) {
                     	case 1 :
-                    	    // Ocl.g:5491:2: () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6
+                    	    // Ocl.g:5364:2: () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6
                     	    {
-                    	    // Ocl.g:5491:2: ()
-                    	    // Ocl.g:5491:3: 
+                    	    // Ocl.g:5364:2: ()
+                    	    // Ocl.g:5364:3: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:5493:2: (a0= XOR_OPERATOR )
-                    	    // Ocl.g:5494:3: a0= XOR_OPERATOR
+                    	    // Ocl.g:5366:2: (a0= XOR_OPERATOR )
+                    	    // Ocl.g:5367:3: a0= XOR_OPERATOR
                     	    {
                     	    a0=(Token)match(input,XOR_OPERATOR,FOLLOW_XOR_OPERATOR_in_parseop_OclExpressionCS_level_54645); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -8688,9 +8561,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      				Object resolvedObject = result.getResolvedToken();
                     	      				if (resolvedObject == null) {
-                    	      					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      				}
-                    	      				java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      				java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      				if (resolved != null) {
                     	      					Object value = resolved;
                     	      					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -8698,7 +8571,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      				}
                     	      				collectHiddenTokens(element);
                     	      				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_1, resolved, true);
-                    	      				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      			}
                     	      		
                     	    }
@@ -8806,7 +8679,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:5595:20: 
+                    // Ocl.g:5468:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -8834,7 +8707,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_6"
-    // Ocl.g:5600:1: parseop_OclExpressionCS_level_6 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_7 ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | ) ;
+    // Ocl.g:5473:1: parseop_OclExpressionCS_level_6 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_7 ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_6() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_6_StartIndex = input.index();
@@ -8848,15 +8721,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 38) ) { return element; }
-            // Ocl.g:5603:1: (leftArg= parseop_OclExpressionCS_level_7 ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | ) )
-            // Ocl.g:5604:1: leftArg= parseop_OclExpressionCS_level_7 ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | )
+            // Ocl.g:5476:1: (leftArg= parseop_OclExpressionCS_level_7 ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | ) )
+            // Ocl.g:5477:1: leftArg= parseop_OclExpressionCS_level_7 ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_7_in_parseop_OclExpressionCS_level_64707);
             leftArg=parseop_OclExpressionCS_level_7();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:5604:42: ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | )
+            // Ocl.g:5477:42: ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ | )
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -8889,9 +8762,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt38) {
                 case 1 :
-                    // Ocl.g:5604:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
+                    // Ocl.g:5477:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
                     {
-                    // Ocl.g:5604:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
+                    // Ocl.g:5477:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
                     int cnt37=0;
                     loop37:
                     do {
@@ -8911,18 +8784,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt37) {
                     	case 1 :
-                    	    // Ocl.g:5605:1: () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7
+                    	    // Ocl.g:5478:1: () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7
                     	    {
-                    	    // Ocl.g:5605:1: ()
-                    	    // Ocl.g:5605:2: 
+                    	    // Ocl.g:5478:1: ()
+                    	    // Ocl.g:5478:2: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:5607:1: (a0= OR_OPERATOR )
-                    	    // Ocl.g:5608:2: a0= OR_OPERATOR
+                    	    // Ocl.g:5480:1: (a0= OR_OPERATOR )
+                    	    // Ocl.g:5481:2: a0= OR_OPERATOR
                     	    {
                     	    a0=(Token)match(input,OR_OPERATOR,FOLLOW_OR_OPERATOR_in_parseop_OclExpressionCS_level_64723); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -8941,9 +8814,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      			tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      			Object resolvedObject = result.getResolvedToken();
                     	      			if (resolvedObject == null) {
-                    	      				addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      				addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      			}
-                    	      			java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      			java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      			if (resolved != null) {
                     	      				Object value = resolved;
                     	      				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -8951,7 +8824,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      			}
                     	      			collectHiddenTokens(element);
                     	      			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_1, resolved, true);
-                    	      			copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      			copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      		}
                     	      	
                     	    }
@@ -9059,7 +8932,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:5709:20: 
+                    // Ocl.g:5582:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -9087,7 +8960,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_7"
-    // Ocl.g:5714:1: parseop_OclExpressionCS_level_7 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_8 ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | ) ;
+    // Ocl.g:5587:1: parseop_OclExpressionCS_level_7 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_8 ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_7() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_7_StartIndex = input.index();
@@ -9101,15 +8974,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 39) ) { return element; }
-            // Ocl.g:5717:1: (leftArg= parseop_OclExpressionCS_level_8 ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | ) )
-            // Ocl.g:5718:1: leftArg= parseop_OclExpressionCS_level_8 ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | )
+            // Ocl.g:5590:1: (leftArg= parseop_OclExpressionCS_level_8 ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | ) )
+            // Ocl.g:5591:1: leftArg= parseop_OclExpressionCS_level_8 ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_8_in_parseop_OclExpressionCS_level_74776);
             leftArg=parseop_OclExpressionCS_level_8();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:5718:42: ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | )
+            // Ocl.g:5591:42: ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ | )
             int alt40=2;
             int LA40_0 = input.LA(1);
 
@@ -9142,9 +9015,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt40) {
                 case 1 :
-                    // Ocl.g:5718:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
+                    // Ocl.g:5591:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
                     {
-                    // Ocl.g:5718:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
+                    // Ocl.g:5591:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
                     int cnt39=0;
                     loop39:
                     do {
@@ -9164,18 +9037,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt39) {
                     	case 1 :
-                    	    // Ocl.g:5719:1: () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8
+                    	    // Ocl.g:5592:1: () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8
                     	    {
-                    	    // Ocl.g:5719:1: ()
-                    	    // Ocl.g:5719:2: 
+                    	    // Ocl.g:5592:1: ()
+                    	    // Ocl.g:5592:2: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:5721:1: (a0= AND_OPERATOR )
-                    	    // Ocl.g:5722:1: a0= AND_OPERATOR
+                    	    // Ocl.g:5594:1: (a0= AND_OPERATOR )
+                    	    // Ocl.g:5595:1: a0= AND_OPERATOR
                     	    {
                     	    a0=(Token)match(input,AND_OPERATOR,FOLLOW_AND_OPERATOR_in_parseop_OclExpressionCS_level_74791); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -9194,9 +9067,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      		Object resolvedObject = result.getResolvedToken();
                     	      		if (resolvedObject == null) {
-                    	      			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      		}
-                    	      		java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      		java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      		if (resolved != null) {
                     	      			Object value = resolved;
                     	      			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -9204,7 +9077,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      		}
                     	      		collectHiddenTokens(element);
                     	      		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_1, resolved, true);
-                    	      		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      	}
 
                     	    }
@@ -9312,7 +9185,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:5823:20: 
+                    // Ocl.g:5696:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -9340,7 +9213,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_8"
-    // Ocl.g:5828:1: parseop_OclExpressionCS_level_8 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_9 ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | ) ;
+    // Ocl.g:5701:1: parseop_OclExpressionCS_level_8 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_9 ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_8() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_8_StartIndex = input.index();
@@ -9355,15 +9228,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 40) ) { return element; }
-            // Ocl.g:5831:1: (leftArg= parseop_OclExpressionCS_level_9 ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | ) )
-            // Ocl.g:5832:1: leftArg= parseop_OclExpressionCS_level_9 ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | )
+            // Ocl.g:5704:1: (leftArg= parseop_OclExpressionCS_level_9 ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | ) )
+            // Ocl.g:5705:1: leftArg= parseop_OclExpressionCS_level_9 ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_9_in_parseop_OclExpressionCS_level_84842);
             leftArg=parseop_OclExpressionCS_level_9();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:5832:42: ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | )
+            // Ocl.g:5705:42: ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ | )
             int alt43=2;
             switch ( input.LA(1) ) {
             case EQUALITY_OPERATOR:
@@ -9446,9 +9319,9 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt43) {
                 case 1 :
-                    // Ocl.g:5832:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
+                    // Ocl.g:5705:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
                     {
-                    // Ocl.g:5832:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
+                    // Ocl.g:5705:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
                     int cnt42=0;
                     loop42:
                     do {
@@ -9477,17 +9350,17 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt42) {
                     	case 1 :
-                    	    // Ocl.g:5833:1: () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9
+                    	    // Ocl.g:5706:1: () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9
                     	    {
-                    	    // Ocl.g:5833:1: ()
-                    	    // Ocl.g:5833:2: 
+                    	    // Ocl.g:5706:1: ()
+                    	    // Ocl.g:5706:2: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:5835:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) )
+                    	    // Ocl.g:5708:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) )
                     	    int alt41=2;
                     	    int LA41_0 = input.LA(1);
 
@@ -9506,10 +9379,10 @@ public class OclParser extends OclANTLRParserBase {
                     	    }
                     	    switch (alt41) {
                     	        case 1 :
-                    	            // Ocl.g:5836:1: (a0= EQUALITY_OPERATOR )
+                    	            // Ocl.g:5709:1: (a0= EQUALITY_OPERATOR )
                     	            {
-                    	            // Ocl.g:5836:1: (a0= EQUALITY_OPERATOR )
-                    	            // Ocl.g:5837:1: a0= EQUALITY_OPERATOR
+                    	            // Ocl.g:5709:1: (a0= EQUALITY_OPERATOR )
+                    	            // Ocl.g:5710:1: a0= EQUALITY_OPERATOR
                     	            {
                     	            a0=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_parseop_OclExpressionCS_level_84859); if (state.failed) return element;
                     	            if ( state.backtracking==0 ) {
@@ -9528,9 +9401,9 @@ public class OclParser extends OclANTLRParserBase {
                     	              		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	              		Object resolvedObject = result.getResolvedToken();
                     	              		if (resolvedObject == null) {
-                    	              			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	              			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	              		}
-                    	              		java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	              		java.lang.String resolved = (java.lang.String) resolvedObject;
                     	              		if (resolved != null) {
                     	              			Object value = resolved;
                     	              			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -9538,7 +9411,7 @@ public class OclParser extends OclANTLRParserBase {
                     	              		}
                     	              		collectHiddenTokens(element);
                     	              		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_0_0, resolved, true);
-                    	              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	              	}
 
                     	            }
@@ -9582,10 +9455,10 @@ public class OclParser extends OclANTLRParserBase {
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // Ocl.g:5900:2: (a1= NEQUALITY_OPERATOR )
+                    	            // Ocl.g:5773:2: (a1= NEQUALITY_OPERATOR )
                     	            {
-                    	            // Ocl.g:5900:2: (a1= NEQUALITY_OPERATOR )
-                    	            // Ocl.g:5901:1: a1= NEQUALITY_OPERATOR
+                    	            // Ocl.g:5773:2: (a1= NEQUALITY_OPERATOR )
+                    	            // Ocl.g:5774:1: a1= NEQUALITY_OPERATOR
                     	            {
                     	            a1=(Token)match(input,NEQUALITY_OPERATOR,FOLLOW_NEQUALITY_OPERATOR_in_parseop_OclExpressionCS_level_84876); if (state.failed) return element;
                     	            if ( state.backtracking==0 ) {
@@ -9604,9 +9477,9 @@ public class OclParser extends OclANTLRParserBase {
                     	              		tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	              		Object resolvedObject = result.getResolvedToken();
                     	              		if (resolvedObject == null) {
-                    	              			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+                    	              			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
                     	              		}
-                    	              		java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	              		java.lang.String resolved = (java.lang.String) resolvedObject;
                     	              		if (resolved != null) {
                     	              			Object value = resolved;
                     	              			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -9614,7 +9487,7 @@ public class OclParser extends OclANTLRParserBase {
                     	              		}
                     	              		collectHiddenTokens(element);
                     	              		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_1_0, resolved, true);
-                    	              		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+                    	              		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
                     	              	}
 
                     	            }
@@ -9761,7 +9634,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6035:20: 
+                    // Ocl.g:5908:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -9789,7 +9662,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_9"
-    // Ocl.g:6040:1: parseop_OclExpressionCS_level_9 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_11 ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | ) ;
+    // Ocl.g:5913:1: parseop_OclExpressionCS_level_9 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_11 ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_9() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_9_StartIndex = input.index();
@@ -9803,15 +9676,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 41) ) { return element; }
-            // Ocl.g:6043:1: (leftArg= parseop_OclExpressionCS_level_11 ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | ) )
-            // Ocl.g:6044:1: leftArg= parseop_OclExpressionCS_level_11 ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | )
+            // Ocl.g:5916:1: (leftArg= parseop_OclExpressionCS_level_11 ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | ) )
+            // Ocl.g:5917:1: leftArg= parseop_OclExpressionCS_level_11 ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_11_in_parseop_OclExpressionCS_level_94932);
             leftArg=parseop_OclExpressionCS_level_11();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:6044:43: ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | )
+            // Ocl.g:5917:43: ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ | )
             int alt45=2;
             int LA45_0 = input.LA(1);
 
@@ -9844,9 +9717,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt45) {
                 case 1 :
-                    // Ocl.g:6044:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
+                    // Ocl.g:5917:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
                     {
-                    // Ocl.g:6044:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
+                    // Ocl.g:5917:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
                     int cnt44=0;
                     loop44:
                     do {
@@ -9866,18 +9739,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt44) {
                     	case 1 :
-                    	    // Ocl.g:6045:1: () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11
+                    	    // Ocl.g:5918:1: () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11
                     	    {
-                    	    // Ocl.g:6045:1: ()
-                    	    // Ocl.g:6045:2: 
+                    	    // Ocl.g:5918:1: ()
+                    	    // Ocl.g:5918:2: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:6047:1: (a0= RELATIONAL_OPERATOR )
-                    	    // Ocl.g:6048:1: a0= RELATIONAL_OPERATOR
+                    	    // Ocl.g:5920:1: (a0= RELATIONAL_OPERATOR )
+                    	    // Ocl.g:5921:1: a0= RELATIONAL_OPERATOR
                     	    {
                     	    a0=(Token)match(input,RELATIONAL_OPERATOR,FOLLOW_RELATIONAL_OPERATOR_in_parseop_OclExpressionCS_level_94947); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -9896,9 +9769,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      Object resolvedObject = result.getResolvedToken();
                     	      if (resolvedObject == null) {
-                    	      	addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      	addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      }
-                    	      java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      if (resolved != null) {
                     	      	Object value = resolved;
                     	      	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -9906,7 +9779,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_1, resolved, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      }
 
                     	    }
@@ -10014,7 +9887,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6149:20: 
+                    // Ocl.g:6022:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -10042,7 +9915,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_11"
-    // Ocl.g:6154:1: parseop_OclExpressionCS_level_11 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_12 ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | ) ;
+    // Ocl.g:6027:1: parseop_OclExpressionCS_level_11 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_12 ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_11() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_11_StartIndex = input.index();
@@ -10056,15 +9929,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 42) ) { return element; }
-            // Ocl.g:6157:1: (leftArg= parseop_OclExpressionCS_level_12 ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | ) )
-            // Ocl.g:6158:1: leftArg= parseop_OclExpressionCS_level_12 ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | )
+            // Ocl.g:6030:1: (leftArg= parseop_OclExpressionCS_level_12 ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | ) )
+            // Ocl.g:6031:1: leftArg= parseop_OclExpressionCS_level_12 ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_12_in_parseop_OclExpressionCS_level_114998);
             leftArg=parseop_OclExpressionCS_level_12();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:6158:43: ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | )
+            // Ocl.g:6031:43: ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ | )
             int alt47=2;
             int LA47_0 = input.LA(1);
 
@@ -10097,9 +9970,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt47) {
                 case 1 :
-                    // Ocl.g:6158:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
+                    // Ocl.g:6031:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
                     {
-                    // Ocl.g:6158:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
+                    // Ocl.g:6031:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
                     int cnt46=0;
                     loop46:
                     do {
@@ -10119,18 +9992,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt46) {
                     	case 1 :
-                    	    // Ocl.g:6159:1: () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12
+                    	    // Ocl.g:6032:1: () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12
                     	    {
-                    	    // Ocl.g:6159:1: ()
-                    	    // Ocl.g:6159:2: 
+                    	    // Ocl.g:6032:1: ()
+                    	    // Ocl.g:6032:2: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:6161:1: (a0= ADDITIVE_OPERATOR )
-                    	    // Ocl.g:6162:1: a0= ADDITIVE_OPERATOR
+                    	    // Ocl.g:6034:1: (a0= ADDITIVE_OPERATOR )
+                    	    // Ocl.g:6035:1: a0= ADDITIVE_OPERATOR
                     	    {
                     	    a0=(Token)match(input,ADDITIVE_OPERATOR,FOLLOW_ADDITIVE_OPERATOR_in_parseop_OclExpressionCS_level_115013); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -10149,9 +10022,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      Object resolvedObject = result.getResolvedToken();
                     	      if (resolvedObject == null) {
-                    	      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      }
-                    	      java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      if (resolved != null) {
                     	      Object value = resolved;
                     	      element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -10159,7 +10032,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_1, resolved, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      }
 
                     	    }
@@ -10267,7 +10140,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6263:20: 
+                    // Ocl.g:6136:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -10295,7 +10168,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_12"
-    // Ocl.g:6268:1: parseop_OclExpressionCS_level_12 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_13 ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | ) ;
+    // Ocl.g:6141:1: parseop_OclExpressionCS_level_12 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : leftArg= parseop_OclExpressionCS_level_13 ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_12() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_12_StartIndex = input.index();
@@ -10309,15 +10182,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 43) ) { return element; }
-            // Ocl.g:6271:1: (leftArg= parseop_OclExpressionCS_level_13 ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | ) )
-            // Ocl.g:6272:1: leftArg= parseop_OclExpressionCS_level_13 ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | )
+            // Ocl.g:6144:1: (leftArg= parseop_OclExpressionCS_level_13 ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | ) )
+            // Ocl.g:6145:1: leftArg= parseop_OclExpressionCS_level_13 ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_13_in_parseop_OclExpressionCS_level_125064);
             leftArg=parseop_OclExpressionCS_level_13();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:6272:43: ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | )
+            // Ocl.g:6145:43: ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ | )
             int alt49=2;
             int LA49_0 = input.LA(1);
 
@@ -10350,9 +10223,9 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt49) {
                 case 1 :
-                    // Ocl.g:6272:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
+                    // Ocl.g:6145:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
                     {
-                    // Ocl.g:6272:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
+                    // Ocl.g:6145:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
                     int cnt48=0;
                     loop48:
                     do {
@@ -10372,18 +10245,18 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt48) {
                     	case 1 :
-                    	    // Ocl.g:6273:1: () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13
+                    	    // Ocl.g:6146:1: () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13
                     	    {
-                    	    // Ocl.g:6273:1: ()
-                    	    // Ocl.g:6273:2: 
+                    	    // Ocl.g:6146:1: ()
+                    	    // Ocl.g:6146:2: 
                     	    {
                     	    }
 
                     	    if ( state.backtracking==0 ) {
                     	       element = null; 
                     	    }
-                    	    // Ocl.g:6275:1: (a0= MULT_OPERATOR )
-                    	    // Ocl.g:6276:1: a0= MULT_OPERATOR
+                    	    // Ocl.g:6148:1: (a0= MULT_OPERATOR )
+                    	    // Ocl.g:6149:1: a0= MULT_OPERATOR
                     	    {
                     	    a0=(Token)match(input,MULT_OPERATOR,FOLLOW_MULT_OPERATOR_in_parseop_OclExpressionCS_level_125079); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -10402,9 +10275,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                     	      Object resolvedObject = result.getResolvedToken();
                     	      if (resolvedObject == null) {
-                    	      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                    	      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                     	      }
-                    	      java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      if (resolved != null) {
                     	      Object value = resolved;
                     	      element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -10412,7 +10285,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_1, resolved, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                     	      }
 
                     	    }
@@ -10520,7 +10393,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6377:20: 
+                    // Ocl.g:6250:20: 
                     {
                     if ( state.backtracking==0 ) {
                        element = leftArg; 
@@ -10548,7 +10421,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_13"
-    // Ocl.g:6382:1: parseop_OclExpressionCS_level_13 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : ( (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | arg= parseop_OclExpressionCS_level_14 );
+    // Ocl.g:6255:1: parseop_OclExpressionCS_level_13 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : ( (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | arg= parseop_OclExpressionCS_level_14 );
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_13() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_13_StartIndex = input.index();
@@ -10560,15 +10433,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 44) ) { return element; }
-            // Ocl.g:6385:1: ( (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | arg= parseop_OclExpressionCS_level_14 )
+            // Ocl.g:6258:1: ( (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | arg= parseop_OclExpressionCS_level_14 )
             int alt50=3;
             alt50 = dfa50.predict(input);
             switch (alt50) {
                 case 1 :
-                    // Ocl.g:6386:1: (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14
+                    // Ocl.g:6259:1: (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14
                     {
-                    // Ocl.g:6386:1: (a0= ADDITIVE_OPERATOR )
-                    // Ocl.g:6387:1: a0= ADDITIVE_OPERATOR
+                    // Ocl.g:6259:1: (a0= ADDITIVE_OPERATOR )
+                    // Ocl.g:6260:1: a0= ADDITIVE_OPERATOR
                     {
                     a0=(Token)match(input,ADDITIVE_OPERATOR,FOLLOW_ADDITIVE_OPERATOR_in_parseop_OclExpressionCS_level_135132); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -10587,9 +10460,9 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                       }
-                      java.lang.String resolved = (java.lang.String)resolvedObject;
+                      java.lang.String resolved = (java.lang.String) resolvedObject;
                       if (resolved != null) {
                       Object value = resolved;
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -10597,7 +10470,7 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_0, resolved, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                       }
 
                     }
@@ -10667,10 +10540,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6469:1: (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14
+                    // Ocl.g:6342:1: (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14
                     {
-                    // Ocl.g:6469:1: (a0= NOT_OPERATOR )
-                    // Ocl.g:6470:1: a0= NOT_OPERATOR
+                    // Ocl.g:6342:1: (a0= NOT_OPERATOR )
+                    // Ocl.g:6343:1: a0= NOT_OPERATOR
                     {
                     a0=(Token)match(input,NOT_OPERATOR,FOLLOW_NOT_OPERATOR_in_parseop_OclExpressionCS_level_135156); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -10689,9 +10562,9 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                       }
-                      java.lang.String resolved = (java.lang.String)resolvedObject;
+                      java.lang.String resolved = (java.lang.String) resolvedObject;
                       if (resolved != null) {
                       Object value = resolved;
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -10699,7 +10572,7 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_0, resolved, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                       }
 
                     }
@@ -10769,7 +10642,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:6553:1: arg= parseop_OclExpressionCS_level_14
+                    // Ocl.g:6426:1: arg= parseop_OclExpressionCS_level_14
                     {
                     pushFollow(FOLLOW_parseop_OclExpressionCS_level_14_in_parseop_OclExpressionCS_level_135179);
                     arg=parseop_OclExpressionCS_level_14();
@@ -10798,7 +10671,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_14"
-    // Ocl.g:6556:1: parseop_OclExpressionCS_level_14 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : arg= parseop_OclExpressionCS_level_20 ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | ) ;
+    // Ocl.g:6429:1: parseop_OclExpressionCS_level_14 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : arg= parseop_OclExpressionCS_level_20 ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | ) ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_14() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_14_StartIndex = input.index();
@@ -10815,15 +10688,15 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 45) ) { return element; }
-            // Ocl.g:6559:1: (arg= parseop_OclExpressionCS_level_20 ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | ) )
-            // Ocl.g:6560:1: arg= parseop_OclExpressionCS_level_20 ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | )
+            // Ocl.g:6432:1: (arg= parseop_OclExpressionCS_level_20 ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | ) )
+            // Ocl.g:6433:1: arg= parseop_OclExpressionCS_level_20 ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | )
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_20_in_parseop_OclExpressionCS_level_145201);
             arg=parseop_OclExpressionCS_level_20();
 
             state._fsp--;
             if (state.failed) return element;
-            // Ocl.g:6560:39: ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | )
+            // Ocl.g:6433:39: ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* | )
             int alt52=2;
             int LA52_0 = input.LA(1);
 
@@ -10856,10 +10729,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt52) {
                 case 1 :
-                    // Ocl.g:6561:1: (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
+                    // Ocl.g:6434:1: (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
                     {
-                    // Ocl.g:6561:1: (a0= NAVIGATION_OPERATOR )
-                    // Ocl.g:6562:1: a0= NAVIGATION_OPERATOR
+                    // Ocl.g:6434:1: (a0= NAVIGATION_OPERATOR )
+                    // Ocl.g:6435:1: a0= NAVIGATION_OPERATOR
                     {
                     a0=(Token)match(input,NAVIGATION_OPERATOR,FOLLOW_NAVIGATION_OPERATOR_in_parseop_OclExpressionCS_level_145210); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -10878,9 +10751,9 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                       }
-                      java.lang.String resolved = (java.lang.String)resolvedObject;
+                      java.lang.String resolved = (java.lang.String) resolvedObject;
                       if (resolved != null) {
                       Object value = resolved;
                       addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, value);
@@ -10888,7 +10761,7 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_2, resolved, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
                       }
 
                     }
@@ -10911,8 +10784,8 @@ public class OclParser extends OclANTLRParserBase {
                       addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_38, 176, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_49);
 
                     }
-                    // Ocl.g:6607:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
-                    // Ocl.g:6608:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
+                    // Ocl.g:6480:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+                    // Ocl.g:6481:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS_in_parseop_OclExpressionCS_level_145225);
                     a1_0=parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS();
@@ -10988,20 +10861,20 @@ public class OclParser extends OclANTLRParserBase {
                       addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_110, 177);
 
                     }
-                    // Ocl.g:6672:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
+                    // Ocl.g:6545:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
                     loop51:
                     do {
                         int alt51=2;
                         alt51 = dfa51.predict(input);
                         switch (alt51) {
                     	case 1 :
-                    	    // Ocl.g:6673:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
+                    	    // Ocl.g:6546:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
                     	    {
-                    	    // Ocl.g:6673:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
-                    	    // Ocl.g:6674:1: (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+                    	    // Ocl.g:6546:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
+                    	    // Ocl.g:6547:1: (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
                     	    {
-                    	    // Ocl.g:6674:1: (a2= NAVIGATION_OPERATOR )
-                    	    // Ocl.g:6675:1: a2= NAVIGATION_OPERATOR
+                    	    // Ocl.g:6547:1: (a2= NAVIGATION_OPERATOR )
+                    	    // Ocl.g:6548:1: a2= NAVIGATION_OPERATOR
                     	    {
                     	    a2=(Token)match(input,NAVIGATION_OPERATOR,FOLLOW_NAVIGATION_OPERATOR_in_parseop_OclExpressionCS_level_145243); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -11020,9 +10893,9 @@ public class OclParser extends OclANTLRParserBase {
                     	      tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), result);
                     	      Object resolvedObject = result.getResolvedToken();
                     	      if (resolvedObject == null) {
-                    	      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+                    	      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
                     	      }
-                    	      java.lang.String resolved = (java.lang.String)resolvedObject;
+                    	      java.lang.String resolved = (java.lang.String) resolvedObject;
                     	      if (resolved != null) {
                     	      Object value = resolved;
                     	      addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, value);
@@ -11030,7 +10903,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_1, resolved, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
                     	      }
 
                     	    }
@@ -11053,8 +10926,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_38, 178, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_49);
 
                     	    }
-                    	    // Ocl.g:6720:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
-                    	    // Ocl.g:6721:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
+                    	    // Ocl.g:6593:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+                    	    // Ocl.g:6594:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS_in_parseop_OclExpressionCS_level_145258);
                     	    a3_0=parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS();
@@ -11212,7 +11085,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6851:15: 
+                    // Ocl.g:6724:15: 
                     {
                     if ( state.backtracking==0 ) {
                        element = arg; 
@@ -11240,7 +11113,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parseop_OclExpressionCS_level_20"
-    // Ocl.g:6855:1: parseop_OclExpressionCS_level_20 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS | c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS | c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS | c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS | c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS | c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS | c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS | c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS | c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS | c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS | c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS | c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS | c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS | c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS | c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS | c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS );
+    // Ocl.g:6728:1: parseop_OclExpressionCS_level_20 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS | c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS | c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS | c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS | c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS | c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS | c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS | c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS | c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS | c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS | c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS | c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS | c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS | c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS | c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS | c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS );
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parseop_OclExpressionCS_level_20() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parseop_OclExpressionCS_level_20_StartIndex = input.index();
@@ -11285,12 +11158,12 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 46) ) { return element; }
-            // Ocl.g:6858:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS | c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS | c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS | c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS | c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS | c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS | c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS | c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS | c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS | c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS | c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS | c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS | c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS | c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS | c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS | c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS )
+            // Ocl.g:6731:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS | c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS | c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS | c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS | c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS | c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS | c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS | c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS | c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS | c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS | c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS | c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS | c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS | c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS | c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS | c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS )
             int alt53=18;
             alt53 = dfa53.predict(input);
             switch (alt53) {
                 case 1 :
-                    // Ocl.g:6859:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS
+                    // Ocl.g:6732:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_in_parseop_OclExpressionCS_level_205304);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS();
@@ -11304,7 +11177,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6860:2: c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS
+                    // Ocl.g:6733:2: c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_in_parseop_OclExpressionCS_level_205312);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS();
@@ -11318,7 +11191,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:6861:2: c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS
+                    // Ocl.g:6734:2: c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS_in_parseop_OclExpressionCS_level_205320);
                     c2=parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS();
@@ -11332,7 +11205,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:6862:2: c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS
+                    // Ocl.g:6735:2: c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS_in_parseop_OclExpressionCS_level_205328);
                     c3=parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS();
@@ -11346,7 +11219,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 5 :
-                    // Ocl.g:6863:2: c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS
+                    // Ocl.g:6736:2: c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IfExpCS_in_parseop_OclExpressionCS_level_205336);
                     c4=parse_tudresden_ocl20_pivot_language_ocl_IfExpCS();
@@ -11360,7 +11233,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 6 :
-                    // Ocl.g:6864:2: c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS
+                    // Ocl.g:6737:2: c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_in_parseop_OclExpressionCS_level_205344);
                     c5=parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS();
@@ -11374,7 +11247,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 7 :
-                    // Ocl.g:6865:2: c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS
+                    // Ocl.g:6738:2: c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS_in_parseop_OclExpressionCS_level_205352);
                     c6=parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS();
@@ -11388,7 +11261,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 8 :
-                    // Ocl.g:6866:2: c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS
+                    // Ocl.g:6739:2: c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS_in_parseop_OclExpressionCS_level_205360);
                     c7=parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS();
@@ -11402,7 +11275,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 9 :
-                    // Ocl.g:6867:2: c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS
+                    // Ocl.g:6740:2: c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS_in_parseop_OclExpressionCS_level_205368);
                     c8=parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS();
@@ -11416,7 +11289,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 10 :
-                    // Ocl.g:6868:2: c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS
+                    // Ocl.g:6741:2: c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_LetExpCS_in_parseop_OclExpressionCS_level_205376);
                     c9=parse_tudresden_ocl20_pivot_language_ocl_LetExpCS();
@@ -11430,7 +11303,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 11 :
-                    // Ocl.g:6869:2: c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS
+                    // Ocl.g:6742:2: c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS_in_parseop_OclExpressionCS_level_205384);
                     c10=parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS();
@@ -11444,7 +11317,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 12 :
-                    // Ocl.g:6870:2: c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS
+                    // Ocl.g:6743:2: c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS_in_parseop_OclExpressionCS_level_205392);
                     c11=parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS();
@@ -11458,7 +11331,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 13 :
-                    // Ocl.g:6871:2: c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS
+                    // Ocl.g:6744:2: c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS_in_parseop_OclExpressionCS_level_205400);
                     c12=parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS();
@@ -11472,7 +11345,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 14 :
-                    // Ocl.g:6872:2: c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS
+                    // Ocl.g:6745:2: c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS_in_parseop_OclExpressionCS_level_205408);
                     c13=parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS();
@@ -11486,7 +11359,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 15 :
-                    // Ocl.g:6873:2: c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS
+                    // Ocl.g:6746:2: c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS_in_parseop_OclExpressionCS_level_205416);
                     c14=parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS();
@@ -11500,7 +11373,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 16 :
-                    // Ocl.g:6874:2: c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS
+                    // Ocl.g:6747:2: c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS_in_parseop_OclExpressionCS_level_205424);
                     c15=parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS();
@@ -11514,7 +11387,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 17 :
-                    // Ocl.g:6875:2: c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS
+                    // Ocl.g:6748:2: c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS_in_parseop_OclExpressionCS_level_205432);
                     c16=parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS();
@@ -11528,7 +11401,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 18 :
-                    // Ocl.g:6876:2: c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS
+                    // Ocl.g:6749:2: c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS_in_parseop_OclExpressionCS_level_205440);
                     c17=parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS();
@@ -11557,7 +11430,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS"
-    // Ocl.g:6879:1: parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS returns [tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element = null] : ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) ( ( (a8= IS_MARKED_PRE ) ) )? a9= '(' ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a13= ')' ;
+    // Ocl.g:6752:1: parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS returns [tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element = null] : ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) ( ( (a8= IS_MARKED_PRE ) ) )? a9= '(' ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a13= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_StartIndex = input.index();
@@ -11582,10 +11455,10 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 47) ) { return element; }
-            // Ocl.g:6882:1: ( ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) ( ( (a8= IS_MARKED_PRE ) ) )? a9= '(' ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a13= ')' )
-            // Ocl.g:6883:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) ( ( (a8= IS_MARKED_PRE ) ) )? a9= '(' ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a13= ')'
+            // Ocl.g:6755:1: ( ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) ( ( (a8= IS_MARKED_PRE ) ) )? a9= '(' ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a13= ')' )
+            // Ocl.g:6756:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) ) ( ( (a8= IS_MARKED_PRE ) ) )? a9= '(' ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a13= ')'
             {
-            // Ocl.g:6883:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) )
+            // Ocl.g:6756:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) | (a2= NOT_OPERATOR ) | (a3= AND_OPERATOR ) | (a4= OR_OPERATOR ) | (a5= XOR_OPERATOR ) | (a6= IMPLIES_OPERATOR ) | (a7= SIMPLE_NAME ) )
             int alt54=8;
             switch ( input.LA(1) ) {
             case EQUALITY_OPERATOR:
@@ -11638,10 +11511,10 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt54) {
                 case 1 :
-                    // Ocl.g:6884:1: (a0= EQUALITY_OPERATOR )
+                    // Ocl.g:6757:1: (a0= EQUALITY_OPERATOR )
                     {
-                    // Ocl.g:6884:1: (a0= EQUALITY_OPERATOR )
-                    // Ocl.g:6885:1: a0= EQUALITY_OPERATOR
+                    // Ocl.g:6757:1: (a0= EQUALITY_OPERATOR )
+                    // Ocl.g:6758:1: a0= EQUALITY_OPERATOR
                     {
                     a0=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5466); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11660,7 +11533,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11673,8 +11546,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_0_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
                       }
 
                     }
@@ -11692,10 +11565,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:6926:2: (a1= NEQUALITY_OPERATOR )
+                    // Ocl.g:6799:2: (a1= NEQUALITY_OPERATOR )
                     {
-                    // Ocl.g:6926:2: (a1= NEQUALITY_OPERATOR )
-                    // Ocl.g:6927:1: a1= NEQUALITY_OPERATOR
+                    // Ocl.g:6799:2: (a1= NEQUALITY_OPERATOR )
+                    // Ocl.g:6800:1: a1= NEQUALITY_OPERATOR
                     {
                     a1=(Token)match(input,NEQUALITY_OPERATOR,FOLLOW_NEQUALITY_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5483); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11714,7 +11587,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11727,8 +11600,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_1_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, proxy);
                       }
 
                     }
@@ -11746,10 +11619,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:6968:2: (a2= NOT_OPERATOR )
+                    // Ocl.g:6841:2: (a2= NOT_OPERATOR )
                     {
-                    // Ocl.g:6968:2: (a2= NOT_OPERATOR )
-                    // Ocl.g:6969:1: a2= NOT_OPERATOR
+                    // Ocl.g:6841:2: (a2= NOT_OPERATOR )
+                    // Ocl.g:6842:1: a2= NOT_OPERATOR
                     {
                     a2=(Token)match(input,NOT_OPERATOR,FOLLOW_NOT_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5500); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11768,7 +11641,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11781,8 +11654,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_2_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
                       }
 
                     }
@@ -11800,10 +11673,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:7010:2: (a3= AND_OPERATOR )
+                    // Ocl.g:6883:2: (a3= AND_OPERATOR )
                     {
-                    // Ocl.g:7010:2: (a3= AND_OPERATOR )
-                    // Ocl.g:7011:1: a3= AND_OPERATOR
+                    // Ocl.g:6883:2: (a3= AND_OPERATOR )
+                    // Ocl.g:6884:1: a3= AND_OPERATOR
                     {
                     a3=(Token)match(input,AND_OPERATOR,FOLLOW_AND_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5517); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11822,7 +11695,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11835,8 +11708,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_3_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, proxy);
                       }
 
                     }
@@ -11854,10 +11727,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 5 :
-                    // Ocl.g:7052:2: (a4= OR_OPERATOR )
+                    // Ocl.g:6925:2: (a4= OR_OPERATOR )
                     {
-                    // Ocl.g:7052:2: (a4= OR_OPERATOR )
-                    // Ocl.g:7053:1: a4= OR_OPERATOR
+                    // Ocl.g:6925:2: (a4= OR_OPERATOR )
+                    // Ocl.g:6926:1: a4= OR_OPERATOR
                     {
                     a4=(Token)match(input,OR_OPERATOR,FOLLOW_OR_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5534); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11876,7 +11749,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11889,8 +11762,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_4_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
                       }
 
                     }
@@ -11908,10 +11781,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 6 :
-                    // Ocl.g:7094:2: (a5= XOR_OPERATOR )
+                    // Ocl.g:6967:2: (a5= XOR_OPERATOR )
                     {
-                    // Ocl.g:7094:2: (a5= XOR_OPERATOR )
-                    // Ocl.g:7095:1: a5= XOR_OPERATOR
+                    // Ocl.g:6967:2: (a5= XOR_OPERATOR )
+                    // Ocl.g:6968:1: a5= XOR_OPERATOR
                     {
                     a5=(Token)match(input,XOR_OPERATOR,FOLLOW_XOR_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5551); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11930,7 +11803,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11943,8 +11816,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_5_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, proxy);
                       }
 
                     }
@@ -11962,10 +11835,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 7 :
-                    // Ocl.g:7136:2: (a6= IMPLIES_OPERATOR )
+                    // Ocl.g:7009:2: (a6= IMPLIES_OPERATOR )
                     {
-                    // Ocl.g:7136:2: (a6= IMPLIES_OPERATOR )
-                    // Ocl.g:7137:1: a6= IMPLIES_OPERATOR
+                    // Ocl.g:7009:2: (a6= IMPLIES_OPERATOR )
+                    // Ocl.g:7010:1: a6= IMPLIES_OPERATOR
                     {
                     a6=(Token)match(input,IMPLIES_OPERATOR,FOLLOW_IMPLIES_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5568); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -11984,7 +11857,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -11997,8 +11870,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_6_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, proxy);
                       }
 
                     }
@@ -12016,10 +11889,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 8 :
-                    // Ocl.g:7178:2: (a7= SIMPLE_NAME )
+                    // Ocl.g:7051:2: (a7= SIMPLE_NAME )
                     {
-                    // Ocl.g:7178:2: (a7= SIMPLE_NAME )
-                    // Ocl.g:7179:1: a7= SIMPLE_NAME
+                    // Ocl.g:7051:2: (a7= SIMPLE_NAME )
+                    // Ocl.g:7052:1: a7= SIMPLE_NAME
                     {
                     a7=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5585); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -12038,7 +11911,7 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
                       }
                       String resolved = (String) resolvedObject;
                       tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -12051,8 +11924,8 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_7_0, proxy, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, proxy);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, proxy);
                       }
 
                     }
@@ -12079,7 +11952,7 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_127, 189);
 
             }
-            // Ocl.g:7226:1: ( ( (a8= IS_MARKED_PRE ) ) )?
+            // Ocl.g:7099:1: ( ( (a8= IS_MARKED_PRE ) ) )?
             int alt55=2;
             int LA55_0 = input.LA(1);
 
@@ -12088,13 +11961,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt55) {
                 case 1 :
-                    // Ocl.g:7227:1: ( (a8= IS_MARKED_PRE ) )
+                    // Ocl.g:7100:1: ( (a8= IS_MARKED_PRE ) )
                     {
-                    // Ocl.g:7227:1: ( (a8= IS_MARKED_PRE ) )
-                    // Ocl.g:7228:1: (a8= IS_MARKED_PRE )
+                    // Ocl.g:7100:1: ( (a8= IS_MARKED_PRE ) )
+                    // Ocl.g:7101:1: (a8= IS_MARKED_PRE )
                     {
-                    // Ocl.g:7228:1: (a8= IS_MARKED_PRE )
-                    // Ocl.g:7229:1: a8= IS_MARKED_PRE
+                    // Ocl.g:7101:1: (a8= IS_MARKED_PRE )
+                    // Ocl.g:7102:1: a8= IS_MARKED_PRE
                     {
                     a8=(Token)match(input,IS_MARKED_PRE,FOLLOW_IS_MARKED_PRE_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5609); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -12113,9 +11986,9 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a8).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStopIndex());
                       }
-                      java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+                      java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
                       if (resolved != null) {
                       Object value = resolved;
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), value);
@@ -12123,7 +11996,7 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2_0_0_0, resolved, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a8, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a8, element);
                       }
 
                     }
@@ -12160,7 +12033,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_3, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a9, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -12197,7 +12070,7 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_103, 192);
 
             }
-            // Ocl.g:7313:1: ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )?
+            // Ocl.g:7186:1: ( ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )?
             int alt57=2;
             int LA57_0 = input.LA(1);
 
@@ -12206,13 +12079,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt57) {
                 case 1 :
-                    // Ocl.g:7314:1: ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
+                    // Ocl.g:7187:1: ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
                     {
-                    // Ocl.g:7314:1: ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
-                    // Ocl.g:7315:1: (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
+                    // Ocl.g:7187:1: ( (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
+                    // Ocl.g:7188:1: (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
                     {
-                    // Ocl.g:7315:1: (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-                    // Ocl.g:7316:1: a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+                    // Ocl.g:7188:1: (a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    // Ocl.g:7189:1: a10_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5647);
                     a10_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -12250,7 +12123,7 @@ public class OclParser extends OclANTLRParserBase {
                       addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_103, 193);
 
                     }
-                    // Ocl.g:7342:1: ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
+                    // Ocl.g:7215:1: ( (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
                     loop56:
                     do {
                         int alt56=2;
@@ -12263,10 +12136,10 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt56) {
                     	case 1 :
-                    	    // Ocl.g:7343:1: (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+                    	    // Ocl.g:7216:1: (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
                     	    {
-                    	    // Ocl.g:7343:1: (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-                    	    // Ocl.g:7344:1: a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    	    // Ocl.g:7216:1: (a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+                    	    // Ocl.g:7217:1: a11= ',' (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
                     	    {
                     	    a11=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5663); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -12277,7 +12150,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_0, null, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a11, element);
 
                     	    }
                     	    if ( state.backtracking==0 ) {
@@ -12313,8 +12186,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 194, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_29);
 
                     	    }
-                    	    // Ocl.g:7385:1: (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-                    	    // Ocl.g:7386:1: a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+                    	    // Ocl.g:7258:1: (a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    	    // Ocl.g:7259:1: a12_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS5676);
                     	    a12_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -12395,7 +12268,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a13, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a13, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -12459,7 +12332,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS"
-    // Ocl.g:7481:1: parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS returns [tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a7= ')' ;
+    // Ocl.g:7354:1: parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS returns [tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a7= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_StartIndex = input.index();
@@ -12479,11 +12352,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 48) ) { return element; }
-            // Ocl.g:7484:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a7= ')' )
-            // Ocl.g:7485:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a7= ')'
+            // Ocl.g:7357:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a7= ')' )
+            // Ocl.g:7358:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) a3= '(' ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )? a7= ')'
             {
-            // Ocl.g:7485:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
-            // Ocl.g:7486:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
+            // Ocl.g:7358:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
+            // Ocl.g:7359:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS5732);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS();
@@ -12529,7 +12402,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_2, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -12538,8 +12411,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_128, 200);
 
             }
-            // Ocl.g:7525:1: (a2= SIMPLE_NAME )
-            // Ocl.g:7526:1: a2= SIMPLE_NAME
+            // Ocl.g:7398:1: (a2= SIMPLE_NAME )
+            // Ocl.g:7399:1: a2= SIMPLE_NAME
             {
             a2=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS5757); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -12558,7 +12431,7 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
               }
               String resolved = (String) resolvedObject;
               tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -12571,8 +12444,8 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_4, proxy, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
               }
 
             }
@@ -12594,7 +12467,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_6, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -12631,7 +12504,7 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_105, 202);
 
             }
-            // Ocl.g:7607:1: ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )?
+            // Ocl.g:7480:1: ( ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* ) )?
             int alt59=2;
             int LA59_0 = input.LA(1);
 
@@ -12640,13 +12513,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt59) {
                 case 1 :
-                    // Ocl.g:7608:1: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
+                    // Ocl.g:7481:1: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
                     {
-                    // Ocl.g:7608:1: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
-                    // Ocl.g:7609:1: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
+                    // Ocl.g:7481:1: ( (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )* )
+                    // Ocl.g:7482:1: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
                     {
-                    // Ocl.g:7609:1: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-                    // Ocl.g:7610:1: a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+                    // Ocl.g:7482:1: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    // Ocl.g:7483:1: a4_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS5787);
                     a4_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -12684,7 +12557,7 @@ public class OclParser extends OclANTLRParserBase {
                       addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_105, 203);
 
                     }
-                    // Ocl.g:7636:1: ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
+                    // Ocl.g:7509:1: ( (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ) )*
                     loop58:
                     do {
                         int alt58=2;
@@ -12697,10 +12570,10 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt58) {
                     	case 1 :
-                    	    // Ocl.g:7637:1: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+                    	    // Ocl.g:7510:1: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
                     	    {
-                    	    // Ocl.g:7637:1: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-                    	    // Ocl.g:7638:1: a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    	    // Ocl.g:7510:1: (a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+                    	    // Ocl.g:7511:1: a5= ',' (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
                     	    {
                     	    a5=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS5803); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -12711,7 +12584,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_0, null, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 
                     	    }
                     	    if ( state.backtracking==0 ) {
@@ -12747,8 +12620,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 204, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_50);
 
                     	    }
-                    	    // Ocl.g:7679:1: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-                    	    // Ocl.g:7680:1: a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+                    	    // Ocl.g:7552:1: (a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+                    	    // Ocl.g:7553:1: a6_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS5816);
                     	    a6_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -12829,7 +12702,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_9, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -12893,7 +12766,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS"
-    // Ocl.g:7775:1: parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS returns [tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) ;
+    // Ocl.g:7648:1: parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS returns [tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) ;
     public final tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS_StartIndex = input.index();
@@ -12906,11 +12779,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 49) ) { return element; }
-            // Ocl.g:7778:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) )
-            // Ocl.g:7779:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME )
+            // Ocl.g:7651:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME ) )
+            // Ocl.g:7652:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS ) a1= '::' (a2= SIMPLE_NAME )
             {
-            // Ocl.g:7779:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
-            // Ocl.g:7780:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
+            // Ocl.g:7652:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS )
+            // Ocl.g:7653:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS_in_parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS5872);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS();
@@ -12956,7 +12829,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_1, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -12965,8 +12838,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_130, 210);
 
             }
-            // Ocl.g:7819:1: (a2= SIMPLE_NAME )
-            // Ocl.g:7820:1: a2= SIMPLE_NAME
+            // Ocl.g:7692:1: (a2= SIMPLE_NAME )
+            // Ocl.g:7693:1: a2= SIMPLE_NAME
             {
             a2=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS5897); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -12985,7 +12858,7 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
               }
               String resolved = (String) resolvedObject;
               tudresden.ocl20.pivot.pivotmodel.NamedElement proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -12998,8 +12871,8 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_2, proxy, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
               }
 
             }
@@ -13067,7 +12940,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS"
-    // Ocl.g:7899:1: parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS element = null] : a0= 'Tuple' a1= '{' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS ) a3= '}' ;
+    // Ocl.g:7772:1: parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS element = null] : a0= 'Tuple' a1= '{' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS ) a3= '}' ;
     public final tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS_StartIndex = input.index();
@@ -13081,8 +12954,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 50) ) { return element; }
-            // Ocl.g:7902:1: (a0= 'Tuple' a1= '{' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS ) a3= '}' )
-            // Ocl.g:7903:1: a0= 'Tuple' a1= '{' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS ) a3= '}'
+            // Ocl.g:7775:1: (a0= 'Tuple' a1= '{' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS ) a3= '}' )
+            // Ocl.g:7776:1: a0= 'Tuple' a1= '{' (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS ) a3= '}'
             {
             a0=(Token)match(input,46,FOLLOW_46_in_parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS5925); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -13093,7 +12966,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13111,7 +12984,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_1, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13120,8 +12993,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 213, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_44, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_51);
 
             }
-            // Ocl.g:7931:1: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS )
-            // Ocl.g:7932:1: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS
+            // Ocl.g:7804:1: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS )
+            // Ocl.g:7805:1: a2_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS_in_parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS5949);
             a2_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS();
@@ -13167,7 +13040,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_3, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13231,7 +13104,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_IfExpCS"
-    // Ocl.g:8011:1: parse_tudresden_ocl20_pivot_language_ocl_IfExpCS returns [tudresden.ocl20.pivot.language.ocl.IfExpCS element = null] : a0= 'if' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= 'then' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a4= 'else' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a6= 'endif' ;
+    // Ocl.g:7884:1: parse_tudresden_ocl20_pivot_language_ocl_IfExpCS returns [tudresden.ocl20.pivot.language.ocl.IfExpCS element = null] : a0= 'if' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= 'then' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a4= 'else' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a6= 'endif' ;
     public final tudresden.ocl20.pivot.language.ocl.IfExpCS parse_tudresden_ocl20_pivot_language_ocl_IfExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.IfExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_IfExpCS_StartIndex = input.index();
@@ -13250,8 +13123,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 51) ) { return element; }
-            // Ocl.g:8014:1: (a0= 'if' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= 'then' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a4= 'else' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a6= 'endif' )
-            // Ocl.g:8015:1: a0= 'if' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= 'then' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a4= 'else' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a6= 'endif'
+            // Ocl.g:7887:1: (a0= 'if' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= 'then' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a4= 'else' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a6= 'endif' )
+            // Ocl.g:7888:1: a0= 'if' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= 'then' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a4= 'else' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a6= 'endif'
             {
             a0=(Token)match(input,50,FOLLOW_50_in_parse_tudresden_ocl20_pivot_language_ocl_IfExpCS5987); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -13262,7 +13135,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13298,8 +13171,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 216, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_52);
 
             }
-            // Ocl.g:8056:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:8057:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:7929:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:7930:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_IfExpCS6000);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -13345,7 +13218,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_3, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13381,8 +13254,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 218, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_53);
 
             }
-            // Ocl.g:8123:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:8124:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:7996:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:7997:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_IfExpCS6025);
             a3_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -13428,7 +13301,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_7, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13464,8 +13337,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 220, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_54);
 
             }
-            // Ocl.g:8190:1: (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:8191:1: a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:8063:1: (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:8064:1: a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_IfExpCS6050);
             a5_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -13511,7 +13384,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_11, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13575,7 +13448,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS"
-    // Ocl.g:8270:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) a1= '{' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )? a5= '}' ;
+    // Ocl.g:8143:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) a1= '{' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )? a5= '}' ;
     public final tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_StartIndex = input.index();
@@ -13593,11 +13466,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 52) ) { return element; }
-            // Ocl.g:8273:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) a1= '{' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )? a5= '}' )
-            // Ocl.g:8274:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) a1= '{' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )? a5= '}'
+            // Ocl.g:8146:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) a1= '{' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )? a5= '}' )
+            // Ocl.g:8147:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) a1= '{' ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )? a5= '}'
             {
-            // Ocl.g:8274:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
-            // Ocl.g:8275:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS
+            // Ocl.g:8147:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
+            // Ocl.g:8148:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS6090);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS();
@@ -13643,7 +13516,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13680,7 +13553,7 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_109, 224);
 
             }
-            // Ocl.g:8342:1: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )?
+            // Ocl.g:8215:1: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* ) )?
             int alt61=2;
             int LA61_0 = input.LA(1);
 
@@ -13689,13 +13562,13 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt61) {
                 case 1 :
-                    // Ocl.g:8343:1: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* )
+                    // Ocl.g:8216:1: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* )
                     {
-                    // Ocl.g:8343:1: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* )
-                    // Ocl.g:8344:1: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )*
+                    // Ocl.g:8216:1: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )* )
+                    // Ocl.g:8217:1: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )*
                     {
-                    // Ocl.g:8344:1: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS )
-                    // Ocl.g:8345:1: a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS
+                    // Ocl.g:8217:1: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS )
+                    // Ocl.g:8218:1: a2_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS6119);
                     a2_0=parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS();
@@ -13733,7 +13606,7 @@ public class OclParser extends OclANTLRParserBase {
                       addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_109, 225);
 
                     }
-                    // Ocl.g:8371:1: ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )*
+                    // Ocl.g:8244:1: ( (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) ) )*
                     loop60:
                     do {
                         int alt60=2;
@@ -13746,10 +13619,10 @@ public class OclParser extends OclANTLRParserBase {
 
                         switch (alt60) {
                     	case 1 :
-                    	    // Ocl.g:8372:1: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) )
+                    	    // Ocl.g:8245:1: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) )
                     	    {
-                    	    // Ocl.g:8372:1: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) )
-                    	    // Ocl.g:8373:1: a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS )
+                    	    // Ocl.g:8245:1: (a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS ) )
+                    	    // Ocl.g:8246:1: a3= ',' (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS )
                     	    {
                     	    a3=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS6135); if (state.failed) return element;
                     	    if ( state.backtracking==0 ) {
@@ -13760,7 +13633,7 @@ public class OclParser extends OclANTLRParserBase {
                     	      }
                     	      collectHiddenTokens(element);
                     	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_1, null, true);
-                    	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+                    	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 
                     	    }
                     	    if ( state.backtracking==0 ) {
@@ -13796,8 +13669,8 @@ public class OclParser extends OclANTLRParserBase {
                     	      addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 226, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_55, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_56);
 
                     	    }
-                    	    // Ocl.g:8414:1: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS )
-                    	    // Ocl.g:8415:1: a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS
+                    	    // Ocl.g:8287:1: (a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS )
+                    	    // Ocl.g:8288:1: a4_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS
                     	    {
                     	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS6148);
                     	    a4_0=parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS();
@@ -13878,7 +13751,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -13942,7 +13815,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS"
-    // Ocl.g:8510:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) ;
+    // Ocl.g:8383:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS_StartIndex = input.index();
@@ -13953,11 +13826,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 53) ) { return element; }
-            // Ocl.g:8513:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) )
-            // Ocl.g:8514:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
+            // Ocl.g:8386:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS ) )
+            // Ocl.g:8387:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
             {
-            // Ocl.g:8514:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
-            // Ocl.g:8515:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS
+            // Ocl.g:8387:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
+            // Ocl.g:8388:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS6204);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS();
@@ -14049,7 +13922,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS"
-    // Ocl.g:8580:1: parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS ) ;
+    // Ocl.g:8453:1: parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS element = null] : (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS_StartIndex = input.index();
@@ -14060,11 +13933,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 54) ) { return element; }
-            // Ocl.g:8583:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS ) )
-            // Ocl.g:8584:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS )
+            // Ocl.g:8456:1: ( (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS ) )
+            // Ocl.g:8457:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS )
             {
-            // Ocl.g:8584:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS )
-            // Ocl.g:8585:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS
+            // Ocl.g:8457:1: (a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS )
+            // Ocl.g:8458:1: a0_0= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS6233);
             a0_0=parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS();
@@ -14156,7 +14029,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS"
-    // Ocl.g:8650:1: parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS returns [tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS element = null] : (a0= SIMPLE_NAME ) (a1= IS_MARKED_PRE ) ;
+    // Ocl.g:8523:1: parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS returns [tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS element = null] : (a0= SIMPLE_NAME ) (a1= IS_MARKED_PRE ) ;
     public final tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS_StartIndex = input.index();
@@ -14167,11 +14040,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 55) ) { return element; }
-            // Ocl.g:8653:1: ( (a0= SIMPLE_NAME ) (a1= IS_MARKED_PRE ) )
-            // Ocl.g:8654:1: (a0= SIMPLE_NAME ) (a1= IS_MARKED_PRE )
+            // Ocl.g:8526:1: ( (a0= SIMPLE_NAME ) (a1= IS_MARKED_PRE ) )
+            // Ocl.g:8527:1: (a0= SIMPLE_NAME ) (a1= IS_MARKED_PRE )
             {
-            // Ocl.g:8654:1: (a0= SIMPLE_NAME )
-            // Ocl.g:8655:1: a0= SIMPLE_NAME
+            // Ocl.g:8527:1: (a0= SIMPLE_NAME )
+            // Ocl.g:8528:1: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS6262); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -14190,7 +14063,7 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               }
               String resolved = (String) resolvedObject;
               tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
@@ -14203,8 +14076,8 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_0, proxy, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               }
 
             }
@@ -14217,8 +14090,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_134, 233);
 
             }
-            // Ocl.g:8694:1: (a1= IS_MARKED_PRE )
-            // Ocl.g:8695:1: a1= IS_MARKED_PRE
+            // Ocl.g:8567:1: (a1= IS_MARKED_PRE )
+            // Ocl.g:8568:1: a1= IS_MARKED_PRE
             {
             a1=(Token)match(input,IS_MARKED_PRE,FOLLOW_IS_MARKED_PRE_in_parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS6277); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -14237,9 +14110,9 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
               }
-              java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+              java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
               if (resolved != null) {
               Object value = resolved;
               element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), value);
@@ -14247,7 +14120,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_2, resolved, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               }
 
             }
@@ -14315,7 +14188,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_LetExpCS"
-    // Ocl.g:8770:1: parse_tudresden_ocl20_pivot_language_ocl_LetExpCS returns [tudresden.ocl20.pivot.language.ocl.LetExpCS element = null] : a0= 'let' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* a4= 'in' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
+    // Ocl.g:8643:1: parse_tudresden_ocl20_pivot_language_ocl_LetExpCS returns [tudresden.ocl20.pivot.language.ocl.LetExpCS element = null] : a0= 'let' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* a4= 'in' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) ;
     public final tudresden.ocl20.pivot.language.ocl.LetExpCS parse_tudresden_ocl20_pivot_language_ocl_LetExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.LetExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_LetExpCS_StartIndex = input.index();
@@ -14333,8 +14206,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 56) ) { return element; }
-            // Ocl.g:8773:1: (a0= 'let' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* a4= 'in' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
-            // Ocl.g:8774:1: a0= 'let' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* a4= 'in' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:8646:1: (a0= 'let' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* a4= 'in' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) )
+            // Ocl.g:8647:1: a0= 'let' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )* a4= 'in' (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
             {
             a0=(Token)match(input,54,FOLLOW_54_in_parse_tudresden_ocl20_pivot_language_ocl_LetExpCS6305); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -14345,7 +14218,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_0, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -14354,8 +14227,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 235, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_57);
 
             }
-            // Ocl.g:8788:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
-            // Ocl.g:8789:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
+            // Ocl.g:8661:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            // Ocl.g:8662:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_LetExpCS6318);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS();
@@ -14393,7 +14266,7 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_101, 236);
 
             }
-            // Ocl.g:8815:1: ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )*
+            // Ocl.g:8688:1: ( (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) ) )*
             loop62:
             do {
                 int alt62=2;
@@ -14406,10 +14279,10 @@ public class OclParser extends OclANTLRParserBase {
 
                 switch (alt62) {
             	case 1 :
-            	    // Ocl.g:8816:1: (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
+            	    // Ocl.g:8689:1: (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
             	    {
-            	    // Ocl.g:8816:1: (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
-            	    // Ocl.g:8817:1: a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            	    // Ocl.g:8689:1: (a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS ) )
+            	    // Ocl.g:8690:1: a2= ',' (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
             	    {
             	    a2=(Token)match(input,41,FOLLOW_41_in_parse_tudresden_ocl20_pivot_language_ocl_LetExpCS6334); if (state.failed) return element;
             	    if ( state.backtracking==0 ) {
@@ -14420,7 +14293,7 @@ public class OclParser extends OclANTLRParserBase {
             	      }
             	      collectHiddenTokens(element);
             	      retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_1, null, true);
-            	      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+            	      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 
             	    }
             	    if ( state.backtracking==0 ) {
@@ -14429,8 +14302,8 @@ public class OclParser extends OclANTLRParserBase {
             	      addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_4, 237, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_19, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_57);
 
             	    }
-            	    // Ocl.g:8831:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
-            	    // Ocl.g:8832:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
+            	    // Ocl.g:8704:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS )
+            	    // Ocl.g:8705:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS
             	    {
             	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS_in_parse_tudresden_ocl20_pivot_language_ocl_LetExpCS6347);
             	    a3_0=parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS();
@@ -14496,7 +14369,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_3, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -14532,8 +14405,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 240, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_58);
 
             }
-            // Ocl.g:8907:1: (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:8908:1: a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:8780:1: (a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:8781:1: a5_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_LetExpCS6380);
             a5_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -14625,7 +14498,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS"
-    // Ocl.g:8973:1: parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element = null] : (a0= INTEGER_LITERAL ) (a1= NAVIGATION_OPERATOR ) ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) ) ;
+    // Ocl.g:8846:1: parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element = null] : (a0= INTEGER_LITERAL ) (a1= NAVIGATION_OPERATOR ) ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) ) ;
     public final tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS_StartIndex = input.index();
@@ -14638,11 +14511,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 57) ) { return element; }
-            // Ocl.g:8976:1: ( (a0= INTEGER_LITERAL ) (a1= NAVIGATION_OPERATOR ) ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) ) )
-            // Ocl.g:8977:1: (a0= INTEGER_LITERAL ) (a1= NAVIGATION_OPERATOR ) ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) )
+            // Ocl.g:8849:1: ( (a0= INTEGER_LITERAL ) (a1= NAVIGATION_OPERATOR ) ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) ) )
+            // Ocl.g:8850:1: (a0= INTEGER_LITERAL ) (a1= NAVIGATION_OPERATOR ) ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) )
             {
-            // Ocl.g:8977:1: (a0= INTEGER_LITERAL )
-            // Ocl.g:8978:1: a0= INTEGER_LITERAL
+            // Ocl.g:8850:1: (a0= INTEGER_LITERAL )
+            // Ocl.g:8851:1: a0= INTEGER_LITERAL
             {
             a0=(Token)match(input,INTEGER_LITERAL,FOLLOW_INTEGER_LITERAL_in_parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS6409); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -14661,9 +14534,9 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               }
-              java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
+              java.lang.Integer resolved = (java.lang.Integer) resolvedObject;
               if (resolved != null) {
               Object value = resolved;
               element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), value);
@@ -14671,7 +14544,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, resolved, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
               }
 
             }
@@ -14684,8 +14557,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_135, 242);
 
             }
-            // Ocl.g:9013:1: (a1= NAVIGATION_OPERATOR )
-            // Ocl.g:9014:1: a1= NAVIGATION_OPERATOR
+            // Ocl.g:8886:1: (a1= NAVIGATION_OPERATOR )
+            // Ocl.g:8887:1: a1= NAVIGATION_OPERATOR
             {
             a1=(Token)match(input,NAVIGATION_OPERATOR,FOLLOW_NAVIGATION_OPERATOR_in_parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS6424); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -14704,9 +14577,9 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
               }
-              java.lang.String resolved = (java.lang.String)resolvedObject;
+              java.lang.String resolved = (java.lang.String) resolvedObject;
               if (resolved != null) {
               Object value = resolved;
               element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), value);
@@ -14714,7 +14587,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
               }
 
             }
@@ -14728,7 +14601,7 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_137, 243);
 
             }
-            // Ocl.g:9050:1: ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) )
+            // Ocl.g:8923:1: ( (a2= INTEGER_0 ) | (a3= INTEGER_LITERAL ) )
             int alt63=2;
             int LA63_0 = input.LA(1);
 
@@ -14747,10 +14620,10 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt63) {
                 case 1 :
-                    // Ocl.g:9051:1: (a2= INTEGER_0 )
+                    // Ocl.g:8924:1: (a2= INTEGER_0 )
                     {
-                    // Ocl.g:9051:1: (a2= INTEGER_0 )
-                    // Ocl.g:9052:1: a2= INTEGER_0
+                    // Ocl.g:8924:1: (a2= INTEGER_0 )
+                    // Ocl.g:8925:1: a2= INTEGER_0
                     {
                     a2=(Token)match(input,INTEGER_0,FOLLOW_INTEGER_0_in_parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS6441); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -14769,9 +14642,9 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
                       }
-                      java.lang.String resolved = (java.lang.String)resolvedObject;
+                      java.lang.String resolved = (java.lang.String) resolvedObject;
                       if (resolved != null) {
                       Object value = resolved;
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), value);
@@ -14779,7 +14652,7 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_0_0, resolved, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
                       }
 
                     }
@@ -14834,10 +14707,10 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9126:2: (a3= INTEGER_LITERAL )
+                    // Ocl.g:8999:2: (a3= INTEGER_LITERAL )
                     {
-                    // Ocl.g:9126:2: (a3= INTEGER_LITERAL )
-                    // Ocl.g:9127:1: a3= INTEGER_LITERAL
+                    // Ocl.g:8999:2: (a3= INTEGER_LITERAL )
+                    // Ocl.g:9000:1: a3= INTEGER_LITERAL
                     {
                     a3=(Token)match(input,INTEGER_LITERAL,FOLLOW_INTEGER_LITERAL_in_parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS6458); if (state.failed) return element;
                     if ( state.backtracking==0 ) {
@@ -14856,9 +14729,9 @@ public class OclParser extends OclANTLRParserBase {
                       tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), result);
                       Object resolvedObject = result.getResolvedToken();
                       if (resolvedObject == null) {
-                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+                      addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
                       }
-                      java.lang.String resolved = (java.lang.String)resolvedObject;
+                      java.lang.String resolved = (java.lang.String) resolvedObject;
                       if (resolved != null) {
                       Object value = resolved;
                       element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), value);
@@ -14866,7 +14739,7 @@ public class OclParser extends OclANTLRParserBase {
                       }
                       collectHiddenTokens(element);
                       retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_1_0, resolved, true);
-                      copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
+                      copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
                       }
 
                     }
@@ -14984,7 +14857,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS"
-    // Ocl.g:9246:1: parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS element = null] : (a0= INTEGER_LITERAL ) ;
+    // Ocl.g:9119:1: parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS element = null] : (a0= INTEGER_LITERAL ) ;
     public final tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS_StartIndex = input.index();
@@ -14994,11 +14867,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 58) ) { return element; }
-            // Ocl.g:9249:1: ( (a0= INTEGER_LITERAL ) )
-            // Ocl.g:9250:1: (a0= INTEGER_LITERAL )
+            // Ocl.g:9122:1: ( (a0= INTEGER_LITERAL ) )
+            // Ocl.g:9123:1: (a0= INTEGER_LITERAL )
             {
-            // Ocl.g:9250:1: (a0= INTEGER_LITERAL )
-            // Ocl.g:9251:1: a0= INTEGER_LITERAL
+            // Ocl.g:9123:1: (a0= INTEGER_LITERAL )
+            // Ocl.g:9124:1: a0= INTEGER_LITERAL
             {
             a0=(Token)match(input,INTEGER_LITERAL,FOLLOW_INTEGER_LITERAL_in_parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS6493); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15017,9 +14890,9 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               }
-              java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
+              java.lang.Integer resolved = (java.lang.Integer) resolvedObject;
               if (resolved != null) {
               Object value = resolved;
               element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), value);
@@ -15027,7 +14900,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, resolved, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
               }
 
             }
@@ -15095,7 +14968,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS"
-    // Ocl.g:9326:1: parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS element = null] : (a0= BOOLEAN_LITERAL ) ;
+    // Ocl.g:9199:1: parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS element = null] : (a0= BOOLEAN_LITERAL ) ;
     public final tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS_StartIndex = input.index();
@@ -15105,11 +14978,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 59) ) { return element; }
-            // Ocl.g:9329:1: ( (a0= BOOLEAN_LITERAL ) )
-            // Ocl.g:9330:1: (a0= BOOLEAN_LITERAL )
+            // Ocl.g:9202:1: ( (a0= BOOLEAN_LITERAL ) )
+            // Ocl.g:9203:1: (a0= BOOLEAN_LITERAL )
             {
-            // Ocl.g:9330:1: (a0= BOOLEAN_LITERAL )
-            // Ocl.g:9331:1: a0= BOOLEAN_LITERAL
+            // Ocl.g:9203:1: (a0= BOOLEAN_LITERAL )
+            // Ocl.g:9204:1: a0= BOOLEAN_LITERAL
             {
             a0=(Token)match(input,BOOLEAN_LITERAL,FOLLOW_BOOLEAN_LITERAL_in_parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS6523); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15128,9 +15001,9 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               }
-              java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+              java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
               if (resolved != null) {
               Object value = resolved;
               element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), value);
@@ -15138,7 +15011,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
               }
 
             }
@@ -15206,7 +15079,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS"
-    // Ocl.g:9406:1: parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS element = null] : (a0= QUOTED_39_39 ) ;
+    // Ocl.g:9279:1: parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS element = null] : (a0= QUOTED_39_39 ) ;
     public final tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS_StartIndex = input.index();
@@ -15216,11 +15089,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 60) ) { return element; }
-            // Ocl.g:9409:1: ( (a0= QUOTED_39_39 ) )
-            // Ocl.g:9410:1: (a0= QUOTED_39_39 )
+            // Ocl.g:9282:1: ( (a0= QUOTED_39_39 ) )
+            // Ocl.g:9283:1: (a0= QUOTED_39_39 )
             {
-            // Ocl.g:9410:1: (a0= QUOTED_39_39 )
-            // Ocl.g:9411:1: a0= QUOTED_39_39
+            // Ocl.g:9283:1: (a0= QUOTED_39_39 )
+            // Ocl.g:9284:1: a0= QUOTED_39_39
             {
             a0=(Token)match(input,QUOTED_39_39,FOLLOW_QUOTED_39_39_in_parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS6553); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15239,9 +15112,9 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               }
-              java.lang.String resolved = (java.lang.String)resolvedObject;
+              java.lang.String resolved = (java.lang.String) resolvedObject;
               if (resolved != null) {
               Object value = resolved;
               element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), value);
@@ -15249,7 +15122,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
               }
 
             }
@@ -15317,7 +15190,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS"
-    // Ocl.g:9486:1: parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS element = null] : a0= 'invalid' ;
+    // Ocl.g:9359:1: parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS element = null] : a0= 'invalid' ;
     public final tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS_StartIndex = input.index();
@@ -15327,8 +15200,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 61) ) { return element; }
-            // Ocl.g:9489:1: (a0= 'invalid' )
-            // Ocl.g:9490:1: a0= 'invalid'
+            // Ocl.g:9362:1: (a0= 'invalid' )
+            // Ocl.g:9363:1: a0= 'invalid'
             {
             a0=(Token)match(input,56,FOLLOW_56_in_parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS6581); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15339,7 +15212,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -15403,7 +15276,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS"
-    // Ocl.g:9544:1: parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS element = null] : a0= 'null' ;
+    // Ocl.g:9417:1: parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS element = null] : a0= 'null' ;
     public final tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS_StartIndex = input.index();
@@ -15413,8 +15286,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 62) ) { return element; }
-            // Ocl.g:9547:1: (a0= 'null' )
-            // Ocl.g:9548:1: a0= 'null'
+            // Ocl.g:9420:1: (a0= 'null' )
+            // Ocl.g:9421:1: a0= 'null'
             {
             a0=(Token)match(input,57,FOLLOW_57_in_parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS6607); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15425,7 +15298,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -15489,7 +15362,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS"
-    // Ocl.g:9602:1: parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS element = null] : (a0= SIMPLE_NAME ) ;
+    // Ocl.g:9475:1: parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS returns [tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS element = null] : (a0= SIMPLE_NAME ) ;
     public final tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS_StartIndex = input.index();
@@ -15499,11 +15372,11 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 63) ) { return element; }
-            // Ocl.g:9605:1: ( (a0= SIMPLE_NAME ) )
-            // Ocl.g:9606:1: (a0= SIMPLE_NAME )
+            // Ocl.g:9478:1: ( (a0= SIMPLE_NAME ) )
+            // Ocl.g:9479:1: (a0= SIMPLE_NAME )
             {
-            // Ocl.g:9606:1: (a0= SIMPLE_NAME )
-            // Ocl.g:9607:1: a0= SIMPLE_NAME
+            // Ocl.g:9479:1: (a0= SIMPLE_NAME )
+            // Ocl.g:9480:1: a0= SIMPLE_NAME
             {
             a0=(Token)match(input,SIMPLE_NAME,FOLLOW_SIMPLE_NAME_in_parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS6635); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15522,7 +15395,7 @@ public class OclParser extends OclANTLRParserBase {
               tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), result);
               Object resolvedObject = result.getResolvedToken();
               if (resolvedObject == null) {
-              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+              addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
               }
               String resolved = (String) resolvedObject;
               tudresden.ocl20.pivot.pivotmodel.NamedElement proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -15535,8 +15408,8 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, proxy, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
               }
 
             }
@@ -15604,7 +15477,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS"
-    // Ocl.g:9686:1: parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS returns [tudresden.ocl20.pivot.language.ocl.BracketExpCS element = null] : a0= '(' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= ')' ;
+    // Ocl.g:9559:1: parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS returns [tudresden.ocl20.pivot.language.ocl.BracketExpCS element = null] : a0= '(' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= ')' ;
     public final tudresden.ocl20.pivot.language.ocl.BracketExpCS parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.BracketExpCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS_StartIndex = input.index();
@@ -15617,8 +15490,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 64) ) { return element; }
-            // Ocl.g:9689:1: (a0= '(' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= ')' )
-            // Ocl.g:9690:1: a0= '(' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= ')'
+            // Ocl.g:9562:1: (a0= '(' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= ')' )
+            // Ocl.g:9563:1: a0= '(' (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS ) a2= ')'
             {
             a0=(Token)match(input,40,FOLLOW_40_in_parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS6663); if (state.failed) return element;
             if ( state.backtracking==0 ) {
@@ -15629,7 +15502,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -15665,8 +15538,8 @@ public class OclParser extends OclANTLRParserBase {
               addExpectedElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.TERMINAL_58, 253, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_13, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_11, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFollowSetProvider.FEATURE_59);
 
             }
-            // Ocl.g:9731:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
-            // Ocl.g:9732:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
+            // Ocl.g:9604:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS )
+            // Ocl.g:9605:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS
             {
             pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_in_parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS6676);
             a1_0=parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS();
@@ -15712,7 +15585,7 @@ public class OclParser extends OclANTLRParserBase {
               }
               collectHiddenTokens(element);
               retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_4, null, true);
-              copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+              copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 
             }
             if ( state.backtracking==0 ) {
@@ -15776,7 +15649,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS"
-    // Ocl.g:9811:1: parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS );
+    // Ocl.g:9684:1: parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS );
     public final tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS_StartIndex = input.index();
@@ -15789,7 +15662,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 65) ) { return element; }
-            // Ocl.g:9812:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS )
+            // Ocl.g:9685:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS )
             int alt64=3;
             int LA64_0 = input.LA(1);
 
@@ -15822,7 +15695,7 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt64) {
                 case 1 :
-                    // Ocl.g:9813:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS
+                    // Ocl.g:9686:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS6710);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS();
@@ -15836,7 +15709,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9814:2: c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS
+                    // Ocl.g:9687:2: c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS6718);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS();
@@ -15850,7 +15723,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9815:2: c2= parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS
+                    // Ocl.g:9688:2: c2= parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS6726);
                     c2=parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS();
@@ -15879,7 +15752,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS"
-    // Ocl.g:9819:1: parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS );
+    // Ocl.g:9692:1: parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS returns [tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS );
     public final tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS_StartIndex = input.index();
@@ -15892,7 +15765,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 66) ) { return element; }
-            // Ocl.g:9820:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS )
+            // Ocl.g:9693:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS | c1= parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS | c2= parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS )
             int alt65=3;
             switch ( input.LA(1) ) {
             case 37:
@@ -15920,7 +15793,7 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt65) {
                 case 1 :
-                    // Ocl.g:9821:1: c0= parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS
+                    // Ocl.g:9694:1: c0= parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS6745);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS();
@@ -15934,7 +15807,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9822:2: c1= parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS
+                    // Ocl.g:9695:2: c1= parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS6753);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS();
@@ -15948,7 +15821,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9823:2: c2= parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS
+                    // Ocl.g:9696:2: c2= parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS_in_parse_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS6761);
                     c2=parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS();
@@ -15977,7 +15850,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS"
-    // Ocl.g:9827:1: parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS returns [tudresden.ocl20.pivot.language.ocl.TypePathNameCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS );
+    // Ocl.g:9700:1: parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS returns [tudresden.ocl20.pivot.language.ocl.TypePathNameCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS );
     public final tudresden.ocl20.pivot.language.ocl.TypePathNameCS parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TypePathNameCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS_StartIndex = input.index();
@@ -15988,7 +15861,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 67) ) { return element; }
-            // Ocl.g:9828:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS )
+            // Ocl.g:9701:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS )
             int alt66=2;
             int LA66_0 = input.LA(1);
 
@@ -16043,7 +15916,7 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt66) {
                 case 1 :
-                    // Ocl.g:9829:1: c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS
+                    // Ocl.g:9702:1: c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS6780);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS();
@@ -16057,7 +15930,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9830:2: c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS
+                    // Ocl.g:9703:2: c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameCS6788);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS();
@@ -16086,7 +15959,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_TypeCS"
-    // Ocl.g:9834:1: parse_tudresden_ocl20_pivot_language_ocl_TypeCS returns [tudresden.ocl20.pivot.language.ocl.TypeCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS | c2= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS | c3= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS );
+    // Ocl.g:9707:1: parse_tudresden_ocl20_pivot_language_ocl_TypeCS returns [tudresden.ocl20.pivot.language.ocl.TypeCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS | c2= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS | c3= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS );
     public final tudresden.ocl20.pivot.language.ocl.TypeCS parse_tudresden_ocl20_pivot_language_ocl_TypeCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.TypeCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_TypeCS_StartIndex = input.index();
@@ -16101,18 +15974,18 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 68) ) { return element; }
-            // Ocl.g:9835:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS | c2= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS | c3= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
+            // Ocl.g:9708:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS | c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS | c2= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS | c3= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS )
             int alt67=4;
             switch ( input.LA(1) ) {
             case SIMPLE_NAME:
                 {
                 int LA67_1 = input.LA(2);
 
-                if ( (LA67_1==30) ) {
-                    alt67=2;
-                }
-                else if ( (LA67_1==EOF||(LA67_1>=STATIC && LA67_1<=EQUALITY_OPERATOR)||(LA67_1>=33 && LA67_1<=39)||(LA67_1>=41 && LA67_1<=43)||LA67_1==45) ) {
+                if ( (LA67_1==EOF||(LA67_1>=STATIC && LA67_1<=EQUALITY_OPERATOR)||(LA67_1>=33 && LA67_1<=39)||(LA67_1>=41 && LA67_1<=43)||LA67_1==45) ) {
                     alt67=1;
+                }
+                else if ( (LA67_1==30) ) {
+                    alt67=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return element;}
@@ -16143,7 +16016,7 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt67) {
                 case 1 :
-                    // Ocl.g:9836:1: c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS
+                    // Ocl.g:9709:1: c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypeCS6807);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS();
@@ -16157,7 +16030,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9837:2: c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS
+                    // Ocl.g:9710:2: c1= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypeCS6815);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS();
@@ -16171,7 +16044,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9838:2: c2= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS
+                    // Ocl.g:9711:2: c2= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypeCS6823);
                     c2=parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS();
@@ -16185,7 +16058,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:9839:2: c3= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS
+                    // Ocl.g:9712:2: c3= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS_in_parse_tudresden_ocl20_pivot_language_ocl_TypeCS6831);
                     c3=parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS();
@@ -16214,7 +16087,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS"
-    // Ocl.g:9843:1: parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS returns [tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_InitValueCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS );
+    // Ocl.g:9716:1: parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS returns [tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_InitValueCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS );
     public final tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS_StartIndex = input.index();
@@ -16225,7 +16098,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 69) ) { return element; }
-            // Ocl.g:9844:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_InitValueCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS )
+            // Ocl.g:9717:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_InitValueCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS )
             int alt68=2;
             int LA68_0 = input.LA(1);
 
@@ -16244,7 +16117,7 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt68) {
                 case 1 :
-                    // Ocl.g:9845:1: c0= parse_tudresden_ocl20_pivot_language_ocl_InitValueCS
+                    // Ocl.g:9718:1: c0= parse_tudresden_ocl20_pivot_language_ocl_InitValueCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_InitValueCS_in_parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS6850);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_InitValueCS();
@@ -16258,7 +16131,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9846:2: c1= parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS
+                    // Ocl.g:9719:2: c1= parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS_in_parse_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS6858);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS();
@@ -16287,7 +16160,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS"
-    // Ocl.g:9850:1: parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS returns [tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS );
+    // Ocl.g:9723:1: parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS returns [tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS );
     public final tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS_StartIndex = input.index();
@@ -16298,7 +16171,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 70) ) { return element; }
-            // Ocl.g:9851:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS )
+            // Ocl.g:9724:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS )
             int alt69=2;
             int LA69_0 = input.LA(1);
 
@@ -16317,7 +16190,7 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt69) {
                 case 1 :
-                    // Ocl.g:9852:1: c0= parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS
+                    // Ocl.g:9725:1: c0= parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS_in_parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS6877);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS();
@@ -16331,7 +16204,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9853:2: c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS
+                    // Ocl.g:9726:2: c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS_in_parse_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS6885);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS();
@@ -16360,7 +16233,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS"
-    // Ocl.g:9857:1: parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : c= parseop_OclExpressionCS_level_4 ;
+    // Ocl.g:9730:1: parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : c= parseop_OclExpressionCS_level_4 ;
     public final tudresden.ocl20.pivot.language.ocl.OclExpressionCS parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS_StartIndex = input.index();
@@ -16369,8 +16242,8 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 71) ) { return element; }
-            // Ocl.g:9858:1: (c= parseop_OclExpressionCS_level_4 )
-            // Ocl.g:9859:1: c= parseop_OclExpressionCS_level_4
+            // Ocl.g:9731:1: (c= parseop_OclExpressionCS_level_4 )
+            // Ocl.g:9732:1: c= parseop_OclExpressionCS_level_4
             {
             pushFollow(FOLLOW_parseop_OclExpressionCS_level_4_in_parse_tudresden_ocl20_pivot_language_ocl_OclExpressionCS6904);
             c=parseop_OclExpressionCS_level_4();
@@ -16397,7 +16270,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS"
-    // Ocl.g:9863:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS );
+    // Ocl.g:9736:1: parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS returns [tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS );
     public final tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS_StartIndex = input.index();
@@ -16408,7 +16281,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 72) ) { return element; }
-            // Ocl.g:9864:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS )
+            // Ocl.g:9737:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS | c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS )
             int alt70=2;
             int LA70_0 = input.LA(1);
 
@@ -16438,7 +16311,7 @@ public class OclParser extends OclANTLRParserBase {
             }
             switch (alt70) {
                 case 1 :
-                    // Ocl.g:9865:1: c0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS
+                    // Ocl.g:9738:1: c0= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS6923);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS();
@@ -16452,7 +16325,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9866:2: c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS
+                    // Ocl.g:9739:2: c1= parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS_in_parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS6931);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS();
@@ -16481,7 +16354,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS"
-    // Ocl.g:9870:1: parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS returns [tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS | c1= parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS | c2= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS );
+    // Ocl.g:9743:1: parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS returns [tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS | c1= parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS | c2= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS );
     public final tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS_StartIndex = input.index();
@@ -16496,7 +16369,7 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 73) ) { return element; }
-            // Ocl.g:9871:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS | c1= parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS | c2= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS )
+            // Ocl.g:9744:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS | c1= parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS | c2= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS )
             int alt71=4;
             switch ( input.LA(1) ) {
             case EQUALITY_OPERATOR:
@@ -16549,7 +16422,7 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt71) {
                 case 1 :
-                    // Ocl.g:9872:1: c0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS
+                    // Ocl.g:9745:1: c0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS6950);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS();
@@ -16563,7 +16436,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9873:2: c1= parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS
+                    // Ocl.g:9746:2: c1= parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS6958);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS();
@@ -16577,7 +16450,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9874:2: c2= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS
+                    // Ocl.g:9747:2: c2= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS6966);
                     c2=parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS();
@@ -16591,7 +16464,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:9875:2: c3= parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS
+                    // Ocl.g:9748:2: c3= parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS_in_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS6974);
                     c3=parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS();
@@ -16620,7 +16493,7 @@ public class OclParser extends OclANTLRParserBase {
 
 
     // $ANTLR start "parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS"
-    // Ocl.g:9879:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS | c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS );
+    // Ocl.g:9752:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS | c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS );
     public final tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS() throws RecognitionException {
         tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS element =  null;
         int parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS_StartIndex = input.index();
@@ -16631,12 +16504,12 @@ public class OclParser extends OclANTLRParserBase {
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 74) ) { return element; }
-            // Ocl.g:9880:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS | c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS )
+            // Ocl.g:9753:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS | c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS )
             int alt72=2;
             alt72 = dfa72.predict(input);
             switch (alt72) {
                 case 1 :
-                    // Ocl.g:9881:1: c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS
+                    // Ocl.g:9754:1: c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS6993);
                     c0=parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS();
@@ -16650,7 +16523,7 @@ public class OclParser extends OclANTLRParserBase {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9882:2: c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS
+                    // Ocl.g:9755:2: c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS
                     {
                     pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS_in_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS7001);
                     c1=parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS();
@@ -16683,14 +16556,14 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS a2_0 = null;
 
 
-        // Ocl.g:4032:3: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )
-        // Ocl.g:4032:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
+        // Ocl.g:3905:3: ( ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' ) )
+        // Ocl.g:3905:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
         {
-        // Ocl.g:4032:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
-        // Ocl.g:4033:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';'
+        // Ocl.g:3905:3: ( (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';' )
+        // Ocl.g:3906:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS ) a3= ';'
         {
-        // Ocl.g:4033:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
-        // Ocl.g:4034:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
+        // Ocl.g:3906:4: (a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS )
+        // Ocl.g:3907:5: a2_0= parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS_in_synpred32_Ocl3353);
         a2_0=parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS();
@@ -16715,16 +16588,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5377:3: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )
-        // Ocl.g:5377:3: () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5
+        // Ocl.g:5250:3: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )
+        // Ocl.g:5250:3: () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5
         {
-        // Ocl.g:5377:3: ()
-        // Ocl.g:5377:4: 
+        // Ocl.g:5250:3: ()
+        // Ocl.g:5250:4: 
         {
         }
 
-        // Ocl.g:5379:3: (a0= IMPLIES_OPERATOR )
-        // Ocl.g:5380:4: a0= IMPLIES_OPERATOR
+        // Ocl.g:5252:3: (a0= IMPLIES_OPERATOR )
+        // Ocl.g:5253:4: a0= IMPLIES_OPERATOR
         {
         a0=(Token)match(input,IMPLIES_OPERATOR,FOLLOW_IMPLIES_OPERATOR_in_synpred39_Ocl4552); if (state.failed) return ;
 
@@ -16746,10 +16619,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5376:45: ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ )
-        // Ocl.g:5376:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
+        // Ocl.g:5249:45: ( ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+ )
+        // Ocl.g:5249:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
         {
-        // Ocl.g:5376:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
+        // Ocl.g:5249:45: ( () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5 )+
         int cnt77=0;
         loop77:
         do {
@@ -16763,15 +16636,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt77) {
         	case 1 :
-        	    // Ocl.g:5377:3: () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5
+        	    // Ocl.g:5250:3: () (a0= IMPLIES_OPERATOR ) rightArg= parseop_OclExpressionCS_level_5
         	    {
-        	    // Ocl.g:5377:3: ()
-        	    // Ocl.g:5377:4: 
+        	    // Ocl.g:5250:3: ()
+        	    // Ocl.g:5250:4: 
         	    {
         	    }
 
-        	    // Ocl.g:5379:3: (a0= IMPLIES_OPERATOR )
-        	    // Ocl.g:5380:4: a0= IMPLIES_OPERATOR
+        	    // Ocl.g:5252:3: (a0= IMPLIES_OPERATOR )
+        	    // Ocl.g:5253:4: a0= IMPLIES_OPERATOR
         	    {
         	    a0=(Token)match(input,IMPLIES_OPERATOR,FOLLOW_IMPLIES_OPERATOR_in_synpred40_Ocl4552); if (state.failed) return ;
 
@@ -16807,16 +16680,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5491:2: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )
-        // Ocl.g:5491:2: () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6
+        // Ocl.g:5364:2: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )
+        // Ocl.g:5364:2: () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6
         {
-        // Ocl.g:5491:2: ()
-        // Ocl.g:5491:3: 
+        // Ocl.g:5364:2: ()
+        // Ocl.g:5364:3: 
         {
         }
 
-        // Ocl.g:5493:2: (a0= XOR_OPERATOR )
-        // Ocl.g:5494:3: a0= XOR_OPERATOR
+        // Ocl.g:5366:2: (a0= XOR_OPERATOR )
+        // Ocl.g:5367:3: a0= XOR_OPERATOR
         {
         a0=(Token)match(input,XOR_OPERATOR,FOLLOW_XOR_OPERATOR_in_synpred41_Ocl4645); if (state.failed) return ;
 
@@ -16838,10 +16711,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5490:43: ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ )
-        // Ocl.g:5490:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
+        // Ocl.g:5363:43: ( ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+ )
+        // Ocl.g:5363:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
         {
-        // Ocl.g:5490:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
+        // Ocl.g:5363:43: ( () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6 )+
         int cnt78=0;
         loop78:
         do {
@@ -16855,15 +16728,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt78) {
         	case 1 :
-        	    // Ocl.g:5491:2: () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6
+        	    // Ocl.g:5364:2: () (a0= XOR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_6
         	    {
-        	    // Ocl.g:5491:2: ()
-        	    // Ocl.g:5491:3: 
+        	    // Ocl.g:5364:2: ()
+        	    // Ocl.g:5364:3: 
         	    {
         	    }
 
-        	    // Ocl.g:5493:2: (a0= XOR_OPERATOR )
-        	    // Ocl.g:5494:3: a0= XOR_OPERATOR
+        	    // Ocl.g:5366:2: (a0= XOR_OPERATOR )
+        	    // Ocl.g:5367:3: a0= XOR_OPERATOR
         	    {
         	    a0=(Token)match(input,XOR_OPERATOR,FOLLOW_XOR_OPERATOR_in_synpred42_Ocl4645); if (state.failed) return ;
 
@@ -16899,16 +16772,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5605:1: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )
-        // Ocl.g:5605:1: () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7
+        // Ocl.g:5478:1: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )
+        // Ocl.g:5478:1: () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7
         {
-        // Ocl.g:5605:1: ()
-        // Ocl.g:5605:2: 
+        // Ocl.g:5478:1: ()
+        // Ocl.g:5478:2: 
         {
         }
 
-        // Ocl.g:5607:1: (a0= OR_OPERATOR )
-        // Ocl.g:5608:2: a0= OR_OPERATOR
+        // Ocl.g:5480:1: (a0= OR_OPERATOR )
+        // Ocl.g:5481:2: a0= OR_OPERATOR
         {
         a0=(Token)match(input,OR_OPERATOR,FOLLOW_OR_OPERATOR_in_synpred43_Ocl4723); if (state.failed) return ;
 
@@ -16930,10 +16803,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5604:43: ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ )
-        // Ocl.g:5604:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
+        // Ocl.g:5477:43: ( ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+ )
+        // Ocl.g:5477:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
         {
-        // Ocl.g:5604:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
+        // Ocl.g:5477:43: ( () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7 )+
         int cnt79=0;
         loop79:
         do {
@@ -16947,15 +16820,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt79) {
         	case 1 :
-        	    // Ocl.g:5605:1: () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7
+        	    // Ocl.g:5478:1: () (a0= OR_OPERATOR ) rightArg= parseop_OclExpressionCS_level_7
         	    {
-        	    // Ocl.g:5605:1: ()
-        	    // Ocl.g:5605:2: 
+        	    // Ocl.g:5478:1: ()
+        	    // Ocl.g:5478:2: 
         	    {
         	    }
 
-        	    // Ocl.g:5607:1: (a0= OR_OPERATOR )
-        	    // Ocl.g:5608:2: a0= OR_OPERATOR
+        	    // Ocl.g:5480:1: (a0= OR_OPERATOR )
+        	    // Ocl.g:5481:2: a0= OR_OPERATOR
         	    {
         	    a0=(Token)match(input,OR_OPERATOR,FOLLOW_OR_OPERATOR_in_synpred44_Ocl4723); if (state.failed) return ;
 
@@ -16991,16 +16864,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5719:1: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )
-        // Ocl.g:5719:1: () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8
+        // Ocl.g:5592:1: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )
+        // Ocl.g:5592:1: () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8
         {
-        // Ocl.g:5719:1: ()
-        // Ocl.g:5719:2: 
+        // Ocl.g:5592:1: ()
+        // Ocl.g:5592:2: 
         {
         }
 
-        // Ocl.g:5721:1: (a0= AND_OPERATOR )
-        // Ocl.g:5722:1: a0= AND_OPERATOR
+        // Ocl.g:5594:1: (a0= AND_OPERATOR )
+        // Ocl.g:5595:1: a0= AND_OPERATOR
         {
         a0=(Token)match(input,AND_OPERATOR,FOLLOW_AND_OPERATOR_in_synpred45_Ocl4791); if (state.failed) return ;
 
@@ -17022,10 +16895,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5718:43: ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ )
-        // Ocl.g:5718:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
+        // Ocl.g:5591:43: ( ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+ )
+        // Ocl.g:5591:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
         {
-        // Ocl.g:5718:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
+        // Ocl.g:5591:43: ( () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8 )+
         int cnt80=0;
         loop80:
         do {
@@ -17039,15 +16912,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt80) {
         	case 1 :
-        	    // Ocl.g:5719:1: () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8
+        	    // Ocl.g:5592:1: () (a0= AND_OPERATOR ) rightArg= parseop_OclExpressionCS_level_8
         	    {
-        	    // Ocl.g:5719:1: ()
-        	    // Ocl.g:5719:2: 
+        	    // Ocl.g:5592:1: ()
+        	    // Ocl.g:5592:2: 
         	    {
         	    }
 
-        	    // Ocl.g:5721:1: (a0= AND_OPERATOR )
-        	    // Ocl.g:5722:1: a0= AND_OPERATOR
+        	    // Ocl.g:5594:1: (a0= AND_OPERATOR )
+        	    // Ocl.g:5595:1: a0= AND_OPERATOR
         	    {
         	    a0=(Token)match(input,AND_OPERATOR,FOLLOW_AND_OPERATOR_in_synpred46_Ocl4791); if (state.failed) return ;
 
@@ -17084,15 +16957,15 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5833:1: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )
-        // Ocl.g:5833:1: () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9
+        // Ocl.g:5706:1: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )
+        // Ocl.g:5706:1: () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9
         {
-        // Ocl.g:5833:1: ()
-        // Ocl.g:5833:2: 
+        // Ocl.g:5706:1: ()
+        // Ocl.g:5706:2: 
         {
         }
 
-        // Ocl.g:5835:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) )
+        // Ocl.g:5708:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) )
         int alt81=2;
         int LA81_0 = input.LA(1);
 
@@ -17111,10 +16984,10 @@ public class OclParser extends OclANTLRParserBase {
         }
         switch (alt81) {
             case 1 :
-                // Ocl.g:5836:1: (a0= EQUALITY_OPERATOR )
+                // Ocl.g:5709:1: (a0= EQUALITY_OPERATOR )
                 {
-                // Ocl.g:5836:1: (a0= EQUALITY_OPERATOR )
-                // Ocl.g:5837:1: a0= EQUALITY_OPERATOR
+                // Ocl.g:5709:1: (a0= EQUALITY_OPERATOR )
+                // Ocl.g:5710:1: a0= EQUALITY_OPERATOR
                 {
                 a0=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_synpred48_Ocl4859); if (state.failed) return ;
 
@@ -17124,10 +16997,10 @@ public class OclParser extends OclANTLRParserBase {
                 }
                 break;
             case 2 :
-                // Ocl.g:5900:2: (a1= NEQUALITY_OPERATOR )
+                // Ocl.g:5773:2: (a1= NEQUALITY_OPERATOR )
                 {
-                // Ocl.g:5900:2: (a1= NEQUALITY_OPERATOR )
-                // Ocl.g:5901:1: a1= NEQUALITY_OPERATOR
+                // Ocl.g:5773:2: (a1= NEQUALITY_OPERATOR )
+                // Ocl.g:5774:1: a1= NEQUALITY_OPERATOR
                 {
                 a1=(Token)match(input,NEQUALITY_OPERATOR,FOLLOW_NEQUALITY_OPERATOR_in_synpred48_Ocl4876); if (state.failed) return ;
 
@@ -17156,10 +17029,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:5832:43: ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ )
-        // Ocl.g:5832:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
+        // Ocl.g:5705:43: ( ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+ )
+        // Ocl.g:5705:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
         {
-        // Ocl.g:5832:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
+        // Ocl.g:5705:43: ( () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9 )+
         int cnt83=0;
         loop83:
         do {
@@ -17173,14 +17046,14 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt83) {
         	case 1 :
-        	    // Ocl.g:5833:1: () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9
+        	    // Ocl.g:5706:1: () ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) ) rightArg= parseop_OclExpressionCS_level_9
         	    {
-        	    // Ocl.g:5833:1: ()
-        	    // Ocl.g:5833:2: 
+        	    // Ocl.g:5706:1: ()
+        	    // Ocl.g:5706:2: 
         	    {
         	    }
 
-        	    // Ocl.g:5835:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) )
+        	    // Ocl.g:5708:1: ( (a0= EQUALITY_OPERATOR ) | (a1= NEQUALITY_OPERATOR ) )
         	    int alt82=2;
         	    int LA82_0 = input.LA(1);
 
@@ -17199,10 +17072,10 @@ public class OclParser extends OclANTLRParserBase {
         	    }
         	    switch (alt82) {
         	        case 1 :
-        	            // Ocl.g:5836:1: (a0= EQUALITY_OPERATOR )
+        	            // Ocl.g:5709:1: (a0= EQUALITY_OPERATOR )
         	            {
-        	            // Ocl.g:5836:1: (a0= EQUALITY_OPERATOR )
-        	            // Ocl.g:5837:1: a0= EQUALITY_OPERATOR
+        	            // Ocl.g:5709:1: (a0= EQUALITY_OPERATOR )
+        	            // Ocl.g:5710:1: a0= EQUALITY_OPERATOR
         	            {
         	            a0=(Token)match(input,EQUALITY_OPERATOR,FOLLOW_EQUALITY_OPERATOR_in_synpred49_Ocl4859); if (state.failed) return ;
 
@@ -17212,10 +17085,10 @@ public class OclParser extends OclANTLRParserBase {
         	            }
         	            break;
         	        case 2 :
-        	            // Ocl.g:5900:2: (a1= NEQUALITY_OPERATOR )
+        	            // Ocl.g:5773:2: (a1= NEQUALITY_OPERATOR )
         	            {
-        	            // Ocl.g:5900:2: (a1= NEQUALITY_OPERATOR )
-        	            // Ocl.g:5901:1: a1= NEQUALITY_OPERATOR
+        	            // Ocl.g:5773:2: (a1= NEQUALITY_OPERATOR )
+        	            // Ocl.g:5774:1: a1= NEQUALITY_OPERATOR
         	            {
         	            a1=(Token)match(input,NEQUALITY_OPERATOR,FOLLOW_NEQUALITY_OPERATOR_in_synpred49_Ocl4876); if (state.failed) return ;
 
@@ -17257,16 +17130,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:6045:1: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )
-        // Ocl.g:6045:1: () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11
+        // Ocl.g:5918:1: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )
+        // Ocl.g:5918:1: () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11
         {
-        // Ocl.g:6045:1: ()
-        // Ocl.g:6045:2: 
+        // Ocl.g:5918:1: ()
+        // Ocl.g:5918:2: 
         {
         }
 
-        // Ocl.g:6047:1: (a0= RELATIONAL_OPERATOR )
-        // Ocl.g:6048:1: a0= RELATIONAL_OPERATOR
+        // Ocl.g:5920:1: (a0= RELATIONAL_OPERATOR )
+        // Ocl.g:5921:1: a0= RELATIONAL_OPERATOR
         {
         a0=(Token)match(input,RELATIONAL_OPERATOR,FOLLOW_RELATIONAL_OPERATOR_in_synpred50_Ocl4947); if (state.failed) return ;
 
@@ -17288,10 +17161,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:6044:44: ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ )
-        // Ocl.g:6044:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
+        // Ocl.g:5917:44: ( ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+ )
+        // Ocl.g:5917:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
         {
-        // Ocl.g:6044:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
+        // Ocl.g:5917:44: ( () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11 )+
         int cnt84=0;
         loop84:
         do {
@@ -17305,15 +17178,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt84) {
         	case 1 :
-        	    // Ocl.g:6045:1: () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11
+        	    // Ocl.g:5918:1: () (a0= RELATIONAL_OPERATOR ) rightArg= parseop_OclExpressionCS_level_11
         	    {
-        	    // Ocl.g:6045:1: ()
-        	    // Ocl.g:6045:2: 
+        	    // Ocl.g:5918:1: ()
+        	    // Ocl.g:5918:2: 
         	    {
         	    }
 
-        	    // Ocl.g:6047:1: (a0= RELATIONAL_OPERATOR )
-        	    // Ocl.g:6048:1: a0= RELATIONAL_OPERATOR
+        	    // Ocl.g:5920:1: (a0= RELATIONAL_OPERATOR )
+        	    // Ocl.g:5921:1: a0= RELATIONAL_OPERATOR
         	    {
         	    a0=(Token)match(input,RELATIONAL_OPERATOR,FOLLOW_RELATIONAL_OPERATOR_in_synpred51_Ocl4947); if (state.failed) return ;
 
@@ -17349,16 +17222,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:6159:1: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )
-        // Ocl.g:6159:1: () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12
+        // Ocl.g:6032:1: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )
+        // Ocl.g:6032:1: () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12
         {
-        // Ocl.g:6159:1: ()
-        // Ocl.g:6159:2: 
+        // Ocl.g:6032:1: ()
+        // Ocl.g:6032:2: 
         {
         }
 
-        // Ocl.g:6161:1: (a0= ADDITIVE_OPERATOR )
-        // Ocl.g:6162:1: a0= ADDITIVE_OPERATOR
+        // Ocl.g:6034:1: (a0= ADDITIVE_OPERATOR )
+        // Ocl.g:6035:1: a0= ADDITIVE_OPERATOR
         {
         a0=(Token)match(input,ADDITIVE_OPERATOR,FOLLOW_ADDITIVE_OPERATOR_in_synpred52_Ocl5013); if (state.failed) return ;
 
@@ -17380,10 +17253,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:6158:44: ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ )
-        // Ocl.g:6158:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
+        // Ocl.g:6031:44: ( ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+ )
+        // Ocl.g:6031:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
         {
-        // Ocl.g:6158:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
+        // Ocl.g:6031:44: ( () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12 )+
         int cnt85=0;
         loop85:
         do {
@@ -17397,15 +17270,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt85) {
         	case 1 :
-        	    // Ocl.g:6159:1: () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12
+        	    // Ocl.g:6032:1: () (a0= ADDITIVE_OPERATOR ) rightArg= parseop_OclExpressionCS_level_12
         	    {
-        	    // Ocl.g:6159:1: ()
-        	    // Ocl.g:6159:2: 
+        	    // Ocl.g:6032:1: ()
+        	    // Ocl.g:6032:2: 
         	    {
         	    }
 
-        	    // Ocl.g:6161:1: (a0= ADDITIVE_OPERATOR )
-        	    // Ocl.g:6162:1: a0= ADDITIVE_OPERATOR
+        	    // Ocl.g:6034:1: (a0= ADDITIVE_OPERATOR )
+        	    // Ocl.g:6035:1: a0= ADDITIVE_OPERATOR
         	    {
         	    a0=(Token)match(input,ADDITIVE_OPERATOR,FOLLOW_ADDITIVE_OPERATOR_in_synpred53_Ocl5013); if (state.failed) return ;
 
@@ -17441,16 +17314,16 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:6273:1: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )
-        // Ocl.g:6273:1: () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13
+        // Ocl.g:6146:1: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )
+        // Ocl.g:6146:1: () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13
         {
-        // Ocl.g:6273:1: ()
-        // Ocl.g:6273:2: 
+        // Ocl.g:6146:1: ()
+        // Ocl.g:6146:2: 
         {
         }
 
-        // Ocl.g:6275:1: (a0= MULT_OPERATOR )
-        // Ocl.g:6276:1: a0= MULT_OPERATOR
+        // Ocl.g:6148:1: (a0= MULT_OPERATOR )
+        // Ocl.g:6149:1: a0= MULT_OPERATOR
         {
         a0=(Token)match(input,MULT_OPERATOR,FOLLOW_MULT_OPERATOR_in_synpred54_Ocl5079); if (state.failed) return ;
 
@@ -17472,10 +17345,10 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS rightArg = null;
 
 
-        // Ocl.g:6272:44: ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ )
-        // Ocl.g:6272:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
+        // Ocl.g:6145:44: ( ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+ )
+        // Ocl.g:6145:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
         {
-        // Ocl.g:6272:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
+        // Ocl.g:6145:44: ( () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13 )+
         int cnt86=0;
         loop86:
         do {
@@ -17489,15 +17362,15 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt86) {
         	case 1 :
-        	    // Ocl.g:6273:1: () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13
+        	    // Ocl.g:6146:1: () (a0= MULT_OPERATOR ) rightArg= parseop_OclExpressionCS_level_13
         	    {
-        	    // Ocl.g:6273:1: ()
-        	    // Ocl.g:6273:2: 
+        	    // Ocl.g:6146:1: ()
+        	    // Ocl.g:6146:2: 
         	    {
         	    }
 
-        	    // Ocl.g:6275:1: (a0= MULT_OPERATOR )
-        	    // Ocl.g:6276:1: a0= MULT_OPERATOR
+        	    // Ocl.g:6148:1: (a0= MULT_OPERATOR )
+        	    // Ocl.g:6149:1: a0= MULT_OPERATOR
         	    {
         	    a0=(Token)match(input,MULT_OPERATOR,FOLLOW_MULT_OPERATOR_in_synpred55_Ocl5079); if (state.failed) return ;
 
@@ -17533,11 +17406,11 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OclExpressionCS arg = null;
 
 
-        // Ocl.g:6469:1: ( (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 )
-        // Ocl.g:6469:1: (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14
+        // Ocl.g:6342:1: ( (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 )
+        // Ocl.g:6342:1: (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14
         {
-        // Ocl.g:6469:1: (a0= NOT_OPERATOR )
-        // Ocl.g:6470:1: a0= NOT_OPERATOR
+        // Ocl.g:6342:1: (a0= NOT_OPERATOR )
+        // Ocl.g:6343:1: a0= NOT_OPERATOR
         {
         a0=(Token)match(input,NOT_OPERATOR,FOLLOW_NOT_OPERATOR_in_synpred57_Ocl5156); if (state.failed) return ;
 
@@ -17559,21 +17432,21 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS a3_0 = null;
 
 
-        // Ocl.g:6673:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )
-        // Ocl.g:6673:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
+        // Ocl.g:6546:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )
+        // Ocl.g:6546:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
         {
-        // Ocl.g:6673:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
-        // Ocl.g:6674:1: (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+        // Ocl.g:6546:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
+        // Ocl.g:6547:1: (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
         {
-        // Ocl.g:6674:1: (a2= NAVIGATION_OPERATOR )
-        // Ocl.g:6675:1: a2= NAVIGATION_OPERATOR
+        // Ocl.g:6547:1: (a2= NAVIGATION_OPERATOR )
+        // Ocl.g:6548:1: a2= NAVIGATION_OPERATOR
         {
         a2=(Token)match(input,NAVIGATION_OPERATOR,FOLLOW_NAVIGATION_OPERATOR_in_synpred58_Ocl5243); if (state.failed) return ;
 
         }
 
-        // Ocl.g:6720:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
-        // Ocl.g:6721:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
+        // Ocl.g:6593:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+        // Ocl.g:6594:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS_in_synpred58_Ocl5258);
         a3_0=parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS();
@@ -17600,18 +17473,18 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS a3_0 = null;
 
 
-        // Ocl.g:6561:1: ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* )
-        // Ocl.g:6561:1: (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
+        // Ocl.g:6434:1: ( (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )* )
+        // Ocl.g:6434:1: (a0= NAVIGATION_OPERATOR ) (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
         {
-        // Ocl.g:6561:1: (a0= NAVIGATION_OPERATOR )
-        // Ocl.g:6562:1: a0= NAVIGATION_OPERATOR
+        // Ocl.g:6434:1: (a0= NAVIGATION_OPERATOR )
+        // Ocl.g:6435:1: a0= NAVIGATION_OPERATOR
         {
         a0=(Token)match(input,NAVIGATION_OPERATOR,FOLLOW_NAVIGATION_OPERATOR_in_synpred59_Ocl5210); if (state.failed) return ;
 
         }
 
-        // Ocl.g:6607:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
-        // Ocl.g:6608:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
+        // Ocl.g:6480:1: (a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+        // Ocl.g:6481:1: a1_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS_in_synpred59_Ocl5225);
         a1_0=parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS();
@@ -17621,7 +17494,7 @@ public class OclParser extends OclANTLRParserBase {
 
         }
 
-        // Ocl.g:6672:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
+        // Ocl.g:6545:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*
         loop87:
         do {
             int alt87=2;
@@ -17634,20 +17507,20 @@ public class OclParser extends OclANTLRParserBase {
 
             switch (alt87) {
         	case 1 :
-        	    // Ocl.g:6673:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
+        	    // Ocl.g:6546:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
         	    {
-        	    // Ocl.g:6673:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
-        	    // Ocl.g:6674:1: (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+        	    // Ocl.g:6546:1: ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) )
+        	    // Ocl.g:6547:1: (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
         	    {
-        	    // Ocl.g:6674:1: (a2= NAVIGATION_OPERATOR )
-        	    // Ocl.g:6675:1: a2= NAVIGATION_OPERATOR
+        	    // Ocl.g:6547:1: (a2= NAVIGATION_OPERATOR )
+        	    // Ocl.g:6548:1: a2= NAVIGATION_OPERATOR
         	    {
         	    a2=(Token)match(input,NAVIGATION_OPERATOR,FOLLOW_NAVIGATION_OPERATOR_in_synpred59_Ocl5243); if (state.failed) return ;
 
         	    }
 
-        	    // Ocl.g:6720:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
-        	    // Ocl.g:6721:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
+        	    // Ocl.g:6593:1: (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS )
+        	    // Ocl.g:6594:1: a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS
         	    {
         	    pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS_in_synpred59_Ocl5258);
         	    a3_0=parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS();
@@ -17679,8 +17552,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS c0 = null;
 
 
-        // Ocl.g:6859:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS )
-        // Ocl.g:6859:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS
+        // Ocl.g:6732:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS )
+        // Ocl.g:6732:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS_in_synpred60_Ocl5304);
         c0=parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS();
@@ -17697,8 +17570,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS c1 = null;
 
 
-        // Ocl.g:6860:2: (c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS )
-        // Ocl.g:6860:2: c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS
+        // Ocl.g:6733:2: (c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS )
+        // Ocl.g:6733:2: c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS_in_synpred61_Ocl5312);
         c1=parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS();
@@ -17715,8 +17588,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS c2 = null;
 
 
-        // Ocl.g:6861:2: (c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS )
-        // Ocl.g:6861:2: c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS
+        // Ocl.g:6734:2: (c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS )
+        // Ocl.g:6734:2: c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS_in_synpred62_Ocl5320);
         c2=parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS();
@@ -17733,8 +17606,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS c3 = null;
 
 
-        // Ocl.g:6862:2: (c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS )
-        // Ocl.g:6862:2: c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS
+        // Ocl.g:6735:2: (c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS )
+        // Ocl.g:6735:2: c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS_in_synpred63_Ocl5328);
         c3=parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS();
@@ -17751,8 +17624,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS c5 = null;
 
 
-        // Ocl.g:6864:2: (c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS )
-        // Ocl.g:6864:2: c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS
+        // Ocl.g:6737:2: (c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS )
+        // Ocl.g:6737:2: c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS_in_synpred65_Ocl5344);
         c5=parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS();
@@ -17769,8 +17642,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS c6 = null;
 
 
-        // Ocl.g:6865:2: (c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS )
-        // Ocl.g:6865:2: c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS
+        // Ocl.g:6738:2: (c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS )
+        // Ocl.g:6738:2: c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS_in_synpred66_Ocl5352);
         c6=parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS();
@@ -17787,8 +17660,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS c7 = null;
 
 
-        // Ocl.g:6866:2: (c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS )
-        // Ocl.g:6866:2: c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS
+        // Ocl.g:6739:2: (c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS )
+        // Ocl.g:6739:2: c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS_in_synpred67_Ocl5360);
         c7=parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS();
@@ -17805,8 +17678,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS c8 = null;
 
 
-        // Ocl.g:6867:2: (c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS )
-        // Ocl.g:6867:2: c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS
+        // Ocl.g:6740:2: (c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS )
+        // Ocl.g:6740:2: c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS_in_synpred68_Ocl5368);
         c8=parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS();
@@ -17823,8 +17696,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS c10 = null;
 
 
-        // Ocl.g:6869:2: (c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS )
-        // Ocl.g:6869:2: c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS
+        // Ocl.g:6742:2: (c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS )
+        // Ocl.g:6742:2: c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS_in_synpred70_Ocl5384);
         c10=parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS();
@@ -17841,8 +17714,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS c11 = null;
 
 
-        // Ocl.g:6870:2: (c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS )
-        // Ocl.g:6870:2: c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS
+        // Ocl.g:6743:2: (c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS )
+        // Ocl.g:6743:2: c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS_in_synpred71_Ocl5392);
         c11=parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS();
@@ -17859,8 +17732,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS c16 = null;
 
 
-        // Ocl.g:6875:2: (c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS )
-        // Ocl.g:6875:2: c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS
+        // Ocl.g:6748:2: (c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS )
+        // Ocl.g:6748:2: c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS_in_synpred76_Ocl5432);
         c16=parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS();
@@ -17877,8 +17750,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS c0 = null;
 
 
-        // Ocl.g:9813:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS )
-        // Ocl.g:9813:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS
+        // Ocl.g:9686:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS )
+        // Ocl.g:9686:1: c0= parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS_in_synpred93_Ocl6710);
         c0=parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS();
@@ -17895,8 +17768,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS c1 = null;
 
 
-        // Ocl.g:9814:2: (c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS )
-        // Ocl.g:9814:2: c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS
+        // Ocl.g:9687:2: (c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS )
+        // Ocl.g:9687:2: c1= parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS_in_synpred94_Ocl6718);
         c1=parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS();
@@ -17913,8 +17786,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS c0 = null;
 
 
-        // Ocl.g:9829:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS )
-        // Ocl.g:9829:1: c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS
+        // Ocl.g:9702:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS )
+        // Ocl.g:9702:1: c0= parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS_in_synpred97_Ocl6780);
         c0=parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS();
@@ -17931,8 +17804,8 @@ public class OclParser extends OclANTLRParserBase {
         tudresden.ocl20.pivot.language.ocl.CollectionRangeCS c0 = null;
 
 
-        // Ocl.g:9881:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS )
-        // Ocl.g:9881:1: c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS
+        // Ocl.g:9754:1: (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS )
+        // Ocl.g:9754:1: c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS
         {
         pushFollow(FOLLOW_parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS_in_synpred107_Ocl6993);
         c0=parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS();
@@ -18455,9 +18328,9 @@ public class OclParser extends OclANTLRParserBase {
     static final String DFA50_specialS =
         "\2\uffff\1\0\22\uffff}>";
     static final String[] DFA50_transitionS = {
-            "\1\3\1\uffff\2\3\1\2\4\3\2\uffff\1\3\1\uffff\1\1\2\uffff\1"+
-            "\3\1\uffff\2\3\20\uffff\1\3\5\uffff\1\3\3\uffff\1\3\3\uffff"+
-            "\1\3\1\uffff\2\3",
+            "\1\3\1\uffff\2\3\1\2\4\3\2\uffff\1\3\1\uffff\1\1\2\uffff\1\3"+
+            "\1\uffff\2\3\20\uffff\1\3\5\uffff\1\3\3\uffff\1\3\3\uffff\1"+
+            "\3\1\uffff\2\3",
             "",
             "\1\uffff",
             "",
@@ -18510,7 +18383,7 @@ public class OclParser extends OclANTLRParserBase {
             this.transition = DFA50_transition;
         }
         public String getDescription() {
-            return "6382:1: parseop_OclExpressionCS_level_13 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : ( (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | arg= parseop_OclExpressionCS_level_14 );";
+            return "6255:1: parseop_OclExpressionCS_level_13 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : ( (a0= ADDITIVE_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | (a0= NOT_OPERATOR ) arg= parseop_OclExpressionCS_level_14 | arg= parseop_OclExpressionCS_level_14 );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -18552,9 +18425,9 @@ public class OclParser extends OclANTLRParserBase {
     static final String DFA51_specialS =
         "\36\uffff\1\0\1\uffff}>";
     static final String[] DFA51_transitionS = {
-            "\3\1\1\uffff\4\1\3\uffff\3\1\1\36\11\uffff\1\1\1\uffff\1\1"+
-            "\1\uffff\7\1\1\uffff\3\1\3\uffff\1\1\1\uffff\1\1\1\uffff\3\1"+
-            "\1\uffff\1\1",
+            "\3\1\1\uffff\4\1\3\uffff\3\1\1\36\11\uffff\1\1\1\uffff\1\1\1"+
+            "\uffff\7\1\1\uffff\3\1\3\uffff\1\1\1\uffff\1\1\1\uffff\3\1\1"+
+            "\uffff\1\1",
             "",
             "",
             "",
@@ -18618,7 +18491,7 @@ public class OclParser extends OclANTLRParserBase {
             this.transition = DFA51_transition;
         }
         public String getDescription() {
-            return "()* loopback of 6672:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*";
+            return "()* loopback of 6545:1: ( ( (a2= NAVIGATION_OPERATOR ) (a3_0= parse_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS ) ) )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -18661,8 +18534,8 @@ public class OclParser extends OclANTLRParserBase {
     static final String DFA53_specialS =
         "\10\uffff\1\0\1\1\1\uffff\1\2\1\uffff\1\3\17\uffff}>";
     static final String[] DFA53_transitionS = {
-            "\1\10\1\uffff\7\1\2\uffff\1\13\4\uffff\1\15\1\uffff\1\16\1"+
-            "\17\20\uffff\1\22\5\uffff\1\11\3\uffff\1\12\3\uffff\1\14\1\uffff"+
+            "\1\10\1\uffff\7\1\2\uffff\1\13\4\uffff\1\15\1\uffff\1\16\1\17"+
+            "\20\uffff\1\22\5\uffff\1\11\3\uffff\1\12\3\uffff\1\14\1\uffff"+
             "\1\20\1\21",
             "",
             "",
@@ -18724,7 +18597,7 @@ public class OclParser extends OclANTLRParserBase {
             this.transition = DFA53_transition;
         }
         public String getDescription() {
-            return "6855:1: parseop_OclExpressionCS_level_20 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS | c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS | c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS | c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS | c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS | c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS | c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS | c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS | c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS | c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS | c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS | c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS | c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS | c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS | c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS | c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS );";
+            return "6728:1: parseop_OclExpressionCS_level_20 returns [tudresden.ocl20.pivot.language.ocl.OclExpressionCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS | c1= parse_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS | c2= parse_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS | c3= parse_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS | c4= parse_tudresden_ocl20_pivot_language_ocl_IfExpCS | c5= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS | c6= parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS | c7= parse_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS | c8= parse_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS | c9= parse_tudresden_ocl20_pivot_language_ocl_LetExpCS | c10= parse_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS | c11= parse_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS | c12= parse_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS | c13= parse_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS | c14= parse_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS | c15= parse_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS | c16= parse_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS | c17= parse_tudresden_ocl20_pivot_language_ocl_BracketExpCS );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -18815,8 +18688,8 @@ public class OclParser extends OclANTLRParserBase {
     static final String DFA72_acceptS =
         "\24\uffff\1\1\1\2";
     static final String DFA72_specialS =
-        "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1"+
-        "\14\1\15\1\16\1\17\1\20\1\21\1\22\2\uffff}>";
+        "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
+        "\1\15\1\16\1\17\1\20\1\21\1\22\2\uffff}>";
     static final String[] DFA72_transitionS = {
             "\1\11\1\uffff\1\3\1\4\1\2\1\5\1\6\1\7\1\10\2\uffff\1\14\1\uffff"+
             "\1\1\2\uffff\1\16\1\uffff\1\17\1\20\20\uffff\1\23\5\uffff\1"+
@@ -18874,7 +18747,7 @@ public class OclParser extends OclANTLRParserBase {
             this.transition = DFA72_transition;
         }
         public String getDescription() {
-            return "9879:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS | c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS );";
+            return "9752:1: parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS returns [tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS element = null] : (c0= parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS | c1= parse_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;

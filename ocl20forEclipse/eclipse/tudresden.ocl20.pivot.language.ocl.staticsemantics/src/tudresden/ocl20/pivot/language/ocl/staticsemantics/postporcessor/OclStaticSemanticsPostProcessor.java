@@ -75,4 +75,9 @@ public class OclStaticSemanticsPostProcessor implements
 		System.out.println(bodyExpression);
 	}
 
+	@Override
+	public void terminate() {
+		// left empty		
+	}
+
 }

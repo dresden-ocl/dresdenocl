@@ -58,7 +58,7 @@ public interface IOclMetaInformation {
 	 * 
 	 * @return a new instance of the printer class
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter createPrinter(java.io.OutputStream ouputStream, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource);
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter createPrinter(java.io.OutputStream outputStream, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource);
 	
 	/**
 	 * Returns all meta classes for which syntax was defined. This information is used

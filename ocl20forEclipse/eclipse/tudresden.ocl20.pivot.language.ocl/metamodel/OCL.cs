@@ -7,6 +7,8 @@ IMPORTS {
 }
 
 OPTIONS {
+	disableDebugSupport = "true";
+	disableLaunchSupport = "true";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	overrideTextResource = "false";

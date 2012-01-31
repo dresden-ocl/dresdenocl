@@ -46,9 +46,9 @@ public class OclHyperlink implements org.eclipse.jface.text.hyperlink.IHyperlink
 	}
 	
 	/**
-	 * Opens the resource in <code>linkTarget</code> with EMFText editor, if it
+	 * Opens the resource in <code>linkTarget</code> with the generated editor, if it
 	 * supports the file extension of this resource, and tries to jump to the
-	 * definition. Otherwise it tries to open with a default editor.
+	 * definition. Otherwise it tries to open the target with the default editor.
 	 */
 	public void open() {
 		if (linkTarget == null) {
@@ -60,13 +60,23 @@ public class OclHyperlink implements org.eclipse.jface.text.hyperlink.IHyperlink
 			org.eclipse.ui.IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 			try {
 				org.eclipse.ui.IEditorDescriptor desc = workbench.getEditorRegistry().getDefaultEditor(file.getName());
+				if (desc == null) {
+					desc = workbench.getEditorRegistry().findEditor("org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
+				}
 				org.eclipse.ui.IEditorPart editorPart = page.openEditor(new org.eclipse.ui.part.FileEditorInput(file), desc.getId());
-				if (editorPart instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor emftEditor = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) editorPart;
-					emftEditor.setCaret(linkTarget, text);
+				if (editorPart instanceof org.eclipse.emf.edit.domain.IEditingDomainProvider) {
+					org.eclipse.emf.edit.domain.IEditingDomainProvider editingDomainProvider = (org.eclipse.emf.edit.domain.IEditingDomainProvider) editorPart;
+					org.eclipse.emf.edit.domain.EditingDomain editingDomain = editingDomainProvider.getEditingDomain();
+					org.eclipse.emf.common.util.URI uri = org.eclipse.emf.ecore.util.EcoreUtil.getURI(linkTarget);
+					org.eclipse.emf.ecore.EObject originalObject = editingDomain.getResourceSet().getEObject(uri, true);
+					if (editingDomainProvider instanceof org.eclipse.emf.common.ui.viewer.IViewerProvider) {
+						org.eclipse.emf.common.ui.viewer.IViewerProvider viewerProvider = (org.eclipse.emf.common.ui.viewer.IViewerProvider) editingDomainProvider;
+						org.eclipse.jface.viewers.Viewer viewer = viewerProvider.getViewer();
+						viewer.setSelection(new org.eclipse.jface.viewers.StructuredSelection(originalObject), true);
+					}
 				}
 			} catch (org.eclipse.ui.PartInitException e) {
-				e.printStackTrace();
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while opening hyperlink target.", e);
 			}
 		}
 	}

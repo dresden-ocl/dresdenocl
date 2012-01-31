@@ -108,7 +108,7 @@ public class OclCodeFoldingManager {
 	}
 	
 	/**
-	 * Checks whether the given postition are in the
+	 * Checks whether the given positions are in the
 	 * <code>org.eclipse.jface.text.source.projection.ProjectionAnnotationModel</code>
 	 * or in the addition set. If not it tries to add into <code>additions</code>.
 	 * Deletes old org.eclipse.jface.text.source.projection.ProjectionAnnotation with
@@ -400,8 +400,15 @@ public class OclCodeFoldingManager {
 	private java.util.List<org.eclipse.emf.ecore.EObject> getAllContents(org.eclipse.emf.ecore.EObject[] contentArray) {
 		java.util.List<org.eclipse.emf.ecore.EObject> result = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		for (org.eclipse.emf.ecore.EObject eObject : contentArray) {
+			if (eObject == null) {
+				continue;
+			}
 			result.add(eObject);
-			result.addAll(getAllContents(eObject.eContents().toArray(new org.eclipse.emf.ecore.EObject[0])));
+			java.util.List<org.eclipse.emf.ecore.EObject> contents = eObject.eContents();
+			if (contents == null) {
+				continue;
+			}
+			result.addAll(getAllContents(contents.toArray(new org.eclipse.emf.ecore.EObject[0])));
 		}
 		return result;
 	}

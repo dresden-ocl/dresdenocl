@@ -30,7 +30,7 @@ public class OclBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 					return false;
 				}
 				org.eclipse.core.resources.IResource resource = delta.getResource();
-				if (resource instanceof org.eclipse.core.resources.IFile && "ocl".equals(resource.getFileExtension())) {
+				if (resource instanceof org.eclipse.core.resources.IFile && resource.getName().endsWith("." + "ocl")) {
 					org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 					if (builder.isBuildingNeeded(uri)) {
 						tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource customResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl().getResource(uri, true);

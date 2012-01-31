@@ -12,24 +12,24 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclAntlrTokenHelper {
 	
-	public boolean canBeUsedForSyntaxColoring(org.antlr.runtime3_2_0.Token token) {
-		return canBeUsedForSyntaxColoring(token.getType());
+	public boolean canBeUsedForSyntaxColoring(org.antlr.runtime3_3_0.Token token) {
+		return canBeUsedForSyntaxHighlighting(token.getType());
 	}
 	
-	public boolean canBeUsedForSyntaxColoring(int tokenType) {
-		if (tokenType == org.antlr.runtime3_2_0.Token.EOF) {
+	public boolean canBeUsedForSyntaxHighlighting(int tokenType) {
+		if (tokenType < 0 || tokenType == org.antlr.runtime3_3_0.Token.EOF) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime3_2_0.Token.UP) {
+		if (tokenType == org.antlr.runtime3_3_0.Token.UP) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime3_2_0.Token.DOWN) {
+		if (tokenType == org.antlr.runtime3_3_0.Token.DOWN) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime3_2_0.Token.EOR_TOKEN_TYPE) {
+		if (tokenType == org.antlr.runtime3_3_0.Token.EOR_TOKEN_TYPE) {
 			return false;
 		}
-		if (tokenType == org.antlr.runtime3_2_0.Token.INVALID_TOKEN_TYPE) {
+		if (tokenType == org.antlr.runtime3_3_0.Token.INVALID_TOKEN_TYPE) {
 			return false;
 		}
 		return true;

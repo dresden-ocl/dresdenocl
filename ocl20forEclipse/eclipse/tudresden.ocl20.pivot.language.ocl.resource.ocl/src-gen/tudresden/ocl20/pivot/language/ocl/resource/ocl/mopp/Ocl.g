@@ -11,12 +11,12 @@ options {
 }
 
 @lexer::members {
-	public java.util.List<org.antlr.runtime3_2_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_2_0.RecognitionException>();
+	public java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions  = new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>();
 	public java.util.List<Integer> lexerExceptionsPosition = new java.util.ArrayList<Integer>();
 	
-	public void reportError(org.antlr.runtime3_2_0.RecognitionException e) {
+	public void reportError(org.antlr.runtime3_3_0.RecognitionException e) {
 		lexerExceptions.add(e);
-		lexerExceptionsPosition.add(((org.antlr.runtime3_2_0.ANTLRStringStream) input).index());
+		lexerExceptionsPosition.add(((org.antlr.runtime3_3_0.ANTLRStringStream) input).index());
 	}
 }
 @header{
@@ -30,8 +30,6 @@ options {
 	 * the index of the last token that was handled by collectHiddenTokens()
 	 */
 	private int lastPosition;
-	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult tokenResolveResult = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
 	
 	/**
 	 * A flag that indicates whether the parser should remember all expected elements.
@@ -51,11 +49,10 @@ options {
 	private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
 	
 	private int mismatchedTokenRecoveryTries = 0;
-	private java.util.Map<?, ?> options;
 	/**
 	 * A helper list to allow a lexer to pass errors to its parser
 	 */
-	protected java.util.List<org.antlr.runtime3_2_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_2_0.RecognitionException>());
+	protected java.util.List<org.antlr.runtime3_3_0.RecognitionException> lexerExceptions = java.util.Collections.synchronizedList(new java.util.ArrayList<org.antlr.runtime3_3_0.RecognitionException>());
 	
 	/**
 	 * Another helper list to allow a lexer to pass positions of errors to its parser
@@ -72,17 +69,6 @@ options {
 	
 	private int stopIncludingHiddenTokens;
 	private int stopExcludingHiddenTokens;
-	/**
-	 * A flag to indicate that the parser should stop parsing as soon as possible. The
-	 * flag is set to false before parsing starts. It can be set to true by invoking
-	 * the terminateParsing() method from another thread. This feature is used, when
-	 * documents are parsed in the background (i.e., while editing them). In order to
-	 * cancel running parsers, the parsing process can be terminated. This is done
-	 * whenever a document changes, because the previous content of the document is
-	 * not valid anymore and parsing the old content is not necessary any longer.
-	 */
-	private boolean terminateParsing;
-	
 	private int tokenIndexOfLastCompleteElement;
 	
 	private int expectedElementsIndexOfLastCompleteElement;
@@ -140,41 +126,6 @@ options {
 		this.expectedElements.add(expectedElement);
 	}
 	
-	protected void addMapEntry(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject dummy) {
-		Object value = element.eGet(structuralFeature);
-		Object mapKey = dummy.getValueByName("key");
-		Object mapValue = dummy.getValueByName("value");
-		if (value instanceof org.eclipse.emf.common.util.EMap<?, ?>) {
-			org.eclipse.emf.common.util.EMap<Object, Object> valueMap = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMapUtil.castToEMap(value);
-			if (mapKey != null && mapValue != null) {
-				valueMap.put(mapKey, mapValue);
-			}
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	
-	public boolean addObjectToList(org.eclipse.emf.ecore.EObject container, int featureID, Object object) {
-		return ((java.util.List<Object>) container.eGet(container.eClass().getEStructuralFeature(featureID))).add(object);
-	}
-	
-	@SuppressWarnings("unchecked")
-	
-	public boolean addObjectToList(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EStructuralFeature feature, Object object) {
-		return ((java.util.List<Object>) container.eGet(feature)).add(object);
-	}
-	
-	protected org.eclipse.emf.ecore.EObject apply(org.eclipse.emf.ecore.EObject target, java.util.List<org.eclipse.emf.ecore.EObject> dummyEObjects) {
-		org.eclipse.emf.ecore.EObject currentTarget = target;
-		for (org.eclipse.emf.ecore.EObject object : dummyEObjects) {
-			assert(object instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject);
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject dummy = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject) object;
-			org.eclipse.emf.ecore.EObject newEObject = dummy.applyTo(currentTarget);
-			currentTarget = newEObject;
-		}
-		return currentTarget;
-	}
-	
 	protected void collectHiddenTokens(org.eclipse.emf.ecore.EObject element) {
 	}
 	
@@ -195,7 +146,7 @@ options {
 		});
 	}
 	
-	protected void copyLocalizationInfos(final org.antlr.runtime3_2_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
+	protected void copyLocalizationInfos(final org.antlr.runtime3_3_0.CommonToken source, final org.eclipse.emf.ecore.EObject target) {
 		postParseCommands.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>() {
 			public boolean execute(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = resource.getLocationMap();
@@ -237,9 +188,9 @@ options {
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser createInstance(java.io.InputStream actualInputStream, String encoding) {
 		try {
 			if (encoding == null) {
-				return new OclParser(new org.antlr.runtime3_2_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_2_0.ANTLRInputStream(actualInputStream))));
+				return new OclParser(new org.antlr.runtime3_3_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream))));
 			} else {
-				return new OclParser(new org.antlr.runtime3_2_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_2_0.ANTLRInputStream(actualInputStream, encoding))));
+				return new OclParser(new org.antlr.runtime3_3_0.CommonTokenStream(new OclLexer(new org.antlr.runtime3_3_0.ANTLRInputStream(actualInputStream, encoding))));
 			}
 		} catch (java.io.IOException e) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Error while creating parser.", e);
@@ -254,7 +205,7 @@ options {
 		super(null);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_2_0.RecognitionException {
+	protected org.eclipse.emf.ecore.EObject doParse() throws org.antlr.runtime3_3_0.RecognitionException {
 		this.lastPosition = 0;
 		// required because the lexer class can not be subclassed
 		((OclLexer) getTokenStream().getTokenSource()).lexerExceptions = lexerExceptions;
@@ -370,34 +321,17 @@ options {
 		throw new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclUnexpectedContentTypeException(typeObject);
 	}
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult getFreshTokenResolveResult() {
-		tokenResolveResult.clear();
-		return tokenResolveResult;
-	}
-	
 	public int getMismatchedTokenRecoveryTries() {
 		return mismatchedTokenRecoveryTries;
 	}
 	
-	public Object getMissingSymbol(org.antlr.runtime3_2_0.IntStream arg0, org.antlr.runtime3_2_0.RecognitionException arg1, int arg2, org.antlr.runtime3_2_0.BitSet arg3) {
+	public Object getMissingSymbol(org.antlr.runtime3_3_0.IntStream arg0, org.antlr.runtime3_3_0.RecognitionException arg1, int arg2, org.antlr.runtime3_3_0.BitSet arg3) {
 		mismatchedTokenRecoveryTries++;
 		return super.getMissingSymbol(arg0, arg1, arg2, arg3);
 	}
 	
-	protected java.util.Map<?,?> getOptions() {
-		return options;
-	}
-	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation getMetaInformation() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
-	}
-	
 	public Object getParseToIndexTypeObject() {
 		return parseToIndexTypeObject;
-	}
-	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
-		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) getMetaInformation().getReferenceResolverSwitch();
 	}
 	
 	protected Object getTypeObject() {
@@ -425,7 +359,7 @@ options {
 			if (lexerExceptions.isEmpty()) {
 				parseResult.setRoot(result);
 			}
-		} catch (org.antlr.runtime3_2_0.RecognitionException re) {
+		} catch (org.antlr.runtime3_3_0.RecognitionException re) {
 			reportError(re);
 		} catch (java.lang.IllegalArgumentException iae) {
 			if ("The 'no null' constraint is violated".equals(iae.getMessage())) {
@@ -435,7 +369,7 @@ options {
 				iae.printStackTrace();
 			}
 		}
-		for (org.antlr.runtime3_2_0.RecognitionException re : lexerExceptions) {
+		for (org.antlr.runtime3_3_0.RecognitionException re : lexerExceptions) {
 			reportLexicalError(re);
 		}
 		parseResult.getPostParseCommands().addAll(postParseCommands);
@@ -447,10 +381,10 @@ options {
 		this.parseToIndexTypeObject = type;
 		this.cursorOffset = cursorOffset;
 		this.lastStartIncludingHidden = -1;
-		final org.antlr.runtime3_2_0.CommonTokenStream tokenStream = (org.antlr.runtime3_2_0.CommonTokenStream) getTokenStream();
+		final org.antlr.runtime3_3_0.CommonTokenStream tokenStream = (org.antlr.runtime3_3_0.CommonTokenStream) getTokenStream();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclParseResult result = parse();
 		for (org.eclipse.emf.ecore.EObject incompleteObject : incompleteObjects) {
-			org.antlr.runtime3_2_0.Lexer lexer = (org.antlr.runtime3_2_0.Lexer) tokenStream.getTokenSource();
+			org.antlr.runtime3_3_0.Lexer lexer = (org.antlr.runtime3_3_0.Lexer) tokenStream.getTokenSource();
 			int endChar = lexer.getCharIndex();
 			int endLine = lexer.getLine();
 			setLocalizationEnd(result.getPostParseCommands(), incompleteObject, endChar, endLine);
@@ -480,7 +414,10 @@ options {
 		int followSetID = 256;
 		int i;
 		for (i = tokenIndexOfLastCompleteElement; i < tokenStream.size(); i++) {
-			org.antlr.runtime3_2_0.CommonToken nextToken = (org.antlr.runtime3_2_0.CommonToken) tokenStream.get(i);
+			org.antlr.runtime3_3_0.CommonToken nextToken = (org.antlr.runtime3_3_0.CommonToken) tokenStream.get(i);
+			if (nextToken.getType() < 0) {
+				break;
+			}
 			if (nextToken.getChannel() == 99) {
 				// hidden tokens do not reduce the follow set
 			} else {
@@ -525,7 +462,7 @@ options {
 			if (index >= input.size()) {
 				break;
 			}
-			org.antlr.runtime3_2_0.CommonToken tokenAtIndex = (org.antlr.runtime3_2_0.CommonToken) input.get(index);
+			org.antlr.runtime3_3_0.CommonToken tokenAtIndex = (org.antlr.runtime3_3_0.CommonToken) input.get(index);
 			stopIncludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
 			if (tokenAtIndex.getChannel() != 99) {
 				stopExcludingHiddenTokens = tokenAtIndex.getStopIndex() + 1;
@@ -535,7 +472,7 @@ options {
 		expectedElement.setPosition(stopExcludingHiddenTokens, stopIncludingHiddenTokens);
 	}
 	
-	public Object recoverFromMismatchedToken(org.antlr.runtime3_2_0.IntStream input, int ttype, org.antlr.runtime3_2_0.BitSet follow) throws org.antlr.runtime3_2_0.RecognitionException {
+	public Object recoverFromMismatchedToken(org.antlr.runtime3_3_0.IntStream input, int ttype, org.antlr.runtime3_3_0.BitSet follow) throws org.antlr.runtime3_3_0.RecognitionException {
 		if (!rememberExpectedElements) {
 			return super.recoverFromMismatchedToken(input, ttype, follow);
 		} else {
@@ -546,35 +483,35 @@ options {
 	/**
 	 * Translates errors thrown by the parser into human readable messages.
 	 */
-	public void reportError(final org.antlr.runtime3_2_0.RecognitionException e)  {
+	public void reportError(final org.antlr.runtime3_3_0.RecognitionException e)  {
 		String message = e.getMessage();
-		if (e instanceof org.antlr.runtime3_2_0.MismatchedTokenException) {
-			org.antlr.runtime3_2_0.MismatchedTokenException mte = (org.antlr.runtime3_2_0.MismatchedTokenException) e;
+		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
+			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
 			String expectedTokenName = formatTokenName(mte.expecting);
 			String actualTokenName = formatTokenName(e.token.getType());
 			message = "Syntax error on token \"" + e.token.getText() + " (" + actualTokenName + ")\", \"" + expectedTokenName + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedTreeNodeException) {
-			org.antlr.runtime3_2_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_2_0.MismatchedTreeNodeException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedTreeNodeException) {
+			org.antlr.runtime3_3_0.MismatchedTreeNodeException mtne = (org.antlr.runtime3_3_0.MismatchedTreeNodeException) e;
 			String expectedTokenName = formatTokenName(mtne.expecting);
 			message = "mismatched tree node: " + "xxx" + "; tokenName " + expectedTokenName;
-		} else if (e instanceof org.antlr.runtime3_2_0.NoViableAltException) {
+		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", check following tokens";
-		} else if (e instanceof org.antlr.runtime3_2_0.EarlyExitException) {
+		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
 			message = "Syntax error on token \"" + e.token.getText() + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedSetException) {
-			org.antlr.runtime3_2_0.MismatchedSetException mse = (org.antlr.runtime3_2_0.MismatchedSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
+			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
 			message = "mismatched token: " + e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedNotSetException) {
-			org.antlr.runtime3_2_0.MismatchedNotSetException mse = (org.antlr.runtime3_2_0.MismatchedNotSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
+			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
 			message = "mismatched token: " +  e.token + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_2_0.FailedPredicateException) {
-			org.antlr.runtime3_2_0.FailedPredicateException fpe = (org.antlr.runtime3_2_0.FailedPredicateException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
+			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
 			message = "rule " + fpe.ruleName + " failed predicate: {" +  fpe.predicateText + "}?";
 		}
-		// the resource may be null if the parse is used for code completion
+		// the resource may be null if the parser is used for code completion
 		final String finalMessage = message;
-		if (e.token instanceof org.antlr.runtime3_2_0.CommonToken) {
-			final org.antlr.runtime3_2_0.CommonToken ct = (org.antlr.runtime3_2_0.CommonToken) e.token;
+		if (e.token instanceof org.antlr.runtime3_3_0.CommonToken) {
+			final org.antlr.runtime3_3_0.CommonToken ct = (org.antlr.runtime3_3_0.CommonToken) e.token;
 			addErrorToResource(finalMessage, ct.getCharPositionInLine(), ct.getLine(), ct.getStartIndex(), ct.getStopIndex());
 		} else {
 			addErrorToResource(finalMessage, e.token.getCharPositionInLine(), e.token.getLine(), 1, 5);
@@ -584,52 +521,30 @@ options {
 	/**
 	 * Translates errors thrown by the lexer into human readable messages.
 	 */
-	public void reportLexicalError(final org.antlr.runtime3_2_0.RecognitionException e)  {
+	public void reportLexicalError(final org.antlr.runtime3_3_0.RecognitionException e)  {
 		String message = "";
-		if (e instanceof org.antlr.runtime3_2_0.MismatchedTokenException) {
-			org.antlr.runtime3_2_0.MismatchedTokenException mte = (org.antlr.runtime3_2_0.MismatchedTokenException) e;
+		if (e instanceof org.antlr.runtime3_3_0.MismatchedTokenException) {
+			org.antlr.runtime3_3_0.MismatchedTokenException mte = (org.antlr.runtime3_3_0.MismatchedTokenException) e;
 			message = "Syntax error on token \"" + ((char) e.c) + "\", \"" + (char) mte.expecting + "\" expected";
-		} else if (e instanceof org.antlr.runtime3_2_0.NoViableAltException) {
+		} else if (e instanceof org.antlr.runtime3_3_0.NoViableAltException) {
 			message = "Syntax error on token \"" + ((char) e.c) + "\", delete this token";
-		} else if (e instanceof org.antlr.runtime3_2_0.EarlyExitException) {
-			org.antlr.runtime3_2_0.EarlyExitException eee = (org.antlr.runtime3_2_0.EarlyExitException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.EarlyExitException) {
+			org.antlr.runtime3_3_0.EarlyExitException eee = (org.antlr.runtime3_3_0.EarlyExitException) e;
 			message = "required (...)+ loop (decision=" + eee.decisionNumber + ") did not match anything; on line " + e.line + ":" + e.charPositionInLine + " char=" + ((char) e.c) + "'";
-		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedSetException) {
-			org.antlr.runtime3_2_0.MismatchedSetException mse = (org.antlr.runtime3_2_0.MismatchedSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedSetException) {
+			org.antlr.runtime3_3_0.MismatchedSetException mse = (org.antlr.runtime3_3_0.MismatchedSetException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedNotSetException) {
-			org.antlr.runtime3_2_0.MismatchedNotSetException mse = (org.antlr.runtime3_2_0.MismatchedNotSetException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedNotSetException) {
+			org.antlr.runtime3_3_0.MismatchedNotSetException mse = (org.antlr.runtime3_3_0.MismatchedNotSetException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set " + mse.expecting;
-		} else if (e instanceof org.antlr.runtime3_2_0.MismatchedRangeException) {
-			org.antlr.runtime3_2_0.MismatchedRangeException mre = (org.antlr.runtime3_2_0.MismatchedRangeException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.MismatchedRangeException) {
+			org.antlr.runtime3_3_0.MismatchedRangeException mre = (org.antlr.runtime3_3_0.MismatchedRangeException) e;
 			message = "mismatched char: '" + ((char) e.c) + "' on line " + e.line + ":" + e.charPositionInLine + "; expecting set '" + (char) mre.a + "'..'" + (char) mre.b + "'";
-		} else if (e instanceof org.antlr.runtime3_2_0.FailedPredicateException) {
-			org.antlr.runtime3_2_0.FailedPredicateException fpe = (org.antlr.runtime3_2_0.FailedPredicateException) e;
+		} else if (e instanceof org.antlr.runtime3_3_0.FailedPredicateException) {
+			org.antlr.runtime3_3_0.FailedPredicateException fpe = (org.antlr.runtime3_3_0.FailedPredicateException) e;
 			message = "rule " + fpe.ruleName + " failed predicate: {" + fpe.predicateText + "}?";
 		}
 		addErrorToResource(message, e.charPositionInLine, e.line, lexerExceptionsPosition.get(lexerExceptions.indexOf(e)), lexerExceptionsPosition.get(lexerExceptions.indexOf(e)));
-	}
-	
-	private String formatTokenName(int tokenType)  {
-		String tokenName = "<unknown>";
-		if (tokenType == org.antlr.runtime3_2_0.Token.EOF) {
-			tokenName = "EOF";
-		} else {
-			if (tokenType < 0) {
-				return tokenName;
-			}
-			tokenName = getTokenNames()[tokenType];
-			tokenName = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.formatTokenName(tokenName);
-		}
-		return tokenName;
-	}
-	
-	public void setOptions(java.util.Map<?,?> options) {
-		this.options = options;
-	}
-	
-	public void terminate() {
-		terminateParsing = true;
 	}
 	
 	protected void completedElement(Object object, boolean isContainment) {
@@ -640,48 +555,6 @@ options {
 			this.tokenIndexOfLastCompleteElement = getTokenStream().index();
 			this.expectedElementsIndexOfLastCompleteElement = expectedElements.size() - 1;
 		}
-	}
-	
-	/**
-	 * Creates a dynamic Java proxy that mimics the interface of the given class.
-	 */
-	@SuppressWarnings("unchecked")
-	
-	public <T> T createDynamicProxy(Class<T> clazz) {
-		Object proxy = java.lang.reflect.Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class<?>[]{clazz, org.eclipse.emf.ecore.EObject.class, org.eclipse.emf.ecore.InternalEObject.class}, new java.lang.reflect.InvocationHandler() {
-			
-			private org.eclipse.emf.ecore.EObject dummyObject = new org.eclipse.emf.ecore.impl.EObjectImpl() {};
-			
-			public Object invoke(Object object, java.lang.reflect.Method method, Object[] args) throws Throwable {
-				// search in dummyObject for the requested method
-				java.lang.reflect.Method[] methodsInDummy = dummyObject.getClass().getMethods();
-				for (java.lang.reflect.Method methodInDummy : methodsInDummy) {
-					boolean matches = true;
-					if (methodInDummy.getName().equals(method.getName())) {
-						Class<?>[] parameterTypes = method.getParameterTypes();
-						Class<?>[] parameterTypesInDummy = methodInDummy.getParameterTypes();
-						if (parameterTypes.length == parameterTypesInDummy.length) {
-							for (int p = 0; p < parameterTypes.length; p++) {
-								Class<?> parameterType = parameterTypes[p];
-								Class<?> parameterTypeInDummy = parameterTypesInDummy[p];
-								if (!parameterType.equals(parameterTypeInDummy)) {
-									matches = false;
-								}
-							}
-						} else {
-							matches = false;
-						}
-					} else {
-						matches = false;
-					}
-					if (matches) {
-						return methodInDummy.invoke(dummyObject, args);
-					}
-				}
-				return null;
-			}
-		});
-		return (T) proxy;
 	}
 	
 }
@@ -727,9 +600,9 @@ parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.p
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), value);
@@ -737,7 +610,7 @@ parse_tudresden_ocl20_pivot_language_ocl_SimpleNameCS returns [tudresden.ocl20.p
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 			}
 		}
 	)
@@ -769,7 +642,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS retur
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -853,7 +726,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS retur
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
@@ -882,7 +755,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Namespace proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -895,8 +768,8 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -918,7 +791,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS ret
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2_0_0_1_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -1013,7 +886,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS returns [
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1096,7 +969,7 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1137,7 +1010,7 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1161,7 +1034,7 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ATTRIBUTE_CONTEXT_DECLARATION_CS__PROPERTY), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
@@ -1174,8 +1047,8 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_3, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, proxy);
 			}
 		}
 	)
@@ -1195,7 +1068,7 @@ parse_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS returns [
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5_0_0_4_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
 			}
 			{
 				// expected elements (follow set)
@@ -1315,7 +1188,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS returns 
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1400,7 +1273,7 @@ parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pi
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1414,7 +1287,7 @@ parse_tudresden_ocl20_pivot_language_ocl_InitValueCS returns [tudresden.ocl20.pi
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1492,7 +1365,7 @@ parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1506,7 +1379,7 @@ parse_tudresden_ocl20_pivot_language_ocl_DeriveValueCS returns [tudresden.ocl20.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1584,7 +1457,7 @@ parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1627,7 +1500,7 @@ parse_tudresden_ocl20_pivot_language_ocl_InvariantExpCS returns [tudresden.ocl20
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1718,9 +1591,9 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 						tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), result);
 						Object resolvedObject = result.getResolvedToken();
 						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 						}
-						java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+						java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 						if (resolved != null) {
 							Object value = resolved;
 							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_CS__STATIC), value);
@@ -1728,7 +1601,7 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_0_0_0_0, resolved, true);
-						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 					}
 				}
 			)
@@ -1751,7 +1624,7 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1765,7 +1638,7 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS returns [tudresden.ocl2
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -1892,9 +1765,9 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudre
 				tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.DEFINITION_EXP_OPERATION_CS__EQUAL), value);
@@ -1902,7 +1775,7 @@ parse_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS returns [tudre
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12_0_0_1, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 			}
 		}
 	)
@@ -1983,7 +1856,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudr
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2033,7 +1906,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS returns [tudr
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2112,7 +1985,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tud
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2162,7 +2035,7 @@ parse_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS returns [tud
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2241,7 +2114,7 @@ parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.oc
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2291,7 +2164,7 @@ parse_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS returns [tudresden.oc
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2396,7 +2269,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2420,7 +2293,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 				tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__OPERATION), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -2433,8 +2306,8 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_4, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
 			}
 		}
 	)
@@ -2450,7 +2323,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_6, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2496,7 +2369,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_8_0_0_1_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 					}
 					{
 						// expected elements (follow set)
@@ -2552,7 +2425,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_10, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2571,7 +2444,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS returns 
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16_0_0_11_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
 			}
 			{
 				// expected elements (follow set)
@@ -2641,7 +2514,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_DEFINITION_IN_DEF_CS__OPERATION), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -2654,8 +2527,8 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -2671,7 +2544,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2717,7 +2590,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_2_0_0_1_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 					}
 					{
 						// expected elements (follow set)
@@ -2773,7 +2646,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_3, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2790,7 +2663,7 @@ parse_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS returns [tud
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17_0_0_4_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
 			}
 			{
 				// expected elements (follow set)
@@ -2856,7 +2729,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PARAMETER_CS__PARAMETER), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Parameter proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createParameter();
@@ -2869,8 +2742,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -2886,7 +2759,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ParameterCS returns [tudresden.ocl20.pi
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -2949,7 +2822,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -2962,8 +2835,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_0_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 				}
 			}
 		)
@@ -2990,7 +2863,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3003,8 +2876,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_1_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, proxy);
 				}
 			}
 		)
@@ -3031,7 +2904,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3044,8 +2917,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_2_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
 				}
 			}
 		)
@@ -3072,7 +2945,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3085,8 +2958,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_3_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, proxy);
 				}
 			}
 		)
@@ -3113,7 +2986,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3126,8 +2999,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_4_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
 				}
 			}
 		)
@@ -3154,7 +3027,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3167,8 +3040,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_5_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, proxy);
 				}
 			}
 		)
@@ -3195,7 +3068,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3208,8 +3081,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_6_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, proxy);
 				}
 			}
 		)
@@ -3236,7 +3109,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_OPERATION_CALL_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
 					}
 					String resolved = (String) resolvedObject;
 					tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -3249,8 +3122,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_0_0_7_0, proxy, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, proxy);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, proxy);
 				}
 			}
 		)
@@ -3272,7 +3145,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a8, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a8, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3345,7 +3218,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_3_0_0_2_0_0_0, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a10, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a10, element);
 					}
 					{
 						// expected elements (follow set)
@@ -3428,7 +3301,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS returns [tudres
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a12, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a12, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3496,7 +3369,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__PROPERTY), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
@@ -3509,8 +3382,8 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -3577,9 +3450,9 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 						tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), result);
 						Object resolvedObject = result.getResolvedToken();
 						if (resolvedObject == null) {
-							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+							addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 						}
-						java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+						java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 						if (resolved != null) {
 							Object value = resolved;
 							element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE), value);
@@ -3587,7 +3460,7 @@ parse_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS returns [tudresd
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31_0_0_1_0_0_1, resolved, true);
-						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 					}
 				}
 			)
@@ -3702,9 +3575,9 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ITERATOR_EXP_CS__ITERATOR_NAME), value);
@@ -3712,7 +3585,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_0, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 			}
 		}
 	)
@@ -3728,7 +3601,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -3801,7 +3674,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 						}
 						collectHiddenTokens(element);
 						retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_2_0_0_1, null, true);
-						copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+						copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 					}
 					{
 						// expected elements (follow set)
@@ -3848,7 +3721,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_3_0_0_3, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 			}
 			{
 				// expected elements (follow set)
@@ -3949,7 +3822,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpCS returns [tudresden.ocl20.
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32_0_0_7, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4007,7 +3880,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4021,7 +3894,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4063,7 +3936,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_3_0_0_2, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4110,7 +3983,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4177,7 +4050,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IterateExpCS returns [tudresden.ocl20.p
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33_0_0_8, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4266,7 +4139,7 @@ parse_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS returns [tudresde
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34_0_0_1_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4336,7 +4209,7 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS returns [tudresden
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Type proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createType();
@@ -4349,8 +4222,8 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS returns [tudresden
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -4396,7 +4269,7 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Namespace proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -4409,8 +4282,8 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -4426,7 +4299,7 @@ parse_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS returns [tudresden
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4487,7 +4360,7 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_0, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4501,7 +4374,7 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4544,7 +4417,7 @@ parse_tudresden_ocl20_pivot_language_ocl_TupleTypeCS returns [tudresden.ocl20.pi
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37_0_0_5, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4610,7 +4483,7 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
 				String resolved = (String) resolvedObject;
 				tudresden.ocl20.pivot.pivotmodel.Type proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createType();
@@ -4623,8 +4496,8 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_0, proxy, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 			}
 		}
 	)
@@ -4678,7 +4551,7 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4721,7 +4594,7 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS returns [tud
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38_0_0_1_0_0_5, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 			}
 			{
 				// expected elements (follow set)
@@ -4844,7 +4717,7 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS return
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39_0_0_1, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -4923,7 +4796,7 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS re
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40_0_0_1_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -5007,7 +4880,7 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_1_0_0_0, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -5067,9 +4940,9 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 				tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL), value);
@@ -5077,7 +4950,7 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS returns [
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41_0_0_2, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
 			}
 		}
 	)
@@ -5192,7 +5065,7 @@ parse_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS retur
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42_0_0_1_0_0_1, null, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 			}
 			{
 				// expected elements (follow set)
@@ -5273,7 +5146,7 @@ parse_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS returns [tudresden.oc
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49_0_0_2, null, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 	}
 	{
 		// expected elements (follow set)
@@ -5393,9 +5266,9 @@ parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclE
 					tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 					Object resolvedObject = result.getResolvedToken();
 					if (resolvedObject == null) {
-						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+						addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 					}
-					java.lang.String resolved = (java.lang.String)resolvedObject;
+					java.lang.String resolved = (java.lang.String) resolvedObject;
 					if (resolved != null) {
 						Object value = resolved;
 						element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -5403,7 +5276,7 @@ parseop_OclExpressionCS_level_4 returns [tudresden.ocl20.pivot.language.ocl.OclE
 					}
 					collectHiddenTokens(element);
 					retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19_0_0_1, resolved, true);
-					copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+					copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 				}
 			}
 		)
@@ -5507,9 +5380,9 @@ leftArg = parseop_OclExpressionCS_level_6((
 				tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 				Object resolvedObject = result.getResolvedToken();
 				if (resolvedObject == null) {
-					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+					addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 				}
-				java.lang.String resolved = (java.lang.String)resolvedObject;
+				java.lang.String resolved = (java.lang.String) resolvedObject;
 				if (resolved != null) {
 					Object value = resolved;
 					element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_XOR_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -5517,7 +5390,7 @@ leftArg = parseop_OclExpressionCS_level_6((
 				}
 				collectHiddenTokens(element);
 				retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20_0_0_1, resolved, true);
-				copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+				copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 			}
 		}
 	)
@@ -5621,9 +5494,9 @@ leftArg = parseop_OclExpressionCS_level_7((
 			tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 			Object resolvedObject = result.getResolvedToken();
 			if (resolvedObject == null) {
-				addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+				addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 			}
-			java.lang.String resolved = (java.lang.String)resolvedObject;
+			java.lang.String resolved = (java.lang.String) resolvedObject;
 			if (resolved != null) {
 				Object value = resolved;
 				element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_OR_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -5631,7 +5504,7 @@ leftArg = parseop_OclExpressionCS_level_7((
 			}
 			collectHiddenTokens(element);
 			retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21_0_0_1, resolved, true);
-			copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+			copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 		}
 	}
 )
@@ -5735,9 +5608,9 @@ a0 = AND_OPERATOR
 		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 		}
-		java.lang.String resolved = (java.lang.String)resolvedObject;
+		java.lang.String resolved = (java.lang.String) resolvedObject;
 		if (resolved != null) {
 			Object value = resolved;
 			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_AND_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -5745,7 +5618,7 @@ a0 = AND_OPERATOR
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22_0_0_1, resolved, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 	}
 }
 )
@@ -5850,9 +5723,9 @@ a0 = EQUALITY_OPERATOR
 		tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 		}
-		java.lang.String resolved = (java.lang.String)resolvedObject;
+		java.lang.String resolved = (java.lang.String) resolvedObject;
 		if (resolved != null) {
 			Object value = resolved;
 			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -5860,7 +5733,7 @@ a0 = EQUALITY_OPERATOR
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_0_0, resolved, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 	}
 }
 )
@@ -5914,9 +5787,9 @@ a1 = NEQUALITY_OPERATOR
 		tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 		Object resolvedObject = result.getResolvedToken();
 		if (resolvedObject == null) {
-			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+			addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 		}
-		java.lang.String resolved = (java.lang.String)resolvedObject;
+		java.lang.String resolved = (java.lang.String) resolvedObject;
 		if (resolved != null) {
 			Object value = resolved;
 			element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.EQUALITY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -5924,7 +5797,7 @@ a1 = NEQUALITY_OPERATOR
 		}
 		collectHiddenTokens(element);
 		retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23_0_0_1_0_1_0, resolved, true);
-		copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+		copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 	}
 }
 )
@@ -6061,9 +5934,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-	addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+	addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 	Object value = resolved;
 	element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.RELATIONAL_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -6071,7 +5944,7 @@ if (resolved != null) {
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -6175,9 +6048,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ADDITIVE_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -6185,7 +6058,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -6289,9 +6162,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.MULT_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -6299,7 +6172,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -6400,9 +6273,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -6410,7 +6283,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -6483,9 +6356,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.LOGICAL_NOT_OPERATION_CALL_EXP_CS__OPERATION_NAME), value);
@@ -6493,7 +6366,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -6575,9 +6448,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, value);
@@ -6585,7 +6458,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_2, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -6688,9 +6561,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 addObjectToList(element, tudresden.ocl20.pivot.language.ocl.OclPackage.NAVIGATION_CALL_EXP__NAVIGATION_OPERATOR, value);
@@ -6698,7 +6571,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29_0_0_5_0_0_1, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
 }
 }
 )
@@ -6898,7 +6771,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -6911,8 +6784,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_0_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 }
 }
 )
@@ -6940,7 +6813,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -6953,8 +6826,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_1_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, proxy);
 }
 }
 )
@@ -6982,7 +6855,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -6995,8 +6868,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_2_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
 }
 }
 )
@@ -7024,7 +6897,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -7037,8 +6910,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_3_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, proxy);
 }
 }
 )
@@ -7066,7 +6939,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a4.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a4).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a4).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a4).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -7079,8 +6952,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_4_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a4, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a4, proxy);
 }
 }
 )
@@ -7108,7 +6981,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a5.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a5).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a5).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a5).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -7121,8 +6994,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_5_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a5, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a5, proxy);
 }
 }
 )
@@ -7150,7 +7023,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a6.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a6).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a6).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a6).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -7163,8 +7036,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_6_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a6, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a6, proxy);
 }
 }
 )
@@ -7192,7 +7065,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a7.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a7).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a7).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a7).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -7205,8 +7078,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_0_0_7_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a7, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a7, proxy);
 }
 }
 )
@@ -7242,9 +7115,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a8.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a8).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a8).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a8).getStopIndex());
 }
-java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.OPERATION_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), value);
@@ -7252,7 +7125,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_2_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a8, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a8, element);
 }
 }
 )
@@ -7275,7 +7148,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a9, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a9, element);
 }
 {
 // expected elements (follow set)
@@ -7348,7 +7221,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_4_0_0_2_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a11, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a11, element);
 }
 {
 // expected elements (follow set)
@@ -7431,7 +7304,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43_0_0_6, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a13, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a13, element);
 }
 {
 // expected elements (follow set)
@@ -7515,7 +7388,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_2, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -7539,7 +7412,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Operation proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createOperation();
@@ -7552,8 +7425,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_4, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
 }
 }
 )
@@ -7569,7 +7442,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_6, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
@@ -7642,7 +7515,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_7_0_0_2_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
@@ -7725,7 +7598,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44_0_0_9, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a7, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a7, element);
 }
 {
 // expected elements (follow set)
@@ -7809,7 +7682,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -7833,7 +7706,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.NamedElement proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -7846,8 +7719,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45_0_0_2, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, proxy);
 }
 }
 )
@@ -7907,7 +7780,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -7921,7 +7794,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -7961,7 +7834,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
@@ -8019,7 +7892,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -8086,7 +7959,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
@@ -8153,7 +8026,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_7, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
 }
 {
 // expected elements (follow set)
@@ -8220,7 +8093,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47_0_0_11, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a6, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a6, element);
 }
 {
 // expected elements (follow set)
@@ -8304,7 +8177,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a1, element);
 }
 {
 // expected elements (follow set)
@@ -8377,7 +8250,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_2_0_0_1_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a3, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a3, element);
 }
 {
 // expected elements (follow set)
@@ -8460,7 +8333,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a5, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a5, element);
 }
 {
 // expected elements (follow set)
@@ -8668,7 +8541,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__PROPERTY), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.Property proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createProperty();
@@ -8681,8 +8554,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 }
 }
 )
@@ -8708,9 +8581,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 }
-java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.PROPERTY_CALL_ON_SELF_EXP_CS__IS_MARKED_PRE), value);
@@ -8718,7 +8591,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53_0_0_2, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 }
 }
 )
@@ -8778,7 +8651,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -8821,7 +8694,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_2_0_0_1, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)
@@ -8870,7 +8743,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54_0_0_3, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a4, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a4, element);
 }
 {
 // expected elements (follow set)
@@ -8991,9 +8864,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
+java.lang.Integer resolved = (java.lang.Integer) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE), value);
@@ -9001,7 +8874,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -9027,9 +8900,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a1.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a1).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a1).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a1).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR), value);
@@ -9037,7 +8910,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_2, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a1, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a1, element);
 }
 }
 )
@@ -9065,9 +8938,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a2.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a2).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a2).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a2).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), value);
@@ -9075,7 +8948,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a2, element);
 }
 }
 )
@@ -9140,9 +9013,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a3.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a3).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a3).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a3).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE), value);
@@ -9150,7 +9023,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55_0_0_4_0_1_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a3, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a3, element);
 }
 }
 )
@@ -9264,9 +9137,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.Integer resolved = (java.lang.Integer)resolvedObject;
+java.lang.Integer resolved = (java.lang.Integer) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL), value);
@@ -9274,7 +9147,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -9344,9 +9217,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.Boolean resolved = (java.lang.Boolean)resolvedObject;
+java.lang.Boolean resolved = (java.lang.Boolean) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL), value);
@@ -9354,7 +9227,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -9424,9 +9297,9 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
-java.lang.String resolved = (java.lang.String)resolvedObject;
+java.lang.String resolved = (java.lang.String) resolvedObject;
 if (resolved != null) {
 Object value = resolved;
 element.eSet(element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL), value);
@@ -9434,7 +9307,7 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58_0_0_0, resolved, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
 }
 }
 )
@@ -9494,7 +9367,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -9552,7 +9425,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -9620,7 +9493,7 @@ tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = 
 tokenResolver.resolve(a0.getText(), element.eClass().getEStructuralFeature(tudresden.ocl20.pivot.language.ocl.OclPackage.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT), result);
 Object resolvedObject = result.getResolvedToken();
 if (resolvedObject == null) {
-addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_2_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_2_0.CommonToken) a0).getStopIndex());
+addErrorToResource(result.getErrorMessage(), ((org.antlr.runtime3_3_0.CommonToken) a0).getLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getCharPositionInLine(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStartIndex(), ((org.antlr.runtime3_3_0.CommonToken) a0).getStopIndex());
 }
 String resolved = (String) resolvedObject;
 tudresden.ocl20.pivot.pivotmodel.NamedElement proxy = tudresden.ocl20.pivot.pivotmodel.PivotModelFactory.eINSTANCE.createNamespace();
@@ -9633,8 +9506,8 @@ completedElement(value, false);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61_0_0_0, proxy, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, element);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken) a0, proxy);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken) a0, proxy);
 }
 }
 )
@@ -9694,7 +9567,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_0, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a0, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a0, element);
 }
 {
 // expected elements (follow set)
@@ -9761,7 +9634,7 @@ incompleteObjects.push(element);
 }
 collectHiddenTokens(element);
 retrieveLayoutInformation(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62_0_0_4, null, true);
-copyLocalizationInfos((org.antlr.runtime3_2_0.CommonToken)a2, element);
+copyLocalizationInfos((org.antlr.runtime3_3_0.CommonToken)a2, element);
 }
 {
 // expected elements (follow set)

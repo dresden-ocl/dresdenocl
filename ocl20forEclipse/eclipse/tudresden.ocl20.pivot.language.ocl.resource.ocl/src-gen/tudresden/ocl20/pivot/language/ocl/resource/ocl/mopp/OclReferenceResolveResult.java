@@ -73,7 +73,7 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>();
+			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclElementMapping<ReferenceType>(identifier, target, warning));
 		errorMessage = null;
@@ -85,7 +85,7 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	
 	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>();
+			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclURIMapping<ReferenceType>(identifier, uri, warning));
 	}

@@ -15,13 +15,14 @@ public class OclPlugin extends org.eclipse.core.runtime.Plugin {
 	/**
 	 * The version of EMFText that was used to generate this plug-in.
 	 */
-	public static final String EMFTEXT_SDK_VERSION = "1.3.3";
+	public static final String EMFTEXT_SDK_VERSION = "1.4.0";
 	/**
 	 * The ID of the extension point to register default options to be used when
 	 * loading resources with this plug-in.
 	 */
 	public static final String EP_DEFAULT_LOAD_OPTIONS_ID = PLUGIN_ID + ".default_load_options";
 	public static final String EP_ADDITIONAL_EXTENSION_PARSER_ID = PLUGIN_ID + ".additional_extension_parser";
+	public static final String DEBUG_MODEL_ID = PLUGIN_ID + ".debugModel";
 	
 	private static OclPlugin plugin;
 	

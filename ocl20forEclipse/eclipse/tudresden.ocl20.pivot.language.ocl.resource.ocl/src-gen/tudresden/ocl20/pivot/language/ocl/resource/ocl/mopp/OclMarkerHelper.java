@@ -131,11 +131,7 @@ public class OclMarkerHelper {
 						marker.setAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID, tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.explode(sourceIDs, "|"));
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					if (ce.getMessage().matches("Marker.*not found.")) {
-						// ignore
-					} else {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Error while creating marks for resource:", ce);
-					}
+					handleException(ce);
 				}
 				return true;
 			}
@@ -176,11 +172,7 @@ public class OclMarkerHelper {
 				try {
 					file.deleteMarkers(markerType, false, org.eclipse.core.resources.IResource.DEPTH_ZERO);
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					if (ce.getMessage().matches("Marker.*not found.")) {
-						// ignore
-					} else {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Error while removing markers from resource:", ce);
-					}
+					handleException(ce);
 				}
 				return true;
 			}
@@ -216,11 +208,7 @@ public class OclMarkerHelper {
 						}
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					if (ce.getMessage().matches("Marker.*not found.")) {
-						// ignore
-					} else {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Error while removing markers from resource:", ce);
-					}
+					handleException(ce);
 				}
 				return true;
 			}
@@ -264,8 +252,8 @@ public class OclMarkerHelper {
 		if (object == null) {
 			return null;
 		}
-		if (object.eIsProxy() && object instanceof org.eclipse.emf.ecore.impl.EObjectImpl) {
-			return ((org.eclipse.emf.ecore.impl.EObjectImpl) object).eProxyURI().toString();
+		if (object.eIsProxy() && object instanceof org.eclipse.emf.ecore.impl.BasicEObjectImpl) {
+			return ((org.eclipse.emf.ecore.impl.BasicEObjectImpl) object).eProxyURI().toString();
 		}
 		org.eclipse.emf.ecore.resource.Resource eResource = object.eResource();
 		if (eResource == null) {
@@ -274,4 +262,13 @@ public class OclMarkerHelper {
 		return eResource.getURI().toString() + "#" + eResource.getURIFragment(object);
 	}
 	
+	private static void handleException(org.eclipse.core.runtime.CoreException ce) {
+		if (ce.getMessage().matches("Marker.*not found.")) {
+			// ignore
+		}else if (ce.getMessage().matches("Resource.*does not exist.")) {
+			// ignore
+		} else {
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Error while removing markers from resource:", ce);
+		}
+	}
 }

@@ -30,10 +30,23 @@ public class OclBackgroundParsingStrategy {
 	 * Schedules a task for background parsing that will be started after a delay.
 	 */
 	public void parse(org.eclipse.jface.text.DocumentEvent event, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+		parse(event.getDocument(), resource, editor, DELAY);
+	}
+	
+	/**
+	 * Schedules a task for background parsing that will be started after a delay.
+	 */
+	public void parse(org.eclipse.jface.text.IDocument document, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
+		parse(document.get(), resource, editor, delay);
+	}
+	
+	/**
+	 * Schedules a task for background parsing that will be started after a delay.
+	 */
+	public void parse(final String contents, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
 		if (resource == null) {
 			return;
 		}
-		final String contents = event.getDocument().get();
 		if (contents == null) {
 			return;
 		}
@@ -77,7 +90,8 @@ public class OclBackgroundParsingStrategy {
 					resource.cancelReload();
 				}
 			};
-			job.schedule(DELAY);
+			job.schedule(delay);
 		}
 	}
+	
 }

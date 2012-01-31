@@ -13,14 +13,30 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
 public class OclResourceUtil {
 	
 	/**
-	 * Searches for all unresolved proxy object in the given resource.
+	 * Searches for all unresolved proxy objects in the given resource set.
+	 * 
+	 * @param resourceSet
+	 * 
+	 * @return all proxy objects that are not resolvable
+	 */
+	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
+		java.util.Set<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
+		
+		for (org.eclipse.emf.ecore.resource.Resource resource : resourceSet.getResources()) {
+			unresolvedProxies.addAll(findUnresolvedProxies(resource));
+		}
+		return unresolvedProxies;
+	}
+	
+	/**
+	 * Searches for all unresolved proxy objects in the given resource.
 	 * 
 	 * @param resource
 	 * 
-	 * @return all proxy object that are not resolvable
+	 * @return all proxy objects that are not resolvable
 	 */
-	public static java.util.List<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
-		java.util.List<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
+	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
+		java.util.Set<org.eclipse.emf.ecore.EObject> unresolvedProxies = new java.util.LinkedHashSet<org.eclipse.emf.ecore.EObject>();
 		
 		for (java.util.Iterator<org.eclipse.emf.ecore.EObject> elementIt = org.eclipse.emf.ecore.util.EcoreUtil.getAllContents(resource, true); elementIt.hasNext(); ) {
 			org.eclipse.emf.ecore.InternalEObject nextElement = (org.eclipse.emf.ecore.InternalEObject) elementIt.next();
@@ -53,6 +69,57 @@ public class OclResourceUtil {
 		} else {
 			return true;
 		}
+	}
+	
+	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.core.resources.IFile file) {
+		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		org.eclipse.emf.ecore.resource.Resource csResource = rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
+		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) csResource;
+	}
+	
+	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file) {
+		return getResource(file, null);
+	}
+	
+	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file, java.util.Map<?,?> options) {
+		return getResource(org.eclipse.emf.common.util.URI.createFileURI(file.getAbsolutePath()), options);
+	}
+	
+	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri) {
+		return getResource(uri, null);
+	}
+	
+	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+		new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().registerResourceFactory();
+		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
+		if (options != null) {
+			rs.getLoadOptions().putAll(options);
+		}
+		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource(uri, true);
+		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) resource;
+	}
+	
+	/**
+	 * Returns the root element of the resource with the given URI.
+	 */
+	public static org.eclipse.emf.ecore.EObject getResourceContent(org.eclipse.emf.common.util.URI uri) {
+		return getResourceContent(uri, null);
+	}
+	
+	/**
+	 * Returns the root element of the resource with the given URI.
+	 */
+	public static org.eclipse.emf.ecore.EObject getResourceContent(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+		org.eclipse.emf.ecore.resource.Resource resource = getResource(uri, options);
+		if (resource == null) {
+			return null;
+		}
+		java.util.List<org.eclipse.emf.ecore.EObject> contents = resource.getContents();
+		if (contents == null || contents.isEmpty()) {
+			return null;
+		}
+		org.eclipse.emf.ecore.EObject root = contents.get(0);
+		return (org.eclipse.emf.ecore.EObject) root;
 	}
 	
 	public static void saveResource(java.io.File file, org.eclipse.emf.ecore.resource.Resource resource) throws java.io.IOException {

@@ -16,12 +16,12 @@ public interface IOclOptions {
 	/**
 	 * The key for the option to provide a stream pre-processor.
 	 */
-	public String INPUT_STREAM_PREPROCESSOR_PROVIDER = "INPUT_STREAM_PREPROCESSOR_PROVIDER";
+	public String INPUT_STREAM_PREPROCESSOR_PROVIDER = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getInputStreamPreprocessorProviderOptionKey();
 	
 	/**
 	 * The key for the option to provide a resource post-processor.
 	 */
-	public String RESOURCE_POSTPROCESSOR_PROVIDER = "RESOURCE_POSTPROCESSOR_PROVIDER";
+	public String RESOURCE_POSTPROCESSOR_PROVIDER = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getResourcePostProcessorProviderOptionKey();
 	
 	/**
 	 * The key for the option to specify an expected content type in text resources

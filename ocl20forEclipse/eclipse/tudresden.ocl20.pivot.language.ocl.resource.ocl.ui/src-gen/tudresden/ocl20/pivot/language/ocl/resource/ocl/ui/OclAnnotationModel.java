@@ -6,7 +6,7 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
-public class OclAnnotationModel extends org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel implements org.eclipse.jface.text.source.IAnnotationModel {
+public class OclAnnotationModel extends org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel {
 	
 	public OclAnnotationModel(org.eclipse.core.resources.IResource resource) {
 		super(resource);
