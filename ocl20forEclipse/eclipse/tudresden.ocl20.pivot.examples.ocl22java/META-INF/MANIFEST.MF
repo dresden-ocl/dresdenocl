@@ -13,5 +13,5 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.examples.ui,
  tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode,
  tudresden.ocl20.pivot.examples.simple.ocl22javacode
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

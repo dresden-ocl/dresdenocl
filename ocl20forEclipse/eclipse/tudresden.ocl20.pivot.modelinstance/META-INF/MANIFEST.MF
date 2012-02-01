@@ -8,7 +8,7 @@ Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelinstancetype;visibility:=reexport,
  tudresden.ocl20.pivot.model;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.modelinstance,
  tudresden.ocl20.pivot.modelinstance.base,

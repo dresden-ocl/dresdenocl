@@ -15,4 +15,4 @@ Export-Package: tudresden.ocl20.pivot.modelbus,
  tudresden.ocl20.pivot.modelbus.descriptor,
  tudresden.ocl20.pivot.modelbus.metamodel,
  tudresden.ocl20.pivot.modelbus.modelinstance
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

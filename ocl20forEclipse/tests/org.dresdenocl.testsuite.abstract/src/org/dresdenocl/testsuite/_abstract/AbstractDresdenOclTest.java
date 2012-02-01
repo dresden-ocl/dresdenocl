@@ -34,8 +34,6 @@ import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.xsd.XSDPackage;
 import org.junit.BeforeClass;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
-
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
@@ -78,6 +76,7 @@ import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmImpl;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2Ddl;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel;
 import tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 /**
  * Abstract class for Dresden OCL test cases. Contains static setUp and tearDown

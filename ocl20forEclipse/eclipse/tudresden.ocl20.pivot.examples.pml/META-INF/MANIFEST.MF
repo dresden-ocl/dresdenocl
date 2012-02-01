@@ -6,7 +6,7 @@ Bundle-Version: 3.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.examples.pml,
  tudresden.ocl20.pivot.examples.pml.impl,
  tudresden.ocl20.pivot.examples.pml.util

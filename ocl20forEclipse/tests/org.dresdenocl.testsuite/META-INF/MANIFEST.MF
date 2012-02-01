@@ -29,6 +29,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelinstancetype.ecore,
  org.dresdenocl.metrics.test,
  tudresden.ocl20.pivot.examples.pain
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: tudresden.ocl20.pivot.examples.pain.test
+Import-Package: tudresden.ocl20.pivot.examples.pain.test,
+ tudresden.ocl20.pivot.tracer.test

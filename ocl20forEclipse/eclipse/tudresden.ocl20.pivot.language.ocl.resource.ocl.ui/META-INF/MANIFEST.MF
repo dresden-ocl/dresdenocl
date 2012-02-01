@@ -23,6 +23,6 @@ Require-Bundle: org.eclipse.core.resources,
   tudresden.ocl20.pivot.language.ocl,
   tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl.ui
 Bundle-Activator: tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin

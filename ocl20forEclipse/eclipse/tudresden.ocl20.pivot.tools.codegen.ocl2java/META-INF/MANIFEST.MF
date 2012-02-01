@@ -12,5 +12,5 @@ Export-Package: tudresden.ocl20.pivot.tools.codegen.ocl2java,
  tudresden.ocl20.pivot.tools.codegen.ocl2java.code,
  tudresden.ocl20.pivot.tools.codegen.ocl2java.internal
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group

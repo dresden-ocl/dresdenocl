@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin$Implementation
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.essentialocl.expressions.provider,
  tudresden.ocl20.pivot.essentialocl.types.provider
 Require-Bundle: tudresden.ocl20.pivot.essentialocl;visibility:=reexport,

@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.metamodels.java,
  tudresden.ocl20.pivot.facade
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: package1.package2,
  tudresden.ocl20.pivot.metamodels.java.test.tests
 Bundle-Vendor: TU Dresden, Software Technology Group

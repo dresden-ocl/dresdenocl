@@ -5,7 +5,7 @@ Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.java;singleton:=true
 Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
