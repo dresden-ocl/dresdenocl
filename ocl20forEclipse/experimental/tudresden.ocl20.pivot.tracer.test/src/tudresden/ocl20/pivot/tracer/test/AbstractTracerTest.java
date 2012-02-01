@@ -213,7 +213,7 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 
 		Diff diff = new Diff(regressionDocument, testDocument);
 		
-		System.out.println(diff.toString());
+		//System.out.println(diff.toString());
 		
 		return diff.similar();
 	}

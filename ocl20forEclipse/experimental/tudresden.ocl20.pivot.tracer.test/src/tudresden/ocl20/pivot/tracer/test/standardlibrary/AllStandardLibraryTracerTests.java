@@ -11,7 +11,14 @@ import org.junit.runners.Suite;
  * 
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({ TestBag.class })
+@Suite.SuiteClasses({
+	TestBag.class,
+	TestBoolean.class,
+	TestCollection.class,
+	TestIterator.class,
+	TestOclInvalid.class,
+	TestString.class
+	})
 public class AllStandardLibraryTracerTests extends AbstractDresdenOclTest {
 	/* Remains empty */
 }

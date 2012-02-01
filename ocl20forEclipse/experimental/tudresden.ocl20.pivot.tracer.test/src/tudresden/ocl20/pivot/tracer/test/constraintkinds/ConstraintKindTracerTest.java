@@ -238,7 +238,7 @@ public class ConstraintKindTracerTest extends AbstractTracerTest {
 				compareXmlFiles(regressionFile, temporaryDocument));
 	}
 
-	@Test
+	//@Test
 	public void testInit02_02() throws Exception {
 
 		/* local variables to be passed */
