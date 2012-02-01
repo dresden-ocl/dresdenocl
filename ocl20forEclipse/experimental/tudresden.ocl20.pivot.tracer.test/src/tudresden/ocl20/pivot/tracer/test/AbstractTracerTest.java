@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -75,8 +75,14 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 	/** This cache maps the path of a constraint file to a list of constraints. */
 	private static Map<String, List<Constraint>> constraintCache;
 
-	/** */
+	/** This is the {@link DocumentBuilder} for the XMLs processed. */
 	private static DocumentBuilder db;
+	
+	/** The {@link File} where the regression XMLs are loaded into. */
+	protected static File regressionFile;
+
+	/** The {@link Document} where the temporary XMLs are stored in. */
+	protected static Document temporaryDocument;
 
 	/** Setup method that should be called by concrete test classes. */
 	public static void setUp() throws Exception {
@@ -87,9 +93,9 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 				.getInterpreterTraceListener());
 
 		/* Set up all caches */
-		modelInstanceCache = new HashMap<String, IModelInstance>();
-		modelCache = new HashMap<String, IModel>();
-		constraintCache = new HashMap<String, List<Constraint>>();
+		modelInstanceCache = new WeakHashMap<String, IModelInstance>();
+		modelCache = new WeakHashMap<String, IModel>();
+		constraintCache = new WeakHashMap<String, List<Constraint>>();
 		db = getDocumentBuilder();
 	}
 
@@ -115,6 +121,8 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 		/* nullify all class variables */
 		modelUnderTest = null;
 		db = null;
+		regressionFile = null;
+		temporaryDocument = null;
 
 		/* nullify all caches */
 		modelInstanceCache = null;
@@ -124,12 +132,12 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 
 	/**
 	 * <p>
-	 * Saves the given {@TracerRoot} into a file with the given
+	 * Saves the given {@link TracerRoot} into a file with the given
 	 * filename
 	 * </p>
 	 * 
 	 * @param root
-	 *          the {@TracerRoot} to be serialized
+	 *          the {@link TracerRoot} to be serialized
 	 * @return
 	 * @throws ParserConfigurationException
 	 * @throws TransformerException
@@ -185,15 +193,13 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 	 * Compares two given XML files
 	 * </p>
 	 * 
-	 * @param file1
-	 *          A XML file to be compared
-	 * @param file2
-	 *          A XML file to be compared
-	 * @return True if the two compared XML files are equal or false otherwise
-	 * @throws IOException
+	 * @param regressionFile
+	 *          the regression XML file
+	 * @param testDocument
+	 *          the {@link Document} to be compared
+	 * @return whether the regression file and the test document are the same
 	 * @throws SAXException
-	 * @throws Exception
-	 * @see org.w3c.dom.Node.isEqualNode
+	 * @throws IOException
 	 */
 	protected static boolean compareXmlFiles(File regressionFile,
 			Document testDocument) throws SAXException, IOException {
@@ -205,9 +211,11 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 		Document regressionDocument;
 		regressionDocument = db.parse(regressionFile);
 
-		Diff d = new Diff(regressionDocument, testDocument);
-
-		return d.similar();
+		Diff diff = new Diff(regressionDocument, testDocument);
+		
+		System.out.println(diff.toString());
+		
+		return diff.similar();
 	}
 
 	/**
@@ -243,6 +251,9 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 		assertTrue(objectTypeNames.length >= 1);
 		assertNotNull(modelType);
 		assertNotNull(modelInstanceType);
+		
+		/* Clear the tracer */
+		TracerPlugin.getInterpreterTraceListener().interpretationCleared();
 
 		modelUnderTest = getModel(modelFilePath, modelType, bundleId);
 		assertNotNull(modelUnderTest);
@@ -274,7 +285,7 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 		// end for.
 
 		modelUnderTest.removeConstraints(constraints);
-
+		
 		TracerRoot tracedRoot;
 		tracedRoot = TracerPlugin.getInterpreterTraceListener().getCurrentRoot();
 
