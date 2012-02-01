@@ -10,6 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.facade,
  org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group
 Export-Package: tudresden.ocl20.pivot.interpreter.test
