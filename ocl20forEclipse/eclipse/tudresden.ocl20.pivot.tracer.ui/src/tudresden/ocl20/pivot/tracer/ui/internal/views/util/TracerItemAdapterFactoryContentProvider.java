@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -19,8 +19,6 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
@@ -28,7 +26,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 
 /**
  * 
- * @author Lars SchÃ¼tze
+ * @author Lars Schütze
  */
 public class TracerItemAdapterFactoryContentProvider extends
 		AdapterFactoryContentProvider {
@@ -38,10 +36,10 @@ public class TracerItemAdapterFactoryContentProvider extends
 		super(adapterFactory);
 	}
 
-	public void notifyChanged(Notification notification) {
-
-		super.notifyChanged(new ViewerNotification(notification));
-	}
+	/*
+	 * public void notifyChanged(Notification notification) {
+	 * super.notifyChanged(new ViewerNotification(notification)); }
+	 */
 
 	public Object[] getElements(Object object) {
 

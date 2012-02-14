@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -17,6 +17,10 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -38,12 +42,20 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 public class TracerItemAdapterFactoryLabelProvider extends
 		AdapterFactoryLabelProvider {
 
+	private static final String IMG_RESULT_UNDEFINED =
+			"icons/result_undefined.gif";
+	private static final String IMG_RESULT_INVALID = "icons/result_invalid.gif";
+	private static final String IMG_RESULT_TRUE = "icons/result_true.gif";
+	private static final String IMG_RESULT_FALSE = "icons/result_false.gif";
+
 	private TracerExpressionsSwitch tracerExprSwitch;
+	private Map<ImageDescriptor, Image> imageCache;
 
 	public TracerItemAdapterFactoryLabelProvider(AdapterFactory adapterFactory) {
 
 		super(adapterFactory);
 		tracerExprSwitch = new TracerExpressionsSwitch();
+		imageCache = new HashMap<ImageDescriptor, Image>();
 	}
 
 	@Override
@@ -74,44 +86,57 @@ public class TracerItemAdapterFactoryLabelProvider extends
 	@Override
 	public Image getColumnImage(Object object, int columnIndex) {
 
-		if (columnIndex != 0)
+		if (columnIndex != 0) {
+
 			return super.getColumnImage(object, columnIndex);
+		}
 
 		if (object instanceof TracerItem) {
 
-			ImageDescriptor imageDescriptor;
 			OclAny result = ((TracerItem) object).getResult();
+
+			ImageDescriptor imageDescriptor = null;
 
 			if (result instanceof OclBoolean) {
 				OclBoolean anOclBoolean = (OclBoolean) result;
 
-				// check the result of this OclBoolean
-				//
+				/* check the result of this OclBoolean */
 				if (anOclBoolean.oclIsInvalid().isTrue()) {
 					imageDescriptor =
-							InterpreterUIPlugin
-									.getImageDescriptor("icons/result_undefined.gif");
+							InterpreterUIPlugin.getImageDescriptor(IMG_RESULT_INVALID);
 				}
 				else if (anOclBoolean.oclIsUndefined().isTrue()) {
 					imageDescriptor =
-							InterpreterUIPlugin
-									.getImageDescriptor("icons/result_invalid.gif");
+							InterpreterUIPlugin.getImageDescriptor(IMG_RESULT_UNDEFINED);
 				}
 				else if (anOclBoolean.isTrue()) {
 					imageDescriptor =
-							InterpreterUIPlugin.getImageDescriptor("icons/result_true.gif");
+							InterpreterUIPlugin.getImageDescriptor(IMG_RESULT_TRUE);
 				}
 				else {
 					imageDescriptor =
-							InterpreterUIPlugin.getImageDescriptor("icons/result_false.gif");
+							InterpreterUIPlugin.getImageDescriptor(IMG_RESULT_FALSE);
+				}
+
+				/* The icon could not be defined so use undefined icon */
+				if (imageDescriptor == null) {
+					imageDescriptor =
+							InterpreterUIPlugin.getImageDescriptor(IMG_RESULT_UNDEFINED);
 				}
 			}
-			else
-				imageDescriptor = null;
 
+			Image image = null;
 			if (imageDescriptor != null) {
-				return imageDescriptor.createImage();
+				if (imageCache.containsKey(imageDescriptor)) {
+					image = imageCache.get(imageDescriptor);
+				}
+				else {
+					image = imageDescriptor.createImage();
+					imageCache.put(imageDescriptor, image);
+				}
 			}
+
+			return image;
 		}
 
 		return super.getImage(object);
@@ -121,27 +146,43 @@ public class TracerItemAdapterFactoryLabelProvider extends
 
 		return false;
 	}
-	
+
 	private String resultText(OclAny result) {
-		
-		if(result instanceof OclInteger) {
-			return ((OclInteger) result).getModelInstanceInteger().getLong().toString();
+
+		if (result instanceof OclInteger) {
+			return ((OclInteger) result).getModelInstanceInteger().getLong()
+					.toString();
 		}
-		if(result instanceof OclBoolean) {
-			return ((OclBoolean) result).getModelInstanceBoolean().getBoolean().toString();
+		if (result instanceof OclBoolean) {
+			return ((OclBoolean) result).getModelInstanceBoolean().getBoolean()
+					.toString();
 		}
-		if(result instanceof OclModelInstanceObject) {
+		if (result instanceof OclModelInstanceObject) {
 			OclModelInstanceObject obj = (OclModelInstanceObject) result;
-			if(obj.oclIsInvalid().isTrue()) {
+			if (obj.oclIsInvalid().isTrue()) {
 				return "invalid: " + obj.getInvalidReason().getMessage();
 			}
-			else if(obj.oclIsUndefined().isTrue()) {
+			else if (obj.oclIsUndefined().isTrue()) {
 				return "undefinied: " + obj.getUndefinedReason();
 			}
-			
+
 			return obj.getModelInstanceObject().getObject().toString();
 		}
-		
+
 		return result.toString();
+	}
+
+	@Override
+	public void dispose() {
+
+		/* Dispose all cached images */
+		Iterator<Image> i = imageCache.values().iterator();
+		while (i.hasNext()) {
+
+			((Image) i.next()).dispose();
+		}
+
+		imageCache.clear();
+		super.dispose();
 	}
 }

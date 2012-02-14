@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFact
 import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryLabelProvider;
 
 /**
- * @author Lars SchÃ¼tze
+ * @author Lars Schütze
  * 
  */
 public class TracerView extends ViewPart implements TracerRegistryListener {
