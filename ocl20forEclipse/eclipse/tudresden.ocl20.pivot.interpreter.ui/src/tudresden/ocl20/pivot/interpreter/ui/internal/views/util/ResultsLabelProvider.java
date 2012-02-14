@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.interpreter.ui.internal.views.util;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -317,5 +318,19 @@ public class ResultsLabelProvider extends LabelProvider implements
 		}
 
 		return result;
+	}
+
+	@Override
+	public void dispose() {
+
+		/* Dispose all cached images */
+		Iterator<Image> i = cachedImages.values().iterator();
+		while (i.hasNext()) {
+
+			((Image) i.next()).dispose();
+		}
+
+		cachedImages.clear();
+		super.dispose();
 	}
 }
