@@ -207,4 +207,18 @@ Library.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="tudresden.ocl20.pivot.tracer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.tracer.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
