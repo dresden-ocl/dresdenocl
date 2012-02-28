@@ -1,12 +1,12 @@
 package tudresden.ocl20.pivot.tracer.test;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class TracerTestPlugin extends AbstractUIPlugin {
+public class TracerTestPlugin extends Plugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer.test"; //$NON-NLS-1$
