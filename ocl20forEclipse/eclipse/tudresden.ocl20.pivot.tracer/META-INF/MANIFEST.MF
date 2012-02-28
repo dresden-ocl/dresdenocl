@@ -31,4 +31,5 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
  tudresden.ocl20.pivot.pivotmodel,
  tudresden.ocl20.pivot.modelinstancetype,
  tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="3.1.0",
- tudresden.ocl20.pivot.standardlibrary.java;bundle-version="3.1.0"
+ tudresden.ocl20.pivot.standardlibrary.java;bundle-version="3.1.0",
+ tudresden.ocl20.pivot.pivotmodel.edit
