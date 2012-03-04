@@ -31,6 +31,7 @@
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
@@ -169,70 +170,67 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * #updatePageComplete()
 	 */
 	public void updatePageComplete() {
-	
+
 		String modelInstanceFileName;
 		IPath modelInstanceFilePath;
 		File modelInstanceFile;
 		boolean complete;
-	
+
 		/* Reset messages. */
 		setErrorMessage(null);
 		setMessage(null);
-	
+
 		/* By default the WizardPage is complete. */
 		complete = true;
-	
+
 		/* Check if a model has been loaded. */
 		if (ModelBusPlugin.getModelRegistry().getModels().length == 0) {
-	
-			this
-					.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseLoadModelFirst);
-	
+
+			this.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseLoadModelFirst);
+
 			complete = false;
 		}
 		// no else.
-	
+
 		/* Eventually continue the check. */
 		if (complete) {
-	
+
 			/* Read out modelInstanceFileName. */
 			modelInstanceFileName = this.getModelInstanceFileName();
-	
+
 			/* Check if modelInstanceFileName is empty. */
 			if (modelInstanceFileName.length() == 0) {
-	
-				this
-						.setMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseChooseModel);
-	
+
+				this.setMessage(ModelBusUIMessages.LoadModelInstancePage_MessagePleaseChooseModel);
+
 				complete = false;
 			}
-	
+
 			/* Else try to get the model instance file. */
 			else {
-	
+
 				/* Substitute variables in String. */
 				modelInstanceFileName = this.decodePath(modelInstanceFileName);
-	
+
 				if (modelInstanceFileName == null) {
-	
-					this
-							.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgInvalidVariables);
-	
+
+					this.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgInvalidVariables);
+
 					complete = false;
 				}
-	
+
 				else {
-	
+
 					/* Create a path for the model instance file file. */
 					modelInstanceFilePath = new Path(modelInstanceFileName);
-	
+
 					/* Check if model instance file exists. */
 					modelInstanceFile = modelInstanceFilePath.toFile();
-	
+
 					if (modelInstanceFile == null
 							|| !modelInstanceFile.exists()) {
 						setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgModelFileNotExisting);
-	
+
 						complete = false;
 					}
 					// no else.
@@ -242,26 +240,24 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 			// end else.
 		}
 		// no else.
-	
+
 		/* Check if a model has been selected. */
 		if (complete && !this.isModelSelected()) {
-	
-			this
-					.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectModelErrorMessage);
-	
+
+			this.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectModelErrorMessage);
+
 			complete = false;
 		}
 		// no else.
-	
+
 		/* Check if a model instance type has been selected. */
 		if (complete && !this.isModelInstanceTypeSeleceted()) {
-			this
-					.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectModelInstanceTypeErrorMessage);
-	
+			this.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_SelectModelInstanceTypeErrorMessage);
+
 			complete = false;
 		}
 		// no else.
-	
+
 		this.setPageComplete(complete);
 	}
 
@@ -538,21 +534,74 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 		/* Eventually use a selected file as default resource for import. */
 		if (this.selection != null) {
-			selectedObject = selection.getFirstElement();
-
 			/*
 			 * Use the name of the first Object in the selection as default text
 			 * of the fileNameTextBox.
 			 */
+			selectedObject = selection.getFirstElement();
+
+			/*
+			 * Reflection is used here to avoid introducing a dependency to the
+			 * JDT-Framework, just in case that somebody uses DresdenOCL without
+			 * Java
+			 */
+			if (selectedObject.getClass().getName()
+					.equals("org.eclipse.jdt.internal.core.CompilationUnit")) {
+
+				try {
+					Method method = selectedObject.getClass().getMethod(
+							"getCorrespondingResource", (Class[]) null);
+					selectedObject = (IResource) method.invoke(selectedObject,
+							(Object[]) null);
+				} catch (Exception e) {
+					/*
+					 * If invocation fails, selection will be discarded
+					 */
+					selectedObject = null;
+				}
+
+			}
+
 			if (selectedObject instanceof IResource) {
 
 				selectedResource = (IResource) selectedObject;
 
 				if (selectedResource.getType() == IResource.FILE) {
+
 					fileTextBoxContent = selectedResource.getRawLocation()
 							.toString();
-					modelInstanceFileTextBox.setText(fileTextBoxContent);
-					fileExtension = selectedResource.getFileExtension();
+
+					/*
+					 * If the selection is a .java file, determine the location
+					 * of the corresponding .class file.
+					 */
+					if (selectedResource.getFileExtension().equalsIgnoreCase(
+							"java")) {
+						String pathToClassFile = fileTextBoxContent.replace(
+								"/src/", "/bin/");
+
+						pathToClassFile = fileTextBoxContent.replace("/src/",
+								"/bin/");
+						pathToClassFile = pathToClassFile.substring(0,
+								pathToClassFile.length() - 4) + "class";
+
+						/*
+						 * Only set the fileTextBoxContent if the class file can
+						 * be found
+						 */
+						if (new File(pathToClassFile).exists()) {
+							fileTextBoxContent = pathToClassFile;
+							fileExtension = "class";
+							modelInstanceFileTextBox.setText(fileTextBoxContent);
+						} else {
+							fileTextBoxContent = "";
+							fileExtension = "";
+						}
+
+					} else {
+						modelInstanceFileTextBox.setText(fileTextBoxContent);
+						fileExtension = selectedResource.getFileExtension();
+					}
 				}
 				// no else
 			}
@@ -568,53 +617,63 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		}
 		// no else.
 
-		/* By default try to select a model instance type we know
-		 * that it can be applied to the file */
+		/*
+		 * By default try to select a model instance type we know that it can be
+		 * applied to the file
+		 */
 		boolean isApplicable = false;
 		miTypes = ModelBusPlugin.getModelInstanceTypeRegistry()
 				.getModelInstanceTypes();
 
 		if (miTypes.length > 0) {
-		    
-		    IModelInstanceType miType = null;
-		    
-		    if(fileExtension != null) {    		    
-        		    /* Check whether the model instance file is a .class file */
-        		    if(fileExtension.equalsIgnoreCase("class")) {
-        			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
-        				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.java");
-        			
-        			isApplicable = true;
-        			
-        		    }
-        		    else if(fileExtension.equalsIgnoreCase("pml")) {
-        			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
-        				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.ecore");
-        			
-        			isApplicable = true;
-        		    }
-        		    else if(fileExtension.equalsIgnoreCase("xml")) {
-        			miType = ModelBusPlugin.getModelInstanceTypeRegistry()
-        				.getModelInstanceType("tudresden.ocl20.pivot.modelinstancetype.xml");
-        			
-        			isApplicable = true;
-        		    }
-		    }
-		    
-		    if(isApplicable && (miType != null)) {
-			/* Search for the model instance type and select it */
-			List<IModelInstanceType> miList = Arrays.asList(miTypes);
-			int i = miList.indexOf(miType);
-			
-			if(i >= 0) {
-			    this.miTypeViewer.setSelection(new StructuredSelection(miList.get(i)));
+
+			IModelInstanceType miType = null;
+
+			if (fileExtension != null) {
+				/* Check whether the model instance file is a .class file */
+				if (fileExtension.equalsIgnoreCase("class")) {
+					miType = ModelBusPlugin
+							.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"tudresden.ocl20.pivot.modelinstancetype.java");
+
+					isApplicable = true;
+
+				} else if (fileExtension.equalsIgnoreCase("pml")) {
+					miType = ModelBusPlugin
+							.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"tudresden.ocl20.pivot.modelinstancetype.ecore");
+
+					isApplicable = true;
+				} else if (fileExtension.equalsIgnoreCase("xml")) {
+					miType = ModelBusPlugin
+							.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"tudresden.ocl20.pivot.modelinstancetype.xml");
+
+					isApplicable = true;
+				}
 			}
-			//no else
-		    }
-		    else {
-		    /* If there is no applicable model instance type select the first */
-			this.miTypeViewer.setSelection(new StructuredSelection(miTypes[0]));
-		    }
+
+			if (isApplicable && (miType != null)) {
+				/* Search for the model instance type and select it */
+				List<IModelInstanceType> miList = Arrays.asList(miTypes);
+				int i = miList.indexOf(miType);
+
+				if (i >= 0) {
+					this.miTypeViewer.setSelection(new StructuredSelection(
+							miList.get(i)));
+				}
+				// no else
+			} else {
+				/*
+				 * If there is no applicable model instance type select the
+				 * first
+				 */
+				this.miTypeViewer.setSelection(new StructuredSelection(
+						miTypes[0]));
+			}
 		}
 		// no else.
 	}
