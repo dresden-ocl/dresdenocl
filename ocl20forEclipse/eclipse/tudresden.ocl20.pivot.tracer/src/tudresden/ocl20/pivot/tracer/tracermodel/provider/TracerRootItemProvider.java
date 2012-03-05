@@ -39,7 +39,8 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -48,6 +49,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public TracerRootItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -59,6 +61,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -74,6 +77,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	protected void addRootItemsPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -82,8 +86,8 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 						getString("_UI_TracerRoot_rootItems_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TracerRoot_rootItems_feature", "_UI_TracerRoot_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						TracermodelPackage.Literals.TRACER_ROOT__ROOT_ITEMS,
-						true, false, true, null, null, null));
+						TracermodelPackage.Literals.TRACER_ROOT__ROOT_ITEMS, true, false,
+						true, null, null, null));
 	}
 
 	/**
@@ -93,6 +97,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected boolean shouldComposeCreationImage() {
+
 		return true;
 	}
 
@@ -104,6 +109,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return getString("_UI_TracerRoot_type"); //$NON-NLS-1$
 	}
 
@@ -116,6 +122,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -130,6 +137,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -141,6 +149,7 @@ public class TracerRootItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return TracermodelEditPlugin.INSTANCE;
 	}
 

@@ -61,7 +61,7 @@ public class InterpreterRegistryListenerImpl implements
 		currentParent = null;
 		isTracingSelection = false;
 		cachedItems = new WeakHashMap<UUID, TracerItem>();
-		
+
 		TracermodelPackageImpl.init();
 		factory = TracermodelFactory.eINSTANCE;
 	}

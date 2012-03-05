@@ -35,7 +35,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String copyright = "Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+	public static final String copyright =
+			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * Creates the default factory implementation.
@@ -44,9 +45,11 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public static TracermodelFactory init() {
+
 		try {
-			TracermodelFactory theTracermodelFactory = (TracermodelFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel"); //$NON-NLS-1$ 
+			TracermodelFactory theTracermodelFactory =
+					(TracermodelFactory) EPackage.Registry.INSTANCE
+							.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel"); //$NON-NLS-1$ 
 			if (theTracermodelFactory != null) {
 				return theTracermodelFactory;
 			}
@@ -63,6 +66,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TracermodelFactoryImpl() {
+
 		super();
 	}
 
@@ -72,6 +76,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public EObject create(EClass eClass) {
+
 		switch (eClass.getClassifierID()) {
 		case TracermodelPackage.TRACER_ITEM:
 			return createTracerItem();
@@ -89,10 +94,10 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
+
 		switch (eDataType.getClassifierID()) {
 		case TracermodelPackage.IMODEL_INSTANCE_ELEMENT:
-			return createIModelInstanceElementFromString(eDataType,
-					initialValue);
+			return createIModelInstanceElementFromString(eDataType, initialValue);
 		case TracermodelPackage.OCL_ANY:
 			return createOclAnyFromString(eDataType, initialValue);
 		case TracermodelPackage.UUID:
@@ -109,10 +114,10 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
+
 		switch (eDataType.getClassifierID()) {
 		case TracermodelPackage.IMODEL_INSTANCE_ELEMENT:
-			return convertIModelInstanceElementToString(eDataType,
-					instanceValue);
+			return convertIModelInstanceElementToString(eDataType, instanceValue);
 		case TracermodelPackage.OCL_ANY:
 			return convertOclAnyToString(eDataType, instanceValue);
 		case TracermodelPackage.UUID:
@@ -128,6 +133,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TracerItem createTracerItem() {
+
 		TracerItemImpl tracerItem = new TracerItemImpl();
 		return tracerItem;
 	}
@@ -137,6 +143,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TracerRoot createTracerRoot() {
+
 		TracerRootImpl tracerRoot = new TracerRootImpl();
 		return tracerRoot;
 	}
@@ -147,6 +154,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 */
 	public IModelInstanceElement createIModelInstanceElementFromString(
 			EDataType eDataType, String initialValue) {
+
 		return (IModelInstanceElement) super.createFromString(eDataType,
 				initialValue);
 	}
@@ -157,6 +165,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 */
 	public String convertIModelInstanceElementToString(EDataType eDataType,
 			Object instanceValue) {
+
 		return super.convertToString(eDataType, instanceValue);
 	}
 
@@ -164,8 +173,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OclAny createOclAnyFromString(EDataType eDataType,
-			String initialValue) {
+	public OclAny createOclAnyFromString(EDataType eDataType, String initialValue) {
+
 		return (OclAny) super.createFromString(eDataType, initialValue);
 	}
 
@@ -173,8 +182,8 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertOclAnyToString(EDataType eDataType,
-			Object instanceValue) {
+	public String convertOclAnyToString(EDataType eDataType, Object instanceValue) {
+
 		return super.convertToString(eDataType, instanceValue);
 	}
 
@@ -183,6 +192,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public UUID createUUIDFromString(EDataType eDataType, String initialValue) {
+
 		return (UUID) super.createFromString(eDataType, initialValue);
 	}
 
@@ -191,6 +201,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
+
 		return super.convertToString(eDataType, instanceValue);
 	}
 
@@ -199,6 +210,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TracermodelPackage getTracermodelPackage() {
+
 		return (TracermodelPackage) getEPackage();
 	}
 
@@ -209,6 +221,7 @@ public class TracermodelFactoryImpl extends EFactoryImpl implements
 	 */
 	@Deprecated
 	public static TracermodelPackage getPackage() {
+
 		return TracermodelPackage.eINSTANCE;
 	}
 

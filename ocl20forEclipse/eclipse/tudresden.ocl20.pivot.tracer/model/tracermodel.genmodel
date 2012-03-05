@@ -5,7 +5,7 @@
     modelDirectory="/tudresden.ocl20.pivot.tracer/src" creationIcons="false" editDirectory="/tudresden.ocl20.pivot.tracer/src"
     modelPluginID="tudresden.ocl20.pivot.tracer" modelName="Tracermodel" nonNLSMarkers="true"
     codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
-    complianceLevel="5.0" providerRootExtendsClass="" editPluginID="tudresden.ocl20.pivot.tracer"
+    complianceLevel="6.0" providerRootExtendsClass="" editPluginID="tudresden.ocl20.pivot.tracer"
     classNamePattern="">
   <foreignModel>tracermodel.ecore</foreignModel>
   <genPackages prefix="Tracermodel" basePackage="tudresden.ocl20.pivot.tracer" disposableProviderFactory="true"
