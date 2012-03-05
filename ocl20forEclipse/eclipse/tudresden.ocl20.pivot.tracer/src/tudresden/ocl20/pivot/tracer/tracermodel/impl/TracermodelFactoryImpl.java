@@ -6,21 +6,21 @@
  */
 package tudresden.ocl20.pivot.tracer.tracermodel.impl;
 
-import java.util.Map;
 import java.util.UUID;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.tracer.tracermodel.*;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--

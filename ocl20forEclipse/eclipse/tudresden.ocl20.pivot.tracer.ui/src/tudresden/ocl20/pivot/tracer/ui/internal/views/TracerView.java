@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -54,10 +54,7 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFact
 public class TracerView extends ViewPart implements TracerRegistryListener {
 
 	/** Icon to clear the view. */
-	public static String CLEAR_IMAGE = "icons/remove.gif";
-
-	/** Icon to refresh the view. */
-	public static String REFRESH_IMAGE = "icons/refresh.gif";
+	private static String CLEAR_IMAGE = "icons/clear.gif";
 
 	/** The {@link TreeViewer} for this {@link TracerView}. */
 	private TreeViewer myTreeViewer;
@@ -91,12 +88,15 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		getRoot();
 	}
 
+	@Override
 	public void dispose() {
 
-		myAdapterFactory.dispose();
-		TracerPlugin.disposeInterpreterTraceListener();
-		TracerPlugin.getTracerRegistry().removeTracerRegistryListener(this);
-		super.dispose();
+		try {
+			myAdapterFactory.dispose();
+			TracerPlugin.getTracerRegistry().removeTracerRegistryListener(this);
+		} finally {
+			super.dispose();
+		}
 	}
 
 	@Override
@@ -124,6 +124,7 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		myTreeViewer.setLabelProvider(new TracerItemAdapterFactoryLabelProvider(
 				myAdapterFactory));
 
+		/* Refresh and init */
 		refreshTreeView();
 		initMenu();
 	}
@@ -155,6 +156,10 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		}
 	}
 
+	/**
+	 * <p>This method encapsulate the call to the tool bar manager.</p>
+	 * @return The {@link IToolBarManager} of the {@link org.eclipse.ui.part.ViewPart ViewPart}.
+	 */
 	private IToolBarManager getToolBarManager() {
 
 		if (myToolBarManager == null) {
@@ -169,11 +174,9 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		myTreeViewer.getControl().setFocus();
 	}
 
-	public TracerView getTracerView() {
-
-		return this;
-	}
-
+	/**
+	 * <p>Clears the view and all its content.</p>
+	 */
 	public void clearTracerView() {
 
 		root = null;
@@ -196,9 +199,9 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 
 		myTreeViewer.setInput(this.getRoot());
 	}
-
+	
 	/**
-	 * 
+	 * <p>Refresh the view with the given trace.</p>
 	 */
 	public void updateTrace(TracerRegistryEvent event) {
 
@@ -210,6 +213,7 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 				myTreeViewer.setInput(root);
 			}
 		};
+		
 		Display display = getViewSite().getShell().getDisplay();
 		display.asyncExec(r);
 	}

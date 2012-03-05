@@ -12,7 +12,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
  * update their UI.
  * </p>
  * 
- * @author Lars SchÃ¼tze
+ * @author Lars Schütze
  * 
  */
 public interface TracerRegistry {
@@ -21,5 +21,6 @@ public interface TracerRegistry {
 
 	public void removeTracerRegistryListener(TracerRegistryListener listener);
 
+	/** Indicates that the trace has been updated. */
 	public void fireUpdateTrace(TracerRoot trace);
 }

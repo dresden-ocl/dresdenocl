@@ -6,10 +6,7 @@
  */
 package tudresden.ocl20.pivot.tracer.tracermodel;
 
-import java.util.UUID;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

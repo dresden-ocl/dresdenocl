@@ -10,7 +10,7 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
 /**
  * 
  * @author Ronny
- * @author Lars SchÃ¼tze
+ * @author Lars Schütze
  */
 public interface IInterpreterTraceListener {
 
@@ -77,7 +77,7 @@ public interface IInterpreterTraceListener {
 	 * @param constraints
 	 *          Holds the array of size 3 containing the
 	 *          {@link JavaModelInstanceObject}, the {@link Constraint} and the
-	 *          result.
+	 *          {@link OclAny result}.
 	 */
 	void traceSelectedConstraints(List<Object[]> constraints);
 }

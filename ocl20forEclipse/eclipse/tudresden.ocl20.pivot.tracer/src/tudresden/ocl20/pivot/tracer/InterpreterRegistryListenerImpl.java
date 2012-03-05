@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -18,12 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 import java.util.WeakHashMap;
-
-import org.eclipse.emf.ecore.EObject;
 
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
@@ -34,13 +31,16 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
 import tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl;
 
 /**
- * @author Lars SchÃ¼tze
+ * @author Lars Schütze
  */
 public class InterpreterRegistryListenerImpl implements
 		IInterpreterTraceListener {
 
 	/** Holding all root elements of this forest. */
-	private TracerRoot roots;
+	private TracerRoot originalTrace;
+
+	/** Holds all root elements of the forest that have been selected */
+	private TracerRoot filteredTrace;
 
 	/** Pointing to the current parent */
 	private TracerItem currentParent;
@@ -51,19 +51,17 @@ public class InterpreterRegistryListenerImpl implements
 	/** This map holds the TracerItems in a cache for fast access */
 	private WeakHashMap<UUID, TracerItem> cachedItems;
 
-	/** Holds all root elements of the forest that have been selected */
-	private TracerRoot tracedRoots;
-
 	/** Indicated whether we have to trace all or just a selection */
 	private boolean isTracingSelection;
 
 	public InterpreterRegistryListenerImpl() {
 
-		tracedRoots = null;
-		roots = null;
+		filteredTrace = null;
+		originalTrace = null;
 		currentParent = null;
 		isTracingSelection = false;
 		cachedItems = new WeakHashMap<UUID, TracerItem>();
+		
 		TracermodelPackageImpl.init();
 		factory = TracermodelFactory.eINSTANCE;
 	}
@@ -86,18 +84,18 @@ public class InterpreterRegistryListenerImpl implements
 		cachedItems.put(uuid, dummy);
 
 		/* Add the dummy to the tree structure */
-		if ((currentParent == null) && (roots == null)) {
+		if ((currentParent == null) && (originalTrace == null)) {
 			/* Set the tracer to send all elements to its listeners. */
 			isTracingSelection = false;
-			
+
 			/* This is the first item in the tree. */
-			roots = factory.createTracerRoot();
-			roots.getRootItems().add(dummy);
+			originalTrace = factory.createTracerRoot();
+			originalTrace.getRootItems().add(dummy);
 			currentParent = dummy;
 		}
 		else {
 			if (currentParent == null) {
-				roots.getRootItems().add(dummy);
+				originalTrace.getRootItems().add(dummy);
 				currentParent = dummy;
 			}
 			else {
@@ -178,22 +176,15 @@ public class InterpreterRegistryListenerImpl implements
 	 */
 	public TracerRoot getCurrentRoot() {
 
-		return isTracingSelection ? tracedRoots : roots;
+		return isTracingSelection ? filteredTrace : originalTrace;
 	}
 
 	public void interpretationCleared() {
 
-		Iterator<EObject> it = factory.eContents().iterator();
-
-		// clear all saved TracerItems due to memory leaks
-		while (it.hasNext()) {
-			it.remove();
-		}
-
 		isTracingSelection = false;
-		roots = null;
 		currentParent = null;
-		tracedRoots = null;
+		originalTrace = null;
+		filteredTrace = null;
 
 		/* Inform all listeners that the root object has been changed */
 		TracerPlugin.getTracerRegistry().fireUpdateTrace(this.getCurrentRoot());
@@ -202,7 +193,7 @@ public class InterpreterRegistryListenerImpl implements
 	public void traceSelectedConstraints(List<Object[]> constraints) {
 
 		isTracingSelection = true;
-		tracedRoots = factory.createTracerRoot();
+		filteredTrace = factory.createTracerRoot();
 
 		for (Object[] aRow : constraints) {
 			/*
@@ -211,10 +202,10 @@ public class InterpreterRegistryListenerImpl implements
 			 * element in our tree and return its subtree
 			 */
 
-			for (TracerItem i : roots.getRootItems()) {
+			for (TracerItem i : originalTrace.getRootItems()) {
 				if ((i.getExpression() == aRow[1]) && (i.getResult() == aRow[2])
 						&& (i.getModelInstanceElement() == aRow[0])) {
-					tracedRoots.getRootItems().add(i);
+					filteredTrace.getRootItems().add(i);
 				}
 				// no else
 			}

@@ -7,15 +7,12 @@
 package tudresden.ocl20.pivot.tracer.tracermodel;
 
 import java.util.UUID;
-import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '

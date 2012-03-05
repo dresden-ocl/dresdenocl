@@ -6,16 +6,14 @@
  */
 package tudresden.ocl20.pivot.tracer.tracermodel.util;
 
-import java.util.Map;
-import java.util.UUID;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tracer.tracermodel.*;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides

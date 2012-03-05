@@ -1,16 +1,16 @@
 package tudresden.ocl20.pivot.tracer;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
+import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistry;
 import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryListener;
 import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.impl.TracerRegistryImpl;
 
 public class TracerPlugin extends Plugin {
-
-	private static BundleContext context;
 
 	/** the plug-in ID */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer";
@@ -75,9 +75,13 @@ public class TracerPlugin extends Plugin {
 		return plugin.tracerRegistry;
 	}
 
-	public static void disposeInterpreterTraceListener() {
+	/**
+	 * <p>Remove the {@link TracerPlugin} from the listeners of the {@link OclInterpreterPlugin}.</p>
+	 */
+	private static void disposeInterpreterTraceListener() {
 
 		if (plugin.listener != null) {
+			/* Remove this plug-in from the listeners of the interpreter. */
 			OclInterpreterPlugin.getInterpreterRegistry()
 					.removeInterpreterTraceListener(plugin.listener);
 		}
@@ -88,30 +92,52 @@ public class TracerPlugin extends Plugin {
 		return plugin;
 	}
 
-	static BundleContext getContext() {
-
-		return context;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext )
+	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 
-		TracerPlugin.context = bundleContext;
+		super.start(bundleContext);
+
+		/* configure custom logging properties. */
+		LoggingPlugin.configureDefaultLogging(plugin);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		
-		plugin = null;
-		super.stop(bundleContext);
+		try {
+			disposeInterpreterTraceListener();
+			plugin = null;
+		}
+		finally {
+			super.stop(bundleContext);
+		}
+	}
+	
+	/**
+	 * <p>
+	 * Facade method for the classes in this plug-in that hides the dependency
+	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * </p>
+	 * 
+	 * @param clazz
+	 *            The {@link Class} to return the {@link Logger} for.
+	 * 
+	 * @return A log4j {@link Logger}> instance.
+	 * 
+	 * @generated NOT
+	 */
+	public static Logger getLogger(Class<?> clazz) {
+
+		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
 
 }
