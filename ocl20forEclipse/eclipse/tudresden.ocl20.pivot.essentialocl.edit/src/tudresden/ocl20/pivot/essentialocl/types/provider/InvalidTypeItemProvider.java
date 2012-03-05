@@ -45,7 +45,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
 import tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider;
 
 /**
@@ -65,6 +64,7 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public InvalidTypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -76,6 +76,7 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -91,8 +92,9 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/InvalidType")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/InvalidType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -106,6 +108,7 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return super.getText(object);
 	}
 
@@ -118,6 +121,7 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -132,6 +136,7 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -143,6 +148,7 @@ public class InvalidTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

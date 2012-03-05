@@ -71,26 +71,26 @@ public class TypePathNameNestedCSItemProvider extends
 	 * @generated
 	 */
 	protected void addNamespacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TypePathNameNestedCS_namespace_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_TypePathNameNestedCS_namespace_feature",
-						"_UI_TypePathNameNestedCS_type"),
-				OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__NAMESPACE, true,
-				false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TypePathNameNestedCS_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TypePathNameNestedCS_namespace_feature", "_UI_TypePathNameNestedCS_type"),
+				 OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__NAMESPACE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -98,37 +98,32 @@ public class TypePathNameNestedCSItemProvider extends
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME);
+			childrenFeatures.add(OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns TypePathNameNestedCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns TypePathNameNestedCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator()
-						.getImage("full/obj16/TypePathNameNestedCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypePathNameNestedCS"));
 	}
 
 	/**
@@ -143,11 +138,10 @@ public class TypePathNameNestedCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -155,10 +149,9 @@ public class TypePathNameNestedCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TypePathNameNestedCS.class)) {
-		case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -175,13 +168,15 @@ public class TypePathNameNestedCSItemProvider extends
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME,
-				OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME,
-				OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
 	}
 
 }

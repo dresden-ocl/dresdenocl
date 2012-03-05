@@ -18,13 +18,12 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class LogicalOrOperationCallExpCSItemProvider extends
@@ -57,17 +56,14 @@ public class LogicalOrOperationCallExpCSItemProvider extends
 	}
 
 	/**
-	 * This returns LogicalOrOperationCallExpCS.gif. <!-- begin-user-doc -->
+	 * This returns LogicalOrOperationCallExpCS.gif.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/LogicalOrOperationCallExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/LogicalOrOperationCallExpCS"));
 	}
 
 	/**
@@ -82,11 +78,10 @@ public class LogicalOrOperationCallExpCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -121,13 +116,14 @@ public class LogicalOrOperationCallExpCSItemProvider extends
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == OclPackage.Literals.OPERATION_CALL_WITH_SOURCE_EXP_CS__SOURCE
-				|| childFeature == OclPackage.Literals.OPERATION_CALL_BINARY_EXP_CS__TARGET;
+		boolean qualify =
+			childFeature == OclPackage.Literals.OPERATION_CALL_WITH_SOURCE_EXP_CS__SOURCE ||
+			childFeature == OclPackage.Literals.OPERATION_CALL_BINARY_EXP_CS__TARGET;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

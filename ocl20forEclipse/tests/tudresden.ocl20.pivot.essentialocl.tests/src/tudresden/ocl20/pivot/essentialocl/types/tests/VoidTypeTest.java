@@ -38,53 +38,50 @@ public class VoidTypeTest extends TestCase {
 	 */
 	public void testConformsTo01() {
 
-		Type voidType = EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getOclVoid();
+		Type voidType =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary().getOclVoid();
 
 		assertTrue(voidType.conformsTo(voidType));
 
 		/* OclVoid does not conform to OclInvalid. */
-		assertFalse(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclInvalid()));
+		assertFalse(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclInvalid()));
 
 		/* OclVoid does conform to other library types. */
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclAny()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getBagType(voidType)));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getCollectionType(voidType)));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclBag()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclBoolean()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclCollection()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclInteger()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclOrderedSet()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclReal()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclSequence()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclSet()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclString()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getOclType()));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getOrderedSetType(voidType)));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getSequenceType(voidType)));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getSetType(voidType)));
-		assertTrue(voidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary().getTypeType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclAny()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getBagType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getCollectionType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBag()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclCollection()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclInteger()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclOrderedSet()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclReal()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclSequence()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclSet()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclString()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclType()));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOrderedSetType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSequenceType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getSetType(voidType)));
+		assertTrue(voidType.conformsTo(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getTypeType(voidType)));
 
 		/* OclVoid does conform to model defined types. */
 		Type aType = PivotModelFactory.eINSTANCE.createType();

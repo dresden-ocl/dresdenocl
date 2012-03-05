@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class CollectionItemTest extends CollectionLiteralPartTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(CollectionItemTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class CollectionItemTest extends CollectionLiteralPartTest {
 	 * @generated
 	 */
 	public CollectionItemTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class CollectionItemTest extends CollectionLiteralPartTest {
 	 */
 	@Override
 	protected CollectionItem getFixture() {
+
 		return (CollectionItem) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class CollectionItemTest extends CollectionLiteralPartTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createCollectionItem());
 	}
 
@@ -95,6 +97,7 @@ public class CollectionItemTest extends CollectionLiteralPartTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

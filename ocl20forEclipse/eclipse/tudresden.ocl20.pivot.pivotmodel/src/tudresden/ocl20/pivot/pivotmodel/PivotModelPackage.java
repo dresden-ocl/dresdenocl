@@ -55,6 +55,7 @@ import org.eclipse.emf.ecore.EReference;
  * @generated
  */
 public interface PivotModelPackage extends EPackage {
+
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -85,8 +86,8 @@ public interface PivotModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PivotModelPackage eINSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl
-			.init();
+	PivotModelPackage eINSTANCE =
+			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -1655,7 +1656,8 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES = PROPERTY_FEATURE_COUNT + 0;
+	int ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES =
+			PROPERTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Association Property</em>' class.
@@ -2452,6 +2454,7 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl <em>Named Element</em>}' class.
 		 * <!-- begin-user-doc -->
@@ -2661,8 +2664,7 @@ public interface PivotModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE
-				.getType_GenericSuperType();
+		EReference TYPE__GENERIC_SUPER_TYPE = eINSTANCE.getType_GenericSuperType();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
@@ -3007,8 +3009,7 @@ public interface PivotModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXPRESSION__CONSTRAINT = eINSTANCE
-				.getExpression_Constraint();
+		EReference EXPRESSION__CONSTRAINT = eINSTANCE.getExpression_Constraint();
 
 		/**
 		 * The meta object literal for the '{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl <em>Association Property</em>}' class.

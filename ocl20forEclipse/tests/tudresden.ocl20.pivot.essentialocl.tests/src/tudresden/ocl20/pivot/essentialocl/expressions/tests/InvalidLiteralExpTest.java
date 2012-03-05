@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class InvalidLiteralExpTest extends LiteralExpTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(InvalidLiteralExpTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class InvalidLiteralExpTest extends LiteralExpTest {
 	 * @generated
 	 */
 	public InvalidLiteralExpTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class InvalidLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected InvalidLiteralExp getFixture() {
+
 		return (InvalidLiteralExp) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class InvalidLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createInvalidLiteralExp());
 	}
 
@@ -95,6 +97,7 @@ public class InvalidLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

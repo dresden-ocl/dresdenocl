@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
 
 /**
@@ -59,6 +58,7 @@ public abstract class CollectionLiteralPartTest extends TestCase {
 	 * @generated
 	 */
 	public CollectionLiteralPartTest(String name) {
+
 		super(name);
 	}
 
@@ -69,6 +69,7 @@ public abstract class CollectionLiteralPartTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(CollectionLiteralPart fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -79,6 +80,7 @@ public abstract class CollectionLiteralPartTest extends TestCase {
 	 * @generated
 	 */
 	protected CollectionLiteralPart getFixture() {
+
 		return fixture;
 	}
 

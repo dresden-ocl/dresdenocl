@@ -190,6 +190,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	public static CollectionKind get(String literal) {
+
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			CollectionKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
@@ -206,6 +207,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	public static CollectionKind getByName(String name) {
+
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			CollectionKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
@@ -222,6 +224,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	public static CollectionKind get(int value) {
+
 		switch (value) {
 		case COLLECTION_VALUE:
 			return COLLECTION;
@@ -265,6 +268,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	private CollectionKind(int value, String name, String literal) {
+
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -276,6 +280,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	public int getValue() {
+
 		return value;
 	}
 
@@ -285,6 +290,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	public String getName() {
+
 		return name;
 	}
 
@@ -294,6 +300,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 * @generated
 	 */
 	public String getLiteral() {
+
 		return literal;
 	}
 
@@ -305,6 +312,7 @@ public enum CollectionKind implements InternalCollectionKind {
 	 */
 	@Override
 	public String toString() {
+
 		return literal;
 	}
 

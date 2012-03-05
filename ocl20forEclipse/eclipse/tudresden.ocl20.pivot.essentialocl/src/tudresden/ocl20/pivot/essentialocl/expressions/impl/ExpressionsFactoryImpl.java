@@ -39,7 +39,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.*;
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
@@ -90,9 +89,11 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public static ExpressionsFactoryImpl init() {
+
 		try {
-			ExpressionsFactoryImpl theExpressionsFactory = (ExpressionsFactoryImpl) EPackage.Registry.INSTANCE
-					.getEFactory("http://www.omg.org/2006/essentialocl/expressions"); //$NON-NLS-1$ 
+			ExpressionsFactoryImpl theExpressionsFactory =
+					(ExpressionsFactoryImpl) EPackage.Registry.INSTANCE
+							.getEFactory("http://www.omg.org/2006/essentialocl/expressions"); //$NON-NLS-1$ 
 			if (theExpressionsFactory != null) {
 				return theExpressionsFactory;
 			}
@@ -109,6 +110,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public ExpressionsFactoryImpl() {
+
 		super();
 	}
 
@@ -119,6 +121,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public EObject create(EClass eClass) {
+
 		switch (eClass.getClassifierID()) {
 		case ExpressionsPackageImpl.VARIABLE_EXP:
 			return createVariableExp();
@@ -179,6 +182,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
+
 		switch (eDataType.getClassifierID()) {
 		case ExpressionsPackageImpl.COLLECTION_KIND:
 			return createCollectionKindFromString(eDataType, initialValue);
@@ -195,6 +199,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
+
 		switch (eDataType.getClassifierID()) {
 		case ExpressionsPackageImpl.COLLECTION_KIND:
 			return convertCollectionKindToString(eDataType, instanceValue);
@@ -210,6 +215,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public VariableExp createVariableExp() {
+
 		VariableExpImpl variableExp = new VariableExpImpl();
 		return variableExp;
 	}
@@ -220,6 +226,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public Variable createVariable() {
+
 		VariableImpl variable = new VariableImpl();
 		return variable;
 	}
@@ -230,6 +237,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public UnlimitedNaturalExp createUnlimitedNaturalExp() {
+
 		UnlimitedNaturalExpImpl unlimitedNaturalExp = new UnlimitedNaturalExpImpl();
 		return unlimitedNaturalExp;
 	}
@@ -240,6 +248,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TypeLiteralExp createTypeLiteralExp() {
+
 		TypeLiteralExpImpl typeLiteralExp = new TypeLiteralExpImpl();
 		return typeLiteralExp;
 	}
@@ -250,6 +259,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TupleLiteralPart createTupleLiteralPart() {
+
 		TupleLiteralPartImpl tupleLiteralPart = new TupleLiteralPartImpl();
 		return tupleLiteralPart;
 	}
@@ -260,6 +270,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public TupleLiteralExp createTupleLiteralExp() {
+
 		TupleLiteralExpImpl tupleLiteralExp = new TupleLiteralExpImpl();
 		return tupleLiteralExp;
 	}
@@ -270,6 +281,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public StringLiteralExp createStringLiteralExp() {
+
 		StringLiteralExpImpl stringLiteralExp = new StringLiteralExpImpl();
 		return stringLiteralExp;
 	}
@@ -280,6 +292,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public RealLiteralExp createRealLiteralExp() {
+
 		RealLiteralExpImpl realLiteralExp = new RealLiteralExpImpl();
 		return realLiteralExp;
 	}
@@ -290,6 +303,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public PropertyCallExp createPropertyCallExp() {
+
 		PropertyCallExpImpl propertyCallExp = new PropertyCallExpImpl();
 		return propertyCallExp;
 	}
@@ -300,6 +314,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public OperationCallExp createOperationCallExp() {
+
 		OperationCallExpImpl operationCallExp = new OperationCallExpImpl();
 		return operationCallExp;
 	}
@@ -310,6 +325,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public UndefinedLiteralExp createUndefinedLiteralExp() {
+
 		UndefinedLiteralExpImpl undefinedLiteralExp = new UndefinedLiteralExpImpl();
 		return undefinedLiteralExp;
 	}
@@ -320,6 +336,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public LetExp createLetExp() {
+
 		LetExpImpl letExp = new LetExpImpl();
 		return letExp;
 	}
@@ -330,6 +347,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public IteratorExp createIteratorExp() {
+
 		IteratorExpImpl iteratorExp = new IteratorExpImpl();
 		return iteratorExp;
 	}
@@ -340,6 +358,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public IterateExp createIterateExp() {
+
 		IterateExpImpl iterateExp = new IterateExpImpl();
 		return iterateExp;
 	}
@@ -350,6 +369,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public InvalidLiteralExp createInvalidLiteralExp() {
+
 		InvalidLiteralExpImpl invalidLiteralExp = new InvalidLiteralExpImpl();
 		return invalidLiteralExp;
 	}
@@ -360,6 +380,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public IntegerLiteralExp createIntegerLiteralExp() {
+
 		IntegerLiteralExpImpl integerLiteralExp = new IntegerLiteralExpImpl();
 		return integerLiteralExp;
 	}
@@ -370,6 +391,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public IfExp createIfExp() {
+
 		IfExpImpl ifExp = new IfExpImpl();
 		return ifExp;
 	}
@@ -380,6 +402,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public BooleanLiteralExp createBooleanLiteralExp() {
+
 		BooleanLiteralExpImpl booleanLiteralExp = new BooleanLiteralExpImpl();
 		return booleanLiteralExp;
 	}
@@ -390,6 +413,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public CollectionItem createCollectionItem() {
+
 		CollectionItemImpl collectionItem = new CollectionItemImpl();
 		return collectionItem;
 	}
@@ -400,7 +424,9 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public CollectionLiteralExp createCollectionLiteralExp() {
-		CollectionLiteralExpImpl collectionLiteralExp = new CollectionLiteralExpImpl();
+
+		CollectionLiteralExpImpl collectionLiteralExp =
+				new CollectionLiteralExpImpl();
 		return collectionLiteralExp;
 	}
 
@@ -410,6 +436,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public CollectionRange createCollectionRange() {
+
 		CollectionRangeImpl collectionRange = new CollectionRangeImpl();
 		return collectionRange;
 	}
@@ -420,6 +447,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public EnumLiteralExp createEnumLiteralExp() {
+
 		EnumLiteralExpImpl enumLiteralExp = new EnumLiteralExpImpl();
 		return enumLiteralExp;
 	}
@@ -430,6 +458,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public ExpressionInOcl createExpressionInOcl() {
+
 		ExpressionInOclImpl expressionInOcl = new ExpressionInOclImpl();
 		return expressionInOcl;
 	}
@@ -441,6 +470,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 */
 	public CollectionKind createCollectionKindFromString(EDataType eDataType,
 			String initialValue) {
+
 		CollectionKind result = CollectionKind.get(initialValue);
 		if (result == null)
 			throw new IllegalArgumentException(
@@ -455,6 +485,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 */
 	public String convertCollectionKindToString(EDataType eDataType,
 			Object instanceValue) {
+
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
@@ -464,6 +495,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 * @generated
 	 */
 	public ExpressionsPackageImpl getExpressionsPackage() {
+
 		return (ExpressionsPackageImpl) getEPackage();
 	}
 
@@ -475,6 +507,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements
 	 */
 	@Deprecated
 	public static ExpressionsPackageImpl getPackage() {
+
 		return ExpressionsPackageImpl.eINSTANCE;
 	}
 

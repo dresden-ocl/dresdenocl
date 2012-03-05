@@ -7,7 +7,6 @@
 package tudresden.ocl20.pivot.language.ocl.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;

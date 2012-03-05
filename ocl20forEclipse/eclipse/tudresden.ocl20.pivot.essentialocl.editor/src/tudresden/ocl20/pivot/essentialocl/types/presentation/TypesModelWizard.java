@@ -42,7 +42,6 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.StringTokenizer;
 
-import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -53,8 +52,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -120,8 +117,9 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final String FORMATTED_FILE_EXTENSIONS = EssentialOCLEditorPlugin.INSTANCE
-			.getString("_UI_TypesEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", "); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public static final String FORMATTED_FILE_EXTENSIONS =
+			EssentialOCLEditorPlugin.INSTANCE.getString(
+					"_UI_TypesEditorFilenameExtensions").replaceAll("\\s*,\\s*", ", "); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 	/**
 	 * This caches an instance of the model package.
@@ -134,14 +132,14 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	/**
 	 * The name of the {@link Namespace} meta element.
 	 */
-	protected static final String NAMESPACE = PivotModelPackageImpl.Literals.NAMESPACE
-			.getName();
+	protected static final String NAMESPACE =
+			PivotModelPackageImpl.Literals.NAMESPACE.getName();
 
 	/**
 	 * The name of the {@link OclLibrary} meta element.
 	 */
-	protected static final String OCL_LIBRARY = TypesPackageImpl.Literals.OCL_LIBRARY
-			.getName();
+	protected static final String OCL_LIBRARY =
+			TypesPackageImpl.Literals.OCL_LIBRARY.getName();
 
 	/**
 	 * This caches an instance of the model factory.
@@ -193,6 +191,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
+
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(EssentialOCLEditorPlugin.INSTANCE
@@ -228,6 +227,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 * @generated NOT
 	 */
 	protected EObject createInitialModel() {
+
 		String initialObjectName;
 		Object rootObject;
 
@@ -263,6 +263,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public boolean performFinish() {
+
 		try {
 			// Remember the file.
 			//
@@ -271,8 +272,10 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 			// Do the work within an operation.
 			//
 			WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
+
 				@Override
 				protected void execute(IProgressMonitor progressMonitor) {
+
 					try {
 						// Create a resource set
 						//
@@ -280,8 +283,9 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 
 						// Get the URI of the model file.
 						//
-						URI fileURI = URI.createPlatformResourceURI(modelFile.getFullPath()
-								.toString(), true);
+						URI fileURI =
+								URI.createPlatformResourceURI(modelFile.getFullPath()
+										.toString(), true);
 
 						// Create a resource for this file.
 						//
@@ -297,8 +301,8 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 						// Save the contents of the resource to the file system.
 						//
 						Map<Object, Object> options = new HashMap<Object, Object>();
-						options.put(XMLResource.OPTION_ENCODING, initialObjectCreationPage
-								.getEncoding());
+						options.put(XMLResource.OPTION_ENCODING,
+								initialObjectCreationPage.getEncoding());
 						resource.save(options);
 					} catch (Exception exception) {
 						EssentialOCLEditorPlugin.INSTANCE.log(exception);
@@ -318,7 +322,9 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 			if (activePart instanceof ISetSelectionTarget) {
 				final ISelection targetSelection = new StructuredSelection(modelFile);
 				getShell().getDisplay().asyncExec(new Runnable() {
+
 					public void run() {
+
 						((ISetSelectionTarget) activePart).selectReveal(targetSelection);
 					}
 				});
@@ -327,9 +333,10 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 			// Open an editor on the new file.
 			//
 			try {
-				page.openEditor(new FileEditorInput(modelFile), workbench
-						.getEditorRegistry().getDefaultEditor(
-								modelFile.getFullPath().toString()).getId());
+				page.openEditor(
+						new FileEditorInput(modelFile),
+						workbench.getEditorRegistry()
+								.getDefaultEditor(modelFile.getFullPath().toString()).getId());
 			} catch (PartInitException exception) {
 				MessageDialog
 						.openError(
@@ -361,6 +368,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 */
 		public TypesModelWizardNewFileCreationPage(String pageId,
 				IStructuredSelection selection) {
+
 			super(pageId, selection);
 		}
 
@@ -372,10 +380,12 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 */
 		@Override
 		protected boolean validatePage() {
+
 			if (super.validatePage()) {
 				String extension = new Path(getFileName()).getFileExtension();
 				if (extension == null || !FILE_EXTENSIONS.contains(extension)) {
-					String key = FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension"; //$NON-NLS-1$ //$NON-NLS-2$
+					String key =
+							FILE_EXTENSIONS.size() > 1 ? "_WARN_FilenameExtensions" : "_WARN_FilenameExtension"; //$NON-NLS-1$ //$NON-NLS-2$
 					setErrorMessage(EssentialOCLEditorPlugin.INSTANCE.getString(key,
 							new Object[] { FORMATTED_FILE_EXTENSIONS }));
 					return false;
@@ -390,8 +400,9 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public IFile getModelFile() {
-			return ResourcesPlugin.getWorkspace().getRoot().getFile(
-					getContainerFullPath().append(getFileName()));
+
+			return ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(getContainerFullPath().append(getFileName()));
 		}
 	}
 
@@ -426,6 +437,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public TypesModelWizardInitialObjectCreationPage(String pageId) {
+
 			super(pageId);
 		}
 
@@ -434,6 +446,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public void createControl(Composite parent) {
+
 			Composite composite = new Composite(parent, SWT.NONE);
 			{
 				GridLayout layout = new GridLayout();
@@ -508,7 +521,9 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected ModifyListener validator = new ModifyListener() {
+
 			public void modifyText(ModifyEvent e) {
+
 				setPageComplete(validatePage());
 			}
 		};
@@ -518,6 +533,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected boolean validatePage() {
+
 			return getInitialObjectName() != null
 					&& getEncodings().contains(encodingField.getText());
 		}
@@ -528,12 +544,14 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 */
 		@Override
 		public void setVisible(boolean visible) {
+
 			super.setVisible(visible);
 			if (visible) {
 				if (initialObjectField.getItemCount() == 1) {
 					initialObjectField.clearSelection();
 					encodingField.setFocus();
-				} else {
+				}
+				else {
 					encodingField.clearSelection();
 					initialObjectField.setFocus();
 				}
@@ -545,6 +563,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public String getInitialObjectName() {
+
 			String label = initialObjectField.getText();
 
 			for (String name : getInitialObjectNames()) {
@@ -560,6 +579,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		public String getEncoding() {
+
 			return encodingField.getText();
 		}
 
@@ -569,6 +589,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected String getLabel(String typeName) {
+
 			try {
 				return EssentialOCLEditPlugin.INSTANCE
 						.getString("_UI_" + typeName + "_type"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -583,11 +604,13 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 		 * @generated
 		 */
 		protected Collection<String> getEncodings() {
+
 			if (encodings == null) {
 				encodings = new ArrayList<String>();
-				for (StringTokenizer stringTokenizer = new StringTokenizer(
-						EssentialOCLEditorPlugin.INSTANCE
-								.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens();) //$NON-NLS-1$
+				for (StringTokenizer stringTokenizer =
+						new StringTokenizer(
+								EssentialOCLEditorPlugin.INSTANCE
+										.getString("_UI_XMLEncodingChoices")); stringTokenizer.hasMoreTokens();) //$NON-NLS-1$
 				{
 					encodings.add(stringTokenizer.nextToken());
 				}
@@ -604,10 +627,11 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public void addPages() {
+
 		// Create a page, set the title, and the initial model file name.
 		//
-		newFileCreationPage = new TypesModelWizardNewFileCreationPage(
-				"Whatever", selection); //$NON-NLS-1$
+		newFileCreationPage =
+				new TypesModelWizardNewFileCreationPage("Whatever", selection); //$NON-NLS-1$
 		newFileCreationPage.setTitle(EssentialOCLEditorPlugin.INSTANCE
 				.getString("_UI_TypesModelWizard_label")); //$NON-NLS-1$
 		newFileCreationPage.setDescription(EssentialOCLEditorPlugin.INSTANCE
@@ -642,22 +666,24 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = EssentialOCLEditorPlugin.INSTANCE
-							.getString("_UI_TypesEditorFilenameDefaultBase"); //$NON-NLS-1$
+					String defaultModelBaseFilename =
+							EssentialOCLEditorPlugin.INSTANCE
+									.getString("_UI_TypesEditorFilenameDefaultBase"); //$NON-NLS-1$
 					String defaultModelFilenameExtension = FILE_EXTENSIONS.get(0);
-					String modelFilename = defaultModelBaseFilename
-							+ "." + defaultModelFilenameExtension; //$NON-NLS-1$
+					String modelFilename =
+							defaultModelBaseFilename + "." + defaultModelFilenameExtension; //$NON-NLS-1$
 					for (int i = 1; ((IContainer) selectedResource)
 							.findMember(modelFilename) != null; ++i) {
-						modelFilename = defaultModelBaseFilename + i
-								+ "." + defaultModelFilenameExtension; //$NON-NLS-1$
+						modelFilename =
+								defaultModelBaseFilename + i
+										+ "." + defaultModelFilenameExtension; //$NON-NLS-1$
 					}
 					newFileCreationPage.setFileName(modelFilename);
 				}
 			}
 		}
-		initialObjectCreationPage = new TypesModelWizardInitialObjectCreationPage(
-				"Whatever2"); //$NON-NLS-1$
+		initialObjectCreationPage =
+				new TypesModelWizardInitialObjectCreationPage("Whatever2"); //$NON-NLS-1$
 		initialObjectCreationPage.setTitle(EssentialOCLEditorPlugin.INSTANCE
 				.getString("_UI_TypesModelWizard_label")); //$NON-NLS-1$
 		initialObjectCreationPage.setDescription(EssentialOCLEditorPlugin.INSTANCE
@@ -671,6 +697,7 @@ public class TypesModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	public IFile getModelFile() {
+
 		return newFileCreationPage.getModelFile();
 	}
 

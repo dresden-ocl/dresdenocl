@@ -50,8 +50,8 @@ public interface PivotModelFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PivotModelFactory eINSTANCE = tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl
-			.init();
+	PivotModelFactory eINSTANCE =
+			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'.

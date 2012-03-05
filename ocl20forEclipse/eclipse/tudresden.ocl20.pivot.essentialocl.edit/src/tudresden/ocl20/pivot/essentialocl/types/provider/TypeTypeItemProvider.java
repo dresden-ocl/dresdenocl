@@ -46,7 +46,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider;
 
@@ -67,6 +66,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public TypeTypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -78,6 +78,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -93,6 +94,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addRepresentedTypePropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -113,8 +115,9 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/TypeType")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/TypeType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -128,6 +131,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return super.getText(object);
 	}
 
@@ -140,6 +144,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -154,6 +159,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -165,6 +171,7 @@ public class TypeTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

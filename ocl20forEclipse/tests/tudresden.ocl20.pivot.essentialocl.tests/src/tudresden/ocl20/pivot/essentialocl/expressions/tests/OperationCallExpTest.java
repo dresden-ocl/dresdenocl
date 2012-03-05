@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class OperationCallExpTest extends FeatureCallExpTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(OperationCallExpTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class OperationCallExpTest extends FeatureCallExpTest {
 	 * @generated
 	 */
 	public OperationCallExpTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class OperationCallExpTest extends FeatureCallExpTest {
 	 */
 	@Override
 	protected OperationCallExp getFixture() {
+
 		return (OperationCallExp) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class OperationCallExpTest extends FeatureCallExpTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createOperationCallExp());
 	}
 
@@ -95,6 +97,7 @@ public class OperationCallExpTest extends FeatureCallExpTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

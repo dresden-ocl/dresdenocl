@@ -32,7 +32,6 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions;
 
-import org.eclipse.emf.ecore.EObject;
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;

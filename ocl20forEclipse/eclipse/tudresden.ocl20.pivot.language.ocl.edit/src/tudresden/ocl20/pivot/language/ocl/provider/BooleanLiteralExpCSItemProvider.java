@@ -69,29 +69,30 @@ public class BooleanLiteralExpCSItemProvider extends
 	 * @generated
 	 */
 	protected void addBooleanLiteralPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BooleanLiteralExpCS_booleanLiteral_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_BooleanLiteralExpCS_booleanLiteral_feature",
-						"_UI_BooleanLiteralExpCS_type"),
-				OclPackage.Literals.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL,
-				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BooleanLiteralExpCS_booleanLiteral_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BooleanLiteralExpCS_booleanLiteral_feature", "_UI_BooleanLiteralExpCS_type"),
+				 OclPackage.Literals.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns BooleanLiteralExpCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns BooleanLiteralExpCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/BooleanLiteralExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/BooleanLiteralExpCS"));
 	}
 
 	/**
@@ -111,11 +112,10 @@ public class BooleanLiteralExpCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -123,10 +123,9 @@ public class BooleanLiteralExpCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BooleanLiteralExpCS.class)) {
-		case OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
-			return;
+			case OclPackage.BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 		}
 		super.notifyChanged(notification);
 	}

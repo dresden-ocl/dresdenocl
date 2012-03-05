@@ -51,6 +51,7 @@ import org.eclipse.emf.ecore.EPackage;
  * @generated
  */
 public interface DatatypesPackage extends EPackage {
+
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -81,8 +82,8 @@ public interface DatatypesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	DatatypesPackage eINSTANCE = tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl
-			.init();
+	DatatypesPackage eINSTANCE =
+			tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl.init();
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type.
@@ -308,6 +309,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+
 		/**
 		 * The meta object literal for the '<em>Boolean</em>' data type.
 		 * <!-- begin-user-doc -->

@@ -6,7 +6,6 @@
  */
 package tudresden.ocl20.pivot.language.ocl;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
 
 
 /**

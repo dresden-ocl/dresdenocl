@@ -49,6 +49,7 @@ public abstract class NumericLiteralExpTest extends PrimitiveLiteralExpTest {
 	 * @generated
 	 */
 	public NumericLiteralExpTest(String name) {
+
 		super(name);
 	}
 
@@ -60,6 +61,7 @@ public abstract class NumericLiteralExpTest extends PrimitiveLiteralExpTest {
 	 */
 	@Override
 	protected NumericLiteralExp getFixture() {
+
 		return (NumericLiteralExp) fixture;
 	}
 

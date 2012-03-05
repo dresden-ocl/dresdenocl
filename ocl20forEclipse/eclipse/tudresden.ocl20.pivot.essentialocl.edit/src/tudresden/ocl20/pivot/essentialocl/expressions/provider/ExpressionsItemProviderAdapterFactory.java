@@ -96,6 +96,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public ExpressionsItemProviderAdapterFactory() {
+
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);
@@ -119,6 +120,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createVariableExpAdapter() {
+
 		if (variableExpItemProvider == null) {
 			variableExpItemProvider = new VariableExpItemProvider(this);
 		}
@@ -142,6 +144,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createVariableAdapter() {
+
 		if (variableItemProvider == null) {
 			variableItemProvider = new VariableItemProvider(this);
 		}
@@ -165,9 +168,10 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createUnlimitedNaturalExpAdapter() {
+
 		if (unlimitedNaturalExpItemProvider == null) {
-			unlimitedNaturalExpItemProvider = new UnlimitedNaturalExpItemProvider(
-					this);
+			unlimitedNaturalExpItemProvider =
+					new UnlimitedNaturalExpItemProvider(this);
 		}
 
 		return unlimitedNaturalExpItemProvider;
@@ -189,6 +193,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createTypeLiteralExpAdapter() {
+
 		if (typeLiteralExpItemProvider == null) {
 			typeLiteralExpItemProvider = new TypeLiteralExpItemProvider(this);
 		}
@@ -212,6 +217,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createTupleLiteralPartAdapter() {
+
 		if (tupleLiteralPartItemProvider == null) {
 			tupleLiteralPartItemProvider = new TupleLiteralPartItemProvider(this);
 		}
@@ -235,6 +241,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createTupleLiteralExpAdapter() {
+
 		if (tupleLiteralExpItemProvider == null) {
 			tupleLiteralExpItemProvider = new TupleLiteralExpItemProvider(this);
 		}
@@ -258,6 +265,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createStringLiteralExpAdapter() {
+
 		if (stringLiteralExpItemProvider == null) {
 			stringLiteralExpItemProvider = new StringLiteralExpItemProvider(this);
 		}
@@ -281,6 +289,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createRealLiteralExpAdapter() {
+
 		if (realLiteralExpItemProvider == null) {
 			realLiteralExpItemProvider = new RealLiteralExpItemProvider(this);
 		}
@@ -304,6 +313,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createPropertyCallExpAdapter() {
+
 		if (propertyCallExpItemProvider == null) {
 			propertyCallExpItemProvider = new PropertyCallExpItemProvider(this);
 		}
@@ -327,6 +337,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createOperationCallExpAdapter() {
+
 		if (operationCallExpItemProvider == null) {
 			operationCallExpItemProvider = new OperationCallExpItemProvider(this);
 		}
@@ -350,9 +361,10 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createUndefinedLiteralExpAdapter() {
+
 		if (undefinedLiteralExpItemProvider == null) {
-			undefinedLiteralExpItemProvider = new UndefinedLiteralExpItemProvider(
-					this);
+			undefinedLiteralExpItemProvider =
+					new UndefinedLiteralExpItemProvider(this);
 		}
 
 		return undefinedLiteralExpItemProvider;
@@ -374,6 +386,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createLetExpAdapter() {
+
 		if (letExpItemProvider == null) {
 			letExpItemProvider = new LetExpItemProvider(this);
 		}
@@ -397,6 +410,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createIteratorExpAdapter() {
+
 		if (iteratorExpItemProvider == null) {
 			iteratorExpItemProvider = new IteratorExpItemProvider(this);
 		}
@@ -420,6 +434,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createIterateExpAdapter() {
+
 		if (iterateExpItemProvider == null) {
 			iterateExpItemProvider = new IterateExpItemProvider(this);
 		}
@@ -443,6 +458,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createInvalidLiteralExpAdapter() {
+
 		if (invalidLiteralExpItemProvider == null) {
 			invalidLiteralExpItemProvider = new InvalidLiteralExpItemProvider(this);
 		}
@@ -466,6 +482,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createIntegerLiteralExpAdapter() {
+
 		if (integerLiteralExpItemProvider == null) {
 			integerLiteralExpItemProvider = new IntegerLiteralExpItemProvider(this);
 		}
@@ -489,6 +506,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createIfExpAdapter() {
+
 		if (ifExpItemProvider == null) {
 			ifExpItemProvider = new IfExpItemProvider(this);
 		}
@@ -512,6 +530,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createBooleanLiteralExpAdapter() {
+
 		if (booleanLiteralExpItemProvider == null) {
 			booleanLiteralExpItemProvider = new BooleanLiteralExpItemProvider(this);
 		}
@@ -535,6 +554,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createCollectionItemAdapter() {
+
 		if (collectionItemItemProvider == null) {
 			collectionItemItemProvider = new CollectionItemItemProvider(this);
 		}
@@ -558,9 +578,10 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createCollectionLiteralExpAdapter() {
+
 		if (collectionLiteralExpItemProvider == null) {
-			collectionLiteralExpItemProvider = new CollectionLiteralExpItemProvider(
-					this);
+			collectionLiteralExpItemProvider =
+					new CollectionLiteralExpItemProvider(this);
 		}
 
 		return collectionLiteralExpItemProvider;
@@ -582,6 +603,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createCollectionRangeAdapter() {
+
 		if (collectionRangeItemProvider == null) {
 			collectionRangeItemProvider = new CollectionRangeItemProvider(this);
 		}
@@ -605,6 +627,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createEnumLiteralExpAdapter() {
+
 		if (enumLiteralExpItemProvider == null) {
 			enumLiteralExpItemProvider = new EnumLiteralExpItemProvider(this);
 		}
@@ -628,6 +651,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter createExpressionInOclAdapter() {
+
 		if (expressionInOclItemProvider == null) {
 			expressionInOclItemProvider = new ExpressionInOclItemProvider(this);
 		}
@@ -642,6 +666,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public ComposeableAdapterFactory getRootAdapterFactory() {
+
 		return parentAdapterFactory == null ? this : parentAdapterFactory
 				.getRootAdapterFactory();
 	}
@@ -654,6 +679,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	public void setParentAdapterFactory(
 			ComposedAdapterFactory parentAdapterFactory) {
+
 		this.parentAdapterFactory = parentAdapterFactory;
 	}
 
@@ -664,6 +690,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public boolean isFactoryForType(Object type) {
+
 		return supportedTypes.contains(type) || super.isFactoryForType(type);
 	}
 
@@ -675,6 +702,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Adapter adapt(Notifier notifier, Object type) {
+
 		return super.adapt(notifier, this);
 	}
 
@@ -685,6 +713,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
+
 		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
 			if (!(type instanceof Class<?>)
@@ -703,6 +732,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void addListener(INotifyChangedListener notifyChangedListener) {
+
 		changeNotifier.addListener(notifyChangedListener);
 	}
 
@@ -713,6 +743,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void removeListener(INotifyChangedListener notifyChangedListener) {
+
 		changeNotifier.removeListener(notifyChangedListener);
 	}
 
@@ -723,6 +754,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void fireNotifyChanged(Notification notification) {
+
 		changeNotifier.fireNotifyChanged(notification);
 
 		if (parentAdapterFactory != null) {
@@ -737,6 +769,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	 * @generated
 	 */
 	public void dispose() {
+
 		if (variableExpItemProvider != null)
 			variableExpItemProvider.dispose();
 		if (variableItemProvider != null)

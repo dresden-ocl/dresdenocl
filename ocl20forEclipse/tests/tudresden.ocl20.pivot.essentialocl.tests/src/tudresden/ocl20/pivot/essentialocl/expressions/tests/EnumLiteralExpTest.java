@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class EnumLiteralExpTest extends LiteralExpTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(EnumLiteralExpTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class EnumLiteralExpTest extends LiteralExpTest {
 	 * @generated
 	 */
 	public EnumLiteralExpTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class EnumLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected EnumLiteralExp getFixture() {
+
 		return (EnumLiteralExp) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class EnumLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createEnumLiteralExp());
 	}
 
@@ -95,6 +97,7 @@ public class EnumLiteralExpTest extends LiteralExpTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

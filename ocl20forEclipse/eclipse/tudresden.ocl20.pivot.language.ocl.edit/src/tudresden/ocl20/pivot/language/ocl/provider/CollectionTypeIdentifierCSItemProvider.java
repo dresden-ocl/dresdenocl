@@ -28,10 +28,8 @@ import tudresden.ocl20.pivot.language.ocl.OclFactory;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
@@ -70,26 +68,26 @@ public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
 	 * @generated
 	 */
 	protected void addTypeNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_CollectionTypeIdentifierCS_typeName_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_CollectionTypeIdentifierCS_typeName_feature",
-						"_UI_CollectionTypeIdentifierCS_type"),
-				OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME,
-				true, false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CollectionTypeIdentifierCS_typeName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CollectionTypeIdentifierCS_typeName_feature", "_UI_CollectionTypeIdentifierCS_type"),
+				 OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__TYPE_NAME,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -97,38 +95,32 @@ public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE);
+			childrenFeatures.add(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns CollectionTypeIdentifierCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns CollectionTypeIdentifierCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/CollectionTypeIdentifierCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CollectionTypeIdentifierCS"));
 	}
 
 	/**
@@ -143,11 +135,10 @@ public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -155,10 +146,9 @@ public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CollectionTypeIdentifierCS.class)) {
-		case OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -175,25 +165,25 @@ public class CollectionTypeIdentifierCSItemProvider extends TypeCSItemProvider
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
-						OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
+				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
-						OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
+				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
-						OclFactory.eINSTANCE.createTupleTypeCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
+				 OclFactory.eINSTANCE.createTupleTypeCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
-						OclFactory.eINSTANCE.createCollectionTypeIdentifierCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE,
+				 OclFactory.eINSTANCE.createCollectionTypeIdentifierCS()));
 	}
 
 }

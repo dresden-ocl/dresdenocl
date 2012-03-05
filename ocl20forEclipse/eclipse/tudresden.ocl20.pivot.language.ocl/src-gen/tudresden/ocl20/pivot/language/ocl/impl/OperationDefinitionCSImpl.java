@@ -10,15 +10,11 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -26,8 +22,6 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS;
 import tudresden.ocl20.pivot.language.ocl.ParameterCS;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
-
-import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**

@@ -22,10 +22,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class OperationDefinitionInDefCSItemProvider extends
@@ -58,17 +56,14 @@ public class OperationDefinitionInDefCSItemProvider extends
 	}
 
 	/**
-	 * This returns OperationDefinitionInDefCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns OperationDefinitionInDefCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/OperationDefinitionInDefCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationDefinitionInDefCS"));
 	}
 
 	/**
@@ -83,11 +78,10 @@ public class OperationDefinitionInDefCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

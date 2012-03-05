@@ -80,6 +80,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	protected TupleLiteralExpImpl() {
+
 		super();
 	}
 
@@ -159,6 +160,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.TUPLE_LITERAL_EXP;
 	}
 
@@ -167,10 +169,11 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	public List<TupleLiteralPart> getPart() {
+
 		if (part == null) {
-			part = new EObjectContainmentEList<TupleLiteralPart>(
-					TupleLiteralPart.class, this,
-					ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART);
+			part =
+					new EObjectContainmentEList<TupleLiteralPart>(TupleLiteralPart.class,
+							this, ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART);
 		}
 		return part;
 	}
@@ -182,6 +185,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
 			return ((InternalEList<?>) getPart()).basicRemove(otherEnd, msgs);
@@ -195,6 +199,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
 			return getPart();
@@ -209,6 +214,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
 			getPart().clear();
@@ -224,6 +230,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
 			getPart().clear();
@@ -238,6 +245,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.TUPLE_LITERAL_EXP__PART:
 			return part != null && !part.isEmpty();

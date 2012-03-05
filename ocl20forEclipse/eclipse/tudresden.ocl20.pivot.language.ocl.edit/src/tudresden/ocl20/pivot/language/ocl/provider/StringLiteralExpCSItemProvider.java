@@ -69,29 +69,30 @@ public class StringLiteralExpCSItemProvider extends
 	 * @generated
 	 */
 	protected void addStringLiteralPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_StringLiteralExpCS_stringLiteral_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_StringLiteralExpCS_stringLiteral_feature",
-						"_UI_StringLiteralExpCS_type"),
-				OclPackage.Literals.STRING_LITERAL_EXP_CS__STRING_LITERAL,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StringLiteralExpCS_stringLiteral_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StringLiteralExpCS_stringLiteral_feature", "_UI_StringLiteralExpCS_type"),
+				 OclPackage.Literals.STRING_LITERAL_EXP_CS__STRING_LITERAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns StringLiteralExpCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns StringLiteralExpCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/StringLiteralExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StringLiteralExpCS"));
 	}
 
 	/**
@@ -106,11 +107,10 @@ public class StringLiteralExpCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -118,10 +118,9 @@ public class StringLiteralExpCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(StringLiteralExpCS.class)) {
-		case OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
-			return;
+			case OclPackage.STRING_LITERAL_EXP_CS__STRING_LITERAL:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 		}
 		super.notifyChanged(notification);
 	}

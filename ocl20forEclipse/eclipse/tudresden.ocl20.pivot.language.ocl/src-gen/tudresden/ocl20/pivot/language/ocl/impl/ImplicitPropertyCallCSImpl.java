@@ -7,24 +7,14 @@
 package tudresden.ocl20.pivot.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.CallExpCS;
-import tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
 import tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS;
 import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 
 /**
  * <!-- begin-user-doc -->

@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 
 /**
@@ -66,6 +65,7 @@ public abstract class OclExpressionTest extends TestCase {
 	 * @generated
 	 */
 	public OclExpressionTest(String name) {
+
 		super(name);
 	}
 
@@ -76,6 +76,7 @@ public abstract class OclExpressionTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(OclExpression fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -86,6 +87,7 @@ public abstract class OclExpressionTest extends TestCase {
 	 * @generated
 	 */
 	protected OclExpression getFixture() {
+
 		return fixture;
 	}
 
@@ -97,6 +99,7 @@ public abstract class OclExpressionTest extends TestCase {
 	 * @generated
 	 */
 	public void testWithAtPre() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -110,6 +113,7 @@ public abstract class OclExpressionTest extends TestCase {
 	 * @generated
 	 */
 	public void testWithAsSet() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

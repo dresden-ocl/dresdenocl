@@ -64,6 +64,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * @generated
 	 */
 	protected TypeArgumentImpl() {
+
 		super();
 	}
 
@@ -73,6 +74,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.TYPE_ARGUMENT;
 	}
 
@@ -121,6 +123,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * @generated
 	 */
 	public ComplexGenericType getOwningGenericType() {
+
 		if (eContainerFeatureID() != PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE)
 			return null;
 		return (ComplexGenericType) eContainer();
@@ -156,8 +159,10 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 */
 	public NotificationChain basicSetOwningGenericType(
 			ComplexGenericType newOwningGenericType, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newOwningGenericType,
-				PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE, msgs);
+
+		msgs =
+				eBasicSetContainer((InternalEObject) newOwningGenericType,
+						PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE, msgs);
 		return msgs;
 	}
 
@@ -166,6 +171,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * @generated
 	 */
 	public void setOwningGenericType(ComplexGenericType newOwningGenericType) {
+
 		if (newOwningGenericType != eInternalContainer()
 				|| (eContainerFeatureID() != PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE && newOwningGenericType != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningGenericType))
@@ -175,14 +181,15 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningGenericType != null)
-				msgs = ((InternalEObject) newOwningGenericType).eInverseAdd(
-						this,
-						PivotModelPackage.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT,
-						ComplexGenericType.class, msgs);
+				msgs =
+						((InternalEObject) newOwningGenericType).eInverseAdd(this,
+								PivotModelPackage.COMPLEX_GENERIC_TYPE__TYPE_ARGUMENT,
+								ComplexGenericType.class, msgs);
 			msgs = basicSetOwningGenericType(newOwningGenericType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE,
 					newOwningGenericType, newOwningGenericType));
@@ -193,14 +200,14 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetOwningGenericType((ComplexGenericType) otherEnd,
-					msgs);
+			return basicSetOwningGenericType((ComplexGenericType) otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -212,6 +219,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			return basicSetOwningGenericType(null, msgs);
@@ -226,6 +234,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
+
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			return eInternalContainer().eInverseRemove(this,
@@ -241,6 +250,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			return getOwningGenericType();
@@ -254,6 +264,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			setOwningGenericType((ComplexGenericType) newValue);
@@ -268,6 +279,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_ARGUMENT__OWNING_GENERIC_TYPE:
 			setOwningGenericType((ComplexGenericType) null);

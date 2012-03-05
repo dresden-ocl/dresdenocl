@@ -65,13 +65,10 @@ public class IteratorExpVariableCSItemProvider extends ItemProviderAdapter
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -79,40 +76,33 @@ public class IteratorExpVariableCSItemProvider extends ItemProviderAdapter
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME);
-			childrenFeatures
-					.add(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME);
+			childrenFeatures.add(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME);
+			childrenFeatures.add(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns IteratorExpVariableCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns IteratorExpVariableCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/IteratorExpVariableCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IteratorExpVariableCS"));
 	}
 
 	/**
@@ -128,11 +118,10 @@ public class IteratorExpVariableCSItemProvider extends ItemProviderAdapter
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -140,11 +129,10 @@ public class IteratorExpVariableCSItemProvider extends ItemProviderAdapter
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(IteratorExpVariableCS.class)) {
-		case OclPackage.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME:
-		case OclPackage.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME:
+			case OclPackage.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -161,25 +149,30 @@ public class IteratorExpVariableCSItemProvider extends ItemProviderAdapter
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME,
-				OclFactory.eINSTANCE.createSimpleNameCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__VARIABLE_NAME,
+				 OclFactory.eINSTANCE.createSimpleNameCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
-				OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
-				OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
-				OclFactory.eINSTANCE.createTupleTypeCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTupleTypeCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
-				OclFactory.eINSTANCE.createCollectionTypeIdentifierCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.ITERATOR_EXP_VARIABLE_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createCollectionTypeIdentifierCS()));
 	}
 
 	/**

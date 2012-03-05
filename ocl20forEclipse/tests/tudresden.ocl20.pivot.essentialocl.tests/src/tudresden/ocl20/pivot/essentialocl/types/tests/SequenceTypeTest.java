@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class SequenceTypeTest extends CollectionTypeTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(SequenceTypeTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class SequenceTypeTest extends CollectionTypeTest {
 	 * @generated
 	 */
 	public SequenceTypeTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class SequenceTypeTest extends CollectionTypeTest {
 	 */
 	@Override
 	protected SequenceType getFixture() {
+
 		return (SequenceType) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class SequenceTypeTest extends CollectionTypeTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(TypesFactoryImpl.eINSTANCE.createSequenceType());
 	}
 
@@ -95,6 +97,7 @@ public class SequenceTypeTest extends CollectionTypeTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

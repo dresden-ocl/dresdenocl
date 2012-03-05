@@ -49,6 +49,7 @@ public abstract class LiteralExpTest extends OclExpressionTest {
 	 * @generated
 	 */
 	public LiteralExpTest(String name) {
+
 		super(name);
 	}
 
@@ -60,6 +61,7 @@ public abstract class LiteralExpTest extends OclExpressionTest {
 	 */
 	@Override
 	protected LiteralExp getFixture() {
+
 		return (LiteralExp) fixture;
 	}
 

@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.essentialocl.types;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;

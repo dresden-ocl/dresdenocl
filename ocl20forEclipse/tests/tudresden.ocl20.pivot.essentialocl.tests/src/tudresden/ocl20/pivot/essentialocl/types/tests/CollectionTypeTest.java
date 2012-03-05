@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
@@ -60,6 +59,7 @@ public class CollectionTypeTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(CollectionTypeTest.class);
 	}
 
@@ -70,6 +70,7 @@ public class CollectionTypeTest extends TestCase {
 	 * @generated
 	 */
 	public CollectionTypeTest(String name) {
+
 		super(name);
 	}
 
@@ -80,6 +81,7 @@ public class CollectionTypeTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(CollectionType fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -90,6 +92,7 @@ public class CollectionTypeTest extends TestCase {
 	 * @generated
 	 */
 	protected CollectionType getFixture() {
+
 		return fixture;
 	}
 
@@ -101,6 +104,7 @@ public class CollectionTypeTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(TypesFactoryImpl.eINSTANCE.createCollectionType());
 	}
 
@@ -112,6 +116,7 @@ public class CollectionTypeTest extends TestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

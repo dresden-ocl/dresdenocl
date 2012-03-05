@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class UnlimitedNaturalExpTest extends NumericLiteralExpTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(UnlimitedNaturalExpTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class UnlimitedNaturalExpTest extends NumericLiteralExpTest {
 	 * @generated
 	 */
 	public UnlimitedNaturalExpTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class UnlimitedNaturalExpTest extends NumericLiteralExpTest {
 	 */
 	@Override
 	protected UnlimitedNaturalExp getFixture() {
+
 		return (UnlimitedNaturalExp) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class UnlimitedNaturalExpTest extends NumericLiteralExpTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createUnlimitedNaturalExp());
 	}
 
@@ -95,6 +97,7 @@ public class UnlimitedNaturalExpTest extends NumericLiteralExpTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

@@ -7,6 +7,7 @@
 package tudresden.ocl20.pivot.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
+
 import tudresden.ocl20.pivot.pivotmodel.Property;
 
 /**

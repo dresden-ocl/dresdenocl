@@ -51,10 +51,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class UnlimitedNaturalExpItemProvider extends
@@ -69,6 +67,7 @@ public class UnlimitedNaturalExpItemProvider extends
 	 * @generated
 	 */
 	public UnlimitedNaturalExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -80,6 +79,7 @@ public class UnlimitedNaturalExpItemProvider extends
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,6 +95,7 @@ public class UnlimitedNaturalExpItemProvider extends
 	 * @generated
 	 */
 	protected void addSymbolPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -104,18 +105,19 @@ public class UnlimitedNaturalExpItemProvider extends
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_UnlimitedNaturalExp_symbol_feature", "_UI_UnlimitedNaturalExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP__SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+						null, null));
 	}
 
 	/**
-	 * This returns UnlimitedNaturalExp.gif. <!-- begin-user-doc --> <!--
+	 * This returns UnlimitedNaturalExp.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/UnlimitedNaturalExp")); //$NON-NLS-1$
 	}
@@ -128,20 +130,21 @@ public class UnlimitedNaturalExpItemProvider extends
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((UnlimitedNaturalExp) object).getSymbol() + "";
 		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(UnlimitedNaturalExp.class)) {
@@ -163,6 +166,7 @@ public class UnlimitedNaturalExpItemProvider extends
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

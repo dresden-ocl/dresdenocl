@@ -33,11 +33,8 @@
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
@@ -74,6 +71,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(OclLibraryTest.class);
 	}
 
@@ -84,6 +82,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public OclLibraryTest(String name) {
+
 		super(name);
 	}
 
@@ -94,6 +93,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(OclLibrary fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -104,6 +104,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	protected OclLibrary getFixture() {
+
 		return fixture;
 	}
 
@@ -115,6 +116,7 @@ public class OclLibraryTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(TypesFactoryImpl.eINSTANCE.createOclLibrary());
 	}
 
@@ -126,6 +128,7 @@ public class OclLibraryTest extends TestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 
@@ -137,6 +140,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testMakeTupleType__List() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -150,6 +154,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testGetCollectionType__Type() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -163,6 +168,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testGetSequenceType__Type() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -176,6 +182,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testGetBagType__Type() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -189,6 +196,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testGetSetType__Type() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -202,6 +210,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testGetOrderedSetType__Type() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -215,6 +224,7 @@ public class OclLibraryTest extends TestCase {
 	 * @generated
 	 */
 	public void testGetTypeType__Type() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

@@ -66,6 +66,7 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	 * @generated
 	 */
 	public TypeParameterItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -77,6 +78,7 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -91,6 +93,7 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeParameter")); //$NON-NLS-1$
 	}
@@ -129,8 +132,8 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 		switch (notification.getFeatureID(TypeParameter.class)) {
 		case PivotModelPackageImpl.TYPE_PARAMETER__NAME: {
 			fireNotifyChanged(new ViewerNotification(notification,
-					((TypeParameter) notification.getNotifier())
-							.getGenericElement(), true, true));
+					((TypeParameter) notification.getNotifier()).getGenericElement(),
+					true, true));
 			return;
 		}
 		}
@@ -148,6 +151,7 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

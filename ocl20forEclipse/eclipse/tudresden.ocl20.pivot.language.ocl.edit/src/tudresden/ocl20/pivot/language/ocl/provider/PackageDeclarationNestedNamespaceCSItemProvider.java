@@ -31,10 +31,8 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class PackageDeclarationNestedNamespaceCSItemProvider extends
@@ -75,28 +73,26 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 	 * @generated
 	 */
 	protected void addNamespacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_PackageDeclarationNestedNamespaceCS_namespace_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_PackageDeclarationNestedNamespaceCS_namespace_feature",
-								"_UI_PackageDeclarationNestedNamespaceCS_type"),
-						OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE,
-						true, false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PackageDeclarationNestedNamespaceCS_namespace_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PackageDeclarationNestedNamespaceCS_namespace_feature", "_UI_PackageDeclarationNestedNamespaceCS_type"),
+				 OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -104,38 +100,32 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE);
+			childrenFeatures.add(OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns PackageDeclarationNestedNamespaceCS.gif. <!-- begin-user-doc
+	 * This returns PackageDeclarationNestedNamespaceCS.gif.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/PackageDeclarationNestedNamespaceCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PackageDeclarationNestedNamespaceCS"));
 	}
 
 	/**
@@ -155,23 +145,20 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification
-				.getFeatureID(PackageDeclarationNestedNamespaceCS.class)) {
-		case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+		switch (notification.getFeatureID(PackageDeclarationNestedNamespaceCS.class)) {
+			case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -188,11 +175,10 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE,
-						OclFactory.eINSTANCE
-								.createPackageDeclarationNestedNamespaceCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE,
+				 OclFactory.eINSTANCE.createPackageDeclarationNestedNamespaceCS()));
 	}
 
 	/**

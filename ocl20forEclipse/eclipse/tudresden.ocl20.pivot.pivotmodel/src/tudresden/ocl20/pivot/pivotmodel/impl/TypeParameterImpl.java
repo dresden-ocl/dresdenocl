@@ -65,6 +65,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	protected TypeParameterImpl() {
+
 		super();
 	}
 
@@ -74,6 +75,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.TYPE_PARAMETER;
 	}
 
@@ -82,6 +84,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public GenericElement getGenericElement() {
+
 		if (eContainerFeatureID() != PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT)
 			return null;
 		return (GenericElement) eContainer();
@@ -93,8 +96,10 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	public NotificationChain basicSetGenericElement(
 			GenericElement newGenericElement, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newGenericElement,
-				PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, msgs);
+
+		msgs =
+				eBasicSetContainer((InternalEObject) newGenericElement,
+						PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, msgs);
 		return msgs;
 	}
 
@@ -103,6 +108,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	public void setGenericElement(GenericElement newGenericElement) {
+
 		if (newGenericElement != eInternalContainer()
 				|| (eContainerFeatureID() != PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT && newGenericElement != null)) {
 			if (EcoreUtil.isAncestor(this, newGenericElement))
@@ -112,18 +118,18 @@ public class TypeParameterImpl extends NamedElementImpl implements
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGenericElement != null)
-				msgs = ((InternalEObject) newGenericElement)
-						.eInverseAdd(
-								this,
+				msgs =
+						((InternalEObject) newGenericElement).eInverseAdd(this,
 								PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
 								GenericElement.class, msgs);
 			msgs = basicSetGenericElement(newGenericElement, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT,
-					newGenericElement, newGenericElement));
+					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, newGenericElement,
+					newGenericElement));
 	}
 
 	/**
@@ -180,8 +186,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	private String getIdentifyingName() {
 
-		return getGenericElement() != null ? getGenericElement().getName()
-				+ "::" //$NON-NLS-1$
+		return getGenericElement() != null ? getGenericElement().getName() + "::" //$NON-NLS-1$
 				+ getName() : getName();
 	}
 
@@ -190,8 +195,9 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			if (eInternalContainer() != null)
@@ -208,6 +214,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return basicSetGenericElement(null, msgs);
@@ -222,6 +229,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
+
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return eInternalContainer().eInverseRemove(this,
@@ -237,6 +245,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return getGenericElement();
@@ -250,6 +259,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			setGenericElement((GenericElement) newValue);
@@ -264,6 +274,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			setGenericElement((GenericElement) null);
@@ -278,6 +289,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return getGenericElement() != null;
@@ -298,8 +310,9 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((identifyingName == null) ? 0 : identifyingName.hashCode());
+		result =
+				prime * result
+						+ ((identifyingName == null) ? 0 : identifyingName.hashCode());
 		return result;
 	}
 

@@ -66,28 +66,30 @@ public class NamedLiteralExpCSItemProvider extends OclExpressionCSItemProvider
 	 * @generated
 	 */
 	protected void addNamedElementPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_NamedLiteralExpCS_namedElement_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_NamedLiteralExpCS_namedElement_feature",
-						"_UI_NamedLiteralExpCS_type"),
-				OclPackage.Literals.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT, true,
-				false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_NamedLiteralExpCS_namedElement_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_NamedLiteralExpCS_namedElement_feature", "_UI_NamedLiteralExpCS_type"),
+				 OclPackage.Literals.NAMED_LITERAL_EXP_CS__NAMED_ELEMENT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns NamedLiteralExpCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns NamedLiteralExpCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/NamedLiteralExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NamedLiteralExpCS"));
 	}
 
 	/**
@@ -102,11 +104,10 @@ public class NamedLiteralExpCSItemProvider extends OclExpressionCSItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

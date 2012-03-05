@@ -32,16 +32,15 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Real Literal Exp</b></em>'.
@@ -89,6 +88,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	protected RealLiteralExpImpl() {
+
 		super();
 	}
 
@@ -129,6 +129,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public float getRealSymbol() {
+
 		return realSymbol;
 	}
 
@@ -137,6 +138,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setRealSymbol(float newRealSymbol) {
+
 		float oldRealSymbol = realSymbol;
 		realSymbol = newRealSymbol;
 		if (eNotificationRequired())
@@ -151,6 +153,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
 			return getRealSymbol();
@@ -164,6 +167,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
 			setRealSymbol((Float) newValue);
@@ -178,6 +182,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
 			setRealSymbol(REAL_SYMBOL_EDEFAULT);
@@ -192,6 +197,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.REAL_LITERAL_EXP__REAL_SYMBOL:
 			return realSymbol != REAL_SYMBOL_EDEFAULT;
@@ -205,6 +211,7 @@ public class RealLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP;
 	}
 

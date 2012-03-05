@@ -6,12 +6,101 @@
  */
 package tudresden.ocl20.pivot.language.ocl.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
 
-import tudresden.ocl20.pivot.language.ocl.*;
+import tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
+import tudresden.ocl20.pivot.language.ocl.CallExpCS;
+import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionRangeCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS;
+import tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS;
+import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
+import tudresden.ocl20.pivot.language.ocl.DeriveValueCS;
+import tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS;
+import tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.IfExpCS;
+import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
+import tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS;
+import tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS;
+import tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS;
+import tudresden.ocl20.pivot.language.ocl.InitValueCS;
+import tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
+import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
+import tudresden.ocl20.pivot.language.ocl.IterateExpCS;
+import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
+import tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS;
+import tudresden.ocl20.pivot.language.ocl.LetExpCS;
+import tudresden.ocl20.pivot.language.ocl.LiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.LoopExpCS;
+import tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
+import tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
+import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS;
+import tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS;
+import tudresden.ocl20.pivot.language.ocl.OperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS;
+import tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS;
+import tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS;
+import tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS;
+import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS;
+import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS;
+import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS;
+import tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS;
+import tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS;
+import tudresden.ocl20.pivot.language.ocl.ParameterCS;
+import tudresden.ocl20.pivot.language.ocl.PathNameCS;
+import tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS;
+import tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS;
+import tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS;
+import tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
+import tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.TupleTypeCS;
+import tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS;
+import tudresden.ocl20.pivot.language.ocl.TypeCS;
+import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
+import tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS;
+import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
+import tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS;
+import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
+import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
+import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS;
+import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS;
+import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +115,7 @@ import tudresden.ocl20.pivot.language.ocl.*;
  * @see tudresden.ocl20.pivot.language.ocl.OclPackage
  * @generated
  */
-public class OclSwitch<T> {
+public class OclSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -48,14 +137,16 @@ public class OclSwitch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @parameter ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -65,26 +156,7 @@ public class OclSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case OclPackage.OCL_EXPRESSION_CS: {
@@ -2169,6 +2241,7 @@ public class OclSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
+	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}

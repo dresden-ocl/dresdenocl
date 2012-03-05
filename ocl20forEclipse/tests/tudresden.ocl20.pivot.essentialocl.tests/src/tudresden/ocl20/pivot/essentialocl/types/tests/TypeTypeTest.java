@@ -33,11 +33,8 @@
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
@@ -62,6 +59,7 @@ public class TypeTypeTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(TypeTypeTest.class);
 	}
 
@@ -72,6 +70,7 @@ public class TypeTypeTest extends TestCase {
 	 * @generated
 	 */
 	public TypeTypeTest(String name) {
+
 		super(name);
 	}
 
@@ -82,6 +81,7 @@ public class TypeTypeTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(TypeType fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -92,6 +92,7 @@ public class TypeTypeTest extends TestCase {
 	 * @generated
 	 */
 	protected TypeType getFixture() {
+
 		return fixture;
 	}
 
@@ -103,6 +104,7 @@ public class TypeTypeTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(TypesFactoryImpl.eINSTANCE.createTypeType());
 	}
 
@@ -114,6 +116,7 @@ public class TypeTypeTest extends TestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

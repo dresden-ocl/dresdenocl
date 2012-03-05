@@ -8,18 +8,13 @@ package tudresden.ocl20.pivot.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import java.util.Collection;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
  * <!-- begin-user-doc -->

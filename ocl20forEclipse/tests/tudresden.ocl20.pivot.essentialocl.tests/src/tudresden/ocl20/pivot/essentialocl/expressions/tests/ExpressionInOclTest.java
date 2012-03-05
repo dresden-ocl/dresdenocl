@@ -33,11 +33,8 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -62,6 +59,7 @@ public class ExpressionInOclTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(ExpressionInOclTest.class);
 	}
 
@@ -72,6 +70,7 @@ public class ExpressionInOclTest extends TestCase {
 	 * @generated
 	 */
 	public ExpressionInOclTest(String name) {
+
 		super(name);
 	}
 
@@ -82,6 +81,7 @@ public class ExpressionInOclTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(ExpressionInOcl fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -92,6 +92,7 @@ public class ExpressionInOclTest extends TestCase {
 	 * @generated
 	 */
 	protected ExpressionInOcl getFixture() {
+
 		return fixture;
 	}
 
@@ -103,6 +104,7 @@ public class ExpressionInOclTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createExpressionInOcl());
 	}
 
@@ -114,6 +116,7 @@ public class ExpressionInOclTest extends TestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

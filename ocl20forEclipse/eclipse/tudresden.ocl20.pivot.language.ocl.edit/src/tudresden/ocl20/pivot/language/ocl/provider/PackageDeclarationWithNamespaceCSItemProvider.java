@@ -115,7 +115,7 @@ public class PackageDeclarationWithNamespaceCSItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return "package";
+		return getString("_UI_PackageDeclarationWithNamespaceCS_type");
 	}
 
 	/**

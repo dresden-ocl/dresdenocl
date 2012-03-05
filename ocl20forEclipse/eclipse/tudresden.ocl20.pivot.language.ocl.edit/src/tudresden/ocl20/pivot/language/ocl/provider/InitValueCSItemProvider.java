@@ -62,8 +62,7 @@ public class InitValueCSItemProvider extends InitOrDeriveValueCSItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/InitValueCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/InitValueCS"));
 	}
 
 	/**
@@ -78,11 +77,10 @@ public class InitValueCSItemProvider extends InitOrDeriveValueCSItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

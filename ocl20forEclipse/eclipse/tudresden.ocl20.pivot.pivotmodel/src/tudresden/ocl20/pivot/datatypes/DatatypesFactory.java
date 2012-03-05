@@ -50,8 +50,8 @@ public interface DatatypesFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	DatatypesFactory eINSTANCE = tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl
-			.init();
+	DatatypesFactory eINSTANCE =
+			tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl.init();
 
 	/**
 	 * Returns the package supported by this factory.

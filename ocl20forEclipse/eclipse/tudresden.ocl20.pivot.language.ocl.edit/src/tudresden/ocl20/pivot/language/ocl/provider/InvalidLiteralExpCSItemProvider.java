@@ -56,15 +56,14 @@ public class InvalidLiteralExpCSItemProvider extends
 	}
 
 	/**
-	 * This returns InvalidLiteralExpCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns InvalidLiteralExpCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/InvalidLiteralExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/InvalidLiteralExpCS"));
 	}
 
 	/**
@@ -79,11 +78,10 @@ public class InvalidLiteralExpCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

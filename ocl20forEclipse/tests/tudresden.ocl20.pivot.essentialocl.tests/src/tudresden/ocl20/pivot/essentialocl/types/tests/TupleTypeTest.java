@@ -33,11 +33,8 @@
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
@@ -62,6 +59,7 @@ public class TupleTypeTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(TupleTypeTest.class);
 	}
 
@@ -72,6 +70,7 @@ public class TupleTypeTest extends TestCase {
 	 * @generated
 	 */
 	public TupleTypeTest(String name) {
+
 		super(name);
 	}
 
@@ -82,6 +81,7 @@ public class TupleTypeTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(TupleType fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -92,6 +92,7 @@ public class TupleTypeTest extends TestCase {
 	 * @generated
 	 */
 	protected TupleType getFixture() {
+
 		return fixture;
 	}
 
@@ -103,6 +104,7 @@ public class TupleTypeTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(TypesFactoryImpl.eINSTANCE.createTupleType());
 	}
 
@@ -114,6 +116,7 @@ public class TupleTypeTest extends TestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

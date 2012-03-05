@@ -68,6 +68,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	 * @generated
 	 */
 	public FeatureItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -79,6 +80,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,6 +97,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	 * @generated
 	 */
 	protected void addStaticPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -103,8 +106,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 						getString("_UI_Feature_static_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Feature_static_feature", "_UI_Feature_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.FEATURE__STATIC, true,
-						false, false,
+						PivotModelPackage.Literals.FEATURE__STATIC, true, false, false,
 						ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
 	}
 
@@ -115,6 +117,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	 * @generated
 	 */
 	protected void addSemanticsPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -123,8 +126,8 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 						getString("_UI_Feature_semantics_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Feature_semantics_feature", "_UI_Feature_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.FEATURE__SEMANTICS, true,
-						false, true, null, null, null));
+						PivotModelPackage.Literals.FEATURE__SEMANTICS, true, false, true,
+						null, null, null));
 	}
 
 	/**
@@ -153,6 +156,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -167,6 +171,7 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

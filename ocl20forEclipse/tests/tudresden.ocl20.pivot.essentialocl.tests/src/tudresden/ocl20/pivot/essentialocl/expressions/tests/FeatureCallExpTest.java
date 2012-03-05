@@ -49,6 +49,7 @@ public abstract class FeatureCallExpTest extends CallExpTest {
 	 * @generated
 	 */
 	public FeatureCallExpTest(String name) {
+
 		super(name);
 	}
 
@@ -60,6 +61,7 @@ public abstract class FeatureCallExpTest extends CallExpTest {
 	 */
 	@Override
 	protected FeatureCallExp getFixture() {
+
 		return (FeatureCallExp) fixture;
 	}
 

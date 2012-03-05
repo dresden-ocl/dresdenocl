@@ -32,17 +32,15 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Unlimited Natural Exp</b></em>'.
@@ -90,6 +88,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	protected UnlimitedNaturalExpImpl() {
+
 		super();
 	}
 
@@ -123,6 +122,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public long getSymbol() {
+
 		return symbol;
 	}
 
@@ -131,6 +131,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setSymbol(long newSymbol) {
+
 		long oldSymbol = symbol;
 		symbol = newSymbol;
 		if (eNotificationRequired())
@@ -145,6 +146,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			return getSymbol();
@@ -158,6 +160,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			setSymbol((Long) newValue);
@@ -172,6 +175,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			setSymbol(SYMBOL_EDEFAULT);
@@ -186,6 +190,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.UNLIMITED_NATURAL_EXP__SYMBOL:
 			return symbol != SYMBOL_EDEFAULT;
@@ -199,6 +204,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.UNLIMITED_NATURAL_EXP;
 	}
 

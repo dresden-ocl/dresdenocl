@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.types.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
-
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class BagTypeTest extends CollectionTypeTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(BagTypeTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class BagTypeTest extends CollectionTypeTest {
 	 * @generated
 	 */
 	public BagTypeTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class BagTypeTest extends CollectionTypeTest {
 	 */
 	@Override
 	protected BagType getFixture() {
+
 		return (BagType) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class BagTypeTest extends CollectionTypeTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(TypesFactoryImpl.eINSTANCE.createBagType());
 	}
 
@@ -95,6 +97,7 @@ public class BagTypeTest extends CollectionTypeTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

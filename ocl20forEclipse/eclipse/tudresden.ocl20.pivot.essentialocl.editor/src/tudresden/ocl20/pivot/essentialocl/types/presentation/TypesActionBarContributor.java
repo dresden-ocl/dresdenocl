@@ -98,16 +98,18 @@ public class TypesActionBarContributor extends
 	protected IAction showPropertiesViewAction = new Action(
 			EssentialOCLEditorPlugin.INSTANCE
 					.getString("_UI_ShowPropertiesView_menu_item")) //$NON-NLS-1$
-	{
-		@Override
-		public void run() {
-			try {
-				getPage().showView("org.eclipse.ui.views.PropertySheet"); //$NON-NLS-1$
-			} catch (PartInitException exception) {
-				EssentialOCLEditorPlugin.INSTANCE.log(exception);
-			}
-		}
-	};
+			{
+
+				@Override
+				public void run() {
+
+					try {
+						getPage().showView("org.eclipse.ui.views.PropertySheet"); //$NON-NLS-1$
+					} catch (PartInitException exception) {
+						EssentialOCLEditorPlugin.INSTANCE.log(exception);
+					}
+				}
+			};
 
 	/**
 	 * This action refreshes the viewer of the current editor if the editor
@@ -119,22 +121,25 @@ public class TypesActionBarContributor extends
 	protected IAction refreshViewerAction = new Action(
 			EssentialOCLEditorPlugin.INSTANCE
 					.getString("_UI_RefreshViewer_menu_item")) //$NON-NLS-1$
-	{
-		@Override
-		public boolean isEnabled() {
-			return activeEditorPart instanceof IViewerProvider;
-		}
+			{
 
-		@Override
-		public void run() {
-			if (activeEditorPart instanceof IViewerProvider) {
-				Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
-				if (viewer != null) {
-					viewer.refresh();
+				@Override
+				public boolean isEnabled() {
+
+					return activeEditorPart instanceof IViewerProvider;
 				}
-			}
-		}
-	};
+
+				@Override
+				public void run() {
+
+					if (activeEditorPart instanceof IViewerProvider) {
+						Viewer viewer = ((IViewerProvider) activeEditorPart).getViewer();
+						if (viewer != null) {
+							viewer.refresh();
+						}
+					}
+				}
+			};
 
 	/**
 	 * This will contain one {@link org.eclipse.emf.edit.ui.action.CreateChildAction} corresponding to each descriptor
@@ -177,6 +182,7 @@ public class TypesActionBarContributor extends
 	 * @generated
 	 */
 	public TypesActionBarContributor() {
+
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
 		validateAction = new ValidateAction();
@@ -191,6 +197,7 @@ public class TypesActionBarContributor extends
 	 */
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
+
 		toolBarManager.add(new Separator("types-settings")); //$NON-NLS-1$
 		toolBarManager.add(new Separator("types-additions")); //$NON-NLS-1$
 	}
@@ -204,10 +211,12 @@ public class TypesActionBarContributor extends
 	 */
 	@Override
 	public void contributeToMenu(IMenuManager menuManager) {
+
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(
-				EssentialOCLEditorPlugin.INSTANCE.getString("_UI_TypesEditor_menu"), "tudresden.ocl20.pivot.essentialocl.typesMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
+		IMenuManager submenuManager =
+				new MenuManager(
+						EssentialOCLEditorPlugin.INSTANCE.getString("_UI_TypesEditor_menu"), "tudresden.ocl20.pivot.essentialocl.typesMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("additions", submenuManager); //$NON-NLS-1$
 		submenuManager.add(new Separator("settings")); //$NON-NLS-1$
 		submenuManager.add(new Separator("actions")); //$NON-NLS-1$
@@ -216,21 +225,26 @@ public class TypesActionBarContributor extends
 
 		// Prepare for CreateChild item addition or removal.
 		//
-		createChildMenuManager = new MenuManager(EssentialOCLEditorPlugin.INSTANCE
-				.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
+		createChildMenuManager =
+				new MenuManager(
+						EssentialOCLEditorPlugin.INSTANCE
+								.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
 		submenuManager.insertBefore("additions", createChildMenuManager); //$NON-NLS-1$
 
 		// Prepare for CreateSibling item addition or removal.
 		//
-		createSiblingMenuManager = new MenuManager(
-				EssentialOCLEditorPlugin.INSTANCE
-						.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
+		createSiblingMenuManager =
+				new MenuManager(
+						EssentialOCLEditorPlugin.INSTANCE
+								.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
 		submenuManager.insertBefore("additions", createSiblingMenuManager); //$NON-NLS-1$
 
 		// Force an update because Eclipse hides empty menus now.
 		//
 		submenuManager.addMenuListener(new IMenuListener() {
+
 			public void menuAboutToShow(IMenuManager menuManager) {
+
 				menuManager.updateAll(true);
 			}
 		});
@@ -246,6 +260,7 @@ public class TypesActionBarContributor extends
 	 */
 	@Override
 	public void setActiveEditor(IEditorPart part) {
+
 		super.setActiveEditor(part);
 		activeEditorPart = part;
 
@@ -256,7 +271,8 @@ public class TypesActionBarContributor extends
 		}
 		if (part == null) {
 			selectionProvider = null;
-		} else {
+		}
+		else {
 			selectionProvider = part.getSite().getSelectionProvider();
 			selectionProvider.addSelectionChangedListener(this);
 
@@ -278,6 +294,7 @@ public class TypesActionBarContributor extends
 	 * @generated
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
+
 		// Remove any menu items for old selection.
 		//
 		if (createChildMenuManager != null) {
@@ -297,8 +314,8 @@ public class TypesActionBarContributor extends
 				&& ((IStructuredSelection) selection).size() == 1) {
 			Object object = ((IStructuredSelection) selection).getFirstElement();
 
-			EditingDomain domain = ((IEditingDomainProvider) activeEditorPart)
-					.getEditingDomain();
+			EditingDomain domain =
+					((IEditingDomainProvider) activeEditorPart).getEditingDomain();
 
 			newChildDescriptors = domain.getNewChildDescriptors(object, null);
 			newSiblingDescriptors = domain.getNewChildDescriptors(null, object);
@@ -306,10 +323,10 @@ public class TypesActionBarContributor extends
 
 		// Generate actions for selection; populate and redraw the menus.
 		//
-		createChildActions = generateCreateChildActions(newChildDescriptors,
-				selection);
-		createSiblingActions = generateCreateSiblingActions(newSiblingDescriptors,
-				selection);
+		createChildActions =
+				generateCreateChildActions(newChildDescriptors, selection);
+		createSiblingActions =
+				generateCreateSiblingActions(newSiblingDescriptors, selection);
 
 		if (createChildMenuManager != null) {
 			populateManager(createChildMenuManager, createChildActions, null);
@@ -330,6 +347,7 @@ public class TypesActionBarContributor extends
 	 */
 	protected Collection<IAction> generateCreateChildActions(
 			Collection<?> descriptors, ISelection selection) {
+
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
@@ -349,6 +367,7 @@ public class TypesActionBarContributor extends
 	 */
 	protected Collection<IAction> generateCreateSiblingActions(
 			Collection<?> descriptors, ISelection selection) {
+
 		Collection<IAction> actions = new ArrayList<IAction>();
 		if (descriptors != null) {
 			for (Object descriptor : descriptors) {
@@ -370,11 +389,13 @@ public class TypesActionBarContributor extends
 	 */
 	protected void populateManager(IContributionManager manager,
 			Collection<? extends IAction> actions, String contributionID) {
+
 		if (actions != null) {
 			for (IAction action : actions) {
 				if (contributionID != null) {
 					manager.insertBefore(contributionID, action);
-				} else {
+				}
+				else {
 					manager.add(action);
 				}
 			}
@@ -390,6 +411,7 @@ public class TypesActionBarContributor extends
 	 */
 	protected void depopulateManager(IContributionManager manager,
 			Collection<? extends IAction> actions) {
+
 		if (actions != null) {
 			IContributionItem[] items = manager.getItems();
 			for (int i = 0; i < items.length; i++) {
@@ -397,15 +419,15 @@ public class TypesActionBarContributor extends
 				//
 				IContributionItem contributionItem = items[i];
 				while (contributionItem instanceof SubContributionItem) {
-					contributionItem = ((SubContributionItem) contributionItem)
-							.getInnerItem();
+					contributionItem =
+							((SubContributionItem) contributionItem).getInnerItem();
 				}
 
 				// Delete the ActionContributionItems with matching action.
 				//
 				if (contributionItem instanceof ActionContributionItem) {
-					IAction action = ((ActionContributionItem) contributionItem)
-							.getAction();
+					IAction action =
+							((ActionContributionItem) contributionItem).getAction();
 					if (actions.contains(action)) {
 						manager.remove(contributionItem);
 					}
@@ -422,16 +444,21 @@ public class TypesActionBarContributor extends
 	 */
 	@Override
 	public void menuAboutToShow(IMenuManager menuManager) {
+
 		super.menuAboutToShow(menuManager);
 		MenuManager submenuManager = null;
 
-		submenuManager = new MenuManager(EssentialOCLEditorPlugin.INSTANCE
-				.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
+		submenuManager =
+				new MenuManager(
+						EssentialOCLEditorPlugin.INSTANCE
+								.getString("_UI_CreateChild_menu_item")); //$NON-NLS-1$
 		populateManager(submenuManager, createChildActions, null);
 		menuManager.insertBefore("edit", submenuManager); //$NON-NLS-1$
 
-		submenuManager = new MenuManager(EssentialOCLEditorPlugin.INSTANCE
-				.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
+		submenuManager =
+				new MenuManager(
+						EssentialOCLEditorPlugin.INSTANCE
+								.getString("_UI_CreateSibling_menu_item")); //$NON-NLS-1$
 		populateManager(submenuManager, createSiblingActions, null);
 		menuManager.insertBefore("edit", submenuManager); //$NON-NLS-1$
 	}
@@ -444,6 +471,7 @@ public class TypesActionBarContributor extends
 	 */
 	@Override
 	protected void addGlobalActions(IMenuManager menuManager) {
+
 		menuManager.insertAfter("additions-end", new Separator("ui-actions")); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("ui-actions", showPropertiesViewAction); //$NON-NLS-1$
 
@@ -461,6 +489,7 @@ public class TypesActionBarContributor extends
 	 */
 	@Override
 	protected boolean removeAllReferencesOnDelete() {
+
 		return true;
 	}
 

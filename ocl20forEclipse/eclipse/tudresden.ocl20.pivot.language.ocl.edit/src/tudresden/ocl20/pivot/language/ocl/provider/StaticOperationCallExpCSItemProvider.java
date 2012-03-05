@@ -28,10 +28,8 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class StaticOperationCallExpCSItemProvider extends
@@ -71,28 +69,26 @@ public class StaticOperationCallExpCSItemProvider extends
 	 * @generated
 	 */
 	protected void addOperationNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory)
-								.getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_StaticOperationCallExpCS_operationName_feature"),
-						getString(
-								"_UI_PropertyDescriptor_description",
-								"_UI_StaticOperationCallExpCS_operationName_feature",
-								"_UI_StaticOperationCallExpCS_type"),
-						OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME,
-						true, false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_StaticOperationCallExpCS_operationName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_StaticOperationCallExpCS_operationName_feature", "_UI_StaticOperationCallExpCS_type"),
+				 OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__OPERATION_NAME,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -100,40 +96,33 @@ public class StaticOperationCallExpCSItemProvider extends
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME);
-			childrenFeatures
-					.add(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS);
+			childrenFeatures.add(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME);
+			childrenFeatures.add(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns StaticOperationCallExpCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns StaticOperationCallExpCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/StaticOperationCallExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StaticOperationCallExpCS"));
 	}
 
 	/**
@@ -148,11 +137,10 @@ public class StaticOperationCallExpCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -160,11 +148,10 @@ public class StaticOperationCallExpCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(StaticOperationCallExpCS.class)) {
-		case OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME:
-		case OclPackage.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME:
+			case OclPackage.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -181,150 +168,185 @@ public class StaticOperationCallExpCSItemProvider extends
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME,
-				OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME,
-				OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createBracketExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createBracketExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createNamedLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createNamedLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createCollectionTypeLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createCollectionTypeLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createTupleTypeLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createEnumLiteralOrStaticPropertyExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createCollectionLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createCollectionLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createIteratorExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createIteratorExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createIterateExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createIterateExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createNavigationCallExp()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createNavigationCallExp()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createPropertyCallOnSelfExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createPropertyCallOnSelfExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createPropertyCallExplicitPathExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createPropertyCallExplicitPathExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createOperationCallOnSelfExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createOperationCallOnSelfExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createStaticOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createStaticOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createUnaryOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createUnaryOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createLogicalNotOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createLogicalNotOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createOperationCallWithSourceExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createOperationCallWithSourceExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createAdditiveOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createAdditiveOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createMultOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createMultOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createRelationalOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createRelationalOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createEqualityOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createEqualityOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createLogicalAndOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createLogicalAndOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createLogicalOrOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createLogicalOrOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createLogicalXorOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createLogicalXorOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createLogicalImpliesOperationCallExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createLogicalImpliesOperationCallExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE
-						.createOperationCallWithImlicitSourceExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createOperationCallWithImlicitSourceExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createTupleLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createTupleLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createIntegerLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createIntegerLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createRealLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createRealLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createBooleanLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createBooleanLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createStringLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createStringLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createInvalidLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createInvalidLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createNullLiteralExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createNullLiteralExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createLetExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createLetExpCS()));
 
-		newChildDescriptors.add(createChildParameter(
-				OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
-				OclFactory.eINSTANCE.createIfExpCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS,
+				 OclFactory.eINSTANCE.createIfExpCS()));
 	}
 
 }

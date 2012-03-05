@@ -34,7 +34,6 @@ package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
 import junit.textui.TestRunner;
 
 /**
@@ -51,6 +50,7 @@ public class ExpressionsTests extends TestSuite {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(suite());
 	}
 
@@ -60,6 +60,7 @@ public class ExpressionsTests extends TestSuite {
 	 * @generated
 	 */
 	public static Test suite() {
+
 		TestSuite suite = new ExpressionsTests("expressions Tests"); //$NON-NLS-1$
 		suite.addTestSuite(VariableExpTest.class);
 		suite.addTestSuite(VariableTest.class);
@@ -92,6 +93,7 @@ public class ExpressionsTests extends TestSuite {
 	 * @generated
 	 */
 	public ExpressionsTests(String name) {
+
 		super(name);
 	}
 

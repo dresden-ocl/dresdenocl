@@ -27,10 +27,8 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class OperationDefinitionInContextCSItemProvider extends
@@ -64,13 +62,10 @@ public class OperationDefinitionInContextCSItemProvider extends
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -78,38 +73,32 @@ public class OperationDefinitionInContextCSItemProvider extends
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME);
+			childrenFeatures.add(OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns OperationDefinitionInContextCS.gif. <!-- begin-user-doc -->
+	 * This returns OperationDefinitionInContextCS.gif.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/OperationDefinitionInContextCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationDefinitionInContextCS"));
 	}
 
 	/**
@@ -125,11 +114,10 @@ public class OperationDefinitionInContextCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -137,10 +125,9 @@ public class OperationDefinitionInContextCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OperationDefinitionInContextCS.class)) {
-		case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -157,15 +144,15 @@ public class OperationDefinitionInContextCSItemProvider extends
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME,
-						OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameSimpleCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME,
-						OclFactory.eINSTANCE.createTypePathNameNestedCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME,
+				 OclFactory.eINSTANCE.createTypePathNameNestedCS()));
 	}
 
 	/**
@@ -181,13 +168,14 @@ public class OperationDefinitionInContextCSItemProvider extends
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == OclPackage.Literals.OPERATION_DEFINITION_CS__RETURN_TYPE
-				|| childFeature == OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME;
+		boolean qualify =
+			childFeature == OclPackage.Literals.OPERATION_DEFINITION_CS__RETURN_TYPE ||
+			childFeature == OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME;
 
 		if (qualify) {
-			return getString("_UI_CreateChild_text2", new Object[] {
-					getTypeText(childObject), getFeatureText(childFeature),
-					getTypeText(owner) });
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
 	}

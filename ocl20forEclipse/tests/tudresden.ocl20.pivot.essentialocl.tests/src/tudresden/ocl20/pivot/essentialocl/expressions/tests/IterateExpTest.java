@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class IterateExpTest extends LoopExpTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(IterateExpTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class IterateExpTest extends LoopExpTest {
 	 * @generated
 	 */
 	public IterateExpTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class IterateExpTest extends LoopExpTest {
 	 */
 	@Override
 	protected IterateExp getFixture() {
+
 		return (IterateExp) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class IterateExpTest extends LoopExpTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createIterateExp());
 	}
 
@@ -95,6 +97,7 @@ public class IterateExpTest extends LoopExpTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

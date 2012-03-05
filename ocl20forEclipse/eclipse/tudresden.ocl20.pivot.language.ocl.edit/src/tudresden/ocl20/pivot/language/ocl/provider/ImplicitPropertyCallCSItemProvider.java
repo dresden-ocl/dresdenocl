@@ -26,10 +26,8 @@ import tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class ImplicitPropertyCallCSItemProvider extends
@@ -70,16 +68,19 @@ public class ImplicitPropertyCallCSItemProvider extends
 	 * @generated
 	 */
 	protected void addPropertyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_PropertyCallBaseExpCS_property_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_PropertyCallBaseExpCS_property_feature",
-						"_UI_PropertyCallBaseExpCS_type"),
-				OclPackage.Literals.PROPERTY_CALL_BASE_EXP_CS__PROPERTY, true,
-				false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyCallBaseExpCS_property_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyCallBaseExpCS_property_feature", "_UI_PropertyCallBaseExpCS_type"),
+				 OclPackage.Literals.PROPERTY_CALL_BASE_EXP_CS__PROPERTY,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -89,31 +90,30 @@ public class ImplicitPropertyCallCSItemProvider extends
 	 * @generated
 	 */
 	protected void addIsMarkedPrePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_PropertyCallBaseExpCS_isMarkedPre_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_PropertyCallBaseExpCS_isMarkedPre_feature",
-						"_UI_PropertyCallBaseExpCS_type"),
-				OclPackage.Literals.PROPERTY_CALL_BASE_EXP_CS__IS_MARKED_PRE,
-				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PropertyCallBaseExpCS_isMarkedPre_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PropertyCallBaseExpCS_isMarkedPre_feature", "_UI_PropertyCallBaseExpCS_type"),
+				 OclPackage.Literals.PROPERTY_CALL_BASE_EXP_CS__IS_MARKED_PRE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns ImplicitPropertyCallCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns ImplicitPropertyCallCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/ImplicitPropertyCallCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ImplicitPropertyCallCS"));
 	}
 
 	/**
@@ -137,11 +137,10 @@ public class ImplicitPropertyCallCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -149,10 +148,9 @@ public class ImplicitPropertyCallCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ImplicitPropertyCallCS.class)) {
-		case OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
-			return;
+			case OclPackage.IMPLICIT_PROPERTY_CALL_CS__IS_MARKED_PRE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 		}
 		super.notifyChanged(notification);
 	}

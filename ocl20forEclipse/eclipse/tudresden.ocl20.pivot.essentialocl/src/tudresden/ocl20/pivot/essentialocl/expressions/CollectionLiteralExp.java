@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions;
 
 import java.util.List;
+
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

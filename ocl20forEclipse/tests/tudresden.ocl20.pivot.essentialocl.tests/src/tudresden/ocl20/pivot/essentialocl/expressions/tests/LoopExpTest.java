@@ -49,6 +49,7 @@ public abstract class LoopExpTest extends CallExpTest {
 	 * @generated
 	 */
 	public LoopExpTest(String name) {
+
 		super(name);
 	}
 
@@ -60,6 +61,7 @@ public abstract class LoopExpTest extends CallExpTest {
 	 */
 	@Override
 	protected LoopExp getFixture() {
+
 		return (LoopExp) fixture;
 	}
 

@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->

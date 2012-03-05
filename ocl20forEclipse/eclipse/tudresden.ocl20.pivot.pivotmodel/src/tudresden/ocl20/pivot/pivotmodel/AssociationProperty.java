@@ -58,6 +58,7 @@ import java.util.List;
  * @generated
  */
 public interface AssociationProperty extends Property {
+
 	/**
 	 * Returns the value of the '<em><b>Inverse Association Properties</b></em>' containment reference list.
 	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}.

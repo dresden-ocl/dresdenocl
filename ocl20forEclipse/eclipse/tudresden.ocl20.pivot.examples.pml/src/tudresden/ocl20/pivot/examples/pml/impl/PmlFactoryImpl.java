@@ -9,12 +9,19 @@ package tudresden.ocl20.pivot.examples.pml.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.examples.pml.*;
+import tudresden.ocl20.pivot.examples.pml.Extension;
+import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
+import tudresden.ocl20.pivot.examples.pml.Feature;
+import tudresden.ocl20.pivot.examples.pml.JavaType;
+import tudresden.ocl20.pivot.examples.pml.Operation;
+import tudresden.ocl20.pivot.examples.pml.Parameter;
+import tudresden.ocl20.pivot.examples.pml.Plugin;
+import tudresden.ocl20.pivot.examples.pml.PluginPackage;
+import tudresden.ocl20.pivot.examples.pml.PmlFactory;
+import tudresden.ocl20.pivot.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc -->

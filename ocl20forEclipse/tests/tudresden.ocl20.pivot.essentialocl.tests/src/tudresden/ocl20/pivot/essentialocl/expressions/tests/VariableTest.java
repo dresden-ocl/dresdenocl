@@ -33,11 +33,8 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
-
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -69,6 +66,7 @@ public class VariableTest extends TestCase {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(VariableTest.class);
 	}
 
@@ -79,6 +77,7 @@ public class VariableTest extends TestCase {
 	 * @generated
 	 */
 	public VariableTest(String name) {
+
 		super(name);
 	}
 
@@ -89,6 +88,7 @@ public class VariableTest extends TestCase {
 	 * @generated
 	 */
 	protected void setFixture(Variable fixture) {
+
 		this.fixture = fixture;
 	}
 
@@ -99,6 +99,7 @@ public class VariableTest extends TestCase {
 	 * @generated
 	 */
 	protected Variable getFixture() {
+
 		return fixture;
 	}
 
@@ -110,6 +111,7 @@ public class VariableTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createVariable());
 	}
 
@@ -121,6 +123,7 @@ public class VariableTest extends TestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 
@@ -132,6 +135,7 @@ public class VariableTest extends TestCase {
 	 * @generated
 	 */
 	public void testAsParameter() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
@@ -145,6 +149,7 @@ public class VariableTest extends TestCase {
 	 * @generated
 	 */
 	public void testAsProperty() {
+
 		// TODO: implement this operation test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();

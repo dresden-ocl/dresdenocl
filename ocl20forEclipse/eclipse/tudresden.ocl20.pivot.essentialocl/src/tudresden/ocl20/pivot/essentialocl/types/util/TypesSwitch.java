@@ -32,12 +32,10 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
 
-import tudresden.ocl20.pivot.essentialocl.types.*;
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
@@ -68,7 +66,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl
  * @generated
  */
-public class TypesSwitch<T> {
+public class TypesSwitch<T> extends Switch<T> {
 
 	/**
 	 * The cached model package
@@ -85,20 +83,24 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public TypesSwitch() {
+
 		if (modelPackage == null) {
 			modelPackage = TypesPackageImpl.eINSTANCE;
 		}
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @parameter ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -108,24 +110,9 @@ public class TypesSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		} else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(
-					eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
+
 		switch (classifierID) {
 		case TypesPackageImpl.BAG_TYPE: {
 			BagType bagType = (BagType) theEObject;
@@ -309,6 +296,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseBagType(BagType object) {
+
 		return null;
 	}
 
@@ -324,6 +312,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseTupleType(TupleType object) {
+
 		return null;
 	}
 
@@ -339,6 +328,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseCollectionType(CollectionType object) {
+
 		return null;
 	}
 
@@ -354,6 +344,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseInvalidType(InvalidType object) {
+
 		return null;
 	}
 
@@ -369,6 +360,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseOrderedSetType(OrderedSetType object) {
+
 		return null;
 	}
 
@@ -384,6 +376,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseSequenceType(SequenceType object) {
+
 		return null;
 	}
 
@@ -399,6 +392,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseSetType(SetType object) {
+
 		return null;
 	}
 
@@ -414,6 +408,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseVoidType(VoidType object) {
+
 		return null;
 	}
 
@@ -429,6 +424,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeType(TypeType object) {
+
 		return null;
 	}
 
@@ -444,6 +440,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseOclLibrary(OclLibrary object) {
+
 		return null;
 	}
 
@@ -459,6 +456,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseAnyType(AnyType object) {
+
 		return null;
 	}
 
@@ -474,6 +472,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+
 		return null;
 	}
 
@@ -489,6 +488,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseConstrainableElement(ConstrainableElement object) {
+
 		return null;
 	}
 
@@ -504,6 +504,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseGenericElement(GenericElement object) {
+
 		return null;
 	}
 
@@ -519,6 +520,7 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseType(Type object) {
+
 		return null;
 	}
 
@@ -533,7 +535,9 @@ public class TypesSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
+	@Override
 	public T defaultCase(EObject object) {
+
 		return null;
 	}
 

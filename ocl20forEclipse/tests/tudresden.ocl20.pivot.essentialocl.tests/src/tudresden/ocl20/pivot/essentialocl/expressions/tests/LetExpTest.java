@@ -33,9 +33,7 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
-
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
@@ -52,6 +50,7 @@ public class LetExpTest extends OclExpressionTest {
 	 * @generated
 	 */
 	public static void main(String[] args) {
+
 		TestRunner.run(LetExpTest.class);
 	}
 
@@ -62,6 +61,7 @@ public class LetExpTest extends OclExpressionTest {
 	 * @generated
 	 */
 	public LetExpTest(String name) {
+
 		super(name);
 	}
 
@@ -73,6 +73,7 @@ public class LetExpTest extends OclExpressionTest {
 	 */
 	@Override
 	protected LetExp getFixture() {
+
 		return (LetExp) fixture;
 	}
 
@@ -84,6 +85,7 @@ public class LetExpTest extends OclExpressionTest {
 	 */
 	@Override
 	protected void setUp() throws Exception {
+
 		setFixture(ExpressionsFactoryImpl.eINSTANCE.createLetExp());
 	}
 
@@ -95,6 +97,7 @@ public class LetExpTest extends OclExpressionTest {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
+
 		setFixture(null);
 	}
 

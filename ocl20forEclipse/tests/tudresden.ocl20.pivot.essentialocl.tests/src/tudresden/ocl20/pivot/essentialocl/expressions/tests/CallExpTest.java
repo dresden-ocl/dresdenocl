@@ -49,6 +49,7 @@ public abstract class CallExpTest extends OclExpressionTest {
 	 * @generated
 	 */
 	public CallExpTest(String name) {
+
 		super(name);
 	}
 
@@ -60,6 +61,7 @@ public abstract class CallExpTest extends OclExpressionTest {
 	 */
 	@Override
 	protected CallExp getFixture() {
+
 		return (CallExp) fixture;
 	}
 

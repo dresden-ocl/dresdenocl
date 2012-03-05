@@ -27,10 +27,8 @@ import tudresden.ocl20.pivot.language.ocl.OclFactory;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class DefinitionExpPropertyCSItemProvider extends
@@ -63,13 +61,10 @@ public class DefinitionExpPropertyCSItemProvider extends
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -77,38 +72,32 @@ public class DefinitionExpPropertyCSItemProvider extends
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION);
+			childrenFeatures.add(OclPackage.Literals.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns DefinitionExpPropertyCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns DefinitionExpPropertyCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/DefinitionExpPropertyCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DefinitionExpPropertyCS"));
 	}
 
 	/**
@@ -124,11 +113,10 @@ public class DefinitionExpPropertyCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -136,10 +124,9 @@ public class DefinitionExpPropertyCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(DefinitionExpPropertyCS.class)) {
-		case OclPackage.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -156,11 +143,10 @@ public class DefinitionExpPropertyCSItemProvider extends
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION,
-						OclFactory.eINSTANCE
-								.createVariableDeclarationWithInitCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION,
+				 OclFactory.eINSTANCE.createVariableDeclarationWithInitCS()));
 	}
 
 }

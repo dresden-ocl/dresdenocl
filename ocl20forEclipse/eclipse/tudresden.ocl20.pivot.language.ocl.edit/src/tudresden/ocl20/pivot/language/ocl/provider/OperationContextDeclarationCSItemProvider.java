@@ -27,10 +27,8 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class OperationContextDeclarationCSItemProvider extends
@@ -64,13 +62,10 @@ public class OperationContextDeclarationCSItemProvider extends
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -78,40 +73,33 @@ public class OperationContextDeclarationCSItemProvider extends
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__OPERATION);
-			childrenFeatures
-					.add(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS);
+			childrenFeatures.add(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__OPERATION);
+			childrenFeatures.add(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns OperationContextDeclarationCS.gif. <!-- begin-user-doc -->
+	 * This returns OperationContextDeclarationCS.gif.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/OperationContextDeclarationCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/OperationContextDeclarationCS"));
 	}
 
 	/**
@@ -128,11 +116,10 @@ public class OperationContextDeclarationCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -140,11 +127,10 @@ public class OperationContextDeclarationCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OperationContextDeclarationCS.class)) {
-		case OclPackage.OPERATION_CONTEXT_DECLARATION_CS__OPERATION:
-		case OclPackage.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case OclPackage.OPERATION_CONTEXT_DECLARATION_CS__OPERATION:
+			case OclPackage.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -161,26 +147,25 @@ public class OperationContextDeclarationCSItemProvider extends
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__OPERATION,
-						OclFactory.eINSTANCE
-								.createOperationDefinitionInContextCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__OPERATION,
+				 OclFactory.eINSTANCE.createOperationDefinitionInContextCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS,
-						OclFactory.eINSTANCE.createPreConditionDeclarationCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS,
+				 OclFactory.eINSTANCE.createPreConditionDeclarationCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS,
-						OclFactory.eINSTANCE.createPostConditionDeclarationCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS,
+				 OclFactory.eINSTANCE.createPostConditionDeclarationCS()));
 
-		newChildDescriptors
-				.add(createChildParameter(
-						OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS,
-						OclFactory.eINSTANCE.createBodyDeclarationCS()));
+		newChildDescriptors.add
+			(createChildParameter
+				(OclPackage.Literals.OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS,
+				 OclFactory.eINSTANCE.createBodyDeclarationCS()));
 	}
 
 }

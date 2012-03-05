@@ -7,15 +7,12 @@
 package tudresden.ocl20.pivot.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
-
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**

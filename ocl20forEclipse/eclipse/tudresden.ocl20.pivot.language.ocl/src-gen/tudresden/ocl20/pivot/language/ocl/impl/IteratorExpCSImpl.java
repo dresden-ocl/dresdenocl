@@ -10,14 +10,10 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -25,9 +21,6 @@ import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
 import tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS;
 import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
 
 /**
  * <!-- begin-user-doc -->

@@ -66,6 +66,7 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	 * @generated
 	 */
 	public LetExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -77,6 +78,7 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,6 +97,7 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackageImpl.Literals.LET_EXP__IN);
@@ -110,6 +113,7 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
+
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -124,8 +128,9 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/LetExp")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/LetExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -136,7 +141,10 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
-		return "let";
+
+		String label = ((LetExp) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_LetExp_type") : //$NON-NLS-1$
+				getString("_UI_LetExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -148,13 +156,14 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LetExp.class)) {
 		case ExpressionsPackageImpl.LET_EXP__IN:
 		case ExpressionsPackageImpl.LET_EXP__VARIABLE:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -170,6 +179,7 @@ public class LetExpItemProvider extends OclExpressionItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -49,10 +49,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
@@ -66,6 +64,7 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public TypeLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -77,6 +76,7 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -92,6 +92,7 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addReferredTypePropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -105,13 +106,14 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	}
 
 	/**
-	 * This returns TypeLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * This returns TypeLiteralExp.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeLiteralExp")); //$NON-NLS-1$
 	}
@@ -124,20 +126,21 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((TypeLiteralExp) object).getReferredType().getName();
 		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -152,6 +155,7 @@ public class TypeLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

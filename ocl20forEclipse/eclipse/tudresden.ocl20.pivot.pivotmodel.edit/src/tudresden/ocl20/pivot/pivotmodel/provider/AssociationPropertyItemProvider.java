@@ -61,6 +61,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 public class AssociationPropertyItemProvider extends PropertyItemProvider
 		implements IEditingDomainItemProvider, IStructuredItemContentProvider,
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
+
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -68,6 +69,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	 * @generated
 	 */
 	public AssociationPropertyItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -79,6 +81,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,6 +100,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
@@ -112,6 +116,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
+
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -126,6 +131,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/AssociationProperty")); //$NON-NLS-1$
 	}
@@ -138,6 +144,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((AssociationProperty) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_AssociationProperty_type") : //$NON-NLS-1$
 				getString("_UI_AssociationProperty_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
@@ -152,6 +159,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AssociationProperty.class)) {
@@ -173,6 +181,7 @@ public class AssociationPropertyItemProvider extends PropertyItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors

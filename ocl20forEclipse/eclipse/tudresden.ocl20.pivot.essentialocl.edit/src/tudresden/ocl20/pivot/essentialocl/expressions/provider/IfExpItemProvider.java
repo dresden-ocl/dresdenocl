@@ -66,6 +66,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	 * @generated
 	 */
 	public IfExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -77,6 +78,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -95,6 +97,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackageImpl.Literals.IF_EXP__CONDITION);
@@ -113,6 +116,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
+
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -127,8 +131,9 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/IfExp")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/IfExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -139,6 +144,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return "if";
 	}
 
@@ -151,14 +157,15 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(IfExp.class)) {
 		case ExpressionsPackageImpl.IF_EXP__CONDITION:
 		case ExpressionsPackageImpl.IF_EXP__THEN_EXPRESSION:
 		case ExpressionsPackageImpl.IF_EXP__ELSE_EXPRESSION:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -174,6 +181,7 @@ public class IfExpItemProvider extends OclExpressionItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

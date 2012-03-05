@@ -32,17 +32,15 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Integer Literal Exp</b></em>'.
@@ -89,6 +87,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	protected IntegerLiteralExpImpl() {
+
 		super();
 	}
 
@@ -129,6 +128,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public int getIntegerSymbol() {
+
 		return integerSymbol;
 	}
 
@@ -137,6 +137,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setIntegerSymbol(int newIntegerSymbol) {
+
 		int oldIntegerSymbol = integerSymbol;
 		integerSymbol = newIntegerSymbol;
 		if (eNotificationRequired())
@@ -151,6 +152,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			return getIntegerSymbol();
@@ -164,6 +166,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			setIntegerSymbol((Integer) newValue);
@@ -178,6 +181,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			setIntegerSymbol(INTEGER_SYMBOL_EDEFAULT);
@@ -192,6 +196,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.INTEGER_LITERAL_EXP__INTEGER_SYMBOL:
 			return integerSymbol != INTEGER_SYMBOL_EDEFAULT;
@@ -205,6 +210,7 @@ public class IntegerLiteralExpImpl extends NumericLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.INTEGER_LITERAL_EXP;
 	}
 

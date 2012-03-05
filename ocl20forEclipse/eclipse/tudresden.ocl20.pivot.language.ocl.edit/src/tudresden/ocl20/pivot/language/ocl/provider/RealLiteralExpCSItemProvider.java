@@ -71,17 +71,19 @@ public class RealLiteralExpCSItemProvider extends
 	 * @generated
 	 */
 	protected void addIntValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_RealLiteralExpCS_intValue_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_RealLiteralExpCS_intValue_feature",
-						"_UI_RealLiteralExpCS_type"),
-				OclPackage.Literals.REAL_LITERAL_EXP_CS__INT_VALUE, true,
-				false, false, ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RealLiteralExpCS_intValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RealLiteralExpCS_intValue_feature", "_UI_RealLiteralExpCS_type"),
+				 OclPackage.Literals.REAL_LITERAL_EXP_CS__INT_VALUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -91,17 +93,19 @@ public class RealLiteralExpCSItemProvider extends
 	 * @generated
 	 */
 	protected void addRealValuePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_RealLiteralExpCS_realValue_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_RealLiteralExpCS_realValue_feature",
-						"_UI_RealLiteralExpCS_type"),
-				OclPackage.Literals.REAL_LITERAL_EXP_CS__REAL_VALUE, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null,
-				null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RealLiteralExpCS_realValue_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RealLiteralExpCS_realValue_feature", "_UI_RealLiteralExpCS_type"),
+				 OclPackage.Literals.REAL_LITERAL_EXP_CS__REAL_VALUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -111,29 +115,30 @@ public class RealLiteralExpCSItemProvider extends
 	 * @generated
 	 */
 	protected void addNavigationOperatorPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_RealLiteralExpCS_navigationOperator_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_RealLiteralExpCS_navigationOperator_feature",
-						"_UI_RealLiteralExpCS_type"),
-				OclPackage.Literals.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RealLiteralExpCS_navigationOperator_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RealLiteralExpCS_navigationOperator_feature", "_UI_RealLiteralExpCS_type"),
+				 OclPackage.Literals.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns RealLiteralExpCS.gif. <!-- begin-user-doc --> <!--
+	 * This returns RealLiteralExpCS.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/RealLiteralExpCS"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RealLiteralExpCS"));
 	}
 
 	/**
@@ -150,11 +155,10 @@ public class RealLiteralExpCSItemProvider extends
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -162,12 +166,11 @@ public class RealLiteralExpCSItemProvider extends
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RealLiteralExpCS.class)) {
-		case OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE:
-		case OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE:
-		case OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), false, true));
-			return;
+			case OclPackage.REAL_LITERAL_EXP_CS__INT_VALUE:
+			case OclPackage.REAL_LITERAL_EXP_CS__REAL_VALUE:
+			case OclPackage.REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 		}
 		super.notifyChanged(notification);
 	}

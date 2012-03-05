@@ -38,10 +38,12 @@ public class InvalidTypeTest extends TestCase {
 	 */
 	public void testConformsTo01() {
 
-		Type invalidType = EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getOclInvalid();
-		Type elementType = EssentialOclPlugin.getOclLibraryProvider()
-				.getOclLibrary().getOclInteger();
+		Type invalidType =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInvalid();
+		Type elementType =
+				EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOclInteger();
 
 		assertTrue(invalidType.conformsTo(invalidType));
 
@@ -53,11 +55,10 @@ public class InvalidTypeTest extends TestCase {
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary().getOclAny()));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getBagType(elementType)));
-		assertTrue(invalidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getCollectionType(elementType)));
+				.getOclLibraryProvider().getOclLibrary().getBagType(elementType)));
+		assertTrue(invalidType
+				.conformsTo(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getCollectionType(elementType)));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary().getOclBag()));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
@@ -78,18 +79,15 @@ public class InvalidTypeTest extends TestCase {
 				.getOclLibraryProvider().getOclLibrary().getOclString()));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
 				.getOclLibraryProvider().getOclLibrary().getOclType()));
+		assertTrue(invalidType
+				.conformsTo(EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+						.getOrderedSetType(elementType)));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getOrderedSetType(elementType)));
+				.getOclLibraryProvider().getOclLibrary().getSequenceType(elementType)));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getSequenceType(elementType)));
+				.getOclLibraryProvider().getOclLibrary().getSetType(elementType)));
 		assertTrue(invalidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getSetType(elementType)));
-		assertTrue(invalidType.conformsTo(EssentialOclPlugin
-				.getOclLibraryProvider().getOclLibrary()
-				.getTypeType(elementType)));
+				.getOclLibraryProvider().getOclLibrary().getTypeType(elementType)));
 
 		/* OclInvalid does conform to model defined types. */
 		Type aType = PivotModelFactory.eINSTANCE.createType();
