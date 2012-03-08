@@ -21,7 +21,6 @@ public class TracerUIPlugin extends AbstractUIPlugin {
 	private static TracerUIPlugin plugin;
 
 	public TracerUIPlugin() {
-		plugin = this;
 	}
 
 	/*
@@ -32,6 +31,8 @@ public class TracerUIPlugin extends AbstractUIPlugin {
 	public void start(BundleContext bundleContext) throws Exception {
 
 		super.start(bundleContext);
+		
+		plugin = this;
 
 		/* configure custom logging properties. */
 		LoggingPlugin.configureDefaultLogging(plugin);

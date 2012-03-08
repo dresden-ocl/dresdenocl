@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schï¿½tze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -31,7 +31,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.impl.TracerRegistr
 /**
  * <p>This plug-in enables tracing of the interpretation of OCL from the interpreter plug-in.</p>
  * 
- * @author Lars Schütze
+ * @author Lars Schï¿½tze
  */
 public class TracerPlugin extends Plugin {
 
@@ -51,11 +51,9 @@ public class TracerPlugin extends Plugin {
 	private TracerRegistry tracerRegistry;
 
 	/**
-	 * 
+	 * The constructor
 	 */
 	public TracerPlugin() {
-
-		plugin = this;
 	}
 
 	public static InterpreterRegistryListenerImpl getInterpreterTraceListener() {
@@ -124,6 +122,8 @@ public class TracerPlugin extends Plugin {
 	public void start(BundleContext bundleContext) throws Exception {
 
 		super.start(bundleContext);
+		
+		plugin = this;
 
 		/* configure custom logging properties. */
 		LoggingPlugin.configureDefaultLogging(plugin);

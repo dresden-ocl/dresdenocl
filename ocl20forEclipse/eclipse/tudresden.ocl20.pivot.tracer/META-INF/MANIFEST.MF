@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Dresden OCL Tracer Plug-In
 Bundle-SymbolicName: tudresden.ocl20.pivot.tracer;singleton:=true
 Bundle-Version: 3.1.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.tracer,
@@ -33,3 +33,5 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
  tudresden.ocl20.pivot.modelinstancetype.java;bundle-version="3.1.0",
  tudresden.ocl20.pivot.standardlibrary.java;bundle-version="3.1.0",
  tudresden.ocl20.pivot.pivotmodel.edit
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: tudresden.ocl20.pivot.tracer.TracerPlugin

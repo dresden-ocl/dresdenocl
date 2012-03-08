@@ -6,11 +6,12 @@
            category="tudresden.ocl20.views.category"
            class="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
            id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
-           name="Dresden OCL Tracer"/>
-     <category
+           name="Dresden OCL Tracer View"
+           icon="icons/dresdenocl.gif">
+        </view>
+     	<category
            id="tudresden.ocl20.views.category"
            name="Dresden OCL">
-     </category>
+     	</category>
    </extension>
-
 </plugin>
