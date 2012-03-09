@@ -30,7 +30,6 @@ import org.eclipse.swt.graphics.Image;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;

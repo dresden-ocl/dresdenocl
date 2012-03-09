@@ -10,15 +10,13 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectEList;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
@@ -50,7 +48,7 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	 * @generated
 	 */
 	public static final String copyright =
-			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' reference.
@@ -89,7 +87,7 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 	protected TracerItem parent;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getChildren()
 	 * @generated
@@ -272,7 +270,7 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 
 		if (children == null) {
 			children =
-					new EObjectContainmentEList<TracerItem>(TracerItem.class, this,
+					new EObjectEList<TracerItem>(TracerItem.class, this,
 							TracermodelPackage.TRACER_ITEM__CHILDREN);
 		}
 		return children;
@@ -322,22 +320,6 @@ public class TracerItemImpl extends EObjectImpl implements TracerItem {
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					TracermodelPackage.TRACER_ITEM__MODEL_INSTANCE_ELEMENT,
 					oldModelInstanceElement, modelInstanceElement));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
-
-		switch (featureID) {
-		case TracermodelPackage.TRACER_ITEM__CHILDREN:
-			return ((InternalEList<?>) getChildren()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**

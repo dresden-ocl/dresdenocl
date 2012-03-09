@@ -34,7 +34,7 @@ public interface TracermodelPackage extends EPackage {
 	 * @generated
 	 */
 	String copyright =
-			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 
 	/**
 	 * The package name.
@@ -233,9 +233,9 @@ public interface TracermodelPackage extends EPackage {
 	EReference getTracerItem_Parent();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
+	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Children</em>'.
+	 * @return the meta object for the reference list '<em>Children</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren()
 	 * @see #getTracerItem()
 	 * @generated
@@ -273,9 +273,9 @@ public interface TracermodelPackage extends EPackage {
 	EClass getTracerRoot();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}'.
+	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Root Items</em>'.
+	 * @return the meta object for the reference list '<em>Root Items</em>'.
 	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems()
 	 * @see #getTracerRoot()
 	 * @generated
@@ -370,7 +370,7 @@ public interface TracermodelPackage extends EPackage {
 		EReference TRACER_ITEM__PARENT = eINSTANCE.getTracerItem_Parent();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */
@@ -404,7 +404,7 @@ public interface TracermodelPackage extends EPackage {
 		EClass TRACER_ROOT = eINSTANCE.getTracerRoot();
 
 		/**
-		 * The meta object literal for the '<em><b>Root Items</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Root Items</b></em>' reference list feature.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @generated
 		 */

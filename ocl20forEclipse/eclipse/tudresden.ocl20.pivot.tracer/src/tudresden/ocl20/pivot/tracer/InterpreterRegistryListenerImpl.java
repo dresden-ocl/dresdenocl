@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schï¿½tze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.WeakHashMap;
@@ -31,7 +32,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
 import tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl;
 
 /**
- * @author Lars Schütze
+ * @author Lars Schï¿½tze
  */
 public class InterpreterRegistryListenerImpl implements
 		IInterpreterTraceListener {
@@ -201,10 +202,12 @@ public class InterpreterRegistryListenerImpl implements
 			 * itself aRow[2] holds the result Now we need to find the specific
 			 * element in our tree and return its subtree
 			 */
-
-			for (TracerItem i : originalTrace.getRootItems()) {
+			List<TracerItem> readOnlyList;
+			readOnlyList = Collections.unmodifiableList(originalTrace.getRootItems());
+			for (TracerItem i : readOnlyList) {
 				if ((i.getExpression() == aRow[1]) && (i.getResult() == aRow[2])
 						&& (i.getModelInstanceElement() == aRow[0])) {
+					
 					filteredTrace.getRootItems().add(i);
 				}
 				// no else

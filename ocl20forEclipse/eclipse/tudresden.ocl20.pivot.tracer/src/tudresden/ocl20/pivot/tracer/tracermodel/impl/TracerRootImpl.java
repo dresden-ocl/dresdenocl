@@ -8,13 +8,10 @@ package tudresden.ocl20.pivot.tracer.tracermodel.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
@@ -40,9 +37,9 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 	 * @generated
 	 */
 	public static final String copyright =
-			"Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
+			"Copyright (C) 2011 by Lars SchÃ¼tze (lschuetze@gmx.net)\n\nThis file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.\n\nDresden OCL2 for Eclipse is free software: you can redistribute it and/or modify \nit under the terms of the GNU Lesser General Public License as published by the \nFree Software Foundation, either version 3 of the License, or (at your option)\nany later version.\n\nDresden OCL2 for Eclipse is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \nor FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License \nfor more details.\n\nYou should have received a copy of the GNU Lesser General Public License along \nwith Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>."; //$NON-NLS-1$
 	/**
-	 * The cached value of the '{@link #getRootItems() <em>Root Items</em>}' containment reference list.
+	 * The cached value of the '{@link #getRootItems() <em>Root Items</em>}' reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getRootItems()
 	 * @generated
@@ -77,26 +74,10 @@ public class TracerRootImpl extends EObjectImpl implements TracerRoot {
 
 		if (rootItems == null) {
 			rootItems =
-					new EObjectContainmentEList.Resolving<TracerItem>(TracerItem.class,
-							this, TracermodelPackage.TRACER_ROOT__ROOT_ITEMS);
+					new EObjectResolvingEList<TracerItem>(TracerItem.class, this,
+							TracermodelPackage.TRACER_ROOT__ROOT_ITEMS);
 		}
 		return rootItems;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
-
-		switch (featureID) {
-		case TracermodelPackage.TRACER_ROOT__ROOT_ITEMS:
-			return ((InternalEList<?>) getRootItems()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
