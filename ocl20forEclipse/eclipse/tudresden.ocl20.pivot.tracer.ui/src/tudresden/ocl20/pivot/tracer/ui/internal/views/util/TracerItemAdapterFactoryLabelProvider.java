@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schï¿½tze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -30,13 +30,14 @@ import org.eclipse.swt.graphics.Image;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
 import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 
 /**
  * 
- * @author Lars Schütze
+ * @author Lars Schï¿½tze
  * 
  */
 public class TracerItemAdapterFactoryLabelProvider extends
@@ -150,8 +151,18 @@ public class TracerItemAdapterFactoryLabelProvider extends
 	private String resultText(OclAny result) {
 
 		if (result instanceof OclInteger) {
-			return ((OclInteger) result).getModelInstanceInteger().getLong()
-					.toString();
+			OclInteger anOclInteger;
+			tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement imiElement;
+			
+			anOclInteger = ((OclInteger) result);
+			imiElement = anOclInteger.getModelInstanceElement();
+			
+			if(!imiElement.isUndefined()) {
+				return anOclInteger.getModelInstanceInteger().getLong().toString();
+			}
+			else {
+				return imiElement.toString();
+			}
 		}
 		if (result instanceof OclBoolean) {
 			return ((OclBoolean) result).getModelInstanceBoolean().getBoolean()
