@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Sch�tze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schuetze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -26,7 +26,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 
 /**
  * 
- * @author Lars Sch�tze
+ * @author Lars Schuetze
  */
 public class TracerItemAdapterFactoryContentProvider extends
 		AdapterFactoryContentProvider {

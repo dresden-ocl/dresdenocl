@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schuetze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -21,7 +21,8 @@ package tudresden.ocl20.pivot.tracer.tracermodel.util.listener;
 /**
  * <p>Interface for listeners of the tracer plug-in.</p>
  * @see tudresden.ocl20.pivot.tracer.TracerPlugin
- * @author Lars Schütze
+ * 
+ * @author Lars Schuetze
  */
 public interface TracerRegistryListener {
 

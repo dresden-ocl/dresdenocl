@@ -10,7 +10,7 @@ import tudresden.ocl20.pivot.tracer.test.standardlibrary.AllStandardLibraryTrace
 /**
  * Test suite containing all Dresden OCL Tracer Tests
  * 
- * @author Lars Schütze
+ * @author Lars Schuetze
  * 
  */
 @RunWith(Suite.class)

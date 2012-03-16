@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schuetze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -24,7 +24,7 @@ package tudresden.ocl20.pivot.tracer.ui.actions;
  * {@link TracerViewMenuAction} can exist.
  * </p>
  * 
- * @author Lars Schütze
+ * @author Lars Schuetze
  */
 public enum TracerViewMenuActionType {
 	CLEAR_ALL_ELEMTENTS

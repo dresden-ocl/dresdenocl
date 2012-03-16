@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Sch�tze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schuetze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -36,21 +36,34 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 
 /**
  * 
- * @author Lars Sch�tze
+ * @author Lars Schuetze
  * 
  */
 public class TracerItemAdapterFactoryLabelProvider extends
 		AdapterFactoryLabelProvider {
 
+	/** The string for the undefined graphic file path. */
 	private static final String IMG_RESULT_UNDEFINED =
 			"icons/result_undefined.gif";
+	
+	/** The string for the invalid graphic file path. */
 	private static final String IMG_RESULT_INVALID = "icons/result_invalid.gif";
+	
+	/** The string for the true graphic file path. */
 	private static final String IMG_RESULT_TRUE = "icons/result_true.gif";
+	
+	/** The string for the false graphic file path. */
 	private static final String IMG_RESULT_FALSE = "icons/result_false.gif";
 
+	/** The switch for expressions. */
 	private TracerExpressionsSwitch tracerExprSwitch;
+	
+	/** The map to cache images. */
 	private Map<ImageDescriptor, Image> imageCache;
 
+	/**
+	 * <p>The constructor of this provider.</p>
+	 */
 	public TracerItemAdapterFactoryLabelProvider(AdapterFactory adapterFactory) {
 
 		super(adapterFactory);
@@ -147,6 +160,13 @@ public class TracerItemAdapterFactoryLabelProvider extends
 		return false;
 	}
 
+	/**
+	 * <p>
+	 * Returns the appropriate string output to a given result.
+	 * </p>
+	 * @param result The {@link OclAny result} to output.
+	 * @return The {@link String output} appropriate for the result.
+	 */
 	private String resultText(OclAny result) {
 
 		if (result instanceof OclInteger) {

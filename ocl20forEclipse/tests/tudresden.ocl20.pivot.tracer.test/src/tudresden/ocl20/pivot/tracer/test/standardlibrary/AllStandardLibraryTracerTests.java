@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 /**
  * Test suite containing all Dresden OCL Tracer Tests
  * 
- * @author Lars Schütze
+ * @author Lars Schuetze
  * 
  */
 @RunWith(Suite.class)

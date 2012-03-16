@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schuetze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFact
 import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryLabelProvider;
 
 /**
- * @author Lars Schütze
+ * @author Lars Schuetze
  * 
  */
 public class TracerView extends ViewPart implements TracerRegistryListener {

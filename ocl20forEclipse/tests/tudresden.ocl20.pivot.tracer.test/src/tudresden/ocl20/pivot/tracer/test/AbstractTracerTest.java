@@ -37,7 +37,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 /**
  * Abstract test class for Dresden OCL Tracer tests.
  * 
- * @author Lars Schütze
+ * @author Lars Schuetze
  * 
  */
 public class AbstractTracerTest extends AbstractDresdenOclTest {

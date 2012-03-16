@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2011 by Lars Schütze (lschuetze@gmx.net)
+Copyright (C) 2011 by Lars Schuetze (lschuetze@gmx.net)
 
 This file is part of the OCL 2 Interpreter of Dresden OCL2 for Eclipse.
 
@@ -21,7 +21,7 @@ package tudresden.ocl20.pivot.tracer.ui.internal.msg;
 import org.eclipse.osgi.util.NLS;
 
 /**
- * @author Lars Schütze
+ * @author Lars Schuetze
  */
 public class OclTracerUIMessages extends NLS {
 
