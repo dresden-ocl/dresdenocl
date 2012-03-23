@@ -5,6 +5,10 @@ Release 3.x (not scheduled yet)
 ================================
 * Introduction of new Tool: Dresden OCL Metrics
 
+* Introduction of new Tool: OCL Interpreter Tracer: the cause of interpretation results 
+  can now be visualized by displaying a trace tree of an individual interpretation 
+  results.
+  
 * Genreal bug fixes:
   - Enumerations now extend OclAny. Thus, operations of OclAny can now be parsed on
     enumerations.
@@ -15,6 +19,10 @@ Release 3.x (not scheduled yet)
   - Added missing dependency to org.eclipse.uml.resources. Should now be installable
     appropiately within non MDT-Eclipse distributions.
   - Adaptation of DataTypes is now supported.
+  
+* Bug fixes on Java model instance adaptation
+  - Java model instances can now be opened by selecting the .java file instead of the
+    .class file.
   
 * Bug fixes on XML model instande adaptation
   - XML files having a file name ending with .XML instead of .xml should now be 
