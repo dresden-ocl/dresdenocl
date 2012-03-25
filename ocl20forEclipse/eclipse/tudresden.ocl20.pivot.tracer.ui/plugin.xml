@@ -14,4 +14,19 @@
            name="Dresden OCL">
      	</category>
    </extension>
+   
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="tudresden.ocl20.pivot.ui.perspective">
+         <view
+               id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.views.PropertySheet">
+         </view>
+         <viewShortcut
+               id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView">
+         </viewShortcut>
+      </perspectiveExtension>
+   </extension>
 </plugin>
