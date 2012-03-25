@@ -118,12 +118,10 @@ public class InterpreterRegistryListenerImpl implements
 	public void interpretationTreeDepthIncreased(UUID uuid,
 			IModelInstanceElement modelInstanceElement) {
 
-		/* Call this method since it overloads this method */
+		/* Call this method since it is overloaded by this method */
 		interpretationTreeDepthIncreased(uuid);
 
-		/*
-		 * Set the modelInstanceElement from the just added item
-		 */
+		/* Set the modelInstanceElement from the just added item */
 		TracerItem item = cachedItems.get(uuid);
 		item.setModelInstanceElement(modelInstanceElement);
 	}
@@ -168,6 +166,7 @@ public class InterpreterRegistryListenerImpl implements
 			item.setExpression(event.getExpression());
 			item.setResult(event.getResult());
 		}
+		//no else
 	}
 
 	/**
@@ -196,22 +195,27 @@ public class InterpreterRegistryListenerImpl implements
 		filteredTrace = factory.createTracerRoot();
 
 		for (Object[] aRow : constraints) {
-			/*
-			 * aRow[0] holds the ModelInstanceElement aRow[1] holds the Constraint
-			 * itself aRow[2] holds the result Now we need to find the specific
-			 * element in our tree and return its subtree
-			 */
-			List<TracerItem> readOnlyList;
-			readOnlyList = Collections.unmodifiableList(originalTrace.getRootItems());
-			for (TracerItem i : readOnlyList) {
-				if ((i.getExpression() == aRow[1]) && (i.getResult() == aRow[2])
-						&& (i.getModelInstanceElement() == aRow[0])) {
-					
-					filteredTrace.getRootItems().add(i);
+			
+			/* Check if aRow has at least three values */
+			if(aRow.length >= 3) {
+				/*
+				 * aRow[0] holds the ModelInstanceElement aRow[1] holds the Constraint
+				 * itself aRow[2] holds the result Now we need to find the specific
+				 * element in our tree and return its subtree
+				 */
+				List<TracerItem> readOnlyList;
+				readOnlyList = Collections.unmodifiableList(originalTrace.getRootItems());
+				for (TracerItem i : readOnlyList) {
+					if ((i.getExpression() == aRow[1]) && (i.getResult() == aRow[2])
+							&& (i.getModelInstanceElement() == aRow[0])) {
+						
+						filteredTrace.getRootItems().add(i);
+					}
+					// no else
 				}
-				// no else
+				// end for
 			}
-			// end for
+			//no else (aRow has less than three values)
 		}
 		// end for
 
