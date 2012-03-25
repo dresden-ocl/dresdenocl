@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="tudresden.ocl20.pivot.tracer.ui.actionSet"
+            label="Tracer Action Set"
+            visible="true">
+         <menu
+               icon="icons/dresdenocl.gif"
+               id="tudresden.ocl20.pivot.modelbus.ui.menu"
+               label="Dresden OCL">
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+            </separator>
+         </menu>
+         <action
+               label="Open OCL Tracer"
+               icon="icons/dresdenocl.gif"
+               class="tudresden.ocl20.pivot.tracer.ui.actions.TracerViewAction"
+               tooltip="Opens the OCL Tracer View of Dresden OCL."
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
+               id="tudresden.ocl20.pivot.tracer.ui.actions.TracerViewAction">
+         </action>
+      </actionSet>
+   </extension>
+   
    <extension point="org.eclipse.ui.views">
    		<view
            category="tudresden.ocl20.views.category"
