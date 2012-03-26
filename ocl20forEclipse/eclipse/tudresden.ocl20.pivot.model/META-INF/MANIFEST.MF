@@ -12,4 +12,5 @@ Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.model,
  tudresden.ocl20.pivot.model.base,
  tudresden.ocl20.pivot.model.event,
- tudresden.ocl20.pivot.model.metamodel
+ tudresden.ocl20.pivot.model.metamodel,
+ tudresden.ocl20.pivot.model.util
