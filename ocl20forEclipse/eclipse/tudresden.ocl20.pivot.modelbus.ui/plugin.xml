@@ -16,8 +16,11 @@
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
             </separator>
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+                  name="tudresden.ocl20. pivot.modelbus.ui.menu.tools">
             </separator>
+            <groupMarker
+            	name="tudresden.ocl20.pivot.modelbus.ui.menu.tools.codegen">
+            </groupMarker>
          </menu>
          <action
                class="tudresden.ocl20.pivot.modelbus.ui.actions.LoadModelInstanceWizardAction"

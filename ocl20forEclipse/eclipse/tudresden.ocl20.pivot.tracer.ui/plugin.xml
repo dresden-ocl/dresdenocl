@@ -17,6 +17,9 @@
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
             </separator>
+            <groupMarker
+            	name="tudresden.ocl20.pivot.modelbus.ui.menu.tools.codegen">
+            </groupMarker>
          </menu>
          <action
                label="Open OCL Tracer"

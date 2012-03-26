@@ -17,13 +17,16 @@
             <separator
                   name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
             </separator>
+            <groupMarker
+            	name="tudresden.ocl20.pivot.modelbus.ui.menu.codegen">
+            </groupMarker>
          </menu>
          <action
                label="Generate AspectJ Constraint Code"
                icon="icons/codegen.gif"
                class="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction"
                tooltip="Creates AspectJ code to instrument constraints for a given model and given OCL constraints."
-               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
+               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.codegen"
                id="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction">
          </action>
       </actionSet>
