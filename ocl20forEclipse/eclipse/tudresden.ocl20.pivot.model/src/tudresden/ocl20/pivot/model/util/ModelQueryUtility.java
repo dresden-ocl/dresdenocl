@@ -85,10 +85,23 @@ public class ModelQueryUtility {
 	
 	private static List<Namespace> getNestedNamespaces(Namespace namespace) {
 
-		List<Namespace> result = namespace.getNestedNamespace();;
+		List<Namespace> nestedNamespaces = namespace.getNestedNamespace();
+		List<Namespace> result = null;
 
-		for (Namespace nestedNamespace : namespace.getNestedNamespace()) {
-			result.addAll(getNestedNamespaces(nestedNamespace));
+		for (Namespace nestedNamespace : nestedNamespaces) {
+			if (result == null) {
+				result = getNestedNamespaces(nestedNamespace);
+			}
+			else {
+				result.addAll(getNestedNamespaces(nestedNamespace));
+			}
+		}
+
+		if (result == null) {
+			result = nestedNamespaces;
+		}
+		else {
+			result.addAll(nestedNamespaces);
 		}
 
 		return result;
