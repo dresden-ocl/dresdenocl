@@ -20,6 +20,11 @@ Release 3.x (not scheduled yet)
     appropiately within non MDT-Eclipse distributions.
   - Adaptation of DataTypes is now supported.
   
+ * Bug fixes on Java metamodel adaptation
+  - Java models can now be opened by selecting the .java file instead of the .class 
+    file.
+  
+ 
 * Bug fixes on Java model instance adaptation
   - Java model instances can now be opened by selecting the .java file instead of the
     .class file.
