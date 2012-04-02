@@ -11,8 +11,14 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.essentialocl.standardlibrary;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Export-Package: tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.modelbus.descriptor,
- tudresden.ocl20.pivot.modelbus.metamodel,
- tudresden.ocl20.pivot.modelbus.modelinstance
+Export-Package: tudresden.ocl20.pivot.modelbus;
+  uses:="org.eclipse.core.runtime,
+   tudresden.ocl20.pivot.modelinstance,
+   org.apache.log4j,
+   org.osgi.framework,
+   tudresden.ocl20.pivot.model,
+   tudresden.ocl20.pivot.model.metamodel",
+ tudresden.ocl20.pivot.modelbus.descriptor;uses:="org.eclipse.core.runtime",
+ tudresden.ocl20.pivot.modelbus.metamodel;uses:="tudresden.ocl20.pivot.modelbus.descriptor",
+ tudresden.ocl20.pivot.modelbus.modelinstance;uses:="tudresden.ocl20.pivot.modelbus.descriptor"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

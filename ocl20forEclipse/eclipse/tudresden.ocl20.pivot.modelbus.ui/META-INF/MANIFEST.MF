@@ -14,5 +14,17 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.variables
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.modelbus.ui,
- tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util
+Export-Package: tudresden.ocl20.pivot.modelbus.ui;
+  uses:="org.eclipse.jface.resource,
+   org.apache.log4j,
+   org.eclipse.ui,
+   org.eclipse.ui.plugin,
+   org.osgi.framework",
+ tudresden.ocl20.pivot.modelbus.ui.internal.views,
+ tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
+  uses:="org.eclipse.jface.wizard,
+   org.eclipse.swt.events,
+   org.eclipse.core.resources,
+   org.eclipse.jface.viewers,
+   org.eclipse.swt.graphics,
+   org.eclipse.swt.widgets"
