@@ -416,7 +416,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 		String fileExtension = null;
 		String fileTextBoxContent = null;
 
-		if (this.selection != null) {
+		if (this.selection.getFirstElement() != null) {
 			Object selectedObject = this.selection.getFirstElement();
 
 			/*

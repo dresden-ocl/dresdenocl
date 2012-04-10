@@ -531,7 +531,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		IModelInstanceType[] miTypes;
 
 		/* Eventually use a selected file as default resource for import. */
-		if (this.selection != null) {
+		if (this.selection.getFirstElement() != null) {
 			/*
 			 * Use the name of the first Object in the selection as default text of
 			 * the fileNameTextBox.
