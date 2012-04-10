@@ -11,7 +11,7 @@ provided in Chapter~\ref{chapter:introduction}.
 
 The SQL Code Generator is able to generate the following code of SQL dialects (target languages):
 \begin{itemize}
-  \item Standard SQL 2008
+   \item Standard SQL 2008
   \item PostgreSQL 9
   \item Oracle SQL 11g
   \item MySQL 5.1 und 5.5
@@ -25,13 +25,16 @@ the Eclipse workspace have to use the wizard \emph{File -> New -> Other\ldots
 \model{tudresden.ocl20.pivot.\linebreak[0]examp\-les.\linebreak[0]university}
 should be available within the workspace.
 
-The project provides a model file which contains the university class model
-(\model{/model/university\linebreak[0].uml}) and the constraint file we want to
-generate code for
-(\model{/con\-straints/\linebreak[0]uni\-ver\-si\-ty\linebreak[0].ocl}). One
-invariant is shown in Listing~\ref{lst:codegen:universityInvariant}. The
-invariant specifies, that the \model{grade} of any \model{Person}'s supervisor
-must be greater than its own \model{grade}.
+
+The project 
+provides a model file which contains the university class diagram (the model file is located at 
+\model{model/university.uml}) and the constraint file (located at
+\model{con\-straints/\linebreak[0]uni\-ver\-si\-ty\linebreak[0].ocl}) we want to generate code for. One
+invariant is shown in Listing~\ref{lst:codegen:universityInvariant}. It is contained in the
+constraint file we want to generate code for. The invariant declares, that the
+\model{grade} of any \model{Person}'s superviser must be greater thant its own
+\model{grade}.
+
 
 \begin{figure}[!t]
 	\centering
@@ -91,7 +94,7 @@ model and click the \eclipse{Next} button.
 \subsection{Selecting Constraints}
 As a second step we have to select the constraints we want to
 generate code for. We only select the constraints \model{inv: oclInv1} and
-\model{inv: oclInv2}. After selecting the constraints, we click on the
+\model{inv: oclInv2}. After the selection of the constraints we click on the
 \eclipse{Next} button (cf. Fig.~\ref{pic:codegen:codegen02SQL}).
 
 \begin{figure}[!p]
@@ -110,40 +113,39 @@ generate code for. We only select the constraints \model{inv: oclInv1} and
 
 
 \subsection{Selecting a target directory}
-Now, we have to choose the directory where the generated code will be saved.
+Now, we have to choose the directory where the generated code will be stored.
 We select the folder \model{sql} in this project (which is 
 \model{tudresden.\linebreak[0]ocl20.pivot.examples.university/\linebreak[0]sql})
 (cf. Fig.~\ref{pic:codegen:codegen03SQL}). Then, we click the \eclipse{Next}
 button.
 
-\subsection{General Settings}
-On the following page of the wizard we specify general settings for the code
-generation (cf. Fig.~\ref{pic:codegen:codegen04SQL}). We can choose a SQL
-dialect for the generated code. The modus of SQL generation decides how
-inheritance relationships are described in the SQL schema. In the \model{typed
-modus} all classes of an inheritance tree will be mapped in one big table, with
-an extra column for different the classes of the inheritance tree. In the 
-\model{vertical modus}, any class gets is own table. If you wish only
-to generate the code for invariant only, you must choice \emph{Only Integrity
-View}. Otherwise, the table schema will be generated as well. The other
-parameters for the generation will set the prefix for the different parts
-(table, association table, view, primary key, foreign key) of the SQL schema. We
-can finish the settings and start the code generation with the \eclipse{Finish}
-button.
+ 
+\subsection{General settings}
 
+On the following page of the wizard we can specify general settings for the code
+generation (cf. Fig.~\ref{pic:codegen:codegen04SQL}). We can choose a SQL 
+dialect for the generated code. The modus of SQL generation decides how
+inheritance relationships are mapped to the SQL schema. In the typed
+modus all subclass properties will be written to one table of the super class (often called generalization table).
+Any class has its own table with the own properties in the vertical modus. If
+you wish only to generate the code for invariant you must choose \emph{Only
+Integrity View} otherwise the table schema will be generated as well. The other
+parameter will set the prefix for the different parts of the SQL schema. We can
+finish the settings and start the code generation with the \eclipse{Finish} button.
+ 
 \section{The Generated Code}
 After finishing the wizard, the code for the selected constraints will be 
-generated. To investigate the results it can be necessary to refresh the
-project (F5). Our example project contains two new SQL files in the folder
-\texttt{sql} (cf. Fig.~\ref{pic:codegen:projectExplorerSQL}). The file 
-\texttt{2010-09-29-09-34\_schema.sql} contains the table and view schema of the
-model. Every class of the model has its own view. Over this view the
-data (i.e., instances) of the class can be accesssed. The other file
-\texttt{2010-09-29-09-34\_view.sql} has the views for the invariants (cf.
-Fig.~\ref{pic:codegen:generateSQL}). A call of the generated views contain all
-objects that violate the specific invariant (cf.
-Listing~\ref{lst:codegen:sqlInvariant}).
-
+generated. To review the results it can be necessary to refresh the
+project (F5). Our project contains two new SQL files in the folder \texttt{sql}
+(cf. Fig.~\ref{pic:codegen:projectExplorerSQL}). The file 
+\texttt{2010-09-29-09-34\_schema.sql} contains the table and view definitions (called object views) of the
+model. Every class of the model has its own view. Via this view the
+data(objects) of the class can be accesssed. The other file
+\texttt{2010-09-29-09-34\_view.sql} contains the SQL code for the invariants (cf.
+Fig.~\ref{pic:codegen:generateSQL}), that is one view definition (called integrity view) for each invariant. 
+The semantics of such an integrity view is that after evaluation of an invariant the corresponding integrity view contains all objects that
+violate the invariant (cf. Listing~\ref{lst:codegen:sqlInvariant}).
+ 
 \begin{figure}[!p]
 	\centering
 	\includegraphics[width=0.45\linewidth]{figures/codegen/projectExplorerSQL}
@@ -175,9 +177,12 @@ WHERE NOT (((SELECT value FROM OV_Grade
 \end{figure}
 
 \section{Summary}
-In this chapter how to generate SQL code using the \keyword{OCL2SQL} code
-generator of Dresden OCL was described. Besides the use of \keyword{OCL2SQL}
-via Dresden OCL's GUI, you can also invoke OCL2SQL via Dresden OCL's \acs{API}.
-The easiest way to connect to Dresden OCL is via its \emph{Facade} providing
-interfaces for all services of Dresden OCL. How to use Dresden OCL's facade is
-documented in Chapter~\ref{chapter:integration}.
+ 
+  
+Basically this chapter describes the translation of OCL invariants to SQL integrity views by the 
+\keyword{OCL2SQL} code generator of Dresden OCL.
+Besides the use of \keyword{OCL2SQL} via Dresden OCL's GUI, you can also invoke
+OCL2SQL via Dresden OCL's \acs{API}. The easiest way to connect to Dresden OCL
+is via its \emph{Facade} providing interfaces for all services of Dresden OCL. 
+How to use Dresden OCL's facade is documented in Chapter~\ref{chapter:integration}.
+ 
