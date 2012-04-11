@@ -25,29 +25,29 @@ package tudresden.ocl20.pivot.language.ocl;
  */
 public interface BooleanLiteralExpCS extends PrimitiveLiteralExpCS {
 	/**
-	 * Returns the value of the '<em><b>Boolean Literal</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Boolean Literal</b></em>' attribute.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Boolean Literal</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Boolean Literal</em>' attribute.
-	 * @see #setBooleanLiteral(boolean)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getBooleanLiteralExpCS_BooleanLiteral()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Boolean Literal</em>' attribute.
+   * @see #setBooleanLiteral(boolean)
+   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getBooleanLiteralExpCS_BooleanLiteral()
+   * @model required="true"
+   * @generated
+   */
 	boolean isBooleanLiteral();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Boolean Literal</em>' attribute.
-	 * @see #isBooleanLiteral()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Boolean Literal</em>' attribute.
+   * @see #isBooleanLiteral()
+   * @generated
+   */
 	void setBooleanLiteral(boolean value);
 
 } // BooleanLiteralExpCS

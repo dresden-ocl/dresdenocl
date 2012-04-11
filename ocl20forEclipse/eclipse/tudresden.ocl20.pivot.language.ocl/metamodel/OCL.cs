@@ -7,6 +7,7 @@ IMPORTS {
 }
 
 OPTIONS {
+	generateCodeFromGeneratorModel = "true";
 	disableDebugSupport = "true";
 	disableLaunchSupport = "true";
 	reloadGeneratorModel = "true";
@@ -16,6 +17,11 @@ OPTIONS {
 	overrideManifest = "false";
 	overridePluginXML = "false";
 	usePredefinedTokens = "false";
+	overrideHyperlink = "false";
+	resourcePluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl";
+	resourceUIPluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui";
+	srcFolder = "src";
+	srcGenFolder = "src-gen";
 }
 
 TOKENS {

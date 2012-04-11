@@ -18,7 +18,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 
 /**

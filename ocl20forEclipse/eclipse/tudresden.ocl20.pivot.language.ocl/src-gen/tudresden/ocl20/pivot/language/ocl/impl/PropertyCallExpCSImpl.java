@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS;
  */
 public abstract class PropertyCallExpCSImpl extends FeatureCallExpCSImpl implements PropertyCallExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected PropertyCallExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.PROPERTY_CALL_EXP_CS;
-	}
+    return OclPackage.Literals.PROPERTY_CALL_EXP_CS;
+  }
 
 } //PropertyCallExpCSImpl

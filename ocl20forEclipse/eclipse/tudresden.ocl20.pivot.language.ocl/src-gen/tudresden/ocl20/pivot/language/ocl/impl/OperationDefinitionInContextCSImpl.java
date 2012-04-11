@@ -31,147 +31,154 @@ import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
  */
 public class OperationDefinitionInContextCSImpl extends OperationDefinitionCSImpl implements OperationDefinitionInContextCS {
 	/**
-	 * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypeName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTypeName()
+   * @generated
+   * @ordered
+   */
 	protected TypePathNameCS typeName;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OperationDefinitionInContextCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS;
-	}
+    return OclPackage.Literals.OPERATION_DEFINITION_IN_CONTEXT_CS;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TypePathNameCS getTypeName() {
-		return typeName;
-	}
+    return typeName;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetTypeName(TypePathNameCS newTypeName, NotificationChain msgs) {
-		TypePathNameCS oldTypeName = typeName;
-		typeName = newTypeName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, oldTypeName, newTypeName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    TypePathNameCS oldTypeName = typeName;
+    typeName = newTypeName;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, oldTypeName, newTypeName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setTypeName(TypePathNameCS newTypeName) {
-		if (newTypeName != typeName) {
-			NotificationChain msgs = null;
-			if (typeName != null)
-				msgs = ((InternalEObject)typeName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, null, msgs);
-			if (newTypeName != null)
-				msgs = ((InternalEObject)newTypeName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, null, msgs);
-			msgs = basicSetTypeName(newTypeName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, newTypeName, newTypeName));
-	}
+    if (newTypeName != typeName)
+    {
+      NotificationChain msgs = null;
+      if (typeName != null)
+        msgs = ((InternalEObject)typeName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, null, msgs);
+      if (newTypeName != null)
+        msgs = ((InternalEObject)newTypeName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, null, msgs);
+      msgs = basicSetTypeName(newTypeName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME, newTypeName, newTypeName));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-				return basicSetTypeName(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
+        return basicSetTypeName(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-				return getTypeName();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
+        return getTypeName();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-				setTypeName((TypePathNameCS)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
+        setTypeName((TypePathNameCS)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-				setTypeName((TypePathNameCS)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
+        setTypeName((TypePathNameCS)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
-				return typeName != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME:
+        return typeName != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //OperationDefinitionInContextCSImpl

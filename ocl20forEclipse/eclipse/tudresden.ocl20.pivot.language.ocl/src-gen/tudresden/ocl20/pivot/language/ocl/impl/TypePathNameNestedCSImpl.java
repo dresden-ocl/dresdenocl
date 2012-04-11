@@ -33,206 +33,215 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  */
 public class TypePathNameNestedCSImpl extends TypePathNameCSImpl implements TypePathNameNestedCS {
 	/**
-	 * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getNamespace() <em>Namespace</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNamespace()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getNamespace()
+   * @generated
+   * @ordered
+   */
 	protected Namespace namespace;
 
 	/**
-	 * The cached value of the '{@link #getTypePathName() <em>Type Path Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTypePathName() <em>Type Path Name</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypePathName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTypePathName()
+   * @generated
+   * @ordered
+   */
 	protected TypePathNameCS typePathName;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TypePathNameNestedCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS;
-	}
+    return OclPackage.Literals.TYPE_PATH_NAME_NESTED_CS;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Namespace getNamespace() {
-		if (namespace != null && namespace.eIsProxy()) {
-			InternalEObject oldNamespace = (InternalEObject)namespace;
-			namespace = (Namespace)eResolveProxy(oldNamespace);
-			if (namespace != oldNamespace) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE, oldNamespace, namespace));
-			}
-		}
-		return namespace;
-	}
+    if (namespace != null && namespace.eIsProxy())
+    {
+      InternalEObject oldNamespace = (InternalEObject)namespace;
+      namespace = (Namespace)eResolveProxy(oldNamespace);
+      if (namespace != oldNamespace)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE, oldNamespace, namespace));
+      }
+    }
+    return namespace;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public Namespace basicGetNamespace() {
-		return namespace;
-	}
+    return namespace;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setNamespace(Namespace newNamespace) {
-		Namespace oldNamespace = namespace;
-		namespace = newNamespace;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE, oldNamespace, namespace));
-	}
+    Namespace oldNamespace = namespace;
+    namespace = newNamespace;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE, oldNamespace, namespace));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public TypePathNameCS getTypePathName() {
-		return typePathName;
-	}
+    return typePathName;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetTypePathName(TypePathNameCS newTypePathName, NotificationChain msgs) {
-		TypePathNameCS oldTypePathName = typePathName;
-		typePathName = newTypePathName;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, oldTypePathName, newTypePathName);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    TypePathNameCS oldTypePathName = typePathName;
+    typePathName = newTypePathName;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, oldTypePathName, newTypePathName);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setTypePathName(TypePathNameCS newTypePathName) {
-		if (newTypePathName != typePathName) {
-			NotificationChain msgs = null;
-			if (typePathName != null)
-				msgs = ((InternalEObject)typePathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, null, msgs);
-			if (newTypePathName != null)
-				msgs = ((InternalEObject)newTypePathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, null, msgs);
-			msgs = basicSetTypePathName(newTypePathName, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, newTypePathName, newTypePathName));
-	}
+    if (newTypePathName != typePathName)
+    {
+      NotificationChain msgs = null;
+      if (typePathName != null)
+        msgs = ((InternalEObject)typePathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, null, msgs);
+      if (newTypePathName != null)
+        msgs = ((InternalEObject)newTypePathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, null, msgs);
+      msgs = basicSetTypePathName(newTypePathName, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME, newTypePathName, newTypePathName));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
-				return basicSetTypePathName(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
+        return basicSetTypePathName(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
-				if (resolve) return getNamespace();
-				return basicGetNamespace();
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
-				return getTypePathName();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
+        if (resolve) return getNamespace();
+        return basicGetNamespace();
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
+        return getTypePathName();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
-				setNamespace((Namespace)newValue);
-				return;
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
-				setTypePathName((TypePathNameCS)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
+        setNamespace((Namespace)newValue);
+        return;
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
+        setTypePathName((TypePathNameCS)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
-				setNamespace((Namespace)null);
-				return;
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
-				setTypePathName((TypePathNameCS)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
+        setNamespace((Namespace)null);
+        return;
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
+        setTypePathName((TypePathNameCS)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
-				return namespace != null;
-			case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
-				return typePathName != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__NAMESPACE:
+        return namespace != null;
+      case OclPackage.TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME:
+        return typePathName != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //TypePathNameNestedCSImpl

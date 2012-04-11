@@ -28,137 +28,141 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public class IntegerLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements IntegerLiteralExpCS {
 	/**
-	 * The default value of the '{@link #getIntegerLiteral() <em>Integer Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getIntegerLiteral() <em>Integer Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIntegerLiteral()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIntegerLiteral()
+   * @generated
+   * @ordered
+   */
 	protected static final int INTEGER_LITERAL_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getIntegerLiteral() <em>Integer Literal</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getIntegerLiteral() <em>Integer Literal</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIntegerLiteral()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getIntegerLiteral()
+   * @generated
+   * @ordered
+   */
 	protected int integerLiteral = INTEGER_LITERAL_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected IntegerLiteralExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.INTEGER_LITERAL_EXP_CS;
-	}
+    return OclPackage.Literals.INTEGER_LITERAL_EXP_CS;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public int getIntegerLiteral() {
-		return integerLiteral;
-	}
+    return integerLiteral;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setIntegerLiteral(int newIntegerLiteral) {
-		int oldIntegerLiteral = integerLiteral;
-		integerLiteral = newIntegerLiteral;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL, oldIntegerLiteral, integerLiteral));
-	}
+    int oldIntegerLiteral = integerLiteral;
+    integerLiteral = newIntegerLiteral;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL, oldIntegerLiteral, integerLiteral));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
-				return getIntegerLiteral();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
+        return getIntegerLiteral();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
-				setIntegerLiteral((Integer)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
+        setIntegerLiteral((Integer)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
-				setIntegerLiteral(INTEGER_LITERAL_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
+        setIntegerLiteral(INTEGER_LITERAL_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
-				return integerLiteral != INTEGER_LITERAL_EDEFAULT;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL:
+        return integerLiteral != INTEGER_LITERAL_EDEFAULT;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (integerLiteral: ");
-		result.append(integerLiteral);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (integerLiteral: ");
+    result.append(integerLiteral);
+    result.append(')');
+    return result.toString();
+  }
 
 } //IntegerLiteralExpCSImpl

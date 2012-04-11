@@ -23,22 +23,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public abstract class OclExpressionCSImpl extends EObjectImpl implements OclExpressionCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OclExpressionCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.OCL_EXPRESSION_CS;
-	}
+    return OclPackage.Literals.OCL_EXPRESSION_CS;
+  }
 
 } //OclExpressionCSImpl

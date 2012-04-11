@@ -29,7 +29,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * A hyperlink for the proxy elements in source code.
- * @author Lars Schütze implemented linking
+ * @author Lars Schütze implemented linking into ModelBrowser
  */
 public class OclHyperlink implements
 		org.eclipse.jface.text.hyperlink.IHyperlink {

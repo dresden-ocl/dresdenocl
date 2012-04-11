@@ -23,22 +23,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public abstract class DefinitionExpPartCSImpl extends EObjectImpl implements DefinitionExpPartCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected DefinitionExpPartCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.DEFINITION_EXP_PART_CS;
-	}
+    return OclPackage.Literals.DEFINITION_EXP_PART_CS;
+  }
 
 } //DefinitionExpPartCSImpl

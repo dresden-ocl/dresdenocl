@@ -32,214 +32,221 @@ import tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS;
  */
 public class UnaryOperationCallExpCSImpl extends OperationCallExpCSImpl implements UnaryOperationCallExpCS {
 	/**
-	 * The default value of the '{@link #getOperationName() <em>Operation Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getOperationName() <em>Operation Name</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperationName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getOperationName()
+   * @generated
+   * @ordered
+   */
 	protected static final String OPERATION_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getOperationName() <em>Operation Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getOperationName() <em>Operation Name</em>}' attribute.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperationName()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getOperationName()
+   * @generated
+   * @ordered
+   */
 	protected String operationName = OPERATION_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTarget()
+   * @generated
+   * @ordered
+   */
 	protected OclExpressionCS target;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected UnaryOperationCallExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.UNARY_OPERATION_CALL_EXP_CS;
-	}
+    return OclPackage.Literals.UNARY_OPERATION_CALL_EXP_CS;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public String getOperationName() {
-		return operationName;
-	}
+    return operationName;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setOperationName(String newOperationName) {
-		String oldOperationName = operationName;
-		operationName = newOperationName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME, oldOperationName, operationName));
-	}
+    String oldOperationName = operationName;
+    operationName = newOperationName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME, oldOperationName, operationName));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public OclExpressionCS getTarget() {
-		return target;
-	}
+    return target;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public NotificationChain basicSetTarget(OclExpressionCS newTarget, NotificationChain msgs) {
-		OclExpressionCS oldTarget = target;
-		target = newTarget;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, oldTarget, newTarget);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    OclExpressionCS oldTarget = target;
+    target = newTarget;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, oldTarget, newTarget);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public void setTarget(OclExpressionCS newTarget) {
-		if (newTarget != target) {
-			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, newTarget, newTarget));
-	}
+    if (newTarget != target)
+    {
+      NotificationChain msgs = null;
+      if (target != null)
+        msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, null, msgs);
+      if (newTarget != null)
+        msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, null, msgs);
+      msgs = basicSetTarget(newTarget, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET, newTarget, newTarget));
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
-				return basicSetTarget(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
+        return basicSetTarget(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
-				return getOperationName();
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
-				return getTarget();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
+        return getOperationName();
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
+        return getTarget();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
-				setOperationName((String)newValue);
-				return;
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
-				setTarget((OclExpressionCS)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
+        setOperationName((String)newValue);
+        return;
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
+        setTarget((OclExpressionCS)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
-				setOperationName(OPERATION_NAME_EDEFAULT);
-				return;
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
-				setTarget((OclExpressionCS)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
+        setOperationName(OPERATION_NAME_EDEFAULT);
+        return;
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
+        setTarget((OclExpressionCS)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
-				return OPERATION_NAME_EDEFAULT == null ? operationName != null : !OPERATION_NAME_EDEFAULT.equals(operationName);
-			case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
-				return target != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__OPERATION_NAME:
+        return OPERATION_NAME_EDEFAULT == null ? operationName != null : !OPERATION_NAME_EDEFAULT.equals(operationName);
+      case OclPackage.UNARY_OPERATION_CALL_EXP_CS__TARGET:
+        return target != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (operationName: ");
-		result.append(operationName);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (operationName: ");
+    result.append(operationName);
+    result.append(')');
+    return result.toString();
+  }
 
 } //UnaryOperationCallExpCSImpl

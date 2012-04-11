@@ -27,19 +27,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface PackageDeclarationCS extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Context Declarations</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Context Declarations</b></em>' containment reference list.
+   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS}.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Context Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Context Declarations</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationCS_ContextDeclarations()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Context Declarations</em>' containment reference list.
+   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationCS_ContextDeclarations()
+   * @model containment="true"
+   * @generated
+   */
 	EList<ContextDeclarationCS> getContextDeclarations();
 
 } // PackageDeclarationCS

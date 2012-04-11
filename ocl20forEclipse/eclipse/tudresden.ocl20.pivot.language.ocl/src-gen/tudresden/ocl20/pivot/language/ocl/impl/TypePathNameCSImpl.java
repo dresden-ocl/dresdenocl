@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
  */
 public abstract class TypePathNameCSImpl extends TypeCSImpl implements TypePathNameCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TypePathNameCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.TYPE_PATH_NAME_CS;
-	}
+    return OclPackage.Literals.TYPE_PATH_NAME_CS;
+  }
 
 } //TypePathNameCSImpl

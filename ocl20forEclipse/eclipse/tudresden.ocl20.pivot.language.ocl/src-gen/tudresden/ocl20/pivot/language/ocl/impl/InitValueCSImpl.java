@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public class InitValueCSImpl extends InitOrDeriveValueCSImpl implements InitValueCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected InitValueCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.INIT_VALUE_CS;
-	}
+    return OclPackage.Literals.INIT_VALUE_CS;
+  }
 
 } //InitValueCSImpl

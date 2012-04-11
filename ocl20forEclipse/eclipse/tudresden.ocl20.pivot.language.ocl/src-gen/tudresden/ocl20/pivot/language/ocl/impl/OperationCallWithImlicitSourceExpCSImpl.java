@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS;
  */
 public class OperationCallWithImlicitSourceExpCSImpl extends OperationCallOnSelfExpCSImpl implements OperationCallWithImlicitSourceExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OperationCallWithImlicitSourceExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS;
-	}
+    return OclPackage.Literals.OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS;
+  }
 
 } //OperationCallWithImlicitSourceExpCSImpl

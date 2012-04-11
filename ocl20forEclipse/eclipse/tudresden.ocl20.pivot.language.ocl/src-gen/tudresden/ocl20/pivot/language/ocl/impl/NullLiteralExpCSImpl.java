@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public class NullLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements NullLiteralExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected NullLiteralExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.NULL_LITERAL_EXP_CS;
-	}
+    return OclPackage.Literals.NULL_LITERAL_EXP_CS;
+  }
 
 } //NullLiteralExpCSImpl

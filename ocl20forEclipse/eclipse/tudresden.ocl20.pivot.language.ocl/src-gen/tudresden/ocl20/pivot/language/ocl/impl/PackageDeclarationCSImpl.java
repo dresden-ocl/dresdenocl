@@ -35,118 +35,124 @@ import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
  */
 public abstract class PackageDeclarationCSImpl extends EObjectImpl implements PackageDeclarationCS {
 	/**
-	 * The cached value of the '{@link #getContextDeclarations() <em>Context Declarations</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getContextDeclarations() <em>Context Declarations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContextDeclarations()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getContextDeclarations()
+   * @generated
+   * @ordered
+   */
 	protected EList<ContextDeclarationCS> contextDeclarations;
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected PackageDeclarationCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.PACKAGE_DECLARATION_CS;
-	}
+    return OclPackage.Literals.PACKAGE_DECLARATION_CS;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	public EList<ContextDeclarationCS> getContextDeclarations() {
-		if (contextDeclarations == null) {
-			contextDeclarations = new EObjectContainmentEList<ContextDeclarationCS>(ContextDeclarationCS.class, this, OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS);
-		}
-		return contextDeclarations;
-	}
+    if (contextDeclarations == null)
+    {
+      contextDeclarations = new EObjectContainmentEList<ContextDeclarationCS>(ContextDeclarationCS.class, this, OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS);
+    }
+    return contextDeclarations;
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-				return ((InternalEList<?>)getContextDeclarations()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+        return ((InternalEList<?>)getContextDeclarations()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-				return getContextDeclarations();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+        return getContextDeclarations();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-				getContextDeclarations().clear();
-				getContextDeclarations().addAll((Collection<? extends ContextDeclarationCS>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+        getContextDeclarations().clear();
+        getContextDeclarations().addAll((Collection<? extends ContextDeclarationCS>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID) {
-			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-				getContextDeclarations().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+        getContextDeclarations().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
-				return contextDeclarations != null && !contextDeclarations.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case OclPackage.PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS:
+        return contextDeclarations != null && !contextDeclarations.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //PackageDeclarationCSImpl

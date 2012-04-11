@@ -6,6 +6,10 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
+import java.io.PrintWriter;
+
+import org.eclipse.emf.ecore.EObject;
+
 public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter {
 	
 	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();

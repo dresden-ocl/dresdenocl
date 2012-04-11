@@ -3,7 +3,15 @@
 	package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 
-import org.antlr.runtime3_3_0.*;
+import org.antlr.runtime3_3_0.BaseRecognizer;
+import org.antlr.runtime3_3_0.CharStream;
+import org.antlr.runtime3_3_0.DFA;
+import org.antlr.runtime3_3_0.EarlyExitException;
+import org.antlr.runtime3_3_0.Lexer;
+import org.antlr.runtime3_3_0.MismatchedSetException;
+import org.antlr.runtime3_3_0.NoViableAltException;
+import org.antlr.runtime3_3_0.RecognitionException;
+import org.antlr.runtime3_3_0.RecognizerSharedState;
 
 public class OclLexer extends Lexer {
     public static final int EOF=-1;

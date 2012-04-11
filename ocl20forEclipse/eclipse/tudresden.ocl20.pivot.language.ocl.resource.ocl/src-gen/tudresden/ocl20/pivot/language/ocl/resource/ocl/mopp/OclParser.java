@@ -3,8 +3,18 @@
 	package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 
-import org.antlr.runtime3_3_0.*;
 import java.util.HashMap;
+
+import org.antlr.runtime3_3_0.BaseRecognizer;
+import org.antlr.runtime3_3_0.BitSet;
+import org.antlr.runtime3_3_0.DFA;
+import org.antlr.runtime3_3_0.EarlyExitException;
+import org.antlr.runtime3_3_0.IntStream;
+import org.antlr.runtime3_3_0.NoViableAltException;
+import org.antlr.runtime3_3_0.RecognitionException;
+import org.antlr.runtime3_3_0.RecognizerSharedState;
+import org.antlr.runtime3_3_0.Token;
+import org.antlr.runtime3_3_0.TokenStream;
 @SuppressWarnings("unused")
 public class OclParser extends OclANTLRParserBase {
     public static final String[] tokenNames = new String[] {
