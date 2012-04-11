@@ -55,8 +55,9 @@ public class TestCollection extends AbstractTracerTest {
 				AbstractTracerTest.getFile(
 						"resources/standardlibrary/product01_regression.xml",
 						TracerTestPlugin.PLUGIN_ID);
-	
+		
 		temporaryDocument = serializeTracerRoot(tracedRoot);
+		
 		/*
 		File f = new File("resources/standardlibrary/product01_regression.xml");
 		if(!f.exists()) f.createNewFile();
@@ -64,8 +65,7 @@ public class TestCollection extends AbstractTracerTest {
 		DOMSource source = new DOMSource(temporaryDocument);
 		StreamResult result = new StreamResult(f);
 		tf.transform(source, result);
-		 */
-		
+		*/
 		assertTrue("XML documents are not equal",
 				compareXmlFiles(regressionFile, temporaryDocument));
 	}

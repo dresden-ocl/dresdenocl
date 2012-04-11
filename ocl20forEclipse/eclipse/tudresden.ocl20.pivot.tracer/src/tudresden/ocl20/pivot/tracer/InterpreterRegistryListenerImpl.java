@@ -23,9 +23,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
@@ -166,7 +168,7 @@ public class InterpreterRegistryListenerImpl implements
 			item.setExpression(event.getExpression());
 			item.setResult(event.getResult());
 		}
-		//no else
+		// no else
 	}
 
 	/**
@@ -189,33 +191,52 @@ public class InterpreterRegistryListenerImpl implements
 		TracerPlugin.getTracerRegistry().fireUpdateTrace(this.getCurrentRoot());
 	}
 
+
 	public void traceSelectedConstraints(List<Object[]> constraints) {
 
 		isTracingSelection = true;
 		filteredTrace = factory.createTracerRoot();
 
 		for (Object[] aRow : constraints) {
-			
+
 			/* Check if aRow has at least three values */
-			if(aRow.length >= 3) {
-				/*
-				 * aRow[0] holds the ModelInstanceElement aRow[1] holds the Constraint
-				 * itself aRow[2] holds the result Now we need to find the specific
-				 * element in our tree and return its subtree
-				 */
-				List<TracerItem> readOnlyList;
-				readOnlyList = Collections.unmodifiableList(originalTrace.getRootItems());
-				for (TracerItem i : readOnlyList) {
-					if ((i.getExpression() == aRow[1]) && (i.getResult() == aRow[2])
-							&& (i.getModelInstanceElement() == aRow[0])) {
-						
-						filteredTrace.getRootItems().add(i);
-					}
-					// no else
+			if (aRow.length >= 3) {
+				
+				/* Make sure all types are correct */
+				IModelInstanceElement _miElement = null;
+				Constraint _constraint = null;
+				OclAny _result = null;
+
+				if (aRow[0] instanceof IModelInstanceElement) {
+					_miElement = (IModelInstanceElement) aRow[0];
 				}
-				// end for
+
+				if (aRow[1] instanceof Constraint) {
+					_constraint = (Constraint) aRow[1];
+				}
+
+				if (aRow[2] instanceof OclAny) {
+					_result = (OclAny) aRow[2];
+				}
+
+				if (_miElement != null && _constraint != null && _result != null) {
+					List<TracerItem> readOnlyList;
+					readOnlyList =
+							Collections.unmodifiableList(originalTrace.getRootItems());
+					for (TracerItem item : readOnlyList) {
+						if ((item.getExpression() == _constraint)
+								&& (item.getResult() == _result)
+								&& (item.getModelInstanceElement() == _miElement)) {
+
+							filteredTrace.getRootItems().add(item);
+						}
+						// no else
+					}
+					// end for
+				}
+				// no else (since one or more values or null)
 			}
-			//no else (aRow has less than three values)
+			// no else (aRow has less than three values)
 		}
 		// end for
 
