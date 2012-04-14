@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePath;
@@ -26,6 +27,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
 import tudresden.ocl20.pivot.pivotmodel.Type;
+import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
 
 /**
  * A hyperlink for the proxy elements in source code.
@@ -37,7 +39,7 @@ public class OclHyperlink implements
 	private String text;
 	private org.eclipse.emf.ecore.EObject linkTarget;
 	private org.eclipse.jface.text.IRegion region;
-
+	
 	/**
 	 * Creates the hyperlink.
 	 * 
@@ -86,7 +88,7 @@ public class OclHyperlink implements
 		if (linkTarget == null) {
 			return;
 		}
-
+		
 		/* Show the ModelBrowser */
 		try {
 			final IViewPart mbViewPart =
@@ -98,7 +100,7 @@ public class OclHyperlink implements
 				@Override
 				public void run() {
 
-					showModelBrowser(mbViewPart);
+					showSelectionInModelBrowser(mbViewPart);
 				}
 			});
 		} catch (PartInitException e) {
@@ -166,24 +168,34 @@ public class OclHyperlink implements
 		return region;
 	}
 
-	private void showModelBrowser(IViewPart mbViewPart) {
+	private void showSelectionInModelBrowser(IViewPart mbViewPart) {
 
 		if (mbViewPart == null) {
 			return;
 		}
-
+		
 		mbViewPart.setFocus();
 		ISelectionProvider mbSelectionProvider =
 				mbViewPart.getViewSite().getSelectionProvider();
+		
 		/* Since we know that the Model Browser is a TreeViewer */
 		if (mbSelectionProvider instanceof TreeViewer) {
+			
+			/** The Model Browser Viewer */
 			TreeViewer mbViewer = (TreeViewer) mbSelectionProvider;
-
-			Namespace[] typeNamespace = null;
+			/** The way in the viewer to the linkTarget */
+			List<EObject> typeNamespace = null;
 
 			if (linkTarget instanceof Type) {
 				typeNamespace = getAllNestingNamespacesFromType((Type) linkTarget);
 			}
+			//no else
+			
+			if(linkTarget instanceof AbstractProperty) {
+				typeNamespace = getAllNestingNamespacesFromType(((AbstractProperty) linkTarget).getOwningType());
+				typeNamespace.add(((AbstractProperty) linkTarget).getOwningType());
+			}
+			//no else
 
 			if (linkTarget instanceof Operation) {
 				try {
@@ -203,21 +215,22 @@ public class OclHyperlink implements
 					/* do nothing here */
 				}
 			}
+			//no else
 
-			if (typeNamespace != null && typeNamespace.length > 0) {
-				mbViewer.expandToLevel(new TreePath(typeNamespace), 1);
+			if (typeNamespace != null && !typeNamespace.isEmpty()) {
+				mbViewer.expandToLevel(new TreePath(typeNamespace.toArray()), 1);
 				mbViewer.expandToLevel(linkTarget, 1);
 				mbViewer.setSelection(new StructuredSelection(linkTarget), true);
 				mbViewer.getTree().showSelection();
 			}
+			//no else
 		}
+		//could not happen
 	}
 
-	private static Namespace[] EMPTY_NAMESPACE_ARRAY = new Namespace[0];
+	private List<EObject> getAllNestingNamespacesFromType(Type type) {
 
-	private Namespace[] getAllNestingNamespacesFromType(Type type) {
-
-		List<Namespace> result = new ArrayList<Namespace>();
+		List<EObject> result = new ArrayList<EObject>();
 
 		Namespace namespace = type.getNamespace();
 		Namespace oldNamespace = null;
@@ -231,6 +244,6 @@ public class OclHyperlink implements
 
 		/* Reverse the list so that it is in the right order */
 		Collections.reverse(result);
-		return result.toArray(EMPTY_NAMESPACE_ARRAY);
+		return result;
 	}
 }
