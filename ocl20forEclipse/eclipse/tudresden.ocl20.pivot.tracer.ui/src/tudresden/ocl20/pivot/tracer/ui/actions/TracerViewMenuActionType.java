@@ -27,5 +27,9 @@ package tudresden.ocl20.pivot.tracer.ui.actions;
  * @author Lars Schuetze
  */
 public enum TracerViewMenuActionType {
-	CLEAR_ALL_ELEMTENTS
+	/* Action types for the tool bar */
+	CLEAR_ALL_ELEMTENTS,
+	
+	/* Action types for the menu bar */
+	FILTER_FALSE_ELEMENTS, FILTER_TRUE_ELEMENTS, FILTER_NOTHING
 }

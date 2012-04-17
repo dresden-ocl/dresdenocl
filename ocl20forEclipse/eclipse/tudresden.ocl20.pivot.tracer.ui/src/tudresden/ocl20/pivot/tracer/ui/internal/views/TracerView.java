@@ -44,8 +44,11 @@ import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryList
 import tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin;
 import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuAction;
 import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuActionType;
+import tudresden.ocl20.pivot.tracer.ui.internal.msg.OclTracerUIMessages;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryContentProvider;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryLabelProvider;
+import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemViewerFilter;
+import tudresden.ocl20.pivot.tracer.ui.internal.views.util.ViewerFilterType;
 
 /**
  * @author Lars Schuetze
@@ -67,6 +70,12 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 
 	/** The {@link IMenuManager} of this {@link TracerView}. */
 	private IToolBarManager myToolBarManager;
+
+	/** The {@link IMenuManager} of this {@link TracerView}. */
+	private IMenuManager myMenuManager;
+
+	/** The {@link TracerItemViewerFilter} of this {@link TreeViewer} */
+	private TracerItemViewerFilter myViewerFilter;
 
 	/**
 	 * <p>
@@ -117,7 +126,10 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		column2.setText("Result");
 		column2.setWidth(200);
 
+		myViewerFilter = new TracerItemViewerFilter();
+
 		myTreeViewer = new TreeViewer(myTracerTree);
+		myTreeViewer.addFilter(myViewerFilter);
 		myTreeViewer
 				.setContentProvider(new TracerItemAdapterFactoryContentProvider(
 						myAdapterFactory));
@@ -137,13 +149,15 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	private void initMenu() {
 
 		TracerViewMenuAction clearAllTracedElements;
+		TracerViewMenuAction filterFalseElements;
+		TracerViewMenuAction filterTrueElements;
+		TracerViewMenuAction filterNothing;
 
 		/*
 		 * --- TOOLBAR
 		 */
-		myToolBarManager = this.getToolBarManager();
 
-		/* Add the clear all traced elements button to the tool bar */
+		/* Add the clear all traced elements button to the tool bar. */
 		{
 			clearAllTracedElements =
 					new TracerViewMenuAction(
@@ -152,13 +166,52 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 			clearAllTracedElements.setImageDescriptor(TracerUIPlugin
 					.getImageDescriptor(CLEAR_IMAGE));
 
-			myToolBarManager.add(clearAllTracedElements);
+			this.getToolBarManager().add(clearAllTracedElements);
 		}
+
+		/*
+		 * --- ACTION BAR
+		 */
+
+		/* Add all menu items to the drop down menu. */
+		{
+			filterNothing =
+					new TracerViewMenuAction(TracerViewMenuActionType.FILTER_NOTHING,
+							this);
+
+			filterNothing
+					.setText(OclTracerUIMessages.TracerView_Filter_Nothing_Title);
+
+			this.getMenuManager().add(filterNothing);
+
+			filterFalseElements =
+					new TracerViewMenuAction(
+							TracerViewMenuActionType.FILTER_FALSE_ELEMENTS, this);
+
+			filterFalseElements
+					.setText(OclTracerUIMessages.TracerView_Filter_False_Title);
+
+			this.getMenuManager().add(filterFalseElements);
+
+			filterTrueElements =
+					new TracerViewMenuAction(
+							TracerViewMenuActionType.FILTER_TRUE_ELEMENTS, this);
+
+			filterTrueElements
+					.setText(OclTracerUIMessages.TracerView_Filter_True_Title);
+
+			this.getMenuManager().add(filterTrueElements);
+		}
+
 	}
 
 	/**
-	 * <p>This method encapsulate the call to the tool bar manager.</p>
-	 * @return The {@link IToolBarManager} of the {@link org.eclipse.ui.part.ViewPart ViewPart}.
+	 * <p>
+	 * This method encapsulate the call to the tool bar manager.
+	 * </p>
+	 * 
+	 * @return The {@link IToolBarManager} of the
+	 *         {@link org.eclipse.ui.part.ViewPart ViewPart}.
 	 */
 	private IToolBarManager getToolBarManager() {
 
@@ -168,6 +221,21 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		return myToolBarManager;
 	}
 
+	/**
+	 * <p>
+	 * This method encapsulate the call to the tool bar manager.
+	 * </p>
+	 * 
+	 * @return The {@link IMenuManager} of the {@link ViewPart}.
+	 */
+	private IMenuManager getMenuManager() {
+
+		if (myMenuManager == null) {
+			myMenuManager = this.getViewSite().getActionBars().getMenuManager();
+		}
+		return myMenuManager;
+	}
+
 	@Override
 	public void setFocus() {
 
@@ -175,7 +243,9 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	}
 
 	/**
-	 * <p>Clears the view and all its content.</p>
+	 * <p>
+	 * Clears the view and all its content.
+	 * </p>
 	 */
 	public void clearTracerView() {
 
@@ -199,9 +269,11 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 
 		myTreeViewer.setInput(this.getRoot());
 	}
-	
+
 	/**
-	 * <p>Refresh the view with the given trace.</p>
+	 * <p>
+	 * Refresh the view with the given trace.
+	 * </p>
 	 */
 	public void updateTrace(TracerRegistryEvent event) {
 
@@ -213,8 +285,26 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 				myTreeViewer.setInput(root);
 			}
 		};
-		
+
 		Display display = getViewSite().getShell().getDisplay();
 		display.asyncExec(r);
+	}
+
+	/**
+	 * <p>
+	 * Sets the {@link TracerItemViewerFilter} to filter the given
+	 * {@link ViewerFilterType}.
+	 * </p>
+	 * 
+	 * @param filterType
+	 *          the {@link ViewerFilterType} to be set
+	 */
+	public void setFilter(ViewerFilterType filterType) {
+
+		if (filterType != null) {
+			myViewerFilter.setFilterType(filterType);
+			myTreeViewer.refresh();
+		}
+		// no else
 	}
 }

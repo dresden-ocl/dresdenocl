@@ -23,6 +23,7 @@ import org.eclipse.jface.action.IAction;
 
 import tudresden.ocl20.pivot.tracer.ui.internal.msg.OclTracerUIMessages;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
+import tudresden.ocl20.pivot.tracer.ui.internal.views.util.ViewerFilterType;
 
 /**
  * @author Lars Schuetze
@@ -72,6 +73,18 @@ public class TracerViewMenuAction extends Action implements IAction {
 			result = OclTracerUIMessages.TracerView_Menu_Clear;
 			break;
 
+		case FILTER_FALSE_ELEMENTS:
+			result = "";
+			break;
+
+		case FILTER_TRUE_ELEMENTS:
+			result = "";
+			break;
+
+		case FILTER_NOTHING:
+			result = "";
+			break;
+
 		default:
 			result = "No action selected.";
 		}
@@ -86,6 +99,19 @@ public class TracerViewMenuAction extends Action implements IAction {
 		case CLEAR_ALL_ELEMTENTS:
 			myTracerView.clearTracerView();
 			break;
+
+		case FILTER_NOTHING:
+			myTracerView.setFilter(ViewerFilterType.FILTER_NONE);
+			break;
+
+		case FILTER_FALSE_ELEMENTS:
+			myTracerView.setFilter(ViewerFilterType.FILTER_FALSE);
+			break;
+
+		case FILTER_TRUE_ELEMENTS:
+			myTracerView.setFilter(ViewerFilterType.FILTER_TRUE);
+			break;
 		}
+		// end switch
 	}
 }

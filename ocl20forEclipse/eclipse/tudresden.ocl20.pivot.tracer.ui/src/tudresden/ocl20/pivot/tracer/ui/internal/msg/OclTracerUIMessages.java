@@ -28,8 +28,14 @@ public class OclTracerUIMessages extends NLS {
 	private static final String BUNDLE_NAME =
 			"tudresden.ocl20.pivot.tracer.ui.internal.msg.messages";
 
+	public static String TracerView_Filter_Nothing_Title;
+	public static String TracerView_Filter_True_Title;
+	public static String TracerView_Filter_False_Title;
 	public static String TracerView_Menu_Clear;
-
+	public static String TracerView_Menu_Filter_Nothing;
+	public static String TracerView_Menu_Filter_False;
+	public static String TracerView_Menu_Filter_True;
+	
 	static {
 		/* Initialize resource bundle. */
 		NLS.initializeMessages(BUNDLE_NAME, OclTracerUIMessages.class);
