@@ -198,7 +198,7 @@ public class TracerItemAdapterFactoryLabelProvider extends
 
 			return obj.getModelInstanceObject().getObject().toString();
 		}
-
+		
 		return result.toString();
 	}
 

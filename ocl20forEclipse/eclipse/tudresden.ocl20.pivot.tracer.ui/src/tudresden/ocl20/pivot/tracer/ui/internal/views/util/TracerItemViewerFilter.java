@@ -18,6 +18,9 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 
+import java.util.UUID;
+import java.util.WeakHashMap;
+
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
@@ -25,6 +28,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
 
 /**
  * <p>
@@ -38,6 +42,8 @@ public class TracerItemViewerFilter extends ViewerFilter {
 
 	private ViewerFilterType filterType;
 
+	private WeakHashMap<UUID, ViewerFilterType> addedParents;
+
 	/**
 	 * <p>
 	 * The constructor of this class.
@@ -47,53 +53,62 @@ public class TracerItemViewerFilter extends ViewerFilter {
 
 		super();
 		filterType = ViewerFilterType.FILTER_NONE;
+		addedParents = new WeakHashMap<UUID, ViewerFilterType>();
 	}
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-
+		
 		if (element instanceof TracerRoot) {
+			return false;
+		}
+
+		if (filterType.equals(ViewerFilterType.FILTER_NONE)) {
 			return true;
 		}
 		// no else
 
 		if (element instanceof TracerItem) {
 
-			OclAny result = ((TracerItem) element).getResult();
+			TracerItem item = (TracerItem) element;
+
+			if (parentElement instanceof TracerItem) {
+				TracerItem parentItem = (TracerItem) parentElement;
+
+				/* Check if the parent has been cashed and could pass the filter. */
+				if (addedParents.containsKey(parentItem.getUUID())) {
+					if (filterType.equals(addedParents.get(parentItem.getUUID()))) {
+						/* Then this item can be added too. */
+						addedParents.put(item.getUUID(), filterType);
+						return true;
+					}
+				}
+			}
+
+			/* There was no parent found so we need to determine our self. */
+			OclAny result = item.getResult();
 
 			if (result instanceof OclBoolean) {
 				OclBoolean anOclBoolean = (OclBoolean) result;
 
 				if (anOclBoolean.oclIsInvalid().isTrue()
 						|| anOclBoolean.oclIsUndefined().isTrue()) {
-					/* Return true if there is no filtering, else false */
-					return filterType.equals(ViewerFilterType.FILTER_NONE);
+					return false;
 				}
-				//no else
+				// no else
 
 				switch (filterType) {
 				case FILTER_FALSE:
+					addedParents.put(item.getUUID(), filterType);
 					return !anOclBoolean.isTrue();
 
 				case FILTER_TRUE:
+					addedParents.put(item.getUUID(), filterType);
 					return anOclBoolean.isTrue();
-
-				case FILTER_NONE:
-					return true;
 				}
 				// end switch
 			}
-			/* result is no boolean */
-			else {
-				switch (filterType) {
-				case FILTER_NONE:
-					return true;
-
-				default:
-					return false;
-				}
-				// end switch
-			}
+			// no else (result is no boolean)
 		}
 		// no else
 
