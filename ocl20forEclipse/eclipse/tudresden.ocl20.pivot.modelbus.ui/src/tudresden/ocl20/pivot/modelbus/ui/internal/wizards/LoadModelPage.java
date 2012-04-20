@@ -205,6 +205,18 @@ public class LoadModelPage extends AbstractModelBusPage {
 					complete = false;
 				}
 				// no else.
+				
+				//Automaticly select the correct metamodel
+				selectMetaModelByModelFilePath(modelFilePath);
+
+				/* Check if the corresponding .class file exists */
+				if (complete
+						&& modelFilePath.getFileExtension().equalsIgnoreCase("java")
+						&& !new File(getCorrespondingClassFileName(modelFileName)).exists()) {
+					this.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgCorrespondingClassFileNotExisting);
+					complete = false;
+				}
+				// no else
 			}
 			// end else.
 		}
@@ -231,6 +243,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		File result;
 		String modelFileName;
+		IPath modelFilePath;
 
 		/** By default the model file is null. */
 		result = null;
@@ -239,7 +252,15 @@ public class LoadModelPage extends AbstractModelBusPage {
 		modelFileName = decodePath(getModelFileName());
 
 		if (modelFileName != null) {
-			result = new Path(modelFileName).toFile();
+			modelFilePath = new Path(modelFileName);
+
+			/* Get the path to the corresponding .class file if needed */
+			if (modelFilePath.getFileExtension().equalsIgnoreCase("java")) {
+				modelFilePath = new Path(getCorrespondingClassFileName(modelFileName));
+			}
+			//no else.
+			
+			result = modelFilePath.toFile();
 		}
 		// no else.
 
@@ -263,6 +284,29 @@ public class LoadModelPage extends AbstractModelBusPage {
 						.getSelection()).getFirstElement();
 
 		return result;
+	}
+	
+	/**
+	 * <p>
+	 * Helper method which substitutes the "/src/" with "/bin/" 
+	 * and the file ending to ".class"
+	 * </p>
+	 * 
+	 * @param A
+	 *          {@link String} which represents the path to the .java file
+	 * @return A {@link String} which represents the possible path to the
+	 *         corresponding .class file of a .java file
+	 */
+	private String getCorrespondingClassFileName(String modelFileName) {
+
+		String pathToClassFile;
+
+		pathToClassFile = modelFileName.replace("/src/", "/bin/");
+
+		pathToClassFile =
+				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";
+
+		return pathToClassFile;
 	}
 
 	/**
@@ -420,6 +464,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 			Object selectedObject = this.selection.getFirstElement();
 
 			/*
+			 * Determine the CorrespondingResource to a 
+			 * CompilationUnit-Object (e.g. .java Files in the src directory) 
 			 * Reflection is used here to avoid introducing a dependency to the
 			 * JDT-Framework, just in case that somebody uses DresdenOCL without Java
 			 */
@@ -452,49 +498,30 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 					fileTextBoxContent = selectedResource.getRawLocation().toString();
 
-					/*
-					 * If the selection is a .java file, determine the location of the
-					 * corresponding .class file.
-					 */
-					if (selectedResource.getFileExtension().equalsIgnoreCase("java")) {
-
-						String pathToClassFile;
-
-						pathToClassFile = fileTextBoxContent.replace("/src/", "/bin/");
-
-						pathToClassFile =
-								pathToClassFile.substring(0, pathToClassFile.length() - 4)
-										+ "class";
-
-						/*
-						 * Only set the fileTextBoxContent if the class file can be found
-						 */
-						if (new File(pathToClassFile).exists()) {
-							fileTextBoxContent = pathToClassFile;
-							fileExtension = "class";
-							modelFileTextBox.setText(fileTextBoxContent);
-						}
-						else {
-							fileTextBoxContent = "";
-							fileExtension = "";
-						}
-
-					}
-					else {
-						modelFileTextBox.setText(fileTextBoxContent);
-						fileExtension = selectedResource.getFileExtension();
-					}
+					modelFileTextBox.setText(fileTextBoxContent);
+					fileExtension = selectedResource.getFileExtension();
 				}
 				// no else
 			}
 			// no else.
 		}
 		// no else.
+		
+		/* By default select the first meta model. */
+		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
-		/*
-		 * By default try to select a meta model we know that it can be applied to
-		 * the file
-		 */
+		if (metaModels.length > 0) {
+			this.metamodelViewer.setSelection(new StructuredSelection(
+					metaModels[0]));
+		}
+		// no else.
+	}
+	
+	private void selectMetaModelByModelFilePath(IPath modelFilePath){
+		IMetamodel[] metaModels;
+		String fileExtension = modelFilePath.getFileExtension();
+		
+		
 		boolean isApplicable = false;
 		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
@@ -505,7 +532,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 			if (fileExtension != null) {
 				/* Check which meta model can be applied */
 				if (fileExtension.equalsIgnoreCase("class")
-						|| fileExtension.equalsIgnoreCase("javamodel")) {
+						|| fileExtension.equalsIgnoreCase("javamodel")
+						|| fileExtension.equals("java")) {
 					mmType =
 							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
 									"tudresden.ocl20.pivot.metamodels.java");
@@ -541,16 +569,20 @@ public class LoadModelPage extends AbstractModelBusPage {
 				int i = mmList.indexOf(mmType);
 
 				if (i >= 0) {
-					this.metamodelViewer.setSelection(new StructuredSelection(mmList
-							.get(i)));
+					StructuredSelection selection = new StructuredSelection(mmList.get(i));
+					
+					/* Avoid endless loop due to the 
+					 * eventhandler is called for every
+					 * setSelection()
+					 */ 
+					if(!this.metamodelViewer.getSelection().equals(selection)){
+						this.metamodelViewer.setSelection(selection);
+					}
+					
 				}
 				// no else
 			}
-			else {
-				/* If there is no applicable model instance type select the first */
-				this.metamodelViewer
-						.setSelection(new StructuredSelection(metaModels[0]));
-			}
+			//no else.
 		}
 		// no else.
 	}
