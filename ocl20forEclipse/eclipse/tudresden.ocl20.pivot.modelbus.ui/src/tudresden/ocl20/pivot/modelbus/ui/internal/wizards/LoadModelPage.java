@@ -205,8 +205,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 					complete = false;
 				}
 				// no else.
-				
-				//Automaticly select the correct metamodel
+
+				// Automaticly select the correct metamodel
 				selectMetaModelByModelFilePath(modelFilePath);
 
 				/* Check if the corresponding .class file exists */
@@ -258,8 +258,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 			if (modelFilePath.getFileExtension().equalsIgnoreCase("java")) {
 				modelFilePath = new Path(getCorrespondingClassFileName(modelFileName));
 			}
-			//no else.
-			
+			// no else.
+
 			result = modelFilePath.toFile();
 		}
 		// no else.
@@ -285,11 +285,11 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		return result;
 	}
-	
+
 	/**
 	 * <p>
-	 * Helper method which substitutes the "/src/" with "/bin/" 
-	 * and the file ending to ".class"
+	 * Helper method which substitutes the "/src/" with "/bin/" and the file
+	 * ending to ".class"
 	 * </p>
 	 * 
 	 * @param A
@@ -301,7 +301,9 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		String pathToClassFile;
 
-		pathToClassFile = modelFileName.replace("/src/", "/bin/");
+		pathToClassFile =
+				modelFileName.replace(File.separator + "src" + File.separator,
+						File.separator + "bin" + File.separator);
 
 		pathToClassFile =
 				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";
@@ -457,31 +459,26 @@ public class LoadModelPage extends AbstractModelBusPage {
 	private void initializeFromSelection() {
 
 		IMetamodel[] metaModels;
-		String fileExtension = null;
 		String fileTextBoxContent = null;
 
 		if (this.selection.getFirstElement() != null) {
 			Object selectedObject = this.selection.getFirstElement();
 
 			/*
-			 * Determine the CorrespondingResource to a 
-			 * CompilationUnit-Object (e.g. .java Files in the src directory) 
-			 * Reflection is used here to avoid introducing a dependency to the
-			 * JDT-Framework, just in case that somebody uses DresdenOCL without Java
+			 * Determine the CorrespondingResource to a CompilationUnit-Object (e.g.
+			 * .java Files in the src directory) Reflection is used here to avoid
+			 * introducing a dependency to the JDT-Framework, just in case that
+			 * somebody uses DresdenOCL without Java
 			 */
 			if (selectedObject.getClass().getName()
 					.equals("org.eclipse.jdt.internal.core.CompilationUnit")) {
 
 				try {
 					Method method =
-							selectedObject.getClass().getMethod("getCorrespondingResource",
-									(Class[]) null);
-					selectedObject =
-							(IResource) method.invoke(selectedObject, (Object[]) null);
+							selectedObject.getClass().getMethod("getCorrespondingResource");
+					selectedObject = (IResource) method.invoke(selectedObject);
 				} catch (Exception e) {
-					/*
-					 * If invocation fails, selection will be discarded
-					 */
+					/* If invocation fails, selection will be discarded */
 					selectedObject = null;
 				}
 
@@ -492,36 +489,42 @@ public class LoadModelPage extends AbstractModelBusPage {
 				IResource selectedResource;
 
 				selectedResource = (IResource) selectedObject;
-				fileExtension = selectedResource.getFileExtension();
 
 				if (selectedResource.getType() == IResource.FILE) {
 
 					fileTextBoxContent = selectedResource.getRawLocation().toString();
 
 					modelFileTextBox.setText(fileTextBoxContent);
-					fileExtension = selectedResource.getFileExtension();
 				}
 				// no else
 			}
 			// no else.
 		}
 		// no else.
-		
+
 		/* By default select the first meta model. */
 		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
 		if (metaModels.length > 0) {
-			this.metamodelViewer.setSelection(new StructuredSelection(
-					metaModels[0]));
+			this.metamodelViewer.setSelection(new StructuredSelection(metaModels[0]));
 		}
 		// no else.
 	}
-	
-	private void selectMetaModelByModelFilePath(IPath modelFilePath){
+
+	/**
+	 * <p>
+	 * Determines the metamodel in the metamodeviewer depending on the filetype
+	 * given by the path parameter...
+	 * </p>
+	 * 
+	 * @param The
+	 *          {@link IPath} to the model file
+	 */
+	private void selectMetaModelByModelFilePath(IPath modelFilePath) {
+
 		IMetamodel[] metaModels;
 		String fileExtension = modelFilePath.getFileExtension();
-		
-		
+
 		boolean isApplicable = false;
 		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
@@ -533,7 +536,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 				/* Check which meta model can be applied */
 				if (fileExtension.equalsIgnoreCase("class")
 						|| fileExtension.equalsIgnoreCase("javamodel")
-						|| fileExtension.equals("java")) {
+						|| fileExtension.equalsIgnoreCase("java")) {
 					mmType =
 							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
 									"tudresden.ocl20.pivot.metamodels.java");
@@ -569,20 +572,21 @@ public class LoadModelPage extends AbstractModelBusPage {
 				int i = mmList.indexOf(mmType);
 
 				if (i >= 0) {
-					StructuredSelection selection = new StructuredSelection(mmList.get(i));
-					
-					/* Avoid endless loop due to the 
-					 * eventhandler is called for every
+					StructuredSelection selection =
+							new StructuredSelection(mmList.get(i));
+
+					/*
+					 * Avoid endless loop due to the eventhandler is called for every
 					 * setSelection()
-					 */ 
-					if(!this.metamodelViewer.getSelection().equals(selection)){
+					 */
+					if (!this.metamodelViewer.getSelection().equals(selection)) {
 						this.metamodelViewer.setSelection(selection);
 					}
-					
+
 				}
 				// no else
 			}
-			//no else.
+			// no else.
 		}
 		// no else.
 	}
