@@ -206,7 +206,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 				}
 				// no else.
 
-				// Automaticly select the correct metamodel
+				/* Automaticly select the correct metamodel */
 				selectMetaModelByModelFilePath(modelFilePath);
 
 				/* Check if the corresponding .class file exists */
@@ -513,7 +513,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 	/**
 	 * <p>
-	 * Determines the metamodel in the metamodeviewer depending on the filetype
+	 * Selects the metamodel in the metamodelviewer depending on the filetype
 	 * given by the path parameter...
 	 * </p>
 	 * 

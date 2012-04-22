@@ -106,6 +106,8 @@ public class ModelBusUIMessages extends NLS {
 	public static String LoadModelInstancePage_SelectModelInstanceTypeErrorMessage;
 
 	public static String LoadModelInstancePage_Title;
+	
+	public static String LoadModelInstancePage_ErrorMsgCorrespondingClassFileNotExisting;
 
 	public static String LoadModelInstanceWizard_Title;
 
