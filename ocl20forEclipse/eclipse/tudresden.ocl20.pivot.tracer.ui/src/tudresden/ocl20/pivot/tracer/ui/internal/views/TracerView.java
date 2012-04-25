@@ -30,6 +30,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
@@ -116,13 +117,11 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		myTracerTree.setHeaderVisible(true);
 		myTracerTree.setLinesVisible(true);
 
-		TreeColumn column1 = new TreeColumn(myTracerTree, SWT.LEFT);
-		column1.setAlignment(SWT.LEFT);
-		column1.setText("Constraint type");
+		TreeColumn column1 = new TreeColumn(myTracerTree, 0);
+		column1.setText("Constraint");
 		column1.setWidth(400);
 
-		TreeColumn column2 = new TreeColumn(myTracerTree, SWT.RIGHT);
-		column2.setAlignment(SWT.LEFT);
+		TreeColumn column2 = new TreeColumn(myTracerTree, 0);
 		column2.setText("Result");
 		column2.setWidth(200);
 

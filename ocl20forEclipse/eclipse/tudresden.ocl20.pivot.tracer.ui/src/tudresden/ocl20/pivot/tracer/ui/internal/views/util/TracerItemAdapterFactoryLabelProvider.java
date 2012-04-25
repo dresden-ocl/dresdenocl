@@ -45,24 +45,26 @@ public class TracerItemAdapterFactoryLabelProvider extends
 	/** The string for the undefined graphic file path. */
 	private static final String IMG_RESULT_UNDEFINED =
 			"icons/result_undefined.gif";
-	
+
 	/** The string for the invalid graphic file path. */
 	private static final String IMG_RESULT_INVALID = "icons/result_invalid.gif";
-	
+
 	/** The string for the true graphic file path. */
 	private static final String IMG_RESULT_TRUE = "icons/result_true.gif";
-	
+
 	/** The string for the false graphic file path. */
 	private static final String IMG_RESULT_FALSE = "icons/result_false.gif";
 
 	/** The switch for expressions. */
 	private TracerExpressionsSwitch tracerExprSwitch;
-	
+
 	/** The map to cache images. */
 	private Map<ImageDescriptor, Image> imageCache;
 
 	/**
-	 * <p>The constructor of this provider.</p>
+	 * <p>
+	 * The constructor of this provider.
+	 * </p>
 	 */
 	public TracerItemAdapterFactoryLabelProvider(AdapterFactory adapterFactory) {
 
@@ -164,30 +166,41 @@ public class TracerItemAdapterFactoryLabelProvider extends
 	 * <p>
 	 * Returns the appropriate string output to a given result.
 	 * </p>
-	 * @param result The {@link OclAny result} to output.
+	 * 
+	 * @param result
+	 *          The {@link OclAny result} to output.
 	 * @return The {@link String output} appropriate for the result.
 	 */
 	private String resultText(OclAny result) {
 
+		/*
+		 * This happens sometimes when the view is updated during interpretation and
+		 * there are no results yet.
+		 */
+		if (result == null) {
+			return "null";
+		}
+		// no else
+
 		if (result instanceof OclInteger) {
 			OclInteger anOclInteger;
 			tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement imiElement;
-			
+
 			anOclInteger = ((OclInteger) result);
 			imiElement = anOclInteger.getModelInstanceElement();
-			
-			if(!imiElement.isUndefined()) {
+
+			if (!imiElement.isUndefined()) {
 				return anOclInteger.getModelInstanceInteger().getLong().toString();
 			}
 			else {
 				return imiElement.toString();
 			}
 		}
-		if (result instanceof OclBoolean) {
+		else if (result instanceof OclBoolean) {
 			return ((OclBoolean) result).getModelInstanceBoolean().getBoolean()
 					.toString();
 		}
-		if (result instanceof OclModelInstanceObject) {
+		else if (result instanceof OclModelInstanceObject) {
 			OclModelInstanceObject obj = (OclModelInstanceObject) result;
 			if (obj.oclIsInvalid().isTrue()) {
 				return "invalid: " + obj.getInvalidReason().getMessage();
@@ -198,21 +211,22 @@ public class TracerItemAdapterFactoryLabelProvider extends
 
 			return obj.getModelInstanceObject().getObject().toString();
 		}
-		
-		return result.toString();
+		else
+			return result.toString();
 	}
 
 	@Override
 	public void dispose() {
 
-		/* Dispose all cached images */
-		Iterator<Image> i = imageCache.values().iterator();
-		while (i.hasNext()) {
-
-			((Image) i.next()).dispose();
+		try {
+			/* Dispose all cached images */
+			for (Image i : imageCache.values()) {
+				i.dispose();
+			}
+			/* Clear the cache */
+			imageCache.clear();
+		} finally {
+			super.dispose();
 		}
-
-		imageCache.clear();
-		super.dispose();
 	}
 }

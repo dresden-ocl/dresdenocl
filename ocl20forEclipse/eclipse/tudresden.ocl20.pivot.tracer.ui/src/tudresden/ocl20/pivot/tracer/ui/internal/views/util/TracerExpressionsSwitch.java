@@ -85,8 +85,7 @@ public class TracerExpressionsSwitch extends ExpressionsSwitch<String> {
 	@Override
 	public String caseTypeLiteralExp(TypeLiteralExp object) {
 
-		// TODO Auto-generated method stub
-		return super.caseTypeLiteralExp(object);
+		return "referred Type: " + object.getReferredType().getName();
 	}
 
 	@Override
@@ -120,7 +119,8 @@ public class TracerExpressionsSwitch extends ExpressionsSwitch<String> {
 	@Override
 	public String casePropertyCallExp(PropertyCallExp object) {
 
-		return object.getReferredProperty().getName();
+		return "Name: " + object.getReferredProperty().getName() + ", Type: "
+				+ object.getType().getName();
 	}
 
 	@Override
@@ -182,8 +182,7 @@ public class TracerExpressionsSwitch extends ExpressionsSwitch<String> {
 	@Override
 	public String caseIteratorExp(IteratorExp object) {
 
-		// TODO Auto-generated method stub
-		return super.caseIteratorExp(object);
+		return object.getName();
 	}
 
 	@Override
