@@ -20,10 +20,12 @@ package tudresden.ocl20.pivot.tracer.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
+import tudresden.ocl20.pivot.tracer.TracerPlugin;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
 
 /**
@@ -31,7 +33,7 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
  * @author Lars Schuetze
  *
  */
-public class TracerUIPlugin extends AbstractUIPlugin {
+public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 
 	/** the plug-in ID */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer.ui";
@@ -103,6 +105,13 @@ public class TracerUIPlugin extends AbstractUIPlugin {
 	public static Logger getLogger(Class<?> clazz) {
 
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
+	}
+
+	@Override
+	public void earlyStartup() {
+		
+		/* activate the tracer plug-in */
+		TracerPlugin.getDefault();
 	}
 
 }
