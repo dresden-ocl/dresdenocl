@@ -53,7 +53,7 @@ public class TracerPlugin extends Plugin {
 	/**
 	 * The constructor
 	 */
-	private TracerPlugin() {
+	public TracerPlugin() {
 		super();
 		
 		/* Register the TracerPlugin as listener to the interpreter itself. */
