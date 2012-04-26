@@ -6,7 +6,7 @@
 \end{flushright}
 
 This chapter describes how the \acs{OCL} Interpreter provided with Dresden OCL 
-can be used. How to install and run Dresden OCL and how 
+can be used and how to trace such interpretations. How to install and run Dresden OCL and how 
 to load models and OCL constraints was explained in 
 Chapter~\ref{chapter:introduction}. If you are not familiar with such basic uses
 of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
@@ -323,6 +323,26 @@ constraints during the runtime of other software. Then you can prepare
 constraints before methods are invoked and check postconditions afterwards, 
 e.g., by using \emph{\acf{AOP}}.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/interpreter/tracer01.png}
+	\caption{The results of the interpretation.}
+	\label{pic:interpret:tracer01}
+
+	\vspace{3.0em}	
+	
+	\centering
+	\includegraphics[scale=1]{figures/interpreter/tracer02.png}
+	\caption{The menu to apply filters to the tracer.}
+	\label{pic:interpret:tracer02}
+\end{figure}
+
+\subsection{Tracing}
+
+Tracing is applied for logging the execution path of the interpretation of an \acs{OCL} expression.
+That is, it should be typically used by programmers for debugging purposes. To receive interim results during interpretation of \acs{OCL} expressions open the Dresden \acs{OCL} Tracer from the menu option \eclipse{Dresden OCL > Open Dresden OCL Tracer} before you start the interpretation. Then the execution path of an \acs{OCL} expression will be logged and shown in the \acs{OCL} \eclipse{Tracer View} (see Figure \ref{pic:interpret:tracer01}).
+
+Especially when debugging we want to find failures. Therefore, the \acs{OCL} \eclipse{Tracer View} also provides a menu to filter for special criteria, e.g. all \model{true} or \model{false} results (see Figure \ref{pic:interpret:tracer02}).
 
 
 \section{Summary}
@@ -330,7 +350,8 @@ e.g., by using \emph{\acf{AOP}}.
 This chapter described how \acs{OCL} constraints can be interpreted using the 
 \acs{OCL} Interpreter of Dresden OCL. The preparation and interpretation of 
 constraints has been explained, the addition of new variables to the 
-Interpreter Environment has been shown. Besides the use of the Interpreter via 
+Interpreter Environment has been shown. The tracing of expressions has been
+demonstrated. Besides the use of the Interpreter via 
 Dresden OCL's GUI, you can also invoke the Interpreter via Dresden OCL's 
 \acs{API}. The easiest way to connect to Dresden OCL is via its \emph{Facade} 
 providing interfaces for all services of Dresden OCL. How to use Dresden OCL's 
