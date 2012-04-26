@@ -53,7 +53,12 @@ public class TracerPlugin extends Plugin {
 	/**
 	 * The constructor
 	 */
-	public TracerPlugin() {
+	private TracerPlugin() {
+		super();
+		
+		/* Register the TracerPlugin as listener to the interpreter itself. */
+		plugin = this;
+		getInterpreterTraceListener();
 	}
 
 	public static InterpreterRegistryListenerImpl getInterpreterTraceListener() {
@@ -110,6 +115,10 @@ public class TracerPlugin extends Plugin {
 
 	public static TracerPlugin getDefault() {
 
+		if(plugin == null) {
+			plugin = new TracerPlugin();
+		}
+		
 		return plugin;
 	}
 
