@@ -93,6 +93,7 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 			this.myCurrentModel = ModelBusPlugin.getModelRegistry()
 					.getActiveModel();
 			this.myCurrentModel.addListener(this);
+			refreshView();
 		}
 	}
 
