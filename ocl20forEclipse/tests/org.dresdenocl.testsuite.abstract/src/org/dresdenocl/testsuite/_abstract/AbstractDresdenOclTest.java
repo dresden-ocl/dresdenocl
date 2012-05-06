@@ -15,8 +15,10 @@ package org.dresdenocl.testsuite._abstract;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
@@ -93,19 +95,42 @@ public class AbstractDresdenOclTest {
 	/** Whether or not was initialized yet. */
 	private static boolean isInitialized = false;
 
+	private static Properties properties = new Properties(
+			System.getProperties());
+
 	@BeforeClass
 	public static void setUp() throws Exception {
 
 		/* Initializes Dresden OCL when tests were started headless. */
 		if (!Platform.isRunning() && !isInitialized) {
-			File currentTestLocation = new File("../");
-			System.setProperty("DRESDENOCL_LOCATION_TESTS", currentTestLocation
-					.getCanonicalFile().getAbsolutePath() + File.separator);
-			File currentEclipseLocation = new File("../../eclipse");
-			System.setProperty("DRESDENOCL_LOCATION_ECLIPSE",
-					currentEclipseLocation.getCanonicalFile().getAbsolutePath()
-							+ File.separator);
-			
+
+			File propertiesFile = new File("dresdenOclTest.properties");
+			// this should be the case in the Jenkins tests
+			if (propertiesFile.exists()) {
+				properties.load(new FileInputStream(propertiesFile));
+
+				if (properties.getProperty("DRESDENOCL_LOCATION_TESTS") == null)
+					throw new IllegalArgumentException(
+							"DRESDENOCL_LOCATION_TESTS key-value pair is missing in dresdenOclTest.properties.");
+				if (properties.getProperty("DRESDENOCL_LOCATION_ECLIPSE") == null)
+					throw new IllegalArgumentException(
+							"DRESDENOCL_LOCATION_ECLIPSE key-value pair is missing in dresdenOclTest.properties.");
+
+				System.setProperties(properties);
+			}
+			// this is the case when run from inside Eclipse as normal JUnit
+			// test
+			else {
+				File currentTestLocation = new File("../");
+				System.setProperty("DRESDENOCL_LOCATION_TESTS",
+						currentTestLocation.getCanonicalFile()
+								.getAbsolutePath() + File.separator);
+				File currentEclipseLocation = new File("../../eclipse");
+				System.setProperty("DRESDENOCL_LOCATION_ECLIPSE",
+						currentEclipseLocation.getCanonicalFile()
+								.getAbsolutePath() + File.separator);
+			}
+
 			initializeLogging();
 			registerEmfResourceFactories();
 			registerMetamodels();
