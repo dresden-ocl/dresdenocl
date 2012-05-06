@@ -105,10 +105,18 @@ public class AbstractDresdenOclTest {
 		if (!Platform.isRunning() && !isInitialized) {
 
 			File propertiesFile = new File("dresdenOclTest.properties");
+			
+			System.out.println("Try to load dresdenOclTest.properties");
+			
 			// this should be the case in the Jenkins tests
 			if (propertiesFile.exists()) {
+				
+				System.out.println("dresdenOclTest.properties exists");
+				
 				properties.load(new FileInputStream(propertiesFile));
 
+				System.out.println("Loading dresdenOclTest.properties successful");
+				
 				if (properties.getProperty("DRESDENOCL_LOCATION_TESTS") == null)
 					throw new IllegalArgumentException(
 							"DRESDENOCL_LOCATION_TESTS key-value pair is missing in dresdenOclTest.properties.");
@@ -117,6 +125,8 @@ public class AbstractDresdenOclTest {
 							"DRESDENOCL_LOCATION_ECLIPSE key-value pair is missing in dresdenOclTest.properties.");
 
 				System.setProperties(properties);
+				
+				System.getProperties().list(System.out);
 			}
 			// this is the case when run from inside Eclipse as normal JUnit
 			// test
