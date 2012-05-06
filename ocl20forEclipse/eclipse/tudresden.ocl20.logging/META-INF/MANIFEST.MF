@@ -6,11 +6,10 @@ Bundle-Version: 3.1.0.qualifier
 Bundle-Activator: tudresden.ocl20.logging.LoggingPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
- org.apache.commons.lang
+ org.apache.commons.lang,
+ org.apache.log4j;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: lib/log4j-1.2.14.jar,
- .
+Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.apache.log4j,
- tudresden.ocl20.logging,
+Export-Package: tudresden.ocl20.logging,
  tudresden.ocl20.logging.appender
