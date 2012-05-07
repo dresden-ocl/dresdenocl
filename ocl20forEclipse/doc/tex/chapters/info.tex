@@ -45,7 +45,7 @@ Dresden OCL.
     \\
     \hline
     XMI & 
-    XMI export import of OCL is currently not supported. \\
+    XMI export/import of OCL is currently not supported. \\
     \hline
     Evaluation & 
     \\
@@ -187,7 +187,7 @@ of two given \acs{OCL} expressions. Since \acs{OCL} values can be both
 behave when used with \code{null} and \code{invalid} values. According to the 
 specification, comparing two \acs{OCL} values results in \code{invalid} when 
 one of the two values is either \code{null} or
-\code{invalid}~\cite[p.~195]{spec:OCL2-3}. In some situations this can lead to
+\code{invalid}~\cite[p.~214]{spec:OCL2-3}. In some situations this can lead to
 problems during evaluation, e.g., when iterating on an \acs{OCL} collection 
 containing \code{null} values.
 
@@ -223,9 +223,9 @@ Bag { true, null } -> select(oclIsUndefined()) => Bag { null }
 In Dresden OCL, iterators will result in a value as long as they can be computed,
 even if their collection contains \code{null} values. 
 Listing~\ref{lst:exampleIterators} shows some examples for iterator expressions 
-and their results in Dresden OCL. E.g., an \code{any} iterator will result in 
+and their results in Dresden OCL (e.g., an \code{any} iterator will result in 
 \code{true} as long as one element of its source's collection fulfills its 
-condition even if other elements are \code{null} values. On the other hand, a 
+condition even if other elements are \code{null} values). On the other hand, a 
 \code{select} iterator will result in \code{invalid} if the condition for any 
 element in its collection results in \code{null}. However, if the collection 
 contains \code{null} values but the condition results in \code{true} or 
@@ -290,7 +290,7 @@ Listing~\ref{lst:info:invalidValues} shows some examples for evaluations on
 \section{Supported Models In Dresden OCL}
 \label{sect:info:models}
 
-Dresden OCL is adapted to multiple meta-models and thus allows the import of 
+Dresden OCL is adapted to multiple metamodels and thus allows the import of 
 multiple kinds of models. Which kinds of models and which model file formats are
 supported by Dresden OCL is documented in this section. Possible use cases for
 the different models and model instances supported by Dresden \acs{OCL} are
@@ -307,7 +307,7 @@ files matching to the naming pattern \code{*.ecore}.
 \subsection{Java Classes as Models}
 \label{subsec:javaModel}
 
-Dresden OCL supports to import Java classes as models and thus to define
+Dresden OCL supports to import Java classes as models and thus, to define
 \acs{OCL} constraints directly on Java types and their fields and methods. If a 
 Java class is imported into Dresden OCL, all types used inside the class' 
 declaration are handled as also being a part of the imported model. If a 
@@ -336,20 +336,20 @@ public class ModelProviderClass {
 \end{figure}
 
 If a \code{ClassA} is imported into Dresden OCL, the type of \code{ClassA} and
-all types that are directly related to this class are imported as well. E.g., a 
+all types that are directly related to this class are imported as well (e.g., a 
 \code{ClassB} used in a property of \code{ClassA} would be imported, a related 
-\code{ClassC} used in \code{ClassB} would not be imported (see 
+\code{ClassC} used in \code{ClassB} would not be imported, see 
 Figure~\ref{fig:info:transitiveTypeImport}). If other types are requested during
 the work of tools on the imported model (e.g., if a tool requests the operation 
-\code{ClassB.getOwnedOperations()}, all newly required types will be imported as
-well. This deferred transitive adaptation mechanism avoids that all types never 
+\code{ClassB.getOwnedOperations()}), all newly required types will be imported
+as well. This deferred transitive adaptation mechanism avoids that all types never 
 used inside Dresden OCL are imported and adapted and cause overhead and
 maintenance problems. Listing~\ref{lst:javaModelProvider} shows an example for a
 Java class provided with the \emph{Simple Example} of Dresden OCL. The class
 contains properties having the types \code{Person}, \code{Professor} and 
 \code{Student}. Thus, the imported model in Dresden OCL will contain a package 
 \code{tudresden.ocl20.pivot.example.simple}, containing the four classes 
-\code{ModelProviderClass} \code{Person}, \code{Professor} and \code{Student}.
+\code{ModelProviderClass}, \code{Person}, \code{Professor} and \code{Student}.
 
 \begin{figure}[t]
 	\centering
@@ -365,7 +365,10 @@ To import Java classes into Dresden OCL two possibilities exist:
 	  classes (either as types of properties and operations or their arguments) are
 	  imported as well. \textbf{Please be aware, that only byte code classes
 	  (\code{*.class}) and not source code classes \code{*.java} can be imported
-	  into Dresden OCL!}
+	  into Dresden OCL!} However, the graphical, Eclipse-based version supports
+	  selecting \code{*.java} files instead. In most cases the byte code resolving
+	  should work correctly. If you intend using Dresden OCL without the provided
+	  UI, you have to select \code{*.class} files instead.
 	\item Alternatively, the path leading to the Java class to be imported can be 
 	  declared in a text file matching to the file naming pattern
 	  \code{*.javamodel}. This alternative was implemented to support the import of
@@ -414,7 +417,7 @@ Dresden OCL allows to import \acl{XSD}s (\acs{XSD}) as models. Typically,
 \section{Supported Model Instances In Dresden OCL}
 \label{sect:info:modelinstances}
 
-Dresden OCL is adapted to and thus allows the import of multiple types of model 
+Dresden OCL is adapted to and thus, allows the import of multiple types of model 
 instances. Which types of model instances are supported by Dresden OCL is 
 documented in this section. Possible use cases for
 the different models and model instances supported by Dresden \acs{OCL} are
@@ -426,7 +429,7 @@ given in Section~\ref{sec:usecases}.
 Besides the creation of meta-models or \acs{DSL}s, the \acf{EMF} allows the 
 generation of simple model editors that can be used to model instances of the 
 Ecore-based models created before. E.g., you can create a simple \acs{DSL} 
-using \acs{EMF}. Afterwards you can model an instance of this \acs{DSL} using 
+using \acs{EMF}. Afterwards, you can model an instance of this \acs{DSL} using 
 an Ecore-generated model editor. Now, you can import your \acs{DSL} as a model 
 into Dresden OCL and you can parse \acs{OCL} constraints defined on your
 \acs{DSL}. To check these constraints on the created model instance, you have to
@@ -500,7 +503,7 @@ public class ModelInstanceProviderClass {
 
 Dresden OCL supports to import \acs{XML} files as model instances. Although
 \acs{XML} files cannot contain executable code, their elements can be used as
-data to be verified by structural \acs{OCL} integrity constraints. Typically 
+data to be verified by structural \acs{OCL} integrity constraints. Typically, 
 \acs{XML} files conform to the file name matching pattern \code{*.xml}.
 
 
@@ -508,5 +511,5 @@ data to be verified by structural \acs{OCL} integrity constraints. Typically
 \section{Summary}
 
 This chapter documented which version of OCL is supported by Dresden OCL. 
-Furthermore, supported types of models, and model instances were presented. The
+Furthermore, supported types of models and model instances were presented. The
 following chapter will explain how to install and use Dresden OCL.

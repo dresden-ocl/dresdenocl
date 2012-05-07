@@ -1,5 +1,6 @@
 #TeXlipse project settings
-#Wed May 25 09:33:56 CEST 2011
+#Sun May 06 11:05:50 CEST 2012
+markTmpDer=true
 builderNum=2
 outputDir=tex/
 makeIndSty=
@@ -8,6 +9,6 @@ outputFormat=pdf
 tempDir=tex
 mainTexFile=manual.tex
 outputFile=manual.pdf
-langSpell=
+langSpell=en
 markDer=true
 srcDir=tex/

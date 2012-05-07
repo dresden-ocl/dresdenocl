@@ -14,7 +14,7 @@ available at the project's website~\cite{WWW:toolkit}.
 This chapter explains the installation of Dresden OCL and how to load a 
 model, an instance of such a model, and \acs{OCL} constraints defined on such a 
 model into Dresden OCL. Besides the Eclipse distribution, Dresden OCL can 
-also be used as a stand-alone Java Library. If you plan to use the stand-alone 
+also be used as a stand-alone Java library. If you plan to use the stand-alone 
 distribution you can skip this chapter and continue with 
 Chapter~\ref{chapter:standalone}. However, this chapter explains the basic 
 concepts of Dresden OCL. Although you cannot use the shown GUI wizards and 
@@ -147,9 +147,9 @@ minimum installation. The answer to this question depends on the things you
 plan to do with Dresden OCL. Table~\ref{tab:plugins} in the appendix of 
 this manual shows a list of the currently existing plug-ins of
 Dresden OCL, that are related to different features. You should install 
-at least the \keyword{Core} feature, at least one meta-model of the 
-\keyword{Meta-Models} feature, and the complete \keyword{Parser} feature. The 
-\keyword{Interpreter}, the \keyword{OCL22Java}m and the
+at least the \keyword{Core} feature, at least one metamodel of the 
+\keyword{Metamodels} feature, and the complete \keyword{Parser} feature. The 
+\keyword{Interpreter}, the \keyword{OCL22Java} and the
 \keyword{OCL2SQL} features are only required if you want to interpret
 constraints or to generate code from constraints, respectively. If you import or interpret model instances, you need to install 
 the \keyword{Model Instances} feature as well. The examples of the 
@@ -173,17 +173,7 @@ be cleaning the
 \reference{tudresden\linebreak[0].ocl\-20\linebreak[0].pivot.language.ocl.staticsemantics}
 plug-in or by running the \keyword{Ant} task \reference{clean all} of the same plug-in.
 
-Each plug-in that contains Scala code (\reference{org.kiama.attribution},
-\reference{tudresden.ocl20.pivot\linebreak[0].lan\-guage\linebreak[0].ocl.semantics},
-\reference{tudresden.ocl20.pivot.language.ocl.staticsemantics} and
-\reference{tu\-dres\-den\linebreak[0].ocl20.pivot.pivotmodel.semantics})
-contains a
-\keyword{build.xml} file that comes with three targets: \reference{clean all}
-to clean the selected project and all dependent projects, \reference{clean} to
-only clean the selected project and \reference{compile} to simply compile changes
-that have been made since the last build.
-
-In either case, you have to run the \keyword{ANT} scripts in the same 
+You have to run the \keyword{ANT} scripts in the same 
 \keyword{JRE} as Eclipse. Figures~\ref{pic:intro:parserbuild01} 
 and~\ref{pic:intro:parserbuild02} show how to achieve this. If an error like 
 ``Unable to find javac compiler.'' occurs, you might be trying to run the
@@ -195,8 +185,7 @@ If you want to make changes to the static semantics evaluation of the parser you
 should consider installing the \emph{Scala IDE} from 
 \url{http://www.scala-lang.org/scala-eclipse-plugin}. Be aware that the Scala
 code is version 2.7.7 which is not compatible with Scala 2.8 and therefore you
-cannot use the current \emph{Scala IDE} which supports only Scala 2.8. The
-\emph{Scala IDE} runs with Eclipse 3.5 and 3.6.
+cannot use the current \emph{Scala IDE} which supports only Scala 2.8. 
 
 In order to use the Scala compiler of the IDE, you have to go to the
 \eclipse{Properties} of each Scala plug-in, select the tab \eclipse{Builders},
@@ -245,11 +234,11 @@ which is located in the plug-in
 Figure~\ref{pic:examples:simple01} shows a class diagram of the Simple Example.
 
 Dresden OCL provides more examples than the Simple Example. The different 
-examples use different meta-models which is possible with the \textit{Pivot
-Model} architecture of the Toolkit. An overview about all examples provided 
+examples use different metamodels which is possible with the \textit{Pivot
+Model} architecture of the Toolkit. An overview on all examples provided 
 with Dresden OCL is listed in Table~\ref{tab:examples} in the appendix of
-this manual. The Simple Example can be used with two different meta-models. 
-These are \keyword{\acs{UML} 2} (based on \keyword{\acs{Eclipse MDT} 
+this manual. The Simple Example can be used with two different metamodels. 
+These are \keyword{\acs{UML}~2} (based on \keyword{\acs{Eclipse MDT} 
 \acs{UML}}) and \keyword{Java}.
 
 
@@ -259,7 +248,7 @@ Dresden OCL provides its own perspective within Eclipse that contains all views
 and editors provided with Dresden OCL. To ease the work with Dresden OCL, you
 should now switch to the Dresden OCL perspective. Select the menu option
 \eclipse{Window -> Open Perspective -> Other \ldots} and select the perspective
-\eclipse{Dresden OCL} (cf. Fig.~\ref{pic:introduction:perspective})
+\eclipse{Dresden OCL} (cf. Fig.~\ref{pic:introduction:perspective}).
 	
 \begin{figure}[!t]
 	\centering
@@ -301,7 +290,7 @@ Now you can import the model into Dresden OCL. Select the
 \reference{model/simple.uml} file in the \eclipse{Project Explorer} and open the
 context menu (right mouse click). Select the menu option
 \eclipse{Dresden OCL > Load Model} (cf. Fig.~\ref{pic:intro:loadmodel00}). In
-the opened wizard you have to select the meta-model \acs{UML}2 and click the
+the opened wizard you have to select the metamodel \acs{UML}2 and click the
 \eclipse{Finish} button (cf. Fig.~\ref{pic:intro:loadmodel01}).
 
 Figure~\ref{pic:intro:loadmodel02} shows the imported Simple Example model,
@@ -350,11 +339,8 @@ elements instantiating the classes described in the opened model. Which kinds
 of model instances are supported in Dresden OCL is documented in
 Section~\ref{sect:info:modelinstances}. 
 Since the Simple Example provides a Java model instance, we now have to select a
-\code{class} file. \code{class} files are not displayed in the \eclipse{Project
-Explorer}. Thus, switch to the \eclipse{Navigator} that should be visible at the
-left hand side of the Dresden OCL perspective as well and select the
-file
-\reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/\linebreak[0]sim\-ple/\linebreak[0]in\-stance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].class}
+\code{*.java} or \code{*.class} file. Select the file
+\reference{src/tudresden/ocl20/\linebreak[0]pivot/examples/\linebreak[0]sim\-ple/\linebreak[0]in\-stance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].java}
 of the Simple Example in the \eclipse{Project Explorer}. Open the context menu 
 and select the menu option \eclipse{Dresden OCL > Load Model Instance} (cf.
 Fig.~\ref{pic:intro:loadInstance00}).
@@ -462,10 +448,12 @@ Table~\ref{tab:usecases} and shortly explained in the following.
   \textbf{BR Specification and Evaluation} & \\
   \hline
   UML-based model,\newline e.g., \texttt{model01.uml} &
-  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.class} \\
+  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.java}
+  \\
   \hline
-  Java classes,\newline e.g., \texttt{Model01.class} &
-  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.class} \\
+  Java classes,\newline e.g., \texttt{Model01.java} &
+  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.java}
+  \\
   \hline
   XML Schema (\acs{XSD}),\newline e.g., \texttt{mySchema.xsd} &
   XML instance (data),\newline e.g., \texttt{Instance01.xml} \\
@@ -490,7 +478,7 @@ import the model file (e.g., \texttt{mydsl.ecore}) as a model into Dresden
 you can specify \acs{OCL} constraints using the \acs{OCL} parser/editor of
 Dresden \acs{OCL}. You can import istances of your \acs{DSL} into Dresden
 \acs{OCL} using the model instance importer for \acs{EMF}/Ecore-based instances
-(e.g., \texttt{model01.mydsl}) to interprete the specified constraints on them.
+(e.g., \texttt{model01.mydsl}) to interpret the specified constraints on them.
 
 \subsubsection{WFRs for the UML Metamodel}
 Another common use case is the specification of \acs{OCL} constraints on the
@@ -499,8 +487,8 @@ Another common use case is the specification of \acs{OCL} constraints on the
 \acs{UML}-metamodel of the Eclipse \acf{MDT}. You can find the required
 \texttt{uml.ecore} within the Eclipse plug-in \texttt{org.eclipse.uml.uml} of
 Eclipse MDT. Please note, when importing this metamodel into Dresden \acs{OCL},
-you have to import using the \acs{EMF}/Ecore model importer and not a \acs{UML}
-model importer (since the \acs{UML} metamodel was modelled in \acs{EMF})!
+you have to import it using the \acs{EMF}/Ecore model importer and not a
+\acs{UML} model importer (since the \acs{UML} metamodel was modelled in \acs{EMF})!
 Afterwards, you can import a \acs{UML} model as an instance of the metamodel to
 evaluate constraints on it (e.g., \texttt{model.uml}). Again, you have use
 the \acs{EMF}/Ecore model instance importer.
@@ -517,22 +505,22 @@ model (e.g., \texttt{model01.uml}), typically containing a class model. You can
 import \acs{UML} class models into Dresden \acs{OCL} using the corresponding
 model importer. For \acs{OCL} evaluation a
 possible model instance is a set of runtime objects by using a Java class and
-the Java model instance importer (e.g., \texttt{Instance01.class}). Details how
+the Java model instance importer (e.g., \texttt{Instance01.java}). Details how
 a Java class usable as a Java model instance must be implemented are documented
 in Section~\ref{subsec:javaInstance}.
 
 \subsubsection{BRs for Java Classes}
 Another possible use case is the use of a set of Java classes as a model for
-\acs{OCL} constraint specification (e.g., \texttt{Model01.class}). A Java class
+\acs{OCL} constraint specification (e.g., \texttt{Model01.java}). A Java class
 can be imported as a model using the Java model importer. Details how the class
 is imported as a model are documented in Section~\ref{subsec:javaModel}. Again,
 a typical model istance would be a set of Java objects as mentioned above
-(e.g., \texttt{Instance01.class}).
+(e.g., \texttt{Instance01.java}).
 
 \subsubsection{BRs for XML Schemata}
-Dresden \acs{OCL} supports the definition of \acs{OCL} rules on \acl{XSDs}
+Dresden \acs{OCL} supports the definition of \acs{OCL} rules on \acl{XSD}s
 (\acs{XSD}s) as well (e.g., \texttt{mySchema.xsd}) using the \acs{XSD} model
-importer. Obviously an \acs{XML} file would be an appropriate model instance, 
+importer. Obviously an \acs{XML} file would be an appropriate model instance,
 using the \acs{XML} model instance importer (e.g., \texttt{Instance01.xml}).
 
 
