@@ -27,8 +27,8 @@ required. The structure of the example is described below.
 
 The \reference{lib} folder contains all libraries that are needed when executing
 the example. This includes several Eclipse jar files as well as
-stringtemplate.jar that is needed for the code generation facilities of the 
-application and others. The \reference{plugins} folder contains all jar files
+\code{stringtemplate.jar} that is needed for the code generation facilities of
+the application and others. The \reference{plugins} folder contains all jar files
 that are provided by Dresden OCL. When using the example as an Eclipse or
 Netbeans project all jars are already on the classpath. When using the command
 line or other tools, you probably have to add these jars to the classpath manually.
@@ -38,7 +38,7 @@ line or other tools, you probably have to add these jars to the classpath manual
 
 The \reference{resources} folder has three sub-folders. In
 \reference{constraints} the OCL constraint files for three different examples
-are located. The \reference{model} folder contains the model files. Note, that 
+are located. The \reference{model} folder contains the model files. Note that 
 in order to use the Java models, you need the appropriate \code{.class} files
 that are contained in a folder structure that represents the package name of the
 classes. Also, all classes that are referenced by the model need to be located
@@ -63,7 +63,7 @@ be aware that this will significantly slow down the execution time).
 \subsection{Using the Example}
 
 The \reference{src} folder contains one class, named 
-\code{StandaloneDresden OCLExample.java}. It contains a \code{main} method that 
+\code{StandaloneDresdenOCLExample.java}. It contains a \code{main} method that 
 executes numerous examples.
 
 \paragraph{Royal \& Loyal}
@@ -164,7 +164,7 @@ library, you can manipulate the given file or create a new one and change the
 
 \subsection{Adding and Removing Methods}
 The central class for standalone applications is the \code{StandaloneFacade}. 
-Adding new methods to the facade should pose no problems as long as all needed
+Adding new methods to the facade should pose no problems as long as all required
 libraries are on the classpath. If the facade offers too much possibilities, 
 you can delete all methods you do not need. Then, you are able to remove 
 libraries from the classpath that are no longer needed (e.g., all UML related 
