@@ -178,7 +178,7 @@ public class CarOcl2SqlTest {
 			constraints = Ocl22Parser.INSTANCE.doParse(
 					model,
 					URI.createFileURI(AbstractDresdenOclTest.getFile(
-							"constraints/university_complex.ocl",
+							"constraints/car.ocl",
 							Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 		} catch (ParseException e) {
 			fail("Can't parse the constraints");

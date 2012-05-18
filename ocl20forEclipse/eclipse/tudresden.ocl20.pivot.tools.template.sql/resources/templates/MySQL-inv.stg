@@ -57,3 +57,7 @@ IF($select$ IS NULL,NULL,1)
 feature_call_string_concat(operand1,operand2) ::= <<
 CONCAT($operand1$,$operand2$)
 >>
+
+feature_call_string_matches(operand1,operand2) ::= <<
+$operand1$ REGEXP $operand2$
+>>

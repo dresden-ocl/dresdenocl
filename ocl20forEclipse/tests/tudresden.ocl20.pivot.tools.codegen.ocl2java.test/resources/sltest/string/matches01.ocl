@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testStringMatches(source: String, arg01: String): Boolean =
+source.matches(arg01)
+
+endpackage

@@ -339,6 +339,10 @@ CREATE OR REPLACE VIEW tudOclInv15_12 AS
 (SELECT * FROM O_Student AS self
 WHERE NOT ((self.firstName > self.lastName)));
 
+CREATE OR REPLACE VIEW tudOclInv15_13 AS
+(SELECT * FROM O_Student AS self
+WHERE NOT (self.firstName SIMILAR TO '[:alpha:]*'));
+
 CREATE OR REPLACE VIEW tudOclInv16_1 AS
 (WITH RECURSIVE tudOclInv16_1_1 (variable1, variable2) AS (
 (SELECT temp2.P_Facility, temp1.P_Facility

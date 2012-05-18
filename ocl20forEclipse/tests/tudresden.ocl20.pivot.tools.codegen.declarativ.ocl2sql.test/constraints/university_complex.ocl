@@ -200,6 +200,8 @@ inv tudOclInv15_11: self.firstName >= self.lastName
 
 inv tudOclInv15_12: self.firstName > self.lastName
 
+inv tudOclInv15_13: self.firstName.matches('[:alpha:]*')
+
 --Context Facility
 context Facility
 inv tudOclInv16_1: self->closure(subFacility)->size() > 1

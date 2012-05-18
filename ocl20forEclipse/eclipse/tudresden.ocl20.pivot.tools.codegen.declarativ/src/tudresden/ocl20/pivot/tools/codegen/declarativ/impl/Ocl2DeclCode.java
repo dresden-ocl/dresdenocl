@@ -1022,6 +1022,9 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		else if (operationName.equals("substring")) {
 			resultExp = handleStringSubstring(sourceCode, firstArg, args.get(1));
 		}
+		else if (operationName.equals("matches")) {
+			resultExp = handleStringMatches(sourceCode, firstArg);
+		}
 
 		// BASIC TYPE - Real and Integer operations
 		else if (operationName.equals("abs")) {
@@ -1922,6 +1925,22 @@ public class Ocl2DeclCode extends ExpressionsSwitch<ICode> implements
 		template.addCode("end", ICode);
 
 		return template;
+	}
+	
+	/**
+	 * Generates a declarative code fragment for a matches operation.
+	 * 
+	 * @param sourceCode
+	 *          declarative code fragment of the operand (the string to build the
+	 *          substring from)
+	 * @param firstArg
+	 *          the regular Expression
+	 * @return declarative code fragment for the substring operation
+	 */
+	protected ICode handleStringMatches(ICode sourceCode,
+			ICode firstArg) {
+
+		return this.createTwoOperandOperation("feature_call_string_matches", sourceCode, firstArg);
 	}
 
 	/**

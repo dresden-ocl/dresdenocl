@@ -127,6 +127,10 @@ feature_call_string_substring(operand,start,end) ::= <<
 SUBSTR($operand$, $start$, $end$ - $start$ + 1)
 >>
 
+feature_call_string_matches(operand1,operand2) ::= <<
+REGEXP_LIKE($operand1$,$operand2$)
+>>
+
 feature_call_int_max(operand1,operand2) ::= <<
 GREATEST($operand1$,$operand2$)
 >>

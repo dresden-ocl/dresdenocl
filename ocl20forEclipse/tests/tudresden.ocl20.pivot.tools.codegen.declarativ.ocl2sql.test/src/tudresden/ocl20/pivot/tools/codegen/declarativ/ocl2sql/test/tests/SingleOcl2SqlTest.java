@@ -446,41 +446,47 @@ public abstract class SingleOcl2SqlTest {
 
 		this.runConstraint(49);
 	}
-
+	
 	@Test
-	public void runConstraint16_1() {
+	public void runConstraint15_13() {
 
 		this.runConstraint(50);
 	}
 
 	@Test
-	public void runConstraint16_2() {
+	public void runConstraint16_1() {
 
 		this.runConstraint(51);
 	}
 
 	@Test
-	public void runConstraint16_3() {
+	public void runConstraint16_2() {
 
 		this.runConstraint(52);
 	}
 
 	@Test
-	public void runConstraint16_4() {
+	public void runConstraint16_3() {
 
 		this.runConstraint(53);
 	}
 
 	@Test
-	public void runConstraint16_5() {
+	public void runConstraint16_4() {
 
 		this.runConstraint(54);
 	}
 
 	@Test
-	public void runConstraint16_6() {
+	public void runConstraint16_5() {
 
 		this.runConstraint(55);
+	}
+
+	@Test
+	public void runConstraint16_6() {
+
+		this.runConstraint(56);
 	}
 
 }

@@ -34,6 +34,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
@@ -291,6 +294,37 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 		return result;
 	}
 
+	public OclBoolean matches(OclString s) {
+
+		OclBoolean result;
+
+		result = checkInvalid(EssentialOclPlugin.getOclLibraryProvider()
+				.getOclLibrary().getOclBoolean(), this, s);
+
+		if (result == null)
+			result = checkUndefined("matches", EssentialOclPlugin
+					.getOclLibraryProvider().getOclLibrary().getOclBoolean(),
+					this, s);
+
+		if (result == null) {
+			String thisString = this.getModelInstanceString().getString();
+			String thatString = s.getModelInstanceString().getString();
+			Matcher m = Pattern.compile("\\[:([a-zA-Z])([a-zA-Z]*):\\]").matcher(thatString);
+			while ( m.find() )  {
+				thatString = thatString.replaceAll("\\[:"+m.group(1)+m.group(2)+":\\]", "\\\\p\\{"+m.group(1).toUpperCase()+m.group(2).toLowerCase()+"\\}");
+			}
+			try {
+				result =  JavaStandardLibraryFactory.INSTANCE.createOclBoolean(thisString.matches(thatString));
+			} catch (PatternSyntaxException e) {
+				result = JavaStandardLibraryFactory.INSTANCE.createOclInvalid(EssentialOclPlugin.getOclLibraryProvider()
+						.getOclLibrary().getOclBoolean(), e);
+			}
+
+		}
+
+		return result;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 

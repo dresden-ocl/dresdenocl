@@ -187,4 +187,18 @@ public interface OclString extends OclLibraryObject {
 	 *         <code>s</code>.
 	 */
 	OclBoolean isGreaterEqual(OclString s);
+	
+	/** TODO: change javadoc
+	 * Queries the index in <code>this</code> at which <code>s</code> is a
+	 * substring of <code>this</code>, or zero if <code>s</code> is not a
+	 * substring of <code>this</code>. The empty string is considered to be a
+	 * substring of every string but the empty string, at index 1. No string is a
+	 * substring of the empty string.
+	 * 
+	 * @param s
+	 *          the substring to look for
+	 * @return the index in <code>this</code> at which <code>s</code> is a
+	 *         substring of <code>this</code>
+	 */
+	OclBoolean matches(OclString s);
 }

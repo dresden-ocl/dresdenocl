@@ -59,6 +59,9 @@
     <ownedOperation name="toLowerCase" type="//@oclString"/>
     <ownedOperation name="toReal" type="//@oclReal"/>
     <ownedOperation name="toUpperCase" type="//@oclString"/>
+    <ownedOperation name="matches" type="//@oclBoolean">
+      <ownedParameter name="s" type="//@oclString"/>
+    </ownedOperation>
   </oclString>
   <oclInteger name="Integer" superType="//@oclReal" kind="Integer">
     <ownedOperation name="-" type="//@oclInteger"/>

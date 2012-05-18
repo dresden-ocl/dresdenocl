@@ -425,6 +425,16 @@ inv stringIndexOfOperation		: (self.kind = PrimitiveTypeKind::String
 									)
 								  )
 								  or self.kind <> PrimitiveTypeKind::String
+						
+inv stringMatchesOperation		: (self.kind = PrimitiveTypeKind::String
+									and self.ownedOperation->exists(o |
+										o.name = 'matches'
+										and o.inputParameter->size() = 1
+										and o.inputParameter->first().type = self
+										and o.type.oclAsType(PrimitiveType).kind = PrimitiveTypeKind::Boolean
+									)
+								  )
+								  or self.kind <> PrimitiveTypeKind::String
 								  
 
 inv stringEqualsIgnoreCaseOp	: (self.kind = PrimitiveTypeKind::String

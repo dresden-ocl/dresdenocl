@@ -154,6 +154,7 @@ public class TestString extends AbstractDiffTest {
 
 		this.compareFragmentCodeGeneration("sltest/string", "indexOf01");
 	}
+	
 
 	/**
 	 * <p>
@@ -181,6 +182,20 @@ public class TestString extends AbstractDiffTest {
 		this.compareFragmentCodeGeneration("sltest/string", "lessThanEqual01");
 	}
 
+	
+	/**
+	 * <p>
+	 * Tests the instrumentation of the constraint.
+	 * </p>
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testMatchtes01() throws Exception {
+		this.compareFragmentCodeGeneration("sltest/string", "matches01");
+	}
+	
+		
 	/**
 	 * <p>
 	 * Tests the instrumentation of the constraint.

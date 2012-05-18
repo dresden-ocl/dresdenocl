@@ -52,7 +52,9 @@ public class JavaOclStringTest {
 			.createOclString("42.23");
 	private final OclString _true = myStandardLibraryFactory
 			.createOclString("true");
-
+	private final OclString regexTest = myStandardLibraryFactory.createOclString("[a-zA-Z_ ]*");
+	private final OclString regexAlpha = myStandardLibraryFactory.createOclString("[:alpha:]+");
+	private final OclString regexWord = myStandardLibraryFactory.createOclString("\\w+");
 	private final OclInteger integer0 = myStandardLibraryFactory
 			.createOclInteger(0L);
 	private final OclInteger integer1 = myStandardLibraryFactory
@@ -163,6 +165,14 @@ public class JavaOclStringTest {
 		assertTrue(OCL_rocks.indexOf(rocks).isEqualTo(integer5).isTrue());
 	}
 
+	@Test
+	public void matches() {
+		assertTrue(OCL.matches(OCL).isTrue());
+		assertTrue(OCL.matches(regexAlpha).isTrue());
+		assertTrue(OCL.matches(regexWord).isTrue());
+		assertTrue(OCL_rocks.matches(regexTest).isTrue());
+	}
+	
 	@Test
 	public void testEqualsIgnoreCase() {
 

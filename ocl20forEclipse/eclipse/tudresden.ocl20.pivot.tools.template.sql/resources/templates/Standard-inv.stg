@@ -527,6 +527,10 @@ feature_call_string_substring(operand,start,end) ::= <<
 SUBSTRING($operand$, $start$, $end$ - $start$ + 1)
 >>
 
+feature_call_string_matches(operand1,operand2) ::= <<
+$operand1$ SIMILAR TO $operand2$
+>>
+
 feature_call_int_abs(operand1) ::= <<
 ABS($operand1$)
 >>

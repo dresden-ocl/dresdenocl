@@ -512,6 +512,12 @@ negativeOperationOnReal(sourceExp) ::= <<
 -($sourceExp$)
 >>
 
+// --- String.matches(String) ---
+matchesOperationOnString(sourceExp, argsExp) ::= <<
+Pattern.compile($argsExp$).matcher($sourceExp$).find()
+>>
+
+
 // --- Boolean.not(Boolean) ---
 notOperationOnBoolean(sourceExp) ::= <<
 !$sourceExp$
