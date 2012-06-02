@@ -296,7 +296,7 @@ public class UML2Model extends AbstractModel implements IModel {
 						Namespace adaptedNamespace = this.factory
 								.createNamespace(umlPackage, this.rootNamespace);
 						if (adaptedNamespace != null
-								&& !this.rootNamespace.getNestedNamespace()
+								&& !this.rootNamespace.equals(adaptedNamespace) && !this.rootNamespace.getNestedNamespace()
 										.contains(adaptedNamespace))
 							this.rootNamespace
 									.addNestedNamespace(adaptedNamespace);
