@@ -514,7 +514,7 @@ negativeOperationOnReal(sourceExp) ::= <<
 
 // --- String.matches(String) ---
 matchesOperationOnString(sourceExp, argsExp) ::= <<
-Pattern.compile($argsExp$).matcher($sourceExp$).find()
+Pattern.compile($stringUtility()$.getJavaRegEx($argsExp$)).matcher($sourceExp$).find()
 >>
 
 
@@ -794,6 +794,11 @@ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences
 // --- Utility Class for Set Operations ---
 setUtility() ::= <<
 tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets
+>>
+
+// --- Utility Class for String Operations ---
+stringUtility() ::= <<
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclString
 >>
 
 // --- Conversion operation from Number to Integer. */

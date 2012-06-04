@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2008-2010 by Claas Wilke (claas.wilke@tu-dresden.de)
+Copyright (C) 2008-2012 by Bjoern Freitag (bjoern.freitag@inf.tu-dresden.de)
 
 This file is part of the OCL 2 Java Code Generator of Dresden OCL.
 
@@ -18,20 +18,31 @@ with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.test;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclString;
 
 /**
  * <p>
- * Provides a jUnit Test Suite containing all tests of this package.
+ * Provides test cases to test the methods of the class {@link OclString}.
  * </p>
  * 
- * @author Claas Wilke
+ * @author Bjoern Freitag
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses( { OclBagsTest.class, OclCollectionsTest.class,
-		OclOrderedSetsTest.class, OclSequencesTest.class, OclSetsTest.class, OclStringTest.class })
-public class AllUtilTests {
-	// this class remains completely empty,
-	// being used only as a holder for the above annotations
+public class OclStringTest {
+
+	@Test
+	public void testgetJavaRegex() {
+
+		assertEquals("\\p{Alpha}",OclString.getJavaRegEx("[:alpha:]"));
+		assertEquals("\\p{Lower}",OclString.getJavaRegEx("[:lower:]"));	
+		assertEquals("testString",OclString.getJavaRegEx("testString"));
+		assertEquals("testString\\p{Alpha}\\p{Lower}",OclString.getJavaRegEx("testString[:alpha:][:lower:]"));
+		assertEquals("[:alp:ha:]",OclString.getJavaRegEx("[:alp:ha:]"));
+	
+
+	}
+
 }
