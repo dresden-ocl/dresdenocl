@@ -31,7 +31,7 @@ For this guide, Eclipse 3.7 has been used.
 
 Installation:
 
-1.1. We recomment using Subclipse 1.6 since we were facing some problems
+1.1. We recommend using Subclipse 1.6 since we were facing some problems
 	with Subversive and svn+ssh. The version from the Eclipse Marketplace
 	does not (yet) come with a SVNKit connector and the JavaHL connector
 	caused problems too.
