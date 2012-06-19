@@ -10,8 +10,8 @@ How to run the toolkit in both situation is explained below.
 
 a) How to run a source code distribution
 
-If you got the source code distribution, import the directories located in the directory 'eclipse' 
-as plug-ins into your workspace. Afterwards you can run the plug-ins in a new Eclipse instance.
+Follow the steps listed in the detailed description below. Afterwards you 
+can run the plug-ins in a new Eclipse instance.
 
 b) How to run a binary distribution
 
@@ -23,6 +23,46 @@ For further details look into the tutorials provided in the directory 'doc'.
 More information about the Dresden OCL is also available at the Toolkit Website
 (http://dresden-ocl.sourceforge.net/).
 
+
+Detailed steps for running the source code distribution
+=======================================================
+
+For this guide, Eclipse 3.7 has been used.
+
+Installation:
+1. Install new software -> subclipse -> choose all 
+	We recomment using Subclipse 1.6 (the steps above) since we were 
+	facing some problems with Subversive and svn+ssh. The version 
+	from the Eclipse Marketplace does not (yet) come with a SVNKit 
+	connector and the JavaHL connector caused problems too.
+2. Window -> preferences -> team -> svn -> svn-interface == svnkit
+3. Add repository: svn+ssh://<<username@>>svn-st.inf.tu-dresden.de/srv/svn/dresdenocl
+	for readonly access, use the url http://svn-st.inf.tu-dresden.de/svn/dresdenocl/
+4. Install AspectJ (from marketplace)
+5. Install new software -> Indigo -> Modeling -> 
+	* Ecore
+	* EMF SDK
+	* UML 2 Extender
+	* XSD SDK
+6. Install orbit
+	* Install new software -> Available Software Sites -> filter for orbit and choose the update-site
+	* Click OK
+	* Choose the orbit update-site -> install the "Apache Jakarta Log4J plugin"
+7. Checkout http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText -> EMFText.access 
+8. Checkout the projects listed below
+9. Staticsemantics -> build.xml -> Run As -> 2nd entry of Ant-Build 
+	-> clean + compile (tab "Target") 
+	-> run jre in same workspace (tab "JRE")  
+	-> Run
+
+
+Check out the following projects:
+- oclforeclipse -> eclipse -> all
+- oclforeclipse -> experimental -> org.dresdenocl.examples.uml
+- oclforeclipse -> tests -> all
+
+CodeStyle
+- http://st.inf.tu-dresden.de/stwiki/index.php/OCL:Best_Practices
 
 Bugs and known issues
 =====================
