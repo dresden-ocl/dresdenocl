@@ -36,7 +36,7 @@ Installation:
 	from the Eclipse Marketplace does not (yet) come with a SVNKit 
 	connector and the JavaHL connector caused problems too.
 2. Window -> preferences -> team -> svn -> svn-interface == svnkit
-3. Add repository: svn+ssh://<<username@>>svn-st.inf.tu-dresden.de/srv/svn/dresdenocl
+3. Add repository: svn+ssh://<<username>>@svn-st.inf.tu-dresden.de/srv/svn/dresdenocl
 	for readonly access, use the url http://svn-st.inf.tu-dresden.de/svn/dresdenocl/
 4. Install AspectJ (from marketplace)
 5. Install new software -> Indigo -> Modeling -> 
