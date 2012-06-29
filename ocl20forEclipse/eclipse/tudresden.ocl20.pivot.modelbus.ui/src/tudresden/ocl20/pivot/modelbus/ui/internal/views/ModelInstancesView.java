@@ -414,11 +414,8 @@ public class ModelInstancesView extends ViewPart implements
 
 		/* Get the action or initialize it. */
 		if (aModelsActions != null) {
-			result = aModelsActions.get(modelInstance.getModel());
-		}
-		// no else.
-
-		else {
+			result = aModelsActions.get(modelInstance);
+		} else {
 			aModelsActions = new HashMap<IModelInstance, ModelInstanceSelectionAction>();
 		}
 
