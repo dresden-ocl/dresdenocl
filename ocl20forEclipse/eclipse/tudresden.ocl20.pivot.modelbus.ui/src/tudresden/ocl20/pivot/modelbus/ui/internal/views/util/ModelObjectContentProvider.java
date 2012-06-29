@@ -148,7 +148,7 @@ public class ModelObjectContentProvider implements IStructuredContentProvider,
 						propertyValue = null;
 					}
 
-					if (!adaptedFeatures.containsKey(property)) {
+					if (!adaptedFeatures.containsKey(property.getName())) {
 						ModelInstanceObjectProperty modelInstanceObjectProperty;
 						modelInstanceObjectProperty = new ModelInstanceObjectProperty(
 								imiObject, property, propertyValue);
