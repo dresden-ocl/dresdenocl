@@ -87,8 +87,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	private StructuredViewer modelViewer;
 
 	/**
-	 * The {@link StructuredViewer} to show the {@link IModelInstanceType}s which
-	 * can be selected.
+	 * The {@link StructuredViewer} to show the {@link IModelInstanceType}s
+	 * which can be selected.
 	 */
 	private StructuredViewer miTypeViewer;
 
@@ -101,7 +101,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param selection
-	 *          The current {@link IStructuredSelection} or <code>null</code>.
+	 *            The current {@link IStructuredSelection} or <code>null</code>.
 	 */
 	public LoadModelInstancePage(IStructuredSelection selection) {
 
@@ -115,6 +115,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -152,6 +153,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #setFileTextBoxText(java.lang.String)
@@ -163,6 +165,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #updatePageComplete()
@@ -225,7 +228,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 					/* Check if model instance file exists. */
 					modelInstanceFile = modelInstanceFilePath.toFile();
 
-					if (modelInstanceFile == null || !modelInstanceFile.exists()) {
+					if (modelInstanceFile == null
+							|| !modelInstanceFile.exists()) {
 						setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgModelFileNotExisting);
 
 						complete = false;
@@ -237,9 +241,10 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 					/* Check if the corresponding .class file exists */
 					if (complete
-							&& modelInstanceFilePath.getFileExtension().equalsIgnoreCase(
-									"java")
-							&& !new File(getCorrespondingClassFileName(modelInstanceFileName))
+							&& modelInstanceFilePath.getFileExtension()
+									.equalsIgnoreCase("java")
+							&& !new File(
+									getCorrespondingClassFileName(modelInstanceFileName))
 									.exists()) {
 						this.setErrorMessage(ModelBusUIMessages.LoadModelInstancePage_ErrorMsgCorrespondingClassFileNotExisting);
 						complete = false;
@@ -285,8 +290,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		IModel result;
 		IStructuredSelection modelViewerSelection;
 
-		modelViewerSelection =
-				(IStructuredSelection) this.modelViewer.getSelection();
+		modelViewerSelection = (IStructuredSelection) this.modelViewer
+				.getSelection();
 		result = (IModel) modelViewerSelection.getFirstElement();
 
 		return result;
@@ -305,8 +310,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		IModelInstanceType result;
 		IStructuredSelection miTypeViewerSelection;
 
-		miTypeViewerSelection =
-				(IStructuredSelection) this.miTypeViewer.getSelection();
+		miTypeViewerSelection = (IStructuredSelection) this.miTypeViewer
+				.getSelection();
 		result = (IModelInstanceType) miTypeViewerSelection.getFirstElement();
 
 		return result;
@@ -318,8 +323,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * {@link IModelInstance} file.
 	 * </p>
 	 * 
-	 * @return The selected {@link IModelInstance} file or <code>null</code> if no
-	 *         model instance is selected.
+	 * @return The selected {@link IModelInstance} file or <code>null</code> if
+	 *         no model instance is selected.
 	 */
 	public File getModelInstanceFile() {
 
@@ -336,11 +341,12 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		if (modelInstanceFileName != null) {
 			modelInstanceFilePath = new Path(modelInstanceFileName);
 
-			if (modelInstanceFilePath.getFileExtension().equalsIgnoreCase("java")) {
-				modelInstanceFilePath =
-						new Path(getCorrespondingClassFileName(modelInstanceFileName));
+			if (modelInstanceFilePath.getFileExtension().equalsIgnoreCase(
+					"java")) {
+				modelInstanceFilePath = new Path(
+						getCorrespondingClassFileName(modelInstanceFileName));
 			}
-			
+
 			result = modelInstanceFilePath.toFile();
 		}
 		// no else.
@@ -355,7 +361,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param parent
-	 *          The parent of the created SWT Group.
+	 *            The parent of the created SWT Group.
 	 */
 	private void createModelInstanceFileGroup(Composite parent) {
 
@@ -366,8 +372,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		GridLayout layout;
 
 		modelFileGroupComposite = new Composite(parent, SWT.None);
-		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
-				false));
+		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
+				true, false));
 
 		/* We need a GridLayout to properly set additional margins. */
 		layout = new GridLayout();
@@ -377,8 +383,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		modelInstanceFileGroup = new Group(modelFileGroupComposite, SWT.NONE);
 		modelInstanceFileGroup
 				.setText(ModelBusUIMessages.LoadModelInstancePage_ModelFileGroupText);
-		modelInstanceFileGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
-				false));
+		modelInstanceFileGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE,
+				true, false));
 
 		/* Create another GridLayout for the modelInstanceFileGroup. */
 		layout = new GridLayout(4, false);
@@ -392,29 +398,30 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 				.setText(ModelBusUIMessages.LoadModelInstancePage_LocationLabelText);
 
 		/* Create modelInstanceFileTextBox. */
-		modelInstanceFileTextBox =
-				new Text(modelInstanceFileGroup, SWT.SINGLE | SWT.BORDER);
-		modelInstanceFileTextBox.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL,
-				true, false, 3, 1));
+		modelInstanceFileTextBox = new Text(modelInstanceFileGroup, SWT.SINGLE
+				| SWT.BORDER);
+		modelInstanceFileTextBox.setLayoutData(new GridData(SWT.FILL,
+				SWT.NORMAL, true, false, 3, 1));
 
 		/* Add ModifyListener to modelInstanceFileTextBox. */
 		modelInstanceFileTextBox.addModifyListener(new FileBoxListener(this));
 
 		/* The spacing label. */
 		spacer = new Label(modelInstanceFileGroup, SWT.NONE);
-		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2, 1));
+		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2,
+				1));
 
 		/* Create the buttons to select files. */
-		browseWorkspaceButton =
-				createButton(modelInstanceFileGroup,
-						ModelBusUIMessages.LoadModelInstancePage_BrowseWorkspaceButtonText);
-		browseFileButton =
-				createButton(modelInstanceFileGroup,
-						ModelBusUIMessages.LoadModelInstancePage_BrowseFileSystemButtonText);
+		browseWorkspaceButton = createButton(
+				modelInstanceFileGroup,
+				ModelBusUIMessages.LoadModelInstancePage_BrowseWorkspaceButtonText);
+		browseFileButton = createButton(
+				modelInstanceFileGroup,
+				ModelBusUIMessages.LoadModelInstancePage_BrowseFileSystemButtonText);
 
 		/* Add listeners to the Buttons */
-		browseWorkspaceButton
-				.addSelectionListener(new BrowseWorkspaceListener(this));
+		browseWorkspaceButton.addSelectionListener(new BrowseWorkspaceListener(
+				this));
 		browseFileButton.addSelectionListener(new BrowseFileListener(this));
 	}
 
@@ -424,7 +431,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param parent
-	 *          The parent of the model selection part.
+	 *            The parent of the model selection part.
 	 */
 	private void createModelSelectionGroup(Composite parent) {
 
@@ -451,9 +458,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 				.setText(ModelBusUIMessages.LoadModelInstancePage_SelectMetamodelLabel);
 
 		/* Create the modelViewer to display the meta models. */
-		modelViewer =
-				new TableViewer(modelSelectionGroup, SWT.SINGLE | SWT.V_SCROLL
-						| SWT.BORDER);
+		modelViewer = new TableViewer(modelSelectionGroup, SWT.SINGLE
+				| SWT.V_SCROLL | SWT.BORDER);
 		modelViewer.setContentProvider(new ArrayContentProvider());
 		modelViewer.setLabelProvider(new ModelLabelProvider());
 		modelViewer.setInput(ModelBusPlugin.getModelRegistry().getModels());
@@ -473,7 +479,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param parent
-	 *          The parent of the model selection part.
+	 *            The parent of the model selection part.
 	 */
 	private void createModelInstanceTypeSelectionGroup(Composite parent) {
 
@@ -500,21 +506,21 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 				.setText(ModelBusUIMessages.LoadModelInstancePage_SelectModelInstanceTypeLabel);
 
 		/* Create the miTypeViewer to display the IModelInstanceTypes. */
-		this.miTypeViewer =
-				new TableViewer(miTypeSelectionGroup, SWT.SINGLE | SWT.V_SCROLL
-						| SWT.BORDER);
+		this.miTypeViewer = new TableViewer(miTypeSelectionGroup, SWT.SINGLE
+				| SWT.V_SCROLL | SWT.BORDER);
 		this.miTypeViewer.setContentProvider(new ArrayContentProvider());
-		this.miTypeViewer.setLabelProvider(new ModelInstanceTypeLabelProvider());
-		this.miTypeViewer.setInput(ModelBusPlugin.getModelInstanceTypeRegistry()
-				.getModelInstanceTypes());
+		this.miTypeViewer
+				.setLabelProvider(new ModelInstanceTypeLabelProvider());
+		this.miTypeViewer.setInput(ModelBusPlugin
+				.getModelInstanceTypeRegistry().getModelInstanceTypes());
 
 		/* Set miTypeViewer's LayoutData. */
 		miTypeViewerData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		this.miTypeViewer.getControl().setLayoutData(miTypeViewerData);
 
 		/* Add a Change Listener to the miTypeViewer. */
-		this.miTypeViewer
-				.addSelectionChangedListener(new ModelViewerListener(this));
+		this.miTypeViewer.addSelectionChangedListener(new ModelViewerListener(
+				this));
 	}
 
 	/**
@@ -554,24 +560,23 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		/* Eventually use a selected file as default resource for import. */
 		if (this.selection.getFirstElement() != null) {
 			/*
-			 * Use the name of the first Object in the selection as default text of
-			 * the fileNameTextBox.
+			 * Use the name of the first Object in the selection as default text
+			 * of the fileNameTextBox.
 			 */
 			selectedObject = selection.getFirstElement();
 
 			/*
 			 * Reflection is used here to avoid introducing a dependency to the
-			 * JDT-Framework, just in case that somebody uses DresdenOCL without Java
+			 * JDT-Framework, just in case that somebody uses DresdenOCL without
+			 * Java
 			 */
 			if (selectedObject.getClass().getName()
 					.equals("org.eclipse.jdt.internal.core.CompilationUnit")) {
 
 				try {
-					Method method =
-							selectedObject.getClass().getMethod("getCorrespondingResource",
-									(Class[]) null);
-					selectedObject =
-							(IResource) method.invoke(selectedObject, (Object[]) null);
+					Method method = selectedObject.getClass().getMethod(
+							"getCorrespondingResource");
+					selectedObject = (IResource) method.invoke(selectedObject);
 				} catch (Exception e) {
 					/*
 					 * If invocation fails, selection will be discarded
@@ -587,7 +592,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 				if (selectedResource.getType() == IResource.FILE) {
 
-					fileTextBoxContent = selectedResource.getRawLocation().toString();
+					fileTextBoxContent = selectedResource.getRawLocation()
+							.toString();
 
 					modelInstanceFileTextBox.setText(fileTextBoxContent);
 				}
@@ -606,8 +612,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		// no else.
 
 		/* By default select the first model instance type. */
-		miTypes =
-				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceTypes();
+		miTypes = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceTypes();
 
 		if (miTypes.length > 0) {
 			this.miTypeViewer.setSelection(new StructuredSelection(miTypes[0]));
@@ -628,8 +634,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		boolean result;
 		IStructuredSelection modelViewerSelection;
 
-		modelViewerSelection =
-				(IStructuredSelection) this.miTypeViewer.getSelection();
+		modelViewerSelection = (IStructuredSelection) this.miTypeViewer
+				.getSelection();
 		result = !modelViewerSelection.isEmpty();
 
 		return result;
@@ -647,8 +653,8 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		boolean result;
 		IStructuredSelection modelViewerSelection;
 
-		modelViewerSelection =
-				(IStructuredSelection) this.modelViewer.getSelection();
+		modelViewerSelection = (IStructuredSelection) this.modelViewer
+				.getSelection();
 		result = !modelViewerSelection.isEmpty();
 
 		return result;
@@ -661,18 +667,24 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param The
-	 *          {@link IPath} to the modelinstance file
+	 *            {@link IPath} to the modelinstance file
 	 */
 	private void selectModelInstanceTypeFromModelInstanceFilePath(
 			IPath modelInstanceFilePath) {
 
-		IModelInstanceType[] miTypes = null;
-		String fileExtension = modelInstanceFilePath.getFileExtension();
-
+		IModelInstanceType[] miTypes;
+		String fileExtension;
 		boolean isApplicable = false;
 
-		miTypes =
-				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceTypes();
+		// return if the IPath is null
+		if (modelInstanceFilePath != null) {
+			fileExtension = modelInstanceFilePath.getFileExtension();
+		} else {
+			return;
+		}
+
+		miTypes = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceTypes();
 
 		if (miTypes.length > 0) {
 
@@ -682,31 +694,31 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 				/* Check whether the model instance file is a .class file */
 				if (fileExtension.equalsIgnoreCase("class")
 						|| fileExtension.equalsIgnoreCase("java")) {
-					miType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(
-											"tudresden.ocl20.pivot.modelinstancetype.java");
+					miType = ModelBusPlugin
+							.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"tudresden.ocl20.pivot.modelinstancetype.java");
 
 					isApplicable = true;
 
-				}
-				else if (fileExtension.equalsIgnoreCase("pml")) {
-					miType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(
-											"tudresden.ocl20.pivot.modelinstancetype.ecore");
+				} else if (fileExtension.equalsIgnoreCase("pml")) {
+					miType = ModelBusPlugin
+							.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"tudresden.ocl20.pivot.modelinstancetype.ecore");
 
 					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("xml")) {
-					miType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(
-											"tudresden.ocl20.pivot.modelinstancetype.xml");
+
+				} else if (fileExtension.equalsIgnoreCase("xml")) {
+					miType = ModelBusPlugin
+							.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"tudresden.ocl20.pivot.modelinstancetype.xml");
 
 					isApplicable = true;
 				}
 			}
+			// no else
 
 			if (isApplicable && (miType != null)) {
 				/* Search for the model instance type and select it */
@@ -715,16 +727,17 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 				if (i >= 0) {
 
-					StructuredSelection selection =
-							new StructuredSelection(miList.get(i));
+					StructuredSelection selection = new StructuredSelection(
+							miList.get(i));
 
 					/*
-					 * Avoid endless loop due to the eventhandler is called for every
-					 * setSelection()
+					 * Avoid endless loop due to the eventhandler is called for
+					 * every setSelection()
 					 */
 					if (!this.miTypeViewer.getSelection().equals(selection)) {
 						this.miTypeViewer.setSelection(selection);
 					}
+					// no else
 
 				}
 				// no else.
@@ -741,7 +754,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param A
-	 *          {@link String} which represents the path to the .java file
+	 *            {@link String} which represents the path to the .java file
 	 * @return A {@link String} which represents the possible path to the
 	 *         corresponding .class file of a .java file
 	 */
@@ -749,12 +762,10 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 		String pathToClassFile;
 
-		pathToClassFile =
-				modelInstanceFileName.replace(File.separator + "src" + File.separator,
-						File.separator + "bin" + File.separator);
+		pathToClassFile = modelInstanceFileName.replace("/src/", "/bin/");
 
-		pathToClassFile =
-				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";
+		pathToClassFile = pathToClassFile.substring(0,
+				pathToClassFile.length() - 4) + "class";
 
 		return pathToClassFile;
 	}
