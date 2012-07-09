@@ -7,7 +7,7 @@ Bundle-Activator: tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.uml2.uml,
+ org.eclipse.uml2.uml;bundle-version="[3.1.0,5.0.0)",
  tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.metamodels.uml2,
