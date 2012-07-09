@@ -10,8 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.metamodels.uml2,
  tudresden.ocl20.pivot.facade,
  org.eclipse.emf.ecore.xmi,
- org.eclipse.uml2.uml,
- org.eclipse.uml2.uml.resources
+ org.eclipse.uml2.uml
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group
