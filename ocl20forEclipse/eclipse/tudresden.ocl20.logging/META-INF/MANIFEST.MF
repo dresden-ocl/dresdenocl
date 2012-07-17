@@ -8,8 +8,9 @@ Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.lang,
  org.apache.log4j;visibility:=reexport
+Eclipse-RegisterBuddy: org.apache.log4j
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.logging,
+Export-Package: tudresden.ocl20.logging;uses:="org.eclipse.core.runtime,org.apache.log4j,org.osgi.framework",
  tudresden.ocl20.logging.appender
