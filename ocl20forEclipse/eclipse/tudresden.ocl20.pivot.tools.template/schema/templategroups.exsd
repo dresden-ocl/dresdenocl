@@ -18,7 +18,10 @@
       </annotation>
       <complexType>
          <sequence>
-            <element ref="templategroup" minOccurs="1" maxOccurs="unbounded"/>
+            <choice minOccurs="1" maxOccurs="unbounded">
+               <element ref="templategroup"/>
+               <element ref="templateresource"/>
+            </choice>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -57,7 +60,7 @@
          <attribute name="name" type="string" use="required">
             <annotation>
                <documentation>
-                  A name that will be used in the UI for this model instance type.
+                  A name that will be used in the UI for this template group.
                </documentation>
             </annotation>
          </attribute>
@@ -69,6 +72,40 @@
                <appInfo>
                   <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.tools.template.ITemplateGroup"/>
                </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="templateresource">
+      <annotation>
+         <appInfo>
+            <meta.element deprecated="true"/>
+         </appInfo>
+      </annotation>
+      <complexType>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  A name that will be used in the UI for this template group.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="path" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The path ist required and can be a File or a Directory. Is path a directory all subfiles with the end .stg are files for the template group.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="resource"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="supergroup" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
             </annotation>
          </attribute>
       </complexType>
@@ -89,15 +126,6 @@
       </appInfo>
       <documentation>
          [Enter extension point usage example here.]
-      </documentation>
-   </annotation>
-
-   <annotation>
-      <appInfo>
-         <meta.section type="apiInfo"/>
-      </appInfo>
-      <documentation>
-         [Enter API information here.]
       </documentation>
    </annotation>
 
@@ -131,6 +159,15 @@ for more details.
 
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see http://www.gnu.org/licenses/.
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiInfo"/>
+      </appInfo>
+      <documentation>
+         [Enter API information here.]
       </documentation>
    </annotation>
 

@@ -69,7 +69,7 @@ import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
 import tudresden.ocl20.pivot.tools.template.impl.StandaloneTemplateEngineRegistry;
 import tudresden.ocl20.pivot.tools.template.impl.StandaloneTemplateGroupRegistry;
 import tudresden.ocl20.pivot.tools.template.internal.TemplateGroup;
-import tudresden.ocl20.pivot.tools.template.sql.SQLTemplate;
+import tudresden.ocl20.pivot.tools.template.sql.standalone.SQLTemplate;
 import tudresden.ocl20.pivot.tools.template.stringtemplate.StringTemplateEngine;
 import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
 import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
@@ -193,7 +193,7 @@ public class AbstractDresdenOclTest {
 		TemplatePlugin.setTempateEngineRegistry(templateEngineRegistry);
 		TemplatePlugin.setTempateGroupRegistry(templateGroupRegistry);
 
-		SQLTemplate.loadSQLTemplates();
+		SQLTemplate.loadTemplates();
 
 		ITransformationRegistry transformationRegistry = TransformationPlugin
 				.getTransformationRegistry();

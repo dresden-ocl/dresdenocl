@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.template.sql;
+package tudresden.ocl20.pivot.tools.template.sql.standalone;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,10 +12,11 @@ import org.eclipse.core.runtime.Platform;
 import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
 import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
 import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import tudresden.ocl20.pivot.tools.template.sql.SQLTemplatePlugin;
 
 public class SQLTemplate {
 
-	public static void loadSQLTemplates() {
+	public static void loadTemplates() {
 
 		List<String> streams = new LinkedList<String>();
 		String stream = null;
@@ -23,8 +24,8 @@ public class SQLTemplate {
 		ITemplateGroup standardGroup = null;
 
 		try {
-			stream = getUrl("/resources/templates/Standard.stg");
-			stream2 = getUrl("/resources/templates/Standard-inv.stg");
+			stream = getUrl("/resources/templates/Standard/schema.stg");
+			stream2 = getUrl("/resources/templates/Standard/ocl.stg");
 			streams.add(stream);
 			streams.add(stream2);
 			standardGroup = TemplatePlugin.getTemplateGroupRegistry()
@@ -39,8 +40,8 @@ public class SQLTemplate {
 		}
 
 		try {
-			stream = getUrl("/resources/templates/MySQL.stg");
-			stream2 = getUrl("/resources/templates/MySQL-inv.stg");
+			stream = getUrl("/resources/templates/MySQL/schema.stg");
+			stream2 = getUrl("/resources/templates/MySQL/ocl.stg");
 			streams = new LinkedList<String>();
 			streams.add(stream);
 			streams.add(stream2);
@@ -57,7 +58,7 @@ public class SQLTemplate {
 		}
 
 		try {
-			stream = getUrl("/resources/templates/MySQL55.stg");
+			stream = getUrl("/resources/templates/MySQL55/schema.stg");
 			streams = new LinkedList<String>();
 			streams.add(stream);
 			ITemplateGroup mysqlGroup;
@@ -73,8 +74,8 @@ public class SQLTemplate {
 		}
 		
 		try {
-			stream = getUrl("/resources/templates/Oracle8i.stg");
-			stream2 = getUrl("/resources/templates/Oracle8i-inv.stg");
+			stream = getUrl("/resources/templates/Oracle8i/schema.stg");
+			stream2 = getUrl("/resources/templates/Oracle8i/ocl.stg");
 			streams = new LinkedList<String>();
 			streams.add(stream);
 			streams.add(stream2);
@@ -91,7 +92,8 @@ public class SQLTemplate {
 		}
 
 		try {
-			stream = getUrl("/resources/templates/PostgreSQL81.stg");
+			stream = getUrl("/resources/templates/PostgreSQL81/schema.stg");
+			stream2 = getUrl("/resources/templates/PostgreSQL81/ocl.stg");
 			streams = new LinkedList<String>();
 			streams.add(stream);
 			streams.add(stream2);

@@ -203,9 +203,9 @@ public class CarOcl2SqlTest {
 				.createOcl2DeclCodeSettings();
 		try {
 			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-					.getTemplateGroup("MySQL (SQL)"));
+					.getTemplateGroup("StandardTest(SQL)"));
 		} catch (TemplateException e1) {
-			fail("Can't load Standard SQL template.");
+			fail("Can't load StandardTest template.");
 		}
 		List<String> result = null;
 		try {
@@ -214,7 +214,7 @@ public class CarOcl2SqlTest {
 			fail("Can't generate sql code");
 		}
 		assertNotNull("No result", result);
-		testStringList(removeComments(result), parseFile(AbstractDresdenOclTest.getFile("solution/car.sql",
+		testStringList(removeComments(result), parseFile(AbstractDresdenOclTest.getFile("solution/car-nop.sql",
 				Ocl2SqlTestPlugin.PLUGIN_ID).getAbsolutePath()));
 	}
 	
@@ -225,9 +225,9 @@ public class CarOcl2SqlTest {
 				.createOcl2DeclCodeSettings();
 		try {
 			settings.setTemplateGroup(TemplatePlugin.getTemplateGroupRegistry()
-					.getTemplateGroup("StandardTest(SQL)"));
+					.getTemplateGroup("MySQL(SQL)"));
 		} catch (TemplateException e1) {
-			fail("Can't load Standard SQL template.");
+			fail("Can't load MySQL template.");
 		}
 		List<String> result = null;
 		try {

@@ -37,7 +37,6 @@ public class SQLTemplatePlugin extends Plugin {
 
 		super();
 		plugin = this;
-		SQLTemplate.loadSQLTemplates();
 	}
 
 	/**

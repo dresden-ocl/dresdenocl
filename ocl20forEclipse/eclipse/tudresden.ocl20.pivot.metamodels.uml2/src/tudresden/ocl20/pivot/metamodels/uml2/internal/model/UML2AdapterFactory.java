@@ -304,7 +304,7 @@ public class UML2AdapterFactory {
 			anAssociationClass = (AssociationClass) dslType;
 
 			/* Get all association ends. */
-			allEnds = anAssociationClass.allConnections();
+			allEnds = anAssociationClass.getOwnedEnds();
 
 			/* Add all other ends to each navigable end. */
 			this.addNavigableAssociationEnds(allEnds);
