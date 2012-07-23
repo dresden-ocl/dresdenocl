@@ -6,23 +6,23 @@
         <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
           <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
             <ownedAttribute xmi:id="_MIZyMMHiEd2UNuYhQ_ApoA" name="firstName" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               <defaultValue xmi:type="uml:LiteralString" xmi:id="_ix9C0DXHEd-_J9pP9Zsbaw" value=""/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_fjVkADXCEd-_J9pP9Zsbaw" name="lastName" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_Y5dQgDXDEd-_J9pP9Zsbaw" name="isMarried" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_HRNAYDXDEd-_J9pP9Zsbaw" name="birthDate" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_onYJ4DePEd-JXKTQMEgtig" name="salaries" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w8L4sDePEd-JXKTQMEgtig" value="*"/>
             </ownedAttribute>
           </packagedElement>

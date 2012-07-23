@@ -6,13 +6,13 @@
         <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
           <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
             <ownedAttribute xmi:id="_fjVkADXCEd-_J9pP9Zsbaw" name="lastName" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">
             <generalization xmi:id="_U2mRYMHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
             <ownedAttribute xmi:id="_6H5LUDXDEd-_J9pP9Zsbaw" name="matNr" visibility="private">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
           </packagedElement>
         </packagedElement>

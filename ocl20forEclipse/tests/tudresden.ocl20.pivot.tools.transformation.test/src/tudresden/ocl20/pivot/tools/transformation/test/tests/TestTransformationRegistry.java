@@ -35,7 +35,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -59,16 +61,20 @@ public class TestTransformationRegistry extends AbstractTransformationTest {
 	public static void setUp() throws Exception {
 
 		AbstractTransformationTest.setUp();
+	}
+	
+	@Before
+	public void before() throws Exception {
+
+		AbstractTransformationTest.setUp();
 		itrans = TransformationFactory.getInstance().getTransformation(
 				"TestTrans", "", "");
 		TransformationPlugin.getTransformationRegistry().removeTransformation(
 				itrans);
 	}
 
-	@AfterClass
-	public static void tearDown() {
-
-		AbstractTransformationTest.tearDown();
+	@After
+	public void after() {
 
 		if (!TransformationPlugin.getTransformationRegistry()
 				.getTransformationList().contains("TestTrans")) {
@@ -76,7 +82,13 @@ public class TestTransformationRegistry extends AbstractTransformationTest {
 					itrans);
 		}
 	}
+	
+	@AfterClass
+	public static void tearDown() {
+		AbstractTransformationTest.tearDown();
 
+	}
+	
 	@Test
 	public void checkAdd() {
 

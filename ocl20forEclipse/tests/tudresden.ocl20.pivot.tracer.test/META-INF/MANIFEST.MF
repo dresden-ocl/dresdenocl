@@ -33,3 +33,5 @@ Import-Package: org.dresdenocl.testsuite._abstract,
  tudresden.ocl20.pivot.tracer,
  tudresden.ocl20.pivot.tracer.tracermodel
 Export-Package: tudresden.ocl20.pivot.tracer.test
+Bundle-ClassPath: lib/xmlunit-1.3.jar,
+ .

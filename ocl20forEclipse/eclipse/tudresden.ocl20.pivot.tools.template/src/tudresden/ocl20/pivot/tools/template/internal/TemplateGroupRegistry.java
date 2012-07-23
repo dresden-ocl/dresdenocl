@@ -2,6 +2,7 @@ package tudresden.ocl20.pivot.tools.template.internal;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
@@ -330,23 +332,28 @@ IRegistryEventListener {
 			}
 			List<String> streams = new LinkedList<String>();
 			if (configurationElement.getAttribute("path") != null) {
-				File file = new File(Platform
-						.getBundle(extension.getNamespaceIdentifier())
-						.getResource(configurationElement.getAttribute("path"))
-						.getFile());
-				if (file.isFile()) {
-					streams.add(file.getPath());
-				} else {
-					File[] files = file.listFiles(new FilenameFilter() {
-						@Override
-						public boolean accept(File dir, String name) {
-							return new File(dir, name).isFile()
-									&& name.toLowerCase().endsWith(".stg");
+				try {
+					File file = new File(FileLocator.toFileURL(Platform
+							.getBundle(extension.getNamespaceIdentifier())
+							.getResource(configurationElement.getAttribute("path"))).getPath());
+					if (file.isFile()) {
+						streams.add(file.getPath());
+					} else {
+						File[] files = file.listFiles(new FilenameFilter() {
+							@Override
+							public boolean accept(File dir, String name) {
+								return new File(dir, name).isFile()
+										&& name.toLowerCase().endsWith(".stg");
+							}
+						});
+						for (File dirFile : files) {
+							streams.add(dirFile.getPath());
 						}
-					});
-					for (File dirFile : files) {
-						streams.add(dirFile.getPath());
 					}
+				} catch (InvalidRegistryObjectException e) {
+					// Do nothing
+				} catch (IOException e) {
+					// Do nothing
 				}
 			}
 			String name = configurationElement.getAttribute("name");

@@ -39,16 +39,16 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_zRUHgWZeEd6kutRb95dOwQ" name="TestPrimitiveTypeClass">
     <ownedAttribute xmi:id="_EVFxkGZfEd6kutRb95dOwQ" name="aBooleanBoolean">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_IRlcUGZfEd6kutRb95dOwQ" name="anIntegerInteger">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_IfNBkGZfEd6kutRb95dOwQ" name="anIntegerUnlimitedNatural">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#UnlimitedNatural"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_Io1esGZfEd6kutRb95dOwQ" name="aStringString">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_-ZJiIGZfEd6kutRb95dOwQ" name="aRealEFloat">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EFloat"/>

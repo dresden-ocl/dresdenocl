@@ -21,32 +21,32 @@
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_VW-hEMVEEd2gxo2Yyu8isA" name="Customer">
             <ownedAttribute xmi:id="_1y46wMnOEd23VbTmZ6CCEw" name="age">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_MC0aoMoREd2R-LEScdZDXg" name="dateOfBirth" type="_W--kwWu4Ed6ofs5w8Takvg"/>
             <ownedAttribute xmi:id="_FONTQMoREd2R-LEScdZDXg" name="isMale">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_doldsMkwEd2S2cuzoMKaDg" name="name">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_noF1gMm5Ed23VbTmZ6CCEw" name="title">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedOperation xmi:id="_LoRdkMoaEd2R-LEScdZDXg" name="birthdayHappens"/>
             <ownedOperation xmi:id="_KtaX0MoaEd2R-LEScdZDXg" name="getAge">
               <ownedParameter xmi:id="_5XTyMMoaEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
             </ownedOperation>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_fBpSwMVIEd2gxo2Yyu8isA" name="CustomerCard">
             <ownedAttribute xmi:id="_dJRj4MnSEd23VbTmZ6CCEw" name="color" type="_2Cn4gMnREd23VbTmZ6CCEw"/>
             <ownedAttribute xmi:id="_f8pz0Mm5Ed23VbTmZ6CCEw" name="printedName">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_gYE6MMVIEd2gxo2Yyu8isA" name="valid">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="__hwMwMnOEd23VbTmZ6CCEw" name="validFrom" type="_W--kwWu4Ed6ofs5w8Takvg"/>
             <ownedAttribute xmi:id="_CZyJ0MnPEd23VbTmZ6CCEw" name="validThru" type="_W--kwWu4Ed6ofs5w8Takvg"/>
@@ -56,44 +56,44 @@
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_MG7VMMVIEd2gxo2Yyu8isA" name="LoyaltyAccount">
             <ownedAttribute xmi:id="_W-Nn0MVIEd2gxo2Yyu8isA" name="points">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_m30qoMnDEd23VbTmZ6CCEw" name="totalPointsEarned">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_ufv9UMobEd2R-LEScdZDXg" name="number">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedOperation xmi:id="_07xlkMobEd2R-LEScdZDXg" name="burn">
               <ownedParameter xmi:id="_EZge4MocEd2R-LEScdZDXg" name="points">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
               <ownedParameter xmi:id="__MBGUMobEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_zvn7gMobEd2R-LEScdZDXg" name="earn">
               <ownedParameter xmi:id="_Az4cAMocEd2R-LEScdZDXg" name="points">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
               <ownedParameter xmi:id="__t2BAMobEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_ymYvEMm5Ed23VbTmZ6CCEw" name="getCustomerName">
               <ownedParameter xmi:id="_0bqOoMm5Ed23VbTmZ6CCEw" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_1eWHIMobEd2R-LEScdZDXg" name="isEmpty">
               <ownedParameter xmi:id="_JHZxYMocEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
               </ownedParameter>
             </ownedOperation>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_AVjVsMVEEd2gxo2Yyu8isA" name="LoyaltyProgram">
             <ownedAttribute xmi:id="_GSa8wMVEEd2gxo2Yyu8isA" name="name">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedOperation xmi:id="_v22JkMoPEd2R-LEScdZDXg" name="addService">
               <ownedParameter xmi:id="_zaFm0MoPEd2R-LEScdZDXg" name="aPartner" type="_ODIWQMn1Ed2R-LEScdZDXg"/>
@@ -103,12 +103,12 @@
             <ownedOperation xmi:id="_Ne3VUMVEEd2gxo2Yyu8isA" name="enroll" concurrency="concurrent">
               <ownedParameter xmi:id="_T5ZIwMVEEd2gxo2Yyu8isA" name="c" type="_VW-hEMVEEd2gxo2Yyu8isA"/>
               <ownedParameter xmi:id="_lRjNkMoJEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_BSpSEMoQEd2R-LEScdZDXg" name="getName">
               <ownedParameter xmi:id="_C0s6sMoQEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_ZUJhQMVEEd2gxo2Yyu8isA" name="getServices">
@@ -121,42 +121,42 @@
           <packagedElement xmi:type="uml:Class" xmi:id="_ktNNcMkkEd2S2cuzoMKaDg" name="Membership"/>
           <packagedElement xmi:type="uml:Class" xmi:id="_ODIWQMn1Ed2R-LEScdZDXg" name="ProgramPartner">
             <ownedAttribute xmi:id="__tTjkModEd2R-LEScdZDXg" name="name">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_6y_F0Mn1Ed2R-LEScdZDXg" name="numberOfCustomers">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_bFF6cMVEEd2gxo2Yyu8isA" name="Service">
             <ownedAttribute xmi:id="_pOKSQMn3Ed2R-LEScdZDXg" name="condition">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_rZL_YMn3Ed2R-LEScdZDXg" name="pointsBurned">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_q2Bn8Mn3Ed2R-LEScdZDXg" name="pointsEarned">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_r4VZgMn3Ed2R-LEScdZDXg" name="description">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_scP-4Mn3Ed2R-LEScdZDXg" name="serviceNr">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedOperation xmi:id="_Zl_OQModEd2R-LEScdZDXg" name="calcPoints">
               <ownedParameter xmi:id="_gOqycModEd2R-LEScdZDXg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_aCmRwModEd2R-LEScdZDXg" name="upgradePointsEarned">
               <ownedParameter xmi:id="_pR4fYModEd2R-LEScdZDXg" name="amount">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
               </ownedParameter>
             </ownedOperation>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_8fH4kMkmEd2S2cuzoMKaDg" name="ServiceLevel">
             <ownedAttribute xmi:id="_blCOYMksEd2S2cuzoMKaDg" name="name">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
           </packagedElement>
           <packagedElement xmi:type="uml:Class" xmi:id="_qdRHkMkkEd2S2cuzoMKaDg" name="Transaction">
@@ -164,7 +164,7 @@
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/Ecore.metamodel.uml#EFloat"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="__Y7BIMkvEd2S2cuzoMKaDg" name="points">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Integer"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
             </ownedAttribute>
             <ownedAttribute xmi:id="_hr_PkMoeEd2R-LEScdZDXg" name="date" type="_W--kwWu4Ed6ofs5w8Takvg"/>
             <ownedOperation xmi:id="_nI91oMoeEd2R-LEScdZDXg" name="getProgram">
@@ -259,18 +259,18 @@
           <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_W--kwWu4Ed6ofs5w8Takvg" name="Date">
             <ownedAttribute xmi:id="_EPbawfQqEd2SMeEUZ5YgYQ" name="now" isStatic="true" type="_W--kwWu4Ed6ofs5w8Takvg"/>
             <ownedAttribute xmi:id="_73W4YPQwEd2SMeEUZ5YgYQ" name="nowString" isStatic="true">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
             <ownedOperation xmi:id="_skwXgMkvEd2S2cuzoMKaDg" name="isAfter">
               <ownedParameter xmi:id="_t7e54MkvEd2S2cuzoMKaDg" name="aDate" type="_W--kwWu4Ed6ofs5w8Takvg"/>
               <ownedParameter xmi:id="_1d1RAMkvEd2S2cuzoMKaDg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_2_vIoMkvEd2S2cuzoMKaDg" name="isBefore">
               <ownedParameter xmi:id="_2_vIockvEd2S2cuzoMKaDg" name="aDate" type="_W--kwWu4Ed6ofs5w8Takvg"/>
               <ownedParameter xmi:id="_2_vIoskvEd2S2cuzoMKaDg" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_gQ8boMojEd2R-LEScdZDXg" name="now" isStatic="true">
@@ -278,12 +278,12 @@
             </ownedOperation>
             <ownedOperation xmi:id="_DDgWAPQxEd2SMeEUZ5YgYQ" name="nowAsString" isStatic="true">
               <ownedParameter xmi:id="_Gb3Y8PQxEd2SMeEUZ5YgYQ" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               </ownedParameter>
             </ownedOperation>
             <ownedOperation xmi:id="_Du6CcPQ8Ed2SMeEUZ5YgYQ" name="toString">
               <ownedParameter xmi:id="_I7zlIPQ8Ed2SMeEUZ5YgYQ" direction="return">
-                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
               </ownedParameter>
             </ownedOperation>
           </packagedElement>
