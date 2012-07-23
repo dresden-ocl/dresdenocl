@@ -131,7 +131,7 @@ public class ConstraintKindTracerTest extends AbstractTracerTest {
 		DOMSource source = new DOMSource(temporaryDocument);
 		StreamResult result =	new StreamResult(f);
 		tf.transform(source, result);
-*/
+		 */
 
 		assertTrue("XML documents are not equal",
 				compareXmlFiles(regressionFile, temporaryDocument));
@@ -166,7 +166,7 @@ public class ConstraintKindTracerTest extends AbstractTracerTest {
 		DOMSource source = new DOMSource(temporaryDocument);
 		StreamResult result =	new StreamResult(f);
 		tf.transform(source, result);
-*/
+		 */
 
 		assertTrue("XML documents are not equal",
 				compareXmlFiles(regressionFile, temporaryDocument));
@@ -199,7 +199,7 @@ public class ConstraintKindTracerTest extends AbstractTracerTest {
 		DOMSource source = new DOMSource(temporaryDocument);
 		StreamResult result =	new StreamResult(f);
 		tf.transform(source, result);
-*/
+		 */
 
 		assertTrue("XML documents are not equal",
 				compareXmlFiles(regressionFile, temporaryDocument));
@@ -232,7 +232,7 @@ public class ConstraintKindTracerTest extends AbstractTracerTest {
 		DOMSource source = new DOMSource(temporaryDocument);
 		StreamResult result =	new StreamResult(f);
 		tf.transform(source, result);
-*/
+		 */
 
 		assertTrue("XML documents are not equal",
 				compareXmlFiles(regressionFile, temporaryDocument));
@@ -253,20 +253,20 @@ public class ConstraintKindTracerTest extends AbstractTracerTest {
 						Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 
 		/* Write the object to a file */
-		/*
 		regressionFile =
 				AbstractTracerTest.getFile(
 						"resources/constraintkind/init02_02_regression.xml",
 						TracerTestPlugin.PLUGIN_ID);
-						*/
 
 		temporaryDocument = serializeTracerRoot(tracedRoot);
 
+		/*
 		File f = new File("resources/constraintkind/init02_02_regression.xml");
 		Transformer tf = TransformerFactory.newInstance().newTransformer();
 		DOMSource source = new DOMSource(temporaryDocument);
 		StreamResult result =	new StreamResult(f);
 		tf.transform(source, result);
+		*/
 
 		assertTrue("XML documents are not equal",
 				compareXmlFiles(regressionFile, temporaryDocument));
