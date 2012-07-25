@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -105,18 +106,19 @@ public class AbstractDresdenOclTest {
 		if (!Platform.isRunning() && !isInitialized) {
 
 			File propertiesFile = new File("dresdenOclTest.properties");
-			
+
 			System.out.println("Try to load dresdenOclTest.properties");
-			
+
 			// this should be the case in the Jenkins tests
 			if (propertiesFile.exists()) {
-				
+
 				System.out.println("dresdenOclTest.properties exists");
-				
+
 				properties.load(new FileInputStream(propertiesFile));
 
-				System.out.println("Loading dresdenOclTest.properties successful");
-				
+				System.out
+						.println("Loading dresdenOclTest.properties successful");
+
 				if (properties.getProperty("DRESDENOCL_LOCATION_TESTS") == null)
 					throw new IllegalArgumentException(
 							"DRESDENOCL_LOCATION_TESTS key-value pair is missing in dresdenOclTest.properties.");
@@ -125,7 +127,7 @@ public class AbstractDresdenOclTest {
 							"DRESDENOCL_LOCATION_ECLIPSE key-value pair is missing in dresdenOclTest.properties.");
 
 				System.setProperties(properties);
-				
+
 				System.getProperties().list(System.out);
 			}
 			// this is the case when run from inside Eclipse as normal JUnit
@@ -214,12 +216,12 @@ public class AbstractDresdenOclTest {
 	protected static void loadUmlResources() throws IOException {
 
 		File umlResources = getFile(
-				"lib/org.eclipse.uml2.uml.resources_3.1.1.v201008191505.jar",
+				"lib/org.eclipse.uml2.uml.resources_4.0.0.v20120604-0919.jar",
 				"org.dresdenocl.testsuite.abstract");
 		if (umlResources == null)
 			throw new IllegalArgumentException(
 					"Cannot laod an UML model with umlResources == null; umlResources has to point to the jar file of the plugin org.eclipse.uml2.uml.resources.");
-
+		org.eclipse.uml2.uml.resources.util.UMLResourcesUtil.init(null);
 		URI pluginURI = URI.createURI("jar:file:"
 				+ umlResources.getAbsolutePath() + "!/");
 		URIConverter.URI_MAP.put(URI.createURI(UMLResource.LIBRARIES_PATHMAP),
