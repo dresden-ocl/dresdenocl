@@ -112,8 +112,12 @@ public abstract class AbstractInterpreterTest extends AbstractDresdenOclTest {
 	@SuppressWarnings("unchecked")
 	protected void assertIsCollectionOfSize(Integer expectedSize,
 			IInterpretationResult result) {
-		assertFalse(result.getResult().oclIsInvalid().isTrue());
-		assertFalse(result.getResult().oclIsUndefined().isTrue());
+		assertFalse("Result was invalid: "
+				+ result.getResult().getInvalidReason(), result.getResult()
+				.oclIsInvalid().isTrue());
+		assertFalse("Result was undefined: "
+				+ result.getResult().getUndefinedReason(), result.getResult()
+				.oclIsUndefined().isTrue());
 
 		if (result.getResult() instanceof OclCollection<?>) {
 			OclCollection<OclAny> oclCollection;

@@ -708,6 +708,31 @@ public class TestIterator extends AbstractInterpreterTest {
 
 	/**
 	 * <p>
+	 * Tests the iterator <code>Collection->closure(..)</code>.
+	 * </p>
+	 * 
+	 * @throws ParseException
+	 * @throws ModelAccessException
+	 * @throws IllegalArgumentException
+	 */
+	@Test
+	public void testClosure09() throws IllegalArgumentException,
+			ModelAccessException, ParseException {
+
+		List<IInterpretationResult> results;
+		results = super.interpretConstraintsForInstance(MODEL1_NAME,
+				CONSTRAINT_DIRECTORY + "/closure09", INSTANCE3_NAME,
+				Arrays.asList(new String[] { "Class1" }));
+
+		assertNotNull(results);
+		assertEquals(2, results.size());
+
+		this.assertIsCollectionOfSize(2, results.get(0));
+		this.assertIsCollectionOfSize(2, results.get(1));
+	}
+
+	/**
+	 * <p>
 	 * Tests the iterator <code>Collection->collect(..)</code>.
 	 * </p>
 	 * 
