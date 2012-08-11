@@ -46,6 +46,7 @@ public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 	private static TracerUIPlugin plugin;
 
 	public TracerUIPlugin() {
+		//remains empty
 	}
 
 	/*
