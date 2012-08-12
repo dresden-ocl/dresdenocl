@@ -18,15 +18,15 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer.ui.internal.views;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
@@ -34,17 +34,18 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
@@ -274,9 +275,35 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	 * Clears the view and all its content.
 	 * </p>
 	 */
-	public void clearTracerView() {
+	public synchronized void clearTracerView() {
 
-		// TODO: this will set the filter to show nothing
+		// TODO: check for memory leaks
+
+		cachedItems.clear();
+		if (tracerRoot.getRootItems() != null) {
+			Deque<TracerItem> stack =
+					new ArrayDeque<TracerItem>(tracerRoot.getRootItems());
+
+			while (!stack.isEmpty()) {
+				TracerItem item = stack.pop();
+				if (item.getChildren() != null) {
+					stack.addAll(item.getChildren());
+					item.getChildren().clear();
+				}
+				// no else
+			}
+			tracerRoot.getRootItems().clear();
+		}
+		// no else
+		
+		Display.getDefault().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+
+				myTreeViewer.refresh();
+			}
+		});
 	}
 
 	/**
@@ -298,13 +325,12 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	}
 
 	@Override
-	public void interpretationTreeDepthIncreased(UUID uuid) {
+	public synchronized void interpretationTreeDepthIncreased(UUID uuid) {
 
 		TracerItem dummyItem = factory.createTracerItem();
 		dummyItem.setUUID(uuid);
 
 		if (currentParent == null) {
-			// We are at the root
 			tracerRoot.getRootItems().add(dummyItem);
 		}
 		else {
@@ -316,7 +342,7 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	}
 
 	@Override
-	public void interpretationTreeDepthIncreased(UUID uuid,
+	public synchronized void interpretationTreeDepthIncreased(UUID uuid,
 			IModelInstanceElement modelInstanceElement) {
 
 		interpretationTreeDepthIncreased(uuid);
@@ -324,16 +350,29 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	}
 
 	@Override
-	public void interpretationTreeDepthDecreased() {
+	public synchronized void interpretationTreeDepthDecreased() {
 
 		if (currentParent != null) {
 			currentParent = currentParent.getParent();
+
+			if (currentParent == null) {
+				Display.getDefault().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+
+						myTreeViewer.refresh(false);
+					}
+				});
+			}
+			// no else
 		}
 		// no else
 	}
 
 	@Override
-	public void partialInterpretationFinished(InterpreterTraceEvent event) {
+	public synchronized void partialInterpretationFinished(
+			InterpreterTraceEvent event) {
 
 		if (event != null) {
 			TracerItem item = cachedItems.get(event.getUUID());
@@ -347,20 +386,13 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	}
 
 	@Override
-	public void interpretationCleared() {
-		//TODO: watch this for memory leaks
-		
-		cachedItems.clear();
-		LinkedList<TracerItem> queue = new LinkedList<TracerItem>();
-		
-		for(TracerItem item : queue) {
-			queue.addAll(item.getChildren());
-			item.getChildren().clear();
-		}
+	public synchronized void interpretationCleared() {
+
+		clearTracerView();
 	}
 
 	@Override
-	public void traceSelectedConstraints(List<Object[]> constraints) {
+	public synchronized void traceSelectedConstraints(List<Object[]> constraints) {
 		
 	}
 
