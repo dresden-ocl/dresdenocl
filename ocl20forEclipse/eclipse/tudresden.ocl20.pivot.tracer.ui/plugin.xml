@@ -60,10 +60,4 @@
          </viewShortcut>
       </perspectiveExtension>
    </extension>
-   <extension
-         point="org.eclipse.ui.startup">
-      <startup
-            class="tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin">
-      </startup>
-   </extension>
 </plugin>

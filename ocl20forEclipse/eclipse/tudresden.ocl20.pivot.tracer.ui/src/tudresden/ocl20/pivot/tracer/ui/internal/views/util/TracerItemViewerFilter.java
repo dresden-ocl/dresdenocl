@@ -44,6 +44,8 @@ public class TracerItemViewerFilter extends ViewerFilter {
 
 	private WeakHashMap<UUID, ViewerFilterType> addedParents;
 
+	private WeakHashMap<UUID, TracerItem> allowedItems;
+
 	/**
 	 * <p>
 	 * The constructor of this class.
@@ -54,14 +56,16 @@ public class TracerItemViewerFilter extends ViewerFilter {
 		super();
 		filterType = ViewerFilterType.FILTER_NONE;
 		addedParents = new WeakHashMap<UUID, ViewerFilterType>();
+		allowedItems = new WeakHashMap<UUID, TracerItem>();
 	}
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		
+
 		if (element instanceof TracerRoot) {
 			return false;
 		}
+		// no else
 
 		if (filterType.equals(ViewerFilterType.FILTER_NONE)) {
 			return true;
@@ -69,50 +73,60 @@ public class TracerItemViewerFilter extends ViewerFilter {
 		// no else
 
 		if (element instanceof TracerItem) {
-
 			TracerItem item = (TracerItem) element;
 
-			if (parentElement instanceof TracerItem) {
-				TracerItem parentItem = (TracerItem) parentElement;
+			// check if the item is in the list of items
+			// that are allowed to be displayed
+			//
+			if (allowedItems.isEmpty() || allowedItems.containsKey(item.getUUID())) {
 
-				/* Check if the parent has been cashed and could pass the filter. */
-				if (addedParents.containsKey(parentItem.getUUID())) {
-					if (filterType.equals(addedParents.get(parentItem.getUUID()))) {
-						/* Then this item can be added too. */
-						addedParents.put(item.getUUID(), filterType);
-						return true;
+				if (parentElement instanceof TracerItem) {
+					TracerItem parentItem = (TracerItem) parentElement;
+
+					// Check if the parent has been cashed and could pass the filter.
+					//
+					if (addedParents.containsKey(parentItem.getUUID())) {
+						if (filterType.equals(addedParents.get(parentItem.getUUID()))) {
+							// Then this item can be added too.
+							//
+							addedParents.put(item.getUUID(), filterType);
+							return true;
+						}
 					}
 				}
-			}
 
-			/* There was no parent found so we need to determine our self. */
-			OclAny result = item.getResult();
+				// There was no parent found so we need to determine our self.
+				//
+				OclAny result = item.getResult();
 
-			if (result instanceof OclBoolean) {
-				OclBoolean anOclBoolean = (OclBoolean) result;
+				if (result instanceof OclBoolean) {
+					OclBoolean anOclBoolean = (OclBoolean) result;
 
-				if (anOclBoolean.oclIsInvalid().isTrue()
-						|| anOclBoolean.oclIsUndefined().isTrue()) {
-					return false;
+					if (anOclBoolean.oclIsInvalid().isTrue()
+							|| anOclBoolean.oclIsUndefined().isTrue()) {
+						return false;
+					}
+					// no else
+
+					switch (filterType) {
+					case FILTER_FALSE:
+						addedParents.put(item.getUUID(), filterType);
+						return !anOclBoolean.isTrue();
+
+					case FILTER_TRUE:
+						addedParents.put(item.getUUID(), filterType);
+						return anOclBoolean.isTrue();
+					}
+					// end switch
 				}
-				// no else
-
-				switch (filterType) {
-				case FILTER_FALSE:
-					addedParents.put(item.getUUID(), filterType);
-					return !anOclBoolean.isTrue();
-
-				case FILTER_TRUE:
-					addedParents.put(item.getUUID(), filterType);
-					return anOclBoolean.isTrue();
-				}
-				// end switch
+				// no else (result is no boolean)
 			}
-			// no else (result is no boolean)
+			// no else (not contained in the allowed list)
 		}
-		// no else
+		// no else (not an TracerItem)
 
-		/* Nothing could be applied. */
+		// Nothing could be applied.
+		//
 		return false;
 	}
 
@@ -128,6 +142,10 @@ public class TracerItemViewerFilter extends ViewerFilter {
 	public void setFilterType(ViewerFilterType filterType) {
 
 		this.filterType = filterType;
+	}
+
+	public void addItems() {
+
 	}
 
 }

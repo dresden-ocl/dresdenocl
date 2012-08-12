@@ -51,7 +51,7 @@ public class TracerPlugin extends Plugin {
 	 * <p>Remove the {@link TracerPlugin} from the listeners of the {@link OclInterpreterPlugin}.</p>
 	 */
 	private static void disposeInterpreterTraceListener() {
-//TODO: refactor
+//TODO: refactor into ui
 /*
 		if (plugin.listener != null) {
 			// Remove this plug-in from the listeners of the interpreter.

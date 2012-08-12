@@ -20,9 +20,13 @@ package tudresden.ocl20.pivot.tracer.ui.internal.views;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
+import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
 import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
@@ -30,18 +34,22 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 
-import tudresden.ocl20.pivot.tracer.TracerPlugin;
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
+import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
+import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
+import tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl;
 import tudresden.ocl20.pivot.tracer.tracermodel.provider.TracermodelItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryEvent;
-import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryListener;
 import tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin;
 import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuAction;
 import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuActionType;
@@ -55,7 +63,7 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.util.ViewerFilterType;
  * @author Lars Schuetze
  * 
  */
-public class TracerView extends ViewPart implements TracerRegistryListener {
+public class TracerView extends ViewPart implements IInterpreterTraceListener {
 
 	/** Icon to clear the view. */
 	private static String CLEAR_IMAGE = "icons/clear.gif";
@@ -64,7 +72,7 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	private TreeViewer myTreeViewer;
 
 	/** The {@link TracerRoot} of the tree. */
-	private TracerRoot root;
+	private TracerRoot tracerRoot;
 
 	/** The {@link ComposedAdapterFactory} of the {@link tracer}. */
 	private ComposedAdapterFactory myAdapterFactory;
@@ -78,6 +86,15 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	/** The {@link TracerItemViewerFilter} of this {@link TreeViewer} */
 	private TracerItemViewerFilter myViewerFilter;
 
+	/** Pointing to the current parent */
+	private TracerItem currentParent;
+
+	/** The factory to create new instances */
+	private TracermodelFactory factory;
+
+	/** This map holds the TracerItems in a cache for fast access */
+	private WeakHashMap<UUID, TracerItem> cachedItems;
+
 	/**
 	 * <p>
 	 * Instantiates this view.
@@ -88,22 +105,32 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 
 		super();
 
+		TracermodelPackageImpl.init();
+		factory = TracermodelFactory.eINSTANCE;
+
 		List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
 		Collections.addAll(factories, new TracermodelItemProviderAdapterFactory(),
 				new ReflectiveItemProviderAdapterFactory(),
 				new ResourceItemProviderAdapterFactory());
 
 		myAdapterFactory = new ComposedAdapterFactory(factories);
-		TracerPlugin.getTracerRegistry().addTracerRegistryListener(this);
-		getRoot();
+		cachedItems = new WeakHashMap<UUID, TracerItem>();
+		tracerRoot = factory.createTracerRoot();
+		currentParent = null;
+
+		// Add this listener to the InterpreterRegistry
+		//
+		OclInterpreterPlugin.getInterpreterRegistry().addInterpreterTraceListener(
+				this);
 	}
 
 	@Override
 	public void dispose() {
 
 		try {
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.removeInterpreterTraceListener(this);
 			myAdapterFactory.dispose();
-			TracerPlugin.getTracerRegistry().removeTracerRegistryListener(this);
 		} finally {
 			super.dispose();
 		}
@@ -112,6 +139,8 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	@Override
 	public void createPartControl(Composite parent) {
 
+		// This tree defines the layout for the TreeView
+		//
 		Tree myTracerTree =
 				new Tree(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		myTracerTree.setHeaderVisible(true);
@@ -128,15 +157,14 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		myViewerFilter = new TracerItemViewerFilter();
 
 		myTreeViewer = new TreeViewer(myTracerTree);
-		myTreeViewer.addFilter(myViewerFilter);
+		// myTreeViewer.addFilter(myViewerFilter);
 		myTreeViewer
 				.setContentProvider(new TracerItemAdapterFactoryContentProvider(
 						myAdapterFactory));
 		myTreeViewer.setLabelProvider(new TracerItemAdapterFactoryLabelProvider(
 				myAdapterFactory));
 
-		/* Refresh and init */
-		refreshTreeView();
+		myTreeViewer.setInput(tracerRoot);
 		initMenu();
 	}
 
@@ -248,45 +276,7 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 	 */
 	public void clearTracerView() {
 
-		root = null;
-		myTreeViewer.setInput(null);
-	}
-
-	private TracerRoot getRoot() {
-
-		root = TracerPlugin.getInterpreterTraceListener().getCurrentRoot();
-		return root;
-	}
-
-	/**
-	 * <p>
-	 * This method will just be here until the tree viewer can refresh itself
-	 * automatically
-	 * </p>
-	 */
-	private void refreshTreeView() {
-
-		myTreeViewer.setInput(this.getRoot());
-	}
-
-	/**
-	 * <p>
-	 * Refresh the view with the given trace.
-	 * </p>
-	 */
-	public void updateTrace(TracerRegistryEvent event) {
-
-		root = event.getTrace();
-		Runnable r = new Runnable() {
-
-			public void run() {
-
-				myTreeViewer.setInput(root);
-			}
-		};
-
-		Display display = getViewSite().getShell().getDisplay();
-		display.asyncExec(r);
+		// TODO: this will set the filter to show nothing
 	}
 
 	/**
@@ -306,4 +296,72 @@ public class TracerView extends ViewPart implements TracerRegistryListener {
 		}
 		// no else
 	}
+
+	@Override
+	public void interpretationTreeDepthIncreased(UUID uuid) {
+
+		TracerItem dummyItem = factory.createTracerItem();
+		dummyItem.setUUID(uuid);
+
+		if (currentParent == null) {
+			// We are at the root
+			tracerRoot.getRootItems().add(dummyItem);
+		}
+		else {
+			currentParent.getChildren().add(dummyItem);
+		}
+		cachedItems.put(uuid, dummyItem);
+		dummyItem.setParent(currentParent);
+		currentParent = dummyItem;
+	}
+
+	@Override
+	public void interpretationTreeDepthIncreased(UUID uuid,
+			IModelInstanceElement modelInstanceElement) {
+
+		interpretationTreeDepthIncreased(uuid);
+		cachedItems.get(uuid).setModelInstanceElement(modelInstanceElement);
+	}
+
+	@Override
+	public void interpretationTreeDepthDecreased() {
+
+		if (currentParent != null) {
+			currentParent = currentParent.getParent();
+		}
+		// no else
+	}
+
+	@Override
+	public void partialInterpretationFinished(InterpreterTraceEvent event) {
+
+		if (event != null) {
+			TracerItem item = cachedItems.get(event.getUUID());
+			if (item != null) {
+				item.setExpression(event.getExpression());
+				item.setResult(event.getResult());
+			}
+			// no else
+		}
+		// no else
+	}
+
+	@Override
+	public void interpretationCleared() {
+		//TODO: watch this for memory leaks
+		
+		cachedItems.clear();
+		LinkedList<TracerItem> queue = new LinkedList<TracerItem>();
+		
+		for(TracerItem item : queue) {
+			queue.addAll(item.getChildren());
+			item.getChildren().clear();
+		}
+	}
+
+	@Override
+	public void traceSelectedConstraints(List<Object[]> constraints) {
+		
+	}
+
 }

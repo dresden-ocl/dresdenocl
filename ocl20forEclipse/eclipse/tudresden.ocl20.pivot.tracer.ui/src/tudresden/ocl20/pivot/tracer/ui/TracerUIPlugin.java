@@ -20,20 +20,21 @@ package tudresden.ocl20.pivot.tracer.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.tracer.TracerPlugin;
 import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
 
 /**
- * <p>The UI plug-in for the Dresden OCL Tracer.</p>
+ * <p>
+ * The UI plug-in for the Dresden OCL Tracer.
+ * </p>
+ * 
  * @author Lars Schuetze
- *
+ * 
  */
-public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
+public class TracerUIPlugin extends AbstractUIPlugin {
 
 	/** the plug-in ID */
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer.ui";
@@ -46,7 +47,8 @@ public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 	private static TracerUIPlugin plugin;
 
 	public TracerUIPlugin() {
-		//remains empty
+
+		// remains empty
 	}
 
 	/*
@@ -57,7 +59,7 @@ public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 	public void start(BundleContext bundleContext) throws Exception {
 
 		super.start(bundleContext);
-		
+
 		plugin = this;
 
 		/* configure custom logging properties. */
@@ -89,7 +91,7 @@ public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
-	
+
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
@@ -97,7 +99,7 @@ public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *            The {@link Class} to return the {@link Logger} for.
+	 *          The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 
@@ -106,13 +108,6 @@ public class TracerUIPlugin extends AbstractUIPlugin implements IStartup {
 	public static Logger getLogger(Class<?> clazz) {
 
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
-	}
-
-	@Override
-	public void earlyStartup() {
-		
-		/* activate the tracer plug-in */
-		TracerPlugin.getDefault();
 	}
 
 }
