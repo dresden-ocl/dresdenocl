@@ -31,10 +31,12 @@ public class OclTracerUIMessages extends NLS {
 	public static String TracerView_Filter_Nothing_Title;
 	public static String TracerView_Filter_True_Title;
 	public static String TracerView_Filter_False_Title;
+	public static String TracerView_Remove_Selection_Title;
 	public static String TracerView_Menu_Clear;
 	public static String TracerView_Menu_Filter_Nothing;
 	public static String TracerView_Menu_Filter_False;
 	public static String TracerView_Menu_Filter_True;
+	public static String TracerView_Menu_Remove_Selection;
 	
 	static {
 		/* Initialize resource bundle. */

@@ -74,15 +74,19 @@ public class TracerViewMenuAction extends Action implements IAction {
 			break;
 
 		case FILTER_FALSE_ELEMENTS:
-			result = "";
+			result = OclTracerUIMessages.TracerView_Menu_Filter_False;
 			break;
 
 		case FILTER_TRUE_ELEMENTS:
-			result = "";
+			result = OclTracerUIMessages.TracerView_Menu_Filter_True;
 			break;
 
 		case FILTER_NOTHING:
-			result = "";
+			result = OclTracerUIMessages.TracerView_Menu_Filter_Nothing;
+			break;
+
+		case REMOVE_SELECTION:
+			result = OclTracerUIMessages.TracerView_Menu_Remove_Selection;
 			break;
 
 		default:
@@ -101,15 +105,19 @@ public class TracerViewMenuAction extends Action implements IAction {
 			break;
 
 		case FILTER_NOTHING:
-			myTracerView.setFilter(ViewerFilterType.FILTER_NONE);
+			myTracerView.setFilterType(ViewerFilterType.FILTER_NONE);
 			break;
 
 		case FILTER_FALSE_ELEMENTS:
-			myTracerView.setFilter(ViewerFilterType.FILTER_FALSE);
+			myTracerView.setFilterType(ViewerFilterType.FILTER_FALSE);
 			break;
 
 		case FILTER_TRUE_ELEMENTS:
-			myTracerView.setFilter(ViewerFilterType.FILTER_TRUE);
+			myTracerView.setFilterType(ViewerFilterType.FILTER_TRUE);
+			break;
+			
+		case REMOVE_SELECTION:
+			myTracerView.setFilterElements(null);
 			break;
 		}
 		// end switch

@@ -24,6 +24,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import org.eclipse.ui.PartInitException;
 
+import tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin;
+
 /**
  * @author Lars Schuetze
  * 
@@ -33,6 +35,7 @@ public class TracerViewAction implements IWorkbenchWindowActionDelegate {
 	private IWorkbenchWindow window;
 
 	public TracerViewAction() {
+
 		/* empty constructor */
 	}
 
@@ -44,8 +47,7 @@ public class TracerViewAction implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 
 		try {
-			this.window.getActivePage().showView(
-					"tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView");
+			this.window.getActivePage().showView(TracerUIPlugin.TRACER_VIEW_ID);
 		}
 
 		catch (PartInitException e) {
@@ -61,6 +63,7 @@ public class TracerViewAction implements IWorkbenchWindowActionDelegate {
 	 */
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
+
 	}
 
 	/*
@@ -69,6 +72,7 @@ public class TracerViewAction implements IWorkbenchWindowActionDelegate {
 	 */
 	@Override
 	public void dispose() {
+
 	}
 
 	/*
@@ -78,7 +82,7 @@ public class TracerViewAction implements IWorkbenchWindowActionDelegate {
 	 */
 	@Override
 	public void init(IWorkbenchWindow window) {
-		
+
 		this.window = window;
 	}
 

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
@@ -34,18 +35,18 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
 import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
@@ -158,7 +159,7 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 		myViewerFilter = new TracerItemViewerFilter();
 
 		myTreeViewer = new TreeViewer(myTracerTree);
-		// myTreeViewer.addFilter(myViewerFilter);
+		myTreeViewer.addFilter(myViewerFilter);
 		myTreeViewer
 				.setContentProvider(new TracerItemAdapterFactoryContentProvider(
 						myAdapterFactory));
@@ -180,6 +181,7 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 		TracerViewMenuAction filterFalseElements;
 		TracerViewMenuAction filterTrueElements;
 		TracerViewMenuAction filterNothing;
+		TracerViewMenuAction removeSelection;
 
 		/*
 		 * --- TOOLBAR
@@ -194,6 +196,8 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 			clearAllTracedElements.setImageDescriptor(TracerUIPlugin
 					.getImageDescriptor(CLEAR_IMAGE));
 
+			clearAllTracedElements.setText(OclTracerUIMessages.TracerView_Menu_Clear);
+
 			this.getToolBarManager().add(clearAllTracedElements);
 		}
 
@@ -203,31 +207,32 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 
 		/* Add all menu items to the drop down menu. */
 		{
+			removeSelection =
+					new TracerViewMenuAction(TracerViewMenuActionType.REMOVE_SELECTION,
+							this);
+			removeSelection
+					.setText(OclTracerUIMessages.TracerView_Remove_Selection_Title);
+			this.getMenuManager().add(removeSelection);
+
 			filterNothing =
 					new TracerViewMenuAction(TracerViewMenuActionType.FILTER_NOTHING,
 							this);
-
 			filterNothing
 					.setText(OclTracerUIMessages.TracerView_Filter_Nothing_Title);
-
 			this.getMenuManager().add(filterNothing);
 
 			filterFalseElements =
 					new TracerViewMenuAction(
 							TracerViewMenuActionType.FILTER_FALSE_ELEMENTS, this);
-
 			filterFalseElements
 					.setText(OclTracerUIMessages.TracerView_Filter_False_Title);
-
 			this.getMenuManager().add(filterFalseElements);
 
 			filterTrueElements =
 					new TracerViewMenuAction(
 							TracerViewMenuActionType.FILTER_TRUE_ELEMENTS, this);
-
 			filterTrueElements
 					.setText(OclTracerUIMessages.TracerView_Filter_True_Title);
-
 			this.getMenuManager().add(filterTrueElements);
 		}
 
@@ -295,15 +300,8 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 			tracerRoot.getRootItems().clear();
 		}
 		// no else
-		
-		Display.getDefault().asyncExec(new Runnable() {
 
-			@Override
-			public void run() {
-
-				myTreeViewer.refresh();
-			}
-		});
+		setFilterElements(cachedItems);
 	}
 
 	/**
@@ -315,13 +313,39 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	 * @param filterType
 	 *          the {@link ViewerFilterType} to be set
 	 */
-	public void setFilter(ViewerFilterType filterType) {
+	public void setFilterType(ViewerFilterType filterType) {
 
 		if (filterType != null) {
 			myViewerFilter.setFilterType(filterType);
-			myTreeViewer.refresh();
+			Display.getDefault().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+
+					myTreeViewer.refresh(false);
+				}
+			});
 		}
 		// no else
+	}
+
+	public void setFilterElements(Map<UUID, TracerItem> map) {
+
+		if (map == null) {
+			myViewerFilter.setFilterElements(cachedItems);
+		}
+		else {
+			myViewerFilter.setFilterElements(map);
+		}
+
+		Display.getDefault().syncExec(new Runnable() {
+
+			@Override
+			public void run() {
+
+				myTreeViewer.refresh(false);
+			}
+		});
 	}
 
 	@Override
@@ -356,14 +380,7 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 			currentParent = currentParent.getParent();
 
 			if (currentParent == null) {
-				Display.getDefault().asyncExec(new Runnable() {
-
-					@Override
-					public void run() {
-
-						myTreeViewer.refresh(false);
-					}
-				});
+				setFilterElements(cachedItems);
 			}
 			// no else
 		}
@@ -393,7 +410,72 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 
 	@Override
 	public synchronized void traceSelectedConstraints(List<Object[]> constraints) {
-		
+
+		Map<UUID, TracerItem> whiteList = new WeakHashMap<UUID, TracerItem>();
+
+		for (Object[] aRow : constraints) {
+			// Check if aRow has at least three values
+			//
+			if (aRow.length >= 3) {
+
+				// Make sure all types are correct
+				//
+				IModelInstanceElement _miElement = null;
+				Constraint _constraint = null;
+				OclAny _result = null;
+
+				if (aRow[0] instanceof IModelInstanceElement) {
+					_miElement = (IModelInstanceElement) aRow[0];
+				}
+
+				if (aRow[1] instanceof Constraint) {
+					_constraint = (Constraint) aRow[1];
+				}
+
+				if (aRow[2] instanceof OclAny) {
+					_result = (OclAny) aRow[2];
+				}
+
+				if (_miElement != null && _constraint != null && _result != null) {
+
+					for (TracerItem item : tracerRoot.getRootItems()) {
+						if ((item.getModelInstanceElement() == _miElement)
+								&& (item.getExpression() == _constraint)
+								&& (item.getResult() == _result)) {
+
+							whiteList.put(item.getUUID(), item);
+							whiteList.putAll(flatTracerStructure(item.getChildren()));
+						}
+						// no else
+					}
+					// end for
+				}
+				// no else (since one or more values or null)
+			}
+			// no else (aRow has less than three values)
+		}
+		// end for
+
+		setFilterElements(whiteList);
 	}
 
+	private Map<UUID, TracerItem> flatTracerStructure(List<TracerItem> items) {
+
+		if (items != null) {
+			Map<UUID, TracerItem> result = new WeakHashMap<UUID, TracerItem>();
+			Deque<TracerItem> stack = new ArrayDeque<TracerItem>(items);
+
+			while (!stack.isEmpty()) {
+				TracerItem item = stack.pop();
+				result.put(item.getUUID(), item);
+				if (item.getChildren() != null) {
+					stack.addAll(item.getChildren());
+				}
+				// no else
+			}
+			// end while
+			return result;
+		}
+		return Collections.emptyMap();
+	}
 }

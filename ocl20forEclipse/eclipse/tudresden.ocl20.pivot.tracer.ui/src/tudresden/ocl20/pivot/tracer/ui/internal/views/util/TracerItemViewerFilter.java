@@ -18,6 +18,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
@@ -42,9 +43,9 @@ public class TracerItemViewerFilter extends ViewerFilter {
 
 	private ViewerFilterType filterType;
 
-	private WeakHashMap<UUID, ViewerFilterType> addedParents;
+	private Map<UUID, ViewerFilterType> addedParents;
 
-	private WeakHashMap<UUID, TracerItem> allowedItems;
+	private Map<UUID, TracerItem> whiteList;
 
 	/**
 	 * <p>
@@ -54,9 +55,10 @@ public class TracerItemViewerFilter extends ViewerFilter {
 	public TracerItemViewerFilter() {
 
 		super();
+
 		filterType = ViewerFilterType.FILTER_NONE;
 		addedParents = new WeakHashMap<UUID, ViewerFilterType>();
-		allowedItems = new WeakHashMap<UUID, TracerItem>();
+		whiteList = new WeakHashMap<UUID, TracerItem>();
 	}
 
 	@Override
@@ -67,27 +69,27 @@ public class TracerItemViewerFilter extends ViewerFilter {
 		}
 		// no else
 
-		if (filterType.equals(ViewerFilterType.FILTER_NONE)) {
-			return true;
-		}
-		// no else
-
 		if (element instanceof TracerItem) {
 			TracerItem item = (TracerItem) element;
 
-			// check if the item is in the list of items
-			// that are allowed to be displayed
-			//
-			if (allowedItems.isEmpty() || allowedItems.containsKey(item.getUUID())) {
+			if (whiteList.containsKey(item.getUUID())) {
 
+				if (filterType.equals(ViewerFilterType.FILTER_NONE)) {
+					return true;
+				}
+				// no else
+
+				// If the parentElement is a TracerItem we will already
+				// have adapted it into our cache
+				//
 				if (parentElement instanceof TracerItem) {
 					TracerItem parentItem = (TracerItem) parentElement;
 
-					// Check if the parent has been cashed and could pass the filter.
+					// Check if the parent has been cached and could pass the filter.
 					//
 					if (addedParents.containsKey(parentItem.getUUID())) {
 						if (filterType.equals(addedParents.get(parentItem.getUUID()))) {
-							// Then this item can be added too.
+							// Then this item can cached added too.
 							//
 							addedParents.put(item.getUUID(), filterType);
 							return true;
@@ -121,7 +123,7 @@ public class TracerItemViewerFilter extends ViewerFilter {
 				}
 				// no else (result is no boolean)
 			}
-			// no else (not contained in the allowed list)
+			// no else (element is not whitelisted)
 		}
 		// no else (not an TracerItem)
 
@@ -144,8 +146,9 @@ public class TracerItemViewerFilter extends ViewerFilter {
 		this.filterType = filterType;
 	}
 
-	public void addItems() {
+	public void setFilterElements(Map<UUID, TracerItem> whiteList) {
 
+		this.whiteList = whiteList;
 	}
 
 }
