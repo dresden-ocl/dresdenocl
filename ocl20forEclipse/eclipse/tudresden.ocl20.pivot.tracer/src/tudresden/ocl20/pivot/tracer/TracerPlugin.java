@@ -24,9 +24,6 @@ import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistry;
-import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.TracerRegistryListener;
-import tudresden.ocl20.pivot.tracer.tracermodel.util.listener.impl.TracerRegistryImpl;
 
 /**
  * <p>This plug-in enables tracing of the interpretation of OCL from the interpreter plug-in.</p>
@@ -41,76 +38,28 @@ public class TracerPlugin extends Plugin {
 	/** the shared instance of the plug-in */
 	private static TracerPlugin plugin;
 
-	/** the listener who is holding the tree structure */
-	private InterpreterRegistryListenerImpl listener;
-
-	/**
-	 * The {@link TracerRegistry} for the {@link TracerRegistryListener}s of the
-	 * {@link InterpreterRegistryListenerImpl}.
-	 */
-	private TracerRegistry tracerRegistry;
-
 	/**
 	 * The constructor
 	 */
 	public TracerPlugin() {
-		super();
-		
-		/* Register the TracerPlugin as listener to the interpreter itself. */
-		plugin = this;
-		getInterpreterTraceListener();
+		//remains empty
+		//
 	}
 
-	public static InterpreterRegistryListenerImpl getInterpreterTraceListener() {
-
-		if (plugin == null) {
-			plugin = new TracerPlugin();
-		}
-		// no else
-
-		if (plugin.listener == null) {
-			plugin.listener = new InterpreterRegistryListenerImpl();
-
-			/* add the listener object to the registry */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.addInterpreterTraceListener(plugin.listener);
-		}
-		// no else
-
-		return plugin.listener;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static TracerRegistry getTracerRegistry() {
-
-		/* Check if the plug-in has been activated. */
-		if (plugin == null) {
-			plugin = new TracerPlugin();
-		}
-		// no else.
-
-		/* Lazily create the registry. */
-		if (plugin.tracerRegistry == null) {
-			plugin.tracerRegistry = new TracerRegistryImpl();
-		}
-		// no else.
-
-		return plugin.tracerRegistry;
-	}
 
 	/**
 	 * <p>Remove the {@link TracerPlugin} from the listeners of the {@link OclInterpreterPlugin}.</p>
 	 */
 	private static void disposeInterpreterTraceListener() {
-
+//TODO: refactor
+/*
 		if (plugin.listener != null) {
-			/* Remove this plug-in from the listeners of the interpreter. */
+			// Remove this plug-in from the listeners of the interpreter.
+			//
 			OclInterpreterPlugin.getInterpreterRegistry()
 					.removeInterpreterTraceListener(plugin.listener);
 		}
+*/
 	}
 
 	public static TracerPlugin getDefault() {
@@ -118,7 +67,6 @@ public class TracerPlugin extends Plugin {
 		if(plugin == null) {
 			plugin = new TracerPlugin();
 		}
-		
 		return plugin;
 	}
 
@@ -134,7 +82,8 @@ public class TracerPlugin extends Plugin {
 		
 		plugin = this;
 
-		/* configure custom logging properties. */
+		// configure custom logging properties.
+		//
 		LoggingPlugin.configureDefaultLogging(plugin);
 	}
 
@@ -144,9 +93,9 @@ public class TracerPlugin extends Plugin {
 	 */
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-		
+//TODO: refactor disposing		
 		try {
-			disposeInterpreterTraceListener();
+			//disposeInterpreterTraceListener();
 			plugin = null;
 		}
 		finally {
