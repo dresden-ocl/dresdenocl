@@ -111,6 +111,7 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 		factory = TracermodelFactory.eINSTANCE;
 
 		List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
+		
 		Collections.addAll(factories, new TracermodelItemProviderAdapterFactory(),
 				new ReflectiveItemProviderAdapterFactory(),
 				new ResourceItemProviderAdapterFactory());

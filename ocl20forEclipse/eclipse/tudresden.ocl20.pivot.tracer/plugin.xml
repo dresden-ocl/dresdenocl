@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel"
-            class="tracermodel.TracermodelPackage"
+            class="tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage"
             genModel="model/tracermodel.genmodel"/>
    </extension>
 

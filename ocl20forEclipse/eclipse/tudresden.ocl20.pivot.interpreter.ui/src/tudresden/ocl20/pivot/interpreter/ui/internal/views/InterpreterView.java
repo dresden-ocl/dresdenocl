@@ -171,16 +171,18 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 */
 	public void dispose() {
 
-		/* Remove this view as listener of related plug-ins. */
-		ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
+		try {
+			// Remove this view as listener of related plug-ins.
+			ModelBusPlugin.getModelRegistry().removeModelRegistryListener(this);
 
-		ModelBusPlugin.getModelInstanceRegistry()
-				.removeModelInstanceRegistryListener(this);
+			ModelBusPlugin.getModelInstanceRegistry()
+					.removeModelInstanceRegistryListener(this);
 
-		((ISelectionService) getSite().getService(ISelectionService.class))
-				.removeSelectionListener(this);
-
-		super.dispose();
+			((ISelectionService) getSite().getService(ISelectionService.class))
+					.removeSelectionListener(this);
+		} finally {
+			super.dispose();
+		}
 	}
 
 	/*
@@ -331,7 +333,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 				}
 				// end while.
 
-				/* Readd the filter to the table viewer. */
+				/* Read the filter to the table viewer. */
 				this.myTableViewer.addFilter(this.myCurrentFilter);
 				this.refreshView();
 			}

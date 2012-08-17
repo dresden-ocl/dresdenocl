@@ -23,10 +23,12 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 
 /**
- * <p>This plug-in enables tracing of the interpretation of OCL from the interpreter plug-in.</p>
+ * <p>
+ * This plug-in enables tracing of the interpretation of OCL from the
+ * interpreter plug-in.
+ * </p>
  * 
  * @author Lars Schuetze
  */
@@ -42,32 +44,9 @@ public class TracerPlugin extends Plugin {
 	 * The constructor
 	 */
 	public TracerPlugin() {
-		//remains empty
+
+		// remains empty
 		//
-	}
-
-
-	/**
-	 * <p>Remove the {@link TracerPlugin} from the listeners of the {@link OclInterpreterPlugin}.</p>
-	 */
-	private static void disposeInterpreterTraceListener() {
-//TODO: refactor into ui
-/*
-		if (plugin.listener != null) {
-			// Remove this plug-in from the listeners of the interpreter.
-			//
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.removeInterpreterTraceListener(plugin.listener);
-		}
-*/
-	}
-
-	public static TracerPlugin getDefault() {
-
-		if(plugin == null) {
-			plugin = new TracerPlugin();
-		}
-		return plugin;
 	}
 
 	/*
@@ -79,7 +58,7 @@ public class TracerPlugin extends Plugin {
 	public void start(BundleContext bundleContext) throws Exception {
 
 		super.start(bundleContext);
-		
+
 		plugin = this;
 
 		// configure custom logging properties.
@@ -93,16 +72,11 @@ public class TracerPlugin extends Plugin {
 	 */
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
-//TODO: refactor disposing		
-		try {
-			//disposeInterpreterTraceListener();
-			plugin = null;
-		}
-		finally {
-			super.stop(bundleContext);
-		}
+
+		plugin = null;
+		super.stop(bundleContext);
 	}
-	
+
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
@@ -110,7 +84,7 @@ public class TracerPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *            The {@link Class} to return the {@link Logger} for.
+	 *          The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 
