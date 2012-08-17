@@ -71,7 +71,8 @@ public abstract class AbstractModelInstanceProvider implements
 	
 		try {
 			/* File.toURL().toURL() handles white spaces differently. */
-			modelInstanceFileUrl = modelInstanceFile.toURL();
+			//modelInstanceFileUrl = modelInstanceFile.toURL();
+			modelInstanceFileUrl = modelInstanceFile.toURI().toURL();
 		}
 	
 		catch (MalformedURLException e) {
