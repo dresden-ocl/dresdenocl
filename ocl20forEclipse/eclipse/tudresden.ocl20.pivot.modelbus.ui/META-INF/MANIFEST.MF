@@ -20,7 +20,14 @@ Export-Package: tudresden.ocl20.pivot.modelbus.ui;
    org.eclipse.ui,
    org.eclipse.ui.plugin,
    org.osgi.framework",
- tudresden.ocl20.pivot.modelbus.ui.internal.views,
+ tudresden.ocl20.pivot.modelbus.ui.internal.views;
+  uses:="tudresden.ocl20.pivot.modelinstance.event,
+   tudresden.ocl20.pivot.model.event,
+   org.eclipse.ui,
+   org.eclipse.jface.viewers,
+   org.eclipse.ui.part,
+   tudresden.ocl20.pivot.model,
+   org.eclipse.swt.widgets",
  tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
   uses:="org.eclipse.jface.wizard,
    org.eclipse.swt.events,
