@@ -23,8 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.swt.widgets.Display;
-
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
