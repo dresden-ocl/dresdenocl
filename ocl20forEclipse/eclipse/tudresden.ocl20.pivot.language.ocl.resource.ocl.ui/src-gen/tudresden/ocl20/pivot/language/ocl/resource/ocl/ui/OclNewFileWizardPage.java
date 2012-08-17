@@ -6,6 +6,8 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
+import org.eclipse.jface.dialogs.IDialogPage;
+
 /**
  * The NewFileWizardPage allows setting the container for the new file, as well as
  * the file name. The page will only accept file names without extension OR with

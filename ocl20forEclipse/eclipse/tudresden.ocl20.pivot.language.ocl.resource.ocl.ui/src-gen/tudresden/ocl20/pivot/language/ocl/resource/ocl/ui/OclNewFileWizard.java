@@ -6,6 +6,8 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
+import org.eclipse.ui.IWorkbenchWizard;
+
 public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard {
 	
 	private String categoryId = null;
