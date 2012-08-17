@@ -121,7 +121,6 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 		currentParent = null;
 
 		// Add this listener to the InterpreterRegistry
-		//
 		OclInterpreterPlugin.getInterpreterRegistry().addInterpreterTraceListener(
 				this);
 	}
@@ -142,7 +141,6 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	public void createPartControl(Composite parent) {
 
 		// This tree defines the layout for the TreeView
-		//
 		Tree myTracerTree =
 				new Tree(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		myTracerTree.setHeaderVisible(true);
@@ -283,24 +281,25 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 	public synchronized void clearTracerView() {
 
 		// TODO: check for memory leaks
+		synchronized (tracerRoot) {
+			cachedItems.clear();
+			if (tracerRoot.getRootItems() != null) {
+				Deque<TracerItem> stack =
+						new ArrayDeque<TracerItem>(tracerRoot.getRootItems());
 
-		cachedItems.clear();
-		if (tracerRoot.getRootItems() != null) {
-			Deque<TracerItem> stack =
-					new ArrayDeque<TracerItem>(tracerRoot.getRootItems());
-
-			while (!stack.isEmpty()) {
-				TracerItem item = stack.pop();
-				if (item.getChildren() != null) {
-					stack.addAll(item.getChildren());
-					item.getChildren().clear();
+				while (!stack.isEmpty()) {
+					TracerItem item = stack.pop();
+					if (item.getChildren() != null) {
+						stack.addAll(item.getChildren());
+						item.getChildren().clear();
+					}
+					// no else
 				}
-				// no else
+				tracerRoot.getRootItems().clear();
 			}
-			tracerRoot.getRootItems().clear();
+			// no else
 		}
-		// no else
-
+		// end synchronized
 		setFilterElements(cachedItems);
 	}
 
@@ -354,12 +353,15 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 		TracerItem dummyItem = factory.createTracerItem();
 		dummyItem.setUUID(uuid);
 
-		if (currentParent == null) {
-			tracerRoot.getRootItems().add(dummyItem);
+		synchronized (tracerRoot) {
+			if (currentParent == null) {
+				tracerRoot.getRootItems().add(dummyItem);
+			}
+			else {
+				currentParent.getChildren().add(dummyItem);
+			}
 		}
-		else {
-			currentParent.getChildren().add(dummyItem);
-		}
+		// end synchronized
 		cachedItems.put(uuid, dummyItem);
 		dummyItem.setParent(currentParent);
 		currentParent = dummyItem;
@@ -410,51 +412,51 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 
 	@Override
 	public synchronized void traceSelectedConstraints(List<Object[]> constraints) {
-
+		
 		Map<UUID, TracerItem> whiteList = new WeakHashMap<UUID, TracerItem>();
+		synchronized (tracerRoot) {
+			for (Object[] aRow : constraints) {
+				// Check if aRow has at least three values
+				if (aRow.length >= 3) {
 
-		for (Object[] aRow : constraints) {
-			// Check if aRow has at least three values
-			//
-			if (aRow.length >= 3) {
+					// Make sure all types are correct
+					IModelInstanceElement _miElement = null;
+					Constraint _constraint = null;
+					OclAny _result = null;
 
-				// Make sure all types are correct
-				//
-				IModelInstanceElement _miElement = null;
-				Constraint _constraint = null;
-				OclAny _result = null;
-
-				if (aRow[0] instanceof IModelInstanceElement) {
-					_miElement = (IModelInstanceElement) aRow[0];
-				}
-
-				if (aRow[1] instanceof Constraint) {
-					_constraint = (Constraint) aRow[1];
-				}
-
-				if (aRow[2] instanceof OclAny) {
-					_result = (OclAny) aRow[2];
-				}
-
-				if (_miElement != null && _constraint != null && _result != null) {
-
-					for (TracerItem item : tracerRoot.getRootItems()) {
-						if ((item.getModelInstanceElement() == _miElement)
-								&& (item.getExpression() == _constraint)
-								&& (item.getResult() == _result)) {
-
-							whiteList.put(item.getUUID(), item);
-							whiteList.putAll(flatTracerStructure(item.getChildren()));
-						}
-						// no else
+					if (aRow[0] instanceof IModelInstanceElement) {
+						_miElement = (IModelInstanceElement) aRow[0];
 					}
-					// end for
+
+					if (aRow[1] instanceof Constraint) {
+						_constraint = (Constraint) aRow[1];
+					}
+
+					if (aRow[2] instanceof OclAny) {
+						_result = (OclAny) aRow[2];
+					}
+
+					if (_miElement != null && _constraint != null && _result != null) {
+
+						for (TracerItem item : tracerRoot.getRootItems()) {
+							if ((item.getModelInstanceElement() == _miElement)
+									&& (item.getExpression() == _constraint)
+									&& (item.getResult() == _result)) {
+
+								whiteList.put(item.getUUID(), item);
+								whiteList.putAll(flatTracerStructure(item.getChildren()));
+							}
+							// no else
+						}
+						// end for
+					}
+					// no else (since one or more values or null)
 				}
-				// no else (since one or more values or null)
+				// no else (aRow has less than three values)
 			}
-			// no else (aRow has less than three values)
+			// end for
 		}
-		// end for
+		// end synchronized
 
 		setFilterElements(whiteList);
 	}
