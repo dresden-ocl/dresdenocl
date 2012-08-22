@@ -3,11 +3,11 @@
 	
 	<property name="integrationPlugin" value="tudresden.attributegrammar.integration.kiama"/>
 	
-	<condition property="attributableEObjectBin" value="${workspacePath}/plugins/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
+	<condition property="attributableEObjectBin" value="${workspacePath}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
 		<isset property="headless"/>
 	</condition>
 	
-	<condition property="attributableEObjectSrc" value="${workspacePath}/plugins/${integrationPlugin}/src" else="./../${integrationPlugin}/src">
+	<condition property="attributableEObjectSrc" value="${workspacePath}/${integrationPlugin}/src" else="./../${integrationPlugin}/src">
 		<isset property="headless"/>
 	</condition>
 		
