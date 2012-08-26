@@ -19,9 +19,7 @@
          ================================= -->
 	<target name="init">
 
-		<echo message="Removing old build" />
-		<!-- only remove old workspace, so that Eclipse is not materialised every time... -->
-		<delete dir="${workspacePath}" quiet="true" />
+		<echo message="Removing old build artifacts created by Jenkins" />
 		<delete dir="${buckminster.output.root}" />
 		<delete dir="${buckminster.temp.root}" />
 		<delete dir="${testResultsPath}" />
@@ -35,9 +33,30 @@
 	</target>
 
 	<!-- ================================= 
+          target: init workspace              
+         ================================= -->
+	<target name="init.workspace" depends="init" description="Inits the workspace for Buckminster as the svn checkout has not the right directory structure.">
+		<copy todir="${workspacePath}">
+			<fileset dir="${hudsonWorkSpacePath}/svn/eclipse">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${hudsonWorkSpacePath}/svn/experimental">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${hudsonWorkSpacePath}/svn/tests">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${hudsonWorkSpacePath}/svn/updatesite">
+				<include name="**" />
+			</fileset>
+		</copy>
+	</target>
+
+
+	<!-- ================================= 
           target: init.buckminster              
          ================================= -->
-	<target name="init.buckminster" depends="init">
+	<target name="init.buckminster" depends="init.workspace">
 		<echo message="Using workspace ${workspacePath}" />
 
 		<echo message="Setting jre to ${env.JAVA_HOME}" />

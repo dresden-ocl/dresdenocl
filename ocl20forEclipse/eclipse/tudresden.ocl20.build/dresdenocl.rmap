@@ -6,40 +6,44 @@
 	<property key="build.type" mutable="true" value="N" />
 
 	<searchPath name="dresdenocl.plugins">
-		<provider componentTypes="osgi.bundle" readerType="svn"
+		<provider componentTypes="osgi.bundle" readerType="local"
 			source="true">
 			<uri
-				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/eclipse/{0}">
+				format="file:/{0}/{1}">
+				<bc:propertyRef key="workspacePath"
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
 	</searchPath>
 
 	<searchPath name="dresdenocl.features">
-		<provider componentTypes="eclipse.feature" readerType="svn"
-			source="true" mutable="false">
+		<provider componentTypes="eclipse.feature" readerType="local"
+			source="true">
 			<uri
-				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/updatesite/{0}">
+				format="file:/{0}/{1}">
+				<bc:propertyRef key="workspacePath"
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
 	</searchPath>
 
 	<searchPath name="dresdenocl.experimental">
-		<provider componentTypes="osgi.bundle" readerType="svn"
+		<provider componentTypes="osgi.bundle" readerType="local"
 			source="true">
 			<uri
-				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/experimental/{0}">
+				format="file:/{0}/{1}">
+				<bc:propertyRef key="workspacePath"
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
 	</searchPath>
 		
 	<searchPath name="dresdenocl.tests">
-		<provider componentTypes="osgi.bundle" readerType="svn"
+		<provider componentTypes="osgi.bundle" readerType="local"
 			source="true">
 			<uri
-				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/tests/{0}">
+				format="file:/{0}/{1}">
+				<bc:propertyRef key="workspacePath"
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
@@ -52,7 +56,7 @@
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false">
-			<uri format="http://download.eclipse.org/tools/ajdt/37/update" />
+			<uri format="http://download.eclipse.org/tools/ajdt/42/update" />
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false">
@@ -60,7 +64,7 @@
 		</provider>
 		<provider componentTypes="eclipse.feature,osgi.bundle"
 			readerType="p2" source="false" mutable="false">
-			<uri format="http://download.eclipse.org/releases/indigo" />
+			<uri format="http://download.eclipse.org/releases/juno" />
 		</provider>
 	</searchPath>
 

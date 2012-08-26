@@ -68,6 +68,7 @@
 				<arg value="org.eclipse.buckminster.pde.headless.feature.feature.group" />
 			</args>
 		</eclipse.launch>
+		<!-- use Jenkins to checkout SVN as it is multiple times faster than this
 		<eclipse.launch app="director">
 			<args>
 				<arg value="-r" />
@@ -79,8 +80,9 @@
 				<arg value="-i" />
 				<arg value="org.eclipse.buckminster.subversive.headless.feature.feature.group" />
 			</args>
-		</eclipse.launch>
+		</eclipse.launch> -->
 		<!-- Additionally, install AJDT to enable the compilation of .aj files -->
+		<!-- deactivated as it is needed only for tests and highly unstable...
 		<echo message="Fetching AJDT and installing it into Buckminster" />
 		<eclipse.launch app="director">
 			<args>
@@ -93,7 +95,7 @@
 				<arg value="-i" />
 				<arg value="org.aspectj.ajde" />
 			</args>
-		</eclipse.launch>
+		</eclipse.launch> -->
 		<!-- <tempfile destdir="${java.io.tmpdir}" prefix="ajdt-" suffix=".zip" property="ajdt.zip" deleteonexit="true" />
 		<get src="${ajdt.url}" dest="${ajdt.zip}" />
 		<mkdir dir="${toolsPath}" />
