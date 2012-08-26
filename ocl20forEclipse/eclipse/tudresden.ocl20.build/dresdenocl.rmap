@@ -9,7 +9,7 @@
 		<provider componentTypes="osgi.bundle" readerType="local"
 			source="true">
 			<uri
-				format="file:/{0}/{1}">
+				format="file://{0}/{1}">
 				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
@@ -20,7 +20,7 @@
 		<provider componentTypes="eclipse.feature" readerType="local"
 			source="true">
 			<uri
-				format="file:/{0}/{1}">
+				format="file://{0}/{1}">
 				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
@@ -31,7 +31,7 @@
 		<provider componentTypes="osgi.bundle" readerType="local"
 			source="true">
 			<uri
-				format="file:/{0}/{1}">
+				format="file://{0}/{1}">
 				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
@@ -42,7 +42,7 @@
 		<provider componentTypes="osgi.bundle" readerType="local"
 			source="true">
 			<uri
-				format="file:/{0}/{1}">
+				format="file://{0}/{1}">
 				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
