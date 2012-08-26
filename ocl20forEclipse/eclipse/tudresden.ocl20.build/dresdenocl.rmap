@@ -10,7 +10,7 @@
 			source="true">
 			<uri
 				format="file:/{0}/{1}">
-				<bc:propertyRef key="workspacePath"
+				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
@@ -21,7 +21,7 @@
 			source="true">
 			<uri
 				format="file:/{0}/{1}">
-				<bc:propertyRef key="workspacePath"
+				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
@@ -32,7 +32,7 @@
 			source="true">
 			<uri
 				format="file:/{0}/{1}">
-				<bc:propertyRef key="workspacePath"
+				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
@@ -43,7 +43,7 @@
 			source="true">
 			<uri
 				format="file:/{0}/{1}">
-				<bc:propertyRef key="workspacePath"
+				<bc:propertyRef key="workspacePath" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
