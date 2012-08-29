@@ -173,7 +173,6 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected CharSequence getTypeName(Type type) {
 
 		return "Tuple"; //$NON-NLS-1$

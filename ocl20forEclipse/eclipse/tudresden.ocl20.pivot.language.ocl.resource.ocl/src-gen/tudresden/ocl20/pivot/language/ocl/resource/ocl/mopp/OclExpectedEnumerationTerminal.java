@@ -36,4 +36,16 @@ public class OclExpectedEnumerationTerminal extends tudresden.ocl20.pivot.langua
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal getEnumerationTerminal() {
 		return this.enumerationTerminal;
 	}
+	
+	/**
+	 * Returns the expected enumeration terminal.
+	 */
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+		return enumerationTerminal;
+	}
+	
+	public String toString() {
+		return "EnumTerminal \"" + getEnumerationTerminal() + "\"";
+	}
+	
 }

@@ -18,6 +18,9 @@ public class OclCompletionProcessor implements org.eclipse.jface.text.contentass
 	
 	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeCompletionProposals(org.eclipse.jface.text.ITextViewer viewer, int offset) {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
+		if (textResource == null) {
+			return new org.eclipse.jface.text.contentassist.ICompletionProposal[0];
+		}
 		String content = viewer.getDocument().get();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper helper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] computedProposals = helper.computeCompletionProposals(textResource, content, offset);

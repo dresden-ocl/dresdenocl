@@ -9,14 +9,10 @@ package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -33,6 +29,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableC
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 
 
 /**

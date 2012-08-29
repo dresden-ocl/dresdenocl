@@ -37,6 +37,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.*;
 import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;

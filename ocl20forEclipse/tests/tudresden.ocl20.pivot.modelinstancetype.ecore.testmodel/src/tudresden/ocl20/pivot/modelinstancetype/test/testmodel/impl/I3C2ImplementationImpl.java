@@ -12,6 +12,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implemen
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>I3C2 Implementation</b></em>'.

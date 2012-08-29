@@ -6,17 +6,17 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
-public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser {
+public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser {
 	
 	/**
-	 * the index of the last token that was handled by retrieveLayoutInformation()
+	 * The index of the last token that was handled by retrieveLayoutInformation().
 	 */
 	private int lastPosition2;
 	
 	/**
-	 * a collection to store all anonymous tokens
+	 * A collection to store all anonymous tokens.
 	 */
-	protected java.util.List<org.antlr.runtime3_3_0.CommonToken> anonymousTokens = new java.util.ArrayList<org.antlr.runtime3_3_0.CommonToken>();
+	protected java.util.List<org.antlr.runtime3_4_0.CommonToken> anonymousTokens = new java.util.ArrayList<org.antlr.runtime3_4_0.CommonToken>();
 	
 	/**
 	 * A collection that is filled with commands to be executed after parsing. This
@@ -25,7 +25,26 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 	 */
 	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>> postParseCommands;
 	
+	/**
+	 * A copy of the options that were used to load the text resource. This map is
+	 * filled when the parser is created.
+	 */
 	private java.util.Map<?, ?> options;
+	
+	/**
+	 * A flag that indicates whether this parser runs in a special mode where the
+	 * location map is not filled. If this flag is set to true, copying localization
+	 * information for elements is not performed. This improves time and memory
+	 * consumption.
+	 */
+	protected boolean disableLocationMap = false;
+	
+	/**
+	 * A flag that indicates whether this parser runs in a special mode where layout
+	 * information is not recorded. If this flag is set to true, no layout information
+	 * adapters are created. This improves time and memory consumption.
+	 */
+	protected boolean disableLayoutRecording = false;
 	
 	/**
 	 * A flag to indicate that the parser should stop parsing as soon as possible. The
@@ -43,16 +62,18 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 	 */
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult tokenResolveResult = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
 	
-	public OclANTLRParserBase(org.antlr.runtime3_3_0.TokenStream input) {
+	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	
+	public OclANTLRParserBase(org.antlr.runtime3_4_0.TokenStream input) {
 		super(input);
 	}
 	
-	public OclANTLRParserBase(org.antlr.runtime3_3_0.TokenStream input, org.antlr.runtime3_3_0.RecognizerSharedState state) {
+	public OclANTLRParserBase(org.antlr.runtime3_4_0.TokenStream input, org.antlr.runtime3_4_0.RecognizerSharedState state) {
 		super(input, state);
 	}
 	
 	protected void retrieveLayoutInformation(org.eclipse.emf.ecore.EObject element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, boolean ignoreTokensAfterLastVisibleToken) {
-		if (element == null) {
+		if (disableLayoutRecording || element == null) {
 			return;
 		}
 		// null must be accepted, since the layout information that is found at the end of
@@ -67,10 +88,10 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 			return;
 		}
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
-		for (org.antlr.runtime3_3_0.CommonToken anonymousToken : anonymousTokens) {
-			layoutInformationAdapter.addLayoutInformation(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, anonymousToken.getStartIndex(), anonymousToken.getText(), null));
+		StringBuilder anonymousText = new StringBuilder();
+		for (org.antlr.runtime3_4_0.CommonToken anonymousToken : anonymousTokens) {
+			anonymousText.append(anonymousToken.getText());
 		}
-		anonymousTokens.clear();
 		int currentPos = getTokenStream().index();
 		if (currentPos == 0) {
 			return;
@@ -78,7 +99,7 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 		int endPos = currentPos - 1;
 		if (ignoreTokensAfterLastVisibleToken) {
 			for (; endPos >= this.lastPosition2; endPos--) {
-				org.antlr.runtime3_3_0.Token token = getTokenStream().get(endPos);
+				org.antlr.runtime3_4_0.Token token = getTokenStream().get(endPos);
 				int _channel = token.getChannel();
 				if (_channel != 99) {
 					break;
@@ -86,12 +107,16 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 			}
 		}
 		StringBuilder hiddenTokenText = new StringBuilder();
+		hiddenTokenText.append(anonymousText);
 		StringBuilder visibleTokenText = new StringBuilder();
-		org.antlr.runtime3_3_0.CommonToken firstToken = null;
+		org.antlr.runtime3_4_0.CommonToken firstToken = null;
 		for (int pos = this.lastPosition2; pos <= endPos; pos++) {
-			org.antlr.runtime3_3_0.Token token = getTokenStream().get(pos);
+			org.antlr.runtime3_4_0.Token token = getTokenStream().get(pos);
 			if (firstToken == null) {
-				firstToken = (org.antlr.runtime3_3_0.CommonToken) token;
+				firstToken = (org.antlr.runtime3_4_0.CommonToken) token;
+			}
+			if (anonymousTokens.contains(token)) {
+				continue;
 			}
 			int _channel = token.getChannel();
 			if (_channel == 99) {
@@ -106,6 +131,7 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 		}
 		layoutInformationAdapter.addLayoutInformation(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, offset, hiddenTokenText.toString(), visibleTokenText.toString()));
 		this.lastPosition2 = (endPos < 0 ? 0 : endPos + 1);
+		anonymousTokens.clear();
 	}
 	
 	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
@@ -141,7 +167,7 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 	
 	protected String formatTokenName(int tokenType)  {
 		String tokenName = "<unknown>";
-		if (tokenType < 0 || tokenType == org.antlr.runtime3_3_0.Token.EOF) {
+		if (tokenType < 0) {
 			tokenName = "EOF";
 		} else {
 			if (tokenType < 0) {
@@ -159,6 +185,15 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 	
 	public void setOptions(java.util.Map<?,?> options) {
 		this.options = options;
+		if (this.options == null) {
+			return;
+		}
+		if (this.options.containsKey(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_LOCATION_MAP)) {
+			this.disableLocationMap = true;
+		}
+		if (this.options.containsKey(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_LAYOUT_INFORMATION_RECORDING)) {
+			this.disableLayoutRecording = true;
+		}
 	}
 	
 	/**
@@ -244,12 +279,10 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_3_0.Parser i
 		return tokenResolveResult;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation getMetaInformation() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
-	}
-	
 	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
-		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) getMetaInformation().getReferenceResolverSwitch();
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch resolverSwitch = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) metaInformation.getReferenceResolverSwitch();
+		resolverSwitch.setOptions(options);
+		return resolverSwitch;
 	}
 	
 }

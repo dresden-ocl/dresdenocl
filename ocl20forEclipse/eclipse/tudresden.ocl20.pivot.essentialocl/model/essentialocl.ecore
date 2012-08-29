@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="essentialocl"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/essentialocl" nsPrefix="essentialocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="essentialocl" nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/essentialocl"
+    nsPrefix="essentialocl">
   <eSubpackages name="types" nsURI="http://www.omg.org/2006/essentialocl/types" nsPrefix="types">
     <eClassifiers xsi:type="ecore:EClass" name="BagType" eSuperTypes="#//types/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="TupleType" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type">

@@ -6,10 +6,6 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
-import java.io.PrintWriter;
-
-import org.eclipse.emf.ecore.EObject;
-
 public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter {
 	
 	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();
@@ -23,6 +19,7 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource;
 	
 	private java.util.Map<?, ?> options;
+	private String encoding = System.getProperty("file.encoding");
 	
 	public OclPrinter(java.io.OutputStream outputStream, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
 		super();
@@ -332,6 +329,16 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 		return options;
 	}
 	
+	public void setEncoding(String encoding) {
+		if (encoding != null) {
+			this.encoding = encoding;
+		}
+	}
+	
+	public String getEncoding() {
+		return encoding;
+	}
+	
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource getResource() {
 		return resource;
 	}
@@ -340,8 +347,8 @@ public class OclPrinter implements tudresden.ocl20.pivot.language.ocl.resource.o
 	 * Calls {@link #doPrint(EObject, PrintWriter, String)} and writes the result to
 	 * the underlying output stream.
 	 */
-	public void print(org.eclipse.emf.ecore.EObject element) {
-		java.io.PrintWriter out = new java.io.PrintWriter(new java.io.BufferedOutputStream(outputStream));
+	public void print(org.eclipse.emf.ecore.EObject element) throws java.io.IOException {
+		java.io.PrintWriter out = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.BufferedOutputStream(outputStream), encoding));
 		doPrint(element, out, "");
 		out.flush();
 		out.close();

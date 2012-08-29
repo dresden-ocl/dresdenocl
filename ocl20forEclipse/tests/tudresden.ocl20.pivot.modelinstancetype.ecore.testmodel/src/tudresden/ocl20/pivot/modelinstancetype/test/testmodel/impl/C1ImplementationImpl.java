@@ -12,6 +12,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementa
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>C1 Implementation</b></em>'.

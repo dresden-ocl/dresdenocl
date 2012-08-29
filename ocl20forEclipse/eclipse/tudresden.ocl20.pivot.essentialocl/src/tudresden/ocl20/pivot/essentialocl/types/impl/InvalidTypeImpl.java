@@ -105,7 +105,6 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	public boolean conformsTo(Type other) {
 
 		return true;

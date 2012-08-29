@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.pivotmodel/src"
-    modelPluginID="tudresden.ocl20.pivot.pivotmodel" templateDirectory="/tudresden.ocl20.pivot.pivotmodel/templates"
-    dynamicTemplates="true" modelName="Pivot Model" modelPluginClass="" nonNLSMarkers="true"
-    rootImplementsInterface="" suppressEMFTypes="true" codeFormatting="true" booleanFlagsField=""
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.pivotmodel/src" modelPluginID="tudresden.ocl20.pivot.pivotmodel"
+    templateDirectory="/tudresden.ocl20.pivot.pivotmodel/templates" dynamicTemplates="true"
+    modelName="Pivot Model" modelPluginClass="" nonNLSMarkers="true" rootImplementsInterface=""
+    suppressEMFTypes="true" codeFormatting="true" booleanFlagsField="" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0">
   <foreignModel>pivotmodel.ecore</foreignModel>
   <foreignModel>datatypes.ecore</foreignModel>
   <genPackages prefix="PivotModel" basePackage="tudresden.ocl20.pivot" disposableProviderFactory="true"

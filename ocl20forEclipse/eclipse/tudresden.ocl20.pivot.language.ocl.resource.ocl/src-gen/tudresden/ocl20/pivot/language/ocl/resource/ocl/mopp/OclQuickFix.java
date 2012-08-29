@@ -45,7 +45,7 @@ public abstract class OclQuickFix implements tudresden.ocl20.pivot.language.ocl.
 			getResource().save(output, null);
 			return output.toString();
 		} catch (java.io.IOException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while applying quick fix", e);
+			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while applying quick fix", e);
 		}
 		return null;
 	}

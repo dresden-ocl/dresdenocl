@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import tudresden.ocl20.pivot.language.ocl.*;
 import tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;

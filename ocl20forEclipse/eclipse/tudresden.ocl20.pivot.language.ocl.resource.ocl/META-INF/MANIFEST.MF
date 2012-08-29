@@ -1,48 +1,25 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: OCL Parser
+Bundle-Name: EMFText Parser Plugin: ocl
 Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.resource.ocl;singleton:=true
 Bundle-Version: 3.1.0.qualifier
-Bundle-Vendor: TU Dresden, Software Technology Group
-Require-Bundle: org.eclipse.emf.codegen.ecore,
- org.eclipse.emf.ecore.edit,
- org.eclipse.emf.workspace,
- org.emftext.commons.antlr3_3_0,
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.change,
+ org.eclipse.emf.validation;resolution:=optional,
+ org.emftext.access;resolution:=optional,
+ org.emftext.commons.antlr3_4_0,
  tudresden.ocl20.pivot.language.ocl,
- tudresden.ocl20.pivot.modelbus
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.model
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl;
-  uses:="org.eclipse.emf.ecore.resource,
-   org.eclipse.emf.ecore,
-   org.eclipse.core.runtime,
-   org.eclipse.emf.common.util,
-   tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp",
- tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;uses:="org.eclipse.emf.ecore,tudresden.ocl20.pivot.language.ocl.resource.ocl",
- tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;uses:="org.eclipse.emf.ecore,tudresden.ocl20.pivot.language.ocl.resource.ocl",
- tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
-  uses:="org.eclipse.emf.ecore.resource,
-   org.eclipse.core.runtime,
-   tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis,
-   org.eclipse.emf.common.util,
-   tudresden.ocl20.pivot.language.ocl,
-   org.eclipse.emf.common.notify,
-   org.antlr.runtime3_3_0,
-   tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar,
-   org.eclipse.emf.ecore,
-   org.eclipse.core.resources,
-   tudresden.ocl20.pivot.language.ocl.resource.ocl,
-   org.osgi.framework,
-   org.eclipse.emf.ecore.impl",
- tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
-  uses:="org.eclipse.emf.ecore.resource,
-   tudresden.ocl20.pivot.pivotmodel,
-   org.eclipse.emf.common.util,
-   tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
-   tudresden.ocl20.pivot.language.ocl,
-   org.eclipse.emf.common.notify,
-   org.eclipse.emf.ecore.util,
-   org.eclipse.emf.ecore,
-   org.eclipse.core.resources,
-   tudresden.ocl20.pivot.language.ocl.resource.ocl"
+Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
+  tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis,
+  tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
+  tudresden.ocl20.pivot.language.ocl.resource.ocl.debug,
+  tudresden.ocl20.pivot.language.ocl.resource.ocl.launch,
+  tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar,
+  tudresden.ocl20.pivot.language.ocl.resource.ocl.util
 Bundle-Activator: tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin

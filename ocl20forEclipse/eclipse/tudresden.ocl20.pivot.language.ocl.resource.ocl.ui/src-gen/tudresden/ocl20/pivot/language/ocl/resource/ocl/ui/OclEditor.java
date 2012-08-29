@@ -8,6 +8,14 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
 /**
  * A text editor for 'ocl' models.
+ * <p>
+ * This editor has id
+ * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor</code>
+ * The editor's context menu has id
+ * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorContext</code>.
+ * The editor's ruler context menu has id
+ * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorRuler</code>.
+ * </p>
  */
 public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements org.eclipse.emf.edit.domain.IEditingDomainProvider, org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener, org.eclipse.emf.common.ui.viewer.IViewerProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandlerProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider {
 	
@@ -29,7 +37,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	
 	public OclEditor() {
 		super();
-		setSourceViewerConfiguration(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditorConfiguration(this, this, this, colorManager));
+		setSourceViewerConfiguration(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSourceViewerConfiguration(this, this, this, colorManager));
 		initializeEditingDomain();
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
 		addSelectionChangedListener(this);
@@ -174,6 +182,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	
 	public void dispose() {
 		colorManager.dispose();
+		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().removeResourceChangeListener(resourceChangeListener);
 		super.dispose();
 	}
 	
@@ -436,8 +445,8 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 						continue;
 					}
 					
-					int annotationLayer = annotationAccess.getLayer(annotation);
 					if (annotationAccess != null) {
+						int annotationLayer = annotationAccess.getLayer(annotation);
 						if (annotationLayer < layer) {
 							continue;
 						}
@@ -490,7 +499,14 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 			Object object = structuredSelection.getFirstElement();
 			if (object instanceof org.eclipse.emf.ecore.EObject) {
 				org.eclipse.emf.ecore.EObject element = (org.eclipse.emf.ecore.EObject) object;
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) element.eResource();
+				org.eclipse.emf.ecore.resource.Resource resource = element.eResource();
+				if (resource == null) {
+					return false;
+				}
+				if (!(resource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource)) {
+					return false;
+				}
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resource;
 				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 				int destination = locationMap.getCharStart(element);
 				if (destination < 0) {

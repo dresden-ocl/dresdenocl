@@ -116,7 +116,6 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected String getTypeName(Type type) {
 
 		return "OrderedSet"; //$NON-NLS-1$

@@ -23,6 +23,13 @@ public class OclExpectedStructuralFeature extends tudresden.ocl20.pivot.language
 		return placeholder.getFeature();
 	}
 	
+	/**
+	 * Returns the expected placeholder.
+	 */
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+		return placeholder;
+	}
+	
 	public String getTokenName() {
 		return placeholder.getTokenName();
 	}
@@ -41,4 +48,9 @@ public class OclExpectedStructuralFeature extends tudresden.ocl20.pivot.language
 		}
 		return false;
 	}
+	@Override	
+	public int hashCode() {
+		return getFeature().hashCode();
+	}
+	
 }

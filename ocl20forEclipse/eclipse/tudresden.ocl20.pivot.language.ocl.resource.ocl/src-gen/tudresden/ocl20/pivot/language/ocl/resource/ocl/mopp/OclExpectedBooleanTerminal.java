@@ -23,6 +23,13 @@ public class OclExpectedBooleanTerminal extends tudresden.ocl20.pivot.language.o
 		return booleanTerminal;
 	}
 	
+	/**
+	 * Returns the expected boolean terminal.
+	 */
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+		return booleanTerminal;
+	}
+	
 	private org.eclipse.emf.ecore.EStructuralFeature getFeature() {
 		return booleanTerminal.getFeature();
 	}
@@ -36,6 +43,11 @@ public class OclExpectedBooleanTerminal extends tudresden.ocl20.pivot.language.o
 			return getFeature().equals(((OclExpectedBooleanTerminal) o).getFeature());
 		}
 		return false;
+	}
+	
+	@Override	
+	public int hashCode() {
+		return getFeature().hashCode();
 	}
 	
 	public java.util.Set<String> getTokenNames() {

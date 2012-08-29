@@ -117,7 +117,6 @@ public class SequenceTypeItemProvider extends CollectionTypeItemProvider
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected String getTypeName(Type type) {
 
 		return "Sequence"; //$NON-NLS-1$

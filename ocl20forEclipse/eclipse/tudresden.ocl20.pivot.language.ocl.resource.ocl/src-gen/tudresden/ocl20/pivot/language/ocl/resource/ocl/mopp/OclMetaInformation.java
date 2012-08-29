@@ -49,7 +49,7 @@ public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.re
 	}
 	
 	public String[] getTokenNames() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclParser(null).getTokenNames();
+		return tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclParser.tokenNames;
 	}
 	
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(String tokenName) {
@@ -98,6 +98,29 @@ public class OclMetaInformation implements tudresden.ocl20.pivot.language.ocl.re
 	
 	public String getLaunchConfigurationType() {
 		return "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.launchConfigurationType";
+	}
+	
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclNameProvider createNameProvider() {
+		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultNameProvider();
+	}
+	
+	public String[] getSyntaxHighlightableTokenNames() {
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAntlrTokenHelper tokenHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAntlrTokenHelper();
+		java.util.List<String> highlightableTokens = new java.util.ArrayList<String>();
+		String[] parserTokenNames = getTokenNames();
+		for (int i = 0; i < parserTokenNames.length; i++) {
+			// If ANTLR is used we need to normalize the token names
+			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
+				continue;
+			}
+			String tokenName = tokenHelper.getTokenName(parserTokenNames, i);
+			if (tokenName == null) {
+				continue;
+			}
+			highlightableTokens.add(tokenName);
+		}
+		highlightableTokens.add(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyleInformationProvider.TASK_ITEM_TOKEN_NAME);
+		return highlightableTokens.toArray(new String[highlightableTokens.size()]);
 	}
 	
 }

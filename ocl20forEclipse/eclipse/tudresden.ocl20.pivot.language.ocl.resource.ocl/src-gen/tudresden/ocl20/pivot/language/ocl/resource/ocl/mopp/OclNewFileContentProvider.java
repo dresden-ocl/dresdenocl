@@ -44,7 +44,7 @@ public class OclNewFileContentProvider {
 		try {
 			printer.print(root);
 		} catch (java.io.IOException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while generating example content.", e);
+			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while generating example content.", e);
 		}
 		return buffer.toString();
 	}

@@ -11,8 +11,6 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer {
 	
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclAntlrTokenHelper tokenHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclAntlrTokenHelper();
-	
 	public void initializeDefaultPreferences() {
 		
 		initializeDefaultSyntaxHighlighting();
@@ -48,21 +46,14 @@ public class OclPreferenceInitializer extends org.eclipse.core.runtime.preferenc
 		store.setDefault(languageId + tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSet.getBracketString());
 	}
 	
-	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation metaInformation) {
+	private void initializeDefaultSyntaxHighlighting(org.eclipse.jface.preference.IPreferenceStore store, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation) {
 		String languageId = metaInformation.getSyntaxName();
-		String[] tokenNames = metaInformation.getTokenNames();
+		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
 		if (tokenNames == null) {
 			return;
 		}
 		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxHighlighting(i)) {
-				continue;
-			}
-			
-			String tokenName = tokenHelper.getTokenName(tokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
+			String tokenName = tokenNames[i];
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle style = metaInformation.getDefaultTokenStyle(tokenName);
 			if (style != null) {
 				String color = getColorString(style.getColorAsRGB());

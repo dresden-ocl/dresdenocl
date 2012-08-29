@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
@@ -38,6 +37,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTyp
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelFactory;
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+
 
 
 /**

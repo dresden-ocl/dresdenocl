@@ -12,6 +12,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Initializabl
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
+
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
  * <em><b>Initializable Copyable Class</b></em>'. <!-- end-user-doc -->

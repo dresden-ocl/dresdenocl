@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
+import tudresden.ocl20.pivot.language.ocl.*;
 import tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS;
 import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;

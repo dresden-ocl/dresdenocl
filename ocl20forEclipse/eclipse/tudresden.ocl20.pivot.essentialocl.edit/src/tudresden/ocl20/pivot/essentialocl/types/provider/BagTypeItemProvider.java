@@ -115,7 +115,6 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected String getTypeName(Type type) {
 
 		return "Bag"; //$NON-NLS-1$

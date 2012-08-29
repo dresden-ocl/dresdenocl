@@ -34,13 +34,6 @@ public interface IOclTextResource extends org.eclipse.emf.ecore.resource.Resourc
 	public void reload(java.io.InputStream stream, java.util.Map<?,?> options) throws java.io.IOException;
 	
 	/**
-	 * Try to cancel a current reload of this resource. It is not guaranteed that
-	 * canceling is successful. If this resource has already finished parsing the new
-	 * content, it will replace its content unconditionally.
-	 */
-	public void cancelReload();
-	
-	/**
 	 * Returns a map containing information about the location of model elements in
 	 * the text.
 	 * 
@@ -70,15 +63,21 @@ public interface IOclTextResource extends org.eclipse.emf.ecore.resource.Resourc
 	 */
 	public <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, ContainerType container, org.eclipse.emf.ecore.EReference reference, String id, org.eclipse.emf.ecore.EObject proxyElement, int position);
 	
+	@Deprecated	
+	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause);
+	
 	/**
 	 * Attaches a warning with the given message to object 'cause'.
 	 */
-	public void addWarning(String message, org.eclipse.emf.ecore.EObject cause);
+	public void addWarning(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, org.eclipse.emf.ecore.EObject cause);
+	
+	@Deprecated	
+	public void addError(String message, org.eclipse.emf.ecore.EObject cause);
 	
 	/**
 	 * Attaches an error with the given message to object 'cause'.
 	 */
-	public void addError(String message, org.eclipse.emf.ecore.EObject cause);
+	public void addError(String message, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType type, org.eclipse.emf.ecore.EObject cause);
 	
 	/**
 	 * Returns the quick fix for the given context. This method is used by the

@@ -208,14 +208,26 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof tudresden.ocl20.pivot.language.ocl.IterateExpCS) {
-			result = interprete_tudresden_ocl20_pivot_language_ocl_IterateExpCS((tudresden.ocl20.pivot.language.ocl.IterateExpCS) object, context);
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.LoopExpCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_LoopExpCS((tudresden.ocl20.pivot.language.ocl.LoopExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof tudresden.ocl20.pivot.language.ocl.LoopExpCS) {
-			result = interprete_tudresden_ocl20_pivot_language_ocl_LoopExpCS((tudresden.ocl20.pivot.language.ocl.LoopExpCS) object, context);
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.CallExpCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_CallExpCS((tudresden.ocl20.pivot.language.ocl.CallExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS((tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.IterateExpCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_IterateExpCS((tudresden.ocl20.pivot.language.ocl.IterateExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -228,12 +240,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS) {
 			result = interprete_tudresden_ocl20_pivot_language_ocl_FeatureCallExpCS((tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof tudresden.ocl20.pivot.language.ocl.CallExpCS) {
-			result = interprete_tudresden_ocl20_pivot_language_ocl_CallExpCS((tudresden.ocl20.pivot.language.ocl.CallExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -384,12 +390,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS) {
 			result = interprete_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS((tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS) {
-			result = interprete_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS((tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -568,6 +568,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS) {
+			result = interprete_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS((tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS) {
 			result = interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS((tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS) object, context);
 		}
@@ -718,456 +724,450 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS) {
-			result = interprete_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS((tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		return result;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OclExpressionCS(tudresden.ocl20.pivot.language.ocl.OclExpressionCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OclExpressionCS(tudresden.ocl20.pivot.language.ocl.OclExpressionCS oclExpressionCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_BracketExpCS(tudresden.ocl20.pivot.language.ocl.BracketExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_BracketExpCS(tudresden.ocl20.pivot.language.ocl.BracketExpCS bracketExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_NamedLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS namedLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PathNameCS(tudresden.ocl20.pivot.language.ocl.PathNameCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PathNameCS(tudresden.ocl20.pivot.language.ocl.PathNameCS pathNameCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_SimpleNameCS(tudresden.ocl20.pivot.language.ocl.SimpleNameCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_SimpleNameCS(tudresden.ocl20.pivot.language.ocl.SimpleNameCS simpleNameCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypeCS(tudresden.ocl20.pivot.language.ocl.TypeCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypeCS(tudresden.ocl20.pivot.language.ocl.TypeCS typeCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypePathNameCS(tudresden.ocl20.pivot.language.ocl.TypePathNameCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypePathNameCS(tudresden.ocl20.pivot.language.ocl.TypePathNameCS typePathNameCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS(tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypePathNameSimpleCS(tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS typePathNameSimpleCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS(tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TypePathNameNestedCS(tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS typePathNameNestedCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeCS(tudresden.ocl20.pivot.language.ocl.TupleTypeCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeCS(tudresden.ocl20.pivot.language.ocl.TupleTypeCS tupleTypeCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS collectionTypeLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleTypeLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS tupleTypeLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS variableDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS variableDeclarationWithInitCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS variableDeclarationWithoutInitCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS variableDeclarationWithInitListCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_VariableDeclarationWithoutInitListCS(tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS variableDeclarationWithoutInitListCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LiteralExpCS(tudresden.ocl20.pivot.language.ocl.LiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LiteralExpCS(tudresden.ocl20.pivot.language.ocl.LiteralExpCS literalExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS(tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_EnumLiteralOrStaticPropertyExpCS(tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS enumLiteralOrStaticPropertyExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionLiteralExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS collectionLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionTypeIdentifierCS(tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS collectionTypeIdentifierCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS collectionLiteralPartsCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionLiteralPartsOclExpCS(tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS collectionLiteralPartsOclExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS(tudresden.ocl20.pivot.language.ocl.CollectionRangeCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CollectionRangeCS(tudresden.ocl20.pivot.language.ocl.CollectionRangeCS collectionRangeCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CallExpCS(tudresden.ocl20.pivot.language.ocl.CallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_CallExpCS(tudresden.ocl20.pivot.language.ocl.CallExpCS callExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LoopExpCS(tudresden.ocl20.pivot.language.ocl.LoopExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LoopExpCS(tudresden.ocl20.pivot.language.ocl.LoopExpCS loopExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS(tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IteratorExpVariableCS(tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS iteratorExpVariableCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IteratorExpCS(tudresden.ocl20.pivot.language.ocl.IteratorExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IteratorExpCS(tudresden.ocl20.pivot.language.ocl.IteratorExpCS iteratorExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IterateExpCS(tudresden.ocl20.pivot.language.ocl.IterateExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IterateExpCS(tudresden.ocl20.pivot.language.ocl.IterateExpCS iterateExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_FeatureCallExpCS(tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_FeatureCallExpCS(tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS featureCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_NavigationCallExp(tudresden.ocl20.pivot.language.ocl.NavigationCallExp object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_NavigationCallExp(tudresden.ocl20.pivot.language.ocl.NavigationCallExp navigationCallExp, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallBaseExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallBaseExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS operationCallBaseExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallBaseExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallBaseExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS propertyCallBaseExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ImplicitFeatureCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS implicitFeatureCallCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ImplicitPropertyCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS implicitPropertyCallCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ImplicitOperationCallCS(tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS implicitOperationCallCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS propertyCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS propertyCallOnSelfExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallExplicitPathExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PropertyCallExplicitPathExpCS(tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS propertyCallExplicitPathExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallExpCS operationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallOnSelfExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS operationCallOnSelfExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_StaticOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS staticOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_UnaryOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_UnaryOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS unaryOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalNotOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalNotOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS logicalNotOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallWithSourceExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallWithSourceExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS operationCallWithSourceExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallBinaryExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallBinaryExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS operationCallBinaryExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_AdditiveOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_AdditiveOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS additiveOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_MultOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_MultOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS multOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_RelationalOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_RelationalOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS relationalOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_EqualityOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_EqualityOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS equalityOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalAndOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalAndOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS logicalAndOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalOrOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalOrOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS logicalOrOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalXorOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalXorOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS logicalXorOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalImpliesOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LogicalImpliesOperationCallExpCS(tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS logicalImpliesOperationCallExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallWithImlicitSourceExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationCallWithImlicitSourceExpCS(tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS operationCallWithImlicitSourceExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_TupleLiteralExpCS(tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS tupleLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PrimitiveLiteralExpCS(tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PrimitiveLiteralExpCS(tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS primitiveLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS(tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IntegerLiteralExpCS(tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS integerLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS(tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_RealLiteralExpCS(tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS realLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS(tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_BooleanLiteralExpCS(tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS booleanLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS(tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_StringLiteralExpCS(tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS stringLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS(tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InvalidLiteralExpCS(tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS invalidLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_NullLiteralExpCS(tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS nullLiteralExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LetExpCS(tudresden.ocl20.pivot.language.ocl.LetExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_LetExpCS(tudresden.ocl20.pivot.language.ocl.LetExpCS letExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IfExpCS(tudresden.ocl20.pivot.language.ocl.IfExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_IfExpCS(tudresden.ocl20.pivot.language.ocl.IfExpCS ifExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS packageDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS packageDeclarationWithNamespaceCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationNestedNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS packageDeclarationNestedNamespaceCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PackageDeclarationWithoutNamespaceCS(tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS packageDeclarationWithoutNamespaceCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS contextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_AttributeContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS attributeContextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ClassifierContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS classifierContextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationContextDeclarationCS(tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS operationContextDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS(tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InitOrDeriveValueCS(tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS initOrDeriveValueCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InitValueCS(tudresden.ocl20.pivot.language.ocl.InitValueCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InitValueCS(tudresden.ocl20.pivot.language.ocl.InitValueCS initValueCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DeriveValueCS(tudresden.ocl20.pivot.language.ocl.DeriveValueCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DeriveValueCS(tudresden.ocl20.pivot.language.ocl.DeriveValueCS deriveValueCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS(tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InvariantOrDefinitionCS(tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS invariantOrDefinitionCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InvariantExpCS(tudresden.ocl20.pivot.language.ocl.InvariantExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_InvariantExpCS(tudresden.ocl20.pivot.language.ocl.InvariantExpCS invariantExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpCS definitionExpCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpPartCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS definitionExpPartCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpPropertyCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS definitionExpPropertyCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_DefinitionExpOperationCS(tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS definitionExpOperationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS(tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PrePostOrBodyDeclarationCS(tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS prePostOrBodyDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PreConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS preConditionDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_PostConditionDeclarationCS(tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS postConditionDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS(tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_BodyDeclarationCS(tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS bodyDeclarationCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS operationDefinitionCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInContextCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS operationDefinitionInContextCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_OperationDefinitionInDefCS(tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS operationDefinitionInDefCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ParameterCS(tudresden.ocl20.pivot.language.ocl.ParameterCS object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_language_ocl_ParameterCS(tudresden.ocl20.pivot.language.ocl.ParameterCS parameterCS, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_NamedElement(tudresden.ocl20.pivot.pivotmodel.NamedElement object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_NamedElement(tudresden.ocl20.pivot.pivotmodel.NamedElement namedElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_TypedElement(tudresden.ocl20.pivot.pivotmodel.TypedElement object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_TypedElement(tudresden.ocl20.pivot.pivotmodel.TypedElement typedElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Feature(tudresden.ocl20.pivot.pivotmodel.Feature object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Feature(tudresden.ocl20.pivot.pivotmodel.Feature feature, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_GenericElement(tudresden.ocl20.pivot.pivotmodel.GenericElement object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_GenericElement(tudresden.ocl20.pivot.pivotmodel.GenericElement genericElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_ConstrainableElement(tudresden.ocl20.pivot.pivotmodel.ConstrainableElement object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_ConstrainableElement(tudresden.ocl20.pivot.pivotmodel.ConstrainableElement constrainableElement, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Namespace(tudresden.ocl20.pivot.pivotmodel.Namespace object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Namespace(tudresden.ocl20.pivot.pivotmodel.Namespace namespace, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Type(tudresden.ocl20.pivot.pivotmodel.Type object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Type(tudresden.ocl20.pivot.pivotmodel.Type type, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_PrimitiveType(tudresden.ocl20.pivot.pivotmodel.PrimitiveType object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_PrimitiveType(tudresden.ocl20.pivot.pivotmodel.PrimitiveType primitiveType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Enumeration(tudresden.ocl20.pivot.pivotmodel.Enumeration object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Enumeration(tudresden.ocl20.pivot.pivotmodel.Enumeration enumeration, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_EnumerationLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_EnumerationLiteral(tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral enumerationLiteral, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Property(tudresden.ocl20.pivot.pivotmodel.Property object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Property(tudresden.ocl20.pivot.pivotmodel.Property property, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Operation(tudresden.ocl20.pivot.pivotmodel.Operation object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Operation(tudresden.ocl20.pivot.pivotmodel.Operation operation, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Parameter(tudresden.ocl20.pivot.pivotmodel.Parameter object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Parameter(tudresden.ocl20.pivot.pivotmodel.Parameter parameter, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_GenericType(tudresden.ocl20.pivot.pivotmodel.GenericType object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_GenericType(tudresden.ocl20.pivot.pivotmodel.GenericType genericType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_ParameterGenericType(tudresden.ocl20.pivot.pivotmodel.ParameterGenericType object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_ParameterGenericType(tudresden.ocl20.pivot.pivotmodel.ParameterGenericType parameterGenericType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_ComplexGenericType(tudresden.ocl20.pivot.pivotmodel.ComplexGenericType object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_ComplexGenericType(tudresden.ocl20.pivot.pivotmodel.ComplexGenericType complexGenericType, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_TypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_TypeParameter(tudresden.ocl20.pivot.pivotmodel.TypeParameter typeParameter, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_TypeArgument(tudresden.ocl20.pivot.pivotmodel.TypeArgument object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_TypeArgument(tudresden.ocl20.pivot.pivotmodel.TypeArgument typeArgument, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Constraint(tudresden.ocl20.pivot.pivotmodel.Constraint object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Constraint(tudresden.ocl20.pivot.pivotmodel.Constraint constraint, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Expression(tudresden.ocl20.pivot.pivotmodel.Expression object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_Expression(tudresden.ocl20.pivot.pivotmodel.Expression expression, ContextType context) {
 		return null;
 	}
 	
-	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_AssociationProperty(tudresden.ocl20.pivot.pivotmodel.AssociationProperty object, ContextType context) {
+	public ResultType interprete_tudresden_ocl20_pivot_pivotmodel_AssociationProperty(tudresden.ocl20.pivot.pivotmodel.AssociationProperty associationProperty, ContextType context) {
 		return null;
 	}
 	

@@ -37,7 +37,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 		return result != null;
 	}
 	
-	public synchronized tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve() {
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve() {
 		if (resolving) {
 			return null;
 		}
@@ -77,7 +77,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 			} else if (list != null) {
 				addResultToList(mapping, proxy, list);
 			} else {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
+				new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
 			}
 		}
 	}

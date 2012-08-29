@@ -5,33 +5,9 @@
  * 
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ISelectionProvider;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TreePath;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.util.ModelQueryUtility;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
-
+//TODO Lars: re-implement the linking into the model browser
 /**
  * A hyperlink for the proxy elements in source code.
- * @author Lars Schütze implemented linking into ModelBrowser
  */
 public class OclHyperlink implements
 		org.eclipse.jface.text.hyperlink.IHyperlink {
@@ -39,7 +15,7 @@ public class OclHyperlink implements
 	private String text;
 	private org.eclipse.emf.ecore.EObject linkTarget;
 	private org.eclipse.jface.text.IRegion region;
-	
+
 	/**
 	 * Creates the hyperlink.
 	 * 
@@ -88,62 +64,56 @@ public class OclHyperlink implements
 		if (linkTarget == null) {
 			return;
 		}
-		
-		/* Show the ModelBrowser */
-		try {
-			final IViewPart mbViewPart =
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-							.showView(ModelsView.ID);
-
-			PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-
-				@Override
-				public void run() {
-
-					showSelectionInModelBrowser(mbViewPart);
+		org.eclipse.core.resources.IFile file = getIFileFromResource();
+		if (file != null) {
+			org.eclipse.ui.IWorkbench workbench =
+					org.eclipse.ui.PlatformUI.getWorkbench();
+			org.eclipse.ui.IWorkbenchPage page =
+					workbench.getActiveWorkbenchWindow().getActivePage();
+			try {
+				org.eclipse.ui.IEditorDescriptor desc =
+						workbench.getEditorRegistry().getDefaultEditor(file.getName());
+				if (desc == null) {
+					desc =
+							workbench.getEditorRegistry().findEditor(
+									"org.eclipse.emf.ecore.presentation.ReflectiveEditorID");
 				}
-			});
-		} catch (PartInitException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError(
-					"Exception while opening hyperlink target.", e);
+				org.eclipse.ui.IEditorPart editorPart =
+						page.openEditor(new org.eclipse.ui.part.FileEditorInput(file),
+								desc.getId());
+				if (editorPart instanceof org.eclipse.emf.edit.domain.IEditingDomainProvider) {
+					org.eclipse.emf.edit.domain.IEditingDomainProvider editingDomainProvider =
+							(org.eclipse.emf.edit.domain.IEditingDomainProvider) editorPart;
+					org.eclipse.emf.edit.domain.EditingDomain editingDomain =
+							editingDomainProvider.getEditingDomain();
+					org.eclipse.emf.common.util.URI uri =
+							org.eclipse.emf.ecore.util.EcoreUtil.getURI(linkTarget);
+					org.eclipse.emf.ecore.EObject originalObject =
+							editingDomain.getResourceSet().getEObject(uri, true);
+					if (editingDomainProvider instanceof org.eclipse.emf.common.ui.viewer.IViewerProvider) {
+						org.eclipse.emf.common.ui.viewer.IViewerProvider viewerProvider =
+								(org.eclipse.emf.common.ui.viewer.IViewerProvider) editingDomainProvider;
+						org.eclipse.jface.viewers.Viewer viewer =
+								viewerProvider.getViewer();
+						viewer.setSelection(
+								new org.eclipse.jface.viewers.StructuredSelection(
+										originalObject), true);
+					}
+				}
+			} catch (org.eclipse.ui.PartInitException e) {
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin
+						.logError("Exception while opening hyperlink target.", e);
+			}
 		}
-
-		/*
-		 * org.eclipse.core.resources.IFile file = getIFileFromResource(); if (file
-		 * != null) { org.eclipse.ui.IWorkbench workbench =
-		 * org.eclipse.ui.PlatformUI.getWorkbench(); org.eclipse.ui.IWorkbenchPage
-		 * page = workbench.getActiveWorkbenchWindow().getActivePage(); try {
-		 * org.eclipse.ui.IEditorDescriptor desc =
-		 * workbench.getEditorRegistry().getDefaultEditor(file.getName()); if (desc
-		 * == null) { desc = workbench.getEditorRegistry().findEditor(
-		 * "org.eclipse.emf.ecore.presentation.ReflectiveEditorID"); }
-		 * org.eclipse.ui.IEditorPart editorPart = page.openEditor(new
-		 * org.eclipse.ui.part.FileEditorInput(file), desc.getId()); if (editorPart
-		 * instanceof org.eclipse.emf.edit.domain.IEditingDomainProvider) {
-		 * org.eclipse.emf.edit.domain.IEditingDomainProvider editingDomainProvider
-		 * = (org.eclipse.emf.edit.domain.IEditingDomainProvider) editorPart;
-		 * org.eclipse.emf.edit.domain.EditingDomain editingDomain =
-		 * editingDomainProvider.getEditingDomain(); org.eclipse.emf.common.util.URI
-		 * uri = org.eclipse.emf.ecore.util.EcoreUtil.getURI(linkTarget);
-		 * org.eclipse.emf.ecore.EObject originalObject =
-		 * editingDomain.getResourceSet().getEObject(uri, true); if
-		 * (editingDomainProvider instanceof
-		 * org.eclipse.emf.common.ui.viewer.IViewerProvider) {
-		 * org.eclipse.emf.common.ui.viewer.IViewerProvider viewerProvider =
-		 * (org.eclipse.emf.common.ui.viewer.IViewerProvider) editingDomainProvider;
-		 * org.eclipse.jface.viewers.Viewer viewer = viewerProvider.getViewer();
-		 * viewer.setSelection(new
-		 * org.eclipse.jface.viewers.StructuredSelection(originalObject), true); } }
-		 * } catch (org.eclipse.ui.PartInitException e) {
-		 * tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError(
-		 * "Exception while opening hyperlink target.", e); } }
-		 */
 	}
 
 	private org.eclipse.core.resources.IFile getIFileFromResource() {
 
 		org.eclipse.emf.ecore.resource.Resource linkTargetResource =
 				linkTarget.eResource();
+		if (linkTargetResource == null) {
+			return null;
+		}
 		org.eclipse.emf.common.util.URI resourceURI = linkTargetResource.getURI();
 		if (linkTargetResource.getResourceSet() != null
 				&& linkTargetResource.getResourceSet().getURIConverter() != null) {
@@ -168,82 +138,4 @@ public class OclHyperlink implements
 		return region;
 	}
 
-	private void showSelectionInModelBrowser(IViewPart mbViewPart) {
-
-		if (mbViewPart == null) {
-			return;
-		}
-		
-		mbViewPart.setFocus();
-		ISelectionProvider mbSelectionProvider =
-				mbViewPart.getViewSite().getSelectionProvider();
-		
-		/* Since we know that the Model Browser is a TreeViewer */
-		if (mbSelectionProvider instanceof TreeViewer) {
-			
-			/** The Model Browser Viewer */
-			TreeViewer mbViewer = (TreeViewer) mbSelectionProvider;
-			/** The way in the viewer to the linkTarget */
-			List<EObject> typeNamespace = null;
-
-			if (linkTarget instanceof Type) {
-				typeNamespace = getAllNestingNamespacesFromType((Type) linkTarget);
-			}
-			//no else
-			
-			if(linkTarget instanceof AbstractProperty) {
-				typeNamespace = getAllNestingNamespacesFromType(((AbstractProperty) linkTarget).getOwningType());
-				typeNamespace.add(((AbstractProperty) linkTarget).getOwningType());
-			}
-			//no else
-
-			if (linkTarget instanceof Operation) {
-				try {
-					Collection<Type> activeModelsTypes =
-							ModelQueryUtility.getAllTypes(ModelBusPlugin.getModelRegistry()
-									.getActiveModel());
-					
-					for(Type type : activeModelsTypes) {
-						if(type.getOwnedOperation().contains((Operation) linkTarget)) {
-							typeNamespace = getAllNestingNamespacesFromType(type);
-							break;
-						}
-						//no else
-					}
-					
-				} catch (ModelAccessException e) {
-					/* do nothing here */
-				}
-			}
-			//no else
-
-			if (typeNamespace != null && !typeNamespace.isEmpty()) {
-				mbViewer.expandToLevel(new TreePath(typeNamespace.toArray()), 1);
-				mbViewer.expandToLevel(linkTarget, 1);
-				mbViewer.setSelection(new StructuredSelection(linkTarget), true);
-				mbViewer.getTree().showSelection();
-			}
-			//no else
-		}
-		//could not happen
-	}
-
-	private List<EObject> getAllNestingNamespacesFromType(Type type) {
-
-		List<EObject> result = new ArrayList<EObject>();
-
-		Namespace namespace = type.getNamespace();
-		Namespace oldNamespace = null;
-		while (namespace != null && oldNamespace != namespace) {
-			result.add(namespace);
-			oldNamespace = namespace;
-			namespace = namespace.getNestingNamespace();
-		}
-		/* Remove root namespace */
-		result.remove(result.size() - 1);
-
-		/* Reverse the list so that it is in the right order */
-		Collections.reverse(result);
-		return result;
-	}
 }

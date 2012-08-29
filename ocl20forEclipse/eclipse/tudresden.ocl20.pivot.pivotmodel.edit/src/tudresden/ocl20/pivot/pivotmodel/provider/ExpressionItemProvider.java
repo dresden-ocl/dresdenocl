@@ -51,7 +51,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.pivotmodel.Expression;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Expression} object.

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl" nsPrefix="ocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl" nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+    nsPrefix="ocl">
   <eClassifiers xsi:type="ecore:EClass" name="OclExpressionCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="BracketExpCS" eSuperTypes="#//OclExpressionCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"

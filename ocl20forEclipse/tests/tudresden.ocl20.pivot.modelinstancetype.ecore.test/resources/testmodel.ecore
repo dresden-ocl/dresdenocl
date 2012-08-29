@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tudresden"
-    nsURI="http://www.tu-dresden.de" nsPrefix="tudresden">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tudresden" nsURI="http://www.tu-dresden.de" nsPrefix="tudresden">
   <eSubpackages name="ocl20" nsURI="http://www.tu-dresden.de/ocl20" nsPrefix="ocl20">
     <eSubpackages name="pivot" nsURI="http://www.tu-dresden.de/ocl20/pivot" nsPrefix="pivot">
       <eSubpackages name="modelinstancetype" nsURI="http://www.tudresden.de/ocl20/pivot/modelinstancetype"

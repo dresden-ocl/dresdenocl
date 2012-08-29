@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
 

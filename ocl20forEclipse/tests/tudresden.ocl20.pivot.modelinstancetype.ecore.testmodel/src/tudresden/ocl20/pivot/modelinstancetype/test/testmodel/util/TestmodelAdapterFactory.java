@@ -8,12 +8,30 @@ package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 /**

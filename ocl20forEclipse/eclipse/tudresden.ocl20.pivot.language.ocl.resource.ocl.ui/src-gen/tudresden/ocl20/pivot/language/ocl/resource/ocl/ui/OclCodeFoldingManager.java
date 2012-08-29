@@ -319,6 +319,7 @@ public class OclCodeFoldingManager {
 			encryptMsg = md.digest(text.getBytes());
 		} catch (java.security.NoSuchAlgorithmException e) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("NoSuchAlgorithmException while creating MD5 checksum.", e);
+			return "";
 		}
 		String swap = "";
 		String byteStr = "";

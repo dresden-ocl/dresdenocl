@@ -6,12 +6,31 @@
  */
 package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 /**
@@ -27,7 +46,8 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.*;
  * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage
  * @generated
  */
-public class TestmodelSwitch<T> {
+public class TestmodelSwitch<T> extends 
+Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -49,14 +69,16 @@ public class TestmodelSwitch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @parameter ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -66,26 +88,7 @@ public class TestmodelSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case TestmodelPackage.CONTAINER_CLASS: {
@@ -539,6 +542,7 @@ public class TestmodelSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
+	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}

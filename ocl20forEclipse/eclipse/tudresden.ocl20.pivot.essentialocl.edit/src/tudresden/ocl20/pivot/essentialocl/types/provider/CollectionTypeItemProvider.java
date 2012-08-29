@@ -184,7 +184,6 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected String getTypeName(Type type) {
 
 		return "Collection"; //$NON-NLS-1$

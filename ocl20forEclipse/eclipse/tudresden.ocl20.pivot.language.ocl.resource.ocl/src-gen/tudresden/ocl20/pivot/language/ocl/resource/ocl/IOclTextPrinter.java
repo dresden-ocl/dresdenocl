@@ -23,4 +23,9 @@ public interface IOclTextPrinter extends tudresden.ocl20.pivot.language.ocl.reso
 	 */
 	public void print(org.eclipse.emf.ecore.EObject element) throws java.io.IOException;
 	
+	/**
+	 * Sets the encoding used for printing.
+	 */
+	public void setEncoding(String encoding);
+	
 }

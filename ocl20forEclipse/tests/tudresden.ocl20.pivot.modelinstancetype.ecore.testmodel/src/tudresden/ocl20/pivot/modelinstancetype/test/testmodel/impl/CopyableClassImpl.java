@@ -7,7 +7,6 @@
 package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;

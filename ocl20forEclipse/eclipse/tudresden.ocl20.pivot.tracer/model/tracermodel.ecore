@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracermodel"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel" nsPrefix="tracermodel">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tracermodel" nsURI="http://www.tu-dresden.de/ocl20/pivot/2011/tracermodel"
+    nsPrefix="tracermodel">
   <eClassifiers xsi:type="ecore:EClass" name="TracerItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="result" eType="#//OclAny"/>

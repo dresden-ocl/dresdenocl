@@ -12,6 +12,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopy
 import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Clonable Copyable Class</b></em>'.
