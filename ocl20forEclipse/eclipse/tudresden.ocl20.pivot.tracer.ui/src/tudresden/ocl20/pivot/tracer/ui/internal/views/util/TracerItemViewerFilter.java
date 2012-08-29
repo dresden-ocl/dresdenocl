@@ -118,6 +118,8 @@ public class TracerItemViewerFilter extends ViewerFilter {
 					case FILTER_TRUE:
 						addedParents.put(item.getUUID(), filterType);
 						return anOclBoolean.isTrue();
+					default:
+						return true;
 					}
 					// end switch
 				}
