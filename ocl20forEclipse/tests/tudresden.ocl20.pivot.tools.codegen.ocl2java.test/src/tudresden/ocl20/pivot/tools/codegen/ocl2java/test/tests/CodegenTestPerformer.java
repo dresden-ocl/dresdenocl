@@ -446,8 +446,10 @@ public final class CodegenTestPerformer {
 			} finally {
 				try {
 					// To avoid resource leaks
-					diffReader.close();
-
+					if (diffReader != null) {
+						diffReader.close();
+					}
+					// no else.
 				} catch (IOException e) {
 					throw new Ocl2CodeException(
 							"The difference file could not be closed. Test failed.");
