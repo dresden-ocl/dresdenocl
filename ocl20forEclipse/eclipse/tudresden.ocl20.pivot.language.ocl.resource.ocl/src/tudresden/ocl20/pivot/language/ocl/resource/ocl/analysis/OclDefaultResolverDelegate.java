@@ -284,12 +284,14 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	}
 	
 	protected String deResolve(ReferenceType element, ContainerType container, org.eclipse.emf.ecore.EReference reference) {
+		/* TODO: Small hack: Find out why the original code does not work
 		org.eclipse.emf.ecore.resource.Resource elementResource = element.eResource();
 		// For elements in external resources we return the resource URI instead of the
 		// name of the element.
 		if (elementResource != null && !elementResource.equals(container.eResource())) {
 			return elementResource.getURI().toString();
 		}
+		*/
 		return getName(element);
 	}
 	

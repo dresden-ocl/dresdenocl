@@ -18,6 +18,7 @@ OPTIONS {
 	overridePluginXML = "false";
 	usePredefinedTokens = "false";
 	overrideHyperlink = "false";
+	overrideDefaultResolverDelegate = "false";
 	resourcePluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl";
 	resourceUIPluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui";
 	srcFolder = "src";
