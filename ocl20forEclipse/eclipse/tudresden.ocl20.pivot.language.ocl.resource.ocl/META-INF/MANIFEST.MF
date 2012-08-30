@@ -12,7 +12,8 @@ Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
  org.emftext.commons.antlr3_4_0,
  tudresden.ocl20.pivot.language.ocl,
  tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.model
+ tudresden.ocl20.pivot.model,
+ tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
