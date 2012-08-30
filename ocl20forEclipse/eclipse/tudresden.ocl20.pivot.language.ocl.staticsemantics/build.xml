@@ -28,6 +28,7 @@
 		<echo message="Compile OclStaticSemanticsException.java" />
 		<javac
 			target="1.6"
+			source="1.6"
 			srcdir="${oclStaticSemanticsSrc}"
 			destdir="${oclStaticSemanticsBin}"
 			classpathref="build.classpath"
@@ -47,6 +48,7 @@
 		<echo message="Compile Java Code" />
 		<javac
 			target="1.6"
+			source="1.6"
 			srcdir="${oclStaticSemanticsSrc}"
 			destdir="${oclStaticSemanticsBin}"
 			classpathref="build.classpath"

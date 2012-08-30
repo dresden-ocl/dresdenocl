@@ -28,6 +28,7 @@
 		<echo message="Compile Java Code" />
 		<javac
 			target="1.6"
+			source="1.6"
 			srcdir="${attributableEObjectSrc}"
 			destdir="${attributableEObjectBin}"
 			classpathref="build.classpath"

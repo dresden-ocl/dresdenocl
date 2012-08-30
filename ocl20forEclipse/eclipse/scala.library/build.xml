@@ -33,6 +33,7 @@
 				<include name="plugins/org.eclipse.*.jar" />
 				<include name="plugins/org.emftext.access*.jar" />
 				<include name="dropins/*/org.emftext.access*.jar" />
+				<include name="plugins/org.emftext.commons.layout*.jar" />
 				<include name="plugins/org.apache.**.jar" />
 			</fileset>
 			<dirset dir="./..">
