@@ -6,8 +6,10 @@
  */
 package tudresden.ocl20.pivot.language.ocl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import org.emftext.commons.layout.LayoutInformation;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
 
 /**
@@ -20,6 +22,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation <em>Layout Information</em>}</li>
  * </ul>
  * </p>
  *
@@ -79,5 +82,21 @@ public interface PackageDeclarationNestedNamespaceCS extends EObject {
    * @generated
    */
 	void setNestedNamespace(PackageDeclarationNestedNamespaceCS value);
+
+	/**
+   * Returns the value of the '<em><b>Layout Information</b></em>' reference list.
+   * The list contents are of type {@link org.emftext.commons.layout.LayoutInformation}.
+   * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Layout Information</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+   * @return the value of the '<em>Layout Information</em>' reference list.
+   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_LayoutInformation()
+   * @model
+   * @generated
+   */
+	EList<LayoutInformation> getLayoutInformation();
 
 } // PackageDeclarationNestedNamespaceCS

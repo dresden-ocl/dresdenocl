@@ -2103,6 +2103,15 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EReference getPackageDeclarationNestedNamespaceCS_LayoutInformation() {
+    return (EReference)packageDeclarationNestedNamespaceCSEClass.getEStructuralFeatures().get(2);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	public EClass getPackageDeclarationWithoutNamespaceCS() {
     return packageDeclarationWithoutNamespaceCSEClass;
   }
@@ -2759,6 +2768,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     packageDeclarationNestedNamespaceCSEClass = createEClass(PACKAGE_DECLARATION_NESTED_NAMESPACE_CS);
     createEReference(packageDeclarationNestedNamespaceCSEClass, PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE);
     createEReference(packageDeclarationNestedNamespaceCSEClass, PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE);
+    createEReference(packageDeclarationNestedNamespaceCSEClass, PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION);
 
     packageDeclarationWithoutNamespaceCSEClass = createEClass(PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS);
 
@@ -3149,6 +3159,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     initEClass(packageDeclarationNestedNamespaceCSEClass, PackageDeclarationNestedNamespaceCS.class, "PackageDeclarationNestedNamespaceCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPackageDeclarationNestedNamespaceCS_Namespace(), thePivotModelPackage.getNamespace(), null, "namespace", null, 1, 1, PackageDeclarationNestedNamespaceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPackageDeclarationNestedNamespaceCS_NestedNamespace(), this.getPackageDeclarationNestedNamespaceCS(), null, "nestedNamespace", null, 0, 1, PackageDeclarationNestedNamespaceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPackageDeclarationNestedNamespaceCS_LayoutInformation(), theLayoutPackage.getLayoutInformation(), null, "layoutInformation", null, 0, -1, PackageDeclarationNestedNamespaceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(packageDeclarationWithoutNamespaceCSEClass, PackageDeclarationWithoutNamespaceCS.class, "PackageDeclarationWithoutNamespaceCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

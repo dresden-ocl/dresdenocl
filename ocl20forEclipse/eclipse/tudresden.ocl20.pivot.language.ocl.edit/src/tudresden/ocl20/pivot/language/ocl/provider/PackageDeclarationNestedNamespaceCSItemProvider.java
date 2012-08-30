@@ -59,6 +59,7 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 			super.getPropertyDescriptors(object);
 
 			addNamespacePropertyDescriptor(object);
+			addLayoutInformationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -77,6 +78,28 @@ public class PackageDeclarationNestedNamespaceCSItemProvider extends
 				 getString("_UI_PackageDeclarationNestedNamespaceCS_namespace_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_PackageDeclarationNestedNamespaceCS_namespace_feature", "_UI_PackageDeclarationNestedNamespaceCS_type"),
 				 OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Layout Information feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLayoutInformationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_PackageDeclarationNestedNamespaceCS_layoutInformation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PackageDeclarationNestedNamespaceCS_layoutInformation_feature", "_UI_PackageDeclarationNestedNamespaceCS_type"),
+				 OclPackage.Literals.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION,
 				 true,
 				 false,
 				 true,

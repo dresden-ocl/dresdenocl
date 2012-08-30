@@ -2477,13 +2477,22 @@ public interface OclPackage extends EPackage {
 	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE = 1;
 
 	/**
+   * The feature id for the '<em><b>Layout Information</b></em>' reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION = 2;
+
+	/**
    * The number of structural features of the '<em>Package Declaration Nested Namespace CS</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS_FEATURE_COUNT = 2;
+	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS_FEATURE_COUNT = 3;
 
 	/**
    * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl <em>Package Declaration Without Namespace CS</em>}' class.
@@ -4779,6 +4788,17 @@ public interface OclPackage extends EPackage {
 	EReference getPackageDeclarationNestedNamespaceCS_NestedNamespace();
 
 	/**
+   * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation <em>Layout Information</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Layout Information</em>'.
+   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation()
+   * @see #getPackageDeclarationNestedNamespaceCS()
+   * @generated
+   */
+	EReference getPackageDeclarationNestedNamespaceCS_LayoutInformation();
+
+	/**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS <em>Package Declaration Without Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6574,6 +6594,14 @@ public interface OclPackage extends EPackage {
      * @generated
      */
 		EReference PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE = eINSTANCE.getPackageDeclarationNestedNamespaceCS_NestedNamespace();
+
+		/**
+     * The meta object literal for the '<em><b>Layout Information</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION = eINSTANCE.getPackageDeclarationNestedNamespaceCS_LayoutInformation();
 
 		/**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl <em>Package Declaration Without Namespace CS</em>}' class.

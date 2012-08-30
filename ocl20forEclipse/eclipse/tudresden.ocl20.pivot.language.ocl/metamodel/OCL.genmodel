@@ -189,6 +189,7 @@
     <genClasses ecoreClass="OCL.ecore#//PackageDeclarationNestedNamespaceCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationNestedNamespaceCS/namespace"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationNestedNamespaceCS/nestedNamespace"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference OCL.ecore#//PackageDeclarationNestedNamespaceCS/layoutInformation"/>
     </genClasses>
     <genClasses ecoreClass="OCL.ecore#//PackageDeclarationWithoutNamespaceCS"/>
     <genClasses image="false" ecoreClass="OCL.ecore#//ContextDeclarationCS"/>

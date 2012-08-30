@@ -6,13 +6,17 @@
  */
 package tudresden.ocl20.pivot.language.ocl.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.emftext.commons.layout.LayoutInformation;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS;
 import tudresden.ocl20.pivot.pivotmodel.Namespace;
@@ -26,6 +30,7 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  * <ul>
  *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getLayoutInformation <em>Layout Information</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +56,16 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
    * @ordered
    */
 	protected PackageDeclarationNestedNamespaceCS nestedNamespace;
+
+	/**
+   * The cached value of the '{@link #getLayoutInformation() <em>Layout Information</em>}' reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @see #getLayoutInformation()
+   * @generated
+   * @ordered
+   */
+	protected EList<LayoutInformation> layoutInformation;
 
 	/**
    * <!-- begin-user-doc -->
@@ -161,6 +176,19 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EList<LayoutInformation> getLayoutInformation() {
+    if (layoutInformation == null)
+    {
+      layoutInformation = new EObjectResolvingEList<LayoutInformation>(LayoutInformation.class, this, OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION);
+    }
+    return layoutInformation;
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
     switch (featureID)
@@ -185,6 +213,8 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
         return basicGetNamespace();
       case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
         return getNestedNamespace();
+      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+        return getLayoutInformation();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -194,6 +224,7 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
 	 * <!-- end-user-doc -->
    * @generated
    */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
     switch (featureID)
@@ -203,6 +234,10 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
         return;
       case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
         setNestedNamespace((PackageDeclarationNestedNamespaceCS)newValue);
+        return;
+      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+        getLayoutInformation().clear();
+        getLayoutInformation().addAll((Collection<? extends LayoutInformation>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -223,6 +258,9 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
       case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
         setNestedNamespace((PackageDeclarationNestedNamespaceCS)null);
         return;
+      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+        getLayoutInformation().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -240,6 +278,8 @@ public class PackageDeclarationNestedNamespaceCSImpl extends EObjectImpl impleme
         return namespace != null;
       case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE:
         return nestedNamespace != null;
+      case OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION:
+        return layoutInformation != null && !layoutInformation.isEmpty();
     }
     return super.eIsSet(featureID);
   }
