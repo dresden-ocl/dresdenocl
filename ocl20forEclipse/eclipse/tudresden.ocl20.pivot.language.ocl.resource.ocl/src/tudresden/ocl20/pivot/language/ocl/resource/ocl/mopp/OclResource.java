@@ -68,25 +68,39 @@ public class OclResource extends
 								return model;
 							}
 
-							// get the absolute URL of the resource without the resource
-							// file name itself
-							String absResUrl = CommonPlugin.resolve(getURI()).toFileString();
-							absResUrl =
-									absResUrl.substring(0,
-											absResUrl.lastIndexOf(File.separator) + 1);
-							try {
-								URL modelFileURL =
-										new URL(new URL("file:" + absResUrl), modelFilePath);
-								File modelFile = new File(modelFileURL.getFile());
+							File modelFile = new File(modelFilePath);
+							if (modelFile.isAbsolute()) {
+								try {
+									setModel(metamodel.getModelProvider().getModel(modelFile));
+								}
+								// Return gracefully on failure
+								catch (ModelAccessException e) {
+									return model;
+								}
+							}
+							else {
+								// get the absolute URL of the resource without the resource
+								// file name itself
+								String absResUrl =
+										CommonPlugin.resolve(getURI()).toFileString();
+								absResUrl =
+										absResUrl.substring(0,
+												absResUrl.lastIndexOf(File.separator) + 1);
+								try {
+									URL modelFileURL =
+											new URL(new URL("file:" + absResUrl), modelFilePath);
+									modelFile = new File(modelFileURL.getFile());
 
-								setModel(metamodel.getModelProvider().getModel(modelFile));
+									setModel(metamodel.getModelProvider().getModel(modelFile));
+								}
+								// Return gracefully on failure
+								catch (ModelAccessException e) {
+									return model;
+								} catch (MalformedURLException e) {
+									return model;
+								}
 							}
-							// Return gracefully on failure
-							catch (ModelAccessException e) {
-								return model;
-							} catch (MalformedURLException e) {
-								return model;
-							}
+							// end else
 						}
 						// end if (hiddenToken does not contain the metadata)
 					}
