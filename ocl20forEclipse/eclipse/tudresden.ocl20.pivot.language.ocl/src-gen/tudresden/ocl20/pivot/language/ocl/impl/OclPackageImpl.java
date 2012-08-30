@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.emftext.commons.layout.LayoutPackage;
 import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
 import tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS;
 import tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS;
@@ -791,6 +792,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
     isInited = true;
 
     // Initialize simple dependencies
+    LayoutPackage.eINSTANCE.eClass();
     PivotModelPackage.eINSTANCE.eClass();
     DatatypesPackage.eINSTANCE.eClass();
 
@@ -2047,6 +2049,15 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
+	public EReference getPackageDeclarationCS_LayoutInformation() {
+    return (EReference)packageDeclarationCSEClass.getEStructuralFeatures().get(1);
+  }
+
+	/**
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   */
 	public EClass getPackageDeclarationWithNamespaceCS() {
     return packageDeclarationWithNamespaceCSEClass;
   }
@@ -2740,6 +2751,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
     packageDeclarationCSEClass = createEClass(PACKAGE_DECLARATION_CS);
     createEReference(packageDeclarationCSEClass, PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS);
+    createEReference(packageDeclarationCSEClass, PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION);
 
     packageDeclarationWithNamespaceCSEClass = createEClass(PACKAGE_DECLARATION_WITH_NAMESPACE_CS);
     createEReference(packageDeclarationWithNamespaceCSEClass, PACKAGE_DECLARATION_WITH_NAMESPACE_CS__NESTED_NAMESPACE);
@@ -2843,6 +2855,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
     // Obtain other dependent packages
     PivotModelPackage thePivotModelPackage = (PivotModelPackage)EPackage.Registry.INSTANCE.getEPackage(PivotModelPackage.eNS_URI);
+    LayoutPackage theLayoutPackage = (LayoutPackage)EPackage.Registry.INSTANCE.getEPackage(LayoutPackage.eNS_URI);
 
     // Create type parameters
 
@@ -3128,6 +3141,7 @@ public class OclPackageImpl extends EPackageImpl implements OclPackage {
 
     initEClass(packageDeclarationCSEClass, PackageDeclarationCS.class, "PackageDeclarationCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPackageDeclarationCS_ContextDeclarations(), this.getContextDeclarationCS(), null, "contextDeclarations", null, 0, -1, PackageDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPackageDeclarationCS_LayoutInformation(), theLayoutPackage.getLayoutInformation(), null, "layoutInformation", null, 0, -1, PackageDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(packageDeclarationWithNamespaceCSEClass, PackageDeclarationWithNamespaceCS.class, "PackageDeclarationWithNamespaceCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPackageDeclarationWithNamespaceCS_NestedNamespace(), this.getPackageDeclarationNestedNamespaceCS(), null, "nestedNamespace", null, 1, 1, PackageDeclarationWithNamespaceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

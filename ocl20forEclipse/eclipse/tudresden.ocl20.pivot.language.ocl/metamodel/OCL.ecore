@@ -248,6 +248,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextDeclarations" upperBound="-1"
         eType="#//ContextDeclarationCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithNamespaceCS" eSuperTypes="#//PackageDeclarationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" lowerBound="1"

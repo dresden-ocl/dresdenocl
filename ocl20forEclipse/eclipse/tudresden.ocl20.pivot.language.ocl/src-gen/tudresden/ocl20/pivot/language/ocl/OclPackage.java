@@ -2385,13 +2385,22 @@ public interface OclPackage extends EPackage {
 	int PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS = 0;
 
 	/**
+   * The feature id for the '<em><b>Layout Information</b></em>' reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION = 1;
+
+	/**
    * The number of structural features of the '<em>Package Declaration CS</em>' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-	int PACKAGE_DECLARATION_CS_FEATURE_COUNT = 1;
+	int PACKAGE_DECLARATION_CS_FEATURE_COUNT = 2;
 
 	/**
    * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl <em>Package Declaration With Namespace CS</em>}' class.
@@ -2411,6 +2420,15 @@ public interface OclPackage extends EPackage {
    * @ordered
    */
 	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS__CONTEXT_DECLARATIONS = PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS;
+
+	/**
+   * The feature id for the '<em><b>Layout Information</b></em>' reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS__LAYOUT_INFORMATION = PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION;
 
 	/**
    * The feature id for the '<em><b>Nested Namespace</b></em>' containment reference.
@@ -2485,6 +2503,15 @@ public interface OclPackage extends EPackage {
    * @ordered
    */
 	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS__CONTEXT_DECLARATIONS = PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS;
+
+	/**
+   * The feature id for the '<em><b>Layout Information</b></em>' reference list.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS__LAYOUT_INFORMATION = PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION;
 
 	/**
    * The number of structural features of the '<em>Package Declaration Without Namespace CS</em>' class.
@@ -4688,6 +4715,17 @@ public interface OclPackage extends EPackage {
 	EReference getPackageDeclarationCS_ContextDeclarations();
 
 	/**
+   * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS#getLayoutInformation <em>Layout Information</em>}'.
+   * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Layout Information</em>'.
+   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS#getLayoutInformation()
+   * @see #getPackageDeclarationCS()
+   * @generated
+   */
+	EReference getPackageDeclarationCS_LayoutInformation();
+
+	/**
    * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS <em>Package Declaration With Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6484,6 +6522,14 @@ public interface OclPackage extends EPackage {
      * @generated
      */
 		EReference PACKAGE_DECLARATION_CS__CONTEXT_DECLARATIONS = eINSTANCE.getPackageDeclarationCS_ContextDeclarations();
+
+		/**
+     * The meta object literal for the '<em><b>Layout Information</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+     * @generated
+     */
+		EReference PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION = eINSTANCE.getPackageDeclarationCS_LayoutInformation();
 
 		/**
      * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl <em>Package Declaration With Namespace CS</em>}' class.

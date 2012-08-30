@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.language.ocl;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
  tudresden.ocl20.pivot.pivotmodel;visibility:=reexport,
- tudresden.ocl20.pivot.pivotmodel.edit;visibility:=reexport
+ tudresden.ocl20.pivot.pivotmodel.edit;visibility:=reexport,
+ org.emftext.commons.layout.edit
 Bundle-ActivationPolicy: lazy

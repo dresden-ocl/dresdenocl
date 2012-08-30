@@ -21,6 +21,7 @@ Require-Bundle: org.eclipse.core.resources,
   tudresden.ocl20.pivot.language.ocl.resource.ocl,
   org.emftext.commons.antlr3_4_0,
   tudresden.ocl20.pivot.language.ocl,
+  org.emftext.commons.layout,
   tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

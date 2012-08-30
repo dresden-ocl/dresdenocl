@@ -9,6 +9,7 @@ package tudresden.ocl20.pivot.language.ocl.provider;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.emftext.commons.layout.provider.LayoutEditPlugin;
 import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelEditPlugin;
 
 /**
@@ -43,6 +44,7 @@ public final class OCLEditPlugin extends EMFPlugin {
 	public OCLEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     LayoutEditPlugin.INSTANCE,
 		     PivotModelEditPlugin.INSTANCE,
 		   });
 	}
