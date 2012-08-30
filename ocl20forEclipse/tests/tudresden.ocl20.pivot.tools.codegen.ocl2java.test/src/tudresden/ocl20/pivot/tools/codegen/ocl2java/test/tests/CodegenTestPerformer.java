@@ -417,44 +417,28 @@ public final class CodegenTestPerformer {
 			throws Ocl2CodeException {
 
 		/* Compare String lines with expected lines from text file. */
+		BufferedReader diffReader = null;
 		try {
 			File expectedCodeFile =
 					AbstractDresdenOclTest.getFile(expectedFilePath,
 							Ocl2JavaTestPlugin.PLUGIN_ID);
 
-			BufferedReader diffReader = null;
-			String expectedString;
+			String expectedString = new String();
 
-			try {
-				/* Open expected String file. */
-				diffReader = new BufferedReader(new FileReader(expectedCodeFile));
+			/* Open expected String file. */
+			diffReader = new BufferedReader(new FileReader(expectedCodeFile));
 
-				expectedString = "";
+			/* Read the expected code from file. */
+			while (diffReader.ready()) {
 
-				/* Read the expected code from file. */
-				while (diffReader.ready()) {
+				expectedString += diffReader.readLine();
 
-					expectedString += diffReader.readLine();
-
-					if (diffReader.ready()) {
-						expectedString += "\n";
-					}
-					// no else.
+				if (diffReader.ready()) {
+					expectedString += "\n";
 				}
-				// end while.
-
-			} finally {
-				try {
-					// To avoid resource leaks
-					if (diffReader != null) {
-						diffReader.close();
-					}
-					// no else.
-				} catch (IOException e) {
-					throw new Ocl2CodeException(
-							"The difference file could not be closed. Test failed.");
-				}
+				// no else.
 			}
+			// end while.
 
 			String[] expectedLines;
 			String[] givenLines;
@@ -500,6 +484,19 @@ public final class CodegenTestPerformer {
 		catch (IOException e) {
 			throw new Ocl2CodeException(
 					"The difference file could not be read. Test failed.");
+		}
+
+		finally {
+			try {
+				// To avoid resource leaks
+				if (diffReader != null) {
+					diffReader.close();
+				}
+				// no else.
+			} catch (IOException e) {
+				throw new Ocl2CodeException(
+						"The difference file could not be closed. Test failed.");
+			}
 		}
 	}
 
