@@ -1,22 +1,169 @@
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+
+import org.eclipse.emf.common.CommonPlugin;
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.commons.layout.LayoutInformation;
+
+import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.ModelAccessException;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 
 public class OclResource extends
 		org.eclipse.emf.ecore.resource.impl.ResourceImpl implements
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource,
 		IOclResource {
 
-	private IModel model;
+	private IModel model = null;
 
+	@Override
 	public void setModel(IModel model) {
 
 		this.model = model;
+		ModelBusPlugin.getModelRegistry().addModel(model);
+		// Set this model as active model, if it is not already so
+		if (ModelBusPlugin.getModelRegistry().getActiveModel() != model) {
+			ModelBusPlugin.getModelRegistry().setActiveModel(model);
+		}
 	}
 
-	public IModel getModel() {
+	@Override
+	public IModel getModel(List<EObject> from) {
 
+		if (model == null) {
+			for (EObject eObject : from) {
+				if (eObject instanceof PackageDeclarationCS) {
+					PackageDeclarationCS packageDeclCs = (PackageDeclarationCS) eObject;
+
+					for (LayoutInformation li : packageDeclCs.getLayoutInformation()) {
+						String hiddenToken = li.getHiddenTokenText().trim();
+
+						if (hiddenToken.contains("@model{")) {
+							String modelFilePath;
+							modelFilePath =
+									hiddenToken.substring(hiddenToken.indexOf("@model{") + 7,
+											hiddenToken.lastIndexOf("}"));
+
+							// Abort and return on failure
+							if (modelFilePath == null || "".equals(modelFilePath)) {
+								return model;
+							}
+							String modelExtension = getFileExtension(modelFilePath);
+
+							// Abort and return on failure
+							if (modelExtension == null || "".equals(modelExtension)) {
+								return model;
+							}
+
+							IMetamodel metamodel = getMetamodelByExtension(modelExtension);
+							// Abort and return on failure
+							if (metamodel == null) {
+								return model;
+							}
+
+							// get the absolute URL of the resource without the resource
+							// file name itself
+							String absResUrl = CommonPlugin.resolve(getURI()).toFileString();
+							absResUrl =
+									absResUrl.substring(0,
+											absResUrl.lastIndexOf(File.separator) + 1);
+							try {
+								URL modelFileURL =
+										new URL(new URL("file:" + absResUrl), modelFilePath);
+								File modelFile = new File(modelFileURL.getFile());
+
+								setModel(metamodel.getModelProvider().getModel(modelFile));
+							}
+							// Return gracefully on failure
+							catch (ModelAccessException e) {
+								return model;
+							} catch (MalformedURLException e) {
+								return model;
+							}
+						}
+						// end if (hiddenToken does not contain the metadata)
+					}
+					// end for
+				}
+				// end if (eObject is no PackageDeclarationCS)
+			}
+			// end for
+		}
 		return model;
+	}
+
+	private String getFileExtension(String filePath) {
+
+		int dotPos = filePath.lastIndexOf(".");
+		// check whether there is a dot or the file ends with a dot
+		if (dotPos == -1 || dotPos == filePath.length()) {
+			return null;
+		}
+		// no else.
+		return filePath.substring(dotPos + 1);
+	}
+
+	private IMetamodel getMetamodelByExtension(String fileExtension) {
+
+		IMetamodel[] metaModels;
+
+		boolean isApplicable = false;
+		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
+
+		if (metaModels.length > 0) {
+
+			IMetamodel mmType = null;
+
+			if (fileExtension != null) {
+				/* Check which meta model can be applied */
+				if (fileExtension.equalsIgnoreCase("class")
+						|| fileExtension.equalsIgnoreCase("javamodel")
+						|| fileExtension.equalsIgnoreCase("java")) {
+					mmType =
+							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+									"tudresden.ocl20.pivot.metamodels.java");
+
+					isApplicable = true;
+				}
+				else if (fileExtension.equalsIgnoreCase("uml")) {
+					mmType =
+							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+									"tudresden.ocl20.pivot.metamodels.uml2");
+
+					isApplicable = true;
+				}
+				else if (fileExtension.equalsIgnoreCase("ecore")) {
+					mmType =
+							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+									"tudresden.ocl20.pivot.metamodels.ecore");
+
+					isApplicable = true;
+				}
+				else if (fileExtension.equalsIgnoreCase("xsd")) {
+					mmType =
+							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+									"tudresden.ocl20.pivot.metamodels.xsd");
+
+					isApplicable = true;
+				}
+			}
+
+			/* Search for the meta model and select it */
+			if (isApplicable && (mmType != null)) {
+				List<IMetamodel> mmList = Arrays.asList(metaModels);
+				return mmList.get(mmList.indexOf(mmType));
+			}
+			// no else.
+		}
+		// no else.
+		return null;
 	}
 
 	public class ElementBasedTextDiagnostic implements
