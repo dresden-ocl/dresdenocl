@@ -44,7 +44,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
    * Used for type lookup and adding defs.
    */
   protected[staticsemantics] lazy val model: IModel = {
-    var m = resource.getModel
+    var m = resource.getModel(resource.getContents)
     if (m == null) {
       m = tudresden.ocl20.pivot.modelbus.ModelBusPlugin.getModelRegistry.getActiveModel
       if (m == null) {
