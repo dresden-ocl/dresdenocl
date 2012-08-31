@@ -7,8 +7,15 @@ Release 3.x (not scheduled yet)
 
 * Introduction of new Tool: OCL Interpreter Tracer: the cause of interpretation results 
   can now be visualized by displaying a trace tree of an individual interpretation 
-  results.
+  result.
   
+* Dresden OCL Supports Juno and Indigo
+
+* Changes on OCL Editor:
+  - On .ocl files metadata can be defined using the new @model{model/path} command
+	within comments. This can be single line comments as well as multi line comments.
+    This model path can either be absolute or relative to the corresponding .ocl file.
+	  
 * Genreal bug fixes:
   - Enumerations now extend OclAny. Thus, operations of OclAny can now be parsed on
     enumerations.
@@ -23,8 +30,7 @@ Release 3.x (not scheduled yet)
  * Bug fixes on Java metamodel adaptation
   - Java models can now be opened by selecting the .java file instead of the .class 
     file.
-  
- 
+   
 * Bug fixes on Java model instance adaptation
   - Java model instances can now be opened by selecting the .java file instead of the
     .class file.
@@ -51,6 +57,8 @@ GUI
 ===
 * OCL Editor
   - The outline has been completely revised.
+  
+* Introduction of the new OCL Tracer View (see above)
 
 Release 3.1 (January, 17th 2011)
 ================================
