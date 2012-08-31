@@ -29,7 +29,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
   with OclAttributes {
 
   /**
-   * Used to create contiuous numbers for implicit variable names in order to
+   * Used to create continuous numbers for implicit variable names in order to
    * let those numbers be unique
    */
   object ImplicitVariableNumberGenerator {
