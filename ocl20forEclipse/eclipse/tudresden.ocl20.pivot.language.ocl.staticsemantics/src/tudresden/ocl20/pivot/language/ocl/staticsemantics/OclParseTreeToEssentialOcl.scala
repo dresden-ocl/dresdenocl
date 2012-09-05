@@ -22,22 +22,22 @@ import Attribution._
 
 import AttributableEObject._
 
-trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
+trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
 
   protected val computeConstraints = __computeConstraints
-  protected def __computeConstraints: Attributable ==> Box[List[Constraint]] = {
+  protected def __computeConstraints : Attributable ==> Box[List[Constraint]] = {
     attr {
-      case unknown: AttributableEObject => yieldFailure("Cannot compute constraints for " + unknown, unknown.eObject)
+      case unknown : AttributableEObject => yieldFailure("Cannot compute constraints for " + unknown, unknown.eObject)
     }
   }
 
-  protected val computeConstraint: Attributable ==> Box[Constraint] = {
+  protected val computeConstraint : Attributable ==> Box[Constraint] = {
     attr {
-      case i: InvariantExpCS => {
+      case i : InvariantExpCS => {
         computeBooleanConstraint(i, i.getName, i.getOclExpression, ConstraintKind.INVARIANT, null)
       }
 
-      case d: DefinitionExpCS => {
+      case d : DefinitionExpCS => {
         for (
           self <- self(d);
           (feature, init) <- computeFeature(d.getDefinitionExpPart)
@@ -51,7 +51,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case p: PreConditionDeclarationCS => {
+      case p : PreConditionDeclarationCS => {
         (variables(p)).flatMap {
           case (_, explicitVariables) =>
             val representedParameter = explicitVariables.filter(_.getRepresentedParameter != null)
@@ -59,7 +59,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case p: PostConditionDeclarationCS => {
+      case p : PostConditionDeclarationCS => {
         (variables(p)).flatMap {
           case (_, explicitVariables) =>
             val representedParameter = explicitVariables.filter(_.getRepresentedParameter != null)
@@ -67,7 +67,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case b: BodyDeclarationCS => {
+      case b : BodyDeclarationCS => {
         (self(b)).flatMap { self =>
           (context(b)).flatMap { context =>
             (computeOclExpression(b.getOclExpression)).flatMap { oclExpressionEOcl =>
@@ -80,8 +80,8 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                     val result = factory.createVariable(operation.getReturnParameter)
                     val representedParameter = explicitVariables.filter(_.getRepresentedParameter != null).toArray
                     val expression = factory.createExpressionInOcl(
-                      printOclExpression(b), oclExpressionEOcl, self, result, representedParameter: _*)
-                    var constraintName: String = ""
+                      printOclExpression(b), oclExpressionEOcl, self, result, representedParameter : _*)
+                    var constraintName : String = ""
                     if (b.getName != null)
                       constraintName = b.getName.getSimpleName
                     val constraint = factory.createConstraint(
@@ -94,7 +94,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case i: InitOrDeriveValueCS => {
+      case i : InitOrDeriveValueCS => {
         (self(i)).flatMap { self =>
           (context(i)).flatMap { context =>
             (computeOclExpression(i.getOclExpression)).flatMap { oclExpressionEOcl =>
@@ -106,8 +106,8 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                   printOclExpression(i), oclExpressionEOcl, self, null)
                 val constraint = factory.createConstraint(
                   "", i match {
-                    case _: InitValueCS => ConstraintKind.INITIAL
-                    case _: DeriveValueCS => ConstraintKind.DERIVED
+                    case _ : InitValueCS   => ConstraintKind.INITIAL
+                    case _ : DeriveValueCS => ConstraintKind.DERIVED
                   }, expression, property, context)
                 Full(constraint)
               }
@@ -118,12 +118,12 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
     }
   }
 
-  def computeBooleanConstraint(element: AttributableEObject, name: SimpleNameCS,
-    oclExpression: OclExpressionCS, constraintKind: ConstraintKind,
-    parameters: List[Variable]): Box[Constraint] = {
+  def computeBooleanConstraint(element : AttributableEObject, name : SimpleNameCS,
+                               oclExpression : OclExpressionCS, constraintKind : ConstraintKind,
+                               parameters : List[Variable]) : Box[Constraint] = {
     (computeOclExpression(oclExpression)).flatMap { oclExpressionEOcl =>
       oclExpressionEOcl.getType match {
-        case pt: PrimitiveType => if (pt.getKind != PrimitiveTypeKind.BOOLEAN)
+        case pt : PrimitiveType => if (pt.getKind != PrimitiveTypeKind.BOOLEAN)
           yieldFailure(constraintKind.getName + "s must result in type Boolean and not " +
             pt.getKind + ".", element.eObject)
         case otherType => yieldFailure(constraintKind.getName + "s must result in type Boolean and not " +
@@ -139,8 +139,8 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
               printOclExpression(element.eObject), oclExpressionEOcl, self, null)
           else
             factory.createExpressionInOcl(
-              printOclExpression(element.eObject), oclExpressionEOcl, self, null, parameters: _*)
-        var constraintName: String = ""
+              printOclExpression(element.eObject), oclExpressionEOcl, self, null, parameters : _*)
+        var constraintName : String = ""
         if (name != null)
           constraintName = name.getSimpleName
         val constraint = factory.createConstraint(
@@ -150,19 +150,23 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
     }
   }
 
-  protected val computeFeature: Attributable ==> Box[Tuple2[Feature, OclExpression]] = {
+  protected val computeFeature : Attributable ==> Box[Tuple2[Feature, OclExpression]] = {
     attr {
-      case d: DefinitionExpPropertyCS => {
-        computeFeature(d.getVariableDeclaration)
+      case d : DefinitionExpPropertyCS => {
+        // check for self containment in the assignment
+        checkSelfcontainment(d.getVariableDeclaration) match {
+          case Full(true) => yieldFailure("Assignment is self containing", d.getVariableDeclaration)
+          case _          => computeFeature(d.getVariableDeclaration)
+        }
       }
 
-      case v: VariableDeclarationWithInitCS => {
+      case v : VariableDeclarationWithInitCS => {
         (computeOclExpression(v.getInitialization)).flatMap { oclExpressionEOcl =>
           checkVariableDeclarationType(v).flatMap { tipe =>
             (propertyForVariableDeclarationWithInit(v)).flatMap { property =>
               v.parent match {
-                case v: VariableDeclarationWithInitListCS => v.parent match {
-                  case _: TupleLiteralExpCS => Full((property, oclExpressionEOcl))
+                case v : VariableDeclarationWithInitListCS => v.parent match {
+                  case _ : TupleLiteralExpCS => Full((property, oclExpressionEOcl))
                 }
                 case _ => {
                   (self(v)).flatMap { self =>
@@ -179,7 +183,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case v: VariableDeclarationWithoutInitCS => {
+      case v : VariableDeclarationWithoutInitCS => {
         (oclType(v.getTypeName)).flatMap { tipe =>
           val property = PivotModelFactory.eINSTANCE.createProperty
           property.setName(v.getVariableName.getSimpleName)
@@ -189,7 +193,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case d: DefinitionExpOperationCS => {
+      case d : DefinitionExpOperationCS => {
         val operation = d.getOperation.getOperation
         if (operation.eIsProxy)
           Empty
@@ -204,7 +208,8 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                 else
                   Full(true)
               }
-            } else
+            }
+            else
               Full(true)
             typeConformance.flatMap { _ =>
               Full((operation, oclExpressionEOcl))
@@ -215,13 +220,13 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
     }
   }
 
-  protected val computeOclExpression: Attributable ==> Box[OclExpression] = {
+  protected val computeOclExpression : Attributable ==> Box[OclExpression] = {
     attr {
-      case i: IntegerLiteralExpCS => {
+      case i : IntegerLiteralExpCS => {
         Full(factory.createIntegerLiteralExp(i.getIntegerLiteral))
       }
 
-      case r: RealLiteralExpCS => {
+      case r : RealLiteralExpCS => {
         import java.lang.Math._
         if (r.getNavigationOperator == "()")
           yieldFailure("Cannot use '()' in a real expression.", r)
@@ -231,23 +236,23 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case s: StringLiteralExpCS => {
+      case s : StringLiteralExpCS => {
         Full(factory.createStringLiteralExp(s.getStringLiteral))
       }
 
-      case b: BooleanLiteralExpCS => {
+      case b : BooleanLiteralExpCS => {
         Full(factory.createBooleanLiteralExp(b.isBooleanLiteral))
       }
 
-      case i: InvalidLiteralExpCS => {
+      case i : InvalidLiteralExpCS => {
         Full(factory.createInvalidLiteralExp)
       }
 
-      case n: NullLiteralExpCS => {
+      case n : NullLiteralExpCS => {
         Full(factory.createUndefinedLiteralExp)
       }
 
-      case t: TupleLiteralExpCS => {
+      case t : TupleLiteralExpCS => {
         val properties = t.getVariableDeclarations.getVariableDeclarations.flatMap(vd => computeFeature(vd))
         if (properties.size != t.getVariableDeclarations.getVariableDeclarations.size)
           Empty
@@ -261,11 +266,11 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
               tupleLiteralPart.setValue(initExpression)
               tupleLiteralPart
           }
-          Full(factory.createTupleLiteralExp(tupleLiteralParts.toArray: _*))
+          Full(factory.createTupleLiteralExp(tupleLiteralParts.toArray : _*))
         }
       }
 
-      case o: OperationCallBinaryExpCS => {
+      case o : OperationCallBinaryExpCS => {
         try {
           for (
             sourceEOcl <- computeOclExpression(o.getSource);
@@ -277,41 +282,44 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
             else
               result
           }
-        } catch {
-          case e: IllegalArgumentException => yieldFailure(e.getMessage, o)
+        }
+        catch {
+          case e : IllegalArgumentException => yieldFailure(e.getMessage, o)
         }
       }
 
-      case u: UnaryOperationCallExpCS => {
+      case u : UnaryOperationCallExpCS => {
         try {
           for (
             targetEOcl <- computeOclExpression(u.getTarget);
             result <- Full(factory.createOperationCallExp(targetEOcl, u.getOperationName))
           ) yield result
-        } catch {
-          case e: IllegalArgumentException => yieldFailure(e.getMessage, u)
+        }
+        catch {
+          case e : IllegalArgumentException => yieldFailure(e.getMessage, u)
         }
       }
 
-      case l: LogicalNotOperationCallExpCS => {
+      case l : LogicalNotOperationCallExpCS => {
         try {
           for (
             targetEOcl <- computeOclExpression(l.getTarget);
             result <- Full(factory.createOperationCallExp(targetEOcl, l.getOperationName))
           ) yield result
-        } catch {
-          case e: IllegalArgumentException => yieldFailure(e.getMessage, l)
+        }
+        catch {
+          case e : IllegalArgumentException => yieldFailure(e.getMessage, l)
         }
       }
 
-      case v: NamedLiteralExpCS => {
+      case v : NamedLiteralExpCS => {
         val namedElement = v.getNamedElement
         if (namedElement.eIsProxy)
           Empty
         else {
           namedElement match {
-            case v: Variable => Full(factory.createVariableExp(v))
-            case p: Property => {
+            case v : Variable => Full(factory.createVariableExp(v))
+            case p : Property => {
               if (p.isStatic) {
                 // TODO: put this into the EssentialOclFactory
                 val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
@@ -320,7 +328,8 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                 pce.setSource(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList))
                 pce.setOclLibrary(oclLibrary)
                 Full(pce)
-              } else {
+              }
+              else {
                 (variables(v)).flatMap {
                   case (implicitVariables, _) =>
                     val propertyOwner = if (p.getOwningType != null) p.getOwningType else definedPropertysType.get(p)
@@ -340,13 +349,14 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                       val cleanSourceExpression =
                         if (sourceExpression.eContainer != null) {
                           sourceExpression match {
-                            case v: VariableExp =>
+                            case v : VariableExp =>
                               factory.createVariableExp(
                                 factory.createVariable(v.getReferredVariable.getName,
                                   v.getReferredVariable.getType,
                                   v.getReferredVariable.getInitExpression))
                           }
-                        } else
+                        }
+                        else
                           sourceExpression
                       pce.setSource(cleanSourceExpression)
                       pce.setOclLibrary(oclLibrary)
@@ -355,7 +365,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                 }
               }
             }
-            case t: Type => {
+            case t : Type => {
               val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
               tle.setReferredType(t)
               tle.setOclLibrary(oclLibrary)
@@ -365,11 +375,11 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case n: NavigationCallExp => {
+      case n : NavigationCallExp => {
         computeOclExpression(n.getFeatureCalls.last)
       }
 
-      case p: PropertyCallBaseExpCS => {
+      case p : PropertyCallBaseExpCS => {
         if (p.isIsMarkedPre && !(isInPostCondition(p)))
           yieldFailure("Cannot use @pre outside of a post condition.", p)
         else {
@@ -393,14 +403,15 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                   val normalisedSourceExpression =
                     if (sourceExpression.eContainer != null) {
                       sourceExpression match {
-                        case v: VariableExp =>
+                        case v : VariableExp =>
                           factory.createVariableExp(
                             factory.createVariable(v.getReferredVariable.getName,
                               v.getReferredVariable.getType,
                               v.getReferredVariable.getInitExpression))
                         case unknown => unknown.eContainer.asInstanceOf[OclExpression]
                       }
-                    } else
+                    }
+                    else
                       sourceExpression
 
                   val sourceType = normalisedSourceExpression.getType
@@ -424,13 +435,15 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                     Full(pce.withAtPre)
                   else
                     Full(pce)
-                } else if (pef == ImplicitCollect) {
+                }
+                else if (pef == ImplicitCollect) {
                   val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
                   iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
                   iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
                   pce.setSource(factory.createVariableExp(iteratorVar))
                   Full(factory.createIteratorExp(sourceExpression, "collect", pce, iteratorVar))
-                } else {
+                }
+                else {
                   pce.setSource(sourceExpression.withAsSet)
                   Full(pce)
                 }
@@ -439,7 +452,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case o: OperationCallBaseExpCS => {
+      case o : OperationCallBaseExpCS => {
         if (o.isIsMarkedPre && !(isInPostCondition(o)))
           yieldFailure("Cannot use @pre outside of a post condition.", o)
         else {
@@ -459,7 +472,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                 }
                 import OperationExpressionForm._
                 val oef = o match {
-                  case o: OperationCallOnSelfExpCS => {
+                  case o : OperationCallOnSelfExpCS => {
                     (variables(o)).flatMap {
                       case (implicitVariables, _) =>
                         implicitVariables.flatMap { iv =>
@@ -477,7 +490,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                         }.firstOption // the first value is OK, since implicit variables are ordered from innermost to outermost
                     }
                   }
-                  case i: ImplicitOperationCallCS => {
+                  case i : ImplicitOperationCallCS => {
                     (sourceExpression(o)).flatMap { sourceExpression =>
                       // Make sure, the source is not already contained by another element.
                       // If it's a VariableExp, copy it; if it's not, then there has been
@@ -485,14 +498,15 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                       val normalisedSourceExpression =
                         if (sourceExpression.eContainer != null) {
                           sourceExpression match {
-                            case v: VariableExp =>
+                            case v : VariableExp =>
                               factory.createVariableExp(
                                 factory.createVariable(v.getReferredVariable.getName,
                                   v.getReferredVariable.getType,
                                   v.getReferredVariable.getInitExpression))
                             case unknown => unknown.eContainer.asInstanceOf[OclExpression]
                           }
-                        } else
+                        }
+                        else
                           sourceExpression
                       (isMultipleNavigationCall(o)).flatMap { isMultipleNavigationCall =>
                         val sourceType = normalisedSourceExpression.getType
@@ -521,13 +535,15 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                         Full(oce.withAtPre)
                       else
                         Full(oce)
-                    } else if (oef == ImplicitCollect) {
+                    }
+                    else if (oef == ImplicitCollect) {
                       val iteratorVar = ExpressionsFactory.INSTANCE.createVariable
                       iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
                       iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
                       oce.setSource(factory.createVariableExp(iteratorVar))
                       Full(factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar))
-                    } else {
+                    }
+                    else {
                       oce.setSource(sourceExpression.withAsSet)
                       Full(oce)
                     }
@@ -538,42 +554,43 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case i: IteratorExpCS => {
+      case i : IteratorExpCS => {
         (sourceExpression(i)).flatMap { se =>
           (computeOclExpression(i.getBodyExpression)).flatMap { bodyEOcl =>
             (variables(i.getBodyExpression)).flatMap {
               case (implicitVariables, explicitVariables) =>
                 val iteratorNames = i.getIteratorVariables.map(_.getVariableName.getSimpleName)
                 val iteratorExp = factory.createIteratorExp(se.getType match {
-                  case _: CollectionType => se
-                  case _: Type => se.withAsSet
+                  case _ : CollectionType => se
+                  case _ : Type           => se.withAsSet
                 }, i.getIteratorName, bodyEOcl,
                   (if (i.getIteratorVariables.isEmpty)
                     Array(implicitVariables.first)
                   else if (i.getIteratorVariables.size == 1)
                     Array(explicitVariables.first)
                   else
-                    Array(explicitVariables.first, explicitVariables.get(1))): _*)
+                    Array(explicitVariables.first, explicitVariables.get(1))) : _*)
                 // triggers WFR checks in if(EssentialOcl) WFRException is thrown yield a Failure
                 try {
                   iteratorExp.getType
                   Full(iteratorExp)
-                } catch {
-                  case e: WellformednessException => yieldFailure(e.getMessage, i)
+                }
+                catch {
+                  case e : WellformednessException => yieldFailure(e.getMessage, i)
                 }
             }
           }
         }
       }
 
-      case i: IterateExpCS => {
+      case i : IterateExpCS => {
         (sourceExpression(i)).flatMap { se =>
           (variables(i.getBodyExpression)).flatMap {
             case (implicitVariables, explicitVariables) =>
               (computeOclExpression(i.getBodyExpression)).flatMap { bodyEOcl =>
                 val iteratorExp = factory.createIterateExp(se.getType match {
-                  case _: CollectionType => se
-                  case _: Type => se.withAsSet
+                  case _ : CollectionType => se
+                  case _ : Type           => se.withAsSet
                 }, bodyEOcl,
                   if (i.getIteratorVariable != null) explicitVariables.get(1) else explicitVariables.first,
                   if (i.getIteratorVariable != null) explicitVariables.first else implicitVariables.first)
@@ -581,19 +598,20 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
                 try {
                   iteratorExp.getType
                   Full(iteratorExp)
-                } catch {
-                  case e: WellformednessException => yieldFailure(e.getMessage, i)
+                }
+                catch {
+                  case e : WellformednessException => yieldFailure(e.getMessage, i)
                 }
               }
           }
         }
       }
 
-      case c: CollectionLiteralExpCS => {
+      case c : CollectionLiteralExpCS => {
         val literalPartsEOcl = c.getCollectionLiteralParts.map(clp => computeLiteralPart(clp))
         literalPartsEOcl.find(!_.isDefined) match {
           case Some(Failure(msg, _, _)) => Failure(msg, Empty, Empty)
-          case Some(_) => Empty
+          case Some(_)                  => Empty
           case None => {
             (oclType(c.getCollectionType)).flatMap { ct =>
               val unboxedLiteralParts = literalPartsEOcl.flatten(l => l)
@@ -609,19 +627,20 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
               //                Full(true)
               //              typeConformance.flatMap{_ =>
               val collectionKind = ct match {
-                case b: BagType => Full(CollectionKind.BAG)
-                case s: SetType => Full(CollectionKind.SET)
-                case s: SequenceType => Full(CollectionKind.SEQUENCE)
-                case o: OrderedSetType => Full(CollectionKind.ORDERED_SET)
-                case c: CollectionType => yieldFailure("'Collection' cannot be initialised.", c)
+                case b : BagType        => Full(CollectionKind.BAG)
+                case s : SetType        => Full(CollectionKind.SET)
+                case s : SequenceType   => Full(CollectionKind.SEQUENCE)
+                case o : OrderedSetType => Full(CollectionKind.ORDERED_SET)
+                case c : CollectionType => yieldFailure("'Collection' cannot be initialised.", c)
               }
               collectionKind.flatMap { collectionKind =>
-                val result = factory.createCollectionLiteralExp(collectionKind, ct.asInstanceOf[CollectionType].getElementType, unboxedLiteralParts.toArray: _*)
+                val result = factory.createCollectionLiteralExp(collectionKind, ct.asInstanceOf[CollectionType].getElementType, unboxedLiteralParts.toArray : _*)
                 try {
                   result.getType
                   Full(result)
-                } catch {
-                  case e: WellformednessException => yieldFailure(e.getMessage, c); Failure(e.getMessage, Empty, Empty)
+                }
+                catch {
+                  case e : WellformednessException => yieldFailure(e.getMessage, c); Failure(e.getMessage, Empty, Empty)
                 }
               }
             }
@@ -630,7 +649,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case i: IfExpCS => {
+      case i : IfExpCS => {
         for (
           conditionEOcl <- computeOclExpression(i.getCondition);
           thenEOcl <- computeOclExpression(i.getThenBranch);
@@ -638,7 +657,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         ) yield factory.createIfExp(conditionEOcl, thenEOcl, elseEOcl)
       }
 
-      case l: LetExpCS => {
+      case l : LetExpCS => {
         (variables(l.getOclExpression)).flatMap {
           case (_, explicitVariables) =>
             explicitVariables.take(l.getVariableDeclarations.size).foldLeft(computeOclExpression(l.getOclExpression)) { (expression, explicitVariable) =>
@@ -649,24 +668,24 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case b: BracketExpCS => {
+      case b : BracketExpCS => {
         computeOclExpression(b.getOclExpression)
       }
 
-      case e: EnumLiteralOrStaticPropertyExpCS => {
+      case e : EnumLiteralOrStaticPropertyExpCS => {
         val enumLitOrProp = e.getEnumLiteralOrStaticProperty
         if (enumLitOrProp.eIsProxy)
           Empty
         else {
           enumLitOrProp match {
-            case e: EnumerationLiteral => {
+            case e : EnumerationLiteral => {
               // TODO: move to EssentialOclFactory
               val exp = ExpressionsFactory.INSTANCE.createEnumLiteralExp
               exp.setReferredEnumLiteral(e)
               exp.setOclLibrary(oclLibrary)
               Full(exp)
             }
-            case p: Property => {
+            case p : Property => {
               // TODO: move to EssentialOclFactory
               val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
               pce.setReferredProperty(p)
@@ -679,7 +698,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case s: StaticOperationCallExpCS => {
+      case s : StaticOperationCallExpCS => {
         val operation = s.getOperationName
         if (operation.eIsProxy)
           Empty
@@ -701,7 +720,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case c: CollectionTypeLiteralExpCS => {
+      case c : CollectionTypeLiteralExpCS => {
         (oclType(c.getCollectionType)).flatMap { oclType =>
           val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
           tle.setReferredType(oclType)
@@ -710,7 +729,7 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
         }
       }
 
-      case t: TupleTypeLiteralExpCS => {
+      case t : TupleTypeLiteralExpCS => {
         (oclType(t.getTupleType)).flatMap { oclType =>
           val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
           tle.setReferredType(oclType)
@@ -721,32 +740,32 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
 
       case unknown => {
         unknown match {
-          case u: AttributableEObject => iResource.addError("unknown element", u.eObject)
-          case _ => //ignore
+          case u : AttributableEObject => iResource.addError("unknown element", u.eObject)
+          case _                       => //ignore
         }
         Failure("unknown element: " + unknown)
       }
     }
   }
 
-  protected val computeLiteralPart: Attributable ==> Box[CollectionLiteralPart] = {
+  protected val computeLiteralPart : Attributable ==> Box[CollectionLiteralPart] = {
     attr {
-      case c: CollectionLiteralPartsOclExpCS => {
+      case c : CollectionLiteralPartsOclExpCS => {
         (computeOclExpression(c.getOclExpression)).flatMap { oclExpressionEOcl =>
           Full(factory.createCollectionItem(oclExpressionEOcl))
         }
       }
-      case c: CollectionRangeCS => {
+      case c : CollectionRangeCS => {
         (computeOclExpression(c.getFrom)).flatMap { fromEOcl =>
           (computeOclExpression(c.getTo)).flatMap { toEOcl =>
             val ok_? = fromEOcl.getType match {
-              case pt: PrimitiveType if pt.getKind != PrimitiveTypeKind.INTEGER =>
+              case pt : PrimitiveType if pt.getKind != PrimitiveTypeKind.INTEGER =>
                 yieldFailure("Collection Ranges can only contain Integers. Found: " + fromEOcl.getType.getName, c.getFrom)
               case ok => Full(true)
             }
             ok_?.flatMap { _ =>
               val ok_? = toEOcl.getType match {
-                case pt: PrimitiveType if pt.getKind != PrimitiveTypeKind.INTEGER =>
+                case pt : PrimitiveType if pt.getKind != PrimitiveTypeKind.INTEGER =>
                   yieldFailure("Collection Ranges can only contain Integers. Found: " + toEOcl.getType.getName, c.getTo)
                 case ok => Full(true)
               }
@@ -756,6 +775,42 @@ trait OclParseTreeToEssentialOcl { selfType: OclStaticSemantics =>
             }
           }
         }
+      }
+    }
+  }
+
+  protected val checkSelfcontainment : VariableDeclarationWithInitCS ==> Box[Boolean] = {
+    attr { v =>
+      // check for self containment in the assignment
+      v.getInitialization match {
+        // a = b
+        case n : NamedLiteralExpCS => {
+          if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+            Full(true)
+          }
+          else None
+        }
+        // a = a = true
+        case eq : EqualityOperationCallExpCS => {
+          eq.getSource match {
+            case n : NamedLiteralExpCS =>
+              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+                Full(true)
+              }
+              else None
+          }
+        }
+        // a = not a
+        case lno : LogicalNotOperationCallExpCS => {
+          lno.getTarget match {
+            case n : NamedLiteralExpCS =>
+              if (n.getNamedElement.getName.equals(v.getVariableName.getSimpleName)) {
+                Full(true)
+              }
+              else None
+          }
+        }
+        case _ => None
       }
     }
   }
