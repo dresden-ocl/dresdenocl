@@ -200,7 +200,7 @@ Library.
       <import plugin="org.eclipse.emf.ecore.edit"/>
       <import plugin="org.eclipse.emf.validation"/>
       <import plugin="org.eclipse.emf.workspace"/>
-      <import plugin="org.emftext.commons.antlr3_2_0"/>
+      <import plugin="org.emftext.commons.antlr3_4_0"/>
       <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.jface"/>
