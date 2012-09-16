@@ -188,12 +188,12 @@
 		</loadfile>
 		<echo file="${updatesite}/content.xml" message="${content.xml}" />
 		<!-- insert into content.xml -->
-		<echo file="${updatesite}/content.xml" append="true">
+		<echoxml file="${updatesite}/content.xml" append="true">
 			<repository uri='http://emftext.org/update' url='http://emftext.org/update' type='0' options='1' />
 			<repository uri='http://emftext.org/update' url='http://emftext.org/update' type='1' options='1' />
 			<repository uri='http://download.eclipse.org/tools/ajdt/42/update' url='http://download.eclipse.org/tools/ajdt/42/update' type='0' options='1' />
 			<repository uri='http://download.eclipse.org/tools/ajdt/42/update' url='http://download.eclipse.org/tools/ajdt/42/update' type='1' options='1' />
-		</echo>
+		</echoxml>
 		<!--  
 	    workaround for Tycho bug: uncategorized features in site.xml are put into
 	    "Uncategorized" category, rather than just being uncategorized (hidden) 
