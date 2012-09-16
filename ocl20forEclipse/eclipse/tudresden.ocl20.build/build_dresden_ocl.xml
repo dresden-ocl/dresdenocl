@@ -162,6 +162,8 @@
 			</fileset>
 		</copy>
 
+		<antcall inheritall="true" target="add.associate.sites" />
+		
 		<echo message="Copying update site to ST server" />
 		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true" failonerror="true">
 			<fileset dir="${updatesite}">
@@ -172,6 +174,66 @@
 		<echo message="Clean up old build" />
 		<sshexec host="lars.inf.tu-dresden.de" port="22" trust="true" username="${usr}" password="${pwd}" command="/home/hudson/clean_up_dresdenocl.sh" />
 
+	</target>
+
+	<target name="add.associate.sites" if="associate.sites">
+		<if>
+			<and>
+				<!-- Defined in aggregateSite.properties -->
+				<isset property="associate.sites" />
+				<not>
+					<equals arg1="${associate.sites}" arg2="" />
+				</not>
+			</and>
+			<then>
+				<if>
+					<available file="${updatesite}/content.jar" type="file" />
+					<then>
+						<unzip src="${updatesite}/content.jar" dest="${updatesite}" />
+						<delete file="${updatesite}/content.jar" />
+					</then>
+				</if>
+				<!-- counter variable -->
+				<var name="associate.sites.0" value="" />
+				<for param="associate.site" list="${associate.sites}" delimiter=",">
+					<sequential>
+						<var name="associate.sites.0" value="${associate.sites.0}00" />
+					</sequential>
+				</for>
+				<length property="associate.sites.length" string="${associate.sites.0}" />
+
+				<loadfile srcfile="${updatesite}/content.xml" property="content.xml">
+					<filterchain>
+						<tailfilter lines="-1" skip="1" />
+					</filterchain>
+				</loadfile>
+				<echo file="${updatesite}/content.xml" message="${content.xml}" />
+				<echo file="${updatesite}/content.xml" append="true">
+					<references size='${associate.sites.length}'>
+						<for param="associate.site" list="${associate.sites}" delimiter=",">
+							<sequential>
+								<!-- insert into content.xml -->
+								<echo file="${updatesite}/content.xml" append="true">
+									<repository uri='@{associate.site}' url='@{associate.site}' type='0' options='1' />
+									<repository uri='@{associate.site}' url='@{associate.site}' type='1' options='1' />
+								</echo>
+							</sequential>
+						</for>
+						<echo file="${updatesite}/content.xml" append="true">
+						</echo>
+					</references>
+				</echo>
+				<!--  
+	    workaround for Tycho bug: uncategorized features in site.xml are put into
+	    "Uncategorized" category, rather than just being uncategorized (hidden) 
+	   -->
+				<!--<copy file="${updatesite}/content.xml" tofile="${updatesite}/content.old.xml" overwrite="true" />
+				<xslt style="remove-uncategorized.xsl" in="${updatesite}/content.old.xml" out="${updatesite}/content.xml" />-->
+				<zip destfile="${updatesite}/content.jar" basedir="${updatesite}" includes="content.xml" />
+				<delete file="${updatesite}/content.xml" />
+				<!--<delete file="${updatesite}/content.old.xml" />-->
+			</then>
+		</if>
 	</target>
 
 </project>

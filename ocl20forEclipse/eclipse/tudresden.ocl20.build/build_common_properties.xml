@@ -2,7 +2,7 @@
 	<property environment="env" />
 
 	<property file="buckminster.properties" />
-
+	<property file="aggregateSite.properties" />
 
 	<condition property="hudsonWorkSpacePath" value="${env.WORKSPACE}" else="${basedir}/../../..">
 		<isset property="env.WORKSPACE" />
@@ -28,12 +28,12 @@
 
 	<property name="buckminster.output.root" location="${buildRoot}/output" />
 	<property name="buckminster.temp.root" location="${buildRoot}/temp" />
-	<property name="testResultsPath" value="${buildRoot}/tests"/>
-	
+	<property name="testResultsPath" value="${buildRoot}/tests" />
+
 	<property name="updatesite" value="${buckminster.output.root}/updatesite" />
-	
+
 	<exec executable="sed" inputstring="${updatesite}" outputproperty="updatesiteURI">
-		<arg value="s/\ /%20/g"/>
+		<arg value="s/\ /%20/g" />
 	</exec>
 	<echo>${updatesiteURI}</echo>
 
