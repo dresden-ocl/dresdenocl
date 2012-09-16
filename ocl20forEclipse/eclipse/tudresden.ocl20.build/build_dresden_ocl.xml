@@ -190,8 +190,14 @@
 		<!-- insert into content.xml -->
 		<echoxml file="${updatesite}/content.xml" append="true">
 			<repository uri='http://emftext.org/update' url='http://emftext.org/update' type='0' options='1' />
+		</echoxml>
+		<echoxml file="${updatesite}/content.xml" append="true">
 			<repository uri='http://emftext.org/update' url='http://emftext.org/update' type='1' options='1' />
+		</echoxml>
+		<echoxml file="${updatesite}/content.xml" append="true">
 			<repository uri='http://download.eclipse.org/tools/ajdt/42/update' url='http://download.eclipse.org/tools/ajdt/42/update' type='0' options='1' />
+		</echoxml>
+		<echoxml file="${updatesite}/content.xml" append="true">
 			<repository uri='http://download.eclipse.org/tools/ajdt/42/update' url='http://download.eclipse.org/tools/ajdt/42/update' type='1' options='1' />
 		</echoxml>
 		<!--  
