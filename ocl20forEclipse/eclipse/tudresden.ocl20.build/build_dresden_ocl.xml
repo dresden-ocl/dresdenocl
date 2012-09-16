@@ -162,7 +162,7 @@
 			</fileset>
 		</copy>
 
-		<antcall inheritall="true" target="add.associate.sites" />
+		<!--<antcall inheritall="true" target="add.associate.sites" />-->
 
 		<echo message="Copying update site to ST server" />
 		<scp todir="${usr}:${pwd}@lars.inf.tu-dresden.de:/srv/www/dresdenocl_updatesite/latestbuild" port="22" sftp="true" trust="true" failonerror="true">
