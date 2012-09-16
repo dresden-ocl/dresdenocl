@@ -1,2 +1,2 @@
-instructions.configure=org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:http${#58}//emftext.org/update/,type:0,name:EMFText,enabled:true); \
+instructions.collect=org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:http${#58}//emftext.org/update/,type:0,name:EMFText,enabled:true); \
   org.eclipse.equinox.p2.touchpoint.eclipse.addRepository(location:http${#58}//emftext.org/update/,type:1,name:EMFText,enabled:true);
