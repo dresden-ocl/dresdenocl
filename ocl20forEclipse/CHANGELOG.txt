@@ -1,8 +1,8 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.x (not scheduled yet)
-================================
+Release 3.2 (September, 24th 2012)
+==================================
 * Introduction of new Tool: Dresden OCL Metrics
 
 * Introduction of new Tool: OCL Interpreter Tracer: the cause of interpretation results 
@@ -59,6 +59,7 @@ GUI
   - The outline has been completely revised.
   
 * Introduction of the new OCL Tracer View (see above)
+
 
 Release 3.1 (January, 17th 2011)
 ================================
