@@ -140,22 +140,24 @@ function in the context menu (cf. Fig.~\ref{pic:intro:svn02}).
 \end{figure}
 
 
-\subsection{Which Plug-ins do you need at least?}
+\subsection{Problems While Installing Dresden OCL}
 
-Often people wonder which plug-ins of Dresden OCL they require for a
-minimum installation. The answer to this question depends on the things you 
-plan to do with Dresden OCL. Table~\ref{tab:plugins} in the appendix of 
-this manual shows a list of the currently existing plug-ins of
-Dresden OCL, that are related to different features. You should install 
-at least the \keyword{Core} feature, at least one metamodel of the 
-\keyword{Metamodels} feature, and the complete \keyword{Parser} feature. The 
-\keyword{Interpreter}, the \keyword{OCL22Java} and the
-\keyword{OCL2SQL} features are only required if you want to interpret
-constraints or to generate code from constraints, respectively. If you import or interpret model instances, you need to install 
-the \keyword{Model Instances} feature as well. The examples of the 
-\keyword{Example} feature are only required to run the examples provided in 
-this manual. We recommend to install all provided features.
-		
+Dresden OCL required some other plugins as a prerequesite for its installation. Unfortunately,
+the mechanism to declare these dependencies automatically does not work with all installations of
+Eclipse well. If during the installation of Dresden OCL problems such as unresolved dependencies occur,
+you have to declare these dependent update sites manually.
+
+Open the p2 update manager by the menu option \emph{Help -> Install New Software\ldots}.
+
+Enter the following update sites and confirm each site by pressing the \emph{Add} button:
+
+\begin{itemize}
+  \item \url{http://www.emftext.org/update/}
+  \item \url{http://download.eclipse.org/tools/ajdt/42/dev/update/}
+\end{itemize}
+
+Afterwards, the problem with unresolved dependencies should not occur anymore.
+
 
 \subsection{Building the OCL2 Parser}
 The new Dresden OCL parser/editor is partially written in Scala. In order
@@ -412,6 +414,60 @@ Figure~\ref{pic:intro:loadconstraints03}.
 	\label{pic:intro:loadconstraints03}
 \end{figure}
 
+
+\subsection{Referencing the constrained Model}
+
+The architecture of Dresden OCL requires that a model must always be imported before
+a constraint file can be parsed correctly. Thus, if a constraint file is opened before
+its model has been loaded, its complete contend will be marked as erroneous, as the
+OCL parser is not able to resolved the referenced files.
+
+To avoid this situation, an annotation can be added to an OCL file that references to
+the constraint model specifying a relative path to the model file. The annotation must
+be included in a comment at the top of the OCL file consisting of the pattern
+\texttt{@model{<path>}} (e.g., for the constraint files of the simple example, the annotation
+\texttt{@model{../model/simple.uml}} should work).
+
+
+\subsection{Refactorings for Dresden OCL}
+
+Dresden OCL can be extended with support for OCL refactorings to ease and improve OCL editing.
+How refactorings can be installed and used in Dresden OCL is shortly explained in the following.
+
+\subsubsection{Installation of Refactorings for Dresden OCL}
+
+\begin{itemize}
+  \item Install Refactory from the following URL: \url{http://www.emftext.org/update/}.
+  \item Install the Refactoring for Dresden OCL feature from: 
+  \url{http://www.modelrefactoring.org/DresdenOCLRefactoring/} 
+\end{itemize}
+
+\subsubsection{Usage of OCL Refactorings}
+
+After installing the refactoring support, refactorings can simply be performed by selecting
+an element in the OCL editor, opening the context menu and select the respective refactoring
+(e.g., you can extract a variable as shwon in Fig.~\ref{pic:intro:refactoring01}--\ref{pic:intro:refactoring03}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.35\linewidth]{figures/introduction/refactoring01.png}
+	\caption{Extracting a variable: issue the refactoring.}
+	\label{pic:intro:refactoring01}
+
+	\vspace{2.0em}
+	
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/introduction/refactoring02.png}
+	\caption{Extracting a variable: enter parameters.}
+	\label{pic:intro:refactoring02}
+
+	\vspace{2.0em}
+
+	\centering
+	\includegraphics[width=0.35\linewidth]{figures/introduction/refactoring03.png}
+	\caption{Extracting a variable: the result.}
+	\label{pic:intro:refactoring03}
+\end{figure}
 	
 
 \section{Possible Use Cases of Dresden OCL using different Models and Model
