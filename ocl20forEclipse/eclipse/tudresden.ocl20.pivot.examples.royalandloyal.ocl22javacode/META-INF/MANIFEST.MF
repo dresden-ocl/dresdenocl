@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Royal and Loyal Example, Generated Java Code and Test Cases
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode;singleton:=true
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Export-Package: org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals,
  org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints,
  tudresden.ocl20.pivot.examples.royalsandloyals.test

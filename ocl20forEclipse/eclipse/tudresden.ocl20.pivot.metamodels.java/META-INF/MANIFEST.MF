@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Java Reflective Meta Model
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.java;singleton:=true
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

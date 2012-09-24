@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Living Example Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.living
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Export-Package: tudresden.ocl20.pivot.examples.living
 Bundle-ClassPath: src/,
  .

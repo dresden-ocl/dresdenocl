@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Parser Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.ocl2parser.test;singleton:=true
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.ocl2parser.test.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.junit4;bundle-version="4.0.0",

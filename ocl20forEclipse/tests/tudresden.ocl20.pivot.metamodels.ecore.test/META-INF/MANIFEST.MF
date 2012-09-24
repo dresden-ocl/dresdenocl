@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ecore Meta-Model Test Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.ecore.test;singleton:=true
-Bundle-Version: 3.1.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.ecore.test.EcoreMetaModelTestPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
