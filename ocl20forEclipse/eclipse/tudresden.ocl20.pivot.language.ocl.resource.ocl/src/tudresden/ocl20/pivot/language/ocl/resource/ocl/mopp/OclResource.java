@@ -37,7 +37,7 @@ public class OclResource extends
 	@Override
 	public IModel getModel(List<EObject> from) {
 
-		if (model == null) {
+		if (model == null || from != null) {
 			for (EObject eObject : from) {
 				if (eObject instanceof PackageDeclarationCS) {
 					PackageDeclarationCS packageDeclCs = (PackageDeclarationCS) eObject;
