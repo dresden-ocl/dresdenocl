@@ -3,12 +3,13 @@
 	package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 
-import org.antlr.runtime3_4_0.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
+import org.antlr.runtime3_4_0.BitSet;
+import org.antlr.runtime3_4_0.EarlyExitException;
+import org.antlr.runtime3_4_0.NoViableAltException;
+import org.antlr.runtime3_4_0.RecognitionException;
+import org.antlr.runtime3_4_0.RecognizerSharedState;
+import org.antlr.runtime3_4_0.Token;
+import org.antlr.runtime3_4_0.TokenStream;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class OclParser extends OclANTLRParserBase {

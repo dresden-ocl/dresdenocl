@@ -1,7 +1,6 @@
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
