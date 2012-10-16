@@ -12,7 +12,7 @@ import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 
 /**
- * @author Lars Schütze
+ * @author Lars Schuetze
  * 
  */
 public class ModelLoaderUtility {

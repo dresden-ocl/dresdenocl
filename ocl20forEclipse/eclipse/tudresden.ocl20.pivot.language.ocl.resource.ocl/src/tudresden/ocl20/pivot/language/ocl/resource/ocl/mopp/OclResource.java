@@ -18,7 +18,7 @@ import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
 
 /**
  * 
- * @author Lars Schütze
+ * @author Lars Schuetze
  *
  */
 public class OclResource extends
@@ -99,7 +99,6 @@ public class OclResource extends
 						try {
 							setModel(metamodel.getModelProvider().getModel(modelFile));
 						} catch (ModelAccessException e) {
-							System.out.println(e.getMessage());
 							addWarning("The file does not exist.",
 									OclEProblemType.ANALYSIS_PROBLEM, eFrom);
 							return null;
