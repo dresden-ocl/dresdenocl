@@ -20,5 +20,6 @@ Export-Package: tudresden.ocl20.pivot.modelbus;
    tudresden.ocl20.pivot.model.metamodel",
  tudresden.ocl20.pivot.modelbus.descriptor;uses:="org.eclipse.core.runtime",
  tudresden.ocl20.pivot.modelbus.metamodel;uses:="tudresden.ocl20.pivot.modelbus.descriptor",
- tudresden.ocl20.pivot.modelbus.modelinstance;uses:="tudresden.ocl20.pivot.modelbus.descriptor"
+ tudresden.ocl20.pivot.modelbus.modelinstance;uses:="tudresden.ocl20.pivot.modelbus.descriptor",
+ tudresden.ocl20.pivot.modelbus.util
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
