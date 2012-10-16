@@ -19,7 +19,7 @@ import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
 /**
  * 
  * @author Lars Schuetze
- *
+ * 
  */
 public class OclResource extends
 		org.eclipse.emf.ecore.resource.impl.ResourceImpl implements
@@ -45,6 +45,10 @@ public class OclResource extends
 
 	@Override
 	public IModel getModel(List<EObject> from) {
+
+		if (model != null) {
+			return model;
+		}
 
 		if (from == null) {
 			return null;
@@ -72,11 +76,19 @@ public class OclResource extends
 							return null;
 						}
 
-						IMetamodel metamodel = ModelLoaderUtility.getMetamodelByExtension(extension);
+						IMetamodel metamodel =
+								ModelLoaderUtility.getMetamodelByExtension(extension);
 						if (metamodel == null) {
 							return null;
 						}
 
+						// get the corresponding class file if this is a java file
+						if (extension.equals("java")) {
+							modelFilePath =
+									ModelLoaderUtility
+											.getCorrespondingClassFileName(modelFilePath);
+						}
+						// no else
 						File modelFile = new File(modelFilePath);
 
 						if (!modelFile.isAbsolute()) {
@@ -90,6 +102,7 @@ public class OclResource extends
 							try {
 								URL modelFileUrl =
 										new URL(new URL(absResourceUrl), modelFilePath);
+
 								modelFile = new File(modelFileUrl.getFile());
 							} catch (Exception e) {
 								return null;
@@ -99,8 +112,6 @@ public class OclResource extends
 						try {
 							setModel(metamodel.getModelProvider().getModel(modelFile));
 						} catch (ModelAccessException e) {
-							addWarning("The file does not exist.",
-									OclEProblemType.ANALYSIS_PROBLEM, eFrom);
 							return null;
 						}
 					}
