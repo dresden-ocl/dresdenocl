@@ -152,7 +152,7 @@ public class ModelQueryUtility {
 	 * Dont let anyone instantiate this class.
 	 */
 	private ModelQueryUtility() {
-
+		throw new AssertionError("This class must not be instantiated.");
 	}
 
 }

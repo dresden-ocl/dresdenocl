@@ -21,7 +21,7 @@ public class ModelLoaderUtility {
 	 * Prevent this class from being instantiated.
 	 */
 	private ModelLoaderUtility() {
-
+		throw new AssertionError("This class must not be instantiated.");
 	}
 
 	/**
