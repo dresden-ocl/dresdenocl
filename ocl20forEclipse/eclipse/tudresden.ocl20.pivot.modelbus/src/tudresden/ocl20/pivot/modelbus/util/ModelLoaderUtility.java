@@ -21,6 +21,7 @@ public class ModelLoaderUtility {
 	 * Prevent this class from being instantiated.
 	 */
 	private ModelLoaderUtility() {
+
 		throw new AssertionError("This class must not be instantiated.");
 	}
 
@@ -42,9 +43,8 @@ public class ModelLoaderUtility {
 
 		String pathToClassFile;
 
-		pathToClassFile =
-				pathToJavaFile.replace(File.separator + "src" + File.separator,
-						File.separator + "bin" + File.separator);
+		// File.seperator is not needed within the Java libraries
+		pathToClassFile = pathToJavaFile.replace("/src/", "/bin/");
 
 		pathToClassFile =
 				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";
@@ -119,7 +119,7 @@ public class ModelLoaderUtility {
 
 	public static IModelInstanceType getModelinstanceTypeByExtension(
 			String fileExtension) {
-		
+
 		IModelInstanceType[] miTypes;
 		boolean isApplicable = false;
 
