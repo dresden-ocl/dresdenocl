@@ -34,8 +34,6 @@ package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -65,6 +63,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseWorkspaceLi
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.FileBoxListener;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.MetaModelLabelProvider;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
+import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
 
 /**
  * <p>
@@ -212,7 +211,9 @@ public class LoadModelPage extends AbstractModelBusPage {
 				/* Check if the corresponding .class file exists */
 				if (complete
 						&& modelFilePath.getFileExtension().equalsIgnoreCase("java")
-						&& !new File(getCorrespondingClassFileName(modelFileName)).exists()) {
+						&& !new File(
+								ModelLoaderUtility.getCorrespondingClassFileName(modelFileName))
+								.exists()) {
 					this.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgCorrespondingClassFileNotExisting);
 					complete = false;
 				}
@@ -256,7 +257,9 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 			/* Get the path to the corresponding .class file if needed */
 			if (modelFilePath.getFileExtension().equalsIgnoreCase("java")) {
-				modelFilePath = new Path(getCorrespondingClassFileName(modelFileName));
+				modelFilePath =
+						new Path(
+								ModelLoaderUtility.getCorrespondingClassFileName(modelFileName));
 			}
 			// no else.
 
@@ -284,31 +287,6 @@ public class LoadModelPage extends AbstractModelBusPage {
 						.getSelection()).getFirstElement();
 
 		return result;
-	}
-
-	/**
-	 * <p>
-	 * Helper method which substitutes the "/src/" with "/bin/" and the file
-	 * ending to ".class"
-	 * </p>
-	 * 
-	 * @param A
-	 *          {@link String} which represents the path to the .java file
-	 * @return A {@link String} which represents the possible path to the
-	 *         corresponding .class file of a .java file
-	 */
-	private String getCorrespondingClassFileName(String modelFileName) {
-
-		String pathToClassFile;
-
-		pathToClassFile =
-				modelFileName.replace(File.separator + "src" + File.separator,
-						File.separator + "bin" + File.separator);
-
-		pathToClassFile =
-				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";
-
-		return pathToClassFile;
 	}
 
 	/**
@@ -522,72 +500,22 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 */
 	private void selectMetaModelByModelFilePath(IPath modelFilePath) {
 
-		IMetamodel[] metaModels;
-		String fileExtension = modelFilePath.getFileExtension();
-
-		boolean isApplicable = false;
-		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
-
-		if (metaModels.length > 0) {
-
-			IMetamodel mmType = null;
-
-			if (fileExtension != null) {
-				/* Check which meta model can be applied */
-				if (fileExtension.equalsIgnoreCase("class")
-						|| fileExtension.equalsIgnoreCase("javamodel")
-						|| fileExtension.equalsIgnoreCase("java")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.java");
-
-					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("uml")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.uml2");
-
-					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("ecore")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.ecore");
-
-					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("xsd")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.xsd");
-
-					isApplicable = true;
-				}
-			}
-
-			/* Search for the meta model and select it */
-			if (isApplicable && (mmType != null)) {
-				List<IMetamodel> mmList = Arrays.asList(metaModels);
-				int i = mmList.indexOf(mmType);
-
-				if (i >= 0) {
-					StructuredSelection selection =
-							new StructuredSelection(mmList.get(i));
-
-					/*
-					 * Avoid endless loop due to the eventhandler is called for every
-					 * setSelection()
-					 */
-					if (!this.metamodelViewer.getSelection().equals(selection)) {
-						this.metamodelViewer.setSelection(selection);
-					}
-
-				}
-				// no else
-			}
-			// no else.
+		if(modelFilePath == null) {
+			return;
 		}
-		// no else.
+		
+		IMetamodel mm =
+				ModelLoaderUtility.getMetamodelByExtension(modelFilePath
+						.getFileExtension());
+
+		StructuredSelection selection = new StructuredSelection(mm);
+
+		/*
+		 * Avoid endless loop due to the eventhandler is called for every
+		 * setSelection()
+		 */
+		if (!this.metamodelViewer.getSelection().equals(selection)) {
+			this.metamodelViewer.setSelection(selection);
+		}
 	}
 }
