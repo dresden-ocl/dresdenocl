@@ -2,7 +2,6 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.CommonPlugin;
@@ -15,7 +14,13 @@ import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
 
+/**
+ * 
+ * @author Lars Schütze
+ *
+ */
 public class OclResource extends
 		org.eclipse.emf.ecore.resource.impl.ResourceImpl implements
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource,
@@ -67,7 +72,7 @@ public class OclResource extends
 							return null;
 						}
 
-						IMetamodel metamodel = getMetamodelByExtension(extension);
+						IMetamodel metamodel = ModelLoaderUtility.getMetamodelByExtension(extension);
 						if (metamodel == null) {
 							return null;
 						}
@@ -91,14 +96,12 @@ public class OclResource extends
 							}
 						}
 						// no else (the path is absolute)
-						if (!modelFile.exists()) {
-							addWarning("The file does not exist.",
-									OclEProblemType.ANALYSIS_PROBLEM, eFrom);
-							return null;
-						}
 						try {
 							setModel(metamodel.getModelProvider().getModel(modelFile));
 						} catch (ModelAccessException e) {
+							System.out.println(e.getMessage());
+							addWarning("The file does not exist.",
+									OclEProblemType.ANALYSIS_PROBLEM, eFrom);
 							return null;
 						}
 					}
@@ -108,7 +111,7 @@ public class OclResource extends
 			// no else (Other CS elements do not contain needed information)
 		}
 		// end for
-		return null;
+		return model;
 	}
 
 	/**
@@ -127,71 +130,6 @@ public class OclResource extends
 		}
 		// no else.
 		return filePath.substring(dotPos + 1);
-	}
-
-	/**
-	 * <p>
-	 * Checks if the file extension is known so we can derive the metamodel to
-	 * load.
-	 * </p>
-	 * 
-	 * @param fileExtension
-	 * @return the metamodel to load or null
-	 */
-	private IMetamodel getMetamodelByExtension(String fileExtension) {
-
-		IMetamodel[] metaModels;
-
-		boolean isApplicable = false;
-		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
-
-		if (metaModels.length > 0) {
-
-			IMetamodel mmType = null;
-
-			if (fileExtension != null) {
-				/* Check which meta model can be applied */
-				if (fileExtension.equalsIgnoreCase("class")
-						|| fileExtension.equalsIgnoreCase("javamodel")
-						|| fileExtension.equalsIgnoreCase("java")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.java");
-
-					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("uml")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.uml2");
-
-					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("ecore")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.ecore");
-
-					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("xsd")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.xsd");
-
-					isApplicable = true;
-				}
-			}
-
-			/* Search for the meta model and select it */
-			if (isApplicable && (mmType != null)) {
-				List<IMetamodel> mmList = Arrays.asList(metaModels);
-				return mmList.get(mmList.indexOf(mmType));
-			}
-			// no else.
-		}
-		// no else.
-		return null;
 	}
 
 	public class ElementBasedTextDiagnostic implements
