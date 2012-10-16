@@ -3,6 +3,10 @@
  */
 package tudresden.ocl20.pivot.modelbus.util;
 
+import java.io.File;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,10 +44,17 @@ public class ModelLoaderUtility {
 		if (pathToJavaFile == null)
 			return null;
 
-		String pathToClassFile;
+		Path path = null;
+		try {
+			path = Paths.get(pathToJavaFile);
+		} catch (InvalidPathException e) {
+			return pathToJavaFile;
+		}
+		path.normalize();
 
-		// File.seperator is not needed within the Java libraries
-		pathToClassFile = pathToJavaFile.replace("/src/", "/bin/");
+		String pathToClassFile =
+				path.toString().replace(File.separator + "src" + File.separator,
+						File.separator + "bin" + File.separator);
 
 		pathToClassFile =
 				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";

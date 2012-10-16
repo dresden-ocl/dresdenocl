@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.emftext.commons.layout.LayoutInformation;
 
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType;
 import tudresden.ocl20.pivot.model.IModel;
 import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
@@ -75,22 +74,21 @@ public class OclResource extends
 						if (extension == null || extension.isEmpty()) {
 							return null;
 						}
-
-						IMetamodel metamodel =
-								ModelLoaderUtility.getMetamodelByExtension(extension);
-						if (metamodel == null) {
-							return null;
-						}
-
+						
 						// get the corresponding class file if this is a java file
 						if (extension.equals("java")) {
 							modelFilePath =
 									ModelLoaderUtility
 											.getCorrespondingClassFileName(modelFilePath);
 						}
-						// no else
-						File modelFile = new File(modelFilePath);
 
+						IMetamodel metamodel =
+								ModelLoaderUtility.getMetamodelByExtension(extension);
+						if (metamodel == null) {
+							return null;
+						}
+						
+						File modelFile = new File(modelFilePath);
 						if (!modelFile.isAbsolute()) {
 							// make the path absolute if it is not
 							String absResourceUrl =
