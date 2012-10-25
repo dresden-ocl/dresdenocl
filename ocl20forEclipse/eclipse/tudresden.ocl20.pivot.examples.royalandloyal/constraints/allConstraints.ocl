@@ -1,5 +1,5 @@
 -- All constraints were taken and adapted from [1].
-
+-- @model{../model/royalsandloyals.uml}
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
 -- Body Expression 1:

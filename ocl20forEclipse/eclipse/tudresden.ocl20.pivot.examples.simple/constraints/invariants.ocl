@@ -1,3 +1,4 @@
+-- @model{../model/simple.uml}
 package tudresden::ocl20::pivot::examples::simple
 
 -- The age of Person can not be negative.

@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* The Payment Information Ultimate Creditor Organisation Identification (PmtInf ultmtCdtr Id orgId) can only 

@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* For Debtor Agent in Direct Debit Transaction Information (drctDbtTxInf dbtrAgt finInstnId), only BIC is 

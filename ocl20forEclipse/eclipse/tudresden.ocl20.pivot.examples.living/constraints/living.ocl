@@ -1,3 +1,4 @@
+-- @model{../src/tudresden/ocl20/pivot/examples/living/ModelProviderClass.java}
 package tudresden::ocl20::pivot::examples::living
 
 -- If the zip of an Accomodation is empty, the result should be equal to 00000.

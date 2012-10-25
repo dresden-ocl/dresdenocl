@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* If GroupHeader/Grouping is present and equals GRPD, then one and only one occurrence of 

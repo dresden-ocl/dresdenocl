@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* Warning: The element DbtrAgtAcct in DrctDbtTxInf is AOS only. Instructed banks that are not in the

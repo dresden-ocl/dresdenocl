@@ -1,3 +1,4 @@
+-- @model{../model/simple.uml}
 package tudresden::ocl20::pivot::examples::simple
 
 -- Before returning the age, the age must be defined.

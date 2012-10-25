@@ -1,3 +1,4 @@
+-- @model{../model/pml.ecore}
 package tudresden::ocl20::pivot::examples::pml
 
 -- The id of a plug-in must be defined.

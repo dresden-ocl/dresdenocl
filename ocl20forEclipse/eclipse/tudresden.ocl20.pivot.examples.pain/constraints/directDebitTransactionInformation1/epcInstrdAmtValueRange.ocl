@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* The instructed amount in direct debit transaction information (DrctDbTxInf instdAmt) must be 0.01 or more 
