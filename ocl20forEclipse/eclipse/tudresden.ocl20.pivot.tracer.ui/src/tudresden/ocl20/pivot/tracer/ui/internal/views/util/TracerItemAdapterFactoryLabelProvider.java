@@ -180,6 +180,16 @@ public class TracerItemAdapterFactoryLabelProvider extends
 			return "null";
 		}
 		// no else
+		
+		//TODO: Since there are some bugs currently we have to check here to
+		//avoid more errors
+		if(result.getInvalidReason() != null) {
+			return "invalid: " + result.getInvalidReason().toString();
+		}
+		if(result.getUndefinedReason() != null) {
+			return "undefinied: " + result.getUndefinedReason().toString();
+		}
+		//TODO: end
 
 		if (result instanceof OclInteger) {
 			OclInteger anOclInteger;
@@ -187,7 +197,6 @@ public class TracerItemAdapterFactoryLabelProvider extends
 
 			anOclInteger = ((OclInteger) result);
 			imiElement = anOclInteger.getModelInstanceElement();
-
 			if (!imiElement.isUndefined()) {
 				return anOclInteger.getModelInstanceInteger().getLong().toString();
 			}
