@@ -42,6 +42,4 @@ context Extension
 inv extensionImplementsExtensionPoint:
   self.implementation.implements->includes(self.extensionPoint.interface)
 
-
-
 endpackage
