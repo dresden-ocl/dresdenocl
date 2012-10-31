@@ -4,9 +4,6 @@
 package tudresden.ocl20.pivot.modelbus.util;
 
 import java.io.File;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +15,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
  * @author Lars Schuetze
  * 
  */
-public class ModelLoaderUtility {
+public final class ModelLoaderUtility {
 
 	/**
 	 * Prevent this class from being instantiated.
@@ -27,6 +24,9 @@ public class ModelLoaderUtility {
 
 		throw new AssertionError("This class must not be instantiated.");
 	}
+
+	private static final String m_src = File.separator + "src" + File.separator;
+	private static final String m_bin = File.separator + "bin" + File.separator;
 
 	/**
 	 * <p>
@@ -44,17 +44,7 @@ public class ModelLoaderUtility {
 		if (pathToJavaFile == null)
 			return null;
 
-		Path path = null;
-		try {
-			path = Paths.get(pathToJavaFile);
-		} catch (InvalidPathException e) {
-			return pathToJavaFile;
-		}
-		path.normalize();
-
-		String pathToClassFile =
-				path.toString().replace(File.separator + "src" + File.separator,
-						File.separator + "bin" + File.separator);
+		String pathToClassFile = pathToJavaFile.replace(m_src, m_bin);
 
 		pathToClassFile =
 				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";

@@ -4,13 +4,13 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.ecore.EObject;
 import org.emftext.commons.layout.LayoutInformation;
 
 import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
 import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
 import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
@@ -69,27 +69,17 @@ public class OclResource extends
 						if (modelFilePath == null || modelFilePath.isEmpty()) {
 							return null;
 						}
-
-						String extension = getFileExtension(modelFilePath);
-						if (extension == null || extension.isEmpty()) {
-							return null;
-						}
-						
-						// get the corresponding class file if this is a java file
-						if (extension.equals("java")) {
+						// change to OS specific separators
+						modelFilePath = FilenameUtils.separatorsToSystem(modelFilePath);
+						final String extension = FilenameUtils.getExtension(modelFilePath);
+						if (extension != null && extension.equals("java")) {
 							modelFilePath =
 									ModelLoaderUtility
 											.getCorrespondingClassFileName(modelFilePath);
 						}
 
-						IMetamodel metamodel =
-								ModelLoaderUtility.getMetamodelByExtension(extension);
-						if (metamodel == null) {
-							return null;
-						}
-						
-						File modelFile = new File(modelFilePath);
-						if (!modelFile.isAbsolute()) {
+						File file = new File(modelFilePath);
+						if (!file.isAbsolute()) {
 							// make the path absolute if it is not
 							String absResourceUrl =
 									CommonPlugin.resolve(getURI()).toFileString();
@@ -100,17 +90,27 @@ public class OclResource extends
 							try {
 								URL modelFileUrl =
 										new URL(new URL(absResourceUrl), modelFilePath);
-
-								modelFile = new File(modelFileUrl.getFile());
+								file = new File(modelFileUrl.getFile());
 							} catch (Exception e) {
 								return null;
 							}
 						}
-						// no else (the path is absolute)
-						try {
-							setModel(metamodel.getModelProvider().getModel(modelFile));
-						} catch (ModelAccessException e) {
+						
+						if(!file.exists()) {
 							return null;
+						}
+						
+						final IMetamodel metamodel =
+								ModelLoaderUtility.getMetamodelByExtension(extension);
+						if (metamodel != null) {
+							IModel model;
+							try {
+								model = metamodel.getModelProvider().getModel(file);
+							} catch (Exception e) {
+								return null;
+							}
+							this.setModel(model);
+							return this.model;
 						}
 					}
 					// no else (hiddenToken does not contain the metadata)
@@ -119,25 +119,7 @@ public class OclResource extends
 			// no else (Other CS elements do not contain needed information)
 		}
 		// end for
-		return model;
-	}
-
-	/**
-	 * 
-	 * @param filePath
-	 * @return true if the file contains an extension, otherwise false
-	 * @throws NullPointerException
-	 *           if filePath is null
-	 */
-	private String getFileExtension(String filePath) {
-
-		int dotPos = filePath.lastIndexOf(".");
-		// check whether there is a dot or the file ends with a dot
-		if (dotPos == -1 || dotPos == filePath.length()) {
-			return null;
-		}
-		// no else.
-		return filePath.substring(dotPos + 1);
+		return null;
 	}
 
 	public class ElementBasedTextDiagnostic implements
