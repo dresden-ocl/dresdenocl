@@ -589,9 +589,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		case BODY:
 			return ((Feature) constraint.getConstrainedElement().iterator()
 					.next()).isStatic();
-			// no default;
+		default:
+			return false;
 		}
-		return false;
 	}
 
 	/**
@@ -4031,32 +4031,20 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* TupleLiteralExps cannot be cached. */
 		OclAny result;
 
-		if (tupleLiteralExp.getPart().size() != tupleLiteralExp.getPart()
-				.size()) {
-			result = this.myStandardLibraryFactory
-					.createOclInvalid(
-							tupleLiteralExp.getType(),
-							new IllegalStateException(
-									"Sizes of keys and values in TupleLiteralExp does not match."));
+		List<IModelInstanceString> partNames = new LinkedList<IModelInstanceString>();
+		List<IModelInstanceElement> partValues = new LinkedList<IModelInstanceElement>();
+
+		for (TupleLiteralPart literalPart : tupleLiteralExp.getPart()) {
+			partNames.add(BasisJavaModelInstanceFactory
+					.createModelInstanceString(literalPart.getProperty()
+							.getName()));
+			partValues.add(doSwitch((EObject) literalPart)
+					.getModelInstanceElement());
 		}
+		// end for.
 
-		else {
-			List<IModelInstanceString> partNames = new LinkedList<IModelInstanceString>();
-			List<IModelInstanceElement> partValues = new LinkedList<IModelInstanceElement>();
-
-			for (TupleLiteralPart literalPart : tupleLiteralExp.getPart()) {
-				partNames.add(BasisJavaModelInstanceFactory
-						.createModelInstanceString(literalPart.getProperty()
-								.getName()));
-				partValues.add(doSwitch((EObject) literalPart)
-						.getModelInstanceElement());
-			}
-			// end for.
-
-			result = myStandardLibraryFactory.createOclTuple(partNames,
-					partValues, tupleLiteralExp.getType());
-		}
-		// end else.
+		result = myStandardLibraryFactory.createOclTuple(partNames, partValues,
+				tupleLiteralExp.getType());
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
