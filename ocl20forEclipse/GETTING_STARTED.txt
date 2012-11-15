@@ -96,3 +96,8 @@ Please be aware, that the Dresden OCL is still under construction and
 contains some bugs and issues already known by the development team. 
 Bugs already found are listed on the SourceForge project page of the Dresden OCL
 (https://sourceforge.net/projects/dresden-ocl). Please feel free to contribute.
+
+Code Contribution
+=================
+If you plan to submit any code to the Dresden OCL repository, please use the JDT code
+formatter available at http://www.dresden-ocl.org/update/stuff/formatter.xml.
