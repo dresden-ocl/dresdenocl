@@ -45,13 +45,22 @@ public class EcoreReturnParameter extends AbstractParameter implements
 
 	/**
 	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
+	
+	/**
+	 * <p>
 	 * Creates a new {@link EcoreReturnParameter}.
 	 * </p>
 	 * 
 	 * @param eOperation
 	 *            The adapted {@link EOperation}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreReturnParameter(EOperation eOperation) {
+	public EcoreReturnParameter(EOperation eOperation,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -67,7 +76,7 @@ public class EcoreReturnParameter extends AbstractParameter implements
 
 		/* Initialize adapted EOperation. */
 		this.eOperation = eOperation;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -99,7 +108,7 @@ public class EcoreReturnParameter extends AbstractParameter implements
 	@Override
 	public Operation getOperation() {
 
-		return EcoreAdapterFactory.INSTANCE.createOperation(this.eOperation);
+		return factory.createOperation(this.eOperation);
 	}
 
 	/*
@@ -113,7 +122,7 @@ public class EcoreReturnParameter extends AbstractParameter implements
 		Type result;
 
 		Type elementType;
-		elementType = EcoreAdapterFactory.INSTANCE.createType(eOperation
+		elementType = factory.createType(eOperation
 				.getEType());
 
 		/* Probably put the type into a collection. */

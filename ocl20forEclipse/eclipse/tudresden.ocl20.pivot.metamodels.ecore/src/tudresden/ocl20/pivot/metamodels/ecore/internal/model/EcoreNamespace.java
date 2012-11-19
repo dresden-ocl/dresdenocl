@@ -61,6 +61,13 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 	/** The adapted {@link EPackage}. */
 	private EPackage ePackage;
+	
+	/**
+	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
 
 	/**
 	 * <p>
@@ -69,8 +76,10 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 	 * 
 	 * @param ePackage
 	 *            The {@link EPackage} that is adapted by this class.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreNamespace(EPackage ePackage) {
+	public EcoreNamespace(EPackage ePackage,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -86,7 +95,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 
 		/* Initialize adapted EPackage. */
 		this.ePackage = ePackage;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -125,7 +134,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 		eSuperPackage = this.ePackage.getESuperPackage();
 
 		if (eSuperPackage != null) {
-			result = EcoreAdapterFactory.INSTANCE
+			result = factory
 					.createNamespace(eSuperPackage);
 		}
 
@@ -151,7 +160,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 		result = new BasicEList<Type>();
 
 		for (EClassifier eClassifier : this.ePackage.getEClassifiers()) {
-			result.add(EcoreAdapterFactory.INSTANCE.createType(eClassifier));
+			result.add(factory.createType(eClassifier));
 		}
 
 		/* Improves display of model. */
@@ -180,7 +189,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 		result = new BasicEList<Namespace>();
 
 		for (EPackage subPackage : this.ePackage.getESubpackages()) {
-			result.add(EcoreAdapterFactory.INSTANCE.createNamespace(subPackage));
+			result.add(factory.createNamespace(subPackage));
 		}
 
 		/* Improves display of model. */

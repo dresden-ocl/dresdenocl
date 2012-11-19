@@ -60,13 +60,22 @@ public class EcoreEnumerationLiteral extends AbstractEnumerationLiteral
 
 	/**
 	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
+	
+	/**
+	 * <p>
 	 * Creates a new {@link EcoreEnumerationLiteral}.
 	 * </p>
 	 * 
 	 * @param enumLiteral
 	 *          The adapted {@link EEnumLiteral}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreEnumerationLiteral(EEnumLiteral eEnumLiteral) {
+	public EcoreEnumerationLiteral(EEnumLiteral eEnumLiteral,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -82,7 +91,8 @@ public class EcoreEnumerationLiteral extends AbstractEnumerationLiteral
 
 		/* Initialize adapted enumeration literal. */
 		this.eEnumLiteral = eEnumLiteral;
-
+		this.factory = factory;
+		
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -101,7 +111,7 @@ public class EcoreEnumerationLiteral extends AbstractEnumerationLiteral
 	 */
 	public Enumeration getEnumeration() {
 
-		return EcoreAdapterFactory.INSTANCE.createEnumeration(this.eEnumLiteral
+		return factory.createEnumeration(this.eEnumLiteral
 				.getEEnum());
 	}
 

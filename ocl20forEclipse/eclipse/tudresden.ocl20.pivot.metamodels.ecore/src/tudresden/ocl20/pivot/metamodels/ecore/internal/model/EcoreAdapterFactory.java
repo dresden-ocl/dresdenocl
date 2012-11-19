@@ -67,11 +67,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * </p>
  * 
  * @author Matthias Braeuer
+ * @author Bjoern Freitag
  */
 public class EcoreAdapterFactory {
-
-	/** The Singleton instance of the {@link EcoreAdapterFactory}. */
-	public static EcoreAdapterFactory INSTANCE = new EcoreAdapterFactory();
 
 	/** The {@link Logger} for this class. */
 	private static final Logger LOGGER = EcoreMetamodelPlugin
@@ -92,13 +90,14 @@ public class EcoreAdapterFactory {
 	 * garbage collector.
 	 */
 	private WeakHashMap<EModelElement, NamedElement> myCachedReturnParameterAdapters;
-
+	
 	/**
 	 * <p>
-	 * Clients are not supposed to instantiate an {@link EcoreAdapterFactory}.
+	 * Creates a new {@link EcoreAdapterFactory}.
 	 * </p>
+	 * @generated NOT
 	 */
-	private EcoreAdapterFactory() {
+	public EcoreAdapterFactory() {
 
 		this.myCachedAdapters = new WeakHashMap<EModelElement, NamedElement>();
 		this.myCachedReturnParameterAdapters = new WeakHashMap<EModelElement, NamedElement>();
@@ -136,7 +135,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Enumeration. */
 		else {
-			result = new EcoreEnumeration(eEnum);
+			result = new EcoreEnumeration(eEnum,this);
 
 			/* Cache the result. */
 			myCachedAdapters.put(eEnum, result);
@@ -190,7 +189,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreEnumerationLiteral(eEnumLiteral);
+			result = new EcoreEnumerationLiteral(eEnumLiteral,this);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(eEnumLiteral, result);
@@ -241,7 +240,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the name space. */
 		else {
-			result = new EcoreNamespace(ePackage);
+			result = new EcoreNamespace(ePackage,this);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(ePackage, result);
@@ -293,7 +292,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreOperation(eOperation);
+			result = new EcoreOperation(eOperation,this);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(eOperation, result);
@@ -345,7 +344,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreParameter(eParameter);
+			result = new EcoreParameter(eParameter,this);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(eParameter, result);
@@ -396,7 +395,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreProperty(eStructuralFeature);
+			result = new EcoreProperty(eStructuralFeature,this);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(eStructuralFeature, result);
@@ -451,7 +450,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreReturnParameter(eOperation);
+			result = new EcoreReturnParameter(eOperation,this);
 
 			/* Cache the result. */
 			this.myCachedReturnParameterAdapters.put(eOperation, result);
@@ -551,7 +550,7 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreType(eClass);
+			result = new EcoreType(eClass,this);
 
 			/* Cache the result. */
 			this.myCachedAdapters.put(eClass, result);
@@ -607,12 +606,12 @@ public class EcoreAdapterFactory {
 			/* Check if the data type represents a primitive type. */
 			if (!EcorePrimitiveType.getKind(eDataType).equals(
 					PrimitiveTypeKind.UNKNOWN)) {
-				result = new EcorePrimitiveType(eDataType);
+				result = new EcorePrimitiveType(eDataType,this);
 			}
 
 			/* Else create a non-primitive data type adaptation. */
 			else {
-				result = new EcoreDataType(eDataType);
+				result = new EcoreDataType(eDataType,this);
 			}
 
 			/* Cache the result. */

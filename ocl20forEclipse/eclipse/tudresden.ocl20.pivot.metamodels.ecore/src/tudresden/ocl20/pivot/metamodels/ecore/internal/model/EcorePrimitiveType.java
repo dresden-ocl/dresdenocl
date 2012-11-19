@@ -93,13 +93,22 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 	/**
 	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
+	
+	/**
+	 * <p>
 	 * Creates a new {@link EcorePrimitiveType} instance.
 	 * </p>
 	 * 
 	 * @param eDataType
 	 *          The {@link EDataType} that is adapted by this class.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcorePrimitiveType(EDataType eDataType) {
+	public EcorePrimitiveType(EDataType eDataType,EcoreAdapterFactory factory) {
 
 		super();
 
@@ -117,7 +126,8 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 		/* Initialize adapted EDataType. */
 		this.eDataType = eDataType;
-
+		this.factory = factory;
+		
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -245,7 +255,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	@Override
 	public Namespace getNamespace() {
 
-		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eDataType
+		return factory.createNamespace(this.eDataType
 				.getEPackage());
 	}
 }

@@ -61,13 +61,22 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 
 	/**
 	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
+	
+	/**
+	 * <p>
 	 * Creates a new {@link EcoreParameter}.
 	 * </p>
 	 * 
 	 * @param eParameter
 	 *            The adapted {@link EParameter}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreParameter(EParameter eParameter) {
+	public EcoreParameter(EParameter eParameter,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -83,7 +92,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 
 		/* Initialize adapted EParameter. */
 		this.eParameter = eParameter;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -115,7 +124,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 	@Override
 	public Operation getOperation() {
 
-		return EcoreAdapterFactory.INSTANCE.createOperation(this.eParameter
+		return factory.createOperation(this.eParameter
 				.getEOperation());
 	}
 
@@ -130,7 +139,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 		Type result;
 
 		Type elementType;
-		elementType = EcoreAdapterFactory.INSTANCE.createType(eParameter
+		elementType = factory.createType(eParameter
 				.getEType());
 
 		/* Probably put the type into a collection. */
