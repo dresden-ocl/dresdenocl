@@ -32,6 +32,7 @@
  */
 package org.dresdenocl.metamodels.ecore.internal.provider;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
@@ -46,6 +47,7 @@ import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.model.util.Tuple2;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
@@ -68,7 +70,6 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.modelbus.IModelProvider#getModel(java.net.URL)
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
@@ -92,6 +93,17 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 			throw new ModelAccessException("Invalid URL: " + modelURL, e); //$NON-NLS-1$
 		}
 
+		// Check if the model is cached
+		if (m_modelCache.get(modelURL.toString()) != null) {
+			final Tuple2<WeakReference<IModel>, Integer> tuple =
+					m_modelCache.get(modelURL.toString());
+			if (tuple.getFirstValue().get() != null) {
+				// increments the reference counter for this IModel
+				tuple.setSecondValue(tuple.getSecondValue() + 1);
+				return tuple.getFirstValue().get();
+			}
+		}
+
 		/* Get the resource. */
 		resource = getResourceSet().getResource(modelURI, true);
 
@@ -103,9 +115,16 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 		// no else.
 
 		/* Create the model from the resource. */
-		model = new EcoreModel(getResourceSet().getResource(modelURI, false),
-				ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-						EcoreMetamodelPlugin.ID));
+		model =
+				new EcoreModel(getResourceSet().getResource(modelURI, false),
+						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
+								EcoreMetamodelPlugin.ID), this);
+
+		// Cache the model and set reference counter to 1
+		final Tuple2<WeakReference<IModel>, Integer> tuple =
+				new Tuple2<WeakReference<IModel>, Integer>(new WeakReference<IModel>(
+						model), 1);
+		m_modelCache.put(modelURL.toString(), tuple);
 
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -118,20 +137,21 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.dresdenocl.model.base.AbstractModelProvider#getModel(org.eclipse
 	 * .emf.ecore.resource.Resource)
 	 */
 	public IModel getModel(Resource resource) {
+
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("getModel(reosurce=" + resource + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
-		IModel model = new EcoreModel(resource, ModelBusPlugin
-				.getMetamodelRegistry().getMetamodel(EcoreMetamodelPlugin.ID));
+		IModel model =
+				new EcoreModel(resource, ModelBusPlugin.getMetamodelRegistry()
+						.getMetamodel(EcoreMetamodelPlugin.ID), this);
 
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {

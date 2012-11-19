@@ -11,6 +11,7 @@ import org.eclipse.xsd.ecore.XSDEcoreBuilder;
 
 import org.dresdenocl.metamodels.ecore.internal.model.EcoreAdapterFactory;
 import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.ModelConstants;
 import org.dresdenocl.model.base.AbstractModel;
@@ -49,12 +50,12 @@ public class XSDModel extends AbstractModel implements IModel {
 	 *          the {@link org.eclipse.emf.ecore.resource.Resource} containing the
 	 *          model
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public XSDModel(org.eclipse.emf.ecore.resource.Resource resource,
-			IMetamodel metamodel) {
+			IMetamodel metamodel, IModelProvider provider) {
 
-		super(resource.getURI().toString(), metamodel);
+		super(resource.getURI().toString(), metamodel, provider);
 
 		// initialize
 		this.resource = resource;
@@ -70,6 +71,8 @@ public class XSDModel extends AbstractModel implements IModel {
 		this.resource.unload();
 		/* Reset the root name space to avoid caching. */
 		this.rootNamespace = null;
+		
+		super.dispose();
 	}
 
 	/**

@@ -31,6 +31,7 @@ import org.eclipse.uml2.uml.Type;
 
 import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
 import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.ModelConstants;
 import org.dresdenocl.model.base.AbstractModel;
@@ -76,13 +77,14 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * {@link org.eclipse.uml2.uml.Package}.
 	 * 
 	 * @param resource
-	 *            The {@link Resource} containing the model.
+	 *          The {@link Resource} containing the model.
 	 * 
 	 * @generated NOT
 	 */
-	public UML2Model(Resource resource, IMetamodel metamodel) {
+	public UML2Model(Resource resource, IMetamodel metamodel,
+			IModelProvider provider) {
 
-		super(resource.getURI().toString(), metamodel);
+		super(resource.getURI().toString(), metamodel, provider);
 
 		/* Initialize. */
 		this.resource = resource;
@@ -90,16 +92,16 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.model.IModel#dispose()
 	 */
 	public void dispose() {
+
 		/* Unload referenced resources and the resource. */
 		Set<Resource> resourcesToUnload = new HashSet<Resource>();
 		resourcesToUnload.add(this.resource);
 
-		for (EObject eObject : EcoreUtil.ExternalCrossReferencer.find(
-				this.resource).keySet()) {
+		for (EObject eObject : EcoreUtil.ExternalCrossReferencer
+				.find(this.resource).keySet()) {
 			resourcesToUnload.add(eObject.eResource());
 		}
 		// end for.
@@ -115,19 +117,20 @@ public class UML2Model extends AbstractModel implements IModel {
 		this.rootNamespace = null;
 		/* Reset the factory as well. */
 		this.factory = null;
+		
+		super.dispose();
 	}
 
 	/**
 	 * <p>
-	 * This method lazily creates a {@link Namespace} adapter for the virtual
-	 * root package in the associated UML2 model. Thus, any possible resource
-	 * loading errors will not happen until this method is called for the first
-	 * time.
+	 * This method lazily creates a {@link Namespace} adapter for the virtual root
+	 * package in the associated UML2 model. Thus, any possible resource loading
+	 * errors will not happen until this method is called for the first time.
 	 * </p>
 	 * 
 	 * @throws ModelAccessException
-	 *             if an error occurs when creating the adapter for the top
-	 *             namespace
+	 *           if an error occurs when creating the adapter for the top
+	 *           namespace
 	 * 
 	 * @see org.dresdenocl.model.IModel#getRootNamespace()
 	 * 
@@ -158,8 +161,8 @@ public class UML2Model extends AbstractModel implements IModel {
 
 		/* Check if the given Object is a UML2Model. */
 		if (anObject instanceof UML2Model) {
-			result = resource.getURI().equals(
-					((UML2Model) anObject).resource.getURI());
+			result =
+					resource.getURI().equals(((UML2Model) anObject).resource.getURI());
 		}
 
 		else {
@@ -206,6 +209,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 * @return The {@link UML2AdapterFactory} of this {@link UML2Model}.
 	 */
 	public UML2AdapterFactory getFactory() {
+
 		return this.factory;
 	}
 
@@ -232,8 +236,7 @@ public class UML2Model extends AbstractModel implements IModel {
 				Package containerPackage;
 				containerPackage = classifier.getNearestPackage();
 
-				if (containerPackage == null
-						|| containerPackage instanceof Model
+				if (containerPackage == null || containerPackage instanceof Model
 						|| containerPackage instanceof Profile) {
 
 					// FIXME Claas: This will probably cause problems. Types do
@@ -245,8 +248,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					importedType = this.factory.createType(classifier);
 
 					/* Only add the type if it has not been added yet. */
-					if (!this.rootNamespace.getOwnedType().contains(
-							importedType)) {
+					if (!this.rootNamespace.getOwnedType().contains(importedType)) {
 						this.rootNamespace.addType(importedType);
 					}
 					// no else.
@@ -261,55 +263,52 @@ public class UML2Model extends AbstractModel implements IModel {
 					}
 
 					/*
-					 * Adapt the package. If a package with the same name
-					 * already exists, the packages are merged.
+					 * Adapt the package. If a package with the same name already exists,
+					 * the packages are merged.
 					 */
 					Namespace importedNamespace;
-					importedNamespace = this.factory.createNamespace(
-							containerPackage, this.rootNamespace);
+					importedNamespace =
+							this.factory
+									.createNamespace(containerPackage, this.rootNamespace);
 
 					/*
-					 * Only add the name space if it has not been added yet (for
-					 * merged name space, the name space has not to be added
-					 * again).
+					 * Only add the name space if it has not been added yet (for merged
+					 * name space, the name space has not to be added again).
 					 */
 					if (!this.rootNamespace.getNestedNamespace().contains(
 							importedNamespace)) {
-						this.rootNamespace
-								.addNestedNamespace(importedNamespace);
+						this.rootNamespace.addNestedNamespace(importedNamespace);
 					}
 					// no else.
 				}
 			}
 
 			/*
-			 * Else check if the EObject is a package (can be imported via
-			 * import statement in UML.
+			 * Else check if the EObject is a package (can be imported via import
+			 * statement in UML.
 			 */
 			else if (eObject instanceof Package) {
 
 				/* If the package is a model or a profile only add its content. */
 				if (eObject instanceof Model || eObject instanceof Profile) {
 
-					for (Package umlPackage : ((Package) eObject)
-							.getNestedPackages()) {
-						Namespace adaptedNamespace = this.factory
-								.createNamespace(umlPackage, this.rootNamespace);
+					for (Package umlPackage : ((Package) eObject).getNestedPackages()) {
+						Namespace adaptedNamespace =
+								this.factory.createNamespace(umlPackage, this.rootNamespace);
 						if (adaptedNamespace != null
-								&& !this.rootNamespace.equals(adaptedNamespace) && !this.rootNamespace.getNestedNamespace()
-										.contains(adaptedNamespace))
-							this.rootNamespace
-									.addNestedNamespace(adaptedNamespace);
+								&& !this.rootNamespace.equals(adaptedNamespace)
+								&& !this.rootNamespace.getNestedNamespace().contains(
+										adaptedNamespace))
+							this.rootNamespace.addNestedNamespace(adaptedNamespace);
 						// no else.
 					}
 					// end for.
 
 					for (Type umlType : ((Package) eObject).getOwnedTypes()) {
-						org.dresdenocl.pivotmodel.Type adaptedType = this.factory
-								.createType(umlType);
+						org.dresdenocl.pivotmodel.Type adaptedType =
+								this.factory.createType(umlType);
 						if (adaptedType != null
-								&& !this.rootNamespace.getOwnedType().contains(
-										adaptedType))
+								&& !this.rootNamespace.getOwnedType().contains(adaptedType))
 							this.rootNamespace.addType(adaptedType);
 						// no else.
 					}
@@ -325,22 +324,21 @@ public class UML2Model extends AbstractModel implements IModel {
 							|| importedPackage.getNestingPackage() instanceof Profile) {
 
 						/*
-						 * Adapt the package. If a package with the same name
-						 * already exists, the packages are merged.
+						 * Adapt the package. If a package with the same name already
+						 * exists, the packages are merged.
 						 */
 						Namespace importedNamespace;
-						importedNamespace = this.factory.createNamespace(
-								importedPackage, this.rootNamespace);
+						importedNamespace =
+								this.factory.createNamespace(importedPackage,
+										this.rootNamespace);
 
 						/*
-						 * Only add the name space if it has not been added yet
-						 * (for merged name space, the name space has not to be
-						 * added again).
+						 * Only add the name space if it has not been added yet (for merged
+						 * name space, the name space has not to be added again).
 						 */
 						if (!this.rootNamespace.getNestedNamespace().contains(
 								importedNamespace)) {
-							this.rootNamespace
-									.addNestedNamespace(importedNamespace);
+							this.rootNamespace.addNestedNamespace(importedNamespace);
 						}
 						// no else.
 					}
@@ -354,16 +352,16 @@ public class UML2Model extends AbstractModel implements IModel {
 
 	/**
 	 * <p>
-	 * Helper method that creates the adapter for the root namespace. If there
-	 * is only one top-level namespace possible, then this method should just
-	 * return the adapter for the top-level namespace, else it should create a
-	 * new "virtual" root namespace.
+	 * Helper method that creates the adapter for the root namespace. If there is
+	 * only one top-level namespace possible, then this method should just return
+	 * the adapter for the top-level namespace, else it should create a new
+	 * "virtual" root namespace.
 	 * </p>
 	 * 
 	 * @return A {@link Namespace} instance
 	 * 
 	 * @throws ModelAccessException
-	 *             If an error occurs while loading the adapted UML2 model.
+	 *           If an error occurs while loading the adapted UML2 model.
 	 * 
 	 * @generated NOT
 	 */
@@ -375,8 +373,7 @@ public class UML2Model extends AbstractModel implements IModel {
 			if (!resource.isLoaded()) {
 
 				if (LOGGER.isInfoEnabled()) {
-					LOGGER.info(NLS.bind(
-							UML2ModelMessages.UML2Model_LoadingUML2Model,
+					LOGGER.info(NLS.bind(UML2ModelMessages.UML2Model_LoadingUML2Model,
 							resource.getURI()));
 				}
 
@@ -410,25 +407,23 @@ public class UML2Model extends AbstractModel implements IModel {
 			for (EObject eObject : rootPackages) {
 
 				/*
-				 * Models should not be added themselves. Add their contained
-				 * packages instead.
+				 * Models should not be added themselves. Add their contained packages
+				 * instead.
 				 */
 				if (eObject instanceof Model) {
 
-					for (Package umlPackage : ((Model) eObject)
-							.getNestedPackages()) {
-						Namespace adaptedNamespace = this.factory
-								.createNamespace(umlPackage, this.rootNamespace);
+					for (Package umlPackage : ((Model) eObject).getNestedPackages()) {
+						Namespace adaptedNamespace =
+								this.factory.createNamespace(umlPackage, this.rootNamespace);
 						if (adaptedNamespace != null)
-							this.rootNamespace
-									.addNestedNamespace(adaptedNamespace);
+							this.rootNamespace.addNestedNamespace(adaptedNamespace);
 						// no else.
 					}
 					// end for.
 
 					for (Type umlType : ((Model) eObject).getOwnedTypes()) {
-						org.dresdenocl.pivotmodel.Type adaptedType = this.factory
-								.createType(umlType);
+						org.dresdenocl.pivotmodel.Type adaptedType =
+								this.factory.createType(umlType);
 						if (adaptedType != null)
 							this.rootNamespace.addType(adaptedType);
 						// no else.
@@ -437,25 +432,23 @@ public class UML2Model extends AbstractModel implements IModel {
 				}
 
 				/*
-				 * Profiles should not be added themselves. Add their contained
-				 * packages instead.
+				 * Profiles should not be added themselves. Add their contained packages
+				 * instead.
 				 */
 				else if (eObject instanceof Profile) {
 
-					for (Package umlPackage : ((Profile) eObject)
-							.getNestedPackages()) {
-						Namespace adaptedNamespace = this.factory
-								.createNamespace(umlPackage, this.rootNamespace);
+					for (Package umlPackage : ((Profile) eObject).getNestedPackages()) {
+						Namespace adaptedNamespace =
+								this.factory.createNamespace(umlPackage, this.rootNamespace);
 						if (adaptedNamespace != null)
-							this.rootNamespace
-									.addNestedNamespace(adaptedNamespace);
+							this.rootNamespace.addNestedNamespace(adaptedNamespace);
 						// no else.
 					}
 					// end for.
 
 					for (Type umlType : ((Profile) eObject).getOwnedTypes()) {
-						org.dresdenocl.pivotmodel.Type adaptedType = this.factory
-								.createType(umlType);
+						org.dresdenocl.pivotmodel.Type adaptedType =
+								this.factory.createType(umlType);
 						if (adaptedType != null)
 							this.rootNamespace.addType(adaptedType);
 						// no else.
@@ -464,16 +457,17 @@ public class UML2Model extends AbstractModel implements IModel {
 				}
 
 				else if (eObject instanceof Package) {
-					Namespace adaptedNamespace = this.factory.createNamespace(
-							(Package) eObject, this.rootNamespace);
+					Namespace adaptedNamespace =
+							this.factory.createNamespace((Package) eObject,
+									this.rootNamespace);
 					if (adaptedNamespace != null)
 						this.rootNamespace.addNestedNamespace(adaptedNamespace);
 					// no else.
 				}
 
 				else if (eObject instanceof Type) {
-					org.dresdenocl.pivotmodel.Type adaptedType = this.factory
-							.createType((Type) eObject);
+					org.dresdenocl.pivotmodel.Type adaptedType =
+							this.factory.createType((Type) eObject);
 					if (adaptedType != null)
 						this.rootNamespace.addType(adaptedType);
 					// no else.

@@ -99,4 +99,6 @@ public interface IModelProvider {
 	 * @return An {@link IModel} instance.
 	 */
 	IModel getModel(Resource resource);
+	
+	void releaseModel(final IModel model) throws ModelAccessException;
 }

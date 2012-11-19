@@ -55,6 +55,7 @@ import org.eclipse.osgi.util.NLS;
 
 import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
 import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.ModelConstants;
 import org.dresdenocl.model.base.AbstractModel;
@@ -101,9 +102,10 @@ public class EcoreModel extends AbstractModel implements IModel {
 	 * @param resource
 	 *          The {@link Resource} containing the model.
 	 */
-	public EcoreModel(Resource resource, IMetamodel metamodel) {
+	public EcoreModel(Resource resource, IMetamodel metamodel,
+			IModelProvider provider) {
 
-		super(resource.getURI().toString(), metamodel);
+		super(resource.getURI().toString(), metamodel, provider);
 
 		/* Initialize. */
 		this.resource = resource;
@@ -111,14 +113,16 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.dresdenocl.model.IModel#dispose()
 	 */
 	public void dispose() {
+
 		/* Unload the resource to remove external contents. */
 		this.resource.unload();
 		/* Reset the root name space to avoid caching. */
 		this.rootNamespace = null;
+		
+		super.dispose();
 	}
 
 	/**
@@ -187,7 +191,6 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -195,8 +198,9 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 		String result;
 
-		result = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.append("resource", this.resource.getURI()).toString();
+		result =
+				new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append(
+						"resource", this.resource.getURI()).toString();
 
 		return result;
 	}

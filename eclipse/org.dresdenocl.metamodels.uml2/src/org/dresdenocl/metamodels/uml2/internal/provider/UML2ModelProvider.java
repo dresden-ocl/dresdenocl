@@ -13,6 +13,7 @@
  */
 package org.dresdenocl.metamodels.uml2.internal.provider;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
@@ -27,6 +28,7 @@ import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.model.util.Tuple2;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
@@ -82,6 +84,17 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 			throw new ModelAccessException("Invalid URL: " + modelURL, e);
 		}
 
+		// Check if the model is cached
+		if (m_modelCache.get(modelURL.toString()) != null) {
+			final Tuple2<WeakReference<IModel>, Integer> tuple =
+					m_modelCache.get(modelURL.toString());
+			if (tuple.getFirstValue().get() != null) {
+				// increments the reference counter for this IModel
+				tuple.setSecondValue(tuple.getSecondValue() + 1);
+				return tuple.getFirstValue().get();
+			}
+		}
+		
 		/* Get the resource of the given URI. */
 		resource = getResourceSet().getResource(modelURI, false);
 
@@ -92,8 +105,15 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 		}
 		// no else.
 
-		result = new UML2Model(resource, ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel(UML2MetamodelPlugin.ID));
+		result =
+				new UML2Model(resource, ModelBusPlugin.getMetamodelRegistry()
+						.getMetamodel(UML2MetamodelPlugin.ID), this);
+
+		// Cache the model and set reference counter to 1
+		final Tuple2<WeakReference<IModel>, Integer> tuple =
+				new Tuple2<WeakReference<IModel>, Integer>(new WeakReference<IModel>(
+						result), 1);
+		m_modelCache.put(modelURL.toString(), tuple);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

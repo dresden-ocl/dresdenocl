@@ -1,5 +1,6 @@
 package org.dresdenocl.metamodels.xsd.internal.provider;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
@@ -14,6 +15,7 @@ import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.model.util.Tuple2;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
@@ -52,6 +54,17 @@ public class XSDModelProvider extends AbstractModelProvider implements
 			throw new ModelAccessException("Invalid URL: " + modelURL, e); //$NON-NLS-1$
 		}
 
+		// Check if the model is cached
+		if (m_modelCache.get(modelURL.toString()) != null) {
+			final Tuple2<WeakReference<IModel>, Integer> tuple =
+					m_modelCache.get(modelURL.toString());
+			if (tuple.getFirstValue().get() != null) {
+				// increments the reference counter for this IModel
+				tuple.setSecondValue(tuple.getSecondValue() + 1);
+				return tuple.getFirstValue().get();
+			}
+		}
+		
 		// get the resource
 		resource = getResourceSet().getResource(modelURI, false);
 
@@ -63,7 +76,13 @@ public class XSDModelProvider extends AbstractModelProvider implements
 		model =
 				new XSDModel(getResourceSet().getResource(modelURI, false),
 						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-								XSDMetamodelPlugin.ID));
+								XSDMetamodelPlugin.ID), this);
+		
+		// Cache the model and set reference counter to 1
+		final Tuple2<WeakReference<IModel>, Integer> tuple =
+				new Tuple2<WeakReference<IModel>, Integer>(new WeakReference<IModel>(
+						model), 1);
+		m_modelCache.put(modelURL.toString(), tuple);
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("getModel() - exit - return value=" + model); //$NON-NLS-1$

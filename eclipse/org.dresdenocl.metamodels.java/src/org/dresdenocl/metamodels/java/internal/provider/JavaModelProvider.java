@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -35,6 +36,7 @@ import org.dresdenocl.model.IModelProvider;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.model.ModelPlugin;
 import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.model.util.Tuple2;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
@@ -49,8 +51,8 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		IModelProvider {
 
 	/** The {@link Logger} for this class. */
-	protected static final Logger LOGGER =
-			JavaMetaModelPlugin.getLogger(JavaModelProvider.class);
+	protected static final Logger LOGGER = JavaMetaModelPlugin
+			.getLogger(JavaModelProvider.class);
 
 	/*
 	 * (non-Javadoc)
@@ -86,6 +88,17 @@ public class JavaModelProvider extends AbstractModelProvider implements
 		}
 		// no else.
 
+		// Check if the model is cached
+		if (m_modelCache.get(modelURL.toString()) != null) {
+			final Tuple2<WeakReference<IModel>, Integer> tuple =
+					m_modelCache.get(modelURL.toString());
+			if (tuple.getFirstValue().get() != null) {
+				// increments the reference counter for this IModel
+				tuple.setSecondValue(tuple.getSecondValue() + 1);
+				return tuple.getFirstValue().get();
+			}
+		}
+
 		IModel result;
 		result = null;
 
@@ -118,6 +131,12 @@ public class JavaModelProvider extends AbstractModelProvider implements
 			throw new ModelAccessException(msg);
 		}
 		// no else.
+
+		// Cache the model and set reference counter to 1
+		final Tuple2<WeakReference<IModel>, Integer> tuple =
+				new Tuple2<WeakReference<IModel>, Integer>(new WeakReference<IModel>(
+						result), 1);
+		m_modelCache.put(modelURL.toString(), tuple);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -157,7 +176,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 		result =
 				new JavaModel(modelClass, ModelBusPlugin.getMetamodelRegistry()
-						.getMetamodel(JavaMetaModelPlugin.ID));
+						.getMetamodel(JavaMetaModelPlugin.ID), this);
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -330,8 +349,8 @@ public class JavaModelProvider extends AbstractModelProvider implements
 				 * find types from EMF Ecore like EObject.
 				 */
 				aClassLoader =
-						new URLClassLoader(urls.toArray(new URL[0]), ModelPlugin.class
-								.getClassLoader());
+						new URLClassLoader(urls.toArray(new URL[0]),
+								ModelPlugin.class.getClassLoader());
 
 				result = Class.forName(aClassName, true, aClassLoader);
 
