@@ -49,17 +49,19 @@ III. Eclipse Plug-Ins
 			Plug-Ins afterwards:
 
 	III.I.		Help -> Install New Software... -> Indigo -> Modeling ->
-				* Ecore Tools SDK
-				* EMF - Eclipse Modeling Framework SDK
-				* UML2 Extender SDK
-				* XSD - XML Schema Definition SDK
+					* Ecore Tools SDK
+					* EMF - Eclipse Modeling Framework SDK
+					* UML2 Extender SDK
+					* XSD - XML Schema Definition SDK
 
 	III.II.		Help -> Install New Software... -> Available Software Sites ->
-				filter for 'Orbit' and choose the update-site
-				* Apache Jakarta Log4J plugin
+				filter for 'Orbit' and choose the update-site. Then find and install
+				the following Plug-Ins:
+					* Apache Jakarta Log4J plugin
+					* Apache Commons IO
 
 	III.III.	Help -> Install New Software... -> http://www.emftext.org/update ->
-				* EMFText
+					* EMFText
 
 
 Installation:
