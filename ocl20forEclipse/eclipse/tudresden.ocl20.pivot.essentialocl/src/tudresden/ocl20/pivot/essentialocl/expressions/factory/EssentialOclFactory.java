@@ -880,6 +880,57 @@ public class EssentialOclFactory {
 	}
 
 	/**
+	 * @author Lars Schuetze
+	 * @param source
+	 *          The source {@link OclExpression} of the {@link PropertyCallExp}.
+	 * @param referredProperty
+	 *          The referred {@link Property property}
+	 * @param qualifier
+	 *          qualifier {@link OclExpression} as an Array.
+	 * @return A {@link PropertyCallExp} instance.
+	 * @throws EssentialOclFactoryException
+	 */
+	public PropertyCallExp createPropertyCallExp(OclExpression source,
+			Property referredProperty, OclExpression... qualifier)
+			throws EssentialOclFactoryException {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPropertyCallExp(source=" + source
+					+ ", refferedProperty=" + referredProperty + ", qualifier="
+					+ ArrayUtils.toString(qualifier));
+		}
+
+		if (source == null || referredProperty == null) {
+			throw new IllegalArgumentException(
+					"Parameters must not be null: source=" + source //$NON-NLS-1$
+							+ ", referredProperty=" + referredProperty + "."); //$NON-NLS-1$//$NON-NLS-2$
+		}
+
+		// create the expression
+		PropertyCallExp propertyCallExp =
+				ExpressionsFactory.INSTANCE.createPropertyCallExp();
+
+		propertyCallExp.setSource(source);
+		propertyCallExp.setSourceType(referredProperty.getOwningType());
+		propertyCallExp.setReferredProperty(referredProperty);
+
+		// a property call expression needs access to the OCL library
+		propertyCallExp.setOclLibrary(oclLibrary);
+
+		// set the qualifiers if existing
+		if (qualifier != null) {
+			propertyCallExp.getQualifier().addAll(Arrays.asList(qualifier));
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPropertyCallExp() - exit - return value=" //$NON-NLS-1$
+					+ propertyCallExp);
+		}
+
+		return propertyCallExp;
+	}
+
+	/**
 	 * <p>
 	 * Creates a {@link PropertyCallExp}.
 	 * </p>

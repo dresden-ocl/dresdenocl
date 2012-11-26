@@ -321,13 +321,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             case v : Variable => Full(factory.createVariableExp(v))
             case p : Property => {
               if (p.isStatic) {
-                // TODO: put this into the EssentialOclFactory
-                val pce = ExpressionsFactory.INSTANCE.createPropertyCallExp
-                pce.setReferredProperty(p)
-                pce.setSourceType(p.getOwningType)
-                pce.setSource(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList))
-                pce.setOclLibrary(oclLibrary)
-                Full(pce)
+                Full(factory.createPropertyCallExp(
+                  factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList), p))
               }
               else {
                 (variables(v)).flatMap {
