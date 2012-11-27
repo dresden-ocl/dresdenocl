@@ -39,24 +39,24 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Parameter Direction Kind</b></em>',
- * and utility methods for working with them.
- * <!-- end-user-doc -->
- * <!-- begin-model-doc -->
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration '
+ * <em><b>Parameter Direction Kind</b></em>', and utility methods for working
+ * with them. <!-- end-user-doc --> <!-- begin-model-doc -->
  * <p>
- * An enumeration type that defines literals used to specify direction of {@link Parameter parameters}.
+ * An enumeration type that defines literals used to specify direction of
+ * {@link Parameter parameters}.
  * </p>
  * <!-- end-model-doc -->
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameterDirectionKind()
  * @model
  * @generated
  */
 public enum ParameterDirectionKind implements Enumerator {
 	/**
-	 * The '<em><b>In</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>In</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #IN_VALUE
 	 * @generated
 	 * @ordered
@@ -64,9 +64,9 @@ public enum ParameterDirectionKind implements Enumerator {
 	IN(0, "in", "in"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Out</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>Out</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #OUT_VALUE
 	 * @generated
 	 * @ordered
@@ -74,9 +74,9 @@ public enum ParameterDirectionKind implements Enumerator {
 	OUT(1, "out", "out"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Inout</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>Inout</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #INOUT_VALUE
 	 * @generated
 	 * @ordered
@@ -84,9 +84,9 @@ public enum ParameterDirectionKind implements Enumerator {
 	INOUT(2, "inout", "inout"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Return</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>Return</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #RETURN_VALUE
 	 * @generated
 	 * @ordered
@@ -94,15 +94,14 @@ public enum ParameterDirectionKind implements Enumerator {
 	RETURN(3, "return", "return"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>In</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>In</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Indicates that parameter values are passed into the 
-	 * {@link Operation} by the caller.
+	 * Indicates that parameter values are passed into the {@link Operation} by
+	 * the caller.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #IN
 	 * @model name="in"
 	 * @generated
@@ -111,15 +110,14 @@ public enum ParameterDirectionKind implements Enumerator {
 	public static final int IN_VALUE = 0;
 
 	/**
-	 * The '<em><b>Out</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Out</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Indicates that parameter values are passed from an 
-	 * {@link Operation} out to the caller.
+	 * Indicates that parameter values are passed from an {@link Operation} out to
+	 * the caller.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #OUT
 	 * @model name="out"
 	 * @generated
@@ -128,16 +126,14 @@ public enum ParameterDirectionKind implements Enumerator {
 	public static final int OUT_VALUE = 1;
 
 	/**
-	 * The '<em><b>Inout</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Inout</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Indicates that parameter values are passed into an {@link 
-	 * Operation} by the caller and then back out to
-	 * the caller from the {@link Operation}.
+	 * Indicates that parameter values are passed into an {@link Operation} by the
+	 * caller and then back out to the caller from the {@link Operation}.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #INOUT
 	 * @model name="inout"
 	 * @generated
@@ -146,15 +142,14 @@ public enum ParameterDirectionKind implements Enumerator {
 	public static final int INOUT_VALUE = 2;
 
 	/**
-	 * The '<em><b>Return</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Return</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Indicates that parameter values are passed as return
-	 * values from an {@link Operation} back to the caller.
+	 * Indicates that parameter values are passed as return values from an
+	 * {@link Operation} back to the caller.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #RETURN
 	 * @model name="return"
 	 * @generated
@@ -164,26 +159,27 @@ public enum ParameterDirectionKind implements Enumerator {
 
 	/**
 	 * An array of all the '<em><b>Parameter Direction Kind</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static final ParameterDirectionKind[] VALUES_ARRAY =
 			new ParameterDirectionKind[] { IN, OUT, INOUT, RETURN, };
 
 	/**
-	 * A public read-only list of all the '<em><b>Parameter Direction Kind</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * A public read-only list of all the '
+	 * <em><b>Parameter Direction Kind</b></em>' enumerators. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final List<ParameterDirectionKind> VALUES = Collections
 			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the
+	 * specified literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ParameterDirectionKind get(String literal) {
@@ -198,9 +194,9 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the
+	 * specified name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ParameterDirectionKind getByName(String name) {
@@ -215,9 +211,9 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Parameter Direction Kind</b></em>' literal with the
+	 * specified integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ParameterDirectionKind get(int value) {
@@ -236,30 +232,30 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private ParameterDirectionKind(int value, String name, String literal) {
@@ -270,8 +266,8 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getValue() {
@@ -280,8 +276,8 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -290,8 +286,8 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
@@ -300,9 +296,9 @@ public enum ParameterDirectionKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string
+	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -311,4 +307,4 @@ public enum ParameterDirectionKind implements Enumerator {
 		return literal;
 	}
 
-} //ParameterDirectionKind
+} // ParameterDirectionKind

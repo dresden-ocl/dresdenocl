@@ -52,8 +52,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class TypeArgumentItemProvider extends TypedElementItemProvider
@@ -61,9 +63,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TypeArgumentItemProvider(AdapterFactory adapterFactory) {
@@ -72,9 +74,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,8 +90,9 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This returns TypeArgument.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns TypeArgument.gif. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -103,8 +106,8 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * Changed the EMF-generated code to return the name of the type of the adapted
-	 * {@link TypeArgument}.
+	 * Changed the EMF-generated code to return the name of the type of the
+	 * adapted {@link TypeArgument}.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -116,12 +119,13 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * Extended the EMF implementation to update the label of the owner if the type of the
-	 * {@link TypeArgument} is changed.
+	 * Extended the EMF implementation to update the label of the owner if the
+	 * type of the {@link TypeArgument} is changed.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -135,8 +139,11 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 		case PivotModelPackageImpl.TYPE_ARGUMENT__TYPE:
 		case PivotModelPackageImpl.TYPE_ARGUMENT__GENERIC_TYPE: {
 
-			// update all element labels until we arrive at the Type that contains the type argument
-			for (NamedElement element = (NamedElement) notification.getNotifier(); // start at notifier 
+			// update all element labels until we arrive at the Type that contains the
+			// type argument
+			for (NamedElement element = (NamedElement) notification.getNotifier(); // start
+																																							// at
+																																							// notifier
 			element != null; element = element.getOwner()) {
 				fireNotifyChanged(new ViewerNotification(notification, element, false,
 						true));
@@ -154,10 +161,10 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

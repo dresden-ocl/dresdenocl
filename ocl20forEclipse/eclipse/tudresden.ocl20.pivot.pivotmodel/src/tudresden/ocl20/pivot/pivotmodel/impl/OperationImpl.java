@@ -75,16 +75,29 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter
+ * <em>Owned Type Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType
+ * <em>Owning Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter
+ * <em>Owned Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter
+ * <em>Input Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter
+ * <em>Output Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter
+ * <em>Return Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter
+ * <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class OperationImpl extends FeatureImpl implements Operation {
@@ -107,8 +120,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameter()
-	 * <em>Owned Parameter</em>}' containment reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Owned Parameter</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOwnedParameter()
 	 * @generated
@@ -121,6 +134,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected OperationImpl() {
@@ -193,9 +207,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	}
 
 	/**
-	 * Overridden to return the generic type of the
-	 * {@link #getReturnParameter() return parameter} if there is one.
-	 * Otherwise, default to super implementation.
+	 * Overridden to return the generic type of the {@link #getReturnParameter()
+	 * return parameter} if there is one. Otherwise, default to super
+	 * implementation.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType()
 	 */
@@ -237,9 +251,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	/*
 	 * Overridden so that the generic type of the {@link #getReturnParameter()
 	 * return parameter} is changed if one exists.
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType
 	 * (tudresden.ocl20.pivot.pivotmodel.GenericType)
 	 */
 	@Override
@@ -278,6 +290,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -294,6 +307,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
@@ -305,6 +319,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
@@ -318,6 +333,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
@@ -361,6 +377,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedParameter()} is redirected to this method. <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<Parameter> getOwnedParameterGen() {
@@ -411,15 +428,15 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	}
 
 	/**
-	 * A helper method that can be used to filter the
-	 * {@link #getOwnedParameter() list of all parameters} according to their
-	 * {@link Parameter#getKind() direction}.
+	 * A helper method that can be used to filter the {@link #getOwnedParameter()
+	 * list of all parameters} according to their {@link Parameter#getKind()
+	 * direction}.
 	 * 
 	 * @param directionKinds
-	 *            an <code>EnumSet</code> containing the direction kinds of the
-	 *            parameters that should be contained in the filtered list
+	 *          an <code>EnumSet</code> containing the direction kinds of the
+	 *          parameters that should be contained in the filtered list
 	 * @param structuralFeature
-	 *            the meta object representing the corresponding feature
+	 *          the meta object representing the corresponding feature
 	 * 
 	 * @return an {@link EcoreEList.UnmodifiableEList<Parameter>} with the
 	 *         filtered <code>Parameters</code>.
@@ -674,6 +691,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -698,6 +716,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -719,6 +738,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -735,6 +755,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -761,6 +782,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -786,6 +808,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -807,6 +830,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -833,6 +857,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -857,6 +882,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -881,6 +907,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -890,10 +917,10 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	}
 
 	/**
-	 * Changed EMF implementation in order to use a consistent style. In
-	 * addition, the getter methods are used to get attribute values. This is
-	 * important if repository-specific subclasses have alternative ways of
-	 * obtaining their attribute values.
+	 * Changed EMF implementation in order to use a consistent style. In addition,
+	 * the getter methods are used to get attribute values. This is important if
+	 * repository-specific subclasses have alternative ways of obtaining their
+	 * attribute values.
 	 * 
 	 * @generated NOT
 	 */

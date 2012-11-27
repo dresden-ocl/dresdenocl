@@ -84,7 +84,7 @@ public class TestModelImport {
 		 */
 		Type testTypeClass;
 		testTypeClass = model.findType(Arrays.asList(new String[] {
-				ModelConstants.ROOT_PACKAGE_NAME, "package1",
+				ModelConstants.ROOT_PACKAGE_NAME, ModelConstants.ROOT_PACKAGE_NAME,"package1",
 				"TestTypeClass1" }));
 		assertNotNull(msg, testTypeClass);
 

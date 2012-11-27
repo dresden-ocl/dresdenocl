@@ -46,21 +46,24 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Argument</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Type Argument</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl#getOwningGenericType <em>Owning Generic Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl#getOwningGenericType
+ * <em>Owning Generic Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TypeArgumentImpl() {
@@ -70,6 +73,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -79,9 +83,9 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	}
 
 	/**
-	 * Overridden to return the name of the type of this <code>TypeArgument</code> because commonly
-	 * a type argument won't have a dedicated name. If neither a type nor a generic type is set, the
-	 * empty string is returned.
+	 * Overridden to return the name of the type of this <code>TypeArgument</code>
+	 * because commonly a type argument won't have a dedicated name. If neither a
+	 * type nor a generic type is set, the empty string is returned.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
 	 */
@@ -93,8 +97,9 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	}
 
 	/**
-	 * Overridden to prevent setting a name. The name of the <code>TypeArgument</code> is determined
-	 * based on the referenced type. This method will throw an {@link UnsupportedOperationException}.
+	 * Overridden to prevent setting a name. The name of the
+	 * <code>TypeArgument</code> is determined based on the referenced type. This
+	 * method will throw an {@link UnsupportedOperationException}.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
@@ -107,8 +112,8 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	}
 
 	/**
-	 * Overridden to return the {@link #getOwningGenericType() generic type} that owns this
-	 * <code>TypeArgument</code>
+	 * Overridden to return the {@link #getOwningGenericType() generic type} that
+	 * owns this <code>TypeArgument</code>
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -120,6 +125,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ComplexGenericType getOwningGenericType() {
@@ -131,7 +137,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
@@ -142,8 +147,8 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	}
 
 	/**
-	 * Overridden to indicate that the name is determined automatically. Assure that
-	 * {@link #setName(String)} is not called which would throw an exception.
+	 * Overridden to indicate that the name is determined automatically. Assure
+	 * that {@link #setName(String)} is not called which would throw an exception.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#hasVolatileName()
 	 */
@@ -155,6 +160,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningGenericType(
@@ -168,6 +174,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOwningGenericType(ComplexGenericType newOwningGenericType) {
@@ -197,6 +204,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -214,6 +222,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -229,6 +238,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -246,6 +256,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -260,6 +271,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -275,6 +287,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -289,9 +302,10 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	}
 
 	/**
-	 * The EMF implementation is adapted to prevent that the name of the <code>TypeArgument</code>
-	 * is serialized to XMI. This is necessary to prevent setting the name upon loading the document
-	 * which would throw an exception.
+	 * The EMF implementation is adapted to prevent that the name of the
+	 * <code>TypeArgument</code> is serialized to XMI. This is necessary to
+	 * prevent setting the name upon loading the document which would throw an
+	 * exception.
 	 * 
 	 * @generated NOT
 	 * 

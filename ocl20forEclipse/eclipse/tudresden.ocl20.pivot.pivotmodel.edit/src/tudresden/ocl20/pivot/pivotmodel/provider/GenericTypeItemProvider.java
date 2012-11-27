@@ -46,11 +46,14 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import tudresden.ocl20.pivot.pivotmodel.GenericType;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.GenericType} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.GenericType} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class GenericTypeItemProvider extends NamedElementItemProvider implements
@@ -58,9 +61,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public GenericTypeItemProvider(AdapterFactory adapterFactory) {
@@ -69,9 +72,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -88,8 +91,8 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	 * This returns GenericType.gif.
 	 * 
 	 * <p>
-	 * Overridden to return <em>GenericSuperType.gif</em> if the generic type is the generic super
-	 * type of a type.
+	 * Overridden to return <em>GenericSuperType.gif</em> if the generic type is
+	 * the generic super type of a type.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -112,8 +115,8 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * The EMF implementation is changed to simply use the
-	 * {@link super#getText(Object) super implementation}.
+	 * The EMF implementation is changed to simply use the {@link
+	 * super#getText(Object) super implementation}.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -125,8 +128,9 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * @generated
 	 */
@@ -138,10 +142,10 @@ public class GenericTypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

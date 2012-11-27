@@ -80,15 +80,14 @@ public abstract class AbstractNamespace extends NamespaceImpl implements
 		Namespace {
 
 	/**
-	 * Subclasses should return the name of the adapted {@link Namespace}
-	 * concept.
+	 * Subclasses should return the name of the adapted {@link Namespace} concept.
 	 */
 	@Override
 	public abstract String getName();
 
 	/**
-	 * Subclasses should return an adapter for the {@link Namespace} that
-	 * contains this <code>Namespace</code>.
+	 * Subclasses should return an adapter for the {@link Namespace} that contains
+	 * this <code>Namespace</code>.
 	 */
 	@Override
 	public abstract Namespace getNestingNamespace();
@@ -99,6 +98,7 @@ public abstract class AbstractNamespace extends NamespaceImpl implements
 	 */
 	@Override
 	public final List<Namespace> getNestedNamespace() {
+
 		List<Namespace> nestedNamespace = new BasicEList<Namespace>();
 		nestedNamespace.addAll(getNestedNamespaceImpl());
 		nestedNamespace.addAll(getNestedNamespaceGen());
@@ -120,7 +120,6 @@ public abstract class AbstractNamespace extends NamespaceImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -133,8 +132,7 @@ public abstract class AbstractNamespace extends NamespaceImpl implements
 
 			aNamespace = (Namespace) anObject;
 
-			result = this.getQualifiedName().equals(
-					aNamespace.getQualifiedName());
+			result = this.getQualifiedName().equals(aNamespace.getQualifiedName());
 		}
 
 		else {

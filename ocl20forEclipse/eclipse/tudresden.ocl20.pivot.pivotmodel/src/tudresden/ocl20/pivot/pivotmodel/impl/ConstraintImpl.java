@@ -58,19 +58,27 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Constraint</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Constraint</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getSpecification <em>Specification</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getConstrainedElement <em>Constrained Element</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getDefinedFeature <em>Defined Feature</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getKind <em>
+ * Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getNamespace
+ * <em>Namespace</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getSpecification
+ * <em>Specification</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getConstrainedElement
+ * <em>Constrained Element</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getDefinedFeature
+ * <em>Defined Feature</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ConstraintImpl extends NamedElementImpl implements Constraint {
@@ -81,9 +89,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	private static final Logger logger = Logger.getLogger(ConstraintImpl.class);
 
 	/**
-	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -92,9 +100,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			ConstraintKind.INVARIANT;
 
 	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -102,8 +110,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	protected ConstraintKind kind = KIND_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getSpecification() <em>Specification</em>}
+	 * ' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getSpecification()
 	 * @generated
 	 * @ordered
@@ -111,8 +120,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	protected Expression specification;
 
 	/**
-	 * The cached value of the '{@link #getConstrainedElement() <em>Constrained Element</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getConstrainedElement()
+	 * <em>Constrained Element</em>}' reference list. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getConstrainedElement()
 	 * @generated
 	 * @ordered
@@ -120,8 +131,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	protected EList<ConstrainableElement> constrainedElement;
 
 	/**
-	 * The cached value of the '{@link #getDefinedFeature() <em>Defined Feature</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getDefinedFeature()
+	 * <em>Defined Feature</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getDefinedFeature()
 	 * @generated
 	 * @ordered
@@ -130,6 +143,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ConstraintImpl() {
@@ -139,6 +153,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -149,6 +164,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ConstraintKind getKind() {
@@ -158,6 +174,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKind(ConstraintKind newKind) {
@@ -171,6 +188,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Namespace getNamespace() {
@@ -182,6 +200,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNamespace(Namespace newNamespace,
@@ -195,6 +214,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setNamespace(Namespace newNamespace) {
@@ -222,6 +242,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Expression getSpecification() {
@@ -231,6 +252,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetSpecification(Expression newSpecification,
@@ -253,6 +275,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setSpecification(Expression newSpecification) {
@@ -280,9 +303,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	}
 
 	/**
-	 * The implementation in this class simply redirects to {{@link #getConstrainedElementGen()}
-	 * which contains the code generated by EMF. Client may, however, override this method to provide
-	 * specific behaviour, e.g., adapt to other model repositories.
+	 * The implementation in this class simply redirects to {
+	 * {@link #getConstrainedElementGen()} which contains the code generated by
+	 * EMF. Client may, however, override this method to provide specific
+	 * behaviour, e.g., adapt to other model repositories.
 	 * 
 	 * @generated NOT
 	 */
@@ -292,8 +316,10 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->The code generated for {{@link #getConstrainedElement()} is redirected
-	 * to this method.<!-- end-user-doc -->
+	 * <!-- begin-user-doc -->The code generated for {
+	 * {@link #getConstrainedElement()} is redirected to this method.<!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<ConstrainableElement> getConstrainedElementGen() {
@@ -308,6 +334,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Feature getDefinedFeature() {
@@ -316,8 +343,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDefinedFeature(Feature newDefinedFeature,
@@ -340,6 +367,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setDefinedFeature(Feature newDefinedFeature) {
@@ -388,7 +416,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	}
 
 	/**
-	 * Overridden to return the {@link #getNamespace() namespace} of this <code>Constraint</code>.
+	 * Overridden to return the {@link #getNamespace() namespace} of this
+	 * <code>Constraint</code>.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -400,7 +429,6 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 
@@ -425,7 +453,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 		// copy the constrained elements
 		for (ConstrainableElement constrainedElement : getConstrainedElement()) {
-			// do not clone the elements as they are only referenced, not contained by the constraint
+			// do not clone the elements as they are only referenced, not contained by
+			// the constraint
 			clone.addConstrainedElement(constrainedElement);
 		}
 
@@ -434,6 +463,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -464,6 +494,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -483,6 +514,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -499,6 +531,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -521,6 +554,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -551,6 +585,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -578,6 +613,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -599,7 +635,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	}
 
 	/**
-	 * Changed EMF implementation to use the Jakarta Commons Lang {@link ToStringBuilder}.
+	 * Changed EMF implementation to use the Jakarta Commons Lang
+	 * {@link ToStringBuilder}.
 	 * 
 	 * @generated NOT
 	 */

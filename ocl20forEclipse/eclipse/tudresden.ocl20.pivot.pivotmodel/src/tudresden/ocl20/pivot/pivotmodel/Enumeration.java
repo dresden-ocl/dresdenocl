@@ -35,25 +35,24 @@ package tudresden.ocl20.pivot.pivotmodel;
 import java.util.List;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Enumeration</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Enumeration</b></em>'. <!-- end-user-doc -->
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * An <code>Enumeration</code> defines a set of 
- * {@link EnumerationLiteral literals} that can be used as its 
- * values.
+ * An <code>Enumeration</code> defines a set of {@link EnumerationLiteral
+ * literals} that can be used as its values.
  * </p>
  * <!-- end-model-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral <em>Owned Literal</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral <em>
+ * Owned Literal</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumeration()
  * @model
  * @generated
@@ -61,17 +60,20 @@ import java.util.List;
 public interface Enumeration extends Type {
 
 	/**
-	 * Returns the value of the '<em><b>Owned Literal</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration <em>Enumeration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * Returns the value of the '<em><b>Owned Literal</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}. It is
+	 * bidirectional and its opposite is '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * <em>Enumeration</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
+	 * begin-model-doc -->
 	 * <p>
 	 * This is the ordered collection of literals for the enumeration.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Owned Literal</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Owned Literal</em>' containment reference
+	 *         list.
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumeration_OwnedLiteral()
 	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
 	 * @model opposite="enumeration" containment="true"
@@ -80,36 +82,36 @@ public interface Enumeration extends Type {
 	List<EnumerationLiteral> getOwnedLiteral();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Adds an {@link EnumerationLiteral} to this <code>Enumeration</code>.
-	 * This operation is required to properly support cloning enumerations.
-	 * The operation returns a reference to this <code>Enumeration</code>.
+	 * Adds an {@link EnumerationLiteral} to this <code>Enumeration</code>. This
+	 * operation is required to properly support cloning enumerations. The
+	 * operation returns a reference to this <code>Enumeration</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model required="true" literalRequired="true"
 	 * @generated
 	 */
 	Enumeration addLiteral(EnumerationLiteral literal);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Returns an {@link EnumerationLiteral} of this <code>Enumeration</code>
-	 * with the given name.
+	 * Returns an {@link EnumerationLiteral} of this <code>Enumeration</code> with
+	 * the given name.
 	 * 
 	 * It is specified as follows:
+	 * 
 	 * <pre>
 	 * context Enumeration
 	 * def: lookupLiteral(name : String) : EnumerationLiteral =
 	 *    self.ownedLiteral->any(l | l.name = name)
 	 * </pre>
+	 * 
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model nameDataType="tudresden.ocl20.pivot.datatypes.String"
 	 * @generated
 	 */

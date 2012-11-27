@@ -72,16 +72,17 @@ public abstract class AbstractType extends TypeImpl implements Type {
 	 */
 	@Override
 	public final List<Property> getOwnedProperty() {
-		List<Property> ownedProperty = new BasicInternalEList<Property>(
-				Property.class);
+
+		List<Property> ownedProperty =
+				new BasicInternalEList<Property>(Property.class);
 		ownedProperty.addAll(getOwnedPropertyGen());
 		ownedProperty.addAll(getOwnedPropertyImpl());
 		return ownedProperty;
 	}
 
 	/**
-	 * Subclasses should return a list of adapters for the properties owned by
-	 * the adapted <code>Type</code>.
+	 * Subclasses should return a list of adapters for the properties owned by the
+	 * adapted <code>Type</code>.
 	 * 
 	 * @return
 	 */
@@ -93,6 +94,7 @@ public abstract class AbstractType extends TypeImpl implements Type {
 	 */
 	@Override
 	public final List<Operation> getOwnedOperation() {
+
 		List<Operation> ownedOperation = new BasicEList<Operation>();
 		ownedOperation.addAll(getOwnedOperationGen());
 		ownedOperation.addAll(getOwnedOperationImpl());
@@ -100,8 +102,8 @@ public abstract class AbstractType extends TypeImpl implements Type {
 	}
 
 	/**
-	 * Subclasses should return a list of adapters for the operations owned by
-	 * the adapted <code>Type</code>.
+	 * Subclasses should return a list of adapters for the operations owned by the
+	 * adapted <code>Type</code>.
 	 * 
 	 * @return
 	 */

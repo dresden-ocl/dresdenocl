@@ -28,8 +28,8 @@ import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
 import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -90,6 +90,13 @@ public class TestProperty {
 
 	/** A {@link Property} of the current {@link IModel} under test. */
 	private static Property nonuniqueMultipleProperty;
+	
+	/** A {@link Property} of the current {@link IModel} under test. */
+	private static Property identifierProperty;
+
+	/** A {@link Property} of the current {@link IModel} under test. */
+	private static Property nonidentifierProperty;
+	
 
 	/**
 	 * <p>
@@ -132,7 +139,13 @@ public class TestProperty {
 				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_UNIQUEMULTIPLEASSOCIATONEND);
 		nonuniqueMultipleAssociationEnd = testPropertyClass
 				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_NONUNIQUEMULTIPLEASSOCIATONEND);
+		
 
+		identifierProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_IDENTIFIER);
+		nonidentifierProperty = testPropertyClass
+				.lookupProperty(MetaModelTestServices.PROPERTY_NAME_NONIDENTIFIER);
+		
 		if (associationEnd1 == null || orderedMultipleAssociationEnd == null
 				|| unorderedMultipleAssociationEnd == null
 				|| uniqueMultipleAssociationEnd == null
@@ -363,7 +376,7 @@ public class TestProperty {
 			msg += " or the Type of Class3.associationEnd1 is not set in the model.";
 
 			/* The property must have the same type as in the model. */
-			assertEquals(class1, associationEnd1.getType());
+			assertEquals(msg,class1, associationEnd1.getType());
 		}
 		// no else.
 	}
@@ -695,6 +708,52 @@ public class TestProperty {
 			/* The property must not be static. */
 			assertTrue(msg, staticAssociationEnd.isStatic());
 		}
+		// no else.
+	}
+	
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#isIdentifier()}.
+	 * </p>
+	 */
+	@Test
+	public void testIdentifier1() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations.
+		 */
+		if (identifierProperty != null) {
+
+			String msg = "The adaptation of Property.isIdentifier() seems to be wrong value for identifier property.";
+
+			/* The property must have been found by the given name. */
+			assertTrue(
+					msg, identifierProperty.isIdentifier());
+		}
+		// no else.
+	}
+	
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Property#isIdentifier()}.
+	 * </p>
+	 */
+	@Test
+	public void testIdentifier2() {
+
+		/*
+		 * Only execute this test if the current model under test supports
+		 * associations.
+		 */
+		if (nonidentifierProperty != null) {
+
+			String msg = "The adaptation of Property.isIdentifier() seems to be wrong value for non identifier property.";
+
+			/* The property must have been found by the given name. */
+			assertFalse(
+					msg, nonidentifierProperty.isIdentifier());
+		} 
 		// no else.
 	}
 }

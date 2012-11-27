@@ -32,170 +32,125 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
 
 /**
  * <p>
- * An implementation of the Pivot Model {@link Type} concept for Ecore.
+ * An implementation of the Pivot Model {@link Property} concept for Ecore.
  * </p>
  * 
  * @author Matthias Braeuer
+ * @uauthor Bjoern Freitag
  */
-public class EcoreType extends AbstractType implements Type {
-
-	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EcoreMetamodelPlugin.getLogger(EcoreType.class);
-
-	/** The adapted {@link EClass}. */
-	private EClass eClass;
+public class EcoreReference extends EcoreProperty implements AssociationProperty {
 
 	/**
 	 * <p>
-	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * Logger for this class
 	 * </p>
+	 * 
+	 * @generated NOT
 	 */
-	private EcoreAdapterFactory factory;
+	private static final Logger LOGGER =
+			EcoreMetamodelPlugin.getLogger(EcoreReference.class);
+	
+	/**
+	 * 
+	 * @generated NOT
+	 */
+	private List<AssociationProperty> inverseAssociationProperties;
 	
 	/**
 	 * <p>
-	 * Creates a new {@link EcoreType} instance.
+	 * Creates a new {@link EcoreReference} instance.
 	 * </p>
 	 * 
-	 * @param eClass
-	 *          The adapted {@link EClass}.
+	 * @param eStructuralFeature
+	 *            The adapted {@link EAttribute} or {@link EReference}.
 	 * @param factory
 	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreType(EClass eClass,EcoreAdapterFactory factory) {
+	public EcoreReference(EStructuralFeature eStructuralFeature,EcoreAdapterFactory factory) {
 
+		super(eStructuralFeature, factory);
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "EcoreType(";
-			msg += "eClass = " + eClass;
+			msg = "EcoreProperty(";
+			msg += "eStructuralFeature = " + eStructuralFeature;
 			msg += ") - enter";
 
 			LOGGER.debug(msg); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
-
-		/* Initialize adapted EClass. */
-		this.eClass = eClass;
-		this.factory = factory;
+	
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "EcoreType() - exit";
+			msg = "EcoreProperty() - exit";
 
 			LOGGER.debug(msg); //$NON-NLS-1$
 		}
 		// no else.
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
-	 */
 	@Override
-	public String getName() {
-
-		return this.eClass.getName();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
-	 */
-	@Override
-	public Namespace getNamespace() {
-
-		return factory.createNamespace(this.eClass
-				.getEPackage());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl ()
-	 */
-	@Override
-	protected List<Operation> getOwnedOperationImpl() {
-
-		List<Operation> result;
-
-		result = new BasicEList<Operation>();
-
-		for (EOperation eOperation : this.eClass.getEOperations()) {
-			result.add(factory.createOperation(eOperation));
+	public List<AssociationProperty> getInverseAssociationProperties() {
+		if (this.inverseAssociationProperties == null) {
+			this.inverseAssociationProperties = new LinkedList<AssociationProperty>();
 		}
-
-		return result;
+		return this.inverseAssociationProperties;
+	}
+	@Override
+	public void addAssociation(AssociationProperty bProperty) {
+		if (!isInverseAssociation(bProperty) && bProperty != this && bProperty != null) getInverseAssociationProperties().add(bProperty);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
-	 */
 	@Override
-	protected List<Property> getOwnedPropertyImpl() {
-
-		List<Property> result;
-
-		result = new ArrayList<Property>();
-
-		for (EStructuralFeature eStructuralFeature : this.eClass
-				.getEStructuralFeatures()) {
-			result.add(factory
-					.createProperty(eStructuralFeature));
+	public AssociationProperty getAssociation(String propName) {
+		AssociationProperty property = null;
+		for (AssociationProperty prop : getInverseAssociationProperties()) {
+			if (prop.getName().equals(propName)) {
+				property = prop;
+				break;
+			}
 		}
-
-		return result;
+		return property;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
-	 */
 	@Override
-	protected List<Type> getSuperTypeImpl() {
+	public void removeAssociation(AssociationProperty bProperty) {
+		this.getInverseAssociationProperties().remove(bProperty);	
+	}
 
-		List<Type> result;
+	@Override
+	public boolean isInverseAssociation(AssociationProperty bProperty) {
+		return getInverseAssociationProperties().contains(bProperty);
+	}
 
-		result = new ArrayList<Type>();
-
-		for (EClass eSuperType : this.eClass.getESuperTypes()) {
-			result.add(factory.createType(eSuperType));
+	@Override
+	public void addAssociations(List<AssociationProperty> bProperty) {
+		for (AssociationProperty prob : bProperty) {
+			addAssociation(prob);
 		}
-
-		return result;
+		
 	}
 
-	/* (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getIDProperties()
-	 */
 	@Override
-	public List<Property> getIDProperties() {
-		if (eClass.getEIDAttribute() == null) return super.getIDProperties();
-		List<Property> props = new ArrayList<Property>();
-		props.add(factory.createProperty(eClass.getEIDAttribute()));
-		return props;
+	public boolean isNavigable() {
+		return true;
 	}
+
 }

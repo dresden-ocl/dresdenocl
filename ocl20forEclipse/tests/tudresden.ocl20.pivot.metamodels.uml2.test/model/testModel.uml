@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="package1">
+<uml:Package xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="package1">
   <elementImport xmi:id="_BzbGEGZfEd6kutRb95dOwQ">
     <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
   </elementImport>
@@ -109,6 +109,12 @@
     </ownedAttribute>
     <ownedAttribute xmi:id="_GL666mZgEd6kutRb95dOwQ" name="nonuniqueMultipleProperty" type="_HtPiAFjeEd6lGdDGCz3Giw" isUnique="false">
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GL6662ZgEd6kutRb95dOwQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_0BV5gDifEeK6pbbHSYboWw" name="identifierProperty" isID="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_CMaREDigEeK6pbbHSYboWw" name="nonidentifierProperty">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_bY82AGCREd6dPvgh_DkPIw" name="" memberEnd="_bY82AWCREd6dPvgh_DkPIw _EVL4EGCUEd6dPvgh_DkPIw" navigableOwnedEnd="_bY82AWCREd6dPvgh_DkPIw _EVL4EGCUEd6dPvgh_DkPIw">

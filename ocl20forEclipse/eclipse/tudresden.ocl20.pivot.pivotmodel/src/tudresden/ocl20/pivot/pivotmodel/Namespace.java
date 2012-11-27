@@ -38,24 +38,27 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Namespace</b></em>'. <!-- end-user-doc -->
- *
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Namespace</code> is a container for types and 
- * other namespaces.
+ * A <code>Namespace</code> is a container for types and other namespaces.
  * </p>
  * <!-- end-model-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType <em>Owned Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule <em>Owned Rule</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace <em>Nested Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace <em>Nesting Namespace</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType <em>Owned
+ * Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule <em>Owned
+ * Rule</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace <em>
+ * Nested Namespace</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+ * <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace()
  * @model
  * @generated
@@ -101,16 +104,20 @@ public interface Namespace extends NamedElement, GenericElement {
 	List<Type> getOwnedType();
 
 	/**
-	 * Returns the value of the '<em><b>Nested Namespace</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.Namespace}.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace <em>Nesting Namespace</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Nested Namespace</b></em>' containment
+	 * reference list. The list contents are of type
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace}. It is bidirectional and
+	 * its opposite is '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * <em>Nesting Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * This is the set of namespaces contained in this namespace.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Nested Namespace</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Nested Namespace</em>' containment reference
+	 *         list.
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace_NestedNamespace()
 	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
 	 * @model opposite="nestingNamespace" containment="true"
@@ -119,15 +126,17 @@ public interface Namespace extends NamedElement, GenericElement {
 	List<Namespace> getNestedNamespace();
 
 	/**
-	 * Returns the value of the '<em><b>Nesting Namespace</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace <em>Nested Namespace</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Nesting Namespace</b></em>' container
+	 * reference. It is bidirectional and its opposite is '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace
+	 * <em>Nested Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
-	 * This specifies the <code>Namespace</code> that is the 
-	 * owner of this namespace.
+	 * This specifies the <code>Namespace</code> that is the owner of this
+	 * namespace.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Nesting Namespace</em>' container reference.
 	 * @see #setNestingNamespace(Namespace)
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace_NestingNamespace()
@@ -138,10 +147,14 @@ public interface Namespace extends NamedElement, GenericElement {
 	Namespace getNestingNamespace();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace <em>Nesting Namespace</em>}' container reference.
-	 * <!-- begin-user-doc -->
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * <em>Nesting Namespace</em>}' container reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Nesting Namespace</em>' container reference.
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Nesting Namespace</em>' container
+	 *          reference.
 	 * @see #getNestingNamespace()
 	 * @generated
 	 */
@@ -251,23 +264,24 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * </p>
 	 * 
 	 * @return <code>true</code> if the {@link Constraint}s have been removed.
-	 * <!-- end-model-doc -->
+	 *         <!-- end-model-doc -->
 	 * @generated
 	 */
 	boolean removeOwnedAndNestedRules();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Removes all {@link Constraint}s that are owned by this or any nested {@link Namespace} and contained in the given {@link Collection}.
+	 * Removes all {@link Constraint}s that are owned by this or any nested
+	 * {@link Namespace} and contained in the given {@link Collection}.
 	 * </p>
 	 * 
-	 * @param constraints The {@link Constraint}s that shall be removed.
+	 * @param constraints
+	 *          The {@link Constraint}s that shall be removed.
 	 * @return <code>true</code> if the {@link Constraint}s have been removed.
-	 * <!-- end-model-doc -->
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true" constraintsMany="true"
+	 *         <!-- end-model-doc -->
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
+	 *        constraintsMany="true"
 	 * @generated
 	 */
 	boolean removeOwnedAndNestedRules(List<Constraint> constraints);

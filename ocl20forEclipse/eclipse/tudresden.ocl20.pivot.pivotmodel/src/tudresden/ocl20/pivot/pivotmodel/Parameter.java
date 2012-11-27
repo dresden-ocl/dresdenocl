@@ -33,24 +33,25 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Parameter</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Parameter</b></em>'. <!-- end-user-doc -->
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Parameter</code> is a specification of an argument used to pass information into or out of an invocation of an {@link Operation}.
+ * A <code>Parameter</code> is a specification of an argument used to pass
+ * information into or out of an invocation of an {@link Operation}.
  * </p>
  * <!-- end-model-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation <em>Operation</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation <em>
+ * Operation</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter()
  * @model
  * @generated
@@ -58,16 +59,16 @@ package tudresden.ocl20.pivot.pivotmodel;
 public interface Parameter extends TypedElement, NamedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
-	 * The default value is <code>"in"</code>.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute. The default
+	 * value is <code>"in"</code>. The literals are from the enumeration
+	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind}. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Specifies the {@link ParameterDirectionKind direction kind} of this <code>Parameter</code>.
+	 * Specifies the {@link ParameterDirectionKind direction kind} of this
+	 * <code>Parameter</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
 	 * @see #setKind(ParameterDirectionKind)
@@ -78,10 +79,12 @@ public interface Parameter extends TypedElement, NamedElement {
 	ParameterDirectionKind getKind();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
 	 * @see #getKind()
 	 * @generated
@@ -90,14 +93,15 @@ public interface Parameter extends TypedElement, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Operation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter <em>Owned Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * It is bidirectional and its opposite is '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter
+	 * <em>Owned Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * References the {@link Operation} for which this is a formal parameter.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Operation</em>' container reference.
 	 * @see #setOperation(Operation)
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter_Operation()
@@ -108,23 +112,28 @@ public interface Parameter extends TypedElement, NamedElement {
 	Operation getOperation();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation <em>Operation</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Operation</em>' container reference.
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation
+	 * <em>Operation</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Operation</em>' container reference.
 	 * @see #getOperation()
 	 * @generated
 	 */
 	void setOperation(Operation value);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * This is an additional operation defined in the OCL specification (Section 8.3.8). It results in a {@link Property} that has the same name, type, etc. as the parameter. This is necessary, for instance, to create tuple types from the out parameters of an {@link Operation}.
+	 * This is an additional operation defined in the OCL specification (Section
+	 * 8.3.8). It results in a {@link Property} that has the same name, type, etc.
+	 * as the parameter. This is necessary, for instance, to create tuple types
+	 * from the out parameters of an {@link Operation}.
 	 * 
 	 * The operation is specified as:
+	 * 
 	 * <pre>
 	 * context Parameter::asProperty(): Property
 	 *    pre: -- none
@@ -135,8 +144,10 @@ public interface Parameter extends TypedElement, NamedElement {
 	 *    post: result.isUnique = self.isUnique
 	 *    post: result.isStatic = false
 	 * </pre>
+	 * 
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */

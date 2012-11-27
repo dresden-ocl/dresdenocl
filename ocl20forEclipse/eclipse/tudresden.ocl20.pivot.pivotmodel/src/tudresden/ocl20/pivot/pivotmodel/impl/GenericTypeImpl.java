@@ -45,11 +45,11 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Generic Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Generic Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class GenericTypeImpl extends NamedElementImpl implements
@@ -62,6 +62,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected GenericTypeImpl() {
@@ -70,9 +71,11 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * Overridden to return the EMF container reference. This will either be a {@link TypedElement} or
-	 * a {@link Type}, depending on whether this <code>GenericType</code> is used as a generic type
-	 * for a <code>TypedElement</code> or as a generic super type of a <code>Type</code>.
+	 * Overridden to return the EMF container reference. This will either be a
+	 * {@link TypedElement} or a {@link Type}, depending on whether this
+	 * <code>GenericType</code> is used as a generic type for a
+	 * <code>TypedElement</code> or as a generic super type of a <code>Type</code>
+	 * .
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -84,8 +87,8 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * Overridden to prevent setting the name for the GenericType. This method will throw an
-	 * {@link UnsupportedOperationException}.
+	 * Overridden to prevent setting the name for the GenericType. This method
+	 * will throw an {@link UnsupportedOperationException}.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
@@ -98,13 +101,18 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * This method checks the input parameters and delegates to {@link #doBindGenericType(List, List)}.
+	 * This method checks the input parameters and delegates to
+	 * {@link #doBindGenericType(List, List)}.
 	 * 
-	 * @param parameters the type parameters to be bound
-	 * @param types the types for binding
-	 * @param typedElement the <code>TypedElement</code> whose type should be bound
+	 * @param parameters
+	 *          the type parameters to be bound
+	 * @param types
+	 *          the types for binding
+	 * @param typedElement
+	 *          the <code>TypedElement</code> whose type should be bound
 	 * 
-	 * @return the given <code>TypedElement</code>, either with a bound type or unchanged
+	 * @return the given <code>TypedElement</code>, either with a bound type or
+	 *         unchanged
 	 * 
 	 * @see GenericType#bindGenericType(List, List, TypedElement)
 	 * 
@@ -129,7 +137,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 		return success;
 	}
 
-	/**
+/**
 	 * This method checks the input parameters and delegates to
 	 * {@link #doBindGenericSuperType(List, List, Type).
 	 * 
@@ -182,7 +190,8 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	public abstract boolean isConformant(Type type);
 
 	/**
-	 * Overridden to set the covariant return type. The actual implementation is left to subclasses.
+	 * Overridden to set the covariant return type. The actual implementation is
+	 * left to subclasses.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
 	 */
@@ -190,9 +199,9 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	public abstract GenericType clone();
 
 	/**
-	 * The EMF implementation is adapted to prevent that the name of the generic type is serialized to
-	 * XMI. This is necessary to prevent setting the name upon loading the document which would throw
-	 * an exception.
+	 * The EMF implementation is adapted to prevent that the name of the generic
+	 * type is serialized to XMI. This is necessary to prevent setting the name
+	 * upon loading the document which would throw an exception.
 	 * 
 	 * @generated NOT
 	 * 
@@ -210,6 +219,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

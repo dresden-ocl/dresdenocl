@@ -45,22 +45,24 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Primitive Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Primitive Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind
+ * <em>Kind</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
-	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -68,8 +70,9 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	protected static final PrimitiveTypeKind KIND_EDEFAULT =
 			PrimitiveTypeKind.UNKNOWN;
 	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -78,6 +81,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PrimitiveTypeImpl() {
@@ -94,12 +98,13 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * 
 	 * <p>
 	 * More precisely, two primitive types conform to each other if their
-	 * <code>kind</code> is equal. Furthermore, we implement the special rule
-	 * that a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
+	 * <code>kind</code> is equal. Furthermore, we implement the special rule that
+	 * a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
 	 * conforms to one with kind {@link PrimitiveTypeKind#REAL REAL}.
 	 * </p>
 	 * 
-	 * @param other the other type
+	 * @param other
+	 *          the other type
 	 * 
 	 * @return <code>true</code> if this type conforms to the other,
 	 *         <code>false</code> otherwise
@@ -132,6 +137,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public PrimitiveTypeKind getKind() {
@@ -141,6 +147,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKind(PrimitiveTypeKind newKind) {
@@ -154,7 +161,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
 	 */
 	@Override
@@ -177,6 +183,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -191,6 +198,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -206,6 +214,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -221,6 +230,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -235,6 +245,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

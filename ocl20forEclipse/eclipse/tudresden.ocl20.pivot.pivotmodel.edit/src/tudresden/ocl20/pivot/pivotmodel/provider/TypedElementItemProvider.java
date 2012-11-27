@@ -161,8 +161,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		}
 
 		/**
-		 * Returns the normal choices (i.e, all {@link Type}s in the model) as
-		 * well as the {@link TypeParameter}s of all owning elements.
+		 * Returns the normal choices (i.e, all {@link Type}s in the model) as well
+		 * as the {@link TypeParameter}s of all owning elements.
 		 * 
 		 * @see org.eclipse.emf.edit.provider.ItemPropertyDescriptor#getChoiceOfValues(java.lang.Object)
 		 */
@@ -241,9 +241,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		}
 
 		/**
-		 * Helper method that sets the generic type on a {@link TypedElement}.
-		 * Uses a <code>SetCommand</code> for this purpose so the action can be
-		 * undone.
+		 * Helper method that sets the generic type on a {@link TypedElement}. Uses
+		 * a <code>SetCommand</code> for this purpose so the action can be undone.
 		 * 
 		 * @param genericType
 		 */
@@ -268,8 +267,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * Overridden to return the type arguments of the generic type of the
-	 * adapted {@link TypedElement}.
+	 * Overridden to return the type arguments of the generic type of the adapted
+	 * {@link TypedElement}.
 	 * 
 	 * @see org.eclipse.emf.edit.provider.ItemProviderAdapter#getChildren(java.lang.Object)
 	 */
@@ -327,8 +326,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		typedElement = (TypedElement) object;
 
 		/*
-		 * Initialize with the name of the typed element determined by
-		 * subclasses.
+		 * Initialize with the name of the typed element determined by subclasses.
 		 */
 		typedElementName = this.getTypedElementName(typedElement);
 
@@ -352,12 +350,12 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This method can be overridden in subclasses to specify the rendering of
-	 * the name of the {@link TypedElement}. This default implementation simply
+	 * This method can be overridden in subclasses to specify the rendering of the
+	 * name of the {@link TypedElement}. This default implementation simply
 	 * returns the name of the <code>TypedElement</code> unchanged.
 	 * 
 	 * @param typedElement
-	 *            the <code>TypedElement</code> instance
+	 *          the <code>TypedElement</code> instance
 	 * 
 	 * @return a <code>String</code> with the name of the
 	 *         <code>TypedElement</code>
@@ -374,7 +372,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * neither a type nor a generic type is set, the empty string is returned.
 	 * 
 	 * @param typedElement
-	 *            the <code>TypedElement</code> instance
+	 *          the <code>TypedElement</code> instance
 	 * 
 	 * @return a <code>String</code> representing the type of the
 	 *         <code>TypedElement</code>
@@ -392,7 +390,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * if the type, but subclasses may override to provide a custom rendering.
 	 * 
 	 * @param type
-	 *            the <code>Type</code>, guaranteed not to be <code>null</code>
+	 *          the <code>Type</code>, guaranteed not to be <code>null</code>
 	 * 
 	 * @return a formatted name for the type
 	 */
@@ -407,8 +405,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * {@link GenericTypeItemProvider#getText()} for determining the rendering.
 	 * 
 	 * @param genericType
-	 *            the <code>GenericType</code>, guaranteed not to be
-	 *            <code>null</code>
+	 *          the <code>GenericType</code>, guaranteed not to be
+	 *          <code>null</code>
 	 * 
 	 * @return a formatted name for the generic type
 	 */
@@ -418,10 +416,11 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -440,9 +439,9 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing the children that can be created under this object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */

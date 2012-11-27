@@ -70,6 +70,9 @@ public class TestType {
 
 	/** A {@link Namespace} of the current {@link IModel} under test. */
 	private static Namespace package1;
+	
+	/** A {@link Property} of the current {@link IModel} under test. */
+	private static Property identifierProperty;
 
 	/**
 	 * <p>
@@ -94,6 +97,8 @@ public class TestType {
 
 		interface2 = MetaModelTestServices.getInstance().getTypeUnderTest(
 				MetaModelTestServices.TYPE_QUALIFIED_NAME_TESTTYPEINTERFACE2);
+		
+		identifierProperty = class3.lookupProperty(MetaModelTestServices.PROPERTY_NAME_IDENTIFIER);
 
 		if (interface1 == null || interface2 == null) {
 
@@ -563,6 +568,7 @@ public class TestType {
 		/* Property2 should be found. */
 		assertTrue(msg, foundProperty2);
 	}
+	
 
 	/**
 	 * <p>
@@ -623,6 +629,22 @@ public class TestType {
 		String msg = "The adaptation of Type.getOwnedProperty() seems to be wrong. Result should be an EList.";
 
 		assertTrue(msg, class1.getOwnedProperty() instanceof EList);
+	}
+	
+	/**
+	 * <p>
+	 * A test case testing the operation {@link Type#getIDProperties()}.
+	 * </p>
+	 */
+	@Test
+	public void testGetIDProperties() {
+
+		String msg = "The adaptation of Type.getIDProperties() seems to be wrong. Result should be contains one element";
+
+		if (identifierProperty != null) {
+			assertEquals(msg,1,class3.getIDProperties().size());
+			assertTrue(msg,class3.getIDProperties().contains(identifierProperty));
+		}
 	}
 
 	/**

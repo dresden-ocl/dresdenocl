@@ -54,88 +54,99 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  */
 public class GenericElements {
 
-  /**
-   * This class is not meant to be instantiated.
-   */
-  private GenericElements() {
-    // no implementation necessary
-  }
+	/**
+	 * This class is not meant to be instantiated.
+	 */
+	private GenericElements() {
 
-  /**
-   * Checks the parameters for a binding and throws an exception if they are not
-   * valid.
-   * 
-   * @param parameters the list of type parameters
-   * @param types the list of types
-   */
-  public static void checkBindingParameters(List<TypeParameter> parameters,
-      List<? extends Type> types) {
+		// no implementation necessary
+	}
 
-    if (parameters == null || types == null) {
-      throw new NullArgumentException("parameters or types"); //$NON-NLS-1$
-    }
+	/**
+	 * Checks the parameters for a binding and throws an exception if they are not
+	 * valid.
+	 * 
+	 * @param parameters
+	 *          the list of type parameters
+	 * @param types
+	 *          the list of types
+	 */
+	public static void checkBindingParameters(List<TypeParameter> parameters,
+			List<? extends Type> types) {
 
-    if (parameters.size() != types.size()) {
-      throw new IllegalArgumentException(
-          "The list of type parameters must have the same size as the list of types."); //$NON-NLS-1$
-    }
+		if (parameters == null || types == null) {
+			throw new NullArgumentException("parameters or types"); //$NON-NLS-1$
+		}
 
-    if (parameters.contains(null) || types.contains(null)) {
-      throw new IllegalArgumentException(
-          "The lists with type parameters and types must not contain null values."); //$NON-NLS-1$
-    }
+		if (parameters.size() != types.size()) {
+			throw new IllegalArgumentException(
+					"The list of type parameters must have the same size as the list of types."); //$NON-NLS-1$
+		}
 
-  }
+		if (parameters.contains(null) || types.contains(null)) {
+			throw new IllegalArgumentException(
+					"The lists with type parameters and types must not contain null values."); //$NON-NLS-1$
+		}
 
-  /**
-   * Returns whether the given {@link TypedElement typed element} has a generic
-   * type amd no non-generic type. In other words, determines whether the typed
-   * element should be bound during a generic binding.
-   * 
-   * @param typedElement the typed element
-   * 
-   * @return <code>true</code> if the typed element has a <code>null</code>
-   *         type and a non-<code>null</code> generic type
-   */
-  public static boolean isGeneric(TypedElement typedElement) {
-    return typedElement.getType() == null
-        && typedElement.getGenericType() != null;
-  }
+	}
 
-  /**
-   * Helper method that binds a {@link TypedElement}..
-   * 
-   * @param typedElement the typed element
-   * @param parameters the type parameters to bind
-   * @param types the types to bind to the type parameters
-   */
-  public static void bindTypedElement(TypedElement typedElement,
-      List<TypeParameter> parameters, List<? extends Type> types) {
+	/**
+	 * Returns whether the given {@link TypedElement typed element} has a generic
+	 * type amd no non-generic type. In other words, determines whether the typed
+	 * element should be bound during a generic binding.
+	 * 
+	 * @param typedElement
+	 *          the typed element
+	 * 
+	 * @return <code>true</code> if the typed element has a <code>null</code> type
+	 *         and a non-<code>null</code> generic type
+	 */
+	public static boolean isGeneric(TypedElement typedElement) {
 
-    if (isGeneric(typedElement)) {
-      typedElement.getGenericType().bindGenericType(parameters, types,
-          typedElement);
-    }
+		return typedElement.getType() == null
+				&& typedElement.getGenericType() != null;
+	}
 
-  }
+	/**
+	 * Helper method that binds a {@link TypedElement}..
+	 * 
+	 * @param typedElement
+	 *          the typed element
+	 * @param parameters
+	 *          the type parameters to bind
+	 * @param types
+	 *          the types to bind to the type parameters
+	 */
+	public static void bindTypedElement(TypedElement typedElement,
+			List<TypeParameter> parameters, List<? extends Type> types) {
 
-  /**
-   * Helper method to bind an operation.
-   * 
-   * @param operation the operation to bind
-   * @param parameters the type parameters to bind
-   * @param types the types to bind to the type parameters
-   */
-  public static void bindOperation(Operation operation,
-      List<TypeParameter> parameters, List<? extends Type> types) {
+		if (isGeneric(typedElement)) {
+			typedElement.getGenericType().bindGenericType(parameters, types,
+					typedElement);
+		}
 
-    // bind the parameters of the operation
-    for (Parameter parameter : operation.getOwnedParameter()) {
-      GenericElements.bindTypedElement(parameter, parameters, types);
-    }
+	}
 
-    // bind the type of the operation
-    GenericElements.bindTypedElement(operation, parameters, types);
+	/**
+	 * Helper method to bind an operation.
+	 * 
+	 * @param operation
+	 *          the operation to bind
+	 * @param parameters
+	 *          the type parameters to bind
+	 * @param types
+	 *          the types to bind to the type parameters
+	 */
+	public static void bindOperation(Operation operation,
+			List<TypeParameter> parameters, List<? extends Type> types) {
 
-  }
+		// bind the parameters of the operation
+		for (Parameter parameter : operation.getOwnedParameter()) {
+			GenericElements.bindTypedElement(parameter, parameters, types);
+		}
+
+		// bind the type of the operation
+		GenericElements.bindTypedElement(operation, parameters, types);
+
+	}
 }

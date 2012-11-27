@@ -57,18 +57,21 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind <em>Kind</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getOperation <em>Operation</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind <em>
+ * Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getOperation
+ * <em>Operation</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
-	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -77,8 +80,9 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 			ParameterDirectionKind.IN;
 
 	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -87,6 +91,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ParameterImpl() {
@@ -96,6 +101,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -171,6 +177,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ParameterDirectionKind getKind() {
@@ -180,6 +187,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKind(ParameterDirectionKind newKind) {
@@ -193,6 +201,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Operation getOperation() {
@@ -204,6 +213,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOperation(Operation newOperation,
@@ -217,6 +227,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOperation(Operation newOperation) {
@@ -289,6 +300,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -306,6 +318,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -321,6 +334,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -337,6 +351,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -353,6 +368,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -371,6 +387,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -389,6 +406,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -404,10 +422,10 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	}
 
 	/**
-	 * Changed EMF implementation in order to use a consistent style. In
-	 * addition, the getter methods are used to get attribute values. This is
-	 * important if repository-specific subclasses have alternative ways of
-	 * obtaining their attribute values.
+	 * Changed EMF implementation in order to use a consistent style. In addition,
+	 * the getter methods are used to get attribute values. This is important if
+	 * repository-specific subclasses have alternative ways of obtaining their
+	 * attribute values.
 	 * 
 	 * @generated NOT
 	 */

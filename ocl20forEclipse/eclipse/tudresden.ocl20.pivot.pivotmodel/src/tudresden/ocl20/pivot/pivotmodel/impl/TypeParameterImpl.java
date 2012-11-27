@@ -46,15 +46,17 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Parameter</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Type Parameter</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl#getGenericElement <em>Generic Element</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl#getGenericElement
+ * <em>Generic Element</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeParameterImpl extends NamedElementImpl implements
@@ -62,6 +64,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TypeParameterImpl() {
@@ -71,6 +74,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -81,6 +85,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public GenericElement getGenericElement() {
@@ -92,6 +97,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetGenericElement(
@@ -105,6 +111,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setGenericElement(GenericElement newGenericElement) {
@@ -158,24 +165,23 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * Helper method that returns a name useful for identifying this
-	 * <code>TypeParameter</code>. This method is used by
-	 * {@link #equals(Object)} and {@link #hashCode()} when determining the
-	 * equality with another <code>TypeParameter</code>. This is important in
-	 * the context of
-	 * {@link GenericElement#bindTypeParameter(java.util.List, java.util.List) binding}
-	 * the type parameters of a {@link GenericElement generic element}. The name
-	 * alone is not enough for this purpose, since two different type parameters
-	 * may have the same name. However, the full
+	 * <code>TypeParameter</code>. This method is used by {@link #equals(Object)}
+	 * and {@link #hashCode()} when determining the equality with another
+	 * <code>TypeParameter</code>. This is important in the context of
+	 * {@link GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * binding} the type parameters of a {@link GenericElement generic element}.
+	 * The name alone is not enough for this purpose, since two different type
+	 * parameters may have the same name. However, the full
 	 * {@link #getQualifiedName() qualified name} is not helpful either.
 	 * 
 	 * <p>
 	 * To see why, consider that generic elements are cloned before they are
 	 * bound. However, they are not added to the original element's namespace.
 	 * Thus, their fully qualified name (and that of the owned
-	 * <code>TypeParameter</code>s) will be different. During binding, this
-	 * would prevent recognizing two <code>TypeParameter</code>s as equal and
-	 * therefore hinder binding. Thus, changing the qualified name to only include
-	 * the parent solves this problem.
+	 * <code>TypeParameter</code>s) will be different. During binding, this would
+	 * prevent recognizing two <code>TypeParameter</code>s as equal and therefore
+	 * hinder binding. Thus, changing the qualified name to only include the
+	 * parent solves this problem.
 	 * </p>
 	 * 
 	 * <p>
@@ -192,6 +198,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -209,6 +216,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -224,6 +232,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -241,6 +250,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -255,6 +265,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -270,6 +281,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -285,6 +297,7 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -321,7 +334,8 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * the name of their owning generic element are equal. See
 	 * {@link #getIdentifyingName()} for more details.
 	 * 
-	 * @param obj the other object
+	 * @param obj
+	 *          the other object
 	 * 
 	 * @return <code>true</code> if the other object is a
 	 *         <code>TypeParameter</code> with the same name and equally-named

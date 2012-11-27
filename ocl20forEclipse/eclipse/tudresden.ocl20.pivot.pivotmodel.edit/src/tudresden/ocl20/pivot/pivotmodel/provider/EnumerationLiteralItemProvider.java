@@ -43,11 +43,13 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class EnumerationLiteralItemProvider extends NamedElementItemProvider
@@ -55,9 +57,9 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EnumerationLiteralItemProvider(AdapterFactory adapterFactory) {
@@ -66,9 +68,9 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -82,9 +84,9 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This returns EnumerationLiteral.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns EnumerationLiteral.gif. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -95,7 +97,8 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * Overridden to simply use the super{@link #getText(Object) super implementation}.
+	 * Overridden to simply use the super{@link #getText(Object) super
+	 * implementation}.
 	 * 
 	 * @generated NOT
 	 */
@@ -106,10 +109,11 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -120,10 +124,10 @@ public class EnumerationLiteralItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

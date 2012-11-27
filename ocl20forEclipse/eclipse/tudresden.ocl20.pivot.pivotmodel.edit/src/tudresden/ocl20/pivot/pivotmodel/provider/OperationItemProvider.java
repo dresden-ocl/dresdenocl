@@ -57,8 +57,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Operation} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.Operation} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class OperationItemProvider extends FeatureItemProvider implements
@@ -66,9 +68,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public OperationItemProvider(AdapterFactory adapterFactory) {
@@ -77,9 +79,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -97,9 +99,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Input Parameter feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Input Parameter feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addInputParameterPropertyDescriptor(Object object) {
@@ -117,9 +119,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Output Parameter feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Output Parameter feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addOutputParameterPropertyDescriptor(Object object) {
@@ -137,9 +139,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Return Parameter feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Return Parameter feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addReturnParameterPropertyDescriptor(Object object) {
@@ -157,9 +159,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Signature Parameter feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Signature Parameter feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addSignatureParameterPropertyDescriptor(Object object) {
@@ -177,11 +179,12 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
-	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * This specifies how to implement {@link #getChildren} and is used to deduce
+	 * an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -201,20 +204,22 @@ public class OperationItemProvider extends FeatureItemProvider implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Operation.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns Operation.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@Override
@@ -241,8 +246,8 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * The EMF-generated code is extended to simply call
-	 * {@link super#getText(Object) the super implementation}.
+	 * The EMF-generated code is extended to simply call {@link
+	 * super#getText(Object) the super implementation}.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -254,8 +259,9 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * Overridden to return the name of the operation and a list of parameters. If the operation is
-	 * generic, it will also prepend any type parameters in analogy to Java generics.
+	 * Overridden to return the name of the operation and a list of parameters. If
+	 * the operation is generic, it will also prepend any type parameters in
+	 * analogy to Java generics.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypedElementItemProvider#getTypedElementName(tudresden.ocl20.pivot.pivotmodel.TypedElement)
 	 */
@@ -311,14 +317,16 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * The EMF implementation is altered here to send content refresh and label refresh notifications
-	 * if the owned parameters or the (generic) type of the operation changes (an update to a
-	 * contained return parameter might be necessary). In addition, changes to the owned type
-	 * parameters should trigger a label update.
+	 * The EMF implementation is altered here to send content refresh and label
+	 * refresh notifications if the owned parameters or the (generic) type of the
+	 * operation changes (an update to a contained return parameter might be
+	 * necessary). In addition, changes to the owned type parameters should
+	 * trigger a label update.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -341,10 +349,10 @@ public class OperationItemProvider extends FeatureItemProvider implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

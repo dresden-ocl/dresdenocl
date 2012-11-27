@@ -39,25 +39,24 @@ import java.util.List;
 import org.eclipse.emf.common.util.Enumerator;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Constraint Kind</b></em>',
- * and utility methods for working with them.
- * <!-- end-user-doc -->
- * <!-- begin-model-doc -->
+ * <!-- begin-user-doc --> A representation of the literals of the enumeration '
+ * <em><b>Constraint Kind</b></em>', and utility methods for working with them.
+ * <!-- end-user-doc --> <!-- begin-model-doc -->
  * <p>
- * A <code>ConstraintKind</code> determines the semantics 
- * of a {@link Constraint}.
+ * A <code>ConstraintKind</code> determines the semantics of a
+ * {@link Constraint}.
  * </p>
  * <!-- end-model-doc -->
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraintKind()
  * @model
  * @generated
  */
 public enum ConstraintKind implements Enumerator {
 	/**
-	 * The '<em><b>Invariant</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>Invariant</b></em>' literal object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #INVARIANT_VALUE
 	 * @generated
 	 * @ordered
@@ -65,9 +64,9 @@ public enum ConstraintKind implements Enumerator {
 	INVARIANT(0, "invariant", "invariant"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Definition</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>Definition</b></em>' literal object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #DEFINITION_VALUE
 	 * @generated
 	 * @ordered
@@ -75,9 +74,9 @@ public enum ConstraintKind implements Enumerator {
 	DEFINITION(1, "definition", "definition"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Precondition</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>Precondition</b></em>' literal object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #PRECONDITION_VALUE
 	 * @generated
 	 * @ordered
@@ -85,9 +84,9 @@ public enum ConstraintKind implements Enumerator {
 	PRECONDITION(2, "precondition", "precondition"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Postcondition</b></em>' literal object.
-	 * <!-- begin-user-doc -->
+	 * The '<em><b>Postcondition</b></em>' literal object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #POSTCONDITION_VALUE
 	 * @generated
 	 * @ordered
@@ -95,9 +94,9 @@ public enum ConstraintKind implements Enumerator {
 	POSTCONDITION(3, "postcondition", "postcondition"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Initial</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>Initial</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #INITIAL_VALUE
 	 * @generated
 	 * @ordered
@@ -105,9 +104,9 @@ public enum ConstraintKind implements Enumerator {
 	INITIAL(4, "initial", "initial"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Derived</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>Derived</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #DERIVED_VALUE
 	 * @generated
 	 * @ordered
@@ -115,9 +114,9 @@ public enum ConstraintKind implements Enumerator {
 	DERIVED(5, "derived", "derived"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Body</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The '<em><b>Body</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #BODY_VALUE
 	 * @generated
 	 * @ordered
@@ -125,17 +124,16 @@ public enum ConstraintKind implements Enumerator {
 	BODY(6, "body", "body"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Invariant</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Invariant</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * An invariant constraint is linked to a {@link Type}. It 
-	 * specifies invariants for the type, i.e. boolean conditions that 
-	 * must be true upon completion of every public operation, but 
-	 * not necessarily during the execution of operations.
+	 * An invariant constraint is linked to a {@link Type}. It specifies
+	 * invariants for the type, i.e. boolean conditions that must be true upon
+	 * completion of every public operation, but not necessarily during the
+	 * execution of operations.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #INVARIANT
 	 * @model name="invariant"
 	 * @generated
@@ -144,19 +142,16 @@ public enum ConstraintKind implements Enumerator {
 	public static final int INVARIANT_VALUE = 0;
 
 	/**
-	 * The '<em><b>Definition</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Definition</b></em>' literal value. <!-- begin-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * A definition constraint is linked to a {@link Type} and is 
-	 * used to define {@link Property properties} or {@link 
-	 * Operation operations} for that type. Defining a property or 
-	 * operation this way means that every instance of the type 
-	 * holds a property or operation that conforms to the given 
-	 * definition.
+	 * A definition constraint is linked to a {@link Type} and is used to define
+	 * {@link Property properties} or {@link Operation operations} for that type.
+	 * Defining a property or operation this way means that every instance of the
+	 * type holds a property or operation that conforms to the given definition.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #DEFINITION
 	 * @model name="definition"
 	 * @generated
@@ -165,16 +160,15 @@ public enum ConstraintKind implements Enumerator {
 	public static final int DEFINITION_VALUE = 1;
 
 	/**
-	 * The '<em><b>Precondition</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Precondition</b></em>' literal value. <!-- begin-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * A precondition is a boolean expression that must be true at 
-	 * the moment when an {@link Operation} starts its execution;
-	 * otherwise, the operation will not be executed.
+	 * A precondition is a boolean expression that must be true at the moment when
+	 * an {@link Operation} starts its execution; otherwise, the operation will
+	 * not be executed.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #PRECONDITION
 	 * @model name="precondition"
 	 * @generated
@@ -183,16 +177,15 @@ public enum ConstraintKind implements Enumerator {
 	public static final int PRECONDITION_VALUE = 2;
 
 	/**
-	 * The '<em><b>Postcondition</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Postcondition</b></em>' literal value. <!-- begin-user-doc -->
+	 * <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * A postcondition is a boolean expression that must be true at 
-	 * the moment when an {@link Operation} ends its execution; 
-	 * otherwise, the operation has not executed correctly.
+	 * A postcondition is a boolean expression that must be true at the moment
+	 * when an {@link Operation} ends its execution; otherwise, the operation has
+	 * not executed correctly.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #POSTCONDITION
 	 * @model name="postcondition"
 	 * @generated
@@ -201,16 +194,14 @@ public enum ConstraintKind implements Enumerator {
 	public static final int POSTCONDITION_VALUE = 3;
 
 	/**
-	 * The '<em><b>Initial</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Initial</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * A constraint with the kind <em>initial</em> specifies the 
-	 * value of a {@link Property} at the moment an instance of a 
-	 * {@link Type} is created.
+	 * A constraint with the kind <em>initial</em> specifies the value of a
+	 * {@link Property} at the moment an instance of a {@link Type} is created.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #INITIAL
 	 * @model name="initial"
 	 * @generated
@@ -219,16 +210,14 @@ public enum ConstraintKind implements Enumerator {
 	public static final int INITIAL_VALUE = 4;
 
 	/**
-	 * The '<em><b>Derived</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Derived</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * A derivation rule specifies that the value of a {@link 
-	 * Property} should always be equal to the value given by the 
-	 * constraint expression.
+	 * A derivation rule specifies that the value of a {@link Property} should
+	 * always be equal to the value given by the constraint expression.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #DERIVED
 	 * @model name="derived"
 	 * @generated
@@ -237,18 +226,16 @@ public enum ConstraintKind implements Enumerator {
 	public static final int DERIVED_VALUE = 5;
 
 	/**
-	 * The '<em><b>Body</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * The '<em><b>Body</b></em>' literal value. <!-- begin-user-doc --> <!--
+	 * end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * An {@link Operation} can be fully defined by specifying the 
-	 * result of the operation in a single expression. Commonly, 
-	 * operations specified using a body constraint do not have 
-	 * side effects; i.e. they are pure query operations returning a 
-	 * value or a set of values.
+	 * An {@link Operation} can be fully defined by specifying the result of the
+	 * operation in a single expression. Commonly, operations specified using a
+	 * body constraint do not have side effects; i.e. they are pure query
+	 * operations returning a value or a set of values.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @see #BODY
 	 * @model name="body"
 	 * @generated
@@ -257,9 +244,9 @@ public enum ConstraintKind implements Enumerator {
 	public static final int BODY_VALUE = 6;
 
 	/**
-	 * An array of all the '<em><b>Constraint Kind</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * An array of all the '<em><b>Constraint Kind</b></em>' enumerators. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private static final ConstraintKind[] VALUES_ARRAY = new ConstraintKind[] {
@@ -267,18 +254,18 @@ public enum ConstraintKind implements Enumerator {
 			BODY, };
 
 	/**
-	 * A public read-only list of all the '<em><b>Constraint Kind</b></em>' enumerators.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * A public read-only list of all the '<em><b>Constraint Kind</b></em>'
+	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static final List<ConstraintKind> VALUES = Collections
 			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified
+	 * literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ConstraintKind get(String literal) {
@@ -293,9 +280,9 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified name.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified
+	 * name. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ConstraintKind getByName(String name) {
@@ -310,9 +297,9 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified integer value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified
+	 * integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static ConstraintKind get(int value) {
@@ -337,30 +324,30 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	private ConstraintKind(int value, String name, String literal) {
@@ -371,8 +358,8 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public int getValue() {
@@ -381,8 +368,8 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -391,8 +378,8 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
@@ -401,9 +388,9 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string representation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string
+	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -412,4 +399,4 @@ public enum ConstraintKind implements Enumerator {
 		return literal;
 	}
 
-} //ConstraintKind
+} // ConstraintKind

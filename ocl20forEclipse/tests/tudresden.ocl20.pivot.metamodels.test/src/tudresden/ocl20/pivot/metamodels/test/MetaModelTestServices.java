@@ -230,7 +230,7 @@ public final class MetaModelTestServices {
 
 	/** The name of the {@link Property} <code>property2</code>. */
 	public static final String PROPERTY_NAME_PROPERTY2 = "property2";
-
+	
 	/** The name of the {@link Property} <code>nonmultipleProperty</code>. */
 	public static final String PROPERTY_NAME_NONMULTIPLEPROPERTY = "nonmultipleProperty";
 
@@ -283,6 +283,16 @@ public final class MetaModelTestServices {
 	/** The name of the {@link Property} <code>nonmultipleAssociationEnd</code>. */
 	public static final String PROPERTY_QUALIFIED_NAME_NONMULTIPLEASSOCIATIONEND = TYPE_QUALIFIED_NAME_TESTPROPERTYCLASS
 			+ "::" + PROPERTY_NAME_NONMULTIPLEASSOCIATONEND;
+	
+	/**
+	 * The name of the {@link Property}
+	 * <code>unorderedMultipleAssociationEnd</code>.
+	 */
+	public static final String PROPERTY_NAME_IDENTIFIER = "identifierProperty";
+
+	/** The name of the {@link Property} <code>unorderedMultipleProperty</code>. */
+	public static final String PROPERTY_NAME_NONIDENTIFIER = "nonidentifierProperty";
+	
 
 	/** The name of the {@link Parameter} <code>in1</code>. */
 	public static final String PARAMETER_NAME_INPUTPARAMETER1 = "in1";

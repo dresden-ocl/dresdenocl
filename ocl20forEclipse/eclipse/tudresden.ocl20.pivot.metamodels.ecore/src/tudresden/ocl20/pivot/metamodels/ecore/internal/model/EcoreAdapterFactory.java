@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -44,11 +45,13 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.Enumeration;
 import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
@@ -386,7 +389,7 @@ public class EcoreAdapterFactory {
 		}
 		// no else.
 
-		Property result;
+		Property result = null;
 
 		/* Eventually use a cached result. */
 		if (this.myCachedAdapters.containsKey(eStructuralFeature)) {
@@ -395,10 +398,17 @@ public class EcoreAdapterFactory {
 
 		/* Else create the Type. */
 		else {
-			result = new EcoreProperty(eStructuralFeature,this);
-
+			if (eStructuralFeature instanceof EAttribute) {
+				result = new EcoreProperty(eStructuralFeature,this);
+			} else if (eStructuralFeature instanceof EReference) {
+				if (((EReference) eStructuralFeature).getEOpposite() != null) result = new EcoreReference(eStructuralFeature,this);
+				else result = new EcoreProperty(eStructuralFeature,this);
+			}
 			/* Cache the result. */
 			this.myCachedAdapters.put(eStructuralFeature, result);
+			if (result instanceof EcoreReference && ((EReference) eStructuralFeature).getEOpposite() != null) {
+					((EcoreReference)result).addAssociation((AssociationProperty) createProperty(((EReference) eStructuralFeature).getEOpposite()));
+			}
 		}
 
 		/* Eventually log the exit from this method. */

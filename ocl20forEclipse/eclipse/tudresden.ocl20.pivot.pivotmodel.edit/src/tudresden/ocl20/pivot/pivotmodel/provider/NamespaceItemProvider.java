@@ -57,9 +57,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Namespace} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.Namespace} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class NamespaceItemProvider extends NamedElementItemProvider implements
@@ -67,9 +68,9 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NamespaceItemProvider(AdapterFactory adapterFactory) {
@@ -78,9 +79,9 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -95,9 +96,9 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Nesting Namespace feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Nesting Namespace feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNestingNamespacePropertyDescriptor(Object object) {
@@ -115,11 +116,13 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce
+	 * an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -139,23 +142,23 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Namespace.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns Namespace.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -167,10 +170,11 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 
 	/**
 	 * This returns the label text for the adapted class.
-	 *
+	 * 
 	 * <p>
-	 * The EMF implementation is changed to return the name of the adapted {@link Namespace} or 
-	 * <code>null</code> if no name is set. Existing type parameters are appended as well.
+	 * The EMF implementation is changed to return the name of the adapted
+	 * {@link Namespace} or <code>null</code> if no name is set. Existing type
+	 * parameters are appended as well.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -209,12 +213,13 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * The EMF implementation is adapted to send label notifications if the owned type parameters
-	 * change.
+	 * The EMF implementation is adapted to send label notifications if the owned
+	 * type parameters change.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -240,12 +245,14 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing all of the children that can be created under this object.
+	 * This adds to the collection of
+	 * {@link org.eclipse.emf.edit.command.CommandParameter}s describing all of
+	 * the children that can be created under this object.
 	 * 
 	 * <p>
-	 * The EMF implementation is adapted in order not to include the {@link GenericType}.
-	 * Generic types are created automatically so we do not want the editor to show them.
+	 * The EMF implementation is adapted in order not to include the
+	 * {@link GenericType}. Generic types are created automatically so we do not
+	 * want the editor to show them.
 	 * </p>
 	 * 
 	 * @generated NOT

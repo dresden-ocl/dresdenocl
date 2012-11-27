@@ -57,14 +57,14 @@ public class EcoreProperty extends AbstractProperty implements Property {
 			.getLogger(EcoreProperty.class);
 
 	/** The adapted {@link EAttribute} or {@link EReference}. */
-	private EStructuralFeature eStructuralFeature;
+	protected EStructuralFeature eStructuralFeature;
 
 	/**
 	 * <p>
 	 * The {@link EcoreAdapterFactory} used to create nested elements.
 	 * </p>
 	 */
-	private EcoreAdapterFactory factory;
+	protected EcoreAdapterFactory factory;
 	
 	/**
 	 * <p>
@@ -184,5 +184,11 @@ public class EcoreProperty extends AbstractProperty implements Property {
 		return result;
 	}
 
-
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isIdentifier()
+	 */
+	@Override
+	public boolean isIdentifier() {
+		return (eStructuralFeature instanceof EAttribute && ((EAttribute)eStructuralFeature).isID());
+	}
 }

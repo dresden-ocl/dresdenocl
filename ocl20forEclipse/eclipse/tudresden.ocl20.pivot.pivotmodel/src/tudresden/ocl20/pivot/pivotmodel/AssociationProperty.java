@@ -35,24 +35,25 @@ package tudresden.ocl20.pivot.pivotmodel;
 import java.util.List;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Association Property</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Association Property</b></em>'. <!-- end-user-doc -->
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Association</code> is a {@link Property} 
- * typed element that represents an bidirectional association to another type.
+ * A <code>Association</code> is a {@link Property} typed element that
+ * represents an bidirectional association to another type.
  * </p>
  * <!-- end-model-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties <em>Inverse Association Properties</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties
+ * <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getAssociationProperty()
  * @model
  * @generated
@@ -60,15 +61,19 @@ import java.util.List;
 public interface AssociationProperty extends Property {
 
 	/**
-	 * Returns the value of the '<em><b>Inverse Association Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Inverse Association Properties</b></em>'
+	 * containment reference list. The list contents are of type
+	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}. <!--
+	 * begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Inverse Association Properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Inverse Association Properties</em>' containment
+	 * reference list isn't clear, there really should be more of a description
+	 * here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inverse Association Properties</em>' containment reference list.
+	 * 
+	 * @return the value of the '<em>Inverse Association Properties</em>'
+	 *         containment reference list.
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getAssociationProperty_InverseAssociationProperties()
 	 * @model containment="true"
 	 * @generated
@@ -76,73 +81,73 @@ public interface AssociationProperty extends Property {
 	List<AssociationProperty> getInverseAssociationProperties();
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * The operation addAssociation added a <code> NDirectionalAssociation</code> to the inverse association list.
+	 * The operation addAssociation added a <code> NDirectionalAssociation</code>
+	 * to the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	void addAssociation(AssociationProperty bProperty);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * The operation removeAssociation removed a <code>NDirectionalAssociation</code> from the inverse association list.
+	 * The operation removeAssociation removed a
+	 * <code>NDirectionalAssociation</code> from the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model propNameDataType="tudresden.ocl20.pivot.datatypes.String"
 	 * @generated
 	 */
 	AssociationProperty getAssociation(String propName);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * The operation removeAssociation removed a <code>NDirectionalAssociation</code> from the inverse association list.
+	 * The operation removeAssociation removed a
+	 * <code>NDirectionalAssociation</code> from the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model
 	 * @generated
 	 */
 	void removeAssociation(AssociationProperty bProperty);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * The operation isInverseAssociation ckecked a <code>NDirectionalAssociation</code> is in the inverse association list.
+	 * The operation isInverseAssociation ckecked a
+	 * <code>NDirectionalAssociation</code> is in the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isInverseAssociation(AssociationProperty bProperty);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * The operation addAssociation added a <code>NDirectionalAssociation</code> to the inverse association list.
+	 * The operation addAssociation added a <code>NDirectionalAssociation</code>
+	 * to the inverse association list.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model bPropertyMany="true"
 	 * @generated
 	 */
 	void addAssociations(List<AssociationProperty> bProperty);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @model kind="operation" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */

@@ -35,22 +35,20 @@ package tudresden.ocl20.pivot.pivotmodel;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Constrainable Element</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Constrainable Element</b></em>'. <!-- end-user-doc -->
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * A <code>ConstrainableElement</code> can be 
- * constrained by a {@link Constraint}. Depending on the 
- * concrete type of the constrainable element different forms 
- * of constraints are possible. A constraint may even define 
- * the value of a constrainable element, in the form of derived 
- * values or defined operations.
+ * A <code>ConstrainableElement</code> can be constrained by a
+ * {@link Constraint}. Depending on the concrete type of the constrainable
+ * element different forms of constraints are possible. A constraint may even
+ * define the value of a constrainable element, in the form of derived values or
+ * defined operations.
  * </p>
  * <!-- end-model-doc -->
- *
- *
+ * 
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstrainableElement()
  * @model interface="true" abstract="true"
  * @generated

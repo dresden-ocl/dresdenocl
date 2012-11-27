@@ -46,25 +46,27 @@ import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Association Property</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Association Property</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties <em>Inverse Association Properties</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties
+ * <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class AssociationPropertyImpl extends PropertyImpl implements
 		AssociationProperty {
 
 	/**
-	 * The cached value of the '{@link #getInverseAssociationProperties() <em>Inverse Association Properties</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getInverseAssociationProperties()
+	 * <em>Inverse Association Properties</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getInverseAssociationProperties()
 	 * @generated
 	 * @ordered
@@ -72,8 +74,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	protected EList<AssociationProperty> inverseAssociationProperties;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected AssociationPropertyImpl() {
@@ -82,8 +84,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -93,8 +95,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List<AssociationProperty> getInverseAssociationProperties() {
@@ -110,8 +112,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void addAssociation(AssociationProperty bProperty) {
@@ -122,8 +124,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public AssociationProperty getAssociation(String propName) {
@@ -134,8 +136,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void removeAssociation(AssociationProperty bProperty) {
@@ -146,8 +148,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isInverseAssociation(AssociationProperty bProperty) {
@@ -158,8 +160,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void addAssociations(List<AssociationProperty> bProperty) {
@@ -170,8 +172,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isNavigable() {
@@ -182,8 +184,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -199,8 +201,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -214,8 +216,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -233,8 +235,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -249,8 +251,8 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -264,4 +266,4 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 		return super.eIsSet(featureID);
 	}
 
-} //AssociationPropertyImpl
+} // AssociationPropertyImpl

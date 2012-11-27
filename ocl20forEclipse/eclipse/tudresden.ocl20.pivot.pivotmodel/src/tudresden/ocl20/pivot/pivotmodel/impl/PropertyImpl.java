@@ -54,10 +54,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType
+ * <em>Owning Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PropertyImpl extends FeatureImpl implements Property {
@@ -69,6 +70,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PropertyImpl() {
@@ -78,6 +80,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -100,6 +103,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
@@ -111,6 +115,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
@@ -124,6 +129,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
@@ -147,6 +153,16 @@ public class PropertyImpl extends FeatureImpl implements Property {
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PivotModelPackage.PROPERTY__OWNING_TYPE, newOwningType, newOwningType));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean isIdentifier() {
+
+		return false;
 	}
 
 	/**
@@ -200,6 +216,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -217,6 +234,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -232,6 +250,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -248,6 +267,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -262,6 +282,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -277,6 +298,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -292,6 +314,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

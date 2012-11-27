@@ -53,9 +53,10 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} object.
- * <!-- begin-user-doc --> <!--
- * end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
@@ -63,9 +64,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ComplexGenericTypeItemProvider(AdapterFactory adapterFactory) {
@@ -74,9 +75,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -91,9 +92,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Unbound Type feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Unbound Type feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addUnboundTypePropertyDescriptor(Object object) {
@@ -111,11 +112,12 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
-	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * This specifies how to implement {@link #getChildren} and is used to deduce
+	 * an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
@@ -133,19 +135,22 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
 
-		// Check the type of the specified child object and return the proper feature to use for
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * Adapted to simply default to the super{@link #getImage(Object) super implementation}.
+	 * Adapted to simply default to the super{@link #getImage(Object) super
+	 * implementation}.
 	 * 
 	 * @generated NOT
 	 */
@@ -159,8 +164,9 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * The EMF implementation is altered to return the formatted name of the {@link Type} wrapped by
-	 * the {@link ComplexGenericType} as well as a list of the {@link TypeArgument}s.
+	 * The EMF implementation is altered to return the formatted name of the
+	 * {@link Type} wrapped by the {@link ComplexGenericType} as well as a list of
+	 * the {@link TypeArgument}s.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -174,7 +180,8 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 		ComplexGenericType genericType = (ComplexGenericType) object;
 		Type unboundType = genericType.getUnboundType();
 
-		// the label provider should be a TypeItemProvider, maybe we should check, though
+		// the label provider should be a TypeItemProvider, maybe we should check,
+		// though
 		TypeItemProvider typeItemProvider =
 				(TypeItemProvider) getLabelProvider(unboundType);
 
@@ -207,9 +214,11 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -220,10 +229,10 @@ public class ComplexGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
