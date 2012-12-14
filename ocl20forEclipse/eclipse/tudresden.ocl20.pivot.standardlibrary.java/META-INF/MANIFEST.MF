@@ -4,14 +4,15 @@ Bundle-Name: Java Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.standardlibrary.java;singleton:=true
 Bundle-Version: 1.2.0
 Bundle-Activator: tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin
-Require-Bundle: tudresden.ocl20.pivot.essentialocl.standardlibrary,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.modelbus,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.lang,
  org.eclipse.emf.common,
  org.eclipse.emf.ecore,
- tudresden.ocl20.logging
+ tudresden.ocl20.logging,
+ tudresden.ocl20.pivot.pivotmodel,
+ tudresden.ocl20.pivot.modelbus,
+ tudresden.ocl20.pivot.essentialocl,
+ tudresden.ocl20.pivot.essentialocl.standardlibrary
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.standardlibrary.java,
  tudresden.ocl20.pivot.standardlibrary.java.internal.factory,

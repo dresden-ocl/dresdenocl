@@ -102,29 +102,29 @@ public class JavaOclType extends JavaOclRoot implements OclType {
 
 		OclRoot result;
 
-		Class<?> thisAdaptee;
-		Class<?> anAdaptee;
+		Class<?> typeOfThisObject;
+		Class<?> typeOfGivenObject;
 
-		thisAdaptee = (Class<?>) this.getAdaptee();
-		anAdaptee = anOclRoot.getAdapteeClass();
+		typeOfThisObject = (Class<?>) this.getAdaptee();
+		typeOfGivenObject = anOclRoot.getAdapteeClass();
 
-		if (anAdaptee.isAssignableFrom(thisAdaptee)) {
+		if (typeOfThisObject.isAssignableFrom(typeOfGivenObject)) {
 
 			if (this == OCLVOIDTYPE) {
 				result = JavaOclVoid.getInstance();
 			}
 
 			else if (this == OCLTYPETYPE) {
-				result = new JavaOclType(anAdaptee);
+				result = new JavaOclType(typeOfGivenObject);
 			}
 
 			else if (this == OCLANYTYPE) {
-				return new JavaOclAny(anAdaptee);
+				return new JavaOclAny(typeOfGivenObject);
 			}
 
 			else {
-				result = new JavaOclObject(anAdaptee);
-				result.setAdapteeClass(thisAdaptee);
+				result = new JavaOclObject(anOclRoot.getAdaptee());
+				result.setAdapteeClass(typeOfThisObject);
 			}
 		}
 

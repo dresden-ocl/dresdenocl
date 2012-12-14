@@ -33,17 +33,12 @@
 package tudresden.ocl20.pivot.modelbus;
 
 import java.util.List;
+import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollectionType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclPrimitiveType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTupleType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapterFactory;
-import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeObject;
+import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <p>
@@ -53,15 +48,6 @@ import tudresden.ocl20.pivot.modelbus.util.OclCollectionTypeKind;
  * @author Matthias Braeuer
  */
 public interface IModelInstance {
-
-	/**
-	 * <p>
-	 * Returns the {@link IModelInstanceFactory} of this {@link IModelInstance}.
-	 * </p>
-	 * 
-	 * @return The {@link IModelInstanceFactory} of this {@link IModelInstance}.
-	 */
-	IModelInstanceFactory getFactory();
 
 	/**
 	 * <p>
@@ -87,84 +73,31 @@ public interface IModelInstance {
 	boolean isInstanceOf(IModel aModel);
 
 	/**
-	 * @param pathName
-	 * @return
-	 */
-	OclType findType(List<String> pathName);
-
-	/**
-	 * @param pathName
-	 * @return
-	 */
-	OclEnumType findEnumType(List<String> pathName);
-
-	/**
-	 * Find enum literal for given path name.
+	 * <p>
+	 * Searches in this {@link IModelInstance} for a implementation of the given
+	 * {@link EnumerationLiteral}.
 	 * 
-	 * @param pathName
+	 * @param literal
+	 *          The {@link EnumerationLiteral} whose implementation shall be
+	 *          found.
+	 * @return The found {@link IModelInstanceEnumerationLiteral} or
+	 *         <code>null</code>.
+	 */
+	IModelInstanceEnumerationLiteral findEnumerationLiteral(
+			EnumerationLiteral literal);
+
+	/**
+	 * <p>
+	 * Searches for and probably returns the {@link IModelInstanceTypeObject} of a
+	 * given {@link Type} if the given {@link Type} is implemented by an
+	 * {@link IModelInstanceTypeObject} in this {@link IModelInstance}.
+	 * </p>
 	 * 
-	 * @return
+	 * @param type
+	 *          The {@link Type} that shall be found.
+	 * @return The found {@link IModelInstanceTypeObject} or <code>null</code>.
 	 */
-	OclEnumLiteral findEnumLiteral(List<String> pathName);
-
-	/**
-	 * @param name
-	 * @return
-	 */
-	OclPrimitiveType getPrimitiveType(String name);
-
-	/**
-	 * @return
-	 */
-	OclType getAnyType();
-
-	/**
-	 * @return
-	 */
-	OclType getVoidType();
-
-	/**
-	 * @return
-	 */
-	OclType getInvalidType();
-
-	/**
-	 * @return
-	 */
-	OclType getTypeType();
-
-	/**
-	 * @param partNames
-	 * @param partTypes
-	 * 
-	 * @return
-	 */
-	OclTupleType getTupleType(String[] partNames, OclType[] partTypes);
-
-	/**
-	 * @param kind
-	 * @param elementType
-	 * @return
-	 */
-	OclCollectionType getCollectionType(OclCollectionTypeKind kind,
-			OclType elementType);
-
-	/**
-	 * Returns the single instance of {@link OclVoid} called
-	 * <code>undefined</code>. For most domain-specific languages, this will
-	 * correspond to the <code>null</code> literal.
-	 * 
-	 * @return the single <code>OclVoid</code> instance
-	 */
-	OclVoid getUndefined();
-
-	/**
-	 * Returns the single instance of {@link OclInvalid} called
-	 * <code>invalid</code>.
-	 * 
-	 * @return the single <code>OclInvalid</code> instance
-	 */
-	OclInvalid getInvalid();
+	public IModelInstanceTypeObject findModelTypeObject(Type type);
 
 	/**
 	 * Maps OCL operation names to standardlibrary operation names.
@@ -186,46 +119,22 @@ public interface IModelInstance {
 	List<IModelObject> getObjects();
 
 	/**
-	 * Gets all objects of an specific kind of the model instance.
+	 * Gets all objects of an specific type of the model instance.
 	 * 
 	 * @param typePath
-	 *          the type path for the object kind
+	 *          the type path for the object type
 	 * 
 	 * @return the {@link IModelObject}s for this model instance
 	 */
-	List<IModelObject> getObjectsOfKind(List<String> typePath);
+	List<IModelObject> getObjectsOfType(List<String> typePath);
 
 	/**
 	 * Gets the object kinds.
 	 * 
-	 * @return the available kinds of {@link IModelObject}s for this model
+	 * @return the available types of {@link IModelObject}s for this model
 	 *         instance.
 	 */
-	List<List<String>> getObjectKinds();
-
-	/**
-	 * Gets the default {@link StandardlibraryAdapterFactory} for this model
-	 * instance.
-	 * 
-	 * @return the default {@link StandardlibraryAdapterFactory}
-	 */
-	StandardlibraryAdapterFactory getDefaultSlAF();
-
-	/**
-	 * Changes the current {@link StandardlibraryAdapterFactory}.
-	 * 
-	 * @param the
-	 *          new {@link StandardlibraryAdapterFactory}
-	 */
-	void setCurrentSlAF(StandardlibraryAdapterFactory slAF);
-
-	/**
-	 * Gets the current {@link StandardlibraryAdapterFactory} for this model
-	 * instance.
-	 * 
-	 * @return the current {@link StandardlibraryAdapterFactory}
-	 */
-	StandardlibraryAdapterFactory getCurrentSlAF();
+	Set<Type> getObjectTypes();
 
 	/**
 	 * Gets the display name.

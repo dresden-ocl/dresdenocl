@@ -32,6 +32,7 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary;
 
+
 /**
  * <code>OclRoot</code> is the base interface for the OCL Standard Library
  * type hierarchy. It defines common operations of {@link OclObject objects} and
@@ -106,6 +107,7 @@ public interface OclRoot extends OclAdapter {
 
 	/**
 	 * @param operationName
+	 * @param referredOperation
 	 * @param parameters
 	 * @return
 	 */

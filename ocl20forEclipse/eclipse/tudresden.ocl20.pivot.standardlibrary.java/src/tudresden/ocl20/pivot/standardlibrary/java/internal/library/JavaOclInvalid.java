@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
  * <p>
  * This class implements the OCL type {@link OclInvalid} in Java.
  * </p>
- * 
+ *
  * @author Ronny Brandt
  */
 public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
@@ -51,7 +51,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 	 * <p>
 	 * Instantiates a {@link JavaOclInvalid}.
 	 * </p>
-	 * 
+	 *
 	 * @param adaptee
 	 *            The adapted element of this {@link JavaOclInvalid}.
 	 */
@@ -70,7 +70,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 	 * #getType()
@@ -82,7 +82,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #invokeOperation(java.lang.String,
@@ -96,7 +96,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #oclIsInvalid()
@@ -108,7 +108,7 @@ public class JavaOclInvalid extends JavaOclObject implements OclInvalid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)

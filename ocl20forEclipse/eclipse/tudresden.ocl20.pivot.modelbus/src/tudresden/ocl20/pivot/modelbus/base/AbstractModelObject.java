@@ -30,20 +30,10 @@
  */
 package tudresden.ocl20.pivot.modelbus.base;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.modelbus.IModel;
 import tudresden.ocl20.pivot.modelbus.IModelObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -59,52 +49,11 @@ public abstract class AbstractModelObject implements IModelObject {
 	/** The name of this {@link IModelObject}. */
 	protected String myName;
 
-	/** The {@link OclRoot} object of this {@link IModelObject}. */
-	protected OclRoot myOclObject;
-
-	/** The results are mapped to constraints. */
-	protected Map<Constraint, OclRoot> myResults =
-			new HashMap<Constraint, OclRoot>();
-
 	/**
 	 * The {@link Type}s of the {@link IModel} of which this IModelObject is an
 	 * instance.
 	 */
-	protected Type[] myTypes;
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#addResult(tudresden.ocl20
-	 * .pivot.pivotmodel.Constraint,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
-	 */
-	public void addResult(Constraint aConstraint, OclRoot aResult) {
-
-		this.myResults.put(aConstraint, aResult);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#clearResults()
-	 */
-	public boolean clearResults() {
-
-		boolean result;
-
-		/* Eventually clear the results map. */
-		if (this.myResults != null) {
-
-			this.myResults.clear();
-
-			result = true;
-		}
-
-		else {
-			result = false;
-		}
-
-		return result;
-	}
+	protected Set<Type> myTypes;
 
 	/*
 	 * (non-Javadoc)
@@ -162,34 +111,11 @@ public abstract class AbstractModelObject implements IModelObject {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getResults()
-	 */
-	public Map<Constraint, OclRoot> getResults() {
-
-		return this.myResults;
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see tudresden.ocl20.pivot.modelbus.IModelObject#getTypes()
 	 */
 	public Set<Type> getTypes() {
 
-		List<Type> types;
-
-		/* Get all types. */
-		types = new ArrayList<Type>(Arrays.asList(this.myTypes));
-
-		/* Sort the types. */
-		Collections.sort(types, new Comparator<Type>() {
-
-			public int compare(Type type1, Type type2) {
-
-				return type1.getQualifiedName().compareTo(type2.getQualifiedName());
-			}
-		});
-
-		return new HashSet<Type>(types);
+		return this.myTypes;
 	}
 
 	/*
@@ -214,26 +140,4 @@ public abstract class AbstractModelObject implements IModelObject {
 
 		return result;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelObject#removeResult(tudresden.ocl20
-	 * .pivot.pivotmodel.Constraint)
-	 */
-	public boolean removeResult(Constraint cs) {
-
-		if (myResults != null) {
-			myResults.remove(cs);
-			return true;
-		}
-		return false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public abstract String toString();
 }

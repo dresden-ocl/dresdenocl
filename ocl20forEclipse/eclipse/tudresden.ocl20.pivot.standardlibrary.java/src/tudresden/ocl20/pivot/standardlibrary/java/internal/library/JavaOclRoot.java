@@ -45,18 +45,14 @@ import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
 import tudresden.ocl20.pivot.essentialocl.standardlibrary.base.AbstractOclAdapter;
+import tudresden.ocl20.pivot.standardlibrary.java.internal.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -239,7 +235,7 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 				e.printStackTrace();
 			}
 
-			result = this.adaptProperty(property);
+			result = JavaStandardLibraryFactory.INSTANCE.createOclRoot(property);
 		}
 
 		return result;
@@ -580,89 +576,6 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 	public void setUndefinedreason(String undefinedreason) {
 
 		this.undefinedreason = undefinedreason;
-	}
-
-	/**
-	 * <p>
-	 * Adapts a given model instance property (as {@link Object}) to an
-	 * {@link OclRoot}.
-	 * </p>
-	 * 
-	 * @param property
-	 *          The property which shall be adapted.
-	 * @return The adapted property.
-	 */
-	protected OclRoot adaptProperty(Object property) {
-
-		OclRoot result;
-
-		if (property == null) {
-			result = JavaOclVoid.getInstance();
-		}
-
-		else if (property instanceof Integer) {
-			result =
-					(OclRoot) Platform.getAdapterManager().getAdapter(property,
-							OclInteger.class);
-		}
-
-		else if (property instanceof Float) {
-			result =
-					(OclRoot) Platform.getAdapterManager().getAdapter(property,
-							OclReal.class);
-		}
-
-		else if (property instanceof Boolean) {
-			result =
-					(OclRoot) Platform.getAdapterManager().getAdapter(property,
-							OclBoolean.class);
-		}
-
-		else if (property instanceof String) {
-			result =
-					(OclRoot) Platform.getAdapterManager().getAdapter(property,
-							OclString.class);
-		}
-
-		else if (property.getClass().isEnum()) {
-			result =
-					(OclRoot) Platform.getAdapterManager().getAdapter(property,
-							OclEnumLiteral.class);
-		}
-
-		/*
-		 * If the property is a collection, each element must be adapted for itself.
-		 */
-		else if (property instanceof Collection<?>) {
-
-			Collection<?> aCollection;
-			List<OclRoot> propertyList;
-
-			aCollection = (Collection<?>) property;
-			propertyList = new ArrayList<OclRoot>();
-
-			for (Object anElement : aCollection) {
-
-				OclRoot adaptedElement;
-
-				/* Adapt anElement to OclRoot. */
-				adaptedElement = this.adaptProperty(anElement);
-
-				propertyList.add(adaptedElement);
-			}
-
-			result = new JavaOclBag<OclRoot>(propertyList);
-		}
-
-		else if (property instanceof OclRoot) {
-			result = (OclRoot) property;
-		}
-
-		else {
-			result = new JavaOclObject(property);
-		}
-
-		return result;
 	}
 
 	/**
@@ -1025,56 +938,7 @@ public class JavaOclRoot extends AbstractOclAdapter implements OclRoot {
 
 		/* Eventually adapt the result to OclRoot. */
 		else {
-
-			/* Eventually adapt the result to all possible OCL types. */
-
-			if (adaptedResult instanceof Boolean) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclBoolean.class);
-			}
-
-			else if (adaptedResult instanceof Integer) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclInteger.class);
-			}
-
-			else if (adaptedResult instanceof Float) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclReal.class);
-			}
-
-			else if (adaptedResult instanceof String) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclString.class);
-			}
-
-			else if (adaptedResult instanceof Enum<?>) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclEnumType.class);
-			}
-
-			else if (adaptedResult instanceof List<?>) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclBag.class);
-			}
-
-			else if (adaptedResult instanceof Set<?>) {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclSet.class);
-			}
-
-			else {
-				result =
-						(OclRoot) Platform.getAdapterManager().getAdapter(adaptedResult,
-								OclRoot.class);
-			}
+			result = JavaStandardLibraryFactory.INSTANCE.createOclRoot(adaptedResult);
 		}
 
 		return result;

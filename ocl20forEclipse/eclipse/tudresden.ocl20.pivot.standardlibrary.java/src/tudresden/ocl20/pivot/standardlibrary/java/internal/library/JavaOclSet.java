@@ -64,7 +64,7 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted model instance object of this {@link JavaOclSet}.
+	 *          The adapted model instance object of this {@link JavaOclSet}.
 	 */
 	public JavaOclSet(Set<T> adaptee) {
 
@@ -73,44 +73,45 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 		Set<T> adaptedSet;
 		Set<T> newAdaptedSet;
 
-		/*
-		 * Don't trust the given set. The given set could contain duplicates
-		 * because of object schizophrenia.
-		 */
 		adaptedSet = (Set<T>) this.adaptee;
 
-		newAdaptedSet = new HashSet<T>();
+		if (this.adaptee != null) {
+			/*
+			 * Don't trust the given set. The given set could contain duplicates
+			 * because of object schizophrenia.
+			 */
+			newAdaptedSet = new HashSet<T>();
 
-		for (T aNewElement : adaptedSet) {
+			for (T aNewElement : adaptedSet) {
 
-			boolean isAlreadyContained;
+				boolean isAlreadyContained;
 
-			isAlreadyContained = false;
+				isAlreadyContained = false;
 
-			for (T anElement : (Set<T>) newAdaptedSet) {
+				for (T anElement : (Set<T>) newAdaptedSet) {
 
-				if (aNewElement.equals(anElement)) {
+					if (aNewElement.equals(anElement)) {
 
-					isAlreadyContained = true;
-					break;
+						isAlreadyContained = true;
+						break;
+					}
+					// no else.
+				}
+
+				if (!isAlreadyContained) {
+					newAdaptedSet.add(aNewElement);
 				}
 				// no else.
 			}
 
-			if (!isAlreadyContained) {
-				newAdaptedSet.add(aNewElement);
-			}
-			// no else.
+			this.adaptee = newAdaptedSet;
 		}
-
-		this.adaptee = newAdaptedSet;
+		// no else.
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#complement(
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#complement(
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
 	public OclSet<T> complement(OclSet<T> aSet) {
@@ -139,8 +140,8 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 			for (T anElement : (Collection<T>) this.getAdaptee()) {
 
 				/*
-				 * Check if the given set does not contain an element of this
-				 * set, add it to the result.
+				 * Check if the given set does not contain an element of this set, add
+				 * it to the result.
 				 */
 				if (!aSetAsList.contains(anElement)) {
 					resultList.add(anElement);
@@ -156,7 +157,6 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#excluding(java
 	 * .lang.Object)
@@ -195,10 +195,8 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
-	 * ()
+	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
 	public <T2 extends OclRoot> OclSet<T2> flatten() {
 
@@ -231,7 +229,6 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#including(java
 	 * .lang.Object)
@@ -270,9 +267,7 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#intersection
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#intersection
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
 	 */
 	public OclSet<T> intersection(OclBag<T> aBag) {
@@ -314,7 +309,6 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
@@ -381,7 +375,6 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#symmetricDifference
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
@@ -442,7 +435,6 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#union(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclSet)
@@ -486,7 +478,6 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
 	 * #getType()
@@ -500,16 +491,15 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 
 			/* Compute the generic type. */
 			if (((List<T>) getAdaptee()).size() > 0) {
-				elementType = ((Set<T>) getAdaptee()).iterator().next()
-						.getType();
+				elementType = ((Set<T>) getAdaptee()).iterator().next().getType();
 			}
 
 			else {
 				elementType = JavaOclType.getType("OclVoid");
 			}
 
-			this.type = JavaOclCollectionType.getType(
-					OclCollectionTypeKind.SET, elementType);
+			this.type =
+					JavaOclCollectionType.getType(OclCollectionTypeKind.SET, elementType);
 		}
 		// no else.
 
@@ -522,11 +512,12 @@ public class JavaOclSet<T extends OclRoot> extends JavaOclUnsortedCollection<T>
 	 * </p>
 	 * 
 	 * @param aSet
-	 *            The {@link OclSet} which shall be subtracted.
+	 *          The {@link OclSet} which shall be subtracted.
 	 * 
 	 * @return The {@link OclSet} which is the result of the subtraction.
 	 */
 	public OclSet<T> subtract(OclSet<T> aSet) {
+
 		return complement(aSet);
 	}
 }

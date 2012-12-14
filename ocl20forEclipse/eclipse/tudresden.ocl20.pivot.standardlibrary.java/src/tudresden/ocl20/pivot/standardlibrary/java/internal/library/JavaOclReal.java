@@ -52,15 +52,15 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * </p>
 	 * 
 	 * @param adaptee
-	 *            The adapted {@link Number}.
+	 *          The adapted {@link Number}.
 	 */
 	public JavaOclReal(Number adaptee) {
+
 		super(adaptee);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#abs()
 	 */
 	public OclReal abs() {
@@ -74,8 +74,8 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclReal(Math.abs(((Number) this.getAdaptee())
-					.floatValue()));
+			result =
+					new JavaOclReal(Math.abs(((Number) this.getAdaptee()).floatValue()));
 		}
 
 		return result;
@@ -83,7 +83,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#add(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -118,7 +117,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable#compareTo
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable)
@@ -163,7 +161,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#divide(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -198,7 +195,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#floor()
 	 */
 	public OclInteger floor() {
@@ -213,8 +209,9 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 		/* Else compute the result. */
 		else {
-			result = new JavaOclInteger((int) Math
-					.floor(((Number) getAdaptee()).floatValue()));
+			result =
+					new JavaOclInteger((int) Math.floor(((Number) getAdaptee())
+							.floatValue()));
 		}
 
 		return result;
@@ -222,7 +219,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isGreaterEqual
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -259,7 +255,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isGreaterThan
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -296,9 +291,7 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessEqual
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessEqual
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclBoolean isLessEqual(OclReal aReal) {
@@ -333,9 +326,7 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessThan
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessThan
 	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclBoolean isLessThan(OclReal aReal) {
@@ -370,7 +361,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#max(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -405,7 +395,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#min(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -440,7 +429,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#multiply(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -475,9 +463,7 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#negative()
+	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#negative()
 	 */
 	public OclReal negative() {
 
@@ -503,7 +489,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#round()
 	 */
 	public OclInteger round() {
@@ -530,7 +515,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#subtract(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
@@ -565,7 +549,6 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
@@ -606,26 +589,38 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
 	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
+
 		return JavaOclPrimitiveType.getType("Real");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #toString()
 	 */
 	public String toString() {
-		return this.getClass().getSimpleName() + "("
-				+ ((Number) getAdaptee()).toString() + ")";
+
+		String result;
+
+		result = this.getClass().getSimpleName();
+		result += "(";
+
+		if (this.isOclUndefined().isTrue()) {
+			result += this.undefinedreason;
+		}
+
+		else {
+			result += ((Number) this.getAdaptee()).toString();
+		}
+		result += ")";
+
+		return result;
 	}
 
 	/**
@@ -633,12 +628,13 @@ public class JavaOclReal extends JavaOclAny implements OclReal {
 	 * Compares this {@link JavaOclReal} with a given {@link OclRoot}.
 	 * 
 	 * @param anOclRoot
-	 *            The {@link OclRoot} which shall be compare with this
-	 *            {@link JavaOclReal}.
+	 *          The {@link OclRoot} which shall be compare with this
+	 *          {@link JavaOclReal}.
 	 * 
 	 * @return True, if the to {@link OclReal}s have the same value.
 	 */
 	public boolean equals(OclRoot anOclRoot) {
+
 		return this.isEqualTo(anOclRoot).isTrue();
 	}
 }

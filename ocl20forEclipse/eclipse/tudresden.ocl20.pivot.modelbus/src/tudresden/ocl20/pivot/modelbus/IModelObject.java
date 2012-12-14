@@ -30,11 +30,13 @@
  */
 package tudresden.ocl20.pivot.modelbus;
 
-import java.util.Map;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceCollection;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceInteger;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceReal;
+import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceString;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -49,47 +51,21 @@ public interface IModelObject {
 
 	/**
 	 * <p>
-	 * Returns the {@link Type}s of which this IModelObject is an instance.
+	 * Returns the {@link Type}s of that this IModelObject is an instance.
 	 * </p>
 	 * 
-	 * @return The {@link Type}s of which this IModelObject is an instance.</p>
+	 * <p>
+	 * <strong>Please be aware, that the {@link Type}s of an {@link IModelObject}
+	 * are only set, if the {@link IModelObject} represents at least one Type in
+	 * the {@link IModel}. The {@link IModelObject}s of the kinds
+	 * {@link IModelInstanceCollection}, {@link IModelInstanceBoolean},
+	 * {@link IModelInstanceInteger}, {@link IModelInstanceReal}, and
+	 * {@link IModelInstanceString} do not have a {@link Type}.</strong>
+	 * </p>
+	 * 
+	 * @return The {@link Type}s of which this IModelObject is an instance. </p>
 	 */
 	Set<Type> getTypes();
-
-	/**
-	 * <p>
-	 * Checks whether or not this {@link IModelObject} contains multiple
-	 * {@link Object}s of the adapted language. Multiple objects could be
-	 * contained in collection or array like objects.
-	 * </p>
-	 * 
-	 * @return
-	 */
-	boolean isMultiple();
-
-	/**
-	 * FIXME Claas: Refactored until here.
-	 * 
-	 * <p>
-	 * Adds a given result to this {@link IModelObject} for a given
-	 * {@link Constraint}.
-	 * </p>
-	 * 
-	 * @param cs
-	 *          The {@link Constraint} the result belongs to.
-	 * @param result
-	 *          The result for the given {@link Constraint}.
-	 */
-	void addResult(Constraint cs, OclRoot result);
-
-	/**
-	 * <p>
-	 * Clears the results for this {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return True, if successful cleared the results.
-	 */
-	boolean clearResults();
 
 	/**
 	 * <p>
@@ -99,15 +75,6 @@ public interface IModelObject {
 	 * @return The name of the {@link IModelObject}.
 	 */
 	String getName();
-
-	/**
-	 * <p>
-	 * Returns the {@link OclRoot} representation of the {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @return An {@link OclRoot} representing the {@link IModelObject}.
-	 */
-	OclRoot getOclObject();
 
 	/**
 	 * <p>
@@ -121,15 +88,6 @@ public interface IModelObject {
 
 	/**
 	 * <p>
-	 * Returns a {@link Map} containing {@link Constraint}s and their interpreted
-	 * {@link OclRoot} results.
-	 * 
-	 * @return the results
-	 */
-	Map<Constraint, OclRoot> getResults();
-
-	/**
-	 * <p>
 	 * Returns true if this {@link IModelObject} is an instance of the given
 	 * {@link Type} in the {@link IModel}.
 	 * </p>
@@ -140,17 +98,4 @@ public interface IModelObject {
 	 *         {@link Type}.
 	 */
 	boolean isInstanceOf(Type aType);
-
-	/**
-	 * <p>
-	 * Removes the result for a given {@link Constraint} from this
-	 * {@link IModelObject}.
-	 * </p>
-	 * 
-	 * @param aConstraint
-	 *          The {@link Constraint} whose result shall be removed.
-	 * 
-	 * @return True, if the result was removed successful
-	 */
-	boolean removeResult(Constraint aConstraint);
 }

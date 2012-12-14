@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
  * <p>
  * Provides an implementation of {@link OclVoid} in Java.
  * </p>
- * 
+ *
  * @author Ronny Brandt
  */
 public class JavaOclVoid extends JavaOclObject implements OclVoid {
@@ -51,7 +51,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * <p>
 	 * Instantiates a new {@link JavaOclVoid}.
 	 * </p>
-	 * 
+	 *
 	 * @param adaptable
 	 *            The adaptable {@link Class} of this {@link JavaOclVoid}.
 	 */
@@ -63,7 +63,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 	 * <p>
 	 * Gets the single instance of {@link JavaOclVoid}.
 	 * </p>
-	 * 
+	 *
 	 * @return single instance of {@link JavaOclVoid}.
 	 */
 	public static JavaOclVoid getInstance() {
@@ -79,7 +79,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #getPropertyValue(java.lang.String)
@@ -91,7 +91,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 	 * #getType()
@@ -103,7 +103,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #invokeOperation(java.lang.String,
@@ -117,7 +117,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isOclUndefined()
@@ -129,7 +129,7 @@ public class JavaOclVoid extends JavaOclObject implements OclVoid {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)

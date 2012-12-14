@@ -48,15 +48,15 @@ public class JavaOclAny extends JavaOclObject implements OclAny {
 	 * Instantiates a new {@link JavaOclAny}.
 	 * 
 	 * @param adaptee
-	 *            The adapted element of this {@link JavaOclAny}.
+	 *          The adapted element of this {@link JavaOclAny}.
 	 */
 	public JavaOclAny(Object adaptee) {
+
 		super(adaptee);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object anObject) {
@@ -80,35 +80,38 @@ public class JavaOclAny extends JavaOclObject implements OclAny {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclRoot
 	 * #invokeOperation(java.lang.String,
 	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot[])
 	 */
 	@Override
-	public OclRoot invokeOperation(String operationName, OclRoot... parameters)
-			throws NoSuchMethodException {
+	public OclRoot invokeOperation(String operationName, OclRoot... parameters) {
+
 		OclRoot result;
 
 		/*
-		 * On this type, onyl library operation can be invoked, because the type
-		 * is a library type itself.
+		 * On this type, onyl library operation can be invoked, because the type is
+		 * a library type itself.
 		 */
-		result = invokeLibraryOperation(operationName, parameters);
+		try {
+			result = invokeLibraryOperation(operationName, parameters);
+		} catch (NoSuchMethodException e) {
+			return null;
+		}
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclObject
 	 * #getType()
 	 */
 	@Override
 	public OclType getType() {
+
 		OclType result;
 
 		result = JavaOclType.getType("OclAny");

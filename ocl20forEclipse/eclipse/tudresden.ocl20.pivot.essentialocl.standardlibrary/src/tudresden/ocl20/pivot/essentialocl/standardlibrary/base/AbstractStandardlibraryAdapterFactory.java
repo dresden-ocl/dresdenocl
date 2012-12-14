@@ -59,6 +59,7 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.StandardlibraryAdapter
  * @author Ronny Brandt
  * @version 1.0 31.08.2007
  */
+@Deprecated
 public abstract class AbstractStandardlibraryAdapterFactory implements
 		StandardlibraryAdapterFactory {
 
