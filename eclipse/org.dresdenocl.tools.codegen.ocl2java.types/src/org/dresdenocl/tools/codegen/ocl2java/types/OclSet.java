@@ -16,13 +16,13 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.types;
+package org.dresdenocl.tools.codegen.ocl2java.types;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets;
+import org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets;
 
 /**
  * <p>

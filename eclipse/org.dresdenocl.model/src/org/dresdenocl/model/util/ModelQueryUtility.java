@@ -1,16 +1,16 @@
-package tudresden.ocl20.pivot.model.util;
+package org.dresdenocl.model.util;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

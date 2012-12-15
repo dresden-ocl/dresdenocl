@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
+package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import java.util.Collection;
 
@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -30,19 +30,19 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getNonMultipleProperty <em>Non Multiple Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleUniqueOrderedProperty <em>Multiple Unique Ordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleUniqueUnorderedProperty <em>Multiple Unique Unordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleNonuniqueOrderedProperty <em>Multiple Nonunique Ordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleNonuniqueUnorderedProperty <em>Multiple Nonunique Unordered Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyBooleanMultiple <em>Argument Property Boolean Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyStringMultiple <em>Argument Property String Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyObjectMultiple <em>Argument Property Object Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyEnumerationLiteralMultiple <em>Argument Property Enumeration Literal Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getNonMultipleProperty <em>Non Multiple Property</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleUniqueOrderedProperty <em>Multiple Unique Ordered Property</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleUniqueUnorderedProperty <em>Multiple Unique Unordered Property</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleNonuniqueOrderedProperty <em>Multiple Nonunique Ordered Property</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getMultipleNonuniqueUnorderedProperty <em>Multiple Nonunique Unordered Property</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#isArgumentPropertyBooleanNonMultiple <em>Argument Property Boolean Non Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyStringNonMultiple <em>Argument Property String Non Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyBooleanMultiple <em>Argument Property Boolean Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyStringMultiple <em>Argument Property String Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyObjectNonMultiple <em>Argument Property Object Non Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyObjectMultiple <em>Argument Property Object Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyEnumerationLiteralNonMultiple <em>Argument Property Enumeration Literal Non Multiple</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.Class1Impl#getArgumentPropertyEnumerationLiteralMultiple <em>Argument Property Enumeration Literal Multiple</em>}</li>
  * </ul>
  * </p>
  *

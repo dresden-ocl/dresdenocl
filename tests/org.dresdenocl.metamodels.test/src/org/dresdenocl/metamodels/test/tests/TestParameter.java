@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.test.tests;
+package org.dresdenocl.metamodels.test.tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,17 +20,17 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
-import tudresden.ocl20.pivot.metamodels.test.msg.MetaModelTestSuiteMessages;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.test.MetaModelTestPlugin;
+import org.dresdenocl.metamodels.test.MetaModelTestServices;
+import org.dresdenocl.metamodels.test.msg.MetaModelTestSuiteMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

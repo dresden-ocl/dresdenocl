@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.template.impl;
+package org.dresdenocl.tools.template.impl;
 
 import java.util.Collection;
 

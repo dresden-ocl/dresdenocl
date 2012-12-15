@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.provider;
+package org.dresdenocl.modelinstancetype.ecore.internal.provider;
 
 import java.net.URL;
 
@@ -27,14 +27,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.modelinstance.EcoreModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceProvider;
+import org.dresdenocl.modelinstance.base.AbstractModelInstanceProvider;
+import org.dresdenocl.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.ecore.internal.modelinstance.EcoreModelInstance;
+import org.dresdenocl.modelinstancetype.ecore.internal.msg.EcoreModelInstanceTypeMessages;
 
 /**
  * <p>
@@ -62,8 +62,8 @@ public class EcoreModelInstanceProvider extends AbstractModelInstanceProvider
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
-	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceProvider#
+	 * createEmptyModelInstance(org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance createEmptyModelInstance(IModel model) {
 
@@ -77,8 +77,8 @@ public class EcoreModelInstanceProvider extends AbstractModelInstanceProvider
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
-	 * (java.net.URL, tudresden.ocl20.pivot.modelbus.IModel)
+	 * @see org.dresdenocl.modelbus.IModelInstanceProvider#getModelInstance
+	 * (java.net.URL, org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance getModelInstance(URL modelInstanceUrl, IModel model)
 			throws ModelAccessException {

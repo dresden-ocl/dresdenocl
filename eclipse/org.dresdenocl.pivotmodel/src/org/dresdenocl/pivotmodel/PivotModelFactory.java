@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage
  * @generated
  */
 public interface PivotModelFactory extends EFactory {
@@ -50,7 +50,7 @@ public interface PivotModelFactory extends EFactory {
 	 * @generated
 	 */
 	PivotModelFactory eINSTANCE =
-			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelFactoryImpl.init();
+			org.dresdenocl.pivotmodel.impl.PivotModelFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Enumeration</em>'. <!-- begin-user-doc

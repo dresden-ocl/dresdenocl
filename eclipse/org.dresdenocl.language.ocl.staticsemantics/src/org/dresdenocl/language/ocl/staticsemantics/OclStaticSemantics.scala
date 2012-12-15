@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics
+package org.dresdenocl.language.ocl.staticsemantics
 
 import collection.JavaConversions._
 
@@ -6,18 +6,18 @@ import org.emftext.access._
 import org.emftext.access.resource._
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.util._
-import tudresden.attributegrammar.integration.kiama._
-import tudresden.ocl20.pivot.language.ocl._
-import tudresden.ocl20.pivot.pivotmodel._
-import tudresden.ocl20.pivot.essentialocl._
+import org.dresdenocl.attributegrammar.integration.kiama._
+import org.dresdenocl.language.ocl._
+import org.dresdenocl.pivotmodel._
+import org.dresdenocl.essentialocl._
 import expressions._
 import expressions.util._
 import types._
 import expressions.factory._
-import tudresden.ocl20.pivot.model._
+import org.dresdenocl.model._
 import Box._
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
+import org.dresdenocl.language.ocl.resource.ocl.mopp._
 
 
 import AttributableEObject._
@@ -46,7 +46,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
   protected[staticsemantics] lazy val model: IModel = {
     var m = resource.getModel(resource.getContents)
     if (m == null) {
-      m = tudresden.ocl20.pivot.modelbus.ModelBusPlugin.getModelRegistry.getActiveModel
+      m = org.dresdenocl.modelbus.ModelBusPlugin.getModelRegistry.getActiveModel
       if (m == null) {
         val exception = new OclStaticSemanticsException("Cannot check OCL static semantics. Please load a model first.")
         yieldFailure(exception, resource.getContents.get(0))

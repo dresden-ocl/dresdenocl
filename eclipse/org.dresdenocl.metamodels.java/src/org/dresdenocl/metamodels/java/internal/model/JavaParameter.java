@@ -11,18 +11,18 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
 import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractParameter;
 
 /**
  * <p>
@@ -118,7 +118,7 @@ public class JavaParameter extends AbstractParameter implements Parameter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl#getKind()
 	 */
 	public ParameterDirectionKind getKind() {
 
@@ -127,7 +127,7 @@ public class JavaParameter extends AbstractParameter implements Parameter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getName()
 	 */
 	@Override
 	public String getName() {
@@ -137,7 +137,7 @@ public class JavaParameter extends AbstractParameter implements Parameter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getOperation()
 	 */
 	@Override
 	public Operation getOperation() {
@@ -147,7 +147,7 @@ public class JavaParameter extends AbstractParameter implements Parameter {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getType()
 	 */
 	@Override
 	public Type getType() {

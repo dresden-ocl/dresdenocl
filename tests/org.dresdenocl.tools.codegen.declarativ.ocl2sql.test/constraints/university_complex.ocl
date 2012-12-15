@@ -9,7 +9,7 @@
 -- Use this constraint file with model university_complex.uml
 -- 
 
-package tudresden::ocl20::pivot::examples::university_complex
+package org::dresdenocl::examples::university_complex
 
 /*
  * The academic grade of a persons supervisor must be greater

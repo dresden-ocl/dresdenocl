@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.standardlibrary.java.test;
+package org.dresdenocl.standardlibrary.java.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -10,7 +10,7 @@ public class StandardLibraryTestPlugin extends Plugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.standardlibrary.java.test";
+			"org.dresdenocl.standardlibrary.java.test";
 
 	// The shared instance
 	private static StandardLibraryTestPlugin plugin;

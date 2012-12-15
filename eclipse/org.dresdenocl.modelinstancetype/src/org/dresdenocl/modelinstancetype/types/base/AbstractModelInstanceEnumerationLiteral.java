@@ -16,10 +16,10 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types.base;
+package org.dresdenocl.modelinstancetype.types.base;
 
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -37,7 +37,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 	 * #getName()
 	 */
 	public String getName() {
@@ -80,7 +80,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
 	@Override
@@ -121,7 +121,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	@Override
@@ -144,8 +144,8 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
-	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (org.dresdenocl.pivotmodel.Type)
 	 */
 	public boolean isKindOf(Type type) {
 
@@ -155,7 +155,7 @@ public abstract class AbstractModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {

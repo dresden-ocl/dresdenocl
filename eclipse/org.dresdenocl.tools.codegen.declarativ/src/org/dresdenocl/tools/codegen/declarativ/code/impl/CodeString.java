@@ -1,6 +1,6 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.code.impl;
+package org.dresdenocl.tools.codegen.declarativ.code.impl;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.code.ICode;
+import org.dresdenocl.tools.codegen.declarativ.code.ICode;
 
 public class CodeString implements ICode {
 

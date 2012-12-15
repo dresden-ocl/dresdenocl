@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A OclContainedFeature represents a path element of a
- * tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainmentTrace
+ * org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace
  */
 public class OclContainedFeature {
 	

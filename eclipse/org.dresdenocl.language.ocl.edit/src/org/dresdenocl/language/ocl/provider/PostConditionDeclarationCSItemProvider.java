@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.provider;
+package org.dresdenocl.language.ocl.provider;
 
 
 import java.util.Collection;
@@ -20,7 +20,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.PostConditionDeclarationCS} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

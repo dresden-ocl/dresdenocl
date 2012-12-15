@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionExcludes {
      *       def: testCollectionExcludes(source: Collection(OclAny), arg01: OclAny): Boolean = source ->excludes(arg01)</code></p>
      */
     public Boolean testpackage.Class1.testCollectionExcludes(java.util.Collection<Object> source, Object arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.excludes(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.excludes(source, arg01);
     }
 }

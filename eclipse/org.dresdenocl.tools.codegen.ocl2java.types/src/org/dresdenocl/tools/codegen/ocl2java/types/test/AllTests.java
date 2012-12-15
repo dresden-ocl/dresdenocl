@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.test;
+package org.dresdenocl.tools.codegen.ocl2java.types.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

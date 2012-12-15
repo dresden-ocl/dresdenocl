@@ -4,16 +4,16 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * Implementors of this interface map identifiers to URIs. This is sometimes
  * necessary when resolving references depends on the resolution of others.
  * 
  * @param <ReferenceType> unused type parameter which is needed to implement
- * tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping.
+ * org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping.
  */
-public interface IOclURIMapping<ReferenceType> extends tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> {
+public interface IOclURIMapping<ReferenceType> extends org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> {
 	
 	/**
 	 * Returns an alternative proxy URI that should follow EMF's default naming scheme

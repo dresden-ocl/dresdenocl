@@ -1,8 +1,8 @@
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.Variable;
 
 /**
  * Holder for implicit and explicit {@link Variable}s that are defined for

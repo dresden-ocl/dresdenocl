@@ -1,21 +1,21 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.impl
+package org.dresdenocl.language.ocl.staticsemantics.impl
 
 import collection.JavaConversions._
 
 import org.eclipse.emf.ecore._
 import org.eclipse.emf.ecore.util._
-import tudresden.attributegrammar.integration.kiama._
-import tudresden.ocl20.pivot.language.ocl._
-import tudresden.ocl20.pivot.pivotmodel._
-import tudresden.ocl20.pivot.essentialocl._
+import org.dresdenocl.attributegrammar.integration.kiama._
+import org.dresdenocl.language.ocl._
+import org.dresdenocl.pivotmodel._
+import org.dresdenocl.essentialocl._
 import expressions._
 import types._
 import factory._
-import tudresden.ocl20.pivot.model._
-import tudresden.ocl20.pivot.language.ocl.staticsemantics._
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.Box._
+import org.dresdenocl.model._
+import org.dresdenocl.language.ocl.staticsemantics._
+import org.dresdenocl.language.ocl.staticsemantics.Box._
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
+import org.dresdenocl.language.ocl.resource.ocl.mopp._
 
 import org.kiama._
 import attribution._

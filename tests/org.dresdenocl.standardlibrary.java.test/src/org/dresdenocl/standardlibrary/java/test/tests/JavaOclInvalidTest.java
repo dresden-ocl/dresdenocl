@@ -1,15 +1,15 @@
-package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
+package org.dresdenocl.standardlibrary.java.test.tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.essentialocl.standardlibrary.OclType;
+import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 
 public class JavaOclInvalidTest {
 

@@ -28,12 +28,12 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelinstance.event;
+package org.dresdenocl.modelinstance.event;
 
 import java.util.EventObject;
 
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceRegistry;
 
 /**
  * <p>

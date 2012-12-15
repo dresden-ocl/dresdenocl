@@ -2,13 +2,13 @@
  * Created on 09.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation;
+package org.dresdenocl.tools.transformation;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.impl.Tuple;
 
 /**
  * ParallelTransformation is an abstract implementation of a parallel

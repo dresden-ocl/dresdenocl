@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.template.test.tests;
+package org.dresdenocl.tools.template.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -37,17 +37,17 @@ import java.util.LinkedList;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.template.test.TemplateTestPlugin;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.test.TemplateTestPlugin;
 
 /**
  * This test will test the class StringTemplateEngine.java of the package
- * tudresden.ocl20.pivot.tools.template.stringtemplate.
+ * org.dresdenocl.tools.template.stringtemplate.
  * 
- * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine
+ * @see org.dresdenocl.tools.template.ITemplateEngine
  */
 public class TestStringTemplateEngine extends AbstractDresdenOclTest {
 

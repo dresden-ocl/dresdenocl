@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 176 and adapted.
 -- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 context ProgramPartner
 inv: self.programs.partners->select(p : ProgramPartner | p <> self)->size() >= 0

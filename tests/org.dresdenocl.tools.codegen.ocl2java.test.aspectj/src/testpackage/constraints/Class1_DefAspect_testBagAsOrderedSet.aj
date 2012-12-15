@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testBagAsOrderedSet {
      *       def: testBagAsOrderedSet(source: Bag(OclAny)):    OrderedSet(OclAny) = source ->asOrderedSet()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testBagAsOrderedSet(java.util.List<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags.asOrderedSet(source);
     }
 }

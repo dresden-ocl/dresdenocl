@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter;
+package org.dresdenocl.codegen.adapter;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -19,7 +19,7 @@ public final class PivotAdapterGeneratorPlugin extends EMFPlugin {
 	 */
 	private static Implementation plugin;
 
-	public static final String ID = "tudresden.ocl20.pivot.codegen.adapter";
+	public static final String ID = "org.dresdenocl.codegen.adapter";
 
 	/**
 	 * Creates the singleton instance.

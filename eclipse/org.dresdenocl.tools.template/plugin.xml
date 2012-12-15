@@ -4,9 +4,9 @@
    <extension-point id="templateGroups" name="Template Groups" schema="schema/templategroups.exsd"/>
    <extension-point id="templateEngines" name="Template Engines" schema="schema/templateengines.exsd"/>
    <extension
-         point="tudresden.ocl20.pivot.tools.template.templateEngines">
+         point="org.dresdenocl.tools.template.templateEngines">
       <templateEngine
-            class="tudresden.ocl20.pivot.tools.template.stringtemplate.StringTemplateEngine"
+            class="org.dresdenocl.tools.template.stringtemplate.StringTemplateEngine"
             name="String Template">
       </templateEngine>
    </extension>

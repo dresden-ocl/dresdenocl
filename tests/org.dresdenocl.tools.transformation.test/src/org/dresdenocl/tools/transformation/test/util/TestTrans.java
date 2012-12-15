@@ -1,12 +1,12 @@
-package tudresden.ocl20.pivot.tools.transformation.test.util;
+package org.dresdenocl.tools.transformation.test.util;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.M2XTransformation;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.M2XTransformation;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
 
 public class TestTrans extends
 		M2XTransformation<EObject, IOcl2CodeSettings, String> implements

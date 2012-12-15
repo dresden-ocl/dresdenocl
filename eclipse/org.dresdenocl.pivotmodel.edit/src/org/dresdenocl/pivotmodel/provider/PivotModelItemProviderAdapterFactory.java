@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.provider;
+package org.dresdenocl.pivotmodel.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,7 +50,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.pivotmodel.util.PivotModelAdapterFactory;
+import org.dresdenocl.pivotmodel.util.PivotModelAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support
@@ -108,7 +108,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Enumeration} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Enumeration} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -117,7 +117,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Enumeration}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.Enumeration}. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -134,7 +134,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Operation} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -143,7 +143,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Operation}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -160,7 +160,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Namespace} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -169,7 +169,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Namespace}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -186,7 +186,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Type} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -194,7 +194,7 @@ public class PivotModelItemProviderAdapterFactory extends
 	protected TypeItemProvider typeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Type}
+	 * This creates an adapter for a {@link org.dresdenocl.pivotmodel.Type}
 	 * . <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -211,7 +211,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Parameter} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -220,7 +220,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Parameter}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -237,7 +237,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -246,7 +246,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}. <!--
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -263,7 +263,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Property} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -272,7 +272,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Property}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -289,7 +289,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveType} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -298,7 +298,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveType}. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -315,7 +315,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Constraint} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -324,7 +324,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.Constraint}. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -341,7 +341,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.Expression} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -350,7 +350,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.Expression}. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -367,7 +367,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty} instances.
+	 * {@link org.dresdenocl.pivotmodel.AssociationProperty} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -376,7 +376,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}. <!--
+	 * {@link org.dresdenocl.pivotmodel.AssociationProperty}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -394,7 +394,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -403,7 +403,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter}. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -420,7 +420,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -429,7 +429,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument}. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -446,7 +446,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} instances.
+	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType} instances.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -455,7 +455,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType}. <!--
+	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -473,7 +473,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType} instances. <!--
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -482,7 +482,7 @@ public class PivotModelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType}. <!--
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

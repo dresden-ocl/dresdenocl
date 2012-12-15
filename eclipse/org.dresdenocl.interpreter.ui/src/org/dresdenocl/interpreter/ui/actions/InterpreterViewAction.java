@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.ui.actions;
+package org.dresdenocl.interpreter.ui.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -59,7 +59,7 @@ public class InterpreterViewAction implements IWorkbenchWindowActionDelegate {
 			this.window
 					.getActivePage()
 					.showView(
-							"tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView");
+							"org.dresdenocl.interpreter.ui.internal.views.InterpreterView");
 		}
 
 		catch (PartInitException e) {

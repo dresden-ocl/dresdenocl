@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -16,13 +16,13 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorName <em>Iterator Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorVariables <em>Iterator Variables</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IteratorExpCS#getIteratorName <em>Iterator Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IteratorExpCS#getIteratorVariables <em>Iterator Variables</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IteratorExpCS#getBodyExpression <em>Body Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpCS()
  * @model
  * @generated
  */
@@ -37,14 +37,14 @@ public interface IteratorExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Iterator Name</em>' attribute.
    * @see #setIteratorName(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpCS_IteratorName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpCS_IteratorName()
    * @model required="true"
    * @generated
    */
 	String getIteratorName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorName <em>Iterator Name</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IteratorExpCS#getIteratorName <em>Iterator Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Iterator Name</em>' attribute.
@@ -55,7 +55,7 @@ public interface IteratorExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 
 	/**
    * Returns the value of the '<em><b>Iterator Variables</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.IteratorExpVariableCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Iterator Variables</em>' containment reference list isn't clear,
@@ -63,7 +63,7 @@ public interface IteratorExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Iterator Variables</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpCS_IteratorVariables()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpCS_IteratorVariables()
    * @model containment="true" upper="2"
    * @generated
    */
@@ -79,14 +79,14 @@ public interface IteratorExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Body Expression</em>' containment reference.
    * @see #setBodyExpression(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpCS_BodyExpression()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpCS_BodyExpression()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getBodyExpression();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getBodyExpression <em>Body Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IteratorExpCS#getBodyExpression <em>Body Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Body Expression</em>' containment reference.

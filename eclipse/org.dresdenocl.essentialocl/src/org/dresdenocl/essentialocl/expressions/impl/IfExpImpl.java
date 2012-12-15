@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
@@ -39,10 +39,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.IfExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.IfExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>If Exp</b></em>'.
@@ -50,9 +50,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getThenExpression <em>Then Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl#getElseExpression <em>Else Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.IfExpImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.IfExpImpl#getThenExpression <em>Then Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.IfExpImpl#getElseExpression <em>Else Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -121,7 +121,7 @@ public class IfExpImpl extends OclExpressionImpl implements IfExp {
 	 *   inv: self.condition.type.oclIsKindOf(PrimitiveType) and self.condition.type.name = ‘Boolean’
 	 * </pre>
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
 	 */
 	@Override
 	protected Type evaluateType() {

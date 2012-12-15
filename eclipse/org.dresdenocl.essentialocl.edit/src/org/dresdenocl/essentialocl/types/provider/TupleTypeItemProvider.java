@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.provider;
+package org.dresdenocl.essentialocl.types.provider;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -47,13 +47,13 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider;
+import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.provider.TypeItemProvider;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TupleType} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.essentialocl.types.TupleType} object.
  * <!-- begin-user-doc --> <!--
  * end-user-doc -->
  * @generated
@@ -141,7 +141,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * Overridden to suppress the type arguments and add a OCL-conformant rendering of the elements of
 	 * the <code>TupleType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeNameWithTypeArguments(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeNameWithTypeArguments(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected CharSequence getTypeNameWithTypeArguments(Type type) {
@@ -170,7 +170,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * Overridden to implement custom rendering of the tuple type's name. This method returns the
 	 * string <code>"Tuple"</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeName(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected CharSequence getTypeName(Type type) {
@@ -181,7 +181,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	/**
 	 * Overridden to return <code>'('</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeParameterListOpeningDelimiter()
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeParameterListOpeningDelimiter()
 	 */
 	@Override
 	protected char getTypeParameterListOpeningDelimiter() {
@@ -192,7 +192,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	/**
 	 * Overridden to return <code>')'</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeParameterListClosingDelimiter()
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeParameterListClosingDelimiter()
 	 */
 	@Override
 	protected char getTypeParameterListClosingDelimiter() {

@@ -1,15 +1,15 @@
-package tudresden.ocl20.benchmark.sql;
+package org.dresdenocl.benchmark.sql;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import tudresden.ocl20.benchmark.sql.car.EOSCarPerformer;
-import tudresden.ocl20.benchmark.sql.car.ICarPerformer;
-import tudresden.ocl20.benchmark.sql.car.OCL2MySQLCarPerformer;
-import tudresden.ocl20.benchmark.sql.car.OCL2SqlCarPerformer;
-import tudresden.ocl20.benchmark.sql.util.IBenchmark;
+import org.dresdenocl.benchmark.sql.car.EOSCarPerformer;
+import org.dresdenocl.benchmark.sql.car.ICarPerformer;
+import org.dresdenocl.benchmark.sql.car.OCL2MySQLCarPerformer;
+import org.dresdenocl.benchmark.sql.car.OCL2SqlCarPerformer;
+import org.dresdenocl.benchmark.sql.util.IBenchmark;
 
 public class CarBenchmark extends Benchmark<ICarPerformer> {
 

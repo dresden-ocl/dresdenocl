@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.provider;
+package org.dresdenocl.pivotmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,12 +46,12 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.pivotmodel.Feature} object. <!-- begin-user-doc
+ * {@link org.dresdenocl.pivotmodel.Feature} object. <!-- begin-user-doc
  * --> <!-- end-user-doc -->
  * 
  * @generated

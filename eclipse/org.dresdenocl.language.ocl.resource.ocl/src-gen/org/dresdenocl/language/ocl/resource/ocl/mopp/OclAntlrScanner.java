@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public class OclAntlrScanner implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextScanner {
+public class OclAntlrScanner implements org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner {
 	
 	private org.antlr.runtime3_4_0.Lexer antlrLexer;
 	
@@ -14,7 +14,7 @@ public class OclAntlrScanner implements tudresden.ocl20.pivot.language.ocl.resou
 		this.antlrLexer = antlrLexer;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken getNextToken() {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextToken getNextToken() {
 		if (antlrLexer.getCharStream() == null) {
 			return null;
 		}
@@ -22,7 +22,7 @@ public class OclAntlrScanner implements tudresden.ocl20.pivot.language.ocl.resou
 		if (current == null || current.getType() < 0) {
 			return null;
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken result = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclANTLRTextToken(current);
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextToken result = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclANTLRTextToken(current);
 		return result;
 	}
 	

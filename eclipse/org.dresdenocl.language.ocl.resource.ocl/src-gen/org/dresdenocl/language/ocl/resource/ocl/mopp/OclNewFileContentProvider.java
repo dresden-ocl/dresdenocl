@@ -4,18 +4,18 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 public class OclNewFileContentProvider {
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation getMetaInformation() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation getMetaInformation() {
+		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	}
 	
 	public String getNewFileContent(String newFileName) {
 		return getExampleContent(new org.eclipse.emf.ecore.EClass[] {
-			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(),
-			tudresden.ocl20.pivot.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithoutNamespaceCS(),
+			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithNamespaceCS(),
+			org.dresdenocl.language.ocl.OclPackage.eINSTANCE.getPackageDeclarationWithoutNamespaceCS(),
 		}, getMetaInformation().getClassesWithSyntax(), newFileName);
 	}
 	
@@ -32,7 +32,7 @@ public class OclNewFileContentProvider {
 	
 	protected String getExampleContent(org.eclipse.emf.ecore.EClass eClass, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax, String newFileName) {
 		// create a minimal model
-		org.eclipse.emf.ecore.EObject root = new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMinimalModelHelper().getMinimalModel(eClass, allClassesWithSyntax, newFileName);
+		org.eclipse.emf.ecore.EObject root = new org.dresdenocl.language.ocl.resource.ocl.util.OclMinimalModelHelper().getMinimalModel(eClass, allClassesWithSyntax, newFileName);
 		if (root == null) {
 			// could not create a minimal model. returning an empty document is the best we
 			// can do.
@@ -40,17 +40,17 @@ public class OclNewFileContentProvider {
 		}
 		// use printer to get text for model
 		java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter printer = getPrinter(buffer);
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter printer = getPrinter(buffer);
 		try {
 			printer.print(root);
 		} catch (java.io.IOException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while generating example content.", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while generating example content.", e);
 		}
 		return buffer.toString();
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter getPrinter(java.io.OutputStream outputStream) {
-		return getMetaInformation().createPrinter(outputStream, new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource());
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter getPrinter(java.io.OutputStream outputStream) {
+		return getMetaInformation().createPrinter(outputStream, new org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource());
 	}
 	
 }

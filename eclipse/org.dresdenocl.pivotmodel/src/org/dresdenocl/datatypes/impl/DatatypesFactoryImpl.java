@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.datatypes.impl;
+package org.dresdenocl.datatypes.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -39,9 +39,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.datatypes.*;
-import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
-import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
+import org.dresdenocl.datatypes.*;
+import org.dresdenocl.datatypes.DatatypesFactory;
+import org.dresdenocl.datatypes.DatatypesPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--

@@ -8,8 +8,8 @@ JRE as the workspace.
 If you want to change the Scala sources, it is highly recommended that you use the 
 Scala IDE (http://www.scala-ide.org/) for Scala 2.9.x.
 After the installation you have to manually change the builder of the projects
-- tudresden.attributegrammar.integration.kiama
-- tudresden.ocl20.pivot.language.ocl.staticsemantics
+- org.dresdenocl.attributegrammar.integration.kiama
+- org.dresdenocl.language.ocl.staticsemantics
 to the Scala IDE builder. Right-click on the project and go to the properties panel.
 There, go to Builders, de-select the ANT script and select the Scala IDE builder.
 Just to be safe, clean both projects.

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * Implementors of this interface can be used to post-process parsed text
@@ -19,7 +19,7 @@ public interface IOclResourcePostProcessor {
 	 * 
 	 * @param resource the resource to validate of modify
 	 */
-	public void process(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource resource);
+	public void process(org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource resource);
 	
 	/**
 	 * This method is called to request the post processor to terminate. It is called

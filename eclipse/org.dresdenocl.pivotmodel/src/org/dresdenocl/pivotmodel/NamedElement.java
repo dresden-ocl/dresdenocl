@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -53,16 +53,16 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getName <em>Name
+ * <li>{@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name
  * </em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName
+ * <li>{@link org.dresdenocl.pivotmodel.NamedElement#getQualifiedName
  * <em>Qualified Name</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner <em>Owner
+ * <li>{@link org.dresdenocl.pivotmodel.NamedElement#getOwner <em>Owner
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamedElement()
  * @model abstract="true"
  * @generated
  */
@@ -79,8 +79,8 @@ public interface NamedElement extends EObject {
 	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement_Name()
-	 * @model default="" dataType="tudresden.ocl20.pivot.datatypes.String"
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamedElement_Name()
+	 * @model default="" dataType="org.dresdenocl.datatypes.String"
 	 *        required="true" ordered="false"
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface NamedElement extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getName <em>Name</em>}
+	 * {@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name</em>}
 	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -111,8 +111,8 @@ public interface NamedElement extends EObject {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Qualified Name</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement_QualifiedName()
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.String" transient="true"
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamedElement_QualifiedName()
+	 * @model dataType="org.dresdenocl.datatypes.String" transient="true"
 	 *        changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
@@ -136,7 +136,7 @@ public interface NamedElement extends EObject {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Owner</em>' reference.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamedElement_Owner()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamedElement_Owner()
 	 * @model resolveProxies="false" transient="true" changeable="false"
 	 *        volatile="true"
 	 * @generated
@@ -157,7 +157,7 @@ public interface NamedElement extends EObject {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @model required="true"
-	 *        exceptions="tudresden.ocl20.pivot.pivotmodel.CloneNotSupportedException"
+	 *        exceptions="org.dresdenocl.pivotmodel.CloneNotSupportedException"
 	 * @generated
 	 */
 	NamedElement clone() throws CloneNotSupportedException;
@@ -171,7 +171,7 @@ public interface NamedElement extends EObject {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model kind="operation" dataType="tudresden.ocl20.pivot.datatypes.String"
+	 * @model kind="operation" dataType="org.dresdenocl.datatypes.String"
 	 *        unique="false"
 	 * @generated
 	 */

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.BracketExpCS#getOclExpression <em>Ocl Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.BracketExpCS#getOclExpression <em>Ocl Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getBracketExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getBracketExpCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface BracketExpCS extends OclExpressionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Ocl Expression</em>' containment reference.
    * @see #setOclExpression(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getBracketExpCS_OclExpression()
+   * @see org.dresdenocl.language.ocl.OclPackage#getBracketExpCS_OclExpression()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getOclExpression();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.BracketExpCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.BracketExpCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Ocl Expression</em>' containment reference.

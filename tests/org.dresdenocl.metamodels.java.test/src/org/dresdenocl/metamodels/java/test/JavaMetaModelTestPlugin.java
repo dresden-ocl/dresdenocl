@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.test;
+package org.dresdenocl.metamodels.java.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -25,7 +25,7 @@ public class JavaMetaModelTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.metamodels.java.test";
+			"org.dresdenocl.metamodels.java.test";
 
 	/** The shared instance. */
 	private static JavaMetaModelTestPlugin plugin;

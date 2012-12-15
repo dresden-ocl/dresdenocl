@@ -4,12 +4,12 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
-public class OclCompound extends tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement {
+public class OclCompound extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement {
 	
-	public OclCompound(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclChoice choice, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {
-		super(cardinality, new tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement[] {choice});
+	public OclCompound(org.dresdenocl.language.ocl.resource.ocl.grammar.OclChoice choice, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {
+		super(cardinality, new org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement[] {choice});
 	}
 	
 	public String toString() {

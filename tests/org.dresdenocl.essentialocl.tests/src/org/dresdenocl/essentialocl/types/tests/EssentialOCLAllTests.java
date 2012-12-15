@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.essentialocl.types.tests;
+package org.dresdenocl.essentialocl.types.tests;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;

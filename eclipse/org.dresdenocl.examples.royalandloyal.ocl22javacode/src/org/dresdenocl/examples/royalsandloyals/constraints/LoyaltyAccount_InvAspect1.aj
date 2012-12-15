@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,9 +9,9 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect LoyaltyAccount_InvAspect1 {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -20,14 +20,14 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
      * <code>context LoyaltyAccount
      *       inv: points > 0 implies transactions->exists(t | t.points > 0)</code></p>
      */
-    after(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyAccount. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.LoyaltyAccount")) {
         Boolean result1;
         result1 = false;
 
         /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-        for (org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+        for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
             if ((anElement1.points > new Integer(0))) {
                 result1 = true;
                 break;

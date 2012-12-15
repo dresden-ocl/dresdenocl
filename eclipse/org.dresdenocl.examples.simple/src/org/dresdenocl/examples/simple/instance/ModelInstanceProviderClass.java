@@ -1,11 +1,11 @@
-package tudresden.ocl20.pivot.examples.simple.instance;
+package org.dresdenocl.examples.simple.instance;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.examples.simple.Person;
-import tudresden.ocl20.pivot.examples.simple.Professor;
-import tudresden.ocl20.pivot.examples.simple.Student;
+import org.dresdenocl.examples.simple.Person;
+import org.dresdenocl.examples.simple.Professor;
+import org.dresdenocl.examples.simple.Student;
 
 /**
  * <p>

@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequenceSubSequence {
      *       def: testSequenceSubSequence(source: Sequence(OclAny), arg01: Integer, arg02: Integer): Sequence(OclAny) = source ->subSequence(arg01, arg02)</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSequenceSubSequence(java.util.List<Object> source, Integer arg01, Integer arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.subSequence(source, arg01, arg02);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.subSequence(source, arg01, arg02);
     }
 }

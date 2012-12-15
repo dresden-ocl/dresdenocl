@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.xml.test;
+package org.dresdenocl.modelinstancetype.xml.test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -19,9 +19,9 @@ import java.io.File;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.modelinstance.IModelInstance;
 
 /**
  * <p>

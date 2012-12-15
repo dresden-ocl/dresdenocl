@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.ocl;
+package org.dresdenocl.ocl;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class OclLanguagePlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.language.ocl";
+	public static final String PLUGIN_ID = "org.dresdenocl.language.ocl";
 
 	// The shared instance
 	private static OclLanguagePlugin plugin;

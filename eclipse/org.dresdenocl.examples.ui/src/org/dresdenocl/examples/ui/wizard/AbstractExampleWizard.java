@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.ui.wizard;
+package org.dresdenocl.examples.ui.wizard;
 
 import java.util.ArrayList;
 import java.util.Collection;

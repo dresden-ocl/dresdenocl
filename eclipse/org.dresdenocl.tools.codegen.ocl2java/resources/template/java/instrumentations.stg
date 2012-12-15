@@ -449,7 +449,7 @@ after($package$.$class$ $selfVariable()$) throwing : all$class$PublicMethods($se
 // --- Instrumentation Code for Invariants with validation variant 3 ---
 invInstrumentation3(class, package, attribute, attributeType, constCode, constExp, oclBody, errorCode, disableInheritance, defineCheckMethod) ::= <<
 $if(defineCheckMethod)$
-declare parents: $package$.$class$ implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+declare parents: $package$.$class$ implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
 public void $package$.$class$.$checkInvariantsOperationName()$() {
     /* Remains empty. Is only filled with behavior by advice(s). */

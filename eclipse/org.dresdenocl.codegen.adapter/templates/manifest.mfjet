@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil" class="ManifestMF" %>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil" class="ManifestMF" %>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
 String activator = PivotAdapterGeneratorUtil.getProjectName(genModel) + "." + PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";
@@ -18,9 +18,9 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 <%//add RequiredPLlugins%>
 <%String additionallyRequiredPlugins = 
 	genModel.getModelPluginID() + "," + System.getProperty("line.separator") +
-	" tudresden.ocl20.pivot.modelbus," + System.getProperty("line.separator") +
-	" tudresden.ocl20.pivot.pivotmodel," + System.getProperty("line.separator") +
-	" tudresden.ocl20.logging," + System.getProperty("line.separator") +
+	" org.dresdenocl.modelbus," + System.getProperty("line.separator") +
+	" org.dresdenocl.pivotmodel," + System.getProperty("line.separator") +
+	" org.dresdenocl.logging," + System.getProperty("line.separator") +
 	" org.apache.commons.lang";%>
 <%Iterator<String> requiredPluginIterator = genModel.getModelRequiredPlugins().iterator();
 if (requiredPluginIterator.hasNext()) { 

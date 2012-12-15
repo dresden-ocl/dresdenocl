@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * Preference page for configuring syntax coloring.
@@ -18,7 +18,7 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 	public OclSyntaxColoringPreferencePage() {
 		super();
 		
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 		
 		String languageId = metaInformation.getSyntaxName();
 		
@@ -32,7 +32,7 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		java.util.Collections.sort(terminals);
 		content.put(languageId, terminals);
 		
-		setPreferenceStore(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
 		setDescription("Configure syntax coloring for ." + languageId + " files.");
 	}
 	
@@ -117,12 +117,12 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		 */
 		public HighlightingColorListItem(String languageID, String tokenName) {
 			fDisplayName = tokenName;
-			fColorKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR);
-			fBoldKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD);
-			fItalicKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ITALIC);
-			fStrikethroughKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.STRIKETHROUGH);
-			fUnderlineKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE);
-			fEnableKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ENABLE);
+			fColorKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR);
+			fBoldKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD);
+			fItalicKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ITALIC);
+			fStrikethroughKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.STRIKETHROUGH);
+			fUnderlineKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE);
+			fEnableKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageID, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ENABLE);
 		}
 		
 		/**
@@ -517,7 +517,7 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 	}
 	
 	private void addFiller(org.eclipse.swt.widgets.Composite composite, int horizontalSpan) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPixelConverter pixelConverter = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPixelConverter(composite);
+		org.dresdenocl.language.ocl.resource.ocl.ui.OclPixelConverter pixelConverter = new org.dresdenocl.language.ocl.resource.ocl.ui.OclPixelConverter(composite);
 		org.eclipse.swt.widgets.Label filler = new org.eclipse.swt.widgets.Label(composite, org.eclipse.swt.SWT.LEFT);
 		org.eclipse.swt.layout.GridData gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.HORIZONTAL_ALIGN_FILL);
 		gd.horizontalSpan = horizontalSpan;
@@ -601,8 +601,8 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 	private void updateActiveEditor() {
 		org.eclipse.ui.IWorkbench workbench = org.eclipse.ui.PlatformUI.getWorkbench();
 		org.eclipse.ui.IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor != null && editor instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor emfTextEditor = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) editor;
+		if (editor != null && editor instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) {
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor emfTextEditor = (org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) editor;
 			emfTextEditor.invalidateTextRepresentation();
 		}
 	}

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.PathNameCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,10 +25,10 @@ import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#getSource <em>Source</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#getPropertyPath <em>Property Path</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#getPropertyName <em>Property Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#isIsMarkedPre <em>Is Marked Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#getPropertyPath <em>Property Path</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#getPropertyName <em>Property Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl#isIsMarkedPre <em>Is Marked Pre</em>}</li>
  * </ul>
  * </p>
  *

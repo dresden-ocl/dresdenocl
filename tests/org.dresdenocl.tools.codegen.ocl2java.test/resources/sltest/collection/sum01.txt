@@ -1,1 +1,1 @@
-new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(source).intValue())
+new Integer(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.sum(source).intValue())

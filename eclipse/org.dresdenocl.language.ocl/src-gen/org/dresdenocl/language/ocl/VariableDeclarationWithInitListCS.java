@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -17,18 +17,18 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS#getVariableDeclarations <em>Variable Declarations</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS#getVariableDeclarations <em>Variable Declarations</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithInitListCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithInitListCS()
  * @model
  * @generated
  */
 public interface VariableDeclarationWithInitListCS extends EObject {
 	/**
    * Returns the value of the '<em><b>Variable Declarations</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable Declarations</em>' containment reference list isn't clear,
@@ -36,7 +36,7 @@ public interface VariableDeclarationWithInitListCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Variable Declarations</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithInitListCS_VariableDeclarations()
+   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithInitListCS_VariableDeclarations()
    * @model containment="true" required="true"
    * @generated
    */

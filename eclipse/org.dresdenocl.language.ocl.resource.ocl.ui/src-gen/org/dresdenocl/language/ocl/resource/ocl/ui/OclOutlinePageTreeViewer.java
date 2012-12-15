@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * This custom implementation of a TreeViewer expands the tree automatically up to
@@ -81,7 +81,7 @@ public class OclOutlinePageTreeViewer extends org.eclipse.jface.viewers.TreeView
 			
 			private String getURI(org.eclipse.emf.ecore.EObject eObject) {
 				java.util.List<String> uriFragmentPath = getFragmentPath(eObject);
-				String uriFragment = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.explode(uriFragmentPath, "/");
+				String uriFragment = org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.explode(uriFragmentPath, "/");
 				return uriFragment;
 			}
 			
@@ -103,7 +103,7 @@ public class OclOutlinePageTreeViewer extends org.eclipse.jface.viewers.TreeView
 		if (!linkWithEditor) {
 			return;
 		}
-		if (selection instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection) {
+		if (selection instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection) {
 			suppressNotifications = true;
 			super.setSelection(selection, reveal);
 			suppressNotifications = false;
@@ -159,7 +159,7 @@ public class OclOutlinePageTreeViewer extends org.eclipse.jface.viewers.TreeView
 		try {
 			super.expandToLevel(level);
 		} catch (Exception e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while refreshing outline view", e);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while refreshing outline view", e);
 		}
 	}
 	

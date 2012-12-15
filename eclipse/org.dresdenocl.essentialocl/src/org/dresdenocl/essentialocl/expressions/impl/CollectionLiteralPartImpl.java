@@ -30,13 +30,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralPart;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.TypedElementImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Literal Part</b></em>'.

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationCS()
  * @model abstract="true"
  * @generated
  */
@@ -35,14 +35,14 @@ public interface VariableDeclarationCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Variable Name</em>' containment reference.
    * @see #setVariableName(SimpleNameCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationCS_VariableName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationCS_VariableName()
    * @model containment="true" required="true"
    * @generated
    */
 	SimpleNameCS getVariableName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Variable Name</em>' containment reference.

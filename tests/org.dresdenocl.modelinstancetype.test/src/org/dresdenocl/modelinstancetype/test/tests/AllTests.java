@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.tests;
+package org.dresdenocl.modelinstancetype.test.tests;
 
 import java.util.Set;
 
@@ -25,22 +25,22 @@ import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestModelTypesNames;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestServices;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestModelTypesNames;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
  * Contains all test cases of the package
- * <code>tudresden.ocl20.pivot.modelinstancetype.test.tests</code>.
+ * <code>org.dresdenocl.modelinstancetype.test.tests</code>.
  * </p>
  * 
  * @author Claas Wilke

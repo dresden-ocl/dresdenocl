@@ -23,7 +23,7 @@ of Dresden OCL. A documentation of the complete facade's interface would be too
 large for this documentation. Thus, please investigate the facade directly
 trough the source code or API documentation. The facade called
 \code{Ocl2ForEclipseFacade} is located in the plug-in
-\code{tudresden.ocl20.pivot.facade}. Please be aware of the fact that if you
+\code{org.dresdenocl.facade}. Please be aware of the fact that if you
 use the facade, you will result in dependencies to all major parts of Dresden
 OCL. Thus, if you want to use one of the tools only (e.g, the \acs{OCL} Parser)
 you could access these tools directly as explained below.
@@ -34,7 +34,7 @@ you could access these tools directly as explained below.
 
 The central registry component of Dresden OCL is the \keyword{Model-Bus}
 which is implemented by the Eclipse plug-in 
-\code{tudresden.ocl20.pivot.modelbus}. The main class of this plug-in 
+\code{org.dresdenocl.modelbus}. The main class of this plug-in 
 (\code{tudresden.\linebreak[0]ocl20.pivot.modelbus.ModelBusPlugin}) provides 
 methods, to access metamodels, models and model instances and to import new
 resources of these kinds into the toolkit (cf. 
@@ -63,7 +63,7 @@ The method \code{getMetamodels()} returns all metamodels that are currently
 registered in the registry. The method \code{getMetamodel(id: String)} can be 
 used to get a metamodel by its ID (Normally, the ID of a metamodel is equal to
 the name of its plug-in (e.g., the \acs{UML}2 metamodel has the ID 
-\code{tudresden.ocl20.pivot.metamodels.uml2})).
+\code{org.dresdenocl.metamodels.uml2})).
 
 \begin{figure}[!b]
 	\centering
@@ -98,7 +98,7 @@ IMetamodel metaModel;
 IModel model;
 
 metaModel = ModelBusPlugin.getMetamodelRegistry()
-              .getMetamodel("tudresden.ocl20.pivot.metamodels.uml2");
+              .getMetamodel("org.dresdenocl.metamodels.uml2");
 model = metaModel.getModelProvider().getModel(modelURL);
 \end{lstlisting}
 
@@ -130,7 +130,7 @@ currently registered in the registry. The method \code{getModelInstanceType(id:
 String)} can be used to get a model instance types by its ID (Normally, the ID 
 of a model instance type is equal to the name of its plug-in (e.g., the Java 
 model instance type has the ID 
-\code{tudresden.ocl20.pivot.modelinstancetype.java})).
+\code{org.dresdenocl.modelinstancetype.java})).
 
 \begin{figure}[!b]
 	\centering
@@ -172,7 +172,7 @@ IModelInstance modelInstance;
 
 miType = ModelBusPlugin.getModelInstanceTypeRegistry()
            .getModelInstanceType(
-             "tudresden.ocl20.pivot.modelinstancetype.java");
+             "org.dresdenocl.modelinstancetype.java");
 modelInstance = miType.getModelInstanceProvider()
                   .getModelInstance(modelInstanceUrl, model);
 \end{lstlisting}
@@ -196,9 +196,9 @@ the \keyword{Model Instance Browser} of Dresden OCL's GUI.
 
 \section{How to access the OCL Parser}
 The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in 
-\code{tudresden.ocl20.pivot.\linebreak[0]language.ocl.staticsemantics} within
+\code{org.dresdenocl.\linebreak[0]language.ocl.staticsemantics} within
 the package
-\code{tudresden.ocl20.pivot.language.ocl\linebreak[0].\linebreak[0]re\-source\linebreak[0].ocl}.
+\code{org.dresdenocl.language.ocl\linebreak[0].\linebreak[0]re\-source\linebreak[0].ocl}.
 The parser provides a very simple interface and can be used as shown in Listing
 \ref{lst:integration:parserConstraints}. You have to provide an \code{IModel}
 and an \code{URI} where the \acs{OCL} file can be found. You can specify whether
@@ -224,7 +224,7 @@ To use the \acs{OCL} Interpreter, a model and a model instance must be loaded
 into the toolkit before. Additionally, at least one constraint must be parsed 
 that shall be interpreted for the objects contained in the model instance. The 
 interpreter is located in the plug-in 
-\code{tudresden.ocl20.pi\-vot.\linebreak[0]in\-ter\-pre\-ter}. It has a more 
+\code{org.dresdenocl.pi\-vot.\linebreak[0]in\-ter\-pre\-ter}. It has a more 
 complex interface than the other tools and contains many different operations 
 to interpret different kinds of constraints.
 

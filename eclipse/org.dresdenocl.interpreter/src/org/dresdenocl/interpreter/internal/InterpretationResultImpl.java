@@ -17,12 +17,12 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.internal;
+package org.dresdenocl.interpreter.internal;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

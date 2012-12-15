@@ -1,15 +1,15 @@
-package tudresden.ocl20.pivot.pivotmodel.base;
+package org.dresdenocl.pivotmodel.base;
 
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.util.BasicInternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.TypeImpl;
 
 /**
  * This class is meant as a base class for DSL- and/or repository-specific

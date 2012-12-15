@@ -17,15 +17,15 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test.expressions;
+package org.dresdenocl.ocl2parser.test.expressions;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.model.IModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.model.IModel;
 
 /**
  * <p>
@@ -51,11 +51,11 @@ public class AllExpressionTests extends AbstractDresdenOclTest {
 	 * The name of the {@link Bundle} that provides the model used during
 	 * testing.
 	 */
-	public static final String MODEL_BUNDLE = "tudresden.ocl20.pivot.ocl2parser.test";
+	public static final String MODEL_BUNDLE = "org.dresdenocl.ocl2parser.test";
 
 	/** The path of the directory of the {@link IModel} used during testing. */
 	public static final String MODEL_DIRECTORY = "resources/model/";
 
 	/** The ID of the {@link IMetamodel} used during testing. */
-	public static final String META_MODEL_ID = "tudresden.ocl20.pivot.metamodels.uml2";
+	public static final String META_MODEL_ID = "org.dresdenocl.metamodels.uml2";
 }

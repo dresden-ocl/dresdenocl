@@ -4,15 +4,15 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
+package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -23,10 +23,10 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#isBooleanProperty1 <em>Boolean Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#getIntegerProperty1 <em>Integer Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#getRealProperty1 <em>Real Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#getStringProperty1 <em>String Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#isBooleanProperty1 <em>Boolean Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#getIntegerProperty1 <em>Integer Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#getRealProperty1 <em>Real Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.PrimitiveTypeProviderClassImpl#getStringProperty1 <em>String Property1</em>}</li>
  * </ul>
  * </p>
  *

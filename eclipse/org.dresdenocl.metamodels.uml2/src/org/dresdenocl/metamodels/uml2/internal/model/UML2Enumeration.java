@@ -11,18 +11,18 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.base.AbstractEnumeration;
 
 /**
  * <p>
@@ -94,7 +94,7 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -105,7 +105,7 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getNamespace()
 	 * 
 	 * @generated NOT
 	 */
@@ -116,7 +116,7 @@ public class UML2Enumeration extends AbstractEnumeration implements Enumeration 
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
 	 * 
 	 * @generated NOT
 	 */

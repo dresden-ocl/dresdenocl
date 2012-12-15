@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +42,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,7 +52,7 @@ public interface InvalidType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Library</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ocl Library</em>' container reference isn't clear,
@@ -61,13 +61,13 @@ public interface InvalidType extends Type {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ocl Library</em>' container reference.
 	 * @see #setOclLibrary(OclLibrary)
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclInvalid
 	 * @generated
 	 */
 	OclLibrary getOclLibrary();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}' container reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Library</em>' container reference.

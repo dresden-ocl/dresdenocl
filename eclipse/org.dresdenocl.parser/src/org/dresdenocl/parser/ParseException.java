@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.parser;
+package org.dresdenocl.parser;
 
 
 /**

@@ -17,14 +17,14 @@ You should have received a copy of the GNU Lesser General Public License along
 with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.ui.internal.perspective;
+package org.dresdenocl.modelbus.ui.internal.perspective;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
+import org.dresdenocl.modelbus.ui.internal.views.ModelInstancesView;
+import org.dresdenocl.modelbus.ui.internal.views.ModelsView;
 
 /**
  * <p>

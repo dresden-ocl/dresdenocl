@@ -16,15 +16,15 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.exception;
+package org.dresdenocl.modelinstancetype.exception;
 
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
  * A {@link AsTypeCastException} is thrown, if the operation
- * {@link IModelInstanceElement#asType(tudresden.ocl20.pivot.pivotmodel.Type)}
+ * {@link IModelInstanceElement#asType(org.dresdenocl.pivotmodel.Type)}
  * is invoked with a {@link Type} to that the {@link IModelInstanceElement}
  * cannot be casted.
  * </p>

@@ -11,12 +11,12 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter;
+package org.dresdenocl.interpreter;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.interpreter.internal.InterpretationResultImpl;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.internal.InterpretationResultImpl;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

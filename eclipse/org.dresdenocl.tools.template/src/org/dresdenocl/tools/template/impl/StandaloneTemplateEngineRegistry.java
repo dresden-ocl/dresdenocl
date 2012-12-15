@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.template.impl;
+package org.dresdenocl.tools.template.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +8,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.event.ITemplateEngineRegistryListener;
-import tudresden.ocl20.pivot.tools.template.event.TemplateEngineRegistryEvent;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateEngine;
+import org.dresdenocl.tools.template.ITemplateEngineRegistry;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.event.ITemplateEngineRegistryListener;
+import org.dresdenocl.tools.template.event.TemplateEngineRegistryEvent;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -64,7 +64,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#addTemplateEngine(ITemplateEngine)
 	 */
 	public void addTemplateEngine(ITemplateEngine templateEngine)
 			throws TemplateException {
@@ -105,7 +105,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#dispose()
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -116,7 +116,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#getNewTemplateEngine(String)
 	 */
 	public ITemplateEngine getNewTemplateEngine(String templateEngineName)
 			throws TemplateException {
@@ -144,7 +144,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#getTemplateEngines()
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#getTemplateEngines()
 	 */
 	public List<ITemplateEngine> getTemplateEngines() {
 
@@ -156,7 +156,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngine(ITemplateEngine)
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#removeTemplateEngine(ITemplateEngine)
 	 */
 	public void removeTemplateEngine(ITemplateEngine templateEngine) {
 
@@ -174,7 +174,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngine(String)
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#removeTemplateEngine(String)
 	 */
 	public void removeTemplateEngine(String templateEngineName) {
 
@@ -188,7 +188,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#addTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#addTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
 	 */
 	public void addTemplateEngineRegistryListener(
 			ITemplateEngineRegistryListener listener) {
@@ -259,7 +259,7 @@ public class StandaloneTemplateEngineRegistry implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry#removeTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
+	 * @see org.dresdenocl.tools.template.ITemplateEngineRegistry#removeTemplateEngineRegistryListener(ITemplateEngineRegistryListener)
 	 * 
 	 */
 	public void removeTemplateEngineRegistryListener(

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * A simple interface for commands that can be executed and that return

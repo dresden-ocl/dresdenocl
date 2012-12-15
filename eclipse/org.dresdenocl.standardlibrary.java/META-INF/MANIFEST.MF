@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Standard Library Java Implementation Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.standardlibrary.java;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.standardlibrary.java;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin
+Bundle-Activator: org.dresdenocl.standardlibrary.java.JavaStandardlibraryPlugin
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.modelbus
+ org.dresdenocl.modelbus
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.standardlibrary.java
+Export-Package: org.dresdenocl.standardlibrary.java
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: TU Dresden, Software Technology Group

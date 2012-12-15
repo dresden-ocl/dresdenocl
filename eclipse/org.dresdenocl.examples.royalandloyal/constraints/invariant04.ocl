@@ -1,9 +1,9 @@
 -- Constraint taken from [1] page 47.
 -- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 -- Adapted from participants to programs.participants
--- Exception during parsing of given OCL constraints. Unable to find operation 'includes' with argument types [UML2Class[name=CustomerCard,namespace=UML2Package[name=royalsandloyals]]] in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard'.
+-- Exception during parsing of given OCL constraints. Unable to find operation 'includes' with argument types [UML2Class[name=CustomerCard,namespace=UML2Package[name=royalsandloyals]]] in type 'root::org::dresdenocl::examples::royalsandloyals::CustomerCard'.
 context Membership
 inv correctCard: program.participants.cards->flatten()->includes(self.card)
 

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,13 +15,13 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getIteratorVariable <em>Iterator Variable</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getResultVariable <em>Result Variable</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IterateExpCS#getIteratorVariable <em>Iterator Variable</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IterateExpCS#getResultVariable <em>Result Variable</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IterateExpCS#getBodyExpression <em>Body Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIterateExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getIterateExpCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface IterateExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Iterator Variable</em>' containment reference.
    * @see #setIteratorVariable(IteratorExpVariableCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIterateExpCS_IteratorVariable()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIterateExpCS_IteratorVariable()
    * @model containment="true"
    * @generated
    */
 	IteratorExpVariableCS getIteratorVariable();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getIteratorVariable <em>Iterator Variable</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IterateExpCS#getIteratorVariable <em>Iterator Variable</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Iterator Variable</em>' containment reference.
@@ -62,14 +62,14 @@ public interface IterateExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Result Variable</em>' containment reference.
    * @see #setResultVariable(VariableDeclarationWithInitCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIterateExpCS_ResultVariable()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIterateExpCS_ResultVariable()
    * @model containment="true" required="true"
    * @generated
    */
 	VariableDeclarationWithInitCS getResultVariable();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getResultVariable <em>Result Variable</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IterateExpCS#getResultVariable <em>Result Variable</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Result Variable</em>' containment reference.
@@ -88,14 +88,14 @@ public interface IterateExpCS extends LoopExpCS, ImplicitFeatureCallCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Body Expression</em>' containment reference.
    * @see #setBodyExpression(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIterateExpCS_BodyExpression()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIterateExpCS_BodyExpression()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getBodyExpression();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getBodyExpression <em>Body Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IterateExpCS#getBodyExpression <em>Body Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Body Expression</em>' containment reference.

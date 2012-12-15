@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Living Example Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.examples.living
+Bundle-SymbolicName: org.dresdenocl.examples.living
 Bundle-Version: 3.2.0.qualifier
-Export-Package: tudresden.ocl20.pivot.examples.living
+Export-Package: org.dresdenocl.examples.living
 Bundle-ClassPath: src/,
  .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

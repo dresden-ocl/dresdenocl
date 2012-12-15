@@ -11,7 +11,7 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,10 +22,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.uml2.uml.Package;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractNamespace;
 
 /**
  * <p>
@@ -112,7 +112,7 @@ public class UML2Package extends AbstractNamespace implements Namespace {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getName()
 	 */
 	@Override
 	public String getName() {
@@ -123,7 +123,7 @@ public class UML2Package extends AbstractNamespace implements Namespace {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace
+	 * org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestingNamespace
 	 * ()
 	 */
 	@Override
@@ -135,7 +135,7 @@ public class UML2Package extends AbstractNamespace implements Namespace {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedType()
+	 * org.dresdenocl.pivotmodel.base.AbstractNamespace#getOwnedType()
 	 */
 	@Override
 	public List<Type> getOwnedType() {
@@ -164,7 +164,7 @@ public class UML2Package extends AbstractNamespace implements Namespace {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#
+	 * @seeorg.dresdenocl.pivotmodel.base.AbstractNamespace#
 	 * getNestedNamespaceImpl()
 	 */
 	@Override

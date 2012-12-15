@@ -1,12 +1,12 @@
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
-java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator1;
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result2;
+java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> comparator1;
 
 result2 = aClass.membership.accounts;
 
-comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>() {
+comparator1 = new java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>() {
 
     /** Method which compares two elements of the collection. */
-    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement2) {
+    public int compare(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement1, org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement2) {
         int result3;
 
         result3 = 0;
@@ -22,15 +22,15 @@ comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
 };
 
 java.util.Collections.sort(result2, comparator1);
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
-java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator2;
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result1;
+java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> comparator2;
 
 result1 = result2;
 
-comparator2 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>() {
+comparator2 = new java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>() {
 
     /** Method which compares two elements of the collection. */
-    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement3, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement4) {
+    public int compare(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement3, org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement4) {
         int result4;
 
         result4 = 0;
@@ -47,4 +47,4 @@ comparator2 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandl
 
 java.util.Collections.sort(result1, comparator2);
 
-(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))

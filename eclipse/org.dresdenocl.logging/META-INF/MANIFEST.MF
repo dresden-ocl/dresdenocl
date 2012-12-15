@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL Logging Support
-Bundle-SymbolicName: tudresden.ocl20.logging
+Bundle-SymbolicName: org.dresdenocl.logging
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.logging.LoggingPlugin
+Bundle-Activator: org.dresdenocl.logging.LoggingPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.lang,
@@ -12,5 +12,5 @@ Eclipse-RegisterBuddy: org.apache.log4j
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.logging;uses:="org.eclipse.core.runtime,org.apache.log4j,org.osgi.framework",
- tudresden.ocl20.logging.appender
+Export-Package: org.dresdenocl.logging;uses:="org.eclipse.core.runtime,org.apache.log4j,org.osgi.framework",
+ org.dresdenocl.logging.appender

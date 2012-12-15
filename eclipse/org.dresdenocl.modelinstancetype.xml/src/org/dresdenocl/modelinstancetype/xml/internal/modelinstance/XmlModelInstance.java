@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance;
+package org.dresdenocl.modelinstancetype.xml.internal.modelinstance;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,22 +33,22 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.base.AbstractModelInstance;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <p>
@@ -163,7 +163,7 @@ public class XmlModelInstance extends AbstractModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstance#
 	 * addModelInstanceElement(java.lang.Object)
 	 */
 	public IModelInstanceElement addModelInstanceElement(Object object)
@@ -191,8 +191,8 @@ public class XmlModelInstance extends AbstractModelInstance {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getStaticProperty
-	 * (tudresden.ocl20.pivot.pivotmodel.Property)
+	 * org.dresdenocl.modelbus.modelinstance.IModelInstance#getStaticProperty
+	 * (org.dresdenocl.pivotmodel.Property)
 	 */
 	public IModelInstanceElement getStaticProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException {
@@ -210,8 +210,8 @@ public class XmlModelInstance extends AbstractModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
-	 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstance#
+	 * invokeStaticOperation(org.dresdenocl.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeStaticOperation(Operation operation,

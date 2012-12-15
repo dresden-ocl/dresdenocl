@@ -11,7 +11,7 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -29,14 +29,14 @@ import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Type;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.model.base.AbstractModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
 
 /**
  * <p>
@@ -91,7 +91,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
+	 * @see org.dresdenocl.model.IModel#dispose()
 	 */
 	public void dispose() {
 		/* Unload referenced resources and the resource. */
@@ -129,7 +129,7 @@ public class UML2Model extends AbstractModel implements IModel {
 	 *             if an error occurs when creating the adapter for the top
 	 *             namespace
 	 * 
-	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
+	 * @see org.dresdenocl.model.IModel#getRootNamespace()
 	 * 
 	 * @generated
 	 */
@@ -241,7 +241,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					// located in the root name space directly. */
 
 					/* Adapt the type. */
-					tudresden.ocl20.pivot.pivotmodel.Type importedType;
+					org.dresdenocl.pivotmodel.Type importedType;
 					importedType = this.factory.createType(classifier);
 
 					/* Only add the type if it has not been added yet. */
@@ -305,7 +305,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					// end for.
 
 					for (Type umlType : ((Package) eObject).getOwnedTypes()) {
-						tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+						org.dresdenocl.pivotmodel.Type adaptedType = this.factory
 								.createType(umlType);
 						if (adaptedType != null
 								&& !this.rootNamespace.getOwnedType().contains(
@@ -427,7 +427,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					// end for.
 
 					for (Type umlType : ((Model) eObject).getOwnedTypes()) {
-						tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+						org.dresdenocl.pivotmodel.Type adaptedType = this.factory
 								.createType(umlType);
 						if (adaptedType != null)
 							this.rootNamespace.addType(adaptedType);
@@ -454,7 +454,7 @@ public class UML2Model extends AbstractModel implements IModel {
 					// end for.
 
 					for (Type umlType : ((Profile) eObject).getOwnedTypes()) {
-						tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+						org.dresdenocl.pivotmodel.Type adaptedType = this.factory
 								.createType(umlType);
 						if (adaptedType != null)
 							this.rootNamespace.addType(adaptedType);
@@ -472,7 +472,7 @@ public class UML2Model extends AbstractModel implements IModel {
 				}
 
 				else if (eObject instanceof Type) {
-					tudresden.ocl20.pivot.pivotmodel.Type adaptedType = this.factory
+					org.dresdenocl.pivotmodel.Type adaptedType = this.factory
 							.createType((Type) eObject);
 					if (adaptedType != null)
 						this.rootNamespace.addType(adaptedType);

@@ -30,26 +30,26 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstance;
+package org.dresdenocl.modelinstance;
 
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstancePrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstancePrimitiveType;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -13,9 +13,9 @@ public privileged aspect Membership_DefAspect_getCurrentLevelName {
      * <code>context Membership
      *       def: getCurrentLevelName() : String = currentLevel.name</code></p>
      */
-    public String org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Membership.getCurrentLevelName() {
+    public String org.dresdenocl.examples.royalsandloyals.Membership.getCurrentLevelName() {
     	/* Self variable probably used within the definition. */
-    	org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Membership aClass = this;
+    	org.dresdenocl.examples.royalsandloyals.Membership aClass = this;
     	
         return aClass.currentLevel.name;
     }

@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus;
+package org.dresdenocl.modelbus;
 
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.modelinstance.IModelInstanceProvider;
+import org.dresdenocl.modelinstance.IModelInstanceType;
 
 /**
  * <p>
@@ -90,15 +90,15 @@ public interface IModelBusConstants {
 	String ATT_NAME = "name"; //$NON-NLS-1$
 
 	/**
-	 * The ID of the class tudresden.ocl20.pivot.modelbus.ui.views.ModelsView.
+	 * The ID of the class org.dresdenocl.modelbus.ui.views.ModelsView.
 	 */
 	public static final String MODELS_VIEW_ID =
-			"tudresden.ocl20.pivot.modelbus.ui.views.models"; //$NON-NLS-1$
+			"org.dresdenocl.modelbus.ui.views.models"; //$NON-NLS-1$
 
 	/**
 	 * The ID of the class
-	 * tudresden.ocl20.pivot.modelbus.ui.views.ModelInstancesView.
+	 * org.dresdenocl.modelbus.ui.views.ModelInstancesView.
 	 */
 	public static final String MODEL_INSTANCES_VIEW_ID =
-			"tudresden.ocl20.pivot.modelbus.ui.views.modelinstances"; //$NON-NLS-1$
+			"org.dresdenocl.modelbus.ui.views.modelinstances"; //$NON-NLS-1$
 }

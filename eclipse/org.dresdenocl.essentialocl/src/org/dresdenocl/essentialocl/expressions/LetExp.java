@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,8 +40,8 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getIn <em>In</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getVariable <em>Variable</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.LetExp#getIn <em>In</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.LetExp#getVariable <em>Variable</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,7 +64,7 @@ public interface LetExp extends OclExpression {
 	OclExpression getIn();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getIn <em>In</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.LetExp#getIn <em>In</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>In</em>' containment reference.
@@ -88,7 +88,7 @@ public interface LetExp extends OclExpression {
 	Variable getVariable();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getVariable <em>Variable</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.LetExp#getVariable <em>Variable</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Variable</em>' containment reference.

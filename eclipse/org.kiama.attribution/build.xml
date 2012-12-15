@@ -1,20 +1,20 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
 	
-	<property name="attributableEObjectBin" value="./../tudresden.attributegrammar.integration.kiama/bin"/>
-	<property name="attributableEObjectSrc" value="./../tudresden.attributegrammar.integration.kiama/src"/>
+	<property name="attributableEObjectBin" value="./../org.dresdenocl.attributegrammar.integration.kiama/bin"/>
+	<property name="attributableEObjectSrc" value="./../org.dresdenocl.attributegrammar.integration.kiama/src"/>
 	
-	<target name="Clean tudresden.attributegrammar.integration.kiama" >
+	<target name="Clean org.dresdenocl.attributegrammar.integration.kiama" >
 		<mkdir dir="${attributableEObjectBin}"/>
 		<delete>
 			<fileset dir="${attributableEObjectBin}">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
-		<antcall target="Compile tudresden.attributegrammar.integration.kiama" />
+		<antcall target="Compile org.dresdenocl.attributegrammar.integration.kiama" />
 	</target>
 	
-	<target name="Compile tudresden.attributegrammar.integration.kiama" depends="Scala Compiler Init">		
+	<target name="Compile org.dresdenocl.attributegrammar.integration.kiama" depends="Scala Compiler Init">		
 
 		<mkdir dir="${attributableEObjectBin}"/>
 		<echo message="Compile Scala Code" />

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml;
+package org.dresdenocl.examples.pml;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,13 +16,13 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getId <em>Id</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.ExtensionPoint#getId <em>Id</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtensionPoint()
+ * @see org.dresdenocl.examples.pml.PmlPackage#getExtensionPoint()
  * @model
  * @generated
  */
@@ -37,14 +37,14 @@ public interface ExtensionPoint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtensionPoint_Id()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getExtensionPoint_Id()
 	 * @model
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.ExtensionPoint#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -55,7 +55,7 @@ public interface ExtensionPoint extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Plugin</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Plugin</em>' container reference isn't clear,
@@ -64,15 +64,15 @@ public interface ExtensionPoint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Plugin</em>' container reference.
 	 * @see #setPlugin(Plugin)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtensionPoint_Plugin()
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getExtensionPoint_Plugin()
+	 * @see org.dresdenocl.examples.pml.Plugin#getExtensionPoints
 	 * @model opposite="extensionPoints" required="true"
 	 * @generated
 	 */
 	Plugin getPlugin();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}' container reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Plugin</em>' container reference.
@@ -91,14 +91,14 @@ public interface ExtensionPoint extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Interface</em>' reference.
 	 * @see #setInterface(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtensionPoint_Interface()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getExtensionPoint_Interface()
 	 * @model required="true"
 	 * @generated
 	 */
 	JavaType getInterface();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Interface</em>' reference.

@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->

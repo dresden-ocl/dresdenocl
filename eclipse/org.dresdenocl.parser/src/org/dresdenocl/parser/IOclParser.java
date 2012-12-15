@@ -30,15 +30,15 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.parser;
+package org.dresdenocl.parser;
 
 import java.io.Reader;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * 

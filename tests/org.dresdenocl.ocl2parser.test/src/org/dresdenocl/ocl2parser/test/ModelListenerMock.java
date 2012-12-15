@@ -17,10 +17,10 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test;
+package org.dresdenocl.ocl2parser.test;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelListener;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelListener;
 
 /**
  * <p>
@@ -41,7 +41,7 @@ public class ModelListenerMock implements IModelListener {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModelListener#modelChanged(tudresden
+	 * org.dresdenocl.modelbus.model.IModelListener#modelChanged(tudresden
 	 * .ocl20.pivot.modelbus.model.IModel)
 	 */
 	public void modelChanged(IModel model) {

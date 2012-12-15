@@ -4,13 +4,13 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
-public class OclWhiteSpace extends tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement {
+public class OclWhiteSpace extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement {
 	
 	private final int amount;
 	
-	public OclWhiteSpace(int amount, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {
+	public OclWhiteSpace(int amount, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {
 		super(cardinality);
 		this.amount = amount;
 	}

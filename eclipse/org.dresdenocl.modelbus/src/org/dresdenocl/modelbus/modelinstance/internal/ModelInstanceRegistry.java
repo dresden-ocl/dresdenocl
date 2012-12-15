@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
+package org.dresdenocl.modelbus.modelinstance.internal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,13 +39,13 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.ListenerList;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelinstance.event.IModelInstanceRegistryListener;
-import tudresden.ocl20.pivot.modelinstance.event.ModelInstanceRegistryEvent;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.event.ModelRegistryEvent;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceRegistry;
+import org.dresdenocl.modelinstance.event.IModelInstanceRegistryListener;
+import org.dresdenocl.modelinstance.event.ModelInstanceRegistryEvent;
 
 /**
  * <p>
@@ -73,9 +73,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * @see org.dresdenocl.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
 
@@ -85,9 +85,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceRegistry#
 	 * addModelInstance
-	 * (tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
+	 * (org.dresdenocl.modelbus.modelinstance.IModelInstance)
 	 */
 	public void addModelInstance(IModelInstance modelInstance) {
 
@@ -149,9 +149,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#
+	 * @seeorg.dresdenocl.modelbus.IModelInstanceRegistry#
 	 * addModelInstanceRegistryListener
-	 * (tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
+	 * (org.dresdenocl.modelbus.event.IModelInstanceRegistryListener)
 	 */
 	public void addModelInstanceRegistryListener(
 			IModelInstanceRegistryListener listener) {
@@ -162,7 +162,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#dispose()
+	 * @see org.dresdenocl.modelbus.IModelInstanceRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -183,8 +183,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getActiveModelInstance
-	 * (tudresden.ocl20.pivot.modelbus.IModel)
+	 * org.dresdenocl.modelbus.IModelInstanceRegistry#getActiveModelInstance
+	 * (org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance getActiveModelInstance(IModel model) {
 
@@ -205,8 +205,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getModelInstances
-	 * (tudresden.ocl20.pivot.modelbus.IModel)
+	 * org.dresdenocl.modelbus.IModelInstanceRegistry#getModelInstances
+	 * (org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance[] getModelInstances(IModel model) {
 
@@ -237,8 +237,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded(
-	 * tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * org.dresdenocl.modelbus.event.IModelRegistryListener#modelAdded(
+	 * org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent event) {
 
@@ -249,8 +249,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelRemoved
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * org.dresdenocl.modelbus.event.IModelRegistryListener#modelRemoved
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelRemoved(ModelRegistryEvent event) {
 
@@ -272,9 +272,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceRegistry#
 	 * removeModelInstance
-	 * (tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
+	 * (org.dresdenocl.modelbus.modelinstance.IModelInstance)
 	 */
 	public boolean removeModelInstance(IModelInstance modelInstance) {
 
@@ -347,7 +347,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceRegistry#
 	 * removeModelInstance(java.lang.String)
 	 */
 	public IModelInstance removeModelInstance(String displayName) {
@@ -398,9 +398,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#
+	 * @seeorg.dresdenocl.modelbus.IModelInstanceRegistry#
 	 * removeModelInstanceRegistryListener
-	 * (tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
+	 * (org.dresdenocl.modelbus.event.IModelInstanceRegistryListener)
 	 */
 	public void removeModelInstanceRegistryListener(
 			IModelInstanceRegistryListener listener) {
@@ -414,9 +414,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
-	 * setActiveModelInstance(tudresden.ocl20.pivot.modelbus.model.IModel,
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceRegistry#
+	 * setActiveModelInstance(org.dresdenocl.modelbus.model.IModel,
+	 * org.dresdenocl.modelbus.modelinstance.IModelInstance)
 	 */
 	public void setActiveModelInstance(IModel model,
 			IModelInstance modelInstance) {

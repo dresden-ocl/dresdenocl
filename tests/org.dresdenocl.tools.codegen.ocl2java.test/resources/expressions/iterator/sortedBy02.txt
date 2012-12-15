@@ -67,4 +67,4 @@ java.util.Collections.sort(result1, comparator1);
 secondPart = result1;
 
 
-(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(firstPart) && tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(secondPart))
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(firstPart) && org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(secondPart))

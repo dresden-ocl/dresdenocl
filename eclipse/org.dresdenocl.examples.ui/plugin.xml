@@ -4,16 +4,16 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            id="tudresden.ocl20.pivot.examples.ui.category"
+            id="org.dresdenocl.examples.ui.category"
             name="Dresden OCL Examples">
       </category>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.LivingExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ui.wizard.LivingExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.living"
+            id="org.dresdenocl.examples.ui.wizard.living"
             name="Living Example (Java)"
             project="true">
          <description>
@@ -24,11 +24,11 @@ This example can be used for OCL parsing and SQL code generation.
       </wizard>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.PainExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ui.wizard.PainExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.pain"
+            id="org.dresdenocl.examples.ui.wizard.pain"
             name="SEPA/Pain Example (XML)"
             project="true">
          <description>
@@ -39,11 +39,11 @@ Constraints and Model are kindly provided by Nomos Software (http://www.nomos-so
       </wizard>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.PmlExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ui.wizard.PmlExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.pain"
+            id="org.dresdenocl.examples.ui.wizard.pain"
             name="PML Example (Ecore)"
             project="true">
          <description>
@@ -52,11 +52,11 @@ Constraints and Model are kindly provided by Nomos Software (http://www.nomos-so
       </wizard>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.RoyalAndLoyalExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ui.wizard.RoyalAndLoyalExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.royalandloyal"
+            id="org.dresdenocl.examples.ui.wizard.royalandloyal"
             name="Royal and Loyal Example (UML/Java)"
             project="true">
          <description>
@@ -67,11 +67,11 @@ This example can be used for OCL interpretation.
       </wizard>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.SimpleExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ui.wizard.SimpleExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.simple"
+            id="org.dresdenocl.examples.ui.wizard.simple"
             name="Simple Example (UML/Java)"
             project="true">
          <description>
@@ -82,11 +82,11 @@ This example can be used for OCL interpretation.
       </wizard>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ui.wizard.UniversityExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ui.wizard.UniversityExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.university"
+            id="org.dresdenocl.examples.ui.wizard.university"
             name="University Example (UML)"
             project="true">
          <description>

@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.ui.internal.views;
+package org.dresdenocl.interpreter.ui.internal.views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,17 +34,17 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
-import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.IInterpretationEnvironment;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.PrimitiveType;
 
 /**
  * <p>

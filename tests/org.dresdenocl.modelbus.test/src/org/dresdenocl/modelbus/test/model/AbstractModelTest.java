@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.test.model;
+package org.dresdenocl.modelbus.test.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -35,20 +35,20 @@ import java.util.Set;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelListener;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelListener;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.modelbus.test.ModelBusTestUtility;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -62,7 +62,7 @@ public class AbstractModelTest extends AbstractDresdenOclTest {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModel#addListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * {@link IModel#addListener(org.dresdenocl.modelbus.model.IModelListener)}
 	 * for an {@link IModel} without {@link Constraint}s.
 	 * </p>
 	 * 
@@ -91,7 +91,7 @@ public class AbstractModelTest extends AbstractDresdenOclTest {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModel#addListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * {@link IModel#addListener(org.dresdenocl.modelbus.model.IModelListener)}
 	 * for an {@link IModel} without {@link Constraint}s.
 	 * </p>
 	 * 
@@ -1540,7 +1540,7 @@ public class AbstractModelTest extends AbstractDresdenOclTest {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModel#removeListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * {@link IModel#removeListener(org.dresdenocl.modelbus.model.IModelListener)}
 	 * for an {@link IModel} without {@link Constraint}s.
 	 * </p>
 	 * 
@@ -1567,7 +1567,7 @@ public class AbstractModelTest extends AbstractDresdenOclTest {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModel#removeListener(tudresden.ocl20.pivot.modelbus.model.IModelListener)}
+	 * {@link IModel#removeListener(org.dresdenocl.modelbus.model.IModelListener)}
 	 * for an {@link IModel} without {@link Constraint}s.
 	 * </p>
 	 * 

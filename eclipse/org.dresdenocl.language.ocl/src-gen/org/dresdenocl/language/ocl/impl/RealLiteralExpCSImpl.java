@@ -4,14 +4,14 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.RealLiteralExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,9 +20,9 @@ import tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl#getIntValue <em>Int Value</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl#getRealValue <em>Real Value</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl#getNavigationOperator <em>Navigation Operator</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl#getIntValue <em>Int Value</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl#getRealValue <em>Real Value</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl#getNavigationOperator <em>Navigation Operator</em>}</li>
  * </ul>
  * </p>
  *

@@ -16,24 +16,24 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.internal;
+package org.dresdenocl.interpreter.internal;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
-import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.OperationCallExp;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject;
+import org.dresdenocl.interpreter.IInterpretationEnvironment;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -77,7 +77,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#
 	 * createChildEnvironment()
 	 */
 	public IInterpretationEnvironment createChildEnvironment() {
@@ -92,7 +92,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#getPostconditionValue(
+	 * @see org.dresdenocl.interpreter.IEnvironment#getPostconditionValue(
 	 * tudresden .ocl20.pivot.essentialocl.expressions.OperationCallExp)
 	 */
 	public OclAny getAtPreValue(OperationCallExp operationCallExp) {
@@ -138,7 +138,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getModelInstance
+	 * org.dresdenocl.interpreter.IInterpretationEnvironment#getModelInstance
 	 * ()
 	 */
 	public IModelInstance getModelInstance() {
@@ -149,7 +149,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#getVariableValue
+	 * org.dresdenocl.interpreter.IInterpretationEnvironment#getVariableValue
 	 * (java.lang.String)
 	 */
 	public OclAny getVariableValue(String identifier) {
@@ -171,7 +171,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#isNewInstance
+	 * org.dresdenocl.interpreter.IInterpretationEnvironment#isNewInstance
 	 * (tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
 	 */
@@ -206,9 +206,9 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IEnvironment#savePostconditionValue
+	 * @see org.dresdenocl.interpreter.IEnvironment#savePostconditionValue
 	 * (tudresden .ocl20.pivot.essentialocl.expressions.OperationCallExp,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public void saveAtPreValue(OperationCallExp anOperationCallExp, OclAny value) {
 
@@ -255,8 +255,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#saveOldInstances
-	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.interpreter.IInterpretationEnvironment#saveOldInstances
+	 * (org.dresdenocl.pivotmodel.Type)
 	 */
 	public void saveOldInstances(Type type) {
 
@@ -285,8 +285,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setModelInstance
-	 * (tudresden.ocl20.pivot.modelinstance.IModelInstance)
+	 * org.dresdenocl.interpreter.IInterpretationEnvironment#setModelInstance
+	 * (org.dresdenocl.modelinstance.IModelInstance)
 	 */
 	public void setModelInstance(IModelInstance modelInstance) {
 
@@ -296,9 +296,9 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment#setVariableValue
+	 * org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
 	 * (java.lang.String,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public void setVariableValue(String identifier, OclAny oclRoot) {
 

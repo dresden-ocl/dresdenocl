@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.facade"
+      id="org.dresdenocl.feature.facade"
       label="Dresden OCL Eclipse Integration Facade"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -185,28 +185,28 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.ecore" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
-      <import plugin="tudresden.ocl20.pivot.parser"/>
-      <import plugin="tudresden.ocl20.pivot.interpreter" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.ocl2java" version="2.2.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.xsd"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.declarativ"/>
-      <import plugin="tudresden.ocl20.pivot.tools.template"/>
-      <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
+      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.metamodels.ecore" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.metamodels.java" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelinstancetype.ecore" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.language.ocl.staticsemantics"/>
+      <import plugin="org.dresdenocl.parser"/>
+      <import plugin="org.dresdenocl.interpreter" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.tools.codegen.ocl2java" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.metamodels.xsd"/>
+      <import plugin="org.dresdenocl.modelinstancetype.xml"/>
+      <import plugin="org.dresdenocl.language.ocl.resource.ocl"/>
+      <import plugin="org.dresdenocl.tools.codegen.declarativ.ocl2sql"/>
+      <import plugin="org.dresdenocl.tools.codegen.declarativ"/>
+      <import plugin="org.dresdenocl.tools.template"/>
+      <import plugin="org.dresdenocl.tools.transformation"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.facade"
+         id="org.dresdenocl.facade"
          download-size="0"
          install-size="0"
          version="0.0.0"

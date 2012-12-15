@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.metamodels.xsd.test;
+package org.dresdenocl.metamodels.xsd.test;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -6,7 +6,7 @@ import org.osgi.framework.BundleContext;
 public class XmlSchemaMetamodelTestPlugin implements BundleActivator {
 
 	/** The ID of this plugin. */
-	public static final String ID = "tudresden.ocl20.pivot.metamodels.xsd.test";
+	public static final String ID = "org.dresdenocl.metamodels.xsd.test";
 
 	private static BundleContext context;
 

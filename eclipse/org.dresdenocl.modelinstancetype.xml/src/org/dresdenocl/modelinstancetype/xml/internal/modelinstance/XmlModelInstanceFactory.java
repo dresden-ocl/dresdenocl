@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance;
+package org.dresdenocl.modelinstancetype.xml.internal.modelinstance;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,26 +30,26 @@ import org.eclipse.osgi.util.NLS;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceBoolean;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceReal;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -100,7 +100,7 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object)
 	 */
 	@Override
@@ -154,9 +154,9 @@ public class XmlModelInstanceFactory extends BasisJavaModelInstanceFactory {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceFactory
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object,
-	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.pivotmodel.Type)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

@@ -4,13 +4,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * <!-- begin-user-doc -->

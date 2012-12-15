@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.impl;
+package org.dresdenocl.examples.pml.impl;
 
 import java.util.Collection;
 
@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Operation;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.Operation;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,9 +30,9 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl#getImplements <em>Implements</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.JavaTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.JavaTypeImpl#getImplements <em>Implements</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.JavaTypeImpl#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *

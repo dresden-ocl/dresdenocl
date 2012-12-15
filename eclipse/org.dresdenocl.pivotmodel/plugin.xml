@@ -39,14 +39,14 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel" 
-       class = "tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl"
+       class = "org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl"
        genModel = "model/pivotmodel.genmodel" /> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.tu-dresden.de/ocl20/pivot/2007/datatypes" 
-       class = "tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl"
+       class = "org.dresdenocl.datatypes.impl.DatatypesPackageImpl"
        genModel = "model/pivotmodel.genmodel" /> 
   </extension>
 

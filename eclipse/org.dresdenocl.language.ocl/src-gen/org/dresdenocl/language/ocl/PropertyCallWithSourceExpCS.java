@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,12 +15,12 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithSourceExpCS#getSource <em>Source</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithSourceExpCS#getPropertyCall <em>Property Call</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PropertyCallWithSourceExpCS#getSource <em>Source</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PropertyCallWithSourceExpCS#getPropertyCall <em>Property Call</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallWithSourceExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallWithSourceExpCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface PropertyCallWithSourceExpCS extends PropertyCallExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Source</em>' containment reference.
 	 * @see #setSource(OclExpressionCS)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallWithSourceExpCS_Source()
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallWithSourceExpCS_Source()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	OclExpressionCS getSource();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithSourceExpCS#getSource <em>Source</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PropertyCallWithSourceExpCS#getSource <em>Source</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source</em>' containment reference.
@@ -61,14 +61,14 @@ public interface PropertyCallWithSourceExpCS extends PropertyCallExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property Call</em>' containment reference.
 	 * @see #setPropertyCall(ImplicitPropertyCallCS)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallWithSourceExpCS_PropertyCall()
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallWithSourceExpCS_PropertyCall()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	ImplicitPropertyCallCS getPropertyCall();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithSourceExpCS#getPropertyCall <em>Property Call</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PropertyCallWithSourceExpCS#getPropertyCall <em>Property Call</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Property Call</em>' containment reference.

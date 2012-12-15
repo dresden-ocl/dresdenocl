@@ -18,7 +18,7 @@ available.
 The easiest way to use the standalone application is to check out the provided 
 example at 
 \code{http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/stand\-a\-lone/\newline
-tudresden.ocl20.pivot.standalone.example}. It can be used as an Eclipse Java project (not plug-in project), can be imported
+org.dresdenocl.standalone.example}. It can be used as an Eclipse Java project (not plug-in project), can be imported
 into Netbeans or can be used from the command line as an Eclipse runtime is not 
 required. The structure of the example is described below.
 
@@ -55,7 +55,7 @@ In order to log different parts of Dresden OCL, you can alter the
 \reference{log4j.properties} file. There, two appenders and a root logger are 
 already defined. In order to log only specific parts of the toolkit, for
 example, you can enter: 
-\code{log4j.logger.tudresden.ocl20.pivot.in\-ter\-pre\-ter\linebreak[0]=\linebreak[0]debug,
+\code{log4j.logger.org.dresdenocl.in\-ter\-pre\-ter\linebreak[0]=\linebreak[0]debug,
 stdout} that puts all log messages of the interpreter on the console (please 
 be aware that this will significantly slow down the execution time).
 

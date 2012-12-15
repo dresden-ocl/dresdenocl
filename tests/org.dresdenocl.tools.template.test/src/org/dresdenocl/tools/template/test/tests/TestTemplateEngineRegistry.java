@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.template.test.tests;
+package org.dresdenocl.tools.template.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -39,15 +39,15 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.ITemplateEngine;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * This test will test the class ITemplateEngineRegistry.java of the package
- * tudresden.ocl20.pivot.tools.template.
+ * org.dresdenocl.tools.template.
  * 
- * @see tudresden.ocl20.pivot.tools.template.ITemplateEngineRegistry
+ * @see org.dresdenocl.tools.template.ITemplateEngineRegistry
  */
 public class TestTemplateEngineRegistry {
 

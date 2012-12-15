@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -45,14 +45,14 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type
+ * <li>{@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type
  * </em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType <em>
+ * <li>{@link org.dresdenocl.pivotmodel.TypedElement#getGenericType <em>
  * Generic Type</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypedElement()
  * @model abstract="true"
  * @generated
  */
@@ -68,7 +68,7 @@ public interface TypedElement extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement_Type()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypedElement_Type()
 	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
@@ -76,7 +76,7 @@ public interface TypedElement extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type</em>}
+	 * {@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type</em>}
 	 * ' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -97,7 +97,7 @@ public interface TypedElement extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Generic Type</em>' containment reference.
 	 * @see #setGenericType(GenericType)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement_GenericType()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypedElement_GenericType()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -105,7 +105,7 @@ public interface TypedElement extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType
+	 * {@link org.dresdenocl.pivotmodel.TypedElement#getGenericType
 	 * <em>Generic Type</em>}' containment reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

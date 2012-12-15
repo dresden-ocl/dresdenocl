@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,8 +42,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -52,7 +52,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties
+ * {@link org.dresdenocl.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties
  * <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>

@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil" class="Log4jProperties" %>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates" imports="java.util.* org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil" class="Log4jProperties" %>
 <%GenModel genModel = (GenModel)argument;
 String projectName = PivotAdapterGeneratorUtil.getProjectName(genModel);%>
 # This file can be used to configure additional logging behaviour for this plugin.

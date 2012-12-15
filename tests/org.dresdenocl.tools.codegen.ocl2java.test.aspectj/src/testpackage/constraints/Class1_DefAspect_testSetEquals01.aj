@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetEquals01 {
      *       def: testSetEquals01(source: Set(OclAny), arg01: Set(OclAny)): Boolean = source = arg01</code></p>
      */
     public Boolean testpackage.Class1.testSetEquals01(java.util.Set<Object> source, java.util.Set<Object> arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.equals(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.equals(source, arg01);
     }
 }

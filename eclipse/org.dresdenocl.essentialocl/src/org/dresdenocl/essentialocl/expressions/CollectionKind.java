@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,7 +41,7 @@ import java.util.List;
  * A representation of the literals of the enumeration '<em><b>Collection Kind</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
+ * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
  * @generated
  */
 public enum CollectionKind implements InternalCollectionKind {

@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.internal;
+package org.dresdenocl.tools.transformation.internal;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -18,12 +18,12 @@ import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
-import tudresden.ocl20.pivot.tools.transformation.ParallelTransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
-import tudresden.ocl20.pivot.tools.transformation.event.ITransformationRegistryListener;
-import tudresden.ocl20.pivot.tools.transformation.event.TransformationRegistryEvent;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.ITransformationRegistry;
+import org.dresdenocl.tools.transformation.ParallelTransformation;
+import org.dresdenocl.tools.transformation.TransformationPlugin;
+import org.dresdenocl.tools.transformation.event.ITransformationRegistryListener;
+import org.dresdenocl.tools.transformation.event.TransformationRegistryEvent;
 
 /**
  * Default implementation of the {@link ITransformationRegistr}
@@ -81,7 +81,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry#addTransformation(ITransformation)
+	 * @see org.dresdenocl.tools.transformation.ITransformationRegistry#addTransformation(ITransformation)
 	 */
 	public void addTransformation(ITransformation<?, ?, ?> transformation) {
 
@@ -123,7 +123,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry#dispose()
+	 * @see org.dresdenocl.tools.transformation.ITransformationRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -134,7 +134,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#getTransformationClass(String)
+	 * @see org.dresdenocl.tools.template.ITransformationRegistry#getTransformationClass(String)
 	 */
 	public Class<?> getTransformationClass(String transformationName) {
 
@@ -147,7 +147,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#removeTransformation(ITransformation)
+	 * @see org.dresdenocl.tools.template.ITransformationRegistry#removeTransformation(ITransformation)
 	 */
 	public void removeTransformation(ITransformation<?, ?, ?> transformation) {
 
@@ -163,7 +163,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#removeTransformation(String)
+	 * @see org.dresdenocl.tools.template.ITransformationRegistry#removeTransformation(String)
 	 */
 	public void removeTransformation(String transformationName) {
 
@@ -177,7 +177,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#addTransformationRegistryListener(ITransformationRegistryListener)
+	 * @see org.dresdenocl.tools.template.ITransformationRegistry#addTransformationRegistryListener(ITransformationRegistryListener)
 	 */
 	public void addTransformationRegistryListener(
 			ITransformationRegistryListener listener) {
@@ -258,7 +258,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITransformationRegistry#removeTransformationRegistryListener(ITransformationRegistryListener)
+	 * @see org.dresdenocl.tools.template.ITransformationRegistry#removeTransformationRegistryListener(ITransformationRegistryListener)
 	 * 
 	 */
 	public void removeTransformationRegistryListener(

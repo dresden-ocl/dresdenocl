@@ -11,18 +11,18 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.TypedElement;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractProperty;
 
 /**
  * <p>
@@ -92,7 +92,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -103,7 +103,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getType()
 	 * 
 	 * @generated NOT
 	 */
@@ -156,7 +156,7 @@ public class UML2Association extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getOwningType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getOwningType()
 	 * 
 	 * @generated NOT
 	 */

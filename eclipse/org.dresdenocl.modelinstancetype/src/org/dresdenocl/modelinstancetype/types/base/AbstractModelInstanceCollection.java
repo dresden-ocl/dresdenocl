@@ -16,20 +16,20 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types.base;
+package org.dresdenocl.modelinstancetype.types.base;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.CollectionKind;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -46,7 +46,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.impl.
 	 * AbstractModelInstanceElement#getName()
 	 */
 	public String getName() {
@@ -121,7 +121,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
 	@Override
@@ -228,7 +228,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	@Override
@@ -277,14 +277,14 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * org.dresdenocl.modelinstancetype.types.IModelInstanceCollection
 	 * #isOrdered()
 	 */
 	public boolean isOrdered() {
@@ -308,7 +308,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {
@@ -320,8 +320,8 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement#isKindOf
-	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.modelinstancetype.types.IModelInstanceElement#isKindOf
+	 * (org.dresdenocl.pivotmodel.Type)
 	 */
 	public boolean isKindOf(Type type) {
 
@@ -332,7 +332,7 @@ public abstract class AbstractModelInstanceCollection<T extends IModelInstanceEl
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection
+	 * org.dresdenocl.modelinstancetype.types.IModelInstanceCollection
 	 * #isUnique()
 	 */
 	public boolean isUnique() {

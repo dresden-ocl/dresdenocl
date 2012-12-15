@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
 /**
  * A OclContainmentTrace represents a specific path to a structural feature by
@@ -23,9 +23,9 @@ public class OclContainmentTrace {
 	/**
 	 * The path of contained features.
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[] path;
+	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[] path;
 	
-	public OclContainmentTrace(org.eclipse.emf.ecore.EClass startClass, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[] path) {
+	public OclContainmentTrace(org.eclipse.emf.ecore.EClass startClass, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[] path) {
 		super();
 		// Verify arguments
 		if (startClass != null) {
@@ -44,12 +44,12 @@ public class OclContainmentTrace {
 		return startClass;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[] getPath() {
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[] getPath() {
 		return path;
 	}
 	
 	public String toString() {
-		return (startClass == null ? "null" : startClass.getName()) + "->" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.explode(path, "->");
+		return (startClass == null ? "null" : startClass.getName()) + "->" + org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.explode(path, "->");
 	}
 	
 }

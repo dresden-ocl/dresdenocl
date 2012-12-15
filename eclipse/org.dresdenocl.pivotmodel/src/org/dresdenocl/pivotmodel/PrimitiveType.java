@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -48,12 +48,12 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind <em>Kind
+ * <li>{@link org.dresdenocl.pivotmodel.PrimitiveType#getKind <em>Kind
  * </em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getPrimitiveType()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getPrimitiveType()
  * @model
  * @generated
  */
@@ -62,7 +62,7 @@ public interface PrimitiveType extends Type {
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute. The default
 	 * value is <code>"Unknown"</code>. The literals are from the enumeration
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind}. <!--
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveTypeKind}. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * Specifies the {@link PrimitiveTypeKind kind} of this
@@ -73,9 +73,9 @@ public interface PrimitiveType extends Type {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * @see org.dresdenocl.pivotmodel.PrimitiveTypeKind
 	 * @see #setKind(PrimitiveTypeKind)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getPrimitiveType_Kind()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getPrimitiveType_Kind()
 	 * @model default="Unknown" required="true"
 	 * @generated
 	 */
@@ -83,12 +83,12 @@ public interface PrimitiveType extends Type {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveType#getKind
 	 * <em>Kind</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
 	 *          the new value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * @see org.dresdenocl.pivotmodel.PrimitiveTypeKind
 	 * @see #getKind()
 	 * @generated
 	 */

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.util;
+package org.dresdenocl.essentialocl.types.util;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,12 +38,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.TypeNotFoundException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.TypeNotFoundException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

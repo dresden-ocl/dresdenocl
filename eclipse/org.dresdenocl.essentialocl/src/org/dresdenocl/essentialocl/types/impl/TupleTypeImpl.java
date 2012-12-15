@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -45,18 +45,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreEList;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl;
+import org.dresdenocl.pivotmodel.impl.PropertyImpl;
+import org.dresdenocl.pivotmodel.impl.TypeImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -64,7 +64,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.TupleTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -314,7 +314,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -332,7 +332,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * <code>TupleType</code>. This method will throw an
 	 * {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
 	@Override
 	public final void setName(String newName) {
@@ -354,7 +354,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * OCL Standard Library, a <code>TupleType</code> does not really have a
 	 * namespace. It is implicitly available in all namespaces.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName()
 	 */
 	@Override
 	public final String getQualifiedName() {
@@ -421,7 +421,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#conformsTo(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public boolean conformsTo(Type other) {
@@ -490,7 +490,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * Otherwise, there is no common super type and <code>null</code> is returned.
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#commonSuperType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#commonSuperType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public Type commonSuperType(Type other) {
@@ -557,7 +557,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * operations. This method will throw a
 	 * <code>UnsupportedOperationException</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#addOperation(tudresden.ocl20.pivot.pivotmodel.Operation)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#addOperation(org.dresdenocl.pivotmodel.Operation)
 	 */
 	@Override
 	public Type addOperation(Operation o) {
@@ -571,7 +571,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#clone()
 	 */
 	@Override
 	public TupleType clone() {
@@ -582,7 +582,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	/**
 	 * Overridden to additionally set the reference to the {@link OclLibrary}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#initialize(org.dresdenocl.pivotmodel.Type)
 	 */
 	protected TupleType initialize(TupleType clone) {
 
@@ -598,7 +598,7 @@ public class TupleTypeImpl extends TypeImpl implements TupleType {
 	 * Overridden to indicate that the name of a <code>TupleType</code> is
 	 * determined automatically.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#hasVolatileName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#hasVolatileName()
 	 */
 	@Override
 	protected boolean hasVolatileName() {

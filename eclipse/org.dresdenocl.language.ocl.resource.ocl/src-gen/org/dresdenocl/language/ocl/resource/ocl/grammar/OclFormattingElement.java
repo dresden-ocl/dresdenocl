@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
-public abstract class OclFormattingElement extends tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement {
+public abstract class OclFormattingElement extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement {
 	
-	public OclFormattingElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {
+	public OclFormattingElement(org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality) {
 		super(cardinality, null);
 	}
 	

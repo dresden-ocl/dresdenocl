@@ -18,8 +18,8 @@
 				<include name="org.apache.**.jar" />
 			</fileset>
 			<dirset dir="${workspacePath}">
-				<include name="tudresden.ocl20.**/bin" />
-				<include name="tudresden.attributegrammar.integration.kiama/bin" />
+				<include name="org.dresdenocl.**/bin" />
+				<include name="org.dresdenocl.attributegrammar.integration.kiama/bin" />
 			</dirset>
 			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar" />
 		</path>
@@ -37,8 +37,8 @@
 				<include name="plugins/org.apache.**.jar" />
 			</fileset>
 			<dirset dir="./..">
-				<include name="tudresden.ocl20.**/bin" />
-				<include name="tudresden.attributegrammar.integration.kiama/bin" />
+				<include name="org.dresdenocl.**/bin" />
+				<include name="org.dresdenocl.attributegrammar.integration.kiama/bin" />
 				<include name="org.emftext.**/bin" />
 			</dirset>
 			<pathelement location="./../org.kiama.attribution/lib/kiama_2.9.0-1.1.0.jar" />

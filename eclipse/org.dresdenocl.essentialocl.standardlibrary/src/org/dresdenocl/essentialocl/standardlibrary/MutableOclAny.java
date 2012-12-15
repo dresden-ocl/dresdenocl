@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
 /**
  * The <code>MutableOclAny</code> interface defines additional methods that may be mixed in by

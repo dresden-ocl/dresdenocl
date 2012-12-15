@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationWithNamespaceCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationWithNamespaceCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface PackageDeclarationWithNamespaceCS extends PackageDeclarationCS 
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Nested Namespace</em>' containment reference.
    * @see #setNestedNamespace(PackageDeclarationNestedNamespaceCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationWithNamespaceCS_NestedNamespace()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationWithNamespaceCS_NestedNamespace()
    * @model containment="true" required="true"
    * @generated
    */
 	PackageDeclarationNestedNamespaceCS getNestedNamespace();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Nested Namespace</em>' containment reference.

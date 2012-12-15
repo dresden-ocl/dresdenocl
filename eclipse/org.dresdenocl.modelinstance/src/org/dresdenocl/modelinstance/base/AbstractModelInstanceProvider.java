@@ -28,17 +28,17 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelinstance.base;
+package org.dresdenocl.modelinstance.base;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceProvider;
 
 /**
  * <p>
@@ -52,8 +52,8 @@ public abstract class AbstractModelInstanceProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
-	 * (java.io.File, tudresden.ocl20.pivot.modelbus.IModel)
+	 * @see org.dresdenocl.modelbus.IModelInstanceProvider#getModelInstance
+	 * (java.io.File, org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance getModelInstance(File modelInstanceFile, IModel model)
 			throws ModelAccessException {
@@ -97,8 +97,8 @@ public abstract class AbstractModelInstanceProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
-	 * (java.lang.String, tudresden.ocl20.pivot.modelbus.IModel)
+	 * @see org.dresdenocl.modelbus.IModelInstanceProvider#getModelInstance
+	 * (java.lang.String, org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance getModelInstance(String modelInstanceName, IModel model)
 			throws ModelAccessException {

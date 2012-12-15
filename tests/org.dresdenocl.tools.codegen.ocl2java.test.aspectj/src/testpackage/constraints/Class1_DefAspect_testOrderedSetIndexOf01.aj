@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testOrderedSetIndexOf01 {
      *       def: testOrderedSetIndexOf01(source: OrderedSet(OclAny), arg01: OclAny): Integer = source ->indexOf(arg01)</code></p>
      */
     public Integer testpackage.Class1.testOrderedSetIndexOf01(java.util.List<Object> source, Object arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.indexOf(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets.indexOf(source, arg01);
     }
 }

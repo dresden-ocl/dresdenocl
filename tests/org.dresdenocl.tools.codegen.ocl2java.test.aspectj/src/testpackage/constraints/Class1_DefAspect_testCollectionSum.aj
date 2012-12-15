@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionSum {
      *       def: testCollectionSum(source: Collection(Integer)): Integer = source ->sum()</code></p>
      */
     public Integer testpackage.Class1.testCollectionSum(java.util.Collection<Integer> source) {
-        return new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(source).intValue());
+        return new Integer(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.sum(source).intValue());
     }
 }

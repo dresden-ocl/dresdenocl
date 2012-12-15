@@ -26,8 +26,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '

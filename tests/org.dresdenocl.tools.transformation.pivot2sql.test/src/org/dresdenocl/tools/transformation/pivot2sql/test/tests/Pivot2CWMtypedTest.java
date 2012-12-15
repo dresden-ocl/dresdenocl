@@ -1,12 +1,12 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
 
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.CWMTest;
+import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.CWMTest;
 
 public class Pivot2CWMtypedTest extends CWMTest {
 

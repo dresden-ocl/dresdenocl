@@ -16,14 +16,14 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util;
+package org.dresdenocl.tools.codegen.ocl2java.types.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException;
+import org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException;
 
 /**
  * <p>

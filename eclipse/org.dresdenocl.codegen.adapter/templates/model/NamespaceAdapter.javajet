@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="NamespaceAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="NamespaceAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -14,9 +14,9 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 <%genModel.addImport("org.apache.log4j.Logger");
 genModel.addImport("java.util.List");
 genModel.addImport("java.util.ArrayList");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace");
+genModel.addImport("org.dresdenocl.pivotmodel.Namespace");
+genModel.addImport("org.dresdenocl.pivotmodel.Type");
+genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractNamespace");
 genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));
 genModel.markImportLocation(stringBuffer);%>
 
@@ -30,7 +30,7 @@ public class <%=adapterClass%> extends AbstractNamespace implements Namespace {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=adapteeClass%> data type
@@ -61,7 +61,7 @@ public class <%=adapterClass%> extends AbstractNamespace implements Namespace {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getName()
 	 *
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public class <%=adapterClass%> extends AbstractNamespace implements Namespace {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestedNamespaceImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestedNamespaceImpl()
 	 *
 	 * @generated
 	 */
@@ -86,7 +86,7 @@ public class <%=adapterClass%> extends AbstractNamespace implements Namespace {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestingNamespace()
 	 *
 	 * @generated
 	 */
@@ -97,7 +97,7 @@ public class <%=adapterClass%> extends AbstractNamespace implements Namespace {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl()
 	 *
 	 * @generated
 	 */

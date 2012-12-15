@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 175f and adapted.
 -- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 context LoyaltyProgram
 inv: self.membership.accounts->isUnique(number)

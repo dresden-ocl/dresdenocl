@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -53,20 +53,20 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getNamespace <em>Namespace
+ * <li>{@link org.dresdenocl.pivotmodel.Type#getNamespace <em>Namespace
  * </em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedOperation <em>Owned
+ * <li>{@link org.dresdenocl.pivotmodel.Type#getOwnedOperation <em>Owned
  * Operation</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty <em>Owned
+ * <li>{@link org.dresdenocl.pivotmodel.Type#getOwnedProperty <em>Owned
  * Property</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getSuperType <em>Super Type
+ * <li>{@link org.dresdenocl.pivotmodel.Type#getSuperType <em>Super Type
  * </em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Type#getGenericSuperType <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Type#getGenericSuperType <em>
  * Generic Super Type</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getType()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getType()
  * @model
  * @generated
  */
@@ -75,7 +75,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 
 	/**
 	 * Returns the value of the '<em><b>Super Type</b></em>' reference list. The
-	 * list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.Type}.
+	 * list contents are of type {@link org.dresdenocl.pivotmodel.Type}.
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * References the immediate supertypes of a <code>Type</code>, from which the
@@ -91,7 +91,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	/**
 	 * Returns the value of the '<em><b>Generic Super Type</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericType}. <!-- begin-user-doc
+	 * {@link org.dresdenocl.pivotmodel.GenericType}. <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of the '<em>Generic Super Type</em>' containment reference
@@ -101,7 +101,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * 
 	 * @return the value of the '<em>Generic Super Type</em>' containment
 	 *         reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getType_GenericSuperType()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getType_GenericSuperType()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -110,9 +110,9 @@ public interface Type extends NamedElement, ConstrainableElement,
 	/**
 	 * Returns the value of the '<em><b>Owned Operation</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation}. It is bidirectional and
+	 * {@link org.dresdenocl.pivotmodel.Operation}. It is bidirectional and
 	 * its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwningType
+	 * {@link org.dresdenocl.pivotmodel.Operation#getOwningType
 	 * <em>Owning Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -123,7 +123,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * 
 	 * @return the value of the '<em>Owned Operation</em>' containment reference
 	 *         list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOwningType
+	 * @see org.dresdenocl.pivotmodel.Operation#getOwningType
 	 * @generated
 	 */
 	List<Operation> getOwnedOperation();
@@ -131,9 +131,9 @@ public interface Type extends NamedElement, ConstrainableElement,
 	/**
 	 * Returns the value of the '<em><b>Owned Property</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property}. It is bidirectional and
+	 * {@link org.dresdenocl.pivotmodel.Property}. It is bidirectional and
 	 * its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property#getOwningType
+	 * {@link org.dresdenocl.pivotmodel.Property#getOwningType
 	 * <em>Owning Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -144,7 +144,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * 
 	 * @return the value of the '<em>Owned Property</em>' containment reference
 	 *         list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Property#getOwningType
+	 * @see org.dresdenocl.pivotmodel.Property#getOwningType
 	 * @generated
 	 */
 	List<Property> getOwnedProperty();
@@ -152,7 +152,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getOwnedType
 	 * <em>Owned Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -162,14 +162,14 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * 
 	 * @return the value of the '<em>Namespace</em>' container reference.
 	 * @see #setNamespace(Namespace)
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType
+	 * @see org.dresdenocl.pivotmodel.Namespace#getOwnedType
 	 * @generated
 	 */
 	Namespace getNamespace();
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getNamespace
+	 * {@link org.dresdenocl.pivotmodel.Type#getNamespace
 	 * <em>Namespace</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -338,7 +338,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean" required="true"
 	 * @generated
 	 */
 	boolean removeProperty(Property property);
@@ -354,7 +354,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean" required="true"
 	 * @generated
 	 */
 	boolean removeOperation(Operation operation);
@@ -397,7 +397,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	/**
 	 * Overridden to specialize the co-variant return type to <code>Type</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List,
+	 * @see org.dresdenocl.pivotmodel.GenericElement#bindTypeParameter(java.util.List,
 	 *      java.util.List)
 	 */
 	Type bindTypeParameter(List<TypeParameter> parameters,
@@ -406,7 +406,7 @@ public interface Type extends NamedElement, ConstrainableElement,
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	Type clone();
 

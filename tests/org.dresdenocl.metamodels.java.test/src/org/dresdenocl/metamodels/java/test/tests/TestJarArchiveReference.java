@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.test.tests;
+package org.dresdenocl.metamodels.java.test.tests;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -20,10 +20,10 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -60,8 +60,8 @@ public class TestJarArchiveReference extends AbstractJavaModelTest {
 
 		Type personType;
 		personType = model.findType(Arrays.asList(new String[] {
-				ModelConstants.ROOT_PACKAGE_NAME, "tudresden", "ocl20",
-				"pivot", "examples", "simple", "Person" }));
+				ModelConstants.ROOT_PACKAGE_NAME, "org", "dresdenocl",
+				"examples", "simple", "Person" }));
 		assertNotNull(msg, personType);
 	}
 }

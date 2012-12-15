@@ -11,8 +11,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.pivotmodel.ConstraintKind;
 
 /**
  * Contains test cases for {@link OclMetrics}.

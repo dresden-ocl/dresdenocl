@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +42,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -51,12 +51,12 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName
+ * <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName
  * <em>Name</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName
+ * {@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName
  * <em>Qualified Name</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner
+ * <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner
  * <em>Owner</em>}</li>
  * </ul>
  * </p>

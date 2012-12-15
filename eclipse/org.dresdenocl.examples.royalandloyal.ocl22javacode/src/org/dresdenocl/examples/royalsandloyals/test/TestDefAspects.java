@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.test;
+package org.dresdenocl.examples.royalsandloyals.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,18 +7,18 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Membership;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
+import org.dresdenocl.examples.royalsandloyals.Burning;
+import org.dresdenocl.examples.royalsandloyals.Customer;
+import org.dresdenocl.examples.royalsandloyals.CustomerCard;
+import org.dresdenocl.examples.royalsandloyals.Date;
+import org.dresdenocl.examples.royalsandloyals.Earning;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyAccount;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyProgram;
+import org.dresdenocl.examples.royalsandloyals.Membership;
+import org.dresdenocl.examples.royalsandloyals.ProgramPartner;
+import org.dresdenocl.examples.royalsandloyals.Service;
+import org.dresdenocl.examples.royalsandloyals.ServiceLevel;
+import org.dresdenocl.examples.royalsandloyals.Transaction;
 import org.junit.Test;
 
 

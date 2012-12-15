@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.examples"
+      id="org.dresdenocl.feature.examples"
       label="Dresden OCL Examples"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -185,73 +185,73 @@ Library.
    <requires>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.facade" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.xsd" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.metamodels.xsd" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.common.ui"/>
-      <import plugin="tudresden.ocl20.logging"/>
-      <import plugin="tudresden.ocl20.pivot.examples.royalandloyal" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.logging"/>
+      <import plugin="org.dresdenocl.examples.royalandloyal" version="3.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.ecore"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.java"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
+      <import plugin="org.dresdenocl.modelbus"/>
+      <import plugin="org.dresdenocl.metamodels.ecore"/>
+      <import plugin="org.dresdenocl.metamodels.java"/>
+      <import plugin="org.dresdenocl.metamodels.uml2"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.uml2.uml"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore"/>
+      <import plugin="org.dresdenocl.modelinstancetype.java"/>
+      <import plugin="org.dresdenocl.language.ocl"/>
+      <import plugin="org.dresdenocl.language.ocl.resource.ocl"/>
+      <import plugin="org.dresdenocl.language.ocl.staticsemantics"/>
+      <import plugin="org.dresdenocl.modelinstancetype.ecore"/>
       <import plugin="org.eclipse.xsd"/>
-      <import plugin="tudresden.ocl20.pivot.tools.template"/>
-      <import plugin="tudresden.ocl20.pivot.tools.template.sql"/>
-      <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
-      <import plugin="tudresden.ocl20.pivot.tools.transformation.pivot2sql"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel"/>
+      <import plugin="org.dresdenocl.tools.template"/>
+      <import plugin="org.dresdenocl.tools.template.sql"/>
+      <import plugin="org.dresdenocl.tools.transformation"/>
+      <import plugin="org.dresdenocl.tools.transformation.pivot2sql"/>
+      <import plugin="org.dresdenocl.modelinstancetype.ecore.testmodel"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.simple"
+         id="org.dresdenocl.examples.simple"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.pml"
+         id="org.dresdenocl.examples.pml"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.living"
+         id="org.dresdenocl.examples.living"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.pain"
+         id="org.dresdenocl.examples.pain"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.university"
+         id="org.dresdenocl.examples.university"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.ui"
+         id="org.dresdenocl.examples.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

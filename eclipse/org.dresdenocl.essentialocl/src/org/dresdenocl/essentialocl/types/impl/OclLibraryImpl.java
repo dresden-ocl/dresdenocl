@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,22 +48,22 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Ocl Library</b></em>'.
@@ -71,20 +71,20 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclBoolean <em>Ocl Boolean</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclString <em>Ocl String</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclInteger <em>Ocl Integer</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclReal <em>Ocl Real</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclAny <em>Ocl Any</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclVoid <em>Ocl Void</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclInvalid <em>Ocl Invalid</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclType <em>Ocl Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclCollection <em>Ocl Collection</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclSequence <em>Ocl Sequence</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclBag <em>Ocl Bag</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclSet <em>Ocl Set</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclOrderedSet <em>Ocl Ordered Set</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl#getOclTuple <em>Ocl Tuple</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclBoolean <em>Ocl Boolean</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclString <em>Ocl String</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclInteger <em>Ocl Integer</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclReal <em>Ocl Real</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclAny <em>Ocl Any</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclVoid <em>Ocl Void</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclInvalid <em>Ocl Invalid</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclType <em>Ocl Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclCollection <em>Ocl Collection</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclSequence <em>Ocl Sequence</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclBag <em>Ocl Bag</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclSet <em>Ocl Set</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclOrderedSet <em>Ocl Ordered Set</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl#getOclTuple <em>Ocl Tuple</em>}</li>
  * </ul>
  * </p>
  *

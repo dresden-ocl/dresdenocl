@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.essentialocl/src" modelPluginID="tudresden.ocl20.pivot.essentialocl"
-    templateDirectory="/tudresden.ocl20.pivot.pivotmodel/templates" dynamicTemplates="true"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.dresdenocl.essentialocl/src" modelPluginID="org.dresdenocl.essentialocl"
+    templateDirectory="/org.dresdenocl.pivotmodel/templates" dynamicTemplates="true"
     modelName="Essential OCL" nonNLSMarkers="true" rootImplementsInterface="" suppressEMFTypes="true"
     suppressEMFMetaData="true" suppressEMFModelTags="true" codeFormatting="true" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" usedGenPackages="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.genmodel#//pivotmodel ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.genmodel#//datatypes">
+    complianceLevel="6.0" usedGenPackages="../../org.dresdenocl.pivotmodel/model/pivotmodel.genmodel#//pivotmodel ../../org.dresdenocl.pivotmodel/model/pivotmodel.genmodel#//datatypes">
   <foreignModel>essentialocl.ecore</foreignModel>
-  <genPackages prefix="EssentialOcl" basePackage="tudresden.ocl20.pivot" disposableProviderFactory="true"
+  <genPackages prefix="EssentialOcl" basePackage="org.dresdenocl" disposableProviderFactory="true"
       generateExampleClass="false" multipleEditorPages="false" generateModelWizard="false"
       ecorePackage="essentialocl.ecore#/">
-    <nestedGenPackages prefix="Types" basePackage="tudresden.ocl20.pivot.essentialocl"
+    <nestedGenPackages prefix="Types" basePackage="org.dresdenocl.essentialocl"
         disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"
         ecorePackage="essentialocl.ecore#//types">
       <genClasses ecoreClass="essentialocl.ecore#//types/BagType"/>
@@ -78,7 +78,7 @@
       </genClasses>
       <genClasses ecoreClass="essentialocl.ecore#//types/AnyType"/>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Expressions" basePackage="tudresden.ocl20.pivot.essentialocl"
+    <nestedGenPackages prefix="Expressions" basePackage="org.dresdenocl.essentialocl"
         disposableProviderFactory="true" generateExampleClass="false" multipleEditorPages="false"
         generateModelWizard="false" ecorePackage="essentialocl.ecore#//expressions">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="essentialocl.ecore#//expressions/CollectionKind">

@@ -1,17 +1,17 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests.util;
 
 import java.io.File;
 import static org.junit.Assert.fail;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 public class TestPerformer {
 

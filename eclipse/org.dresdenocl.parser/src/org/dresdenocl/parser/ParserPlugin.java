@@ -30,13 +30,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.parser;
+package org.dresdenocl.parser;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -44,7 +44,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class ParserPlugin extends Plugin {
 
   // The plug-in ID
-  public static final String ID = "tudresden.ocl20.pivot.parser"; //$NON-NLS-1$
+  public static final String ID = "org.dresdenocl.parser"; //$NON-NLS-1$
 
   // The shared instance
   private static ParserPlugin plugin;
@@ -90,7 +90,7 @@ public class ParserPlugin extends Plugin {
 
  /**
    * Facade method for the classes in this plugin that hides the dependency from
-   * the <code>tudresden.ocl20.logging</code> plugin.
+   * the <code>org.dresdenocl.logging</code> plugin.
    * 
    * @param clazz the class to return the logger for
    * 

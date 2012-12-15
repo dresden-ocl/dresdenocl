@@ -27,7 +27,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.tu-dresden.de/ocl20/pivot/examples/pml"
-            class="tudresden.ocl20.pivot.examples.pml.PmlPackage"
+            class="org.dresdenocl.examples.pml.PmlPackage"
             genModel="model/pml.genmodel"/>
    </extension>
 

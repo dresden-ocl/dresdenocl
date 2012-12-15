@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards;
+package org.dresdenocl.tools.codegen.ocl2java.ui.internal.wizards;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardPage;
@@ -32,11 +32,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.AbstractMouseListener;
+import org.dresdenocl.tools.codegen.code.ITransformedCode;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaFactory;
+import org.dresdenocl.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.AbstractMouseListener;
 
 /**
  * <p>

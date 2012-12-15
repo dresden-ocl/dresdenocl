@@ -11,7 +11,7 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -19,13 +19,13 @@ import java.math.BigInteger;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractPrimitiveType;
 
 /**
  * <p>
@@ -248,7 +248,7 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -267,7 +267,7 @@ public class UML2PrimitiveType extends AbstractPrimitiveType implements
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getNamespace()
 	 * 
 	 * @generated NOT
 	 */

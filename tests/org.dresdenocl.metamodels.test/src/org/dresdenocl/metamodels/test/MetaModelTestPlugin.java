@@ -11,16 +11,16 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.test;
+package org.dresdenocl.metamodels.test;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.model.IModel;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.model.IModel;
 
 /**
  * <p>
@@ -31,7 +31,7 @@ public class MetaModelTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.metamodels.test";
+			"org.dresdenocl.metamodels.test";
 
 	/** The shared instance. */
 	private static MetaModelTestPlugin plugin;
@@ -84,7 +84,7 @@ public class MetaModelTestPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

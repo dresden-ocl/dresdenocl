@@ -30,7 +30,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import java.util.List;
 
@@ -39,11 +39,11 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.base.AbstractEnumeration;
 
 /**
  * <p>
@@ -109,7 +109,7 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getName()
 	 */
 	public String getName() {
 
@@ -119,7 +119,7 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
+	 * org.dresdenocl.pivotmodel.base.AbstractEnumeration#getNamespace()
 	 */
 	@Override
 	public Namespace getNamespace() {
@@ -131,7 +131,7 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral
+	 * org.dresdenocl.pivotmodel.base.AbstractEnumeration#getOwnedLiteral
 	 * ()
 	 */
 	@Override

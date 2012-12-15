@@ -30,17 +30,17 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.IteratorExp;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -101,7 +101,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
 	 */
 	@Override
 	protected Type evaluateType() {
@@ -219,7 +219,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#validateWellformednessRules()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl#validateWellformednessRules()
 	 */
 	@Override
 	protected void validateWellformednessRules() {

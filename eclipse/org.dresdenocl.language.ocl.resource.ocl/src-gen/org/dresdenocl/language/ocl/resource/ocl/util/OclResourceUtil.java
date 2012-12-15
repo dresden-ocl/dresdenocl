@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * Class ResourceUtil can be used to perform common tasks on resources, such as
@@ -20,7 +20,7 @@ public class OclResourceUtil {
 	 * @return all proxy objects that are not resolvable
 	 */
 	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.ResourceSet resourceSet) {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclInterruptibleEcoreResolver().findUnresolvedProxies(resourceSet);
+		return new org.dresdenocl.language.ocl.resource.ocl.util.OclInterruptibleEcoreResolver().findUnresolvedProxies(resourceSet);
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class OclResourceUtil {
 	 * @return all proxy objects that are not resolvable
 	 */
 	public static java.util.Set<org.eclipse.emf.ecore.EObject> findUnresolvedProxies(org.eclipse.emf.ecore.resource.Resource resource) {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclInterruptibleEcoreResolver().findUnresolvedProxies(resource);
+		return new org.dresdenocl.language.ocl.resource.ocl.util.OclInterruptibleEcoreResolver().findUnresolvedProxies(resource);
 	}
 	
 	/**
@@ -60,8 +60,8 @@ public class OclResourceUtil {
 				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
-				if (deresolvedReference != null && deresolvedReference.startsWith(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
-					deresolvedReference = deresolvedReference.substring(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+				if (deresolvedReference != null && deresolvedReference.startsWith(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+					deresolvedReference = deresolvedReference.substring(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
 				}
 			}
@@ -69,33 +69,33 @@ public class OclResourceUtil {
 		return deresolvedReference;
 	}
 	
-	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file) {
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file) {
 		return getResource(file, null);
 	}
 	
-	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file, java.util.Map<?,?> options) {
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(java.io.File file, java.util.Map<?,?> options) {
 		return getResource(org.eclipse.emf.common.util.URI.createFileURI(file.getAbsolutePath()), options);
 	}
 	
-	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri) {
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri) {
 		return getResource(uri, null);
 	}
 	
-	public static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
-		new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().registerResourceFactory();
+	public static org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.emf.common.util.URI uri, java.util.Map<?,?> options) {
+		new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().registerResourceFactory();
 		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
 		if (options != null) {
 			rs.getLoadOptions().putAll(options);
 		}
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource(uri, true);
-		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) resource;
+		return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) resource;
 	}
 	
 	/**
 	 * Returns the resource after parsing the given text.
 	 */
 	public static org.eclipse.emf.ecore.resource.Resource getResource(String text) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 		metaInformation.registerResourceFactory();
 		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
 		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
@@ -159,10 +159,10 @@ public class OclResourceUtil {
 	}
 	
 	public static String getText(org.eclipse.emf.ecore.EObject eObject) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 		metaInformation.registerResourceFactory();
 		org.eclipse.emf.ecore.resource.ResourceSet rs = null;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) eObject.eResource();
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) eObject.eResource();
 		if (resource != null) {
 			rs = resource.getResourceSet();
 		}
@@ -171,10 +171,10 @@ public class OclResourceUtil {
 		}
 		if (resource == null) {
 			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createURI("temp." + metaInformation.getSyntaxName());
-			resource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) rs.createResource(uri);
+			resource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) rs.createResource(uri);
 		}
 		java.io.ByteArrayOutputStream outputStream = new java.io.ByteArrayOutputStream();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter printer = metaInformation.createPrinter(outputStream, resource);
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter printer = metaInformation.createPrinter(outputStream, resource);
 		try {
 			printer.print(eObject);
 		} catch (java.io.IOException e) {

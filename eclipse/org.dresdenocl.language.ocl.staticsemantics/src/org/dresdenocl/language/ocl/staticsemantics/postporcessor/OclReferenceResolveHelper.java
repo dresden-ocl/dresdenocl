@@ -1,21 +1,21 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor;
+package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.ParameterCS;
-import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.IOclResource;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.ParameterCS;
+import org.dresdenocl.language.ocl.TypeCS;
+import org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveHelper;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.IOclResource;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 public class OclReferenceResolveHelper implements IOclReferenceResolveHelper {
 

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,9 +40,9 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getCondition <em>Condition</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getThenExpression <em>Then Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getElseExpression <em>Else Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.IfExp#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.IfExp#getThenExpression <em>Then Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.IfExp#getElseExpression <em>Else Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,7 +65,7 @@ public interface IfExp extends OclExpression {
 	OclExpression getCondition();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getCondition <em>Condition</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.IfExp#getCondition <em>Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Condition</em>' containment reference.
@@ -89,7 +89,7 @@ public interface IfExp extends OclExpression {
 	OclExpression getThenExpression();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getThenExpression <em>Then Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.IfExp#getThenExpression <em>Then Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Then Expression</em>' containment reference.
@@ -113,7 +113,7 @@ public interface IfExp extends OclExpression {
 	OclExpression getElseExpression();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getElseExpression <em>Else Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.IfExp#getElseExpression <em>Else Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Else Expression</em>' containment reference.

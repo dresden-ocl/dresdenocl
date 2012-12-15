@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tracer.ui.internal.views;
+package org.dresdenocl.tracer.ui.internal.views;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -41,25 +41,25 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.ViewPart;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
-import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
-import tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl;
-import tudresden.ocl20.pivot.tracer.tracermodel.provider.TracermodelItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.tracer.ui.TracerUIPlugin;
-import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuAction;
-import tudresden.ocl20.pivot.tracer.ui.actions.TracerViewMenuActionType;
-import tudresden.ocl20.pivot.tracer.ui.internal.msg.OclTracerUIMessages;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryContentProvider;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemAdapterFactoryLabelProvider;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.util.TracerItemViewerFilter;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.util.ViewerFilterType;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.OclInterpreterPlugin;
+import org.dresdenocl.interpreter.event.IInterpreterTraceListener;
+import org.dresdenocl.interpreter.event.internal.InterpreterTraceEvent;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.tracer.tracermodel.TracermodelFactory;
+import org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl;
+import org.dresdenocl.tracer.tracermodel.provider.TracermodelItemProviderAdapterFactory;
+import org.dresdenocl.tracer.ui.TracerUIPlugin;
+import org.dresdenocl.tracer.ui.actions.TracerViewMenuAction;
+import org.dresdenocl.tracer.ui.actions.TracerViewMenuActionType;
+import org.dresdenocl.tracer.ui.internal.msg.OclTracerUIMessages;
+import org.dresdenocl.tracer.ui.internal.views.util.TracerItemAdapterFactoryContentProvider;
+import org.dresdenocl.tracer.ui.internal.views.util.TracerItemAdapterFactoryLabelProvider;
+import org.dresdenocl.tracer.ui.internal.views.util.TracerItemViewerFilter;
+import org.dresdenocl.tracer.ui.internal.views.util.ViewerFilterType;
 
 /**
  * @author Lars Schuetze

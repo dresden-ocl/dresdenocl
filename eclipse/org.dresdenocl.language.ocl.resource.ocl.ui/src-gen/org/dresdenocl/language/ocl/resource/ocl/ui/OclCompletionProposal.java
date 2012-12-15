@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A proposal for completing an incomplete document.
@@ -19,7 +19,7 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 	/**
 	 * The terminal that was expected at the cursor position.
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal;
+	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal;
 	
 	/**
 	 * The string that will be inserted if the user picks this proposal. This string
@@ -67,7 +67,7 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 	 */
 	private org.eclipse.swt.graphics.Image image;
 	
-	public OclCompletionProposal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container) {
+	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container) {
 		super();
 		this.expectedTerminal = expectedTerminal;
 		this.insertString = insertString;
@@ -77,12 +77,12 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 		this.container = container;
 	}
 	
-	public OclCompletionProposal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image) {
+	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container);
 		this.image = image;
 	}
 	
-	public OclCompletionProposal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image, String displayString) {
+	public OclCompletionProposal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String insertString, String prefix, boolean matchesPrefix, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.swt.graphics.Image image, String displayString) {
 		this(expectedTerminal, insertString, prefix, matchesPrefix, structuralFeature, container, image);
 		this.displayString = displayString;
 	}
@@ -133,7 +133,7 @@ public class OclCompletionProposal implements java.lang.Comparable<OclCompletion
 		return container;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal getExpectedTerminal() {
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal getExpectedTerminal() {
 		return expectedTerminal;
 	}
 	

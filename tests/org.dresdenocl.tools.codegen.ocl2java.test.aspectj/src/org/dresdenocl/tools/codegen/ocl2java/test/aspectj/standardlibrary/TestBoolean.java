@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.standardlibrary;
+package org.dresdenocl.tools.codegen.ocl2java.test.aspectj.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 

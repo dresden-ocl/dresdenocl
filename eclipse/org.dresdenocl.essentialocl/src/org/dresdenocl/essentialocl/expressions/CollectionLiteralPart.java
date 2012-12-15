@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc -->

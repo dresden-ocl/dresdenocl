@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * An <code>IContextDependentURIFragment</code> points at an element referenced
@@ -69,7 +69,7 @@ public interface IOclContextDependentURIFragment<ReferenceType extends org.eclip
 	 * 
 	 * @return result of resolving process
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve();
 	
 	/**
 	 * 

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.model.internal;
+package org.dresdenocl.modelbus.model.internal;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,12 +39,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelRegistry;
-import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.internal.ModelBusMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelRegistry;
+import org.dresdenocl.model.event.IModelRegistryListener;
+import org.dresdenocl.model.event.ModelRegistryEvent;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.internal.ModelBusMessages;
 
 /**
  * <p>
@@ -72,7 +72,7 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#addMetamodel(tudresden.ocl20
+	 * org.dresdenocl.modelbus.IModelRegistry#addMetamodel(org.dresdenocl
 	 * .pivot.modelbus.IModel)
 	 */
 	public void addModel(IModel model) {
@@ -126,7 +126,7 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#addModelBusListener(tudresden
+	 * org.dresdenocl.modelbus.IModelRegistry#addModelBusListener(tudresden
 	 * .ocl20.pivot.modelbus.event.IModelRegistryListener)
 	 */
 	public void addModelRegistryListener(IModelRegistryListener listener) {
@@ -136,7 +136,7 @@ public class ModelRegistry implements IModelRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#dispose()
+	 * @see org.dresdenocl.modelbus.IModelRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -151,7 +151,7 @@ public class ModelRegistry implements IModelRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#getActiveModel()
+	 * @see org.dresdenocl.modelbus.IModelRegistry#getActiveModel()
 	 */
 	public IModel getActiveModel() {
 
@@ -160,7 +160,7 @@ public class ModelRegistry implements IModelRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelRegistry#getModels()
+	 * @see org.dresdenocl.modelbus.IModelRegistry#getModels()
 	 */
 	public IModel[] getModels() {
 
@@ -180,7 +180,7 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModelRegistry#removeModel(tudresden
+	 * org.dresdenocl.modelbus.model.IModelRegistry#removeModel(tudresden
 	 * .ocl20.pivot.modelbus.model.IModel)
 	 */
 	public boolean removeModel(IModel model) {
@@ -224,7 +224,7 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModelRegistry#removeModel(java.lang
+	 * org.dresdenocl.modelbus.model.IModelRegistry#removeModel(java.lang
 	 * .String)
 	 */
 	public IModel removeModel(String displayName) {
@@ -260,7 +260,7 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#removeModelBusListener(tudresden
+	 * org.dresdenocl.modelbus.IModelRegistry#removeModelBusListener(tudresden
 	 * .ocl20.pivot.modelbus.event.IModelRegistryListener)
 	 */
 	public void removeModelRegistryListener(IModelRegistryListener listener) {
@@ -274,7 +274,7 @@ public class ModelRegistry implements IModelRegistry {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelRegistry#setActiveModel(tudresden.
+	 * org.dresdenocl.modelbus.IModelRegistry#setActiveModel(tudresden.
 	 * ocl20.pivot.modelbus.IModel)
 	 */
 	public void setActiveModel(IModel model) {

@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.tests;
+package org.dresdenocl.essentialocl.expressions.tests;
 
 import junit.textui.TestRunner;
-import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
+import org.dresdenocl.essentialocl.expressions.RealLiteralExp;
+import org.dresdenocl.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * The NewFileWizardPage allows setting the container for the new file, as well as

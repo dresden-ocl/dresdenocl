@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.test.model;
+package org.dresdenocl.modelbus.test.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -28,14 +28,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelRegistry;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelRegistry;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.metamodel.IMetamodelRegistry;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.test.ModelBusTestUtility;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceRegistry;
 
 /**
  * <p>

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * A utility class that provides methods to handle EClasses.

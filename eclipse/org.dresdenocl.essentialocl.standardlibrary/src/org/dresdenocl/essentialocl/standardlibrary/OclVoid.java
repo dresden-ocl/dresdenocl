@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
 /**
  * One single instance for <code>null</code> values in OCL.

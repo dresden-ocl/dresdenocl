@@ -1,11 +1,11 @@
-package tudresden.ocl20.pivot.pivotmodel.base;
+package org.dresdenocl.pivotmodel.base;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.impl.EnumerationImpl;
 
 /**
  * This class is meant as a base class for DSL- and/or repository-specific

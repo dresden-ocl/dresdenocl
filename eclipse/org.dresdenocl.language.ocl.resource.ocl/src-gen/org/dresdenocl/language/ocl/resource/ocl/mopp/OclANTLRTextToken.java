@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public class OclANTLRTextToken extends tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTextToken {
+public class OclANTLRTextToken extends org.dresdenocl.language.ocl.resource.ocl.mopp.OclTextToken {
 	
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	private final static org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	
 	public OclANTLRTextToken(org.antlr.runtime3_4_0.Token antlrToken) {
 		super(getTokenName(metaInformation.getTokenNames(), antlrToken.getType()), antlrToken.getText(), ((org.antlr.runtime3_4_0.CommonToken) antlrToken).getStartIndex(), ((org.antlr.runtime3_4_0.CommonToken) antlrToken).getStopIndex() - ((org.antlr.runtime3_4_0.CommonToken) antlrToken).getStartIndex() + 1, antlrToken.getLine(), antlrToken.getCharPositionInLine(), canBeUsedForSyntaxHighlighting(antlrToken.getType()));

@@ -4,21 +4,21 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.util;
+package org.dresdenocl.examples.pml.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
-import tudresden.ocl20.pivot.examples.pml.Extension;
-import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
-import tudresden.ocl20.pivot.examples.pml.Feature;
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Operation;
-import tudresden.ocl20.pivot.examples.pml.Parameter;
-import tudresden.ocl20.pivot.examples.pml.Plugin;
-import tudresden.ocl20.pivot.examples.pml.PluginPackage;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.Extension;
+import org.dresdenocl.examples.pml.ExtensionPoint;
+import org.dresdenocl.examples.pml.Feature;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.Operation;
+import org.dresdenocl.examples.pml.Parameter;
+import org.dresdenocl.examples.pml.Plugin;
+import org.dresdenocl.examples.pml.PluginPackage;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage
+ * @see org.dresdenocl.examples.pml.PmlPackage
  * @generated
  */
 public class PmlSwitch<T> extends Switch<T> {

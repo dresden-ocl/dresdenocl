@@ -1,13 +1,13 @@
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <p>
@@ -63,7 +63,7 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociation(AssociationProperty)
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#addAssociation(AssociationProperty)
 	 * 
 	 * @generated NOT
 	 */
@@ -72,7 +72,7 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	}
 	
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getAssociation(String)
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#getAssociation(String)
 	 * 
 	 * @generated NOT
 	 */
@@ -88,7 +88,7 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#removeAssociation(AssociationProperty)
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#removeAssociation(AssociationProperty)
 	 * 
 	 * @generated NOT
 	 */
@@ -98,7 +98,7 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties()
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#getInverseAssociationProperties()
 	 * 
 	 * @generated NOT
 	 */
@@ -110,7 +110,7 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#isInverseAssociation(AssociationProperty)
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#isInverseAssociation(AssociationProperty)
 	 * 
 	 * @generated NOT
 	 */
@@ -119,7 +119,7 @@ public class UML2AssociationProperty extends UML2Property implements Association
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#addAssociations(List)
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#addAssociations(List)
 	 * 
 	 * @generated NOT
 	 */

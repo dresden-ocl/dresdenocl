@@ -39,14 +39,14 @@ import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelListener;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelListener;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.event.IModelRegistryListener;
+import org.dresdenocl.model.event.ModelRegistryEvent;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -116,9 +116,9 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * @seeorg.dresdenocl.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
 
@@ -181,8 +181,8 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * org.dresdenocl.modelbus.event.IModelRegistryListener#modelAdded
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent event) {
 
@@ -385,7 +385,7 @@ public class MetricsView extends ViewPart implements ISelectionListener,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.model.IModelListener#modelChanged(tudresden.ocl20
+	 * org.dresdenocl.model.IModelListener#modelChanged(org.dresdenocl
 	 * .pivot.model.IModel)
 	 */
 	public void modelChanged(IModel model) {

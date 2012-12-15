@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.descriptor;
+package org.dresdenocl.modelbus.descriptor;
 
 import java.net.URL;
 
@@ -47,7 +47,7 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -97,7 +97,7 @@ public abstract class AbstractDescriptor implements IDescriptor {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.internal.descriptor.IDescriptor#getId()
+	 * @see org.dresdenocl.modelbus.internal.descriptor.IDescriptor#getId()
 	 */
 	public String getId() {
 
@@ -127,7 +127,7 @@ public abstract class AbstractDescriptor implements IDescriptor {
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.internal.descriptor.IDescriptor#
+	 * @seeorg.dresdenocl.modelbus.internal.descriptor.IDescriptor#
 	 * getDeclaringExtension()
 	 */
 	public IExtension getDeclaringExtension() {

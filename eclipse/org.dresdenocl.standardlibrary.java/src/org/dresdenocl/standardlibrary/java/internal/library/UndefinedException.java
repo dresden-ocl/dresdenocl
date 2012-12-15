@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 public class UndefinedException extends RuntimeException {
 

@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.ui.internal.views.util;
+package org.dresdenocl.interpreter.ui.internal.views.util;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,14 +29,14 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
-import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
+import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
+import org.dresdenocl.interpreter.ui.internal.views.InterpreterView;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <p>

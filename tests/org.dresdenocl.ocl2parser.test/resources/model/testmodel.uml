@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_YrjsoM2zEd62LvZ-4azseA" name="package1">
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_YrjsoM2zEd62LvZ-4azseA" name="package1">
   <packagedElement xmi:type="uml:Package" xmi:id="_bWclkM2zEd62LvZ-4azseA" name="package2">
     <elementImport xmi:id="_hR4MwM20Ed62LvZ-4azseA">
       <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>

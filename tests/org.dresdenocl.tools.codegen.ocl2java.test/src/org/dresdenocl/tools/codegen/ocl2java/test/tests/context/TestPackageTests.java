@@ -17,17 +17,17 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.context;
+package org.dresdenocl.tools.codegen.ocl2java.test.tests.context;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaFactory;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>

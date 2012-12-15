@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -19,12 +19,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractOperation;
 
 /**
  * <p>
@@ -83,7 +83,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getName()
 	 */
 	@Override
 	public String getName() {
@@ -95,7 +95,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter
+	 * org.dresdenocl.pivotmodel.base.AbstractOperation#getOwnedParameter
 	 * ()
 	 */
 	@Override
@@ -114,7 +114,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
+	 * org.dresdenocl.pivotmodel.base.AbstractOperation#getOwningType()
 	 */
 	@Override
 	public Type getOwningType() {
@@ -129,7 +129,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.OperationImpl#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -142,7 +142,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter()
+	 * org.dresdenocl.pivotmodel.impl.OperationImpl#getReturnParameter()
 	 */
 	public Parameter getReturnParameter() {
 
@@ -154,7 +154,7 @@ public class JavaOperation extends AbstractOperation implements Operation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
+	 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl#isStatic()
 	 */
 	public boolean isStatic() {
 

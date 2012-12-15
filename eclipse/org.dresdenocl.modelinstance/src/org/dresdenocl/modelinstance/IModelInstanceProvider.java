@@ -30,14 +30,14 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstance;
+package org.dresdenocl.modelinstance;
 
 import java.io.File;
 import java.net.URL;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * <p>

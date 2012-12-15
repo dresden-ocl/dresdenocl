@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.test.model;
+package org.dresdenocl.metamodels.java.test.model;
 
 import package1.TestEnumeration;
 import package1.TestInnerClassesClass;

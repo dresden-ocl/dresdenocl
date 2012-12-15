@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -13,7 +13,7 @@ package tudresden.ocl20.pivot.language.ocl;
  * <!-- end-user-doc -->
  *
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallExpCS()
  * @model abstract="true"
  * @generated
  */

@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter;
+package org.dresdenocl.codegen.adapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ import org.eclipse.jdt.launching.JavaRuntime;
 public class GenModelPivotAdapterGeneratorAdapter extends
 		GenBaseGeneratorAdapter {
 
-	public static final String PIVOTADAPTER_PROJECT_TYPE = "tudresden.ocl20.pivot.codegen.generator.PivotAdapter";
+	public static final String PIVOTADAPTER_PROJECT_TYPE = "org.dresdenocl.codegen.generator.PivotAdapter";
 
 	protected static final int MANIFEST_MF_ID = 0;
 	protected static final int PLUGIN_XML_ID = 1;
@@ -54,23 +54,23 @@ public class GenModelPivotAdapterGeneratorAdapter extends
 
 	protected static final JETEmitterDescriptor[] JET_EMITTER_DESCRIPTORS = {
 			new JETEmitterDescriptor("manifest.mfjet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.ManifestMF"),
+					"org.dresdenocl.codegen.adapter.templates.ManifestMF"),
 			new JETEmitterDescriptor("plugin.xmljet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.PluginXML"),
+					"org.dresdenocl.codegen.adapter.templates.PluginXML"),
 			new JETEmitterDescriptor("Plugin.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.PluginJava"),
+					"org.dresdenocl.codegen.adapter.templates.PluginJava"),
 			new JETEmitterDescriptor("model/AdapterFactory.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.AdapterFactory"),
+					"org.dresdenocl.codegen.adapter.templates.AdapterFactory"),
 			new JETEmitterDescriptor("model/Model.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.Model"),
+					"org.dresdenocl.codegen.adapter.templates.Model"),
 			new JETEmitterDescriptor("model/ModelMessages.javajet",
-					"tudresden.ocl20.pivot.codegen.adpater.templates.ModelMessages"),
+					"org.dresdenocl.codegen.adpater.templates.ModelMessages"),
 			new JETEmitterDescriptor("model/Messages.propertiesjet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.Messages"),
+					"org.dresdenocl.codegen.adapter.templates.Messages"),
 			new JETEmitterDescriptor("provider/ModelProvider.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.ModelProvider"),
+					"org.dresdenocl.codegen.adapter.templates.ModelProvider"),
 			new JETEmitterDescriptor("log4j.propertiesjet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.Log4jProperties") };
+					"org.dresdenocl.codegen.adapter.templates.Log4jProperties") };
 
 	protected JETEmitterDescriptor[] getJETEmitterDescriptors() {
 		return JET_EMITTER_DESCRIPTORS;

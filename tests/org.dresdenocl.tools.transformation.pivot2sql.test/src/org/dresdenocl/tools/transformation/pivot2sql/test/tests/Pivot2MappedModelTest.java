@@ -25,7 +25,7 @@
  * MA  02111-1307  USA
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import static org.junit.Assert.fail;
 
@@ -37,25 +37,25 @@ import java.util.Map;
 
 import org.junit.Before;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.TransformationTest;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TransformationTest;
 
 /**
  * <p>
  * This test class tests the MappedModel & Pivot2MappedModel.
  * </p>
  * 
- * @see tudresden.ocl20.pivot.tools.transformation.MappedModelImpl; ;
+ * @see org.dresdenocl.tools.transformation.MappedModelImpl; ;
  */
 public class Pivot2MappedModelTest extends TransformationTest {
 

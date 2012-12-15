@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 
@@ -14,7 +14,7 @@ package tudresden.ocl20.pivot.language.ocl;
  * <!-- end-user-doc -->
  *
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTypePathNameCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getTypePathNameCS()
  * @model abstract="true"
  * @generated
  */

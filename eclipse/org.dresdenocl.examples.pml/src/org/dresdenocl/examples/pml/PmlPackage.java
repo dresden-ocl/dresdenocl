@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml;
+package org.dresdenocl.examples.pml;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.examples.pml.PmlFactory
+ * @see org.dresdenocl.examples.pml.PmlFactory
  * @model kind="package"
  * @generated
  */
@@ -57,24 +57,24 @@ public interface PmlPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	PmlPackage eINSTANCE = tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl.init();
+	PmlPackage eINSTANCE = org.dresdenocl.examples.pml.impl.PmlPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl <em>Plugin</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.PluginImpl <em>Plugin</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPlugin()
+	 * @see org.dresdenocl.examples.pml.impl.PluginImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getPlugin()
 	 * @generated
 	 */
 	int PLUGIN = 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getFeature()
+	 * @see org.dresdenocl.examples.pml.impl.FeatureImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getFeature()
 	 * @generated
 	 */
 	int FEATURE = 0;
@@ -206,11 +206,11 @@ public interface PmlPackage extends EPackage {
 	int PLUGIN_FEATURE_COUNT = 8;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl <em>Extension Point</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.ExtensionPointImpl <em>Extension Point</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtensionPoint()
+	 * @see org.dresdenocl.examples.pml.impl.ExtensionPointImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getExtensionPoint()
 	 * @generated
 	 */
 	int EXTENSION_POINT = 2;
@@ -252,11 +252,11 @@ public interface PmlPackage extends EPackage {
 	int EXTENSION_POINT_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl <em>Extension</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.ExtensionImpl <em>Extension</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtension()
+	 * @see org.dresdenocl.examples.pml.impl.ExtensionImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getExtension()
 	 * @generated
 	 */
 	int EXTENSION = 3;
@@ -289,11 +289,11 @@ public interface PmlPackage extends EPackage {
 	int EXTENSION_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl <em>Java Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.JavaTypeImpl <em>Java Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getJavaType()
+	 * @see org.dresdenocl.examples.pml.impl.JavaTypeImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getJavaType()
 	 * @generated
 	 */
 	int JAVA_TYPE = 4;
@@ -335,11 +335,11 @@ public interface PmlPackage extends EPackage {
 	int JAVA_TYPE_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl <em>Operation</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.OperationImpl <em>Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.OperationImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getOperation()
+	 * @see org.dresdenocl.examples.pml.impl.OperationImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getOperation()
 	 * @generated
 	 */
 	int OPERATION = 5;
@@ -390,11 +390,11 @@ public interface PmlPackage extends EPackage {
 	int OPERATION_FEATURE_COUNT = 4;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.ParameterImpl <em>Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getParameter()
+	 * @see org.dresdenocl.examples.pml.impl.ParameterImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getParameter()
 	 * @generated
 	 */
 	int PARAMETER = 6;
@@ -436,11 +436,11 @@ public interface PmlPackage extends EPackage {
 	int PARAMETER_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl
-	 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPluginPackage()
+	 * @see org.dresdenocl.examples.pml.impl.PluginPackageImpl
+	 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getPluginPackage()
 	 * @generated
 	 */
 	int PLUGIN_PACKAGE = 7;
@@ -483,410 +483,410 @@ public interface PmlPackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Plugin <em>Plugin</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.Plugin <em>Plugin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Plugin</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin
+	 * @see org.dresdenocl.examples.pml.Plugin
 	 * @generated
 	 */
 	EClass getPlugin();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Plugin#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getId()
+	 * @see org.dresdenocl.examples.pml.Plugin#getId()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EAttribute getPlugin_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Plugin#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getName()
+	 * @see org.dresdenocl.examples.pml.Plugin#getName()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EAttribute getPlugin_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Plugin#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getVersion()
+	 * @see org.dresdenocl.examples.pml.Plugin#getVersion()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EAttribute getPlugin_Version();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getProvider <em>Provider</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Plugin#getProvider <em>Provider</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Provider</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getProvider()
+	 * @see org.dresdenocl.examples.pml.Plugin#getProvider()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EAttribute getPlugin_Provider();
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getFeature <em>Feature</em>}'.
+	 * Returns the meta object for the container reference '{@link org.dresdenocl.examples.pml.Plugin#getFeature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Feature</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getFeature()
+	 * @see org.dresdenocl.examples.pml.Plugin#getFeature()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EReference getPlugin_Feature();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Extension Points</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints()
+	 * @see org.dresdenocl.examples.pml.Plugin#getExtensionPoints()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EReference getPlugin_ExtensionPoints();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions <em>Extensions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.Plugin#getExtensions <em>Extensions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Extensions</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions()
+	 * @see org.dresdenocl.examples.pml.Plugin#getExtensions()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EReference getPlugin_Extensions();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.Plugin#getActivator <em>Activator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Activator</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin#getActivator()
+	 * @see org.dresdenocl.examples.pml.Plugin#getActivator()
 	 * @see #getPlugin()
 	 * @generated
 	 */
 	EReference getPlugin_Activator();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Feature <em>Feature</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.Feature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Feature</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature
+	 * @see org.dresdenocl.examples.pml.Feature
 	 * @generated
 	 */
 	EClass getFeature();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Feature#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Feature#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature#getId()
+	 * @see org.dresdenocl.examples.pml.Feature#getId()
 	 * @see #getFeature()
 	 * @generated
 	 */
 	EAttribute getFeature_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Feature#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Feature#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature#getName()
+	 * @see org.dresdenocl.examples.pml.Feature#getName()
 	 * @see #getFeature()
 	 * @generated
 	 */
 	EAttribute getFeature_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Feature#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Feature#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature#getVersion()
+	 * @see org.dresdenocl.examples.pml.Feature#getVersion()
 	 * @see #getFeature()
 	 * @generated
 	 */
 	EAttribute getFeature_Version();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Feature#getPlugins <em>Plugins</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.Feature#getPlugins <em>Plugins</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Plugins</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature#getPlugins()
+	 * @see org.dresdenocl.examples.pml.Feature#getPlugins()
 	 * @see #getFeature()
 	 * @generated
 	 */
 	EReference getFeature_Plugins();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint <em>Extension Point</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.ExtensionPoint <em>Extension Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Extension Point</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint
+	 * @see org.dresdenocl.examples.pml.ExtensionPoint
 	 * @generated
 	 */
 	EClass getExtensionPoint();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.ExtensionPoint#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getId()
+	 * @see org.dresdenocl.examples.pml.ExtensionPoint#getId()
 	 * @see #getExtensionPoint()
 	 * @generated
 	 */
 	EAttribute getExtensionPoint_Id();
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}'.
+	 * Returns the meta object for the container reference '{@link org.dresdenocl.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Plugin</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin()
+	 * @see org.dresdenocl.examples.pml.ExtensionPoint#getPlugin()
 	 * @see #getExtensionPoint()
 	 * @generated
 	 */
 	EReference getExtensionPoint_Plugin();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.ExtensionPoint#getInterface <em>Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Interface</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getInterface()
+	 * @see org.dresdenocl.examples.pml.ExtensionPoint#getInterface()
 	 * @see #getExtensionPoint()
 	 * @generated
 	 */
 	EReference getExtensionPoint_Interface();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Extension <em>Extension</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.Extension <em>Extension</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Extension</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Extension
+	 * @see org.dresdenocl.examples.pml.Extension
 	 * @generated
 	 */
 	EClass getExtension();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Extension#getImplementation <em>Implementation</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.Extension#getImplementation <em>Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Implementation</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Extension#getImplementation()
+	 * @see org.dresdenocl.examples.pml.Extension#getImplementation()
 	 * @see #getExtension()
 	 * @generated
 	 */
 	EReference getExtension_Implementation();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Extension Point</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Extension#getExtensionPoint()
+	 * @see org.dresdenocl.examples.pml.Extension#getExtensionPoint()
 	 * @see #getExtension()
 	 * @generated
 	 */
 	EReference getExtension_ExtensionPoint();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.JavaType <em>Java Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.JavaType <em>Java Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Java Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.JavaType
+	 * @see org.dresdenocl.examples.pml.JavaType
 	 * @generated
 	 */
 	EClass getJavaType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.JavaType#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.JavaType#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Fully Qualified Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.JavaType#getFullyQualifiedName()
+	 * @see org.dresdenocl.examples.pml.JavaType#getFullyQualifiedName()
 	 * @see #getJavaType()
 	 * @generated
 	 */
 	EAttribute getJavaType_FullyQualifiedName();
 
 	/**
-	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.examples.pml.JavaType#getImplements <em>Implements</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dresdenocl.examples.pml.JavaType#getImplements <em>Implements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Implements</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.JavaType#getImplements()
+	 * @see org.dresdenocl.examples.pml.JavaType#getImplements()
 	 * @see #getJavaType()
 	 * @generated
 	 */
 	EReference getJavaType_Implements();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.JavaType#getOperations <em>Operations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.JavaType#getOperations <em>Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Operations</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.JavaType#getOperations()
+	 * @see org.dresdenocl.examples.pml.JavaType#getOperations()
 	 * @see #getJavaType()
 	 * @generated
 	 */
 	EReference getJavaType_Operations();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Operation <em>Operation</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Operation
+	 * @see org.dresdenocl.examples.pml.Operation
 	 * @generated
 	 */
 	EClass getOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Operation#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Operation#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getName()
+	 * @see org.dresdenocl.examples.pml.Operation#getName()
 	 * @see #getOperation()
 	 * @generated
 	 */
 	EAttribute getOperation_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Operation#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.Operation#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Return Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getReturnType()
+	 * @see org.dresdenocl.examples.pml.Operation#getReturnType()
 	 * @see #getOperation()
 	 * @generated
 	 */
 	EReference getOperation_ReturnType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.Operation#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.Operation#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getParameters()
+	 * @see org.dresdenocl.examples.pml.Operation#getParameters()
 	 * @see #getOperation()
 	 * @generated
 	 */
 	EReference getOperation_Parameters();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Operation#getMyType <em>My Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.Operation#getMyType <em>My Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>My Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Operation#getMyType()
+	 * @see org.dresdenocl.examples.pml.Operation#getMyType()
 	 * @see #getOperation()
 	 * @generated
 	 */
 	EReference getOperation_MyType();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.Parameter <em>Parameter</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Parameter
+	 * @see org.dresdenocl.examples.pml.Parameter
 	 * @generated
 	 */
 	EClass getParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.examples.pml.Parameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getName()
+	 * @see org.dresdenocl.examples.pml.Parameter#getName()
 	 * @see #getParameter()
 	 * @generated
 	 */
 	EAttribute getParameter_Name();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.examples.pml.Parameter#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getType()
+	 * @see org.dresdenocl.examples.pml.Parameter#getType()
 	 * @see #getParameter()
 	 * @generated
 	 */
 	EReference getParameter_Type();
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getOperation <em>Operation</em>}'.
+	 * Returns the meta object for the container reference '{@link org.dresdenocl.examples.pml.Parameter#getOperation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Operation</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getOperation()
+	 * @see org.dresdenocl.examples.pml.Parameter#getOperation()
 	 * @see #getParameter()
 	 * @generated
 	 */
 	EReference getParameter_Operation();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.examples.pml.PluginPackage <em>Plugin Package</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.examples.pml.PluginPackage <em>Plugin Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Plugin Package</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.PluginPackage
+	 * @see org.dresdenocl.examples.pml.PluginPackage
 	 * @generated
 	 */
 	EClass getPluginPackage();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.PluginPackage#getPlugins <em>Plugins</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.PluginPackage#getPlugins <em>Plugins</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Plugins</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.PluginPackage#getPlugins()
+	 * @see org.dresdenocl.examples.pml.PluginPackage#getPlugins()
 	 * @see #getPluginPackage()
 	 * @generated
 	 */
 	EReference getPluginPackage_Plugins();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.PluginPackage#getTypes <em>Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.PluginPackage#getTypes <em>Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Types</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.PluginPackage#getTypes()
+	 * @see org.dresdenocl.examples.pml.PluginPackage#getTypes()
 	 * @see #getPluginPackage()
 	 * @generated
 	 */
 	EReference getPluginPackage_Types();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.examples.pml.PluginPackage#getFeatures <em>Features</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.examples.pml.PluginPackage#getFeatures <em>Features</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Features</em>'.
-	 * @see tudresden.ocl20.pivot.examples.pml.PluginPackage#getFeatures()
+	 * @see org.dresdenocl.examples.pml.PluginPackage#getFeatures()
 	 * @see #getPluginPackage()
 	 * @generated
 	 */
@@ -915,11 +915,11 @@ public interface PmlPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl <em>Plugin</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.PluginImpl <em>Plugin</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPlugin()
+		 * @see org.dresdenocl.examples.pml.impl.PluginImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getPlugin()
 		 * @generated
 		 */
 		EClass PLUGIN = eINSTANCE.getPlugin();
@@ -989,11 +989,11 @@ public interface PmlPackage extends EPackage {
 		EReference PLUGIN__ACTIVATOR = eINSTANCE.getPlugin_Activator();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.FeatureImpl <em>Feature</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getFeature()
+		 * @see org.dresdenocl.examples.pml.impl.FeatureImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getFeature()
 		 * @generated
 		 */
 		EClass FEATURE = eINSTANCE.getFeature();
@@ -1031,11 +1031,11 @@ public interface PmlPackage extends EPackage {
 		EReference FEATURE__PLUGINS = eINSTANCE.getFeature_Plugins();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl <em>Extension Point</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.ExtensionPointImpl <em>Extension Point</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtensionPoint()
+		 * @see org.dresdenocl.examples.pml.impl.ExtensionPointImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getExtensionPoint()
 		 * @generated
 		 */
 		EClass EXTENSION_POINT = eINSTANCE.getExtensionPoint();
@@ -1065,11 +1065,11 @@ public interface PmlPackage extends EPackage {
 		EReference EXTENSION_POINT__INTERFACE = eINSTANCE.getExtensionPoint_Interface();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl <em>Extension</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.ExtensionImpl <em>Extension</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getExtension()
+		 * @see org.dresdenocl.examples.pml.impl.ExtensionImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getExtension()
 		 * @generated
 		 */
 		EClass EXTENSION = eINSTANCE.getExtension();
@@ -1091,11 +1091,11 @@ public interface PmlPackage extends EPackage {
 		EReference EXTENSION__EXTENSION_POINT = eINSTANCE.getExtension_ExtensionPoint();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl <em>Java Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.JavaTypeImpl <em>Java Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.JavaTypeImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getJavaType()
+		 * @see org.dresdenocl.examples.pml.impl.JavaTypeImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getJavaType()
 		 * @generated
 		 */
 		EClass JAVA_TYPE = eINSTANCE.getJavaType();
@@ -1125,11 +1125,11 @@ public interface PmlPackage extends EPackage {
 		EReference JAVA_TYPE__OPERATIONS = eINSTANCE.getJavaType_Operations();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl <em>Operation</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.OperationImpl <em>Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.OperationImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getOperation()
+		 * @see org.dresdenocl.examples.pml.impl.OperationImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getOperation()
 		 * @generated
 		 */
 		EClass OPERATION = eINSTANCE.getOperation();
@@ -1167,11 +1167,11 @@ public interface PmlPackage extends EPackage {
 		EReference OPERATION__MY_TYPE = eINSTANCE.getOperation_MyType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.ParameterImpl <em>Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.ParameterImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getParameter()
+		 * @see org.dresdenocl.examples.pml.impl.ParameterImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getParameter()
 		 * @generated
 		 */
 		EClass PARAMETER = eINSTANCE.getParameter();
@@ -1201,11 +1201,11 @@ public interface PmlPackage extends EPackage {
 		EReference PARAMETER__OPERATION = eINSTANCE.getParameter_Operation();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.examples.pml.impl.PluginPackageImpl <em>Plugin Package</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PluginPackageImpl
-		 * @see tudresden.ocl20.pivot.examples.pml.impl.PmlPackageImpl#getPluginPackage()
+		 * @see org.dresdenocl.examples.pml.impl.PluginPackageImpl
+		 * @see org.dresdenocl.examples.pml.impl.PmlPackageImpl#getPluginPackage()
 		 * @generated
 		 */
 		EClass PLUGIN_PACKAGE = eINSTANCE.getPluginPackage();

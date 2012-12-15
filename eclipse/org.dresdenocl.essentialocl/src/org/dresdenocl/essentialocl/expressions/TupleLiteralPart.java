@@ -30,10 +30,10 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,8 +43,8 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getValue <em>Value</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,7 +67,7 @@ public interface TupleLiteralPart extends TypedElement {
 	Property getProperty();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getProperty <em>Property</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getProperty <em>Property</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Property</em>' containment reference.
@@ -91,7 +91,7 @@ public interface TupleLiteralPart extends TypedElement {
 	OclExpression getValue();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' containment reference.

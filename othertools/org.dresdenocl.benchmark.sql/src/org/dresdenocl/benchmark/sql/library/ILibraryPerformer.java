@@ -1,6 +1,6 @@
-package tudresden.ocl20.benchmark.sql.library;
+package org.dresdenocl.benchmark.sql.library;
 
-import tudresden.ocl20.benchmark.sql.util.IPerformer;
+import org.dresdenocl.benchmark.sql.util.IPerformer;
 
 public interface ILibraryPerformer extends IPerformer {
 

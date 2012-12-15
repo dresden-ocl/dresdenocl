@@ -22,12 +22,12 @@
  * MA  02111-1307  USA
  *
  */
-package tudresden.ocl20.pivot.tools.template.stringtemplate;
+package org.dresdenocl.tools.template.stringtemplate;
 
 import org.antlr.stringtemplate.StringTemplate;
 import org.stringtemplate.v4.ST;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplate;
 
 /**
  * <p>

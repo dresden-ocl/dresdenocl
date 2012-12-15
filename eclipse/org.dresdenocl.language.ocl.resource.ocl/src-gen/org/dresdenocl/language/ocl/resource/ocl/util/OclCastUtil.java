@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * Utility class that provides a method to cast objects to type parameterized

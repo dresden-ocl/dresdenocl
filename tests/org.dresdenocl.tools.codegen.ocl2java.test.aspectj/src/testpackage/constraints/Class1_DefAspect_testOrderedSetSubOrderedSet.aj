@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testOrderedSetSubOrderedSet {
      *       def: testOrderedSetSubOrderedSet(source: OrderedSet(OclAny), arg01: Integer, arg02: Integer): OrderedSet(OclAny) = source ->subOrderedSet(arg01, arg02)</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testOrderedSetSubOrderedSet(java.util.List<Object> source, Integer arg01, Integer arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.subOrderedSet(source, arg01, arg02);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets.subOrderedSet(source, arg01, arg02);
     }
 }

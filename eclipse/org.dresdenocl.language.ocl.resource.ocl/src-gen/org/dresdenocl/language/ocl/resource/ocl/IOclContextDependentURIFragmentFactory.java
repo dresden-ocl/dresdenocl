@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * An interface for factories to create instances of
- * tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.
+ * org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.
  * 
  * @param <ContainerType> the type of the class containing the reference to be
  * resolved
@@ -18,7 +18,7 @@ public interface IOclContextDependentURIFragmentFactory<ContainerType extends or
 	
 	/**
 	 * Create a new instance of the
-	 * tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment
+	 * org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment
 	 * interface.
 	 * 
 	 * @param identifier the identifier that references an Object
@@ -29,7 +29,7 @@ public interface IOclContextDependentURIFragmentFactory<ContainerType extends or
 	 * @param proxy the proxy that will be resolved later to the actual EObject
 	 * 
 	 * @return the new instance of
-	 * tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment
+	 * org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<?> create(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int positionInReference, org.eclipse.emf.ecore.EObject proxy);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment<?> create(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int positionInReference, org.eclipse.emf.ecore.EObject proxy);
 }

@@ -1,7 +1,7 @@
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclLibraryObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.essentialocl.standardlibrary.OclLibraryObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * This class implements an {@link OclLibraryObject} in Java.

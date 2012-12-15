@@ -1,52 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="tudresden">
-  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="ocl20">
-    <packagedElement xmi:type="uml:Package" xmi:id="_BlraUMHiEd2UNuYhQ_ApoA" name="pivot">
-      <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
-        <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="simple">
-          <elementImport xmi:id="_TGIkcLQFEd6jRpBYO5b3OQ">
-            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-          </elementImport>
-          <elementImport xmi:id="_TGbfYLQFEd6jRpBYO5b3OQ">
-            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </elementImport>
-          <elementImport xmi:id="_TGbfYbQFEd6jRpBYO5b3OQ">
-            <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-          </elementImport>
-          <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
-            <ownedAttribute xmi:id="_MIZyMMHiEd2UNuYhQ_ApoA" name="name">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-              <defaultValue xmi:type="uml:LiteralString" xmi:id="_Mjqx4MHiEd2UNuYhQ_ApoA" value=""/>
-            </ownedAttribute>
-            <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-            </ownedAttribute>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">
-            <generalization xmi:id="_U2mRYMHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Class" xmi:id="_XPL5YMHiEd2UNuYhQ_ApoA" name="Professor">
-            <generalization xmi:id="_XrWQ8MHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Class" xmi:id="_9MPlcbNTEd6ho98vmcJu3w" name="ModelProviderClass"/>
-          <packagedElement xmi:type="uml:Association" xmi:id="_Wt0iQLNUEd6ho98vmcJu3w" memberEnd="_ecuusLNUEd6ho98vmcJu3w _hIhmkLNUEd6ho98vmcJu3w">
-            <ownedEnd xmi:id="_ecuusLNUEd6ho98vmcJu3w" name="persons" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_Wt0iQLNUEd6ho98vmcJu3w">
-              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_78voQLNaEd6ho98vmcJu3w" value="*"/>
-            </ownedEnd>
-            <ownedEnd xmi:id="_hIhmkLNUEd6ho98vmcJu3w" name="owner" visibility="private" type="_9MPlcbNTEd6ho98vmcJu3w" association="_Wt0iQLNUEd6ho98vmcJu3w"/>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="_jDllELNUEd6ho98vmcJu3w" memberEnd="_jDllEbNUEd6ho98vmcJu3w _jDllErNUEd6ho98vmcJu3w">
-            <ownedEnd xmi:id="_jDllEbNUEd6ho98vmcJu3w" name="professor" type="_XPL5YMHiEd2UNuYhQ_ApoA" association="_jDllELNUEd6ho98vmcJu3w">
-              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-X2YwLNaEd6ho98vmcJu3w" value="*"/>
-            </ownedEnd>
-            <ownedEnd xmi:id="_jDllErNUEd6ho98vmcJu3w" name="owner" visibility="private" type="_9MPlcbNTEd6ho98vmcJu3w" association="_jDllELNUEd6ho98vmcJu3w"/>
-          </packagedElement>
-          <packagedElement xmi:type="uml:Association" xmi:id="_jMrPoLNUEd6ho98vmcJu3w" memberEnd="_jMrPobNUEd6ho98vmcJu3w _jMrPorNUEd6ho98vmcJu3w">
-            <ownedEnd xmi:id="_jMrPobNUEd6ho98vmcJu3w" name="students" type="_Tagt4MHiEd2UNuYhQ_ApoA" association="_jMrPoLNUEd6ho98vmcJu3w">
-              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__rZEQLNaEd6ho98vmcJu3w" value="*"/>
-            </ownedEnd>
-            <ownedEnd xmi:id="_jMrPorNUEd6ho98vmcJu3w" name="owner" visibility="private" type="_9MPlcbNTEd6ho98vmcJu3w" association="_jMrPoLNUEd6ho98vmcJu3w"/>
-          </packagedElement>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="org">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="dresdenocl">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="simple">
+        <elementImport xmi:id="_TGIkcLQFEd6jRpBYO5b3OQ">
+          <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </elementImport>
+        <elementImport xmi:id="_TGbfYLQFEd6jRpBYO5b3OQ">
+          <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </elementImport>
+        <elementImport xmi:id="_TGbfYbQFEd6jRpBYO5b3OQ">
+          <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </elementImport>
+        <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
+          <ownedAttribute xmi:id="_MIZyMMHiEd2UNuYhQ_ApoA" name="name">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <defaultValue xmi:type="uml:LiteralString" xmi:id="_Mjqx4MHiEd2UNuYhQ_ApoA" value=""/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">
+          <generalization xmi:id="_U2mRYMHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_XPL5YMHiEd2UNuYhQ_ApoA" name="Professor">
+          <generalization xmi:id="_XrWQ8MHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_9MPlcbNTEd6ho98vmcJu3w" name="ModelProviderClass"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_Wt0iQLNUEd6ho98vmcJu3w" memberEnd="_ecuusLNUEd6ho98vmcJu3w _hIhmkLNUEd6ho98vmcJu3w">
+          <ownedEnd xmi:id="_ecuusLNUEd6ho98vmcJu3w" name="persons" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_Wt0iQLNUEd6ho98vmcJu3w">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_78voQLNaEd6ho98vmcJu3w" value="*"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_hIhmkLNUEd6ho98vmcJu3w" name="owner" visibility="private" type="_9MPlcbNTEd6ho98vmcJu3w" association="_Wt0iQLNUEd6ho98vmcJu3w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_jDllELNUEd6ho98vmcJu3w" memberEnd="_jDllEbNUEd6ho98vmcJu3w _jDllErNUEd6ho98vmcJu3w">
+          <ownedEnd xmi:id="_jDllEbNUEd6ho98vmcJu3w" name="professor" type="_XPL5YMHiEd2UNuYhQ_ApoA" association="_jDllELNUEd6ho98vmcJu3w">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-X2YwLNaEd6ho98vmcJu3w" value="*"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_jDllErNUEd6ho98vmcJu3w" name="owner" visibility="private" type="_9MPlcbNTEd6ho98vmcJu3w" association="_jDllELNUEd6ho98vmcJu3w"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_jMrPoLNUEd6ho98vmcJu3w" memberEnd="_jMrPobNUEd6ho98vmcJu3w _jMrPorNUEd6ho98vmcJu3w">
+          <ownedEnd xmi:id="_jMrPobNUEd6ho98vmcJu3w" name="students" type="_Tagt4MHiEd2UNuYhQ_ApoA" association="_jMrPoLNUEd6ho98vmcJu3w">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__rZEQLNaEd6ho98vmcJu3w" value="*"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_jMrPorNUEd6ho98vmcJu3w" name="owner" visibility="private" type="_9MPlcbNTEd6ho98vmcJu3w" association="_jMrPoLNUEd6ho98vmcJu3w"/>
         </packagedElement>
       </packagedElement>
     </packagedElement>

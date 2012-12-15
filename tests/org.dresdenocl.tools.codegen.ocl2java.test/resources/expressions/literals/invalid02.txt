@@ -3,7 +3,7 @@ Boolean result1;
 /* Check if the expression results in invalid. */
 try {
     /* DUMMY variable is necessary to form literals into a statement. */
-    Object DUMMY = (Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral(); 
+    Object DUMMY = (Object) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral(); 
     result1 = false;
 }
 

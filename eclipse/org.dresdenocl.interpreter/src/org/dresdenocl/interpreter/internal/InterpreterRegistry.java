@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter.internal;
+package org.dresdenocl.interpreter.internal;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,14 +36,14 @@ import java.util.UUID;
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
-import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterRegistryEvent;
-import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterTraceEvent;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.IInterpreterRegistry;
+import org.dresdenocl.interpreter.event.IInterpreterRegistryListener;
+import org.dresdenocl.interpreter.event.IInterpreterTraceListener;
+import org.dresdenocl.interpreter.event.internal.InterpreterRegistryEvent;
+import org.dresdenocl.interpreter.event.internal.InterpreterTraceEvent;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 
 /**
  * <p>
@@ -178,9 +178,9 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
+	 * @seeorg.dresdenocl.interpreter.IInterpreterRegistry#
 	 * addInterpreterRegistryListener
-	 * (tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener)
+	 * (org.dresdenocl.interpreter.event.IInterpreterRegistryListener)
 	 */
 	public void addInterpreterRegistryListener(
 			IInterpreterRegistryListener listener) {
@@ -190,9 +190,9 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.interpreter.IInterpreterRegistry#
+	 * @see org.dresdenocl.interpreter.IInterpreterRegistry#
 	 * fireInterpretationFinished
-	 * (tudresden.ocl20.pivot.interpreter.IInterpretationResult)
+	 * (org.dresdenocl.interpreter.IInterpretationResult)
 	 */
 	public void fireInterpretationFinished(
 			IInterpretationResult interpretationResult) {
@@ -224,9 +224,9 @@ public class InterpreterRegistry implements IInterpreterRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.interpreter.IInterpreterRegistry#
+	 * @seeorg.dresdenocl.interpreter.IInterpreterRegistry#
 	 * removeInterpreterRegistryListener
-	 * (tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener)
+	 * (org.dresdenocl.interpreter.event.IInterpreterRegistryListener)
 	 */
 	public void removeInterpreterRegistryListener(
 			IInterpreterRegistryListener listener) {

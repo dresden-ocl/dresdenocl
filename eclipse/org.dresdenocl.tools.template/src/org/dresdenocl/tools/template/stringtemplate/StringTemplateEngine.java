@@ -23,7 +23,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.template.stringtemplate;
+package org.dresdenocl.tools.template.stringtemplate;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -36,9 +36,9 @@ import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupFile;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateEngine;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -109,7 +109,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getTemplate(String)
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#getTemplate(String)
 	 */
 	public ITemplate getTemplate(String name) {
 
@@ -128,7 +128,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getDisplayName()
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#getDisplayName()
 	 */
 	public String getDisplayName() {
 
@@ -136,7 +136,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getVersion()
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#getVersion()
 	 */
 	public String getVersion() {
 
@@ -145,7 +145,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFile(URL)
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#addFile(URL)
 	 */
 	public void addFile(String file) throws TemplateException {
 
@@ -154,7 +154,7 @@ public class StringTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFiles(LinkedList)
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#addFiles(LinkedList)
 	 */
 	public void addFiles(List<String> files) throws TemplateException {
 

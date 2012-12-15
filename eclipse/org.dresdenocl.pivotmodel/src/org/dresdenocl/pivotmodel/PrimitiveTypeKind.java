@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,7 +48,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * </p>
  * <!-- end-model-doc -->
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
+ * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
  * @generated
  */
 public enum PrimitiveTypeKind implements Enumerator {

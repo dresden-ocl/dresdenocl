@@ -26,7 +26,7 @@ inv component_names: not componentnames->exists(name = self.type.name)
 
 -- p.31
 -- Type prefixes (i.e. flow, discrete, parameter, constant, input, output) shall only be applied for type, record and connector components.
--- tudresden.ocl20.pivot.ocl2parser.internal.exception.BuildingASMException: Unable to find operation 'oclIsKindOf' with argument types [TypeTypeImpl[name=OclType,namespace=<null>,representedType=EcoreType[name=MoType,namespace=EcoreNamespace[name=modelica]]]] in type 'root::modelica::AbstractMoClass'. The operation is invalid. Error occured at line 39 and column 23. The error occured at the token oclIsKindOf.
+-- org.dresdenocl.ocl2parser.internal.exception.BuildingASMException: Unable to find operation 'oclIsKindOf' with argument types [TypeTypeImpl[name=OclType,namespace=<null>,representedType=EcoreType[name=MoType,namespace=EcoreNamespace[name=modelica]]]] in type 'root::modelica::AbstractMoClass'. The operation is invalid. Error occured at line 39 and column 23. The error occured at the token oclIsKindOf.
 /*
 context Component
 inv type_prefixes: 

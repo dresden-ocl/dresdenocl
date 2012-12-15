@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp;
+import org.dresdenocl.essentialocl.expressions.NumericLiteralExp;
 
 /**
  * <!-- begin-user-doc -->

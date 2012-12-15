@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.provider;
+package org.dresdenocl.essentialocl.expressions.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -47,11 +47,11 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
+import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
+import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.essentialocl.expressions.BooleanLiteralExp} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated

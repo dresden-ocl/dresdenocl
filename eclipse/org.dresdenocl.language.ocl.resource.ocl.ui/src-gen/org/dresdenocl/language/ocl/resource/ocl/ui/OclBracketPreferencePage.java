@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * The preference page for the bracket setting with following features:
@@ -19,7 +19,7 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	private static final String[] ALL_LEFT_BRACKETS = new String[] { "{", "(", "[", "<", "\"", "'", };
 	private static final String[] ALL_RIGHT_BRACKETS = new String[] { "}", ")", "]", ">", "\"", "'", };
 	
-	private String BRACKETS_COLOR = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR;
+	private String BRACKETS_COLOR = org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR;
 	
 	private java.util.Set<String> languageIDs = new java.util.LinkedHashSet<String>();
 	
@@ -35,9 +35,9 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	private org.eclipse.swt.widgets.Button addBracketButton;
 	private org.eclipse.swt.widgets.Button removeBracketButton;
 	private java.util.Map<String, String> bracketSetTemp = new java.util.LinkedHashMap<String, String>();
-	private String language = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
+	private String language = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketSet bracketsTmp;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet bracketsTmp;
 	
 	/**
 	 * Creates a preference page for bracket setting.
@@ -45,7 +45,7 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	public OclBracketPreferencePage() {
 		super();
 		
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+		org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 		String languageId = metaInformation.getSyntaxName();
 		languageIDs.add(languageId);
 	}
@@ -55,12 +55,12 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	 * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
 	public void init(org.eclipse.ui.IWorkbench workbench) {
-		setPreferenceStore(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
 		setDescription("Define the coloring of matching brackets.");
 		
-		bracketsTmp = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketSet(null, null);
+		bracketsTmp = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet(null, null);
 		for (String languageID : languageIDs) {
-			bracketSetTemp.put(languageID, getPreferenceStore().getString(languageID + tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX));
+			bracketSetTemp.put(languageID, getPreferenceStore().getString(languageID + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX));
 		}
 	}
 	
@@ -162,16 +162,16 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	 */
 	private void handleMatchingBracketsSelection() {
 		// not for the case of none existing language
-		enableCheckbox.setSelection(getPreferenceStore().getBoolean(		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX));
+		enableCheckbox.setSelection(getPreferenceStore().getBoolean(		org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX));
 		enableClosingInside.setSelection(false);
-		matchingBracketsColorButton.setEnabled(getPreferenceStore().getBoolean(		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX));
+		matchingBracketsColorButton.setEnabled(getPreferenceStore().getBoolean(		org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX));
 		org.eclipse.swt.graphics.RGB rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(getPreferenceStore(),
 		BRACKETS_COLOR);
 		matchingBracketsColorEditor.setColorValue(rgb);
 		removeBracketButton.setEnabled(false);
 		
 		initializeLanguage();
-		bracketsTmp.setBrackets(getPreferenceStore().getString(language + tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX));
+		bracketsTmp.setBrackets(getPreferenceStore().getString(language + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX));
 		String[] brackets = bracketsTmp.getBracketArray();
 		if (brackets != null) {
 			bracketsList.setItems(brackets);
@@ -235,7 +235,7 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 				boolean isClosingInside = true;
 				int[] itemIndices = bracketsList.getSelectionIndices();
 				for (int index : itemIndices) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair = bracketsTmp.getBracketPair(index);
+					org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair = bracketsTmp.getBracketPair(index);
 					if (bracketPair != null					&& !bracketPair.isClosingEnabledInside()) {
 						isClosingInside = false;
 						break;
@@ -255,7 +255,7 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 				boolean isClosingInside = enableClosingInside.getSelection();
 				int[] itemIndices = bracketsList.getSelectionIndices();
 				for (int idx : itemIndices) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair = bracketsTmp.getBracketPair(idx);
+					org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair = bracketsTmp.getBracketPair(idx);
 					if (bracketPair != null)					bracketsTmp.setClosingEnabledInside(bracketPair, isClosingInside);
 				}
 				bracketSetTemp.put(language, bracketsTmp.getBracketString());
@@ -270,10 +270,10 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	 * Sets the default values for this preference page.
 	 */
 	protected void performDefaults() {
-		enableCheckbox.setSelection(getPreferenceStore().getDefaultBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX));
+		enableCheckbox.setSelection(getPreferenceStore().getDefaultBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX));
 		matchingBracketsColorButton.setEnabled(enableCheckbox.getSelection());
 		matchingBracketsColorEditor.setColorValue(org.eclipse.jface.preference.PreferenceConverter.getDefaultColor(getPreferenceStore(), BRACKETS_COLOR));
-		bracketSetTemp.put(language, getPreferenceStore().getDefaultString(language + tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX));
+		bracketSetTemp.put(language, getPreferenceStore().getDefaultString(language + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX));
 		bracketsTmp.setBrackets(bracketSetTemp.get(language));
 		bracketsList.setItems(bracketsTmp.getBracketArray());
 		enableClosingInside.setSelection(false);
@@ -297,12 +297,12 @@ public class OclBracketPreferencePage extends org.eclipse.jface.preference.Prefe
 	private void updateActiveEditor() {
 		// set the values after ok or apply
 		org.eclipse.jface.preference.PreferenceConverter.setValue(getPreferenceStore(), BRACKETS_COLOR, matchingBracketsColorEditor.getColorValue());
-		getPreferenceStore().setValue(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX, enableCheckbox.getSelection());
-		getPreferenceStore().setValue(language + tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSetTemp.get(language));
+		getPreferenceStore().setValue(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX, enableCheckbox.getSelection());
+		getPreferenceStore().setValue(language + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX, bracketSetTemp.get(language));
 		org.eclipse.ui.IWorkbench workbench = org.eclipse.ui.PlatformUI.getWorkbench();
 		org.eclipse.ui.IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor != null && editor instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) {
-			((tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) editor).invalidateTextRepresentation();
+		if (editor != null && editor instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) {
+			((org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) editor).invalidateTextRepresentation();
 		}
 	}
 	

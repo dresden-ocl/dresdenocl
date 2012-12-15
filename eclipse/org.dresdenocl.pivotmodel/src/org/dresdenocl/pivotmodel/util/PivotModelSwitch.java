@@ -30,35 +30,35 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.util;
+package org.dresdenocl.pivotmodel.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
-import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
-import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.*;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.ComplexGenericType;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterGenericType;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeArgument;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
@@ -68,7 +68,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage
  * @generated
  */
 public class PivotModelSwitch<T> extends Switch<T> {

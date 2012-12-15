@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
+package org.dresdenocl.modelbus.modelinstance.internal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,12 +29,12 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IRegistryEventListener;
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
-import tudresden.ocl20.pivot.modelbus.descriptor.InvalidDescriptorException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.descriptor.IDescriptor;
+import org.dresdenocl.modelbus.descriptor.InvalidDescriptorException;
+import org.dresdenocl.modelinstance.IModelInstanceType;
+import org.dresdenocl.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * <p>
@@ -138,8 +138,8 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
-	 * addModelInstanceType(tudresden.ocl20.pivot.modelbus.IModelInstanceType)
+	 * @seeorg.dresdenocl.modelbus.IModelInstanceTypeRegistry#
+	 * addModelInstanceType(org.dresdenocl.modelbus.IModelInstanceType)
 	 */
 	public void addModelInstanceType(IModelInstanceType modelInstanceType) {
 
@@ -200,7 +200,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#dispose()
+	 * @see org.dresdenocl.modelbus.IModelInstanceTypeRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -216,7 +216,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
+	 * @seeorg.dresdenocl.modelbus.IModelInstanceTypeRegistry#
 	 * getModelInstanceType(java.lang.String)
 	 */
 	public IModelInstanceType getModelInstanceType(String id) {
@@ -245,7 +245,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceFileFormatRegistry#
+	 * @seeorg.dresdenocl.modelbus.IModelInstanceFileFormatRegistry#
 	 * getFileFormats()
 	 */
 	public IModelInstanceType[] getModelInstanceTypes() {

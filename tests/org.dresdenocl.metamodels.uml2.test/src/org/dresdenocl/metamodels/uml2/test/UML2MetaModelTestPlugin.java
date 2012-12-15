@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.test;
+package org.dresdenocl.metamodels.uml2.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -27,7 +27,7 @@ import org.osgi.framework.BundleContext;
 public class UML2MetaModelTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.metamodels.uml2.test";
+	public static final String PLUGIN_ID = "org.dresdenocl.metamodels.uml2.test";
 
 	/** The shared instance. */
 	private static UML2MetaModelTestPlugin plugin;

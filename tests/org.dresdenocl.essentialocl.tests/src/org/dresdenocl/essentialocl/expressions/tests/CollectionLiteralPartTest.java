@@ -30,10 +30,10 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.tests;
+package org.dresdenocl.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralPart;
 
 /**
  * <!-- begin-user-doc -->

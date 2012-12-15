@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.ocl22java;
+package org.dresdenocl.examples.ocl22java;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Ocl22JavaExamplesPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.examples.ocl22java"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.dresdenocl.examples.ocl22java"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Ocl22JavaExamplesPlugin plugin;

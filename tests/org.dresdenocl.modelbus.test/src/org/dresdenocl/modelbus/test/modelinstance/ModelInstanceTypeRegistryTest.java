@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.test.modelinstance;
+package org.dresdenocl.modelbus.test.modelinstance;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,11 +29,11 @@ import org.eclipse.core.runtime.IRegistryEventListener;
 import org.eclipse.core.runtime.Platform;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelinstance.IModelInstanceType;
+import org.dresdenocl.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * <p>

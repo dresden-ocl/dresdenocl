@@ -1,1 +1,1 @@
-!"".equals(tudresden.ocl20.pivot.examples.royalsandloyals.Date.nowString)
+!"".equals(org.dresdenocl.examples.royalsandloyals.Date.nowString)

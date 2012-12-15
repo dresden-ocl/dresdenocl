@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -40,9 +40,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -50,9 +50,9 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic <em>
+ * <li>{@link org.dresdenocl.pivotmodel.impl.FeatureImpl#isStatic <em>
  * Static</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#getSemantics
+ * <li>{@link org.dresdenocl.pivotmodel.impl.FeatureImpl#getSemantics
  * <em>Semantics</em>}</li>
  * </ul>
  * </p>

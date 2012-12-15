@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
+package org.dresdenocl.standardlibrary.java.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -14,28 +14,28 @@ import org.eclipse.emf.common.util.UniqueEList;
 import org.junit.Before;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBag;
+import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
+import org.dresdenocl.essentialocl.standardlibrary.OclOrderedSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclTuple;
+import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * Test for collections in OCL.

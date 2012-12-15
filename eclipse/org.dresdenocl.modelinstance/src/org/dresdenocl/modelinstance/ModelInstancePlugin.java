@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.modelinstance;
+package org.dresdenocl.modelinstance;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class ModelInstancePlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.modelinstance";
+	public static final String PLUGIN_ID = "org.dresdenocl.modelinstance";
 
 	// The shared instance
 	private static ModelInstancePlugin plugin;

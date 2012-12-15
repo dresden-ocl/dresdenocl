@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * 

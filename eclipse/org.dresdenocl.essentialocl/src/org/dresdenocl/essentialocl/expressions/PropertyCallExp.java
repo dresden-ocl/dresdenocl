@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,8 +44,8 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getQualifier <em>Qualifier</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,7 +68,7 @@ public interface PropertyCallExp extends FeatureCallExp {
 	Property getReferredProperty();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Referred Property</em>' reference.
@@ -79,7 +79,7 @@ public interface PropertyCallExp extends FeatureCallExp {
 
 	/**
 	 * Returns the value of the '<em><b>Qualifier</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.expressions.OclExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Qualifier</em>' containment reference list isn't clear,

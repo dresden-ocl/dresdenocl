@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * This class is based on:
@@ -23,7 +23,7 @@ public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard impleme
 	/**
 	 * The name of the project creation page
 	 */
-	private String pageName = "New " + new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName() + " Project";
+	private String pageName = "New " + new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName() + " Project";
 	
 	/**
 	 * The title of the project creation page
@@ -87,7 +87,7 @@ public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard impleme
 							projectFolderFile.mkdirs();
 							monitor.worked(10);
 							
-							org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("tudresden.ocl20.pivot.language.ocl.resource.ocl.ui");
+							org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle("org.dresdenocl.language.ocl.resource.ocl.ui");
 							java.net.URL newProjectZipURL = bundle.getEntry(newProjectZip);
 							
 							if (newProjectZipURL != null) {
@@ -104,9 +104,9 @@ public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard impleme
 								desc.setLocation(new org.eclipse.core.runtime.Path(projectFolder));
 							}
 							
-							String natureID = tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNature.NATURE_ID;
+							String natureID = org.dresdenocl.language.ocl.resource.ocl.mopp.OclNature.NATURE_ID;
 							java.util.List<org.eclipse.core.resources.ICommand> buildCommands = new java.util.ArrayList<org.eclipse.core.resources.ICommand>();
-							for (String builderID : tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNature.BUILDER_IDS) {
+							for (String builderID : org.dresdenocl.language.ocl.resource.ocl.mopp.OclNature.BUILDER_IDS) {
 								org.eclipse.core.resources.ICommand command = desc.newCommand();
 								command.setBuilderName(builderID);
 								buildCommands.add(command);
@@ -124,7 +124,7 @@ public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard impleme
 								defaultNewFile.create(new java.io.ByteArrayInputStream(new byte[0]), true, null);
 							}
 							if (defaultNewFile.exists()) {
-								tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation info = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+								org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation info = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 								String fileName = "new_file." + info.getSyntaxName();
 								String content = info.getNewFileContentProvider().getNewFileContent("new_file." + info.getSyntaxName());
 								defaultNewFile.setContents(new java.io.ByteArrayInputStream(content.getBytes()), org.eclipse.core.resources.IFile.FORCE, null);
@@ -301,7 +301,7 @@ public class OclNewProjectWizard extends org.eclipse.jface.wizard.Wizard impleme
 	public void init(org.eclipse.ui.IWorkbench workbench, org.eclipse.jface.viewers.IStructuredSelection selection) {
 		// Set default image for all wizard pages
 		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path("icons/new_project_wizban.gif");
-		org.osgi.framework.Bundle bundle = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle();
+		org.osgi.framework.Bundle bundle = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle();
 		java.net.URL url = org.eclipse.core.runtime.FileLocator.find(bundle, path, null);
 		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(url);
 		setDefaultPageImageDescriptor(descriptor);

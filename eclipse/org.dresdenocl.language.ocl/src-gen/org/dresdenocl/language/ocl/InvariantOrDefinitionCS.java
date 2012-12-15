@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getInvariantOrDefinitionCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getInvariantOrDefinitionCS()
  * @model abstract="true"
  * @generated
  */

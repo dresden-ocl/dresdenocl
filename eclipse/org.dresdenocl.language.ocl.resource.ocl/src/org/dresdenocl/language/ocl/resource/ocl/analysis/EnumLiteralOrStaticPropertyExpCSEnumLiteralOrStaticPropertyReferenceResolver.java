@@ -4,27 +4,27 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveHelper;
+import org.dresdenocl.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
+import org.dresdenocl.pivotmodel.NamedElement;
 
 public class EnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenceResolver
 		implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS, tudresden.ocl20.pivot.pivotmodel.NamedElement> {
+		org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS, org.dresdenocl.pivotmodel.NamedElement> {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS, tudresden.ocl20.pivot.pivotmodel.NamedElement> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS, tudresden.ocl20.pivot.pivotmodel.NamedElement>();
+	private org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS, org.dresdenocl.pivotmodel.NamedElement> delegate = new org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS, org.dresdenocl.pivotmodel.NamedElement>();
 
 	public void resolve(
 			java.lang.String identifier,
-			tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS container,
+			org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS container,
 			org.eclipse.emf.ecore.EReference reference,
 			int position,
 			boolean resolveFuzzy,
-			final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<tudresden.ocl20.pivot.pivotmodel.NamedElement> result) {
+			final org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.dresdenocl.pivotmodel.NamedElement> result) {
 		IOclReferenceResolveHelper rrHelper = OclReferenceResolveHelperProvider
 				.getOclReferenceResolveHelper();
 		if (rrHelper != null) {
@@ -40,8 +40,8 @@ public class EnumLiteralOrStaticPropertyExpCSEnumLiteralOrStaticPropertyReferenc
 	}
 
 	public java.lang.String deResolve(
-			tudresden.ocl20.pivot.pivotmodel.NamedElement element,
-			tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS container,
+			org.dresdenocl.pivotmodel.NamedElement element,
+			org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS container,
 			org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}

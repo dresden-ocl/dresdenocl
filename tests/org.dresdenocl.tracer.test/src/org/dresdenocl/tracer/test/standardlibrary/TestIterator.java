@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tracer.test.standardlibrary;
+package org.dresdenocl.tracer.test.standardlibrary;
 
 import static org.junit.Assert.assertTrue;
 
@@ -13,11 +13,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.interpreter.test.OclInterpreterTestPlugin;
-import tudresden.ocl20.pivot.tracer.test.AbstractTracerTest;
-import tudresden.ocl20.pivot.tracer.test.TracerTestPlugin;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.interpreter.test.OclInterpreterTestPlugin;
+import org.dresdenocl.tracer.test.AbstractTracerTest;
+import org.dresdenocl.tracer.test.TracerTestPlugin;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
 
 
 public class TestIterator extends AbstractTracerTest {

@@ -16,12 +16,12 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance;
+package org.dresdenocl.modelbus.modelinstance;
 
 import java.net.URL;
 
-import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import org.dresdenocl.modelbus.descriptor.IDescriptor;
+import org.dresdenocl.modelinstance.IModelInstanceType;
 
 /**
  * <p>

@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test.standardlibrary;
+package org.dresdenocl.ocl2parser.test.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,11 +27,11 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.OperationCallExp;
+import org.dresdenocl.ocl2parser.test.TestPerformer;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

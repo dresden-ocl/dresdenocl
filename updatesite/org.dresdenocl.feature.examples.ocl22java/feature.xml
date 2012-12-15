@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.examples.ocl22java"
+      id="org.dresdenocl.feature.examples.ocl22java"
       label="Dresden OCL Ocl22Java Examples"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -184,37 +184,37 @@ Library.
    </license>
 
    <includes
-         id="tudresden.ocl20.feature.codegen"
+         id="org.dresdenocl.feature.codegen"
          version="0.0.0"/>
 
    <requires>
       <import plugin="org.aspectj.runtime"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.ocl2java.types" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.tools.codegen.ocl2java.types" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.common.ui"/>
-      <import plugin="tudresden.ocl20.pivot.examples.ui"/>
+      <import plugin="org.dresdenocl.examples.ui"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode"
+         id="org.dresdenocl.examples.royalandloyal.ocl22javacode"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.simple.ocl22javacode"
+         id="org.dresdenocl.examples.simple.ocl22javacode"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.ocl22java"
+         id="org.dresdenocl.examples.ocl22java"
          download-size="0"
          install-size="0"
          version="0.0.0"

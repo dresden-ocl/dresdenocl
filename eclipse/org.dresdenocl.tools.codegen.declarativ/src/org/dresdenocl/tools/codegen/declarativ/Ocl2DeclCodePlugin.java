@@ -1,10 +1,10 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ;
+package org.dresdenocl.tools.codegen.declarativ;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * <p>
@@ -17,7 +17,7 @@ public class Ocl2DeclCodePlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String ID =
-			"tudresden.ocl20.pivot.tools.codegen.declarativ"; //$NON-NLS-1$
+			"org.dresdenocl.tools.codegen.declarativ"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static Ocl2DeclCodePlugin plugin;
@@ -47,7 +47,7 @@ public class Ocl2DeclCodePlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

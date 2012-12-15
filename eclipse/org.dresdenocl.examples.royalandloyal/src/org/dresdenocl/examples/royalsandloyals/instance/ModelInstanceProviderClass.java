@@ -16,26 +16,26 @@
  * You should have received a copy of the GNU Lesser General Public License along 
  * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.examples.royalsandloyals.instance;
+package org.dresdenocl.examples.royalsandloyals.instance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SpringLayout.Constraints;
 
-import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Color;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Membership;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
+import org.dresdenocl.examples.royalsandloyals.Burning;
+import org.dresdenocl.examples.royalsandloyals.Color;
+import org.dresdenocl.examples.royalsandloyals.Customer;
+import org.dresdenocl.examples.royalsandloyals.CustomerCard;
+import org.dresdenocl.examples.royalsandloyals.Date;
+import org.dresdenocl.examples.royalsandloyals.Earning;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyAccount;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyProgram;
+import org.dresdenocl.examples.royalsandloyals.Membership;
+import org.dresdenocl.examples.royalsandloyals.ProgramPartner;
+import org.dresdenocl.examples.royalsandloyals.Service;
+import org.dresdenocl.examples.royalsandloyals.ServiceLevel;
+import org.dresdenocl.examples.royalsandloyals.Transaction;
 
 /**
  * <p>

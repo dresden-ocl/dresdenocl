@@ -2,11 +2,11 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="tudresden.ocl20.pivot.modelbus.modelinstancetypes">
+         point="org.dresdenocl.modelbus.modelinstancetypes">
       <modelinstancetype
             icon="icons/java.gif"
-            id="tudresden.ocl20.pivot.modelinstancetype.java"
-            modelInstanceProvider="tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider"
+            id="org.dresdenocl.modelinstancetype.java"
+            modelInstanceProvider="org.dresdenocl.modelinstancetype.java.internal.provider.JavaModelInstanceProvider"
             name="Java Instance (via ProviderClass.class)">
       </modelinstancetype>
    </extension>

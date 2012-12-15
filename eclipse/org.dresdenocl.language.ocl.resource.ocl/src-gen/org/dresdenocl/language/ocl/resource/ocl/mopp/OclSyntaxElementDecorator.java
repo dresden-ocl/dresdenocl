@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 public class OclSyntaxElementDecorator {
 	
 	/**
 	 * the syntax element to be decorated
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement;
+	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement;
 	
 	/**
 	 * an array of child decorators (one decorator per child of the decorated syntax
@@ -24,7 +24,7 @@ public class OclSyntaxElementDecorator {
 	 */
 	private java.util.List<Integer> indicesToPrint = new java.util.ArrayList<Integer>();
 	
-	public OclSyntaxElementDecorator(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement, OclSyntaxElementDecorator[] childDecorators) {
+	public OclSyntaxElementDecorator(org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement, OclSyntaxElementDecorator[] childDecorators) {
 		super();
 		this.decoratedElement = decoratedElement;
 		this.childDecorators = childDecorators;
@@ -34,7 +34,7 @@ public class OclSyntaxElementDecorator {
 		indicesToPrint.add(index);
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getDecoratedElement() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement getDecoratedElement() {
 		return decoratedElement;
 	}
 	

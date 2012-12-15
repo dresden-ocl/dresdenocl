@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResolutionGenerator {
 	
@@ -19,14 +19,14 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 				final org.eclipse.core.resources.IFile file = (org.eclipse.core.resources.IFile) resource;
 				org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 				org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
-				rs.getLoadOptions().put(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS, "true");
+				rs.getLoadOptions().put(org.dresdenocl.language.ocl.resource.ocl.IOclOptions.DISABLE_CREATING_MARKERS_FOR_PROBLEMS, "true");
 				org.eclipse.emf.ecore.resource.Resource emfResource = rs.getResource(uri, true);
-				if (emfResource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource customResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) emfResource;
+				if (emfResource instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) {
+					org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource customResource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) emfResource;
 					org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(customResource);
-					java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(customResource, marker);
+					java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(customResource, marker);
 					java.util.List<org.eclipse.ui.IMarkerResolution2> resolutions = new java.util.ArrayList<org.eclipse.ui.IMarkerResolution2>();
-					for (final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
+					for (final org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
 						resolutions.add(new org.eclipse.ui.IMarkerResolution2() {
 							
 							public void run(org.eclipse.core.resources.IMarker marker) {
@@ -35,7 +35,7 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 								try {
 									file.setContents(new java.io.ByteArrayInputStream(newText.getBytes()), true, true, null);
 								} catch (org.eclipse.core.runtime.CoreException e) {
-									tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while applying quick fix", e);
+									org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while applying quick fix", e);
 								}
 							}
 							
@@ -44,7 +44,7 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 							}
 							
 							public org.eclipse.swt.graphics.Image getImage() {
-								return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation().getImageProvider().getImage(quickFix.getImageKey());
+								return new org.dresdenocl.language.ocl.resource.ocl.ui.OclUIMetaInformation().getImageProvider().getImage(quickFix.getImageKey());
 							}
 							
 							public String getDescription() {
@@ -57,19 +57,19 @@ public class OclMarkerResolutionGenerator implements org.eclipse.ui.IMarkerResol
 				}
 			}
 		} catch (Exception e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while computing quick fix resolutions", e);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while computing quick fix resolutions", e);
 		}
 		return new org.eclipse.ui.IMarkerResolution[] {};
 	}
 	
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.core.resources.IMarker marker) {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.core.resources.IMarker marker) {
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
 		try {
 			String quickFixContexts = getQuickFixContextString(marker);
 			if (quickFixContexts != null) {
 				String[] quickFixContextParts = quickFixContexts.split("\\|");
 				for (String quickFixContext : quickFixContextParts) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix = resource.getQuickFix(quickFixContext);
+					org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix = resource.getQuickFix(quickFixContext);
 					if (quickFix != null) {
 						foundQuickFixes.add(quickFix);
 					}

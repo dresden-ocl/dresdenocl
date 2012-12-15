@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.provider;
+package org.dresdenocl.essentialocl.types.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,7 +50,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.types.util.TypesAdapterFactory;
+import org.dresdenocl.essentialocl.types.util.TypesAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -104,7 +104,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.BagType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.BagType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -112,7 +112,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected BagTypeItemProvider bagTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.BagType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.BagType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -128,7 +128,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.TupleType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.TupleType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -136,7 +136,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected TupleTypeItemProvider tupleTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TupleType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.TupleType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -152,7 +152,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.CollectionType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -160,7 +160,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected CollectionTypeItemProvider collectionTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.CollectionType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -176,7 +176,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.InvalidType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.InvalidType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -184,7 +184,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected InvalidTypeItemProvider invalidTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.InvalidType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.InvalidType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -200,7 +200,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.OrderedSetType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -208,7 +208,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected OrderedSetTypeItemProvider orderedSetTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.OrderedSetType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -224,7 +224,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.SequenceType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.SequenceType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -232,7 +232,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected SequenceTypeItemProvider sequenceTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.SequenceType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.SequenceType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -248,7 +248,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.SetType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.SetType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -256,7 +256,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected SetTypeItemProvider setTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.SetType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.SetType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -272,7 +272,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.VoidType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.VoidType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -280,7 +280,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected VoidTypeItemProvider voidTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.VoidType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.VoidType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -296,7 +296,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.TypeType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.TypeType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -304,7 +304,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected TypeTypeItemProvider typeTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.TypeType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.TypeType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -320,7 +320,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.OclLibrary} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -328,7 +328,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected OclLibraryItemProvider oclLibraryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.OclLibrary}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -344,7 +344,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.types.AnyType} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.types.AnyType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -352,7 +352,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory
 	protected AnyTypeItemProvider anyTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.AnyType}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.types.AnyType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

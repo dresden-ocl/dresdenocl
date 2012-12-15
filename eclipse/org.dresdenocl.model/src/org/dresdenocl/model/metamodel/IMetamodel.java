@@ -30,10 +30,10 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.model.metamodel;
+package org.dresdenocl.model.metamodel;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
 
 /**
  * <p>

@@ -15,8 +15,8 @@ includes a code generator that creates adapter stubs.
 \section{The Adapter Code generation}
 
 The code generator is located in the plug-in 
-\reference{tudresden.ocl20.pivot.codegen.adapter}. The only prerequisites are 
-the core features (\reference{tudresden.ocl20.feature.core}) of Dresden OCL and
+\reference{org.dresdenocl.codegen.adapter}. The only prerequisites are 
+the core features (\reference{org.dresdenocl.feature.core}) of Dresden OCL and
 the metamodel to adapt that has to be modeled in \acs{EMF} Ecore.
 
 In the following Ecore itself will be adapted to the pivot model (this has been 
@@ -94,7 +94,7 @@ Figure~\ref{pic:pivotModelAdaption:EcoreGenModel}). Open the context menu on
 the root element and choose \code{Generate Pivot Model adapters} as shown in
 Figure~\ref{pic:pivotModelAdaption:GeneratePivotModelAdapters}. A new plug-in 
 is created. It is named after the conventions of the Dresden OCL:
-\code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].meta\-mo\-dels.<meta-model name>}. The package explorer is shown in Figure \ref{pic:pivotModelAdaption:GeneratedPlugin}.
+\code{org.dresdenocl\linebreak[0].pi\-vot\linebreak[0].meta\-mo\-dels.<meta-model name>}. The package explorer is shown in Figure \ref{pic:pivotModelAdaption:GeneratedPlugin}.
 
 Every created class marked blue 
 (\url{http://www.eclipse.org/modeling/emft/?project=mint/}) has methods with an

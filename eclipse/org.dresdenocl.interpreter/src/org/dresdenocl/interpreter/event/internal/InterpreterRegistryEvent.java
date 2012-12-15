@@ -28,12 +28,12 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter.event.internal;
+package org.dresdenocl.interpreter.event.internal;
 
 import java.util.EventObject;
 
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.IInterpreterRegistry;
 
 /**
  * {@link InterpreterRegistryEvent} are fired during interpretation for

@@ -4,13 +4,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.provider;
+package org.dresdenocl.language.ocl.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.emftext.commons.layout.provider.LayoutEditPlugin;
-import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelEditPlugin;
+import org.dresdenocl.pivotmodel.provider.PivotModelEditPlugin;
 
 /**
  * This is the central singleton for the OCL edit plugin.

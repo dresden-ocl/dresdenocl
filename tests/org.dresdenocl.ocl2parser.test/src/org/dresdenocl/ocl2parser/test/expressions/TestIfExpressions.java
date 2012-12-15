@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test.expressions;
+package org.dresdenocl.ocl2parser.test.expressions;
 
 import static org.junit.Assert.fail;
 
@@ -25,10 +25,10 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2parser.test.TestPerformer;
-import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
-import tudresden.ocl20.pivot.parser.ParseException;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.ocl2parser.test.TestPerformer;
+import org.dresdenocl.ocl2parser.test.exception.MetaModelNotFoundException;
+import org.dresdenocl.parser.ParseException;
 
 /**
  * <p>

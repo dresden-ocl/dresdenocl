@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizards;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.internal.wizards;
 
 import java.util.List;
 
@@ -26,13 +26,13 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.Ocl2SqlUIMessages;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.CodegenJob;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.TransformCodeWizard;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.internal.Ocl2SqlUIMessages;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.CodegenJob;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.TransformCodeWizard;
 
 public class SQLCodeWizard extends TransformCodeWizard implements INewWizard {
 

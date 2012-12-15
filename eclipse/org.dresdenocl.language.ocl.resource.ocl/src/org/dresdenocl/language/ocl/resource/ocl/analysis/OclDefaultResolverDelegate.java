@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
 public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> {
 	
@@ -60,9 +60,9 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 */
 	private int oldProxyCount = -1;
 	
-	private static tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	private static org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclNameProvider nameProvider = metaInformation.createNameProvider();
+	private org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider nameProvider = metaInformation.createNameProvider();
 	
 	/**
 	 * This standard implementation searches for objects in the resource, which have
@@ -70,7 +70,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * matching object is found, the identifier is used as URI. If the resource at
 	 * this URI has a root element of the correct type, this element is returned.
 	 */
-	protected void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	protected void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		try {
 			org.eclipse.emf.ecore.EObject root = container;
 			if (!enableScoping) {
@@ -150,7 +150,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	 * resolvers which require to search in a particular scope for referenced
 	 * elements, rather than in the whole resource as done by resolve().
 	 */
-	protected boolean tryToResolveIdentifierInObjectTree(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject root, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result, boolean checkRootFirst) {
+	protected boolean tryToResolveIdentifierInObjectTree(String identifier, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject root, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result, boolean checkRootFirst) {
 		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
 		boolean continueSearch;
 		if (checkRootFirst) {
@@ -180,7 +180,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return true;
 	}
 	
-	protected boolean tryToResolveIdentifierAsURI(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	protected boolean tryToResolveIdentifierAsURI(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
 		org.eclipse.emf.ecore.resource.Resource resource = container.eResource();
 		if (resource != null) {
@@ -196,7 +196,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return true;
 	}
 	
-	protected boolean tryToResolveIdentifierInGenModelRegistry(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	protected boolean tryToResolveIdentifierInGenModelRegistry(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		org.eclipse.emf.ecore.EClass type = reference.getEReferenceType();
 		
 		final java.util.Map<String, org.eclipse.emf.common.util.URI> packageNsURIToGenModelLocationMap = org.eclipse.emf.ecore.plugin.EcorePlugin.getEPackageNsURIToGenModelLocationMap();
@@ -224,7 +224,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return true;
 	}
 	
-	protected boolean checkElement(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EReference reference, int position, org.eclipse.emf.ecore.EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
+	protected boolean checkElement(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EReference reference, int position, org.eclipse.emf.ecore.EClass type, String identifier, boolean resolveFuzzy, boolean checkStringWise, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result) {
 		if (element.eIsProxy()) {
 			return true;
 		}
@@ -253,7 +253,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 				} else {
 					oldTarget = (org.eclipse.emf.ecore.EObject) container.eGet(reference, false);
 				}
-				result.addQuickFix(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclChangeReferenceQuickFix("Replace with " + similarMatch, "IMG_TOOL_FORWARD", container, reference, oldTarget, element));
+				result.addQuickFix(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclChangeReferenceQuickFix("Replace with " + similarMatch, "IMG_TOOL_FORWARD", container, reference, oldTarget, element));
 			}
 			return true;
 		}
@@ -278,7 +278,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		return (ReferenceType) element;
 	}
 	
-	protected String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
+	protected String produceDeResolveErrorMessage(org.eclipse.emf.ecore.EObject refObject, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
 		String msg = getClass().getSimpleName() + ": " + reference.getEType().getName() + " \"" + refObject.toString() + "\" not de-resolveable";
 		return msg;
 	}
@@ -337,8 +337,8 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
-				if (deresolvedReference != null && deresolvedReference.startsWith(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
-					deresolvedReference = deresolvedReference.substring(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+				if (deresolvedReference != null && deresolvedReference.startsWith(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+					deresolvedReference = deresolvedReference.substring(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
 				}
 			}
@@ -398,15 +398,15 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 		}
 	}
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceCache getCache(org.eclipse.emf.ecore.EObject object) {
+	protected org.dresdenocl.language.ocl.resource.ocl.IOclReferenceCache getCache(org.eclipse.emf.ecore.EObject object) {
 		org.eclipse.emf.ecore.EObject root = org.eclipse.emf.ecore.util.EcoreUtil.getRootContainer(object);
-		org.eclipse.emf.common.notify.Adapter adapter = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.getEAdapter(root, tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclReferenceCache.class);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclReferenceCache cache = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclCastUtil.cast(adapter);
+		org.eclipse.emf.common.notify.Adapter adapter = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getEAdapter(root, org.dresdenocl.language.ocl.resource.ocl.analysis.OclReferenceCache.class);
+		org.dresdenocl.language.ocl.resource.ocl.analysis.OclReferenceCache cache = org.dresdenocl.language.ocl.resource.ocl.util.OclCastUtil.cast(adapter);
 		if (cache != null) {
 			return cache;
 		} else {
 			// cache does not exist. create a new one.
-			cache = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclReferenceCache(nameProvider);
+			cache = new org.dresdenocl.language.ocl.resource.ocl.analysis.OclReferenceCache(nameProvider);
 			cache.initialize(root);
 			root.eAdapters().add(cache);
 			return cache;
@@ -424,7 +424,7 @@ public class OclDefaultResolverDelegate<ContainerType extends org.eclipse.emf.ec
 	protected boolean isSimilar(String identifier, Object attributeValue) {
 		if (attributeValue != null && attributeValue instanceof String) {
 			String name = (String) attributeValue;
-			if (tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.computeLevenshteinDistance(identifier, name) <= MAX_DISTANCE) {
+			if (org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.computeLevenshteinDistance(identifier, name) <= MAX_DISTANCE) {
 				return true;
 			}
 		}

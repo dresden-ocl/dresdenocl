@@ -30,19 +30,19 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -77,7 +77,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 * <code>TypedElement</code> or as a generic super type of a <code>Type</code>
 	 * .
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -90,7 +90,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 * Overridden to prevent setting the name for the GenericType. This method
 	 * will throw an {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
 	@Override
 	@SuppressWarnings("unused")
@@ -193,7 +193,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	 * Overridden to set the covariant return type. The actual implementation is
 	 * left to subclasses.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
 	public abstract GenericType clone();

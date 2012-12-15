@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.examples.pain;
+package org.dresdenocl.examples.pain;
 
 import org.eclipse.core.runtime.Plugin;
 
@@ -33,7 +33,7 @@ import org.osgi.framework.BundleContext;
 public class PainExamplePlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.examples.pain"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.examples.pain"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static PainExamplePlugin plugin;

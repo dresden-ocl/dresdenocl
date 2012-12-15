@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * A UnicodeConverter can read an input stream and convert unicode escape
@@ -12,7 +12,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
  * unicode sequence (6 bytes) is replaced by the respective UTF-8 byte sequence (1
  * to 4 bytes).
  */
-public class OclUnicodeConverter extends tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclInputStreamProcessor {
+public class OclUnicodeConverter extends org.dresdenocl.language.ocl.resource.ocl.mopp.OclInputStreamProcessor {
 	
 	private int[] stack = new int[4];
 	private int stackPosition = -1;

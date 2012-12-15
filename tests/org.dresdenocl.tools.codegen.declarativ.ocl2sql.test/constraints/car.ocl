@@ -5,7 +5,7 @@
 -- Use this constraint file with model car.uml
 -- 
 
-package tudresden::ocl20::pivot::examples::car
+package org::dresdenocl::examples::car
 
 context Car 
 inv carOcl01: Car.allInstances().owner.ownedCars->size() = 1

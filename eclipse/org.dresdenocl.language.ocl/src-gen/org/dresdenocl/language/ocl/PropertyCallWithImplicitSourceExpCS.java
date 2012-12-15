@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,12 +15,12 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithImplicitSourceExpCS#getPropertyName <em>Property Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithImplicitSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PropertyCallWithImplicitSourceExpCS#getPropertyName <em>Property Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PropertyCallWithImplicitSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallWithImplicitSourceExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallWithImplicitSourceExpCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface PropertyCallWithImplicitSourceExpCS extends PropertyCallExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property Name</em>' containment reference.
 	 * @see #setPropertyName(SimpleNameCS)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallWithImplicitSourceExpCS_PropertyName()
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallWithImplicitSourceExpCS_PropertyName()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	SimpleNameCS getPropertyName();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithImplicitSourceExpCS#getPropertyName <em>Property Name</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PropertyCallWithImplicitSourceExpCS#getPropertyName <em>Property Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Property Name</em>' containment reference.
@@ -61,14 +61,14 @@ public interface PropertyCallWithImplicitSourceExpCS extends PropertyCallExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Marked Pre</em>' attribute.
 	 * @see #setIsMarkedPre(boolean)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallWithImplicitSourceExpCS_IsMarkedPre()
+	 * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallWithImplicitSourceExpCS_IsMarkedPre()
 	 * @model
 	 * @generated
 	 */
 	boolean isIsMarkedPre();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallWithImplicitSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.PropertyCallWithImplicitSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Marked Pre</em>' attribute.

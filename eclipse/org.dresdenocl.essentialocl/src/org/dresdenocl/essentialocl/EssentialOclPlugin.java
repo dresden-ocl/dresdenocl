@@ -1,14 +1,14 @@
-package tudresden.ocl20.pivot.essentialocl;
+package org.dresdenocl.essentialocl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.IOclLibraryProvider;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.OclLibraryProvider;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.StandaloneOclLibraryProvider;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.provider.IOclLibraryProvider;
+import org.dresdenocl.essentialocl.standardlibrary.provider.OclLibraryProvider;
+import org.dresdenocl.essentialocl.standardlibrary.provider.StandaloneOclLibraryProvider;
+import org.dresdenocl.essentialocl.types.OclLibrary;
 
 /**
  * The only purpose of this plugin is to initialize the {@link LoggingPlugin
@@ -28,7 +28,7 @@ public class EssentialOclPlugin extends Plugin {
 	/**
 	 * The id of this plugin
 	 */
-	public static final String ID = "tudresden.ocl20.pivot.essentialocl"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.essentialocl"; //$NON-NLS-1$
 
 	// The shared instance
 	private static EssentialOclPlugin plugin;
@@ -131,7 +131,7 @@ public class EssentialOclPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

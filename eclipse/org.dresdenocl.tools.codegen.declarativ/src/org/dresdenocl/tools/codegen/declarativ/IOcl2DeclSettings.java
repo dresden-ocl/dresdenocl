@@ -1,9 +1,9 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ;
+package org.dresdenocl.tools.codegen.declarativ;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.template.ITemplateGroup;
 
 public interface IOcl2DeclSettings extends IOcl2CodeSettings {
 

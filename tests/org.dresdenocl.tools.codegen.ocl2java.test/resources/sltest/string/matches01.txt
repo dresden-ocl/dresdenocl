@@ -1,1 +1,1 @@
-Pattern.compile(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclString.getJavaRegEx(arg01)).matcher(source).find()
+Pattern.compile(org.dresdenocl.tools.codegen.ocl2java.types.util.OclString.getJavaRegEx(arg01)).matcher(source).find()

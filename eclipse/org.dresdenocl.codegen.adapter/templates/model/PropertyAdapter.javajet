@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="PropertyAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="PropertyAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -13,9 +13,9 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 
 <%genModel.addImport("org.apache.log4j.Logger");%>
 
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Property");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Property");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Type");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractProperty");%>
 <%genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);%>
 <%genModel.markImportLocation(stringBuffer);%>
 
@@ -31,7 +31,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=adapteeClass%> data type
@@ -62,7 +62,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getName()
 	 *
 	 * @generated
 	 */
@@ -73,7 +73,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getOwningType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getOwningType()
 	 *
 	 * @generated
 	 */
@@ -84,7 +84,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getType()
 	 *
 	 * @generated
 	 */
@@ -95,7 +95,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isMultiple()
+	 * @see org.dresdenocl.pivotmodel.impl.PropertyImpl#isMultiple()
 	 *
 	 * @generated
 	 */
@@ -106,7 +106,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isOrdered()
+	 * @see org.dresdenocl.pivotmodel.impl.PropertyImpl#isOrdered()
 	 *
 	 * @generated
 	 */
@@ -117,7 +117,7 @@ public class <%=adapterClass%> extends AbstractProperty implements Property {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isUnique()
+	 * @see org.dresdenocl.pivotmodel.impl.PropertyImpl#isUnique()
 	 *
 	 * @generated
 	 */

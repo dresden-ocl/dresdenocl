@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="ModelMessages" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="ModelMessages" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
 String packageName = PivotAdapterGeneratorUtil.getAdapterPackage(genModel);
@@ -15,7 +15,7 @@ genModel.markImportLocation(stringBuffer);
  */
 public class <%=className%> extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.<%=PivotAdapterGeneratorUtil.startWithLowerCaseLetter(modelName)%>.internal.model.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.dresdenocl.metamodels.<%=PivotAdapterGeneratorUtil.startWithLowerCaseLetter(modelName)%>.internal.model.messages"; //$NON-NLS-1$
 
 	public static String <%=modelName%>AdapterFactory_CreatingPivotModelAdapter;
 

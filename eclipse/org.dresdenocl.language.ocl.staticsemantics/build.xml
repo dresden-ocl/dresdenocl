@@ -1,8 +1,8 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
-	<import file="./../tudresden.attributegrammar.integration.kiama/build.xml"/>
+	<import file="./../org.dresdenocl.attributegrammar.integration.kiama/build.xml"/>
 	
-	<property name="staticSemanticsPlugin" value="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+	<property name="staticSemanticsPlugin" value="org.dresdenocl.language.ocl.staticsemantics"/>
 	
 	<condition property="oclStaticSemanticsBin" value="${workspacePath}/${staticSemanticsPlugin}/bin" else="./../${staticSemanticsPlugin}/bin">
 		<isset property="headless"/>
@@ -12,17 +12,17 @@
 		<isset property="headless"/>
 	</condition>
 	
-	<target name="Clean tudresden.ocl20.pivot.language.ocl.staticsemantics" depends="Clean tudresden.attributegrammar.integration.kiama">
+	<target name="Clean org.dresdenocl.language.ocl.staticsemantics" depends="Clean org.dresdenocl.attributegrammar.integration.kiama">
 		<mkdir dir="${oclStaticSemanticsBin}"/>
 		<delete>
 			<fileset dir="${oclStaticSemanticsBin}">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
-		<antcall target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" />
+		<antcall target="Compile org.dresdenocl.language.ocl.staticsemantics" />
 	</target>
 	
-	<target name="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" depends="Compile tudresden.attributegrammar.integration.kiama">		
+	<target name="Compile org.dresdenocl.language.ocl.staticsemantics" depends="Compile org.dresdenocl.attributegrammar.integration.kiama">		
 
 		<mkdir dir="${oclStaticSemanticsBin}"/>
 		<echo message="Compile OclStaticSemanticsException.java" />

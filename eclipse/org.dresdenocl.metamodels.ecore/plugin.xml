@@ -2,11 +2,11 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
-         point="tudresden.ocl20.pivot.modelbus.metamodels">
+         point="org.dresdenocl.modelbus.metamodels">
       <metamodel
             icon="icons/ecore.gif"
-            id="tudresden.ocl20.pivot.metamodels.ecore"
-            modelProvider="tudresden.ocl20.pivot.metamodels.ecore.internal.provider.EcoreModelProvider"
+            id="org.dresdenocl.metamodels.ecore"
+            modelProvider="org.dresdenocl.metamodels.ecore.internal.provider.EcoreModelProvider"
             name="Eclipse Modeling Framework (EMF) Ecore">
       </metamodel>
    </extension>

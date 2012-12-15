@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CWM
-Bundle-SymbolicName: tudresden.ocl20.pivot.tools.CWM;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.tools.CWM;singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -74,7 +74,7 @@ Export-Package: orgomg.cwm.analysis.businessnomenclature,
  orgomg.cwm.resource.xml.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- tudresden.ocl20.logging
+ org.dresdenocl.logging
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: tudresden.ocl20.pivot.tools.CWM.CWMPlugin
+Bundle-Activator: org.dresdenocl.tools.CWM.CWMPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group

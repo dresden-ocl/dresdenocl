@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter {
+public class OclPrinter2 implements org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter {
 	
 	protected class PrintToken {
 		
@@ -68,7 +68,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			featureToPrintedIndicesMap.get(featureName).add(index);
 		}
 		
-		public int getCountLeft(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal terminal) {
+		public int getCountLeft(org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal terminal) {
 			org.eclipse.emf.ecore.EStructuralFeature feature = terminal.getFeature();
 			String featureName = feature.getName();
 			java.util.List<Object> totalValuesToPrint = featureToValuesMap.get(featureName);
@@ -114,19 +114,19 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	
 	public final static String NEW_LINE = java.lang.System.getProperties().getProperty("line.separator");
 	
-	private final tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEClassUtil eClassUtil = new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEClassUtil();
+	private final org.dresdenocl.language.ocl.resource.ocl.util.OclEClassUtil eClassUtil = new org.dresdenocl.language.ocl.resource.ocl.util.OclEClassUtil();
 	
 	/**
 	 * Holds the resource that is associated with this printer. May be null if the
 	 * printer is used stand alone.
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource;
 	
 	private java.util.Map<?, ?> options;
 	private java.io.OutputStream outputStream;
 	private String encoding = System.getProperty("file.encoding");
 	protected java.util.List<PrintToken> tokenOutputStream;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();
 	private boolean handleTokenSpaceAutomatically = false;
 	private int tokenSpace = 1;
 	/**
@@ -157,7 +157,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	 */
 	private boolean startedPrintingContainedObject;
 	
-	public OclPrinter2(java.io.OutputStream outputStream, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
+	public OclPrinter2(java.io.OutputStream outputStream, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
 		super();
 		this.outputStream = outputStream;
 		this.resource = resource;
@@ -169,11 +169,11 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		tabsBeforeCurrentObject = 0;
 		startedPrintingObject = true;
 		startedPrintingContainedObject = false;
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement>  formattingElements = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement>();
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement>  formattingElements = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement>();
 		doPrint(element, formattingElements);
 		// print all remaining formatting elements
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = getCopyOfLayoutInformation(element);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation eofLayoutInformation = getLayoutInformation(layoutInformations, null, null, null);
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = getCopyOfLayoutInformation(element);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation eofLayoutInformation = getLayoutInformation(layoutInformations, null, null, null);
 		printFormattingElements(element, formattingElements, layoutInformations, eofLayoutInformation);
 		java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.OutputStreamWriter(new java.io.BufferedOutputStream(outputStream), encoding));
 		if (handleTokenSpaceAutomatically) {
@@ -184,7 +184,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		writer.flush();
 	}
 	
-	protected void doPrint(org.eclipse.emf.ecore.EObject element, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements) {
+	protected void doPrint(org.eclipse.emf.ecore.EObject element, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements) {
 		if (element == null) {
 			throw new java.lang.IllegalArgumentException("Nothing to write.");
 		}
@@ -192,265 +192,265 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			throw new java.lang.IllegalArgumentException("Nothing to write on.");
 		}
 		
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.SimpleNameCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.SimpleNameCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_0, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_1, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_2, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_3, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_3, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.OperationContextDeclarationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_4, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.AttributeContextDeclarationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_5, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.ClassifierContextDeclarationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_6, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.InitValueCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.InitValueCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_7, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.DeriveValueCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.DeriveValueCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_8, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.InvariantExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.InvariantExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_9, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.DefinitionExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.DefinitionExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_10, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_11, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.DefinitionExpPropertyCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_11, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.DefinitionExpOperationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_12, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.PreConditionDeclarationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_13, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.PostConditionDeclarationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_14, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.BodyDeclarationCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_15, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.OperationDefinitionInContextCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_16, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.OperationDefinitionInDefCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_17, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.ParameterCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.ParameterCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_18, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_19, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_20, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_21, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_22, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.EqualityOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_23, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.RelationalOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_24, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.AdditiveOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_25, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.MultOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_26, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.UnaryOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_27, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_28, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.NavigationCallExp) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.NavigationCallExp) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_29, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.ImplicitOperationCallCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_30, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.ImplicitPropertyCallCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_31, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.IteratorExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.IteratorExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_32, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.IterateExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.IterateExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_33, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.IteratorExpVariableCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_34, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.TypePathNameSimpleCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_35, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.TypePathNameNestedCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_36, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.TupleTypeCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.TupleTypeCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_37, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeIdentifierCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_38, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_39, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_40, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithInitCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_41, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_42, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_43, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.StaticOperationCallExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_44, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_45, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.TupleLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_46, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.IfExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.IfExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_47, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.CollectionLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_48, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionRangeCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.CollectionRangeCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_49, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_50, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_51, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.TupleTypeLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_52, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_53, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.LetExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.LetExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_54, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.RealLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_55, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.IntegerLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_56, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.BooleanLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_57, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.StringLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_58, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.InvalidLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_59, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.NullLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_60, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.NamedLiteralExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_61, foundFormattingElements);
 			return;
 		}
-		if (element instanceof tudresden.ocl20.pivot.language.ocl.BracketExpCS) {
-			printInternal(element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62, foundFormattingElements);
+		if (element instanceof org.dresdenocl.language.ocl.BracketExpCS) {
+			printInternal(element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.OCL_62, foundFormattingElements);
 			return;
 		}
 		
 		addWarningToResource("The printer can not handle " + element.eClass().getName() + " elements", element);
 	}
 	
-	public void printInternal(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement ruleElement, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements) {
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = getCopyOfLayoutInformation(eObject);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decoratorTree = getDecoratorTree(ruleElement);
+	public void printInternal(org.eclipse.emf.ecore.EObject eObject, org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement ruleElement, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements) {
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = getCopyOfLayoutInformation(eObject);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decoratorTree = getDecoratorTree(ruleElement);
 		decorateTree(decoratorTree, eObject);
 		printTree(decoratorTree, eObject, foundFormattingElements, layoutInformations);
 	}
@@ -459,22 +459,22 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	 * creates a tree of decorator objects which reflects the syntax tree that is
 	 * attached to the given syntax element
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator getDecoratorTree(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement[] children = syntaxElement.getChildren();
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator getDecoratorTree(org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement) {
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement[] children = syntaxElement.getChildren();
 		int childCount = children.length;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator[] childDecorators = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator[childCount];
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator[] childDecorators = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator[childCount];
 		for (int i = 0; i < childCount; i++) {
 			childDecorators[i] = getDecoratorTree(children[i]);
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator(syntaxElement, childDecorators);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator(syntaxElement, childDecorators);
 		return decorator;
 	}
 	
-	public void decorateTree(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject) {
+	public void decorateTree(org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject) {
 		PrintCountingMap printCountingMap = initializePrintCountingMap(eObject);
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator>();
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator>();
 		decorateTreeBasic(decorator, eObject, printCountingMap, keywordsToPrint);
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator keywordToPrint : keywordsToPrint) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator keywordToPrint : keywordsToPrint) {
 			// for keywords the concrete index does not matter, but we must add one to
 			// indicate that the keyword needs to be printed here. Thus, we use 0 as index.
 			keywordToPrint.addIndexToPrint(0);
@@ -485,20 +485,20 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	 * Tries to decorate the decorator with an attribute value, or reference held by
 	 * the given EObject. Returns true if an attribute value or reference was found.
 	 */
-	public boolean decorateTreeBasic(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint) {
+	public boolean decorateTreeBasic(org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> keywordsToPrint) {
 		boolean foundFeatureToPrint = false;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = decorator.getDecoratedElement();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality = syntaxElement.getCardinality();
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = decorator.getDecoratedElement();
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality = syntaxElement.getCardinality();
 		boolean isFirstIteration = true;
 		while (true) {
-			java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> subKeywordsToPrint = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator>();
+			java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator> subKeywordsToPrint = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator>();
 			boolean keepDecorating = false;
-			if (syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword) {
+			if (syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword) {
 				subKeywordsToPrint.add(decorator);
-			} else if (syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal terminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal) syntaxElement;
+			} else if (syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal) {
+				org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal terminal = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal) syntaxElement;
 				org.eclipse.emf.ecore.EStructuralFeature feature = terminal.getFeature();
-				if (feature == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.ANONYMOUS_FEATURE) {
+				if (feature == org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.ANONYMOUS_FEATURE) {
 					return false;
 				}
 				String featureName = feature.getName();
@@ -508,8 +508,8 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 					int indexToPrint = printCountingMap.getNextIndexToPrint(featureName);
 					// But, if there are type restrictions for containments, we must choose an index
 					// of an element that fits (i.e., which has the correct type)
-					if (terminal instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) terminal;
+					if (terminal instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment) {
+						org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment containment = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment) terminal;
 						indexToPrint = findElementWithCorrectType(eObject, feature, printCountingMap.getIndicesToPrint(featureName), containment);
 					}
 					if (indexToPrint >= 0) {
@@ -519,10 +519,10 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 					}
 				}
 			}
-			if (syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclChoice) {
+			if (syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclChoice) {
 				// for choices we do print only the choice which does print at least one feature
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childToPrint = null;
-				for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
+				org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childToPrint = null;
+				for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
 					// pick first choice as default, will be overridden if a choice that prints a
 					// feature is found
 					if (childToPrint == null) {
@@ -536,15 +536,15 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 				keepDecorating |= decorateTreeBasic(childToPrint, eObject, printCountingMap, subKeywordsToPrint);
 			} else {
 				// for all other syntax element we do print all children
-				for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
+				for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
 					keepDecorating |= decorateTreeBasic(childDecorator, eObject, printCountingMap, subKeywordsToPrint);
 				}
 			}
 			foundFeatureToPrint |= keepDecorating;
 			// only print keywords if a feature was printed or the syntax element is mandatory
-			if (cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.ONE) {
+			if (cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.ONE) {
 				keywordsToPrint.addAll(subKeywordsToPrint);
-			} else if (cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.PLUS) {
+			} else if (cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.PLUS) {
 				if (isFirstIteration) {
 					keywordsToPrint.addAll(subKeywordsToPrint);
 				} else {
@@ -552,10 +552,10 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 						keywordsToPrint.addAll(subKeywordsToPrint);
 					}
 				}
-			} else if (keepDecorating && (cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.STAR || cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK)) {
+			} else if (keepDecorating && (cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.STAR || cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK)) {
 				keywordsToPrint.addAll(subKeywordsToPrint);
 			}
-			if (cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.ONE || cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK) {
+			if (cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.ONE || cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK) {
 				break;
 			} else if (!keepDecorating) {
 				break;
@@ -565,7 +565,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return foundFeatureToPrint;
 	}
 	
-	private int findElementWithCorrectType(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, java.util.Set<Integer> indicesToPrint, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment) {
+	private int findElementWithCorrectType(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EStructuralFeature feature, java.util.Set<Integer> indicesToPrint, org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment containment) {
 		// By default the type restrictions that are defined in the CS definition are
 		// considered when printing models. You can change this behavior by setting the
 		// 'ignoreTypeRestrictionsForPrinting' option to true.
@@ -599,12 +599,12 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	 * multiple choices are available. We pick the choice that prints at least one
 	 * attribute or reference.
 	 */
-	public boolean doesPrintFeature(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = decorator.getDecoratedElement();
-		if (syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal terminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal) syntaxElement;
+	public boolean doesPrintFeature(org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, PrintCountingMap printCountingMap) {
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = decorator.getDecoratedElement();
+		if (syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal) {
+			org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal terminal = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal) syntaxElement;
 			org.eclipse.emf.ecore.EStructuralFeature feature = terminal.getFeature();
-			if (feature == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.ANONYMOUS_FEATURE) {
+			if (feature == org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.ANONYMOUS_FEATURE) {
 				return false;
 			}
 			int countLeft = printCountingMap.getCountLeft(terminal);
@@ -613,7 +613,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 				return true;
 			}
 		}
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
 			if (doesPrintFeature(childDecorator, eObject, printCountingMap)) {
 				return true;
 			}
@@ -621,10 +621,10 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return false;
 	}
 	
-	public boolean printTree(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement printElement = decorator.getDecoratedElement();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality = printElement.getCardinality();
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> cloned = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement>();
+	public boolean printTree(org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator decorator, org.eclipse.emf.ecore.EObject eObject, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement printElement = decorator.getDecoratedElement();
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality = printElement.getCardinality();
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> cloned = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement>();
 		cloned.addAll(foundFormattingElements);
 		boolean foundSomethingAtAll = false;
 		boolean foundSomethingToPrint;
@@ -632,23 +632,23 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			foundSomethingToPrint = false;
 			Integer indexToPrint = decorator.getNextIndexToPrint();
 			if (indexToPrint != null) {
-				if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword) {
-					printKeyword(eObject, (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword) printElement, foundFormattingElements, layoutInformations);
+				if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword) {
+					printKeyword(eObject, (org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword) printElement, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
-				} else if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder) printElement;
+				} else if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder) {
+					org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder) printElement;
 					printFeature(eObject, placeholder, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
-				} else if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) printElement;
+				} else if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment) {
+					org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment containment = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment) printElement;
 					printContainedObject(eObject, containment, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
-				} else if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal) printElement;
+				} else if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal) {
+					org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal) printElement;
 					printBooleanTerminal(eObject, booleanTerminal, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
-				} else if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal) printElement;
+				} else if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal) {
+					org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumTerminal = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal) printElement;
 					printEnumerationTerminal(eObject, enumTerminal, indexToPrint, foundFormattingElements, layoutInformations);
 					foundSomethingToPrint = true;
 				}
@@ -656,20 +656,20 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			if (foundSomethingToPrint) {
 				foundSomethingAtAll = true;
 			}
-			if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclWhiteSpace) {
-				foundFormattingElements.add((tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclWhiteSpace) printElement);
+			if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclWhiteSpace) {
+				foundFormattingElements.add((org.dresdenocl.language.ocl.resource.ocl.grammar.OclWhiteSpace) printElement);
 			}
-			if (printElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclLineBreak) {
-				foundFormattingElements.add((tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclLineBreak) printElement);
+			if (printElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclLineBreak) {
+				foundFormattingElements.add((org.dresdenocl.language.ocl.resource.ocl.grammar.OclLineBreak) printElement);
 			}
-			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
+			for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclSyntaxElementDecorator childDecorator : decorator.getChildDecorators()) {
 				foundSomethingToPrint |= printTree(childDecorator, eObject, foundFormattingElements, layoutInformations);
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement = decorator.getDecoratedElement();
-				if (foundSomethingToPrint && decoratedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclChoice) {
+				org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement decoratedElement = decorator.getDecoratedElement();
+				if (foundSomethingToPrint && decoratedElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclChoice) {
 					break;
 				}
 			}
-			if (cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.ONE || cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK) {
+			if (cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.ONE || cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK) {
 				break;
 			} else if (!foundSomethingToPrint) {
 				break;
@@ -677,21 +677,21 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 		// only print formatting elements if a feature was printed or the syntax element
 		// is mandatory
-		if (!foundSomethingAtAll && (cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.STAR || cardinality == tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK)) {
+		if (!foundSomethingAtAll && (cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.STAR || cardinality == org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality.QUESTIONMARK)) {
 			foundFormattingElements.clear();
 			foundFormattingElements.addAll(cloned);
 		}
 		return foundSomethingToPrint;
 	}
 	
-	public void printKeyword(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword keyword, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation keywordLayout = getLayoutInformation(layoutInformations, keyword, null, eObject);
+	public void printKeyword(org.eclipse.emf.ecore.EObject eObject, org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword keyword, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation keywordLayout = getLayoutInformation(layoutInformations, keyword, null, eObject);
 		printFormattingElements(eObject, foundFormattingElements, layoutInformations, keywordLayout);
 		String value = keyword.getValue();
-		tokenOutputStream.add(new PrintToken(value, "'" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(value) + "'", eObject));
+		tokenOutputStream.add(new PrintToken(value, "'" + org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(value) + "'", eObject));
 	}
 	
-	public void printFeature(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int count, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+	public void printFeature(org.eclipse.emf.ecore.EObject eObject, org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int count, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature feature = placeholder.getFeature();
 		if (feature instanceof org.eclipse.emf.ecore.EAttribute) {
 			printAttribute(eObject, (org.eclipse.emf.ecore.EAttribute) feature, placeholder, count, foundFormattingElements, layoutInformations);
@@ -700,10 +700,10 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 	}
 	
-	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int index, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+	public void printAttribute(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EAttribute attribute, org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int index, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		String result = null;
-		Object attributeValue = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, attribute, index);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
+		Object attributeValue = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, attribute, index);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, placeholder, attributeValue, eObject);
 		String visibleTokenText = getVisibleTokenText(attributeLayout);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
@@ -713,7 +713,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		if (result == null) {
 			// if no text is available, the attribute is deresolved to obtain its textual
 			// representation
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(placeholder.getTokenName());
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(placeholder.getTokenName());
 			tokenResolver.setOptions(getOptions());
 			String deResolvedValue = tokenResolver.deResolve(attributeValue, attribute, eObject);
 			result = deResolvedValue;
@@ -727,11 +727,11 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	}
 	
 	
-	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal, int index, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+	public void printBooleanTerminal(org.eclipse.emf.ecore.EObject eObject, org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal, int index, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = booleanTerminal.getAttribute();
 		String result = null;
-		Object attributeValue = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, attribute, index);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
+		Object attributeValue = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, attribute, index);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, booleanTerminal, attributeValue, eObject);
 		String visibleTokenText = getVisibleTokenText(attributeLayout);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
@@ -751,16 +751,16 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		if (result != null && !"".equals(result)) {
 			printFormattingElements(eObject, foundFormattingElements, layoutInformations, attributeLayout);
 			// write result to the output stream
-			tokenOutputStream.add(new PrintToken(result, "'" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(result) + "'", eObject));
+			tokenOutputStream.add(new PrintToken(result, "'" + org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(result) + "'", eObject));
 		}
 	}
 	
 	
-	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumTerminal, int index, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+	public void printEnumerationTerminal(org.eclipse.emf.ecore.EObject eObject, org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumTerminal, int index, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EAttribute attribute = enumTerminal.getAttribute();
 		String result = null;
-		Object attributeValue = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, attribute, index);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
+		Object attributeValue = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, attribute, index);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation attributeLayout = getLayoutInformation(layoutInformations, enumTerminal, attributeValue, eObject);
 		String visibleTokenText = getVisibleTokenText(attributeLayout);
 		// if there is text for the attribute we use it
 		if (visibleTokenText != null) {
@@ -777,14 +777,14 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		if (result != null && !"".equals(result)) {
 			printFormattingElements(eObject, foundFormattingElements, layoutInformations, attributeLayout);
 			// write result to the output stream
-			tokenOutputStream.add(new PrintToken(result, "'" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(result) + "'", eObject));
+			tokenOutputStream.add(new PrintToken(result, "'" + org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.escapeToANTLRKeyword(result) + "'", eObject));
 		}
 	}
 	
 	
-	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment containment, int index, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+	public void printContainedObject(org.eclipse.emf.ecore.EObject eObject, org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment containment, int index, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		org.eclipse.emf.ecore.EStructuralFeature reference = containment.getFeature();
-		Object o = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, reference, index);
+		Object o = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, reference, index);
 		// save current number of tabs to restore them after printing the contained object
 		int oldTabsBeforeCurrentObject = tabsBeforeCurrentObject;
 		int oldCurrentTabs = currentTabs;
@@ -799,7 +799,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		currentTabs = oldCurrentTabs;
 	}
 	
-	public void printFormattingElements(org.eclipse.emf.ecore.EObject eObject, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
+	public void printFormattingElements(org.eclipse.emf.ecore.EObject eObject, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
 		String hiddenTokenText = getHiddenTokenText(layoutInformation);
 		if (hiddenTokenText != null) {
 			// removed used information
@@ -814,15 +814,15 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 		int printedTabs = 0;
 		if (foundFormattingElements.size() > 0) {
-			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement foundFormattingElement : foundFormattingElements) {
-				if (foundFormattingElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclWhiteSpace) {
-					int amount = ((tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclWhiteSpace) foundFormattingElement).getAmount();
+			for (org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement foundFormattingElement : foundFormattingElements) {
+				if (foundFormattingElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclWhiteSpace) {
+					int amount = ((org.dresdenocl.language.ocl.resource.ocl.grammar.OclWhiteSpace) foundFormattingElement).getAmount();
 					for (int i = 0; i < amount; i++) {
 						tokenOutputStream.add(createSpaceToken(eObject));
 					}
 				}
-				if (foundFormattingElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclLineBreak) {
-					currentTabs = ((tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclLineBreak) foundFormattingElement).getTabs();
+				if (foundFormattingElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclLineBreak) {
+					currentTabs = ((org.dresdenocl.language.ocl.resource.ocl.grammar.OclLineBreak) foundFormattingElement).getTabs();
 					printedTabs += currentTabs;
 					tokenOutputStream.add(createNewLineToken(eObject));
 					for (int i = 0; i < tabsBeforeCurrentObject + currentTabs; i++) {
@@ -856,11 +856,11 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 	}
 	
 	@SuppressWarnings("unchecked")	
-	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int index, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
+	public void printReference(org.eclipse.emf.ecore.EObject eObject, org.eclipse.emf.ecore.EReference reference, org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder, int index, java.util.List<org.dresdenocl.language.ocl.resource.ocl.grammar.OclFormattingElement> foundFormattingElements, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations) {
 		String tokenName = placeholder.getTokenName();
-		Object referencedObject = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, reference, index, false);
+		Object referencedObject = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.getFeatureValue(eObject, reference, index, false);
 		// first add layout before the reference
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation referenceLayout = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation referenceLayout = getLayoutInformation(layoutInformations, placeholder, referencedObject, eObject);
 		printFormattingElements(eObject, foundFormattingElements, layoutInformations, referenceLayout);
 		// proxy objects must be printed differently
 		String deresolvedReference = null;
@@ -870,8 +870,8 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 				deresolvedReference = ((org.eclipse.emf.ecore.InternalEObject) eObjectToDeResolve).eProxyURI().fragment();
 				// If the proxy was created by EMFText, we can try to recover the identifier from
 				// the proxy URI
-				if (deresolvedReference != null && deresolvedReference.startsWith(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
-					deresolvedReference = deresolvedReference.substring(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
+				if (deresolvedReference != null && deresolvedReference.startsWith(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+					deresolvedReference = deresolvedReference.substring(org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX.length());
 					deresolvedReference = deresolvedReference.substring(deresolvedReference.indexOf("_") + 1);
 				}
 			}
@@ -881,11 +881,11 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			// use the visible token information, because deresolving usually depends on
 			// attribute values of the referenced object instead of the object itself.
 			@SuppressWarnings("rawtypes")			
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver referenceResolver = getReferenceResolverSwitch().getResolver(reference);
+			org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver referenceResolver = getReferenceResolverSwitch().getResolver(reference);
 			referenceResolver.setOptions(getOptions());
 			deresolvedReference = referenceResolver.deResolve((org.eclipse.emf.ecore.EObject) referencedObject, eObject, reference);
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
+		org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 		tokenResolver.setOptions(getOptions());
 		String deresolvedToken = tokenResolver.deResolve(deresolvedReference, reference, eObject);
 		// write result to output stream
@@ -938,36 +938,36 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource getResource() {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextResource getResource() {
 		return resource;
 	}
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
-		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getReferenceResolverSwitch();
+	protected org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
+		return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getReferenceResolverSwitch();
 	}
 	
 	protected void addWarningToResource(final String errorMessage, org.eclipse.emf.ecore.EObject cause) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource = getResource();
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource = getResource();
 		if (resource == null) {
 			// the resource can be null if the printer is used stand alone
 			return;
 		}
-		resource.addProblem(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclProblem(errorMessage, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.PRINT_PROBLEM, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.WARNING), cause);
+		resource.addProblem(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclProblem(errorMessage, org.dresdenocl.language.ocl.resource.ocl.OclEProblemType.PRINT_PROBLEM, org.dresdenocl.language.ocl.resource.ocl.OclEProblemSeverity.WARNING), cause);
 	}
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
+	protected org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
 		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
-			if (adapter instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
-				return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
+			if (adapter instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
+				return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
 			}
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
 		element.eAdapters().add(newAdapter);
 		return newAdapter;
 	}
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation getLayoutInformation(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, org.eclipse.emf.ecore.EObject container) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation : layoutInformations) {
+	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation getLayoutInformation(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations, org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, org.eclipse.emf.ecore.EObject container) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation : layoutInformations) {
 			if (syntaxElement == layoutInformation.getSyntaxElement()) {
 				if (object == null) {
 					return layoutInformation;
@@ -988,17 +988,17 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return null;
 	}
 	
-	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> getCopyOfLayoutInformation(org.eclipse.emf.ecore.EObject eObject) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(eObject);
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> originalLayoutInformations = layoutInformationAdapter.getLayoutInformations();
+	public java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> getCopyOfLayoutInformation(org.eclipse.emf.ecore.EObject eObject) {
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(eObject);
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> originalLayoutInformations = layoutInformationAdapter.getLayoutInformations();
 		// create a copy of the original list of layout information object in order to be
 		// able to remove used informations during printing
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation>(originalLayoutInformations.size());
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation>(originalLayoutInformations.size());
 		layoutInformations.addAll(originalLayoutInformations);
 		return layoutInformations;
 	}
 	
-	private String getHiddenTokenText(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
+	private String getHiddenTokenText(org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
 		if (layoutInformation != null) {
 			return layoutInformation.getHiddenTokenText();
 		} else {
@@ -1006,7 +1006,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		}
 	}
 	
-	private String getVisibleTokenText(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
+	private String getVisibleTokenText(org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
 		if (layoutInformation != null) {
 			return layoutInformation.getVisibleTokenText();
 		} else {
@@ -1087,11 +1087,11 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 				continue;
 			}
 			// now check whether the current block can be scanned
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextScanner scanner = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().createLexer();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner scanner = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().createLexer();
 			scanner.setText(currentBlock.toString());
 			// retrieve all tokens from scanner and add them to list 'tempTokens'
-			java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken> tempTokens = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken>();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken nextToken = scanner.getNextToken();
+			java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> tempTokens = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextToken nextToken = scanner.getNextToken();
 			while (nextToken != null && nextToken.getText() != null) {
 				tempTokens.add(nextToken);
 				nextToken = scanner.getNextToken();
@@ -1100,7 +1100,7 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 			// check whether the current block was scanned to the same token sequence
 			for (int t = 0; t < tempTokens.size(); t++) {
 				PrintToken printTokenT = tokenOutputStream.get(currentBlockStart + t);
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken tempToken = tempTokens.get(t);
+				org.dresdenocl.language.ocl.resource.ocl.IOclTextToken tempToken = tempTokens.get(t);
 				if (!tempToken.getText().equals(printTokenT.getText())) {
 					sequenceIsValid = false;
 					break;
@@ -1150,11 +1150,11 @@ public class OclPrinter2 implements tudresden.ocl20.pivot.language.ocl.resource.
 		return o1 == o2;
 	}
 	
-	protected java.util.List<Class<?>> getAllowedTypes(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal terminal) {
+	protected java.util.List<Class<?>> getAllowedTypes(org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal terminal) {
 		java.util.List<Class<?>> allowedTypes = new java.util.ArrayList<Class<?>>();
 		allowedTypes.add(terminal.getFeature().getEType().getInstanceClass());
-		if (terminal instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment printingContainment = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainment) terminal;
+		if (terminal instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment) {
+			org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment printingContainment = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainment) terminal;
 			org.eclipse.emf.ecore.EClass[] typeRestrictions = printingContainment.getAllowedTypes();
 			if (typeRestrictions != null && typeRestrictions.length > 0) {
 				allowedTypes.clear();

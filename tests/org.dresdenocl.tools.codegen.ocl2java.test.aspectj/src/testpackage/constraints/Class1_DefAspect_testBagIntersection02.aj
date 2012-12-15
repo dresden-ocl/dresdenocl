@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testBagIntersection02 {
      *       def: testBagIntersection02(source: Bag(OclAny), arg01: Bag(OclAny)): Bag(OclAny) = source ->intersection(arg01)</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testBagIntersection02(java.util.List<Object> source, java.util.List<Object> arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.intersection(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags.intersection(source, arg01);
     }
 }

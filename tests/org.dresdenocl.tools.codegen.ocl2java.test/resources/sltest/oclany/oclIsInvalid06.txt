@@ -1,7 +1,7 @@
 /* Well, what has to be the result here? */
 
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException test;
-test = (tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException test;
+test = (org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
 
 Boolean result1;
 

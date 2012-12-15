@@ -28,18 +28,18 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclEnumLiteral;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -79,7 +79,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral#
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclEnumLiteral#
 	 * getModelInstanceEnumerationLiteral()
 	 */
 	public IModelInstanceEnumerationLiteral getModelInstanceEnumerationLiteral() {
@@ -91,7 +91,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
@@ -118,7 +118,7 @@ public class JavaOclEnumLiteral extends JavaOclLibraryObject implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 

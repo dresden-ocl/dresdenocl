@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -38,11 +38,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -50,7 +50,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind
+ * <li>{@link org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl#getKind
  * <em>Kind</em>}</li>
  * </ul>
  * </p>
@@ -161,7 +161,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#clone()
 	 */
 	@Override
 	public PrimitiveType clone() {
@@ -172,7 +172,7 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	/**
 	 * Helper method to initialize a cloned <code>PrimitiveType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#initialize(org.dresdenocl.pivotmodel.Type)
 	 */
 	protected PrimitiveType initialize(PrimitiveType clone) {
 

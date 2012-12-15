@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,9 +9,9 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 public privileged aspect CustomerCard_DeriveAspect_printedName {
 
     /**
-     * <p>Pointcut for all requests on {@link tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#printedName}.</p>
+     * <p>Pointcut for all requests on {@link org.dresdenocl.examples.royalsandloyals.CustomerCard#printedName}.</p>
      */
-    protected pointcut printedNameGetter(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) :
+    protected pointcut printedNameGetter(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass) :
     	get(* printedName) && target(aClass);
     
     /**
@@ -19,7 +19,7 @@ public privileged aspect CustomerCard_DeriveAspect_printedName {
      * <code>context CustomerCard
      *       derive: owner.title.concat(' ').concat(owner.name)</code></p>
      */
-    before(tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass): printedNameGetter(aClass) {
+    before(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass): printedNameGetter(aClass) {
         aClass.printedName = aClass.owner.title.concat(" ").concat(aClass.owner.name);
     }
 }

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.provider;
+package org.dresdenocl.essentialocl.types.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,13 +48,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.provider.TypeItemProvider;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.CollectionType} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.essentialocl.types.CollectionType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -151,7 +151,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * Overridden to include the element type if it is not null. In this case, the
 	 * {@link CollectionType} should have been bound already and the type parameters will be empty.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeNameWithTypeArguments(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeNameWithTypeArguments(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected CharSequence getTypeNameWithTypeArguments(Type type) {
@@ -181,7 +181,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	/**
 	 * Overridden to return the constant string <code>"Collection"</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeName(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected String getTypeName(Type type) {
@@ -192,7 +192,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	/**
 	 * Overridden to return the OCL syntax <code>')'</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeParameterListOpeningDelimiter()
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeParameterListOpeningDelimiter()
 	 */
 	@Override
 	protected char getTypeParameterListOpeningDelimiter() {
@@ -203,7 +203,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	/**
 	 * Overridden to return the OCL syntax <code>'('</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeParameterListClosingDelimiter()
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeParameterListClosingDelimiter()
 	 */
 	@Override
 	protected char getTypeParameterListClosingDelimiter() {

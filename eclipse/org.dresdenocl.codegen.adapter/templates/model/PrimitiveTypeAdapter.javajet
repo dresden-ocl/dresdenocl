@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="PrimitiveTypeAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="PrimitiveTypeAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -13,10 +13,10 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 
 <%genModel.addImport("org.apache.log4j.Logger");%>
 
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.PrimitiveType");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Namespace");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.PrimitiveType");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.PrimitiveTypeKind");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractPrimitiveType");%>
 <%genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);%>
 <%genModel.markImportLocation(stringBuffer);%>
 
@@ -32,7 +32,7 @@ public class <%=adapterClass%> extends AbstractPrimitiveType implements Primitiv
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=adapteeClass%> data type
@@ -63,7 +63,7 @@ public class <%=adapterClass%> extends AbstractPrimitiveType implements Primitiv
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getName()
 	 *
 	 * @generated
 	 */
@@ -74,7 +74,7 @@ public class <%=adapterClass%> extends AbstractPrimitiveType implements Primitiv
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getNamespace()
 	 *
 	 * @generated
 	 */

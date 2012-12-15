@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.xsd.test;
+package org.dresdenocl.metamodels.xsd.test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -24,12 +24,12 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.metamodels.xsd.XSDMetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * This class tests the correct adaptation of an XSD shipped by Fraunhofer ISOB.

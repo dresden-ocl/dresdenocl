@@ -4,12 +4,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,13 +19,13 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getArguments <em>Arguments</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallBaseExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface OperationCallBaseExpCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Operation Name</em>' reference.
    * @see #setOperationName(Operation)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallBaseExpCS_OperationName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_OperationName()
    * @model required="true"
    * @generated
    */
 	Operation getOperationName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operation Name</em>' reference.
@@ -58,7 +58,7 @@ public interface OperationCallBaseExpCS extends EObject {
 
 	/**
    * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.OclExpressionCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.OclExpressionCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
@@ -66,7 +66,7 @@ public interface OperationCallBaseExpCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Arguments</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallBaseExpCS_Arguments()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_Arguments()
    * @model containment="true"
    * @generated
    */
@@ -82,14 +82,14 @@ public interface OperationCallBaseExpCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Is Marked Pre</em>' attribute.
    * @see #setIsMarkedPre(boolean)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallBaseExpCS_IsMarkedPre()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallBaseExpCS_IsMarkedPre()
    * @model
    * @generated
    */
 	boolean isIsMarkedPre();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Is Marked Pre</em>' attribute.

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
 /**
  * 
@@ -100,7 +100,7 @@ public interface OclSequence<T extends OclAny> extends OclSortedCollection<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclCollection#flatten()
 	 */
 	<T2 extends OclAny> OclSequence<T2> flatten();
 	

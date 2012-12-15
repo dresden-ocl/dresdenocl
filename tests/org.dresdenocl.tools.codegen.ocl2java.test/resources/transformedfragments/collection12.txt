@@ -20,4 +20,4 @@ collection4.add(new Integer(5));
 collection4.add(new Integer(6));
 collection1.add(collection4);
 
-((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(3))
+((Object) org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(3))

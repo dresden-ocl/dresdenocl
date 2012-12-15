@@ -25,22 +25,22 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test;
+package org.dresdenocl.tools.transformation.pivot2sql.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.CWM2DdlTest;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2CWMtypedTest;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2CWMverticalTest;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2DdlAndMappedModelTest;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2DdlTest;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.Pivot2MappedModelTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.CWM2DdlTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2CWMtypedTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2CWMverticalTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2DdlAndMappedModelTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2DdlTest;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.Pivot2MappedModelTest;
 
 /**
  * This TestSuite runs all Tests testing the package
- * <code>tudresden.ocl20.pivot.tools.transformation.pivot2sql</code> and its
+ * <code>org.dresdenocl.tools.transformation.pivot2sql</code> and its
  * subpackages of the Dresden OCL2 Toolkit
  * 
  * @author Bjoern Freitag

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
 public enum OclCardinality {
 	

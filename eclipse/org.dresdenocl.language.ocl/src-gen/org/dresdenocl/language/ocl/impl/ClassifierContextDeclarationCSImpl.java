@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.TypeCS;
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.TypeCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,8 +29,8 @@ import tudresden.ocl20.pivot.language.ocl.TypeCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.ClassifierContextDeclarationCSImpl#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.ClassifierContextDeclarationCSImpl#getInvariantsAndDefinitions <em>Invariants And Definitions</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl#getInvariantsAndDefinitions <em>Invariants And Definitions</em>}</li>
  * </ul>
  * </p>
  *

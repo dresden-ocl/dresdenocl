@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.provider;
+package org.dresdenocl.essentialocl.expressions.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,7 +50,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsAdapterFactory;
+import org.dresdenocl.essentialocl.expressions.util.ExpressionsAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -105,7 +105,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.VariableExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -113,7 +113,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected VariableExpItemProvider variableExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.VariableExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -129,7 +129,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.Variable} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -137,7 +137,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected VariableItemProvider variableItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -153,7 +153,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -161,7 +161,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected UnlimitedNaturalExpItemProvider unlimitedNaturalExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -178,7 +178,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.TypeLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -186,7 +186,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected TypeLiteralExpItemProvider typeLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.TypeLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -202,7 +202,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -210,7 +210,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected TupleLiteralPartItemProvider tupleLiteralPartItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -226,7 +226,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.TupleLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -234,7 +234,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected TupleLiteralExpItemProvider tupleLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.TupleLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -250,7 +250,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.StringLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -258,7 +258,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected StringLiteralExpItemProvider stringLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.StringLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -274,7 +274,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.RealLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -282,7 +282,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected RealLiteralExpItemProvider realLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.RealLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -298,7 +298,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.PropertyCallExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -306,7 +306,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected PropertyCallExpItemProvider propertyCallExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.PropertyCallExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -322,7 +322,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.OperationCallExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -330,7 +330,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected OperationCallExpItemProvider operationCallExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.OperationCallExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -346,7 +346,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -354,7 +354,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected UndefinedLiteralExpItemProvider undefinedLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -371,7 +371,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.LetExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -379,7 +379,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected LetExpItemProvider letExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.LetExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -395,7 +395,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.IteratorExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -403,7 +403,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected IteratorExpItemProvider iteratorExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.IteratorExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -419,7 +419,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.IterateExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -427,7 +427,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected IterateExpItemProvider iterateExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.IterateExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -443,7 +443,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.InvalidLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -451,7 +451,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected InvalidLiteralExpItemProvider invalidLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.InvalidLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -467,7 +467,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -475,7 +475,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected IntegerLiteralExpItemProvider integerLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -491,7 +491,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.IfExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -499,7 +499,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected IfExpItemProvider ifExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.IfExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -515,7 +515,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.BooleanLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -523,7 +523,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected BooleanLiteralExpItemProvider booleanLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.BooleanLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -539,7 +539,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.CollectionItem} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -547,7 +547,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected CollectionItemItemProvider collectionItemItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.CollectionItem}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -563,7 +563,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -571,7 +571,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected CollectionLiteralExpItemProvider collectionLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -588,7 +588,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.CollectionRange} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -596,7 +596,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected CollectionRangeItemProvider collectionRangeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.CollectionRange}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -612,7 +612,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -620,7 +620,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected EnumLiteralExpItemProvider enumLiteralExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -636,7 +636,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -644,7 +644,7 @@ public class ExpressionsItemProviderAdapterFactory extends
 	protected ExpressionInOclItemProvider expressionInOclItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl}.
+	 * This creates an adapter for a {@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

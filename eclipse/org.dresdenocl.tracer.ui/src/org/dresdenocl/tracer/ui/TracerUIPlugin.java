@@ -16,15 +16,15 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tracer.ui;
+package org.dresdenocl.tracer.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.tracer.ui.internal.views.TracerView;
 
 /**
  * <p>
@@ -37,11 +37,11 @@ import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
 public class TracerUIPlugin extends AbstractUIPlugin {
 
 	/** the plug-in ID */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer.ui";
+	public static final String PLUGIN_ID = "org.dresdenocl.tracer.ui";
 
 	/** the ID of the {@link TracerView}. */
 	public static final String TRACER_VIEW_ID =
-			"tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView";
+			"org.dresdenocl.tracer.ui.internal.views.TracerView";
 
 	/** the shared instance of this plug-in */
 	private static TracerUIPlugin plugin;
@@ -95,7 +95,7 @@ public class TracerUIPlugin extends AbstractUIPlugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

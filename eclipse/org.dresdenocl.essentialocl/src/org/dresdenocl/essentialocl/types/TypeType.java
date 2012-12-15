@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,7 +71,7 @@ public interface TypeType extends Type {
 	Type getRepresentedType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Represented Type</em>' reference.

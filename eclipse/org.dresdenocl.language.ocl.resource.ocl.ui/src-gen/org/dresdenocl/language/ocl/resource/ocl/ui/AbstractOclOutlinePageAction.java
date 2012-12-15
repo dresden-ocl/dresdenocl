@@ -4,25 +4,25 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.action.Action {
 	
 	private String preferenceKey = this.getClass().getSimpleName() + ".isChecked";
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer;
 	
-	public AbstractOclOutlinePageAction(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer, String text, int style) {
+	public AbstractOclOutlinePageAction(org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer, String text, int style) {
 		super(text, style);
 		this.treeViewer = treeViewer;
 	}
 	
 	public void initialize(String imagePath) {
-		org.eclipse.jface.resource.ImageDescriptor descriptor = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclImageProvider.INSTANCE.getImageDescriptor(imagePath);
+		org.eclipse.jface.resource.ImageDescriptor descriptor = org.dresdenocl.language.ocl.resource.ocl.ui.OclImageProvider.INSTANCE.getImageDescriptor(imagePath);
 		setDisabledImageDescriptor(descriptor);
 		setImageDescriptor(descriptor);
 		setHoverImageDescriptor(descriptor);
-		boolean checked = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore().getBoolean(preferenceKey);
+		boolean checked = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore().getBoolean(preferenceKey);
 		valueChanged(checked, false);
 	}
 	
@@ -49,7 +49,7 @@ public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.act
 		setChecked(on);
 		runBusy(on);
 		if (store) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore().setValue(preferenceKey, on);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore().setValue(preferenceKey, on);
 		}
 	}
 	
@@ -57,12 +57,12 @@ public abstract class AbstractOclOutlinePageAction extends org.eclipse.jface.act
 		return true;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer getTreeViewer() {
+	public org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer getTreeViewer() {
 		return treeViewer;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewerComparator getTreeViewerComparator() {
-		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewerComparator) treeViewer.getComparator();
+	public org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewerComparator getTreeViewerComparator() {
+		return (org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewerComparator) treeViewer.getComparator();
 	}
 	
 }

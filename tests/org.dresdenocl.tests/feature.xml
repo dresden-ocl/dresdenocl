@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.tests"
+      id="org.dresdenocl.tests"
       label="Tests"
       version="3.1.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -39,161 +39,161 @@
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.essentialocl.tests"
+         id="org.dresdenocl.essentialocl.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.pain"
+         id="org.dresdenocl.examples.pain"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.pain.tests"
+         id="org.dresdenocl.examples.pain.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.interpreter.test"
+         id="org.dresdenocl.interpreter.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.ecore.test"
+         id="org.dresdenocl.metamodels.ecore.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.java.test"
+         id="org.dresdenocl.metamodels.java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.test"
+         id="org.dresdenocl.metamodels.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.uml2.test"
+         id="org.dresdenocl.metamodels.uml2.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.xsd.test"
+         id="org.dresdenocl.metamodels.xsd.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelbus.test"
+         id="org.dresdenocl.modelbus.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.ecore.test"
+         id="org.dresdenocl.modelinstancetype.ecore.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel"
+         id="org.dresdenocl.modelinstancetype.ecore.testmodel"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.java.test"
+         id="org.dresdenocl.modelinstancetype.java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.test"
+         id="org.dresdenocl.modelinstancetype.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.xml.test"
+         id="org.dresdenocl.modelinstancetype.xml.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.ocl2parser.test"
+         id="org.dresdenocl.ocl2parser.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.standardlibrary.java.test"
+         id="org.dresdenocl.standardlibrary.java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test"
+         id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java.test"
+         id="org.dresdenocl.tools.codegen.ocl2java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj"
+         id="org.dresdenocl.tools.codegen.ocl2java.test.aspectj"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.template.test"
+         id="org.dresdenocl.tools.template.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.transformation.pivot2sql.test"
+         id="org.dresdenocl.tools.transformation.pivot2sql.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.transformation.test"
+         id="org.dresdenocl.tools.transformation.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -207,7 +207,7 @@
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tracer.test"
+         id="org.dresdenocl.tracer.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

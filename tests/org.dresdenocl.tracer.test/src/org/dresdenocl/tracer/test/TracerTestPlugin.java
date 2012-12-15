@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tracer.test;
+package org.dresdenocl.tracer.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class TracerTestPlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer.test"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.dresdenocl.tracer.test"; //$NON-NLS-1$
 
 	// The shared instance
 	private static TracerTestPlugin plugin;

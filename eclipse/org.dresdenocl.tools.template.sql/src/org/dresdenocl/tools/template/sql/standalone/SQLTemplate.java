@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.template.sql.standalone;
+package org.dresdenocl.tools.template.sql.standalone;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.util.List;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.template.sql.SQLTemplatePlugin;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.sql.SQLTemplatePlugin;
 
 public class SQLTemplate {
 

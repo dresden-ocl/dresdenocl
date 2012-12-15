@@ -1,6 +1,6 @@
 -- Constraint taken and adapted from [1] page 48.
 -- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 context Membership
 inv levelAndColor:

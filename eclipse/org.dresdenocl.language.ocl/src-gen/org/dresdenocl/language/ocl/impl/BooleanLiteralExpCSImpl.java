@@ -4,14 +4,14 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.BooleanLiteralExpCS;
+import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +20,7 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.BooleanLiteralExpCSImpl#isBooleanLiteral <em>Boolean Literal</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.BooleanLiteralExpCSImpl#isBooleanLiteral <em>Boolean Literal</em>}</li>
  * </ul>
  * </p>
  *

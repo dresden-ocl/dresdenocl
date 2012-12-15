@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * A TokenResolverFactory creates TokenResolvers. The concrete resolver to be
@@ -17,12 +17,12 @@ public interface IOclTokenResolverFactory {
 	/**
 	 * Creates a token resolver for normal tokens of type <code>tokenName</code>.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver createTokenResolver(String tokenName);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver createTokenResolver(String tokenName);
 	
 	/**
 	 * Creates a token resolver for COLLECT-IN tokens that are stored in feature
 	 * <code>featureName</code>.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver createCollectInTokenResolver(String featureName);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver createCollectInTokenResolver(String featureName);
 	
 }

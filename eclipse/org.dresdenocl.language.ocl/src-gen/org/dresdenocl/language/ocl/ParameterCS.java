@@ -4,11 +4,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Parameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,12 +18,12 @@ import tudresden.ocl20.pivot.pivotmodel.Parameter;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameter <em>Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameterType <em>Parameter Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.ParameterCS#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.ParameterCS#getParameterType <em>Parameter Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getParameterCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getParameterCS()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface ParameterCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Parameter</em>' reference.
    * @see #setParameter(Parameter)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getParameterCS_Parameter()
+   * @see org.dresdenocl.language.ocl.OclPackage#getParameterCS_Parameter()
    * @model required="true"
    * @generated
    */
 	Parameter getParameter();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameter <em>Parameter</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.ParameterCS#getParameter <em>Parameter</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Parameter</em>' reference.
@@ -64,14 +64,14 @@ public interface ParameterCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Parameter Type</em>' containment reference.
    * @see #setParameterType(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getParameterCS_ParameterType()
+   * @see org.dresdenocl.language.ocl.OclPackage#getParameterCS_ParameterType()
    * @model containment="true" required="true"
    * @generated
    */
 	TypeCS getParameterType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameterType <em>Parameter Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.ParameterCS#getParameterType <em>Parameter Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Parameter Type</em>' containment reference.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.parser"
+      id="org.dresdenocl.feature.parser"
       label="Dresden OCL Parser and Editor"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -193,7 +193,7 @@ Library.
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="scala.library" version="2.9.1" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
+      <import plugin="org.dresdenocl.pivotmodel"/>
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf"/>
       <import plugin="org.eclipse.emf.codegen.ecore"/>
@@ -201,7 +201,7 @@ Library.
       <import plugin="org.eclipse.emf.validation"/>
       <import plugin="org.eclipse.emf.workspace"/>
       <import plugin="org.emftext.commons.antlr3_4_0"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.jface.text"/>
@@ -209,12 +209,12 @@ Library.
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.views"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl.standardlibrary"/>
-      <import plugin="tudresden.ocl20.pivot.model"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.essentialocl.standardlibrary"/>
+      <import plugin="org.dresdenocl.model"/>
+      <import plugin="org.dresdenocl.essentialocl" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.emftext.access"/>
       <import plugin="org.eclipse.emf.edit"/>
-      <import plugin="tudresden.ocl20.pivot.pivotmodel.edit"/>
+      <import plugin="org.dresdenocl.pivotmodel.edit"/>
    </requires>
 
    <plugin
@@ -230,49 +230,49 @@ Library.
          version="0.0.0"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.language.ocl"
+         id="org.dresdenocl.language.ocl"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.language.ocl.resource.ocl"
+         id="org.dresdenocl.language.ocl.resource.ocl"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.language.ocl.resource.ocl.ui"
+         id="org.dresdenocl.language.ocl.resource.ocl.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.language.ocl.staticsemantics"
+         id="org.dresdenocl.language.ocl.staticsemantics"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.parser"
+         id="org.dresdenocl.parser"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.language.ocl.edit"
+         id="org.dresdenocl.language.ocl.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.attributegrammar.integration.kiama"
+         id="org.dresdenocl.attributegrammar.integration.kiama"
          download-size="0"
          install-size="0"
          version="0.0.0"

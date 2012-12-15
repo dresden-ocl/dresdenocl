@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.impl;
+package org.dresdenocl.tracer.tracermodel.impl;
 
 import java.util.UUID;
 
@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.tracer.tracermodel.TracermodelFactory;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--

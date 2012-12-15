@@ -11,7 +11,7 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.provider;
+package org.dresdenocl.metamodels.uml2.internal.provider;
 
 import java.net.URL;
 
@@ -21,13 +21,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.uml2.internal.model.UML2Model;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.metamodels.uml2.internal.model.UML2Model;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -54,7 +54,7 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 	protected ResourceSet resourceSet;
 
 	/**
-	 * @see tudresden.ocl20.pivot.model.IModelProvider#getModel(java.net.URL)
+	 * @see org.dresdenocl.model.IModelProvider#getModel(java.net.URL)
 	 * 
 	 * @generated NOT
 	 */

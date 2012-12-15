@@ -17,15 +17,15 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.expressions;
+package org.dresdenocl.tools.codegen.ocl2java.test.tests.expressions;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.AbstractDiffTest;
 
 /**
  * <p>
@@ -155,7 +155,7 @@ public class TestInvalidLiteralExp extends AbstractDiffTest {
 
 		/*
 		 * TODO This failure is associated to the bug
-		 * tudresden.ocl20.pivot.ocl2parser
+		 * org.dresdenocl.ocl2parser
 		 * .test.expressions.TestInvalidLiterals.testInvalidPositive02()
 		 */
 		this.compareFragmentCodeGeneration("expressions/literals", "invalid07");

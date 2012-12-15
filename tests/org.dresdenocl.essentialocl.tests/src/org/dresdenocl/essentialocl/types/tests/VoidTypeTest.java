@@ -16,13 +16,13 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.essentialocl.types.tests;
+package org.dresdenocl.essentialocl.types.tests;
 
 import junit.framework.TestCase;
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * Tests the VoidType implementation.

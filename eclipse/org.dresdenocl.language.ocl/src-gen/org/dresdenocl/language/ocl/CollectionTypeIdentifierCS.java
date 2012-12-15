@@ -4,9 +4,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 
 /**
@@ -17,12 +17,12 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getGenericType <em>Generic Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getGenericType <em>Generic Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionTypeIdentifierCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getCollectionTypeIdentifierCS()
  * @model
  * @generated
  */
@@ -37,14 +37,14 @@ public interface CollectionTypeIdentifierCS extends TypeCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' reference.
    * @see #setTypeName(Type)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionTypeIdentifierCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionTypeIdentifierCS_TypeName()
    * @model required="true"
    * @generated
    */
 	Type getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getTypeName <em>Type Name</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getTypeName <em>Type Name</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' reference.
@@ -63,14 +63,14 @@ public interface CollectionTypeIdentifierCS extends TypeCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Generic Type</em>' containment reference.
    * @see #setGenericType(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionTypeIdentifierCS_GenericType()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionTypeIdentifierCS_GenericType()
    * @model containment="true"
    * @generated
    */
 	TypeCS getGenericType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getGenericType <em>Generic Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getGenericType <em>Generic Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Generic Type</em>' containment reference.

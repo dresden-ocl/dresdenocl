@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionFlatten {
      *       def: testCollectionFlatten(source: Collection(OclAny)): Collection(OclAny) = source ->flatten()</code></p>
      */
     public java.util.Collection<Object> testpackage.Class1.testCollectionFlatten(java.util.Collection<Object> source) {
-        return (java.util.Collection<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.flatten(source);
+        return (java.util.Collection<Object>) org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.flatten(source);
     }
 }

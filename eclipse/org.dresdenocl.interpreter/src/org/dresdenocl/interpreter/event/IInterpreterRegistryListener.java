@@ -28,10 +28,10 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter.event;
+package org.dresdenocl.interpreter.event;
 
-import tudresden.ocl20.pivot.interpreter.IInterpreterRegistry;
-import tudresden.ocl20.pivot.interpreter.event.internal.InterpreterRegistryEvent;
+import org.dresdenocl.interpreter.IInterpreterRegistry;
+import org.dresdenocl.interpreter.event.internal.InterpreterRegistryEvent;
 
 /**
  * <p>

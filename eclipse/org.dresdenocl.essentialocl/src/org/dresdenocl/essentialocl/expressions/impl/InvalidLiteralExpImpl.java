@@ -30,13 +30,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.InvalidLiteralExp;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Invalid Literal Exp</b></em>'.
@@ -78,7 +78,7 @@ public class InvalidLiteralExpImpl extends LiteralExpImpl implements
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
 	 */
 	@Override
 	protected Type evaluateType() {

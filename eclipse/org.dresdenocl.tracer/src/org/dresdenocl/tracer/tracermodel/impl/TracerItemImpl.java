@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.impl;
+package org.dresdenocl.tracer.tracermodel.impl;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectEList;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -29,12 +29,12 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getExpression <em>Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getResult <em>Result</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getUUID <em>UUID</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl#getModelInstanceElement <em>Model Instance Element</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl#getUUID <em>UUID</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl#getModelInstanceElement <em>Model Instance Element</em>}</li>
  * </ul>
  * </p>
  *

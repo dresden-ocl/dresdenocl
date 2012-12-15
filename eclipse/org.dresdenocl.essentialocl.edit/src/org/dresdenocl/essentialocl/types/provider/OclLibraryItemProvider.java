@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.provider;
+package org.dresdenocl.essentialocl.types.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,14 +48,14 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.essentialocl.types.OclLibrary} object.
  * <!-- begin-user-doc --> <!--
  * end-user-doc -->
  * @generated

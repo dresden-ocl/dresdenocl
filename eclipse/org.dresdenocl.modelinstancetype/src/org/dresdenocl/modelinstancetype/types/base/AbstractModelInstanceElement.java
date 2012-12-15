@@ -28,11 +28,11 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelinstancetype.types.base;
+package org.dresdenocl.modelinstancetype.types.base;
 
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -85,7 +85,7 @@ public abstract class AbstractModelInstanceElement implements
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Object#hashCode()
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.base.AbstractModelInstanceElement#equals(Object)
+	 * @see org.dresdenocl.modelinstancetype.types.base.AbstractModelInstanceElement#equals(Object)
 	 */
 	@Override
 	public abstract int hashCode();
@@ -93,7 +93,7 @@ public abstract class AbstractModelInstanceElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceElement#getName()
+	 * @see org.dresdenocl.modelbus.IModelInstanceElement#getName()
 	 */
 	public String getName() {
 
@@ -125,7 +125,7 @@ public abstract class AbstractModelInstanceElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 	 * #getType()
 	 */
 	public Type getType() {
@@ -136,8 +136,8 @@ public abstract class AbstractModelInstanceElement implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * #isTypeOf(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+	 * #isTypeOf(org.dresdenocl.pivotmodel.Type)
 	 */
 	public boolean isTypeOf(Type type) {
 

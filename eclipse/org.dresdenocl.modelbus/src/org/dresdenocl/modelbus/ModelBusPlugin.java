@@ -31,21 +31,21 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.modelbus;
+package org.dresdenocl.modelbus;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.model.IModelRegistry;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.metamodel.internal.MetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.model.internal.ModelRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.internal.ModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelbus.modelinstance.internal.ModelInstanceTypeRegistry;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.model.IModelRegistry;
+import org.dresdenocl.model.metamodel.IMetamodelRegistry;
+import org.dresdenocl.modelbus.metamodel.internal.MetamodelRegistry;
+import org.dresdenocl.modelbus.model.internal.ModelRegistry;
+import org.dresdenocl.modelbus.modelinstance.internal.ModelInstanceRegistry;
+import org.dresdenocl.modelbus.modelinstance.internal.ModelInstanceTypeRegistry;
+import org.dresdenocl.modelinstance.IModelInstanceRegistry;
+import org.dresdenocl.modelinstance.IModelInstanceTypeRegistry;
 
 /**
  * <p>
@@ -57,7 +57,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstanceTypeRegistry;
 public class ModelBusPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.modelbus"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.modelbus"; //$NON-NLS-1$
 
 	/** The shared instance. */
 	private static ModelBusPlugin plugin;
@@ -287,7 +287,7 @@ public class ModelBusPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

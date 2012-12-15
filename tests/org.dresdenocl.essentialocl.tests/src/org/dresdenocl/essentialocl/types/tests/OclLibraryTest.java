@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.tests;
+package org.dresdenocl.essentialocl.types.tests;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,13 +44,13 @@ import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#makeTupleType(java.util.List) <em>Make Tuple Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getCollectionType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Collection Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getSequenceType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Sequence Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getBagType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Bag Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getSetType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Set Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOrderedSetType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Ordered Set Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getTypeType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Type Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#makeTupleType(java.util.List) <em>Make Tuple Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getCollectionType(org.dresdenocl.pivotmodel.Type) <em>Get Collection Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getSequenceType(org.dresdenocl.pivotmodel.Type) <em>Get Sequence Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getBagType(org.dresdenocl.pivotmodel.Type) <em>Get Bag Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getSetType(org.dresdenocl.pivotmodel.Type) <em>Get Set Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOrderedSetType(org.dresdenocl.pivotmodel.Type) <em>Get Ordered Set Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getTypeType(org.dresdenocl.pivotmodel.Type) <em>Get Type Type</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -133,10 +133,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#makeTupleType(java.util.List) <em>Make Tuple Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#makeTupleType(java.util.List) <em>Make Tuple Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#makeTupleType(java.util.List)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#makeTupleType(java.util.List)
 	 * @generated
 	 */
 	public void testMakeTupleType__List() {
@@ -147,10 +147,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getCollectionType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Collection Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getCollectionType(org.dresdenocl.pivotmodel.Type) <em>Get Collection Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getCollectionType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getCollectionType(org.dresdenocl.pivotmodel.Type)
 	 * @generated
 	 */
 	public void testGetCollectionType__Type() {
@@ -161,10 +161,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getSequenceType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Sequence Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getSequenceType(org.dresdenocl.pivotmodel.Type) <em>Get Sequence Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getSequenceType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getSequenceType(org.dresdenocl.pivotmodel.Type)
 	 * @generated
 	 */
 	public void testGetSequenceType__Type() {
@@ -175,10 +175,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getBagType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Bag Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getBagType(org.dresdenocl.pivotmodel.Type) <em>Get Bag Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getBagType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getBagType(org.dresdenocl.pivotmodel.Type)
 	 * @generated
 	 */
 	public void testGetBagType__Type() {
@@ -189,10 +189,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getSetType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Set Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getSetType(org.dresdenocl.pivotmodel.Type) <em>Get Set Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getSetType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getSetType(org.dresdenocl.pivotmodel.Type)
 	 * @generated
 	 */
 	public void testGetSetType__Type() {
@@ -203,10 +203,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOrderedSetType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Ordered Set Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOrderedSetType(org.dresdenocl.pivotmodel.Type) <em>Get Ordered Set Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOrderedSetType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOrderedSetType(org.dresdenocl.pivotmodel.Type)
 	 * @generated
 	 */
 	public void testGetOrderedSetType__Type() {
@@ -217,10 +217,10 @@ public class OclLibraryTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getTypeType(tudresden.ocl20.pivot.pivotmodel.Type) <em>Get Type Type</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getTypeType(org.dresdenocl.pivotmodel.Type) <em>Get Type Type</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getTypeType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getTypeType(org.dresdenocl.pivotmodel.Type)
 	 * @generated
 	 */
 	public void testGetTypeType__Type() {

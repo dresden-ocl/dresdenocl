@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.test.tests;
+package org.dresdenocl.metamodels.uml2.test.tests;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -22,12 +22,12 @@ import java.util.Arrays;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.metamodels.uml2.test.UML2MetaModelTestPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.metamodels.uml2.test.UML2MetaModelTestPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

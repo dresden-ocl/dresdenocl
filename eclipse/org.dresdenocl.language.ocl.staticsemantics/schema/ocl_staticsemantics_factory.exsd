@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="tudresden.ocl20.pivot.language.ocl.staticsemantics" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.dresdenocl.language.ocl.staticsemantics" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics" id="ocl_staticsemantics_factory" name="ocl_staticsemantics_factory"/>
+         <meta.schema plugin="org.dresdenocl.language.ocl.staticsemantics" id="ocl_staticsemantics_factory" name="ocl_staticsemantics_factory"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -62,7 +62,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory"/>
+                  <meta.attribute kind="java" basedOn=":org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory"/>
                </appinfo>
             </annotation>
          </attribute>

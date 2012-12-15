@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceAndArgumentsCS#getOperationCall <em>Operation Call</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationCallWithSourceAndArgumentsCS#getOperationCall <em>Operation Call</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallWithSourceAndArgumentsCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallWithSourceAndArgumentsCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface OperationCallWithSourceAndArgumentsCS extends OperationCallWith
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operation Call</em>' containment reference.
 	 * @see #setOperationCall(ImplicitOperationCallCS)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallWithSourceAndArgumentsCS_OperationCall()
+	 * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallWithSourceAndArgumentsCS_OperationCall()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	ImplicitOperationCallCS getOperationCall();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceAndArgumentsCS#getOperationCall <em>Operation Call</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallWithSourceAndArgumentsCS#getOperationCall <em>Operation Call</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Operation Call</em>' containment reference.

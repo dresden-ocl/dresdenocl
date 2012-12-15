@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelinstance.base;
+package org.dresdenocl.modelinstance.base;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -37,17 +37,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.ComplexType;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.ComplexType;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceVoid;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -119,7 +119,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getElementTypes
+	 * org.dresdenocl.modelbus.modelinstance.IModelInstance#getElementTypes
 	 * ()
 	 */
 	public Set<Type> getAllImplementedTypes() {
@@ -152,8 +152,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#getAllInstances
-	 * (tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.modelbus.modelinstance.IModelInstance#getAllInstances
+	 * (org.dresdenocl.pivotmodel.Type)
 	 */
 	public Set<IModelInstanceObject> getAllInstances(Type type) {
 
@@ -183,7 +183,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstance#
 	 * getAllModelInstanceObjects()
 	 */
 	public List<IModelInstanceObject> getAllModelInstanceObjects() {
@@ -194,7 +194,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getDisplayName()
+	 * @see org.dresdenocl.modelbus.IModelInstance#getDisplayName()
 	 */
 	public String getDisplayName() {
 
@@ -204,7 +204,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstance#getModel()
+	 * @see org.dresdenocl.modelbus.IModelInstance#getModel()
 	 */
 	public IModel getModel() {
 
@@ -214,7 +214,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstance#
 	 * getModelInstanceFactory()
 	 */
 	public IModelInstanceFactory getModelInstanceFactory() {
@@ -226,7 +226,7 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#isInstanceOf(tudresden.
+	 * org.dresdenocl.modelbus.IModelInstance#isInstanceOf(tudresden.
 	 * ocl20 .pivot.modelbus.IModel)
 	 */
 	public boolean isInstanceOf(IModel model) {
@@ -244,8 +244,8 @@ public abstract class AbstractModelInstance implements IModelInstance {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstance.IModelInstance#removeModelInstanceElement
-	 * (tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject)
+	 * org.dresdenocl.modelinstance.IModelInstance#removeModelInstanceElement
+	 * (org.dresdenocl.modelinstancetype.types.IModelInstanceObject)
 	 */
 	public void removeModelInstanceElement(IModelInstanceObject imiObject) {
 

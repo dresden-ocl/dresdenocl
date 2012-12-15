@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -42,9 +42,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -52,12 +52,12 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getBody <em>
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getBody <em>
  * Body</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getLanguage
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getLanguage
  * <em>Language</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getConstraint
+ * {@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getConstraint
  * <em>Constraint</em>}</li>
  * </ul>
  * </p>

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.provider;
+package org.dresdenocl.language.ocl.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.language.ocl.util.OclAdapterFactory;
+import org.dresdenocl.language.ocl.util.OclAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -75,7 +75,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.BracketExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.BracketExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -83,7 +83,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected BracketExpCSItemProvider bracketExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.BracketExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.BracketExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -98,7 +98,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.NamedLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -106,7 +106,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected NamedLiteralExpCSItemProvider namedLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.NamedLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -121,7 +121,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PathNameCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PathNameCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -129,7 +129,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PathNameCSItemProvider pathNameCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PathNameCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PathNameCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -144,7 +144,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.SimpleNameCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.SimpleNameCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -152,7 +152,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected SimpleNameCSItemProvider simpleNameCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.SimpleNameCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.SimpleNameCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -167,7 +167,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TypePathNameSimpleCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -175,7 +175,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected TypePathNameSimpleCSItemProvider typePathNameSimpleCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TypePathNameSimpleCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -190,7 +190,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TypePathNameNestedCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -198,7 +198,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected TypePathNameNestedCSItemProvider typePathNameNestedCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TypePathNameNestedCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -213,7 +213,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TupleTypeCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -221,7 +221,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected TupleTypeCSItemProvider tupleTypeCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TupleTypeCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -236,7 +236,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -244,7 +244,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected CollectionTypeLiteralExpCSItemProvider collectionTypeLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -259,7 +259,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -267,7 +267,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected TupleTypeLiteralExpCSItemProvider tupleTypeLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -282,7 +282,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -290,7 +290,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected VariableDeclarationWithInitCSItemProvider variableDeclarationWithInitCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -305,7 +305,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -313,7 +313,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected VariableDeclarationWithoutInitCSItemProvider variableDeclarationWithoutInitCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -328,7 +328,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -336,7 +336,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected VariableDeclarationWithInitListCSItemProvider variableDeclarationWithInitListCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -351,7 +351,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -359,7 +359,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected VariableDeclarationWithoutInitListCSItemProvider variableDeclarationWithoutInitListCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -374,7 +374,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -382,7 +382,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected EnumLiteralOrStaticPropertyExpCSItemProvider enumLiteralOrStaticPropertyExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -397,7 +397,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.CollectionLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -405,7 +405,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected CollectionLiteralExpCSItemProvider collectionLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.CollectionLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -420,7 +420,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -428,7 +428,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected CollectionTypeIdentifierCSItemProvider collectionTypeIdentifierCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -443,7 +443,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -451,7 +451,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected CollectionLiteralPartsOclExpCSItemProvider collectionLiteralPartsOclExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -466,7 +466,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.CollectionRangeCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -474,7 +474,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected CollectionRangeCSItemProvider collectionRangeCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.CollectionRangeCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -489,7 +489,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.IteratorExpVariableCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -497,7 +497,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected IteratorExpVariableCSItemProvider iteratorExpVariableCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.IteratorExpVariableCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -512,7 +512,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.IteratorExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -520,7 +520,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected IteratorExpCSItemProvider iteratorExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.IteratorExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -535,7 +535,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.IterateExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.IterateExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -543,7 +543,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected IterateExpCSItemProvider iterateExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.IterateExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.IterateExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -558,7 +558,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.NavigationCallExp} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -566,7 +566,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected NavigationCallExpItemProvider navigationCallExpItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.NavigationCallExp}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -581,7 +581,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationCallBaseExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -589,7 +589,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationCallBaseExpCSItemProvider operationCallBaseExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationCallBaseExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -604,7 +604,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -612,7 +612,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PropertyCallBaseExpCSItemProvider propertyCallBaseExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -627,7 +627,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.ImplicitPropertyCallCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -635,7 +635,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected ImplicitPropertyCallCSItemProvider implicitPropertyCallCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.ImplicitPropertyCallCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -650,7 +650,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.ImplicitOperationCallCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -658,7 +658,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected ImplicitOperationCallCSItemProvider implicitOperationCallCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.ImplicitOperationCallCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -673,7 +673,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -681,7 +681,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PropertyCallOnSelfExpCSItemProvider propertyCallOnSelfExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -696,7 +696,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -704,7 +704,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PropertyCallExplicitPathExpCSItemProvider propertyCallExplicitPathExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -719,7 +719,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationCallOnSelfExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -727,7 +727,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationCallOnSelfExpCSItemProvider operationCallOnSelfExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationCallOnSelfExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -742,7 +742,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.StaticOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -750,7 +750,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected StaticOperationCallExpCSItemProvider staticOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.StaticOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -765,7 +765,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -773,7 +773,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected UnaryOperationCallExpCSItemProvider unaryOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -788,7 +788,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -796,7 +796,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected LogicalNotOperationCallExpCSItemProvider logicalNotOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -811,7 +811,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -819,7 +819,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationCallWithSourceExpCSItemProvider operationCallWithSourceExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -834,7 +834,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.AdditiveOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -842,7 +842,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected AdditiveOperationCallExpCSItemProvider additiveOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.AdditiveOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -857,7 +857,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.MultOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -865,7 +865,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected MultOperationCallExpCSItemProvider multOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.MultOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -880,7 +880,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.RelationalOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -888,7 +888,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected RelationalOperationCallExpCSItemProvider relationalOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.RelationalOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -903,7 +903,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.EqualityOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -911,7 +911,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected EqualityOperationCallExpCSItemProvider equalityOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.EqualityOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -926,7 +926,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -934,7 +934,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected LogicalAndOperationCallExpCSItemProvider logicalAndOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -949,7 +949,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -957,7 +957,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected LogicalOrOperationCallExpCSItemProvider logicalOrOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -972,7 +972,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -980,7 +980,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected LogicalXorOperationCallExpCSItemProvider logicalXorOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -995,7 +995,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1003,7 +1003,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected LogicalImpliesOperationCallExpCSItemProvider logicalImpliesOperationCallExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1018,7 +1018,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1026,7 +1026,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationCallWithImlicitSourceExpCSItemProvider operationCallWithImlicitSourceExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1041,7 +1041,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.TupleLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1049,7 +1049,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected TupleLiteralExpCSItemProvider tupleLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.TupleLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1064,7 +1064,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.IntegerLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1072,7 +1072,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected IntegerLiteralExpCSItemProvider integerLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.IntegerLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1087,7 +1087,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.RealLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1095,7 +1095,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected RealLiteralExpCSItemProvider realLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.RealLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1110,7 +1110,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.BooleanLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1118,7 +1118,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected BooleanLiteralExpCSItemProvider booleanLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.BooleanLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1133,7 +1133,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.StringLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1141,7 +1141,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected StringLiteralExpCSItemProvider stringLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.StringLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1156,7 +1156,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.InvalidLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1164,7 +1164,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected InvalidLiteralExpCSItemProvider invalidLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.InvalidLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1179,7 +1179,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.NullLiteralExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1187,7 +1187,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected NullLiteralExpCSItemProvider nullLiteralExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.NullLiteralExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1202,7 +1202,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.LetExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.LetExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1210,7 +1210,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected LetExpCSItemProvider letExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.LetExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.LetExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1225,7 +1225,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.IfExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.IfExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1233,7 +1233,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected IfExpCSItemProvider ifExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.IfExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.IfExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1248,7 +1248,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1256,7 +1256,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PackageDeclarationWithNamespaceCSItemProvider packageDeclarationWithNamespaceCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1271,7 +1271,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1279,7 +1279,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PackageDeclarationNestedNamespaceCSItemProvider packageDeclarationNestedNamespaceCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1294,7 +1294,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1302,7 +1302,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PackageDeclarationWithoutNamespaceCSItemProvider packageDeclarationWithoutNamespaceCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1317,7 +1317,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1325,7 +1325,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected AttributeContextDeclarationCSItemProvider attributeContextDeclarationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1340,7 +1340,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1348,7 +1348,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected ClassifierContextDeclarationCSItemProvider classifierContextDeclarationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1363,7 +1363,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationContextDeclarationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1371,7 +1371,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationContextDeclarationCSItemProvider operationContextDeclarationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationContextDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1386,7 +1386,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.InitValueCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.InitValueCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1394,7 +1394,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected InitValueCSItemProvider initValueCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.InitValueCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.InitValueCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1409,7 +1409,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.DeriveValueCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.DeriveValueCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1417,7 +1417,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected DeriveValueCSItemProvider deriveValueCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.DeriveValueCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.DeriveValueCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1432,7 +1432,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.InvariantExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.InvariantExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1440,7 +1440,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected InvariantExpCSItemProvider invariantExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.InvariantExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.InvariantExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1455,7 +1455,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.DefinitionExpCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1463,7 +1463,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected DefinitionExpCSItemProvider definitionExpCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.DefinitionExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1478,7 +1478,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1486,7 +1486,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected DefinitionExpPropertyCSItemProvider definitionExpPropertyCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1501,7 +1501,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.DefinitionExpOperationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1509,7 +1509,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected DefinitionExpOperationCSItemProvider definitionExpOperationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.DefinitionExpOperationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1524,7 +1524,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PreConditionDeclarationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1532,7 +1532,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PreConditionDeclarationCSItemProvider preConditionDeclarationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PreConditionDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1547,7 +1547,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.PostConditionDeclarationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1555,7 +1555,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected PostConditionDeclarationCSItemProvider postConditionDeclarationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.PostConditionDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1570,7 +1570,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.BodyDeclarationCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1578,7 +1578,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected BodyDeclarationCSItemProvider bodyDeclarationCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.BodyDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1593,7 +1593,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1601,7 +1601,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationDefinitionInContextCSItemProvider operationDefinitionInContextCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1616,7 +1616,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.OperationDefinitionInDefCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1624,7 +1624,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected OperationDefinitionInDefCSItemProvider operationDefinitionInDefCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.OperationDefinitionInDefCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1639,7 +1639,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link tudresden.ocl20.pivot.language.ocl.ParameterCS} instances.
+	 * This keeps track of the one adapter used for all {@link org.dresdenocl.language.ocl.ParameterCS} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1647,7 +1647,7 @@ public class OclItemProviderAdapterFactory extends OclAdapterFactory implements 
 	protected ParameterCSItemProvider parameterCSItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link tudresden.ocl20.pivot.language.ocl.ParameterCS}.
+	 * This creates an adapter for a {@link org.dresdenocl.language.ocl.ParameterCS}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

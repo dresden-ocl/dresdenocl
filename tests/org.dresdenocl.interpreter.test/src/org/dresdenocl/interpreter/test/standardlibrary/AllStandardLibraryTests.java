@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test.standardlibrary;
+package org.dresdenocl.interpreter.test.standardlibrary;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -5,7 +5,7 @@
 -- Use this constraint file with model car.uml
 -- 
 
-package tudresden::ocl20::pivot::examples::library
+package org::dresdenocl::examples::library
 
 context Book
 inv oclinvp11: Book.allInstances().author.books->collect(x|x.title)->size() = 1

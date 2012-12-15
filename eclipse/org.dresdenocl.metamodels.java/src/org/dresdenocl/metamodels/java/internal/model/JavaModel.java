@@ -16,17 +16,17 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.base.AbstractModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -70,7 +70,7 @@ public class JavaModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
+	 * @see org.dresdenocl.model.IModel#dispose()
 	 */
 	public void dispose() {
 
@@ -144,7 +144,7 @@ public class JavaModel extends AbstractModel implements IModel {
 	 *           Thrown if an error occurs when creating the adapter for the top
 	 *           {@link Namespace}.
 	 * 
-	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
+	 * @see org.dresdenocl.model.IModel#getRootNamespace()
 	 * 
 	 * @generated NOT
 	 */

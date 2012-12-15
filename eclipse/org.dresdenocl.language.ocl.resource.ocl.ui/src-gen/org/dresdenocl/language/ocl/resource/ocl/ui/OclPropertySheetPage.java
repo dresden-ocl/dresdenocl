@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclPropertySheetPage extends org.eclipse.ui.views.properties.PropertySheetPage implements org.eclipse.jface.viewers.ISelectionChangedListener {
 	
@@ -16,8 +16,8 @@ public class OclPropertySheetPage extends org.eclipse.ui.views.properties.Proper
 		// This is a workaround for a bug in EMF (see
 		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=291301).Unfortunately Ed Merks
 		// refuses to fix it, so we need to solve it here.
-		if (iSelection instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection) {
-			final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection selection = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection) iSelection;
+		if (iSelection instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection) {
+			final org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection selection = (org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection) iSelection;
 			final org.eclipse.emf.ecore.EObject selectedObject = selection.getSelectedObject();
 			// check whether the selected object or one of its children contains a proxy which
 			// is a GenXYZClass (e.g., GenFeature, GenClass, GenPackage)

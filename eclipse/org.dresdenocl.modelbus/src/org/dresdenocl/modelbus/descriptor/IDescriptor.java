@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.descriptor;
+package org.dresdenocl.modelbus.descriptor;
 
 import org.eclipse.core.runtime.IExtension;
 

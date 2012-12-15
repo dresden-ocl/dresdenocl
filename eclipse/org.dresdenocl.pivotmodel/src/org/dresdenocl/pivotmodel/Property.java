@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -46,12 +46,12 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Property#getOwningType <em>Owning
+ * <li>{@link org.dresdenocl.pivotmodel.Property#getOwningType <em>Owning
  * Type</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getProperty()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getProperty()
  * @model
  * @generated
  */
@@ -61,7 +61,7 @@ public interface Property extends Feature, TypedElement, NamedElement,
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty
+	 * {@link org.dresdenocl.pivotmodel.Type#getOwnedProperty
 	 * <em>Owned Property</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
@@ -71,14 +71,14 @@ public interface Property extends Feature, TypedElement, NamedElement,
 	 * 
 	 * @return the value of the '<em>Owning Type</em>' container reference.
 	 * @see #setOwningType(Type)
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty
+	 * @see org.dresdenocl.pivotmodel.Type#getOwnedProperty
 	 * @generated
 	 */
 	Type getOwningType();
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property#getOwningType
+	 * {@link org.dresdenocl.pivotmodel.Property#getOwningType
 	 * <em>Owning Type</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -125,7 +125,7 @@ public interface Property extends Feature, TypedElement, NamedElement,
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	Property clone();
 

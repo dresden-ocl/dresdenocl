@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 public class OclResourceFactoryDelegator implements org.eclipse.emf.ecore.resource.Resource.Factory {
 	
@@ -18,11 +18,11 @@ public class OclResourceFactoryDelegator implements org.eclipse.emf.ecore.resour
 		if (factories == null) {
 			factories = new java.util.LinkedHashMap<String, org.eclipse.emf.ecore.resource.Resource.Factory>();
 		}
-		if (new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().isEclipsePlatformAvailable()) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEclipseProxy().getResourceFactoryExtensions(factories);
+		if (new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().isEclipsePlatformAvailable()) {
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclEclipseProxy().getResourceFactoryExtensions(factories);
 		}
 		if (factories.get("") == null) {
-			factories.put("", new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResourceFactory());
+			factories.put("", new org.dresdenocl.language.ocl.resource.ocl.mopp.OclResourceFactory());
 		}
 	}
 	

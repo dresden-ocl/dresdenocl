@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * An extended diagnostic that gives access to the exact position of the problem
@@ -35,7 +35,7 @@ public interface IOclTextDiagnostic extends org.eclipse.emf.ecore.resource.Resou
 	/**
 	 * Returns the problem that was found.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem getProblem();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclProblem getProblem();
 	
 	/**
 	 * Checks whether the problem was caused by the given element.

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclEObjectSelection implements org.eclipse.jface.viewers.IStructuredSelection {
 	

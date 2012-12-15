@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.xml.internal.provider;
+package org.dresdenocl.modelinstancetype.xml.internal.provider;
 
 import java.io.File;
 import java.net.URL;
@@ -24,13 +24,13 @@ import java.net.URL;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance.XmlModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.base.AbstractModelInstanceProvider;
+import org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.xml.internal.modelinstance.XmlModelInstance;
+import org.dresdenocl.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
 
 /**
  * <p>
@@ -57,8 +57,8 @@ public class XmlModelInstanceProvider extends AbstractModelInstanceProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
-	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.model.IModel)
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceProvider#
+	 * createEmptyModelInstance(org.dresdenocl.modelbus.model.IModel)
 	 */
 	public IModelInstance createEmptyModelInstance(IModel model) {
 

@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizards;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.internal.wizards;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.wizard.WizardPage;
@@ -36,12 +36,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.Ocl2SqlUIMessages;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.AbstractMouseListener;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.internal.Ocl2SqlUIMessages;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.AbstractMouseListener;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * <p>

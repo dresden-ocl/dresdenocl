@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.impl;
+package org.dresdenocl.examples.pml.impl;
 
 import java.util.Collection;
 
@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.examples.pml.Feature;
-import tudresden.ocl20.pivot.examples.pml.Plugin;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.Feature;
+import org.dresdenocl.examples.pml.Plugin;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -28,10 +28,10 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl#getId <em>Id</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.FeatureImpl#getPlugins <em>Plugins</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.FeatureImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.FeatureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.FeatureImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.FeatureImpl#getPlugins <em>Plugins</em>}</li>
  * </ul>
  * </p>
  *

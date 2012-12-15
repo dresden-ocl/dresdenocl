@@ -4,12 +4,12 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
 public class OclSTATICTokenResolver implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver {
+		org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver defaultTokenResolver = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver();
+	private org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver defaultTokenResolver = new org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver();
 
 	public java.lang.String deResolve(java.lang.Object value,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
@@ -23,7 +23,7 @@ public class OclSTATICTokenResolver implements
 	public void resolve(
 			java.lang.String lexem,
 			org.eclipse.emf.ecore.EStructuralFeature feature,
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result) {
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result) {
 		if (lexem.equals("static"))
 			result.setResolvedToken(true);
 		else

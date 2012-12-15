@@ -30,8 +30,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.datatypes.DatatypesPackage;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc -->

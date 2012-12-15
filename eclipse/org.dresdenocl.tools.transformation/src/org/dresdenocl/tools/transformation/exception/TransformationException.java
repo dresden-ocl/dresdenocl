@@ -2,9 +2,9 @@
  * Created on 10.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.exception;
+package org.dresdenocl.tools.transformation.exception;
 
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.ITransformation;
 
 /**
  * The TransformationExcpetion is thrown, when an error occurs while running a

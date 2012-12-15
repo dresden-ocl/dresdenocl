@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.ui;
+package org.dresdenocl.modelbus.ui;
 
 import java.awt.Image;
 
@@ -26,8 +26,8 @@ import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.modelbus.ui.internal.views.ModelsView;
 
 /**
  * <p>
@@ -39,7 +39,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
 public class ModelBusUIPlugin extends AbstractUIPlugin implements IStartup {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.modelbus.ui"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.modelbus.ui"; //$NON-NLS-1$
 
 	/** The plug-in ID. */
 	public static final String MODELS_VIEW_ID = ModelsView.ID;
@@ -127,7 +127,7 @@ public class ModelBusUIPlugin extends AbstractUIPlugin implements IStartup {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * 
 	 * @param aClass
 	 *            The class to return the {@link Logger} for.

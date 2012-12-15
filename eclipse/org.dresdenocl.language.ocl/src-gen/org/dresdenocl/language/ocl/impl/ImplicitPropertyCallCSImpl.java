@@ -4,17 +4,17 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS;
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.language.ocl.ImplicitPropertyCallCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PropertyCallBaseExpCS;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,8 +23,8 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl#isIsMarkedPre <em>Is Marked Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl#isIsMarkedPre <em>Is Marked Pre</em>}</li>
  * </ul>
  * </p>
  *

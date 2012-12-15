@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test.standardlibrary;
+package org.dresdenocl.interpreter.test.standardlibrary;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -27,16 +27,16 @@ import java.util.List;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclVoid;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

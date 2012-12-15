@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * An adapter from the Eclipse
@@ -13,29 +13,29 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScanner {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextScanner lexer;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken currentToken;
-	private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken> nextTokens;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner lexer;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextToken currentToken;
+	private java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> nextTokens;
 	private int offset;
 	private String languageId;
 	private org.eclipse.jface.preference.IPreferenceStore store;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource;
 	
 	/**
 	 * 
 	 * @param colorManager A manager to obtain color objects
 	 */
-	public OclTokenScanner(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager) {
+	public OclTokenScanner(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager) {
 		this.resource = resource;
 		this.colorManager = colorManager;
-		this.lexer = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().createLexer();
-		this.languageId = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin plugin = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault();
+		this.lexer = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().createLexer();
+		this.languageId = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
+		org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin plugin = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault();
 		if (plugin != null) {
 			this.store = plugin.getPreferenceStore();
 		}
-		this.nextTokens = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken>();
+		this.nextTokens = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
 	}
 	
 	public int getTokenLength() {
@@ -65,10 +65,10 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		org.eclipse.jface.text.TextAttribute textAttribute = null;
 		String tokenName = currentToken.getName();
 		if (tokenName != null) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle staticStyle = getStaticTokenStyle();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle = getStaticTokenStyle();
 			// now call dynamic token styler to allow to apply modifications to the static
 			// style
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle dynamicStyle = getDynamicTokenStyle(staticStyle);
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle dynamicStyle = getDynamicTokenStyle(staticStyle);
 			if (dynamicStyle != null) {
 				textAttribute = getTextAttribute(dynamicStyle);
 			}
@@ -98,31 +98,31 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		return new int[] {rgb.red, rgb.green, rgb.blue};
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getStaticTokenStyle() {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle staticStyle = null;
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle getStaticTokenStyle() {
+		org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle = null;
 		String tokenName = currentToken.getName();
-		String enableKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ENABLE);
+		String enableKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ENABLE);
 		boolean enabled = store.getBoolean(enableKey);
 		if (enabled) {
-			String colorKey = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR);
+			String colorKey = org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.COLOR);
 			org.eclipse.swt.graphics.RGB foregroundRGB = org.eclipse.jface.preference.PreferenceConverter.getColor(store, colorKey);
 			org.eclipse.swt.graphics.RGB backgroundRGB = null;
-			boolean bold = store.getBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD));
-			boolean italic = store.getBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ITALIC));
-			boolean strikethrough = store.getBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.STRIKETHROUGH));
-			boolean underline = store.getBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE));
-			staticStyle = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyle(convertToIntArray(foregroundRGB), convertToIntArray(backgroundRGB), bold, italic, strikethrough, underline);
+			boolean bold = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.BOLD));
+			boolean italic = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.ITALIC));
+			boolean strikethrough = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.STRIKETHROUGH));
+			boolean underline = store.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.getPreferenceKey(languageId, tokenName, org.dresdenocl.language.ocl.resource.ocl.ui.OclSyntaxColoringHelper.StyleProperty.UNDERLINE));
+			staticStyle = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenStyle(convertToIntArray(foregroundRGB), convertToIntArray(backgroundRGB), bold, italic, strikethrough, underline);
 		}
 		return staticStyle;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDynamicTokenStyle(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle staticStyle) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDynamicTokenStyler dynamicTokenStyler = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDynamicTokenStyler();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle dynamicStyle = dynamicTokenStyler.getDynamicTokenStyle(resource, currentToken, staticStyle);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle getDynamicTokenStyle(org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle) {
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclDynamicTokenStyler dynamicTokenStyler = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclDynamicTokenStyler();
+		org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle dynamicStyle = dynamicTokenStyler.getDynamicTokenStyle(resource, currentToken, staticStyle);
 		return dynamicStyle;
 	}
 	
-	public org.eclipse.jface.text.TextAttribute getTextAttribute(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle tokeStyle) {
+	public org.eclipse.jface.text.TextAttribute getTextAttribute(org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle tokeStyle) {
 		int[] foregroundColorArray = tokeStyle.getColorAsRGB();
 		org.eclipse.swt.graphics.Color foregroundColor = null;
 		if (colorManager != null) {
@@ -162,13 +162,13 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		final int charStart = currentToken.getOffset();
 		final int column = currentToken.getColumn();
 		
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem> taskItems = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItemDetector().findTaskItems(text, line, charStart);
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem> taskItems = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemDetector().findTaskItems(text, line, charStart);
 		
 		// this is the offset for the next token to be added
 		int offset = charStart;
 		int itemBeginRelative;
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken> newItems = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken>();
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem taskItem : taskItems) {
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken> newItems = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclTextToken>();
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem taskItem : taskItems) {
 			int itemBegin = taskItem.getCharStart();
 			int itemLine = taskItem.getLine();
 			int itemColumn = 0;
@@ -177,13 +177,13 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 			// create token before task item (TODO if required)
 			String textBefore = text.substring(offset - charStart, itemBeginRelative);
 			int textBeforeLength = textBefore.length();
-			newItems.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTextToken(name, textBefore, offset, textBeforeLength, line, column, true));
+			newItems.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTextToken(name, textBefore, offset, textBeforeLength, line, column, true));
 			
 			// create token for the task item itself
 			offset = offset + textBeforeLength;
 			String itemText = taskItem.getKeyword();
 			int itemTextLength = itemText.length();
-			newItems.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTextToken(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyleInformationProvider.TASK_ITEM_TOKEN_NAME, itemText, offset, itemTextLength, itemLine, itemColumn, true));
+			newItems.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTextToken(org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenStyleInformationProvider.TASK_ITEM_TOKEN_NAME, itemText, offset, itemTextLength, itemLine, itemColumn, true));
 			
 			offset = offset + itemTextLength;
 		}
@@ -191,7 +191,7 @@ public class OclTokenScanner implements org.eclipse.jface.text.rules.ITokenScann
 		if (!taskItems.isEmpty()) {
 			// create token after last task item (TODO if required)
 			String textAfter = text.substring(offset - charStart);
-			newItems.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTextToken(name, textAfter, offset, textAfter.length(), line, column, true));
+			newItems.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTextToken(name, textAfter, offset, textAfter.length(), line, column, true));
 		}
 		
 		if (!newItems.isEmpty()) {

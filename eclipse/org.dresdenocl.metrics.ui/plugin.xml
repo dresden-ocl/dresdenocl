@@ -9,16 +9,16 @@
             visible="true">
          <menu
                icon="icons/dresdenocl.gif"
-               id="tudresden.ocl20.pivot.modelbus.ui.menu"
+               id="org.dresdenocl.modelbus.ui.menu"
                label="Dresden OCL">
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+                  name="org.dresdenocl.modelbus.ui.menu.import">
             </separator>
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+                  name="org.dresdenocl.modelbus.ui.menu.tools">
             </separator>
             <groupMarker
-            	name="tudresden.ocl20.pivot.modelbus.ui.menu.tools.codegen">
+            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
             </groupMarker>
          </menu>
          <action
@@ -26,7 +26,7 @@
                icon="icons/dresdenocl.gif"
                class="org.dresdenocl.metrics.ui.MetricsViewAction"
                tooltip="Opens the OCL Metrics View of Dresden OCL."
-               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
+               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.tools"
                id="org.dresdenocl.metrics.ui.actions.MetricsViewAction">
          </action>
       </actionSet>
@@ -34,11 +34,11 @@
    <extension
          point="org.eclipse.ui.views">
       <category
-            id="tudresden.ocl20.views.category"
+            id="org.dresdenocl.views.category"
             name="Dresden OCL">
       </category>
       <view
-            category="tudresden.ocl20.views.category"
+            category="org.dresdenocl.views.category"
             class="org.dresdenocl.metrics.ui.MetricsView"
             icon="icons/dresdenocl.gif"
             id="org.dresdenocl.metrics.view"
@@ -48,7 +48,7 @@
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="tudresden.ocl20.pivot.ui.perspective">
+            targetID="org.dresdenocl.ui.perspective">
          <view
                id="org.dresdenocl.metrics.view"
                minimized="false"

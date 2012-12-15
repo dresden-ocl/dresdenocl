@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.car;
+package org.dresdenocl.examples.car;
 
 import java.util.ArrayList;
 import java.util.List;

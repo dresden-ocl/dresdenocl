@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
+package org.dresdenocl.modelbus.ui.internal.wizards;
 
 import java.io.File;
 
@@ -27,15 +27,15 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.IModelRegistry;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIUtility;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelsView;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.IModelRegistry;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ui.ModelBusUIPlugin;
+import org.dresdenocl.modelbus.ui.ModelBusUIUtility;
+import org.dresdenocl.modelbus.ui.internal.views.ModelsView;
 
 /**
  * <p>

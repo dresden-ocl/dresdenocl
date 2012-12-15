@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -42,15 +42,15 @@ import java.util.List;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getUnboundType
+ * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType
  * <em>Unbound Type</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
+ * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
  * <em>Type Argument</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getComplexGenericType()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getComplexGenericType()
  * @model
  * @generated
  */
@@ -67,7 +67,7 @@ public interface ComplexGenericType extends GenericType {
 	 * 
 	 * @return the value of the '<em>Unbound Type</em>' reference.
 	 * @see #setUnboundType(Type)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getComplexGenericType_UnboundType()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getComplexGenericType_UnboundType()
 	 * @model resolveProxies="false"
 	 * @generated
 	 */
@@ -75,7 +75,7 @@ public interface ComplexGenericType extends GenericType {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getUnboundType
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType
 	 * <em>Unbound Type</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -89,9 +89,9 @@ public interface ComplexGenericType extends GenericType {
 	/**
 	 * Returns the value of the '<em><b>Type Argument</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument}. It is bidirectional
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument}. It is bidirectional
 	 * and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
 	 * <em>Owning Generic Type</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type Argument</em>' containment reference list
@@ -101,8 +101,8 @@ public interface ComplexGenericType extends GenericType {
 	 * 
 	 * @return the value of the '<em>Type Argument</em>' containment reference
 	 *         list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getComplexGenericType_TypeArgument()
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getComplexGenericType_TypeArgument()
+	 * @see org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
 	 * @model opposite="owningGenericType" containment="true"
 	 * @generated
 	 */
@@ -125,7 +125,7 @@ public interface ComplexGenericType extends GenericType {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	ComplexGenericType clone();
 

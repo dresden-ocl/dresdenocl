@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Transformation Test
-Bundle-SymbolicName: tudresden.ocl20.pivot.tools.transformation.test;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.tools.transformation.test;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.tools.transformation.test.TransformationTestPlugin
+Bundle-Activator: org.dresdenocl.tools.transformation.test.TransformationTestPlugin
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: tudresden.ocl20.logging,
+Require-Bundle: org.dresdenocl.logging,
  org.junit4,
  org.eclipse.core.runtime,
- tudresden.ocl20.pivot.tools.transformation,
+ org.dresdenocl.tools.transformation,
  org.eclipse.emf.ecore,
  org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.tools.transformation.test
+Export-Package: org.dresdenocl.tools.transformation.test

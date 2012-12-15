@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
@@ -39,10 +39,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.IterateExp;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Iterate Exp</b></em>'.
@@ -50,7 +50,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.IterateExpImpl#getResult <em>Result</em>}</li>
  * </ul>
  * </p>
  *
@@ -112,7 +112,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
 	 */
 	@Override
 	protected Type evaluateType() {
@@ -161,7 +161,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	 * the abstract syntax mapping for IterateExpCS (OCL Specification, Section
 	 * 9.3). Clients (e.g., a parser) do not need to set the name explicitly.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -173,7 +173,7 @@ public class IterateExpImpl extends LoopExpImpl implements IterateExp {
 	 * Overridden to prevent setting the name of an iterate expression. This
 	 * method will throw an {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
 	@Override
 	public void setName(String newName) {

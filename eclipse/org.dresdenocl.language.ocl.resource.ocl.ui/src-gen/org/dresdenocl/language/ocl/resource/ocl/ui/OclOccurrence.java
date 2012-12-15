@@ -4,22 +4,22 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * This class finds the positions to highlight and adds them to the document.
  */
 public class OclOccurrence {
 	
-	public final static String OCCURRENCE_ANNOTATION_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences";
-	public final static String DECLARATION_ANNOTATION_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.occurences.declaration";
+	public final static String OCCURRENCE_ANNOTATION_ID = "org.dresdenocl.language.ocl.resource.ocl.ui.occurences";
+	public final static String DECLARATION_ANNOTATION_ID = "org.dresdenocl.language.ocl.resource.ocl.ui.occurences.declaration";
 	
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
+	private final static org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper();
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner;
 	private java.util.List<String> quotedTokenArray;
 	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource;
 	private String tokenText = "";
 	private org.eclipse.jface.text.Region tokenRegion;
 	
@@ -30,12 +30,12 @@ public class OclOccurrence {
 	 * @param sourceViewer the source viewer for the text
 	 * @param tokenScanner the token scanner helps to find the searched tokens
 	 */
-	public OclOccurrence(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner) {
+	public OclOccurrence(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer, org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner tokenScanner) {
 		this.textResource = textResource;
 		this.projectionViewer = sourceViewer;
 		
 		quotedTokenArray = new java.util.ArrayList<String>();
-		String[] tokenNames = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getTokenNames();
+		String[] tokenNames = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getTokenNames();
 		for (String tokenName : tokenNames) {
 			if (tokenName.startsWith("'") && tokenName.endsWith("'")) {
 				quotedTokenArray.add(tokenName.substring(1, tokenName.length() - 1).trim());
@@ -80,7 +80,7 @@ public class OclOccurrence {
 		if (textResource == null) {
 			return null;
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
 		if (elementsAtOffset == null || elementsAtOffset.isEmpty()) {
@@ -110,7 +110,7 @@ public class OclOccurrence {
 	}
 	
 	private int getLength(org.eclipse.emf.ecore.EObject eObject) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		return locationMap.getCharEnd(eObject) - locationMap.getCharStart(eObject) + 1;
 	}
 	
@@ -120,7 +120,7 @@ public class OclOccurrence {
 	 * 
 	 * @param bracketSet the set of brackets which have to be ignored.
 	 */
-	public void handleOccurrenceHighlighting(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketSet bracketSet) {
+	public void handleOccurrenceHighlighting(org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet bracketSet) {
 		if (textResource == null) {
 			return;
 		}
@@ -136,7 +136,7 @@ public class OclOccurrence {
 			return;
 		}
 		tokenRegion = new org.eclipse.jface.text.Region(-1,0);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
 		if (elementsAtOffset == null || elementsAtOffset.size() < 1) {
@@ -183,7 +183,7 @@ public class OclOccurrence {
 	
 	private void setHighlightingPositions(org.eclipse.emf.ecore.EObject definitionElement, java.util.List<org.eclipse.emf.ecore.EObject> elementsAtDefinition) {
 		org.eclipse.jface.text.IDocument document = projectionViewer.getDocument();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		org.eclipse.jface.text.rules.IToken token;
 		int defPosition = -1;
 		if (definitionElement == null) {
@@ -200,7 +200,7 @@ public class OclOccurrence {
 				String text = tokenScanner.getTokenText();
 				if (text.equals(tokenText)) {
 					defPosition = tokenScanner.getTokenOffset();
-					addAnnotation(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION, text);
+					addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION, text);
 					break;
 				}
 				token = tokenScanner.nextToken();
@@ -215,7 +215,7 @@ public class OclOccurrence {
 				occEO = tryToResolve(locationMap.getElementsAt(tokenScanner.getTokenOffset()));
 				if (occEO != null) {
 					if (elementsAtDefinition.contains(occEO) || definitionElement.equals(occEO)) {
-						addAnnotation(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY, text);
+						addAnnotation(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY, text);
 					}
 				}
 			}
@@ -223,7 +223,7 @@ public class OclOccurrence {
 		}
 	}
 	
-	private void addAnnotation(org.eclipse.jface.text.IDocument document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory type, String text) {
+	private void addAnnotation(org.eclipse.jface.text.IDocument document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory type, String text) {
 		int tokenOffset = tokenScanner.getTokenOffset();
 		int tokenLength = tokenScanner.getTokenLength();
 		// for declarations and occurrences we do not need to add the position to the
@@ -231,7 +231,7 @@ public class OclOccurrence {
 		org.eclipse.jface.text.Position position = positionHelper.createPosition(tokenOffset, tokenLength);
 		// instead, an annotation is created
 		org.eclipse.jface.text.source.Annotation annotation = new org.eclipse.jface.text.source.Annotation(false);
-		if (type == tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION) {
+		if (type == org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.DEFINTION) {
 			annotation.setText("Declaration of " + text);
 			annotation.setType(DECLARATION_ANNOTATION_ID);
 		} else {
@@ -242,8 +242,8 @@ public class OclOccurrence {
 	}
 	
 	private void removeAnnotations() {
-		removeAnnotations(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrence.OCCURRENCE_ANNOTATION_ID);
-		removeAnnotations(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrence.DECLARATION_ANNOTATION_ID);
+		removeAnnotations(org.dresdenocl.language.ocl.resource.ocl.ui.OclOccurrence.OCCURRENCE_ANNOTATION_ID);
+		removeAnnotations(org.dresdenocl.language.ocl.resource.ocl.ui.OclOccurrence.DECLARATION_ANNOTATION_ID);
 	}
 	
 	private void removeAnnotations(String annotationTypeID) {

@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
+package org.dresdenocl.tools.codegen.ocl2java.test.tests;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +26,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaFactory;
 
 /**
  * <p>
  * Contains some test cases to create the aspectJ code for the project
- * <code>tudresden.ocl20.pivot.ocl22java.test.aspectj</code>.
+ * <code>org.dresdenocl.ocl22java.test.aspectj</code>.
  * </p>
  * 
  * @author Claas Wilke
@@ -318,7 +318,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		constraints.add(new String[] { "constraintkindtest/inv", "inv01" });
 
 		this.createInstrumentationCode(
-				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
+				"org.dresdenocl.tools.codegen.ocl2java.test.aspectj",
 				constraints);
 
 		constraints.clear();
@@ -330,7 +330,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		settings.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_CONSTRUCT_AND_PUBLIC_METHOD_EXECUTION);
 
 		this.createInstrumentationCode(
-				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
+				"org.dresdenocl.tools.codegen.ocl2java.test.aspectj",
 				constraints, settings);
 
 		constraints.clear();
@@ -340,7 +340,7 @@ public class GenerateAspectJCode extends AbstractDiffTest {
 		settings.setDefaultInvariantCheckMode(IOcl2JavaSettings.INVARIANT_CHECK_AFTER_SPECIAL_METHOD_INVOCATION);
 
 		this.createInstrumentationCode(
-				"tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj",
+				"org.dresdenocl.tools.codegen.ocl2java.test.aspectj",
 				constraints, settings);
 	}
 }

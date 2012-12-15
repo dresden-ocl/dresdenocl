@@ -1,8 +1,8 @@
-package tudresden.ocl20.pivot.pivotmodel.base;
+package org.dresdenocl.pivotmodel.base;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.PropertyImpl;
 
 /**
  * This class is meant as a base class for DSL- and/or repository-specific

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -40,12 +40,12 @@ package tudresden.ocl20.pivot.pivotmodel;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType#getTypeParameter
+ * {@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter
  * <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameterGenericType()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameterGenericType()
  * @model
  * @generated
  */
@@ -62,7 +62,7 @@ public interface ParameterGenericType extends GenericType {
 	 * 
 	 * @return the value of the '<em>Type Parameter</em>' reference.
 	 * @see #setTypeParameter(TypeParameter)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameterGenericType_TypeParameter()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameterGenericType_TypeParameter()
 	 * @model resolveProxies="false"
 	 * @generated
 	 */
@@ -70,7 +70,7 @@ public interface ParameterGenericType extends GenericType {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType#getTypeParameter
+	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter
 	 * <em>Type Parameter</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -84,7 +84,7 @@ public interface ParameterGenericType extends GenericType {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	ParameterGenericType clone();
 

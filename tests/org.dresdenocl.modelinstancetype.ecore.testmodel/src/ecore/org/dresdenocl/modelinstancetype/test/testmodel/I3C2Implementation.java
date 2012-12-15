@@ -1,6 +1,6 @@
 /**
  */
-package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
 
 
 /**
@@ -9,7 +9,7 @@ package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
  * <!-- end-user-doc -->
  *
  *
- * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getI3C2Implementation()
+ * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getI3C2Implementation()
  * @model
  * @generated
  */

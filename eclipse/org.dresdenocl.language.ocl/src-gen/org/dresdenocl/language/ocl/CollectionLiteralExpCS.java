@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionType <em>Collection Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionLiteralParts <em>Collection Literal Parts</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionType <em>Collection Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionLiteralParts <em>Collection Literal Parts</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getCollectionLiteralExpCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface CollectionLiteralExpCS extends LiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Collection Type</em>' containment reference.
    * @see #setCollectionType(CollectionTypeIdentifierCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionLiteralExpCS_CollectionType()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionLiteralExpCS_CollectionType()
    * @model containment="true" required="true"
    * @generated
    */
 	CollectionTypeIdentifierCS getCollectionType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionType <em>Collection Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionType <em>Collection Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Collection Type</em>' containment reference.
@@ -54,7 +54,7 @@ public interface CollectionLiteralExpCS extends LiteralExpCS {
 
 	/**
    * Returns the value of the '<em><b>Collection Literal Parts</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.CollectionLiteralPartsCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Collection Literal Parts</em>' containment reference list isn't clear,
@@ -62,7 +62,7 @@ public interface CollectionLiteralExpCS extends LiteralExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Collection Literal Parts</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionLiteralExpCS_CollectionLiteralParts()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionLiteralExpCS_CollectionLiteralParts()
    * @model containment="true"
    * @generated
    */

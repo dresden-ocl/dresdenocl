@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -20,10 +20,10 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.View;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedClass;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedClass;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.transformation.impl.Tuple;
 
 public class ModelChecker {
 

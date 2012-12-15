@@ -23,11 +23,11 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.template;
+package org.dresdenocl.tools.template;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * <p>

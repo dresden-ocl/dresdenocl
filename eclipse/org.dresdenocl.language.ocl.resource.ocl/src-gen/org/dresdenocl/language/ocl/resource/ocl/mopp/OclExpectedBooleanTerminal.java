@@ -4,29 +4,29 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A representation for a range in a document where a boolean attribute is
  * expected.
  */
-public class OclExpectedBooleanTerminal extends tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAbstractExpectedElement {
+public class OclExpectedBooleanTerminal extends org.dresdenocl.language.ocl.resource.ocl.mopp.OclAbstractExpectedElement {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal;
+	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal;
 	
-	public OclExpectedBooleanTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal) {
+	public OclExpectedBooleanTerminal(org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal) {
 		super(booleanTerminal.getMetaclass());
 		this.booleanTerminal = booleanTerminal;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal getBooleanTerminal() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal getBooleanTerminal() {
 		return booleanTerminal;
 	}
 	
 	/**
 	 * Returns the expected boolean terminal.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
 		return booleanTerminal;
 	}
 	

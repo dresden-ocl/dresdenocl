@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testOrderedSetAt {
      *       def: testOrderedSetAt(source: OrderedSet(OclAny), arg01: Integer): OclAny = source ->at(arg01)</code></p>
      */
     public Object testpackage.Class1.testOrderedSetAt(java.util.List<Object> source, Integer arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.at(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets.at(source, arg01);
     }
 }

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A class to display the information of an element. Most of the code is taken
@@ -14,8 +14,8 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	
 	private static final String FONT = org.eclipse.jface.resource.JFaceResources.DIALOG_FONT;
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclHoverTextProvider hoverTextProvider;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclHoverTextProvider hoverTextProvider;
 	/**
 	 * The style sheet (css).
 	 */
@@ -74,7 +74,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	 */
 	public static class OpenDeclarationAction extends org.eclipse.jface.action.Action {
 		
-		private final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl infoControl;
+		private final org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl infoControl;
 		
 		/**
 		 * Creates the action to jump to the declaration.
@@ -82,7 +82,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		 * @param infoControl the info control holds the hover information and the target
 		 * element
 		 */
-		public OpenDeclarationAction(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl infoControl) {
+		public OpenDeclarationAction(org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl infoControl) {
 			this.infoControl = infoControl;
 			setText("Open Declaration");
 			org.eclipse.ui.ISharedImages images = org.eclipse.ui.PlatformUI.getWorkbench().getSharedImages();
@@ -93,13 +93,13 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		 * Creates, sets, activates a hyperlink.
 		 */
 		public void run() {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput infoInput = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) infoControl.getInput();
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput infoInput = (org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) infoControl.getInput();
 			infoControl.notifyDelayedInputChange(null);
 			infoControl.dispose();
 			if (infoInput.getInputElement() instanceof org.eclipse.emf.ecore.EObject) {
 				org.eclipse.emf.ecore.EObject decEO = (org.eclipse.emf.ecore.EObject) infoInput.getInputElement();
 				if (decEO != null && decEO.eResource() != null) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHyperlink hyperlink = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHyperlink(null, decEO, infoInput.getTokenText());
+					org.dresdenocl.language.ocl.resource.ocl.ui.OclHyperlink hyperlink = new org.dresdenocl.language.ocl.resource.ocl.ui.OclHyperlink(null, decEO, infoInput.getTokenText());
 					hyperlink.open();
 				}
 			}
@@ -112,9 +112,9 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	public static final class PresenterControlCreator extends org.eclipse.jface.text.AbstractReusableInformationControlCreator {
 		
 		public org.eclipse.jface.text.IInformationControl doCreateInformationControl(org.eclipse.swt.widgets.Shell parent) {
-			if (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl.isAvailable(parent)) {
+			if (org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl.isAvailable(parent)) {
 				org.eclipse.jface.action.ToolBarManager tbm = new org.eclipse.jface.action.ToolBarManager(org.eclipse.swt.SWT.FLAT);
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl iControl = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl(parent, FONT, tbm);
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl iControl = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl(parent, FONT, tbm);
 				final OpenDeclarationAction openDeclarationAction = new OpenDeclarationAction(iControl);
 				tbm.add(openDeclarationAction);
 				final SimpleSelectionProvider selectionProvider = new SimpleSelectionProvider();
@@ -123,8 +123,8 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 					public void inputChanged(Object newInput) {
 						if (newInput == null) {
 							selectionProvider.setSelection(new org.eclipse.jface.viewers.StructuredSelection());
-						} else if (newInput instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) {
-							tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput input = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) newInput;
+						} else if (newInput instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) {
+							org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput input = (org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) newInput;
 							Object inputElement = input.getInputElement();
 							selectionProvider.setSelection(new org.eclipse.jface.viewers.StructuredSelection(inputElement));
 							// If there is an element of type EObject in the input element, the button to open
@@ -169,8 +169,8 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		
 		public org.eclipse.jface.text.IInformationControl doCreateInformationControl(org.eclipse.swt.widgets.Shell parent) {
 			String tooltipAffordanceString = org.eclipse.ui.editors.text.EditorsUI.getTooltipAffordanceString();
-			if (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl.isAvailable(parent)) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl iControl = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBrowserInformationControl(parent, FONT, tooltipAffordanceString) {
+			if (org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl.isAvailable(parent)) {
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl iControl = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBrowserInformationControl(parent, FONT, tooltipAffordanceString) {
 					public org.eclipse.jface.text.IInformationControlCreator getInformationPresenterControlCreator() {
 						return fInformationPresenterControlCreator;
 					}
@@ -198,10 +198,10 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	/**
 	 * Creates a new TextHover to collect the information about the hovered element.
 	 */
-	public OclTextHover(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider) {
+	public OclTextHover(org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider) {
 		super();
 		this.resourceProvider = resourceProvider;
-		this.hoverTextProvider = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation().getHoverTextProvider();
+		this.hoverTextProvider = new org.dresdenocl.language.ocl.resource.ocl.ui.OclUIMetaInformation().getHoverTextProvider();
 	}
 	
 	// The warning about overriding or implementing a deprecated API cannot be avoided
@@ -211,7 +211,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		if (hoverInfo == null) {
 			return null;
 		}
-		return ((tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) hoverInfo).getHtml();
+		return ((org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) hoverInfo).getHtml();
 	}
 	
 	public org.eclipse.jface.text.IRegion getHoverRegion(org.eclipse.jface.text.ITextViewer textViewer, int offset) {
@@ -240,12 +240,12 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		return hoverTextProvider == null ? null : internalGetHoverInfo(textViewer, hoverRegion);
 	}
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput internalGetHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput internalGetHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
 		if (textResource == null) {
 			return null;
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(hoverRegion.getOffset());
 		if (elementsAtOffset == null || elementsAtOffset.size() == 0) {
 			return null;
@@ -264,7 +264,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	 * @return the HTML hover info for the given element(s) or <code>null</code> if no
 	 * information is available
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput getHoverInfo(java.util.List<org.eclipse.emf.ecore.EObject> elements, org.eclipse.jface.text.ITextViewer textViewer, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput previousInput) {
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput getHoverInfo(java.util.List<org.eclipse.emf.ecore.EObject> elements, org.eclipse.jface.text.ITextViewer textViewer, org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput previousInput) {
 		StringBuffer buffer = new StringBuffer();
 		org.eclipse.emf.ecore.EObject proxyObject = getFirstProxy(elements);
 		org.eclipse.emf.ecore.EObject containerObject = getFirstNonProxy(elements);
@@ -272,8 +272,8 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		// get the token text, which is hovered. It is needed to jump to the declaration.
 		String tokenText = "";
 		if (proxyObject != null) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
+			org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 			int offset = locationMap.getCharStart(proxyObject);
 			int length = locationMap.getCharEnd(proxyObject) + 1 - offset;
 			try {
@@ -282,15 +282,15 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 			}
 			declarationObject = org.eclipse.emf.ecore.util.EcoreUtil.resolve(proxyObject, resourceProvider.getResource());
 			if (declarationObject != null) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(containerObject, declarationObject));
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(containerObject, declarationObject));
 			}
 		} else {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(elements.get(0)));
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(elements.get(0)));
 		}
 		if (buffer.length() > 0) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.insertPageProlog(buffer, 0, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTextHover.getStyleSheet());
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addPageEpilog(buffer);
-			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput(previousInput, declarationObject, resourceProvider.getResource(), buffer.toString(), tokenText);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.insertPageProlog(buffer, 0, org.dresdenocl.language.ocl.resource.ocl.ui.OclTextHover.getStyleSheet());
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.addPageEpilog(buffer);
+			return new org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput(previousInput, declarationObject, resourceProvider.getResource(), buffer.toString(), tokenText);
 		}
 		return null;
 	}
@@ -308,7 +308,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		// Sets background color for the hover text window
 		css += "body {background-color:#FFFFE1;}\n";
 		org.eclipse.swt.graphics.FontData fontData = org.eclipse.jface.resource.JFaceResources.getFontRegistry().getFontData(FONT)[0];
-		css = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.convertTopLevelFont(css, fontData);
+		css = org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.convertTopLevelFont(css, fontData);
 		
 		return css;
 	}
@@ -319,11 +319,11 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	 * @return the style sheet, or <code>null</code> if unable to load
 	 */
 	private static String loadStyleSheet() {
-		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
+		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
 		java.net.URL styleSheetURL = bundle.getEntry("/css/hover_style.css");
 		if (styleSheetURL != null) {
 			try {
-				return tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStreamUtil.getContent(styleSheetURL.openStream());
+				return org.dresdenocl.language.ocl.resource.ocl.util.OclStreamUtil.getContent(styleSheetURL.openStream());
 			} catch (java.io.IOException ex) {
 				ex.printStackTrace();
 			}

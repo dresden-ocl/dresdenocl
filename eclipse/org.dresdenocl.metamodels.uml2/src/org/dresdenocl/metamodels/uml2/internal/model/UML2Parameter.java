@@ -11,17 +11,17 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractParameter;
 
 /**
  * <p>
@@ -93,7 +93,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -104,7 +104,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getOperation()
 	 * 
 	 * @generated NOT
 	 */
@@ -115,7 +115,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getType()
 	 * 
 	 * @generated NOT
 	 */
@@ -170,7 +170,7 @@ public class UML2Parameter extends AbstractParameter implements Parameter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl#getKind()
 	 * 
 	 * @generated NOT
 	 */

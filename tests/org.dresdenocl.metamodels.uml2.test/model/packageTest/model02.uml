@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_mLzdAOYGEd6gXYme4O_RNg" name="package1">
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_mLzdAOYGEd6gXYme4O_RNg" name="package1">
   <packagedElement xmi:type="uml:Package" xmi:id="_1RiGAOYGEd6gXYme4O_RNg" name="package2"/>
 </uml:Package>

@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="AdapterFactory" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil"%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="AdapterFactory" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil"%>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
 String className = modelName + "ModelProvider";
@@ -12,10 +12,10 @@ package <%=packageName%>;
 genModel.addImport("java.net.URL");
 genModel.addImport("org.eclipse.emf.common.util.URI");
 genModel.addImport(modelPackageName);
-genModel.addImport("tudresden.ocl20.pivot.modelbus.IModel");
-genModel.addImport("tudresden.ocl20.pivot.modelbus.IModelProvider");
-genModel.addImport("tudresden.ocl20.pivot.modelbus.ModelAccessException");
-genModel.addImport("tudresden.ocl20.pivot.modelbus.base.AbstractModelProvider");
+genModel.addImport("org.dresdenocl.modelbus.IModel");
+genModel.addImport("org.dresdenocl.modelbus.IModelProvider");
+genModel.addImport("org.dresdenocl.modelbus.ModelAccessException");
+genModel.addImport("org.dresdenocl.modelbus.base.AbstractModelProvider");
 genModel.addImport("org.eclipse.emf.ecore.resource.Resource");
 genModel.addImport("org.eclipse.emf.ecore.resource.ResourceSet");
 genModel.addImport("org.eclipse.emf.ecore.resource.impl.ResourceSetImpl");
@@ -36,7 +36,7 @@ public class <%=className%> extends AbstractModelProvider implements IModelProvi
   private ResourceSet resourceSet = null;
 
   /**
-   * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
+   * @see org.dresdenocl.modelbus.IModelProvider#getModel(java.net.URL)
 	 *
 	 * @generated
    */

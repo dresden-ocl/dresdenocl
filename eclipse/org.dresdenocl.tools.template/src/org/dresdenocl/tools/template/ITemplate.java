@@ -22,7 +22,7 @@
  * MA  02111-1307  USA
  *
  */
-package tudresden.ocl20.pivot.tools.template;
+package org.dresdenocl.tools.template;
 
 /**
  * <p>

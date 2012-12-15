@@ -4,27 +4,27 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveHelper;
+import org.dresdenocl.language.ocl.resource.ocl.OclReferenceResolveHelperProvider;
+import org.dresdenocl.pivotmodel.Type;
 
 public class TypePathNameSimpleCSTypeNameReferenceResolver
 		implements
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS, tudresden.ocl20.pivot.pivotmodel.Type> {
+		org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<org.dresdenocl.language.ocl.TypePathNameSimpleCS, org.dresdenocl.pivotmodel.Type> {
 
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS, tudresden.ocl20.pivot.pivotmodel.Type> delegate = new tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS, tudresden.ocl20.pivot.pivotmodel.Type>();
+	private org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<org.dresdenocl.language.ocl.TypePathNameSimpleCS, org.dresdenocl.pivotmodel.Type> delegate = new org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultResolverDelegate<org.dresdenocl.language.ocl.TypePathNameSimpleCS, org.dresdenocl.pivotmodel.Type>();
 
 	public void resolve(
 			java.lang.String identifier,
-			tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS container,
+			org.dresdenocl.language.ocl.TypePathNameSimpleCS container,
 			org.eclipse.emf.ecore.EReference reference,
 			int position,
 			boolean resolveFuzzy,
-			final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<tudresden.ocl20.pivot.pivotmodel.Type> result) {
+			final org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.dresdenocl.pivotmodel.Type> result) {
 
 		IOclReferenceResolveHelper rrHelper = OclReferenceResolveHelperProvider
 				.getOclReferenceResolveHelper();
@@ -41,8 +41,8 @@ public class TypePathNameSimpleCSTypeNameReferenceResolver
 	}
 
 	public java.lang.String deResolve(
-			tudresden.ocl20.pivot.pivotmodel.Type element,
-			tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS container,
+			org.dresdenocl.pivotmodel.Type element,
+			org.dresdenocl.language.ocl.TypePathNameSimpleCS container,
 			org.eclipse.emf.ecore.EReference reference) {
 		return delegate.deResolve(element, container, reference);
 	}

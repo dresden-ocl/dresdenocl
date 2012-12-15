@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,21 +36,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -96,8 +96,8 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
-	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.standardlibrary.java.internal.library.IAddableElement
+	 * #add(org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclAny add(OclAny that) {
 	
@@ -136,7 +136,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	@SuppressWarnings("unchecked")
 	public OclSet<OclModelInstanceObject> asSet() {
@@ -165,7 +165,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject
+	 * org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject
 	 * #getModelInstanceObject()
 	 */
 	public IModelInstanceObject getModelInstanceObject() {
@@ -177,7 +177,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * org.dresdenocl.standardlibrary.java.internal.library.IAddableElement
 	 * #getNeutralElement()
 	 */
 	public OclAny getNeutralElement() {
@@ -256,7 +256,7 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
@@ -289,9 +289,9 @@ public class JavaOclModelInstanceObject extends JavaOclAny implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
+	 * invokeOperation(org.dresdenocl.pivotmodel.Operation,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny[])
 	 */
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
 

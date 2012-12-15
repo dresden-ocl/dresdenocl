@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.ecore.test.tests;
+package org.dresdenocl.metamodels.ecore.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,12 +26,12 @@ import org.eclipse.emf.ecore.EDataType;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.metamodels.test.MetaModelTestServices;
+import org.dresdenocl.metamodels.test.MetaModelTestSuite;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

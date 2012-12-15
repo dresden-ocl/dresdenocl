@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetFlatten {
      *       def: testSetFlatten(source: Set(OclAny)): Set(OclAny) = source ->flatten()</code></p>
      */
     public java.util.Set<Object> testpackage.Class1.testSetFlatten(java.util.Set<Object> source) {
-        return (java.util.Set<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.flatten(source);
+        return (java.util.Set<Object>) org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.flatten(source);
     }
 }

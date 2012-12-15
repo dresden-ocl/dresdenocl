@@ -1,4 +1,4 @@
-package tudresden.ocl20.logging;
+package org.dresdenocl.logging;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -13,9 +13,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.appender.ErrorLogAppender;
-import tudresden.ocl20.logging.internal.DefaultLogManager;
-import tudresden.ocl20.logging.internal.StandaloneLogManager;
+import org.dresdenocl.logging.appender.ErrorLogAppender;
+import org.dresdenocl.logging.internal.DefaultLogManager;
+import org.dresdenocl.logging.internal.StandaloneLogManager;
 
 /**
  * The LoggingPlugin integrates log4j and allows client plugins to retrieve an
@@ -120,7 +120,7 @@ import tudresden.ocl20.logging.internal.StandaloneLogManager;
  * 
  * This way, a default log4j configuration provided by the
  * <code>LoggingPlugin</code> will be used and all logs will appear under the
- * <code>tudresden.ocl20.logging</code> plugin id. See
+ * <code>org.dresdenocl.logging</code> plugin id. See
  * {@link #configureDefaultLogging(Plugin)} for more information on how to
  * customize logging in this case.
  * </p>
@@ -132,16 +132,16 @@ public class LoggingPlugin extends Plugin {
 
 	// an identifier for the default log manager (used if null is passed when
 	// requesting a log mgr.)
-	private static final String DEFAULT_LOG_MANAGER_NAME = "tudresden.ocl20.logging"; //$NON-NLS-1$
+	private static final String DEFAULT_LOG_MANAGER_NAME = "org.dresdenocl.logging"; //$NON-NLS-1$
 
 	// the system property used to activate debug logging for the logging plugin
-	private static final String DEBUG_SYSTEM_PROPERTY = "tudresden.ocl20.logging.debug"; //$NON-NLS-1$
+	private static final String DEBUG_SYSTEM_PROPERTY = "org.dresdenocl.logging.debug"; //$NON-NLS-1$
 
 	// the default name of the log4j configuration file
 	private static final String DEFAULT_LOG4J_CONFIGURATION_FILE = "log4j.properties"; //$NON-NLS-1$
 
 	// The plug-in ID
-	public static final String ID = "tudresden.ocl20.logging"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.logging"; //$NON-NLS-1$
 
 	// The shared instance
 	private static LoggingPlugin plugin;
@@ -321,7 +321,7 @@ public class LoggingPlugin extends Plugin {
 	 * methods in the log4j {@link Logger} class. Because Eclipse carefully
 	 * separates the classloaders for each plugin, this is the only way a client
 	 * plugin can configure the default log4j loggers (loaded by the
-	 * <code>tudresden.ocl20.logging</code> bundle). This might be necessary
+	 * <code>org.dresdenocl.logging</code> bundle). This might be necessary
 	 * when a client plugin does not want to use the {@link #getLogManager()}
 	 * API provided by the <code>LoggingPlugin</code>.
 	 * 

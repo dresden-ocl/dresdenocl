@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter;
+package org.dresdenocl.codegen.adapter;
 
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.common.notify.Adapter;

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
@@ -39,17 +39,17 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
+import org.dresdenocl.essentialocl.expressions.ExpressionsFactory;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.TypedElementImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -57,8 +57,8 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.VariableImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.VariableImpl#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,7 +111,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * represented parameter} if this <code>Variable</code> represents a
 	 * {@link Parameter}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -123,7 +123,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	/**
 	 * Overridden to lazily determine the type of the variable.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -205,7 +205,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	/**
 	 * Overridden to prevent setting the type after it has already been set.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#setType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public void setType(Type newType) {
@@ -222,7 +222,7 @@ public class VariableImpl extends TypedElementImpl implements Variable {
 	 * Returns <code>null</code> as a <code>Variable</code> does not have an
 	 * owner.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {

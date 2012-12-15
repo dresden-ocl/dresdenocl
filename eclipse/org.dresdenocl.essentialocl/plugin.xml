@@ -39,14 +39,14 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.omg.org/2006/essentialocl/types" 
-       class = "tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl"
+       class = "org.dresdenocl.essentialocl.types.impl.TypesPackageImpl"
        genModel = "model/essentialocl.genmodel" /> 
   </extension>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.omg.org/2006/essentialocl/expressions" 
-       class = "tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl"
+       class = "org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl"
        genModel = "model/essentialocl.genmodel" /> 
   </extension>
 

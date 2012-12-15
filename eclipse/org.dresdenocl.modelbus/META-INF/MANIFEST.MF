@@ -1,26 +1,26 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Model Bus
-Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.modelbus;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.modelbus.ModelBusPlugin
+Bundle-Activator: org.dresdenocl.modelbus.ModelBusPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi,
- tudresden.ocl20.pivot.modelinstance;visibility:=reexport,
- tudresden.ocl20.pivot.essentialocl.standardlibrary;visibility:=reexport
+ org.dresdenocl.modelinstance;visibility:=reexport,
+ org.dresdenocl.essentialocl.standardlibrary;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Export-Package: tudresden.ocl20.pivot.modelbus;
+Export-Package: org.dresdenocl.modelbus;
   uses:="org.eclipse.core.runtime,
-   tudresden.ocl20.pivot.modelinstance,
+   org.dresdenocl.modelinstance,
    org.apache.log4j,
    org.osgi.framework,
-   tudresden.ocl20.pivot.model,
-   tudresden.ocl20.pivot.model.metamodel",
- tudresden.ocl20.pivot.modelbus.descriptor;uses:="org.eclipse.core.runtime",
- tudresden.ocl20.pivot.modelbus.metamodel;uses:="tudresden.ocl20.pivot.modelbus.descriptor",
- tudresden.ocl20.pivot.modelbus.modelinstance;uses:="tudresden.ocl20.pivot.modelbus.descriptor",
- tudresden.ocl20.pivot.modelbus.util
+   org.dresdenocl.model,
+   org.dresdenocl.model.metamodel",
+ org.dresdenocl.modelbus.descriptor;uses:="org.eclipse.core.runtime",
+ org.dresdenocl.modelbus.metamodel;uses:="org.dresdenocl.modelbus.descriptor",
+ org.dresdenocl.modelbus.modelinstance;uses:="org.dresdenocl.modelbus.descriptor",
+ org.dresdenocl.modelbus.util
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.commons.io

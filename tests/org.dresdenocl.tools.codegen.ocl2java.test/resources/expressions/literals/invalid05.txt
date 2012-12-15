@@ -7,7 +7,7 @@ Integer result1;
 result1 = new Integer(0);
 /* IterateExp: Iterate through all elements and perform an operation on them. */
 for (Integer anElement1 : collection1) {
-    result1 = (Integer) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+    result1 = (Integer) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
 }
 
 result1

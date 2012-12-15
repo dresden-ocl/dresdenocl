@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,9 +44,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getPart <em>Part</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getPart <em>Part</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,7 +56,7 @@ public interface CollectionLiteralExp extends LiteralExp {
 
 	/**
 	 * Returns the value of the '<em><b>Part</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.expressions.CollectionLiteralPart}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Part</em>' containment reference list isn't clear,
@@ -70,7 +70,7 @@ public interface CollectionLiteralExp extends LiteralExp {
 
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind}.
+	 * The literals are from the enumeration {@link org.dresdenocl.essentialocl.expressions.CollectionKind}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
@@ -78,18 +78,18 @@ public interface CollectionLiteralExp extends LiteralExp {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
 	 * @see #setKind(CollectionKind)
 	 * @generated
 	 */
 	CollectionKind getKind();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
 	 * @see #getKind()
 	 * @generated
 	 */
@@ -110,7 +110,7 @@ public interface CollectionLiteralExp extends LiteralExp {
 	Type getElementType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Element Type</em>' reference.

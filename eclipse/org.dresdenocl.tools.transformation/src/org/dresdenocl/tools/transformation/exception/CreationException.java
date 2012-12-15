@@ -2,7 +2,7 @@
  * Created on 10.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.exception;
+package org.dresdenocl.tools.transformation.exception;
 
 /**
  * The CreationException is thrown, when an error occurs while reflectivly

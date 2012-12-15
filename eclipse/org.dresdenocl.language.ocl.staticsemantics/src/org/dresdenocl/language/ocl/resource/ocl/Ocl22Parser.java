@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -14,17 +14,17 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import scala.Tuple2;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemanticsException;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor.OclStaticSemanticsProvider;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.IOclParser;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.parser.SemanticException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
+import org.dresdenocl.language.ocl.staticsemantics.OclStaticSemanticsException;
+import org.dresdenocl.language.ocl.staticsemantics.postporcessor.OclStaticSemanticsProvider;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.parser.IOclParser;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.parser.SemanticException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Type;
 
 public class Ocl22Parser implements IOclParser {
 
@@ -62,7 +62,7 @@ public class Ocl22Parser implements IOclParser {
 
 				// clear all caches first
 				org.kiama.attribution.Attribution$.MODULE$.resetMemo();
-				tudresden.attributegrammar.integration.kiama.AttributableEObject$.MODULE$
+				org.dresdenocl.attributegrammar.integration.kiama.AttributableEObject$.MODULE$
 						.clearCache();
 
 				ResourceSet rs = new ResourceSetImpl();
@@ -187,7 +187,7 @@ public class Ocl22Parser implements IOclParser {
 	public Variables getVariables(EObject eObject) {
 		Resource res = eObject.eResource();
 		if (res instanceof OclResource) {
-			tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
+			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
 					.getStaticSemantics((OclResource) res);
 			Variables result = new Variables();
 			Tuple2<List<Variable>, List<Variable>> variables = staticSemantics
@@ -203,7 +203,7 @@ public class Ocl22Parser implements IOclParser {
 	public Type getOclType(EObject eObject) {
 		Resource res = eObject.eResource();
 		if (res instanceof OclResource) {
-			tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
+			org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
 					.getStaticSemantics((OclResource) res);
 			return staticSemantics.getOclType(eObject);
 		} else
@@ -215,7 +215,7 @@ public class Ocl22Parser implements IOclParser {
 			throws ParseException, SemanticException {
 		checkForErrors(resource);
 
-		tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
+		org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics staticSemantics = OclStaticSemanticsProvider
 				.getStaticSemantics(resource);
 		List<Constraint> constraints;
 		try {

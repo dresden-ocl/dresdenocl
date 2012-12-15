@@ -4,17 +4,17 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A representation for a range in a document where an enumeration literal (i.e.,
  * a set of static strings) is expected.
  */
-public class OclExpectedEnumerationTerminal extends tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAbstractExpectedElement {
+public class OclExpectedEnumerationTerminal extends org.dresdenocl.language.ocl.resource.ocl.mopp.OclAbstractExpectedElement {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal;
+	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal;
 	
-	public OclExpectedEnumerationTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal) {
+	public OclExpectedEnumerationTerminal(org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal) {
 		super(enumerationTerminal.getMetaclass());
 		this.enumerationTerminal = enumerationTerminal;
 	}
@@ -33,14 +33,14 @@ public class OclExpectedEnumerationTerminal extends tudresden.ocl20.pivot.langua
 		return tokenNames;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal getEnumerationTerminal() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal getEnumerationTerminal() {
 		return this.enumerationTerminal;
 	}
 	
 	/**
 	 * Returns the expected enumeration terminal.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
 		return enumerationTerminal;
 	}
 	

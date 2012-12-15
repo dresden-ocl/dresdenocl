@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Test Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl.tests;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.essentialocl.tests;singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.essentialocl.expressions.tests,
- tudresden.ocl20.pivot.essentialocl.types.tests
+Export-Package: org.dresdenocl.essentialocl.expressions.tests,
+ org.dresdenocl.essentialocl.types.tests
 Require-Bundle: org.junit;bundle-version="4.0.0";visibility:=reexport,
- tudresden.ocl20.pivot.modelbus,
+ org.dresdenocl.modelbus,
  org.dresdenocl.testsuite.abstract
 Bundle-ActivationPolicy: lazy

@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tools.transformation;
+package org.dresdenocl.tools.transformation;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.tools.transformation.event.ITransformationRegistryListener;
+import org.dresdenocl.tools.transformation.event.ITransformationRegistryListener;
 
 /**
  * <p>

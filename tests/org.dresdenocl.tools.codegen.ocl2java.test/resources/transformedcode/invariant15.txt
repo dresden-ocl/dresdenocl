@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -8,16 +8,16 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  */
 public privileged aspect LoyaltyAccount_InvAspect1 {
 
-    declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    declare parents: org.dresdenocl.examples.royalsandloyals.LoyaltyAccount implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
-    public void tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.checkInvariants() {
+    public void org.dresdenocl.examples.royalsandloyals.LoyaltyAccount.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
 
     /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyAccount#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -26,14 +26,14 @@ public privileged aspect LoyaltyAccount_InvAspect1 {
      * <code>context LoyaltyAccount
      *       inv: points > 0 implies transactions->exists(t | t.points > 0)</code></p>
      */
-    after(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyAccount. */
-        if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.LoyaltyAccount")) {
         Boolean result1;
         result1 = false;
         
         /* Iterator Exists: Iterate and check, if any element fulfills the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+        for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
             if ((anElement1.points > new Integer(0))) {
                 result1 = true;
                 break;

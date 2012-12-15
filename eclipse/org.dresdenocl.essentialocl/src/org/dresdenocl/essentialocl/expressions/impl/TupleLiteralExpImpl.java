@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,11 +45,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralPart;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Tuple Literal Exp</b></em>'.
@@ -57,7 +57,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl#getPart <em>Part</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralExpImpl#getPart <em>Part</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,7 +108,7 @@ public class TupleLiteralExpImpl extends LiteralExpImpl implements
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
 	 */
 	@Override
 	protected Type evaluateType() {

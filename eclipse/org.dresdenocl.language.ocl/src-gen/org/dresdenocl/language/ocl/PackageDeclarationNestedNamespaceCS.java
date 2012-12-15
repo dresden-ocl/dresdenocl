@@ -4,13 +4,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import org.emftext.commons.layout.LayoutInformation;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Namespace;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,13 +20,13 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation <em>Layout Information</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation <em>Layout Information</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS()
  * @model
  * @generated
  */
@@ -41,14 +41,14 @@ public interface PackageDeclarationNestedNamespaceCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Namespace</em>' reference.
    * @see #setNamespace(Namespace)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_Namespace()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_Namespace()
    * @model required="true"
    * @generated
    */
 	Namespace getNamespace();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Namespace</em>' reference.
@@ -67,14 +67,14 @@ public interface PackageDeclarationNestedNamespaceCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Nested Namespace</em>' containment reference.
    * @see #setNestedNamespace(PackageDeclarationNestedNamespaceCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_NestedNamespace()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_NestedNamespace()
    * @model containment="true"
    * @generated
    */
 	PackageDeclarationNestedNamespaceCS getNestedNamespace();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Nested Namespace</em>' containment reference.
@@ -93,7 +93,7 @@ public interface PackageDeclarationNestedNamespaceCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Layout Information</em>' reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_LayoutInformation()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPackageDeclarationNestedNamespaceCS_LayoutInformation()
    * @model
    * @generated
    */

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
 /**
  * The abstract super class for all elements of a grammar. This class provides
@@ -14,9 +14,9 @@ public abstract class OclSyntaxElement {
 	
 	private OclSyntaxElement[] children;
 	private OclSyntaxElement parent;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality;
+	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality;
 	
-	public OclSyntaxElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality, OclSyntaxElement[] children) {
+	public OclSyntaxElement(org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, OclSyntaxElement[] children) {
 		this.cardinality = cardinality;
 		this.children = children;
 		if (this.children != null) {
@@ -54,7 +54,7 @@ public abstract class OclSyntaxElement {
 		return parent.getMetaclass();
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality getCardinality() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality getCardinality() {
 		return cardinality;
 	}
 	

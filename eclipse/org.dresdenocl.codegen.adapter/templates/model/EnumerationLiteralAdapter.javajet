@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="EnumerationLiteralAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="EnumerationLiteralAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -12,9 +12,9 @@ String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
 package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 
 <%genModel.addImport("org.apache.log4j.Logger");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Enumeration");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral");
+genModel.addImport("org.dresdenocl.pivotmodel.EnumerationLiteral");
+genModel.addImport("org.dresdenocl.pivotmodel.Enumeration");
+genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractEnumerationLiteral");
 genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));
 genModel.markImportLocation(stringBuffer);%>
 
@@ -30,7 +30,7 @@ public class <%=adapterClass%> extends AbstractEnumerationLiteral implements Enu
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=adapteeClass%> data type
@@ -61,7 +61,7 @@ public class <%=adapterClass%> extends AbstractEnumerationLiteral implements Enu
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumerationLiteral#getName()
 	 *
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public class <%=adapterClass%> extends AbstractEnumerationLiteral implements Enu
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getEnumeration()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumerationLiteral#getEnumeration()
 	 *
 	 * @generated
 	 */

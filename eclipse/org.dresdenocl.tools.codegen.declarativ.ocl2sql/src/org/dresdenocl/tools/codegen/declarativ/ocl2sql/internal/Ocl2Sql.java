@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.internal;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.internal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,23 +37,23 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclCode;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.impl.Tuple;
 
 /**
  * OCL2SQL-Compiler

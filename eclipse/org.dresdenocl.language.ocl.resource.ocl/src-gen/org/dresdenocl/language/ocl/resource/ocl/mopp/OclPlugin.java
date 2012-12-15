@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A singleton class for the text resource plug-in.
  */
 public class OclPlugin extends org.eclipse.core.runtime.Plugin {
 	
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl";
+	public static final String PLUGIN_ID = "org.dresdenocl.language.ocl.resource.ocl";
 	/**
 	 * The version of EMFText that was used to generate this plug-in.
 	 */

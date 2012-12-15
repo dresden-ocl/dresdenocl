@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
+package org.dresdenocl.modelinstancetype.java.internal.modelinstance;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,20 +28,20 @@ import java.util.WeakHashMap;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
+import org.dresdenocl.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -83,7 +83,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.impl.java.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.impl.java.
 	 * BasisJavaModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object)
 	 */
@@ -156,10 +156,10 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * BasisJavaModelInstanceFactory
 	 * #createModelInstanceElement(java.lang.Object,
-	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.pivotmodel.Type)
 	 */
 	public IModelInstanceElement createModelInstanceElement(Object adapted,
 			Type type) {

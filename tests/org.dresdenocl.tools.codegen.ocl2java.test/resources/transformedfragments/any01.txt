@@ -1,1 +1,1 @@
-(tudresden.ocl20.pivot.examples.royalsandloyals.Transaction.class.isAssignableFrom(aClass.getClass()))
+(org.dresdenocl.examples.royalsandloyals.Transaction.class.isAssignableFrom(aClass.getClass()))

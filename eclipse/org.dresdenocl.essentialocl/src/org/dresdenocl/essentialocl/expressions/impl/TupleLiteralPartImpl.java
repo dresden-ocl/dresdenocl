@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -38,12 +38,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralPart;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.TypedElementImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Tuple Literal Part</b></em>'.
@@ -51,8 +51,8 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralPartImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralPartImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *

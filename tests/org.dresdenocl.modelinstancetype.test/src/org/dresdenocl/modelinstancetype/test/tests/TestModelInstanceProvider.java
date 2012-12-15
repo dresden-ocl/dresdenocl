@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.tests;
+package org.dresdenocl.modelinstancetype.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,10 +25,10 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceProvider;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestServices;
 
 /**
  * <p>
@@ -57,7 +57,7 @@ public class TestModelInstanceProvider {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceProvider#createEmptyModelInstance(tudresden.ocl20.pivot.model.IModel)}
+	 * {@link IModelInstanceProvider#createEmptyModelInstance(org.dresdenocl.model.IModel)}
 	 * .
 	 * </p>
 	 */
@@ -88,7 +88,7 @@ public class TestModelInstanceProvider {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceProvider#createEmptyModelInstance(tudresden.ocl20.pivot.model.IModel)}
+	 * {@link IModelInstanceProvider#createEmptyModelInstance(org.dresdenocl.model.IModel)}
 	 * with illegal arguments.
 	 * </p>
 	 */

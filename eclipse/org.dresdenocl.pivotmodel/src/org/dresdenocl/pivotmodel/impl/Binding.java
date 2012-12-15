@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.Iterator;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.util.EObjectEList;
 
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * A <code>Binding</code> contains all information about the binding of the

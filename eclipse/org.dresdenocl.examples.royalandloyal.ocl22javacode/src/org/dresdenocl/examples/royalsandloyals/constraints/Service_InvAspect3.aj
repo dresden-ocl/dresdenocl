@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,9 +9,9 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect Service_InvAspect3 {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Service#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.Service aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -20,9 +20,9 @@ public privileged aspect Service_InvAspect3 {
      * <code>context Service
      *       inv: self.oclIsInvalid() = false</code></p>
      */
-    after(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.Service aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Service. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.Service")) {
         Boolean result1;
 
         /* Check if the expression results in invalid. */

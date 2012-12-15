@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
+package org.dresdenocl.modelbus.ui.internal.wizards.util;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -29,7 +29,7 @@ import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
 
-import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
+import org.dresdenocl.modelbus.ui.internal.ModelBusUIMessages;
 
 /**
  * <p>

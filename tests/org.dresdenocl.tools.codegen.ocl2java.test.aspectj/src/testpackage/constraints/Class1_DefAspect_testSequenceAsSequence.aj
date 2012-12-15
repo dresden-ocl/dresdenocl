@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequenceAsSequence {
      *       def: testSequenceAsSequence(source: Sequence(OclAny)):    Sequence(OclAny) = source ->asSequence()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSequenceAsSequence(java.util.List<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.asSequence(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.asSequence(source);
     }
 }

@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequenceEquals01 {
      *       def: testSequenceEquals01(source: Sequence(OclAny), arg01: Sequence(OclAny)): Boolean = source = arg01</code></p>
      */
     public Boolean testpackage.Class1.testSequenceEquals01(java.util.List<Object> source, java.util.List<Object> arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.equals(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.equals(source, arg01);
     }
 }

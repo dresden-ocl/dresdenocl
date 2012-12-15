@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.xml.internal.modelinstance;
+package org.dresdenocl.modelinstancetype.xml.internal.modelinstance;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,25 +28,25 @@ import org.eclipse.osgi.util.NLS;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.AbstractModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.modelinstance.base.AbstractModelInstance;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.exception.CopyForAtPreException;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.base.AbstractModelInstanceObject;
+import org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.xml.internal.msg.XmlModelInstanceTypeMessages;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -153,8 +153,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(org.dresdenocl.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
@@ -198,7 +198,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceElement
 	 * #copyForAtPre()
 	 */
 	public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
@@ -217,7 +217,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#equals(java.lang.Object)
 	 */
 	@Override
@@ -267,7 +267,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceObject
 	 * #getObject()
 	 */
 	public Object getObject() {
@@ -279,8 +279,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
-	 * #getProperty(tudresden.ocl20.pivot.pivotmodel.Property)
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceObject
+	 * #getProperty(org.dresdenocl.pivotmodel.Property)
 	 */
 	public IModelInstanceElement getProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException {
@@ -401,7 +401,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.types.base.
+	 * @seeorg.dresdenocl.modelbus.modelinstance.types.base.
 	 * AbstractModelInstanceElement#hashCode()
 	 */
 	@Override
@@ -426,8 +426,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
-	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceObject
+	 * #invokeOperation(org.dresdenocl.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeOperation(Operation operation,
@@ -454,7 +454,7 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceElement
 	 * #isUndefined()
 	 */
 	public boolean isUndefined() {

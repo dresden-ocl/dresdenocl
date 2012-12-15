@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
+package org.dresdenocl.modelbus.ui.internal.wizards;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -53,17 +53,17 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.AbstractModelBusPage;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseFileListener;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseWorkspaceListener;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.FileBoxListener;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.MetaModelLabelProvider;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
-import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ui.internal.ModelBusUIMessages;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.AbstractModelBusPage;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.BrowseFileListener;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.BrowseWorkspaceListener;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.FileBoxListener;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.MetaModelLabelProvider;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.ModelViewerListener;
+import org.dresdenocl.modelbus.util.ModelLoaderUtility;
 
 /**
  * <p>
@@ -144,7 +144,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #setFileTextBoxText(java.lang.String)
 	 */
 	public void setFileTextBoxText(String text) {
@@ -155,7 +155,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #updatePageComplete()
 	 */
 	public void updatePageComplete() {

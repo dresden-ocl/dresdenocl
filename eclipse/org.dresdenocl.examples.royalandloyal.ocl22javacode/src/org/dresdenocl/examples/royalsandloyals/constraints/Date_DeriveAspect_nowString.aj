@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,10 +9,10 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect Date_DeriveAspect_nowString {
 
     /**
-     * <p>Pointcut for all requests on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date#nowString}.</p>
+     * <p>Pointcut for all requests on {@link org.dresdenocl.examples.royalsandloyals.Date#nowString}.</p>
      */
     protected pointcut nowStringGetter() :
-    	get(static * org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.nowString);
+    	get(static * org.dresdenocl.examples.royalsandloyals.Date.nowString);
 
     /**
      * <p>Derives the attribute nowString defined by the constraint
@@ -20,6 +20,6 @@ public privileged aspect Date_DeriveAspect_nowString {
      *       derive: Date::nowAsString()</code></p>
      */
     before(): nowStringGetter() {
-        org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.nowString = org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.nowAsString();
+        org.dresdenocl.examples.royalsandloyals.Date.nowString = org.dresdenocl.examples.royalsandloyals.Date.nowAsString();
     }
 }

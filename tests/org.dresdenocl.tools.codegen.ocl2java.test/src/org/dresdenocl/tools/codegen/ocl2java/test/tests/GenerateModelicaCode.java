@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
+package org.dresdenocl.tools.codegen.ocl2java.test.tests;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,19 +30,19 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2Java;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaFactory;
 
 /**
  * <p>
  * Contains some test cases to create the aspectJ code for the project
- * <code>tudresden.ocl20.pivot.ocl22java.test.aspectj</code>.
+ * <code>org.dresdenocl.ocl22java.test.aspectj</code>.
  * </p>
  * 
  * @author Claas Wilke
@@ -66,7 +66,7 @@ public class GenerateModelicaCode extends AbstractDiffTest {
 		modelFile = AbstractDiffTest.getFile(MODEL_NAME);
 
 		testModel = ModelBusPlugin.getMetamodelRegistry()
-				.getMetamodel("tudresden.ocl20.pivot.metamodels.ecore")
+				.getMetamodel("org.dresdenocl.metamodels.ecore")
 				.getModelProvider().getModel(modelFile);
 	}
 

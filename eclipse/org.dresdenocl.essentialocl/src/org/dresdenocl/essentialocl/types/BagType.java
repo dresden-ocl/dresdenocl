@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,7 +50,7 @@ public interface BagType extends CollectionType {
 	/**
 	 * Overridden to specialize the co-variant return type to <code>BagType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * @see org.dresdenocl.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
 	 */
 	BagType bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types);

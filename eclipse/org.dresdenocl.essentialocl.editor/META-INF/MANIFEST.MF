@@ -1,17 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Essential OCL Editor Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.essentialocl.editor; singleton:=true
+Bundle-SymbolicName: org.dresdenocl.essentialocl.editor; singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: tudresden.ocl20.pivot.essentialocl.types.presentation.EssentialOCLEditorPlugin$Implementation
+Bundle-Activator: org.dresdenocl.essentialocl.types.presentation.EssentialOCLEditorPlugin$Implementation
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.essentialocl.types.presentation
+Export-Package: org.dresdenocl.essentialocl.types.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
- tudresden.ocl20.pivot.essentialocl.edit;visibility:=reexport,
+ org.dresdenocl.essentialocl.edit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
  org.eclipse.ui.ide;visibility:=reexport

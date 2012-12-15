@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser {
+public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser implements org.dresdenocl.language.ocl.resource.ocl.IOclTextParser {
 	
 	/**
 	 * The index of the last token that was handled by retrieveLayoutInformation().
@@ -23,7 +23,7 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 	 * collection is cleared before parsing starts and returned as part of the parse
 	 * result object.
 	 */
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>> postParseCommands;
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>> postParseCommands;
 	
 	/**
 	 * A copy of the options that were used to load the text resource. This map is
@@ -60,9 +60,9 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 	/**
 	 * A reusable container for the result of resolving tokens.
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult tokenResolveResult = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
+	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolveResult tokenResolveResult = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	protected org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	
 	public OclANTLRParserBase(org.antlr.runtime3_4_0.TokenStream input) {
 		super(input);
@@ -72,7 +72,7 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 		super(input, state);
 	}
 	
-	protected void retrieveLayoutInformation(org.eclipse.emf.ecore.EObject element, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, boolean ignoreTokensAfterLastVisibleToken) {
+	protected void retrieveLayoutInformation(org.eclipse.emf.ecore.EObject element, org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, boolean ignoreTokensAfterLastVisibleToken) {
 		if (disableLayoutRecording || element == null) {
 			return;
 		}
@@ -80,14 +80,14 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 		// documents (just before the EOF character) is not associated with a particular
 		// syntax element.
 		boolean isElementToStore = syntaxElement == null;
-		isElementToStore |= syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder;
-		isElementToStore |= syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword;
-		isElementToStore |= syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal;
-		isElementToStore |= syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal;
+		isElementToStore |= syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder;
+		isElementToStore |= syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword;
+		isElementToStore |= syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal;
+		isElementToStore |= syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal;
 		if (!isElementToStore) {
 			return;
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
 		StringBuilder anonymousText = new StringBuilder();
 		for (org.antlr.runtime3_4_0.CommonToken anonymousToken : anonymousTokens) {
 			anonymousText.append(anonymousToken.getText());
@@ -129,23 +129,23 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 		if (firstToken != null) {
 			offset = firstToken.getStartIndex();
 		}
-		layoutInformationAdapter.addLayoutInformation(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, offset, hiddenTokenText.toString(), visibleTokenText.toString()));
+		layoutInformationAdapter.addLayoutInformation(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, offset, hiddenTokenText.toString(), visibleTokenText.toString()));
 		this.lastPosition2 = (endPos < 0 ? 0 : endPos + 1);
 		anonymousTokens.clear();
 	}
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
+	protected org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
 		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
-			if (adapter instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
-				return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
+			if (adapter instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
+				return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
 			}
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
 		element.eAdapters().add(newAdapter);
 		return newAdapter;
 	}
 	
-	protected <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(final tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, final ContainerType container, final org.eclipse.emf.ecore.EReference reference, final String id, final org.eclipse.emf.ecore.EObject proxy) {
+	protected <ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> void registerContextDependentProxy(final org.dresdenocl.language.ocl.resource.ocl.mopp.OclContextDependentURIFragmentFactory<ContainerType, ReferenceType> factory, final ContainerType container, final org.eclipse.emf.ecore.EReference reference, final String id, final org.eclipse.emf.ecore.EObject proxy) {
 		final int position;
 		if (reference.isMany()) {
 			position = ((java.util.List<?>) container.eGet(reference)).size();
@@ -153,8 +153,8 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 			position = -1;
 		}
 		
-		postParseCommands.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource>() {
-			public boolean execute(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
+		postParseCommands.add(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<org.dresdenocl.language.ocl.resource.ocl.IOclTextResource>() {
+			public boolean execute(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
 				if (resource == null) {
 					// the resource can be null if the parser is used for code completion
 					return true;
@@ -174,7 +174,7 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 				return tokenName;
 			}
 			tokenName = getTokenNames()[tokenType];
-			tokenName = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.formatTokenName(tokenName);
+			tokenName = org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.formatTokenName(tokenName);
 		}
 		return tokenName;
 	}
@@ -188,10 +188,10 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 		if (this.options == null) {
 			return;
 		}
-		if (this.options.containsKey(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_LOCATION_MAP)) {
+		if (this.options.containsKey(org.dresdenocl.language.ocl.resource.ocl.IOclOptions.DISABLE_LOCATION_MAP)) {
 			this.disableLocationMap = true;
 		}
-		if (this.options.containsKey(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_LAYOUT_INFORMATION_RECORDING)) {
+		if (this.options.containsKey(org.dresdenocl.language.ocl.resource.ocl.IOclOptions.DISABLE_LAYOUT_INFORMATION_RECORDING)) {
 			this.disableLayoutRecording = true;
 		}
 	}
@@ -241,12 +241,12 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 		terminateParsing = true;
 	}
 	
-	protected void addMapEntry(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject dummy) {
+	protected void addMapEntry(org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.EStructuralFeature structuralFeature, org.dresdenocl.language.ocl.resource.ocl.mopp.OclDummyEObject dummy) {
 		Object value = element.eGet(structuralFeature);
 		Object mapKey = dummy.getValueByName("key");
 		Object mapValue = dummy.getValueByName("value");
 		if (value instanceof org.eclipse.emf.common.util.EMap<?, ?>) {
-			org.eclipse.emf.common.util.EMap<Object, Object> valueMap = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMapUtil.castToEMap(value);
+			org.eclipse.emf.common.util.EMap<Object, Object> valueMap = org.dresdenocl.language.ocl.resource.ocl.util.OclMapUtil.castToEMap(value);
 			if (mapKey != null && mapValue != null) {
 				valueMap.put(mapKey, mapValue);
 			}
@@ -266,21 +266,21 @@ public abstract class OclANTLRParserBase extends org.antlr.runtime3_4_0.Parser i
 	protected org.eclipse.emf.ecore.EObject apply(org.eclipse.emf.ecore.EObject target, java.util.List<org.eclipse.emf.ecore.EObject> dummyEObjects) {
 		org.eclipse.emf.ecore.EObject currentTarget = target;
 		for (org.eclipse.emf.ecore.EObject object : dummyEObjects) {
-			assert(object instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject);
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject dummy = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclDummyEObject) object;
+			assert(object instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclDummyEObject);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclDummyEObject dummy = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclDummyEObject) object;
 			org.eclipse.emf.ecore.EObject newEObject = dummy.applyTo(currentTarget);
 			currentTarget = newEObject;
 		}
 		return currentTarget;
 	}
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult getFreshTokenResolveResult() {
+	protected org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolveResult getFreshTokenResolveResult() {
 		tokenResolveResult.clear();
 		return tokenResolveResult;
 	}
 	
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch resolverSwitch = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) metaInformation.getReferenceResolverSwitch();
+	protected org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch getReferenceResolverSwitch() {
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch resolverSwitch = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolverSwitch) metaInformation.getReferenceResolverSwitch();
 		resolverSwitch.setOptions(options);
 		return resolverSwitch;
 	}

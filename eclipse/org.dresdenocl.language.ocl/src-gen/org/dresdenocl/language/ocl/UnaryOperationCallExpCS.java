@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,12 +15,12 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getOperationName <em>Operation Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getOperationName <em>Operation Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getUnaryOperationCallExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getUnaryOperationCallExpCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface UnaryOperationCallExpCS extends OperationCallExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Operation Name</em>' attribute.
    * @see #setOperationName(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getUnaryOperationCallExpCS_OperationName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getUnaryOperationCallExpCS_OperationName()
    * @model required="true"
    * @generated
    */
 	String getOperationName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getOperationName <em>Operation Name</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getOperationName <em>Operation Name</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operation Name</em>' attribute.
@@ -61,14 +61,14 @@ public interface UnaryOperationCallExpCS extends OperationCallExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Target</em>' containment reference.
    * @see #setTarget(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getUnaryOperationCallExpCS_Target()
+   * @see org.dresdenocl.language.ocl.OclPackage#getUnaryOperationCallExpCS_Target()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getTarget();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getTarget <em>Target</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getTarget <em>Target</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Target</em>' containment reference.

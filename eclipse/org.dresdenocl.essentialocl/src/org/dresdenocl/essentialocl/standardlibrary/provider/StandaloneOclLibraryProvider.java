@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.essentialocl.standardlibrary.provider;
+package org.dresdenocl.essentialocl.standardlibrary.provider;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
+import org.dresdenocl.essentialocl.types.util.TypeResolver;
 
 /**
  * <p>
@@ -84,7 +84,7 @@ public class StandaloneOclLibraryProvider implements IOclLibraryProvider {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IOclLibraryProvider#getOclLibrary()
+	 * org.dresdenocl.modelbus.model.IOclLibraryProvider#getOclLibrary()
 	 */
 	public OclLibrary getOclLibrary() {
 

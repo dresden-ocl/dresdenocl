@@ -156,7 +156,7 @@ implemented by a model instance type. Instead of implementing own primitive
 type instances, the predefined instances \code{JavaModelInstanceBoolean}, 
 \code{JavaModelInstanceInteger}, \code{JavaModelInstanceReal} and 
 \code{JavaModelInstanceString} (located in the plug-in 
-\code{tudresden.ocl20.pivot.modelinstance} can be reused.
+\code{org.dresdenocl.modelinstance} can be reused.
 
 
 \subsection{The Adaptation of Collections}
@@ -195,7 +195,7 @@ The interface \code{IModelInstanceTuple} represents key
 structures called \keyword{Tuples}. Tuples are required during \acs{OCL} 
 interpretation only and cannot be part of a model instance. Thus, a standard 
 \code{ModelInstanceTuple} implementation located in the plug-in 
-\code{tudresden.ocl20.\linebreak[0]pivot.modelinstance} exists.
+\code{org.dresdenocl.\linebreak[0]pivot.modelinstance} exists.
 
 
 \subsection{IModelInstanceVoid and IModelInstanceInvalid}
@@ -347,8 +347,8 @@ Dresden OCL and you can reuse the \acs{OCL} Parser and \acs{OCL} Interpreter!
 
 If you are confused and still do not know how to adapt your model instance
 type, investigate the existing adaptations for Java 
-(\code{tudresden.ocl20.pivot.modelinstancetype.java}), \acs{EMF} Ecore
-(\code{tudresden.ocl20.pivot.modelinstancetype.ecore}) and \acs{XML}
-(\code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.xml}).
+(\code{org.dresdenocl.modelinstancetype.java}), \acs{EMF} Ecore
+(\code{org.dresdenocl.modelinstancetype.ecore}) and \acs{XML}
+(\code{org.dresdenocl\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.xml}).
 To check your adaptation, have a look at the \keyword{Generic Model Implementation Type Test Suite}
 (presented in Chapter~\ref{chapter:modelInstanceTestSuite}) as well.

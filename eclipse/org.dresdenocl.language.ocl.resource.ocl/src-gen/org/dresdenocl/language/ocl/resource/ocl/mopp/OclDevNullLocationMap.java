@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * An inactive implementation of the ILocationMap interface. That is used if the
- * tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions.DISABLE_LOCATION_MAP
+ * org.dresdenocl.language.ocl.resource.ocl.IOclOptions.DISABLE_LOCATION_MAP
  * option is set.
  */
-public class OclDevNullLocationMap implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap {
+public class OclDevNullLocationMap implements org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap {
 	
 	public void setLine(org.eclipse.emf.ecore.EObject element, int line) {
 	}

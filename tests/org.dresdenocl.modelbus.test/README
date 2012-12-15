@@ -6,6 +6,6 @@ Dresden OCL2 for Eclipse.
 
 To run the test suite execute the class
 
-tudresden.ocl20.pivot.modelbus.test.AllModelBusTests
+org.dresdenocl.modelbus.test.AllModelBusTests
 
 as a JUnit Plugin Test.

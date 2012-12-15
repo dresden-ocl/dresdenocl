@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public abstract class OclQuickFix implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix {
+public abstract class OclQuickFix implements org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix {
 	
 	private String displayString;
 	private String imageKey;
@@ -45,7 +45,7 @@ public abstract class OclQuickFix implements tudresden.ocl20.pivot.language.ocl.
 			getResource().save(output, null);
 			return output.toString();
 		} catch (java.io.IOException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while applying quick fix", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while applying quick fix", e);
 		}
 		return null;
 	}

@@ -23,7 +23,7 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.essentialocl.expressions.factory;
+package org.dresdenocl.essentialocl.expressions.factory;
 
 
 /**

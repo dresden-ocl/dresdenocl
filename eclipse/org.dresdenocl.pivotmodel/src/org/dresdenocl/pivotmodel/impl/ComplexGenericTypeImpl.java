@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,13 +47,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.ComplexGenericType;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeArgument;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -62,10 +62,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType
+ * {@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType
  * <em>Unbound Type</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument
+ * {@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument
  * <em>Type Argument</em>}</li>
  * </ul>
  * </p>
@@ -126,7 +126,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * Overridden to return the name of the associated (non-)generic type wrapped
 	 * by this <code>ComplexGenericType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -256,8 +256,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * bind the unbound type using the {@link TypeArgument}s set for this
 	 * <code>ComplexGenericType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
-	 *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
+	 *      java.util.List, org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected boolean doBindGenericSuperType(List<TypeParameter> parameters,
@@ -345,7 +345,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	 * implementation.
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#isConformantType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl#isConformantType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public boolean isConformant(Type type) {
@@ -356,7 +356,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	/**
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
 	public ComplexGenericType clone() {
@@ -367,7 +367,7 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	/**
 	 * Helper method that initializes a cloned <code>ComplexGenericType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#initialize(org.dresdenocl.pivotmodel.NamedElement)
 	 */
 	protected ComplexGenericType initialize(ComplexGenericType clone) {
 

@@ -19,7 +19,7 @@ suite. Thus, on any change of the source code all tests can be run at once to
 check the integrity of the toolkit.
 
 To extend the extensible test suite with new tests or test suites, a plug-in has
-to implement the extension point \reference{tudresden.ocl20.pivot.testsuite}. 
+to implement the extension point \reference{org.dresdenocl.testsuite}. 
 This extension has to specify the tests it wants to add. \keyword{JUnit3} as
 well as \keyword{JUnit4} tests or test suites are allowed. If, for some reason,
 the test wants to emit some warnings to the user, it can use the Log4j mechanism
@@ -27,13 +27,13 @@ for that purpose. Simply extend the \code{log4j.properties} with the following
 code:
 
 \code{\# Extensible Test Suite appender\newline
-log4j.appender.stringbuffer=tudresden.ocl20.logging.appender.StringBufferAppender\newline
+log4j.appender.stringbuffer=org.dresdenocl.logging.appender.StringBufferAppender\newline
 log4j.appender.stringbuffer.layout = org.apache.log4j.PatternLayout\newline
 log4j.appender.stringbuffer.layout.ConversionPattern = \%C{1}: \%m\%n\%n}
 
 Then add this appender to the logging of the plug-in. An example usage of this 
 mechanism can be found in the plug-in 
-\reference{tudresden.ocl20.pivot.metamodels.test}.
+\reference{org.dresdenocl.metamodels.test}.
 
 To run the extensible test suite, open the context menu on the class 
 \code{OCL2TestSuiteRunner} of the package 

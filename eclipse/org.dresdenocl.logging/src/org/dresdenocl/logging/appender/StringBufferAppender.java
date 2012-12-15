@@ -1,4 +1,4 @@
-package tudresden.ocl20.logging.appender;
+package org.dresdenocl.logging.appender;
 
 import java.io.StringWriter;
 

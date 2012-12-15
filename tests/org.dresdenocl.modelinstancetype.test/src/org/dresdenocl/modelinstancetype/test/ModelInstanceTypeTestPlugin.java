@@ -17,16 +17,16 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test;
+package org.dresdenocl.modelinstancetype.test;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceType;
 
 /**
  * <p>
@@ -38,7 +38,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
 public class ModelInstanceTypeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.modelinstancetype.test";
+	public static final String PLUGIN_ID = "org.dresdenocl.modelinstancetype.test";
 
 	/** The shared instance. */
 	private static ModelInstanceTypeTestPlugin plugin;
@@ -58,7 +58,7 @@ public class ModelInstanceTypeTestPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

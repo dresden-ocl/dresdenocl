@@ -40,14 +40,14 @@
   <extension
     point = "org.eclipse.ui.newWizards">
     <category
-      id = "tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
+      id = "org.dresdenocl.modelbus.ui.newWizards.category"
       name="Dresden OCL">
     </category>
     <wizard
-      id = "tudresden.ocl20.pivot.essentialocl.editor.typesModelWizard"
+      id = "org.dresdenocl.essentialocl.editor.typesModelWizard"
       name = "%_UI_TypesModelWizard_label"
-      class = "tudresden.ocl20.pivot.essentialocl.types.presentation.TypesModelWizard"
-      category = "tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
+      class = "org.dresdenocl.essentialocl.types.presentation.TypesModelWizard"
+      category = "org.dresdenocl.modelbus.ui.newWizards.category"
       icon = "icons/full/obj16/TypesModelFile.gif">
       <description>%_UI_TypesModelWizard_description</description>
       <selection class = "org.eclipse.core.resources.IResource" />
@@ -56,12 +56,12 @@
 
   <extension point = "org.eclipse.ui.editors">
     <editor
-        id = "tudresden.ocl20.pivot.essentialocl.editor.typesEditor"
+        id = "org.dresdenocl.essentialocl.editor.typesEditor"
         name = "%_UI_TypesEditor_label"
         icon = "icons/full/obj16/TypesModelFile.gif"
         extensions = "types"
-        class = "tudresden.ocl20.pivot.essentialocl.types.presentation.TypesEditor" 
-        contributorClass="tudresden.ocl20.pivot.essentialocl.types.presentation.TypesActionBarContributor" >
+        class = "org.dresdenocl.essentialocl.types.presentation.TypesEditor" 
+        contributorClass="org.dresdenocl.essentialocl.types.presentation.TypesActionBarContributor" >
     </editor>
   </extension>    
 

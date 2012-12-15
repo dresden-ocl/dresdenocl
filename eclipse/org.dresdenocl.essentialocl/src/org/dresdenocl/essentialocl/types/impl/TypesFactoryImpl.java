@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -38,19 +38,19 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import tudresden.ocl20.pivot.essentialocl.types.*;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
+import org.dresdenocl.essentialocl.types.*;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.essentialocl.types.VoidType;
 
 /**
  * <!-- begin-user-doc -->

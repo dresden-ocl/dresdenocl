@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -8,15 +8,15 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
  */
 public privileged aspect Burning_InvAspect4 {
 
-    declare parents: org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    declare parents: org.dresdenocl.examples.royalsandloyals.Burning implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
-    public void org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning.checkInvariants() {
+    public void org.dresdenocl.examples.royalsandloyals.Burning.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Burning#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.Burning aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -25,10 +25,10 @@ public privileged aspect Burning_InvAspect4 {
      * <code>context Burning
      *       inv: self.points = self.oclAsType(Transaction).points</code></p>
      */
-    after(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.Burning aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Burning. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Burning")) {
-        if (!((Object) aClass.points).equals(((org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction) aClass).points)) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.Burning")) {
+        if (!((Object) aClass.points).equals(((org.dresdenocl.examples.royalsandloyals.Transaction) aClass).points)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'undefined' (inv: self.points = self.oclAsType(Transaction).points) was violated for Object " + aClass.toString() + ".";
         	throw new RuntimeException(msg);

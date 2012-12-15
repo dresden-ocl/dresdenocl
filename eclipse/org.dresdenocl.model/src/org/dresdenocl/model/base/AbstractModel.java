@@ -22,7 +22,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.model.base;
+package org.dresdenocl.model.base;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,18 +34,18 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelListener;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.model.ModelPlugin;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelListener;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.model.ModelPlugin;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -105,7 +105,7 @@ public abstract class AbstractModel implements IModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModel#addListener(tudresden.ocl20
+	 * org.dresdenocl.modelbus.model.IModel#addListener(org.dresdenocl
 	 * .pivot.modelbus.model.IModelListener)
 	 */
 	public boolean addListener(IModelListener listener) {
@@ -145,7 +145,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#findNamespace(java.util.List)
+	 * @see org.dresdenocl.modelbus.IModel#findNamespace(java.util.List)
 	 */
 	public Namespace findNamespace(List<String> pathName)
 			throws ModelAccessException {
@@ -216,7 +216,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#findType(java.util.List)
+	 * @see org.dresdenocl.modelbus.IModel#findType(java.util.List)
 	 */
 	public Type findType(List<String> pathName) throws ModelAccessException {
 
@@ -330,7 +330,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#getConstraints()
+	 * @see org.dresdenocl.modelbus.model.IModel#getConstraints()
 	 */
 	public Collection<Constraint> getConstraints() throws ModelAccessException {
 
@@ -340,7 +340,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getDisplayName()
+	 * @see org.dresdenocl.modelbus.IModel#getDisplayName()
 	 */
 	public String getDisplayName() {
 
@@ -350,7 +350,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModel#getMetamodel()
+	 * @see org.dresdenocl.modelbus.IModel#getMetamodel()
 	 */
 	public IMetamodel getMetamodel() {
 
@@ -360,7 +360,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#hasChanged()
+	 * @see org.dresdenocl.modelbus.model.IModel#hasChanged()
 	 */
 	public boolean hasChanged() {
 
@@ -390,7 +390,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#notifiyListeners()
+	 * @see org.dresdenocl.modelbus.model.IModel#notifiyListeners()
 	 */
 	public synchronized boolean notifiyListeners() {
 
@@ -430,7 +430,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#removeAllConstraints()
+	 * @see org.dresdenocl.modelbus.model.IModel#removeAllConstraints()
 	 */
 	public boolean removeAllConstraints() throws IllegalArgumentException,
 			ModelAccessException {
@@ -474,7 +474,7 @@ public abstract class AbstractModel implements IModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModel#removeConstraints(java.util
+	 * org.dresdenocl.modelbus.model.IModel#removeConstraints(java.util
 	 * .Collection)
 	 */
 	public boolean removeConstraints(Collection<Constraint> constraints)
@@ -521,7 +521,7 @@ public abstract class AbstractModel implements IModel {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModel#removeListener(tudresden.
+	 * org.dresdenocl.modelbus.model.IModel#removeListener(tudresden.
 	 * ocl20.pivot.modelbus.model.IModelListener)
 	 */
 	public boolean removeListener(IModelListener listener) {
@@ -561,7 +561,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.model.IModel#setChanged()
+	 * @see org.dresdenocl.modelbus.model.IModel#setChanged()
 	 */
 	public void setChanged() {
 

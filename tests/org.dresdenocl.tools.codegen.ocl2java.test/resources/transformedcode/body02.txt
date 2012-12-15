@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,10 +9,10 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 public privileged aspect LoyaltyAccount_BodyAspect_getCustomerName {
 
     /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount#getCustomerName()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyAccount#getCustomerName()}.</p>
      */
-    protected pointcut getCustomerNameCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass):
-    	call(* tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount.getCustomerName())
+    protected pointcut getCustomerNameCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount aClass):
+    	call(* org.dresdenocl.examples.royalsandloyals.LoyaltyAccount.getCustomerName())
     	&& target(aClass);
 
     /**
@@ -20,7 +20,7 @@ public privileged aspect LoyaltyAccount_BodyAspect_getCustomerName {
      * <code>context LoyaltyAccount::getCustomerName(): String
      *       body: membership.card.owner.name</code></p>
      */
-    String around(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount aClass): getCustomerNameCaller(aClass) {
+    String around(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount aClass): getCustomerNameCaller(aClass) {
         return aClass.membership.card.owner.name;
     }
 }

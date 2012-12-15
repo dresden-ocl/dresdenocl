@@ -16,19 +16,19 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.ui.internal.views;
+package org.dresdenocl.interpreter.ui.internal.views;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.util.ResultsContentProvider;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.OclInterpreterPlugin;
+import org.dresdenocl.interpreter.event.IInterpreterTraceListener;
+import org.dresdenocl.interpreter.ui.internal.views.util.ResultsContentProvider;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

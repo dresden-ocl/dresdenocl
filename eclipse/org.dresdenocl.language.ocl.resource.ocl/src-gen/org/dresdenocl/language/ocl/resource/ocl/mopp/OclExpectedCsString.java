@@ -4,17 +4,17 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A representation for a range in a document where a keyword (i.e., a static
  * string) is expected.
  */
-public class OclExpectedCsString extends tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAbstractExpectedElement {
+public class OclExpectedCsString extends org.dresdenocl.language.ocl.resource.ocl.mopp.OclAbstractExpectedElement {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword keyword;
+	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword keyword;
 	
-	public OclExpectedCsString(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclKeyword keyword) {
+	public OclExpectedCsString(org.dresdenocl.language.ocl.resource.ocl.grammar.OclKeyword keyword) {
 		super(keyword.getMetaclass());
 		this.keyword = keyword;
 	}
@@ -26,7 +26,7 @@ public class OclExpectedCsString extends tudresden.ocl20.pivot.language.ocl.reso
 	/**
 	 * Returns the expected keyword.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
 		return keyword;
 	}
 	

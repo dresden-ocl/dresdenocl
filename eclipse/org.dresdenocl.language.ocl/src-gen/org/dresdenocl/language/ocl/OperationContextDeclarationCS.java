@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getOperation <em>Operation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getPrePostOrBodyDeclarations <em>Pre Post Or Body Declarations</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS#getPrePostOrBodyDeclarations <em>Pre Post Or Body Declarations</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationContextDeclarationCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getOperationContextDeclarationCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface OperationContextDeclarationCS extends ContextDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Operation</em>' containment reference.
    * @see #setOperation(OperationDefinitionInContextCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationContextDeclarationCS_Operation()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationContextDeclarationCS_Operation()
    * @model containment="true" required="true"
    * @generated
    */
 	OperationDefinitionInContextCS getOperation();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getOperation <em>Operation</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS#getOperation <em>Operation</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operation</em>' containment reference.
@@ -54,7 +54,7 @@ public interface OperationContextDeclarationCS extends ContextDeclarationCS {
 
 	/**
    * Returns the value of the '<em><b>Pre Post Or Body Declarations</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Pre Post Or Body Declarations</em>' containment reference list isn't clear,
@@ -62,7 +62,7 @@ public interface OperationContextDeclarationCS extends ContextDeclarationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Pre Post Or Body Declarations</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationContextDeclarationCS_PrePostOrBodyDeclarations()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationContextDeclarationCS_PrePostOrBodyDeclarations()
    * @model containment="true" required="true"
    * @generated
    */

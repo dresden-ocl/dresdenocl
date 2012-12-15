@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetAsBag {
      *       def: testSetAsBag(source: Set(OclAny)):    Bag(OclAny) = source ->asBag()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSetAsBag(java.util.Set<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asBag(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.asBag(source);
     }
 }

@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types.base;
+package org.dresdenocl.modelinstancetype.types.base;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,13 +24,13 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.modelinstancetype.ModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.ModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.internal.ModelInstanceMessages;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -102,8 +102,8 @@ public class ModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+	 * #asType(org.dresdenocl.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
@@ -144,7 +144,7 @@ public class ModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 	 * #copyForAtPre()
 	 */
 	public IModelInstanceElement copyForAtPre() {
@@ -156,7 +156,7 @@ public class ModelInstanceEnumerationLiteral extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceEnumerationLiteral
+	 * org.dresdenocl.modelbus.modelinstance.IModelInstanceEnumerationLiteral
 	 * #getLiteral()
 	 */
 	public EnumerationLiteral getLiteral() {

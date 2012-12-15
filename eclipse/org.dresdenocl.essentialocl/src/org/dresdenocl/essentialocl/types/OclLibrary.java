@@ -30,15 +30,15 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Ocl Library</b></em>'.
@@ -60,20 +60,20 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBoolean <em>Ocl Boolean</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclString <em>Ocl String</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInteger <em>Ocl Integer</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclReal <em>Ocl Real</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclAny <em>Ocl Any</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclType <em>Ocl Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclCollection <em>Ocl Collection</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSequence <em>Ocl Sequence</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBag <em>Ocl Bag</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSet <em>Ocl Set</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclOrderedSet <em>Ocl Ordered Set</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclTuple <em>Ocl Tuple</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclBoolean <em>Ocl Boolean</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclString <em>Ocl String</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInteger <em>Ocl Integer</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclReal <em>Ocl Real</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclAny <em>Ocl Any</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclType <em>Ocl Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclCollection <em>Ocl Collection</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclSequence <em>Ocl Sequence</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclBag <em>Ocl Bag</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclSet <em>Ocl Set</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclOrderedSet <em>Ocl Ordered Set</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclTuple <em>Ocl Tuple</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,7 +83,7 @@ public interface OclLibrary extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Void</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ocl Void</em>' reference isn't clear, there really should be
@@ -92,13 +92,13 @@ public interface OclLibrary extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ocl Void</em>' containment reference.
 	 * @see #setOclVoid(VoidType)
-	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary
+	 * @see org.dresdenocl.essentialocl.types.VoidType#getOclLibrary
 	 * @generated
 	 */
 	VoidType getOclVoid();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Void</em>' containment reference.
 	 * @see #getOclVoid()
@@ -121,7 +121,7 @@ public interface OclLibrary extends EObject {
 	AnyType getOclAny();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclAny <em>Ocl Any</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclAny <em>Ocl Any</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Any</em>' containment reference.
 	 * @see #getOclAny()
@@ -146,7 +146,7 @@ public interface OclLibrary extends EObject {
 	CollectionType getOclCollection();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclCollection <em>Ocl Collection</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclCollection <em>Ocl Collection</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Collection</em>' containment reference.
@@ -172,7 +172,7 @@ public interface OclLibrary extends EObject {
 	SequenceType getOclSequence();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSequence <em>Ocl Sequence</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclSequence <em>Ocl Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Sequence</em>' containment reference.
@@ -198,7 +198,7 @@ public interface OclLibrary extends EObject {
 	BagType getOclBag();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBag <em>Ocl Bag</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclBag <em>Ocl Bag</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Bag</em>' containment reference.
@@ -224,7 +224,7 @@ public interface OclLibrary extends EObject {
 	SetType getOclSet();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSet <em>Ocl Set</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclSet <em>Ocl Set</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Set</em>' containment reference.
@@ -250,7 +250,7 @@ public interface OclLibrary extends EObject {
 	OrderedSetType getOclOrderedSet();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclOrderedSet <em>Ocl Ordered Set</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclOrderedSet <em>Ocl Ordered Set</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Ordered Set</em>' containment reference.
@@ -261,7 +261,7 @@ public interface OclLibrary extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Tuple</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.types.TupleType}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.types.TupleType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -292,7 +292,7 @@ public interface OclLibrary extends EObject {
 	PrimitiveType getOclBoolean();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBoolean <em>Ocl Boolean</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclBoolean <em>Ocl Boolean</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Boolean</em>' containment reference.
 	 * @see #getOclBoolean()
@@ -315,7 +315,7 @@ public interface OclLibrary extends EObject {
 	PrimitiveType getOclString();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclString <em>Ocl String</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclString <em>Ocl String</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl String</em>' containment reference.
 	 * @see #getOclString()
@@ -338,7 +338,7 @@ public interface OclLibrary extends EObject {
 	PrimitiveType getOclInteger();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInteger <em>Ocl Integer</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInteger <em>Ocl Integer</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Integer</em>' containment reference.
 	 * @see #getOclInteger()
@@ -361,7 +361,7 @@ public interface OclLibrary extends EObject {
 	PrimitiveType getOclReal();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclReal <em>Ocl Real</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclReal <em>Ocl Real</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Real</em>' containment reference.
 	 * @see #getOclReal()
@@ -371,7 +371,7 @@ public interface OclLibrary extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Invalid</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ocl Invalid</em>' reference isn't clear, there really should be
@@ -380,13 +380,13 @@ public interface OclLibrary extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ocl Invalid</em>' containment reference.
 	 * @see #setOclInvalid(InvalidType)
-	 * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary
+	 * @see org.dresdenocl.essentialocl.types.InvalidType#getOclLibrary
 	 * @generated
 	 */
 	InvalidType getOclInvalid();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Invalid</em>' containment reference.
 	 * @see #getOclInvalid()
@@ -409,7 +409,7 @@ public interface OclLibrary extends EObject {
 	TypeType getOclType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclType <em>Ocl Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclType <em>Ocl Type</em>}' containment reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Type</em>' containment reference.
 	 * @see #getOclType()

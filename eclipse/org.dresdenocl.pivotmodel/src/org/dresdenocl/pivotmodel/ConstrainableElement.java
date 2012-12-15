@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -49,7 +49,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-model-doc -->
  * 
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstrainableElement()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstrainableElement()
  * @model interface="true" abstract="true"
  * @generated
  */

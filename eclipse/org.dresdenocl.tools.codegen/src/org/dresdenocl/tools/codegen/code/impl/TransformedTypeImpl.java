@@ -16,10 +16,10 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.code.impl;
+package org.dresdenocl.tools.codegen.code.impl;
 
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedType;
+import org.dresdenocl.tools.codegen.code.ITransformedCode;
+import org.dresdenocl.tools.codegen.code.ITransformedType;
 
 /**
  * <p>
@@ -55,7 +55,7 @@ public class TransformedTypeImpl implements ITransformedType {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedType#getType()
+	 * @see org.dresdenocl.ocl22code.IGeneratedType#getType()
 	 */
 	public String getTypeName() {
 
@@ -64,7 +64,7 @@ public class TransformedTypeImpl implements ITransformedType {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedType#getGenericResultType()
+	 * @see org.dresdenocl.ocl22code.IGeneratedType#getGenericResultType()
 	 */
 	public ITransformedType getGenericType() {
 
@@ -74,7 +74,7 @@ public class TransformedTypeImpl implements ITransformedType {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#isResultTypeCollection()
+	 * org.dresdenocl.ocl22code.IGeneratedType#isResultTypeCollection()
 	 */
 	public boolean isGenericType() {
 
@@ -84,7 +84,7 @@ public class TransformedTypeImpl implements ITransformedType {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#setType(java.lang.String)
+	 * org.dresdenocl.ocl22code.IGeneratedType#setType(java.lang.String)
 	 */
 	public void setTypeName(String aTypeName) {
 
@@ -94,7 +94,7 @@ public class TransformedTypeImpl implements ITransformedType {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.IGeneratedType#setGenericResultType(tudresden
+	 * org.dresdenocl.ocl22code.IGeneratedType#setGenericResultType(tudresden
 	 * .ocl20.pivot.ocl22code.IGeneratedType)
 	 */
 	public void setGenericType(ITransformedType aType) {

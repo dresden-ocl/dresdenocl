@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.parser.internal;
+package org.dresdenocl.parser.internal;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -42,7 +42,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public class ParserMessages extends NLS {
 
-  private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.parser.internal.messages"; //$NON-NLS-1$
+  private static final String BUNDLE_NAME = "org.dresdenocl.parser.internal.messages"; //$NON-NLS-1$
   
   public static String XOCLParser_Parsing;
 

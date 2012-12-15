@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,18 +9,18 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
 public privileged aspect LoyaltyProgram_PostAspect_enroll {
 
     /**
-     * A method to make copies of {@link tudresden.ocl20.pivot.examples.royalsandloyals.Membership}.
+     * A method to make copies of {@link org.dresdenocl.examples.royalsandloyals.Membership}.
      *
      * @param anObject The {@link Object} which shall be copied.
      * @return The copy of the given {@link Object}.
      */
-    protected tudresden.ocl20.pivot.examples.royalsandloyals.Membership createCopy(tudresden.ocl20.pivot.examples.royalsandloyals.Membership anObject) {
+    protected org.dresdenocl.examples.royalsandloyals.Membership createCopy(org.dresdenocl.examples.royalsandloyals.Membership anObject) {
     
-        tudresden.ocl20.pivot.examples.royalsandloyals.Membership result;
+        org.dresdenocl.examples.royalsandloyals.Membership result;
     
         /*
-         * TODO: Auto-generated code to copy values of the class tudresden.ocl20.pivot.examples.royalsandloyals.Membership.
-         * Change this statement to create a new instance of tudresden.ocl20.pivot.examples.royalsandloyals.Membership
+         * TODO: Auto-generated code to copy values of the class org.dresdenocl.examples.royalsandloyals.Membership.
+         * Change this statement to create a new instance of org.dresdenocl.examples.royalsandloyals.Membership
          * and eventually set some attributes as well.
          */
         result = anObject;
@@ -29,22 +29,22 @@ public privileged aspect LoyaltyProgram_PostAspect_enroll {
     } 
     
     /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#enroll(tudresden.ocl20.pivot.examples.royalsandloyals.Customer c)}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyProgram#enroll(org.dresdenocl.examples.royalsandloyals.Customer c)}.</p>
      */
-    protected pointcut enrollCaller(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, tudresden.ocl20.pivot.examples.royalsandloyals.Customer c):
-    	call(* tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.enroll(tudresden.ocl20.pivot.examples.royalsandloyals.Customer))
+    protected pointcut enrollCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.examples.royalsandloyals.Customer c):
+    	call(* org.dresdenocl.examples.royalsandloyals.LoyaltyProgram.enroll(org.dresdenocl.examples.royalsandloyals.Customer))
     	&& target(aClass) && args(c);
     
     /**
-     * <p>Checks a postcondition for the operation {@link LoyaltyProgram#enroll(, tudresden.ocl20.pivot.examples.royalsandloyals.Customer c)} defined by the constraint
-     * <code>context LoyaltyProgram::enroll(c: tudresden.ocl20.pivot.examples.royalsandloyals.Customer) : Boolean
+     * <p>Checks a postcondition for the operation {@link LoyaltyProgram#enroll(, org.dresdenocl.examples.royalsandloyals.Customer c)} defined by the constraint
+     * <code>context LoyaltyProgram::enroll(c: org.dresdenocl.examples.royalsandloyals.Customer) : Boolean
      *       post: membership = membership@pre</code></p>
      */
-    Boolean around(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, tudresden.ocl20.pivot.examples.royalsandloyals.Customer c): enrollCaller(aClass, c) {
+    Boolean around(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.examples.royalsandloyals.Customer c): enrollCaller(aClass, c) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
-        if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.LoyaltyProgram")) {
     
-        tudresden.ocl20.pivot.examples.royalsandloyals.Membership atPreValue1;
+        org.dresdenocl.examples.royalsandloyals.Membership atPreValue1;
         
         if (aClass.membership == null) {
             atPreValue1 == null;

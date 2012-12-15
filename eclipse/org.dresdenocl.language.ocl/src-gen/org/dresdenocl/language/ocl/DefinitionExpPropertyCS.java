@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpPropertyCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpPropertyCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface DefinitionExpPropertyCS extends DefinitionExpPartCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Variable Declaration</em>' containment reference.
    * @see #setVariableDeclaration(VariableDeclarationWithInitCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpPropertyCS_VariableDeclaration()
+   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpPropertyCS_VariableDeclaration()
    * @model containment="true" required="true"
    * @generated
    */
 	VariableDeclarationWithInitCS getVariableDeclaration();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Variable Declaration</em>' containment reference.

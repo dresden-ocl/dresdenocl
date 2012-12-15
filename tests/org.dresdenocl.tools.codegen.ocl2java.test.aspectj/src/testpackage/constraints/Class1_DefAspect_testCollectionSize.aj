@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionSize {
      *       def: testCollectionSize(source: Collection(OclAny)):    Integer = source ->size()</code></p>
      */
     public Integer testpackage.Class1.testCollectionSize(java.util.Collection<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(source);
     }
 }

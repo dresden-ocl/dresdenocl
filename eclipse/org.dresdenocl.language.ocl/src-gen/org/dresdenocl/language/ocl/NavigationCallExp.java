@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -17,13 +17,13 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getSource <em>Source</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getNavigationOperator <em>Navigation Operator</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getFeatureCalls <em>Feature Calls</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.NavigationCallExp#getSource <em>Source</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.NavigationCallExp#getNavigationOperator <em>Navigation Operator</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.NavigationCallExp#getFeatureCalls <em>Feature Calls</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNavigationCallExp()
+ * @see org.dresdenocl.language.ocl.OclPackage#getNavigationCallExp()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface NavigationCallExp extends FeatureCallExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Source</em>' containment reference.
    * @see #setSource(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNavigationCallExp_Source()
+   * @see org.dresdenocl.language.ocl.OclPackage#getNavigationCallExp_Source()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getSource();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getSource <em>Source</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.NavigationCallExp#getSource <em>Source</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Source</em>' containment reference.
@@ -64,7 +64,7 @@ public interface NavigationCallExp extends FeatureCallExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Navigation Operator</em>' attribute list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNavigationCallExp_NavigationOperator()
+   * @see org.dresdenocl.language.ocl.OclPackage#getNavigationCallExp_NavigationOperator()
    * @model unique="false" required="true"
    * @generated
    */
@@ -72,7 +72,7 @@ public interface NavigationCallExp extends FeatureCallExpCS {
 
 	/**
    * Returns the value of the '<em><b>Feature Calls</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.ImplicitFeatureCallCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Feature Calls</em>' containment reference list isn't clear,
@@ -80,7 +80,7 @@ public interface NavigationCallExp extends FeatureCallExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Feature Calls</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNavigationCallExp_FeatureCalls()
+   * @see org.dresdenocl.language.ocl.OclPackage#getNavigationCallExp_FeatureCalls()
    * @model containment="true" required="true"
    * @generated
    */

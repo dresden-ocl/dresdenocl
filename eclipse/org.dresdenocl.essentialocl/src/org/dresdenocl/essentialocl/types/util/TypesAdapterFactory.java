@@ -30,37 +30,37 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.util;
+package org.dresdenocl.essentialocl.types.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.types.*;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.types.*;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl
+ * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl
  * @generated
  */
 public class TypesAdapterFactory extends AdapterFactoryImpl {
@@ -226,13 +226,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.BagType <em>Bag Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.BagType <em>Bag Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.BagType
+	 * @see org.dresdenocl.essentialocl.types.BagType
 	 * @generated
 	 */
 	public Adapter createBagTypeAdapter() {
@@ -241,13 +241,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.TupleType <em>Tuple Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.TupleType <em>Tuple Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.TupleType
+	 * @see org.dresdenocl.essentialocl.types.TupleType
 	 * @generated
 	 */
 	public Adapter createTupleTypeAdapter() {
@@ -256,13 +256,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType <em>Collection Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.CollectionType <em>Collection Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType
+	 * @see org.dresdenocl.essentialocl.types.CollectionType
 	 * @generated
 	 */
 	public Adapter createCollectionTypeAdapter() {
@@ -271,13 +271,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType
+	 * @see org.dresdenocl.essentialocl.types.InvalidType
 	 * @generated
 	 */
 	public Adapter createInvalidTypeAdapter() {
@@ -286,13 +286,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType <em>Ordered Set Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.OrderedSetType <em>Ordered Set Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OrderedSetType
+	 * @see org.dresdenocl.essentialocl.types.OrderedSetType
 	 * @generated
 	 */
 	public Adapter createOrderedSetTypeAdapter() {
@@ -301,13 +301,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.SequenceType <em>Sequence Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.SequenceType <em>Sequence Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.SequenceType
+	 * @see org.dresdenocl.essentialocl.types.SequenceType
 	 * @generated
 	 */
 	public Adapter createSequenceTypeAdapter() {
@@ -316,13 +316,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.SetType <em>Set Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.SetType <em>Set Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.SetType
+	 * @see org.dresdenocl.essentialocl.types.SetType
 	 * @generated
 	 */
 	public Adapter createSetTypeAdapter() {
@@ -331,13 +331,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType <em>Void Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.VoidType <em>Void Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType
+	 * @see org.dresdenocl.essentialocl.types.VoidType
 	 * @generated
 	 */
 	public Adapter createVoidTypeAdapter() {
@@ -346,13 +346,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType <em>Type Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.TypeType <em>Type Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.TypeType
+	 * @see org.dresdenocl.essentialocl.types.TypeType
 	 * @generated
 	 */
 	public Adapter createTypeTypeAdapter() {
@@ -361,13 +361,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary
 	 * @generated
 	 */
 	public Adapter createOclLibraryAdapter() {
@@ -376,13 +376,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.types.AnyType <em>Any Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.types.AnyType <em>Any Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.AnyType
+	 * @see org.dresdenocl.essentialocl.types.AnyType
 	 * @generated
 	 */
 	public Adapter createAnyTypeAdapter() {
@@ -391,13 +391,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * @see org.dresdenocl.pivotmodel.NamedElement
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
@@ -406,13 +406,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * @see org.dresdenocl.pivotmodel.ConstrainableElement
 	 * @generated
 	 */
 	public Adapter createConstrainableElementAdapter() {
@@ -421,13 +421,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement <em>Generic Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.GenericElement <em>Generic Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * @see org.dresdenocl.pivotmodel.GenericElement
 	 * @generated
 	 */
 	public Adapter createGenericElementAdapter() {
@@ -436,13 +436,13 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.Type <em>Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type
+	 * @see org.dresdenocl.pivotmodel.Type
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {

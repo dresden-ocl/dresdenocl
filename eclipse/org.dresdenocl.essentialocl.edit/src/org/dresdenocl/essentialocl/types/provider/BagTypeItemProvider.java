@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.provider;
+package org.dresdenocl.essentialocl.types.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -44,10 +44,10 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.types.BagType} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.essentialocl.types.BagType} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
@@ -112,7 +112,7 @@ public class BagTypeItemProvider extends CollectionTypeItemProvider implements
 	/**
 	 * Overridden to return the constant string <code>"Bag"</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.provider.TypeItemProvider#getTypeName(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected String getTypeName(Type type) {

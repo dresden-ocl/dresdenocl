@@ -28,11 +28,11 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelinstancetype.types;
+package org.dresdenocl.modelinstancetype.types;
 
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.exception.CopyForAtPreException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

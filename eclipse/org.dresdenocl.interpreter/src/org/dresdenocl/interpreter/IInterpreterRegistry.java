@@ -28,18 +28,18 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter;
+package org.dresdenocl.interpreter;
 
 import java.util.List;
 import java.util.UUID;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.event.IInterpreterRegistryListener;
+import org.dresdenocl.interpreter.event.IInterpreterTraceListener;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

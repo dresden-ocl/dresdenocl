@@ -30,56 +30,56 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.util;
+package org.dresdenocl.essentialocl.expressions.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.*;
-import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
-import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IfExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.essentialocl.expressions.*;
+import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CallExp;
+import org.dresdenocl.essentialocl.expressions.CollectionItem;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralPart;
+import org.dresdenocl.essentialocl.expressions.CollectionRange;
+import org.dresdenocl.essentialocl.expressions.EnumLiteralExp;
+import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
+import org.dresdenocl.essentialocl.expressions.FeatureCallExp;
+import org.dresdenocl.essentialocl.expressions.IfExp;
+import org.dresdenocl.essentialocl.expressions.IntegerLiteralExp;
+import org.dresdenocl.essentialocl.expressions.InvalidLiteralExp;
+import org.dresdenocl.essentialocl.expressions.IterateExp;
+import org.dresdenocl.essentialocl.expressions.IteratorExp;
+import org.dresdenocl.essentialocl.expressions.LetExp;
+import org.dresdenocl.essentialocl.expressions.LiteralExp;
+import org.dresdenocl.essentialocl.expressions.LoopExp;
+import org.dresdenocl.essentialocl.expressions.NumericLiteralExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.OperationCallExp;
+import org.dresdenocl.essentialocl.expressions.PrimitiveLiteralExp;
+import org.dresdenocl.essentialocl.expressions.PropertyCallExp;
+import org.dresdenocl.essentialocl.expressions.RealLiteralExp;
+import org.dresdenocl.essentialocl.expressions.StringLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralPart;
+import org.dresdenocl.essentialocl.expressions.TypeLiteralExp;
+import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
+import org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.VariableExp;
+import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl
+ * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl
  * @generated
  */
 public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
@@ -360,13 +360,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp <em>Variable Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.VariableExp <em>Variable Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.VariableExp
+	 * @see org.dresdenocl.essentialocl.expressions.VariableExp
 	 * @generated
 	 */
 	public Adapter createVariableExpAdapter() {
@@ -375,13 +375,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable <em>Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.Variable
+	 * @see org.dresdenocl.essentialocl.expressions.Variable
 	 * @generated
 	 */
 	public Adapter createVariableAdapter() {
@@ -390,13 +390,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp <em>Unlimited Natural Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp <em>Unlimited Natural Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp
+	 * @see org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp
 	 * @generated
 	 */
 	public Adapter createUnlimitedNaturalExpAdapter() {
@@ -405,13 +405,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp <em>Type Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.TypeLiteralExp <em>Type Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.TypeLiteralExp
 	 * @generated
 	 */
 	public Adapter createTypeLiteralExpAdapter() {
@@ -420,13 +420,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart <em>Tuple Literal Part</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart <em>Tuple Literal Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralPart
 	 * @generated
 	 */
 	public Adapter createTupleLiteralPartAdapter() {
@@ -435,13 +435,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp <em>Tuple Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralExp <em>Tuple Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralExp
 	 * @generated
 	 */
 	public Adapter createTupleLiteralExpAdapter() {
@@ -450,13 +450,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp <em>String Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.StringLiteralExp <em>String Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.StringLiteralExp
 	 * @generated
 	 */
 	public Adapter createStringLiteralExpAdapter() {
@@ -465,13 +465,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp <em>Real Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.RealLiteralExp <em>Real Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.RealLiteralExp
 	 * @generated
 	 */
 	public Adapter createRealLiteralExpAdapter() {
@@ -480,13 +480,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp <em>Property Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp <em>Property Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp
+	 * @see org.dresdenocl.essentialocl.expressions.PropertyCallExp
 	 * @generated
 	 */
 	public Adapter createPropertyCallExpAdapter() {
@@ -495,13 +495,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp <em>Primitive Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.PrimitiveLiteralExp <em>Primitive Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.PrimitiveLiteralExp
 	 * @generated
 	 */
 	public Adapter createPrimitiveLiteralExpAdapter() {
@@ -510,13 +510,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp <em>Operation Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.OperationCallExp <em>Operation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp
+	 * @see org.dresdenocl.essentialocl.expressions.OperationCallExp
 	 * @generated
 	 */
 	public Adapter createOperationCallExpAdapter() {
@@ -525,13 +525,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression <em>Ocl Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.OclExpression <em>Ocl Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression
+	 * @see org.dresdenocl.essentialocl.expressions.OclExpression
 	 * @generated
 	 */
 	public Adapter createOclExpressionAdapter() {
@@ -540,13 +540,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp <em>Numeric Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.NumericLiteralExp <em>Numeric Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.NumericLiteralExp
 	 * @generated
 	 */
 	public Adapter createNumericLiteralExpAdapter() {
@@ -555,13 +555,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp <em>Undefined Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp <em>Undefined Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp
 	 * @generated
 	 */
 	public Adapter createUndefinedLiteralExpAdapter() {
@@ -570,13 +570,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp <em>Loop Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.LoopExp <em>Loop Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LoopExp
+	 * @see org.dresdenocl.essentialocl.expressions.LoopExp
 	 * @generated
 	 */
 	public Adapter createLoopExpAdapter() {
@@ -585,13 +585,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp <em>Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.LiteralExp <em>Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.LiteralExp
 	 * @generated
 	 */
 	public Adapter createLiteralExpAdapter() {
@@ -600,13 +600,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp <em>Let Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.LetExp <em>Let Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LetExp
+	 * @see org.dresdenocl.essentialocl.expressions.LetExp
 	 * @generated
 	 */
 	public Adapter createLetExpAdapter() {
@@ -615,13 +615,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp <em>Iterator Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.IteratorExp <em>Iterator Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp
+	 * @see org.dresdenocl.essentialocl.expressions.IteratorExp
 	 * @generated
 	 */
 	public Adapter createIteratorExpAdapter() {
@@ -630,13 +630,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp <em>Iterate Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.IterateExp <em>Iterate Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IterateExp
+	 * @see org.dresdenocl.essentialocl.expressions.IterateExp
 	 * @generated
 	 */
 	public Adapter createIterateExpAdapter() {
@@ -645,13 +645,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp <em>Invalid Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.InvalidLiteralExp <em>Invalid Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.InvalidLiteralExp
 	 * @generated
 	 */
 	public Adapter createInvalidLiteralExpAdapter() {
@@ -660,13 +660,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp <em>Integer Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp <em>Integer Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.IntegerLiteralExp
 	 * @generated
 	 */
 	public Adapter createIntegerLiteralExpAdapter() {
@@ -675,13 +675,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp <em>If Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.IfExp <em>If Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IfExp
+	 * @see org.dresdenocl.essentialocl.expressions.IfExp
 	 * @generated
 	 */
 	public Adapter createIfExpAdapter() {
@@ -690,13 +690,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp <em>Feature Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.FeatureCallExp <em>Feature Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp
+	 * @see org.dresdenocl.essentialocl.expressions.FeatureCallExp
 	 * @generated
 	 */
 	public Adapter createFeatureCallExpAdapter() {
@@ -705,13 +705,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp <em>Boolean Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.BooleanLiteralExp <em>Boolean Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.BooleanLiteralExp
 	 * @generated
 	 */
 	public Adapter createBooleanLiteralExpAdapter() {
@@ -720,13 +720,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CallExp <em>Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.CallExp <em>Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CallExp
+	 * @see org.dresdenocl.essentialocl.expressions.CallExp
 	 * @generated
 	 */
 	public Adapter createCallExpAdapter() {
@@ -735,13 +735,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem <em>Collection Item</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.CollectionItem <em>Collection Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionItem
 	 * @generated
 	 */
 	public Adapter createCollectionItemAdapter() {
@@ -750,13 +750,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp <em>Collection Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp <em>Collection Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralExp
 	 * @generated
 	 */
 	public Adapter createCollectionLiteralExpAdapter() {
@@ -765,13 +765,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart <em>Collection Literal Part</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralPart <em>Collection Literal Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralPart
 	 * @generated
 	 */
 	public Adapter createCollectionLiteralPartAdapter() {
@@ -780,13 +780,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange <em>Collection Range</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.CollectionRange <em>Collection Range</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionRange
 	 * @generated
 	 */
 	public Adapter createCollectionRangeAdapter() {
@@ -795,13 +795,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp <em>Enum Literal Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp <em>Enum Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.EnumLiteralExp
 	 * @generated
 	 */
 	public Adapter createEnumLiteralExpAdapter() {
@@ -810,13 +810,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl <em>Expression In Ocl</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl <em>Expression In Ocl</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl
+	 * @see org.dresdenocl.essentialocl.expressions.ExpressionInOcl
 	 * @generated
 	 */
 	public Adapter createExpressionInOclAdapter() {
@@ -825,13 +825,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.TypedElement <em>Typed Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.TypedElement <em>Typed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypedElement
+	 * @see org.dresdenocl.pivotmodel.TypedElement
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
@@ -840,13 +840,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * @see org.dresdenocl.pivotmodel.NamedElement
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
@@ -855,13 +855,13 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.pivotmodel.Expression <em>Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression
+	 * @see org.dresdenocl.pivotmodel.Expression
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {

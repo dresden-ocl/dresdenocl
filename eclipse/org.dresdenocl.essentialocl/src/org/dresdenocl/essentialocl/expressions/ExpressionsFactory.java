@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +48,7 @@ public interface ExpressionsFactory {
 	 * @generated
 	 */
 	ExpressionsFactory INSTANCE =
-			tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl.eINSTANCE;
+			org.dresdenocl.essentialocl.expressions.impl.ExpressionsFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Variable Exp</em>'.

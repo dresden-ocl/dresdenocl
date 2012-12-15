@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * The OclTaskItemBuilder is used to find task items in text documents. The
@@ -16,31 +16,31 @@ public class OclTaskItemBuilder {
 	
 	public void build(org.eclipse.core.resources.IFile resource, org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		monitor.setTaskName("Searching for task items");
-		new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, org.eclipse.core.resources.IMarker.TASK);
+		new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, org.eclipse.core.resources.IMarker.TASK);
 		if (isInBinFolder(resource)) {
 			return;
 		}
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem> taskItems = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem>();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItemDetector taskItemDetector = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItemDetector();
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem> taskItems = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem>();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemDetector taskItemDetector = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemDetector();
 		try {
 			java.io.InputStream inputStream = resource.getContents();
-			String content = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStreamUtil.getContent(inputStream);
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextScanner lexer = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().createLexer();
+			String content = org.dresdenocl.language.ocl.resource.ocl.util.OclStreamUtil.getContent(inputStream);
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner lexer = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().createLexer();
 			lexer.setText(content);
 			
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken nextToken = lexer.getNextToken();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextToken nextToken = lexer.getNextToken();
 			while (nextToken != null) {
 				String text = nextToken.getText();
 				taskItems.addAll(taskItemDetector.findTaskItems(text, nextToken.getLine(), nextToken.getOffset()));
 				nextToken = lexer.getNextToken();
 			}
 		} catch (java.io.IOException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while searching for task items", e);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while searching for task items", e);
 		} catch (org.eclipse.core.runtime.CoreException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while searching for task items", e);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while searching for task items", e);
 		}
 		
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem taskItem : taskItems) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem taskItem : taskItems) {
 			java.util.Map<String, Object> markerAttributes = new java.util.LinkedHashMap<String, Object>();
 			markerAttributes.put(org.eclipse.core.resources.IMarker.USER_EDITABLE, false);
 			markerAttributes.put(org.eclipse.core.resources.IMarker.DONE, false);
@@ -48,7 +48,7 @@ public class OclTaskItemBuilder {
 			markerAttributes.put(org.eclipse.core.resources.IMarker.CHAR_START, taskItem.getCharStart());
 			markerAttributes.put(org.eclipse.core.resources.IMarker.CHAR_END, taskItem.getCharEnd());
 			markerAttributes.put(org.eclipse.core.resources.IMarker.MESSAGE, taskItem.getMessage());
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper().createMarker(resource, org.eclipse.core.resources.IMarker.TASK, markerAttributes);
+			new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMarkerHelper().createMarker(resource, org.eclipse.core.resources.IMarker.TASK, markerAttributes);
 		}
 	}
 	

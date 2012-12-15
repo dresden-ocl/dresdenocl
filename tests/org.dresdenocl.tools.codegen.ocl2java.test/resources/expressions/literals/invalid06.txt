@@ -1,5 +1,5 @@
 Integer var;
-var = (Integer) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+var = (Integer) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
 
 
 var

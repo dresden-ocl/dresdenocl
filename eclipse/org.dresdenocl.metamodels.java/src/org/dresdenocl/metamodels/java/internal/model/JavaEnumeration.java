@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +19,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.base.AbstractEnumeration;
 
 /**
  * <p>
@@ -84,7 +84,7 @@ public class JavaEnumeration extends AbstractEnumeration implements Enumeration 
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getName()
 	 */
 	public String getName() {
 
@@ -94,7 +94,7 @@ public class JavaEnumeration extends AbstractEnumeration implements Enumeration 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
+	 * org.dresdenocl.pivotmodel.base.AbstractEnumeration#getNamespace()
 	 */
 	@Override
 	public Namespace getNamespace() {
@@ -121,7 +121,7 @@ public class JavaEnumeration extends AbstractEnumeration implements Enumeration 
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
 	 * 
 	 * @generated NOT
 	 */

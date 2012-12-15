@@ -30,7 +30,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -38,11 +38,11 @@ import java.math.BigInteger;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EDataType;
 
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.base.AbstractPrimitiveType;
 
 /**
  * <p>
@@ -217,7 +217,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getKind()
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
@@ -231,7 +231,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getName()
 	 */
 	@Override
 	public String getName() {
@@ -250,7 +250,7 @@ public class EcorePrimitiveType extends AbstractPrimitiveType implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace ()
+	 * org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getNamespace ()
 	 */
 	@Override
 	public Namespace getNamespace() {

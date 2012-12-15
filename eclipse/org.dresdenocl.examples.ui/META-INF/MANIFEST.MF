@@ -1,22 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL Example Creation Wizards
-Bundle-SymbolicName: tudresden.ocl20.pivot.examples.ui;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.examples.ui;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.examples.ui.ExampleUiPlugin
+Bundle-Activator: org.dresdenocl.examples.ui.ExampleUiPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.ui,
  org.eclipse.emf.common,
  org.eclipse.emf.common.ui,
- tudresden.ocl20.logging,
- tudresden.ocl20.pivot.examples.simple,
- tudresden.ocl20.pivot.examples.living,
- tudresden.ocl20.pivot.examples.pain,
- tudresden.ocl20.pivot.examples.pml,
- tudresden.ocl20.pivot.examples.royalandloyal;bundle-version="3.1.0",
- tudresden.ocl20.pivot.examples.university
+ org.dresdenocl.logging,
+ org.dresdenocl.examples.simple,
+ org.dresdenocl.examples.living,
+ org.dresdenocl.examples.pain,
+ org.dresdenocl.examples.pml,
+ org.dresdenocl.examples.royalandloyal;bundle-version="3.1.0",
+ org.dresdenocl.examples.university
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.examples.ui.wizard
+Export-Package: org.dresdenocl.examples.ui.wizard

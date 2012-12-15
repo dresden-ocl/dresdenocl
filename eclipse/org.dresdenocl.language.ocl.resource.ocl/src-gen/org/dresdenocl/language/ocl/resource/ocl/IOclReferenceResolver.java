@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * A reference resolver tries to resolve a reference to one or many model elements
@@ -15,7 +15,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl;
  * @param <ReferenceType> the type of the reference that is resolved by this
  * resolver
  */
-public interface IOclReferenceResolver<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> extends tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclConfigurable {
+public interface IOclReferenceResolver<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	
 	/**
 	 * Attempts to resolve a reference string.
@@ -30,7 +30,7 @@ public interface IOclReferenceResolver<ContainerType extends org.eclipse.emf.eco
 	 * @param result an object that can be used to store the result of the resolve
 	 * operation.
 	 */
-	public void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result);
+	public void resolve(String identifier, ContainerType container, org.eclipse.emf.ecore.EReference reference, int position, boolean resolveFuzzy, org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result);
 	
 	/**
 	 * Reverse of the resolve operation: constructs a String representing the given

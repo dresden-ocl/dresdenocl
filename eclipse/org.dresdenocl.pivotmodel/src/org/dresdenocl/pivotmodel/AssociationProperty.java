@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -49,12 +49,12 @@ import java.util.List;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties
+ * {@link org.dresdenocl.pivotmodel.AssociationProperty#getInverseAssociationProperties
  * <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getAssociationProperty()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getAssociationProperty()
  * @model
  * @generated
  */
@@ -63,7 +63,7 @@ public interface AssociationProperty extends Property {
 	/**
 	 * Returns the value of the '<em><b>Inverse Association Properties</b></em>'
 	 * containment reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty}. <!--
+	 * {@link org.dresdenocl.pivotmodel.AssociationProperty}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inverse Association Properties</em>' containment
@@ -74,7 +74,7 @@ public interface AssociationProperty extends Property {
 	 * 
 	 * @return the value of the '<em>Inverse Association Properties</em>'
 	 *         containment reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getAssociationProperty_InverseAssociationProperties()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getAssociationProperty_InverseAssociationProperties()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -101,7 +101,7 @@ public interface AssociationProperty extends Property {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model propNameDataType="tudresden.ocl20.pivot.datatypes.String"
+	 * @model propNameDataType="org.dresdenocl.datatypes.String"
 	 * @generated
 	 */
 	AssociationProperty getAssociation(String propName);
@@ -127,7 +127,7 @@ public interface AssociationProperty extends Property {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isInverseAssociation(AssociationProperty bProperty);
@@ -148,7 +148,7 @@ public interface AssociationProperty extends Property {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model kind="operation" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 * @model kind="operation" dataType="org.dresdenocl.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isNavigable();

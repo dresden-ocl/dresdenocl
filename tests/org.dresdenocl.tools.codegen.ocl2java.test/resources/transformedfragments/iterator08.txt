@@ -1,51 +1,51 @@
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership> result3;
-result3 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership>();
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Membership> result3;
+result3 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Membership>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement1 : aClass.programs) {
+for (org.dresdenocl.examples.royalsandloyals.LoyaltyProgram anElement1 : aClass.programs) {
     result3.add(anElement1.membership);
 }
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
-result2 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result2;
+result2 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Membership anElement2 : result3) {
+for (org.dresdenocl.examples.royalsandloyals.Membership anElement2 : result3) {
     result2.addAll(anElement2.accounts);
 }
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
-result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result1;
+result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement3 : result2) {
+for (org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement3 : result2) {
     if ((anElement3.points > new Integer(0))) {
         result1.add(anElement3);
     }
     // no else
 }
 
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership> result6;
-result6 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Membership>();
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Membership> result6;
+result6 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Membership>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement4 : aClass.programs) {
+for (org.dresdenocl.examples.royalsandloyals.LoyaltyProgram anElement4 : aClass.programs) {
     result6.add(anElement4.membership);
 }
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result5;
-result5 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result5;
+result5 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Membership anElement5 : result6) {
+for (org.dresdenocl.examples.royalsandloyals.Membership anElement5 : result6) {
     result5.addAll(anElement5.accounts);
 }
-java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result4;
-result4 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>();
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result4;
+result4 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>();
 
 /* Iterator Reject: Select all elements which do not fulfill the condition. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement6 : result5) {
+for (org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement6 : result5) {
     if (!!(anElement6.points > new Integer(0))) {
         result4.add(anElement6);
     }
     // no else
 }
 
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.equals(result1, result4)
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags.equals(result1, result4)

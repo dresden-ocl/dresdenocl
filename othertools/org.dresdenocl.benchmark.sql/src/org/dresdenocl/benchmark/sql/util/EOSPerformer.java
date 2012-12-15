@@ -1,4 +1,4 @@
-package tudresden.ocl20.benchmark.sql.util;
+package org.dresdenocl.benchmark.sql.util;
 
 import java.util.HashMap;
 import java.util.Map;

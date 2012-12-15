@@ -1,7 +1,7 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclCode;
 
 public interface IOcl2Sql extends IOcl2DeclCode {
 

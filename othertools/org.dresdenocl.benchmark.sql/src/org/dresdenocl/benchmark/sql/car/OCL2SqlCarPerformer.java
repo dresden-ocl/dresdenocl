@@ -1,8 +1,8 @@
-package tudresden.ocl20.benchmark.sql.car;
+package org.dresdenocl.benchmark.sql.car;
 
 import java.sql.SQLException;
 
-import tudresden.ocl20.benchmark.sql.util.Ocl2SqlPerformer;
+import org.dresdenocl.benchmark.sql.util.Ocl2SqlPerformer;
 
 public class OCL2SqlCarPerformer extends Ocl2SqlPerformer implements
 		ICarPerformer {

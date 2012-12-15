@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.msg;
+package org.dresdenocl.modelinstancetype.test.msg;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -32,7 +32,7 @@ public class ModelInstanceTypeTestSuiteMessages extends NLS {
 
 	/** The name of the message resource bundle. */
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.modelinstancetype.test.msg.messages"; //$NON-NLS-1$
+			"org.dresdenocl.modelinstancetype.test.msg.messages"; //$NON-NLS-1$
 
 
 	public static String ModelInstanceTypeTestSuite_Services_ModelInstanceFileNotFound;

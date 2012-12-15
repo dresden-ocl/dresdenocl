@@ -4,13 +4,13 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * Converts a tree of <code>org.eclipse.emf.ecore.EObject</code>s into a plain
  * text.
  */
-public interface IOclTextPrinter extends tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclConfigurable {
+public interface IOclTextPrinter extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	
 	/**
 	 * Prints the given <code>org.eclipse.emf.ecore.EObject</code> and its content to

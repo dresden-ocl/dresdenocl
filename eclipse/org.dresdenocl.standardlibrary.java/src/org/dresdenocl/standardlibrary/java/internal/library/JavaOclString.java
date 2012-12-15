@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,18 +38,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -88,7 +88,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
@@ -194,7 +194,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#concat(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#concat(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclString)
 	 */
 	public OclString concat(OclString aString) {
@@ -329,8 +329,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny
+	 * #isEqualTo(org.dresdenocl.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
@@ -363,8 +363,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isGreaterEqual
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#isGreaterEqual
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclString)
 	 */
 	public OclBoolean isGreaterEqual(OclString that) {
 
@@ -395,8 +395,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isGreaterThan
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#isGreaterThan
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclString)
 	 */
 	public OclBoolean isGreaterThan(OclString that) {
 
@@ -427,8 +427,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isLessEqual
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#isLessEqual
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclString)
 	 */
 	public OclBoolean isLessEqual(OclString that) {
 
@@ -459,8 +459,8 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#isLessThan
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#isLessThan
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclString)
 	 */
 	public OclBoolean isLessThan(OclString that) {
 
@@ -492,7 +492,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#plus(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#plus(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclString)
 	 */
 	public OclString plus(OclString s) {
@@ -503,7 +503,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#size()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclString#size()
 	 */
 	public OclInteger size() {
 
@@ -531,9 +531,9 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#substring
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#substring
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclInteger,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclString substring(OclInteger lower, OclInteger upper) {
 
@@ -601,7 +601,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toInteger()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#toInteger()
 	 */
 	public OclInteger toInteger() {
 
@@ -678,7 +678,7 @@ public class JavaOclString extends JavaOclLibraryObject implements OclString {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString#toReal()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclString#toReal()
 	 */
 	public OclReal toReal() {
 

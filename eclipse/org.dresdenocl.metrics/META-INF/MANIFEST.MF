@@ -9,9 +9,9 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- tudresden.ocl20.pivot.pivotmodel;visibility:=reexport,
- tudresden.ocl20.pivot.model,
- tudresden.ocl20.pivot.essentialocl
+ org.dresdenocl.pivotmodel;visibility:=reexport,
+ org.dresdenocl.model,
+ org.dresdenocl.essentialocl
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dresdenocl.metrics,
  org.dresdenocl.metrics.metric,

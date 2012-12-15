@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards;
+package org.dresdenocl.tools.codegen.ui.impl.wizards;
 
 import java.util.List;
 
@@ -42,12 +42,12 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.ui.Ocl2CodeUIPlugIn;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.tools.codegen.ui.Ocl2CodeUIPlugIn;
+import org.dresdenocl.tools.codegen.ui.impl.CodegenUIMessages;
 
 /**
  * <p>

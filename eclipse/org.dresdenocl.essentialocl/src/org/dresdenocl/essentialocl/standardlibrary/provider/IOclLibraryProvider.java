@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary.provider;
+package org.dresdenocl.essentialocl.standardlibrary.provider;
 
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
-import tudresden.ocl20.pivot.model.IModel;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.util.TypeResolver;
+import org.dresdenocl.model.IModel;
 
 /**
  * <p>

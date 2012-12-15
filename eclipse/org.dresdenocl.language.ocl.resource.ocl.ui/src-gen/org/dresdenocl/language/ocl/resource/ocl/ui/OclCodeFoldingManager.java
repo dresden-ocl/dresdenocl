@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * This manager adds new projection annotations for the code folding and deletes
@@ -14,7 +14,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclCodeFoldingManager {
 	
-	private class FoldingUpdateListener implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener {
+	private class FoldingUpdateListener implements org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener {
 		public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource resource) {
 			calculatePositions();
 		}
@@ -22,9 +22,9 @@ public class OclCodeFoldingManager {
 	
 	private class EditorOnCloseListener implements org.eclipse.ui.IPartListener2 {
 		
-		private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+		private org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor;
 		
-		public EditorOnCloseListener(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+		public EditorOnCloseListener(org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor) {
 			this.editor = editor;
 		}
 		
@@ -39,8 +39,8 @@ public class OclCodeFoldingManager {
 				return;
 			}
 			org.eclipse.ui.IWorkbenchPart workbenchPart = partRef.getPart(false);
-			if (workbenchPart instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) workbenchPart;
+			if (workbenchPart instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) {
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor = (org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor) workbenchPart;
 				org.eclipse.emf.ecore.resource.Resource editorResource = editor.getResource();
 				if (editorResource == null) {
 					return;
@@ -82,7 +82,7 @@ public class OclCodeFoldingManager {
 	protected java.util.Map<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position> additions = new java.util.LinkedHashMap<org.eclipse.jface.text.source.projection.ProjectionAnnotation, org.eclipse.jface.text.Position>();
 	protected org.eclipse.jface.text.source.projection.ProjectionAnnotationModel projectionAnnotationModel;
 	protected org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer;
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+	protected org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor;
 	
 	/**
 	 * Creates a code folding manager to handle the
@@ -90,7 +90,7 @@ public class OclCodeFoldingManager {
 	 * 
 	 * @param sourceViewer the source viewer to calculate the element lines
 	 */
-	public OclCodeFoldingManager(org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer,tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor textEditor) {
+	public OclCodeFoldingManager(org.eclipse.jface.text.source.projection.ProjectionViewer sourceViewer,org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor textEditor) {
 		this.projectionAnnotationModel = sourceViewer.getProjectionAnnotationModel();
 		this.sourceViewer = sourceViewer;
 		this.editor = textEditor;
@@ -102,7 +102,7 @@ public class OclCodeFoldingManager {
 		}
 	}
 	
-	private void addCloseListener(final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	private void addCloseListener(final org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor) {
 		editor.getSite().getPage().addPartListener(new EditorOnCloseListener(editor));
 		editor.addBackgroundParsingListener(new FoldingUpdateListener());
 	}
@@ -302,7 +302,7 @@ public class OclCodeFoldingManager {
 	}
 	
 	private java.io.File getCodeFoldingStateFile(String uriString) {
-		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
+		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
 		org.eclipse.core.runtime.IPath path = org.eclipse.core.runtime.Platform.getStateLocation(bundle);
 		if (path == null) {
 			return null;
@@ -318,7 +318,7 @@ public class OclCodeFoldingManager {
 			md = java.security.MessageDigest.getInstance("MD5");
 			encryptMsg = md.digest(text.getBytes());
 		} catch (java.security.NoSuchAlgorithmException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("NoSuchAlgorithmException while creating MD5 checksum.", e);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("NoSuchAlgorithmException while creating MD5 checksum.", e);
 			return "";
 		}
 		String swap = "";
@@ -344,7 +344,7 @@ public class OclCodeFoldingManager {
 	}
 	
 	protected void calculatePositions() {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) editor.getResource();
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) editor.getResource();
 		org.eclipse.jface.text.IDocument document = sourceViewer.getDocument();
 		if (textResource == null || document == null) {
 			return;
@@ -354,7 +354,7 @@ public class OclCodeFoldingManager {
 			return;
 		}
 		final java.util.List<org.eclipse.jface.text.Position> positions = new java.util.ArrayList<org.eclipse.jface.text.Position>();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		org.eclipse.emf.ecore.EClass[] foldableClasses = textResource.getMetaInformation().getFoldableClasses();
 		if (foldableClasses == null) {
 			return;

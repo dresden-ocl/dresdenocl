@@ -2,10 +2,10 @@
  * Created on 17.01.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation;
+package org.dresdenocl.tools.transformation;
 
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
 
 /**
  * ITransformation represents the interface that each metamodelbased

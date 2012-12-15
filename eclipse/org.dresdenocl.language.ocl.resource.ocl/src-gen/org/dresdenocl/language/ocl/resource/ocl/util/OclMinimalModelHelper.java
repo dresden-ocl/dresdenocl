@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * A helper class that is able to create minimal model instances for Ecore models.
  */
 public class OclMinimalModelHelper {
 	
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEClassUtil eClassUtil = new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEClassUtil();
+	private final static org.dresdenocl.language.ocl.resource.ocl.util.OclEClassUtil eClassUtil = new org.dresdenocl.language.ocl.resource.ocl.util.OclEClassUtil();
 	
 	public org.eclipse.emf.ecore.EObject getMinimalModel(org.eclipse.emf.ecore.EClass eClass, java.util.Collection<org.eclipse.emf.ecore.EClass> allAvailableClasses) {
 		return getMinimalModel(eClass, allAvailableClasses.toArray(new org.eclipse.emf.ecore.EClass[allAvailableClasses.size()]), null);
@@ -64,7 +64,7 @@ public class OclMinimalModelHelper {
 						else {
 							subModel = typeClass.getEPackage().getEFactoryInstance().create(typeClass);
 							// set some proxy URI to make this object a proxy
-							String initialValue = "#some" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.capitalize(typeClass.getName());
+							String initialValue = "#some" + org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.capitalize(typeClass.getName());
 							org.eclipse.emf.common.util.URI proxyURI = org.eclipse.emf.common.util.URI.createURI(initialValue);
 							((org.eclipse.emf.ecore.InternalEObject) subModel).eSetProxyURI(proxyURI);
 						}
@@ -74,7 +74,7 @@ public class OclMinimalModelHelper {
 						
 						Object value = root.eGet(reference);
 						if (value instanceof java.util.List<?>) {
-							java.util.List<org.eclipse.emf.ecore.EObject> list = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.castListUnchecked(value);
+							java.util.List<org.eclipse.emf.ecore.EObject> list = org.dresdenocl.language.ocl.resource.ocl.util.OclListUtil.castListUnchecked(value);
 							list.add(subModel);
 						} else {
 							root.eSet(reference, subModel);
@@ -89,11 +89,11 @@ public class OclMinimalModelHelper {
 						initialValue = name;
 					}
 					else {
-						initialValue = "some" + tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.capitalize(attribute.getName());
+						initialValue = "some" + org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.capitalize(attribute.getName());
 					}
 					Object value = root.eGet(attribute);
 					if (value instanceof java.util.List<?>) {
-						java.util.List<String> list = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.castListUnchecked(value);
+						java.util.List<String> list = org.dresdenocl.language.ocl.resource.ocl.util.OclListUtil.castListUnchecked(value);
 						list.add(initialValue);
 					} else {
 						root.eSet(attribute, initialValue);

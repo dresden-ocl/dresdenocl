@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="tudresden.ocl20.pivot.tools.template" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.dresdenocl.tools.template" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="tudresden.ocl20.pivot.tools.template" id="templateEngines" name="Template Engines"/>
+         <meta.schema plugin="org.dresdenocl.tools.template" id="templateEngines" name="Template Engines"/>
       </appInfo>
       <documentation>
          [Enter description of this extension point.]
@@ -70,7 +70,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.tools.template.ITemplateEngine"/>
+                  <meta.attribute kind="java" basedOn=":org.dresdenocl.tools.template.ITemplateEngine"/>
                </appInfo>
             </annotation>
          </attribute>

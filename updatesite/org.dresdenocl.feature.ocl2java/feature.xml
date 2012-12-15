@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.ocl2java"
+      id="org.dresdenocl.feature.ocl2java"
       label="Dresden OCL Ocl22Java Code Generator"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -182,36 +182,36 @@ Library.
    </license>
 
    <includes
-         id="tudresden.ocl20.feature.codegen"
+         id="org.dresdenocl.feature.codegen"
          version="0.0.0"/>
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.tools.codegen" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.ui" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.tools.codegen.ui" version="2.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java"
+         id="org.dresdenocl.tools.codegen.ocl2java"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java.types"
+         id="org.dresdenocl.tools.codegen.ocl2java.types"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui"
+         id="org.dresdenocl.tools.codegen.ocl2java.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

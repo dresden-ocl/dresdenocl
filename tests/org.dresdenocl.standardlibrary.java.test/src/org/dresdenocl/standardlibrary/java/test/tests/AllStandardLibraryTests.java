@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
+package org.dresdenocl.standardlibrary.java.test.tests;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;

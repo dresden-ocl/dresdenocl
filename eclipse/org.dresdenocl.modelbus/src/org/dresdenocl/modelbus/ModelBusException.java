@@ -31,7 +31,7 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.modelbus;
+package org.dresdenocl.modelbus;
 
 /**
  * <p>

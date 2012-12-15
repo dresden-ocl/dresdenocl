@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,18 +47,18 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -67,17 +67,17 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter
+ * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter
  * <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedType
+ * <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedType
  * <em>Owned Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getOwnedRule
+ * <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedRule
  * <em>Owned Rule</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestedNamespace
+ * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getNestedNamespace
  * <em>Nested Namespace</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl#getNestingNamespace
+ * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getNestingNamespace
  * <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
@@ -158,7 +158,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * Overridden to return the {@link #getNestingNamespace() nesting namespace}
 	 * of this <code>Namespace</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -628,7 +628,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
 	public Namespace clone() {
@@ -639,7 +639,7 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	/**
 	 * Helper method that initializes this <code>Namespace</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#initialize(org.dresdenocl.pivotmodel.NamedElement)
 	 */
 	protected Namespace initialize(Namespace clone) {
 

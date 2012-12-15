@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.model.metamodel;
+package org.dresdenocl.model.metamodel;
 
 
 /**

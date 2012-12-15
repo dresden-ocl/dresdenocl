@@ -30,10 +30,10 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.tests;
+package org.dresdenocl.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,8 +42,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre() <em>With At Pre</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet() <em>With As Set</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.OclExpression#withAtPre() <em>With At Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.OclExpression#withAsSet() <em>With As Set</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -92,10 +92,10 @@ public abstract class OclExpressionTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre() <em>With At Pre</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.expressions.OclExpression#withAtPre() <em>With At Pre</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAtPre()
+	 * @see org.dresdenocl.essentialocl.expressions.OclExpression#withAtPre()
 	 * @generated
 	 */
 	public void testWithAtPre() {
@@ -106,10 +106,10 @@ public abstract class OclExpressionTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet() <em>With As Set</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.expressions.OclExpression#withAsSet() <em>With As Set</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#withAsSet()
+	 * @see org.dresdenocl.essentialocl.expressions.OclExpression#withAsSet()
 	 * @generated
 	 */
 	public void testWithAsSet() {

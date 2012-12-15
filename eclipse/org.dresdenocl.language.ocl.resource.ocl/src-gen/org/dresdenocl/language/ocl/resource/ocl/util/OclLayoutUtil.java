@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * A utility class to inject/extract layout information into/from a model.
@@ -38,10 +38,10 @@ public class OclLayoutUtil {
 	}
 	
 	public void transferLayoutInformationToModel(org.eclipse.emf.ecore.EObject element) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
 		layoutInformationAdapter.getLayoutInformations();
-		for (java.util.Iterator<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> i = layoutInformationAdapter.getLayoutInformations().iterator(); i.hasNext(); ) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = i.next();
+		for (java.util.Iterator<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> i = layoutInformationAdapter.getLayoutInformations().iterator(); i.hasNext(); ) {
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = i.next();
 			org.eclipse.emf.ecore.EReference layoutReference = findLayoutReference(element.eClass());
 			if (layoutReference != null) {
 				org.eclipse.emf.ecore.EObject layoutInformationModelElement = createLayoutInformationModelElement(layoutInformation, layoutReference.getEType().getEPackage());
@@ -58,12 +58,12 @@ public class OclLayoutUtil {
 	public void transferLayoutInformationFromModel(org.eclipse.emf.ecore.EObject element) {
 		org.eclipse.emf.ecore.EReference layoutReference = findLayoutReference(element.eClass());
 		if (layoutReference != null) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter layoutInformationAdapter = getLayoutInformationAdapter(element);
 			@SuppressWarnings("unchecked")			
 			java.util.List<org.eclipse.emf.ecore.EObject> list = (java.util.List<org.eclipse.emf.ecore.EObject>) element.eGet(layoutReference);
 			for (java.util.Iterator<org.eclipse.emf.ecore.EObject> i = list.iterator(); i.hasNext(); ) {
 				org.eclipse.emf.ecore.EObject layoutModelElement = i.next();
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = createLayoutInformation(layoutModelElement);
+				org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation = createLayoutInformation(layoutModelElement);
 				if (layoutInformation != null) {
 					layoutInformationAdapter.getLayoutInformations().add(layoutInformation);
 					i.remove();
@@ -72,10 +72,10 @@ public class OclLayoutUtil {
 		}
 	}
 	
-	public org.eclipse.emf.ecore.EObject createLayoutInformationModelElement(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation, org.eclipse.emf.ecore.EPackage layoutPackage) {
+	public org.eclipse.emf.ecore.EObject createLayoutInformationModelElement(org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation, org.eclipse.emf.ecore.EPackage layoutPackage) {
 		org.eclipse.emf.ecore.EFactory factory = layoutPackage.getEFactoryInstance();
 		Object object = layoutInformation.getObject(null, false);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = layoutInformation.getSyntaxElement();
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = layoutInformation.getSyntaxElement();
 		org.eclipse.emf.ecore.EClass layoutInformationEClass = null;
 		org.eclipse.emf.ecore.EObject layoutInformationModelElement = null;
 		if (object == null) {
@@ -95,36 +95,36 @@ public class OclLayoutUtil {
 		layoutInformationModelElement.eSet(layoutInformationEClass.getEStructuralFeature(START_OFFSET_EATTRIBUTE_NAME), layoutInformation.getStartOffset());
 		layoutInformationModelElement.eSet(layoutInformationEClass.getEStructuralFeature(HIDDEN_TOKEN_TEXT_EATTRIBUTE_NAME), layoutInformation.getHiddenTokenText());
 		layoutInformationModelElement.eSet(layoutInformationEClass.getEStructuralFeature(VISIBLE_TOKEN_TEXT_EATTRIBUTE_NAME), layoutInformation.getVisibleTokenText());
-		layoutInformationModelElement.eSet(layoutInformationEClass.getEStructuralFeature(SYNTAX_ELEMENT_ID_EATTRIBUTE_NAME), tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.getSyntaxElementID(syntaxElement));
+		layoutInformationModelElement.eSet(layoutInformationEClass.getEStructuralFeature(SYNTAX_ELEMENT_ID_EATTRIBUTE_NAME), org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.getSyntaxElementID(syntaxElement));
 		return layoutInformationModelElement;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation createLayoutInformation(org.eclipse.emf.ecore.EObject layoutInformationModelElement) {
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation createLayoutInformation(org.eclipse.emf.ecore.EObject layoutInformationModelElement) {
 		Object object = null;
 		org.eclipse.emf.ecore.EStructuralFeature objectFeature = layoutInformationModelElement.eClass().getEStructuralFeature(OBJECT_EATTRIBUTE_NAME);
 		int startOffset = (Integer) layoutInformationModelElement.eGet(layoutInformationModelElement.eClass().getEStructuralFeature(START_OFFSET_EATTRIBUTE_NAME));
 		String hiddenTokenText = (String) layoutInformationModelElement.eGet(layoutInformationModelElement.eClass().getEStructuralFeature(HIDDEN_TOKEN_TEXT_EATTRIBUTE_NAME));
 		String visibleTokenText = (String) layoutInformationModelElement.eGet(layoutInformationModelElement.eClass().getEStructuralFeature(VISIBLE_TOKEN_TEXT_EATTRIBUTE_NAME));
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.getSyntaxElementByID((String) layoutInformationModelElement.eGet(layoutInformationModelElement.eClass().getEStructuralFeature(SYNTAX_ELEMENT_ID_EATTRIBUTE_NAME)));
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement = org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.getSyntaxElementByID((String) layoutInformationModelElement.eGet(layoutInformationModelElement.eClass().getEStructuralFeature(SYNTAX_ELEMENT_ID_EATTRIBUTE_NAME)));
 		if (objectFeature != null) {
 			object = layoutInformationModelElement.eGet(objectFeature);
-		} else if (syntaxElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder = (tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclPlaceholder) syntaxElement;
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolverFactory().createTokenResolver(placeholder.getTokenName());
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
+		} else if (syntaxElement instanceof org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder) {
+			org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder placeholder = (org.dresdenocl.language.ocl.resource.ocl.grammar.OclPlaceholder) syntaxElement;
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolverFactory().createTokenResolver(placeholder.getTokenName());
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolveResult();
 			tokenResolver.resolve(visibleTokenText, placeholder.getFeature(), result);
 			object = result.getResolvedToken();
 		}
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, startOffset, hiddenTokenText, visibleTokenText);
+		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation(syntaxElement, object, startOffset, hiddenTokenText, visibleTokenText);
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter getLayoutInformationAdapter(org.eclipse.emf.ecore.EObject element) {
 		for (org.eclipse.emf.common.notify.Adapter adapter : element.eAdapters()) {
-			if (adapter instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
-				return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
+			if (adapter instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) {
+				return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter) adapter;
 			}
 		}
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter newAdapter = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformationAdapter();
 		element.eAdapters().add(newAdapter);
 		return newAdapter;
 	}

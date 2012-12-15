@@ -15,4 +15,4 @@ collection2.add("X");
 collection2.add("c");
 collection2.add("d");
 
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(collection1, new Integer(3), "X"), collection2)
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.equals(org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(collection1, new Integer(3), "X"), collection2)

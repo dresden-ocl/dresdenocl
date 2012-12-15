@@ -30,17 +30,17 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.VariableExp;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Variable Exp</b></em>'.
@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.VariableExpImpl#getReferredVariable <em>Referred Variable</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,7 +95,7 @@ public class VariableExpImpl extends OclExpressionImpl implements VariableExp {
 	 * <code>VariableExp</code> is <code>null</code>, a
 	 * {@link WellformednessException} is thrown.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType()
 	 */
 	@Override
 	protected Type evaluateType() {

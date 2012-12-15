@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testOclTypeAllInstances03 {
      *       def: testOclTypeAllInstances03(): Set = OclInvalid.allInstances()</code></p>
      */
     public java.util.Set testpackage.Class1.testOclTypeAllInstances03() {
-        return (java.util.Set<tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+        return (java.util.Set<org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException>) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
     }
 }

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A container for all bracket pairs.
@@ -16,8 +16,8 @@ public class OclBracketSet {
 	 * character, it will be used as regular expression
 	 */
 	public final static String BRACKET_SEPARATOR = " and ";
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
-	private java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair> bracketPairs;
+	private final static org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper();
+	private java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> bracketPairs;
 	private org.eclipse.jface.text.source.ISourceViewer viewer;
 	private String languageID;
 	private org.eclipse.swt.custom.StyledText textWidget;
@@ -26,7 +26,7 @@ public class OclBracketSet {
 	/**
 	 * A single pair of brackets.
 	 */
-	private class BracketPair implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair {
+	private class BracketPair implements org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair {
 		
 		private final String[] brackets;
 		private boolean closingEnabledInside;
@@ -56,7 +56,7 @@ public class OclBracketSet {
 	/**
 	 * A listener for the automatic closing.
 	 */
-	private class ClosingListener implements tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler, org.eclipse.swt.events.VerifyListener, org.eclipse.swt.events.ModifyListener, org.eclipse.swt.custom.VerifyKeyListener {
+	private class ClosingListener implements org.dresdenocl.language.ocl.resource.ocl.ui.IOclBracketHandler, org.eclipse.swt.events.VerifyListener, org.eclipse.swt.events.ModifyListener, org.eclipse.swt.custom.VerifyKeyListener {
 		private int closingLength = -1;
 		private int addedPosition = -1;
 		private boolean closingAdded = false;
@@ -72,7 +72,7 @@ public class OclBracketSet {
 				return;
 			}
 			if (caret > 0 && caret < textWidget.getCharCount()) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair = getBracketPair(textWidget.getTextRange(caret - 1, 1), textWidget.getTextRange(caret, 1));
+				org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair = getBracketPair(textWidget.getTextRange(caret - 1, 1), textWidget.getTextRange(caret, 1));
 				if (bracketPair != null && !bracketPair.isClosingEnabledInside()) {
 					return;
 				}
@@ -146,14 +146,14 @@ public class OclBracketSet {
 	 * 
 	 * @param sourceViewer the source viewer for matching brackets
 	 */
-	public OclBracketSet(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
-		languageID = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
-		this.bracketPairs = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair>();
+	public OclBracketSet(org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor, org.eclipse.jface.text.source.ISourceViewer sourceViewer) {
+		languageID = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
+		this.bracketPairs = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair>();
 		if (sourceViewer != null) {
 			viewer = sourceViewer;
 			textWidget = viewer.getTextWidget();
 		}
-		preferenceStore = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+		preferenceStore = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
 		if (sourceViewer != null && preferenceStore != null) {
 			resetBrackets();
 			addListeners(editor);
@@ -164,7 +164,7 @@ public class OclBracketSet {
 	 * Checks whether the given string is an open bracket.
 	 */
 	public boolean isOpeningBracket(String bracket) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			if (bracket.equals(bracketPair.getOpeningBracket())) {
 				return true;
 			}
@@ -176,7 +176,7 @@ public class OclBracketSet {
 	 * Checks whether the string is a bracket.
 	 */
 	public boolean isBracket(String bracket) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			if (bracket.equals(bracketPair.getOpeningBracket()) || bracket.equals(bracketPair.getClosingBracket())) {
 				return true;
 			}
@@ -187,8 +187,8 @@ public class OclBracketSet {
 	/**
 	 * Returns the bracket pair with the given opening and closing.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair getBracketPair(String opening, String closing) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair getBracketPair(String opening, String closing) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			if (bracketPair.getOpeningBracket().equals(opening) && bracketPair.getClosingBracket().equals(closing)) {
 				return bracketPair;
 			}
@@ -196,7 +196,7 @@ public class OclBracketSet {
 		return null;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair getBracketPair(int index) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair getBracketPair(int index) {
 		try {
 			return bracketPairs.get(index);
 		} catch (Exception e) {
@@ -219,7 +219,7 @@ public class OclBracketSet {
 	 * Sets whether other bracket pairs shall be automatically closed, when used
 	 * inside of this bracket pair.
 	 */
-	public boolean setClosingEnabledInside(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair, boolean closingEnabledInside) {
+	public boolean setClosingEnabledInside(org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair, boolean closingEnabledInside) {
 		if (bracketPair instanceof BracketPair) {
 			((BracketPair) bracketPair).setClosingEnabledInside(closingEnabledInside);
 			return true;
@@ -232,7 +232,7 @@ public class OclBracketSet {
 	 * the preference store.
 	 */
 	public boolean resetBrackets() {
-		String bracketPairs = preferenceStore.getString(languageID + tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX);
+		String bracketPairs = preferenceStore.getString(languageID + org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_BRACKETS_SUFFIX);
 		if (bracketPairs == null) {
 			return false;
 		}
@@ -244,7 +244,7 @@ public class OclBracketSet {
 	 * Returns the counter part of a bracket.
 	 */
 	public String getCounterpart(String bracket) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			if (bracket.equals(bracketPair.getOpeningBracket())) {
 				return bracketPair.getClosingBracket();
 			}
@@ -262,8 +262,8 @@ public class OclBracketSet {
 	/**
 	 * Removes the given bracket pair.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair remove(String opening, String closing) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair remove(String opening, String closing) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			if (bracketPair.getOpeningBracket().equals(opening) && bracketPair.getClosingBracket().equals(closing)) {
 				bracketPairs.remove(bracketPair);
 				return bracketPair;
@@ -296,7 +296,7 @@ public class OclBracketSet {
 		if (bracketSet.length() % 3 != 0) {
 			return false;
 		}
-		bracketPairs = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair>();
+		bracketPairs = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair>();
 		for (int i = 0; i < bracketSet.length() / 3; i++) {
 			addBracketPair("" + bracketSet.charAt(i * 3), "" + bracketSet.charAt(i * 3 + 1), bracketSet.charAt(i * 3 + 2) != '0');
 		}
@@ -313,7 +313,7 @@ public class OclBracketSet {
 	public String[] getBracketArray() {
 		String[] ret = new String[bracketPairs.size()];
 		int i = 0;
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			ret[i] = bracketPair.getOpeningBracket() + BRACKET_SEPARATOR + bracketPair.getClosingBracket();
 			i++;
 		}
@@ -333,7 +333,7 @@ public class OclBracketSet {
 			return "";
 		}
 		String result = "";
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair bracketPair : bracketPairs) {
 			String isClosingStr = "0";
 			if (bracketPair.isClosingEnabledInside()) {
 				isClosingStr = "1";
@@ -346,7 +346,7 @@ public class OclBracketSet {
 	/**
 	 * Adds listeners to handle bracket automatic closing.
 	 */
-	private void addListeners(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	private void addListeners(org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor) {
 		ClosingListener closingListener = new ClosingListener();
 		textWidget.addVerifyListener(closingListener);
 		textWidget.addVerifyKeyListener(closingListener);
@@ -408,8 +408,8 @@ public class OclBracketSet {
 			return;
 		}
 		if (position != -1 && position != document.getLength()) {
-			positionHelper.addPosition(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString(), position, 1);
-			positionHelper.addPosition(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString(), caretOffset - 1, 1);
+			positionHelper.addPosition(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString(), position, 1);
+			positionHelper.addPosition(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString(), caretOffset - 1, 1);
 		}
 	}
 	

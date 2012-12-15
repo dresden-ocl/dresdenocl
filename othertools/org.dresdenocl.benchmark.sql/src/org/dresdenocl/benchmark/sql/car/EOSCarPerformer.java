@@ -1,6 +1,6 @@
-package tudresden.ocl20.benchmark.sql.car;
+package org.dresdenocl.benchmark.sql.car;
 
-import tudresden.ocl20.benchmark.sql.util.EOSPerformer;
+import org.dresdenocl.benchmark.sql.util.EOSPerformer;
 import core.IEOS;
 
 /**

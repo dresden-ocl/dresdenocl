@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequenceFirst {
      *       def: testSequenceFirst(source: Sequence(OclAny)): OclAny = source ->first()</code></p>
      */
     public Object testpackage.Class1.testSequenceFirst(java.util.List<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.first(source);
     }
 }

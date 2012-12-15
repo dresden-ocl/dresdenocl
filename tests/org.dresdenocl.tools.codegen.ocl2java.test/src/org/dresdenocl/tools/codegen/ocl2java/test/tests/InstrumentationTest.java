@@ -17,14 +17,14 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests;
+package org.dresdenocl.tools.codegen.ocl2java.test.tests;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
 
 /**
  * <p>

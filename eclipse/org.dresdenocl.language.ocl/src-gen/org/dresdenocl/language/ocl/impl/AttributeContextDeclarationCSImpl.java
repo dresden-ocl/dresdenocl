@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -17,12 +17,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
+import org.dresdenocl.language.ocl.InitOrDeriveValueCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.TypeCS;
+import org.dresdenocl.language.ocl.TypePathNameCS;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,10 +31,10 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl#getType <em>Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl#getInitOrDeriveValue <em>Init Or Derive Value</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl#getInitOrDeriveValue <em>Init Or Derive Value</em>}</li>
  * </ul>
  * </p>
  *

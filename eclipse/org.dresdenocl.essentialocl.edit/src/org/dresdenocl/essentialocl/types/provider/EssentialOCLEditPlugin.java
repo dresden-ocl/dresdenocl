@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.provider;
+package org.dresdenocl.essentialocl.types.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelEditPlugin;
+import org.dresdenocl.pivotmodel.provider.PivotModelEditPlugin;
 
 /**
  * This is the central singleton for the Essential OCL edit plugin.

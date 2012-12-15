@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.test;
+package org.dresdenocl.tools.codegen.ocl2java.types.util.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -29,8 +29,8 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags;
+import org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException;
+import org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags;
 
 /**
  * <p>

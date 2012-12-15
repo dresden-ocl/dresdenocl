@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.facade;
+package org.dresdenocl.facade;
 
 import java.io.File;
 import java.net.URL;
@@ -33,46 +33,46 @@ import org.dresdenocl.metrics.OclMetrics;
 import org.dresdenocl.metrics.metric.Metric;
 import org.eclipse.emf.common.util.URI;
 
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
-import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
-import tudresden.ocl20.pivot.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.interpreter.OclInterpreterPlugin;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.metamodels.xsd.XSDMetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceType;
+import org.dresdenocl.modelinstancetype.ecore.EcoreModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SQLFactory;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2Java;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaFactory;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.TransformationPlugin;
+import org.dresdenocl.tools.transformation.impl.Tuple;
 
 /**
  * <p>

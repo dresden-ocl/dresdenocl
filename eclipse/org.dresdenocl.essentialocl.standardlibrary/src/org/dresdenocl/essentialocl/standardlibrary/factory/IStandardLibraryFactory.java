@@ -16,44 +16,44 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary.factory;
+package org.dresdenocl.essentialocl.standardlibrary.factory;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceInteger;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceReal;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceString;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBag;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
+import org.dresdenocl.essentialocl.standardlibrary.OclEnumLiteral;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject;
+import org.dresdenocl.essentialocl.standardlibrary.OclOrderedSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.essentialocl.standardlibrary.OclTuple;
+import org.dresdenocl.essentialocl.standardlibrary.OclType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceBoolean;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceReal;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.modelinstancetype.types.base.JavaModelInstanceBoolean;
+import org.dresdenocl.modelinstancetype.types.base.JavaModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.base.JavaModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.base.JavaModelInstanceReal;
+import org.dresdenocl.modelinstancetype.types.base.JavaModelInstanceString;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

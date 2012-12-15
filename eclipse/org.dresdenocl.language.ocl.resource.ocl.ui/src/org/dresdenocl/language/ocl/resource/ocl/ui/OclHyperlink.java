@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 //TODO Lars: re-implement the linking into the model browser
 /**
  * A hyperlink for the proxy elements in source code.
@@ -101,7 +101,7 @@ public class OclHyperlink implements
 					}
 				}
 			} catch (org.eclipse.ui.PartInitException e) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin
+				org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin
 						.logError("Exception while opening hyperlink target.", e);
 			}
 		}

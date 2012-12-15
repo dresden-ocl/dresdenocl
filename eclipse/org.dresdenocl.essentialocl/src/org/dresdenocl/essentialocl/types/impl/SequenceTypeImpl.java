@@ -30,17 +30,17 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Sequence Type</b></em>'.
@@ -77,8 +77,8 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	 * <code>SequenceType</code>. In this case, return a <code>SequenceType</code> with the given
 	 * element type, otherwise default to <code>CollectionType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(tudresden.ocl20.pivot.essentialocl.types.CollectionType,
-	 *      tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl#getCommonCollectionType(org.dresdenocl.essentialocl.types.CollectionType,
+	 *      org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	protected CollectionType getCommonCollectionType(
@@ -100,7 +100,7 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
+	 * @see org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl#bindTypeParameter(java.util.List,
 	 *      java.util.List)
 	 */
 	@Override
@@ -113,7 +113,7 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.SequenceType#clone()
+	 * @see org.dresdenocl.essentialocl.types.impl.SequenceType#clone()
 	 */
 
 	@Override

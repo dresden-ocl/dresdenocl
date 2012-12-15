@@ -17,38 +17,38 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
+package org.dresdenocl.standardlibrary.java.test.tests;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelRegistry;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceRegistry;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.standardlibrary.java.JavaStandardlibraryPlugin;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.examples.royalsandloyals.Customer;
+import org.dresdenocl.examples.royalsandloyals.CustomerCard;
+import org.dresdenocl.examples.royalsandloyals.Date;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyAccount;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyProgram;
+import org.dresdenocl.examples.royalsandloyals.ProgramPartner;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelRegistry;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceProvider;
+import org.dresdenocl.modelinstance.IModelInstanceRegistry;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.java.internal.provider.JavaModelInstanceProvider;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.standardlibrary.java.JavaStandardlibraryPlugin;
 
 /**
  * <p>
@@ -67,7 +67,7 @@ public class TestPerformer {
 	 */
 
 	public static String QUALIFIED_NAME_MODEL_PACKAGE = ModelConstants.ROOT_PACKAGE_NAME
-			+ "::tudresden::ocl20::pivot::examples::royalsandloyals";
+			+ "::org::dresdenocl::examples::royalsandloyals";
 
 	/** The qualified Name of {@link Customer}. */
 	public static String QUALIFIED_NAME_CUSTOMER = QUALIFIED_NAME_MODEL_PACKAGE
@@ -101,7 +101,7 @@ public class TestPerformer {
 	private final static String META_MODEL = UML2MetamodelPlugin.ID;
 
 	/** The name of the bundle of the model file. */
-	private final static String MODEL_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal";
+	private final static String MODEL_BUNDLE = "org.dresdenocl.examples.royalandloyal";
 
 	/** The path of the UML model file. */
 	private final static String MODEL_FILE = "model/royalsandloyals.uml";

@@ -1,4 +1,4 @@
-package tudresden.ocl20.logging.appender;
+package org.dresdenocl.logging.appender;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Level;
@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.lang.builder.ToStringBuilder;
 

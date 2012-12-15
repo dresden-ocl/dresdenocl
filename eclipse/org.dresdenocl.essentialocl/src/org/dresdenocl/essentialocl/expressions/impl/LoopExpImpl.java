@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,12 +45,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.LoopExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Loop Exp</b></em>'.
@@ -58,8 +58,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#getBody <em>Body</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl#getIterator <em>Iterator</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl#getIterator <em>Iterator</em>}</li>
  * </ul>
  * </p>
  *

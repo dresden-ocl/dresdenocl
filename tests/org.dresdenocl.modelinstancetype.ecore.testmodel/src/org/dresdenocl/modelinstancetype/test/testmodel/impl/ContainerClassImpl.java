@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
+package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import java.util.Collection;
 
@@ -16,19 +16,19 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -39,17 +39,17 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getPrimitiveTypeProviderClassInstances <em>Primitive Type Provider Class Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getCollectionTypeProviderClassInstances <em>Collection Type Provider Class Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getEnumerationLiteralProviderClassInstances <em>Enumeration Literal Provider Class Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getClass1Instances <em>Class1 Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getClass2Instances <em>Class2 Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getInterface1Instances <em>Interface1 Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getInterface2Instances <em>Interface2 Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getInterface3Instances <em>Interface3 Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getCopyableClassInstances <em>Copyable Class Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getNonCopyableClassInstances <em>Non Copyable Class Instances</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getStaticPropertyAndOperationClassInstances <em>Static Property And Operation Class Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getPrimitiveTypeProviderClassInstances <em>Primitive Type Provider Class Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getCollectionTypeProviderClassInstances <em>Collection Type Provider Class Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getEnumerationLiteralProviderClassInstances <em>Enumeration Literal Provider Class Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getClass1Instances <em>Class1 Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getClass2Instances <em>Class2 Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getInterface1Instances <em>Interface1 Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getInterface2Instances <em>Interface2 Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getInterface3Instances <em>Interface3 Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getCopyableClassInstances <em>Copyable Class Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getNonCopyableClassInstances <em>Non Copyable Class Instances</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.ContainerClassImpl#getStaticPropertyAndOperationClassInstances <em>Static Property And Operation Class Instances</em>}</li>
  * </ul>
  * </p>
  *

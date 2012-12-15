@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.impl;
+package org.dresdenocl.examples.pml.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Plugin;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.ExtensionPoint;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.Plugin;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -25,9 +25,9 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl#getId <em>Id</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl#getPlugin <em>Plugin</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionPointImpl#getInterface <em>Interface</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.ExtensionPointImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.ExtensionPointImpl#getPlugin <em>Plugin</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.ExtensionPointImpl#getInterface <em>Interface</em>}</li>
  * </ul>
  * </p>
  *

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,13 +15,13 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOperation <em>Operation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpOperationCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpOperationCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface DefinitionExpOperationCS extends DefinitionExpPartCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Operation</em>' containment reference.
    * @see #setOperation(OperationDefinitionInDefCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpOperationCS_Operation()
+   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpOperationCS_Operation()
    * @model containment="true" required="true"
    * @generated
    */
 	OperationDefinitionInDefCS getOperation();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOperation <em>Operation</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOperation <em>Operation</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operation</em>' containment reference.
@@ -62,14 +62,14 @@ public interface DefinitionExpOperationCS extends DefinitionExpPartCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Equal</em>' attribute.
    * @see #setEqual(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpOperationCS_Equal()
+   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpOperationCS_Equal()
    * @model required="true"
    * @generated
    */
 	String getEqual();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Equal</em>' attribute.
@@ -88,14 +88,14 @@ public interface DefinitionExpOperationCS extends DefinitionExpPartCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Ocl Expression</em>' containment reference.
    * @see #setOclExpression(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpOperationCS_OclExpression()
+   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpOperationCS_OclExpression()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getOclExpression();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Ocl Expression</em>' containment reference.

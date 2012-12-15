@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.internal;
+package org.dresdenocl.modelbus.internal;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -59,7 +59,7 @@ public class ModelBusMessages extends NLS {
 
 	/** The location of the messages file. */
 	private static final String MESSAGES_FILE_LOCATION =
-			"tudresden.ocl20.pivot.modelbus.internal.messages"; //$NON-NLS-1$
+			"org.dresdenocl.modelbus.internal.messages"; //$NON-NLS-1$
 
 	static {
 		/* Initialize resource bundle. */

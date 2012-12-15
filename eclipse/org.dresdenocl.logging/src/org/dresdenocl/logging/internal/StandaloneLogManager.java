@@ -1,4 +1,4 @@
-package tudresden.ocl20.logging.internal;
+package org.dresdenocl.logging.internal;
 
 import java.net.URL;
 import java.util.Properties;
@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.spi.RootLogger;
 
-import tudresden.ocl20.logging.ILogManager;
+import org.dresdenocl.logging.ILogManager;
 
 public class StandaloneLogManager implements ILogManager {
 

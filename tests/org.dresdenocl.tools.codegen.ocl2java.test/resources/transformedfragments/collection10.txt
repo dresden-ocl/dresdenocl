@@ -1,1 +1,1 @@
-(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.participants) < new Integer(10000))
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.participants) < new Integer(10000))

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -50,20 +50,20 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getKind <em>Kind</em>}
+ * <li>{@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}
  * </li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getNamespace <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Constraint#getNamespace <em>
  * Namespace</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Constraint#getSpecification <em>
  * Specification</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getConstrainedElement
+ * <li>{@link org.dresdenocl.pivotmodel.Constraint#getConstrainedElement
  * <em>Constrained Element</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature <em>
  * Defined Feature</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint()
  * @model
  * @generated
  */
@@ -72,7 +72,7 @@ public interface Constraint extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute. The literals are
 	 * from the enumeration
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind}. <!--
+	 * {@link org.dresdenocl.pivotmodel.ConstraintKind}. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * This attribute determines the semantics of a constraint in relation to its
@@ -81,9 +81,9 @@ public interface Constraint extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstraintKind
+	 * @see org.dresdenocl.pivotmodel.ConstraintKind
 	 * @see #setKind(ConstraintKind)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_Kind()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint_Kind()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -91,12 +91,12 @@ public interface Constraint extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getKind <em>Kind</em>}'
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
 	 *          the new value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstraintKind
+	 * @see org.dresdenocl.pivotmodel.ConstraintKind
 	 * @see #getKind()
 	 * @generated
 	 */
@@ -105,7 +105,7 @@ public interface Constraint extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Namespace</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getOwnedRule
 	 * <em>Owned Rule</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -120,8 +120,8 @@ public interface Constraint extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Namespace</em>' container reference.
 	 * @see #setNamespace(Namespace)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_Namespace()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint_Namespace()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getOwnedRule
 	 * @model opposite="ownedRule"
 	 * @generated
 	 */
@@ -129,7 +129,7 @@ public interface Constraint extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getNamespace
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getNamespace
 	 * <em>Namespace</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -143,7 +143,7 @@ public interface Constraint extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Specification</b></em>' containment
 	 * reference. It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint
+	 * {@link org.dresdenocl.pivotmodel.Expression#getConstraint
 	 * <em>Constraint</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -154,8 +154,8 @@ public interface Constraint extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Specification</em>' containment reference.
 	 * @see #setSpecification(Expression)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_Specification()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint_Specification()
+	 * @see org.dresdenocl.pivotmodel.Expression#getConstraint
 	 * @model opposite="constraint" containment="true" required="true"
 	 * @generated
 	 */
@@ -163,7 +163,7 @@ public interface Constraint extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getSpecification
 	 * <em>Specification</em>}' containment reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -178,7 +178,7 @@ public interface Constraint extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Constrained Element</b></em>' reference
 	 * list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement}. <!--
+	 * {@link org.dresdenocl.pivotmodel.ConstrainableElement}. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * This is the ordered set of {@link ConstrainableElement}s referenced by this
@@ -187,7 +187,7 @@ public interface Constraint extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Constrained Element</em>' reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_ConstrainedElement()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint_ConstrainedElement()
 	 * @model resolveProxies="false"
 	 * @generated
 	 */
@@ -196,7 +196,7 @@ public interface Constraint extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Defined Feature</b></em>' reference. It is
 	 * bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics
+	 * {@link org.dresdenocl.pivotmodel.Feature#getSemantics
 	 * <em>Semantics</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -207,8 +207,8 @@ public interface Constraint extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Defined Feature</em>' reference.
 	 * @see #setDefinedFeature(Feature)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getConstraint_DefinedFeature()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint_DefinedFeature()
+	 * @see org.dresdenocl.pivotmodel.Feature#getSemantics
 	 * @model opposite="semantics" resolveProxies="false"
 	 * @generated
 	 */
@@ -216,7 +216,7 @@ public interface Constraint extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature
 	 * <em>Defined Feature</em>}' reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -245,7 +245,7 @@ public interface Constraint extends NamedElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	Constraint clone();
 

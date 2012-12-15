@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.tests;
+package org.dresdenocl.modelinstancetype.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -38,27 +38,27 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
-import tudresden.ocl20.pivot.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestModelTypesNames;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.expressions.CollectionKind;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.exception.CopyForAtPreException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestPlugin;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestServices;
+import org.dresdenocl.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestModelTypesNames;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
  * Contains test cases to test the implementation of
- * {@link tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceCollection}
+ * {@link org.dresdenocl.modelbus.modelinstance.types.IModelInstanceCollection}
  * .
  * </p>
  * 

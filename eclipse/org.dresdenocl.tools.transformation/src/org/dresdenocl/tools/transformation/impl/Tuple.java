@@ -2,7 +2,7 @@
  * Created on 09.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.impl;
+package org.dresdenocl.tools.transformation.impl;
 
 /**
  * This class implements a generic tuple of two java objects. It is used to

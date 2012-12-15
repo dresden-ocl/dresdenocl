@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types;
+package org.dresdenocl.modelinstancetype.types;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,11 +25,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractType;
 
 /**
  * <p>
@@ -103,7 +103,7 @@ public final class ComplexType extends AbstractType {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getNamespace()
 	 */
 	@Override
 	public Namespace getNamespace() {
@@ -117,7 +117,7 @@ public final class ComplexType extends AbstractType {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl()
+	 * org.dresdenocl.pivotmodel.base.AbstractType#getOwnedOperationImpl()
 	 */
 	@Override
 	protected List<Operation> getOwnedOperationImpl() {
@@ -129,7 +129,7 @@ public final class ComplexType extends AbstractType {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
+	 * org.dresdenocl.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
 	 */
 	@Override
 	protected List<Property> getOwnedPropertyImpl() {
@@ -140,7 +140,7 @@ public final class ComplexType extends AbstractType {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getSuperTypeImpl()
 	 */
 	@Override
 	protected List<Type> getSuperTypeImpl() {

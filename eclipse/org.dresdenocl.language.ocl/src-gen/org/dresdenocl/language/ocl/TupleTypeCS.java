@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTupleTypeCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getTupleTypeCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface TupleTypeCS extends TypeCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Variable Declaration List</em>' containment reference.
    * @see #setVariableDeclarationList(VariableDeclarationWithoutInitListCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTupleTypeCS_VariableDeclarationList()
+   * @see org.dresdenocl.language.ocl.OclPackage#getTupleTypeCS_VariableDeclarationList()
    * @model containment="true"
    * @generated
    */
 	VariableDeclarationWithoutInitListCS getVariableDeclarationList();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Variable Declaration List</em>' containment reference.

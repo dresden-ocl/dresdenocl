@@ -30,7 +30,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import java.util.List;
 
@@ -39,12 +39,12 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractOperation;
 
 /**
  * <p>
@@ -110,7 +110,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -165,7 +165,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getName()
 	 */
 	@Override
 	public String getName() {
@@ -177,7 +177,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter
+	 * org.dresdenocl.pivotmodel.base.AbstractOperation#getOwnedParameter
 	 * ()
 	 */
 	@Override
@@ -202,7 +202,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
+	 * org.dresdenocl.pivotmodel.base.AbstractOperation#getOwningType()
 	 */
 	@Override
 	public Type getOwningType() {

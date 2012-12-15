@@ -1,20 +1,20 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Template Plug-In
-Bundle-SymbolicName: tudresden.ocl20.pivot.tools.template;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.tools.template;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.tools.template.TemplatePlugin
+Bundle-Activator: org.dresdenocl.tools.template.TemplatePlugin
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.logging
+ org.dresdenocl.logging
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.tools.template,
- tudresden.ocl20.pivot.tools.template.event,
- tudresden.ocl20.pivot.tools.template.exception,
- tudresden.ocl20.pivot.tools.template.impl,
- tudresden.ocl20.pivot.tools.template.internal,
- tudresden.ocl20.pivot.tools.template.stringtemplate
+Export-Package: org.dresdenocl.tools.template,
+ org.dresdenocl.tools.template.event,
+ org.dresdenocl.tools.template.exception,
+ org.dresdenocl.tools.template.impl,
+ org.dresdenocl.tools.template.internal,
+ org.dresdenocl.tools.template.stringtemplate
 Bundle-ClassPath: .,
  lib/antlr-3.3-complete.jar,
  lib/ST-4.0.4.jar

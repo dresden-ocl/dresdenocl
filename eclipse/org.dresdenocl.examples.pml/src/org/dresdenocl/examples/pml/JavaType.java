@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml;
+package org.dresdenocl.examples.pml;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -17,13 +17,13 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.JavaType#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.JavaType#getImplements <em>Implements</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.JavaType#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.JavaType#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.JavaType#getImplements <em>Implements</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.JavaType#getOperations <em>Operations</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getJavaType()
+ * @see org.dresdenocl.examples.pml.PmlPackage#getJavaType()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface JavaType extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Fully Qualified Name</em>' attribute.
 	 * @see #setFullyQualifiedName(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getJavaType_FullyQualifiedName()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getJavaType_FullyQualifiedName()
 	 * @model
 	 * @generated
 	 */
 	String getFullyQualifiedName();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.JavaType#getFullyQualifiedName <em>Fully Qualified Name</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.JavaType#getFullyQualifiedName <em>Fully Qualified Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Fully Qualified Name</em>' attribute.
@@ -56,7 +56,7 @@ public interface JavaType extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Implements</b></em>' reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.JavaType}.
+	 * The list contents are of type {@link org.dresdenocl.examples.pml.JavaType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Implements</em>' reference list isn't clear,
@@ -64,7 +64,7 @@ public interface JavaType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implements</em>' reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getJavaType_Implements()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getJavaType_Implements()
 	 * @model
 	 * @generated
 	 */
@@ -72,7 +72,7 @@ public interface JavaType extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Operation}.
+	 * The list contents are of type {@link org.dresdenocl.examples.pml.Operation}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Operations</em>' containment reference list isn't clear,
@@ -80,7 +80,7 @@ public interface JavaType extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Operations</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getJavaType_Operations()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getJavaType_Operations()
 	 * @model containment="true"
 	 * @generated
 	 */

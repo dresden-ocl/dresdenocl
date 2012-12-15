@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public class OclTokenStyle implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle {
+public class OclTokenStyle implements org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle {
 	
 	private int[] color;
 	private int[] backgroundColor;

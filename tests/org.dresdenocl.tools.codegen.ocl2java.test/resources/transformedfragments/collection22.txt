@@ -10,4 +10,4 @@ collection2 = new java.util.HashSet<Integer>();
 collection2.add(new Integer(1));
 collection2.add(new Integer(3));
 
-((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.intersection(collection1, collection2))).equals(new Integer(1))
+((Object) org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.intersection(collection1, collection2))).equals(new Integer(1))

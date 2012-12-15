@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -38,10 +38,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.CollectionRange;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Range</b></em>'.
@@ -49,8 +49,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl#getFirst <em>First</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl#getLast <em>Last</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.CollectionRangeImpl#getFirst <em>First</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.CollectionRangeImpl#getLast <em>Last</em>}</li>
  * </ul>
  * </p>
  *

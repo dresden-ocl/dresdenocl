@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +27,7 @@ import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl#getVariableDeclarations <em>Variable Declarations</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl#getVariableDeclarations <em>Variable Declarations</em>}</li>
  * </ul>
  * </p>
  *

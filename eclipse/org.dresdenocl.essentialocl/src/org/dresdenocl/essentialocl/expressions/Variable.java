@@ -30,14 +30,14 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,8 +47,8 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,7 +71,7 @@ public interface Variable extends TypedElement, NamedElement {
 	Parameter getRepresentedParameter();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Represented Parameter</em>' reference.
@@ -95,7 +95,7 @@ public interface Variable extends TypedElement, NamedElement {
 	OclExpression getInitExpression();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Init Expression</em>' containment reference.

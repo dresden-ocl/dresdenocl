@@ -20,7 +20,7 @@ package org.dresdenocl.metrics.metric;
 
 import java.util.Map;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <!-- begin-user-doc -->

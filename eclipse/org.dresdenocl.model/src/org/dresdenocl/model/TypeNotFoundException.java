@@ -23,7 +23,7 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.model;
+package org.dresdenocl.model;
 
 
 /**

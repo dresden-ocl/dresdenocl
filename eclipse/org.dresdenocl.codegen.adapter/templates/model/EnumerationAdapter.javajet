@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="EnumerationAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="EnumerationAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -14,10 +14,10 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 <%genModel.addImport("org.apache.log4j.Logger");
 genModel.addImport("java.util.List");
 genModel.addImport("java.util.ArrayList");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Enumeration");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
+genModel.addImport("org.dresdenocl.pivotmodel.Enumeration");
+genModel.addImport("org.dresdenocl.pivotmodel.EnumerationLiteral");
+genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractEnumeration");
+genModel.addImport("org.dresdenocl.pivotmodel.Namespace");
 genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));
 genModel.markImportLocation(stringBuffer);%>
 
@@ -33,7 +33,7 @@ public class <%=adapterClass%> extends AbstractEnumeration implements Enumeratio
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=adapteeClass%> data type
@@ -64,7 +64,7 @@ public class <%=adapterClass%> extends AbstractEnumeration implements Enumeratio
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getName()
 	 *
 	 * @generated
 	 */
@@ -75,7 +75,7 @@ public class <%=adapterClass%> extends AbstractEnumeration implements Enumeratio
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getNamespace()
 	 *
 	 * @generated
 	 */
@@ -86,7 +86,7 @@ public class <%=adapterClass%> extends AbstractEnumeration implements Enumeratio
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumeration#getOwnedLiteral()
 	 *
 	 * @generated
 	 */

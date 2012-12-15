@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,8 +23,8 @@ import tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl#getOperationName <em>Operation Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl#getOperationName <em>Operation Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl#getTarget <em>Target</em>}</li>
  * </ul>
  * </p>
  *

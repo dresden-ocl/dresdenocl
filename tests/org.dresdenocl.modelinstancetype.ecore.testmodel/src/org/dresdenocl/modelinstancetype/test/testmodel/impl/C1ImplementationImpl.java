@@ -4,12 +4,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
+package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 

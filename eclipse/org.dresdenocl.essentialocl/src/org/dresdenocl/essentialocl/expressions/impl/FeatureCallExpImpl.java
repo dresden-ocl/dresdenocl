@@ -30,17 +30,17 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.FeatureCallExp;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.FeatureCallExpImpl#getSourceType <em>Source Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,7 +88,7 @@ public abstract class FeatureCallExpImpl extends CallExpImpl implements
 	 * {@link #getSource() source} of this <code>FeatureCallExp</code> if no
 	 * explicit source type has been set.
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
+	 * @see org.dresdenocl.essentialocl.expressions.FeatureCallExp#getSourceType()
 	 * 
 	 * @generated NOT
 	 */

@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.template.test.tests;
+package org.dresdenocl.tools.template.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -46,18 +46,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.template.test.TemplateTestPlugin;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.test.TemplateTestPlugin;
 
 /**
  * This test will test the class ITemplateGroupRegistry.java and ITemplateGroup
- * of the package tudresden.ocl20.pivot.tools.template.
+ * of the package org.dresdenocl.tools.template.
  * 
- * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup
- * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry
+ * @see org.dresdenocl.tools.template.ITemplateGroup
+ * @see org.dresdenocl.tools.template.ITemplateGroupRegistry
  */
 public class TestTemplateGroup {
 

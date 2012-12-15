@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License along 
  * with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.examples.royalsandloyals;
+package org.dresdenocl.examples.royalsandloyals;
 
-import tudresden.ocl20.pivot.ocl2java.types.OclBag;
+import org.dresdenocl.ocl2java.types.OclBag;
 
 /**
  * <p>

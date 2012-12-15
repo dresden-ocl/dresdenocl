@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tracer.ui.internal.views.util;
+package org.dresdenocl.tracer.ui.internal.views.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +26,12 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
-import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject;
+import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
 
 /**
  * 
@@ -193,7 +193,7 @@ public class TracerItemAdapterFactoryLabelProvider extends
 
 		if (result instanceof OclInteger) {
 			OclInteger anOclInteger;
-			tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement imiElement;
+			org.dresdenocl.modelinstancetype.types.IModelInstanceElement imiElement;
 
 			anOclInteger = ((OclInteger) result);
 			imiElement = anOclInteger.getModelInstanceElement();

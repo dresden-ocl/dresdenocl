@@ -1,8 +1,8 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.factory
+package org.dresdenocl.language.ocl.staticsemantics.factory
 
-import tudresden.ocl20.pivot.language.ocl.staticsemantics._
-import tudresden.ocl20.pivot.essentialocl.types._
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._
+import org.dresdenocl.language.ocl.staticsemantics._
+import org.dresdenocl.essentialocl.types._
+import org.dresdenocl.language.ocl.resource.ocl.mopp._
 
 trait OclStaticSemanticsFactory {
 

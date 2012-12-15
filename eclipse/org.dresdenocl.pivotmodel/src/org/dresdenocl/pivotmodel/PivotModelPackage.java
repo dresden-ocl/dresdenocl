@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -50,7 +50,7 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelFactory
+ * @see org.dresdenocl.pivotmodel.PivotModelFactory
  * @model kind="package"
  * @generated
  */
@@ -84,16 +84,16 @@ public interface PivotModelPackage extends EPackage {
 	 * @generated
 	 */
 	PivotModelPackage eINSTANCE =
-			tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl.init();
+			org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl.init();
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.NamedElementImpl
 	 * <em>Named Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamedElement()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getNamedElement()
 	 * @generated
 	 */
 	int NAMED_ELEMENT = 0;
@@ -136,12 +136,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.TypedElementImpl
 	 * <em>Typed Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypedElement()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getTypedElement()
 	 * @generated
 	 */
 	int TYPED_ELEMENT = 1;
@@ -202,11 +202,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl <em>Feature</em>}'
+	 * {@link org.dresdenocl.pivotmodel.impl.FeatureImpl <em>Feature</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getFeature()
+	 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getFeature()
 	 * @generated
 	 */
 	int FEATURE = 2;
@@ -285,12 +285,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * {@link org.dresdenocl.pivotmodel.GenericElement
 	 * <em>Generic Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
+	 * @see org.dresdenocl.pivotmodel.GenericElement
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
 	 * @generated
 	 */
 	int GENERIC_ELEMENT = 3;
@@ -342,12 +342,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * {@link org.dresdenocl.pivotmodel.ConstrainableElement
 	 * <em>Constrainable Element</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
+	 * @see org.dresdenocl.pivotmodel.ConstrainableElement
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
 	 * @generated
 	 */
 	int CONSTRAINABLE_ELEMENT = 4;
@@ -363,11 +363,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl
 	 * <em>Namespace</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.impl.NamespaceImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getNamespace()
 	 * @generated
 	 */
 	int NAMESPACE = 5;
@@ -455,11 +455,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl <em>Type</em>}'
+	 * {@link org.dresdenocl.pivotmodel.impl.TypeImpl <em>Type</em>}'
 	 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getType()
 	 * @generated
 	 */
 	int TYPE = 6;
@@ -556,12 +556,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl
 	 * <em>Primitive Type</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
+	 * @see org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
 	 * @generated
 	 */
 	int PRIMITIVE_TYPE = 7;
@@ -667,11 +667,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.EnumerationImpl
 	 * <em>Enumeration</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumeration()
+	 * @see org.dresdenocl.pivotmodel.impl.EnumerationImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getEnumeration()
 	 * @generated
 	 */
 	int ENUMERATION = 8;
@@ -777,12 +777,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl
 	 * <em>Enumeration Literal</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
+	 * @see org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
 	 * @generated
 	 */
 	int ENUMERATION_LITERAL = 9;
@@ -834,11 +834,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.PropertyImpl
 	 * <em>Property</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getProperty()
+	 * @see org.dresdenocl.pivotmodel.impl.PropertyImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getProperty()
 	 * @generated
 	 */
 	int PROPERTY = 10;
@@ -926,11 +926,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.OperationImpl
 	 * <em>Operation</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getOperation()
+	 * @see org.dresdenocl.pivotmodel.impl.OperationImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getOperation()
 	 * @generated
 	 */
 	int OPERATION = 11;
@@ -1072,11 +1072,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.ParameterImpl
 	 * <em>Parameter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameter()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getParameter()
 	 * @generated
 	 */
 	int PARAMETER = 12;
@@ -1155,12 +1155,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.GenericTypeImpl
 	 * <em>Generic Type</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericType()
+	 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getGenericType()
 	 * @generated
 	 */
 	int GENERIC_TYPE = 13;
@@ -1203,12 +1203,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl
 	 * <em>Parameter Generic Type</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
 	 * @generated
 	 */
 	int PARAMETER_GENERIC_TYPE = 14;
@@ -1260,12 +1260,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl
 	 * <em>Complex Generic Type</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
+	 * @see org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
 	 * @generated
 	 */
 	int COMPLEX_GENERIC_TYPE = 15;
@@ -1326,12 +1326,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.TypeParameterImpl
 	 * <em>Type Parameter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeParameterImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
 	 * @generated
 	 */
 	int TYPE_PARAMETER = 16;
@@ -1383,12 +1383,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.TypeArgumentImpl
 	 * <em>Type Argument</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeArgument()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeArgumentImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getTypeArgument()
 	 * @generated
 	 */
 	int TYPE_ARGUMENT = 17;
@@ -1458,11 +1458,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl
 	 * <em>Constraint</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraint()
+	 * @see org.dresdenocl.pivotmodel.impl.ConstraintImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getConstraint()
 	 * @generated
 	 */
 	int CONSTRAINT = 18;
@@ -1550,11 +1550,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.ExpressionImpl
 	 * <em>Expression</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getExpression()
+	 * @see org.dresdenocl.pivotmodel.impl.ExpressionImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getExpression()
 	 * @generated
 	 */
 	int EXPRESSION = 19;
@@ -1597,12 +1597,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl
+	 * {@link org.dresdenocl.pivotmodel.impl.AssociationPropertyImpl
 	 * <em>Association Property</em>}' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getAssociationProperty()
+	 * @see org.dresdenocl.pivotmodel.impl.AssociationPropertyImpl
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getAssociationProperty()
 	 * @generated
 	 */
 	int ASSOCIATION_PROPERTY = 20;
@@ -1700,36 +1700,36 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveTypeKind
 	 * <em>Primitive Type Kind</em>}' enum. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
+	 * @see org.dresdenocl.pivotmodel.PrimitiveTypeKind
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
 	 * @generated
 	 */
 	int PRIMITIVE_TYPE_KIND = 21;
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
+	 * {@link org.dresdenocl.pivotmodel.ParameterDirectionKind
 	 * <em>Parameter Direction Kind</em>}' enum. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
+	 * @see org.dresdenocl.pivotmodel.ParameterDirectionKind
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
 	 * @generated
 	 */
 	int PARAMETER_DIRECTION_KIND = 22;
 
 	/**
 	 * The meta object id for the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind
+	 * {@link org.dresdenocl.pivotmodel.ConstraintKind
 	 * <em>Constraint Kind</em>}' enum. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstraintKind
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraintKind()
+	 * @see org.dresdenocl.pivotmodel.ConstraintKind
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getConstraintKind()
 	 * @generated
 	 */
 	int CONSTRAINT_KIND = 23;
@@ -1739,29 +1739,29 @@ public interface PivotModelPackage extends EPackage {
 	 * type. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see java.lang.CloneNotSupportedException
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getCloneNotSupportedException()
+	 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getCloneNotSupportedException()
 	 * @generated
 	 */
 	int CLONE_NOT_SUPPORTED_EXCEPTION = 24;
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * {@link org.dresdenocl.pivotmodel.NamedElement
 	 * <em>Named Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Named Element</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * @see org.dresdenocl.pivotmodel.NamedElement
 	 * @generated
 	 */
 	EClass getNamedElement();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getName <em>Name</em>}
+	 * {@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getName()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#getName()
 	 * @see #getNamedElement()
 	 * @generated
 	 */
@@ -1769,11 +1769,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName
+	 * {@link org.dresdenocl.pivotmodel.NamedElement#getQualifiedName
 	 * <em>Qualified Name</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getQualifiedName()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#getQualifiedName()
 	 * @see #getNamedElement()
 	 * @generated
 	 */
@@ -1781,11 +1781,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner
+	 * {@link org.dresdenocl.pivotmodel.NamedElement#getOwner
 	 * <em>Owner</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Owner</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#getOwner()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#getOwner()
 	 * @see #getNamedElement()
 	 * @generated
 	 */
@@ -1793,22 +1793,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement
+	 * {@link org.dresdenocl.pivotmodel.TypedElement
 	 * <em>Typed Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Typed Element</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypedElement
+	 * @see org.dresdenocl.pivotmodel.TypedElement
 	 * @generated
 	 */
 	EClass getTypedElement();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type</em>}
+	 * {@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypedElement#getType()
+	 * @see org.dresdenocl.pivotmodel.TypedElement#getType()
 	 * @see #getTypedElement()
 	 * @generated
 	 */
@@ -1816,12 +1816,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType
+	 * {@link org.dresdenocl.pivotmodel.TypedElement#getGenericType
 	 * <em>Generic Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '
 	 *         <em>Generic Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType()
+	 * @see org.dresdenocl.pivotmodel.TypedElement#getGenericType()
 	 * @see #getTypedElement()
 	 * @generated
 	 */
@@ -1829,22 +1829,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature <em>Feature</em>}'. <!--
+	 * {@link org.dresdenocl.pivotmodel.Feature <em>Feature</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Feature</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature
+	 * @see org.dresdenocl.pivotmodel.Feature
 	 * @generated
 	 */
 	EClass getFeature();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature#isStatic <em>Static</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#isStatic()
+	 * @see org.dresdenocl.pivotmodel.Feature#isStatic()
 	 * @see #getFeature()
 	 * @generated
 	 */
@@ -1852,11 +1852,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics
+	 * {@link org.dresdenocl.pivotmodel.Feature#getSemantics
 	 * <em>Semantics</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Semantics</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics()
+	 * @see org.dresdenocl.pivotmodel.Feature#getSemantics()
 	 * @see #getFeature()
 	 * @generated
 	 */
@@ -1864,24 +1864,24 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * {@link org.dresdenocl.pivotmodel.GenericElement
 	 * <em>Generic Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Generic Element</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * @see org.dresdenocl.pivotmodel.GenericElement
 	 * @generated
 	 */
 	EClass getGenericElement();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
+	 * {@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
 	 * <em>Owned Type Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Type Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter()
+	 * @see org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter()
 	 * @see #getGenericElement()
 	 * @generated
 	 */
@@ -1889,35 +1889,35 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * {@link org.dresdenocl.pivotmodel.ConstrainableElement
 	 * <em>Constrainable Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Constrainable Element</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * @see org.dresdenocl.pivotmodel.ConstrainableElement
 	 * @generated
 	 */
 	EClass getConstrainableElement();
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace <em>Namespace</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Namespace <em>Namespace</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Namespace</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace
+	 * @see org.dresdenocl.pivotmodel.Namespace
 	 * @generated
 	 */
 	EClass getNamespace();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getOwnedType
 	 * <em>Owned Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getOwnedType()
 	 * @see #getNamespace()
 	 * @generated
 	 */
@@ -1925,12 +1925,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getOwnedRule
 	 * <em>Owned Rule</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Rule</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getOwnedRule()
 	 * @see #getNamespace()
 	 * @generated
 	 */
@@ -1938,12 +1938,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace
 	 * <em>Nested Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Nested Namespace</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getNestedNamespace()
 	 * @see #getNamespace()
 	 * @generated
 	 */
@@ -1951,12 +1951,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
 	 * <em>Nesting Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '
 	 *         <em>Nesting Namespace</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getNestingNamespace()
 	 * @see #getNamespace()
 	 * @generated
 	 */
@@ -1964,22 +1964,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type <em>Type</em>}'. <!--
+	 * {@link org.dresdenocl.pivotmodel.Type <em>Type</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type
+	 * @see org.dresdenocl.pivotmodel.Type
 	 * @generated
 	 */
 	EClass getType();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getNamespace
+	 * {@link org.dresdenocl.pivotmodel.Type#getNamespace
 	 * <em>Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Namespace</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.Type#getNamespace()
 	 * @see #getType()
 	 * @generated
 	 */
@@ -1987,12 +1987,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedOperation
+	 * {@link org.dresdenocl.pivotmodel.Type#getOwnedOperation
 	 * <em>Owned Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Operation</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getOwnedOperation()
+	 * @see org.dresdenocl.pivotmodel.Type#getOwnedOperation()
 	 * @see #getType()
 	 * @generated
 	 */
@@ -2000,12 +2000,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty
+	 * {@link org.dresdenocl.pivotmodel.Type#getOwnedProperty
 	 * <em>Owned Property</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Property</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getOwnedProperty()
+	 * @see org.dresdenocl.pivotmodel.Type#getOwnedProperty()
 	 * @see #getType()
 	 * @generated
 	 */
@@ -2013,11 +2013,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getSuperType
+	 * {@link org.dresdenocl.pivotmodel.Type#getSuperType
 	 * <em>Super Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Super Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getSuperType()
+	 * @see org.dresdenocl.pivotmodel.Type#getSuperType()
 	 * @see #getType()
 	 * @generated
 	 */
@@ -2025,13 +2025,13 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getGenericSuperType
+	 * {@link org.dresdenocl.pivotmodel.Type#getGenericSuperType
 	 * <em>Generic Super Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Generic Super Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getGenericSuperType()
+	 * @see org.dresdenocl.pivotmodel.Type#getGenericSuperType()
 	 * @see #getType()
 	 * @generated
 	 */
@@ -2039,22 +2039,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveType
 	 * <em>Primitive Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Primitive Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveType
+	 * @see org.dresdenocl.pivotmodel.PrimitiveType
 	 * @generated
 	 */
 	EClass getPrimitiveType();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveType#getKind
 	 * <em>Kind</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind()
+	 * @see org.dresdenocl.pivotmodel.PrimitiveType#getKind()
 	 * @see #getPrimitiveType()
 	 * @generated
 	 */
@@ -2062,23 +2062,23 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Enumeration <em>Enumeration</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Enumeration</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration
+	 * @see org.dresdenocl.pivotmodel.Enumeration
 	 * @generated
 	 */
 	EClass getEnumeration();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral
+	 * {@link org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral
 	 * <em>Owned Literal</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Literal</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral()
+	 * @see org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral()
 	 * @see #getEnumeration()
 	 * @generated
 	 */
@@ -2086,23 +2086,23 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral
 	 * <em>Enumeration Literal</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Enumeration Literal</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral
+	 * @see org.dresdenocl.pivotmodel.EnumerationLiteral
 	 * @generated
 	 */
 	EClass getEnumerationLiteral();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral#getEnumeration
 	 * <em>Enumeration</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Enumeration</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration()
+	 * @see org.dresdenocl.pivotmodel.EnumerationLiteral#getEnumeration()
 	 * @see #getEnumerationLiteral()
 	 * @generated
 	 */
@@ -2110,22 +2110,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property <em>Property</em>}'. <!--
+	 * {@link org.dresdenocl.pivotmodel.Property <em>Property</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Property</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Property
+	 * @see org.dresdenocl.pivotmodel.Property
 	 * @generated
 	 */
 	EClass getProperty();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property#getOwningType
+	 * {@link org.dresdenocl.pivotmodel.Property#getOwningType
 	 * <em>Owning Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Owning Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Property#getOwningType()
+	 * @see org.dresdenocl.pivotmodel.Property#getOwningType()
 	 * @see #getProperty()
 	 * @generated
 	 */
@@ -2133,22 +2133,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation <em>Operation</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Operation</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation
+	 * @see org.dresdenocl.pivotmodel.Operation
 	 * @generated
 	 */
 	EClass getOperation();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwningType
+	 * {@link org.dresdenocl.pivotmodel.Operation#getOwningType
 	 * <em>Owning Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Owning Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOwningType()
+	 * @see org.dresdenocl.pivotmodel.Operation#getOwningType()
 	 * @see #getOperation()
 	 * @generated
 	 */
@@ -2156,12 +2156,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter
+	 * {@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter
 	 * <em>Owned Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Owned Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter()
+	 * @see org.dresdenocl.pivotmodel.Operation#getOwnedParameter()
 	 * @see #getOperation()
 	 * @generated
 	 */
@@ -2169,11 +2169,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter
+	 * {@link org.dresdenocl.pivotmodel.Operation#getInputParameter
 	 * <em>Input Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Input Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter()
+	 * @see org.dresdenocl.pivotmodel.Operation#getInputParameter()
 	 * @see #getOperation()
 	 * @generated
 	 */
@@ -2181,11 +2181,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter
+	 * {@link org.dresdenocl.pivotmodel.Operation#getOutputParameter
 	 * <em>Output Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference list '<em>Output Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter()
+	 * @see org.dresdenocl.pivotmodel.Operation#getOutputParameter()
 	 * @see #getOperation()
 	 * @generated
 	 */
@@ -2193,11 +2193,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter
+	 * {@link org.dresdenocl.pivotmodel.Operation#getReturnParameter
 	 * <em>Return Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Return Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter()
+	 * @see org.dresdenocl.pivotmodel.Operation#getReturnParameter()
 	 * @see #getOperation()
 	 * @generated
 	 */
@@ -2205,13 +2205,13 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter
+	 * {@link org.dresdenocl.pivotmodel.Operation#getSignatureParameter
 	 * <em>Signature Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the reference list '
 	 *         <em>Signature Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter()
+	 * @see org.dresdenocl.pivotmodel.Operation#getSignatureParameter()
 	 * @see #getOperation()
 	 * @generated
 	 */
@@ -2219,22 +2219,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter <em>Parameter</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Parameter
+	 * @see org.dresdenocl.pivotmodel.Parameter
 	 * @generated
 	 */
 	EClass getParameter();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Parameter#getKind()
+	 * @see org.dresdenocl.pivotmodel.Parameter#getKind()
 	 * @see #getParameter()
 	 * @generated
 	 */
@@ -2242,11 +2242,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation
+	 * {@link org.dresdenocl.pivotmodel.Parameter#getOperation
 	 * <em>Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Operation</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation()
+	 * @see org.dresdenocl.pivotmodel.Parameter#getOperation()
 	 * @see #getParameter()
 	 * @generated
 	 */
@@ -2254,34 +2254,34 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericType <em>Generic Type</em>}
+	 * {@link org.dresdenocl.pivotmodel.GenericType <em>Generic Type</em>}
 	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Generic Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericType
+	 * @see org.dresdenocl.pivotmodel.GenericType
 	 * @generated
 	 */
 	EClass getGenericType();
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType
+	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType
 	 * <em>Parameter Generic Type</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Parameter Generic Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterGenericType
+	 * @see org.dresdenocl.pivotmodel.ParameterGenericType
 	 * @generated
 	 */
 	EClass getParameterGenericType();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType#getTypeParameter
+	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter
 	 * <em>Type Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Type Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterGenericType#getTypeParameter()
+	 * @see org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter()
 	 * @see #getParameterGenericType()
 	 * @generated
 	 */
@@ -2289,23 +2289,23 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType
 	 * <em>Complex Generic Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Complex Generic Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType
+	 * @see org.dresdenocl.pivotmodel.ComplexGenericType
 	 * @generated
 	 */
 	EClass getComplexGenericType();
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getUnboundType
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType
 	 * <em>Unbound Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Unbound Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getUnboundType()
+	 * @see org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType()
 	 * @see #getComplexGenericType()
 	 * @generated
 	 */
@@ -2313,12 +2313,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
 	 * <em>Type Argument</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Type Argument</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument()
+	 * @see org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument()
 	 * @see #getComplexGenericType()
 	 * @generated
 	 */
@@ -2326,23 +2326,23 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter
 	 * <em>Type Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Type Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeParameter
+	 * @see org.dresdenocl.pivotmodel.TypeParameter
 	 * @generated
 	 */
 	EClass getTypeParameter();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
 	 * <em>Generic Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '
 	 *         <em>Generic Element</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement()
+	 * @see org.dresdenocl.pivotmodel.TypeParameter#getGenericElement()
 	 * @see #getTypeParameter()
 	 * @generated
 	 */
@@ -2350,24 +2350,24 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument
 	 * <em>Type Argument</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Type Argument</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument
+	 * @see org.dresdenocl.pivotmodel.TypeArgument
 	 * @generated
 	 */
 	EClass getTypeArgument();
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
 	 * <em>Owning Generic Type</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the container reference '
 	 *         <em>Owning Generic Type</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType()
+	 * @see org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType()
 	 * @see #getTypeArgument()
 	 * @generated
 	 */
@@ -2375,22 +2375,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint <em>Constraint</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Constraint <em>Constraint</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Constraint</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint
+	 * @see org.dresdenocl.pivotmodel.Constraint
 	 * @generated
 	 */
 	EClass getConstraint();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getKind <em>Kind</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getKind()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getKind()
 	 * @see #getConstraint()
 	 * @generated
 	 */
@@ -2398,11 +2398,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getNamespace
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getNamespace
 	 * <em>Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Namespace</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getNamespace()
 	 * @see #getConstraint()
 	 * @generated
 	 */
@@ -2410,12 +2410,12 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the containment reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getSpecification
 	 * <em>Specification</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference '
 	 *         <em>Specification</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getSpecification()
 	 * @see #getConstraint()
 	 * @generated
 	 */
@@ -2423,13 +2423,13 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getConstrainedElement
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getConstrainedElement
 	 * <em>Constrained Element</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for the reference list '
 	 *         <em>Constrained Element</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getConstrainedElement()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getConstrainedElement()
 	 * @see #getConstraint()
 	 * @generated
 	 */
@@ -2437,11 +2437,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature
 	 * <em>Defined Feature</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the reference '<em>Defined Feature</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getDefinedFeature()
 	 * @see #getConstraint()
 	 * @generated
 	 */
@@ -2449,22 +2449,22 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression <em>Expression</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for class '<em>Expression</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression
+	 * @see org.dresdenocl.pivotmodel.Expression
 	 * @generated
 	 */
 	EClass getExpression();
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getBody <em>Body</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Body</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression#getBody()
+	 * @see org.dresdenocl.pivotmodel.Expression#getBody()
 	 * @see #getExpression()
 	 * @generated
 	 */
@@ -2472,11 +2472,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the attribute '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getLanguage
+	 * {@link org.dresdenocl.pivotmodel.Expression#getLanguage
 	 * <em>Language</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the attribute '<em>Language</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression#getLanguage()
+	 * @see org.dresdenocl.pivotmodel.Expression#getLanguage()
 	 * @see #getExpression()
 	 * @generated
 	 */
@@ -2484,11 +2484,11 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for the container reference '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint
+	 * {@link org.dresdenocl.pivotmodel.Expression#getConstraint
 	 * <em>Constraint</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for the container reference '<em>Constraint</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint()
+	 * @see org.dresdenocl.pivotmodel.Expression#getConstraint()
 	 * @see #getExpression()
 	 * @generated
 	 */
@@ -2496,25 +2496,25 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty
+	 * {@link org.dresdenocl.pivotmodel.AssociationProperty
 	 * <em>Association Property</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for class '<em>Association Property</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty
 	 * @generated
 	 */
 	EClass getAssociationProperty();
 
 	/**
 	 * Returns the meta object for the containment reference list '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties
+	 * {@link org.dresdenocl.pivotmodel.AssociationProperty#getInverseAssociationProperties
 	 * <em>Inverse Association Properties</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the meta object for the containment reference list '
 	 *         <em>Inverse Association Properties</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty#getInverseAssociationProperties()
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty#getInverseAssociationProperties()
 	 * @see #getAssociationProperty()
 	 * @generated
 	 */
@@ -2522,35 +2522,35 @@ public interface PivotModelPackage extends EPackage {
 
 	/**
 	 * Returns the meta object for enum '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveTypeKind
 	 * <em>Primitive Type Kind</em>}'. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the meta object for enum '<em>Primitive Type Kind</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+	 * @see org.dresdenocl.pivotmodel.PrimitiveTypeKind
 	 * @generated
 	 */
 	EEnum getPrimitiveTypeKind();
 
 	/**
 	 * Returns the meta object for enum '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
+	 * {@link org.dresdenocl.pivotmodel.ParameterDirectionKind
 	 * <em>Parameter Direction Kind</em>}'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Parameter Direction Kind</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
+	 * @see org.dresdenocl.pivotmodel.ParameterDirectionKind
 	 * @generated
 	 */
 	EEnum getParameterDirectionKind();
 
 	/**
 	 * Returns the meta object for enum '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind
+	 * {@link org.dresdenocl.pivotmodel.ConstraintKind
 	 * <em>Constraint Kind</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return the meta object for enum '<em>Constraint Kind</em>'.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstraintKind
+	 * @see org.dresdenocl.pivotmodel.ConstraintKind
 	 * @generated
 	 */
 	EEnum getConstraintKind();
@@ -2596,12 +2596,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.NamedElementImpl
 		 * <em>Named Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamedElement()
+		 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getNamedElement()
 		 * @generated
 		 */
 		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
@@ -2633,12 +2633,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.TypedElementImpl
 		 * <em>Typed Element</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypedElement()
+		 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getTypedElement()
 		 * @generated
 		 */
 		EClass TYPED_ELEMENT = eINSTANCE.getTypedElement();
@@ -2663,11 +2663,11 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.FeatureImpl
 		 * <em>Feature</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getFeature()
+		 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getFeature()
 		 * @generated
 		 */
 		EClass FEATURE = eINSTANCE.getFeature();
@@ -2690,12 +2690,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement
+		 * {@link org.dresdenocl.pivotmodel.GenericElement
 		 * <em>Generic Element</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
+		 * @see org.dresdenocl.pivotmodel.GenericElement
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getGenericElement()
 		 * @generated
 		 */
 		EClass GENERIC_ELEMENT = eINSTANCE.getGenericElement();
@@ -2712,23 +2712,23 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+		 * {@link org.dresdenocl.pivotmodel.ConstrainableElement
 		 * <em>Constrainable Element</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
+		 * @see org.dresdenocl.pivotmodel.ConstrainableElement
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getConstrainableElement()
 		 * @generated
 		 */
 		EClass CONSTRAINABLE_ELEMENT = eINSTANCE.getConstrainableElement();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl
 		 * <em>Namespace</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamespaceImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getNamespace()
+		 * @see org.dresdenocl.pivotmodel.impl.NamespaceImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getNamespace()
 		 * @generated
 		 */
 		EClass NAMESPACE = eINSTANCE.getNamespace();
@@ -2771,11 +2771,11 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl <em>Type</em>}'
+		 * {@link org.dresdenocl.pivotmodel.impl.TypeImpl <em>Type</em>}'
 		 * class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getType()
+		 * @see org.dresdenocl.pivotmodel.impl.TypeImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getType()
 		 * @generated
 		 */
 		EClass TYPE = eINSTANCE.getType();
@@ -2825,12 +2825,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl
 		 * <em>Primitive Type</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
+		 * @see org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveType()
 		 * @generated
 		 */
 		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
@@ -2845,12 +2845,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.EnumerationImpl
 		 * <em>Enumeration</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumeration()
+		 * @see org.dresdenocl.pivotmodel.impl.EnumerationImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getEnumeration()
 		 * @generated
 		 */
 		EClass ENUMERATION = eINSTANCE.getEnumeration();
@@ -2867,12 +2867,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl
 		 * <em>Enumeration Literal</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
+		 * @see org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getEnumerationLiteral()
 		 * @generated
 		 */
 		EClass ENUMERATION_LITERAL = eINSTANCE.getEnumerationLiteral();
@@ -2888,11 +2888,11 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.PropertyImpl
 		 * <em>Property</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getProperty()
+		 * @see org.dresdenocl.pivotmodel.impl.PropertyImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getProperty()
 		 * @generated
 		 */
 		EClass PROPERTY = eINSTANCE.getProperty();
@@ -2907,11 +2907,11 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.OperationImpl
 		 * <em>Operation</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getOperation()
+		 * @see org.dresdenocl.pivotmodel.impl.OperationImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getOperation()
 		 * @generated
 		 */
 		EClass OPERATION = eINSTANCE.getOperation();
@@ -2972,11 +2972,11 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.ParameterImpl
 		 * <em>Parameter</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameter()
+		 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getParameter()
 		 * @generated
 		 */
 		EClass PARAMETER = eINSTANCE.getParameter();
@@ -2999,24 +2999,24 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.GenericTypeImpl
 		 * <em>Generic Type</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getGenericType()
+		 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getGenericType()
 		 * @generated
 		 */
 		EClass GENERIC_TYPE = eINSTANCE.getGenericType();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl
 		 * <em>Parameter Generic Type</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
+		 * @see org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getParameterGenericType()
 		 * @generated
 		 */
 		EClass PARAMETER_GENERIC_TYPE = eINSTANCE.getParameterGenericType();
@@ -3032,12 +3032,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl
 		 * <em>Complex Generic Type</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.ComplexGenericTypeImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
+		 * @see org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getComplexGenericType()
 		 * @generated
 		 */
 		EClass COMPLEX_GENERIC_TYPE = eINSTANCE.getComplexGenericType();
@@ -3063,12 +3063,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.TypeParameterImpl
 		 * <em>Type Parameter</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
+		 * @see org.dresdenocl.pivotmodel.impl.TypeParameterImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getTypeParameter()
 		 * @generated
 		 */
 		EClass TYPE_PARAMETER = eINSTANCE.getTypeParameter();
@@ -3085,12 +3085,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.TypeArgumentImpl
 		 * <em>Type Argument</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getTypeArgument()
+		 * @see org.dresdenocl.pivotmodel.impl.TypeArgumentImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getTypeArgument()
 		 * @generated
 		 */
 		EClass TYPE_ARGUMENT = eINSTANCE.getTypeArgument();
@@ -3107,12 +3107,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl
 		 * <em>Constraint</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraint()
+		 * @see org.dresdenocl.pivotmodel.impl.ConstraintImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getConstraint()
 		 * @generated
 		 */
 		EClass CONSTRAINT = eINSTANCE.getConstraint();
@@ -3163,12 +3163,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.ExpressionImpl
 		 * <em>Expression</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getExpression()
+		 * @see org.dresdenocl.pivotmodel.impl.ExpressionImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getExpression()
 		 * @generated
 		 */
 		EClass EXPRESSION = eINSTANCE.getExpression();
@@ -3199,12 +3199,12 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl
+		 * {@link org.dresdenocl.pivotmodel.impl.AssociationPropertyImpl
 		 * <em>Association Property</em>}' class. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getAssociationProperty()
+		 * @see org.dresdenocl.pivotmodel.impl.AssociationPropertyImpl
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getAssociationProperty()
 		 * @generated
 		 */
 		EClass ASSOCIATION_PROPERTY = eINSTANCE.getAssociationProperty();
@@ -3221,36 +3221,36 @@ public interface PivotModelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
+		 * {@link org.dresdenocl.pivotmodel.PrimitiveTypeKind
 		 * <em>Primitive Type Kind</em>}' enum. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
+		 * @see org.dresdenocl.pivotmodel.PrimitiveTypeKind
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getPrimitiveTypeKind()
 		 * @generated
 		 */
 		EEnum PRIMITIVE_TYPE_KIND = eINSTANCE.getPrimitiveTypeKind();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
+		 * {@link org.dresdenocl.pivotmodel.ParameterDirectionKind
 		 * <em>Parameter Direction Kind</em>}' enum. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
+		 * @see org.dresdenocl.pivotmodel.ParameterDirectionKind
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getParameterDirectionKind()
 		 * @generated
 		 */
 		EEnum PARAMETER_DIRECTION_KIND = eINSTANCE.getParameterDirectionKind();
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.pivotmodel.ConstraintKind
+		 * {@link org.dresdenocl.pivotmodel.ConstraintKind
 		 * <em>Constraint Kind</em>}' enum. <!-- begin-user-doc --> <!--
 		 * end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.pivotmodel.ConstraintKind
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getConstraintKind()
+		 * @see org.dresdenocl.pivotmodel.ConstraintKind
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getConstraintKind()
 		 * @generated
 		 */
 		EEnum CONSTRAINT_KIND = eINSTANCE.getConstraintKind();
@@ -3260,7 +3260,7 @@ public interface PivotModelPackage extends EPackage {
 		 * data type. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.lang.CloneNotSupportedException
-		 * @see tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl#getCloneNotSupportedException()
+		 * @see org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl#getCloneNotSupportedException()
 		 * @generated
 		 */
 		EDataType CLONE_NOT_SUPPORTED_EXCEPTION = eINSTANCE

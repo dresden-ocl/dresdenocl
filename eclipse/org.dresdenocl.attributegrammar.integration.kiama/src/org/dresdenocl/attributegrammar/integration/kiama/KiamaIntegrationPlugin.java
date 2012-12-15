@@ -1,4 +1,4 @@
-package tudresden.attributegrammar.integration.kiama;
+package org.dresdenocl.attributegrammar.integration.kiama;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class KiamaIntegrationPlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.attributegrammar.integration.kiama"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.dresdenocl.attributegrammar.integration.kiama"; //$NON-NLS-1$
 
 	// The shared instance
 	private static KiamaIntegrationPlugin plugin;

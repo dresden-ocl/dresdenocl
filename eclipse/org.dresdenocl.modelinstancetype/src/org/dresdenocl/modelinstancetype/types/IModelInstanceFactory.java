@@ -16,15 +16,15 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types;
+package org.dresdenocl.modelinstancetype.types;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.ModelInstanceTuple;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.base.ModelInstanceTuple;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

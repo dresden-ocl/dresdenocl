@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.IterateExpCS;
-import tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
+import org.dresdenocl.language.ocl.IterateExpCS;
+import org.dresdenocl.language.ocl.IteratorExpVariableCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,9 +25,9 @@ import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl#getIteratorVariable <em>Iterator Variable</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl#getResultVariable <em>Result Variable</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.IterateExpCSImpl#getIteratorVariable <em>Iterator Variable</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.IterateExpCSImpl#getResultVariable <em>Result Variable</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.IterateExpCSImpl#getBodyExpression <em>Body Expression</em>}</li>
  * </ul>
  * </p>
  *

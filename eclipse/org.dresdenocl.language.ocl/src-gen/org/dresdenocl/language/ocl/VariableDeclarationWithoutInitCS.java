@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithoutInitCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithoutInitCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface VariableDeclarationWithoutInitCS extends VariableDeclarationCS 
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
    * @see #setTypeName(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithoutInitCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithoutInitCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
 	TypeCS getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS#getTypeName <em>Type Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS#getTypeName <em>Type Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' containment reference.

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<schema targetNamespace="tudresden.ocl20.pivot.language.ocl.resource.ocl" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.dresdenocl.language.ocl.resource.ocl" xmlns="http://www.w3.org/2001/XMLSchema">
 	<annotation>
 		<appinfo>
-			<meta.schema plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl" id="tudresden.ocl20.pivot.language.ocl.resource.ocl.default_load_options" name="Default Load Options"/>
+			<meta.schema plugin="org.dresdenocl.language.ocl.resource.ocl" id="org.dresdenocl.language.ocl.resource.ocl.default_load_options" name="Default Load Options"/>
 		</appinfo>
 		<documentation>
 			This extension point can be used to configure the default load options for resources.		</documentation>
@@ -68,7 +68,7 @@
 						
 					</documentation>
 					<appinfo>
-						<meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider"/>
+						<meta.attribute kind="java" basedOn=":org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider"/>
 					</appinfo>
 				</annotation>
 			</attribute>

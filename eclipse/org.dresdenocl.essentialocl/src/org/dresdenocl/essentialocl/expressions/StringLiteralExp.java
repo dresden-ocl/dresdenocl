@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp#getStringSymbol <em>String Symbol</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.StringLiteralExp#getStringSymbol <em>String Symbol</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,7 +63,7 @@ public interface StringLiteralExp extends PrimitiveLiteralExp {
 	String getStringSymbol();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp#getStringSymbol <em>String Symbol</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.StringLiteralExp#getStringSymbol <em>String Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>String Symbol</em>' attribute.

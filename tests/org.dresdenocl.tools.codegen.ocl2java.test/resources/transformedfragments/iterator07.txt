@@ -1,12 +1,12 @@
-java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result1;
-result1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
+java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction> result1;
+result1 = new java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction>();
 
 /* Iterator Select: Select all elements which fulfill the condition. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
     if ((anElement1.points > new Integer(100))) {
         result1.add(anElement1);
     }
     // no else
 }
 
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.notEmpty(result1)
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.notEmpty(result1)

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 
@@ -16,12 +16,12 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#isStatic <em>Static</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#getDefinitionExpPart <em>Definition Exp Part</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.DefinitionExpCS#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.DefinitionExpCS#getDefinitionExpPart <em>Definition Exp Part</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface DefinitionExpCS extends InvariantOrDefinitionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Static</em>' attribute.
    * @see #setStatic(boolean)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpCS_Static()
+   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpCS_Static()
    * @model
    * @generated
    */
 	boolean isStatic();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#isStatic <em>Static</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpCS#isStatic <em>Static</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Static</em>' attribute.
@@ -62,14 +62,14 @@ public interface DefinitionExpCS extends InvariantOrDefinitionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Definition Exp Part</em>' containment reference.
    * @see #setDefinitionExpPart(DefinitionExpPartCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getDefinitionExpCS_DefinitionExpPart()
+   * @see org.dresdenocl.language.ocl.OclPackage#getDefinitionExpCS_DefinitionExpPart()
    * @model containment="true" required="true"
    * @generated
    */
 	DefinitionExpPartCS getDefinitionExpPart();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#getDefinitionExpPart <em>Definition Exp Part</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.DefinitionExpCS#getDefinitionExpPart <em>Definition Exp Part</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Definition Exp Part</em>' containment reference.

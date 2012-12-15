@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.PathNameCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,8 +24,8 @@ import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PathNameCSImpl#getSimpleName <em>Simple Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PathNameCSImpl#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl#getPathName <em>Path Name</em>}</li>
  * </ul>
  * </p>
  *

@@ -11,7 +11,7 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.util.List;
 
@@ -20,12 +20,12 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.uml2.uml.LiteralUnlimitedNatural;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractOperation;
 
 /**
  * <p>
@@ -94,7 +94,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -105,7 +105,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwnedParameter()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getOwnedParameter()
 	 * 
 	 * @generated NOT
 	 */
@@ -131,7 +131,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getOwningType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getOwningType()
 	 * 
 	 * @generated NOT
 	 */
@@ -161,7 +161,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractOperation#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractOperation#getType()
 	 * 
 	 * @generated NOT
 	 */
@@ -215,7 +215,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter()
+	 * @see org.dresdenocl.pivotmodel.impl.OperationImpl#getReturnParameter()
 	 * 
 	 * @generated NOT
 	 */
@@ -238,7 +238,7 @@ public class UML2Operation extends AbstractOperation implements Operation {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
+	 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl#isStatic()
 	 * 
 	 * @generated NOT
 	 */

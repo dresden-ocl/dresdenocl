@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.tests;
+package org.dresdenocl.essentialocl.types.tests;
 
 import junit.textui.TestRunner;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->

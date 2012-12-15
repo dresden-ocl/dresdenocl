@@ -30,18 +30,18 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EParameter;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractParameter;
 
 /**
  * <p>
@@ -107,7 +107,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getName()
 	 */
 	@Override
 	public String getName() {
@@ -119,7 +119,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * org.dresdenocl.pivotmodel.base.AbstractParameter#getOperation()
 	 */
 	@Override
 	public Operation getOperation() {
@@ -131,7 +131,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -186,7 +186,7 @@ public class EcoreParameter extends AbstractParameter implements Parameter {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl#getKind()
 	 */
 	@Override
 	public ParameterDirectionKind getKind() {

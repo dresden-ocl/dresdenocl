@@ -1,10 +1,10 @@
-package tudresden.ocl20.pivot.modelinstancetype;
+package org.dresdenocl.modelinstancetype;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -12,7 +12,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class ModelInstanceTypePlugin extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.modelinstancetype";
+	public static final String PLUGIN_ID = "org.dresdenocl.modelinstancetype";
 
 	// The shared instance
 	private static ModelInstanceTypePlugin plugin;
@@ -54,7 +54,7 @@ public class ModelInstanceTypePlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

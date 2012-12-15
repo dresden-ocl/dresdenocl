@@ -18,14 +18,14 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.simple.constraints.test;
+package org.dresdenocl.examples.simple.constraints.test;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.examples.simple.Person;
-import tudresden.ocl20.pivot.examples.simple.Student;
+import org.dresdenocl.examples.simple.Person;
+import org.dresdenocl.examples.simple.Student;
 
 /**
  * <p>

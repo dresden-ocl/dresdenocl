@@ -30,7 +30,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.provider;
+package org.dresdenocl.metamodels.ecore.internal.provider;
 
 import java.net.URL;
 
@@ -40,13 +40,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.ecore.internal.model.EcoreModel;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.metamodels.ecore.internal.model.EcoreModel;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -69,7 +69,7 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
+	 * @see org.dresdenocl.modelbus.IModelProvider#getModel(java.net.URL)
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
 
@@ -120,7 +120,7 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.model.base.AbstractModelProvider#getModel(org.eclipse
+	 * org.dresdenocl.model.base.AbstractModelProvider#getModel(org.eclipse
 	 * .emf.ecore.resource.Resource)
 	 */
 	public IModel getModel(Resource resource) {

@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License along 
  * with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj;
+package org.dresdenocl.tools.codegen.ocl2java.test.aspectj;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.constraintkinds.AllConstraintKindTests;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.expressions.AllExpressionTests;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.aspectj.standardlibrary.AllStandardLibraryTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.aspectj.constraintkinds.AllConstraintKindTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.aspectj.expressions.AllExpressionTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.aspectj.standardlibrary.AllStandardLibraryTests;
 
 /**
  * <p>

@@ -28,22 +28,22 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclComparable;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceReal;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -81,7 +81,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#abs()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#abs()
 	 */
 	public OclReal abs() {
 
@@ -108,8 +108,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
-	 * #add(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.standardlibrary.java.internal.library.IAddableElement
+	 * #add(org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclAny add(OclAny that) {
 	
@@ -132,7 +132,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#add(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#add(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal add(OclReal that) {
@@ -161,7 +161,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 	
@@ -193,8 +193,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable#compareTo
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclComparable#compareTo
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclComparable)
 	 */
 	public OclInteger compareTo(OclComparable that) {
 	
@@ -244,7 +244,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#convertToString
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#convertToString
 	 * ()
 	 */
 	public OclString convertToString() {
@@ -271,7 +271,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#divide(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#divide(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal divide(OclReal that) {
@@ -316,7 +316,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#floor()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#floor()
 	 */
 	public OclInteger floor() {
 	
@@ -344,7 +344,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#getModelInstanceReal
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#getModelInstanceReal
 	 * ()
 	 */
 	public IModelInstanceReal getModelInstanceReal() {
@@ -355,7 +355,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.IAddableElement
+	 * org.dresdenocl.standardlibrary.java.internal.library.IAddableElement
 	 * #getNeutralElement()
 	 */
 	public OclAny getNeutralElement() {
@@ -365,8 +365,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * @see org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny
+	 * #isEqualTo(org.dresdenocl.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 	
@@ -394,8 +394,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isGreaterEqual
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#isGreaterEqual
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclBoolean isGreaterEqual(OclReal that) {
 
@@ -424,8 +424,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isGreaterThan
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#isGreaterThan
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclBoolean isGreaterThan(OclReal that) {
 
@@ -453,8 +453,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessEqual
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#isLessEqual
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclBoolean isLessEqual(OclReal that) {
 
@@ -482,8 +482,8 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#isLessThan
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal)
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#isLessThan
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclBoolean isLessThan(OclReal that) {
 
@@ -512,7 +512,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#max(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#max(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal max(OclReal that) {
@@ -542,7 +542,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#min(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#min(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal min(OclReal that) {
@@ -572,7 +572,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#multiply(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#multiply(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal multiply(OclReal that) {
@@ -601,7 +601,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#negative()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#negative()
 	 */
 	public OclReal negative() {
 
@@ -626,7 +626,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#round()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#round()
 	 */
 	public OclInteger round() {
 
@@ -653,7 +653,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#subtract(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclReal#subtract(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclReal)
 	 */
 	public OclReal subtract(OclReal that) {
@@ -682,7 +682,7 @@ public class JavaOclReal extends JavaOclLibraryObject implements OclReal,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * @see org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny
 	 * #toString()
 	 */
 	public String toString() {

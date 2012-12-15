@@ -30,43 +30,43 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.util;
+package org.dresdenocl.pivotmodel.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.*;
-import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
-import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.*;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.ComplexGenericType;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterGenericType;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeArgument;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage
  * @generated
  */
 public class PivotModelAdapterFactory extends AdapterFactoryImpl {
@@ -271,13 +271,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Enumeration <em>Enumeration</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration
+	 * @see org.dresdenocl.pivotmodel.Enumeration
 	 * @generated
 	 */
 	public Adapter createEnumerationAdapter() {
@@ -287,14 +287,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * {@link org.dresdenocl.pivotmodel.NamedElement
 	 * <em>Named Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement
+	 * @see org.dresdenocl.pivotmodel.NamedElement
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
@@ -304,13 +304,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation <em>Operation</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation
+	 * @see org.dresdenocl.pivotmodel.Operation
 	 * @generated
 	 */
 	public Adapter createOperationAdapter() {
@@ -320,13 +320,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace <em>Namespace</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Namespace <em>Namespace</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace
+	 * @see org.dresdenocl.pivotmodel.Namespace
 	 * @generated
 	 */
 	public Adapter createNamespaceAdapter() {
@@ -336,13 +336,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type <em>Type</em>}'. <!--
+	 * {@link org.dresdenocl.pivotmodel.Type <em>Type</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can
 	 * easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type
+	 * @see org.dresdenocl.pivotmodel.Type
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
@@ -352,13 +352,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter <em>Parameter</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Parameter
+	 * @see org.dresdenocl.pivotmodel.Parameter
 	 * @generated
 	 */
 	public Adapter createParameterAdapter() {
@@ -368,14 +368,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral
 	 * <em>Enumeration Literal</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral
+	 * @see org.dresdenocl.pivotmodel.EnumerationLiteral
 	 * @generated
 	 */
 	public Adapter createEnumerationLiteralAdapter() {
@@ -385,13 +385,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Property <em>Property</em>}'. <!--
+	 * {@link org.dresdenocl.pivotmodel.Property <em>Property</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can
 	 * easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Property
+	 * @see org.dresdenocl.pivotmodel.Property
 	 * @generated
 	 */
 	public Adapter createPropertyAdapter() {
@@ -401,14 +401,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement
+	 * {@link org.dresdenocl.pivotmodel.TypedElement
 	 * <em>Typed Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypedElement
+	 * @see org.dresdenocl.pivotmodel.TypedElement
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
@@ -418,14 +418,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType
+	 * {@link org.dresdenocl.pivotmodel.PrimitiveType
 	 * <em>Primitive Type</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveType
+	 * @see org.dresdenocl.pivotmodel.PrimitiveType
 	 * @generated
 	 */
 	public Adapter createPrimitiveTypeAdapter() {
@@ -435,13 +435,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature <em>Feature</em>}'. <!--
+	 * {@link org.dresdenocl.pivotmodel.Feature <em>Feature</em>}'. <!--
 	 * begin-user-doc --> This default implementation returns null so that we can
 	 * easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Feature
+	 * @see org.dresdenocl.pivotmodel.Feature
 	 * @generated
 	 */
 	public Adapter createFeatureAdapter() {
@@ -451,13 +451,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint <em>Constraint</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Constraint <em>Constraint</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint
+	 * @see org.dresdenocl.pivotmodel.Constraint
 	 * @generated
 	 */
 	public Adapter createConstraintAdapter() {
@@ -467,13 +467,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression <em>Expression</em>}'.
+	 * {@link org.dresdenocl.pivotmodel.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Expression
+	 * @see org.dresdenocl.pivotmodel.Expression
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
@@ -483,14 +483,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.AssociationProperty
+	 * {@link org.dresdenocl.pivotmodel.AssociationProperty
 	 * <em>Association Property</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.AssociationProperty
+	 * @see org.dresdenocl.pivotmodel.AssociationProperty
 	 * @generated
 	 */
 	public Adapter createAssociationPropertyAdapter() {
@@ -500,14 +500,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * {@link org.dresdenocl.pivotmodel.ConstrainableElement
 	 * <em>Constrainable Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ConstrainableElement
+	 * @see org.dresdenocl.pivotmodel.ConstrainableElement
 	 * @generated
 	 */
 	public Adapter createConstrainableElementAdapter() {
@@ -517,14 +517,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * {@link org.dresdenocl.pivotmodel.GenericElement
 	 * <em>Generic Element</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement
+	 * @see org.dresdenocl.pivotmodel.GenericElement
 	 * @generated
 	 */
 	public Adapter createGenericElementAdapter() {
@@ -534,14 +534,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter
 	 * <em>Type Parameter</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeParameter
+	 * @see org.dresdenocl.pivotmodel.TypeParameter
 	 * @generated
 	 */
 	public Adapter createTypeParameterAdapter() {
@@ -551,14 +551,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument
 	 * <em>Type Argument</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeArgument
+	 * @see org.dresdenocl.pivotmodel.TypeArgument
 	 * @generated
 	 */
 	public Adapter createTypeArgumentAdapter() {
@@ -568,14 +568,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType
+	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType
 	 * <em>Parameter Generic Type</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterGenericType
+	 * @see org.dresdenocl.pivotmodel.ParameterGenericType
 	 * @generated
 	 */
 	public Adapter createParameterGenericTypeAdapter() {
@@ -585,14 +585,14 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType
 	 * <em>Complex Generic Type</em>}'. <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType
+	 * @see org.dresdenocl.pivotmodel.ComplexGenericType
 	 * @generated
 	 */
 	public Adapter createComplexGenericTypeAdapter() {
@@ -602,13 +602,13 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericType <em>Generic Type</em>}
+	 * {@link org.dresdenocl.pivotmodel.GenericType <em>Generic Type</em>}
 	 * '. <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericType
+	 * @see org.dresdenocl.pivotmodel.GenericType
 	 * @generated
 	 */
 	public Adapter createGenericTypeAdapter() {

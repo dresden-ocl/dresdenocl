@@ -28,21 +28,21 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -83,7 +83,7 @@ public class JavaOclSequence<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#append
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclSequence#append
 	 * (java.lang.Object)
 	 */
 	public OclSequence<T> append(T that) {
@@ -117,7 +117,7 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#excluding
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSequence#excluding
 	 * (java.lang.Object)
 	 */
 	public OclSequence<T> excluding(T that) {
@@ -157,7 +157,7 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten ()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#flatten ()
 	 */
 	public <T2 extends OclAny> OclSequence<T2> flatten() {
 
@@ -189,7 +189,7 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#including
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSequence#including
 	 * (java.lang.Object)
 	 */
 	public OclSequence<T> including(T object) {
@@ -200,8 +200,8 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#insertAt
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSequence#insertAt
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclInteger,
 	 * java.lang.Object)
 	 */
 	public OclSequence<T> insertAt(OclInteger index, T anElement) {
@@ -251,8 +251,8 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclCollection
+	 * #isEqualTo(org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
@@ -308,7 +308,7 @@ public class JavaOclSequence<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#prepend
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclSequence#prepend
 	 * (java.lang.Object)
 	 */
 	public OclSequence<T> prepend(T that) {
@@ -342,9 +342,9 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence#subSequence
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSequence#subSequence
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclInteger,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclSequence<T> subSequence(OclInteger lower, OclInteger upper) {
 
@@ -400,8 +400,8 @@ public class JavaOclSequence<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection#
-	 * union(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection#
+	 * union(org.dresdenocl.essentialocl.standardlibrary.OclSequence)
 	 */
 	public OclSequence<T> union(OclSequence<T> aCollection) {
 

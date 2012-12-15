@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util;
+package org.dresdenocl.modelbus.ui.internal.wizards.util;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -26,8 +26,8 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.metamodel.IMetamodelDescriptor;
 
 /**
  * <p>

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -38,8 +38,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.CallExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CallExpImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.CallExpImpl#getSource <em>Source</em>}</li>
  * </ul>
  * </p>
  *

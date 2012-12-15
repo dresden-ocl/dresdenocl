@@ -39,7 +39,7 @@
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
        uri = "http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel" 
-       class = "tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFactory" 
+       class = "org.dresdenocl.pivotmodel.provider.PivotModelItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider

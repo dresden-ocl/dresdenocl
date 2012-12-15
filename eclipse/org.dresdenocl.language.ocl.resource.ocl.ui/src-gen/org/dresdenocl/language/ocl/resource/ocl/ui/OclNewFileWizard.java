@@ -4,12 +4,12 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements org.eclipse.ui.INewWizard {
 	
 	private String categoryId = null;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizardPage page;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclNewFileWizardPage page;
 	private org.eclipse.jface.viewers.ISelection selection;
 	private String newName = null;
 	
@@ -30,7 +30,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 	 * Adds the pages to the wizard.
 	 */
 	public void addPages() {
-		page = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclNewFileWizardPage(selection, getFileExtension());
+		page = new org.dresdenocl.language.ocl.resource.ocl.ui.OclNewFileWizardPage(selection, getFileExtension());
 		addPage(page);
 	}
 	
@@ -50,7 +50,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		try {
 			file = getFile(fileName, containerName);
 		} catch (org.eclipse.core.runtime.CoreException e1) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e1);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e1);
 			return false;
 		}
 		
@@ -83,7 +83,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		} catch (java.lang.reflect.InvocationTargetException e) {
 			Throwable realException = e.getTargetException();
 			org.eclipse.jface.dialogs.MessageDialog.openError(getShell(), "Error", realException.getMessage());
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while initializing new file", e);
 			return false;
 		}
 		return true;
@@ -136,7 +136,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 	 * We will initialize file contents with a sample text.
 	 */
 	private java.io.InputStream openContentStream() {
-		return new java.io.ByteArrayInputStream(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getNewFileContentProvider().getNewFileContent(newName).getBytes());
+		return new java.io.ByteArrayInputStream(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getNewFileContentProvider().getNewFileContent(newName).getBytes());
 	}
 	
 	private void throwCoreException(String message) throws org.eclipse.core.runtime.CoreException {
@@ -156,11 +156,11 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 	}
 	
 	public String getFileExtension() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
+		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName();
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation getMetaInformation() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation getMetaInformation() {
+		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	}
 	
 }

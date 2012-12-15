@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -40,12 +40,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -53,10 +53,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType
+ * <li>{@link org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType
  * <em>Type</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType
+ * {@link org.dresdenocl.pivotmodel.impl.TypedElementImpl#getGenericType
  * <em>Generic Type</em>}</li>
  * </ul>
  * </p>
@@ -331,7 +331,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	 * Overridden to include the type and generic type in the stringification of
 	 * subclasses.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#toString()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#toString()
 	 */
 	@Override
 	public String toString() {

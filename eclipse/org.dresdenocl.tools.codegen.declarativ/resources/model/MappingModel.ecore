@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mappingmodel"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/2009/mappingmodel" nsPrefix="mapping">
+<ecore:EPackage xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:version="2.0" name="mappingmodel" nsURI="http://www.tu-dresden.de/ocl20/pivot/2009/mappingmodel" nsPrefix="mapping">
   <eClassifiers xsi:type="ecore:EClass" name="IMappedModel" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="IMappedClass" interface="true">
     <eOperations name="isAttribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -42,13 +39,11 @@
     <eOperations name="reset"/>
     <eOperations name="hasNext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="contextAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" ordered="false"
-        eType="#//Steps"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" ordered="false" eType="#//Steps"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eSubpackages name="impl" nsURI="http://www.tu-dresden.de/ocl20/pivot/2009/mappingmodel/impl"
-      nsPrefix="impl">
+  <eSubpackages name="impl" nsURI="http://www.tu-dresden.de/ocl20/pivot/2009/mappingmodel/impl" nsPrefix="impl">
     <eClassifiers xsi:type="ecore:EClass" name="MappedClassImpl" eSuperTypes="#//IMappedClass"/>
   </eSubpackages>
 </ecore:EPackage>

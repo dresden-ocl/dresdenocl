@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -52,16 +52,16 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Expression#getBody <em>Body</em>}
+ * <li>{@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}
  * </li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Expression#getLanguage <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Expression#getLanguage <em>
  * Language</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Expression#getConstraint <em>
  * Constraint</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getExpression()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getExpression()
  * @model
  * @generated
  */
@@ -77,15 +77,15 @@ public interface Expression extends EObject {
 	 * 
 	 * @return the value of the '<em>Body</em>' attribute.
 	 * @see #setBody(String)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getExpression_Body()
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.String"
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getExpression_Body()
+	 * @model dataType="org.dresdenocl.datatypes.String"
 	 * @generated
 	 */
 	String getBody();
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getBody <em>Body</em>}'
+	 * {@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -105,15 +105,15 @@ public interface Expression extends EObject {
 	 * 
 	 * @return the value of the '<em>Language</em>' attribute.
 	 * @see #setLanguage(String)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getExpression_Language()
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.String"
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getExpression_Language()
+	 * @model dataType="org.dresdenocl.datatypes.String"
 	 * @generated
 	 */
 	String getLanguage();
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getLanguage
+	 * {@link org.dresdenocl.pivotmodel.Expression#getLanguage
 	 * <em>Language</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -127,7 +127,7 @@ public interface Expression extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Constraint</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getSpecification
 	 * <em>Specification</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Constraint</em>' container reference isn't
@@ -137,8 +137,8 @@ public interface Expression extends EObject {
 	 * 
 	 * @return the value of the '<em>Constraint</em>' container reference.
 	 * @see #setConstraint(Constraint)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getExpression_Constraint()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getSpecification
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getExpression_Constraint()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getSpecification
 	 * @model opposite="specification"
 	 * @generated
 	 */
@@ -146,7 +146,7 @@ public interface Expression extends EObject {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Expression#getConstraint
+	 * {@link org.dresdenocl.pivotmodel.Expression#getConstraint
 	 * <em>Constraint</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

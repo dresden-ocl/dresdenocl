@@ -4,7 +4,7 @@ GENERATED JAVA CODE AND TEST SUITE
 
 This plug-in contains and extension of the Royal and Loyal example that is 
 provided with Dresden OCL. The Simple example is located in the 
-plug-in tudresden.ocl20.pivot.examples.simple
+plug-in org.dresdenocl.examples.simple
 
 This plug-in provides some test cases and the environment to generated
 AspectJ code for the constraints provided with the simple example.
@@ -20,7 +20,7 @@ into your Eclipse distribution.
 
 Provided Tests
 ==============
-The directory tudresden.ocl20.pivot.examples.royalsandloyals.constraints.test 
+The directory org.dresdenocl.examples.royalsandloyals.constraints.test 
 contains test cases to test generated AspectJ code with JUnit.
 
 * AllAspectTests tests all generated constraint code.

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.CollectionLiteralExpCS;
+import org.dresdenocl.language.ocl.CollectionLiteralPartsCS;
+import org.dresdenocl.language.ocl.CollectionTypeIdentifierCS;
+import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,8 +29,8 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralExpCSImpl#getCollectionType <em>Collection Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralExpCSImpl#getCollectionLiteralParts <em>Collection Literal Parts</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl#getCollectionType <em>Collection Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl#getCollectionLiteralParts <em>Collection Literal Parts</em>}</li>
  * </ul>
  * </p>
  *

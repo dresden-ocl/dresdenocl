@@ -2,12 +2,12 @@ Boolean result1;
 result1 = true;
 
 /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-for (tudresden.ocl20.pivot.examples.royalsandloyals.Customer anElement1 : aClass.participants) {
+for (org.dresdenocl.examples.royalsandloyals.Customer anElement1 : aClass.participants) {
     Boolean result2;
     result2 = true;
     
     /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-    for (tudresden.ocl20.pivot.examples.royalsandloyals.Customer anElement2 : aClass.participants) {
+    for (org.dresdenocl.examples.royalsandloyals.Customer anElement2 : aClass.participants) {
         if (!(!!anElement1.equals(anElement2) || !anElement1.name.equals(anElement2.name))) {
             result2 = false;
             break;

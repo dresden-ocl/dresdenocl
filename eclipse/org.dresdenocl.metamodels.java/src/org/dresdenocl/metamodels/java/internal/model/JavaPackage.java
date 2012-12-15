@@ -11,17 +11,17 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractNamespace;
 
 /**
  * <p>
@@ -79,7 +79,7 @@ public class JavaPackage extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getName()
 	 */
 	@Override
 	public String getName() {
@@ -90,7 +90,7 @@ public class JavaPackage extends AbstractNamespace implements Namespace {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace
+	 * org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestingNamespace
 	 * ()
 	 */
 	@Override
@@ -121,7 +121,7 @@ public class JavaPackage extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getOwnedType()
 	 */
 	@Override
 	public List<Type> getOwnedType() {
@@ -135,7 +135,7 @@ public class JavaPackage extends AbstractNamespace implements Namespace {
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#
+	 * @seeorg.dresdenocl.pivotmodel.base.AbstractNamespace#
 	 * getNestedNamespaceImpl()
 	 */
 	@Override

@@ -30,13 +30,13 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.tools.CWM;
+package org.dresdenocl.tools.CWM;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * <p>
@@ -78,7 +78,7 @@ public class CWMPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

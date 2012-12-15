@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.tests;
+package org.dresdenocl.essentialocl.expressions.tests;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
+import org.dresdenocl.essentialocl.expressions.CallExp;
 
 /**
  * <!-- begin-user-doc -->

@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.tests;
+package org.dresdenocl.essentialocl.expressions.tests;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImpl;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.impl.ExpressionsFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,8 +44,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsFactoryImp
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#asParameter() <em>As Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#asProperty() <em>As Property</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.Variable#asParameter() <em>As Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.Variable#asProperty() <em>As Property</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -128,10 +128,10 @@ public class VariableTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#asParameter() <em>As Parameter</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.expressions.Variable#asParameter() <em>As Parameter</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.Variable#asParameter()
+	 * @see org.dresdenocl.essentialocl.expressions.Variable#asParameter()
 	 * @generated
 	 */
 	public void testAsParameter() {
@@ -142,10 +142,10 @@ public class VariableTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#asProperty() <em>As Property</em>}' operation.
+	 * Tests the '{@link org.dresdenocl.essentialocl.expressions.Variable#asProperty() <em>As Property</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.Variable#asProperty()
+	 * @see org.dresdenocl.essentialocl.expressions.Variable#asProperty()
 	 * @generated
 	 */
 	public void testAsProperty() {

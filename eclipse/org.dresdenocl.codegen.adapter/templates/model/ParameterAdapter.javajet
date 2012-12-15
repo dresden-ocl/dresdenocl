@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="ParameterAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="ParameterAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -12,10 +12,10 @@ String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
 package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 
 <%genModel.addImport("org.apache.log4j.Logger");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Operation");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Parameter");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter");
+genModel.addImport("org.dresdenocl.pivotmodel.Operation");
+genModel.addImport("org.dresdenocl.pivotmodel.Parameter");
+genModel.addImport("org.dresdenocl.pivotmodel.Type");
+genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractParameter");
 genModel.addImport(PivotAdapterGeneratorUtil.getPackageNameFor(genClass) + adapteeClass);
 genModel.markImportLocation(stringBuffer);%>
 
@@ -31,7 +31,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 
 	/**
 	 * the adapted <%=modelName%> <%=adapteeClass%>
@@ -62,7 +62,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getName()
 	 *
 	 * @generated
 	 */
@@ -73,7 +73,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getOperation()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getOperation()
 	 *
 	 * @generated
 	 */
@@ -84,7 +84,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractParameter#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractParameter#getType()
 	 *
 	 * @generated
 	 */
@@ -95,7 +95,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isMultiple()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl#isMultiple()
 	 *
 	 * @generated
 	 */
@@ -106,7 +106,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isOrdered()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl#isOrdered()
 	 *
 	 * @generated
 	 */
@@ -117,7 +117,7 @@ public class <%=adapterClass%> extends AbstractParameter implements Parameter {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#isUnique()
+	 * @see org.dresdenocl.pivotmodel.impl.ParameterImpl#isUnique()
 	 *
 	 * @generated
 	 */

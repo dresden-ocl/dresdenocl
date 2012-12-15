@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL2 Interpreter GUI Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.interpreter.ui;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.interpreter.ui;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin
+Bundle-Activator: org.dresdenocl.interpreter.ui.InterpreterUIPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- tudresden.ocl20.pivot.interpreter,
- tudresden.ocl20.pivot.modelbus,
- tudresden.ocl20.pivot.modelbus.ui
+ org.dresdenocl.interpreter,
+ org.dresdenocl.modelbus,
+ org.dresdenocl.modelbus.ui
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.interpreter.ui
+Export-Package: org.dresdenocl.interpreter.ui

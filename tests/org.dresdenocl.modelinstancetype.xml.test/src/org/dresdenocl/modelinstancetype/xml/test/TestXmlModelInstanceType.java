@@ -18,15 +18,15 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelinstancetype.xml.test;
+package org.dresdenocl.modelinstancetype.xml.test;
 
 import org.junit.BeforeClass;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestSuite;
-import tudresden.ocl20.pivot.modelinstancetype.xml.XmlModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestPlugin;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestServices;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestSuite;
+import org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin;
 
 /**
  * <p>

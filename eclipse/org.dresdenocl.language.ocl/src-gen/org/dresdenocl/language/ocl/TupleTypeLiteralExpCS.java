@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTupleTypeLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getTupleTypeLiteralExpCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface TupleTypeLiteralExpCS extends LiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Tuple Type</em>' containment reference.
    * @see #setTupleType(TupleTypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTupleTypeLiteralExpCS_TupleType()
+   * @see org.dresdenocl.language.ocl.OclPackage#getTupleTypeLiteralExpCS_TupleType()
    * @model containment="true" required="true"
    * @generated
    */
 	TupleTypeCS getTupleType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Tuple Type</em>' containment reference.

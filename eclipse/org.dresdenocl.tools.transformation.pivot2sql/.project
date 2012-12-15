@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>tudresden.ocl20.pivot.tools.transformation.pivot2sql</name>
+	<name>org.dresdenocl.tools.transformation.pivot2sql</name>
 	<comment></comment>
 	<projects>
 	</projects>

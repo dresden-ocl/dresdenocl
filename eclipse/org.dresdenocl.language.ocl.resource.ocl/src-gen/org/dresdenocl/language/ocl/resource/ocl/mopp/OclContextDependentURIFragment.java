@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * Standard implementation of <code>IContextDependentURIFragment</code>.
@@ -14,14 +14,14 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
  * @param <ReferenceType> the type of the reference which shall be resolved by
  * this fragment.
  */
-public abstract class OclContextDependentURIFragment<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclContextDependentURIFragment<ReferenceType> {
+public abstract class OclContextDependentURIFragment<ContainerType extends org.eclipse.emf.ecore.EObject, ReferenceType extends org.eclipse.emf.ecore.EObject> implements org.dresdenocl.language.ocl.resource.ocl.IOclContextDependentURIFragment<ReferenceType> {
 	
 	protected String identifier;
 	protected ContainerType container;
 	protected org.eclipse.emf.ecore.EReference reference;
 	protected int positionInReference;
 	protected org.eclipse.emf.ecore.EObject proxy;
-	protected tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result;
+	protected org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> result;
 	
 	private boolean resolving;
 	
@@ -37,17 +37,17 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 		return result != null;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve() {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve() {
 		if (resolving) {
 			return null;
 		}
 		resolving = true;
 		if (result == null || !result.wasResolved()) {
-			result = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolveResult<ReferenceType>(false);
+			result = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolveResult<ReferenceType>(false);
 			// set an initial default error message
 			result.setErrorMessage(getStdErrorMessage());
 			
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> resolver = getResolver();
+			org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> resolver = getResolver();
 			// do the actual resolving
 			resolver.resolve(getIdentifier(), getContainer(), getReference(), getPositionInReference(), false, result);
 			
@@ -61,36 +61,36 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 		return result;
 	}
 	
-	public abstract tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> getResolver();
+	public abstract org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolver<ContainerType, ReferenceType> getResolver();
 	
 	private void handleMultipleResults() {
 		org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list = null;
 		Object temp = container.eGet(reference);
 		if (temp instanceof org.eclipse.emf.common.util.EList<?>) {
-			list = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclCastUtil.cast(temp);
+			list = org.dresdenocl.language.ocl.resource.ocl.util.OclCastUtil.cast(temp);
 		}
 		
 		boolean first = true;
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping : result.getMappings()) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping : result.getMappings()) {
 			if (first) {
 				first = false;
 			} else if (list != null) {
 				addResultToList(mapping, proxy, list);
 			} else {
-				new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
+				new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
 			}
 		}
 	}
 	
-	private void addResultToList(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping, org.eclipse.emf.ecore.EObject proxy, org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list) {
+	private void addResultToList(org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping, org.eclipse.emf.ecore.EObject proxy, org.eclipse.emf.common.util.EList<org.eclipse.emf.ecore.EObject> list) {
 		org.eclipse.emf.ecore.EObject target = null;
 		int proxyPosition = list.indexOf(proxy);
 		
-		if (mapping instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclElementMapping<?>) {
-			target = ((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclElementMapping<ReferenceType>) mapping).getTargetElement();
-		} else if (mapping instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclURIMapping<?>) {
+		if (mapping instanceof org.dresdenocl.language.ocl.resource.ocl.IOclElementMapping<?>) {
+			target = ((org.dresdenocl.language.ocl.resource.ocl.IOclElementMapping<ReferenceType>) mapping).getTargetElement();
+		} else if (mapping instanceof org.dresdenocl.language.ocl.resource.ocl.IOclURIMapping<?>) {
 			target = org.eclipse.emf.ecore.util.EcoreUtil.copy(proxy);
-			org.eclipse.emf.common.util.URI uri = ((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclURIMapping<ReferenceType>) mapping).getTargetIdentifier();
+			org.eclipse.emf.common.util.URI uri = ((org.dresdenocl.language.ocl.resource.ocl.IOclURIMapping<ReferenceType>) mapping).getTargetIdentifier();
 			((org.eclipse.emf.ecore.InternalEObject) target).eSetProxyURI(uri);
 		} else {
 			assert false;

@@ -4,22 +4,22 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.util;
+package org.dresdenocl.tracer.tracermodel.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage
+ * @see org.dresdenocl.tracer.tracermodel.TracermodelPackage
  * @generated
  */
 public class TracermodelAdapterFactory extends AdapterFactoryImpl {
@@ -109,14 +109,14 @@ public class TracermodelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerItem
 	 * <em>Tracer Item</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem
 	 * @generated
 	 */
 	public Adapter createTracerItemAdapter() {
@@ -126,14 +126,14 @@ public class TracermodelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
 	 * Creates a new adapter for an object of class '
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerRoot
 	 * <em>Tracer Root</em>}'. <!-- begin-user-doc --> This default implementation
 	 * returns null so that we can easily ignore cases; it's useful to ignore a
 	 * case when inheritance will catch all the cases anyway. <!-- end-user-doc
 	 * -->
 	 * 
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot
+	 * @see org.dresdenocl.tracer.tracermodel.TracerRoot
 	 * @generated
 	 */
 	public Adapter createTracerRootAdapter() {

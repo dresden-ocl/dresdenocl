@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * Displays HTML information in a {@link org.eclipse.swt.browser.Browser} widget.
@@ -96,7 +96,7 @@ public class OclBrowserInformationControl extends org.eclipse.jface.text.Abstrac
 	 */
 	private org.eclipse.swt.graphics.TextStyle fBoldStyle;
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput fInput;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput fInput;
 	
 	/**
 	 * <code>true</code> iff the browser has completed loading of the last input set
@@ -205,14 +205,14 @@ public class OclBrowserInformationControl extends org.eclipse.jface.text.Abstrac
 	 * {@inheritDoc} This control can handle {@link String}(no handle) and
 	 */
 	public void setInput(Object input) {
-		org.eclipse.core.runtime.Assert.isLegal(input == null || input instanceof String || input instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput);
+		org.eclipse.core.runtime.Assert.isLegal(input == null || input instanceof String || input instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput);
 		
 		if (input instanceof String) {
 			setInformation((String)input);
 			return;
 		}
 		
-		fInput= (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) input;
+		fInput= (org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) input;
 		
 		String content= null;
 		if (fInput != null)		content= fInput.getHtml();
@@ -241,7 +241,7 @@ public class OclBrowserInformationControl extends org.eclipse.jface.text.Abstrac
 		}
 		
 		StringBuffer buffer= new StringBuffer(content);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.insertStyles(buffer, styles);
+		org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.insertStyles(buffer, styles);
 		content= buffer.toString();
 		
 		// XXX: Should add some JavaScript here that shows something like "(continued...)"
@@ -358,7 +358,7 @@ public class OclBrowserInformationControl extends org.eclipse.jface.text.Abstrac
 		org.eclipse.jface.text.TextPresentation presentation= new org.eclipse.jface.text.TextPresentation();
 		String text;
 		try {
-			text = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.html2text(new java.io.StringReader(fInput.getHtml()), presentation);
+			text = org.dresdenocl.language.ocl.resource.ocl.ui.OclHTMLPrinter.html2text(new java.io.StringReader(fInput.getHtml()), presentation);
 		} catch (java.io.IOException e) {
 			text = "";
 		}
@@ -529,7 +529,7 @@ public class OclBrowserInformationControl extends org.eclipse.jface.text.Abstrac
 	 * 
 	 * @return the current browser input or <code>null</code>
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput getInput() {
+	public org.dresdenocl.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput getInput() {
 		return fInput;
 	}
 	

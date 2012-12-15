@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -42,11 +42,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -54,7 +54,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType
+ * <li>{@link org.dresdenocl.pivotmodel.impl.PropertyImpl#getOwningType
  * <em>Owning Type</em>}</li>
  * </ul>
  * </p>
@@ -93,7 +93,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	 * Overridden to return the {@link #getOwningType() owning type} of this
 	 * <code>Property</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -205,7 +205,7 @@ public class PropertyImpl extends FeatureImpl implements Property {
 	/**
 	 * Helper method that initializes this <code>Property</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Feature)
+	 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl#initialize(org.dresdenocl.pivotmodel.Feature)
 	 */
 	protected Property initialize(Property clone) {
 

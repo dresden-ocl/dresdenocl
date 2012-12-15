@@ -11,17 +11,17 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractProperty;
 
 /**
  * <p>
@@ -81,7 +81,7 @@ public class JavaField extends AbstractProperty implements Property {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getName()
 	 */
 	@Override
 	public String getName() {
@@ -91,7 +91,7 @@ public class JavaField extends AbstractProperty implements Property {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -102,7 +102,7 @@ public class JavaField extends AbstractProperty implements Property {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getOwningType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getOwningType()
 	 */
 	@Override
 	public Type getOwningType() {
@@ -116,7 +116,7 @@ public class JavaField extends AbstractProperty implements Property {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#isStatic()
+	 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl#isStatic()
 	 */
 	@Override
 	public boolean isStatic() {

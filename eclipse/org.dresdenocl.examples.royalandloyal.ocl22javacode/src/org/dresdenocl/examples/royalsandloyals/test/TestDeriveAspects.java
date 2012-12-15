@@ -1,13 +1,13 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.test;
+package org.dresdenocl.examples.royalsandloyals.test;
 
 import static org.junit.Assert.assertEquals;
 
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
+import org.dresdenocl.examples.royalsandloyals.Customer;
+import org.dresdenocl.examples.royalsandloyals.CustomerCard;
+import org.dresdenocl.examples.royalsandloyals.Date;
+import org.dresdenocl.examples.royalsandloyals.Earning;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyAccount;
+import org.dresdenocl.examples.royalsandloyals.Transaction;
 import org.junit.Test;
 
 

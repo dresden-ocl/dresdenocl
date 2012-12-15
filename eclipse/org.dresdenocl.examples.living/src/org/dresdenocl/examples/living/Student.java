@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.examples.living;
+package org.dresdenocl.examples.living;
 
 import java.util.Calendar;
 import java.util.Vector;
@@ -58,7 +58,7 @@ public class Student extends Person {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.examples.living.Person#toString()
+	 * @see org.dresdenocl.examples.living.Person#toString()
 	 */
 	@Override
 	public String toString() {

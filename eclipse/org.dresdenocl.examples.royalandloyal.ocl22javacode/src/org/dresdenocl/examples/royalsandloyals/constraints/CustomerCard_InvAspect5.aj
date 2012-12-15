@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -8,15 +8,15 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
  */
 public privileged aspect CustomerCard_InvAspect5 {
 
-    declare parents: org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    declare parents: org.dresdenocl.examples.royalsandloyals.CustomerCard implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
-    public void org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.checkInvariants() {
+    public void org.dresdenocl.examples.royalsandloyals.CustomerCard.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.CustomerCard#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -25,11 +25,11 @@ public privileged aspect CustomerCard_InvAspect5 {
      * <code>context CustomerCard
      *       inv:  let correctDate : Boolean =   self.validFrom.isBefore(Date::now()) and   self.validThru.isAfter(Date::now()) in   if valid then     correctDate = true   else     correctDate = false   endif</code></p>
      */
-    after(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.CustomerCard aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of CustomerCard. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.CustomerCard")) {
         Boolean correctDate;
-        correctDate = (aClass.validFrom.isBefore(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.now()) && aClass.validThru.isAfter(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.now()));
+        correctDate = (aClass.validFrom.isBefore(org.dresdenocl.examples.royalsandloyals.Date.now()) && aClass.validThru.isAfter(org.dresdenocl.examples.royalsandloyals.Date.now()));
 
         Boolean ifExpResult1;
 

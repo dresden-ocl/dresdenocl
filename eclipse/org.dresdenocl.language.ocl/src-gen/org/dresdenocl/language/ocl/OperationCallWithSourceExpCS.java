@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,12 +15,12 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#getSource <em>Source</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#getSource <em>Source</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallWithSourceExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallWithSourceExpCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface OperationCallWithSourceExpCS extends OperationCallExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Source</em>' containment reference.
    * @see #setSource(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallWithSourceExpCS_Source()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallWithSourceExpCS_Source()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getSource();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#getSource <em>Source</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#getSource <em>Source</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Source</em>' containment reference.
@@ -62,14 +62,14 @@ public interface OperationCallWithSourceExpCS extends OperationCallExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Is Marked Pre</em>' attribute.
    * @see #setIsMarkedPre(boolean)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationCallWithSourceExpCS_IsMarkedPre()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationCallWithSourceExpCS_IsMarkedPre()
    * @model default="false"
    * @generated
    */
 	boolean isIsMarkedPre();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Is Marked Pre</em>' attribute.

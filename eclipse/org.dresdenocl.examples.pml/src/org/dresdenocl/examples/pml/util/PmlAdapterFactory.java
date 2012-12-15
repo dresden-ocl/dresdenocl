@@ -4,29 +4,29 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.util;
+package org.dresdenocl.examples.pml.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.examples.pml.Extension;
-import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
-import tudresden.ocl20.pivot.examples.pml.Feature;
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Operation;
-import tudresden.ocl20.pivot.examples.pml.Parameter;
-import tudresden.ocl20.pivot.examples.pml.Plugin;
-import tudresden.ocl20.pivot.examples.pml.PluginPackage;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.Extension;
+import org.dresdenocl.examples.pml.ExtensionPoint;
+import org.dresdenocl.examples.pml.Feature;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.Operation;
+import org.dresdenocl.examples.pml.Parameter;
+import org.dresdenocl.examples.pml.Plugin;
+import org.dresdenocl.examples.pml.PluginPackage;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage
+ * @see org.dresdenocl.examples.pml.PmlPackage
  * @generated
  */
 public class PmlAdapterFactory extends AdapterFactoryImpl {
@@ -130,13 +130,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Plugin <em>Plugin</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.Plugin <em>Plugin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.Plugin
+	 * @see org.dresdenocl.examples.pml.Plugin
 	 * @generated
 	 */
 	public Adapter createPluginAdapter() {
@@ -144,13 +144,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Feature <em>Feature</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.Feature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature
+	 * @see org.dresdenocl.examples.pml.Feature
 	 * @generated
 	 */
 	public Adapter createFeatureAdapter() {
@@ -158,13 +158,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint <em>Extension Point</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.ExtensionPoint <em>Extension Point</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint
+	 * @see org.dresdenocl.examples.pml.ExtensionPoint
 	 * @generated
 	 */
 	public Adapter createExtensionPointAdapter() {
@@ -172,13 +172,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Extension <em>Extension</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.Extension <em>Extension</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.Extension
+	 * @see org.dresdenocl.examples.pml.Extension
 	 * @generated
 	 */
 	public Adapter createExtensionAdapter() {
@@ -186,13 +186,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.JavaType <em>Java Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.JavaType <em>Java Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.JavaType
+	 * @see org.dresdenocl.examples.pml.JavaType
 	 * @generated
 	 */
 	public Adapter createJavaTypeAdapter() {
@@ -200,13 +200,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Operation <em>Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.Operation
+	 * @see org.dresdenocl.examples.pml.Operation
 	 * @generated
 	 */
 	public Adapter createOperationAdapter() {
@@ -214,13 +214,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.Parameter
+	 * @see org.dresdenocl.examples.pml.Parameter
 	 * @generated
 	 */
 	public Adapter createParameterAdapter() {
@@ -228,13 +228,13 @@ public class PmlAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.examples.pml.PluginPackage <em>Plugin Package</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.examples.pml.PluginPackage <em>Plugin Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see tudresden.ocl20.pivot.examples.pml.PluginPackage
+	 * @see org.dresdenocl.examples.pml.PluginPackage
 	 * @generated
 	 */
 	public Adapter createPluginPackageAdapter() {

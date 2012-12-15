@@ -18,7 +18,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.simple;
+package org.dresdenocl.examples.simple;
 
 /**
  *<p>

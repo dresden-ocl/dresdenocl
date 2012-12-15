@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,32 +9,32 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect LoyaltyProgram_PostAspect1 {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#addService(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service aService)}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyProgram#addService(org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService)}.</p>
      */
-    protected pointcut addServiceCaller(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service aService):
-    	call(* org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram.addService(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service))
+    protected pointcut addServiceCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService):
+    	call(* org.dresdenocl.examples.royalsandloyals.LoyaltyProgram.addService(org.dresdenocl.examples.royalsandloyals.ProgramPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel, org.dresdenocl.examples.royalsandloyals.Service))
     	&& target(aClass) && args(aPartner, aLevel, aService);
 
     /**
-     * <p>Checks a postcondition for the operation {@link LoyaltyProgram#addService(, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service aService)} defined by the constraint
-     * <code>context LoyaltyProgram::addService(aPartner: org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner, aLevel: org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel, aService: org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service) : 
+     * <p>Checks a postcondition for the operation {@link LoyaltyProgram#addService(, org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService)} defined by the constraint
+     * <code>context LoyaltyProgram::addService(aPartner: org.dresdenocl.examples.royalsandloyals.ProgramPartner, aLevel: org.dresdenocl.examples.royalsandloyals.ServiceLevel, aService: org.dresdenocl.examples.royalsandloyals.Service) : 
      *       post: levels.availableServices->includes(aService)</code></p>
      */
-    void around(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service aService): addServiceCaller(aClass, aPartner, aLevel, aService) {
+    void around(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService): addServiceCaller(aClass, aPartner, aLevel, aService) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.LoyaltyProgram")) {
 
         proceed(aClass, aPartner, aLevel, aService);
 
-        java.util.ArrayList<org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service> result1;
-        result1 = new java.util.ArrayList<org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service>();
+        java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service> result1;
+        result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service>();
 
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel anElement1 : aClass.levels) {
+        for (org.dresdenocl.examples.royalsandloyals.ServiceLevel anElement1 : aClass.levels) {
             result1.addAll(anElement1.availableServices);
         }
 
-        if (!tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService)) {
+        if (!org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.includes(result1, aService)) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'undefined' (post: levels.availableServices->includes(aService)) was violated for Object " + aClass.toString() + ".";
         	throw new RuntimeException(msg);

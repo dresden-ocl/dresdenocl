@@ -2,7 +2,7 @@
  * Created on 10.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.template.exception;
+package org.dresdenocl.tools.template.exception;
 
 /**
  * The TemplateException is thrown, when an error occurs while working with code

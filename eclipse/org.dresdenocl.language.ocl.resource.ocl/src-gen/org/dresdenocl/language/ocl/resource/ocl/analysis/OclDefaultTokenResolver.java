@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
 /**
  * A default implementation for token resolvers. Generated token resolvers
@@ -24,7 +24,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
  * The behavior of this resolving can be customized by either changing the
  * generated token resolver classes or by using custom EMF data type converters.
  */
-public class OclDefaultTokenResolver implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver {
+public class OclDefaultTokenResolver implements org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver {
 	
 	private java.util.Map<?, ?> options;
 	private boolean escapeKeywords;
@@ -47,14 +47,14 @@ public class OclDefaultTokenResolver implements tudresden.ocl20.pivot.language.o
 		this.escapeKeywords = escapeKeywords;
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result) {
+	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result) {
 		resolve(lexem, feature, result, null, null, null);
 	}
 	
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result, String suffix, String prefix, String escapeCharacter) {
+	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result, String suffix, String prefix, String escapeCharacter) {
 		// Step 1: unescape keywords if required
 		if (escapeKeywords && lexem.startsWith("_")) {
-			for (String keyword : tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords()) {
+			for (String keyword : org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords()) {
 				if (lexem.endsWith(keyword)) {
 					String keywordPrefix = lexem.substring(0, lexem.length() - keyword.length());
 					if (keywordPrefix.matches("_+")) {
@@ -159,7 +159,7 @@ public class OclDefaultTokenResolver implements tudresden.ocl20.pivot.language.o
 		// Step 3: escape keywords if required
 		if (escapeKeywords && result != null) {
 			// Escape keywords if required
-			for (String keyword : tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords()) {
+			for (String keyword : org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords()) {
 				if (result.endsWith(keyword)) {
 					String keywordPrefix = result.substring(0, result.length() - keyword.length());
 					if (keywordPrefix.matches("_*")) {

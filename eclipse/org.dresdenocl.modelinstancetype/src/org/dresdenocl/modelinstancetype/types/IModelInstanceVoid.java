@@ -16,17 +16,17 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types;
+package org.dresdenocl.modelinstancetype.types;
 
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.exception.CopyForAtPreException;
+import org.dresdenocl.modelinstancetype.internal.ModelInstanceMessages;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -52,8 +52,8 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-		 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+		 * #asType(org.dresdenocl.pivotmodel.Type)
 		 */
 		public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
@@ -68,7 +68,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 		 * #copyForAtPre()
 		 */
 		public IModelInstanceElement copyForAtPre() throws CopyForAtPreException {
@@ -78,7 +78,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 		 * #getName()
 		 */
 		public String getName() {
@@ -88,7 +88,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 		 * #getType()
 		 */
 		public Type getType() {
@@ -99,8 +99,8 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-		 * #isInstanceOf(tudresden.ocl20.pivot.pivotmodel.Type)
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+		 * #isInstanceOf(org.dresdenocl.pivotmodel.Type)
 		 */
 		// FIXME Michael: if OclInvalid has own meta-type, this should check for it
 		public boolean isKindOf(Type type) {
@@ -114,8 +114,8 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-		 * #isTypeOf(tudresden.ocl20.pivot.pivotmodel.Type)
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+		 * #isTypeOf(org.dresdenocl.pivotmodel.Type)
 		 */
 		public boolean isTypeOf(Type type) {
 
@@ -125,7 +125,7 @@ public interface IModelInstanceVoid extends IModelInstancePrimitiveType {
 
 		/*
 		 * (non-Javadoc)
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 		 * #isUndefined()
 		 */
 		public boolean isUndefined() {

@@ -17,16 +17,16 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.test.tests;
+package org.dresdenocl.modelinstancetype.java.test.tests;
 
 import org.junit.BeforeClass;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.test.JavaModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestSuite;
+import org.dresdenocl.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.java.test.JavaModelInstanceTypeTestPlugin;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestPlugin;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestServices;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestSuite;
 
 /**
  * <p>
@@ -44,7 +44,7 @@ public class TestJavaModelInstanceType extends ModelInstanceTypeTestSuite {
 
 	/** The path of the model which shall be tested. */
 	private static final String TEST_MODELINSTANCE_PATH =
-			"bin/tudresden/ocl20/pivot/modelinstancetype/java/test/modelinstance/ProviderClass.class";
+			"bin/org/dresdenocl/modelinstancetype/java/test/modelinstance/ProviderClass.class";
 
 	/**
 	 * <p>

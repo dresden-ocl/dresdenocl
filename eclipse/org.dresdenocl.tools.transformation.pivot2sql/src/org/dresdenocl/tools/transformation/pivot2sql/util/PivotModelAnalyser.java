@@ -2,7 +2,7 @@
  * Created on 17.01.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.util;
+package org.dresdenocl.tools.transformation.pivot2sql.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,15 +12,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.util.ModelAnalyser;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.util.ModelAnalyser;
 
 /**
  * The ModelAnalyser is a helper class, that contains static methods to analyse

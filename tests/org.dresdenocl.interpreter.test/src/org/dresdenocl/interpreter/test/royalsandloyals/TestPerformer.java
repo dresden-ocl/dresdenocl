@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test.royalsandloyals;
+package org.dresdenocl.interpreter.test.royalsandloyals;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,18 +26,18 @@ import java.util.List;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ public class TestPerformer {
 	private final static String META_MODEL = Ocl2ForEclipseFacade.UML2_MetaModel;
 
 	/** The name of the bundle of the model file. */
-	private final static String MODEL_BUNDLE = "tudresden.ocl20.pivot.examples.royalandloyal";
+	private final static String MODEL_BUNDLE = "org.dresdenocl.examples.royalandloyal";
 
 	/** The path of the UML model file. */
 	private final static String MODEL_FILE = "model/royalsandloyals.uml";

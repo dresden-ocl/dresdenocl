@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import java.util.List;
 
@@ -41,14 +41,14 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
-import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
+import org.dresdenocl.essentialocl.expressions.CollectionKind;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.impl.TypeImpl;
+import org.dresdenocl.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -56,9 +56,9 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
  *
@@ -137,7 +137,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -202,7 +202,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * <code>CollectionType</code>. This method will throw an
 	 * {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
 	@Override
 	public final void setName(String newName) {
@@ -365,7 +365,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * 
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#conformsTo(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public final boolean conformsTo(Type other) {
@@ -423,7 +423,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * with <code>Sequence(String)</code> the common super type evaluates to
 	 * <code>Collection(OclAny)</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#commonSuperType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#commonSuperType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public final Type commonSuperType(Type other) {
@@ -495,7 +495,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	/**
 	 * Overridden to set the element type of the bound collection type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#bindTypeParameter(java.util.List,
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#bindTypeParameter(java.util.List,
 	 *      java.util.List)
 	 */
 	@Override
@@ -544,7 +544,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * Overridden to additionally set the kind, the element type and the reference
 	 * to the {@link OclLibrary}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#initialize(org.dresdenocl.pivotmodel.Type)
 	 */
 	protected CollectionType initialize(CollectionType clone) {
 
@@ -565,7 +565,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * Overridden to return <code>true</code> as a hint that the name of
 	 * collection types is determined automatically.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#hasVolatileName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#hasVolatileName()
 	 */
 	@Override
 	protected boolean hasVolatileName() {

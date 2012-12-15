@@ -2,11 +2,11 @@
 <?eclipse version="3.3"?>
 <plugin>
     <extension
-    		point="tudresden.ocl20.pivot.modelbus.metamodels">
+    		point="org.dresdenocl.modelbus.metamodels">
       <metamodel
             icon="icons/xsd.gif"
-            id="tudresden.ocl20.pivot.metamodels.xsd"
-            modelProvider="tudresden.ocl20.pivot.metamodels.xsd.internal.provider.XSDModelProvider"
+            id="org.dresdenocl.metamodels.xsd"
+            modelProvider="org.dresdenocl.metamodels.xsd.internal.provider.XSDModelProvider"
             name="XML Schema Meta-Model">
       </metamodel>
    </extension>

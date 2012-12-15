@@ -1,6 +1,6 @@
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.NamedElement;
 
 /**
  * A <code>WellformednessException</code> indicates that the attribute values

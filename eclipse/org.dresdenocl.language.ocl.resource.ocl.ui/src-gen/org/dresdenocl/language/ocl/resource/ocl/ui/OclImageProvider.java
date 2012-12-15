@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A provider class for all images that are required by the generated UI plug-in.
@@ -64,7 +64,7 @@ public class OclImageProvider {
 	
 	public org.eclipse.jface.resource.ImageDescriptor getImageDescriptor(String key) {
 		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path(key);
-		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle(), path, null));
+		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle(), path, null));
 		if (org.eclipse.jface.resource.ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
 			// try loading image from any bundle
 			try {
@@ -77,7 +77,7 @@ public class OclImageProvider {
 					return null;
 				}
 			} catch (java.net.MalformedURLException mue) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("IconProvider can't load image (URL is malformed).", mue);
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("IconProvider can't load image (URL is malformed).", mue);
 			}
 		}
 		return descriptor;

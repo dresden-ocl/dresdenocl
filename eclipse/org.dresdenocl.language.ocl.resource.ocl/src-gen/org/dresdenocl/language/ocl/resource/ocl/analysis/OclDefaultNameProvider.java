@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
-public class OclDefaultNameProvider implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclNameProvider {
+public class OclDefaultNameProvider implements org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider {
 	
 	public final static String NAME_FEATURE = "name";
 	
@@ -51,7 +51,7 @@ public class OclDefaultNameProvider implements tudresden.ocl20.pivot.language.oc
 			// ends with 'name'
 			for (org.eclipse.emf.ecore.EOperation operation : element.eClass().getEAllOperations()) {
 				if (operation.getName().toLowerCase().endsWith(NAME_FEATURE) && operation.getEParameters().size() == 0) {
-					Object result = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, operation);
+					Object result = org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.invokeOperation(element, operation);
 					if (result != null) {
 						names.add(result.toString());
 					}

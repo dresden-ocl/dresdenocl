@@ -1,16 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Model
-Bundle-SymbolicName: tudresden.ocl20.pivot.model
+Bundle-SymbolicName: org.dresdenocl.model
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.model.ModelPlugin
+Bundle-Activator: org.dresdenocl.model.ModelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.pivotmodel;visibility:=reexport
+ org.dresdenocl.pivotmodel;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.model,
- tudresden.ocl20.pivot.model.base,
- tudresden.ocl20.pivot.model.event,
- tudresden.ocl20.pivot.model.metamodel,
- tudresden.ocl20.pivot.model.util
+Export-Package: org.dresdenocl.model,
+ org.dresdenocl.model.base,
+ org.dresdenocl.model.event,
+ org.dresdenocl.model.metamodel,
+ org.dresdenocl.model.util

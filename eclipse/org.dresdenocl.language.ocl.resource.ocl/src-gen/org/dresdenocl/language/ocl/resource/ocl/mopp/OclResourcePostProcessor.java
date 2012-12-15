@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-public class OclResourcePostProcessor implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor {
+public class OclResourcePostProcessor implements org.dresdenocl.language.ocl.resource.ocl.IOclResourcePostProcessor {
 	
-	public void process(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource resource) {
+	public void process(org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource resource) {
 		// Set the overrideResourcePostProcessor option to false to customize resource
 		// post processing.
 	}

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -48,12 +48,12 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral <em>
  * Owned Literal</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumeration()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getEnumeration()
  * @model
  * @generated
  */
@@ -62,9 +62,9 @@ public interface Enumeration extends Type {
 	/**
 	 * Returns the value of the '<em><b>Owned Literal</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral}. It is
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral}. It is
 	 * bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral#getEnumeration
 	 * <em>Enumeration</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -74,8 +74,8 @@ public interface Enumeration extends Type {
 	 * 
 	 * @return the value of the '<em>Owned Literal</em>' containment reference
 	 *         list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumeration_OwnedLiteral()
-	 * @see tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getEnumeration_OwnedLiteral()
+	 * @see org.dresdenocl.pivotmodel.EnumerationLiteral#getEnumeration
 	 * @model opposite="enumeration" containment="true"
 	 * @generated
 	 */
@@ -112,7 +112,7 @@ public interface Enumeration extends Type {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model nameDataType="tudresden.ocl20.pivot.datatypes.String"
+	 * @model nameDataType="org.dresdenocl.datatypes.String"
 	 * @generated
 	 */
 	EnumerationLiteral lookupLiteral(String name);
@@ -120,7 +120,7 @@ public interface Enumeration extends Type {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#clone()
+	 * @see org.dresdenocl.pivotmodel.Type#clone()
 	 */
 	Enumeration clone();
 

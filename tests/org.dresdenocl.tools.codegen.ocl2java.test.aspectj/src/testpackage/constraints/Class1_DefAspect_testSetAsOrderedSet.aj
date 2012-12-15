@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetAsOrderedSet {
      *       def: testSetAsOrderedSet(source: Set(OclAny)):    OrderedSet(OclAny) = source ->asOrderedSet()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSetAsOrderedSet(java.util.Set<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asOrderedSet(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.asOrderedSet(source);
     }
 }

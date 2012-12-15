@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +42,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,7 +77,7 @@ public interface FeatureCallExp extends CallExp {
 	Type getSourceType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Source Type</em>' reference.

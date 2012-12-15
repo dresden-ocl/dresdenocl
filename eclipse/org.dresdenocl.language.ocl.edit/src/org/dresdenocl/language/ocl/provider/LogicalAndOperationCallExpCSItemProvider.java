@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.provider;
+package org.dresdenocl.language.ocl.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,11 +18,11 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS;
+import org.dresdenocl.language.ocl.OclPackage;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS} object.
+ * This is the item provider adapter for a {@link org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */

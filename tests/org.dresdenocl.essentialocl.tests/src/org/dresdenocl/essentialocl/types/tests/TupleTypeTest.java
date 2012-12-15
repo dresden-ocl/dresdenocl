@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.tests;
+package org.dresdenocl.essentialocl.types.tests;
 
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.impl.TypesFactoryImpl;
 
 /**
  * <!-- begin-user-doc -->

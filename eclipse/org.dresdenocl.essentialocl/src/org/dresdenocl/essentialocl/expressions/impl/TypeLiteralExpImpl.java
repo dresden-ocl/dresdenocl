@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,11 +39,11 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.essentialocl.expressions.TypeLiteralExp;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Literal Exp</b></em>'.
@@ -51,7 +51,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl#getReferredType <em>Referred Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.TypeLiteralExpImpl#getReferredType <em>Referred Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,7 +84,7 @@ public class TypeLiteralExpImpl extends LiteralExpImpl implements
 	 * type, it is bound with the {@link #getReferredType() referred type} of this
 	 * <code>TypeLiteralExp</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType()
 	 */
 	@Override
 	protected Type evaluateType() {

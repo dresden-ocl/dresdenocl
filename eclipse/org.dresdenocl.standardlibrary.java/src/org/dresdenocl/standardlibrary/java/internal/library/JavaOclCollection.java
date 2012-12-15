@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,29 +36,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclComparable;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclIterator;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBag;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
+import org.dresdenocl.essentialocl.standardlibrary.OclComparable;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
+import org.dresdenocl.essentialocl.standardlibrary.OclOrderedSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclTuple;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInvalid;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -128,7 +128,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asBag()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#asBag()
 	 */
 	public OclBag<T> asBag() {
 	
@@ -159,7 +159,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asOrderedSet
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#asOrderedSet
 	 * ()
 	 */
 	public OclOrderedSet<T> asOrderedSet() {
@@ -192,7 +192,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#asSequence
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#asSequence
 	 * ()
 	 */
 	public OclSequence<T> asSequence() {
@@ -224,7 +224,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public OclSet<T> asSet() {
 
@@ -252,7 +252,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#count
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclCollection#count
 	 * (java.lang.Object)
 	 */
 	@SuppressWarnings("unchecked")
@@ -293,7 +293,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludes
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#excludes
 	 * (java.lang.Object)
 	 */
 	public OclBoolean excludes(T that) {
@@ -304,8 +304,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#excludesAll
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#excludesAll
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclCollection)
 	 */
 	@SuppressWarnings("unchecked")
 	public OclBoolean excludesAll(OclCollection<T> that) {
@@ -359,7 +359,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclCollection#
 	 * getGenericType ()
 	 */
 	public Type getGenericType() {
@@ -370,7 +370,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#getIterator
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#getIterator
 	 * ()
 	 */
 	public OclIterator<T> getIterator() {
@@ -380,7 +380,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclCollection#
 	 * getModelInstanceCollection()
 	 */
 	@SuppressWarnings("unchecked")
@@ -392,7 +392,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#includes
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#includes
 	 * (java.lang.Object)
 	 */
 	public OclBoolean includes(T that) {
@@ -434,8 +434,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#includesAll
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#includesAll
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclCollection)
 	 */
 	@SuppressWarnings("unchecked")
 	public OclBoolean includesAll(OclCollection<T> that) {
@@ -487,7 +487,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#isEmpty ()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#isEmpty ()
 	 */
 	public OclBoolean isEmpty() {
 
@@ -516,7 +516,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#max()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclCollection#max()
 	 */
 	@SuppressWarnings("unchecked")
 	public T max() {
@@ -579,7 +579,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#min()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclCollection#min()
 	 */
 	@SuppressWarnings("unchecked")
 	public T min() {
@@ -643,7 +643,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#notEmpty
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#notEmpty
 	 * ()
 	 */
 	public OclBoolean notEmpty() {
@@ -654,8 +654,8 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#product
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#product
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclCollection)
 	 */
 	public <T2 extends OclAny> OclSet<OclTuple> product(OclCollection<T2> that) {
 
@@ -702,7 +702,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#size()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#size()
 	 */
 	public OclInteger size() {
 	
@@ -731,7 +731,7 @@ public abstract class JavaOclCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#sum()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclCollection#sum()
 	 */
 	@SuppressWarnings("unchecked")
 	public T sum() {

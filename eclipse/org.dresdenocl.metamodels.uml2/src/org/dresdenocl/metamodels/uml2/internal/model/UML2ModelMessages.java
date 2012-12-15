@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -29,7 +29,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public class UML2ModelMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.uml2.internal.model.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.dresdenocl.metamodels.uml2.internal.model.messages"; //$NON-NLS-1$
 
 	public static String UML2AdapterFactory_CreatingPivotModelAdapter;
 

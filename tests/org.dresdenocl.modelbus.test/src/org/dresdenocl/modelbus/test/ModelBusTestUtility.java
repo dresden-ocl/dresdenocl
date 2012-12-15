@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.modelbus.test;
+package org.dresdenocl.modelbus.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,12 +6,12 @@ import java.util.Collection;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

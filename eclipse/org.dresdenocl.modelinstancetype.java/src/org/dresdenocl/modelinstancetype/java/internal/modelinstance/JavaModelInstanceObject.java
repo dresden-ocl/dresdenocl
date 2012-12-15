@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance;
+package org.dresdenocl.modelinstancetype.java.internal.modelinstance;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -30,24 +30,24 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.AbstractModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.JavaModelInstanceCollection;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelinstance.base.AbstractModelInstance;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.exception.CopyForAtPreException;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
+import org.dresdenocl.modelinstancetype.java.internal.util.JavaModelInstanceTypeUtility;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.base.AbstractModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.base.JavaModelInstanceCollection;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -201,8 +201,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceElement
+	 * #asType(org.dresdenocl.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
@@ -350,7 +350,7 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceObject#
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceObject#
 	 * getAdaptedObject()
 	 */
 	public Object getObject() {
@@ -362,8 +362,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
-	 * #invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceObject
+	 * #invokeOperation(org.dresdenocl.pivotmodel.Operation,
 	 * java.util.List)
 	 */
 	public IModelInstanceElement invokeOperation(Operation operation,
@@ -468,8 +468,8 @@ public class JavaModelInstanceObject extends AbstractModelInstanceObject
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject
-	 * #getProperty(tudresden.ocl20.pivot.pivotmodel.Property)
+	 * org.dresdenocl.modelbus.modelinstance.types.IModelInstanceObject
+	 * #getProperty(org.dresdenocl.pivotmodel.Property)
 	 */
 	public IModelInstanceElement getProperty(Property property)
 			throws PropertyAccessException, PropertyNotFoundException {

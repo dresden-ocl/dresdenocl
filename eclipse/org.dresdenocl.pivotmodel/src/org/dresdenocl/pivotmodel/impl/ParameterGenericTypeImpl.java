@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.List;
 
@@ -39,13 +39,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
-import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
+import org.dresdenocl.pivotmodel.ParameterGenericType;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.TypedElement;
+import org.dresdenocl.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -54,7 +54,7 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter
+ * {@link org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter
  * <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
@@ -105,7 +105,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	/**
 	 * Overridden to return the name of the associated type parameter.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -179,8 +179,8 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * 
 	 * @return always <code>false</code>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
-	 *      java.util.List, tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl#doBindGenericSuperType(java.util.List,
+	 *      java.util.List, org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	@SuppressWarnings("unused")
@@ -204,7 +204,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	 * </p>
 	 * 
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#isConformantType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl#isConformantType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	@SuppressWarnings("unused")
@@ -215,7 +215,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.GenericTypeImpl#clone()
 	 */
 	@Override
 	public ParameterGenericType clone() {
@@ -226,7 +226,7 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	/**
 	 * Helper method that initializes a cloned <code>ParameterGenericType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#initialize(org.dresdenocl.pivotmodel.NamedElement)
 	 */
 	protected ParameterGenericType initialize(ParameterGenericType clone) {
 

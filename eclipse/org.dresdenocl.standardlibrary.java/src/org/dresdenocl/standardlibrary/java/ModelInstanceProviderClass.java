@@ -1,10 +1,10 @@
-package tudresden.ocl20.pivot.standardlibrary.java;
+package org.dresdenocl.standardlibrary.java;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>

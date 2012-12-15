@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.presentation;
+package org.dresdenocl.essentialocl.types.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -216,7 +216,7 @@ public class TypesActionBarContributor extends
 
 		IMenuManager submenuManager =
 				new MenuManager(
-						EssentialOCLEditorPlugin.INSTANCE.getString("_UI_TypesEditor_menu"), "tudresden.ocl20.pivot.essentialocl.typesMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
+						EssentialOCLEditorPlugin.INSTANCE.getString("_UI_TypesEditor_menu"), "org.dresdenocl.essentialocl.typesMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("additions", submenuManager); //$NON-NLS-1$
 		submenuManager.add(new Separator("settings")); //$NON-NLS-1$
 		submenuManager.add(new Separator("actions")); //$NON-NLS-1$

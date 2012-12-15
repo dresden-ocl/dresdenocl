@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,19 +9,19 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect CustomerCard_DefAspect_getTotalPoints {
 
     /**
-     * <p>Defines the method getTotalPoints(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date d) defined by the constraint
+     * <p>Defines the method getTotalPoints(org.dresdenocl.examples.royalsandloyals.Date d) defined by the constraint
      * <code>context CustomerCard
      *       def: getTotalPoints(d: Date) : Integer = transactions->select(date.isAfter(d)).points->sum()</code></p>
      */
-    public Integer org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard.getTotalPoints(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date d) {
+    public Integer org.dresdenocl.examples.royalsandloyals.CustomerCard.getTotalPoints(org.dresdenocl.examples.royalsandloyals.Date d) {
     	/* Self variable probably used within the definition. */
-    	org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard aClass = this;
+    	org.dresdenocl.examples.royalsandloyals.CustomerCard aClass = this;
     	
-        java.util.HashSet<org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction> result2;
-        result2 = new java.util.HashSet<org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction>();
+        java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction> result2;
+        result2 = new java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction>();
 
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+        for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
             if (anElement1.date.isAfter(d)) {
                 result2.add(anElement1);
             }
@@ -31,10 +31,10 @@ public privileged aspect CustomerCard_DefAspect_getTotalPoints {
         result1 = new java.util.ArrayList<Integer>();
 
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction anElement2 : result2) {
+        for (org.dresdenocl.examples.royalsandloyals.Transaction anElement2 : result2) {
             result1.add(anElement2.points);
         }
 
-        return new Integer(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.sum(result1).intValue());
+        return new Integer(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.sum(result1).intValue());
     }
 }

@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.util;
+package org.dresdenocl.tools.transformation.pivot2sql.util;
 
 import java.util.Comparator;
 

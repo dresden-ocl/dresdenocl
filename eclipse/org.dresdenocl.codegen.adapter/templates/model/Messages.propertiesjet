@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="Messages" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="Messages" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(((GenModel)argument).getModelName());%>
 
 <%=modelName%>Model_LoadingEcoreModel=Loading <%=modelName%> model from {0}. 

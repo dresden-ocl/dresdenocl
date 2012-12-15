@@ -11,22 +11,22 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.test;
+package org.dresdenocl.metamodels.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.metamodels.test.tests.TestEnumeration;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestEnumerationLiteral;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestModel;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestNamespace;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestOperation;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestParameter;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestPrimitiveType;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestProperty;
-import tudresden.ocl20.pivot.metamodels.test.tests.TestType;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import org.dresdenocl.metamodels.test.tests.TestEnumeration;
+import org.dresdenocl.metamodels.test.tests.TestEnumerationLiteral;
+import org.dresdenocl.metamodels.test.tests.TestModel;
+import org.dresdenocl.metamodels.test.tests.TestNamespace;
+import org.dresdenocl.metamodels.test.tests.TestOperation;
+import org.dresdenocl.metamodels.test.tests.TestParameter;
+import org.dresdenocl.metamodels.test.tests.TestPrimitiveType;
+import org.dresdenocl.metamodels.test.tests.TestProperty;
+import org.dresdenocl.metamodels.test.tests.TestType;
+import org.dresdenocl.model.metamodel.IMetamodel;
 
 /**
  * <p>

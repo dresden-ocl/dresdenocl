@@ -28,24 +28,24 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceTuple;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.essentialocl.standardlibrary.OclTuple;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceTuple;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -83,7 +83,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
@@ -110,7 +110,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclTuple#
 	 * getModelInstanceTuple()
 	 */
 	public IModelInstanceTuple getModelInstanceTuple() {
@@ -122,7 +122,7 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple#getPropertyValue
+	 * org.dresdenocl.essentialocl.standardlibrary.OclTuple#getPropertyValue
 	 * (java.lang.String)
 	 */
 	public OclAny getPropertyValue(OclString pathname) {
@@ -157,8 +157,8 @@ public class JavaOclTuple extends JavaOclLibraryObject implements OclTuple {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny
+	 * #isEqualTo(org.dresdenocl.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 

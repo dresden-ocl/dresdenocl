@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.msg;
+package org.dresdenocl.metamodels.java.internal.msg;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -25,7 +25,7 @@ import org.eclipse.osgi.util.NLS;
 public class JavaMetaModelMessages extends NLS {
 
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.metamodels.java.internal.msg.messages"; //$NON-NLS-1$
+			"org.dresdenocl.metamodels.java.internal.msg.messages"; //$NON-NLS-1$
 
 	public static String JavaMetaModel_ClassNotFound;
 	

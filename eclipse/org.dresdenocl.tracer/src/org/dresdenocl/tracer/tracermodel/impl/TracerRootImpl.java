@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.impl;
+package org.dresdenocl.tracer.tracermodel.impl;
 
 import java.util.Collection;
 
@@ -13,9 +13,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -23,7 +23,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl#getRootItems <em>Root Items</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.impl.TracerRootImpl#getRootItems <em>Root Items</em>}</li>
  * </ul>
  * </p>
  *

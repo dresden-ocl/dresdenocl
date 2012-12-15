@@ -1,7 +1,7 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.impl
+package org.dresdenocl.language.ocl.staticsemantics.impl
 
-import tudresden.ocl20.pivot.language.ocl.staticsemantics._
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp._ 
+import org.dresdenocl.language.ocl.staticsemantics._
+import org.dresdenocl.language.ocl.resource.ocl.mopp._ 
 
 object OclStaticSemanticsFactoryImplHelper {
 

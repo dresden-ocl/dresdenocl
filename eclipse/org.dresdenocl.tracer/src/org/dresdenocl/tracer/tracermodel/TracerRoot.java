@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel;
+package org.dresdenocl.tracer.tracermodel;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}</li>
+ *   <li>{@link org.dresdenocl.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerRoot()
+ * @see org.dresdenocl.tracer.tracermodel.TracermodelPackage#getTracerRoot()
  * @model
  * @generated
  */
@@ -29,7 +29,7 @@ public interface TracerRoot extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Root Items</b></em>' reference list. The
 	 * list contents are of type
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem}. <!--
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerItem}. <!--
 	 * begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Root Items</em>' reference list isn't clear,
@@ -38,7 +38,7 @@ public interface TracerRoot extends EObject {
 	 * <!-- end-user-doc -->
 	 * 
 	 * @return the value of the '<em>Root Items</em>' reference list.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage#getTracerRoot_RootItems()
+	 * @see org.dresdenocl.tracer.tracermodel.TracermodelPackage#getTracerRoot_RootItems()
 	 * @model
 	 * @generated
 	 */

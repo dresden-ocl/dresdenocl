@@ -4,9 +4,9 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclDefaultHoverTextProvider implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclHoverTextProvider {
+public class OclDefaultHoverTextProvider implements org.dresdenocl.language.ocl.resource.ocl.IOclHoverTextProvider {
 	
 	public String getHoverText(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EObject referencedObject) {
 		return getHoverText(referencedObject);

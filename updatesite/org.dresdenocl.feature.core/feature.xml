@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.core"
+      id="org.dresdenocl.feature.core"
       label="Dresden OCL Core"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -198,112 +198,112 @@ Library.
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.essentialocl"
+         id="org.dresdenocl.essentialocl"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.essentialocl.edit"
+         id="org.dresdenocl.essentialocl.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.essentialocl.editor"
+         id="org.dresdenocl.essentialocl.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.essentialocl.standardlibrary"
+         id="org.dresdenocl.essentialocl.standardlibrary"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelbus"
+         id="org.dresdenocl.modelbus"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelbus.ui"
+         id="org.dresdenocl.modelbus.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.pivotmodel"
+         id="org.dresdenocl.pivotmodel"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.pivotmodel.edit"
+         id="org.dresdenocl.pivotmodel.edit"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.standardlibrary.java"
+         id="org.dresdenocl.standardlibrary.java"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.logging"
+         id="org.dresdenocl.logging"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.examples.royalandloyal"
+         id="org.dresdenocl.examples.royalandloyal"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.model"
+         id="org.dresdenocl.model"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstance"
+         id="org.dresdenocl.modelinstance"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype"
+         id="org.dresdenocl.modelinstancetype"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.ecore"
+         id="org.dresdenocl.modelinstancetype.ecore"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel"
+         id="org.dresdenocl.modelinstancetype.ecore.testmodel"
          download-size="0"
          install-size="0"
          version="0.0.0"

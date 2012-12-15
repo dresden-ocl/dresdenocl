@@ -28,20 +28,20 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -83,8 +83,8 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
-	 * #at(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection
+	 * #at(org.dresdenocl.essentialocl.standardlibrary.OclInteger)
 	 */
 	public T at(OclInteger index) {
 
@@ -132,7 +132,7 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection
 	 * #first()
 	 */
 	public T first() {
@@ -145,7 +145,7 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection
 	 * #indexOf(java.lang.Object)
 	 */
 	public OclInteger indexOf(T anObject) {
@@ -178,7 +178,7 @@ public abstract class JavaOclSortedCollection<T extends OclAny> extends
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection
 	 * #last()
 	 */
 	public T last() {

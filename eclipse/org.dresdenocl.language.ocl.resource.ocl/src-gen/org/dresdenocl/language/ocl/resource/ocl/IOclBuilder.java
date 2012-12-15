@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * An interface for builders that can be used to perform operations when resources
@@ -24,7 +24,7 @@ public interface IOclBuilder {
 	/**
 	 * Builds the given resource.
 	 */
-	public org.eclipse.core.runtime.IStatus build(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource resource, org.eclipse.core.runtime.IProgressMonitor monitor);
+	public org.eclipse.core.runtime.IStatus build(org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource resource, org.eclipse.core.runtime.IProgressMonitor monitor);
 	
 	/**
 	 * Handles the deletion of the given resource.

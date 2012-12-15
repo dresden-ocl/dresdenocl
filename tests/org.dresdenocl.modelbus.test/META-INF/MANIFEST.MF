@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Modelbus Test Plug-in.
-Bundle-SymbolicName: tudresden.ocl20.pivot.modelbus.test;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.modelbus.test;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.modelbus.test.Activator
+Bundle-Activator: org.dresdenocl.modelbus.test.Activator
 Bundle-Vendor: TU Dresden
 Require-Bundle: org.eclipse.core.runtime,
  org.junit4;bundle-version="4.0.0",
- tudresden.ocl20.pivot.facade,
+ org.dresdenocl.facade,
  org.dresdenocl.testsuite.abstract
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.modelbus.test
+Export-Package: org.dresdenocl.modelbus.test

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A FuzzyResolveResult is an implementation of the IOclReferenceResolveResult
@@ -14,11 +14,11 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
  * 
  * @param <ReferenceType> the type of the reference that is resolved
  */
-public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.EObject> implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> {
+public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.EObject> implements org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate;
 	
-	public OclFuzzyResolveResult(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate) {
+	public OclFuzzyResolveResult(org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> delegate) {
 		this.delegate = delegate;
 	}
 	
@@ -26,7 +26,7 @@ public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.E
 		return delegate.getErrorMessage();
 	}
 	
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
 		return null;
 	}
 	
@@ -62,11 +62,11 @@ public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.E
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
 		return delegate.getQuickFixes();
 	}
 	
-	public void addQuickFix(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
+	public void addQuickFix(org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix) {
 		delegate.addQuickFix(quickFix);
 	}
 	

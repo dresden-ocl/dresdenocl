@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.provider;
+package org.dresdenocl.metamodels.java.internal.provider;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,15 +27,15 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.metamodels.java.internal.model.JavaModel;
-import tudresden.ocl20.pivot.metamodels.java.internal.msg.JavaMetaModelMessages;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelPlugin;
-import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.metamodels.java.internal.model.JavaModel;
+import org.dresdenocl.metamodels.java.internal.msg.JavaMetaModelMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelPlugin;
+import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
  * <p>
@@ -54,7 +54,7 @@ public class JavaModelProvider extends AbstractModelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.net.URL)
+	 * @see org.dresdenocl.modelbus.IModelProvider#getModel(java.net.URL)
 	 */
 	public IModel getModel(URL modelURL) throws ModelAccessException {
 

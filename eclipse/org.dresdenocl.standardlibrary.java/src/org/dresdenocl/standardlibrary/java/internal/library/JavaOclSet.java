@@ -28,22 +28,22 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBag;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -86,8 +86,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#complement(
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet#complement(
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet)
 	 */
 	public OclSet<T> complement(OclSet<T> that) {
 
@@ -121,7 +121,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#excluding(java
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet#excluding(java
 	 * .lang.Object)
 	 */
 	public OclSet<T> excluding(T that) {
@@ -153,7 +153,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten
+	 * org.dresdenocl.essentialocl.standardlibrary.OclCollection#flatten
 	 * ()
 	 */
 	public <T2 extends OclAny> OclSet<T2> flatten() {
@@ -185,7 +185,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#including(java
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet#including(java
 	 * .lang.Object)
 	 */
 	public OclSet<T> including(T that) {
@@ -217,8 +217,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#intersection(
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet#intersection(
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBag)
 	 */
 	public OclSet<T> intersection(OclBag<T> that) {
 
@@ -229,8 +229,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclCollection
-	 * #isEqualTo(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclCollection
+	 * #isEqualTo(org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
 
@@ -286,8 +286,8 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#symmetricDifference
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet#symmetricDifference
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclSet)
 	 */
 	public OclSet<T> symmetricDifference(OclSet<T> that) {
 
@@ -336,7 +336,7 @@ public class JavaOclSet<T extends OclAny> extends JavaOclUnsortedCollection<T>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet#union(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclSet#union(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclSet)
 	 */
 	public OclSet<T> union(OclSet<T> that) {

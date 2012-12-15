@@ -1,13 +1,13 @@
-package tudresden.ocl20.pivot.tools.template.internal;
+package org.dresdenocl.tools.template.internal;
 
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateEngine;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * A default implementation of the {@link ITemplateGroup}
@@ -60,7 +60,7 @@ public class TemplateGroup implements ITemplateGroup {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#getDisplayName()
+	 * @see org.dresdenocl.tools.template.ITemplateGroup#getDisplayName()
 	 */
 	public String getDisplayName() {
 
@@ -69,7 +69,7 @@ public class TemplateGroup implements ITemplateGroup {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#getSuperTemplateGroup()
+	 * @see org.dresdenocl.tools.template.ITemplateGroup#getSuperTemplateGroup()
 	 */
 	public ITemplateGroup getSuperTemplateGroup() {
 
@@ -78,7 +78,7 @@ public class TemplateGroup implements ITemplateGroup {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#getTemplate(String)
+	 * @see org.dresdenocl.tools.template.ITemplateGroup#getTemplate(String)
 	 */
 	public ITemplate getTemplate(String name) {
 
@@ -90,7 +90,7 @@ public class TemplateGroup implements ITemplateGroup {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#addFile(URL)
+	 * @see org.dresdenocl.tools.template.ITemplateGroup#addFile(URL)
 	 */
 	public void addFile(String file) throws TemplateException {
 
@@ -101,7 +101,7 @@ public class TemplateGroup implements ITemplateGroup {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#addFiles(List)
+	 * @see org.dresdenocl.tools.template.ITemplateGroup#addFiles(List)
 	 */
 	public void addFiles(List<String> files) throws TemplateException {
 

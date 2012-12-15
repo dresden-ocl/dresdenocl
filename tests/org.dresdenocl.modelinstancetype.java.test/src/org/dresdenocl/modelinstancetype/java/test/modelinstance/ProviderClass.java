@@ -17,33 +17,33 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.test.modelinstance;
+package org.dresdenocl.modelinstancetype.java.test.modelinstance;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
+import org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
+import org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
+import org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
 
 /**
  * <p>

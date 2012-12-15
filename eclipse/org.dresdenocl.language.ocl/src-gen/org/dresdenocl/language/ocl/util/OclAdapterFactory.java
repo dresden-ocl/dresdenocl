@@ -4,112 +4,112 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.util;
+package org.dresdenocl.language.ocl.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.language.ocl.*;
-import tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.BracketExpCS;
-import tudresden.ocl20.pivot.language.ocl.CallExpCS;
-import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionRangeCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS;
-import tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS;
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
-import tudresden.ocl20.pivot.language.ocl.DeriveValueCS;
-import tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS;
-import tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.IfExpCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS;
-import tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS;
-import tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS;
-import tudresden.ocl20.pivot.language.ocl.InitValueCS;
-import tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.IterateExpCS;
-import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
-import tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS;
-import tudresden.ocl20.pivot.language.ocl.LetExpCS;
-import tudresden.ocl20.pivot.language.ocl.LiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.LoopExpCS;
-import tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
-import tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS;
-import tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS;
-import tudresden.ocl20.pivot.language.ocl.OperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS;
-import tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS;
-import tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS;
-import tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS;
-import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS;
-import tudresden.ocl20.pivot.language.ocl.ParameterCS;
-import tudresden.ocl20.pivot.language.ocl.PathNameCS;
-import tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS;
-import tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS;
-import tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
-import tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.TupleTypeCS;
-import tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS;
-import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS;
-import tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS;
-import tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS;
+import org.dresdenocl.language.ocl.*;
+import org.dresdenocl.language.ocl.AdditiveOperationCallExpCS;
+import org.dresdenocl.language.ocl.AttributeContextDeclarationCS;
+import org.dresdenocl.language.ocl.BodyDeclarationCS;
+import org.dresdenocl.language.ocl.BooleanLiteralExpCS;
+import org.dresdenocl.language.ocl.BracketExpCS;
+import org.dresdenocl.language.ocl.CallExpCS;
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.CollectionLiteralExpCS;
+import org.dresdenocl.language.ocl.CollectionLiteralPartsCS;
+import org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS;
+import org.dresdenocl.language.ocl.CollectionRangeCS;
+import org.dresdenocl.language.ocl.CollectionTypeIdentifierCS;
+import org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS;
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
+import org.dresdenocl.language.ocl.DefinitionExpCS;
+import org.dresdenocl.language.ocl.DefinitionExpOperationCS;
+import org.dresdenocl.language.ocl.DefinitionExpPartCS;
+import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
+import org.dresdenocl.language.ocl.DeriveValueCS;
+import org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS;
+import org.dresdenocl.language.ocl.EqualityOperationCallExpCS;
+import org.dresdenocl.language.ocl.FeatureCallExpCS;
+import org.dresdenocl.language.ocl.IfExpCS;
+import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
+import org.dresdenocl.language.ocl.ImplicitOperationCallCS;
+import org.dresdenocl.language.ocl.ImplicitPropertyCallCS;
+import org.dresdenocl.language.ocl.InitOrDeriveValueCS;
+import org.dresdenocl.language.ocl.InitValueCS;
+import org.dresdenocl.language.ocl.IntegerLiteralExpCS;
+import org.dresdenocl.language.ocl.InvalidLiteralExpCS;
+import org.dresdenocl.language.ocl.InvariantExpCS;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.IterateExpCS;
+import org.dresdenocl.language.ocl.IteratorExpCS;
+import org.dresdenocl.language.ocl.IteratorExpVariableCS;
+import org.dresdenocl.language.ocl.LetExpCS;
+import org.dresdenocl.language.ocl.LiteralExpCS;
+import org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS;
+import org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS;
+import org.dresdenocl.language.ocl.LoopExpCS;
+import org.dresdenocl.language.ocl.MultOperationCallExpCS;
+import org.dresdenocl.language.ocl.NamedLiteralExpCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.NullLiteralExpCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.OperationCallBaseExpCS;
+import org.dresdenocl.language.ocl.OperationCallBinaryExpCS;
+import org.dresdenocl.language.ocl.OperationCallExpCS;
+import org.dresdenocl.language.ocl.OperationCallOnSelfExpCS;
+import org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS;
+import org.dresdenocl.language.ocl.OperationCallWithSourceExpCS;
+import org.dresdenocl.language.ocl.OperationContextDeclarationCS;
+import org.dresdenocl.language.ocl.OperationDefinitionCS;
+import org.dresdenocl.language.ocl.OperationDefinitionInContextCS;
+import org.dresdenocl.language.ocl.OperationDefinitionInDefCS;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS;
+import org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS;
+import org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS;
+import org.dresdenocl.language.ocl.ParameterCS;
+import org.dresdenocl.language.ocl.PathNameCS;
+import org.dresdenocl.language.ocl.PostConditionDeclarationCS;
+import org.dresdenocl.language.ocl.PreConditionDeclarationCS;
+import org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS;
+import org.dresdenocl.language.ocl.PrimitiveLiteralExpCS;
+import org.dresdenocl.language.ocl.PropertyCallBaseExpCS;
+import org.dresdenocl.language.ocl.PropertyCallExpCS;
+import org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS;
+import org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS;
+import org.dresdenocl.language.ocl.RealLiteralExpCS;
+import org.dresdenocl.language.ocl.RelationalOperationCallExpCS;
+import org.dresdenocl.language.ocl.SimpleNameCS;
+import org.dresdenocl.language.ocl.StaticOperationCallExpCS;
+import org.dresdenocl.language.ocl.StringLiteralExpCS;
+import org.dresdenocl.language.ocl.TupleLiteralExpCS;
+import org.dresdenocl.language.ocl.TupleTypeCS;
+import org.dresdenocl.language.ocl.TupleTypeLiteralExpCS;
+import org.dresdenocl.language.ocl.TypeCS;
+import org.dresdenocl.language.ocl.TypePathNameCS;
+import org.dresdenocl.language.ocl.TypePathNameNestedCS;
+import org.dresdenocl.language.ocl.TypePathNameSimpleCS;
+import org.dresdenocl.language.ocl.UnaryOperationCallExpCS;
+import org.dresdenocl.language.ocl.VariableDeclarationCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS;
+import org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage
+ * @see org.dresdenocl.language.ocl.OclPackage
  * @generated
  */
 public class OclAdapterFactory extends AdapterFactoryImpl {
@@ -636,13 +636,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OclExpressionCS <em>Expression CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OclExpressionCS <em>Expression CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OclExpressionCS
+   * @see org.dresdenocl.language.ocl.OclExpressionCS
    * @generated
    */
 	public Adapter createOclExpressionCSAdapter() {
@@ -650,13 +650,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.BracketExpCS <em>Bracket Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.BracketExpCS <em>Bracket Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.BracketExpCS
+   * @see org.dresdenocl.language.ocl.BracketExpCS
    * @generated
    */
 	public Adapter createBracketExpCSAdapter() {
@@ -664,13 +664,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS <em>Named Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS <em>Named Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS
+   * @see org.dresdenocl.language.ocl.NamedLiteralExpCS
    * @generated
    */
 	public Adapter createNamedLiteralExpCSAdapter() {
@@ -678,13 +678,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PathNameCS <em>Path Name CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PathNameCS <em>Path Name CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PathNameCS
+   * @see org.dresdenocl.language.ocl.PathNameCS
    * @generated
    */
 	public Adapter createPathNameCSAdapter() {
@@ -692,13 +692,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.SimpleNameCS <em>Simple Name CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.SimpleNameCS <em>Simple Name CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.SimpleNameCS
+   * @see org.dresdenocl.language.ocl.SimpleNameCS
    * @generated
    */
 	public Adapter createSimpleNameCSAdapter() {
@@ -706,13 +706,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TypeCS <em>Type CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypeCS <em>Type CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TypeCS
+   * @see org.dresdenocl.language.ocl.TypeCS
    * @generated
    */
 	public Adapter createTypeCSAdapter() {
@@ -720,13 +720,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameCS <em>Type Path Name CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypePathNameCS <em>Type Path Name CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameCS
+   * @see org.dresdenocl.language.ocl.TypePathNameCS
    * @generated
    */
 	public Adapter createTypePathNameCSAdapter() {
@@ -734,13 +734,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS <em>Type Path Name Simple CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS <em>Type Path Name Simple CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS
+   * @see org.dresdenocl.language.ocl.TypePathNameSimpleCS
    * @generated
    */
 	public Adapter createTypePathNameSimpleCSAdapter() {
@@ -748,13 +748,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS <em>Type Path Name Nested CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS <em>Type Path Name Nested CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS
+   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS
    * @generated
    */
 	public Adapter createTypePathNameNestedCSAdapter() {
@@ -762,13 +762,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS <em>Tuple Type CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TupleTypeCS <em>Tuple Type CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleTypeCS
+   * @see org.dresdenocl.language.ocl.TupleTypeCS
    * @generated
    */
 	public Adapter createTupleTypeCSAdapter() {
@@ -776,13 +776,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS <em>Collection Type Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS <em>Collection Type Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS
+   * @see org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS
    * @generated
    */
 	public Adapter createCollectionTypeLiteralExpCSAdapter() {
@@ -790,13 +790,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS <em>Tuple Type Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS <em>Tuple Type Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS
+   * @see org.dresdenocl.language.ocl.TupleTypeLiteralExpCS
    * @generated
    */
 	public Adapter createTupleTypeLiteralExpCSAdapter() {
@@ -804,13 +804,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS <em>Variable Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.VariableDeclarationCS <em>Variable Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationCS
    * @generated
    */
 	public Adapter createVariableDeclarationCSAdapter() {
@@ -818,13 +818,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS <em>Variable Declaration With Init CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS <em>Variable Declaration With Init CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitCS
    * @generated
    */
 	public Adapter createVariableDeclarationWithInitCSAdapter() {
@@ -832,13 +832,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS <em>Variable Declaration Without Init CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS <em>Variable Declaration Without Init CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS
    * @generated
    */
 	public Adapter createVariableDeclarationWithoutInitCSAdapter() {
@@ -846,13 +846,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS <em>Variable Declaration With Init List CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS <em>Variable Declaration With Init List CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS
    * @generated
    */
 	public Adapter createVariableDeclarationWithInitListCSAdapter() {
@@ -860,13 +860,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS <em>Variable Declaration Without Init List CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS <em>Variable Declaration Without Init List CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS
    * @generated
    */
 	public Adapter createVariableDeclarationWithoutInitListCSAdapter() {
@@ -874,13 +874,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LiteralExpCS <em>Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LiteralExpCS <em>Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LiteralExpCS
+   * @see org.dresdenocl.language.ocl.LiteralExpCS
    * @generated
    */
 	public Adapter createLiteralExpCSAdapter() {
@@ -888,13 +888,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS <em>Enum Literal Or Static Property Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS <em>Enum Literal Or Static Property Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS
+   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS
    * @generated
    */
 	public Adapter createEnumLiteralOrStaticPropertyExpCSAdapter() {
@@ -902,13 +902,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS <em>Collection Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS <em>Collection Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS
+   * @see org.dresdenocl.language.ocl.CollectionLiteralExpCS
    * @generated
    */
 	public Adapter createCollectionLiteralExpCSAdapter() {
@@ -916,13 +916,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS <em>Collection Type Identifier CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS <em>Collection Type Identifier CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS
+   * @see org.dresdenocl.language.ocl.CollectionTypeIdentifierCS
    * @generated
    */
 	public Adapter createCollectionTypeIdentifierCSAdapter() {
@@ -930,13 +930,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS <em>Collection Literal Parts CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CollectionLiteralPartsCS <em>Collection Literal Parts CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS
+   * @see org.dresdenocl.language.ocl.CollectionLiteralPartsCS
    * @generated
    */
 	public Adapter createCollectionLiteralPartsCSAdapter() {
@@ -944,13 +944,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS <em>Collection Literal Parts Ocl Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS <em>Collection Literal Parts Ocl Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS
+   * @see org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS
    * @generated
    */
 	public Adapter createCollectionLiteralPartsOclExpCSAdapter() {
@@ -958,13 +958,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS <em>Collection Range CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CollectionRangeCS <em>Collection Range CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionRangeCS
+   * @see org.dresdenocl.language.ocl.CollectionRangeCS
    * @generated
    */
 	public Adapter createCollectionRangeCSAdapter() {
@@ -972,13 +972,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.CallExpCS <em>Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.CallExpCS <em>Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.CallExpCS
+   * @see org.dresdenocl.language.ocl.CallExpCS
    * @generated
    */
 	public Adapter createCallExpCSAdapter() {
@@ -986,13 +986,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LoopExpCS <em>Loop Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LoopExpCS <em>Loop Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LoopExpCS
+   * @see org.dresdenocl.language.ocl.LoopExpCS
    * @generated
    */
 	public Adapter createLoopExpCSAdapter() {
@@ -1000,13 +1000,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS <em>Iterator Exp Variable CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.IteratorExpVariableCS <em>Iterator Exp Variable CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS
+   * @see org.dresdenocl.language.ocl.IteratorExpVariableCS
    * @generated
    */
 	public Adapter createIteratorExpVariableCSAdapter() {
@@ -1014,13 +1014,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS <em>Iterator Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.IteratorExpCS <em>Iterator Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpCS
+   * @see org.dresdenocl.language.ocl.IteratorExpCS
    * @generated
    */
 	public Adapter createIteratorExpCSAdapter() {
@@ -1028,13 +1028,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS <em>Iterate Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.IterateExpCS <em>Iterate Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.IterateExpCS
+   * @see org.dresdenocl.language.ocl.IterateExpCS
    * @generated
    */
 	public Adapter createIterateExpCSAdapter() {
@@ -1042,13 +1042,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS <em>Feature Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.FeatureCallExpCS <em>Feature Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS
+   * @see org.dresdenocl.language.ocl.FeatureCallExpCS
    * @generated
    */
 	public Adapter createFeatureCallExpCSAdapter() {
@@ -1056,13 +1056,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp <em>Navigation Call Exp</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.NavigationCallExp <em>Navigation Call Exp</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.NavigationCallExp
+   * @see org.dresdenocl.language.ocl.NavigationCallExp
    * @generated
    */
 	public Adapter createNavigationCallExpAdapter() {
@@ -1070,13 +1070,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS <em>Operation Call Base Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS <em>Operation Call Base Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallBaseExpCS
    * @generated
    */
 	public Adapter createOperationCallBaseExpCSAdapter() {
@@ -1084,13 +1084,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS <em>Property Call Base Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS <em>Property Call Base Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallBaseExpCS
    * @generated
    */
 	public Adapter createPropertyCallBaseExpCSAdapter() {
@@ -1098,13 +1098,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS <em>Implicit Feature Call CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ImplicitFeatureCallCS <em>Implicit Feature Call CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS
+   * @see org.dresdenocl.language.ocl.ImplicitFeatureCallCS
    * @generated
    */
 	public Adapter createImplicitFeatureCallCSAdapter() {
@@ -1112,13 +1112,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS <em>Property Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PropertyCallExpCS <em>Property Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallExpCS
    * @generated
    */
 	public Adapter createPropertyCallExpCSAdapter() {
@@ -1126,13 +1126,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS <em>Property Call On Self Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS <em>Property Call On Self Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS
    * @generated
    */
 	public Adapter createPropertyCallOnSelfExpCSAdapter() {
@@ -1140,13 +1140,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS <em>Implicit Property Call CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ImplicitPropertyCallCS <em>Implicit Property Call CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS
+   * @see org.dresdenocl.language.ocl.ImplicitPropertyCallCS
    * @generated
    */
 	public Adapter createImplicitPropertyCallCSAdapter() {
@@ -1154,13 +1154,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS <em>Property Call Explicit Path Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS <em>Property Call Explicit Path Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS
    * @generated
    */
 	public Adapter createPropertyCallExplicitPathExpCSAdapter() {
@@ -1168,13 +1168,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallExpCS <em>Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationCallExpCS <em>Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallExpCS
    * @generated
    */
 	public Adapter createOperationCallExpCSAdapter() {
@@ -1182,13 +1182,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS <em>Operation Call On Self Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationCallOnSelfExpCS <em>Operation Call On Self Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallOnSelfExpCS
    * @generated
    */
 	public Adapter createOperationCallOnSelfExpCSAdapter() {
@@ -1196,13 +1196,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS <em>Static Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.StaticOperationCallExpCS <em>Static Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.StaticOperationCallExpCS
    * @generated
    */
 	public Adapter createStaticOperationCallExpCSAdapter() {
@@ -1210,13 +1210,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS <em>Unary Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS <em>Unary Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.UnaryOperationCallExpCS
    * @generated
    */
 	public Adapter createUnaryOperationCallExpCSAdapter() {
@@ -1224,13 +1224,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS <em>Logical Not Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS <em>Logical Not Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS
    * @generated
    */
 	public Adapter createLogicalNotOperationCallExpCSAdapter() {
@@ -1238,13 +1238,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS <em>Operation Call With Source Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS <em>Operation Call With Source Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallWithSourceExpCS
    * @generated
    */
 	public Adapter createOperationCallWithSourceExpCSAdapter() {
@@ -1252,13 +1252,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS <em>Operation Call Binary Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationCallBinaryExpCS <em>Operation Call Binary Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallBinaryExpCS
    * @generated
    */
 	public Adapter createOperationCallBinaryExpCSAdapter() {
@@ -1266,13 +1266,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS <em>Additive Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.AdditiveOperationCallExpCS <em>Additive Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.AdditiveOperationCallExpCS
    * @generated
    */
 	public Adapter createAdditiveOperationCallExpCSAdapter() {
@@ -1280,13 +1280,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS <em>Mult Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.MultOperationCallExpCS <em>Mult Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.MultOperationCallExpCS
    * @generated
    */
 	public Adapter createMultOperationCallExpCSAdapter() {
@@ -1294,13 +1294,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS <em>Relational Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.RelationalOperationCallExpCS <em>Relational Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.RelationalOperationCallExpCS
    * @generated
    */
 	public Adapter createRelationalOperationCallExpCSAdapter() {
@@ -1308,13 +1308,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS <em>Equality Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.EqualityOperationCallExpCS <em>Equality Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.EqualityOperationCallExpCS
    * @generated
    */
 	public Adapter createEqualityOperationCallExpCSAdapter() {
@@ -1322,13 +1322,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS <em>Logical And Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS <em>Logical And Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS
    * @generated
    */
 	public Adapter createLogicalAndOperationCallExpCSAdapter() {
@@ -1336,13 +1336,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS <em>Logical Or Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS <em>Logical Or Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS
    * @generated
    */
 	public Adapter createLogicalOrOperationCallExpCSAdapter() {
@@ -1350,13 +1350,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS <em>Logical Xor Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS <em>Logical Xor Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS
    * @generated
    */
 	public Adapter createLogicalXorOperationCallExpCSAdapter() {
@@ -1364,13 +1364,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS <em>Logical Implies Operation Call Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS <em>Logical Implies Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS
    * @generated
    */
 	public Adapter createLogicalImpliesOperationCallExpCSAdapter() {
@@ -1378,13 +1378,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS <em>Operation Call With Imlicit Source Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS <em>Operation Call With Imlicit Source Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS
    * @generated
    */
 	public Adapter createOperationCallWithImlicitSourceExpCSAdapter() {
@@ -1392,13 +1392,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS <em>Implicit Operation Call CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ImplicitOperationCallCS <em>Implicit Operation Call CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS
+   * @see org.dresdenocl.language.ocl.ImplicitOperationCallCS
    * @generated
    */
 	public Adapter createImplicitOperationCallCSAdapter() {
@@ -1406,13 +1406,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS <em>Tuple Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.TupleLiteralExpCS <em>Tuple Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS
+   * @see org.dresdenocl.language.ocl.TupleLiteralExpCS
    * @generated
    */
 	public Adapter createTupleLiteralExpCSAdapter() {
@@ -1420,13 +1420,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS <em>Primitive Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PrimitiveLiteralExpCS <em>Primitive Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS
+   * @see org.dresdenocl.language.ocl.PrimitiveLiteralExpCS
    * @generated
    */
 	public Adapter createPrimitiveLiteralExpCSAdapter() {
@@ -1434,13 +1434,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS <em>Integer Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.IntegerLiteralExpCS <em>Integer Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS
+   * @see org.dresdenocl.language.ocl.IntegerLiteralExpCS
    * @generated
    */
 	public Adapter createIntegerLiteralExpCSAdapter() {
@@ -1448,13 +1448,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS <em>Real Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.RealLiteralExpCS <em>Real Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS
+   * @see org.dresdenocl.language.ocl.RealLiteralExpCS
    * @generated
    */
 	public Adapter createRealLiteralExpCSAdapter() {
@@ -1462,13 +1462,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS <em>Boolean Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.BooleanLiteralExpCS <em>Boolean Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS
+   * @see org.dresdenocl.language.ocl.BooleanLiteralExpCS
    * @generated
    */
 	public Adapter createBooleanLiteralExpCSAdapter() {
@@ -1476,13 +1476,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS <em>String Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.StringLiteralExpCS <em>String Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS
+   * @see org.dresdenocl.language.ocl.StringLiteralExpCS
    * @generated
    */
 	public Adapter createStringLiteralExpCSAdapter() {
@@ -1490,13 +1490,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS <em>Invalid Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.InvalidLiteralExpCS <em>Invalid Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS
+   * @see org.dresdenocl.language.ocl.InvalidLiteralExpCS
    * @generated
    */
 	public Adapter createInvalidLiteralExpCSAdapter() {
@@ -1504,13 +1504,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS <em>Null Literal Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.NullLiteralExpCS <em>Null Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS
+   * @see org.dresdenocl.language.ocl.NullLiteralExpCS
    * @generated
    */
 	public Adapter createNullLiteralExpCSAdapter() {
@@ -1518,13 +1518,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.LetExpCS <em>Let Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.LetExpCS <em>Let Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.LetExpCS
+   * @see org.dresdenocl.language.ocl.LetExpCS
    * @generated
    */
 	public Adapter createLetExpCSAdapter() {
@@ -1532,13 +1532,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS <em>If Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.IfExpCS <em>If Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.IfExpCS
+   * @see org.dresdenocl.language.ocl.IfExpCS
    * @generated
    */
 	public Adapter createIfExpCSAdapter() {
@@ -1546,13 +1546,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS <em>Package Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PackageDeclarationCS <em>Package Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationCS
    * @generated
    */
 	public Adapter createPackageDeclarationCSAdapter() {
@@ -1560,13 +1560,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS <em>Package Declaration With Namespace CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS <em>Package Declaration With Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS
    * @generated
    */
 	public Adapter createPackageDeclarationWithNamespaceCSAdapter() {
@@ -1574,13 +1574,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS <em>Package Declaration Nested Namespace CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS <em>Package Declaration Nested Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS
    * @generated
    */
 	public Adapter createPackageDeclarationNestedNamespaceCSAdapter() {
@@ -1588,13 +1588,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS <em>Package Declaration Without Namespace CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS <em>Package Declaration Without Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS
    * @generated
    */
 	public Adapter createPackageDeclarationWithoutNamespaceCSAdapter() {
@@ -1602,13 +1602,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS <em>Context Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ContextDeclarationCS <em>Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.ContextDeclarationCS
    * @generated
    */
 	public Adapter createContextDeclarationCSAdapter() {
@@ -1616,13 +1616,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS <em>Attribute Context Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS <em>Attribute Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS
    * @generated
    */
 	public Adapter createAttributeContextDeclarationCSAdapter() {
@@ -1630,13 +1630,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS <em>Classifier Context Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS <em>Classifier Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.ClassifierContextDeclarationCS
    * @generated
    */
 	public Adapter createClassifierContextDeclarationCSAdapter() {
@@ -1644,13 +1644,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS <em>Operation Context Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS <em>Operation Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.OperationContextDeclarationCS
    * @generated
    */
 	public Adapter createOperationContextDeclarationCSAdapter() {
@@ -1658,13 +1658,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS <em>Init Or Derive Value CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.InitOrDeriveValueCS <em>Init Or Derive Value CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS
+   * @see org.dresdenocl.language.ocl.InitOrDeriveValueCS
    * @generated
    */
 	public Adapter createInitOrDeriveValueCSAdapter() {
@@ -1672,13 +1672,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.InitValueCS <em>Init Value CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.InitValueCS <em>Init Value CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.InitValueCS
+   * @see org.dresdenocl.language.ocl.InitValueCS
    * @generated
    */
 	public Adapter createInitValueCSAdapter() {
@@ -1686,13 +1686,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.DeriveValueCS <em>Derive Value CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.DeriveValueCS <em>Derive Value CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.DeriveValueCS
+   * @see org.dresdenocl.language.ocl.DeriveValueCS
    * @generated
    */
 	public Adapter createDeriveValueCSAdapter() {
@@ -1700,13 +1700,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS <em>Invariant Or Definition CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.InvariantOrDefinitionCS <em>Invariant Or Definition CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS
+   * @see org.dresdenocl.language.ocl.InvariantOrDefinitionCS
    * @generated
    */
 	public Adapter createInvariantOrDefinitionCSAdapter() {
@@ -1714,13 +1714,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.InvariantExpCS <em>Invariant Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.InvariantExpCS <em>Invariant Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.InvariantExpCS
+   * @see org.dresdenocl.language.ocl.InvariantExpCS
    * @generated
    */
 	public Adapter createInvariantExpCSAdapter() {
@@ -1728,13 +1728,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS <em>Definition Exp CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.DefinitionExpCS <em>Definition Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpCS
    * @generated
    */
 	public Adapter createDefinitionExpCSAdapter() {
@@ -1742,13 +1742,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS <em>Definition Exp Part CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.DefinitionExpPartCS <em>Definition Exp Part CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpPartCS
    * @generated
    */
 	public Adapter createDefinitionExpPartCSAdapter() {
@@ -1756,13 +1756,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS <em>Definition Exp Property CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS <em>Definition Exp Property CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpPropertyCS
    * @generated
    */
 	public Adapter createDefinitionExpPropertyCSAdapter() {
@@ -1770,13 +1770,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS <em>Definition Exp Operation CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS <em>Definition Exp Operation CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpOperationCS
    * @generated
    */
 	public Adapter createDefinitionExpOperationCSAdapter() {
@@ -1784,13 +1784,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS <em>Pre Post Or Body Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS <em>Pre Post Or Body Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS
+   * @see org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS
    * @generated
    */
 	public Adapter createPrePostOrBodyDeclarationCSAdapter() {
@@ -1798,13 +1798,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS <em>Pre Condition Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PreConditionDeclarationCS <em>Pre Condition Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS
+   * @see org.dresdenocl.language.ocl.PreConditionDeclarationCS
    * @generated
    */
 	public Adapter createPreConditionDeclarationCSAdapter() {
@@ -1812,13 +1812,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS <em>Post Condition Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.PostConditionDeclarationCS <em>Post Condition Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS
+   * @see org.dresdenocl.language.ocl.PostConditionDeclarationCS
    * @generated
    */
 	public Adapter createPostConditionDeclarationCSAdapter() {
@@ -1826,13 +1826,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS <em>Body Declaration CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.BodyDeclarationCS <em>Body Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS
+   * @see org.dresdenocl.language.ocl.BodyDeclarationCS
    * @generated
    */
 	public Adapter createBodyDeclarationCSAdapter() {
@@ -1840,13 +1840,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS <em>Operation Definition CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationDefinitionCS <em>Operation Definition CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS
+   * @see org.dresdenocl.language.ocl.OperationDefinitionCS
    * @generated
    */
 	public Adapter createOperationDefinitionCSAdapter() {
@@ -1854,13 +1854,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS <em>Operation Definition In Context CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS <em>Operation Definition In Context CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS
+   * @see org.dresdenocl.language.ocl.OperationDefinitionInContextCS
    * @generated
    */
 	public Adapter createOperationDefinitionInContextCSAdapter() {
@@ -1868,13 +1868,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS <em>Operation Definition In Def CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.OperationDefinitionInDefCS <em>Operation Definition In Def CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS
+   * @see org.dresdenocl.language.ocl.OperationDefinitionInDefCS
    * @generated
    */
 	public Adapter createOperationDefinitionInDefCSAdapter() {
@@ -1882,13 +1882,13 @@ public class OclAdapterFactory extends AdapterFactoryImpl {
   }
 
 	/**
-   * Creates a new adapter for an object of class '{@link tudresden.ocl20.pivot.language.ocl.ParameterCS <em>Parameter CS</em>}'.
+   * Creates a new adapter for an object of class '{@link org.dresdenocl.language.ocl.ParameterCS <em>Parameter CS</em>}'.
    * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see tudresden.ocl20.pivot.language.ocl.ParameterCS
+   * @see org.dresdenocl.language.ocl.ParameterCS
    * @generated
    */
 	public Adapter createParameterCSAdapter() {

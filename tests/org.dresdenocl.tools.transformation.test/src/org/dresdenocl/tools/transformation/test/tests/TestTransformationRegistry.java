@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.transformation.test.tests;
+package org.dresdenocl.tools.transformation.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -41,17 +41,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
-import tudresden.ocl20.pivot.tools.transformation.test.AbstractTransformationTest;
+import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.TransformationPlugin;
+import org.dresdenocl.tools.transformation.test.AbstractTransformationTest;
 
 /**
  * This test will test the class ITransformationRegistry.java of the package
- * tudresden.ocl20.pivot.tools.transformation.
+ * org.dresdenocl.tools.transformation.
  * 
- * @see tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry
+ * @see org.dresdenocl.tools.transformation.ITransformationRegistry
  */
 public class TestTransformationRegistry extends AbstractTransformationTest {
 

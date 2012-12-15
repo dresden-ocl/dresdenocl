@@ -17,14 +17,14 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * <p>
@@ -37,7 +37,7 @@ public class Ocl2SQLUIPlugIn extends AbstractUIPlugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.tools.codegen.ocl2java.ui";
+			"org.dresdenocl.tools.codegen.ocl2java.ui";
 
 	/** The shared instance. */
 	private static Ocl2SQLUIPlugIn plugin;
@@ -110,7 +110,7 @@ public class Ocl2SQLUIPlugIn extends AbstractUIPlugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

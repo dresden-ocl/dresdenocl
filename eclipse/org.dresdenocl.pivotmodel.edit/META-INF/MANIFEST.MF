@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pivot Model Edit Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.pivotmodel.edit; singleton:=true
+Bundle-SymbolicName: org.dresdenocl.pivotmodel.edit; singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: tudresden.ocl20.pivot.pivotmodel.provider.PivotModelEditPlugin$Implementation
+Bundle-Activator: org.dresdenocl.pivotmodel.provider.PivotModelEditPlugin$Implementation
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.pivotmodel.provider
+Export-Package: org.dresdenocl.pivotmodel.provider
 Require-Bundle: org.eclipse.core.runtime,
- tudresden.ocl20.pivot.pivotmodel;visibility:=reexport,
+ org.dresdenocl.pivotmodel;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy

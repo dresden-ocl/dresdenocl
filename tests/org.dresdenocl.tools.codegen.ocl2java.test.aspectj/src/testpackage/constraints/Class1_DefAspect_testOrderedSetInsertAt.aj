@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testOrderedSetInsertAt {
      *       def: testOrderedSetInsertAt(source: OrderedSet(OclAny), arg01: Integer, arg02: OclAny): OrderedSet(OclAny) = source ->insertAt(arg01, arg02)</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testOrderedSetInsertAt(java.util.List<Object> source, Integer arg01, Object arg02) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets.insertAt(source, arg01, arg02);
     }
 }

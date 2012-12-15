@@ -1,7 +1,7 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
 	
-	<property name="integrationPlugin" value="tudresden.attributegrammar.integration.kiama"/>
+	<property name="integrationPlugin" value="org.dresdenocl.attributegrammar.integration.kiama"/>
 	
 	<condition property="attributableEObjectBin" value="${workspacePath}/${integrationPlugin}/bin" else="./../${integrationPlugin}/bin">
 		<isset property="headless"/>
@@ -11,17 +11,17 @@
 		<isset property="headless"/>
 	</condition>
 		
-	<target name="Clean tudresden.attributegrammar.integration.kiama" >
+	<target name="Clean org.dresdenocl.attributegrammar.integration.kiama" >
 		<mkdir dir="${attributableEObjectBin}"/>
 		<delete>
 			<fileset dir="${attributableEObjectBin}">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
-		<antcall target="Compile tudresden.attributegrammar.integration.kiama" />
+		<antcall target="Compile org.dresdenocl.attributegrammar.integration.kiama" />
 	</target>
 	
-	<target name="Compile tudresden.attributegrammar.integration.kiama" depends="Scala Compiler Init">		
+	<target name="Compile org.dresdenocl.attributegrammar.integration.kiama" depends="Scala Compiler Init">		
 
 		<mkdir dir="${attributableEObjectBin}"/>
 		<echo message="Compile Scala Code" />

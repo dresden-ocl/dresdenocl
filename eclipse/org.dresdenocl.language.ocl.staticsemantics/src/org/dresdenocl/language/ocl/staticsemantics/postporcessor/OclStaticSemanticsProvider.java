@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor;
+package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 
 import java.util.HashMap;
 import java.util.IdentityHashMap;
@@ -6,19 +6,19 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.IOclResource;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactoryEP;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.impl.OclStaticSemanticsFactoryImpl;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.IOclResource;
+import org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactoryEP;
+import org.dresdenocl.language.ocl.staticsemantics.impl.OclStaticSemanticsFactoryImpl;
 
 public class OclStaticSemanticsProvider {
 
-	private static Map<IOclResource, tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics> oclStaticSemantics = new IdentityHashMap<IOclResource, tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics>();
-	private static Map<String, tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory> oclStaticSemanticFactories = new HashMap<String, tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory>();
+	private static Map<IOclResource, org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics> oclStaticSemantics = new IdentityHashMap<IOclResource, org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics>();
+	private static Map<String, org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory> oclStaticSemanticFactories = new HashMap<String, org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory>();
 
-	public static tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics getStaticSemantics(
+	public static org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics getStaticSemantics(
 			IOclResource resource) {
 
-		tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory rightFactory = null;
+		org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory rightFactory = null;
 
 		if (!oclStaticSemantics.containsKey(resource)) {
 			if (org.eclipse.core.runtime.Platform.isRunning()) {
@@ -30,7 +30,7 @@ public class OclStaticSemanticsProvider {
 				for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
 					try {
 						String fileExtension = element.getAttribute("fileExtension");
-						tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory oclStaticSemanticsFactory = (tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory) element
+						org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory oclStaticSemanticsFactory = (org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory) element
 								.createExecutableExtension("oclStaticSemanticsFactory");
 						// FIXME: Add warning if same file extension is registered
 						// multiple
@@ -38,7 +38,7 @@ public class OclStaticSemanticsProvider {
 						oclStaticSemanticFactories.put(fileExtension,
 								oclStaticSemanticsFactory);
 					} catch (org.eclipse.core.runtime.CoreException ce) {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin
+						org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin
 								.logError("Exception while getting default options.", ce);
 					}
 				}

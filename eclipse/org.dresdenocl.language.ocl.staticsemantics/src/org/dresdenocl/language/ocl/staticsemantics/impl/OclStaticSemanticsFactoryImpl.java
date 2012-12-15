@@ -1,8 +1,8 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.impl;
+package org.dresdenocl.language.ocl.staticsemantics.impl;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.IOclResource;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.IOclResource;
+import org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics;
+import org.dresdenocl.language.ocl.staticsemantics.factory.OclStaticSemanticsFactory;
 
 public class OclStaticSemanticsFactoryImpl implements OclStaticSemanticsFactory {
 

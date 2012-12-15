@@ -5,11 +5,11 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ocl22java.wizard.RoyalAndLoyalExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ocl22java.wizard.RoyalAndLoyalExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.simple"
+            id="org.dresdenocl.examples.ui.wizard.simple"
             name="Royal and Loyal (Ocl22Java)"
             project="true">
          <description>
@@ -18,11 +18,11 @@
       </wizard>
       <wizard
             canFinishEarly="true"
-            category="tudresden.ocl20.pivot.examples.ui.category"
-            class="tudresden.ocl20.pivot.examples.ocl22java.wizard.SimpleExampleWizard"
+            category="org.dresdenocl.examples.ui.category"
+            class="org.dresdenocl.examples.ocl22java.wizard.SimpleExampleWizard"
             hasPages="false"
             icon="icons/example.gif"
-            id="tudresden.ocl20.pivot.examples.ui.wizard.simple"
+            id="org.dresdenocl.examples.ui.wizard.simple"
             name="Simple Example (Ocl22Java)"
             project="true">
          <description>

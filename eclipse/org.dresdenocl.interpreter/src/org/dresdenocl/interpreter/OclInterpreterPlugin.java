@@ -28,17 +28,17 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter;
+package org.dresdenocl.interpreter;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
-import tudresden.ocl20.pivot.interpreter.internal.InterpreterRegistry;
-import tudresden.ocl20.pivot.interpreter.internal.OclInterpreter;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.interpreter.event.IInterpreterRegistryListener;
+import org.dresdenocl.interpreter.internal.InterpreterRegistry;
+import org.dresdenocl.interpreter.internal.OclInterpreter;
+import org.dresdenocl.modelinstance.IModelInstance;
 
 /**
  * <p>
@@ -50,7 +50,7 @@ import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 public class OclInterpreterPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter";
+	public static final String PLUGIN_ID = "org.dresdenocl.interpreter";
 
 	/** The shared instance. */
 	private static OclInterpreterPlugin plugin;
@@ -95,7 +95,7 @@ public class OclInterpreterPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

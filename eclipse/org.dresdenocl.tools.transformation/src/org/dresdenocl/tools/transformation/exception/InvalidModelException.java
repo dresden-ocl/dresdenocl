@@ -2,11 +2,11 @@
  * Created on 10.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.exception;
+package org.dresdenocl.tools.transformation.exception;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.ITransformation;
 
 /**
  * The InvalidModelException is thrown, when a given model has features that are

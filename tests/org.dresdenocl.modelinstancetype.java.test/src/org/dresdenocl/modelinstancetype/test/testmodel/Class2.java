@@ -17,9 +17,9 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
 
 /**
  * <p>
@@ -33,7 +33,7 @@ public class Class2 extends Class1 {
 
 	/**
 	 * A field to test the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * .
 	 */
 	protected String nonMultipleProperty = Class2.class.getCanonicalName();

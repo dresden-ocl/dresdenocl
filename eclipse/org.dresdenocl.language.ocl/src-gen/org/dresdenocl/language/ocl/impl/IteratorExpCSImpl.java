@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.IteratorExpCS;
-import tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.IteratorExpCS;
+import org.dresdenocl.language.ocl.IteratorExpVariableCS;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,9 +29,9 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl#getIteratorName <em>Iterator Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl#getIteratorVariables <em>Iterator Variables</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.IteratorExpCSImpl#getIteratorName <em>Iterator Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.IteratorExpCSImpl#getIteratorVariables <em>Iterator Variables</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.IteratorExpCSImpl#getBodyExpression <em>Body Expression</em>}</li>
  * </ul>
  * </p>
  *

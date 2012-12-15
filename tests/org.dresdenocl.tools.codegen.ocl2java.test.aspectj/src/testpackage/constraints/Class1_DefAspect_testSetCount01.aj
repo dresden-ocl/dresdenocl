@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetCount01 {
      *       def: testSetCount01(source: Set(OclAny), arg01: OclAny): Integer = source ->count(arg01)</code></p>
      */
     public Integer testpackage.Class1.testSetCount01(java.util.Set<Object> source, Object arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.count(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.count(source, arg01);
     }
 }

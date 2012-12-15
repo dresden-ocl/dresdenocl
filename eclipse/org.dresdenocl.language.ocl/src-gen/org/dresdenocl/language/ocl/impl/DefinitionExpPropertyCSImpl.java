@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
+import org.dresdenocl.language.ocl.DefinitionExpPropertyCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.VariableDeclarationWithInitCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPropertyCSImpl#getVariableDeclaration <em>Variable Declaration</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.DefinitionExpPropertyCSImpl#getVariableDeclaration <em>Variable Declaration</em>}</li>
  * </ul>
  * </p>
  *

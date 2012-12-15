@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,13 +15,13 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getCondition <em>Condition</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getThenBranch <em>Then Branch</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getElseBranch <em>Else Branch</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IfExpCS#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IfExpCS#getThenBranch <em>Then Branch</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IfExpCS#getElseBranch <em>Else Branch</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIfExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getIfExpCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface IfExpCS extends OclExpressionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Condition</em>' containment reference.
    * @see #setCondition(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIfExpCS_Condition()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIfExpCS_Condition()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getCondition();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getCondition <em>Condition</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IfExpCS#getCondition <em>Condition</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Condition</em>' containment reference.
@@ -62,14 +62,14 @@ public interface IfExpCS extends OclExpressionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Then Branch</em>' containment reference.
    * @see #setThenBranch(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIfExpCS_ThenBranch()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIfExpCS_ThenBranch()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getThenBranch();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getThenBranch <em>Then Branch</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IfExpCS#getThenBranch <em>Then Branch</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Then Branch</em>' containment reference.
@@ -88,14 +88,14 @@ public interface IfExpCS extends OclExpressionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Else Branch</em>' containment reference.
    * @see #setElseBranch(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIfExpCS_ElseBranch()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIfExpCS_ElseBranch()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getElseBranch();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getElseBranch <em>Else Branch</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IfExpCS#getElseBranch <em>Else Branch</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Else Branch</em>' containment reference.

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.emftext.commons.layout.LayoutInformation;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,8 +29,8 @@ import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationCSImpl#getContextDeclarations <em>Context Declarations</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationCSImpl#getLayoutInformation <em>Layout Information</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PackageDeclarationCSImpl#getContextDeclarations <em>Context Declarations</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PackageDeclarationCSImpl#getLayoutInformation <em>Layout Information</em>}</li>
  * </ul>
  * </p>
  *

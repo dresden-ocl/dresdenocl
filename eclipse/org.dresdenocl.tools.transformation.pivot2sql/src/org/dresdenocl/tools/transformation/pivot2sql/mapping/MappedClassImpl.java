@@ -2,13 +2,13 @@
  * Created on 06.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping;
+package org.dresdenocl.tools.transformation.pivot2sql.mapping;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedClass;
+import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedClass;
 
 /**
  * This is the implementation for the interface MappedClass. This implementation

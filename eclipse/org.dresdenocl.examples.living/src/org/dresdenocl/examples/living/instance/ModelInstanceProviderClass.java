@@ -16,19 +16,19 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.examples.living.instance;
+package org.dresdenocl.examples.living.instance;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import tudresden.ocl20.pivot.examples.living.Accomodation;
-import tudresden.ocl20.pivot.examples.living.City;
-import tudresden.ocl20.pivot.examples.living.Course;
-import tudresden.ocl20.pivot.examples.living.Flat;
-import tudresden.ocl20.pivot.examples.living.House;
-import tudresden.ocl20.pivot.examples.living.Student;
+import org.dresdenocl.examples.living.Accomodation;
+import org.dresdenocl.examples.living.City;
+import org.dresdenocl.examples.living.Course;
+import org.dresdenocl.examples.living.Flat;
+import org.dresdenocl.examples.living.House;
+import org.dresdenocl.examples.living.Student;
 
 /**
  * <p>

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.language.ocl.OclFactory
+ * @see org.dresdenocl.language.ocl.OclFactory
  * @model kind="package"
  * @generated
  */
@@ -57,14 +57,14 @@ public interface OclPackage extends EPackage {
 	 * <!-- end-user-doc -->
    * @generated
    */
-	OclPackage eINSTANCE = tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl.init();
+	OclPackage eINSTANCE = org.dresdenocl.language.ocl.impl.OclPackageImpl.init();
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OclExpressionCSImpl <em>Expression CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OclExpressionCSImpl <em>Expression CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclExpressionCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOclExpressionCS()
+   * @see org.dresdenocl.language.ocl.impl.OclExpressionCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOclExpressionCS()
    * @generated
    */
 	int OCL_EXPRESSION_CS = 0;
@@ -79,11 +79,11 @@ public interface OclPackage extends EPackage {
 	int OCL_EXPRESSION_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.BracketExpCSImpl <em>Bracket Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.BracketExpCSImpl <em>Bracket Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.BracketExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBracketExpCS()
+   * @see org.dresdenocl.language.ocl.impl.BracketExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBracketExpCS()
    * @generated
    */
 	int BRACKET_EXP_CS = 1;
@@ -107,11 +107,11 @@ public interface OclPackage extends EPackage {
 	int BRACKET_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NamedLiteralExpCSImpl <em>Named Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl <em>Named Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.NamedLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNamedLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNamedLiteralExpCS()
    * @generated
    */
 	int NAMED_LITERAL_EXP_CS = 2;
@@ -135,11 +135,11 @@ public interface OclPackage extends EPackage {
 	int NAMED_LITERAL_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PathNameCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPathNameCS()
+   * @see org.dresdenocl.language.ocl.impl.PathNameCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPathNameCS()
    * @generated
    */
 	int PATH_NAME_CS = 3;
@@ -172,11 +172,11 @@ public interface OclPackage extends EPackage {
 	int PATH_NAME_CS_FEATURE_COUNT = 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.SimpleNameCSImpl <em>Simple Name CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.SimpleNameCSImpl <em>Simple Name CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.SimpleNameCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getSimpleNameCS()
+   * @see org.dresdenocl.language.ocl.impl.SimpleNameCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getSimpleNameCS()
    * @generated
    */
 	int SIMPLE_NAME_CS = 4;
@@ -200,11 +200,11 @@ public interface OclPackage extends EPackage {
 	int SIMPLE_NAME_CS_FEATURE_COUNT = 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypeCSImpl <em>Type CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypeCSImpl <em>Type CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TypeCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypeCS()
+   * @see org.dresdenocl.language.ocl.impl.TypeCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypeCS()
    * @generated
    */
 	int TYPE_CS = 5;
@@ -219,11 +219,11 @@ public interface OclPackage extends EPackage {
 	int TYPE_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypePathNameCSImpl <em>Type Path Name CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameCSImpl <em>Type Path Name CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TypePathNameCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypePathNameCS()
+   * @see org.dresdenocl.language.ocl.impl.TypePathNameCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameCS()
    * @generated
    */
 	int TYPE_PATH_NAME_CS = 6;
@@ -238,11 +238,11 @@ public interface OclPackage extends EPackage {
 	int TYPE_PATH_NAME_CS_FEATURE_COUNT = TYPE_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypePathNameSimpleCSImpl <em>Type Path Name Simple CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl <em>Type Path Name Simple CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TypePathNameSimpleCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypePathNameSimpleCS()
+   * @see org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameSimpleCS()
    * @generated
    */
 	int TYPE_PATH_NAME_SIMPLE_CS = 7;
@@ -266,11 +266,11 @@ public interface OclPackage extends EPackage {
 	int TYPE_PATH_NAME_SIMPLE_CS_FEATURE_COUNT = TYPE_PATH_NAME_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypePathNameNestedCSImpl <em>Type Path Name Nested CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl <em>Type Path Name Nested CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TypePathNameNestedCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypePathNameNestedCS()
+   * @see org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameNestedCS()
    * @generated
    */
 	int TYPE_PATH_NAME_NESTED_CS = 8;
@@ -303,11 +303,11 @@ public interface OclPackage extends EPackage {
 	int TYPE_PATH_NAME_NESTED_CS_FEATURE_COUNT = TYPE_PATH_NAME_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleTypeCSImpl <em>Tuple Type CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TupleTypeCSImpl <em>Tuple Type CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TupleTypeCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleTypeCS()
+   * @see org.dresdenocl.language.ocl.impl.TupleTypeCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleTypeCS()
    * @generated
    */
 	int TUPLE_TYPE_CS = 9;
@@ -331,61 +331,61 @@ public interface OclPackage extends EPackage {
 	int TUPLE_TYPE_CS_FEATURE_COUNT = TYPE_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationCSImpl <em>Variable Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationCSImpl <em>Variable Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.VariableDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationCS()
    * @generated
    */
 	int VARIABLE_DECLARATION_CS = 12;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
+   * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
    * @generated
    */
 	int VARIABLE_DECLARATION_WITH_INIT_CS = 13;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
+   * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
    * @generated
    */
 	int VARIABLE_DECLARATION_WITHOUT_INIT_CS = 14;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
+   * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitListCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
    * @generated
    */
 	int VARIABLE_DECLARATION_WITH_INIT_LIST_CS = 15;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
+   * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
    * @generated
    */
 	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS = 16;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
    * @generated
    */
 	int LITERAL_EXP_CS = 17;
@@ -400,11 +400,11 @@ public interface OclPackage extends EPackage {
 	int LITERAL_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl <em>Collection Type Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionTypeLiteralExpCSImpl <em>Collection Type Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.CollectionTypeLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
    * @generated
    */
 	int COLLECTION_TYPE_LITERAL_EXP_CS = 10;
@@ -428,11 +428,11 @@ public interface OclPackage extends EPackage {
 	int COLLECTION_TYPE_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl <em>Tuple Type Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TupleTypeLiteralExpCSImpl <em>Tuple Type Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.TupleTypeLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
    * @generated
    */
 	int TUPLE_TYPE_LITERAL_EXP_CS = 11;
@@ -582,11 +582,11 @@ public interface OclPackage extends EPackage {
 	int VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS_FEATURE_COUNT = 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
+   * @see org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
    * @generated
    */
 	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS = 18;
@@ -619,11 +619,11 @@ public interface OclPackage extends EPackage {
 	int ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralExpCS()
    * @generated
    */
 	int COLLECTION_LITERAL_EXP_CS = 19;
@@ -656,11 +656,11 @@ public interface OclPackage extends EPackage {
 	int COLLECTION_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeIdentifierCSImpl <em>Collection Type Identifier CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionTypeIdentifierCSImpl <em>Collection Type Identifier CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeIdentifierCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeIdentifierCS()
+   * @see org.dresdenocl.language.ocl.impl.CollectionTypeIdentifierCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionTypeIdentifierCS()
    * @generated
    */
 	int COLLECTION_TYPE_IDENTIFIER_CS = 20;
@@ -693,11 +693,11 @@ public interface OclPackage extends EPackage {
 	int COLLECTION_TYPE_IDENTIFIER_CS_FEATURE_COUNT = TYPE_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsCSImpl <em>Collection Literal Parts CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralPartsCSImpl <em>Collection Literal Parts CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsCS()
+   * @see org.dresdenocl.language.ocl.impl.CollectionLiteralPartsCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsCS()
    * @generated
    */
 	int COLLECTION_LITERAL_PARTS_CS = 21;
@@ -712,11 +712,11 @@ public interface OclPackage extends EPackage {
 	int COLLECTION_LITERAL_PARTS_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl <em>Collection Literal Parts Ocl Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl <em>Collection Literal Parts Ocl Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsOclExpCS()
+   * @see org.dresdenocl.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsOclExpCS()
    * @generated
    */
 	int COLLECTION_LITERAL_PARTS_OCL_EXP_CS = 22;
@@ -740,11 +740,11 @@ public interface OclPackage extends EPackage {
 	int COLLECTION_LITERAL_PARTS_OCL_EXP_CS_FEATURE_COUNT = COLLECTION_LITERAL_PARTS_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionRangeCSImpl <em>Collection Range CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CollectionRangeCSImpl <em>Collection Range CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionRangeCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionRangeCS()
+   * @see org.dresdenocl.language.ocl.impl.CollectionRangeCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionRangeCS()
    * @generated
    */
 	int COLLECTION_RANGE_CS = 23;
@@ -777,11 +777,11 @@ public interface OclPackage extends EPackage {
 	int COLLECTION_RANGE_CS_FEATURE_COUNT = COLLECTION_LITERAL_PARTS_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CallExpCSImpl <em>Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.CallExpCSImpl <em>Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.CallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.CallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCallExpCS()
    * @generated
    */
 	int CALL_EXP_CS = 24;
@@ -796,11 +796,11 @@ public interface OclPackage extends EPackage {
 	int CALL_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LoopExpCSImpl <em>Loop Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LoopExpCSImpl <em>Loop Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LoopExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLoopExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LoopExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLoopExpCS()
    * @generated
    */
 	int LOOP_EXP_CS = 25;
@@ -815,11 +815,11 @@ public interface OclPackage extends EPackage {
 	int LOOP_EXP_CS_FEATURE_COUNT = CALL_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpVariableCSImpl <em>Iterator Exp Variable CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.IteratorExpVariableCSImpl <em>Iterator Exp Variable CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.IteratorExpVariableCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIteratorExpVariableCS()
+   * @see org.dresdenocl.language.ocl.impl.IteratorExpVariableCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIteratorExpVariableCS()
    * @generated
    */
 	int ITERATOR_EXP_VARIABLE_CS = 26;
@@ -852,11 +852,11 @@ public interface OclPackage extends EPackage {
 	int ITERATOR_EXP_VARIABLE_CS_FEATURE_COUNT = 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl <em>Iterator Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.IteratorExpCSImpl <em>Iterator Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIteratorExpCS()
+   * @see org.dresdenocl.language.ocl.impl.IteratorExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIteratorExpCS()
    * @generated
    */
 	int ITERATOR_EXP_CS = 27;
@@ -898,11 +898,11 @@ public interface OclPackage extends EPackage {
 	int ITERATOR_EXP_CS_FEATURE_COUNT = LOOP_EXP_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl <em>Iterate Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.IterateExpCSImpl <em>Iterate Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIterateExpCS()
+   * @see org.dresdenocl.language.ocl.impl.IterateExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIterateExpCS()
    * @generated
    */
 	int ITERATE_EXP_CS = 28;
@@ -944,31 +944,31 @@ public interface OclPackage extends EPackage {
 	int ITERATE_EXP_CS_FEATURE_COUNT = LOOP_EXP_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.FeatureCallExpCSImpl <em>Feature Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.FeatureCallExpCSImpl <em>Feature Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.FeatureCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getFeatureCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.FeatureCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getFeatureCallExpCS()
    * @generated
    */
 	int FEATURE_CALL_EXP_CS = 29;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNavigationCallExp()
+   * @see org.dresdenocl.language.ocl.impl.NavigationCallExpImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNavigationCallExp()
    * @generated
    */
 	int NAVIGATION_CALL_EXP = 30;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitFeatureCallCSImpl <em>Implicit Feature Call CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ImplicitFeatureCallCSImpl <em>Implicit Feature Call CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.ImplicitFeatureCallCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitFeatureCallCS()
+   * @see org.dresdenocl.language.ocl.impl.ImplicitFeatureCallCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitFeatureCallCS()
    * @generated
    */
 	int IMPLICIT_FEATURE_CALL_CS = 33;
@@ -1019,11 +1019,11 @@ public interface OclPackage extends EPackage {
 	int NAVIGATION_CALL_EXP_FEATURE_COUNT = FEATURE_CALL_EXP_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallBaseExpCSImpl <em>Operation Call Base Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallBaseExpCSImpl <em>Operation Call Base Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallBaseExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallBaseExpCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationCallBaseExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallBaseExpCS()
    * @generated
    */
 	int OPERATION_CALL_BASE_EXP_CS = 31;
@@ -1065,11 +1065,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_CALL_BASE_EXP_CS_FEATURE_COUNT = 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallBaseExpCSImpl <em>Property Call Base Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallBaseExpCSImpl <em>Property Call Base Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallBaseExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallBaseExpCS()
+   * @see org.dresdenocl.language.ocl.impl.PropertyCallBaseExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallBaseExpCS()
    * @generated
    */
 	int PROPERTY_CALL_BASE_EXP_CS = 32;
@@ -1111,21 +1111,21 @@ public interface OclPackage extends EPackage {
 	int IMPLICIT_FEATURE_CALL_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExpCSImpl <em>Property Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallExpCSImpl <em>Property Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.PropertyCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallExpCS()
    * @generated
    */
 	int PROPERTY_CALL_EXP_CS = 36;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl <em>Implicit Property Call CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl <em>Implicit Property Call CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitPropertyCallCS()
+   * @see org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitPropertyCallCS()
    * @generated
    */
 	int IMPLICIT_PROPERTY_CALL_CS = 34;
@@ -1158,161 +1158,161 @@ public interface OclPackage extends EPackage {
 	int IMPLICIT_PROPERTY_CALL_CS_FEATURE_COUNT = IMPLICIT_FEATURE_CALL_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl <em>Property Call Explicit Path Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl <em>Property Call Explicit Path Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallExplicitPathExpCS()
+   * @see org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallExplicitPathExpCS()
    * @generated
    */
 	int PROPERTY_CALL_EXPLICIT_PATH_EXP_CS = 38;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallExpCSImpl <em>Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallExpCSImpl <em>Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallExpCS()
    * @generated
    */
 	int OPERATION_CALL_EXP_CS = 39;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl <em>Unary Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl <em>Unary Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getUnaryOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getUnaryOperationCallExpCS()
    * @generated
    */
 	int UNARY_OPERATION_CALL_EXP_CS = 42;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalNotOperationCallExpCSImpl <em>Logical Not Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalNotOperationCallExpCSImpl <em>Logical Not Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalNotOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalNotOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LogicalNotOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalNotOperationCallExpCS()
    * @generated
    */
 	int LOGICAL_NOT_OPERATION_CALL_EXP_CS = 43;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithSourceExpCSImpl <em>Operation Call With Source Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallWithSourceExpCSImpl <em>Operation Call With Source Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithSourceExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallWithSourceExpCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationCallWithSourceExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallWithSourceExpCS()
    * @generated
    */
 	int OPERATION_CALL_WITH_SOURCE_EXP_CS = 44;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallBinaryExpCSImpl <em>Operation Call Binary Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallBinaryExpCSImpl <em>Operation Call Binary Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallBinaryExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallBinaryExpCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationCallBinaryExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallBinaryExpCS()
    * @generated
    */
 	int OPERATION_CALL_BINARY_EXP_CS = 45;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.AdditiveOperationCallExpCSImpl <em>Additive Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.AdditiveOperationCallExpCSImpl <em>Additive Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.AdditiveOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getAdditiveOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.AdditiveOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getAdditiveOperationCallExpCS()
    * @generated
    */
 	int ADDITIVE_OPERATION_CALL_EXP_CS = 46;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.MultOperationCallExpCSImpl <em>Mult Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.MultOperationCallExpCSImpl <em>Mult Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.MultOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getMultOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.MultOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getMultOperationCallExpCS()
    * @generated
    */
 	int MULT_OPERATION_CALL_EXP_CS = 47;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.RelationalOperationCallExpCSImpl <em>Relational Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.RelationalOperationCallExpCSImpl <em>Relational Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.RelationalOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getRelationalOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.RelationalOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getRelationalOperationCallExpCS()
    * @generated
    */
 	int RELATIONAL_OPERATION_CALL_EXP_CS = 48;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.EqualityOperationCallExpCSImpl <em>Equality Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.EqualityOperationCallExpCSImpl <em>Equality Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.EqualityOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getEqualityOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.EqualityOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEqualityOperationCallExpCS()
    * @generated
    */
 	int EQUALITY_OPERATION_CALL_EXP_CS = 49;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalAndOperationCallExpCSImpl <em>Logical And Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalAndOperationCallExpCSImpl <em>Logical And Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalAndOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalAndOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LogicalAndOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalAndOperationCallExpCS()
    * @generated
    */
 	int LOGICAL_AND_OPERATION_CALL_EXP_CS = 50;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalOrOperationCallExpCSImpl <em>Logical Or Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalOrOperationCallExpCSImpl <em>Logical Or Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalOrOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalOrOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LogicalOrOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalOrOperationCallExpCS()
    * @generated
    */
 	int LOGICAL_OR_OPERATION_CALL_EXP_CS = 51;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalXorOperationCallExpCSImpl <em>Logical Xor Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalXorOperationCallExpCSImpl <em>Logical Xor Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalXorOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalXorOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LogicalXorOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalXorOperationCallExpCS()
    * @generated
    */
 	int LOGICAL_XOR_OPERATION_CALL_EXP_CS = 52;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl <em>Logical Implies Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl <em>Logical Implies Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalImpliesOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalImpliesOperationCallExpCS()
    * @generated
    */
 	int LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS = 53;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl <em>Operation Call With Imlicit Source Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl <em>Operation Call With Imlicit Source Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallWithImlicitSourceExpCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallWithImlicitSourceExpCS()
    * @generated
    */
 	int OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS = 54;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitOperationCallCSImpl <em>Implicit Operation Call CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ImplicitOperationCallCSImpl <em>Implicit Operation Call CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.ImplicitOperationCallCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitOperationCallCS()
+   * @see org.dresdenocl.language.ocl.impl.ImplicitOperationCallCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitOperationCallCS()
    * @generated
    */
 	int IMPLICIT_OPERATION_CALL_CS = 35;
@@ -1363,11 +1363,11 @@ public interface OclPackage extends EPackage {
 	int PROPERTY_CALL_EXP_CS_FEATURE_COUNT = FEATURE_CALL_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallOnSelfExpCSImpl <em>Property Call On Self Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallOnSelfExpCSImpl <em>Property Call On Self Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallOnSelfExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallOnSelfExpCS()
+   * @see org.dresdenocl.language.ocl.impl.PropertyCallOnSelfExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallOnSelfExpCS()
    * @generated
    */
 	int PROPERTY_CALL_ON_SELF_EXP_CS = 37;
@@ -1454,11 +1454,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_CALL_EXP_CS_FEATURE_COUNT = FEATURE_CALL_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallOnSelfExpCSImpl <em>Operation Call On Self Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationCallOnSelfExpCSImpl <em>Operation Call On Self Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallOnSelfExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallOnSelfExpCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationCallOnSelfExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallOnSelfExpCS()
    * @generated
    */
 	int OPERATION_CALL_ON_SELF_EXP_CS = 40;
@@ -1500,11 +1500,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_CALL_ON_SELF_EXP_CS_FEATURE_COUNT = OPERATION_CALL_EXP_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.StaticOperationCallExpCSImpl <em>Static Operation Call Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.StaticOperationCallExpCSImpl <em>Static Operation Call Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.StaticOperationCallExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getStaticOperationCallExpCS()
+   * @see org.dresdenocl.language.ocl.impl.StaticOperationCallExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getStaticOperationCallExpCS()
    * @generated
    */
 	int STATIC_OPERATION_CALL_EXP_CS = 41;
@@ -2068,11 +2068,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS_FEATURE_COUNT = OPERATION_CALL_ON_SELF_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleLiteralExpCSImpl <em>Tuple Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.TupleLiteralExpCSImpl <em>Tuple Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.TupleLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.TupleLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleLiteralExpCS()
    * @generated
    */
 	int TUPLE_LITERAL_EXP_CS = 55;
@@ -2096,11 +2096,11 @@ public interface OclPackage extends EPackage {
 	int TUPLE_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PrimitiveLiteralExpCSImpl <em>Primitive Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PrimitiveLiteralExpCSImpl <em>Primitive Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PrimitiveLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPrimitiveLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.PrimitiveLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPrimitiveLiteralExpCS()
    * @generated
    */
 	int PRIMITIVE_LITERAL_EXP_CS = 56;
@@ -2115,11 +2115,11 @@ public interface OclPackage extends EPackage {
 	int PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT = LITERAL_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IntegerLiteralExpCSImpl <em>Integer Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.IntegerLiteralExpCSImpl <em>Integer Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.IntegerLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIntegerLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.IntegerLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIntegerLiteralExpCS()
    * @generated
    */
 	int INTEGER_LITERAL_EXP_CS = 57;
@@ -2143,11 +2143,11 @@ public interface OclPackage extends EPackage {
 	int INTEGER_LITERAL_EXP_CS_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl <em>Real Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl <em>Real Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getRealLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getRealLiteralExpCS()
    * @generated
    */
 	int REAL_LITERAL_EXP_CS = 58;
@@ -2189,11 +2189,11 @@ public interface OclPackage extends EPackage {
 	int REAL_LITERAL_EXP_CS_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.BooleanLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBooleanLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.BooleanLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBooleanLiteralExpCS()
    * @generated
    */
 	int BOOLEAN_LITERAL_EXP_CS = 59;
@@ -2217,11 +2217,11 @@ public interface OclPackage extends EPackage {
 	int BOOLEAN_LITERAL_EXP_CS_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.StringLiteralExpCSImpl <em>String Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.StringLiteralExpCSImpl <em>String Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.StringLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getStringLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.StringLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getStringLiteralExpCS()
    * @generated
    */
 	int STRING_LITERAL_EXP_CS = 60;
@@ -2245,11 +2245,11 @@ public interface OclPackage extends EPackage {
 	int STRING_LITERAL_EXP_CS_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InvalidLiteralExpCSImpl <em>Invalid Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.InvalidLiteralExpCSImpl <em>Invalid Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.InvalidLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvalidLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.InvalidLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvalidLiteralExpCS()
    * @generated
    */
 	int INVALID_LITERAL_EXP_CS = 61;
@@ -2264,11 +2264,11 @@ public interface OclPackage extends EPackage {
 	int INVALID_LITERAL_EXP_CS_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.NullLiteralExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNullLiteralExpCS()
+   * @see org.dresdenocl.language.ocl.impl.NullLiteralExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNullLiteralExpCS()
    * @generated
    */
 	int NULL_LITERAL_EXP_CS = 62;
@@ -2283,11 +2283,11 @@ public interface OclPackage extends EPackage {
 	int NULL_LITERAL_EXP_CS_FEATURE_COUNT = PRIMITIVE_LITERAL_EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.LetExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLetExpCS()
+   * @see org.dresdenocl.language.ocl.impl.LetExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLetExpCS()
    * @generated
    */
 	int LET_EXP_CS = 63;
@@ -2320,11 +2320,11 @@ public interface OclPackage extends EPackage {
 	int LET_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IfExpCSImpl <em>If Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.IfExpCSImpl <em>If Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.IfExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIfExpCS()
+   * @see org.dresdenocl.language.ocl.impl.IfExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIfExpCS()
    * @generated
    */
 	int IF_EXP_CS = 64;
@@ -2366,11 +2366,11 @@ public interface OclPackage extends EPackage {
 	int IF_EXP_CS_FEATURE_COUNT = OCL_EXPRESSION_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationCSImpl <em>Package Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationCSImpl <em>Package Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.PackageDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationCS()
    * @generated
    */
 	int PACKAGE_DECLARATION_CS = 65;
@@ -2403,11 +2403,11 @@ public interface OclPackage extends EPackage {
 	int PACKAGE_DECLARATION_CS_FEATURE_COUNT = 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl <em>Package Declaration With Namespace CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl <em>Package Declaration With Namespace CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithNamespaceCS()
+   * @see org.dresdenocl.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithNamespaceCS()
    * @generated
    */
 	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS = 66;
@@ -2449,11 +2449,11 @@ public interface OclPackage extends EPackage {
 	int PACKAGE_DECLARATION_WITH_NAMESPACE_CS_FEATURE_COUNT = PACKAGE_DECLARATION_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl <em>Package Declaration Nested Namespace CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl <em>Package Declaration Nested Namespace CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationNestedNamespaceCS()
+   * @see org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationNestedNamespaceCS()
    * @generated
    */
 	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS = 67;
@@ -2495,11 +2495,11 @@ public interface OclPackage extends EPackage {
 	int PACKAGE_DECLARATION_NESTED_NAMESPACE_CS_FEATURE_COUNT = 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl <em>Package Declaration Without Namespace CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl <em>Package Declaration Without Namespace CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithoutNamespaceCS()
+   * @see org.dresdenocl.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithoutNamespaceCS()
    * @generated
    */
 	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS = 68;
@@ -2532,11 +2532,11 @@ public interface OclPackage extends EPackage {
 	int PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS_FEATURE_COUNT = PACKAGE_DECLARATION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ContextDeclarationCSImpl <em>Context Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ContextDeclarationCSImpl <em>Context Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.ContextDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getContextDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.ContextDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getContextDeclarationCS()
    * @generated
    */
 	int CONTEXT_DECLARATION_CS = 69;
@@ -2551,11 +2551,11 @@ public interface OclPackage extends EPackage {
 	int CONTEXT_DECLARATION_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl <em>Attribute Context Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl <em>Attribute Context Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getAttributeContextDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getAttributeContextDeclarationCS()
    * @generated
    */
 	int ATTRIBUTE_CONTEXT_DECLARATION_CS = 70;
@@ -2606,11 +2606,11 @@ public interface OclPackage extends EPackage {
 	int ATTRIBUTE_CONTEXT_DECLARATION_CS_FEATURE_COUNT = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 4;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ClassifierContextDeclarationCSImpl <em>Classifier Context Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl <em>Classifier Context Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.ClassifierContextDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getClassifierContextDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getClassifierContextDeclarationCS()
    * @generated
    */
 	int CLASSIFIER_CONTEXT_DECLARATION_CS = 71;
@@ -2643,11 +2643,11 @@ public interface OclPackage extends EPackage {
 	int CLASSIFIER_CONTEXT_DECLARATION_CS_FEATURE_COUNT = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationContextDeclarationCSImpl <em>Operation Context Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationContextDeclarationCSImpl <em>Operation Context Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationContextDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationContextDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationContextDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationContextDeclarationCS()
    * @generated
    */
 	int OPERATION_CONTEXT_DECLARATION_CS = 72;
@@ -2680,11 +2680,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_CONTEXT_DECLARATION_CS_FEATURE_COUNT = CONTEXT_DECLARATION_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InitOrDeriveValueCSImpl <em>Init Or Derive Value CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.InitOrDeriveValueCSImpl <em>Init Or Derive Value CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.InitOrDeriveValueCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInitOrDeriveValueCS()
+   * @see org.dresdenocl.language.ocl.impl.InitOrDeriveValueCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInitOrDeriveValueCS()
    * @generated
    */
 	int INIT_OR_DERIVE_VALUE_CS = 73;
@@ -2708,11 +2708,11 @@ public interface OclPackage extends EPackage {
 	int INIT_OR_DERIVE_VALUE_CS_FEATURE_COUNT = 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InitValueCSImpl <em>Init Value CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.InitValueCSImpl <em>Init Value CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.InitValueCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInitValueCS()
+   * @see org.dresdenocl.language.ocl.impl.InitValueCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInitValueCS()
    * @generated
    */
 	int INIT_VALUE_CS = 74;
@@ -2736,11 +2736,11 @@ public interface OclPackage extends EPackage {
 	int INIT_VALUE_CS_FEATURE_COUNT = INIT_OR_DERIVE_VALUE_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DeriveValueCSImpl <em>Derive Value CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.DeriveValueCSImpl <em>Derive Value CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.DeriveValueCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDeriveValueCS()
+   * @see org.dresdenocl.language.ocl.impl.DeriveValueCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDeriveValueCS()
    * @generated
    */
 	int DERIVE_VALUE_CS = 75;
@@ -2764,11 +2764,11 @@ public interface OclPackage extends EPackage {
 	int DERIVE_VALUE_CS_FEATURE_COUNT = INIT_OR_DERIVE_VALUE_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InvariantOrDefinitionCSImpl <em>Invariant Or Definition CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.InvariantOrDefinitionCSImpl <em>Invariant Or Definition CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.InvariantOrDefinitionCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvariantOrDefinitionCS()
+   * @see org.dresdenocl.language.ocl.impl.InvariantOrDefinitionCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvariantOrDefinitionCS()
    * @generated
    */
 	int INVARIANT_OR_DEFINITION_CS = 76;
@@ -2783,11 +2783,11 @@ public interface OclPackage extends EPackage {
 	int INVARIANT_OR_DEFINITION_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InvariantExpCSImpl <em>Invariant Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.InvariantExpCSImpl <em>Invariant Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.InvariantExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvariantExpCS()
+   * @see org.dresdenocl.language.ocl.impl.InvariantExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvariantExpCS()
    * @generated
    */
 	int INVARIANT_EXP_CS = 77;
@@ -2820,11 +2820,11 @@ public interface OclPackage extends EPackage {
 	int INVARIANT_EXP_CS_FEATURE_COUNT = INVARIANT_OR_DEFINITION_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpCSImpl <em>Definition Exp CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpCSImpl <em>Definition Exp CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpCS()
+   * @see org.dresdenocl.language.ocl.impl.DefinitionExpCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpCS()
    * @generated
    */
 	int DEFINITION_EXP_CS = 78;
@@ -2857,11 +2857,11 @@ public interface OclPackage extends EPackage {
 	int DEFINITION_EXP_CS_FEATURE_COUNT = INVARIANT_OR_DEFINITION_CS_FEATURE_COUNT + 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPartCSImpl <em>Definition Exp Part CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpPartCSImpl <em>Definition Exp Part CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPartCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpPartCS()
+   * @see org.dresdenocl.language.ocl.impl.DefinitionExpPartCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpPartCS()
    * @generated
    */
 	int DEFINITION_EXP_PART_CS = 79;
@@ -2876,11 +2876,11 @@ public interface OclPackage extends EPackage {
 	int DEFINITION_EXP_PART_CS_FEATURE_COUNT = 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPropertyCSImpl <em>Definition Exp Property CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpPropertyCSImpl <em>Definition Exp Property CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPropertyCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpPropertyCS()
+   * @see org.dresdenocl.language.ocl.impl.DefinitionExpPropertyCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpPropertyCS()
    * @generated
    */
 	int DEFINITION_EXP_PROPERTY_CS = 80;
@@ -2904,11 +2904,11 @@ public interface OclPackage extends EPackage {
 	int DEFINITION_EXP_PROPERTY_CS_FEATURE_COUNT = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl <em>Definition Exp Operation CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpOperationCSImpl <em>Definition Exp Operation CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpOperationCS()
+   * @see org.dresdenocl.language.ocl.impl.DefinitionExpOperationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpOperationCS()
    * @generated
    */
 	int DEFINITION_EXP_OPERATION_CS = 81;
@@ -2950,11 +2950,11 @@ public interface OclPackage extends EPackage {
 	int DEFINITION_EXP_OPERATION_CS_FEATURE_COUNT = DEFINITION_EXP_PART_CS_FEATURE_COUNT + 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PrePostOrBodyDeclarationCSImpl <em>Pre Post Or Body Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PrePostOrBodyDeclarationCSImpl <em>Pre Post Or Body Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PrePostOrBodyDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPrePostOrBodyDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.PrePostOrBodyDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPrePostOrBodyDeclarationCS()
    * @generated
    */
 	int PRE_POST_OR_BODY_DECLARATION_CS = 82;
@@ -2987,11 +2987,11 @@ public interface OclPackage extends EPackage {
 	int PRE_POST_OR_BODY_DECLARATION_CS_FEATURE_COUNT = 2;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PreConditionDeclarationCSImpl <em>Pre Condition Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PreConditionDeclarationCSImpl <em>Pre Condition Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PreConditionDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPreConditionDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.PreConditionDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPreConditionDeclarationCS()
    * @generated
    */
 	int PRE_CONDITION_DECLARATION_CS = 83;
@@ -3024,11 +3024,11 @@ public interface OclPackage extends EPackage {
 	int PRE_CONDITION_DECLARATION_CS_FEATURE_COUNT = PRE_POST_OR_BODY_DECLARATION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PostConditionDeclarationCSImpl <em>Post Condition Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.PostConditionDeclarationCSImpl <em>Post Condition Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.PostConditionDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPostConditionDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.PostConditionDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPostConditionDeclarationCS()
    * @generated
    */
 	int POST_CONDITION_DECLARATION_CS = 84;
@@ -3061,11 +3061,11 @@ public interface OclPackage extends EPackage {
 	int POST_CONDITION_DECLARATION_CS_FEATURE_COUNT = PRE_POST_OR_BODY_DECLARATION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.BodyDeclarationCSImpl <em>Body Declaration CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.BodyDeclarationCSImpl <em>Body Declaration CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.BodyDeclarationCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBodyDeclarationCS()
+   * @see org.dresdenocl.language.ocl.impl.BodyDeclarationCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBodyDeclarationCS()
    * @generated
    */
 	int BODY_DECLARATION_CS = 85;
@@ -3098,11 +3098,11 @@ public interface OclPackage extends EPackage {
 	int BODY_DECLARATION_CS_FEATURE_COUNT = PRE_POST_OR_BODY_DECLARATION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionCSImpl <em>Operation Definition CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationDefinitionCSImpl <em>Operation Definition CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationDefinitionCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionCS()
    * @generated
    */
 	int OPERATION_DEFINITION_CS = 86;
@@ -3144,11 +3144,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_DEFINITION_CS_FEATURE_COUNT = 3;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInContextCSImpl <em>Operation Definition In Context CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationDefinitionInContextCSImpl <em>Operation Definition In Context CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInContextCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionInContextCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationDefinitionInContextCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionInContextCS()
    * @generated
    */
 	int OPERATION_DEFINITION_IN_CONTEXT_CS = 87;
@@ -3199,11 +3199,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_DEFINITION_IN_CONTEXT_CS_FEATURE_COUNT = OPERATION_DEFINITION_CS_FEATURE_COUNT + 1;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInDefCSImpl <em>Operation Definition In Def CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.OperationDefinitionInDefCSImpl <em>Operation Definition In Def CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInDefCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionInDefCS()
+   * @see org.dresdenocl.language.ocl.impl.OperationDefinitionInDefCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionInDefCS()
    * @generated
    */
 	int OPERATION_DEFINITION_IN_DEF_CS = 88;
@@ -3245,11 +3245,11 @@ public interface OclPackage extends EPackage {
 	int OPERATION_DEFINITION_IN_DEF_CS_FEATURE_COUNT = OPERATION_DEFINITION_CS_FEATURE_COUNT + 0;
 
 	/**
-   * The meta object id for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ParameterCSImpl <em>Parameter CS</em>}' class.
+   * The meta object id for the '{@link org.dresdenocl.language.ocl.impl.ParameterCSImpl <em>Parameter CS</em>}' class.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-   * @see tudresden.ocl20.pivot.language.ocl.impl.ParameterCSImpl
-   * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getParameterCS()
+   * @see org.dresdenocl.language.ocl.impl.ParameterCSImpl
+   * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getParameterCS()
    * @generated
    */
 	int PARAMETER_CS = 89;
@@ -3283,2011 +3283,2011 @@ public interface OclPackage extends EPackage {
 
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OclExpressionCS <em>Expression CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OclExpressionCS <em>Expression CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Expression CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OclExpressionCS
+   * @see org.dresdenocl.language.ocl.OclExpressionCS
    * @generated
    */
 	EClass getOclExpressionCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.BracketExpCS <em>Bracket Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.BracketExpCS <em>Bracket Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Bracket Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.BracketExpCS
+   * @see org.dresdenocl.language.ocl.BracketExpCS
    * @generated
    */
 	EClass getBracketExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.BracketExpCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.BracketExpCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.BracketExpCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.BracketExpCS#getOclExpression()
    * @see #getBracketExpCS()
    * @generated
    */
 	EReference getBracketExpCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS <em>Named Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS <em>Named Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Named Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS
+   * @see org.dresdenocl.language.ocl.NamedLiteralExpCS
    * @generated
    */
 	EClass getNamedLiteralExpCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Named Element</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS#getNamedElement()
+   * @see org.dresdenocl.language.ocl.NamedLiteralExpCS#getNamedElement()
    * @see #getNamedLiteralExpCS()
    * @generated
    */
 	EReference getNamedLiteralExpCS_NamedElement();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PathNameCS <em>Path Name CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PathNameCS <em>Path Name CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Path Name CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PathNameCS
+   * @see org.dresdenocl.language.ocl.PathNameCS
    * @generated
    */
 	EClass getPathNameCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Simple Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PathNameCS#getSimpleName()
+   * @see org.dresdenocl.language.ocl.PathNameCS#getSimpleName()
    * @see #getPathNameCS()
    * @generated
    */
 	EReference getPathNameCS_SimpleName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PathNameCS#getPathName <em>Path Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PathNameCS#getPathName <em>Path Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Path Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PathNameCS#getPathName()
+   * @see org.dresdenocl.language.ocl.PathNameCS#getPathName()
    * @see #getPathNameCS()
    * @generated
    */
 	EReference getPathNameCS_PathName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.SimpleNameCS <em>Simple Name CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.SimpleNameCS <em>Simple Name CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Simple Name CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.SimpleNameCS
+   * @see org.dresdenocl.language.ocl.SimpleNameCS
    * @generated
    */
 	EClass getSimpleNameCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.SimpleNameCS#getSimpleName <em>Simple Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.SimpleNameCS#getSimpleName <em>Simple Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Simple Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.SimpleNameCS#getSimpleName()
+   * @see org.dresdenocl.language.ocl.SimpleNameCS#getSimpleName()
    * @see #getSimpleNameCS()
    * @generated
    */
 	EAttribute getSimpleNameCS_SimpleName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TypeCS <em>Type CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypeCS <em>Type CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Type CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypeCS
+   * @see org.dresdenocl.language.ocl.TypeCS
    * @generated
    */
 	EClass getTypeCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameCS <em>Type Path Name CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypePathNameCS <em>Type Path Name CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Type Path Name CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameCS
+   * @see org.dresdenocl.language.ocl.TypePathNameCS
    * @generated
    */
 	EClass getTypePathNameCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS <em>Type Path Name Simple CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS <em>Type Path Name Simple CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Type Path Name Simple CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS
+   * @see org.dresdenocl.language.ocl.TypePathNameSimpleCS
    * @generated
    */
 	EClass getTypePathNameSimpleCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.TypePathNameSimpleCS#getTypeName()
    * @see #getTypePathNameSimpleCS()
    * @generated
    */
 	EReference getTypePathNameSimpleCS_TypeName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS <em>Type Path Name Nested CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS <em>Type Path Name Nested CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Type Path Name Nested CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS
+   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS
    * @generated
    */
 	EClass getTypePathNameNestedCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Namespace</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getNamespace()
+   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS#getNamespace()
    * @see #getTypePathNameNestedCS()
    * @generated
    */
 	EReference getTypePathNameNestedCS_Namespace();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Path Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getTypePathName()
+   * @see org.dresdenocl.language.ocl.TypePathNameNestedCS#getTypePathName()
    * @see #getTypePathNameNestedCS()
    * @generated
    */
 	EReference getTypePathNameNestedCS_TypePathName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS <em>Tuple Type CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TupleTypeCS <em>Tuple Type CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Tuple Type CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleTypeCS
+   * @see org.dresdenocl.language.ocl.TupleTypeCS
    * @generated
    */
 	EClass getTupleTypeCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.TupleTypeCS#getVariableDeclarationList <em>Variable Declaration List</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Variable Declaration List</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleTypeCS#getVariableDeclarationList()
+   * @see org.dresdenocl.language.ocl.TupleTypeCS#getVariableDeclarationList()
    * @see #getTupleTypeCS()
    * @generated
    */
 	EReference getTupleTypeCS_VariableDeclarationList();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS <em>Collection Type Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS <em>Collection Type Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Collection Type Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS
+   * @see org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS
    * @generated
    */
 	EClass getCollectionTypeLiteralExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Collection Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS#getCollectionType()
+   * @see org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS#getCollectionType()
    * @see #getCollectionTypeLiteralExpCS()
    * @generated
    */
 	EReference getCollectionTypeLiteralExpCS_CollectionType();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS <em>Tuple Type Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS <em>Tuple Type Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Tuple Type Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS
+   * @see org.dresdenocl.language.ocl.TupleTypeLiteralExpCS
    * @generated
    */
 	EClass getTupleTypeLiteralExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.TupleTypeLiteralExpCS#getTupleType <em>Tuple Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Tuple Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleTypeLiteralExpCS#getTupleType()
+   * @see org.dresdenocl.language.ocl.TupleTypeLiteralExpCS#getTupleType()
    * @see #getTupleTypeLiteralExpCS()
    * @generated
    */
 	EReference getTupleTypeLiteralExpCS_TupleType();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS <em>Variable Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.VariableDeclarationCS <em>Variable Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Variable Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationCS
    * @generated
    */
 	EClass getVariableDeclarationCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.VariableDeclarationCS#getVariableName <em>Variable Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Variable Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationCS#getVariableName()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationCS#getVariableName()
    * @see #getVariableDeclarationCS()
    * @generated
    */
 	EReference getVariableDeclarationCS_VariableName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS <em>Variable Declaration With Init CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS <em>Variable Declaration With Init CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Variable Declaration With Init CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitCS
    * @generated
    */
 	EClass getVariableDeclarationWithInitCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getTypeName()
    * @see #getVariableDeclarationWithInitCS()
    * @generated
    */
 	EReference getVariableDeclarationWithInitCS_TypeName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getInitialization <em>Initialization</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getInitialization <em>Initialization</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Initialization</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getInitialization()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getInitialization()
    * @see #getVariableDeclarationWithInitCS()
    * @generated
    */
 	EReference getVariableDeclarationWithInitCS_Initialization();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getEqual <em>Equal</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getEqual <em>Equal</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Equal</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getEqual()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getEqual()
    * @see #getVariableDeclarationWithInitCS()
    * @generated
    */
 	EAttribute getVariableDeclarationWithInitCS_Equal();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS <em>Variable Declaration Without Init CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS <em>Variable Declaration Without Init CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Variable Declaration Without Init CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS
    * @generated
    */
 	EClass getVariableDeclarationWithoutInitCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithoutInitCS#getTypeName()
    * @see #getVariableDeclarationWithoutInitCS()
    * @generated
    */
 	EReference getVariableDeclarationWithoutInitCS_TypeName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS <em>Variable Declaration With Init List CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS <em>Variable Declaration With Init List CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Variable Declaration With Init List CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS
    * @generated
    */
 	EClass getVariableDeclarationWithInitListCS();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS#getVariableDeclarations <em>Variable Declarations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS#getVariableDeclarations <em>Variable Declarations</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Variable Declarations</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitListCS#getVariableDeclarations()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithInitListCS#getVariableDeclarations()
    * @see #getVariableDeclarationWithInitListCS()
    * @generated
    */
 	EReference getVariableDeclarationWithInitListCS_VariableDeclarations();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS <em>Variable Declaration Without Init List CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS <em>Variable Declaration Without Init List CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Variable Declaration Without Init List CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS
    * @generated
    */
 	EClass getVariableDeclarationWithoutInitListCS();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS#getVariableDeclarations <em>Variable Declarations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS#getVariableDeclarations <em>Variable Declarations</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Variable Declarations</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithoutInitListCS#getVariableDeclarations()
+   * @see org.dresdenocl.language.ocl.VariableDeclarationWithoutInitListCS#getVariableDeclarations()
    * @see #getVariableDeclarationWithoutInitListCS()
    * @generated
    */
 	EReference getVariableDeclarationWithoutInitListCS_VariableDeclarations();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LiteralExpCS <em>Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LiteralExpCS <em>Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LiteralExpCS
+   * @see org.dresdenocl.language.ocl.LiteralExpCS
    * @generated
    */
 	EClass getLiteralExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS <em>Enum Literal Or Static Property Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS <em>Enum Literal Or Static Property Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Enum Literal Or Static Property Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS
+   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS
    * @generated
    */
 	EClass getEnumLiteralOrStaticPropertyExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getTypeName()
    * @see #getEnumLiteralOrStaticPropertyExpCS()
    * @generated
    */
 	EReference getEnumLiteralOrStaticPropertyExpCS_TypeName();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS#getEnumLiteralOrStaticProperty <em>Enum Literal Or Static Property</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getEnumLiteralOrStaticProperty <em>Enum Literal Or Static Property</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Enum Literal Or Static Property</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.EnumLiteralOrStaticPropertyExpCS#getEnumLiteralOrStaticProperty()
+   * @see org.dresdenocl.language.ocl.EnumLiteralOrStaticPropertyExpCS#getEnumLiteralOrStaticProperty()
    * @see #getEnumLiteralOrStaticPropertyExpCS()
    * @generated
    */
 	EReference getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS <em>Collection Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS <em>Collection Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Collection Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS
+   * @see org.dresdenocl.language.ocl.CollectionLiteralExpCS
    * @generated
    */
 	EClass getCollectionLiteralExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionType <em>Collection Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionType <em>Collection Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Collection Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionType()
+   * @see org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionType()
    * @see #getCollectionLiteralExpCS()
    * @generated
    */
 	EReference getCollectionLiteralExpCS_CollectionType();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionLiteralParts <em>Collection Literal Parts</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionLiteralParts <em>Collection Literal Parts</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Collection Literal Parts</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralExpCS#getCollectionLiteralParts()
+   * @see org.dresdenocl.language.ocl.CollectionLiteralExpCS#getCollectionLiteralParts()
    * @see #getCollectionLiteralExpCS()
    * @generated
    */
 	EReference getCollectionLiteralExpCS_CollectionLiteralParts();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS <em>Collection Type Identifier CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS <em>Collection Type Identifier CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Collection Type Identifier CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS
+   * @see org.dresdenocl.language.ocl.CollectionTypeIdentifierCS
    * @generated
    */
 	EClass getCollectionTypeIdentifierCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getTypeName()
    * @see #getCollectionTypeIdentifierCS()
    * @generated
    */
 	EReference getCollectionTypeIdentifierCS_TypeName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getGenericType <em>Generic Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getGenericType <em>Generic Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Generic Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionTypeIdentifierCS#getGenericType()
+   * @see org.dresdenocl.language.ocl.CollectionTypeIdentifierCS#getGenericType()
    * @see #getCollectionTypeIdentifierCS()
    * @generated
    */
 	EReference getCollectionTypeIdentifierCS_GenericType();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS <em>Collection Literal Parts CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionLiteralPartsCS <em>Collection Literal Parts CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Collection Literal Parts CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsCS
+   * @see org.dresdenocl.language.ocl.CollectionLiteralPartsCS
    * @generated
    */
 	EClass getCollectionLiteralPartsCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS <em>Collection Literal Parts Ocl Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS <em>Collection Literal Parts Ocl Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Collection Literal Parts Ocl Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS
+   * @see org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS
    * @generated
    */
 	EClass getCollectionLiteralPartsOclExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionLiteralPartsOclExpCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.CollectionLiteralPartsOclExpCS#getOclExpression()
    * @see #getCollectionLiteralPartsOclExpCS()
    * @generated
    */
 	EReference getCollectionLiteralPartsOclExpCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS <em>Collection Range CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CollectionRangeCS <em>Collection Range CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Collection Range CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionRangeCS
+   * @see org.dresdenocl.language.ocl.CollectionRangeCS
    * @generated
    */
 	EClass getCollectionRangeCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getFrom <em>From</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.CollectionRangeCS#getFrom <em>From</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>From</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getFrom()
+   * @see org.dresdenocl.language.ocl.CollectionRangeCS#getFrom()
    * @see #getCollectionRangeCS()
    * @generated
    */
 	EReference getCollectionRangeCS_From();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getTo <em>To</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.CollectionRangeCS#getTo <em>To</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>To</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getTo()
+   * @see org.dresdenocl.language.ocl.CollectionRangeCS#getTo()
    * @see #getCollectionRangeCS()
    * @generated
    */
 	EReference getCollectionRangeCS_To();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.CallExpCS <em>Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.CallExpCS <em>Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.CallExpCS
+   * @see org.dresdenocl.language.ocl.CallExpCS
    * @generated
    */
 	EClass getCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LoopExpCS <em>Loop Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LoopExpCS <em>Loop Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Loop Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LoopExpCS
+   * @see org.dresdenocl.language.ocl.LoopExpCS
    * @generated
    */
 	EClass getLoopExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS <em>Iterator Exp Variable CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.IteratorExpVariableCS <em>Iterator Exp Variable CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Iterator Exp Variable CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS
+   * @see org.dresdenocl.language.ocl.IteratorExpVariableCS
    * @generated
    */
 	EClass getIteratorExpVariableCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getVariableName <em>Variable Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IteratorExpVariableCS#getVariableName <em>Variable Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Variable Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getVariableName()
+   * @see org.dresdenocl.language.ocl.IteratorExpVariableCS#getVariableName()
    * @see #getIteratorExpVariableCS()
    * @generated
    */
 	EReference getIteratorExpVariableCS_VariableName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IteratorExpVariableCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.IteratorExpVariableCS#getTypeName()
    * @see #getIteratorExpVariableCS()
    * @generated
    */
 	EReference getIteratorExpVariableCS_TypeName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS <em>Iterator Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.IteratorExpCS <em>Iterator Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Iterator Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpCS
+   * @see org.dresdenocl.language.ocl.IteratorExpCS
    * @generated
    */
 	EClass getIteratorExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorName <em>Iterator Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.IteratorExpCS#getIteratorName <em>Iterator Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Iterator Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorName()
+   * @see org.dresdenocl.language.ocl.IteratorExpCS#getIteratorName()
    * @see #getIteratorExpCS()
    * @generated
    */
 	EAttribute getIteratorExpCS_IteratorName();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorVariables <em>Iterator Variables</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.IteratorExpCS#getIteratorVariables <em>Iterator Variables</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Iterator Variables</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getIteratorVariables()
+   * @see org.dresdenocl.language.ocl.IteratorExpCS#getIteratorVariables()
    * @see #getIteratorExpCS()
    * @generated
    */
 	EReference getIteratorExpCS_IteratorVariables();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getBodyExpression <em>Body Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IteratorExpCS#getBodyExpression <em>Body Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Body Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IteratorExpCS#getBodyExpression()
+   * @see org.dresdenocl.language.ocl.IteratorExpCS#getBodyExpression()
    * @see #getIteratorExpCS()
    * @generated
    */
 	EReference getIteratorExpCS_BodyExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS <em>Iterate Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.IterateExpCS <em>Iterate Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Iterate Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IterateExpCS
+   * @see org.dresdenocl.language.ocl.IterateExpCS
    * @generated
    */
 	EClass getIterateExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getIteratorVariable <em>Iterator Variable</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IterateExpCS#getIteratorVariable <em>Iterator Variable</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Iterator Variable</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IterateExpCS#getIteratorVariable()
+   * @see org.dresdenocl.language.ocl.IterateExpCS#getIteratorVariable()
    * @see #getIterateExpCS()
    * @generated
    */
 	EReference getIterateExpCS_IteratorVariable();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getResultVariable <em>Result Variable</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IterateExpCS#getResultVariable <em>Result Variable</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Result Variable</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IterateExpCS#getResultVariable()
+   * @see org.dresdenocl.language.ocl.IterateExpCS#getResultVariable()
    * @see #getIterateExpCS()
    * @generated
    */
 	EReference getIterateExpCS_ResultVariable();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IterateExpCS#getBodyExpression <em>Body Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IterateExpCS#getBodyExpression <em>Body Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Body Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IterateExpCS#getBodyExpression()
+   * @see org.dresdenocl.language.ocl.IterateExpCS#getBodyExpression()
    * @see #getIterateExpCS()
    * @generated
    */
 	EReference getIterateExpCS_BodyExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS <em>Feature Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.FeatureCallExpCS <em>Feature Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Feature Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.FeatureCallExpCS
+   * @see org.dresdenocl.language.ocl.FeatureCallExpCS
    * @generated
    */
 	EClass getFeatureCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp <em>Navigation Call Exp</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.NavigationCallExp <em>Navigation Call Exp</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Navigation Call Exp</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NavigationCallExp
+   * @see org.dresdenocl.language.ocl.NavigationCallExp
    * @generated
    */
 	EClass getNavigationCallExp();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getSource <em>Source</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.NavigationCallExp#getSource <em>Source</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Source</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getSource()
+   * @see org.dresdenocl.language.ocl.NavigationCallExp#getSource()
    * @see #getNavigationCallExp()
    * @generated
    */
 	EReference getNavigationCallExp_Source();
 
 	/**
-   * Returns the meta object for the attribute list '{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getNavigationOperator <em>Navigation Operator</em>}'.
+   * Returns the meta object for the attribute list '{@link org.dresdenocl.language.ocl.NavigationCallExp#getNavigationOperator <em>Navigation Operator</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute list '<em>Navigation Operator</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getNavigationOperator()
+   * @see org.dresdenocl.language.ocl.NavigationCallExp#getNavigationOperator()
    * @see #getNavigationCallExp()
    * @generated
    */
 	EAttribute getNavigationCallExp_NavigationOperator();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getFeatureCalls <em>Feature Calls</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.NavigationCallExp#getFeatureCalls <em>Feature Calls</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Feature Calls</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NavigationCallExp#getFeatureCalls()
+   * @see org.dresdenocl.language.ocl.NavigationCallExp#getFeatureCalls()
    * @see #getNavigationCallExp()
    * @generated
    */
 	EReference getNavigationCallExp_FeatureCalls();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS <em>Operation Call Base Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS <em>Operation Call Base Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Call Base Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallBaseExpCS
    * @generated
    */
 	EClass getOperationCallBaseExpCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getOperationName <em>Operation Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Operation Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getOperationName()
+   * @see org.dresdenocl.language.ocl.OperationCallBaseExpCS#getOperationName()
    * @see #getOperationCallBaseExpCS()
    * @generated
    */
 	EReference getOperationCallBaseExpCS_OperationName();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getArguments <em>Arguments</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#getArguments <em>Arguments</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Arguments</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#getArguments()
+   * @see org.dresdenocl.language.ocl.OperationCallBaseExpCS#getArguments()
    * @see #getOperationCallBaseExpCS()
    * @generated
    */
 	EReference getOperationCallBaseExpCS_Arguments();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.OperationCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Is Marked Pre</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBaseExpCS#isIsMarkedPre()
+   * @see org.dresdenocl.language.ocl.OperationCallBaseExpCS#isIsMarkedPre()
    * @see #getOperationCallBaseExpCS()
    * @generated
    */
 	EAttribute getOperationCallBaseExpCS_IsMarkedPre();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS <em>Property Call Base Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS <em>Property Call Base Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Property Call Base Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallBaseExpCS
    * @generated
    */
 	EClass getPropertyCallBaseExpCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#getProperty <em>Property</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS#getProperty <em>Property</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Property</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#getProperty()
+   * @see org.dresdenocl.language.ocl.PropertyCallBaseExpCS#getProperty()
    * @see #getPropertyCallBaseExpCS()
    * @generated
    */
 	EReference getPropertyCallBaseExpCS_Property();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Is Marked Pre</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre()
+   * @see org.dresdenocl.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre()
    * @see #getPropertyCallBaseExpCS()
    * @generated
    */
 	EAttribute getPropertyCallBaseExpCS_IsMarkedPre();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS <em>Implicit Feature Call CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ImplicitFeatureCallCS <em>Implicit Feature Call CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Implicit Feature Call CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS
+   * @see org.dresdenocl.language.ocl.ImplicitFeatureCallCS
    * @generated
    */
 	EClass getImplicitFeatureCallCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS <em>Property Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PropertyCallExpCS <em>Property Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Property Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallExpCS
    * @generated
    */
 	EClass getPropertyCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS <em>Property Call On Self Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS <em>Property Call On Self Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Property Call On Self Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallOnSelfExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS
    * @generated
    */
 	EClass getPropertyCallOnSelfExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS <em>Implicit Property Call CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ImplicitPropertyCallCS <em>Implicit Property Call CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Implicit Property Call CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ImplicitPropertyCallCS
+   * @see org.dresdenocl.language.ocl.ImplicitPropertyCallCS
    * @generated
    */
 	EClass getImplicitPropertyCallCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS <em>Property Call Explicit Path Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS <em>Property Call Explicit Path Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Property Call Explicit Path Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS
+   * @see org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS
    * @generated
    */
 	EClass getPropertyCallExplicitPathExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#getSource <em>Source</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#getSource <em>Source</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Source</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#getSource()
+   * @see org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#getSource()
    * @see #getPropertyCallExplicitPathExpCS()
    * @generated
    */
 	EReference getPropertyCallExplicitPathExpCS_Source();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#getPropertyPath <em>Property Path</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#getPropertyPath <em>Property Path</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Property Path</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#getPropertyPath()
+   * @see org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#getPropertyPath()
    * @see #getPropertyCallExplicitPathExpCS()
    * @generated
    */
 	EReference getPropertyCallExplicitPathExpCS_PropertyPath();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#getPropertyName <em>Property Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#getPropertyName <em>Property Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Property Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#getPropertyName()
+   * @see org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#getPropertyName()
    * @see #getPropertyCallExplicitPathExpCS()
    * @generated
    */
 	EReference getPropertyCallExplicitPathExpCS_PropertyName();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Is Marked Pre</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PropertyCallExplicitPathExpCS#isIsMarkedPre()
+   * @see org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS#isIsMarkedPre()
    * @see #getPropertyCallExplicitPathExpCS()
    * @generated
    */
 	EAttribute getPropertyCallExplicitPathExpCS_IsMarkedPre();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallExpCS <em>Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationCallExpCS <em>Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallExpCS
    * @generated
    */
 	EClass getOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS <em>Operation Call On Self Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationCallOnSelfExpCS <em>Operation Call On Self Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Call On Self Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallOnSelfExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallOnSelfExpCS
    * @generated
    */
 	EClass getOperationCallOnSelfExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS <em>Static Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.StaticOperationCallExpCS <em>Static Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Static Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.StaticOperationCallExpCS
    * @generated
    */
 	EClass getStaticOperationCallExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.StaticOperationCallExpCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.StaticOperationCallExpCS#getTypeName()
    * @see #getStaticOperationCallExpCS()
    * @generated
    */
 	EReference getStaticOperationCallExpCS_TypeName();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS#getOperationName <em>Operation Name</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.StaticOperationCallExpCS#getOperationName <em>Operation Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Operation Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS#getOperationName()
+   * @see org.dresdenocl.language.ocl.StaticOperationCallExpCS#getOperationName()
    * @see #getStaticOperationCallExpCS()
    * @generated
    */
 	EReference getStaticOperationCallExpCS_OperationName();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS#getArguments <em>Arguments</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.StaticOperationCallExpCS#getArguments <em>Arguments</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Arguments</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.StaticOperationCallExpCS#getArguments()
+   * @see org.dresdenocl.language.ocl.StaticOperationCallExpCS#getArguments()
    * @see #getStaticOperationCallExpCS()
    * @generated
    */
 	EReference getStaticOperationCallExpCS_Arguments();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS <em>Unary Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS <em>Unary Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Unary Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.UnaryOperationCallExpCS
    * @generated
    */
 	EClass getUnaryOperationCallExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getOperationName <em>Operation Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getOperationName <em>Operation Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Operation Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getOperationName()
+   * @see org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getOperationName()
    * @see #getUnaryOperationCallExpCS()
    * @generated
    */
 	EAttribute getUnaryOperationCallExpCS_OperationName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getTarget <em>Target</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Target</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.UnaryOperationCallExpCS#getTarget()
+   * @see org.dresdenocl.language.ocl.UnaryOperationCallExpCS#getTarget()
    * @see #getUnaryOperationCallExpCS()
    * @generated
    */
 	EReference getUnaryOperationCallExpCS_Target();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS <em>Logical Not Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS <em>Logical Not Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Logical Not Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS
    * @generated
    */
 	EClass getLogicalNotOperationCallExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS#getOperationName <em>Operation Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS#getOperationName <em>Operation Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Operation Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS#getOperationName()
+   * @see org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS#getOperationName()
    * @see #getLogicalNotOperationCallExpCS()
    * @generated
    */
 	EAttribute getLogicalNotOperationCallExpCS_OperationName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS#getTarget <em>Target</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Target</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalNotOperationCallExpCS#getTarget()
+   * @see org.dresdenocl.language.ocl.LogicalNotOperationCallExpCS#getTarget()
    * @see #getLogicalNotOperationCallExpCS()
    * @generated
    */
 	EReference getLogicalNotOperationCallExpCS_Target();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS <em>Operation Call With Source Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS <em>Operation Call With Source Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Call With Source Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallWithSourceExpCS
    * @generated
    */
 	EClass getOperationCallWithSourceExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#getSource <em>Source</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#getSource <em>Source</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Source</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#getSource()
+   * @see org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#getSource()
    * @see #getOperationCallWithSourceExpCS()
    * @generated
    */
 	EReference getOperationCallWithSourceExpCS_Source();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre <em>Is Marked Pre</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Is Marked Pre</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre()
+   * @see org.dresdenocl.language.ocl.OperationCallWithSourceExpCS#isIsMarkedPre()
    * @see #getOperationCallWithSourceExpCS()
    * @generated
    */
 	EAttribute getOperationCallWithSourceExpCS_IsMarkedPre();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS <em>Operation Call Binary Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationCallBinaryExpCS <em>Operation Call Binary Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Call Binary Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallBinaryExpCS
    * @generated
    */
 	EClass getOperationCallBinaryExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS#getOperationName <em>Operation Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.OperationCallBinaryExpCS#getOperationName <em>Operation Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Operation Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS#getOperationName()
+   * @see org.dresdenocl.language.ocl.OperationCallBinaryExpCS#getOperationName()
    * @see #getOperationCallBinaryExpCS()
    * @generated
    */
 	EAttribute getOperationCallBinaryExpCS_OperationName();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS#getTarget <em>Target</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.OperationCallBinaryExpCS#getTarget <em>Target</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Target</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallBinaryExpCS#getTarget()
+   * @see org.dresdenocl.language.ocl.OperationCallBinaryExpCS#getTarget()
    * @see #getOperationCallBinaryExpCS()
    * @generated
    */
 	EReference getOperationCallBinaryExpCS_Target();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS <em>Additive Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.AdditiveOperationCallExpCS <em>Additive Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Additive Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.AdditiveOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.AdditiveOperationCallExpCS
    * @generated
    */
 	EClass getAdditiveOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS <em>Mult Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.MultOperationCallExpCS <em>Mult Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Mult Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.MultOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.MultOperationCallExpCS
    * @generated
    */
 	EClass getMultOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS <em>Relational Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.RelationalOperationCallExpCS <em>Relational Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Relational Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.RelationalOperationCallExpCS
    * @generated
    */
 	EClass getRelationalOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS <em>Equality Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.EqualityOperationCallExpCS <em>Equality Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Equality Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.EqualityOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.EqualityOperationCallExpCS
    * @generated
    */
 	EClass getEqualityOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS <em>Logical And Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS <em>Logical And Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Logical And Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalAndOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalAndOperationCallExpCS
    * @generated
    */
 	EClass getLogicalAndOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS <em>Logical Or Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS <em>Logical Or Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Logical Or Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalOrOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalOrOperationCallExpCS
    * @generated
    */
 	EClass getLogicalOrOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS <em>Logical Xor Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS <em>Logical Xor Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Logical Xor Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalXorOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalXorOperationCallExpCS
    * @generated
    */
 	EClass getLogicalXorOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS <em>Logical Implies Operation Call Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS <em>Logical Implies Operation Call Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Logical Implies Operation Call Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LogicalImpliesOperationCallExpCS
+   * @see org.dresdenocl.language.ocl.LogicalImpliesOperationCallExpCS
    * @generated
    */
 	EClass getLogicalImpliesOperationCallExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS <em>Operation Call With Imlicit Source Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS <em>Operation Call With Imlicit Source Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Call With Imlicit Source Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS
+   * @see org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS
    * @generated
    */
 	EClass getOperationCallWithImlicitSourceExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS <em>Implicit Operation Call CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ImplicitOperationCallCS <em>Implicit Operation Call CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Implicit Operation Call CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ImplicitOperationCallCS
+   * @see org.dresdenocl.language.ocl.ImplicitOperationCallCS
    * @generated
    */
 	EClass getImplicitOperationCallCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS <em>Tuple Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.TupleLiteralExpCS <em>Tuple Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Tuple Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS
+   * @see org.dresdenocl.language.ocl.TupleLiteralExpCS
    * @generated
    */
 	EClass getTupleLiteralExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS#getVariableDeclarations <em>Variable Declarations</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.TupleLiteralExpCS#getVariableDeclarations <em>Variable Declarations</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Variable Declarations</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS#getVariableDeclarations()
+   * @see org.dresdenocl.language.ocl.TupleLiteralExpCS#getVariableDeclarations()
    * @see #getTupleLiteralExpCS()
    * @generated
    */
 	EReference getTupleLiteralExpCS_VariableDeclarations();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS <em>Primitive Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PrimitiveLiteralExpCS <em>Primitive Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Primitive Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PrimitiveLiteralExpCS
+   * @see org.dresdenocl.language.ocl.PrimitiveLiteralExpCS
    * @generated
    */
 	EClass getPrimitiveLiteralExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS <em>Integer Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.IntegerLiteralExpCS <em>Integer Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Integer Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS
+   * @see org.dresdenocl.language.ocl.IntegerLiteralExpCS
    * @generated
    */
 	EClass getIntegerLiteralExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS#getIntegerLiteral <em>Integer Literal</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.IntegerLiteralExpCS#getIntegerLiteral <em>Integer Literal</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Integer Literal</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IntegerLiteralExpCS#getIntegerLiteral()
+   * @see org.dresdenocl.language.ocl.IntegerLiteralExpCS#getIntegerLiteral()
    * @see #getIntegerLiteralExpCS()
    * @generated
    */
 	EAttribute getIntegerLiteralExpCS_IntegerLiteral();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS <em>Real Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.RealLiteralExpCS <em>Real Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Real Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS
+   * @see org.dresdenocl.language.ocl.RealLiteralExpCS
    * @generated
    */
 	EClass getRealLiteralExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getIntValue <em>Int Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getIntValue <em>Int Value</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Int Value</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getIntValue()
+   * @see org.dresdenocl.language.ocl.RealLiteralExpCS#getIntValue()
    * @see #getRealLiteralExpCS()
    * @generated
    */
 	EAttribute getRealLiteralExpCS_IntValue();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Real Value</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getRealValue()
+   * @see org.dresdenocl.language.ocl.RealLiteralExpCS#getRealValue()
    * @see #getRealLiteralExpCS()
    * @generated
    */
 	EAttribute getRealLiteralExpCS_RealValue();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getNavigationOperator <em>Navigation Operator</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getNavigationOperator <em>Navigation Operator</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Navigation Operator</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getNavigationOperator()
+   * @see org.dresdenocl.language.ocl.RealLiteralExpCS#getNavigationOperator()
    * @see #getRealLiteralExpCS()
    * @generated
    */
 	EAttribute getRealLiteralExpCS_NavigationOperator();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS <em>Boolean Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.BooleanLiteralExpCS <em>Boolean Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Boolean Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS
+   * @see org.dresdenocl.language.ocl.BooleanLiteralExpCS
    * @generated
    */
 	EClass getBooleanLiteralExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Boolean Literal</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS#isBooleanLiteral()
+   * @see org.dresdenocl.language.ocl.BooleanLiteralExpCS#isBooleanLiteral()
    * @see #getBooleanLiteralExpCS()
    * @generated
    */
 	EAttribute getBooleanLiteralExpCS_BooleanLiteral();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS <em>String Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.StringLiteralExpCS <em>String Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>String Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS
+   * @see org.dresdenocl.language.ocl.StringLiteralExpCS
    * @generated
    */
 	EClass getStringLiteralExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS#getStringLiteral <em>String Literal</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.StringLiteralExpCS#getStringLiteral <em>String Literal</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>String Literal</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS#getStringLiteral()
+   * @see org.dresdenocl.language.ocl.StringLiteralExpCS#getStringLiteral()
    * @see #getStringLiteralExpCS()
    * @generated
    */
 	EAttribute getStringLiteralExpCS_StringLiteral();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS <em>Invalid Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.InvalidLiteralExpCS <em>Invalid Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Invalid Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InvalidLiteralExpCS
+   * @see org.dresdenocl.language.ocl.InvalidLiteralExpCS
    * @generated
    */
 	EClass getInvalidLiteralExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS <em>Null Literal Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.NullLiteralExpCS <em>Null Literal Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Null Literal Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.NullLiteralExpCS
+   * @see org.dresdenocl.language.ocl.NullLiteralExpCS
    * @generated
    */
 	EClass getNullLiteralExpCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.LetExpCS <em>Let Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.LetExpCS <em>Let Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Let Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LetExpCS
+   * @see org.dresdenocl.language.ocl.LetExpCS
    * @generated
    */
 	EClass getLetExpCS();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.LetExpCS#getVariableDeclarations <em>Variable Declarations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.LetExpCS#getVariableDeclarations <em>Variable Declarations</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Variable Declarations</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LetExpCS#getVariableDeclarations()
+   * @see org.dresdenocl.language.ocl.LetExpCS#getVariableDeclarations()
    * @see #getLetExpCS()
    * @generated
    */
 	EReference getLetExpCS_VariableDeclarations();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.LetExpCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.LetExpCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.LetExpCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.LetExpCS#getOclExpression()
    * @see #getLetExpCS()
    * @generated
    */
 	EReference getLetExpCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS <em>If Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.IfExpCS <em>If Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>If Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IfExpCS
+   * @see org.dresdenocl.language.ocl.IfExpCS
    * @generated
    */
 	EClass getIfExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getCondition <em>Condition</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IfExpCS#getCondition <em>Condition</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Condition</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IfExpCS#getCondition()
+   * @see org.dresdenocl.language.ocl.IfExpCS#getCondition()
    * @see #getIfExpCS()
    * @generated
    */
 	EReference getIfExpCS_Condition();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getThenBranch <em>Then Branch</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IfExpCS#getThenBranch <em>Then Branch</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Then Branch</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IfExpCS#getThenBranch()
+   * @see org.dresdenocl.language.ocl.IfExpCS#getThenBranch()
    * @see #getIfExpCS()
    * @generated
    */
 	EReference getIfExpCS_ThenBranch();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.IfExpCS#getElseBranch <em>Else Branch</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.IfExpCS#getElseBranch <em>Else Branch</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Else Branch</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.IfExpCS#getElseBranch()
+   * @see org.dresdenocl.language.ocl.IfExpCS#getElseBranch()
    * @see #getIfExpCS()
    * @generated
    */
 	EReference getIfExpCS_ElseBranch();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS <em>Package Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PackageDeclarationCS <em>Package Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Package Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationCS
    * @generated
    */
 	EClass getPackageDeclarationCS();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS#getContextDeclarations <em>Context Declarations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.PackageDeclarationCS#getContextDeclarations <em>Context Declarations</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Context Declarations</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS#getContextDeclarations()
+   * @see org.dresdenocl.language.ocl.PackageDeclarationCS#getContextDeclarations()
    * @see #getPackageDeclarationCS()
    * @generated
    */
 	EReference getPackageDeclarationCS_ContextDeclarations();
 
 	/**
-   * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS#getLayoutInformation <em>Layout Information</em>}'.
+   * Returns the meta object for the reference list '{@link org.dresdenocl.language.ocl.PackageDeclarationCS#getLayoutInformation <em>Layout Information</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference list '<em>Layout Information</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS#getLayoutInformation()
+   * @see org.dresdenocl.language.ocl.PackageDeclarationCS#getLayoutInformation()
    * @see #getPackageDeclarationCS()
    * @generated
    */
 	EReference getPackageDeclarationCS_LayoutInformation();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS <em>Package Declaration With Namespace CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS <em>Package Declaration With Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Package Declaration With Namespace CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS
    * @generated
    */
 	EClass getPackageDeclarationWithNamespaceCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Nested Namespace</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace()
+   * @see org.dresdenocl.language.ocl.PackageDeclarationWithNamespaceCS#getNestedNamespace()
    * @see #getPackageDeclarationWithNamespaceCS()
    * @generated
    */
 	EReference getPackageDeclarationWithNamespaceCS_NestedNamespace();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS <em>Package Declaration Nested Namespace CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS <em>Package Declaration Nested Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Package Declaration Nested Namespace CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS
    * @generated
    */
 	EClass getPackageDeclarationNestedNamespaceCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace <em>Namespace</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Namespace</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace()
+   * @see org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNamespace()
    * @see #getPackageDeclarationNestedNamespaceCS()
    * @generated
    */
 	EReference getPackageDeclarationNestedNamespaceCS_Namespace();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace <em>Nested Namespace</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Nested Namespace</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace()
+   * @see org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getNestedNamespace()
    * @see #getPackageDeclarationNestedNamespaceCS()
    * @generated
    */
 	EReference getPackageDeclarationNestedNamespaceCS_NestedNamespace();
 
 	/**
-   * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation <em>Layout Information</em>}'.
+   * Returns the meta object for the reference list '{@link org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation <em>Layout Information</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference list '<em>Layout Information</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation()
+   * @see org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS#getLayoutInformation()
    * @see #getPackageDeclarationNestedNamespaceCS()
    * @generated
    */
 	EReference getPackageDeclarationNestedNamespaceCS_LayoutInformation();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS <em>Package Declaration Without Namespace CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS <em>Package Declaration Without Namespace CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Package Declaration Without Namespace CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PackageDeclarationWithoutNamespaceCS
+   * @see org.dresdenocl.language.ocl.PackageDeclarationWithoutNamespaceCS
    * @generated
    */
 	EClass getPackageDeclarationWithoutNamespaceCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS <em>Context Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ContextDeclarationCS <em>Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Context Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.ContextDeclarationCS
    * @generated
    */
 	EClass getContextDeclarationCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS <em>Attribute Context Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS <em>Attribute Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Attribute Context Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS
    * @generated
    */
 	EClass getAttributeContextDeclarationCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getTypeName()
    * @see #getAttributeContextDeclarationCS()
    * @generated
    */
 	EReference getAttributeContextDeclarationCS_TypeName();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Property</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getProperty()
+   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty()
    * @see #getAttributeContextDeclarationCS()
    * @generated
    */
 	EReference getAttributeContextDeclarationCS_Property();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getType()
+   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getType()
    * @see #getAttributeContextDeclarationCS()
    * @generated
    */
 	EReference getAttributeContextDeclarationCS_Type();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue <em>Init Or Derive Value</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue <em>Init Or Derive Value</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Init Or Derive Value</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue()
+   * @see org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue()
    * @see #getAttributeContextDeclarationCS()
    * @generated
    */
 	EReference getAttributeContextDeclarationCS_InitOrDeriveValue();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS <em>Classifier Context Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS <em>Classifier Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Classifier Context Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.ClassifierContextDeclarationCS
    * @generated
    */
 	EClass getClassifierContextDeclarationCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getTypeName()
    * @see #getClassifierContextDeclarationCS()
    * @generated
    */
 	EReference getClassifierContextDeclarationCS_TypeName();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getInvariantsAndDefinitions <em>Invariants And Definitions</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getInvariantsAndDefinitions <em>Invariants And Definitions</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Invariants And Definitions</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getInvariantsAndDefinitions()
+   * @see org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getInvariantsAndDefinitions()
    * @see #getClassifierContextDeclarationCS()
    * @generated
    */
 	EReference getClassifierContextDeclarationCS_InvariantsAndDefinitions();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS <em>Operation Context Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS <em>Operation Context Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Context Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS
+   * @see org.dresdenocl.language.ocl.OperationContextDeclarationCS
    * @generated
    */
 	EClass getOperationContextDeclarationCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getOperation <em>Operation</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS#getOperation <em>Operation</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Operation</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getOperation()
+   * @see org.dresdenocl.language.ocl.OperationContextDeclarationCS#getOperation()
    * @see #getOperationContextDeclarationCS()
    * @generated
    */
 	EReference getOperationContextDeclarationCS_Operation();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getPrePostOrBodyDeclarations <em>Pre Post Or Body Declarations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.OperationContextDeclarationCS#getPrePostOrBodyDeclarations <em>Pre Post Or Body Declarations</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Pre Post Or Body Declarations</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationContextDeclarationCS#getPrePostOrBodyDeclarations()
+   * @see org.dresdenocl.language.ocl.OperationContextDeclarationCS#getPrePostOrBodyDeclarations()
    * @see #getOperationContextDeclarationCS()
    * @generated
    */
 	EReference getOperationContextDeclarationCS_PrePostOrBodyDeclarations();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS <em>Init Or Derive Value CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.InitOrDeriveValueCS <em>Init Or Derive Value CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Init Or Derive Value CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS
+   * @see org.dresdenocl.language.ocl.InitOrDeriveValueCS
    * @generated
    */
 	EClass getInitOrDeriveValueCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.InitOrDeriveValueCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.InitOrDeriveValueCS#getOclExpression()
    * @see #getInitOrDeriveValueCS()
    * @generated
    */
 	EReference getInitOrDeriveValueCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.InitValueCS <em>Init Value CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.InitValueCS <em>Init Value CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Init Value CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InitValueCS
+   * @see org.dresdenocl.language.ocl.InitValueCS
    * @generated
    */
 	EClass getInitValueCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.DeriveValueCS <em>Derive Value CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.DeriveValueCS <em>Derive Value CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Derive Value CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DeriveValueCS
+   * @see org.dresdenocl.language.ocl.DeriveValueCS
    * @generated
    */
 	EClass getDeriveValueCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS <em>Invariant Or Definition CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.InvariantOrDefinitionCS <em>Invariant Or Definition CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Invariant Or Definition CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS
+   * @see org.dresdenocl.language.ocl.InvariantOrDefinitionCS
    * @generated
    */
 	EClass getInvariantOrDefinitionCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.InvariantExpCS <em>Invariant Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.InvariantExpCS <em>Invariant Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Invariant Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InvariantExpCS
+   * @see org.dresdenocl.language.ocl.InvariantExpCS
    * @generated
    */
 	EClass getInvariantExpCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.InvariantExpCS#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.InvariantExpCS#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InvariantExpCS#getName()
+   * @see org.dresdenocl.language.ocl.InvariantExpCS#getName()
    * @see #getInvariantExpCS()
    * @generated
    */
 	EReference getInvariantExpCS_Name();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.InvariantExpCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.InvariantExpCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.InvariantExpCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.InvariantExpCS#getOclExpression()
    * @see #getInvariantExpCS()
    * @generated
    */
 	EReference getInvariantExpCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS <em>Definition Exp CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.DefinitionExpCS <em>Definition Exp CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Definition Exp CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpCS
    * @generated
    */
 	EClass getDefinitionExpCS();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#isStatic <em>Static</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.DefinitionExpCS#isStatic <em>Static</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Static</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#isStatic()
+   * @see org.dresdenocl.language.ocl.DefinitionExpCS#isStatic()
    * @see #getDefinitionExpCS()
    * @generated
    */
 	EAttribute getDefinitionExpCS_Static();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#getDefinitionExpPart <em>Definition Exp Part</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.DefinitionExpCS#getDefinitionExpPart <em>Definition Exp Part</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Definition Exp Part</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpCS#getDefinitionExpPart()
+   * @see org.dresdenocl.language.ocl.DefinitionExpCS#getDefinitionExpPart()
    * @see #getDefinitionExpCS()
    * @generated
    */
 	EReference getDefinitionExpCS_DefinitionExpPart();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS <em>Definition Exp Part CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.DefinitionExpPartCS <em>Definition Exp Part CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Definition Exp Part CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpPartCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpPartCS
    * @generated
    */
 	EClass getDefinitionExpPartCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS <em>Definition Exp Property CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS <em>Definition Exp Property CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Definition Exp Property CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpPropertyCS
    * @generated
    */
 	EClass getDefinitionExpPropertyCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration <em>Variable Declaration</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Variable Declaration</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration()
+   * @see org.dresdenocl.language.ocl.DefinitionExpPropertyCS#getVariableDeclaration()
    * @see #getDefinitionExpPropertyCS()
    * @generated
    */
 	EReference getDefinitionExpPropertyCS_VariableDeclaration();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS <em>Definition Exp Operation CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS <em>Definition Exp Operation CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Definition Exp Operation CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS
+   * @see org.dresdenocl.language.ocl.DefinitionExpOperationCS
    * @generated
    */
 	EClass getDefinitionExpOperationCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOperation <em>Operation</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOperation <em>Operation</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Operation</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOperation()
+   * @see org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOperation()
    * @see #getDefinitionExpOperationCS()
    * @generated
    */
 	EReference getDefinitionExpOperationCS_Operation();
 
 	/**
-   * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}'.
+   * Returns the meta object for the attribute '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getEqual <em>Equal</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Equal</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getEqual()
+   * @see org.dresdenocl.language.ocl.DefinitionExpOperationCS#getEqual()
    * @see #getDefinitionExpOperationCS()
    * @generated
    */
 	EAttribute getDefinitionExpOperationCS_Equal();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.DefinitionExpOperationCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.DefinitionExpOperationCS#getOclExpression()
    * @see #getDefinitionExpOperationCS()
    * @generated
    */
 	EReference getDefinitionExpOperationCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS <em>Pre Post Or Body Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS <em>Pre Post Or Body Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Pre Post Or Body Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS
+   * @see org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS
    * @generated
    */
 	EClass getPrePostOrBodyDeclarationCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS#getName()
+   * @see org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getName()
    * @see #getPrePostOrBodyDeclarationCS()
    * @generated
    */
 	EReference getPrePostOrBodyDeclarationCS_Name();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS#getOclExpression <em>Ocl Expression</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getOclExpression <em>Ocl Expression</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Ocl Expression</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PrePostOrBodyDeclarationCS#getOclExpression()
+   * @see org.dresdenocl.language.ocl.PrePostOrBodyDeclarationCS#getOclExpression()
    * @see #getPrePostOrBodyDeclarationCS()
    * @generated
    */
 	EReference getPrePostOrBodyDeclarationCS_OclExpression();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS <em>Pre Condition Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PreConditionDeclarationCS <em>Pre Condition Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Pre Condition Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PreConditionDeclarationCS
+   * @see org.dresdenocl.language.ocl.PreConditionDeclarationCS
    * @generated
    */
 	EClass getPreConditionDeclarationCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS <em>Post Condition Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.PostConditionDeclarationCS <em>Post Condition Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Post Condition Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS
+   * @see org.dresdenocl.language.ocl.PostConditionDeclarationCS
    * @generated
    */
 	EClass getPostConditionDeclarationCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS <em>Body Declaration CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.BodyDeclarationCS <em>Body Declaration CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Body Declaration CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.BodyDeclarationCS
+   * @see org.dresdenocl.language.ocl.BodyDeclarationCS
    * @generated
    */
 	EClass getBodyDeclarationCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS <em>Operation Definition CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationDefinitionCS <em>Operation Definition CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Definition CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS
+   * @see org.dresdenocl.language.ocl.OperationDefinitionCS
    * @generated
    */
 	EClass getOperationDefinitionCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getOperation <em>Operation</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getOperation <em>Operation</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Operation</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getOperation()
+   * @see org.dresdenocl.language.ocl.OperationDefinitionCS#getOperation()
    * @see #getOperationDefinitionCS()
    * @generated
    */
 	EReference getOperationDefinitionCS_Operation();
 
 	/**
-   * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getParameters <em>Parameters</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getParameters <em>Parameters</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Parameters</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getParameters()
+   * @see org.dresdenocl.language.ocl.OperationDefinitionCS#getParameters()
    * @see #getOperationDefinitionCS()
    * @generated
    */
 	EReference getOperationDefinitionCS_Parameters();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getReturnType <em>Return Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getReturnType <em>Return Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Return Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getReturnType()
+   * @see org.dresdenocl.language.ocl.OperationDefinitionCS#getReturnType()
    * @see #getOperationDefinitionCS()
    * @generated
    */
 	EReference getOperationDefinitionCS_ReturnType();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS <em>Operation Definition In Context CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS <em>Operation Definition In Context CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Definition In Context CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS
+   * @see org.dresdenocl.language.ocl.OperationDefinitionInContextCS
    * @generated
    */
 	EClass getOperationDefinitionInContextCS();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS#getTypeName <em>Type Name</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.OperationDefinitionInContextCS#getTypeName <em>Type Name</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Type Name</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionInContextCS#getTypeName()
+   * @see org.dresdenocl.language.ocl.OperationDefinitionInContextCS#getTypeName()
    * @see #getOperationDefinitionInContextCS()
    * @generated
    */
 	EReference getOperationDefinitionInContextCS_TypeName();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS <em>Operation Definition In Def CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.OperationDefinitionInDefCS <em>Operation Definition In Def CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Operation Definition In Def CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS
+   * @see org.dresdenocl.language.ocl.OperationDefinitionInDefCS
    * @generated
    */
 	EClass getOperationDefinitionInDefCS();
 
 	/**
-   * Returns the meta object for class '{@link tudresden.ocl20.pivot.language.ocl.ParameterCS <em>Parameter CS</em>}'.
+   * Returns the meta object for class '{@link org.dresdenocl.language.ocl.ParameterCS <em>Parameter CS</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for class '<em>Parameter CS</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ParameterCS
+   * @see org.dresdenocl.language.ocl.ParameterCS
    * @generated
    */
 	EClass getParameterCS();
 
 	/**
-   * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameter <em>Parameter</em>}'.
+   * Returns the meta object for the reference '{@link org.dresdenocl.language.ocl.ParameterCS#getParameter <em>Parameter</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Parameter</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameter()
+   * @see org.dresdenocl.language.ocl.ParameterCS#getParameter()
    * @see #getParameterCS()
    * @generated
    */
 	EReference getParameterCS_Parameter();
 
 	/**
-   * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameterType <em>Parameter Type</em>}'.
+   * Returns the meta object for the containment reference '{@link org.dresdenocl.language.ocl.ParameterCS#getParameterType <em>Parameter Type</em>}'.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Parameter Type</em>'.
-   * @see tudresden.ocl20.pivot.language.ocl.ParameterCS#getParameterType()
+   * @see org.dresdenocl.language.ocl.ParameterCS#getParameterType()
    * @see #getParameterCS()
    * @generated
    */
@@ -5316,21 +5316,21 @@ public interface OclPackage extends EPackage {
    */
 	interface Literals {
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OclExpressionCSImpl <em>Expression CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OclExpressionCSImpl <em>Expression CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclExpressionCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOclExpressionCS()
+     * @see org.dresdenocl.language.ocl.impl.OclExpressionCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOclExpressionCS()
      * @generated
      */
 		EClass OCL_EXPRESSION_CS = eINSTANCE.getOclExpressionCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.BracketExpCSImpl <em>Bracket Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.BracketExpCSImpl <em>Bracket Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.BracketExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBracketExpCS()
+     * @see org.dresdenocl.language.ocl.impl.BracketExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBracketExpCS()
      * @generated
      */
 		EClass BRACKET_EXP_CS = eINSTANCE.getBracketExpCS();
@@ -5344,11 +5344,11 @@ public interface OclPackage extends EPackage {
 		EReference BRACKET_EXP_CS__OCL_EXPRESSION = eINSTANCE.getBracketExpCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NamedLiteralExpCSImpl <em>Named Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl <em>Named Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.NamedLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNamedLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.NamedLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNamedLiteralExpCS()
      * @generated
      */
 		EClass NAMED_LITERAL_EXP_CS = eINSTANCE.getNamedLiteralExpCS();
@@ -5362,11 +5362,11 @@ public interface OclPackage extends EPackage {
 		EReference NAMED_LITERAL_EXP_CS__NAMED_ELEMENT = eINSTANCE.getNamedLiteralExpCS_NamedElement();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PathNameCSImpl <em>Path Name CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PathNameCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPathNameCS()
+     * @see org.dresdenocl.language.ocl.impl.PathNameCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPathNameCS()
      * @generated
      */
 		EClass PATH_NAME_CS = eINSTANCE.getPathNameCS();
@@ -5388,11 +5388,11 @@ public interface OclPackage extends EPackage {
 		EReference PATH_NAME_CS__PATH_NAME = eINSTANCE.getPathNameCS_PathName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.SimpleNameCSImpl <em>Simple Name CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.SimpleNameCSImpl <em>Simple Name CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.SimpleNameCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getSimpleNameCS()
+     * @see org.dresdenocl.language.ocl.impl.SimpleNameCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getSimpleNameCS()
      * @generated
      */
 		EClass SIMPLE_NAME_CS = eINSTANCE.getSimpleNameCS();
@@ -5406,31 +5406,31 @@ public interface OclPackage extends EPackage {
 		EAttribute SIMPLE_NAME_CS__SIMPLE_NAME = eINSTANCE.getSimpleNameCS_SimpleName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypeCSImpl <em>Type CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypeCSImpl <em>Type CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TypeCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypeCS()
+     * @see org.dresdenocl.language.ocl.impl.TypeCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypeCS()
      * @generated
      */
 		EClass TYPE_CS = eINSTANCE.getTypeCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypePathNameCSImpl <em>Type Path Name CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameCSImpl <em>Type Path Name CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TypePathNameCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypePathNameCS()
+     * @see org.dresdenocl.language.ocl.impl.TypePathNameCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameCS()
      * @generated
      */
 		EClass TYPE_PATH_NAME_CS = eINSTANCE.getTypePathNameCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypePathNameSimpleCSImpl <em>Type Path Name Simple CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl <em>Type Path Name Simple CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TypePathNameSimpleCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypePathNameSimpleCS()
+     * @see org.dresdenocl.language.ocl.impl.TypePathNameSimpleCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameSimpleCS()
      * @generated
      */
 		EClass TYPE_PATH_NAME_SIMPLE_CS = eINSTANCE.getTypePathNameSimpleCS();
@@ -5444,11 +5444,11 @@ public interface OclPackage extends EPackage {
 		EReference TYPE_PATH_NAME_SIMPLE_CS__TYPE_NAME = eINSTANCE.getTypePathNameSimpleCS_TypeName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TypePathNameNestedCSImpl <em>Type Path Name Nested CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl <em>Type Path Name Nested CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TypePathNameNestedCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTypePathNameNestedCS()
+     * @see org.dresdenocl.language.ocl.impl.TypePathNameNestedCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTypePathNameNestedCS()
      * @generated
      */
 		EClass TYPE_PATH_NAME_NESTED_CS = eINSTANCE.getTypePathNameNestedCS();
@@ -5470,11 +5470,11 @@ public interface OclPackage extends EPackage {
 		EReference TYPE_PATH_NAME_NESTED_CS__TYPE_PATH_NAME = eINSTANCE.getTypePathNameNestedCS_TypePathName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleTypeCSImpl <em>Tuple Type CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TupleTypeCSImpl <em>Tuple Type CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TupleTypeCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleTypeCS()
+     * @see org.dresdenocl.language.ocl.impl.TupleTypeCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleTypeCS()
      * @generated
      */
 		EClass TUPLE_TYPE_CS = eINSTANCE.getTupleTypeCS();
@@ -5488,11 +5488,11 @@ public interface OclPackage extends EPackage {
 		EReference TUPLE_TYPE_CS__VARIABLE_DECLARATION_LIST = eINSTANCE.getTupleTypeCS_VariableDeclarationList();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl <em>Collection Type Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionTypeLiteralExpCSImpl <em>Collection Type Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.CollectionTypeLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionTypeLiteralExpCS()
      * @generated
      */
 		EClass COLLECTION_TYPE_LITERAL_EXP_CS = eINSTANCE.getCollectionTypeLiteralExpCS();
@@ -5506,11 +5506,11 @@ public interface OclPackage extends EPackage {
 		EReference COLLECTION_TYPE_LITERAL_EXP_CS__COLLECTION_TYPE = eINSTANCE.getCollectionTypeLiteralExpCS_CollectionType();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl <em>Tuple Type Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TupleTypeLiteralExpCSImpl <em>Tuple Type Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TupleTypeLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.TupleTypeLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleTypeLiteralExpCS()
      * @generated
      */
 		EClass TUPLE_TYPE_LITERAL_EXP_CS = eINSTANCE.getTupleTypeLiteralExpCS();
@@ -5524,11 +5524,11 @@ public interface OclPackage extends EPackage {
 		EReference TUPLE_TYPE_LITERAL_EXP_CS__TUPLE_TYPE = eINSTANCE.getTupleTypeLiteralExpCS_TupleType();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationCSImpl <em>Variable Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationCSImpl <em>Variable Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.VariableDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationCS()
      * @generated
      */
 		EClass VARIABLE_DECLARATION_CS = eINSTANCE.getVariableDeclarationCS();
@@ -5542,11 +5542,11 @@ public interface OclPackage extends EPackage {
 		EReference VARIABLE_DECLARATION_CS__VARIABLE_NAME = eINSTANCE.getVariableDeclarationCS_VariableName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitCSImpl <em>Variable Declaration With Init CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
+     * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitCS()
      * @generated
      */
 		EClass VARIABLE_DECLARATION_WITH_INIT_CS = eINSTANCE.getVariableDeclarationWithInitCS();
@@ -5576,11 +5576,11 @@ public interface OclPackage extends EPackage {
 		EAttribute VARIABLE_DECLARATION_WITH_INIT_CS__EQUAL = eINSTANCE.getVariableDeclarationWithInitCS_Equal();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitCSImpl <em>Variable Declaration Without Init CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
+     * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitCS()
      * @generated
      */
 		EClass VARIABLE_DECLARATION_WITHOUT_INIT_CS = eINSTANCE.getVariableDeclarationWithoutInitCS();
@@ -5594,11 +5594,11 @@ public interface OclPackage extends EPackage {
 		EReference VARIABLE_DECLARATION_WITHOUT_INIT_CS__TYPE_NAME = eINSTANCE.getVariableDeclarationWithoutInitCS_TypeName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitListCSImpl <em>Variable Declaration With Init List CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithInitListCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
+     * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithInitListCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithInitListCS()
      * @generated
      */
 		EClass VARIABLE_DECLARATION_WITH_INIT_LIST_CS = eINSTANCE.getVariableDeclarationWithInitListCS();
@@ -5612,11 +5612,11 @@ public interface OclPackage extends EPackage {
 		EReference VARIABLE_DECLARATION_WITH_INIT_LIST_CS__VARIABLE_DECLARATIONS = eINSTANCE.getVariableDeclarationWithInitListCS_VariableDeclarations();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl <em>Variable Declaration Without Init List CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
+     * @see org.dresdenocl.language.ocl.impl.VariableDeclarationWithoutInitListCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getVariableDeclarationWithoutInitListCS()
      * @generated
      */
 		EClass VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS = eINSTANCE.getVariableDeclarationWithoutInitListCS();
@@ -5630,21 +5630,21 @@ public interface OclPackage extends EPackage {
 		EReference VARIABLE_DECLARATION_WITHOUT_INIT_LIST_CS__VARIABLE_DECLARATIONS = eINSTANCE.getVariableDeclarationWithoutInitListCS_VariableDeclarations();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LiteralExpCSImpl <em>Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLiteralExpCS()
      * @generated
      */
 		EClass LITERAL_EXP_CS = eINSTANCE.getLiteralExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl <em>Enum Literal Or Static Property Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
+     * @see org.dresdenocl.language.ocl.impl.EnumLiteralOrStaticPropertyExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEnumLiteralOrStaticPropertyExpCS()
      * @generated
      */
 		EClass ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS = eINSTANCE.getEnumLiteralOrStaticPropertyExpCS();
@@ -5666,11 +5666,11 @@ public interface OclPackage extends EPackage {
 		EReference ENUM_LITERAL_OR_STATIC_PROPERTY_EXP_CS__ENUM_LITERAL_OR_STATIC_PROPERTY = eINSTANCE.getEnumLiteralOrStaticPropertyExpCS_EnumLiteralOrStaticProperty();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl <em>Collection Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.CollectionLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralExpCS()
      * @generated
      */
 		EClass COLLECTION_LITERAL_EXP_CS = eINSTANCE.getCollectionLiteralExpCS();
@@ -5692,11 +5692,11 @@ public interface OclPackage extends EPackage {
 		EReference COLLECTION_LITERAL_EXP_CS__COLLECTION_LITERAL_PARTS = eINSTANCE.getCollectionLiteralExpCS_CollectionLiteralParts();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeIdentifierCSImpl <em>Collection Type Identifier CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionTypeIdentifierCSImpl <em>Collection Type Identifier CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionTypeIdentifierCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionTypeIdentifierCS()
+     * @see org.dresdenocl.language.ocl.impl.CollectionTypeIdentifierCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionTypeIdentifierCS()
      * @generated
      */
 		EClass COLLECTION_TYPE_IDENTIFIER_CS = eINSTANCE.getCollectionTypeIdentifierCS();
@@ -5718,21 +5718,21 @@ public interface OclPackage extends EPackage {
 		EReference COLLECTION_TYPE_IDENTIFIER_CS__GENERIC_TYPE = eINSTANCE.getCollectionTypeIdentifierCS_GenericType();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsCSImpl <em>Collection Literal Parts CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralPartsCSImpl <em>Collection Literal Parts CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsCS()
+     * @see org.dresdenocl.language.ocl.impl.CollectionLiteralPartsCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsCS()
      * @generated
      */
 		EClass COLLECTION_LITERAL_PARTS_CS = eINSTANCE.getCollectionLiteralPartsCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl <em>Collection Literal Parts Ocl Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl <em>Collection Literal Parts Ocl Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsOclExpCS()
+     * @see org.dresdenocl.language.ocl.impl.CollectionLiteralPartsOclExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionLiteralPartsOclExpCS()
      * @generated
      */
 		EClass COLLECTION_LITERAL_PARTS_OCL_EXP_CS = eINSTANCE.getCollectionLiteralPartsOclExpCS();
@@ -5746,11 +5746,11 @@ public interface OclPackage extends EPackage {
 		EReference COLLECTION_LITERAL_PARTS_OCL_EXP_CS__OCL_EXPRESSION = eINSTANCE.getCollectionLiteralPartsOclExpCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CollectionRangeCSImpl <em>Collection Range CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CollectionRangeCSImpl <em>Collection Range CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CollectionRangeCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCollectionRangeCS()
+     * @see org.dresdenocl.language.ocl.impl.CollectionRangeCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCollectionRangeCS()
      * @generated
      */
 		EClass COLLECTION_RANGE_CS = eINSTANCE.getCollectionRangeCS();
@@ -5772,31 +5772,31 @@ public interface OclPackage extends EPackage {
 		EReference COLLECTION_RANGE_CS__TO = eINSTANCE.getCollectionRangeCS_To();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.CallExpCSImpl <em>Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.CallExpCSImpl <em>Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.CallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.CallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getCallExpCS()
      * @generated
      */
 		EClass CALL_EXP_CS = eINSTANCE.getCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LoopExpCSImpl <em>Loop Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LoopExpCSImpl <em>Loop Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LoopExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLoopExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LoopExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLoopExpCS()
      * @generated
      */
 		EClass LOOP_EXP_CS = eINSTANCE.getLoopExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpVariableCSImpl <em>Iterator Exp Variable CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.IteratorExpVariableCSImpl <em>Iterator Exp Variable CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.IteratorExpVariableCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIteratorExpVariableCS()
+     * @see org.dresdenocl.language.ocl.impl.IteratorExpVariableCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIteratorExpVariableCS()
      * @generated
      */
 		EClass ITERATOR_EXP_VARIABLE_CS = eINSTANCE.getIteratorExpVariableCS();
@@ -5818,11 +5818,11 @@ public interface OclPackage extends EPackage {
 		EReference ITERATOR_EXP_VARIABLE_CS__TYPE_NAME = eINSTANCE.getIteratorExpVariableCS_TypeName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl <em>Iterator Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.IteratorExpCSImpl <em>Iterator Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.IteratorExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIteratorExpCS()
+     * @see org.dresdenocl.language.ocl.impl.IteratorExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIteratorExpCS()
      * @generated
      */
 		EClass ITERATOR_EXP_CS = eINSTANCE.getIteratorExpCS();
@@ -5852,11 +5852,11 @@ public interface OclPackage extends EPackage {
 		EReference ITERATOR_EXP_CS__BODY_EXPRESSION = eINSTANCE.getIteratorExpCS_BodyExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl <em>Iterate Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.IterateExpCSImpl <em>Iterate Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.IterateExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIterateExpCS()
+     * @see org.dresdenocl.language.ocl.impl.IterateExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIterateExpCS()
      * @generated
      */
 		EClass ITERATE_EXP_CS = eINSTANCE.getIterateExpCS();
@@ -5886,21 +5886,21 @@ public interface OclPackage extends EPackage {
 		EReference ITERATE_EXP_CS__BODY_EXPRESSION = eINSTANCE.getIterateExpCS_BodyExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.FeatureCallExpCSImpl <em>Feature Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.FeatureCallExpCSImpl <em>Feature Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.FeatureCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getFeatureCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.FeatureCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getFeatureCallExpCS()
      * @generated
      */
 		EClass FEATURE_CALL_EXP_CS = eINSTANCE.getFeatureCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.NavigationCallExpImpl <em>Navigation Call Exp</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNavigationCallExp()
+     * @see org.dresdenocl.language.ocl.impl.NavigationCallExpImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNavigationCallExp()
      * @generated
      */
 		EClass NAVIGATION_CALL_EXP = eINSTANCE.getNavigationCallExp();
@@ -5930,11 +5930,11 @@ public interface OclPackage extends EPackage {
 		EReference NAVIGATION_CALL_EXP__FEATURE_CALLS = eINSTANCE.getNavigationCallExp_FeatureCalls();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallBaseExpCSImpl <em>Operation Call Base Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationCallBaseExpCSImpl <em>Operation Call Base Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallBaseExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallBaseExpCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationCallBaseExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallBaseExpCS()
      * @generated
      */
 		EClass OPERATION_CALL_BASE_EXP_CS = eINSTANCE.getOperationCallBaseExpCS();
@@ -5964,11 +5964,11 @@ public interface OclPackage extends EPackage {
 		EAttribute OPERATION_CALL_BASE_EXP_CS__IS_MARKED_PRE = eINSTANCE.getOperationCallBaseExpCS_IsMarkedPre();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallBaseExpCSImpl <em>Property Call Base Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallBaseExpCSImpl <em>Property Call Base Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallBaseExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallBaseExpCS()
+     * @see org.dresdenocl.language.ocl.impl.PropertyCallBaseExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallBaseExpCS()
      * @generated
      */
 		EClass PROPERTY_CALL_BASE_EXP_CS = eINSTANCE.getPropertyCallBaseExpCS();
@@ -5990,51 +5990,51 @@ public interface OclPackage extends EPackage {
 		EAttribute PROPERTY_CALL_BASE_EXP_CS__IS_MARKED_PRE = eINSTANCE.getPropertyCallBaseExpCS_IsMarkedPre();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitFeatureCallCSImpl <em>Implicit Feature Call CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ImplicitFeatureCallCSImpl <em>Implicit Feature Call CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.ImplicitFeatureCallCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitFeatureCallCS()
+     * @see org.dresdenocl.language.ocl.impl.ImplicitFeatureCallCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitFeatureCallCS()
      * @generated
      */
 		EClass IMPLICIT_FEATURE_CALL_CS = eINSTANCE.getImplicitFeatureCallCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExpCSImpl <em>Property Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallExpCSImpl <em>Property Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.PropertyCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallExpCS()
      * @generated
      */
 		EClass PROPERTY_CALL_EXP_CS = eINSTANCE.getPropertyCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallOnSelfExpCSImpl <em>Property Call On Self Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallOnSelfExpCSImpl <em>Property Call On Self Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallOnSelfExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallOnSelfExpCS()
+     * @see org.dresdenocl.language.ocl.impl.PropertyCallOnSelfExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallOnSelfExpCS()
      * @generated
      */
 		EClass PROPERTY_CALL_ON_SELF_EXP_CS = eINSTANCE.getPropertyCallOnSelfExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl <em>Implicit Property Call CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl <em>Implicit Property Call CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.ImplicitPropertyCallCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitPropertyCallCS()
+     * @see org.dresdenocl.language.ocl.impl.ImplicitPropertyCallCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitPropertyCallCS()
      * @generated
      */
 		EClass IMPLICIT_PROPERTY_CALL_CS = eINSTANCE.getImplicitPropertyCallCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl <em>Property Call Explicit Path Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl <em>Property Call Explicit Path Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PropertyCallExplicitPathExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPropertyCallExplicitPathExpCS()
+     * @see org.dresdenocl.language.ocl.impl.PropertyCallExplicitPathExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPropertyCallExplicitPathExpCS()
      * @generated
      */
 		EClass PROPERTY_CALL_EXPLICIT_PATH_EXP_CS = eINSTANCE.getPropertyCallExplicitPathExpCS();
@@ -6072,31 +6072,31 @@ public interface OclPackage extends EPackage {
 		EAttribute PROPERTY_CALL_EXPLICIT_PATH_EXP_CS__IS_MARKED_PRE = eINSTANCE.getPropertyCallExplicitPathExpCS_IsMarkedPre();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallExpCSImpl <em>Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationCallExpCSImpl <em>Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallExpCS()
      * @generated
      */
 		EClass OPERATION_CALL_EXP_CS = eINSTANCE.getOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallOnSelfExpCSImpl <em>Operation Call On Self Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationCallOnSelfExpCSImpl <em>Operation Call On Self Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallOnSelfExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallOnSelfExpCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationCallOnSelfExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallOnSelfExpCS()
      * @generated
      */
 		EClass OPERATION_CALL_ON_SELF_EXP_CS = eINSTANCE.getOperationCallOnSelfExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.StaticOperationCallExpCSImpl <em>Static Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.StaticOperationCallExpCSImpl <em>Static Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.StaticOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getStaticOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.StaticOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getStaticOperationCallExpCS()
      * @generated
      */
 		EClass STATIC_OPERATION_CALL_EXP_CS = eINSTANCE.getStaticOperationCallExpCS();
@@ -6126,11 +6126,11 @@ public interface OclPackage extends EPackage {
 		EReference STATIC_OPERATION_CALL_EXP_CS__ARGUMENTS = eINSTANCE.getStaticOperationCallExpCS_Arguments();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl <em>Unary Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl <em>Unary Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.UnaryOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getUnaryOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.UnaryOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getUnaryOperationCallExpCS()
      * @generated
      */
 		EClass UNARY_OPERATION_CALL_EXP_CS = eINSTANCE.getUnaryOperationCallExpCS();
@@ -6152,11 +6152,11 @@ public interface OclPackage extends EPackage {
 		EReference UNARY_OPERATION_CALL_EXP_CS__TARGET = eINSTANCE.getUnaryOperationCallExpCS_Target();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalNotOperationCallExpCSImpl <em>Logical Not Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LogicalNotOperationCallExpCSImpl <em>Logical Not Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalNotOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalNotOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LogicalNotOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalNotOperationCallExpCS()
      * @generated
      */
 		EClass LOGICAL_NOT_OPERATION_CALL_EXP_CS = eINSTANCE.getLogicalNotOperationCallExpCS();
@@ -6178,11 +6178,11 @@ public interface OclPackage extends EPackage {
 		EReference LOGICAL_NOT_OPERATION_CALL_EXP_CS__TARGET = eINSTANCE.getLogicalNotOperationCallExpCS_Target();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithSourceExpCSImpl <em>Operation Call With Source Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationCallWithSourceExpCSImpl <em>Operation Call With Source Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithSourceExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallWithSourceExpCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationCallWithSourceExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallWithSourceExpCS()
      * @generated
      */
 		EClass OPERATION_CALL_WITH_SOURCE_EXP_CS = eINSTANCE.getOperationCallWithSourceExpCS();
@@ -6204,11 +6204,11 @@ public interface OclPackage extends EPackage {
 		EAttribute OPERATION_CALL_WITH_SOURCE_EXP_CS__IS_MARKED_PRE = eINSTANCE.getOperationCallWithSourceExpCS_IsMarkedPre();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallBinaryExpCSImpl <em>Operation Call Binary Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationCallBinaryExpCSImpl <em>Operation Call Binary Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallBinaryExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallBinaryExpCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationCallBinaryExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallBinaryExpCS()
      * @generated
      */
 		EClass OPERATION_CALL_BINARY_EXP_CS = eINSTANCE.getOperationCallBinaryExpCS();
@@ -6230,111 +6230,111 @@ public interface OclPackage extends EPackage {
 		EReference OPERATION_CALL_BINARY_EXP_CS__TARGET = eINSTANCE.getOperationCallBinaryExpCS_Target();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.AdditiveOperationCallExpCSImpl <em>Additive Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.AdditiveOperationCallExpCSImpl <em>Additive Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.AdditiveOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getAdditiveOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.AdditiveOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getAdditiveOperationCallExpCS()
      * @generated
      */
 		EClass ADDITIVE_OPERATION_CALL_EXP_CS = eINSTANCE.getAdditiveOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.MultOperationCallExpCSImpl <em>Mult Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.MultOperationCallExpCSImpl <em>Mult Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.MultOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getMultOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.MultOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getMultOperationCallExpCS()
      * @generated
      */
 		EClass MULT_OPERATION_CALL_EXP_CS = eINSTANCE.getMultOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.RelationalOperationCallExpCSImpl <em>Relational Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.RelationalOperationCallExpCSImpl <em>Relational Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.RelationalOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getRelationalOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.RelationalOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getRelationalOperationCallExpCS()
      * @generated
      */
 		EClass RELATIONAL_OPERATION_CALL_EXP_CS = eINSTANCE.getRelationalOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.EqualityOperationCallExpCSImpl <em>Equality Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.EqualityOperationCallExpCSImpl <em>Equality Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.EqualityOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getEqualityOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.EqualityOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getEqualityOperationCallExpCS()
      * @generated
      */
 		EClass EQUALITY_OPERATION_CALL_EXP_CS = eINSTANCE.getEqualityOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalAndOperationCallExpCSImpl <em>Logical And Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LogicalAndOperationCallExpCSImpl <em>Logical And Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalAndOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalAndOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LogicalAndOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalAndOperationCallExpCS()
      * @generated
      */
 		EClass LOGICAL_AND_OPERATION_CALL_EXP_CS = eINSTANCE.getLogicalAndOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalOrOperationCallExpCSImpl <em>Logical Or Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LogicalOrOperationCallExpCSImpl <em>Logical Or Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalOrOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalOrOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LogicalOrOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalOrOperationCallExpCS()
      * @generated
      */
 		EClass LOGICAL_OR_OPERATION_CALL_EXP_CS = eINSTANCE.getLogicalOrOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalXorOperationCallExpCSImpl <em>Logical Xor Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LogicalXorOperationCallExpCSImpl <em>Logical Xor Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalXorOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalXorOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LogicalXorOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalXorOperationCallExpCS()
      * @generated
      */
 		EClass LOGICAL_XOR_OPERATION_CALL_EXP_CS = eINSTANCE.getLogicalXorOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl <em>Logical Implies Operation Call Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl <em>Logical Implies Operation Call Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLogicalImpliesOperationCallExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LogicalImpliesOperationCallExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLogicalImpliesOperationCallExpCS()
      * @generated
      */
 		EClass LOGICAL_IMPLIES_OPERATION_CALL_EXP_CS = eINSTANCE.getLogicalImpliesOperationCallExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl <em>Operation Call With Imlicit Source Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl <em>Operation Call With Imlicit Source Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationCallWithImlicitSourceExpCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationCallWithImlicitSourceExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationCallWithImlicitSourceExpCS()
      * @generated
      */
 		EClass OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS = eINSTANCE.getOperationCallWithImlicitSourceExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ImplicitOperationCallCSImpl <em>Implicit Operation Call CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ImplicitOperationCallCSImpl <em>Implicit Operation Call CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.ImplicitOperationCallCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getImplicitOperationCallCS()
+     * @see org.dresdenocl.language.ocl.impl.ImplicitOperationCallCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getImplicitOperationCallCS()
      * @generated
      */
 		EClass IMPLICIT_OPERATION_CALL_CS = eINSTANCE.getImplicitOperationCallCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.TupleLiteralExpCSImpl <em>Tuple Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.TupleLiteralExpCSImpl <em>Tuple Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.TupleLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getTupleLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.TupleLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getTupleLiteralExpCS()
      * @generated
      */
 		EClass TUPLE_LITERAL_EXP_CS = eINSTANCE.getTupleLiteralExpCS();
@@ -6348,21 +6348,21 @@ public interface OclPackage extends EPackage {
 		EReference TUPLE_LITERAL_EXP_CS__VARIABLE_DECLARATIONS = eINSTANCE.getTupleLiteralExpCS_VariableDeclarations();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PrimitiveLiteralExpCSImpl <em>Primitive Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PrimitiveLiteralExpCSImpl <em>Primitive Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PrimitiveLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPrimitiveLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.PrimitiveLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPrimitiveLiteralExpCS()
      * @generated
      */
 		EClass PRIMITIVE_LITERAL_EXP_CS = eINSTANCE.getPrimitiveLiteralExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IntegerLiteralExpCSImpl <em>Integer Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.IntegerLiteralExpCSImpl <em>Integer Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.IntegerLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIntegerLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.IntegerLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIntegerLiteralExpCS()
      * @generated
      */
 		EClass INTEGER_LITERAL_EXP_CS = eINSTANCE.getIntegerLiteralExpCS();
@@ -6376,11 +6376,11 @@ public interface OclPackage extends EPackage {
 		EAttribute INTEGER_LITERAL_EXP_CS__INTEGER_LITERAL = eINSTANCE.getIntegerLiteralExpCS_IntegerLiteral();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl <em>Real Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl <em>Real Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.RealLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getRealLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.RealLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getRealLiteralExpCS()
      * @generated
      */
 		EClass REAL_LITERAL_EXP_CS = eINSTANCE.getRealLiteralExpCS();
@@ -6410,11 +6410,11 @@ public interface OclPackage extends EPackage {
 		EAttribute REAL_LITERAL_EXP_CS__NAVIGATION_OPERATOR = eINSTANCE.getRealLiteralExpCS_NavigationOperator();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.BooleanLiteralExpCSImpl <em>Boolean Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.BooleanLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBooleanLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.BooleanLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBooleanLiteralExpCS()
      * @generated
      */
 		EClass BOOLEAN_LITERAL_EXP_CS = eINSTANCE.getBooleanLiteralExpCS();
@@ -6428,11 +6428,11 @@ public interface OclPackage extends EPackage {
 		EAttribute BOOLEAN_LITERAL_EXP_CS__BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteralExpCS_BooleanLiteral();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.StringLiteralExpCSImpl <em>String Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.StringLiteralExpCSImpl <em>String Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.StringLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getStringLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.StringLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getStringLiteralExpCS()
      * @generated
      */
 		EClass STRING_LITERAL_EXP_CS = eINSTANCE.getStringLiteralExpCS();
@@ -6446,31 +6446,31 @@ public interface OclPackage extends EPackage {
 		EAttribute STRING_LITERAL_EXP_CS__STRING_LITERAL = eINSTANCE.getStringLiteralExpCS_StringLiteral();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InvalidLiteralExpCSImpl <em>Invalid Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.InvalidLiteralExpCSImpl <em>Invalid Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.InvalidLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvalidLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.InvalidLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvalidLiteralExpCS()
      * @generated
      */
 		EClass INVALID_LITERAL_EXP_CS = eINSTANCE.getInvalidLiteralExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.NullLiteralExpCSImpl <em>Null Literal Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.NullLiteralExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getNullLiteralExpCS()
+     * @see org.dresdenocl.language.ocl.impl.NullLiteralExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getNullLiteralExpCS()
      * @generated
      */
 		EClass NULL_LITERAL_EXP_CS = eINSTANCE.getNullLiteralExpCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.LetExpCSImpl <em>Let Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.LetExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getLetExpCS()
+     * @see org.dresdenocl.language.ocl.impl.LetExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getLetExpCS()
      * @generated
      */
 		EClass LET_EXP_CS = eINSTANCE.getLetExpCS();
@@ -6492,11 +6492,11 @@ public interface OclPackage extends EPackage {
 		EReference LET_EXP_CS__OCL_EXPRESSION = eINSTANCE.getLetExpCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.IfExpCSImpl <em>If Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.IfExpCSImpl <em>If Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.IfExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getIfExpCS()
+     * @see org.dresdenocl.language.ocl.impl.IfExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getIfExpCS()
      * @generated
      */
 		EClass IF_EXP_CS = eINSTANCE.getIfExpCS();
@@ -6526,11 +6526,11 @@ public interface OclPackage extends EPackage {
 		EReference IF_EXP_CS__ELSE_BRANCH = eINSTANCE.getIfExpCS_ElseBranch();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationCSImpl <em>Package Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationCSImpl <em>Package Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.PackageDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationCS()
      * @generated
      */
 		EClass PACKAGE_DECLARATION_CS = eINSTANCE.getPackageDeclarationCS();
@@ -6552,11 +6552,11 @@ public interface OclPackage extends EPackage {
 		EReference PACKAGE_DECLARATION_CS__LAYOUT_INFORMATION = eINSTANCE.getPackageDeclarationCS_LayoutInformation();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl <em>Package Declaration With Namespace CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl <em>Package Declaration With Namespace CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithNamespaceCS()
+     * @see org.dresdenocl.language.ocl.impl.PackageDeclarationWithNamespaceCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithNamespaceCS()
      * @generated
      */
 		EClass PACKAGE_DECLARATION_WITH_NAMESPACE_CS = eINSTANCE.getPackageDeclarationWithNamespaceCS();
@@ -6570,11 +6570,11 @@ public interface OclPackage extends EPackage {
 		EReference PACKAGE_DECLARATION_WITH_NAMESPACE_CS__NESTED_NAMESPACE = eINSTANCE.getPackageDeclarationWithNamespaceCS_NestedNamespace();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl <em>Package Declaration Nested Namespace CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl <em>Package Declaration Nested Namespace CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationNestedNamespaceCS()
+     * @see org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationNestedNamespaceCS()
      * @generated
      */
 		EClass PACKAGE_DECLARATION_NESTED_NAMESPACE_CS = eINSTANCE.getPackageDeclarationNestedNamespaceCS();
@@ -6604,31 +6604,31 @@ public interface OclPackage extends EPackage {
 		EReference PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION = eINSTANCE.getPackageDeclarationNestedNamespaceCS_LayoutInformation();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl <em>Package Declaration Without Namespace CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl <em>Package Declaration Without Namespace CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithoutNamespaceCS()
+     * @see org.dresdenocl.language.ocl.impl.PackageDeclarationWithoutNamespaceCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPackageDeclarationWithoutNamespaceCS()
      * @generated
      */
 		EClass PACKAGE_DECLARATION_WITHOUT_NAMESPACE_CS = eINSTANCE.getPackageDeclarationWithoutNamespaceCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ContextDeclarationCSImpl <em>Context Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ContextDeclarationCSImpl <em>Context Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.ContextDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getContextDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.ContextDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getContextDeclarationCS()
      * @generated
      */
 		EClass CONTEXT_DECLARATION_CS = eINSTANCE.getContextDeclarationCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl <em>Attribute Context Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl <em>Attribute Context Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.AttributeContextDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getAttributeContextDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.AttributeContextDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getAttributeContextDeclarationCS()
      * @generated
      */
 		EClass ATTRIBUTE_CONTEXT_DECLARATION_CS = eINSTANCE.getAttributeContextDeclarationCS();
@@ -6666,11 +6666,11 @@ public interface OclPackage extends EPackage {
 		EReference ATTRIBUTE_CONTEXT_DECLARATION_CS__INIT_OR_DERIVE_VALUE = eINSTANCE.getAttributeContextDeclarationCS_InitOrDeriveValue();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ClassifierContextDeclarationCSImpl <em>Classifier Context Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl <em>Classifier Context Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.ClassifierContextDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getClassifierContextDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.ClassifierContextDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getClassifierContextDeclarationCS()
      * @generated
      */
 		EClass CLASSIFIER_CONTEXT_DECLARATION_CS = eINSTANCE.getClassifierContextDeclarationCS();
@@ -6692,11 +6692,11 @@ public interface OclPackage extends EPackage {
 		EReference CLASSIFIER_CONTEXT_DECLARATION_CS__INVARIANTS_AND_DEFINITIONS = eINSTANCE.getClassifierContextDeclarationCS_InvariantsAndDefinitions();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationContextDeclarationCSImpl <em>Operation Context Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationContextDeclarationCSImpl <em>Operation Context Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationContextDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationContextDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationContextDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationContextDeclarationCS()
      * @generated
      */
 		EClass OPERATION_CONTEXT_DECLARATION_CS = eINSTANCE.getOperationContextDeclarationCS();
@@ -6718,11 +6718,11 @@ public interface OclPackage extends EPackage {
 		EReference OPERATION_CONTEXT_DECLARATION_CS__PRE_POST_OR_BODY_DECLARATIONS = eINSTANCE.getOperationContextDeclarationCS_PrePostOrBodyDeclarations();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InitOrDeriveValueCSImpl <em>Init Or Derive Value CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.InitOrDeriveValueCSImpl <em>Init Or Derive Value CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.InitOrDeriveValueCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInitOrDeriveValueCS()
+     * @see org.dresdenocl.language.ocl.impl.InitOrDeriveValueCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInitOrDeriveValueCS()
      * @generated
      */
 		EClass INIT_OR_DERIVE_VALUE_CS = eINSTANCE.getInitOrDeriveValueCS();
@@ -6736,41 +6736,41 @@ public interface OclPackage extends EPackage {
 		EReference INIT_OR_DERIVE_VALUE_CS__OCL_EXPRESSION = eINSTANCE.getInitOrDeriveValueCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InitValueCSImpl <em>Init Value CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.InitValueCSImpl <em>Init Value CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.InitValueCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInitValueCS()
+     * @see org.dresdenocl.language.ocl.impl.InitValueCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInitValueCS()
      * @generated
      */
 		EClass INIT_VALUE_CS = eINSTANCE.getInitValueCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DeriveValueCSImpl <em>Derive Value CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.DeriveValueCSImpl <em>Derive Value CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.DeriveValueCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDeriveValueCS()
+     * @see org.dresdenocl.language.ocl.impl.DeriveValueCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDeriveValueCS()
      * @generated
      */
 		EClass DERIVE_VALUE_CS = eINSTANCE.getDeriveValueCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InvariantOrDefinitionCSImpl <em>Invariant Or Definition CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.InvariantOrDefinitionCSImpl <em>Invariant Or Definition CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.InvariantOrDefinitionCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvariantOrDefinitionCS()
+     * @see org.dresdenocl.language.ocl.impl.InvariantOrDefinitionCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvariantOrDefinitionCS()
      * @generated
      */
 		EClass INVARIANT_OR_DEFINITION_CS = eINSTANCE.getInvariantOrDefinitionCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.InvariantExpCSImpl <em>Invariant Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.InvariantExpCSImpl <em>Invariant Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.InvariantExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getInvariantExpCS()
+     * @see org.dresdenocl.language.ocl.impl.InvariantExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getInvariantExpCS()
      * @generated
      */
 		EClass INVARIANT_EXP_CS = eINSTANCE.getInvariantExpCS();
@@ -6792,11 +6792,11 @@ public interface OclPackage extends EPackage {
 		EReference INVARIANT_EXP_CS__OCL_EXPRESSION = eINSTANCE.getInvariantExpCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpCSImpl <em>Definition Exp CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpCSImpl <em>Definition Exp CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpCS()
+     * @see org.dresdenocl.language.ocl.impl.DefinitionExpCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpCS()
      * @generated
      */
 		EClass DEFINITION_EXP_CS = eINSTANCE.getDefinitionExpCS();
@@ -6818,21 +6818,21 @@ public interface OclPackage extends EPackage {
 		EReference DEFINITION_EXP_CS__DEFINITION_EXP_PART = eINSTANCE.getDefinitionExpCS_DefinitionExpPart();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPartCSImpl <em>Definition Exp Part CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpPartCSImpl <em>Definition Exp Part CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPartCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpPartCS()
+     * @see org.dresdenocl.language.ocl.impl.DefinitionExpPartCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpPartCS()
      * @generated
      */
 		EClass DEFINITION_EXP_PART_CS = eINSTANCE.getDefinitionExpPartCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPropertyCSImpl <em>Definition Exp Property CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpPropertyCSImpl <em>Definition Exp Property CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpPropertyCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpPropertyCS()
+     * @see org.dresdenocl.language.ocl.impl.DefinitionExpPropertyCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpPropertyCS()
      * @generated
      */
 		EClass DEFINITION_EXP_PROPERTY_CS = eINSTANCE.getDefinitionExpPropertyCS();
@@ -6846,11 +6846,11 @@ public interface OclPackage extends EPackage {
 		EReference DEFINITION_EXP_PROPERTY_CS__VARIABLE_DECLARATION = eINSTANCE.getDefinitionExpPropertyCS_VariableDeclaration();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl <em>Definition Exp Operation CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.DefinitionExpOperationCSImpl <em>Definition Exp Operation CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.DefinitionExpOperationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getDefinitionExpOperationCS()
+     * @see org.dresdenocl.language.ocl.impl.DefinitionExpOperationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getDefinitionExpOperationCS()
      * @generated
      */
 		EClass DEFINITION_EXP_OPERATION_CS = eINSTANCE.getDefinitionExpOperationCS();
@@ -6880,11 +6880,11 @@ public interface OclPackage extends EPackage {
 		EReference DEFINITION_EXP_OPERATION_CS__OCL_EXPRESSION = eINSTANCE.getDefinitionExpOperationCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PrePostOrBodyDeclarationCSImpl <em>Pre Post Or Body Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PrePostOrBodyDeclarationCSImpl <em>Pre Post Or Body Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PrePostOrBodyDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPrePostOrBodyDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.PrePostOrBodyDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPrePostOrBodyDeclarationCS()
      * @generated
      */
 		EClass PRE_POST_OR_BODY_DECLARATION_CS = eINSTANCE.getPrePostOrBodyDeclarationCS();
@@ -6906,41 +6906,41 @@ public interface OclPackage extends EPackage {
 		EReference PRE_POST_OR_BODY_DECLARATION_CS__OCL_EXPRESSION = eINSTANCE.getPrePostOrBodyDeclarationCS_OclExpression();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PreConditionDeclarationCSImpl <em>Pre Condition Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PreConditionDeclarationCSImpl <em>Pre Condition Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PreConditionDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPreConditionDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.PreConditionDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPreConditionDeclarationCS()
      * @generated
      */
 		EClass PRE_CONDITION_DECLARATION_CS = eINSTANCE.getPreConditionDeclarationCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.PostConditionDeclarationCSImpl <em>Post Condition Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.PostConditionDeclarationCSImpl <em>Post Condition Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.PostConditionDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getPostConditionDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.PostConditionDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getPostConditionDeclarationCS()
      * @generated
      */
 		EClass POST_CONDITION_DECLARATION_CS = eINSTANCE.getPostConditionDeclarationCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.BodyDeclarationCSImpl <em>Body Declaration CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.BodyDeclarationCSImpl <em>Body Declaration CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.BodyDeclarationCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getBodyDeclarationCS()
+     * @see org.dresdenocl.language.ocl.impl.BodyDeclarationCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getBodyDeclarationCS()
      * @generated
      */
 		EClass BODY_DECLARATION_CS = eINSTANCE.getBodyDeclarationCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionCSImpl <em>Operation Definition CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationDefinitionCSImpl <em>Operation Definition CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationDefinitionCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionCS()
      * @generated
      */
 		EClass OPERATION_DEFINITION_CS = eINSTANCE.getOperationDefinitionCS();
@@ -6970,11 +6970,11 @@ public interface OclPackage extends EPackage {
 		EReference OPERATION_DEFINITION_CS__RETURN_TYPE = eINSTANCE.getOperationDefinitionCS_ReturnType();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInContextCSImpl <em>Operation Definition In Context CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationDefinitionInContextCSImpl <em>Operation Definition In Context CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInContextCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionInContextCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationDefinitionInContextCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionInContextCS()
      * @generated
      */
 		EClass OPERATION_DEFINITION_IN_CONTEXT_CS = eINSTANCE.getOperationDefinitionInContextCS();
@@ -6988,21 +6988,21 @@ public interface OclPackage extends EPackage {
 		EReference OPERATION_DEFINITION_IN_CONTEXT_CS__TYPE_NAME = eINSTANCE.getOperationDefinitionInContextCS_TypeName();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInDefCSImpl <em>Operation Definition In Def CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.OperationDefinitionInDefCSImpl <em>Operation Definition In Def CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OperationDefinitionInDefCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getOperationDefinitionInDefCS()
+     * @see org.dresdenocl.language.ocl.impl.OperationDefinitionInDefCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getOperationDefinitionInDefCS()
      * @generated
      */
 		EClass OPERATION_DEFINITION_IN_DEF_CS = eINSTANCE.getOperationDefinitionInDefCS();
 
 		/**
-     * The meta object literal for the '{@link tudresden.ocl20.pivot.language.ocl.impl.ParameterCSImpl <em>Parameter CS</em>}' class.
+     * The meta object literal for the '{@link org.dresdenocl.language.ocl.impl.ParameterCSImpl <em>Parameter CS</em>}' class.
      * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-     * @see tudresden.ocl20.pivot.language.ocl.impl.ParameterCSImpl
-     * @see tudresden.ocl20.pivot.language.ocl.impl.OclPackageImpl#getParameterCS()
+     * @see org.dresdenocl.language.ocl.impl.ParameterCSImpl
+     * @see org.dresdenocl.language.ocl.impl.OclPackageImpl#getParameterCS()
      * @generated
      */
 		EClass PARAMETER_CS = eINSTANCE.getParameterCS();

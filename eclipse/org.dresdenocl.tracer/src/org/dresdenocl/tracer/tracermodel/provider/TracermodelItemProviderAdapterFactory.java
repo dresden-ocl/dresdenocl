@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.provider;
+package org.dresdenocl.tracer.tracermodel.provider;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.tracer.tracermodel.util.TracermodelAdapterFactory;
+import org.dresdenocl.tracer.tracermodel.util.TracermodelAdapterFactory;
 
 /**
  * This is the factory that is used to provide the interfaces needed to support Viewers.
@@ -78,7 +78,7 @@ public class TracermodelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem} instances. <!--
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerItem} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -87,7 +87,7 @@ public class TracermodelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem}. <!--
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerItem}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -104,7 +104,7 @@ public class TracermodelItemProviderAdapterFactory extends
 
 	/**
 	 * This keeps track of the one adapter used for all
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot} instances. <!--
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerRoot} instances. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -113,7 +113,7 @@ public class TracermodelItemProviderAdapterFactory extends
 
 	/**
 	 * This creates an adapter for a
-	 * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot}. <!--
+	 * {@link org.dresdenocl.tracer.tracermodel.TracerRoot}. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated

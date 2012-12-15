@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetSymmetricDifference01 {
      *       def: testSetSymmetricDifference01(source: Set(OclAny), arg01: Set(OclAny)): Set(OclAny) = source ->symmetricDifference(arg01)</code></p>
      */
     public java.util.Set<Object> testpackage.Class1.testSetSymmetricDifference01(java.util.Set<Object> source, java.util.Set<Object> arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.symmetricDifference(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.symmetricDifference(source, arg01);
     }
 }

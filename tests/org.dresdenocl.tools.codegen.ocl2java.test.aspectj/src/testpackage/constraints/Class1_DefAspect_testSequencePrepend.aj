@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequencePrepend {
      *       def: testSequencePrepend(source: Sequence(OclAny), arg01: OclAny): Sequence(OclAny) = source ->prepend(arg01)</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSequencePrepend(java.util.List<Object> source, Object arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.prepend(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.prepend(source, arg01);
     }
 }

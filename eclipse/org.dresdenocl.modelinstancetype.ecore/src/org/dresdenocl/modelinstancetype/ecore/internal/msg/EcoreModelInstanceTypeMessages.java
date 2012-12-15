@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg;
+package org.dresdenocl.modelinstancetype.ecore.internal.msg;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -30,7 +30,7 @@ import org.eclipse.osgi.util.NLS;
 public class EcoreModelInstanceTypeMessages extends NLS {
 
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.modelinstancetype.ecore.internal.msg.messages"; //$NON-NLS-1$
+			"org.dresdenocl.modelinstancetype.ecore.internal.msg.messages"; //$NON-NLS-1$
 
 
 	public static String EcoreModelInstanceProvider_InvalidURL;

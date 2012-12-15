@@ -4,16 +4,16 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
+package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Enumeration1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Enumeration1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -24,7 +24,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.EnumerationLiteralProviderClassImpl#getEnumerationLiteralProperty1 <em>Enumeration Literal Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.EnumerationLiteralProviderClassImpl#getEnumerationLiteralProperty1 <em>Enumeration Literal Property1</em>}</li>
  * </ul>
  * </p>
  *

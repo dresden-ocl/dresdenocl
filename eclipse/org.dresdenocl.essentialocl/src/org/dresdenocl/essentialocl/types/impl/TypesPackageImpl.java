@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -41,21 +41,21 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
-import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.datatypes.DatatypesPackage;
+import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -68,7 +68,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.essentialocl.types.TypesFactory
+ * @see org.dresdenocl.essentialocl.types.TypesFactory
  * @generated
  */
 public class TypesPackageImpl extends EPackageImpl {
@@ -105,14 +105,14 @@ public class TypesPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public static final TypesPackageImpl eINSTANCE =
-			tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl.init();
+			org.dresdenocl.essentialocl.types.impl.TypesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getCollectionType()
+	 * @see org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getCollectionType()
 	 * @generated
 	 */
 	public static final int COLLECTION_TYPE = 2;
@@ -247,11 +247,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.BagTypeImpl <em>Bag Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.BagTypeImpl <em>Bag Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.BagTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getBagType()
+	 * @see org.dresdenocl.essentialocl.types.impl.BagTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getBagType()
 	 * @generated
 	 */
 	public static final int BAG_TYPE = 0;
@@ -381,11 +381,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			COLLECTION_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl <em>Tuple Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.TupleTypeImpl <em>Tuple Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getTupleType()
+	 * @see org.dresdenocl.essentialocl.types.impl.TupleTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getTupleType()
 	 * @generated
 	 */
 	public static final int TUPLE_TYPE = 1;
@@ -499,11 +499,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getInvalidType()
+	 * @see org.dresdenocl.essentialocl.types.impl.InvalidTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getInvalidType()
 	 * @generated
 	 */
 	public static final int INVALID_TYPE = 3;
@@ -617,11 +617,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getOrderedSetType()
+	 * @see org.dresdenocl.essentialocl.types.impl.OrderedSetTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getOrderedSetType()
 	 * @generated
 	 */
 	public static final int ORDERED_SET_TYPE = 4;
@@ -754,11 +754,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			COLLECTION_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.SequenceTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getSequenceType()
+	 * @see org.dresdenocl.essentialocl.types.impl.SequenceTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getSequenceType()
 	 * @generated
 	 */
 	public static final int SEQUENCE_TYPE = 5;
@@ -890,11 +890,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			COLLECTION_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.SetTypeImpl <em>Set Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.SetTypeImpl <em>Set Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.SetTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getSetType()
+	 * @see org.dresdenocl.essentialocl.types.impl.SetTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getSetType()
 	 * @generated
 	 */
 	public static final int SET_TYPE = 6;
@@ -1024,11 +1024,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			COLLECTION_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl <em>Void Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.VoidTypeImpl <em>Void Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getVoidType()
+	 * @see org.dresdenocl.essentialocl.types.impl.VoidTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getVoidType()
 	 * @generated
 	 */
 	public static final int VOID_TYPE = 7;
@@ -1142,11 +1142,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getTypeType()
+	 * @see org.dresdenocl.essentialocl.types.impl.TypeTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getTypeType()
 	 * @generated
 	 */
 	public static final int TYPE_TYPE = 8;
@@ -1260,11 +1260,11 @@ public class TypesPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getOclLibrary()
+	 * @see org.dresdenocl.essentialocl.types.impl.OclLibraryImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getOclLibrary()
 	 * @generated
 	 */
 	public static final int OCL_LIBRARY = 9;
@@ -1405,11 +1405,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	public static final int OCL_LIBRARY_FEATURE_COUNT = 14;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.AnyTypeImpl <em>Any Type</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.types.impl.AnyTypeImpl <em>Any Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.AnyTypeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getAnyType()
+	 * @see org.dresdenocl.essentialocl.types.impl.AnyTypeImpl
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getAnyType()
 	 * @generated
 	 */
 	public static final int ANY_TYPE = 10;
@@ -1600,7 +1600,7 @@ public class TypesPackageImpl extends EPackageImpl {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#eNS_URI
+	 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -1669,11 +1669,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.BagType <em>Bag Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.BagType <em>Bag Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Bag Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.BagType
+	 * @see org.dresdenocl.essentialocl.types.BagType
 	 * @generated
 	 */
 	public EClass getBagType() {
@@ -1682,11 +1682,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.TupleType <em>Tuple Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.TupleType <em>Tuple Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tuple Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.TupleType
+	 * @see org.dresdenocl.essentialocl.types.TupleType
 	 * @generated
 	 */
 	public EClass getTupleType() {
@@ -1695,11 +1695,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.TupleType#getOclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.types.TupleType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Ocl Library</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.TupleType#getOclLibrary()
+	 * @see org.dresdenocl.essentialocl.types.TupleType#getOclLibrary()
 	 * @see #getTupleType()
 	 * @generated
 	 */
@@ -1709,11 +1709,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType <em>Collection Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.CollectionType <em>Collection Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collection Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType
+	 * @see org.dresdenocl.essentialocl.types.CollectionType
 	 * @generated
 	 */
 	public EClass getCollectionType() {
@@ -1722,11 +1722,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getElementType <em>Element Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.types.CollectionType#getElementType <em>Element Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Element Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType#getElementType()
+	 * @see org.dresdenocl.essentialocl.types.CollectionType#getElementType()
 	 * @see #getCollectionType()
 	 * @generated
 	 */
@@ -1736,11 +1736,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getOclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.types.CollectionType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Ocl Library</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType#getOclLibrary()
+	 * @see org.dresdenocl.essentialocl.types.CollectionType#getOclLibrary()
 	 * @see #getCollectionType()
 	 * @generated
 	 */
@@ -1750,11 +1750,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getKind <em>Kind</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.types.CollectionType#getKind <em>Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.CollectionType#getKind()
+	 * @see org.dresdenocl.essentialocl.types.CollectionType#getKind()
 	 * @see #getCollectionType()
 	 * @generated
 	 */
@@ -1764,11 +1764,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.InvalidType <em>Invalid Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Invalid Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType
+	 * @see org.dresdenocl.essentialocl.types.InvalidType
 	 * @generated
 	 */
 	public EClass getInvalidType() {
@@ -1777,11 +1777,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for the container reference '{@link org.dresdenocl.essentialocl.types.InvalidType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Ocl Library</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.InvalidType#getOclLibrary()
+	 * @see org.dresdenocl.essentialocl.types.InvalidType#getOclLibrary()
 	 * @see #getInvalidType()
 	 * @generated
 	 */
@@ -1791,11 +1791,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.OrderedSetType <em>Ordered Set Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.OrderedSetType <em>Ordered Set Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Ordered Set Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OrderedSetType
+	 * @see org.dresdenocl.essentialocl.types.OrderedSetType
 	 * @generated
 	 */
 	public EClass getOrderedSetType() {
@@ -1804,11 +1804,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.SequenceType <em>Sequence Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.SequenceType <em>Sequence Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Sequence Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.SequenceType
+	 * @see org.dresdenocl.essentialocl.types.SequenceType
 	 * @generated
 	 */
 	public EClass getSequenceType() {
@@ -1817,11 +1817,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.SetType <em>Set Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.SetType <em>Set Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Set Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.SetType
+	 * @see org.dresdenocl.essentialocl.types.SetType
 	 * @generated
 	 */
 	public EClass getSetType() {
@@ -1830,11 +1830,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType <em>Void Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.VoidType <em>Void Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Void Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType
+	 * @see org.dresdenocl.essentialocl.types.VoidType
 	 * @generated
 	 */
 	public EClass getVoidType() {
@@ -1843,11 +1843,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the container reference '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for the container reference '{@link org.dresdenocl.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Ocl Library</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary()
+	 * @see org.dresdenocl.essentialocl.types.VoidType#getOclLibrary()
 	 * @see #getVoidType()
 	 * @generated
 	 */
@@ -1857,11 +1857,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType <em>Type Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.TypeType <em>Type Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Type Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.TypeType
+	 * @see org.dresdenocl.essentialocl.types.TypeType
 	 * @generated
 	 */
 	public EClass getTypeType() {
@@ -1870,11 +1870,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.types.TypeType#getRepresentedType <em>Represented Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Represented Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.TypeType#getRepresentedType()
+	 * @see org.dresdenocl.essentialocl.types.TypeType#getRepresentedType()
 	 * @see #getTypeType()
 	 * @generated
 	 */
@@ -1884,11 +1884,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.OclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Ocl Library</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary
 	 * @generated
 	 */
 	public EClass getOclLibrary() {
@@ -1897,11 +1897,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclVoid <em>Ocl Void</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Void</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclVoid()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclVoid()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1911,11 +1911,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclAny <em>Ocl Any</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclAny <em>Ocl Any</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Any</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclAny()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclAny()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1925,11 +1925,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclCollection <em>Ocl Collection</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclCollection <em>Ocl Collection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Collection</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclCollection()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclCollection()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1939,11 +1939,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSequence <em>Ocl Sequence</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclSequence <em>Ocl Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Sequence</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSequence()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclSequence()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1953,11 +1953,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBag <em>Ocl Bag</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclBag <em>Ocl Bag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Bag</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBag()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclBag()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1967,11 +1967,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSet <em>Ocl Set</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclSet <em>Ocl Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Set</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclSet()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclSet()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1981,11 +1981,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclOrderedSet <em>Ocl Ordered Set</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclOrderedSet <em>Ocl Ordered Set</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Ordered Set</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclOrderedSet()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclOrderedSet()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -1995,11 +1995,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclTuple <em>Ocl Tuple</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclTuple <em>Ocl Tuple</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Ocl Tuple</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclTuple()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclTuple()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2009,11 +2009,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.types.AnyType <em>Any Type</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.types.AnyType <em>Any Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Any Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.AnyType
+	 * @see org.dresdenocl.essentialocl.types.AnyType
 	 * @generated
 	 */
 	public EClass getAnyType() {
@@ -2022,11 +2022,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBoolean <em>Ocl Boolean</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclBoolean <em>Ocl Boolean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Boolean</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclBoolean()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclBoolean()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2036,11 +2036,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclString <em>Ocl String</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclString <em>Ocl String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl String</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclString()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclString()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2050,11 +2050,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInteger <em>Ocl Integer</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInteger <em>Ocl Integer</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Integer</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInteger()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclInteger()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2064,11 +2064,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclReal <em>Ocl Real</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclReal <em>Ocl Real</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Real</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclReal()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclReal()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2078,11 +2078,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclInvalid <em>Ocl Invalid</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Invalid</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclInvalid()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclInvalid()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2092,11 +2092,11 @@ public class TypesPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclType <em>Ocl Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.types.OclLibrary#getOclType <em>Ocl Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Ocl Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.types.OclLibrary#getOclType()
+	 * @see org.dresdenocl.essentialocl.types.OclLibrary#getOclType()
 	 * @see #getOclLibrary()
 	 * @generated
 	 */
@@ -2441,21 +2441,21 @@ public class TypesPackageImpl extends EPackageImpl {
 	public interface Literals {
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.BagTypeImpl <em>Bag Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.BagTypeImpl <em>Bag Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.BagTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getBagType()
+		 * @see org.dresdenocl.essentialocl.types.impl.BagTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getBagType()
 		 * @generated
 		 */
 		public static final EClass BAG_TYPE = eINSTANCE.getBagType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl <em>Tuple Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.TupleTypeImpl <em>Tuple Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TupleTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getTupleType()
+		 * @see org.dresdenocl.essentialocl.types.impl.TupleTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getTupleType()
 		 * @generated
 		 */
 		public static final EClass TUPLE_TYPE = eINSTANCE.getTupleType();
@@ -2470,11 +2470,11 @@ public class TypesPackageImpl extends EPackageImpl {
 				.getTupleType_OclLibrary();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl <em>Collection Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.CollectionTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getCollectionType()
+		 * @see org.dresdenocl.essentialocl.types.impl.CollectionTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getCollectionType()
 		 * @generated
 		 */
 		public static final EClass COLLECTION_TYPE = eINSTANCE.getCollectionType();
@@ -2507,11 +2507,11 @@ public class TypesPackageImpl extends EPackageImpl {
 				.getCollectionType_Kind();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.InvalidTypeImpl <em>Invalid Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getInvalidType()
+		 * @see org.dresdenocl.essentialocl.types.impl.InvalidTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getInvalidType()
 		 * @generated
 		 */
 		public static final EClass INVALID_TYPE = eINSTANCE.getInvalidType();
@@ -2526,41 +2526,41 @@ public class TypesPackageImpl extends EPackageImpl {
 				.getInvalidType_OclLibrary();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.OrderedSetTypeImpl <em>Ordered Set Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.OrderedSetTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getOrderedSetType()
+		 * @see org.dresdenocl.essentialocl.types.impl.OrderedSetTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getOrderedSetType()
 		 * @generated
 		 */
 		public static final EClass ORDERED_SET_TYPE = eINSTANCE.getOrderedSetType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.SequenceTypeImpl <em>Sequence Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.SequenceTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getSequenceType()
+		 * @see org.dresdenocl.essentialocl.types.impl.SequenceTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getSequenceType()
 		 * @generated
 		 */
 		public static final EClass SEQUENCE_TYPE = eINSTANCE.getSequenceType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.SetTypeImpl <em>Set Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.SetTypeImpl <em>Set Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.SetTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getSetType()
+		 * @see org.dresdenocl.essentialocl.types.impl.SetTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getSetType()
 		 * @generated
 		 */
 		public static final EClass SET_TYPE = eINSTANCE.getSetType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl <em>Void Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.VoidTypeImpl <em>Void Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.VoidTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getVoidType()
+		 * @see org.dresdenocl.essentialocl.types.impl.VoidTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getVoidType()
 		 * @generated
 		 */
 		public static final EClass VOID_TYPE = eINSTANCE.getVoidType();
@@ -2575,11 +2575,11 @@ public class TypesPackageImpl extends EPackageImpl {
 				.getVoidType_OclLibrary();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.TypeTypeImpl <em>Type Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getTypeType()
+		 * @see org.dresdenocl.essentialocl.types.impl.TypeTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getTypeType()
 		 * @generated
 		 */
 		public static final EClass TYPE_TYPE = eINSTANCE.getTypeType();
@@ -2594,11 +2594,11 @@ public class TypesPackageImpl extends EPackageImpl {
 				.getTypeType_RepresentedType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.OclLibraryImpl <em>Ocl Library</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.OclLibraryImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getOclLibrary()
+		 * @see org.dresdenocl.essentialocl.types.impl.OclLibraryImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getOclLibrary()
 		 * @generated
 		 */
 		public static final EClass OCL_LIBRARY = eINSTANCE.getOclLibrary();
@@ -2676,11 +2676,11 @@ public class TypesPackageImpl extends EPackageImpl {
 				.getOclLibrary_OclTuple();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.types.impl.AnyTypeImpl <em>Any Type</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.types.impl.AnyTypeImpl <em>Any Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.AnyTypeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl#getAnyType()
+		 * @see org.dresdenocl.essentialocl.types.impl.AnyTypeImpl
+		 * @see org.dresdenocl.essentialocl.types.impl.TypesPackageImpl#getAnyType()
 		 * @generated
 		 */
 		public static final EClass ANY_TYPE = eINSTANCE.getAnyType();

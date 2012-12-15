@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -47,14 +47,14 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Feature#isStatic <em>Static</em>}
+ * <li>{@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}
  * </li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Feature#getSemantics <em>
  * Semantics</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getFeature()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getFeature()
  * @model abstract="true"
  * @generated
  */
@@ -71,15 +71,15 @@ public interface Feature extends TypedElement {
 	 * 
 	 * @return the value of the '<em>Static</em>' attribute.
 	 * @see #setStatic(boolean)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getFeature_Static()
-	 * @model default="false" dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getFeature_Static()
+	 * @model default="false" dataType="org.dresdenocl.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isStatic();
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature#isStatic <em>Static</em>}'
+	 * {@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -92,7 +92,7 @@ public interface Feature extends TypedElement {
 	/**
 	 * Returns the value of the '<em><b>Semantics</b></em>' reference. It is
 	 * bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature
 	 * <em>Defined Feature</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Semantics</em>' reference isn't clear, there
@@ -102,8 +102,8 @@ public interface Feature extends TypedElement {
 	 * 
 	 * @return the value of the '<em>Semantics</em>' reference.
 	 * @see #setSemantics(Constraint)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getFeature_Semantics()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getDefinedFeature
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getFeature_Semantics()
+	 * @see org.dresdenocl.pivotmodel.Constraint#getDefinedFeature
 	 * @model opposite="definedFeature"
 	 * @generated
 	 */
@@ -111,7 +111,7 @@ public interface Feature extends TypedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Feature#getSemantics
+	 * {@link org.dresdenocl.pivotmodel.Feature#getSemantics
 	 * <em>Semantics</em>}' reference. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 

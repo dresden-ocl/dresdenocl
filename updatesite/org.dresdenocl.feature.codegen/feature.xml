@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.codegen"
+      id="org.dresdenocl.feature.codegen"
       label="Dresden OCL Code Generator Basis"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -183,16 +183,16 @@ Library.
    </license>
 
    <includes
-         id="tudresden.ocl20.feature.core"
+         id="org.dresdenocl.feature.core"
          version="0.0.0"/>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="tudresden.ocl20.logging"/>
-      <import plugin="tudresden.ocl20.pivot.model"/>
+      <import plugin="org.dresdenocl.logging"/>
+      <import plugin="org.dresdenocl.model"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus"/>
+      <import plugin="org.dresdenocl.modelbus"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.ui.ide"/>
@@ -200,28 +200,28 @@ Library.
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen"
+         id="org.dresdenocl.tools.codegen"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.ui"
+         id="org.dresdenocl.tools.codegen.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.template"
+         id="org.dresdenocl.tools.template"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.transformation"
+         id="org.dresdenocl.tools.transformation"
          download-size="0"
          install-size="0"
          version="0.0.0"

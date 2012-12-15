@@ -10,8 +10,8 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
 
 /**
  * <!-- begin-user-doc -->
@@ -50,7 +50,7 @@ public interface ConstraintMetrics extends ConstraintMetric {
 
 	/**
 	 * Returns the value of the '<em><b>Constraints</b></em>' reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.pivotmodel.Constraint}.
+	 * The list contents are of type {@link org.dresdenocl.pivotmodel.Constraint}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Constraints</em>' reference list isn't clear,

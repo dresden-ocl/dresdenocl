@@ -1,11 +1,11 @@
-package tudresden.ocl20.pivot.tools.transformation;
+package org.dresdenocl.tools.transformation;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.transformation.impl.Tuple;
 
 public class TransformationFactory {
 

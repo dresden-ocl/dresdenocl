@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A representation for a range in a document where a terminal (i.e., a
@@ -24,13 +24,13 @@ public class OclExpectedTerminal {
 	
 	private int followSetID;
 	private org.eclipse.emf.ecore.EObject container;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement terminal;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal;
 	private int startIncludingHiddenTokens;
 	private int startExcludingHiddenTokens;
 	private String prefix;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace;
+	private org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace;
 	
-	public OclExpectedTerminal(org.eclipse.emf.ecore.EObject container, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement terminal, int followSetID, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace) {
+	public OclExpectedTerminal(org.eclipse.emf.ecore.EObject container, org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal, int followSetID, org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace) {
 		super();
 		this.container = container;
 		this.terminal = terminal;
@@ -50,7 +50,7 @@ public class OclExpectedTerminal {
 		return followSetID;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement getTerminal() {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement getTerminal() {
 		return terminal;
 	}
 	
@@ -102,7 +102,7 @@ public class OclExpectedTerminal {
 		this.prefix = prefix;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainmentTrace getContainmentTrace() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace getContainmentTrace() {
 		return containmentTrace;
 	}
 	

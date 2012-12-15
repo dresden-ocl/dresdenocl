@@ -16,14 +16,14 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.types;
+package org.dresdenocl.tools.codegen.ocl2java.types;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections;
+import org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections;
 
 /**
  * <p>
@@ -165,7 +165,7 @@ public abstract class OclCollection<T> implements Collection<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.ocl2java.types.IOclCollection#size()
+	 * @see org.dresdenocl.ocl2java.types.IOclCollection#size()
 	 */
 	public int size() {
 		return this.myCollection.size();

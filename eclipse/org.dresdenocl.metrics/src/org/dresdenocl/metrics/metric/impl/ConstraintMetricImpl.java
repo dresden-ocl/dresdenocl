@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <!-- begin-user-doc -->

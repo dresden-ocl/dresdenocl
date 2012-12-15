@@ -22,7 +22,7 @@ public privileged aspect Class1_DefAspect_testOclIsInvalid02 {
         	collection1 = new java.util.ArrayList();
 
             /* DUMMY variable is necessary to form literals into a statement. */
-            Object DUMMY = tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(collection1); 
+            Object DUMMY = org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.first(collection1); 
             result1 = false;
         }
 

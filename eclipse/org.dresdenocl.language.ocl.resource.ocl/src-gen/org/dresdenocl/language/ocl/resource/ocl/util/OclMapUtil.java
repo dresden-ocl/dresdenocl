@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 public class OclMapUtil {
 	
@@ -60,7 +60,7 @@ public class OclMapUtil {
 			if (currentValue instanceof java.util.List<?>) {
 				// if the current value is a list, we add the new value to this list
 				java.util.List<?> currentValueAsList = (java.util.List<?>) currentValue;
-				java.util.List<Object> currentValueAsObjectList = tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclListUtil.copySafelyToObjectList(currentValueAsList);
+				java.util.List<Object> currentValueAsObjectList = org.dresdenocl.language.ocl.resource.ocl.util.OclListUtil.copySafelyToObjectList(currentValueAsList);
 				if (value instanceof java.util.Collection<?>) {
 					currentValueAsObjectList.addAll((java.util.Collection<?>) value);
 				} else {

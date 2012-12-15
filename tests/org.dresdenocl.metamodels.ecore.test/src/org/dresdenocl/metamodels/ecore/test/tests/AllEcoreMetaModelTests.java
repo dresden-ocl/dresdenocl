@@ -11,12 +11,12 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.ecore.test.tests;
+package org.dresdenocl.metamodels.ecore.test.tests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
+import org.dresdenocl.metamodels.test.MetaModelTestPlugin;
 
 /**
  * <p>

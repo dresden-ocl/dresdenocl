@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 public class OclDynamicTokenStyler {
 	
@@ -16,7 +16,7 @@ public class OclDynamicTokenStyler {
 	 * @param staticStyle the token style as set in the editor preferences (is
 	 * <code>null</code> if syntax highlighting for the token is disabled)
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDynamicTokenStyle(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken token, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle staticStyle) {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle getDynamicTokenStyle(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.dresdenocl.language.ocl.resource.ocl.IOclTextToken token, org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle staticStyle) {
 		// The default implementation returns the static style without any changes. To
 		// implement dynamic token styling, set the overrideDynamicTokenStyler option to
 		// <code>false</code> and customize this method.

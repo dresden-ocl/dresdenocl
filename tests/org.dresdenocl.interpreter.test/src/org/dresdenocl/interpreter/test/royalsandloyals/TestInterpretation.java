@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test.royalsandloyals;
+package org.dresdenocl.interpreter.test.royalsandloyals;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -30,31 +30,31 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Burning;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Color;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Membership;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.examples.royalsandloyals.Burning;
+import org.dresdenocl.examples.royalsandloyals.Color;
+import org.dresdenocl.examples.royalsandloyals.Customer;
+import org.dresdenocl.examples.royalsandloyals.CustomerCard;
+import org.dresdenocl.examples.royalsandloyals.Date;
+import org.dresdenocl.examples.royalsandloyals.Earning;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyAccount;
+import org.dresdenocl.examples.royalsandloyals.LoyaltyProgram;
+import org.dresdenocl.examples.royalsandloyals.Membership;
+import org.dresdenocl.examples.royalsandloyals.ProgramPartner;
+import org.dresdenocl.examples.royalsandloyals.Service;
+import org.dresdenocl.examples.royalsandloyals.ServiceLevel;
+import org.dresdenocl.examples.royalsandloyals.Transaction;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <p>

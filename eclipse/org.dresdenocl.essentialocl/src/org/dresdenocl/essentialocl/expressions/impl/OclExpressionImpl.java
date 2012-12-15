@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import java.util.ArrayList;
 
@@ -39,20 +39,20 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
+import org.dresdenocl.essentialocl.expressions.ExpressionsFactory;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.OperationCallExp;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.OperationImpl;
+import org.dresdenocl.pivotmodel.impl.TypedElementImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -60,7 +60,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -97,7 +97,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 * Overridden to implement lazy caching of evaluated types. Subclasses should
 	 * implement {@link #evaluateType()} for the actual type evaluation logic.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType()
 	 */
 	@Override
 	public final Type getType() {
@@ -123,7 +123,7 @@ public abstract class OclExpressionImpl extends TypedElementImpl implements
 	 * <code>OclExpression</code> directly. This method will throw an
 	 * {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#setType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public void setType(Type newType) {

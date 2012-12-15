@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetAsSequence {
      *       def: testSetAsSequence(source: Set(OclAny)):    Sequence(OclAny) = source ->asSequence()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSetAsSequence(java.util.Set<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asSequence(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.asSequence(source);
     }
 }

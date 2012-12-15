@@ -7,27 +7,27 @@
       <actionSet
             label="Codegen Action Set"
             visible="true"
-            id="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.actionSet">
+            id="org.dresdenocl.tools.codegen.ocl2java.ui.actionSet">
          <menu
                label="Dresden OCL"
-               id="tudresden.ocl20.pivot.modelbus.ui.menu">
+               id="org.dresdenocl.modelbus.ui.menu">
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+                  name="org.dresdenocl.modelbus.ui.menu.import">
             </separator>
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+                  name="org.dresdenocl.modelbus.ui.menu.tools">
             </separator>
             <groupMarker
-            	name="tudresden.ocl20.pivot.modelbus.ui.menu.codegen">
+            	name="org.dresdenocl.modelbus.ui.menu.codegen">
             </groupMarker>
          </menu>
          <action
                label="Generate AspectJ Constraint Code"
                icon="icons/codegen.gif"
-               class="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction"
+               class="org.dresdenocl.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction"
                tooltip="Creates AspectJ code to instrument constraints for a given model and given OCL constraints."
-               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.codegen"
-               id="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction">
+               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.codegen"
+               id="org.dresdenocl.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction">
          </action>
       </actionSet>
    </extension>
@@ -35,11 +35,11 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            category="tudresden.ocl20.pivot.modelbus.ui.newWizards.category"
-            class="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards.JavaCodeWizard"
+            category="org.dresdenocl.modelbus.ui.newWizards.category"
+            class="org.dresdenocl.tools.codegen.ocl2java.ui.internal.wizards.JavaCodeWizard"
             hasPages="true"
             icon="icons/codegen.gif"
-            id="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.importWizards.loadModelWizard"
+            id="org.dresdenocl.tools.codegen.ocl2java.ui.importWizards.loadModelWizard"
             name="Generate AspectJ Constraint Code">
          <description>
             Creates AspectJ code to instrument constraints for a given model and given OCL constraints.
@@ -49,9 +49,9 @@
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="tudresden.ocl20.pivot.ui.perspective">
+            targetID="org.dresdenocl.ui.perspective">
          <newWizardShortcut
-               id="tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.importWizards.loadModelWizard">
+               id="org.dresdenocl.tools.codegen.ocl2java.ui.importWizards.loadModelWizard">
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>

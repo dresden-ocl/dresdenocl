@@ -11,19 +11,19 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.internal.model;
+package org.dresdenocl.metamodels.java.internal.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.base.AbstractPrimitiveType;
 
 /**
  * <p>
@@ -165,7 +165,7 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getKind()
+	 * org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getKind()
 	 */
 	@Override
 	public PrimitiveTypeKind getKind() {
@@ -181,7 +181,7 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getName()
+	 * org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getName()
 	 */
 	@Override
 	public String getName() {
@@ -193,7 +193,7 @@ public class JavaPrimitiveType extends AbstractPrimitiveType implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractPrimitiveType#getNamespace
+	 * org.dresdenocl.pivotmodel.base.AbstractPrimitiveType#getNamespace
 	 * ()
 	 */
 	@Override

@@ -30,18 +30,18 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractProperty;
 
 /**
  * <p>
@@ -108,7 +108,7 @@ public class EcoreProperty extends AbstractProperty implements Property {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getName()
 	 */
 	@Override
 	public String getName() {
@@ -120,7 +120,7 @@ public class EcoreProperty extends AbstractProperty implements Property {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getOwningType()
+	 * org.dresdenocl.pivotmodel.base.AbstractProperty#getOwningType()
 	 */
 	@Override
 	public Type getOwningType() {
@@ -132,7 +132,7 @@ public class EcoreProperty extends AbstractProperty implements Property {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractProperty#getType()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractProperty#getType()
 	 */
 	@Override
 	public Type getType() {
@@ -185,7 +185,7 @@ public class EcoreProperty extends AbstractProperty implements Property {
 	}
 
 	/* (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isIdentifier()
+	 * @see org.dresdenocl.pivotmodel.impl.PropertyImpl#isIdentifier()
 	 */
 	@Override
 	public boolean isIdentifier() {

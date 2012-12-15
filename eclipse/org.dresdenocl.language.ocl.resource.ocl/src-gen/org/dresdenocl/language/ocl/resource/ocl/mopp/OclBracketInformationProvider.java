@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 public class OclBracketInformationProvider {
 	
-	public class BracketPair implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair {
+	public class BracketPair implements org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair {
 		
 		private String opening;
 		private String closing;
@@ -34,8 +34,8 @@ public class OclBracketInformationProvider {
 		}
 	}
 	
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs() {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair> result = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair>();
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs() {
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> result = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair>();
 		result.add(new BracketPair("(", ")", true));
 		result.add(new BracketPair("{", "}", true));
 		result.add(new BracketPair("'", "'", false));

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.metamodel.internal;
+package org.dresdenocl.modelbus.metamodel.internal;
 
 import org.apache.log4j.Logger;
 
@@ -38,10 +38,10 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.model.metamodel.IMetamodelRegistry;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
  * <p>

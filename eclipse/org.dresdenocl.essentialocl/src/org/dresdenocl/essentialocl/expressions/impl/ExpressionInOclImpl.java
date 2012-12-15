@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -46,10 +46,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl;
+import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.pivotmodel.impl.ExpressionImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Expression In Ocl</b></em>'.
@@ -57,10 +57,10 @@ import tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getContext <em>Context</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getResult <em>Result</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl#getContext <em>Context</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl#getParameter <em>Parameter</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,7 +119,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	/**
 	 * Overridden to return the string <code>"OCL"</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#getLanguage()
+	 * @see org.dresdenocl.pivotmodel.impl.ExpressionImpl#getLanguage()
 	 */
 	@Override
 	public String getLanguage() {
@@ -131,7 +131,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * Overridden to prevent setting the language. This method will throw an
 	 * {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl#setLanguage(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.ExpressionImpl#setLanguage(java.lang.String)
 	 */
 	@Override
 	public void setLanguage(String newLanguage) {

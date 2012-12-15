@@ -1,6 +1,6 @@
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Operation;
 
 
 public interface OclLibraryObject extends OclAny {

@@ -1,15 +1,15 @@
 /**
  * 
  */
-package tudresden.ocl20.pivot.modelbus.util;
+package org.dresdenocl.modelbus.util;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelinstance.IModelInstanceType;
 
 /**
  * @author Lars Schuetze
@@ -79,28 +79,28 @@ public final class ModelLoaderUtility {
 						|| fileExtension.equalsIgnoreCase("java")) {
 					mmType =
 							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.java");
+									"org.dresdenocl.metamodels.java");
 
 					isApplicable = true;
 				}
 				else if (fileExtension.equalsIgnoreCase("uml")) {
 					mmType =
 							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.uml2");
+									"org.dresdenocl.metamodels.uml2");
 
 					isApplicable = true;
 				}
 				else if (fileExtension.equalsIgnoreCase("ecore")) {
 					mmType =
 							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.ecore");
+									"org.dresdenocl.metamodels.ecore");
 
 					isApplicable = true;
 				}
 				else if (fileExtension.equalsIgnoreCase("xsd")) {
 					mmType =
 							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"tudresden.ocl20.pivot.metamodels.xsd");
+									"org.dresdenocl.metamodels.xsd");
 
 					isApplicable = true;
 				}
@@ -137,7 +137,7 @@ public final class ModelLoaderUtility {
 					miType =
 							ModelBusPlugin.getModelInstanceTypeRegistry()
 									.getModelInstanceType(
-											"tudresden.ocl20.pivot.modelinstancetype.java");
+											"org.dresdenocl.modelinstancetype.java");
 
 					isApplicable = true;
 
@@ -146,7 +146,7 @@ public final class ModelLoaderUtility {
 					miType =
 							ModelBusPlugin.getModelInstanceTypeRegistry()
 									.getModelInstanceType(
-											"tudresden.ocl20.pivot.modelinstancetype.ecore");
+											"org.dresdenocl.modelinstancetype.ecore");
 
 					isApplicable = true;
 
@@ -155,7 +155,7 @@ public final class ModelLoaderUtility {
 					miType =
 							ModelBusPlugin.getModelInstanceTypeRegistry()
 									.getModelInstanceType(
-											"tudresden.ocl20.pivot.modelinstancetype.xml");
+											"org.dresdenocl.modelinstancetype.xml");
 
 					isApplicable = true;
 				}

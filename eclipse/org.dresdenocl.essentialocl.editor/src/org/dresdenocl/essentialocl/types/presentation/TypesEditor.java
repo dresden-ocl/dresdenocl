@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.presentation;
+package org.dresdenocl.essentialocl.types.presentation;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -138,9 +138,9 @@ import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.essentialocl.types.provider.TypesItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
+import org.dresdenocl.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory;
+import org.dresdenocl.essentialocl.types.provider.TypesItemProviderAdapterFactory;
+import org.dresdenocl.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
 
 /**
  * This is an example of a Types model editor.
@@ -558,7 +558,7 @@ public class TypesEditor extends MultiPageEditorPart implements
 		if (updateProblemIndication) {
 			BasicDiagnostic diagnostic =
 					new BasicDiagnostic(Diagnostic.OK,
-							"tudresden.ocl20.pivot.essentialocl.editor", //$NON-NLS-1$
+							"org.dresdenocl.essentialocl.editor", //$NON-NLS-1$
 							0, null, new Object[] { editingDomain.getResourceSet() });
 			for (Diagnostic childDiagnostic : resourceToDiagnosticMap.values()) {
 				if (childDiagnostic.getSeverity() != Diagnostic.OK) {
@@ -927,7 +927,7 @@ public class TypesEditor extends MultiPageEditorPart implements
 			BasicDiagnostic basicDiagnostic =
 					new BasicDiagnostic(
 							Diagnostic.ERROR,
-							"tudresden.ocl20.pivot.essentialocl.editor", //$NON-NLS-1$
+							"org.dresdenocl.essentialocl.editor", //$NON-NLS-1$
 							0,
 							getString("_UI_CreateModelError_message", resource.getURI()), //$NON-NLS-1$
 							new Object[] { exception == null ? (Object) resource : exception });
@@ -936,7 +936,7 @@ public class TypesEditor extends MultiPageEditorPart implements
 		}
 		else if (exception != null) {
 			return new BasicDiagnostic(Diagnostic.ERROR,
-					"tudresden.ocl20.pivot.essentialocl.editor", //$NON-NLS-1$
+					"org.dresdenocl.essentialocl.editor", //$NON-NLS-1$
 					0, getString("_UI_CreateModelError_message", resource.getURI()), //$NON-NLS-1$
 					new Object[] { exception });
 		}

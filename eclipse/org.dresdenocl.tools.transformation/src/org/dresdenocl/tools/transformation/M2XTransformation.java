@@ -2,12 +2,12 @@
  * Created on 26.01.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation;
+package org.dresdenocl.tools.transformation;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
 
 /**
  * M2X Transformation is an abstract implementation for all model-to-x

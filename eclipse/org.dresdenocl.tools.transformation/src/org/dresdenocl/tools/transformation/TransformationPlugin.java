@@ -16,14 +16,14 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.transformation;
+package org.dresdenocl.tools.transformation;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.tools.transformation.internal.TransformationRegistry;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.tools.transformation.internal.TransformationRegistry;
 
 /**
  * <p>
@@ -35,7 +35,7 @@ import tudresden.ocl20.pivot.tools.transformation.internal.TransformationRegistr
 public class TransformationPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.tools.transformation";
+	public static final String ID = "org.dresdenocl.tools.transformation";
 
 	/** The shared instance. */
 	private static TransformationPlugin plugin;
@@ -88,7 +88,7 @@ public class TransformationPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

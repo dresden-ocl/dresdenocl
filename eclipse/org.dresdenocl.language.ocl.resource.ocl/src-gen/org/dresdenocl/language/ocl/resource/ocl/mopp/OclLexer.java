@@ -1,6 +1,6 @@
 // $ANTLR 3.4
 
-	package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+	package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 
 import org.antlr.runtime3_4_0.BaseRecognizer;

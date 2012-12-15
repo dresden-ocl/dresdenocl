@@ -12,7 +12,7 @@
    <extension
          point="org.eclipse.emf.ecore.generated_package">
       <package
-            class="tudresden.ocl20.pivot.language.ocl.OclPackage"
+            class="org.dresdenocl.language.ocl.OclPackage"
             genModel="metamodel/OCL.genmodel"
             uri="http://www.tu-dresden.de/ocl20/pivot/language/ocl">
       </package>

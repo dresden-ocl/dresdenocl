@@ -18,7 +18,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelinstancetype.xml.test;
+package org.dresdenocl.modelinstancetype.xml.test;
 
 /**
  * <p>Plug-in implementation of IModelInstanceType test suite for XML.</p>
@@ -35,7 +35,7 @@ public class XmlModelInstanceTypeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.modelinstancetype.xml.test";
+			"org.dresdenocl.modelinstancetype.xml.test";
 
 	/** The shared instance. */
 	private static XmlModelInstanceTypeTestPlugin plugin;

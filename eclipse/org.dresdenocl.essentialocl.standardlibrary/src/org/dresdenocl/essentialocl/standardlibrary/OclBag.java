@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
 /**
  * 
@@ -76,7 +76,7 @@ public interface OclBag<T extends OclAny> extends OclUnsortedCollection<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection#flatten()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclCollection#flatten()
 	 */
 	<T2 extends OclAny> OclBag<T2> flatten();
 }

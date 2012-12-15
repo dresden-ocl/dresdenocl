@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.test.model;
+package org.dresdenocl.modelbus.test.model;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,15 +28,15 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.util.ModelQueryUtility;
-import tudresden.ocl20.pivot.modelbus.test.ModelBusTestUtility;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.util.ModelQueryUtility;
+import org.dresdenocl.modelbus.test.ModelBusTestUtility;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

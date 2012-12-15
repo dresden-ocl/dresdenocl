@@ -4,13 +4,13 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * Helper class to add markers to text files based on EMF's
  * <code>org.eclipse.emf.ecore.resource.Resource.Diagnostic</code>. If a resource
  * contains
- * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic</code>s
+ * <code>org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic</code>s
  * it uses the more precise information of this extended diagnostic type.
  */
 public class OclMarkerHelper {
@@ -18,7 +18,7 @@ public class OclMarkerHelper {
 	/**
 	 * The extension id of the custom marker type that is used by this text resource.
 	 */
-	public static final String MARKER_TYPE = tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.PLUGIN_ID + ".problem";
+	public static final String MARKER_TYPE = org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.PLUGIN_ID + ".problem";
 	
 	/**
 	 * The total number of markers per file is restricted with this constant.
@@ -48,11 +48,11 @@ public class OclMarkerHelper {
 	
 	private static class MarkerCommandQueue {
 		
-		private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>> commands = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>>();
+		private java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>> commands = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>>();
 		
 		private MutexRule schedulingRule = new MutexRule();
 		
-		public void addCommand(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object> command) {
+		public void addCommand(org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object> command) {
 			synchronized(commands) {
 				commands.add(command);
 				// we only need to schedule a job, if the queue was empty
@@ -75,12 +75,12 @@ public class OclMarkerHelper {
 		}
 		
 		public void runCommands() {
-			java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>> commandsToProcess = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>>();
+			java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>> commandsToProcess = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>>();
 			synchronized(commands) {
 				commandsToProcess.addAll(commands);
 				commands.clear();
 			}
-			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object> command : commandsToProcess) {
+			for (org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object> command : commandsToProcess) {
 				command.execute(null);
 			}
 		}
@@ -96,7 +96,7 @@ public class OclMarkerHelper {
 	 * @param resource The resource that is the file to mark.
 	 * @param diagnostic The diagnostic with information for the marker.
 	 */
-	public void mark(org.eclipse.emf.ecore.resource.Resource resource, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic diagnostic) {
+	public void mark(org.eclipse.emf.ecore.resource.Resource resource, org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic diagnostic) {
 		final org.eclipse.core.resources.IFile file = getFile(resource);
 		if (file == null) {
 			return;
@@ -104,11 +104,11 @@ public class OclMarkerHelper {
 		createMarkerFromDiagnostic(file, diagnostic);
 	}
 	
-	protected void createMarkerFromDiagnostic(final org.eclipse.core.resources.IFile file, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic diagnostic) {
-		final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclProblem problem = diagnostic.getProblem();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType problemType = problem.getType();
+	protected void createMarkerFromDiagnostic(final org.eclipse.core.resources.IFile file, final org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic diagnostic) {
+		final org.dresdenocl.language.ocl.resource.ocl.IOclProblem problem = diagnostic.getProblem();
+		org.dresdenocl.language.ocl.resource.ocl.OclEProblemType problemType = problem.getType();
 		final String markerID = getMarkerID(problemType);
-		COMMAND_QUEUE.addCommand(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>() {
+		COMMAND_QUEUE.addCommand(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>() {
 			public boolean execute(Object context) {
 				try {
 					// if there are too many markers, we do not add new ones
@@ -117,34 +117,34 @@ public class OclMarkerHelper {
 					}
 					
 					org.eclipse.core.resources.IMarker marker = file.createMarker(markerID);
-					if (problem.getSeverity() == tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity.ERROR) {
+					if (problem.getSeverity() == org.dresdenocl.language.ocl.resource.ocl.OclEProblemSeverity.ERROR) {
 						marker.setAttribute(org.eclipse.core.resources.IMarker.SEVERITY, org.eclipse.core.resources.IMarker.SEVERITY_ERROR);
 					} else {
 						marker.setAttribute(org.eclipse.core.resources.IMarker.SEVERITY, org.eclipse.core.resources.IMarker.SEVERITY_WARNING);
 					}
 					marker.setAttribute(org.eclipse.core.resources.IMarker.MESSAGE, diagnostic.getMessage());
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic textDiagnostic = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextDiagnostic) diagnostic;
+					org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic textDiagnostic = (org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic) diagnostic;
 					marker.setAttribute(org.eclipse.core.resources.IMarker.LINE_NUMBER, textDiagnostic.getLine());
 					marker.setAttribute(org.eclipse.core.resources.IMarker.CHAR_START, textDiagnostic.getCharStart());
 					marker.setAttribute(org.eclipse.core.resources.IMarker.CHAR_END, textDiagnostic.getCharEnd() + 1);
-					if (diagnostic instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource.ElementBasedTextDiagnostic) {
-						org.eclipse.emf.ecore.EObject element = ((tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource.ElementBasedTextDiagnostic) diagnostic).getElement();
+					if (diagnostic instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource.ElementBasedTextDiagnostic) {
+						org.eclipse.emf.ecore.EObject element = ((org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource.ElementBasedTextDiagnostic) diagnostic).getElement();
 						String elementURI = getObjectURI(element);
 						if (elementURI != null) {
 							marker.setAttribute(org.eclipse.emf.ecore.util.EcoreValidator.URI_ATTRIBUTE, elementURI);
 						}
 					}
-					java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = textDiagnostic.getProblem().getQuickFixes();
+					java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = textDiagnostic.getProblem().getQuickFixes();
 					java.util.Collection<Object> sourceIDs = new java.util.ArrayList<Object>();
 					if (quickFixes != null) {
-						for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
+						for (org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix : quickFixes) {
 							if (quickFix != null) {
 								sourceIDs.add(quickFix.getContextAsString());
 							}
 						}
 					}
 					if (!sourceIDs.isEmpty()) {
-						marker.setAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID, tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.explode(sourceIDs, "|"));
+						marker.setAttribute(org.eclipse.core.resources.IMarker.SOURCE_ID, org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.explode(sourceIDs, "|"));
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
 					handleException(ce);
@@ -163,7 +163,7 @@ public class OclMarkerHelper {
 	 * @param resource The resource where to delete markers from
 	 */
 	public void unmark(org.eclipse.emf.ecore.resource.Resource resource) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType nextType : tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.values()) {
+		for (org.dresdenocl.language.ocl.resource.ocl.OclEProblemType nextType : org.dresdenocl.language.ocl.resource.ocl.OclEProblemType.values()) {
 			unmark(resource, nextType);
 		}
 	}
@@ -177,13 +177,13 @@ public class OclMarkerHelper {
 	 * @param resource The resource where to delete markers from
 	 * @param problemType The type of problem to remove
 	 */
-	public void unmark(org.eclipse.emf.ecore.resource.Resource resource, tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType problemType) {
+	public void unmark(org.eclipse.emf.ecore.resource.Resource resource, org.dresdenocl.language.ocl.resource.ocl.OclEProblemType problemType) {
 		final org.eclipse.core.resources.IFile file = getFile(resource);
 		if (file == null) {
 			return;
 		}
 		final String markerType = getMarkerID(problemType);
-		COMMAND_QUEUE.addCommand(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>() {
+		COMMAND_QUEUE.addCommand(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>() {
 			public boolean execute(Object context) {
 				try {
 					file.deleteMarkers(markerType, false, org.eclipse.core.resources.IResource.DEPTH_ZERO);
@@ -209,12 +209,12 @@ public class OclMarkerHelper {
 		if (file == null) {
 			return;
 		}
-		final String markerID = getMarkerID(tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.UNKNOWN);
+		final String markerID = getMarkerID(org.dresdenocl.language.ocl.resource.ocl.OclEProblemType.UNKNOWN);
 		final String causingObjectURI = getObjectURI(causingObject);
 		if (causingObjectURI == null) {
 			return;
 		}
-		COMMAND_QUEUE.addCommand(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>() {
+		COMMAND_QUEUE.addCommand(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>() {
 			public boolean execute(Object context) {
 				try {
 					org.eclipse.core.resources.IMarker[] markers = file.findMarkers(markerID, true, org.eclipse.core.resources.IResource.DEPTH_ZERO);
@@ -235,7 +235,7 @@ public class OclMarkerHelper {
 	 * Returns the ID of the marker type that is used to indicate problems of the
 	 * given type.
 	 */
-	public String getMarkerID(tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType problemType) {
+	public String getMarkerID(org.dresdenocl.language.ocl.resource.ocl.OclEProblemType problemType) {
 		String markerID = MARKER_TYPE;
 		String typeID = problemType.getID();
 		if (!"".equals(typeID)) {
@@ -284,7 +284,7 @@ public class OclMarkerHelper {
 		}else if (ce.getMessage().matches("Resource.*does not exist.")) {
 			// ignore
 		} else {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Error while removing markers from resource:", ce);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Error while removing markers from resource:", ce);
 		}
 	}
 	
@@ -301,7 +301,7 @@ public class OclMarkerHelper {
 		if (resource == null) {
 			return;
 		}
-		COMMAND_QUEUE.addCommand(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>() {
+		COMMAND_QUEUE.addCommand(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>() {
 			public boolean execute(Object context) {
 				try {
 					resource.deleteMarkers(markerId, false, org.eclipse.core.resources.IResource.DEPTH_ZERO);
@@ -318,7 +318,7 @@ public class OclMarkerHelper {
 			return;
 		}
 		
-		COMMAND_QUEUE.addCommand(new tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclCommand<Object>() {
+		COMMAND_QUEUE.addCommand(new org.dresdenocl.language.ocl.resource.ocl.IOclCommand<Object>() {
 			public boolean execute(Object context) {
 				try {
 					org.eclipse.core.resources.IMarker marker = resource.createMarker(markerId);
@@ -327,7 +327,7 @@ public class OclMarkerHelper {
 					}
 					return true;
 				} catch (org.eclipse.core.runtime.CoreException e) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Can't create marker.", e);
+					org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logError("Can't create marker.", e);
 					return false;
 				}
 			}

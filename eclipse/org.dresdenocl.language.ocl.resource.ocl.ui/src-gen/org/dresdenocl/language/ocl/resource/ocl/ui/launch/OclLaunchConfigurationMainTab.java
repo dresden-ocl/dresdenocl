@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.launch;
+package org.dresdenocl.language.ocl.resource.ocl.ui.launch;
 
 /**
  * A class that provides the main tab to parameterize launch configurations

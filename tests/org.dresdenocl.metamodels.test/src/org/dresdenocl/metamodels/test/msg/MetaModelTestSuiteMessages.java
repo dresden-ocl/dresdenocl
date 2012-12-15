@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.test.msg;
+package org.dresdenocl.metamodels.test.msg;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.osgi.util.NLS;
@@ -26,7 +26,7 @@ public class MetaModelTestSuiteMessages extends NLS {
 
 	/** The name of the message resource bundle. */
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.metamodels.test.msg.messages"; //$NON-NLS-1$
+			"org.dresdenocl.metamodels.test.msg.messages"; //$NON-NLS-1$
 
 	public static String MetaModelTestSuite_CurrentlyTestedMetaModel;
 	public static String MetaModelTestSuite_EnumerationNotFoundInModel;

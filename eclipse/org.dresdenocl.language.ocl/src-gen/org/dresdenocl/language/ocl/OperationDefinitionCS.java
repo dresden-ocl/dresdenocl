@@ -4,12 +4,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,13 +19,13 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getOperation <em>Operation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getParameters <em>Parameters</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getReturnType <em>Return Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationDefinitionCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionCS()
  * @model abstract="true"
  * @generated
  */
@@ -40,14 +40,14 @@ public interface OperationDefinitionCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Operation</em>' reference.
    * @see #setOperation(Operation)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationDefinitionCS_Operation()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionCS_Operation()
    * @model required="true"
    * @generated
    */
 	Operation getOperation();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getOperation <em>Operation</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getOperation <em>Operation</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operation</em>' reference.
@@ -58,7 +58,7 @@ public interface OperationDefinitionCS extends EObject {
 
 	/**
    * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.ParameterCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.ParameterCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -66,7 +66,7 @@ public interface OperationDefinitionCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Parameters</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationDefinitionCS_Parameters()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionCS_Parameters()
    * @model containment="true"
    * @generated
    */
@@ -82,14 +82,14 @@ public interface OperationDefinitionCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Return Type</em>' containment reference.
    * @see #setReturnType(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getOperationDefinitionCS_ReturnType()
+   * @see org.dresdenocl.language.ocl.OclPackage#getOperationDefinitionCS_ReturnType()
    * @model containment="true"
    * @generated
    */
 	TypeCS getReturnType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.OperationDefinitionCS#getReturnType <em>Return Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.OperationDefinitionCS#getReturnType <em>Return Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Return Type</em>' containment reference.

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="tudresden.ocl20.pivot.tools.transformations" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.dresdenocl.tools.transformations" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="tudresden.ocl20.pivot.tools.transformations" id="transformations" name="Transformations"/>
+         <meta.schema plugin="org.dresdenocl.tools.transformations" id="transformations" name="Transformations"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":tudresden.ocl20.pivot.tools.transformation.ITransformation"/>
+                  <meta.attribute kind="java" basedOn=":org.dresdenocl.tools.transformation.ITransformation"/>
                </appinfo>
             </annotation>
          </attribute>

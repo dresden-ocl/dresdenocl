@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -39,11 +39,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
+import org.dresdenocl.pivotmodel.ComplexGenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.TypeArgument;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -52,7 +52,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypeArgument;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeArgumentImpl#getOwningGenericType
+ * {@link org.dresdenocl.pivotmodel.impl.TypeArgumentImpl#getOwningGenericType
  * <em>Owning Generic Type</em>}</li>
  * </ul>
  * </p>
@@ -87,7 +87,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * because commonly a type argument won't have a dedicated name. If neither a
 	 * type nor a generic type is set, the empty string is returned.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName()
 	 */
 	@Override
 	public String getName() {
@@ -101,7 +101,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * <code>TypeArgument</code> is determined based on the referenced type. This
 	 * method will throw an {@link UnsupportedOperationException}.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
 	@Override
 	@SuppressWarnings("unused")
@@ -115,7 +115,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * Overridden to return the {@link #getOwningGenericType() generic type} that
 	 * owns this <code>TypeArgument</code>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -137,7 +137,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
 	public TypeArgument clone() {
@@ -150,7 +150,7 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 	 * Overridden to indicate that the name is determined automatically. Assure
 	 * that {@link #setName(String)} is not called which would throw an exception.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#hasVolatileName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#hasVolatileName()
 	 */
 	@Override
 	protected boolean hasVolatileName() {

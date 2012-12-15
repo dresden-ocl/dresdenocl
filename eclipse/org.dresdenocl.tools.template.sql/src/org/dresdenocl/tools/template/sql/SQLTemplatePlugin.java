@@ -1,10 +1,10 @@
-package tudresden.ocl20.pivot.tools.template.sql;
+package org.dresdenocl.tools.template.sql;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * The only purpose of this plugin is to initialize the {@link LoggingPlugin
@@ -24,7 +24,7 @@ public class SQLTemplatePlugin extends Plugin {
 	/**
 	 * The id of this plugin
 	 */
-	public static final String ID = "tudresden.ocl20.pivot.tools.template.sql"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.tools.template.sql"; //$NON-NLS-1$
 
 	// The shared instance
 	private static SQLTemplatePlugin plugin;
@@ -65,7 +65,7 @@ public class SQLTemplatePlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

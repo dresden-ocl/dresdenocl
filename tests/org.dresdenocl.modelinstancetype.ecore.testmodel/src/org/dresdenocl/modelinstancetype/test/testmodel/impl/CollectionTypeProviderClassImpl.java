@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
+package org.dresdenocl.modelinstancetype.test.testmodel.impl;
 
 import java.util.Collection;
 
@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 
@@ -26,10 +26,10 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPac
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getBagProperty1 <em>Bag Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getOrderedSetProperty1 <em>Ordered Set Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getSequenceProperty1 <em>Sequence Property1</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getSetProperty1 <em>Set Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getBagProperty1 <em>Bag Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getOrderedSetProperty1 <em>Ordered Set Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getSequenceProperty1 <em>Sequence Property1</em>}</li>
+ *   <li>{@link org.dresdenocl.modelinstancetype.test.testmodel.impl.CollectionTypeProviderClassImpl#getSetProperty1 <em>Set Property1</em>}</li>
  * </ul>
  * </p>
  *

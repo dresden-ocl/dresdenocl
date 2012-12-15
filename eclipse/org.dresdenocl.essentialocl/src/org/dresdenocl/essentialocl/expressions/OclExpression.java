@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.TypedElement;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.TypedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +44,7 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,7 +67,7 @@ public interface OclExpression extends TypedElement, NamedElement {
 	OclLibrary getOclLibrary();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Library</em>' reference.

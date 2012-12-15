@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.datatypes;
+package org.dresdenocl.datatypes;
 
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
@@ -46,7 +46,7 @@ import org.eclipse.emf.ecore.EPackage;
  * </ul>
  * <!-- end-user-doc -->
  * 
- * @see tudresden.ocl20.pivot.datatypes.DatatypesFactory
+ * @see org.dresdenocl.datatypes.DatatypesFactory
  * @model kind="package"
  * @generated
  */
@@ -80,13 +80,13 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	DatatypesPackage eINSTANCE =
-			tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl.init();
+			org.dresdenocl.datatypes.impl.DatatypesPackageImpl.init();
 
 	/**
 	 * The meta object id for the '<em>Boolean</em>' data type. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBoolean()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getBoolean()
 	 * @generated
 	 */
 	int BOOLEAN = 0;
@@ -95,7 +95,7 @@ public interface DatatypesPackage extends EPackage {
 	 * The meta object id for the '<em>Integer</em>' data type. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getInteger()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getInteger()
 	 * @generated
 	 */
 	int INTEGER = 1;
@@ -104,7 +104,7 @@ public interface DatatypesPackage extends EPackage {
 	 * The meta object id for the '<em>Real</em>' data type. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getReal()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getReal()
 	 * @generated
 	 */
 	int REAL = 2;
@@ -114,7 +114,7 @@ public interface DatatypesPackage extends EPackage {
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see java.lang.String
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getString()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getString()
 	 * @generated
 	 */
 	int STRING = 3;
@@ -123,7 +123,7 @@ public interface DatatypesPackage extends EPackage {
 	 * The meta object id for the '<em>Unlimited Natural</em>' data type. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
 	 * @generated
 	 */
 	int UNLIMITED_NATURAL = 4;
@@ -133,7 +133,7 @@ public interface DatatypesPackage extends EPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see java.util.Collection
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getCollection()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getCollection()
 	 * @generated
 	 */
 	int COLLECTION = 5;
@@ -143,7 +143,7 @@ public interface DatatypesPackage extends EPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see java.util.List
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSequence()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getSequence()
 	 * @generated
 	 */
 	int SEQUENCE = 6;
@@ -153,7 +153,7 @@ public interface DatatypesPackage extends EPackage {
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see java.util.List
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBag()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getBag()
 	 * @generated
 	 */
 	int BAG = 7;
@@ -163,7 +163,7 @@ public interface DatatypesPackage extends EPackage {
 	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see java.util.Set
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSet()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getSet()
 	 * @generated
 	 */
 	int SET = 8;
@@ -173,7 +173,7 @@ public interface DatatypesPackage extends EPackage {
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see java.util.List
-	 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
+	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
 	 * @generated
 	 */
 	int ORDERED_SET = 9;
@@ -317,7 +317,7 @@ public interface DatatypesPackage extends EPackage {
 		 * The meta object literal for the '<em>Boolean</em>' data type. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBoolean()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getBoolean()
 		 * @generated
 		 */
 		EDataType BOOLEAN = eINSTANCE.getBoolean();
@@ -326,7 +326,7 @@ public interface DatatypesPackage extends EPackage {
 		 * The meta object literal for the '<em>Integer</em>' data type. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getInteger()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getInteger()
 		 * @generated
 		 */
 		EDataType INTEGER = eINSTANCE.getInteger();
@@ -335,7 +335,7 @@ public interface DatatypesPackage extends EPackage {
 		 * The meta object literal for the '<em>Real</em>' data type. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getReal()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getReal()
 		 * @generated
 		 */
 		EDataType REAL = eINSTANCE.getReal();
@@ -345,7 +345,7 @@ public interface DatatypesPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.lang.String
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getString()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getString()
 		 * @generated
 		 */
 		EDataType STRING = eINSTANCE.getString();
@@ -354,7 +354,7 @@ public interface DatatypesPackage extends EPackage {
 		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
 		 * @generated
 		 */
 		EDataType UNLIMITED_NATURAL = eINSTANCE.getUnlimitedNatural();
@@ -364,7 +364,7 @@ public interface DatatypesPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.util.Collection
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getCollection()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getCollection()
 		 * @generated
 		 */
 		EDataType COLLECTION = eINSTANCE.getCollection();
@@ -374,7 +374,7 @@ public interface DatatypesPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.util.List
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSequence()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getSequence()
 		 * @generated
 		 */
 		EDataType SEQUENCE = eINSTANCE.getSequence();
@@ -384,7 +384,7 @@ public interface DatatypesPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.util.List
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getBag()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getBag()
 		 * @generated
 		 */
 		EDataType BAG = eINSTANCE.getBag();
@@ -394,7 +394,7 @@ public interface DatatypesPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.util.Set
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getSet()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getSet()
 		 * @generated
 		 */
 		EDataType SET = eINSTANCE.getSet();
@@ -404,7 +404,7 @@ public interface DatatypesPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.util.List
-		 * @see tudresden.ocl20.pivot.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
+		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getOrderedSet()
 		 * @generated
 		 */
 		EDataType ORDERED_SET = eINSTANCE.getOrderedSet();

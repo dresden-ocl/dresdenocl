@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * A common interface for scanners to be used by EMFText. A scanner is initialized
@@ -20,6 +20,6 @@ public interface IOclTextScanner {
 	/**
 	 * Returns the next token found in the text.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken getNextToken();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextToken getNextToken();
 	
 }

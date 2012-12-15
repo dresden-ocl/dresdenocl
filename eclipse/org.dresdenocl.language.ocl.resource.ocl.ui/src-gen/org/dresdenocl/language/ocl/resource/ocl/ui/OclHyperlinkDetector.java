@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A hyperlink detector returns hyperlink if the token, where the mouse cursor
@@ -12,7 +12,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclHyperlinkDetector implements org.eclipse.jface.text.hyperlink.IHyperlinkDetector {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource;
 	
 	/**
 	 * Creates a hyperlink detector.
@@ -20,11 +20,11 @@ public class OclHyperlinkDetector implements org.eclipse.jface.text.hyperlink.IH
 	 * @param resource the resource to use for calculating the locations.
 	 */
 	public OclHyperlinkDetector(org.eclipse.emf.ecore.resource.Resource resource) {
-		textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resource;
+		textResource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) resource;
 	}
 	
 	public org.eclipse.jface.text.hyperlink.IHyperlink[] detectHyperlinks(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion region, boolean canShowMultipleHyperlinks) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+		org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(region.getOffset());
 		org.eclipse.emf.ecore.EObject resolvedEObject = null;
 		for (org.eclipse.emf.ecore.EObject eObject : elementsAtOffset) {
@@ -43,7 +43,7 @@ public class OclHyperlinkDetector implements org.eclipse.jface.text.hyperlink.IH
 				// we skipt elements that are not contained in a resource, because we cannot jump
 				// to them anyway
 				if (resolvedEObject.eResource() != null) {
-					org.eclipse.jface.text.hyperlink.IHyperlink hyperlink = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHyperlink(new org.eclipse.jface.text.Region(offset, length), resolvedEObject, text);
+					org.eclipse.jface.text.hyperlink.IHyperlink hyperlink = new org.dresdenocl.language.ocl.resource.ocl.ui.OclHyperlink(new org.eclipse.jface.text.Region(offset, length), resolvedEObject, text);
 					return new org.eclipse.jface.text.hyperlink.IHyperlink[] { hyperlink };
 				}
 			}

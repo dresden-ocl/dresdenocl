@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 173f.
 -- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 context Membership
 inv: Sequence{'a','b','c','c','d','e'}->indexOf( 'c' ) = 3

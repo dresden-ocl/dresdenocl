@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -46,12 +46,12 @@ package tudresden.ocl20.pivot.pivotmodel;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+ * {@link org.dresdenocl.pivotmodel.EnumerationLiteral#getEnumeration
  * <em>Enumeration</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumerationLiteral()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getEnumerationLiteral()
  * @model
  * @generated
  */
@@ -60,7 +60,7 @@ public interface EnumerationLiteral extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Enumeration</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral
+	 * {@link org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral
 	 * <em>Owned Literal</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
@@ -70,8 +70,8 @@ public interface EnumerationLiteral extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Enumeration</em>' container reference.
 	 * @see #setEnumeration(Enumeration)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getEnumerationLiteral_Enumeration()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Enumeration#getOwnedLiteral
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getEnumerationLiteral_Enumeration()
+	 * @see org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral
 	 * @model opposite="ownedLiteral"
 	 * @generated
 	 */
@@ -79,7 +79,7 @@ public interface EnumerationLiteral extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral#getEnumeration
+	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral#getEnumeration
 	 * <em>Enumeration</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -93,7 +93,7 @@ public interface EnumerationLiteral extends NamedElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	EnumerationLiteral clone();
 

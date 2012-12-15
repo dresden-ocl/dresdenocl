@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,19 +9,19 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect Date_PostAspect_now {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date#now()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Date#now()}.</p>
      */
     protected pointcut nowCaller():
-    	execution(* org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.now());
+    	execution(* org.dresdenocl.examples.royalsandloyals.Date.now());
 
     /**
      * <p>Checks a postcondition for the operation {@link Date#now()} defined by the constraint
-     * <code>context Date::now() : org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date
+     * <code>context Date::now() : org.dresdenocl.examples.royalsandloyals.Date
      *       post: not result.oclIsUndefined()</code></p>
      */
-    org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date around(): nowCaller() {
+    org.dresdenocl.examples.royalsandloyals.Date around(): nowCaller() {
 
-        org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date result;
+        org.dresdenocl.examples.royalsandloyals.Date result;
         result = proceed();
 
         if (!!(result == null)) {

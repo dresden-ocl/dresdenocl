@@ -3,7 +3,7 @@ FOR <http://www.tu-dresden.de/ocl20/pivot/language/ocl> <OCL.genmodel>
 START PackageDeclarationWithNamespaceCS, PackageDeclarationWithoutNamespaceCS
 
 IMPORTS {
-	pivotmodel : <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.genmodel>
+	pivotmodel : <http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel> <../org.dresdenocl.pivotmodel/model/pivotmodel.genmodel>
 }
 
 OPTIONS {
@@ -19,8 +19,8 @@ OPTIONS {
 	usePredefinedTokens = "false";
 	overrideHyperlink = "false";
 	overrideDefaultResolverDelegate = "false";
-	resourcePluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl";
-	resourceUIPluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui";
+	resourcePluginID = "org.dresdenocl.language.ocl.resource.ocl";
+	resourceUIPluginID = "org.dresdenocl.language.ocl.resource.ocl.ui";
 	srcFolder = "src";
 	srcGenFolder = "src-gen";
 }

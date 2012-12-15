@@ -1,4 +1,4 @@
-package tudresden.ocl20.logging.internal;
+package org.dresdenocl.logging.internal;
 
 import java.net.URL;
 
@@ -14,10 +14,10 @@ import org.apache.log4j.spi.HierarchyEventListener;
 import org.apache.log4j.spi.RootLogger;
 import org.eclipse.core.runtime.Plugin;
 
-import tudresden.ocl20.logging.ILogManager;
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.logging.appender.ErrorLogAppender;
-import tudresden.ocl20.logging.appender.PluginLogFileAppender;
+import org.dresdenocl.logging.ILogManager;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.logging.appender.ErrorLogAppender;
+import org.dresdenocl.logging.appender.PluginLogFileAppender;
 
 /**
  * Default implementation of the <code>ILogManager</code> interface.

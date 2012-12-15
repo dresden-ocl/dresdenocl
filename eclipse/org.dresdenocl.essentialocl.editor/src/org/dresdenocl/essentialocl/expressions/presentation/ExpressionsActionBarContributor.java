@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.presentation;
+package org.dresdenocl.essentialocl.expressions.presentation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,7 +64,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
-import tudresden.ocl20.pivot.essentialocl.types.presentation.EssentialOCLEditorPlugin;
+import org.dresdenocl.essentialocl.types.presentation.EssentialOCLEditorPlugin;
 
 /**
  * This is the action bar contributor for the Expressions model editor.
@@ -219,7 +219,7 @@ public class ExpressionsActionBarContributor extends
 		IMenuManager submenuManager =
 				new MenuManager(
 						EssentialOCLEditorPlugin.INSTANCE
-								.getString("_UI_ExpressionsEditor_menu"), "tudresden.ocl20.pivot.essentialocl.expressionsMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
+								.getString("_UI_ExpressionsEditor_menu"), "org.dresdenocl.essentialocl.expressionsMenuID"); //$NON-NLS-1$ //$NON-NLS-2$
 		menuManager.insertAfter("additions", submenuManager); //$NON-NLS-1$
 		submenuManager.add(new Separator("settings")); //$NON-NLS-1$
 		submenuManager.add(new Separator("actions")); //$NON-NLS-1$

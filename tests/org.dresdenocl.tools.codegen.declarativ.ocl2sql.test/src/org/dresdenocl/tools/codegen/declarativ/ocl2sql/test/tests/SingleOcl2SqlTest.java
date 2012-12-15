@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,15 +17,15 @@ import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodeFactory;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodeFactory;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.Ocl2SqlTestPlugin;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 
 public abstract class SingleOcl2SqlTest {
 

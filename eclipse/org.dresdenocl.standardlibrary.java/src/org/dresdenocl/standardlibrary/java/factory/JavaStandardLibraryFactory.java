@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.standardlibrary.java.factory;
+package org.dresdenocl.standardlibrary.java.factory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,74 +28,74 @@ import java.util.WeakHashMap;
 
 import org.eclipse.emf.common.util.UniqueEList;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBag;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclCollection;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclEnumLiteral;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclOrderedSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSequence;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclTuple;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclVoid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceEnumerationLiteral;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceReal;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceTuple;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBag;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclBoolean;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclEnumLiteral;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclInvalid;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclModelInstanceObject;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclOrderedSet;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSequence;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclSet;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclString;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclTuple;
-import tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclVoid;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.expressions.CollectionKind;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBag;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
+import org.dresdenocl.essentialocl.standardlibrary.OclEnumLiteral;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclInvalid;
+import org.dresdenocl.essentialocl.standardlibrary.OclModelInstanceObject;
+import org.dresdenocl.essentialocl.standardlibrary.OclOrderedSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclSequence;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.essentialocl.standardlibrary.OclTuple;
+import org.dresdenocl.essentialocl.standardlibrary.OclType;
+import org.dresdenocl.essentialocl.standardlibrary.OclVoid;
+import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceBoolean;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceEnumerationLiteral;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInvalid;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceReal;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceTuple;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceVoid;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclBag;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclBoolean;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclEnumLiteral;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclInteger;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclInvalid;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclModelInstanceObject;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclOrderedSet;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclReal;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclSequence;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclSet;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclString;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclTuple;
+import org.dresdenocl.standardlibrary.java.internal.library.JavaOclVoid;
 
 // FIXME Michael: remove factory methods that get an IMICollection as parameter
 
@@ -136,9 +136,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclAny(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * #createOclAny(org.dresdenocl.modelbus.modelinstance
 	 * .types.IModelInstanceElement)
 	 */
 	@SuppressWarnings("unchecked")
@@ -230,7 +230,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclBag(java.util.List)
 	 */
 	public <T extends OclAny> OclBag<T> createOclBag(final List<?> elements,
@@ -273,7 +273,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclBoolean(java.lang.Boolean)
 	 */
 	public OclBoolean createOclBoolean(final Boolean value) {
@@ -284,9 +284,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclBoolean(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * #createOclBoolean(org.dresdenocl.modelbus.modelinstance
 	 * .types.IModelInstanceBoolean)
 	 */
 	public OclBoolean createOclBoolean(final IModelInstanceBoolean value) {
@@ -352,7 +352,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclEnumLiteral(java.lang.Enum)
 	 */
 	public OclEnumLiteral createOclEnumLiteral(final EnumerationLiteral value) {
@@ -366,9 +366,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclEnumLiteral(tudresden.ocl20.pivot.modelbus.
+	 * #createOclEnumLiteral(org.dresdenocl.modelbus.
 	 * modelinstance.types.IModelInstanceEnumerationLiteral)
 	 */
 	public OclEnumLiteral createOclEnumLiteral(
@@ -380,7 +380,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclInteger(java.lang.Long)
 	 */
 	public OclInteger createOclInteger(final Long value) {
@@ -394,9 +394,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclInteger(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * #createOclInteger(org.dresdenocl.modelbus.modelinstance
 	 * .types.IModelInstanceInteger)
 	 */
 	public OclInteger createOclInteger(final IModelInstanceInteger value) {
@@ -407,9 +407,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclModelInstanceObject(tudresden.ocl20.pivot.modelbus
+	 * #createOclModelInstanceObject(org.dresdenocl.modelbus
 	 * .modelinstance.types.IModelInstanceObject)
 	 */
 	public OclModelInstanceObject createOclModelInstanceObject(
@@ -437,7 +437,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclOrderedSet(java.util.List)
 	 */
 	public <T extends OclAny> OclOrderedSet<T> createOclOrderedSet(
@@ -481,7 +481,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclReal(java.lang.Number)
 	 */
 	public OclReal createOclReal(final Number value) {
@@ -495,9 +495,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclReal(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * #createOclReal(org.dresdenocl.modelbus.modelinstance
 	 * .types.IModelInstanceReal)
 	 */
 	public OclReal createOclReal(final IModelInstanceReal value) {
@@ -508,7 +508,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclSequence(java.util.List)
 	 */
 	public <T extends OclAny> OclSequence<T> createOclSequence(
@@ -551,7 +551,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclSet(java.util.List)
 	 */
 	public <T extends OclAny> OclSet<T> createOclSet(final Set<?> elements,
@@ -594,7 +594,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclString(java.lang.String)
 	 */
 	public OclString createOclString(final String value) {
@@ -608,9 +608,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclString(tudresden.ocl20.pivot.modelbus.modelinstance
+	 * #createOclString(org.dresdenocl.modelbus.modelinstance
 	 * .types.IModelInstanceString)
 	 */
 	public OclString createOclString(final IModelInstanceString value) {
@@ -621,7 +621,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclTuple(java.util.List, java.util.List)
 	 */
 	public OclTuple createOclTuple(final List<IModelInstanceString> names,
@@ -640,7 +640,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory#createOclTupleObject(java.util.List,
 	 * java.util.List)
 	 */
@@ -677,9 +677,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * #createOclType(org.dresdenocl.pivotmodel.Type)
 	 */
 	public <T extends OclAny> OclType<T> createOclType(final Type type) {
 
@@ -691,7 +691,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			 * (non-Javadoc)
 			 * 
 			 * @see
-			 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#getType
+			 * org.dresdenocl.essentialocl.standardlibrary.OclType#getType
 			 * ()
 			 */
 			public Type getType() {
@@ -701,8 +701,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			/*
 			 * (non-Javadoc)
 			 * 
-			 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#
-			 * allInstances(tudresden.ocl20.pivot.modelinstance.IModelInstance)
+			 * @see org.dresdenocl.essentialocl.standardlibrary.OclType#
+			 * allInstances(org.dresdenocl.modelinstance.IModelInstance)
 			 */
 			public OclSet<OclAny> allInstances(IModelInstance modelInstance) {
 
@@ -759,9 +759,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclUndefined(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * #createOclUndefined(org.dresdenocl.pivotmodel.Type)
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends OclAny> T createOclUndefined(final Type type,
@@ -866,7 +866,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					 * (non-Javadoc)
 					 * 
 					 * @see
-					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
+					 * org.dresdenocl.essentialocl.standardlibrary.OclType
 					 * #getType()
 					 */
 					public Type getType() {
@@ -877,8 +877,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					 * (non-Javadoc)
 					 * 
 					 * @see
-					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
-					 * #allInstances(tudresden.ocl20.pivot.modelinstance.
+					 * org.dresdenocl.essentialocl.standardlibrary.OclType
+					 * #allInstances(org.dresdenocl.modelinstance.
 					 * IModelInstance)
 					 */
 					public OclSet<OclAny> allInstances(
@@ -914,7 +914,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 	// /*
 	// * (non-Javadoc)
-	// * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	// * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	// * IStandardLibraryFactory#createOclInvalid(java.lang.Class,
 	// * java.lang.Throwable)
 	// */
@@ -930,9 +930,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.factory.
 	 * IStandardLibraryFactory
-	 * #createOclInvalid(tudresden.ocl20.pivot.pivotmodel.Type,
+	 * #createOclInvalid(org.dresdenocl.pivotmodel.Type,
 	 * java.lang.Throwable)
 	 */
 	@SuppressWarnings("unchecked")
@@ -1047,7 +1047,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					 * (non-Javadoc)
 					 * 
 					 * @see
-					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
+					 * org.dresdenocl.essentialocl.standardlibrary.OclType
 					 * #getType()
 					 */
 					public Type getType() {
@@ -1058,8 +1058,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 					 * (non-Javadoc)
 					 * 
 					 * @see
-					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
-					 * #allInstances(tudresden.ocl20.pivot.modelinstance.
+					 * org.dresdenocl.essentialocl.standardlibrary.OclType
+					 * #allInstances(org.dresdenocl.modelinstance.
 					 * IModelInstance)
 					 */
 					public OclSet<OclAny> allInstances(
@@ -1149,7 +1149,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 		 */
 		public <T extends OclAny> OclSet<T> asSet() {
 
@@ -1163,7 +1163,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+		 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclAny#
 		 * getUndefinedreason ()
 		 */
 		public String getUndefinedReason() {
@@ -1175,9 +1175,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
-		 * (tudresden.ocl20.pivot.pivotmodel.Operation,
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#invokeOperation
+		 * (org.dresdenocl.pivotmodel.Operation,
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny[])
 		 */
 		public OclAny invokeOperation(Operation operation, OclAny... parameters) {
 
@@ -1207,7 +1207,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsUndefined
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclIsUndefined
 		 * ()
 		 */
 		public OclBoolean oclIsUndefined() {
@@ -1219,7 +1219,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclAsType
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclAsType
 		 * (tudresden .ocl20.pivot.essentialocl.standardlibrary.OclType)
 		 */
 		public <T extends OclAny> T oclAsType(OclType<T> type) {
@@ -1234,7 +1234,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsInvalid
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclIsInvalid
 		 * ()
 		 */
 		public OclBoolean oclIsInvalid() {
@@ -1246,8 +1246,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsKindOf
-		 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclIsKindOf
+		 * (org.dresdenocl.essentialocl.standardlibrary.OclType)
 		 */
 		public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 
@@ -1262,8 +1262,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsTypeOf
-		 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclIsTypeOf
+		 * (org.dresdenocl.essentialocl.standardlibrary.OclType)
 		 */
 		public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
@@ -1286,7 +1286,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#isEqualTo
 		 * (tudresden .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 		 */
 		public OclBoolean isEqualTo(OclAny object2) {
@@ -1312,8 +1312,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		 * (non-Javadoc)
 		 * 
 		 * @see
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isNotEqualTo
-		 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny#isNotEqualTo
+		 * (org.dresdenocl.essentialocl.standardlibrary.OclAny)
 		 */
 		public OclBoolean isNotEqualTo(OclAny object2) {
 
@@ -1323,7 +1323,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+		 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclAny#
 		 * getModelInstanceElement()
 		 */
 		public IModelInstanceElement getModelInstanceElement() {
@@ -1335,7 +1335,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+		 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclAny#
 		 * getInvalidReason ()
 		 */
 		public Throwable getInvalidReason() {
@@ -1346,8 +1346,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#
-		 * getStaticProperty (tudresden.ocl20.pivot.pivotmodel.Property)
+		 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclType#
+		 * getStaticProperty (org.dresdenocl.pivotmodel.Property)
 		 */
 		public OclAny getStaticProperty(Property property,
 				IModelInstance modelInstance) {
@@ -1376,9 +1376,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#
-		 * invokeStaticOperation(tudresden.ocl20.pivot.pivotmodel.Operation,
-		 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+		 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclType#
+		 * invokeStaticOperation(org.dresdenocl.pivotmodel.Operation,
+		 * org.dresdenocl.essentialocl.standardlibrary.OclAny[])
 		 */
 		public OclAny invokeStaticOperation(Operation operation,
 				OclAny[] oclAnyParameters, IModelInstance modelInstance) {

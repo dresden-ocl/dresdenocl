@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.metamodel.internal;
+package org.dresdenocl.modelbus.metamodel.internal;
 
 import java.net.URL;
 
@@ -38,12 +38,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.descriptor.AbstractDescriptor;
-import tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.descriptor.AbstractDescriptor;
+import org.dresdenocl.modelbus.metamodel.IMetamodelDescriptor;
 
 /**
  * <p>
@@ -103,7 +103,7 @@ public class MetamodelDescriptor extends AbstractDescriptor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.metamodel.IMetamodelDescriptor#getIconURL()
+	 * org.dresdenocl.modelbus.metamodel.IMetamodelDescriptor#getIconURL()
 	 */
 	public URL getIconURL() {
 
@@ -118,7 +118,7 @@ public class MetamodelDescriptor extends AbstractDescriptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getName()
+	 * @see org.dresdenocl.modelbus.IMetamodel#getName()
 	 */
 	public String getName() {
 
@@ -127,7 +127,7 @@ public class MetamodelDescriptor extends AbstractDescriptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IMetamodel#getModelProvider()
+	 * @see org.dresdenocl.modelbus.IMetamodel#getModelProvider()
 	 */
 	public IModelProvider getModelProvider() {
 

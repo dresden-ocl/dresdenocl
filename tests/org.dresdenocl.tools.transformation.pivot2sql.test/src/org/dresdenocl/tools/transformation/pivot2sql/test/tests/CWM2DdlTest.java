@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests;
 
 import static org.junit.Assert.fail;
 
@@ -13,14 +13,14 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.impl.RelationalPackageImpl;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.ModelAccessException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.ModelAccessException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.ModelChecker;
+import org.dresdenocl.tools.transformation.pivot2sql.test.tests.util.TestPerformer;
 
 public class CWM2DdlTest {
 

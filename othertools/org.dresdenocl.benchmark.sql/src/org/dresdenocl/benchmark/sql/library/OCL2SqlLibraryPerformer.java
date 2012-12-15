@@ -1,8 +1,8 @@
-package tudresden.ocl20.benchmark.sql.library;
+package org.dresdenocl.benchmark.sql.library;
 
 import java.sql.SQLException;
 
-import tudresden.ocl20.benchmark.sql.util.Ocl2SqlPerformer;
+import org.dresdenocl.benchmark.sql.util.Ocl2SqlPerformer;
 
 public class OCL2SqlLibraryPerformer extends Ocl2SqlPerformer implements
 		ILibraryPerformer {

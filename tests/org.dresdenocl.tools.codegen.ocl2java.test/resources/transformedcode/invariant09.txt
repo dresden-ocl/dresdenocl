@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -8,16 +8,16 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  */
 public privileged aspect ProgramPartner_InvAspect_nrOfParticipants {
 
-    declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    declare parents: org.dresdenocl.examples.royalsandloyals.ProgramPartner implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
-    public void tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner.checkInvariants() {
+    public void org.dresdenocl.examples.royalsandloyals.ProgramPartner.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
 
     /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.ProgramPartner#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.ProgramPartner aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -26,18 +26,18 @@ public privileged aspect ProgramPartner_InvAspect_nrOfParticipants {
      * <code>context ProgramPartner
      *       inv nrOfParticipants: numberOfCustomers = programs.participants->size()</code></p>
      */
-    after(tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.ProgramPartner aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of ProgramPartner. */
-        if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner")) {
-        java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Customer> result1;
-        result1 = new java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.Customer>();
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.ProgramPartner")) {
+        java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Customer> result1;
+        result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Customer>();
         
         /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram anElement1 : aClass.programs) {
+        for (org.dresdenocl.examples.royalsandloyals.LoyaltyProgram anElement1 : aClass.programs) {
             result1.addAll(anElement1.participants);
         }
     
-        if (!((Object) aClass.numberOfCustomers).equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
+        if (!((Object) aClass.numberOfCustomers).equals(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'nrOfParticipants' (inv nrOfParticipants: numberOfCustomers = programs.participants->size()) was violated for Object " + aClass.toString() + ".";
         	throw new RuntimeException(msg);

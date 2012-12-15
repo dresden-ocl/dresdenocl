@@ -16,14 +16,14 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.internal.Ocl2Sql;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclCode;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.internal.Ocl2Sql;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 
 /**
  * <p>

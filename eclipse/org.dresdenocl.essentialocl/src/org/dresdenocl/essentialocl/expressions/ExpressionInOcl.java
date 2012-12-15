@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.Expression;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,10 +44,10 @@ import tudresden.ocl20.pivot.pivotmodel.Expression;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getContext <em>Context</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getResult <em>Result</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getContext <em>Context</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getResult <em>Result</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getParameter <em>Parameter</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,7 +70,7 @@ public interface ExpressionInOcl extends Expression {
 	OclExpression getBodyExpression();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Body Expression</em>' containment reference.
@@ -94,7 +94,7 @@ public interface ExpressionInOcl extends Expression {
 	Variable getContext();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getContext <em>Context</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getContext <em>Context</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Context</em>' containment reference.
@@ -118,7 +118,7 @@ public interface ExpressionInOcl extends Expression {
 	Variable getResult();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getResult <em>Result</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getResult <em>Result</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Result</em>' containment reference.
@@ -129,7 +129,7 @@ public interface ExpressionInOcl extends Expression {
 
 	/**
 	 * Returns the value of the '<em><b>Parameter</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.expressions.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameter</em>' containment reference list isn't clear,

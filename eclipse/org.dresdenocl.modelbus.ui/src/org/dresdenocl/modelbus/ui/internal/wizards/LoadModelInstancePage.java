@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
+package org.dresdenocl.modelbus.ui.internal.wizards;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -52,19 +52,19 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.AbstractModelBusPage;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseFileListener;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseWorkspaceListener;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.FileBoxListener;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelInstanceTypeLabelProvider;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelLabelProvider;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
-import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ui.internal.ModelBusUIMessages;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.AbstractModelBusPage;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.BrowseFileListener;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.BrowseWorkspaceListener;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.FileBoxListener;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.ModelInstanceTypeLabelProvider;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.ModelLabelProvider;
+import org.dresdenocl.modelbus.ui.internal.wizards.util.ModelViewerListener;
+import org.dresdenocl.modelbus.util.ModelLoaderUtility;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.IModelInstanceType;
 
 /**
  * <p>
@@ -152,7 +152,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #setFileTextBoxText(java.lang.String)
 	 */
 	public void setFileTextBoxText(String aText) {
@@ -163,7 +163,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #updatePageComplete()
 	 */
 	public void updatePageComplete() {

@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics
+package org.dresdenocl.language.ocl.staticsemantics
 
 /*
  * Copyright 2007-2010 WorldWide Conferencing, LLC

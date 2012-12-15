@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,18 +56,18 @@ import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.GenericElement;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -76,24 +76,24 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter
+ * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwnedTypeParameter
  * <em>Owned Type Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType
+ * <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwningType
  * <em>Owning Type</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter
+ * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwnedParameter
  * <em>Owned Parameter</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter
+ * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getInputParameter
  * <em>Input Parameter</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter
+ * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOutputParameter
  * <em>Output Parameter</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter
+ * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getReturnParameter
  * <em>Return Parameter</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter
+ * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getSignatureParameter
  * <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
@@ -146,7 +146,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * Overridden to additionally include parameter types. This is necessary
 	 * because overloaded operations could not be distinguished otherwise.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName()
 	 */
 	@Override
 	public String getQualifiedName() {
@@ -182,7 +182,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * Overridden to return the {@link #getOwningType() owning type} of this
 	 * <code>Operation</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -211,7 +211,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * return parameter} if there is one. Otherwise, default to super
 	 * implementation.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#getGenericType()
 	 */
 	@Override
 	public GenericType getGenericType() {
@@ -251,8 +251,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	/*
 	 * Overridden so that the generic type of the {@link #getReturnParameter()
 	 * return parameter} is changed if one exists.
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType
-	 * (tudresden.ocl20.pivot.pivotmodel.GenericType)
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#setGenericType
+	 * (org.dresdenocl.pivotmodel.GenericType)
 	 */
 	@Override
 	public void setGenericType(GenericType newGenericType) {
@@ -670,7 +670,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	/**
 	 * Helper method that initializes this <code>Operation</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.FeatureImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Feature)
+	 * @see org.dresdenocl.pivotmodel.impl.FeatureImpl#initialize(org.dresdenocl.pivotmodel.Feature)
 	 */
 	protected Operation initialize(Operation clone) {
 

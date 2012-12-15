@@ -1,8 +1,8 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.util;
+package org.dresdenocl.tools.transformation.pivot2sql.util;
 
 import java.util.Comparator;
 
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.NamedElement;
 
 public class NamedElementComparator implements Comparator<NamedElement> {
 

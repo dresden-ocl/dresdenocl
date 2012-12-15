@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * The result of a single attempt to resolve an identifier. The result can either
@@ -28,13 +28,13 @@ public interface IOclReferenceResolveResult<ReferenceType> {
 	 * Returns an unmodifiable collection of the quick fixes that can be used to
 	 * resolve the resolving error.
 	 */
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes();
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes();
 	
 	/**
 	 * Adds a quick fix to the set of quick fixes that can be used to resolve the
 	 * resolving error.
 	 */
-	public void addQuickFix(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix);
+	public void addQuickFix(org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix);
 	
 	/**
 	 * Sets the error message that describes what went wrong while resolving a
@@ -114,6 +114,6 @@ public interface IOclReferenceResolveResult<ReferenceType> {
 	/**
 	 * Returns all mappings that were found while resolving an identifier.
 	 */
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings();
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings();
 	
 }

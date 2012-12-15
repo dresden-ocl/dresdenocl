@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 
@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
-import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.ImplicitFeatureCallCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.OclPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,9 +30,9 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl#getSource <em>Source</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl#getNavigationOperator <em>Navigation Operator</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.NavigationCallExpImpl#getFeatureCalls <em>Feature Calls</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.NavigationCallExpImpl#getSource <em>Source</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.NavigationCallExpImpl#getNavigationOperator <em>Navigation Operator</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.NavigationCallExpImpl#getFeatureCalls <em>Feature Calls</em>}</li>
  * </ul>
  * </p>
  *

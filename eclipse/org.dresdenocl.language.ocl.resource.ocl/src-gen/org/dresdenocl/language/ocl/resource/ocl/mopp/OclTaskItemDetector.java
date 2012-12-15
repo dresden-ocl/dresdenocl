@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * The OclTaskItemDetector is used to find task items in text documents. The
@@ -15,8 +15,8 @@ public class OclTaskItemDetector {
 	
 	public static String[] TASK_ITEM_KEYWORDS = new String[] {"TODO", "FIXME", "XXX"};
 	
-	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem> findTaskItems(String text, int line, int charStart) {
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem> foundItems = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem>();
+	public java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem> findTaskItems(String text, int line, int charStart) {
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem> foundItems = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem>();
 		String remainingText = text;
 		boolean continueSearch = true;
 		int localCharStart = charStart;
@@ -58,7 +58,7 @@ public class OclTaskItemDetector {
 					int offset = index + localCharStart;
 					int end = offset + keyword.length();
 					int localLine = line + text.substring(0, offset - charStart).split("(\r\n|\r|\n)").length - 1;
-					foundItems.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItem(keyword, message, localLine, offset, end));
+					foundItems.add(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItem(keyword, message, localLine, offset, end));
 					localCharStart += eolIndex;
 					// stop looping over the keywords, we've found one
 					break;

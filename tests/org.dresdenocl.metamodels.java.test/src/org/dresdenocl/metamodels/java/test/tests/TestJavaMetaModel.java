@@ -11,15 +11,15 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java.test.tests;
+package org.dresdenocl.metamodels.java.test.tests;
 
 import org.junit.BeforeClass;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
-import tudresden.ocl20.pivot.metamodels.java.test.JavaMetaModelTestPlugin;
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
+import org.dresdenocl.metamodels.java.JavaMetaModelPlugin;
+import org.dresdenocl.metamodels.java.test.JavaMetaModelTestPlugin;
+import org.dresdenocl.metamodels.test.MetaModelTestPlugin;
+import org.dresdenocl.metamodels.test.MetaModelTestSuite;
 
 /**
  * <p>
@@ -36,7 +36,7 @@ public class TestJavaMetaModel extends MetaModelTestSuite {
 	private static final String META_MODEL_ID = JavaMetaModelPlugin.ID;
 
 	/** The path of the model which shall be tested. */
-	private static final String TEST_MODEL_PATH = "bin/tudresden/ocl20/pivot/metamodels/java/test/model/ModelMainClass.class";
+	private static final String TEST_MODEL_PATH = "bin/org/dresdenocl/metamodels/java/test/model/ModelMainClass.class";
 
 	/**
 	 * <p>

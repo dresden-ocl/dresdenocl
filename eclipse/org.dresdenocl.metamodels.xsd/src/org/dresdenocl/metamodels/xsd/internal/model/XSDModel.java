@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.metamodels.xsd.internal.model;
+package org.dresdenocl.metamodels.xsd.internal.model;
 
 import java.util.Collection;
 
@@ -9,13 +9,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xsd.XSDSchema;
 import org.eclipse.xsd.ecore.XSDEcoreBuilder;
 
-import tudresden.ocl20.pivot.metamodels.ecore.internal.model.EcoreAdapterFactory;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.model.base.AbstractModel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import org.dresdenocl.metamodels.ecore.internal.model.EcoreAdapterFactory;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.model.base.AbstractModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.pivotmodel.Namespace;
 
 /**
  * If the root of the model is a single {@link XSDSchema}, a corresponding
@@ -62,7 +62,7 @@ public class XSDModel extends AbstractModel implements IModel {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.model.IModel#dispose()
+	 * @see org.dresdenocl.model.IModel#dispose()
 	 */
 	public void dispose() {
 
@@ -81,7 +81,7 @@ public class XSDModel extends AbstractModel implements IModel {
 	 *           if an error occurs when creating the adapter for the top
 	 *           namespace
 	 * 
-	 * @see tudresden.ocl20.pivot.model.IModel#getRootNamespace()
+	 * @see org.dresdenocl.model.IModel#getRootNamespace()
 	 * 
 	 * @generated
 	 */

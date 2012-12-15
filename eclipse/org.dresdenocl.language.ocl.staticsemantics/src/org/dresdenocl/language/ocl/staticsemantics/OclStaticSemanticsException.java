@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics;
+package org.dresdenocl.language.ocl.staticsemantics;
 
 public class OclStaticSemanticsException extends RuntimeException {
 

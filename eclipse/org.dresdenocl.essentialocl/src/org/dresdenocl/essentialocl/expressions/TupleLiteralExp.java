@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp#getPart <em>Part</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.TupleLiteralExp#getPart <em>Part</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,7 +52,7 @@ public interface TupleLiteralExp extends LiteralExp {
 
 	/**
 	 * Returns the value of the '<em><b>Part</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Part</em>' containment reference list isn't clear,

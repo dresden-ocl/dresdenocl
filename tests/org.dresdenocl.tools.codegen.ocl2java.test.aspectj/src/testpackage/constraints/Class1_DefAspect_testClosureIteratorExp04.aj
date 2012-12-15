@@ -23,7 +23,7 @@ public privileged aspect Class1_DefAspect_testClosureIteratorExp04 {
         result2.add(aClass);java.util.ArrayList<testpackage.Class1> result1;
         result1 = new java.util.ArrayList<testpackage.Class1>();
         java.util.ArrayList<testpackage.Class1> toVisit1 = new java.util.ArrayList<testpackage.Class1>();
-        toVisit1.addAll(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.asSequence(result2));
+        toVisit1.addAll(org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.asSequence(result2));
                 
         while (toVisit1.size() > 0) {
         	testpackage.Class1 anElement1 = toVisit1.iterator().next();

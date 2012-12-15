@@ -17,19 +17,19 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test;
+package org.dresdenocl.tools.codegen.ocl2java.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.FragmentTest;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.InstrumentationTest;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds.AllConstraintsKindTests;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.context.AllContextTests;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.expressions.AllExpressionsTests;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.standardlibrary.AllStandardLibraryTests;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaPlugin;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.FragmentTest;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.InstrumentationTest;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.constraintkinds.AllConstraintsKindTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.context.AllContextTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.expressions.AllExpressionsTests;
+import org.dresdenocl.tools.codegen.ocl2java.test.tests.standardlibrary.AllStandardLibraryTests;
 
 /**
  * <p>

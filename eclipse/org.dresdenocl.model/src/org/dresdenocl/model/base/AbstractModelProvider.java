@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.model.base;
+package org.dresdenocl.model.base;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -40,10 +40,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.internal.ModelMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.internal.ModelMessages;
 
 /**
  * <p>
@@ -64,7 +64,7 @@ public abstract class AbstractModelProvider implements IModelProvider {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IModelProvider#getModel(java.io.File)
+	 * @see org.dresdenocl.modelbus.IModelProvider#getModel(java.io.File)
 	 */
 	public IModel getModel(File modelFile) throws ModelAccessException {
 
@@ -111,7 +111,7 @@ public abstract class AbstractModelProvider implements IModelProvider {
 	 * required format of the name.
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.model.IModelProvider#getModel(java.lang.String)
+	 * @see org.dresdenocl.model.IModelProvider#getModel(java.lang.String)
 	 */
 	public IModel getModel(String modelName) throws ModelAccessException {
 

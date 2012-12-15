@@ -2,24 +2,24 @@
 <?eclipse version="3.0"?>
 <plugin>
    <extension
-         point="tudresden.ocl20.pivot.tools.transformation.transformations">
+         point="org.dresdenocl.tools.transformation.transformations">
       <transformation
-            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmImpl">
+            class="org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2CwmImpl">
       </transformation>
       <transformation
-            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Cwm2DdlImpl">
+            class="org.dresdenocl.tools.transformation.pivot2sql.impl.Cwm2DdlImpl">
       </transformation>
       <transformation
-            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2Ddl">
+            class="org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2Ddl">
       </transformation>
       <transformation
-            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl">
+            class="org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2MappedModelImpl">
       </transformation>
       <transformation
-            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2CwmAndMappedModel">
+            class="org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2CwmAndMappedModel">
       </transformation>
       <transformation
-            class="tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel">
+            class="org.dresdenocl.tools.transformation.pivot2sql.impl.Pivot2DdlAndMappedModel">
       </transformation>
    </extension>
 </plugin>

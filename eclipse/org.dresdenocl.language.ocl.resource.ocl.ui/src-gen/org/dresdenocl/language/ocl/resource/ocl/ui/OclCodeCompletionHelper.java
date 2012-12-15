@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A CodeCompletionHelper can be used to derive completion proposals for partial
@@ -14,9 +14,9 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclCodeCompletionHelper {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAttributeValueProvider attributeValueProvider = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclAttributeValueProvider();
+	private org.dresdenocl.language.ocl.resource.ocl.mopp.OclAttributeValueProvider attributeValueProvider = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclAttributeValueProvider();
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+	private org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation metaInformation = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation();
 	
 	/**
 	 * Computes a set of proposals for the given document assuming the cursor is at
@@ -29,30 +29,30 @@ public class OclCodeCompletionHelper {
 	 * 
 	 * @return
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] computeCompletionProposals(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource originalResource, String content, int cursorOffset) {
+	public org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal[] computeCompletionProposals(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource originalResource, String content, int cursorOffset) {
 		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
 		// the shadow resource needs the same URI because reference resolvers may use the
 		// URI to resolve external references
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resourceSet.createResource(originalResource.getURI());
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) resourceSet.createResource(originalResource.getURI());
 		java.io.ByteArrayInputStream inputStream = new java.io.ByteArrayInputStream(content.getBytes());
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation metaInformation = resource.getMetaInformation();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser parser = metaInformation.createParser(inputStream, null);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] expectedElements = parseToExpectedElements(parser, resource, cursorOffset);
+		org.dresdenocl.language.ocl.resource.ocl.IOclMetaInformation metaInformation = resource.getMetaInformation();
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextParser parser = metaInformation.createParser(inputStream, null);
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] expectedElements = parseToExpectedElements(parser, resource, cursorOffset);
 		if (expectedElements == null) {
-			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[0];
+			return new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal[0];
 		}
 		if (expectedElements.length == 0) {
-			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[0];
+			return new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal[0];
 		}
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedAfterCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset));
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedBeforeCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset - 1));
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedAfterCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset));
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedBeforeCursor = java.util.Arrays.asList(getElementsExpectedAt(expectedElements, cursorOffset - 1));
 		setPrefixes(expectedAfterCursor, content, cursorOffset);
 		setPrefixes(expectedBeforeCursor, content, cursorOffset);
 		// First, we derive all possible proposals from the set of elements that are
 		// expected at the cursor position.
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> allProposals = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> rightProposals = deriveProposals(expectedAfterCursor, content, resource, cursorOffset);
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> leftProposals = deriveProposals(expectedBeforeCursor, content, resource, cursorOffset - 1);
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> allProposals = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> rightProposals = deriveProposals(expectedAfterCursor, content, resource, cursorOffset);
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> leftProposals = deriveProposals(expectedBeforeCursor, content, resource, cursorOffset - 1);
 		removeKeywordsEndingBeforeIndex(leftProposals, cursorOffset);
 		// Second, the set of left proposals (i.e., the ones before the cursor) is checked
 		// for emptiness. If the set is empty, the right proposals (i.e., the ones after
@@ -62,7 +62,7 @@ public class OclCodeCompletionHelper {
 		allProposals.addAll(leftProposals);
 		// Count the proposals before the cursor that match the prefix
 		int leftMatchingProposals = 0;
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal leftProposal : leftProposals) {
+		for (org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal leftProposal : leftProposals) {
 			if (leftProposal.getMatchesPrefix()) {
 				leftMatchingProposals++;
 			}
@@ -73,43 +73,43 @@ public class OclCodeCompletionHelper {
 		// Third, the proposals are sorted according to their relevance. Proposals that
 		// matched the prefix are preferred over ones that did not. Finally, proposals are
 		// sorted alphabetically.
-		final java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> sortedProposals = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>(allProposals);
+		final java.util.List<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> sortedProposals = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>(allProposals);
 		java.util.Collections.sort(sortedProposals);
 		org.eclipse.emf.ecore.EObject root = null;
 		if (!resource.getContents().isEmpty()) {
 			root = resource.getContents().get(0);
 		}
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : sortedProposals) {
+		for (org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : sortedProposals) {
 			proposal.setRoot(root);
 		}
-		return sortedProposals.toArray(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[sortedProposals.size()]);
+		return sortedProposals.toArray(new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal[sortedProposals.size()]);
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] parseToExpectedElements(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser parser, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, int cursorOffset) {
-		final java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements = parser.parseToExpectedElements(null, resource, cursorOffset);
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] parseToExpectedElements(org.dresdenocl.language.ocl.resource.ocl.IOclTextParser parser, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, int cursorOffset) {
+		final java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements = parser.parseToExpectedElements(null, resource, cursorOffset);
 		if (expectedElements == null) {
-			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[0];
+			return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[0];
 		}
 		removeDuplicateEntries(expectedElements);
 		removeInvalidEntriesAtEnd(expectedElements);
-		return expectedElements.toArray(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[expectedElements.size()]);
+		return expectedElements.toArray(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[expectedElements.size()]);
 	}
 	
 	/**
 	 * Removes all expected elements that refer to the same terminal and that start at
 	 * the same position.
 	 */
-	protected void removeDuplicateEntries(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements) {
+	protected void removeDuplicateEntries(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements) {
 		int size = expectedElements.size();
 		// We split the list of expected elements into buckets where each bucket contains
 		// the elements that start at the same position.
-		java.util.Map<Integer, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal>> map = new java.util.LinkedHashMap<Integer, java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal>>();
+		java.util.Map<Integer, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>> map = new java.util.LinkedHashMap<Integer, java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>>();
 		for (int i = 0; i < size; i++) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = expectedElements.get(i);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = expectedElements.get(i);
 			int start1 = elementAtIndex.getStartExcludingHiddenTokens();
-			java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> list = map.get(start1);
+			java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> list = map.get(start1);
 			if (list == null) {
-				list = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
+				list = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
 				map.put(start1, list);
 			}
 			list.add(elementAtIndex);
@@ -117,14 +117,14 @@ public class OclCodeCompletionHelper {
 		
 		// Then, we remove all duplicate elements from each bucket individually.
 		for (int position : map.keySet()) {
-			java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> list = map.get(position);
+			java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> list = map.get(position);
 			removeDuplicateEntriesFromBucket(list);
 		}
 		
 		// After removing all duplicates, we merge the buckets.
 		expectedElements.clear();
 		for (int position : map.keySet()) {
-			java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> list = map.get(position);
+			java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> list = map.get(position);
 			expectedElements.addAll(list);
 		}
 	}
@@ -134,13 +134,13 @@ public class OclCodeCompletionHelper {
 	 * method assumes that the given list of expected terminals contains only elements
 	 * that start at the same position.
 	 */
-	protected void removeDuplicateEntriesFromBucket(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements) {
+	protected void removeDuplicateEntriesFromBucket(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements) {
 		int size = expectedElements.size();
 		for (int i = 0; i < size - 1; i++) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = expectedElements.get(i);
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement terminal = elementAtIndex.getTerminal();
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = expectedElements.get(i);
+			org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal = elementAtIndex.getTerminal();
 			for (int j = i + 1; j < size;) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtNext = expectedElements.get(j);
+				org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtNext = expectedElements.get(j);
 				if (terminal.equals(elementAtNext.getTerminal())) {
 					expectedElements.remove(j);
 					size--;
@@ -151,16 +151,16 @@ public class OclCodeCompletionHelper {
 		}
 	}
 	
-	protected void removeInvalidEntriesAtEnd(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements) {
+	protected void removeInvalidEntriesAtEnd(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements) {
 		for (int i = 0; i < expectedElements.size() - 1;) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = expectedElements.get(i);
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtNext = expectedElements.get(i + 1);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = expectedElements.get(i);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtNext = expectedElements.get(i + 1);
 			
 			// If the two expected elements have a different parent in the syntax definition,
 			// we must not discard the second element, because is probably stems from a parent
 			// rule.
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement symtaxElementOfThis = elementAtIndex.getTerminal().getSymtaxElement();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement symtaxElementOfNext = elementAtNext.getTerminal().getSymtaxElement();
+			org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement symtaxElementOfThis = elementAtIndex.getTerminal().getSymtaxElement();
+			org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement symtaxElementOfNext = elementAtNext.getTerminal().getSymtaxElement();
 			boolean differentParent = symtaxElementOfNext.getParent() != symtaxElementOfThis.getParent();
 			
 			boolean sameStartExcludingHiddenTokens = elementAtIndex.getStartExcludingHiddenTokens() == elementAtNext.getStartExcludingHiddenTokens();
@@ -176,13 +176,13 @@ public class OclCodeCompletionHelper {
 	/**
 	 * Removes all proposals for keywords that end before the given index.
 	 */
-	protected void removeKeywordsEndingBeforeIndex(java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> proposals, int index) {
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> toRemove = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : proposals) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal = proposal.getExpectedTerminal();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement terminal = expectedTerminal.getTerminal();
-			if (terminal instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString csString = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString) terminal;
+	protected void removeKeywordsEndingBeforeIndex(java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> proposals, int index) {
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> toRemove = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+		for (org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal proposal : proposals) {
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal = proposal.getExpectedTerminal();
+			org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement terminal = expectedTerminal.getTerminal();
+			if (terminal instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString) {
+				org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString csString = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString) terminal;
 				int startExcludingHiddenTokens = expectedTerminal.getStartExcludingHiddenTokens();
 				if (startExcludingHiddenTokens + csString.getValue().length() - 1 < index) {
 					toRemove.add(proposal);
@@ -192,12 +192,12 @@ public class OclCodeCompletionHelper {
 		proposals.removeAll(toRemove);
 	}
 	
-	protected String findPrefix(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedAtCursor, String content, int cursorOffset) {
+	protected String findPrefix(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedAtCursor, String content, int cursorOffset) {
 		if (cursorOffset < 0) {
 			return "";
 		}
 		int end = 0;
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement : expectedElements) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement : expectedElements) {
 			if (expectedElement == expectedAtCursor) {
 				final int start = expectedElement.getStartExcludingHiddenTokens();
 				if (start >= 0  && start < Integer.MAX_VALUE) {
@@ -211,27 +211,27 @@ public class OclCodeCompletionHelper {
 		return prefix;
 	}
 	
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> deriveProposals(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements, String content, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, int cursorOffset) {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> resultSet = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement : expectedElements) {
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> deriveProposals(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements, String content, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, int cursorOffset) {
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> resultSet = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement : expectedElements) {
 			resultSet.addAll(deriveProposals(expectedElement, content, resource, cursorOffset));
 		}
 		return resultSet;
 	}
 	
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> deriveProposals(final tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String content, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, int cursorOffset) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement expectedElement = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement) expectedTerminal.getTerminal();
-		if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString csString = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString) expectedElement;
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> deriveProposals(final org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, String content, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, int cursorOffset) {
+		org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement expectedElement = (org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement) expectedTerminal.getTerminal();
+		if (expectedElement instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString) {
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString csString = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString) expectedElement;
 			return handleKeyword(expectedTerminal, csString, expectedTerminal.getPrefix());
-		} else if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal expectedBooleanTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal) expectedElement;
+		} else if (expectedElement instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal) {
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal expectedBooleanTerminal = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal) expectedElement;
 			return handleBooleanTerminal(expectedTerminal, expectedBooleanTerminal, expectedTerminal.getPrefix());
-		} else if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal expectedEnumerationTerminal = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal) expectedElement;
+		} else if (expectedElement instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal) {
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal expectedEnumerationTerminal = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal) expectedElement;
 			return handleEnumerationTerminal(expectedTerminal, expectedEnumerationTerminal, expectedTerminal.getPrefix());
-		} else if (expectedElement instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature) {
-			final tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature) expectedElement;
+		} else if (expectedElement instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature) {
+			final org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature) expectedElement;
 			final org.eclipse.emf.ecore.EStructuralFeature feature = expectedFeature.getFeature();
 			final org.eclipse.emf.ecore.EClassifier featureType = feature.getEType();
 			final org.eclipse.emf.ecore.EObject container = findCorrectContainer(expectedTerminal);
@@ -243,7 +243,7 @@ public class OclCodeCompletionHelper {
 			// required for different completion situations. This can be particularly observed
 			// when the user has not yet typed a character that starts an element to be
 			// completed.
-			final java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> proposals = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+			final java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> proposals = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
 			expectedTerminal.materialize(new Runnable() {
 				
 				public void run() {
@@ -282,44 +282,44 @@ public class OclCodeCompletionHelper {
 		return java.util.Collections.emptyList();
 	}
 	
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleEnumAttribute(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EEnum enumType, String prefix, org.eclipse.emf.ecore.EObject container) {
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleEnumAttribute(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EEnum enumType, String prefix, org.eclipse.emf.ecore.EObject container) {
 		java.util.Collection<org.eclipse.emf.ecore.EEnumLiteral> enumLiterals = enumType.getELiterals();
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
 		for (org.eclipse.emf.ecore.EEnumLiteral literal : enumLiterals) {
 			String unResolvedLiteral = literal.getLiteral();
 			// use token resolver to get de-resolved value of the literal
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(expectedFeature.getTokenName());
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(expectedFeature.getTokenName());
 			String resolvedLiteral = tokenResolver.deResolve(unResolvedLiteral, expectedFeature.getFeature(), container);
 			boolean matchesPrefix = matches(resolvedLiteral, prefix);
-			result.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, resolvedLiteral, prefix, matchesPrefix, expectedFeature.getFeature(), container));
+			result.add(new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, resolvedLiteral, prefix, matchesPrefix, expectedFeature.getFeature(), container));
 		}
 		return result;
 	}
 	
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleNCReference(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, String prefix, String tokenName) {
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleNCReference(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EReference reference, String prefix, String tokenName) {
 		// proposals for non-containment references are derived by calling the reference
 		// resolver switch in fuzzy mode.
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolverSwitch resolverSwitch = metaInformation.getReferenceResolverSwitch();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> result = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclReferenceResolveResult<org.eclipse.emf.ecore.EObject>(true);
+		org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolverSwitch resolverSwitch = metaInformation.getReferenceResolverSwitch();
+		org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
+		org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult<org.eclipse.emf.ecore.EObject> result = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclReferenceResolveResult<org.eclipse.emf.ecore.EObject>(true);
 		resolverSwitch.resolveFuzzy(prefix, container, reference, 0, result);
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<org.eclipse.emf.ecore.EObject>> mappings = result.getMappings();
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<org.eclipse.emf.ecore.EObject>> mappings = result.getMappings();
 		if (mappings != null) {
-			java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> resultSet = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
-			for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<org.eclipse.emf.ecore.EObject> mapping : mappings) {
+			java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> resultSet = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+			for (org.dresdenocl.language.ocl.resource.ocl.IOclReferenceMapping<org.eclipse.emf.ecore.EObject> mapping : mappings) {
 				org.eclipse.swt.graphics.Image image = null;
-				if (mapping instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclElementMapping<?>) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclElementMapping<?> elementMapping = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclElementMapping<?>) mapping;
+				if (mapping instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclElementMapping<?>) {
+					org.dresdenocl.language.ocl.resource.ocl.mopp.OclElementMapping<?> elementMapping = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclElementMapping<?>) mapping;
 					Object target = elementMapping.getTargetElement();
 					// de-resolve reference to obtain correct identifier
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
+					org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 					final String identifier = tokenResolver.deResolve(elementMapping.getIdentifier(), reference, container);
 					if (target instanceof org.eclipse.emf.ecore.EObject) {
 						image = getImage((org.eclipse.emf.ecore.EObject) target);
 					}
 					boolean matchesPrefix = matches(identifier, prefix);
-					resultSet.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, identifier, prefix, matchesPrefix, reference, container, image));
+					resultSet.add(new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, identifier, prefix, matchesPrefix, reference, container, image));
 				}
 			}
 			return resultSet;
@@ -327,20 +327,20 @@ public class OclCodeCompletionHelper {
 		return java.util.Collections.emptyList();
 	}
 	
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleAttribute(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, String prefix) {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> resultSet = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>();
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleAttribute(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedStructuralFeature expectedFeature, org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EAttribute attribute, String prefix) {
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> resultSet = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>();
 		Object[] defaultValues = attributeValueProvider.getDefaultValues(attribute);
 		if (defaultValues != null) {
 			for (Object defaultValue : defaultValues) {
 				if (defaultValue != null) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
+					org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = metaInformation.getTokenResolverFactory();
 					String tokenName = expectedFeature.getTokenName();
 					if (tokenName != null) {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
+						org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver tokenResolver = tokenResolverFactory.createTokenResolver(tokenName);
 						if (tokenResolver != null) {
 							String defaultValueAsString = tokenResolver.deResolve(defaultValue, attribute, container);
 							boolean matchesPrefix = matches(defaultValueAsString, prefix);
-							resultSet.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, defaultValueAsString, prefix, matchesPrefix, expectedFeature.getFeature(), container));
+							resultSet.add(new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, defaultValueAsString, prefix, matchesPrefix, expectedFeature.getFeature(), container));
 						}
 					}
 				}
@@ -352,18 +352,18 @@ public class OclCodeCompletionHelper {
 	/**
 	 * Creates a set of completion proposals from the given keyword.
 	 */
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleKeyword(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedCsString csString, String prefix) {
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleKeyword(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedCsString csString, String prefix) {
 		String proposal = csString.getValue();
 		boolean matchesPrefix = matches(proposal, prefix);
-		return java.util.Collections.singleton(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, null));
+		return java.util.Collections.singleton(new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, proposal, prefix, matchesPrefix, null, null));
 	}
 	
 	/**
 	 * Creates a set of (two) completion proposals from the given boolean terminal.
 	 */
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleBooleanTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>(2);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleBooleanTerminal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedBooleanTerminal expectedBooleanTerminal, String prefix) {
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>(2);
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclBooleanTerminal booleanTerminal = expectedBooleanTerminal.getBooleanTerminal();
 		result.addAll(handleLiteral(expectedTerminal, booleanTerminal.getAttribute(), prefix, booleanTerminal.getTrueLiteral()));
 		result.addAll(handleLiteral(expectedTerminal, booleanTerminal.getAttribute(), prefix, booleanTerminal.getFalseLiteral()));
 		return result;
@@ -373,9 +373,9 @@ public class OclCodeCompletionHelper {
 	 * Creates a set of completion proposals from the given enumeration terminal. For
 	 * each enumeration literal one proposal is created.
 	 */
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleEnumerationTerminal(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal>(2);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal = expectedEnumerationTerminal.getEnumerationTerminal();
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleEnumerationTerminal(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedEnumerationTerminal expectedEnumerationTerminal, String prefix) {
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> result = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal>(2);
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclEnumerationTerminal enumerationTerminal = expectedEnumerationTerminal.getEnumerationTerminal();
 		java.util.Map<String, String> literalMapping = enumerationTerminal.getLiteralMapping();
 		for (String literalName : literalMapping.keySet()) {
 			result.addAll(handleLiteral(expectedTerminal, enumerationTerminal.getAttribute(), prefix, literalMapping.get(literalName)));
@@ -383,12 +383,12 @@ public class OclCodeCompletionHelper {
 		return result;
 	}
 	
-	protected java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal> handleLiteral(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
+	protected java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal> handleLiteral(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal, org.eclipse.emf.ecore.EAttribute attribute, String prefix, String literal) {
 		if ("".equals(literal)) {
 			return java.util.Collections.emptySet();
 		}
 		boolean matchesPrefix = matches(literal, prefix);
-		return java.util.Collections.singleton(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, literal, prefix, matchesPrefix, null, null));
+		return java.util.Collections.singleton(new org.dresdenocl.language.ocl.resource.ocl.ui.OclCompletionProposal(expectedTerminal, literal, prefix, matchesPrefix, null, null));
 	}
 	
 	/**
@@ -396,27 +396,27 @@ public class OclCodeCompletionHelper {
 	 * the current document content, the cursor position, and the position where the
 	 * element is expected.
 	 */
-	protected void setPrefixes(java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements, String content, int cursorOffset) {
+	protected void setPrefixes(java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedElements, String content, int cursorOffset) {
 		if (cursorOffset < 0) {
 			return;
 		}
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement : expectedElements) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement : expectedElements) {
 			String prefix = findPrefix(expectedElements, expectedElement, content, cursorOffset);
 			expectedElement.setPrefix(prefix);
 		}
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] getElementsExpectedAt(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] allExpectedElements, int cursorOffset) {
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedAtCursor = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] getElementsExpectedAt(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] allExpectedElements, int cursorOffset) {
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> expectedAtCursor = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal>();
 		for (int i = 0; i < allExpectedElements.length; i++) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement = allExpectedElements[i];
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedElement = allExpectedElements[i];
 			int startIncludingHidden = expectedElement.getStartIncludingHiddenTokens();
 			int end = getEnd(allExpectedElements, i);
 			if (cursorOffset >= startIncludingHidden && cursorOffset <= end) {
 				expectedAtCursor.add(expectedElement);
 			}
 		}
-		return expectedAtCursor.toArray(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[expectedAtCursor.size()]);
+		return expectedAtCursor.toArray(new org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[expectedAtCursor.size()]);
 	}
 	
 	/**
@@ -425,12 +425,12 @@ public class OclCodeCompletionHelper {
 	 * expected elements are used. An element is considered to end one character
 	 * before the next elements starts.
 	 */
-	protected int getEnd(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] allExpectedElements, int indexInList) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = allExpectedElements[indexInList];
+	protected int getEnd(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal[] allExpectedElements, int indexInList) {
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtIndex = allExpectedElements[indexInList];
 		int startIncludingHidden = elementAtIndex.getStartIncludingHiddenTokens();
 		int startExcludingHidden = elementAtIndex.getStartExcludingHiddenTokens();
 		for (int i = indexInList + 1; i < allExpectedElements.length; i++) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtI = allExpectedElements[i];
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal elementAtI = allExpectedElements[i];
 			int startIncludingHiddenForI = elementAtI.getStartIncludingHiddenTokens();
 			int startExcludingHiddenForI = elementAtI.getStartExcludingHiddenTokens();
 			if (startIncludingHidden != startIncludingHiddenForI || startExcludingHidden != startExcludingHiddenForI) {
@@ -449,7 +449,7 @@ public class OclCodeCompletionHelper {
 		if (proposal == null || prefix == null) {
 			return false;
 		}
-		return (proposal.toLowerCase().startsWith(prefix.toLowerCase()) || tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.matchCamelCase(prefix, proposal) != null) && !proposal.equals(prefix);
+		return (proposal.toLowerCase().startsWith(prefix.toLowerCase()) || org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.matchCamelCase(prefix, proposal) != null) && !proposal.equals(prefix);
 	}
 	
 	protected org.eclipse.swt.graphics.Image getImage(org.eclipse.emf.ecore.EObject element) {
@@ -464,7 +464,7 @@ public class OclCodeCompletionHelper {
 		return labelProvider.getImage(element);
 	}
 	
-	protected org.eclipse.emf.ecore.EObject findCorrectContainer(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal) {
+	protected org.eclipse.emf.ecore.EObject findCorrectContainer(org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal expectedTerminal) {
 		org.eclipse.emf.ecore.EObject container = expectedTerminal.getContainer();
 		org.eclipse.emf.ecore.EClass ruleMetaclass = expectedTerminal.getTerminal().getRuleMetaclass();
 		if (ruleMetaclass.isInstance(container)) {
@@ -476,11 +476,11 @@ public class OclCodeCompletionHelper {
 		org.eclipse.emf.ecore.EObject previousParent = null;
 		org.eclipse.emf.ecore.EObject correctContainer = null;
 		org.eclipse.emf.ecore.EObject hookableParent = null;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace = expectedTerminal.getContainmentTrace();
+		org.dresdenocl.language.ocl.resource.ocl.grammar.OclContainmentTrace containmentTrace = expectedTerminal.getContainmentTrace();
 		org.eclipse.emf.ecore.EClass startClass = containmentTrace.getStartClass();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature currentLink = null;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature previousLink = null;
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[] containedFeatures = containmentTrace.getPath();
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature currentLink = null;
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature previousLink = null;
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[] containedFeatures = containmentTrace.getPath();
 		for (int i = 0; i < containedFeatures.length; i++) {
 			currentLink = containedFeatures[i];
 			if (i > 0) {
@@ -504,8 +504,8 @@ public class OclCodeCompletionHelper {
 						// initialized for all loop iterations where 'i' is greather than 0 and for the
 						// case where 'i' equals zero, this path is never executed, because
 						// 'previousParent' is null in this case.
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature link = previousLink;
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.setFeature(parent, link.getFeature(), previousParent, false);
+						org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature link = previousLink;
+						org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.setFeature(parent, link.getFeature(), previousParent, false);
 					}
 				}
 			}
@@ -528,7 +528,7 @@ public class OclCodeCompletionHelper {
 			expectedTerminal.setAttachmentCode(new Runnable() {
 				
 				public void run() {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclEObjectUtil.setFeature(finalHookableParent, finalFeature, finalParent, false);
+					org.dresdenocl.language.ocl.resource.ocl.util.OclEObjectUtil.setFeature(finalHookableParent, finalFeature, finalParent, false);
 				}
 			});
 		}
@@ -539,7 +539,7 @@ public class OclCodeCompletionHelper {
 	 * Walks up the containment hierarchy to find an EObject that is able to hold
 	 * (contain) the given object.
 	 */
-	protected org.eclipse.emf.ecore.EObject findHookParent(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EClass startClass, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature currentLink, org.eclipse.emf.ecore.EObject object) {
+	protected org.eclipse.emf.ecore.EObject findHookParent(org.eclipse.emf.ecore.EObject container, org.eclipse.emf.ecore.EClass startClass, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature currentLink, org.eclipse.emf.ecore.EObject object) {
 		org.eclipse.emf.ecore.EClass containerClass = currentLink.getContainerClass();
 		while (container != null) {
 			if (containerClass.isInstance(object)) {

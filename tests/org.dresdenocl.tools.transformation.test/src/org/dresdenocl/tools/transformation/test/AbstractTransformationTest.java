@@ -1,13 +1,13 @@
-package tudresden.ocl20.pivot.tools.transformation.test;
+package org.dresdenocl.tools.transformation.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import tudresden.ocl20.pivot.tools.transformation.TransformationPlugin;
-import tudresden.ocl20.pivot.tools.transformation.test.util.TestFalseTrans;
-import tudresden.ocl20.pivot.tools.transformation.test.util.TestParallelTrans;
-import tudresden.ocl20.pivot.tools.transformation.test.util.TestTrans;
+import org.dresdenocl.tools.transformation.TransformationPlugin;
+import org.dresdenocl.tools.transformation.test.util.TestFalseTrans;
+import org.dresdenocl.tools.transformation.test.util.TestParallelTrans;
+import org.dresdenocl.tools.transformation.test.util.TestTrans;
 
 /**
  * Abstract test class for transformation tests.

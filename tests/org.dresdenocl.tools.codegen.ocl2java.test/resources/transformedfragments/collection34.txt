@@ -19,4 +19,4 @@ collection2.add("c");
 collection2.add("d");
 collection2.add("e");
 
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.prepend(collection1, "X"), collection2)
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.equals(org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.prepend(collection1, "X"), collection2)

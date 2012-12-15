@@ -1,4 +1,4 @@
-package tudresden.ocl20.benchmark.sql;
+package org.dresdenocl.benchmark.sql;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import tudresden.ocl20.benchmark.sql.util.IBenchmark;
-import tudresden.ocl20.benchmark.sql.util.IPerformer;
+import org.dresdenocl.benchmark.sql.util.IBenchmark;
+import org.dresdenocl.benchmark.sql.util.IPerformer;
 
 public abstract class Benchmark<T extends IPerformer> implements IBenchmark {
 

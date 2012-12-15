@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.provider;
+package org.dresdenocl.tracer.tracermodel.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,11 +21,11 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot} object. <!--
+ * {@link org.dresdenocl.tracer.tracermodel.TracerRoot} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

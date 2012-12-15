@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import java.util.List;
 
@@ -42,15 +42,15 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.impl.TypeImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Invalid Type</b></em>'.
@@ -58,7 +58,7 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.InvalidTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.InvalidTypeImpl#getOclLibrary <em>Ocl Library</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,7 +86,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * Standard Library, <code>OclInvalid</code> does not really have a namespace. It is implicitly
 	 * available in all namespaces.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName()
 	 */
 	@Override
 	public String getQualifiedName() {
@@ -102,7 +102,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * inv: Classifier.allInstances()-&gt;forAll (c | self.conformsTo (c))
 	 * </pre>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#conformsTo(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#conformsTo(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public boolean conformsTo(Type other) {
@@ -115,7 +115,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * 
 	 * @return the given other type
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#commonSuperType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#commonSuperType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public Type commonSuperType(Type other) {
@@ -134,7 +134,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * Specification, Section 11.2). This little implementation trick avoids having to make
 	 * <code>OclInvalid</code> the subtype of all model types which would be very expensive.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupOperation(java.lang.String,
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#lookupOperation(java.lang.String,
 	 *      java.util.List)
 	 */
 	@Override
@@ -187,7 +187,7 @@ public class InvalidTypeImpl extends TypeImpl implements InvalidType {
 	 * implementation trick avoids having to make <code>OclInvalid</code> the subtype of all model
 	 * types which would be very expensive.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#lookupProperty(java.lang.String)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#lookupProperty(java.lang.String)
 	 */
 	@Override
 	public Property lookupProperty(String name) {

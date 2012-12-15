@@ -1,7 +1,7 @@
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

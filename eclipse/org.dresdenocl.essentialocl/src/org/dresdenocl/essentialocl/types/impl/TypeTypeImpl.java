@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import java.util.List;
 
@@ -41,12 +41,12 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
-import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
+import org.dresdenocl.pivotmodel.impl.TypeImpl;
+import org.dresdenocl.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Type</b></em>'.
@@ -54,7 +54,7 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.impl.TypeTypeImpl#getRepresentedType <em>Represented Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.impl.TypeTypeImpl#getRepresentedType <em>Represented Type</em>}</li>
  * </ul>
  * </p>
  *

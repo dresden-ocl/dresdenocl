@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,9 +9,9 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect LoyaltyProgram_InvAspect_minServices {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyProgram#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -20,15 +20,15 @@ public privileged aspect LoyaltyProgram_InvAspect_minServices {
      * <code>context LoyaltyProgram
      *       inv minServices: partners->forAll(deliveredServices->size() >= 1)</code></p>
      */
-    after(org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of LoyaltyProgram. */
-        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram")) {
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.LoyaltyProgram")) {
         Boolean result1;
         result1 = true;
 
         /* Iterator ForAll: Iterate and check, if all elements fulfill the condition. */
-        for (org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
-            if (!(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(anElement1.deliveredServices) >= new Integer(1))) {
+        for (org.dresdenocl.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            if (!(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(anElement1.deliveredServices) >= new Integer(1))) {
                 result1 = false;
                 break;
             }

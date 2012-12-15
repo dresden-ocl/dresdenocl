@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testBagUnion02 {
      *       def: testBagUnion02(source: Bag(OclAny), arg01: Bag(OclAny)): Bag(OclAny) = source ->union(arg01)</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testBagUnion02(java.util.List<Object> source, java.util.List<Object> arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags.union(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags.union(source, arg01);
     }
 }

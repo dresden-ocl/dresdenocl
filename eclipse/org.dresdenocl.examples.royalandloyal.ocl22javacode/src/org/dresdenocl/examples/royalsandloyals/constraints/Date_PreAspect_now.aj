@@ -1,4 +1,4 @@
-package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -9,14 +9,14 @@ package org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.constraint
 public privileged aspect Date_PreAspect_now {
 
     /**
-     * <p>Pointcut for all calls on {@link org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date#now()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Date#now()}.</p>
      */
     protected pointcut nowCaller():
-    	execution(* org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date.now());
+    	execution(* org.dresdenocl.examples.royalsandloyals.Date.now());
 
     /**
      * <p>Checks a precondition for the {@link Date#now()} defined by the constraint
-     * <code>context Date::now() : org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date
+     * <code>context Date::now() : org.dresdenocl.examples.royalsandloyals.Date
      *       pre: true</code></p>
      */
     before(): nowCaller() {

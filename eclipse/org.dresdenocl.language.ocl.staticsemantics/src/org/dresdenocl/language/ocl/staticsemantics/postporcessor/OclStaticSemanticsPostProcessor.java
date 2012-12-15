@@ -1,17 +1,17 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor;
+package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
-import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemanticsException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.language.ocl.resource.ocl.IOclResourcePostProcessor;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
+import org.dresdenocl.language.ocl.staticsemantics.OclStaticSemanticsException;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.pivotmodel.Constraint;
 
 public class OclStaticSemanticsPostProcessor implements
 		IOclResourcePostProcessor {
@@ -23,7 +23,7 @@ public class OclStaticSemanticsPostProcessor implements
 
 			try {
 
-				tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics oclStaticSemantics = OclStaticSemanticsProvider
+				org.dresdenocl.language.ocl.staticsemantics.OclStaticSemantics oclStaticSemantics = OclStaticSemanticsProvider
 						.getStaticSemantics(resource);
 
 				List<Constraint> result = oclStaticSemantics

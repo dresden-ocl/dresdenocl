@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter;
+package org.dresdenocl.codegen.adapter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 public class GenClassPivotAdapterGeneratorAdapter extends
 		GenBaseGeneratorAdapter {
 
-	public static final String PIVOTADAPTER_PROJECT_TYPE = "tudresden.ocl20.pivot.codegen.generator.PivotAdapter";
+	public static final String PIVOTADAPTER_PROJECT_TYPE = "org.dresdenocl.codegen.generator.PivotAdapter";
 
 	@SuppressWarnings("serial")
 	protected static final Map<String, Integer> jetEmitterDescriptorIds = new HashMap<String, Integer>() {
@@ -42,21 +42,21 @@ public class GenClassPivotAdapterGeneratorAdapter extends
 
 	protected static final JETEmitterDescriptor[] JET_EMITTER_DESCRIPTORS = {
 			new JETEmitterDescriptor("model/TypeAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.TypeAdapter"),
+					"org.dresdenocl.codegen.adapter.templates.model.TypeAdapter"),
 			new JETEmitterDescriptor("model/PrimitiveTypeAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.PrimitiveTypeAdapter"),
+					"org.dresdenocl.codegen.adapter.templates.model.PrimitiveTypeAdapter"),
 			new JETEmitterDescriptor("model/PropertyAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.Property"),
+					"org.dresdenocl.codegen.adapter.templates.model.Property"),
 			new JETEmitterDescriptor("model/ParameterAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.Parameter"),
+					"org.dresdenocl.codegen.adapter.templates.model.Parameter"),
 			new JETEmitterDescriptor("model/OperationAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.Operation"),
+					"org.dresdenocl.codegen.adapter.templates.model.Operation"),
 			new JETEmitterDescriptor("model/NamespaceAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.Namespace"),
+					"org.dresdenocl.codegen.adapter.templates.model.Namespace"),
 			new JETEmitterDescriptor("model/EnumerationLiteralAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.EnumerationLiteral"),
+					"org.dresdenocl.codegen.adapter.templates.model.EnumerationLiteral"),
 			new JETEmitterDescriptor("model/EnumerationAdapter.javajet",
-					"tudresden.ocl20.pivot.codegen.adapter.templates.model.Enumeration") };
+					"org.dresdenocl.codegen.adapter.templates.model.Enumeration") };
 
 	protected JETEmitterDescriptor[] getJETEmitterDescriptors() {
 		return JET_EMITTER_DESCRIPTORS;

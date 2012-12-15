@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMFText Parser Plugin: ocl
-Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.resource.ocl;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.language.ocl.resource.ocl;singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
@@ -10,18 +10,18 @@ Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
  org.eclipse.emf.validation;resolution:=optional,
  org.emftext.access;resolution:=optional,
  org.emftext.commons.antlr3_4_0,
- tudresden.ocl20.pivot.language.ocl,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.model,
- tudresden.ocl20.pivot.modelbus
+ org.dresdenocl.language.ocl,
+ org.dresdenocl.pivotmodel,
+ org.dresdenocl.model,
+ org.dresdenocl.modelbus
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.debug,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.launch,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar,
-  tudresden.ocl20.pivot.language.ocl.resource.ocl.util
-Bundle-Activator: tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin
+Export-Package: org.dresdenocl.language.ocl.resource.ocl,
+  org.dresdenocl.language.ocl.resource.ocl.analysis,
+  org.dresdenocl.language.ocl.resource.ocl.mopp,
+  org.dresdenocl.language.ocl.resource.ocl.debug,
+  org.dresdenocl.language.ocl.resource.ocl.launch,
+  org.dresdenocl.language.ocl.resource.ocl.grammar,
+  org.dresdenocl.language.ocl.resource.ocl.util
+Bundle-Activator: org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin
 Import-Package: org.apache.commons.io

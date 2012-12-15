@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests.util;
 
 import static org.junit.Assert.fail;
 
@@ -11,15 +11,15 @@ import java.util.Map;
 import org.junit.Before;
 import orgomg.cwm.resource.relational.Schema;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.impl.Tuple;
 
 public abstract class CWMTest extends TransformationTest {
 

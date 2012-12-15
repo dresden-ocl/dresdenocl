@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * A basic interface to convert parsed tokens to the attribute type in the meta
@@ -13,9 +13,9 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl;
  * on the EMF type conversion. This includes conversion of registered EDataTypes.
  * 
  * @see
- * tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver
+ * org.dresdenocl.language.ocl.resource.ocl.analysis.OclDefaultTokenResolver
  */
-public interface IOclTokenResolver extends tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclConfigurable {
+public interface IOclTokenResolver extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	
 	/**
 	 * Converts a token into an Object (the value of the attribute).
@@ -25,7 +25,7 @@ public interface IOclTokenResolver extends tudresden.ocl20.pivot.language.ocl.re
 	 * @param result the result of resolving the lexem, can be used to add processing
 	 * errors
 	 */
-	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult result);
+	public void resolve(String lexem, org.eclipse.emf.ecore.EStructuralFeature feature, org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult result);
 	
 	/**
 	 * Converts an Object (the value of an attribute) to a string which can be

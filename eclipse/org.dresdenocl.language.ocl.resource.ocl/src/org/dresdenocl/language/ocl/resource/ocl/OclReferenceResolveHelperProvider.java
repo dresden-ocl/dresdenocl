@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 public class OclReferenceResolveHelperProvider {
 
@@ -11,11 +11,11 @@ public class OclReferenceResolveHelperProvider {
 					org.eclipse.core.runtime.Platform.getExtensionRegistry();
 			org.eclipse.core.runtime.IConfigurationElement configurationElements[] =
 					extensionRegistry
-							.getConfigurationElementsFor(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
+							.getConfigurationElementsFor(org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
 			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
 				try {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider provider =
-							(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider) element
+					org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider provider =
+							(org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider) element
 									.createExecutableExtension("class");
 					final java.util.Map<?, ?> options = provider.getOptions();
 					final java.util.Collection<?> keys = options.keySet();
@@ -26,7 +26,7 @@ public class OclReferenceResolveHelperProvider {
 						}
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin
+					org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin
 							.logError("Exception while getting default options.", ce);
 					throw new IllegalStateException(
 							"An error occurred during loading the OclReferenceResolveHelper "

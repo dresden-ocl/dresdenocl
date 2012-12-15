@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.pivotmodel.util;
+package org.dresdenocl.pivotmodel.util;
 
 import java.util.Iterator;
 import java.util.List;

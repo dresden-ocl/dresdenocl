@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.template.impl;
+package org.dresdenocl.tools.template.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,15 +8,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.event.ITemplateGroupRegistryListener;
-import tudresden.ocl20.pivot.tools.template.event.TemplateGroupRegistryEvent;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
-import tudresden.ocl20.pivot.tools.template.internal.TemplateGroup;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateEngine;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.ITemplateGroupRegistry;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.event.ITemplateGroupRegistryListener;
+import org.dresdenocl.tools.template.event.TemplateGroupRegistryEvent;
+import org.dresdenocl.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.internal.TemplateGroup;
 
 /**
  * <p>
@@ -58,7 +58,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addTemplateGroup(ITemplateGroup)
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#addTemplateGroup(ITemplateGroup)
 	 */
 	public void addTemplateGroup(ITemplateGroup templateGroup)
 			throws TemplateException {
@@ -99,7 +99,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#dispose()
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -110,7 +110,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#getTemplateGroup(String)
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#getTemplateGroup(String)
 	 */
 	public ITemplateGroup getTemplateGroup(String templateGroupName)
 			throws TemplateException {
@@ -130,7 +130,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#getTemplateGroups()
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#getTemplateGroups()
 	 */
 	public List<ITemplateGroup> getTemplateGroups() {
 
@@ -142,7 +142,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#removeTemplateGroup(ITemplateGroup)
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#removeTemplateGroup(ITemplateGroup)
 	 */
 	public void removeTemplateGroup(ITemplateGroup templateGroup) {
 
@@ -159,7 +159,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#removeTemplateGroup(String)
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#removeTemplateGroup(String)
 	 */
 	public void removeTemplateGroup(String templateGroupName) {
 
@@ -173,7 +173,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addTemplateGroupRegistryListener(ITemplateGroupRegistryListener)
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#addTemplateGroupRegistryListener(ITemplateGroupRegistryListener)
 	 */
 	public void addTemplateGroupRegistryListener(
 			ITemplateGroupRegistryListener listener) {
@@ -244,7 +244,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#removeTemplateGroupRegistryListener(ITemplateGroupRegistryListener)
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#removeTemplateGroupRegistryListener(ITemplateGroupRegistryListener)
 	 * 
 	 */
 	public void removeTemplateGroupRegistryListener(
@@ -273,7 +273,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(String,
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(String,
 	 *      ITemplateGroup)
 	 */
 	public ITemplateGroup addDefaultTemplateGroup(String templateName,
@@ -284,7 +284,7 @@ public class StandaloneTemplateGroupRegistry implements ITemplateGroupRegistry {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(String,
+	 * @see org.dresdenocl.tools.template.ITemplateGroupRegistry#addDefaultTemplateGroup(String,
 	 *      String, ITemplateGroup)
 	 */
 	public ITemplateGroup addDefaultTemplateGroup(String templateName,

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.ocl2sql"
+      id="org.dresdenocl.feature.ocl2sql"
       label="Dresden OCL Ocl2Sql Code Generator"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technoloy Group">
@@ -183,73 +183,73 @@ Library.
    </license>
 
    <includes
-         id="tudresden.ocl20.feature.core"
+         id="org.dresdenocl.feature.core"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.parser"
+         id="org.dresdenocl.feature.parser"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.codegen"
+         id="org.dresdenocl.feature.codegen"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.metamodels"
+         id="org.dresdenocl.feature.metamodels"
          version="0.0.0"/>
 
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="tudresden.ocl20.logging"/>
-      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
-      <import plugin="tudresden.ocl20.pivot.model"/>
+      <import plugin="org.dresdenocl.logging"/>
+      <import plugin="org.dresdenocl.pivotmodel"/>
+      <import plugin="org.dresdenocl.model"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen.ui"/>
+      <import plugin="org.dresdenocl.modelbus"/>
+      <import plugin="org.dresdenocl.tools.codegen.ui"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="tudresden.ocl20.pivot.tools.template"/>
-      <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
-      <import plugin="tudresden.ocl20.pivot.tools.codegen"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl"/>
+      <import plugin="org.dresdenocl.tools.template"/>
+      <import plugin="org.dresdenocl.tools.transformation"/>
+      <import plugin="org.dresdenocl.tools.codegen"/>
+      <import plugin="org.dresdenocl.essentialocl"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql"
+         id="org.dresdenocl.tools.codegen.declarativ.ocl2sql"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui"
+         id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.CWM"
+         id="org.dresdenocl.tools.CWM"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.template.sql"
+         id="org.dresdenocl.tools.template.sql"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.transformation.pivot2sql"
+         id="org.dresdenocl.tools.transformation.pivot2sql"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ"
+         id="org.dresdenocl.tools.codegen.declarativ"
          download-size="0"
          install-size="0"
          version="0.0.0"

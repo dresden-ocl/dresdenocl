@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -39,11 +39,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -52,7 +52,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationLiteralImpl#getEnumeration
+ * {@link org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl#getEnumeration
  * <em>Enumeration</em>}</li>
  * </ul>
  * </p>
@@ -87,7 +87,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 	 * Overridden to return the {@link #getEnumeration() enumeration} that belongs
 	 * to this <code>EnumerationLiteral</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -109,7 +109,7 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 	@Override
 	public EnumerationLiteral clone() {

@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License along 
  * with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java;
+package org.dresdenocl.tools.codegen.ocl2java;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.IOcl2Code;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 
 /**
  * <p>

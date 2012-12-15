@@ -16,7 +16,7 @@ instance type.
 \section{The Test Suite Plug-in}
 
 The generic model instance type test suite is located in the plug-in
-\code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].mo\-del\-in\-stance\-type\linebreak[0].test}.
+\code{org.dresdenocl\linebreak[0].pi\-vot\linebreak[0].mo\-del\-in\-stance\-type\linebreak[0].test}.
 The test suite provides a set of JUnit tests, that check the functionality of
 all operations that must be adapted by every model instance type that
 shall be supported for Dresden OCL. The adaptation of a model instance type
@@ -52,8 +52,8 @@ explained shortly. Because a detailed explanation would be too large for this
 document we recommend to investigate the already existing implementations of 
 the test model provided with the test suite implementations for the Java and 
 the \acs{EMF} Ecore model instance types (the plug-ins
-\code{tudresden.ocl20.modelinstancetype.java.test} and 
-\code{tudresden.ocl20.mo\-del\-in\-stance\-type.ecore.test}).
+\code{org.dresdenocl.modelinstancetype.java.test} and 
+\code{org.dresdenocl.mo\-del\-in\-stance\-type.ecore.test}).
 
 \begin{sidewaysfigure}[!p]
 	\includegraphics[width=0.9\textwidth]{figures/modelinstancetestsuite/testModel01.pdf}
@@ -189,11 +189,11 @@ instance type.
   language=Java
 }
 \begin{lstlisting}[caption={An instantiation of the generic model instance test suite.}, captionpos=b, label=list:modelInstanceTestSuite:constraints01, float]
-import tudresden.ocl20.pivot.modelinstancetype.test.
+import org.dresdenocl.modelinstancetype.test.
        ModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.test.
+import org.dresdenocl.modelinstancetype.test.
        ModelInstanceTypeTestServices;
-import tudresden.ocl20.pivot.modelinstancetype.test.
+import org.dresdenocl.modelinstancetype.test.
        ModelInstanceTypeTestSuite;
 
 @Suite.SuiteClasses(value = { ModelInstanceTypeTestSuite.class })
@@ -207,7 +207,7 @@ public class TestJavaModelInstanceType extends
 
   /** The path of the model which shall be tested. */
   private static final String TEST_MODELINSTANCE_PATH =
-    "bin/tudresden/ocl20/pivot/modelinstancetype/" +
+    "bin/org/dresdenocl/modelinstancetype/" +
     "java/test/modelinstance/ProviderClass.class";
 
   /**
@@ -251,9 +251,9 @@ setting three arguments:
 	  \code{tudresden\linebreak[0].ocl\-20.\linebreak[0]pivot.\linebreak[0]modelinstancetype.java.test},
 	\item The location of the test model relative to the plug-in's root folder 
 	  (e.g.,
-	  \code{bin/tudresden/\linebreak[0]ocl\-20/\linebreak[0]pivot/modelinstancetype/java/test/modelinstance/ProviderClass.class}),
+	  \code{bin/org/dresdenocl\linebreak[0]/modelinstancetype/java/test/modelinstance/ProviderClass.class}),
 	\item And the \code{ID} of the model instance type that shall be tested (e.g.
-	  \code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].mo\-del\-in\-stance\-type\linebreak[0].java}.
+	  \code{org.dresdenocl\linebreak[0].pi\-vot\linebreak[0].mo\-del\-in\-stance\-type\linebreak[0].java}.
 \end{enumerate}
 
 Additionally, the method can set different counters that can be used to inform
@@ -273,7 +273,7 @@ were not implemented intentionally--can be ignored.
 This chapter shortly introduced into the generic model instance type test suite
 of Dresden OCL. For further details of the test suite investigate the test suite
 plug-in
-\code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.test} 
+\code{org.dresdenocl\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.test} 
 or the existing test suite instantiations in the plug-ins
 \code{tu\-dres\-den\linebreak[0].ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.java.test},
 and \code{tudresden\linebreak[0].ocl\-20.pivot.mo\-del\-in\-stance\-type\linebreak[0].ecore.test}.

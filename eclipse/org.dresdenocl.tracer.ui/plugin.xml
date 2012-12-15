@@ -4,59 +4,59 @@
    <extension
          point="org.eclipse.ui.actionSets">
       <actionSet
-            id="tudresden.ocl20.pivot.tracer.ui.actionSet"
+            id="org.dresdenocl.tracer.ui.actionSet"
             label="Tracer Action Set"
             visible="true">
          <menu
                icon="icons/dresdenocl.gif"
-               id="tudresden.ocl20.pivot.modelbus.ui.menu"
+               id="org.dresdenocl.modelbus.ui.menu"
                label="Dresden OCL">
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.import">
+                  name="org.dresdenocl.modelbus.ui.menu.import">
             </separator>
             <separator
-                  name="tudresden.ocl20.pivot.modelbus.ui.menu.tools">
+                  name="org.dresdenocl.modelbus.ui.menu.tools">
             </separator>
             <groupMarker
-            	name="tudresden.ocl20.pivot.modelbus.ui.menu.tools.codegen">
+            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
             </groupMarker>
          </menu>
          <action
                label="Open OCL Tracer"
                icon="icons/dresdenocl.gif"
-               class="tudresden.ocl20.pivot.tracer.ui.actions.TracerViewAction"
+               class="org.dresdenocl.tracer.ui.actions.TracerViewAction"
                tooltip="Opens the OCL Tracer View of Dresden OCL."
-               menubarPath="tudresden.ocl20.pivot.modelbus.ui.menu/tudresden.ocl20.pivot.modelbus.ui.menu.tools"
-               id="tudresden.ocl20.pivot.tracer.ui.actions.TracerViewAction">
+               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.tools"
+               id="org.dresdenocl.tracer.ui.actions.TracerViewAction">
          </action>
       </actionSet>
    </extension>
    
    <extension point="org.eclipse.ui.views">
    		<view
-           category="tudresden.ocl20.views.category"
-           class="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
-           id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
+           category="org.dresdenocl.views.category"
+           class="org.dresdenocl.tracer.ui.internal.views.TracerView"
+           id="org.dresdenocl.tracer.ui.internal.views.TracerView"
            name="Dresden OCL Tracer View"
            icon="icons/dresdenocl.gif">
         </view>
      	<category
-           id="tudresden.ocl20.views.category"
+           id="org.dresdenocl.views.category"
            name="Dresden OCL">
      	</category>
    </extension>
    
    <extension point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="tudresden.ocl20.pivot.ui.perspective">
+            targetID="org.dresdenocl.ui.perspective">
          <view
-               id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView"
+               id="org.dresdenocl.tracer.ui.internal.views.TracerView"
                minimized="false"
                relationship="stack"
                relative="org.eclipse.ui.views.PropertySheet">
          </view>
          <viewShortcut
-               id="tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView">
+               id="org.dresdenocl.tracer.ui.internal.views.TracerView">
          </viewShortcut>
       </perspectiveExtension>
    </extension>

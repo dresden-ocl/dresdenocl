@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -40,12 +40,12 @@ package tudresden.ocl20.pivot.pivotmodel;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+ * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
  * <em>Owning Generic Type</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeArgument()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeArgument()
  * @model
  * @generated
  */
@@ -54,7 +54,7 @@ public interface TypeArgument extends TypedElement {
 	/**
 	 * Returns the value of the '<em><b>Owning Generic Type</b></em>' container
 	 * reference. It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
+	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
 	 * <em>Type Argument</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owning Generic Type</em>' container reference
@@ -65,8 +65,8 @@ public interface TypeArgument extends TypedElement {
 	 * @return the value of the '<em>Owning Generic Type</em>' container
 	 *         reference.
 	 * @see #setOwningGenericType(ComplexGenericType)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeArgument_OwningGenericType()
-	 * @see tudresden.ocl20.pivot.pivotmodel.ComplexGenericType#getTypeArgument
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeArgument_OwningGenericType()
+	 * @see org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
 	 * @model opposite="typeArgument" transient="false"
 	 * @generated
 	 */
@@ -74,7 +74,7 @@ public interface TypeArgument extends TypedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument#getOwningGenericType
+	 * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
 	 * <em>Owning Generic Type</em>}' container reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -89,7 +89,7 @@ public interface TypeArgument extends TypedElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	TypeArgument clone();
 

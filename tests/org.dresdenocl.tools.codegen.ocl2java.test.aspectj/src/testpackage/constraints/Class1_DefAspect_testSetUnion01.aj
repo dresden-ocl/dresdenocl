@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSetUnion01 {
      *       def: testSetUnion01(source: Set(OclAny), arg01: Set(OclAny)): Set(OclAny) = source ->union(arg01)</code></p>
      */
     public java.util.Set<Object> testpackage.Class1.testSetUnion01(java.util.Set<Object> source, java.util.Set<Object> arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets.unionWithSet(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.unionWithSet(source, arg01);
     }
 }

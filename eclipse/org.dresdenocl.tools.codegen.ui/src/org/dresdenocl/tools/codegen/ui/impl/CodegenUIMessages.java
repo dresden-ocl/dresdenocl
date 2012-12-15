@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ui.impl;
+package org.dresdenocl.tools.codegen.ui.impl;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -31,7 +31,7 @@ import org.eclipse.osgi.util.NLS;
 public class CodegenUIMessages extends NLS {
 
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.tools.codegen.ui.impl.messages";
+			"org.dresdenocl.tools.codegen.ui.impl.messages";
 
 	public static String TransformCodeWizard_ErrorMessageDialogTitle;
 

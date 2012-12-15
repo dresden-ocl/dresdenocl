@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tracer.test;
+package org.dresdenocl.tracer.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -22,17 +22,17 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tracer.TracerPlugin;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.tracer.TracerPlugin;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
 
 /**
  * Abstract test class for Dresden OCL Tracer tests.
@@ -91,7 +91,7 @@ public class AbstractTracerTest extends AbstractDresdenOclTest {
 		/* Activate the Tracer */
 
 		/* TODO: make the tests work again
-		 * org.junit.Assert.assertNotNull(tudresden.ocl20.pivot.tracer.TracerPlugin
+		 * org.junit.Assert.assertNotNull(org.dresdenocl.tracer.TracerPlugin
 				.getInterpreterTraceListener());
 			*/
 

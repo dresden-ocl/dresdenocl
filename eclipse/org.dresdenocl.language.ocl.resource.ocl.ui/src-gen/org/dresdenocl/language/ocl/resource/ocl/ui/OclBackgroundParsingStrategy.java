@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A background parsing strategy that starts parsing after a amount of time after
@@ -29,21 +29,21 @@ public class OclBackgroundParsingStrategy {
 	/**
 	 * Schedules a task for background parsing that will be started after a delay.
 	 */
-	public void parse(org.eclipse.jface.text.DocumentEvent event, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	public void parse(org.eclipse.jface.text.DocumentEvent event, final org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, final org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor) {
 		parse(event.getDocument(), resource, editor, DELAY);
 	}
 	
 	/**
 	 * Schedules a task for background parsing that will be started after a delay.
 	 */
-	public void parse(org.eclipse.jface.text.IDocument document, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
+	public void parse(org.eclipse.jface.text.IDocument document, final org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, final org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
 		parse(document.get(), resource, editor, delay);
 	}
 	
 	/**
 	 * Schedules a task for background parsing that will be started after a delay.
 	 */
-	public void parse(final String contents, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
+	public void parse(final String contents, final org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, final org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
 		if (resource == null) {
 			return;
 		}
@@ -70,8 +70,8 @@ public class OclBackgroundParsingStrategy {
 	}
 	
 	private class ParsingJob extends org.eclipse.core.runtime.jobs.Job {
-		private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
-		private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource;
+		private org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor;
+		private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource;
 		
 		public ParsingJob() {
 			super("parsing document");
@@ -86,8 +86,8 @@ public class OclBackgroundParsingStrategy {
 						String currentContent = newContents;
 						newContents = null;
 						String encoding = null;
-						if (resource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) {
-							tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource concreteResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) resource;
+						if (resource instanceof org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) {
+							org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource concreteResource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) resource;
 							encoding = concreteResource.getEncoding(null);
 						}
 						byte[] bytes = null;

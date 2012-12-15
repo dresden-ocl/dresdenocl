@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tracer.ui.internal.msg;
+package org.dresdenocl.tracer.ui.internal.msg;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -26,7 +26,7 @@ import org.eclipse.osgi.util.NLS;
 public class OclTracerUIMessages extends NLS {
 
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.tracer.ui.internal.msg.messages";
+			"org.dresdenocl.tracer.ui.internal.msg.messages";
 
 	public static String TracerView_Filter_Nothing_Title;
 	public static String TracerView_Filter_True_Title;

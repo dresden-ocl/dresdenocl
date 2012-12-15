@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.util;
+package org.dresdenocl.tools.transformation.pivot2sql.util;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -9,7 +9,7 @@ import orgomg.cwm.objectmodel.core.ModelElement;
 import orgomg.cwm.objectmodel.core.Namespace;
 import orgomg.cwm.objectmodel.core.Package;
 
-import tudresden.ocl20.pivot.tools.transformation.util.ModelAnalyser;
+import org.dresdenocl.tools.transformation.util.ModelAnalyser;
 
 public class CwmModelAnalyser extends
 		ModelAnalyser<Package, ModelElement, ModelElement> {

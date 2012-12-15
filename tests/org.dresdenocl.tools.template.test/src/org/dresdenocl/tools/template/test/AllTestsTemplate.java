@@ -25,19 +25,19 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.template.test;
+package org.dresdenocl.tools.template.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.template.test.tests.TestStringTemplateEngine;
-import tudresden.ocl20.pivot.tools.template.test.tests.TestTemplateGroup;
-import tudresden.ocl20.pivot.tools.template.test.tests.TestTemplateEngineRegistry;
+import org.dresdenocl.tools.template.test.tests.TestStringTemplateEngine;
+import org.dresdenocl.tools.template.test.tests.TestTemplateGroup;
+import org.dresdenocl.tools.template.test.tests.TestTemplateEngineRegistry;
 
 /**
  * This TestSuite runs all Tests testing the packages
- * <code>tudresden.ocl20.pivot.tools.template</code> of the Dresden OCL2 Toolkit
+ * <code>org.dresdenocl.tools.template</code> of the Dresden OCL2 Toolkit
  * 
  * @author Bjoern Freitag
  * 

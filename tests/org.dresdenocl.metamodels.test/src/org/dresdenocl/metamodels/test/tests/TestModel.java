@@ -11,18 +11,18 @@
  * the GNU Lesser General Public License along with Dresden OCL. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.test.tests;
+package org.dresdenocl.metamodels.test.tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.metamodels.test.MetaModelTestServices;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import org.dresdenocl.metamodels.test.MetaModelTestServices;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
 
 /**
  * <p>

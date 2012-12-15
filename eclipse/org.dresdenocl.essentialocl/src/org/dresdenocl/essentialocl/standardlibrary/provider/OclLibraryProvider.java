@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary.provider;
+package org.dresdenocl.essentialocl.standardlibrary.provider;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,10 +43,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.internal.EssentialOclMessages;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.internal.EssentialOclMessages;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.util.TypeResolver;
 
 /**
  * <p>
@@ -75,7 +75,7 @@ public class OclLibraryProvider implements IOclLibraryProvider {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IOclLibraryProvider#getOclLibrary()
+	 * @see org.dresdenocl.modelbus.IOclLibraryProvider#getOclLibrary()
 	 */
 	public OclLibrary getOclLibrary() {
 

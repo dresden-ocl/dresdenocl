@@ -17,12 +17,12 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.test.tests.constraintkinds;
+package org.dresdenocl.tools.codegen.ocl2java.test.tests.constraintkinds;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaPlugin;
 
 /**
  * <p>

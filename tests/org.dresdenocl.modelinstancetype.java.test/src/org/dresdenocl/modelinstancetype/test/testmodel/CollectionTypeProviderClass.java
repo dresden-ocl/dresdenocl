@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <p>

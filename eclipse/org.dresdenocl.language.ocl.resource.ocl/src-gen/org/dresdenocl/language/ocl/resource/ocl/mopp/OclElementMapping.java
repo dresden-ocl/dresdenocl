@@ -4,15 +4,15 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A basic implementation of the
- * tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclElementMapping interface.
+ * org.dresdenocl.language.ocl.resource.ocl.IOclElementMapping interface.
  * 
  * @param <ReferenceType> the type of the reference that can be mapped to
  */
-public class OclElementMapping<ReferenceType> implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclElementMapping<ReferenceType> {
+public class OclElementMapping<ReferenceType> implements org.dresdenocl.language.ocl.resource.ocl.IOclElementMapping<ReferenceType> {
 	
 	private final ReferenceType target;
 	private String identifier;

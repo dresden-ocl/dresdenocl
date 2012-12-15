@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * OclLayoutInformation objects are used to store layout information that is found
@@ -22,7 +22,7 @@ public class OclLayoutInformation {
 	 * This can be either an attribute, a non-containment reference (placeholder) or a
 	 * terminal (boolean or enumeration).
 	 */
-	private final tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement;
+	private final org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement;
 	
 	/**
 	 * The offset in the document where this piece of layout was found.
@@ -52,7 +52,7 @@ public class OclLayoutInformation {
 	 */
 	private boolean wasResolved;
 	
-	public OclLayoutInformation(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, int startOffset, String hiddenTokenText, String visibleTokenText) {
+	public OclLayoutInformation(org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement syntaxElement, Object object, int startOffset, String hiddenTokenText, String visibleTokenText) {
 		super();
 		this.syntaxElement = syntaxElement;
 		this.object = object;
@@ -61,7 +61,7 @@ public class OclLayoutInformation {
 		this.visibleTokenText = visibleTokenText;
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSyntaxElement() {
+	public org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement getSyntaxElement() {
 		return syntaxElement;
 	}
 	

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.metamodels"
+      id="org.dresdenocl.feature.metamodels"
       label="Dresden OCL Metamodels"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -187,7 +187,7 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.uml"/>
       <import plugin="org.eclipse.uml2.uml.resources"/>
       <import plugin="org.eclipse.emf.codegen.ecore" version="2.3.1" match="compatible"/>
@@ -201,35 +201,35 @@ Library.
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.ecore"
+         id="org.dresdenocl.metamodels.ecore"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.uml2"
+         id="org.dresdenocl.metamodels.uml2"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.java"
+         id="org.dresdenocl.metamodels.java"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.codegen.adapter"
+         id="org.dresdenocl.codegen.adapter"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.metamodels.xsd"
+         id="org.dresdenocl.metamodels.xsd"
          download-size="0"
          install-size="0"
          version="0.0.0"

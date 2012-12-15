@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem#getItem <em>Item</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.CollectionItem#getItem <em>Item</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,7 +63,7 @@ public interface CollectionItem extends CollectionLiteralPart {
 	OclExpression getItem();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem#getItem <em>Item</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.CollectionItem#getItem <em>Item</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Item</em>' containment reference.

@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates" class="PluginJava" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates" class="PluginJava" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenModel genModel = (GenModel)argument;
 String projectName = PivotAdapterGeneratorUtil.getProjectName(genModel);
 String className = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";%>
@@ -6,7 +6,7 @@ package <%=projectName%>;
 
 <%genModel.addImport("org.eclipse.core.runtime.Plugin");%>
 <%genModel.addImport("org.osgi.framework.BundleContext");%>
-<%genModel.addImport("tudresden.ocl20.logging.LoggingPlugin");%>
+<%genModel.addImport("org.dresdenocl.logging.LoggingPlugin");%>
 <%genModel.addImport("org.apache.log4j.Logger");%>
 <%genModel.markImportLocation(stringBuffer);%>
 
@@ -62,7 +62,7 @@ public class <%=className%> extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

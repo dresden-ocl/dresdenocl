@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -39,8 +39,8 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Unlimited Natural Exp</b></em>'.
@@ -48,7 +48,7 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl#getSymbol <em>Symbol</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.UnlimitedNaturalExpImpl#getSymbol <em>Symbol</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,7 +99,7 @@ public class UnlimitedNaturalExpImpl extends NumericLiteralExpImpl implements
 	 * Library. For the moment being, this method returns the OCL <code>Integer</code> type as it
 	 * most closely corresponds to an unlimited natural number.
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl#evaluateType()
 	 */
 	@Override
 	protected Type evaluateType() {

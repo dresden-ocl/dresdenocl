@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclAnnotationModel extends org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel {
 	
@@ -13,7 +13,7 @@ public class OclAnnotationModel extends org.eclipse.ui.texteditor.ResourceMarker
 	}
 	
 	protected org.eclipse.ui.texteditor.MarkerAnnotation createMarkerAnnotation(org.eclipse.core.resources.IMarker marker) {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation(marker);
+		return new org.dresdenocl.language.ocl.resource.ocl.ui.OclMarkerAnnotation(marker);
 	}
 	
 }

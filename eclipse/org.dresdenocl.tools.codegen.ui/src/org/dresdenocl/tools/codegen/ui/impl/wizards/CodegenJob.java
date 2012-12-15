@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards;
+package org.dresdenocl.tools.codegen.ui.impl.wizards;
 
 import java.util.List;
 
@@ -27,10 +27,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ui.Ocl2CodeUIPlugIn;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.IOcl2Code;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.codegen.ui.Ocl2CodeUIPlugIn;
 
 public abstract class CodegenJob extends Job {
 

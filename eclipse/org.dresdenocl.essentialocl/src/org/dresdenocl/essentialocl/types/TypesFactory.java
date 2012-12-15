@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +48,7 @@ public interface TypesFactory {
 	 * @generated
 	 */
 	TypesFactory INSTANCE =
-			tudresden.ocl20.pivot.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
+			org.dresdenocl.essentialocl.types.impl.TypesFactoryImpl.eINSTANCE;
 
 	/**
 	 * Returns a new object of class '<em>Bag Type</em>'.

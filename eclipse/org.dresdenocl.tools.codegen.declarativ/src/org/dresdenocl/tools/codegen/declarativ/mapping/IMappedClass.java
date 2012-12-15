@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.mapping;
+package org.dresdenocl.tools.codegen.declarativ.mapping;
 
 /**
  * The MappedClass is a target model representation of the corresponding

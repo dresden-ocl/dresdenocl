@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS#getStringLiteral <em>String Literal</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.StringLiteralExpCS#getStringLiteral <em>String Literal</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getStringLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getStringLiteralExpCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface StringLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>String Literal</em>' attribute.
    * @see #setStringLiteral(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getStringLiteralExpCS_StringLiteral()
+   * @see org.dresdenocl.language.ocl.OclPackage#getStringLiteralExpCS_StringLiteral()
    * @model required="true"
    * @generated
    */
 	String getStringLiteral();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.StringLiteralExpCS#getStringLiteral <em>String Literal</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.StringLiteralExpCS#getStringLiteral <em>String Literal</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>String Literal</em>' attribute.

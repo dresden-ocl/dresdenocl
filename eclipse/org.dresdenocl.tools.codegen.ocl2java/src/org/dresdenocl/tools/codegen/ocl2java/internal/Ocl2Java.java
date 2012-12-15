@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along 
  * with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.internal;
+package org.dresdenocl.tools.codegen.ocl2java.internal;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,72 +37,72 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
-import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.pivot.essentialocl.expressions.IfExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch;
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.BagType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
-import tudresden.ocl20.pivot.essentialocl.types.OclLibrary;
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
-import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
-import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
-import tudresden.ocl20.pivot.essentialocl.types.VoidType;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelConstants;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedType;
-import tudresden.ocl20.pivot.tools.codegen.code.impl.TransformedCodeImpl;
-import tudresden.ocl20.pivot.tools.codegen.code.impl.TransformedTypeImpl;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2Java;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaPlugin;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.impl.Ocl2JavaEnvironment;
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
-import tudresden.ocl20.pivot.tools.template.TemplatePlugin;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CollectionItem;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralPart;
+import org.dresdenocl.essentialocl.expressions.CollectionRange;
+import org.dresdenocl.essentialocl.expressions.EnumLiteralExp;
+import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
+import org.dresdenocl.essentialocl.expressions.IfExp;
+import org.dresdenocl.essentialocl.expressions.IntegerLiteralExp;
+import org.dresdenocl.essentialocl.expressions.InvalidLiteralExp;
+import org.dresdenocl.essentialocl.expressions.IterateExp;
+import org.dresdenocl.essentialocl.expressions.IteratorExp;
+import org.dresdenocl.essentialocl.expressions.LetExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.OperationCallExp;
+import org.dresdenocl.essentialocl.expressions.PropertyCallExp;
+import org.dresdenocl.essentialocl.expressions.RealLiteralExp;
+import org.dresdenocl.essentialocl.expressions.StringLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralPart;
+import org.dresdenocl.essentialocl.expressions.TypeLiteralExp;
+import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
+import org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.VariableExp;
+import org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.essentialocl.types.BagType;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.essentialocl.types.InvalidType;
+import org.dresdenocl.essentialocl.types.OclLibrary;
+import org.dresdenocl.essentialocl.types.OrderedSetType;
+import org.dresdenocl.essentialocl.types.SequenceType;
+import org.dresdenocl.essentialocl.types.SetType;
+import org.dresdenocl.essentialocl.types.TupleType;
+import org.dresdenocl.essentialocl.types.TypeType;
+import org.dresdenocl.essentialocl.types.VoidType;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelConstants;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.tools.codegen.code.ITransformedCode;
+import org.dresdenocl.tools.codegen.code.ITransformedType;
+import org.dresdenocl.tools.codegen.code.impl.TransformedCodeImpl;
+import org.dresdenocl.tools.codegen.code.impl.TransformedTypeImpl;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2Java;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaPlugin;
+import org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
+import org.dresdenocl.tools.codegen.ocl2java.code.impl.Ocl2JavaEnvironment;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateGroup;
+import org.dresdenocl.tools.template.TemplatePlugin;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * <p>
@@ -180,7 +180,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl2Code#getSettings()
+	 * @see org.dresdenocl.ocl2java.IOcl2Code#getSettings()
 	 */
 	public IOcl2JavaSettings getSettings() {
 
@@ -190,7 +190,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.ocl2java.IOcl22Code#resetEnvironment()
+	 * @see org.dresdenocl.ocl2java.IOcl22Code#resetEnvironment()
 	 */
 	public void resetEnvironment() {
 
@@ -201,7 +201,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.IOcl2Code#setSettings(tudresden.ocl20
+	 * org.dresdenocl.tools.codegen.IOcl2Code#setSettings(org.dresdenocl
 	 * .pivot.tools.codegen.IOcl2CodeSettings)
 	 */
 	public void setSettings(IOcl2JavaSettings settings) {
@@ -216,7 +216,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.IOcl2Code#transformFragmentCode(java.util
+	 * org.dresdenocl.ocl2java.IOcl2Code#transformFragmentCode(java.util
 	 * .List)
 	 */
 	public List<String> transformFragmentCode(List<Constraint> constraints)
@@ -259,7 +259,7 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.IOcl2Code#transformInstrumentationCode
+	 * org.dresdenocl.ocl2java.IOcl2Code#transformInstrumentationCode
 	 * (java.util.List)
 	 */
 	public List<String> transformInstrumentationCode(
@@ -295,9 +295,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseBooleanLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.BooleanLiteralExp)
 	 */
 	public ITransformedCode caseBooleanLiteralExp(
 			BooleanLiteralExp aBooleanLiteralExp) {
@@ -328,9 +328,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseCollectionLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.CollectionLiteralExp)
 	 */
 	public ITransformedCode caseCollectionLiteralExp(
 			CollectionLiteralExp aCollectionLiteralExp) {
@@ -433,9 +433,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseEnumLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.EnumLiteralExp)
 	 */
 	public ITransformedCode caseEnumLiteralExp(EnumLiteralExp anEnumLiteralExp) {
 
@@ -488,9 +488,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseExpressionInOcl
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl)
+	 * (org.dresdenocl.essentialocl.expressions.ExpressionInOcl)
 	 */
 	public ITransformedCode caseExpressionInOcl(
 			ExpressionInOcl anExpressionInOcl) {
@@ -517,8 +517,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseIfExp(tudresden.ocl20.pivot.essentialocl.expressions.IfExp)
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseIfExp(org.dresdenocl.essentialocl.expressions.IfExp)
 	 */
 	public ITransformedCode caseIfExp(IfExp anIfExp) {
 
@@ -565,9 +565,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIntegerLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.IntegerLiteralExp)
 	 */
 	public ITransformedCode caseIntegerLiteralExp(
 			IntegerLiteralExp anIntegerLiteralExp) {
@@ -598,9 +598,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseInvalidLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.InvalidLiteralExp)
 	 */
 	public ITransformedCode caseInvalidLiteralExp(
 			InvalidLiteralExp anInvalidLiteralExp) {
@@ -636,9 +636,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIterateExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.IterateExp)
+	 * (org.dresdenocl.essentialocl.expressions.IterateExp)
 	 */
 	public ITransformedCode caseIterateExp(IterateExp anIterateExp) {
 
@@ -734,9 +734,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseIteratorExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp)
+	 * (org.dresdenocl.essentialocl.expressions.IteratorExp)
 	 */
 	public ITransformedCode caseIteratorExp(IteratorExp anIteratorExp) {
 
@@ -933,8 +933,8 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
-	 * #caseLetExp(tudresden.ocl20.pivot.essentialocl.expressions.LetExp)
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
+	 * #caseLetExp(org.dresdenocl.essentialocl.expressions.LetExp)
 	 */
 	public ITransformedCode caseLetExp(LetExp aLetExp) {
 
@@ -1709,9 +1709,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #casePropertyCallExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp)
+	 * (org.dresdenocl.essentialocl.expressions.PropertyCallExp)
 	 */
 	public ITransformedCode casePropertyCallExp(PropertyCallExp aPropertyCallExp) {
 
@@ -1820,9 +1820,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseRealLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.RealLiteralExp)
 	 */
 	public ITransformedCode caseRealLiteralExp(RealLiteralExp aRealLiteralExp) {
 
@@ -1852,9 +1852,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseStringLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.StringLiteralExp)
 	 */
 	public ITransformedCode caseStringLiteralExp(
 			StringLiteralExp aStringLiteralExp) {
@@ -1883,9 +1883,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTupleLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.TupleLiteralExp)
 	 */
 	public ITransformedCode caseTupleLiteralExp(TupleLiteralExp aTupleLiteralExp) {
 
@@ -1936,9 +1936,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseTypeLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.TypeLiteralExp)
 	 */
 	public ITransformedCode caseTypeLiteralExp(TypeLiteralExp aTypeLiteralExp) {
 
@@ -1968,9 +1968,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUndefinedLiteralExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp)
+	 * (org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp)
 	 */
 	public ITransformedCode caseUndefinedLiteralExp(
 			UndefinedLiteralExp anUndefinedLiteralExp) {
@@ -1998,9 +1998,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseUnlimitedNaturalExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp)
+	 * (org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp)
 	 */
 	public ITransformedCode caseUnlimitedNaturalExp(
 			UnlimitedNaturalExp anUnlimitedNaturalExp) {
@@ -2033,9 +2033,9 @@ public class Ocl2Java extends ExpressionsSwitch<ITransformedCode> implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.expressions.util.ExpressionsSwitch
+	 * org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseVariableExp
-	 * (tudresden.ocl20.pivot.essentialocl.expressions.VariableExp)
+	 * (org.dresdenocl.essentialocl.expressions.VariableExp)
 	 */
 	public ITransformedCode caseVariableExp(VariableExp aVariableExp) {
 

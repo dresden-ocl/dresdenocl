@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter.actions;
+package org.dresdenocl.codegen.adapter.actions;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -16,8 +16,8 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
-import tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorPlugin;
-import tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil;
+import org.dresdenocl.codegen.adapter.PivotAdapterGeneratorPlugin;
+import org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil;
 
 /**
  * ActionDelegate for the popup menu point "Generate Pivot Model adapters".
@@ -31,7 +31,7 @@ public class GenerateAdaptersActionDelegate implements IObjectActionDelegate {
 
 	private IWorkbenchPart targetPart;
 
-	private static final String PIVOTADAPTER_PROJECT_TYPE = "tudresden.ocl20.pivot.codegen.generator.PivotAdapter";
+	private static final String PIVOTADAPTER_PROJECT_TYPE = "org.dresdenocl.codegen.generator.PivotAdapter";
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 		this.targetPart = targetPart;

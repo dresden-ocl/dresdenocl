@@ -1,10 +1,10 @@
-package tudresden.ocl20.pivot;
+package org.dresdenocl;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * The only purpose of this plugin is to initialize the {@link LoggingPlugin
@@ -24,7 +24,7 @@ public class PivotModelPlugin extends Plugin {
 	/**
 	 * The id of this plugin
 	 */
-	public static final String ID = "tudresden.ocl20.pivot.pivotmodel"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.pivotmodel"; //$NON-NLS-1$
 
 	// The shared instance
 	private static PivotModelPlugin plugin;

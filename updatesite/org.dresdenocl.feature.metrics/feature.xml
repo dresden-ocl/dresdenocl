@@ -184,11 +184,11 @@ Library.
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="tudresden.ocl20.pivot.pivotmodel"/>
-      <import plugin="tudresden.ocl20.pivot.model"/>
-      <import plugin="tudresden.ocl20.pivot.essentialocl"/>
+      <import plugin="org.dresdenocl.pivotmodel"/>
+      <import plugin="org.dresdenocl.model"/>
+      <import plugin="org.dresdenocl.essentialocl"/>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus"/>
+      <import plugin="org.dresdenocl.modelbus"/>
    </requires>
 
    <plugin

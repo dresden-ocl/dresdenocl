@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionIsEmpty {
      *       def: testCollectionIsEmpty(source: Collection(OclAny)): Boolean = source ->isEmpty()</code></p>
      */
     public Boolean testpackage.Class1.testCollectionIsEmpty(java.util.Collection<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(source);
     }
 }

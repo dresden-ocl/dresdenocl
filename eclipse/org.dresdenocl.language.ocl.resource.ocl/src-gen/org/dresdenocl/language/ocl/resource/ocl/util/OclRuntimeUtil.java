@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * This utility class provides methods to obtain information about the current
@@ -32,7 +32,7 @@ public class OclRuntimeUtil {
 	 */
 	public void logError(String message, Throwable exception) {
 		if (isEclipsePlatformAvailable()) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError(message, exception);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logError(message, exception);
 			return;
 		}
 		System.err.println(message);
@@ -47,7 +47,7 @@ public class OclRuntimeUtil {
 	 */
 	public void logWarning(String message, Throwable exception) {
 		if (isEclipsePlatformAvailable()) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logWarning(message, exception);
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logWarning(message, exception);
 			return;
 		}
 		System.err.println(message);

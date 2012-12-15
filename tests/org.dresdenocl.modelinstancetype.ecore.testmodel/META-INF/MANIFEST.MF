@@ -1,21 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.modelinstancetype.ecore.testmodel;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
- tudresden.ocl20.pivot.modelinstancetype.test.testmodel.impl;
-  uses:="ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel,
+Export-Package: ecore.org.dresdenocl.modelinstancetype.test.testmodel;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
+ org.dresdenocl.modelinstancetype.test.testmodel.impl;
+  uses:="ecore.org.dresdenocl.modelinstancetype.test.testmodel,
    org.eclipse.emf.ecore,
    org.eclipse.emf.common.util,
    org.eclipse.emf.common.notify,
    org.eclipse.emf.ecore.impl",
- tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util;
-  uses:="ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel,
+ org.dresdenocl.modelinstancetype.test.testmodel.util;
+  uses:="ecore.org.dresdenocl.modelinstancetype.test.testmodel,
    org.eclipse.emf.ecore,
    org.eclipse.emf.common.notify.impl,
    org.eclipse.emf.common.notify"

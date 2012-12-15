@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.ui.wizard;
+package org.dresdenocl.examples.ui.wizard;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,13 +14,13 @@ public class RoyalAndLoyalExampleWizard extends AbstractExampleWizard {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.examples.ui.wizard.AbstractExampleWizard#
+	 * @see org.dresdenocl.examples.ui.wizard.AbstractExampleWizard#
 	 * getExamplePlugins()
 	 */
 	protected Collection<String[]> getExamplePlugins() {
 
 		Collection<String[]> result = new ArrayList<String[]>(1);
-		result.add(new String[] { "tudresden.ocl20.pivot.examples.royalandloyal",
+		result.add(new String[] { "org.dresdenocl.examples.royalandloyal",
 				"Dresden OCL - Royal & Loyal UML/Java Example" });
 		
 		return result;

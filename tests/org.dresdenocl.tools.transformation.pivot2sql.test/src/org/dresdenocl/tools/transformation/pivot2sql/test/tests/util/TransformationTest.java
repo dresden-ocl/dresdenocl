@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.tests.util;
+package org.dresdenocl.tools.transformation.pivot2sql.test.tests.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.test.Pivot2SqlTestPlugin;
+import org.dresdenocl.tools.transformation.pivot2sql.test.Pivot2SqlTestPlugin;
 
 public abstract class TransformationTest {
 

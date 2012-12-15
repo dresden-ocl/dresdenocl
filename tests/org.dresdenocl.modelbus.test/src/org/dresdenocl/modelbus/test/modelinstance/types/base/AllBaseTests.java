@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.test.modelinstance.types.base;
+package org.dresdenocl.modelbus.test.modelinstance.types.base;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -25,7 +25,7 @@ import org.junit.runners.Suite;
 /**
  * <p>
  * Provides a jUnit Test Suite containing all plug-in tests of the package
- * <code>tudresden.ocl20.pivot.modelbus.modelinstance.types.base</code> and its
+ * <code>org.dresdenocl.modelbus.modelinstance.types.base</code> and its
  * sub packages.
  * </p>
  * 

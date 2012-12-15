@@ -23,7 +23,7 @@ public privileged aspect Class1_DefAspect_testStringCharacters {
         }
 
         /* Remove the first element ''. */
-        result1.remove(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.first(result1));
+        result1.remove(org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.first(result1));
 
         return result1;
     }

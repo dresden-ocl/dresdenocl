@@ -30,7 +30,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,10 +41,10 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractNamespace;
 
 /**
  * <p>
@@ -110,7 +110,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getName()
 	 */
 	@Override
 	public String getName() {
@@ -122,7 +122,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getNestingNamespace
+	 * org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestingNamespace
 	 * ()
 	 */
 	@Override
@@ -149,7 +149,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl
+	 * org.dresdenocl.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl
 	 * ()
 	 */
 	@Override
@@ -178,7 +178,7 @@ public class EcoreNamespace extends AbstractNamespace implements Namespace {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.pivotmodel.base.AbstractNamespace#
+	 * @seeorg.dresdenocl.pivotmodel.base.AbstractNamespace#
 	 * getNestedNamespaceImpl()
 	 */
 	@Override

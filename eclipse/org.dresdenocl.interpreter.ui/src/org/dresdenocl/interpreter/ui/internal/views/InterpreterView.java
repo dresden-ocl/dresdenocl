@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter.ui.internal.views;
+package org.dresdenocl.interpreter.ui.internal.views;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,27 +55,27 @@ import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
-import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
-import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
-import tudresden.ocl20.pivot.interpreter.ui.actions.InterpreterViewMenuAction;
-import tudresden.ocl20.pivot.interpreter.ui.actions.InterpreterViewMenuActionType;
-import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.util.ResultsContentProvider;
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.util.ResultsFilter;
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.util.ResultsLabelProvider;
-import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.event.IModelInstanceRegistryListener;
-import tudresden.ocl20.pivot.modelinstance.event.ModelInstanceRegistryEvent;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.interpreter.OclInterpreterPlugin;
+import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
+import org.dresdenocl.interpreter.ui.actions.InterpreterViewMenuAction;
+import org.dresdenocl.interpreter.ui.actions.InterpreterViewMenuActionType;
+import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
+import org.dresdenocl.interpreter.ui.internal.views.util.ResultsContentProvider;
+import org.dresdenocl.interpreter.ui.internal.views.util.ResultsFilter;
+import org.dresdenocl.interpreter.ui.internal.views.util.ResultsLabelProvider;
+import org.dresdenocl.model.event.IModelRegistryListener;
+import org.dresdenocl.model.event.ModelRegistryEvent;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ui.ModelBusUIPlugin;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.event.IModelInstanceRegistryListener;
+import org.dresdenocl.modelinstance.event.ModelInstanceRegistryEvent;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -187,9 +187,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * @seeorg.dresdenocl.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
 
@@ -198,9 +198,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
+	 * @seeorg.dresdenocl.modelbus.event.IModelInstanceRegistryListener#
 	 * activeModelInstanceChanged
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
+	 * (org.dresdenocl.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
 
@@ -261,8 +261,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * @see org.dresdenocl.modelbus.event.IModelRegistryListener#modelAdded
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent event) {
 
@@ -276,9 +276,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener#
+	 * @seeorg.dresdenocl.modelbus.event.IModelInstanceRegistryListener#
 	 * modelInstanceAdded
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelInstanceRegistryEvent)
+	 * (org.dresdenocl.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void modelInstanceAdded(ModelInstanceRegistryEvent event) {
 

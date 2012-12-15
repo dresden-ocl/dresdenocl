@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="AdapterFactory" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil java.util.List java.util.LinkedList"%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="AdapterFactory" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil java.util.List java.util.LinkedList"%>
 <%GenModel genModel = (GenModel)argument;
 String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
 String modelNameLC = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(genModel.getModelName());
@@ -96,54 +96,54 @@ package <%=packageName%>;
 genModel.addImport("java.util.Map");
 genModel.addImport("org.eclipse.osgi.util.NLS");
 genModel.addImport("org.apache.log4j.Logger");
-genModel.addImport("tudresden.ocl20.pivot.pivotmodel.NamedElement");
+genModel.addImport("org.dresdenocl.pivotmodel.NamedElement");
 //if (!commonSuperTypeName.equals("Object")) {
 //	genModel.addImport(commonSuperTypeName);
 //}
 if (!enumClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Enumeration");
+	genModel.addImport("org.dresdenocl.pivotmodel.Enumeration");
 for (String enumClass : enumClasses) {
 	if (!enumClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, enumClass));
 }
 if (!enumLiteralClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral");
+	genModel.addImport("org.dresdenocl.pivotmodel.EnumerationLiteral");
 for (String enumLiteralClass : enumLiteralClasses) {
 	if (!enumLiteralClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, enumLiteralClass));
 }
 if (!namespaceClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");
+	genModel.addImport("org.dresdenocl.pivotmodel.Namespace");
 for (String namespaceClass : namespaceClasses) {
 	if (!namespaceClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, namespaceClass));
 }
 if (!operationClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Operation");
+	genModel.addImport("org.dresdenocl.pivotmodel.Operation");
 for (String operationClass : operationClasses) {
 	if (!operationClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, operationClass));
 }
 if (!parameterClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Parameter");
+	genModel.addImport("org.dresdenocl.pivotmodel.Parameter");
 for (String parameterClass : parameterClasses) {
 	if (!parameterClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, parameterClass));
 }
 if (!primitiveTypeClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.PrimitiveType");
+	genModel.addImport("org.dresdenocl.pivotmodel.PrimitiveType");
 for (String primitiveTypeClass : primitiveTypeClasses) {
 	if (!primitiveTypeClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, primitiveTypeClass));
 }
 if (!propertyClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Property");
+	genModel.addImport("org.dresdenocl.pivotmodel.Property");
 for (String propertyClass : propertyClasses) {
 	if (!propertyClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, propertyClass));
 }
 if (!typeClasses.isEmpty())
-	genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");
+	genModel.addImport("org.dresdenocl.pivotmodel.Type");
 for (String typeClass : typeClasses) {
 	if (!typeClass.contains("."))
 		genModel.addImport(PivotAdapterGeneratorUtil.getGenClassPackage(genModel, typeClass));
@@ -164,7 +164,7 @@ public class <%=className%> {
 	 *
 	 * @generated
 	 */
-	private static final Logger LOGGER = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>
+	private static final Logger LOGGER = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>
 			.getLogger(<%=className%>.class);
 
 	/**

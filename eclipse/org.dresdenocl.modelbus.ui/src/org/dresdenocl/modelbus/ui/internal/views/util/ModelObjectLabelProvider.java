@@ -16,17 +16,17 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal.views.util;
+package org.dresdenocl.modelbus.ui.internal.views.util;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.ModelInstancesView;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.modelbus.ui.ModelBusUIPlugin;
+import org.dresdenocl.modelbus.ui.internal.views.ModelInstancesView;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>

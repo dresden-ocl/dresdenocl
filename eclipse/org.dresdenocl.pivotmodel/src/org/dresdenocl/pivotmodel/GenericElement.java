@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -42,12 +42,12 @@ import java.util.List;
  * The following features are supported:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
+ * {@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
  * <em>Owned Type Parameter</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericElement()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getGenericElement()
  * @model interface="true" abstract="true"
  * @generated
  */
@@ -56,9 +56,9 @@ public interface GenericElement extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Owned Type Parameter</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter}. It is bidirectional
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter}. It is bidirectional
 	 * and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
 	 * <em>Generic Element</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Type Parameter</em>' containment reference
@@ -68,8 +68,8 @@ public interface GenericElement extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Owned Type Parameter</em>' containment
 	 *         reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericElement_OwnedTypeParameter()
-	 * @see tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getGenericElement_OwnedTypeParameter()
+	 * @see org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
 	 * @model opposite="genericElement" containment="true"
 	 * @generated
 	 */
@@ -115,9 +115,9 @@ public interface GenericElement extends NamedElement {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @model required="true" parametersDataType=
-	 *        "tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>"
+	 *        "org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>"
 	 *        parametersRequired="true" parametersMany="false" typesDataType=
-	 *        "tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>"
+	 *        "org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>"
 	 *        typesRequired="true" typesMany="false"
 	 * @generated
 	 */

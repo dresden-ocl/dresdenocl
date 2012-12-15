@@ -1,4 +1,4 @@
-package tudresden.ocl20.logging;
+package org.dresdenocl.logging;
 
 import org.apache.log4j.Logger;
 

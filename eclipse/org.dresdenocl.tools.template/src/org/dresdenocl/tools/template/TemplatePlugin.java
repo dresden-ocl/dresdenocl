@@ -1,12 +1,12 @@
-package tudresden.ocl20.pivot.tools.template;
+package org.dresdenocl.tools.template;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.tools.template.internal.TemplateEngineRegistry;
-import tudresden.ocl20.pivot.tools.template.internal.TemplateGroupRegistry;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.tools.template.internal.TemplateEngineRegistry;
+import org.dresdenocl.tools.template.internal.TemplateGroupRegistry;
 
 /**
  * <p>
@@ -18,7 +18,7 @@ import tudresden.ocl20.pivot.tools.template.internal.TemplateGroupRegistry;
 public class TemplatePlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.tools.template"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.tools.template"; //$NON-NLS-1$
 
 	private ITemplateGroupRegistry templateGroupRegistry;
 
@@ -56,7 +56,7 @@ public class TemplatePlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

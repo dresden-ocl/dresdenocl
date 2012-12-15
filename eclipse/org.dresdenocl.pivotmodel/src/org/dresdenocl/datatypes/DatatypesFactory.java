@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.datatypes;
+package org.dresdenocl.datatypes;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a
  * create method for each non-abstract class of the model. <!-- end-user-doc -->
  * 
- * @see tudresden.ocl20.pivot.datatypes.DatatypesPackage
+ * @see org.dresdenocl.datatypes.DatatypesPackage
  * @generated
  */
 public interface DatatypesFactory extends EFactory {
@@ -50,7 +50,7 @@ public interface DatatypesFactory extends EFactory {
 	 * @generated
 	 */
 	DatatypesFactory eINSTANCE =
-			tudresden.ocl20.pivot.datatypes.impl.DatatypesFactoryImpl.init();
+			org.dresdenocl.datatypes.impl.DatatypesFactoryImpl.init();
 
 	/**
 	 * Returns the package supported by this factory. <!-- begin-user-doc --> <!--

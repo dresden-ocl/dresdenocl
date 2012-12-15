@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 public interface IOclProblem {
 	public String getMessage();
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemSeverity getSeverity();
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType getType();
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes();
+	public org.dresdenocl.language.ocl.resource.ocl.OclEProblemSeverity getSeverity();
+	public org.dresdenocl.language.ocl.resource.ocl.OclEProblemType getType();
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes();
 }

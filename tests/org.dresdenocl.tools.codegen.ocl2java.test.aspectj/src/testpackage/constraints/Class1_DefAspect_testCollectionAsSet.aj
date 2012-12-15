@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionAsSet {
      *       def: testCollectionAsSet(source: Collection(OclAny)):    Set(OclAny) = source ->asSet()</code></p>
      */
     public java.util.Set<Object> testpackage.Class1.testCollectionAsSet(java.util.Collection<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.asSet(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.asSet(source);
     }
 }

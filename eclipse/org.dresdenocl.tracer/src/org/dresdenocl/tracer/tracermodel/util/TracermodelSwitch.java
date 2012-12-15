@@ -4,15 +4,15 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.util;
+package org.dresdenocl.tracer.tracermodel.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracerRoot;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance
@@ -21,7 +21,7 @@ import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
  * starting with the actual class of the object and proceeding up the
  * inheritance hierarchy until a non-null result is returned, which is the
  * result of the switch. <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage
+ * @see org.dresdenocl.tracer.tracermodel.TracermodelPackage
  * @generated
  */
 public class TracermodelSwitch<T> extends Switch<T> {

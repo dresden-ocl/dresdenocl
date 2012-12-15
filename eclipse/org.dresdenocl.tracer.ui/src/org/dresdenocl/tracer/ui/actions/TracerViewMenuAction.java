@@ -16,14 +16,14 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tracer.ui.actions;
+package org.dresdenocl.tracer.ui.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 
-import tudresden.ocl20.pivot.tracer.ui.internal.msg.OclTracerUIMessages;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.TracerView;
-import tudresden.ocl20.pivot.tracer.ui.internal.views.util.ViewerFilterType;
+import org.dresdenocl.tracer.ui.internal.msg.OclTracerUIMessages;
+import org.dresdenocl.tracer.ui.internal.views.TracerView;
+import org.dresdenocl.tracer.ui.internal.views.util.ViewerFilterType;
 
 /**
  * @author Lars Schuetze

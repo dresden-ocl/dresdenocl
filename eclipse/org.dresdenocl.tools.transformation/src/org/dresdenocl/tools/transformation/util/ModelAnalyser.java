@@ -2,7 +2,7 @@
  * Created on 17.01.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.util;
+package org.dresdenocl.tools.transformation.util;
 
 import java.util.Arrays;
 import java.util.Collection;

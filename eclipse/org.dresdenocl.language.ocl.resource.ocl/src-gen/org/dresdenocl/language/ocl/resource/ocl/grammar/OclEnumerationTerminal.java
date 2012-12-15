@@ -4,16 +4,16 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
 /**
  * A class to represent an enumeration terminal in the grammar.
  */
-public class OclEnumerationTerminal extends tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclTerminal {
+public class OclEnumerationTerminal extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclTerminal {
 	
 	private java.util.Map<String, String> mapping = new java.util.LinkedHashMap<String, String>();
 	
-	public OclEnumerationTerminal(org.eclipse.emf.ecore.EStructuralFeature attribute, String[] literalMappings, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality, int mandatoryOccurrencesAfter) {
+	public OclEnumerationTerminal(org.eclipse.emf.ecore.EStructuralFeature attribute, String[] literalMappings, org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, int mandatoryOccurrencesAfter) {
 		super(attribute, cardinality, mandatoryOccurrencesAfter);
 		assert attribute instanceof org.eclipse.emf.ecore.EAttribute;
 		assert literalMappings.length % 2 == 0;

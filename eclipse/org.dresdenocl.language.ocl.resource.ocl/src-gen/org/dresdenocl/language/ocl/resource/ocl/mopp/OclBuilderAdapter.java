@@ -4,16 +4,16 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 public class OclBuilderAdapter extends org.eclipse.core.resources.IncrementalProjectBuilder implements org.eclipse.core.resources.IResourceDeltaVisitor, org.eclipse.core.resources.IResourceVisitor {
 	
 	/**
 	 * The ID of the default, generated builder.
 	 */
-	public final static String BUILDER_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.builder";
+	public final static String BUILDER_ID = "org.dresdenocl.language.ocl.resource.ocl.builder";
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBuilder defaultBuilder = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclBuilder();
+	private org.dresdenocl.language.ocl.resource.ocl.IOclBuilder defaultBuilder = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclBuilder();
 	
 	/**
 	 * This resource set is used during the whole build.
@@ -46,10 +46,10 @@ public class OclBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 	
 	public void build(org.eclipse.core.resources.IFile resource, org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.core.runtime.IProgressMonitor monitor) {
 		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBuilder builder = getBuilder();
+		org.dresdenocl.language.ocl.resource.ocl.IOclBuilder builder = getBuilder();
 		if (builder.isBuildingNeeded(uri)) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource customResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) resourceSet.getResource(uri, true);
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, getBuilderMarkerId());
+			org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource customResource = (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) resourceSet.getResource(uri, true);
+			new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, getBuilderMarkerId());
 			builder.build(customResource, monitor);
 		}
 	}
@@ -58,7 +58,7 @@ public class OclBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 	 * Returns the builder that shall be used by this adapter. This allows subclasses
 	 * to perform builds with different builders.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBuilder getBuilder() {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclBuilder getBuilder() {
 		return defaultBuilder;
 	}
 	
@@ -67,15 +67,15 @@ public class OclBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 	 * subclasses to produce different kinds of markers.
 	 */
 	public String getBuilderMarkerId() {
-		return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper().getMarkerID(tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.BUILDER_ERROR);
+		return new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMarkerHelper().getMarkerID(org.dresdenocl.language.ocl.resource.ocl.OclEProblemType.BUILDER_ERROR);
 	}
 	
 	/**
 	 * Runs the task item builder to search for new task items in changed resources.
 	 */
 	public void runTaskItemBuilder(org.eclipse.core.resources.IFile resource, org.eclipse.emf.ecore.resource.ResourceSet resourceSet, org.eclipse.core.runtime.IProgressMonitor monitor) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItemBuilder taskItemBuilder = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTaskItemBuilder();
-		new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, taskItemBuilder.getBuilderMarkerId());
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemBuilder taskItemBuilder = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTaskItemBuilder();
+		new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, taskItemBuilder.getBuilderMarkerId());
 		taskItemBuilder.build(resource, resourceSet, monitor);
 	}
 	
@@ -93,14 +93,14 @@ public class OclBuilderAdapter extends org.eclipse.core.resources.IncrementalPro
 	protected boolean doVisit(org.eclipse.core.resources.IResource resource, boolean removed) throws org.eclipse.core.runtime.CoreException {
 		if (removed) {
 			org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBuilder builder = getBuilder();
+			org.dresdenocl.language.ocl.resource.ocl.IOclBuilder builder = getBuilder();
 			if (builder.isBuildingNeeded(uri)) {
 				builder.handleDeletion(uri, monitor);
 			}
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, getBuilderMarkerId());
+			new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMarkerHelper().removeAllMarkers(resource, getBuilderMarkerId());
 			return false;
 		}
-		if (resource instanceof org.eclipse.core.resources.IFile && resource.getName().endsWith("." + new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName())) {
+		if (resource instanceof org.eclipse.core.resources.IFile && resource.getName().endsWith("." + new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().getSyntaxName())) {
 			// First, call the default generated builder that is usually customized to add
 			// compilation-like behavior.
 			build((org.eclipse.core.resources.IFile) resource, resourceSet, monitor);

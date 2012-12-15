@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 
@@ -16,13 +16,13 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getInitialization <em>Initialization</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getEqual <em>Equal</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getInitialization <em>Initialization</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getEqual <em>Equal</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithInitCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithInitCS()
  * @model
  * @generated
  */
@@ -37,14 +37,14 @@ public interface VariableDeclarationWithInitCS extends VariableDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
    * @see #setTypeName(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithInitCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithInitCS_TypeName()
    * @model containment="true"
    * @generated
    */
 	TypeCS getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getTypeName <em>Type Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getTypeName <em>Type Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' containment reference.
@@ -63,14 +63,14 @@ public interface VariableDeclarationWithInitCS extends VariableDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Initialization</em>' containment reference.
    * @see #setInitialization(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithInitCS_Initialization()
+   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithInitCS_Initialization()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getInitialization();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getInitialization <em>Initialization</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getInitialization <em>Initialization</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Initialization</em>' containment reference.
@@ -89,14 +89,14 @@ public interface VariableDeclarationWithInitCS extends VariableDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Equal</em>' attribute.
    * @see #setEqual(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getVariableDeclarationWithInitCS_Equal()
+   * @see org.dresdenocl.language.ocl.OclPackage#getVariableDeclarationWithInitCS_Equal()
    * @model required="true"
    * @generated
    */
 	String getEqual();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.VariableDeclarationWithInitCS#getEqual <em>Equal</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.VariableDeclarationWithInitCS#getEqual <em>Equal</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Equal</em>' attribute.

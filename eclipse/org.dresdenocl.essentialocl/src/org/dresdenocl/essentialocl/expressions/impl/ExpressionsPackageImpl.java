@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -40,42 +40,42 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
-import tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange;
-import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
-import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory;
-import tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IfExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IterateExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LetExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart;
-import tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.VariableExp;
-import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.datatypes.DatatypesPackage;
+import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CallExp;
+import org.dresdenocl.essentialocl.expressions.CollectionItem;
+import org.dresdenocl.essentialocl.expressions.CollectionKind;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
+import org.dresdenocl.essentialocl.expressions.CollectionLiteralPart;
+import org.dresdenocl.essentialocl.expressions.CollectionRange;
+import org.dresdenocl.essentialocl.expressions.EnumLiteralExp;
+import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
+import org.dresdenocl.essentialocl.expressions.ExpressionsFactory;
+import org.dresdenocl.essentialocl.expressions.FeatureCallExp;
+import org.dresdenocl.essentialocl.expressions.IfExp;
+import org.dresdenocl.essentialocl.expressions.IntegerLiteralExp;
+import org.dresdenocl.essentialocl.expressions.InvalidLiteralExp;
+import org.dresdenocl.essentialocl.expressions.IterateExp;
+import org.dresdenocl.essentialocl.expressions.IteratorExp;
+import org.dresdenocl.essentialocl.expressions.LetExp;
+import org.dresdenocl.essentialocl.expressions.LiteralExp;
+import org.dresdenocl.essentialocl.expressions.LoopExp;
+import org.dresdenocl.essentialocl.expressions.NumericLiteralExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.OperationCallExp;
+import org.dresdenocl.essentialocl.expressions.PrimitiveLiteralExp;
+import org.dresdenocl.essentialocl.expressions.PropertyCallExp;
+import org.dresdenocl.essentialocl.expressions.RealLiteralExp;
+import org.dresdenocl.essentialocl.expressions.StringLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralExp;
+import org.dresdenocl.essentialocl.expressions.TupleLiteralPart;
+import org.dresdenocl.essentialocl.expressions.TypeLiteralExp;
+import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
+import org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.VariableExp;
+import org.dresdenocl.essentialocl.types.impl.TypesPackageImpl;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -88,7 +88,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionsFactory
+ * @see org.dresdenocl.essentialocl.expressions.ExpressionsFactory
  * @generated
  */
 public class ExpressionsPackageImpl extends EPackageImpl {
@@ -125,15 +125,15 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * @generated
 	 */
 	public static final ExpressionsPackageImpl eINSTANCE =
-			tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl
+			org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl
 					.init();
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getOclExpression()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getOclExpression()
 	 * @generated
 	 */
 	public static final int OCL_EXPRESSION = 11;
@@ -209,11 +209,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl <em>Variable Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.VariableExpImpl <em>Variable Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariableExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.VariableExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariableExp()
 	 * @generated
 	 */
 	public static final int VARIABLE_EXP = 0;
@@ -296,11 +296,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			OCL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl <em>Variable</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.VariableImpl <em>Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariable()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.VariableImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariable()
 	 * @generated
 	 */
 	public static final int VARIABLE = 1;
@@ -386,11 +386,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LiteralExpImpl <em>Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.LiteralExpImpl <em>Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.LiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getLiteralExp()
 	 * @generated
 	 */
 	public static final int LITERAL_EXP = 15;
@@ -463,11 +463,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			OCL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PrimitiveLiteralExpImpl <em>Primitive Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.PrimitiveLiteralExpImpl <em>Primitive Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.PrimitiveLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getPrimitiveLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.PrimitiveLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getPrimitiveLiteralExp()
 	 * @generated
 	 */
 	public static final int PRIMITIVE_LITERAL_EXP = 9;
@@ -540,11 +540,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.NumericLiteralExpImpl <em>Numeric Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.NumericLiteralExpImpl <em>Numeric Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.NumericLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getNumericLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.NumericLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getNumericLiteralExp()
 	 * @generated
 	 */
 	public static final int NUMERIC_LITERAL_EXP = 12;
@@ -620,11 +620,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PRIMITIVE_LITERAL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl <em>Unlimited Natural Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.UnlimitedNaturalExpImpl <em>Unlimited Natural Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getUnlimitedNaturalExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.UnlimitedNaturalExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getUnlimitedNaturalExp()
 	 * @generated
 	 */
 	public static final int UNLIMITED_NATURAL_EXP = 2;
@@ -710,11 +710,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			NUMERIC_LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl <em>Type Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.TypeLiteralExpImpl <em>Type Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTypeLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.TypeLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getTypeLiteralExp()
 	 * @generated
 	 */
 	public static final int TYPE_LITERAL_EXP = 3;
@@ -797,11 +797,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl <em>Tuple Literal Part</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralPartImpl <em>Tuple Literal Part</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralPart()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.TupleLiteralPartImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralPart()
 	 * @generated
 	 */
 	public static final int TUPLE_LITERAL_PART = 4;
@@ -887,11 +887,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.TupleLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralExp()
 	 * @generated
 	 */
 	public static final int TUPLE_LITERAL_EXP = 5;
@@ -974,11 +974,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.StringLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getStringLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.StringLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getStringLiteralExp()
 	 * @generated
 	 */
 	public static final int STRING_LITERAL_EXP = 6;
@@ -1064,11 +1064,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PRIMITIVE_LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl <em>Real Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.RealLiteralExpImpl <em>Real Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getRealLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.RealLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getRealLiteralExp()
 	 * @generated
 	 */
 	public static final int REAL_LITERAL_EXP = 7;
@@ -1151,11 +1151,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			NUMERIC_LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CallExpImpl <em>Call Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.CallExpImpl <em>Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CallExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCallExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.CallExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCallExp()
 	 * @generated
 	 */
 	public static final int CALL_EXP = 24;
@@ -1235,11 +1235,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			OCL_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl <em>Feature Call Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.FeatureCallExpImpl <em>Feature Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getFeatureCallExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.FeatureCallExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getFeatureCallExp()
 	 * @generated
 	 */
 	public static final int FEATURE_CALL_EXP = 22;
@@ -1330,11 +1330,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			CALL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl <em>Property Call Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.PropertyCallExpImpl <em>Property Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getPropertyCallExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.PropertyCallExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getPropertyCallExp()
 	 * @generated
 	 */
 	public static final int PROPERTY_CALL_EXP = 8;
@@ -1446,11 +1446,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			FEATURE_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl <em>Operation Call Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.OperationCallExpImpl <em>Operation Call Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getOperationCallExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.OperationCallExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getOperationCallExp()
 	 * @generated
 	 */
 	public static final int OPERATION_CALL_EXP = 10;
@@ -1562,11 +1562,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			FEATURE_CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UndefinedLiteralExpImpl <em>Undefined Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.UndefinedLiteralExpImpl <em>Undefined Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.UndefinedLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getUndefinedLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.UndefinedLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getUndefinedLiteralExp()
 	 * @generated
 	 */
 	public static final int UNDEFINED_LITERAL_EXP = 13;
@@ -1639,11 +1639,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl <em>Loop Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl <em>Loop Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getLoopExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getLoopExp()
 	 * @generated
 	 */
 	public static final int LOOP_EXP = 14;
@@ -1739,11 +1739,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	public static final int LOOP_EXP_FEATURE_COUNT = CALL_EXP_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl <em>Let Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.LetExpImpl <em>Let Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getLetExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.LetExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getLetExp()
 	 * @generated
 	 */
 	public static final int LET_EXP = 16;
@@ -1832,11 +1832,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			OCL_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IteratorExpImpl <em>Iterator Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.IteratorExpImpl <em>Iterator Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IteratorExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIteratorExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.IteratorExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIteratorExp()
 	 * @generated
 	 */
 	public static final int ITERATOR_EXP = 17;
@@ -1934,11 +1934,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LOOP_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl <em>Iterate Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.IterateExpImpl <em>Iterate Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIterateExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.IterateExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIterateExp()
 	 * @generated
 	 */
 	public static final int ITERATE_EXP = 18;
@@ -2045,11 +2045,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LOOP_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.InvalidLiteralExpImpl <em>Invalid Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.InvalidLiteralExpImpl <em>Invalid Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.InvalidLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getInvalidLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.InvalidLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getInvalidLiteralExp()
 	 * @generated
 	 */
 	public static final int INVALID_LITERAL_EXP = 19;
@@ -2122,11 +2122,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl <em>Integer Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.IntegerLiteralExpImpl <em>Integer Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIntegerLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.IntegerLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIntegerLiteralExp()
 	 * @generated
 	 */
 	public static final int INTEGER_LITERAL_EXP = 20;
@@ -2210,11 +2210,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			NUMERIC_LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl <em>If Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.IfExpImpl <em>If Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIfExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.IfExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIfExp()
 	 * @generated
 	 */
 	public static final int IF_EXP = 21;
@@ -2314,11 +2314,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			OCL_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl <em>Boolean Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.BooleanLiteralExpImpl <em>Boolean Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getBooleanLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.BooleanLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getBooleanLiteralExp()
 	 * @generated
 	 */
 	public static final int BOOLEAN_LITERAL_EXP = 23;
@@ -2404,11 +2404,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PRIMITIVE_LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralPartImpl <em>Collection Literal Part</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralPartImpl <em>Collection Literal Part</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralPartImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralPart()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralPartImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralPart()
 	 * @generated
 	 */
 	public static final int COLLECTION_LITERAL_PART = 27;
@@ -2474,11 +2474,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PivotModelPackage.TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl <em>Collection Item</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionItemImpl <em>Collection Item</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionItem()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionItemImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionItem()
 	 * @generated
 	 */
 	public static final int COLLECTION_ITEM = 25;
@@ -2552,11 +2552,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			COLLECTION_LITERAL_PART_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl <em>Collection Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralExpImpl <em>Collection Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralExp()
 	 * @generated
 	 */
 	public static final int COLLECTION_LITERAL_EXP = 26;
@@ -2659,11 +2659,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionRange()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionRangeImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionRange()
 	 * @generated
 	 */
 	public static final int COLLECTION_RANGE = 28;
@@ -2749,11 +2749,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			COLLECTION_LITERAL_PART_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl <em>Enum Literal Exp</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.EnumLiteralExpImpl <em>Enum Literal Exp</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getEnumLiteralExp()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.EnumLiteralExpImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getEnumLiteralExp()
 	 * @generated
 	 */
 	public static final int ENUM_LITERAL_EXP = 29;
@@ -2836,11 +2836,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			LITERAL_EXP_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl <em>Expression In Ocl</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl <em>Expression In Ocl</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getExpressionInOcl()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getExpressionInOcl()
 	 * @generated
 	 */
 	public static final int EXPRESSION_IN_OCL = 30;
@@ -2926,11 +2926,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 			PivotModelPackage.EXPRESSION_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind <em>Collection Kind</em>}' enum.
+	 * The meta object id for the '{@link org.dresdenocl.essentialocl.expressions.CollectionKind <em>Collection Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
 	 * @generated
 	 */
 	public static final int COLLECTION_KIND = 31;
@@ -3170,7 +3170,7 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#eNS_URI
+	 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -3239,11 +3239,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp <em>Variable Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.VariableExp <em>Variable Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.VariableExp
+	 * @see org.dresdenocl.essentialocl.expressions.VariableExp
 	 * @generated
 	 */
 	public EClass getVariableExp() {
@@ -3252,11 +3252,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.VariableExp#getReferredVariable <em>Referred Variable</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.VariableExp#getReferredVariable <em>Referred Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Referred Variable</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.VariableExp#getReferredVariable()
+	 * @see org.dresdenocl.essentialocl.expressions.VariableExp#getReferredVariable()
 	 * @see #getVariableExp()
 	 * @generated
 	 */
@@ -3266,11 +3266,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable <em>Variable</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.Variable
+	 * @see org.dresdenocl.essentialocl.expressions.Variable
 	 * @generated
 	 */
 	public EClass getVariable() {
@@ -3279,11 +3279,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.Variable#getRepresentedParameter <em>Represented Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Represented Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.Variable#getRepresentedParameter()
+	 * @see org.dresdenocl.essentialocl.expressions.Variable#getRepresentedParameter()
 	 * @see #getVariable()
 	 * @generated
 	 */
@@ -3293,11 +3293,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.Variable#getInitExpression <em>Init Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Init Expression</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.Variable#getInitExpression()
+	 * @see org.dresdenocl.essentialocl.expressions.Variable#getInitExpression()
 	 * @see #getVariable()
 	 * @generated
 	 */
@@ -3307,11 +3307,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp <em>Unlimited Natural Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp <em>Unlimited Natural Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Unlimited Natural Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp
+	 * @see org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp
 	 * @generated
 	 */
 	public EClass getUnlimitedNaturalExp() {
@@ -3320,11 +3320,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp#getSymbol <em>Symbol</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp#getSymbol <em>Symbol</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Symbol</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.UnlimitedNaturalExp#getSymbol()
+	 * @see org.dresdenocl.essentialocl.expressions.UnlimitedNaturalExp#getSymbol()
 	 * @see #getUnlimitedNaturalExp()
 	 * @generated
 	 */
@@ -3335,11 +3335,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp <em>Type Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.TypeLiteralExp <em>Type Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Type Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.TypeLiteralExp
 	 * @generated
 	 */
 	public EClass getTypeLiteralExp() {
@@ -3348,11 +3348,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp#getReferredType <em>Referred Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.TypeLiteralExp#getReferredType <em>Referred Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Referred Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TypeLiteralExp#getReferredType()
+	 * @see org.dresdenocl.essentialocl.expressions.TypeLiteralExp#getReferredType()
 	 * @see #getTypeLiteralExp()
 	 * @generated
 	 */
@@ -3362,11 +3362,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart <em>Tuple Literal Part</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart <em>Tuple Literal Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tuple Literal Part</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralPart
 	 * @generated
 	 */
 	public EClass getTupleLiteralPart() {
@@ -3375,11 +3375,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getProperty <em>Property</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getProperty <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Property</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getProperty()
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getProperty()
 	 * @see #getTupleLiteralPart()
 	 * @generated
 	 */
@@ -3389,11 +3389,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getValue <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralPart#getValue()
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralPart#getValue()
 	 * @see #getTupleLiteralPart()
 	 * @generated
 	 */
@@ -3403,11 +3403,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp <em>Tuple Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralExp <em>Tuple Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tuple Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralExp
 	 * @generated
 	 */
 	public EClass getTupleLiteralExp() {
@@ -3416,11 +3416,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp#getPart <em>Part</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.expressions.TupleLiteralExp#getPart <em>Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Part</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.TupleLiteralExp#getPart()
+	 * @see org.dresdenocl.essentialocl.expressions.TupleLiteralExp#getPart()
 	 * @see #getTupleLiteralExp()
 	 * @generated
 	 */
@@ -3430,11 +3430,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp <em>String Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.StringLiteralExp <em>String Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>String Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.StringLiteralExp
 	 * @generated
 	 */
 	public EClass getStringLiteralExp() {
@@ -3443,11 +3443,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp#getStringSymbol <em>String Symbol</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.expressions.StringLiteralExp#getStringSymbol <em>String Symbol</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>String Symbol</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp#getStringSymbol()
+	 * @see org.dresdenocl.essentialocl.expressions.StringLiteralExp#getStringSymbol()
 	 * @see #getStringLiteralExp()
 	 * @generated
 	 */
@@ -3457,11 +3457,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp <em>Real Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.RealLiteralExp <em>Real Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Real Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.RealLiteralExp
 	 * @generated
 	 */
 	public EClass getRealLiteralExp() {
@@ -3470,11 +3470,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp#getRealSymbol <em>Real Symbol</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.expressions.RealLiteralExp#getRealSymbol <em>Real Symbol</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Real Symbol</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp#getRealSymbol()
+	 * @see org.dresdenocl.essentialocl.expressions.RealLiteralExp#getRealSymbol()
 	 * @see #getRealLiteralExp()
 	 * @generated
 	 */
@@ -3484,11 +3484,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp <em>Property Call Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp <em>Property Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Property Call Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp
+	 * @see org.dresdenocl.essentialocl.expressions.PropertyCallExp
 	 * @generated
 	 */
 	public EClass getPropertyCallExp() {
@@ -3497,11 +3497,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp#getReferredProperty <em>Referred Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Referred Property</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getReferredProperty()
+	 * @see org.dresdenocl.essentialocl.expressions.PropertyCallExp#getReferredProperty()
 	 * @see #getPropertyCallExp()
 	 * @generated
 	 */
@@ -3511,11 +3511,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getQualifier <em>Qualifier</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.expressions.PropertyCallExp#getQualifier <em>Qualifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Qualifier</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp#getQualifier()
+	 * @see org.dresdenocl.essentialocl.expressions.PropertyCallExp#getQualifier()
 	 * @see #getPropertyCallExp()
 	 * @generated
 	 */
@@ -3525,11 +3525,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp <em>Primitive Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.PrimitiveLiteralExp <em>Primitive Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Primitive Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.PrimitiveLiteralExp
 	 * @generated
 	 */
 	public EClass getPrimitiveLiteralExp() {
@@ -3538,11 +3538,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp <em>Operation Call Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.OperationCallExp <em>Operation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Operation Call Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp
+	 * @see org.dresdenocl.essentialocl.expressions.OperationCallExp
 	 * @generated
 	 */
 	public EClass getOperationCallExp() {
@@ -3551,11 +3551,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getArgument <em>Argument</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.expressions.OperationCallExp#getArgument <em>Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Argument</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getArgument()
+	 * @see org.dresdenocl.essentialocl.expressions.OperationCallExp#getArgument()
 	 * @see #getOperationCallExp()
 	 * @generated
 	 */
@@ -3565,11 +3565,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getReferredOperation <em>Referred Operation</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.OperationCallExp#getReferredOperation <em>Referred Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Referred Operation</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getReferredOperation()
+	 * @see org.dresdenocl.essentialocl.expressions.OperationCallExp#getReferredOperation()
 	 * @see #getOperationCallExp()
 	 * @generated
 	 */
@@ -3579,11 +3579,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression <em>Ocl Expression</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.OclExpression <em>Ocl Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Ocl Expression</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression
+	 * @see org.dresdenocl.essentialocl.expressions.OclExpression
 	 * @generated
 	 */
 	public EClass getOclExpression() {
@@ -3592,11 +3592,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.OclExpression#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Ocl Library</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.OclExpression#getOclLibrary()
+	 * @see org.dresdenocl.essentialocl.expressions.OclExpression#getOclLibrary()
 	 * @see #getOclExpression()
 	 * @generated
 	 */
@@ -3606,11 +3606,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp <em>Numeric Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.NumericLiteralExp <em>Numeric Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Numeric Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.NumericLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.NumericLiteralExp
 	 * @generated
 	 */
 	public EClass getNumericLiteralExp() {
@@ -3619,11 +3619,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp <em>Undefined Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp <em>Undefined Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Undefined Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp
 	 * @generated
 	 */
 	public EClass getUndefinedLiteralExp() {
@@ -3632,11 +3632,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp <em>Loop Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.LoopExp <em>Loop Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Loop Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LoopExp
+	 * @see org.dresdenocl.essentialocl.expressions.LoopExp
 	 * @generated
 	 */
 	public EClass getLoopExp() {
@@ -3645,11 +3645,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getBody <em>Body</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.LoopExp#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getBody()
+	 * @see org.dresdenocl.essentialocl.expressions.LoopExp#getBody()
 	 * @see #getLoopExp()
 	 * @generated
 	 */
@@ -3659,11 +3659,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getIterator <em>Iterator</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.expressions.LoopExp#getIterator <em>Iterator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Iterator</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getIterator()
+	 * @see org.dresdenocl.essentialocl.expressions.LoopExp#getIterator()
 	 * @see #getLoopExp()
 	 * @generated
 	 */
@@ -3673,11 +3673,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp <em>Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.LiteralExp <em>Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.LiteralExp
 	 * @generated
 	 */
 	public EClass getLiteralExp() {
@@ -3686,11 +3686,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp <em>Let Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.LetExp <em>Let Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Let Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LetExp
+	 * @see org.dresdenocl.essentialocl.expressions.LetExp
 	 * @generated
 	 */
 	public EClass getLetExp() {
@@ -3699,11 +3699,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getIn <em>In</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.LetExp#getIn <em>In</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>In</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getIn()
+	 * @see org.dresdenocl.essentialocl.expressions.LetExp#getIn()
 	 * @see #getLetExp()
 	 * @generated
 	 */
@@ -3713,11 +3713,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.LetExp#getVariable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Variable</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.LetExp#getVariable()
+	 * @see org.dresdenocl.essentialocl.expressions.LetExp#getVariable()
 	 * @see #getLetExp()
 	 * @generated
 	 */
@@ -3727,11 +3727,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp <em>Iterator Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.IteratorExp <em>Iterator Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Iterator Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp
+	 * @see org.dresdenocl.essentialocl.expressions.IteratorExp
 	 * @generated
 	 */
 	public EClass getIteratorExp() {
@@ -3740,11 +3740,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp <em>Iterate Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.IterateExp <em>Iterate Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Iterate Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IterateExp
+	 * @see org.dresdenocl.essentialocl.expressions.IterateExp
 	 * @generated
 	 */
 	public EClass getIterateExp() {
@@ -3753,11 +3753,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.IterateExp#getResult <em>Result</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.IterateExp#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Result</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IterateExp#getResult()
+	 * @see org.dresdenocl.essentialocl.expressions.IterateExp#getResult()
 	 * @see #getIterateExp()
 	 * @generated
 	 */
@@ -3767,11 +3767,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp <em>Invalid Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.InvalidLiteralExp <em>Invalid Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Invalid Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.InvalidLiteralExp
 	 * @generated
 	 */
 	public EClass getInvalidLiteralExp() {
@@ -3780,11 +3780,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp <em>Integer Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp <em>Integer Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.IntegerLiteralExp
 	 * @generated
 	 */
 	public EClass getIntegerLiteralExp() {
@@ -3793,11 +3793,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Integer Symbol</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol()
+	 * @see org.dresdenocl.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol()
 	 * @see #getIntegerLiteralExp()
 	 * @generated
 	 */
@@ -3807,11 +3807,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp <em>If Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.IfExp <em>If Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>If Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IfExp
+	 * @see org.dresdenocl.essentialocl.expressions.IfExp
 	 * @generated
 	 */
 	public EClass getIfExp() {
@@ -3820,11 +3820,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.IfExp#getCondition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getCondition()
+	 * @see org.dresdenocl.essentialocl.expressions.IfExp#getCondition()
 	 * @see #getIfExp()
 	 * @generated
 	 */
@@ -3834,11 +3834,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getThenExpression <em>Then Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.IfExp#getThenExpression <em>Then Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Then Expression</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getThenExpression()
+	 * @see org.dresdenocl.essentialocl.expressions.IfExp#getThenExpression()
 	 * @see #getIfExp()
 	 * @generated
 	 */
@@ -3848,11 +3848,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getElseExpression <em>Else Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.IfExp#getElseExpression <em>Else Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Else Expression</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.IfExp#getElseExpression()
+	 * @see org.dresdenocl.essentialocl.expressions.IfExp#getElseExpression()
 	 * @see #getIfExp()
 	 * @generated
 	 */
@@ -3862,11 +3862,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp <em>Feature Call Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.FeatureCallExp <em>Feature Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Feature Call Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp
+	 * @see org.dresdenocl.essentialocl.expressions.FeatureCallExp
 	 * @generated
 	 */
 	public EClass getFeatureCallExp() {
@@ -3875,11 +3875,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.FeatureCallExp#getSourceType <em>Source Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Source Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.FeatureCallExp#getSourceType()
+	 * @see org.dresdenocl.essentialocl.expressions.FeatureCallExp#getSourceType()
 	 * @see #getFeatureCallExp()
 	 * @generated
 	 */
@@ -3889,11 +3889,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp <em>Boolean Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.BooleanLiteralExp <em>Boolean Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Boolean Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.BooleanLiteralExp
 	 * @generated
 	 */
 	public EClass getBooleanLiteralExp() {
@@ -3902,11 +3902,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp#isBooleanSymbol <em>Boolean Symbol</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.expressions.BooleanLiteralExp#isBooleanSymbol <em>Boolean Symbol</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Boolean Symbol</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.BooleanLiteralExp#isBooleanSymbol()
+	 * @see org.dresdenocl.essentialocl.expressions.BooleanLiteralExp#isBooleanSymbol()
 	 * @see #getBooleanLiteralExp()
 	 * @generated
 	 */
@@ -3916,11 +3916,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CallExp <em>Call Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.CallExp <em>Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Call Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CallExp
+	 * @see org.dresdenocl.essentialocl.expressions.CallExp
 	 * @generated
 	 */
 	public EClass getCallExp() {
@@ -3929,11 +3929,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.CallExp#getSource <em>Source</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.CallExp#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Source</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CallExp#getSource()
+	 * @see org.dresdenocl.essentialocl.expressions.CallExp#getSource()
 	 * @see #getCallExp()
 	 * @generated
 	 */
@@ -3943,11 +3943,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem <em>Collection Item</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.CollectionItem <em>Collection Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collection Item</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionItem
 	 * @generated
 	 */
 	public EClass getCollectionItem() {
@@ -3956,11 +3956,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem#getItem <em>Item</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.CollectionItem#getItem <em>Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Item</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionItem#getItem()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionItem#getItem()
 	 * @see #getCollectionItem()
 	 * @generated
 	 */
@@ -3970,11 +3970,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp <em>Collection Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp <em>Collection Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collection Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralExp
 	 * @generated
 	 */
 	public EClass getCollectionLiteralExp() {
@@ -3983,11 +3983,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getPart <em>Part</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getPart <em>Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Part</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getPart()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getPart()
 	 * @see #getCollectionLiteralExp()
 	 * @generated
 	 */
@@ -3998,11 +3998,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getKind <em>Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Kind</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getKind()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getKind()
 	 * @see #getCollectionLiteralExp()
 	 * @generated
 	 */
@@ -4013,11 +4013,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getElementType <em>Element Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Element Type</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralExp#getElementType()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralExp#getElementType()
 	 * @see #getCollectionLiteralExp()
 	 * @generated
 	 */
@@ -4028,11 +4028,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart <em>Collection Literal Part</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.CollectionLiteralPart <em>Collection Literal Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collection Literal Part</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionLiteralPart
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionLiteralPart
 	 * @generated
 	 */
 	public EClass getCollectionLiteralPart() {
@@ -4041,11 +4041,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange <em>Collection Range</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.CollectionRange <em>Collection Range</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Collection Range</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionRange
 	 * @generated
 	 */
 	public EClass getCollectionRange() {
@@ -4054,11 +4054,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getFirst <em>First</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.CollectionRange#getFirst <em>First</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>First</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getFirst()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionRange#getFirst()
 	 * @see #getCollectionRange()
 	 * @generated
 	 */
@@ -4068,11 +4068,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getLast <em>Last</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.CollectionRange#getLast <em>Last</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Last</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionRange#getLast()
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionRange#getLast()
 	 * @see #getCollectionRange()
 	 * @generated
 	 */
@@ -4082,11 +4082,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp <em>Enum Literal Exp</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp <em>Enum Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Enum Literal Exp</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp
+	 * @see org.dresdenocl.essentialocl.expressions.EnumLiteralExp
 	 * @generated
 	 */
 	public EClass getEnumLiteralExp() {
@@ -4095,11 +4095,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral <em>Referred Enum Literal</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral <em>Referred Enum Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Referred Enum Literal</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral()
+	 * @see org.dresdenocl.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral()
 	 * @see #getEnumLiteralExp()
 	 * @generated
 	 */
@@ -4109,11 +4109,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl <em>Expression In Ocl</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl <em>Expression In Ocl</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Expression In Ocl</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl
+	 * @see org.dresdenocl.essentialocl.expressions.ExpressionInOcl
 	 * @generated
 	 */
 	public EClass getExpressionInOcl() {
@@ -4122,11 +4122,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getBodyExpression <em>Body Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Body Expression</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getBodyExpression()
+	 * @see org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getBodyExpression()
 	 * @see #getExpressionInOcl()
 	 * @generated
 	 */
@@ -4136,11 +4136,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getContext <em>Context</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getContext <em>Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Context</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getContext()
+	 * @see org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getContext()
 	 * @see #getExpressionInOcl()
 	 * @generated
 	 */
@@ -4150,11 +4150,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getResult <em>Result</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Result</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getResult()
+	 * @see org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getResult()
 	 * @see #getExpressionInOcl()
 	 * @generated
 	 */
@@ -4164,11 +4164,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getParameter <em>Parameter</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getParameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameter</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl#getParameter()
+	 * @see org.dresdenocl.essentialocl.expressions.ExpressionInOcl#getParameter()
 	 * @see #getExpressionInOcl()
 	 * @generated
 	 */
@@ -4178,11 +4178,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for enum '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind <em>Collection Kind</em>}'.
+	 * Returns the meta object for enum '{@link org.dresdenocl.essentialocl.expressions.CollectionKind <em>Collection Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for enum '<em>Collection Kind</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
 	 * @generated
 	 */
 	public EEnum getCollectionKind() {
@@ -4774,11 +4774,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 	public interface Literals {
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl <em>Variable Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.VariableExpImpl <em>Variable Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariableExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.VariableExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariableExp()
 		 * @generated
 		 */
 		public static final EClass VARIABLE_EXP = eINSTANCE.getVariableExp();
@@ -4793,11 +4793,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getVariableExp_ReferredVariable();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl <em>Variable</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.VariableImpl <em>Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.VariableImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariable()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.VariableImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getVariable()
 		 * @generated
 		 */
 		public static final EClass VARIABLE = eINSTANCE.getVariable();
@@ -4821,11 +4821,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getVariable_InitExpression();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl <em>Unlimited Natural Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.UnlimitedNaturalExpImpl <em>Unlimited Natural Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.UnlimitedNaturalExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getUnlimitedNaturalExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.UnlimitedNaturalExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getUnlimitedNaturalExp()
 		 * @generated
 		 */
 		public static final EClass UNLIMITED_NATURAL_EXP = eINSTANCE
@@ -4841,11 +4841,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getUnlimitedNaturalExp_Symbol();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl <em>Type Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.TypeLiteralExpImpl <em>Type Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.TypeLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTypeLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.TypeLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getTypeLiteralExp()
 		 * @generated
 		 */
 		public static final EClass TYPE_LITERAL_EXP = eINSTANCE.getTypeLiteralExp();
@@ -4860,11 +4860,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getTypeLiteralExp_ReferredType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl <em>Tuple Literal Part</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralPartImpl <em>Tuple Literal Part</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralPartImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralPart()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.TupleLiteralPartImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralPart()
 		 * @generated
 		 */
 		public static final EClass TUPLE_LITERAL_PART = eINSTANCE
@@ -4889,11 +4889,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getTupleLiteralPart_Value();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.TupleLiteralExpImpl <em>Tuple Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.TupleLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.TupleLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getTupleLiteralExp()
 		 * @generated
 		 */
 		public static final EClass TUPLE_LITERAL_EXP = eINSTANCE
@@ -4909,11 +4909,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getTupleLiteralExp_Part();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.StringLiteralExpImpl <em>String Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.StringLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getStringLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.StringLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getStringLiteralExp()
 		 * @generated
 		 */
 		public static final EClass STRING_LITERAL_EXP = eINSTANCE
@@ -4929,11 +4929,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				eINSTANCE.getStringLiteralExp_StringSymbol();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl <em>Real Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.RealLiteralExpImpl <em>Real Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.RealLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getRealLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.RealLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getRealLiteralExp()
 		 * @generated
 		 */
 		public static final EClass REAL_LITERAL_EXP = eINSTANCE.getRealLiteralExp();
@@ -4948,11 +4948,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getRealLiteralExp_RealSymbol();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl <em>Property Call Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.PropertyCallExpImpl <em>Property Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getPropertyCallExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.PropertyCallExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getPropertyCallExp()
 		 * @generated
 		 */
 		public static final EClass PROPERTY_CALL_EXP = eINSTANCE
@@ -4977,22 +4977,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getPropertyCallExp_Qualifier();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PrimitiveLiteralExpImpl <em>Primitive Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.PrimitiveLiteralExpImpl <em>Primitive Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.PrimitiveLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getPrimitiveLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.PrimitiveLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getPrimitiveLiteralExp()
 		 * @generated
 		 */
 		public static final EClass PRIMITIVE_LITERAL_EXP = eINSTANCE
 				.getPrimitiveLiteralExp();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl <em>Operation Call Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.OperationCallExpImpl <em>Operation Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OperationCallExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getOperationCallExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.OperationCallExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getOperationCallExp()
 		 * @generated
 		 */
 		public static final EClass OPERATION_CALL_EXP = eINSTANCE
@@ -5017,11 +5017,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				eINSTANCE.getOperationCallExp_ReferredOperation();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl <em>Ocl Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.OclExpressionImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getOclExpression()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.OclExpressionImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getOclExpression()
 		 * @generated
 		 */
 		public static final EClass OCL_EXPRESSION = eINSTANCE.getOclExpression();
@@ -5036,33 +5036,33 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getOclExpression_OclLibrary();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.NumericLiteralExpImpl <em>Numeric Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.NumericLiteralExpImpl <em>Numeric Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.NumericLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getNumericLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.NumericLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getNumericLiteralExp()
 		 * @generated
 		 */
 		public static final EClass NUMERIC_LITERAL_EXP = eINSTANCE
 				.getNumericLiteralExp();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.UndefinedLiteralExpImpl <em>Undefined Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.UndefinedLiteralExpImpl <em>Undefined Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.UndefinedLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getUndefinedLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.UndefinedLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getUndefinedLiteralExp()
 		 * @generated
 		 */
 		public static final EClass UNDEFINED_LITERAL_EXP = eINSTANCE
 				.getUndefinedLiteralExp();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl <em>Loop Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl <em>Loop Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LoopExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getLoopExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.LoopExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getLoopExp()
 		 * @generated
 		 */
 		public static final EClass LOOP_EXP = eINSTANCE.getLoopExp();
@@ -5085,21 +5085,21 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getLoopExp_Iterator();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LiteralExpImpl <em>Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.LiteralExpImpl <em>Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.LiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getLiteralExp()
 		 * @generated
 		 */
 		public static final EClass LITERAL_EXP = eINSTANCE.getLiteralExp();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl <em>Let Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.LetExpImpl <em>Let Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.LetExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getLetExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.LetExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getLetExp()
 		 * @generated
 		 */
 		public static final EClass LET_EXP = eINSTANCE.getLetExp();
@@ -5122,21 +5122,21 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getLetExp_Variable();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IteratorExpImpl <em>Iterator Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.IteratorExpImpl <em>Iterator Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IteratorExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIteratorExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.IteratorExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIteratorExp()
 		 * @generated
 		 */
 		public static final EClass ITERATOR_EXP = eINSTANCE.getIteratorExp();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl <em>Iterate Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.IterateExpImpl <em>Iterate Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IterateExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIterateExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.IterateExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIterateExp()
 		 * @generated
 		 */
 		public static final EClass ITERATE_EXP = eINSTANCE.getIterateExp();
@@ -5151,22 +5151,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getIterateExp_Result();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.InvalidLiteralExpImpl <em>Invalid Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.InvalidLiteralExpImpl <em>Invalid Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.InvalidLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getInvalidLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.InvalidLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getInvalidLiteralExp()
 		 * @generated
 		 */
 		public static final EClass INVALID_LITERAL_EXP = eINSTANCE
 				.getInvalidLiteralExp();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl <em>Integer Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.IntegerLiteralExpImpl <em>Integer Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IntegerLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIntegerLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.IntegerLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIntegerLiteralExp()
 		 * @generated
 		 */
 		public static final EClass INTEGER_LITERAL_EXP = eINSTANCE
@@ -5182,11 +5182,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				eINSTANCE.getIntegerLiteralExp_IntegerSymbol();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl <em>If Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.IfExpImpl <em>If Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.IfExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getIfExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.IfExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getIfExp()
 		 * @generated
 		 */
 		public static final EClass IF_EXP = eINSTANCE.getIfExp();
@@ -5219,11 +5219,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getIfExp_ElseExpression();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl <em>Feature Call Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.FeatureCallExpImpl <em>Feature Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getFeatureCallExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.FeatureCallExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getFeatureCallExp()
 		 * @generated
 		 */
 		public static final EClass FEATURE_CALL_EXP = eINSTANCE.getFeatureCallExp();
@@ -5238,11 +5238,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getFeatureCallExp_SourceType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl <em>Boolean Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.BooleanLiteralExpImpl <em>Boolean Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.BooleanLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getBooleanLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.BooleanLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getBooleanLiteralExp()
 		 * @generated
 		 */
 		public static final EClass BOOLEAN_LITERAL_EXP = eINSTANCE
@@ -5258,11 +5258,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				eINSTANCE.getBooleanLiteralExp_BooleanSymbol();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CallExpImpl <em>Call Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.CallExpImpl <em>Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CallExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCallExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.CallExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCallExp()
 		 * @generated
 		 */
 		public static final EClass CALL_EXP = eINSTANCE.getCallExp();
@@ -5277,11 +5277,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getCallExp_Source();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl <em>Collection Item</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionItemImpl <em>Collection Item</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionItemImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionItem()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionItemImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionItem()
 		 * @generated
 		 */
 		public static final EClass COLLECTION_ITEM = eINSTANCE.getCollectionItem();
@@ -5296,11 +5296,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getCollectionItem_Item();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl <em>Collection Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralExpImpl <em>Collection Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralExp()
 		 * @generated
 		 */
 		public static final EClass COLLECTION_LITERAL_EXP = eINSTANCE
@@ -5334,22 +5334,22 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				eINSTANCE.getCollectionLiteralExp_ElementType();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralPartImpl <em>Collection Literal Part</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralPartImpl <em>Collection Literal Part</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionLiteralPartImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralPart()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionLiteralPartImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionLiteralPart()
 		 * @generated
 		 */
 		public static final EClass COLLECTION_LITERAL_PART = eINSTANCE
 				.getCollectionLiteralPart();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.CollectionRangeImpl <em>Collection Range</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.CollectionRangeImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionRange()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.CollectionRangeImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionRange()
 		 * @generated
 		 */
 		public static final EClass COLLECTION_RANGE = eINSTANCE
@@ -5374,11 +5374,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getCollectionRange_Last();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl <em>Enum Literal Exp</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.EnumLiteralExpImpl <em>Enum Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.EnumLiteralExpImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getEnumLiteralExp()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.EnumLiteralExpImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getEnumLiteralExp()
 		 * @generated
 		 */
 		public static final EClass ENUM_LITERAL_EXP = eINSTANCE.getEnumLiteralExp();
@@ -5393,11 +5393,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				eINSTANCE.getEnumLiteralExp_ReferredEnumLiteral();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl <em>Expression In Ocl</em>}' class.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl <em>Expression In Ocl</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionInOclImpl
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getExpressionInOcl()
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionInOclImpl
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getExpressionInOcl()
 		 * @generated
 		 */
 		public static final EClass EXPRESSION_IN_OCL = eINSTANCE
@@ -5440,11 +5440,11 @@ public class ExpressionsPackageImpl extends EPackageImpl {
 				.getExpressionInOcl_Parameter();
 
 		/**
-		 * The meta object literal for the '{@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind <em>Collection Kind</em>}' enum.
+		 * The meta object literal for the '{@link org.dresdenocl.essentialocl.expressions.CollectionKind <em>Collection Kind</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
-		 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
+		 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
+		 * @see org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl#getCollectionKind()
 		 * @generated
 		 */
 		public static final EEnum COLLECTION_KIND = eINSTANCE.getCollectionKind();

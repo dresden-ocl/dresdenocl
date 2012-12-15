@@ -25,17 +25,17 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.transformation.test;
+package org.dresdenocl.tools.transformation.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.transformation.test.tests.TestTransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.test.tests.TestTransformationRegistry;
+import org.dresdenocl.tools.transformation.test.tests.TestTransformationFactory;
+import org.dresdenocl.tools.transformation.test.tests.TestTransformationRegistry;
 
 /**
  * This TestSuite runs all Tests testing the package
- * <code>tudresden.ocl20.pivot.tools.transformation</code> and its subpackages
+ * <code>org.dresdenocl.tools.transformation</code> and its subpackages
  * of the Dresden OCL2 Toolkit
  * 
  * @author Bjoern Freitag

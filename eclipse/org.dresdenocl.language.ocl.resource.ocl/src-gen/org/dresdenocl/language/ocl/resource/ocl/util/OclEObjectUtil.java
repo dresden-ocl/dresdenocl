@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * A utility class that can be used to work with EObjects. While many similar
@@ -50,15 +50,15 @@ public class OclEObjectUtil {
 				return result;
 			}
 		} catch (SecurityException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
 		} catch (NoSuchMethodException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
 		} catch (IllegalArgumentException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
 		} catch (IllegalAccessException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
 		} catch (java.lang.reflect.InvocationTargetException e) {
-			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
+			new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while matching proxy URI.", e);
 		}
 		return null;
 	}

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml;
+package org.dresdenocl.examples.pml;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Extension#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Extension#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtension()
+ * @see org.dresdenocl.examples.pml.PmlPackage#getExtension()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface Extension extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implementation</em>' reference.
 	 * @see #setImplementation(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtension_Implementation()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getExtension_Implementation()
 	 * @model
 	 * @generated
 	 */
 	JavaType getImplementation();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Extension#getImplementation <em>Implementation</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Extension#getImplementation <em>Implementation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Implementation</em>' reference.
@@ -62,14 +62,14 @@ public interface Extension extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension Point</em>' reference.
 	 * @see #setExtensionPoint(ExtensionPoint)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getExtension_ExtensionPoint()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getExtension_ExtensionPoint()
 	 * @model required="true"
 	 * @generated
 	 */
 	ExtensionPoint getExtensionPoint();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Extension#getExtensionPoint <em>Extension Point</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Extension Point</em>' reference.

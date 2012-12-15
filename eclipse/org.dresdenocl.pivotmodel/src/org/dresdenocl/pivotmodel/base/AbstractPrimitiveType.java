@@ -1,9 +1,9 @@
-package tudresden.ocl20.pivot.pivotmodel.base;
+package org.dresdenocl.pivotmodel.base;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl;
 
 /**
  * This class is meant as a base class for DSL- and/or repository-specific

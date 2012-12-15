@@ -28,14 +28,14 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java;
+package org.dresdenocl.standardlibrary.java;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -53,7 +53,7 @@ public class JavaStandardlibraryPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.standardlibrary.java";
+			"org.dresdenocl.standardlibrary.java";
 
 	/** The shared instance. */
 	private static JavaStandardlibraryPlugin plugin;

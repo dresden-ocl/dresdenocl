@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel.provider;
+package org.dresdenocl.tracer.tracermodel.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,14 +24,14 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracerItem;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory;
-import tudresden.ocl20.pivot.tracer.tracermodel.TracermodelPackage;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.tracer.tracermodel.TracerItem;
+import org.dresdenocl.tracer.tracermodel.TracermodelFactory;
+import org.dresdenocl.tracer.tracermodel.TracermodelPackage;
 
 /**
  * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem} object. <!--
+ * {@link org.dresdenocl.tracer.tracermodel.TracerItem} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

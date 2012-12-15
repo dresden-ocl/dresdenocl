@@ -28,13 +28,13 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.interpreter.ui;
+package org.dresdenocl.interpreter.ui;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView;
+import org.dresdenocl.interpreter.ui.internal.views.InterpreterView;
 
 /**
  * <p>
@@ -44,11 +44,11 @@ import tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView;
 public class InterpreterUIPlugin extends AbstractUIPlugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter.ui";
+	public static final String PLUGIN_ID = "org.dresdenocl.interpreter.ui";
 
 	/** The ID of the {@link InterpreterView}. */
 	public static final String INTERPRETER_VIEW_ID =
-			"tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView";
+			"org.dresdenocl.interpreter.ui.internal.views.InterpreterView";
 
 	/** The shared instance of this plug-in. */
 	private static InterpreterUIPlugin plugin;

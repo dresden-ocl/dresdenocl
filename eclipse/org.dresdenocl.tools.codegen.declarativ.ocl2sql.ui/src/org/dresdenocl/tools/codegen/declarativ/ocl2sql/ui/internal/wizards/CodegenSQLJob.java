@@ -17,18 +17,18 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizards;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.internal.wizards;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.IOcl2Code;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.CodegenJob;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.IOcl2Code;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.IOcl2Sql;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.Ocl2SqlPlugin;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.CodegenJob;
 
 public class CodegenSQLJob extends CodegenJob {
 

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.impl;
+package org.dresdenocl.examples.pml.impl;
 
 import java.util.Collection;
 
@@ -18,10 +18,10 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Operation;
-import tudresden.ocl20.pivot.examples.pml.Parameter;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.Operation;
+import org.dresdenocl.examples.pml.Parameter;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -29,10 +29,10 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.OperationImpl#getMyType <em>My Type</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.OperationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.OperationImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.OperationImpl#getMyType <em>My Type</em>}</li>
  * </ul>
  * </p>
  *

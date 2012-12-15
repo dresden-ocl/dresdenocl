@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.ecore.test;
+package org.dresdenocl.modelinstancetype.ecore.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -31,7 +31,7 @@ public class EcoreModelInstanceTypeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.modelinstancetype.ecore.test";
+			"org.dresdenocl.modelinstancetype.ecore.test";
 
 	/** The shared instance. */
 	private static EcoreModelInstanceTypeTestPlugin plugin;

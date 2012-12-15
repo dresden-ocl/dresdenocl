@@ -4,11 +4,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,12 +18,12 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallBaseExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallBaseExpCS()
  * @model
  * @generated
  */
@@ -38,14 +38,14 @@ public interface PropertyCallBaseExpCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Property</em>' reference.
    * @see #setProperty(Property)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallBaseExpCS_Property()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallBaseExpCS_Property()
    * @model required="true"
    * @generated
    */
 	Property getProperty();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#getProperty <em>Property</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS#getProperty <em>Property</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Property</em>' reference.
@@ -64,14 +64,14 @@ public interface PropertyCallBaseExpCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Is Marked Pre</em>' attribute.
    * @see #setIsMarkedPre(boolean)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPropertyCallBaseExpCS_IsMarkedPre()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPropertyCallBaseExpCS_IsMarkedPre()
    * @model
    * @generated
    */
 	boolean isIsMarkedPre();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PropertyCallBaseExpCS#isIsMarkedPre <em>Is Marked Pre</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Is Marked Pre</em>' attribute.

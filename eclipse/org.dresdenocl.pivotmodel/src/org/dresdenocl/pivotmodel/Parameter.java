@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -46,13 +46,13 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}</li>
+ * <li>{@link org.dresdenocl.pivotmodel.Parameter#getOperation <em>
  * Operation</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameter()
  * @model
  * @generated
  */
@@ -61,7 +61,7 @@ public interface Parameter extends TypedElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute. The default
 	 * value is <code>"in"</code>. The literals are from the enumeration
-	 * {@link tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind}. <!--
+	 * {@link org.dresdenocl.pivotmodel.ParameterDirectionKind}. <!--
 	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * Specifies the {@link ParameterDirectionKind direction kind} of this
@@ -70,9 +70,9 @@ public interface Parameter extends TypedElement, NamedElement {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
+	 * @see org.dresdenocl.pivotmodel.ParameterDirectionKind
 	 * @see #setKind(ParameterDirectionKind)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter_Kind()
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameter_Kind()
 	 * @model default="in"
 	 * @generated
 	 */
@@ -80,12 +80,12 @@ public interface Parameter extends TypedElement, NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getKind <em>Kind</em>}'
+	 * {@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}'
 	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
 	 *          the new value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind
+	 * @see org.dresdenocl.pivotmodel.ParameterDirectionKind
 	 * @see #getKind()
 	 * @generated
 	 */
@@ -94,7 +94,7 @@ public interface Parameter extends TypedElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Operation</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter
+	 * {@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter
 	 * <em>Owned Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
@@ -104,8 +104,8 @@ public interface Parameter extends TypedElement, NamedElement {
 	 * 
 	 * @return the value of the '<em>Operation</em>' container reference.
 	 * @see #setOperation(Operation)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getParameter_Operation()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameter_Operation()
+	 * @see org.dresdenocl.pivotmodel.Operation#getOwnedParameter
 	 * @model opposite="ownedParameter"
 	 * @generated
 	 */
@@ -113,7 +113,7 @@ public interface Parameter extends TypedElement, NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation
+	 * {@link org.dresdenocl.pivotmodel.Parameter#getOperation
 	 * <em>Operation</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -156,7 +156,7 @@ public interface Parameter extends TypedElement, NamedElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	Parameter clone();
 

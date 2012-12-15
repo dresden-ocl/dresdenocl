@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.metamodels.xsd.internal.model;
+package org.dresdenocl.metamodels.xsd.internal.model;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -8,7 +8,7 @@ import org.eclipse.osgi.util.NLS;
 public class XSDModelMessages extends NLS {
 
 	private static final String BUNDLE_NAME =
-			"tudresden.ocl20.pivot.metamodels.xSD.internal.model.messages"; //$NON-NLS-1$
+			"org.dresdenocl.metamodels.xSD.internal.model.messages"; //$NON-NLS-1$
 
 	public static String XSDAdapterFactory_CreatingPivotModelAdapter;
 

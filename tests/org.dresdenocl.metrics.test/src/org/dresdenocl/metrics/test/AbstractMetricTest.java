@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * Abstract test class for metric tests.

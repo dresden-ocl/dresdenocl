@@ -52,7 +52,7 @@ $ifCode$if ($ifExp$) {
 
 // --- InvalidLiteralExp ---
 invalidLiteralExp(resultType) ::= <<
-$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()>>
+$if(resultType)$($resultType$)$else$($anyType()$)$endif$ org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()>>
 
 
 // --- IterateExp ---

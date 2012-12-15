@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * Simple Outline Page using the ReflectiveItemAdapters provided by EMF
  */
 public class OclOutlinePage extends org.eclipse.ui.part.Page implements org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener, org.eclipse.ui.views.contentoutline.IContentOutlinePage {
 	
-	public final static String CONTEXT_MENU_ID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.outlinecontext";
+	public final static String CONTEXT_MENU_ID = "org.dresdenocl.language.ocl.resource.ocl.ui.outlinecontext";
 	
 	/**
 	 * The auto expand level determines the depth to which the outline tree is
@@ -23,17 +23,17 @@ public class OclOutlinePage extends org.eclipse.ui.part.Page implements org.ecli
 	 * The provider for the resource that is displayed in the outline page. Normally
 	 * this is the current editor.
 	 */
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer;
 	private org.eclipse.core.runtime.ListenerList selectionChangedListeners = new org.eclipse.core.runtime.ListenerList();
 	
-	public OclOutlinePage(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider) {
+	public OclOutlinePage(org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider) {
 		super();
 		this.resourceProvider = resourceProvider;
 	}
 	
 	public void createControl(org.eclipse.swt.widgets.Composite parent) {
-		treeViewer = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer(parent, org.eclipse.swt.SWT.MULTI | org.eclipse.swt.SWT.H_SCROLL | org.eclipse.swt.SWT.V_SCROLL);
+		treeViewer = new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer(parent, org.eclipse.swt.SWT.MULTI | org.eclipse.swt.SWT.H_SCROLL | org.eclipse.swt.SWT.V_SCROLL);
 		Object[] listeners = selectionChangedListeners.getListeners();
 		for (int i = 0; i < listeners.length; ++i) {
 			org.eclipse.jface.viewers.ISelectionChangedListener l = (org.eclipse.jface.viewers.ISelectionChangedListener) listeners[i];
@@ -54,7 +54,7 @@ public class OclOutlinePage extends org.eclipse.ui.part.Page implements org.ecli
 			// Select the root object in the view.
 			treeViewer.setSelection(new org.eclipse.jface.viewers.StructuredSelection(resource), true);
 		}
-		treeViewer.setComparator(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewerComparator());
+		treeViewer.setComparator(new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewerComparator());
 		createContextMenu();
 		createActions();
 	}
@@ -72,7 +72,7 @@ public class OclOutlinePage extends org.eclipse.ui.part.Page implements org.ecli
 		org.eclipse.swt.widgets.Menu menu = menuManager.createContextMenu(treeViewer.getControl());
 		treeViewer.getControl().setMenu(menu);
 		// register menu for extension
-		getSite().registerContextMenu("tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.outlinecontext", menuManager, treeViewer);
+		getSite().registerContextMenu("org.dresdenocl.language.ocl.resource.ocl.ui.outlinecontext", menuManager, treeViewer);
 	}
 	
 	private void fillContextMenu(org.eclipse.jface.action.IMenuManager manager) {
@@ -83,7 +83,7 @@ public class OclOutlinePage extends org.eclipse.ui.part.Page implements org.ecli
 		org.eclipse.ui.part.IPageSite site = getSite();
 		org.eclipse.ui.IActionBars actionBars = site.getActionBars();
 		org.eclipse.jface.action.IToolBarManager toolBarManager = actionBars.getToolBarManager();
-		java.util.List<org.eclipse.jface.action.IAction> actions = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageActionProvider().getActions(treeViewer);
+		java.util.List<org.eclipse.jface.action.IAction> actions = new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageActionProvider().getActions(treeViewer);
 		for (org.eclipse.jface.action.IAction action : actions) {
 			toolBarManager.add(action);
 		}

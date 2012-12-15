@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.provider;
+package org.dresdenocl.essentialocl.expressions.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,14 +48,14 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
-import tudresden.ocl20.pivot.pivotmodel.provider.TypedElementItemProvider;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.essentialocl.expressions.impl.ExpressionsPackageImpl;
+import org.dresdenocl.essentialocl.types.provider.EssentialOCLEditPlugin;
+import org.dresdenocl.pivotmodel.provider.TypedElementItemProvider;
 
 /**
  * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable} object. <!--
+ * {@link org.dresdenocl.essentialocl.expressions.Variable} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

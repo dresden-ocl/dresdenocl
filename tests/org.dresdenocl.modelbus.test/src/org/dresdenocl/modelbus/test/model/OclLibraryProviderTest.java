@@ -17,15 +17,15 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.test.model;
+package org.dresdenocl.modelbus.test.model;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.provider.IOclLibraryProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.provider.IOclLibraryProvider;
+import org.dresdenocl.model.ModelAccessException;
 
 /**
  * <p>

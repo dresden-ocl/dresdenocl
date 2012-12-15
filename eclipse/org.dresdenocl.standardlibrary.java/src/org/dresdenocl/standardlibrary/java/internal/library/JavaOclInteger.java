@@ -28,14 +28,14 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -73,7 +73,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#add(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger#add(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger add(OclInteger that) {
@@ -104,7 +104,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#div(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger#div(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger div(OclInteger that) {
@@ -142,8 +142,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#divide(
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclInteger#divide(
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclReal divide(OclInteger anInteger) {
 	
@@ -171,7 +171,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#max(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger#max(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger max(OclInteger that) {
@@ -202,7 +202,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#min(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger#min(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger min(OclInteger that) {
@@ -233,7 +233,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#mod(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclInteger#mod(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger mod(OclInteger that) {
@@ -271,8 +271,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#multiply
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclInteger#multiply
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger multiply(OclInteger that) {
 
@@ -300,8 +300,8 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger#subtract
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger)
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclInteger#subtract
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclInteger)
 	 */
 	public OclInteger subtract(OclInteger that) {
 
@@ -330,7 +330,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclReal
 	 * #abs()
 	 */
 	@Override
@@ -360,7 +360,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclReal
 	 * #convertToString()
 	 */
 	public OclString convertToString() {
@@ -383,7 +383,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclReal
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclReal
 	 * #negative()
 	 */
 	@Override
@@ -412,7 +412,7 @@ public class JavaOclInteger extends JavaOclReal implements OclInteger {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny
+	 * @see org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny
 	 * #toString()
 	 */
 	public String toString() {

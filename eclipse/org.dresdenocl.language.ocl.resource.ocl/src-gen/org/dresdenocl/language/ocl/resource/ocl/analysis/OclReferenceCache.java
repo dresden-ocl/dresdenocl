@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
+package org.dresdenocl.language.ocl.resource.ocl.analysis;
 
 /**
  * A ReferenceCache can be used to improve the performance of the reference
@@ -14,14 +14,14 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.analysis;
  * other one (the nameToObjects map) can be used to retrieve all objects for a
  * given name.
  */
-public class OclReferenceCache extends org.eclipse.emf.common.notify.impl.AdapterImpl implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceCache {
+public class OclReferenceCache extends org.eclipse.emf.common.notify.impl.AdapterImpl implements org.dresdenocl.language.ocl.resource.ocl.IOclReferenceCache {
 	
 	private java.util.Map<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>> classToObjectsMap = new java.util.LinkedHashMap<org.eclipse.emf.ecore.EClass, java.util.Set<org.eclipse.emf.ecore.EObject>>();
 	private java.util.Map<String, java.util.Set<org.eclipse.emf.ecore.EObject>> nameToObjectsMap  = new java.util.LinkedHashMap<String, java.util.Set<org.eclipse.emf.ecore.EObject>>();
 	private boolean isInitialized;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclNameProvider nameProvider;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider nameProvider;
 	
-	public OclReferenceCache(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclNameProvider nameProvider) {
+	public OclReferenceCache(org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider nameProvider) {
 		super();
 		this.nameProvider = nameProvider;
 	}

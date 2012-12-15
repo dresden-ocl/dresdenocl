@@ -30,11 +30,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,8 +44,8 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getArgument <em>Argument</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getReferredOperation <em>Referred Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.OperationCallExp#getArgument <em>Argument</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.OperationCallExp#getReferredOperation <em>Referred Operation</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,7 +55,7 @@ public interface OperationCallExp extends FeatureCallExp {
 
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.OclExpression}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.expressions.OclExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument</em>' containment reference list isn't clear,
@@ -82,7 +82,7 @@ public interface OperationCallExp extends FeatureCallExp {
 	Operation getReferredOperation();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.OperationCallExp#getReferredOperation <em>Referred Operation</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.OperationCallExp#getReferredOperation <em>Referred Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Referred Operation</em>' reference.

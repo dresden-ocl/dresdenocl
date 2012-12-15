@@ -4,11 +4,11 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,14 +18,14 @@ import tudresden.ocl20.pivot.pivotmodel.Property;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue <em>Init Or Derive Value</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getInitOrDeriveValue <em>Init Or Derive Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getAttributeContextDeclarationCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS()
  * @model
  * @generated
  */
@@ -40,14 +40,14 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
    * @see #setTypeName(TypePathNameCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getAttributeContextDeclarationCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
 	TypePathNameCS getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getTypeName <em>Type Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' containment reference.
@@ -66,14 +66,14 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Property</em>' reference.
    * @see #setProperty(Property)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getAttributeContextDeclarationCS_Property()
+   * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS_Property()
    * @model required="true"
    * @generated
    */
 	Property getProperty();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getProperty <em>Property</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Property</em>' reference.
@@ -92,14 +92,14 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
    * @see #setType(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getAttributeContextDeclarationCS_Type()
+   * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS_Type()
    * @model containment="true"
    * @generated
    */
 	TypeCS getType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.AttributeContextDeclarationCS#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type</em>' containment reference.
@@ -110,7 +110,7 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
 
 	/**
    * Returns the value of the '<em><b>Init Or Derive Value</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.InitOrDeriveValueCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.InitOrDeriveValueCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Init Or Derive Value</em>' containment reference list isn't clear,
@@ -118,7 +118,7 @@ public interface AttributeContextDeclarationCS extends ContextDeclarationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Init Or Derive Value</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getAttributeContextDeclarationCS_InitOrDeriveValue()
+   * @see org.dresdenocl.language.ocl.OclPackage#getAttributeContextDeclarationCS_InitOrDeriveValue()
    * @model containment="true" required="true" upper="2"
    * @generated
    */

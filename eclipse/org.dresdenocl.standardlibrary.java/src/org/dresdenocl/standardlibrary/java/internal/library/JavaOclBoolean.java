@@ -28,21 +28,21 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceBoolean;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -129,7 +129,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#and(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#and(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
 	public OclBoolean and(OclBoolean aBoolean) {
@@ -166,7 +166,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
@@ -200,7 +200,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#convertToString
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#convertToString
 	 * ()
 	 */
 	public OclString convertToString() {
@@ -228,7 +228,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclBoolean#
 	 * getModelInstanceBoolean()
 	 */
 	public IModelInstanceBoolean getModelInstanceBoolean() {
@@ -240,9 +240,9 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#ifThenElse
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#ifThenElse
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclAny,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclAny ifThenElse(OclAny thenStatement, OclAny elseStatement) {
 
@@ -272,8 +272,8 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#implies
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#implies
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclBoolean)
 	 */
 	public OclBoolean implies(OclBoolean that) {
 
@@ -315,7 +315,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclBoolean isEqualTo(OclAny that) {
@@ -353,7 +353,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#isTrue()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#isTrue()
 	 */
 	public boolean isTrue() {
 
@@ -370,7 +370,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#not()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclBoolean#not()
 	 */
 	public OclBoolean not() {
 
@@ -400,7 +400,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#or(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#or(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
 	public OclBoolean or(OclBoolean that) {
@@ -439,7 +439,7 @@ public class JavaOclBoolean extends JavaOclLibraryObject implements OclBoolean {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean#xor(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclBoolean#xor(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclBoolean)
 	 */
 	public OclBoolean xor(OclBoolean that) {

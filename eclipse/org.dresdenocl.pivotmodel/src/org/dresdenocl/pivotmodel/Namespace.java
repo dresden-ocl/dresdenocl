@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,18 +48,18 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedType <em>Owned
+ * <li>{@link org.dresdenocl.pivotmodel.Namespace#getOwnedType <em>Owned
  * Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getOwnedRule <em>Owned
+ * <li>{@link org.dresdenocl.pivotmodel.Namespace#getOwnedRule <em>Owned
  * Rule</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace <em>
  * Nested Namespace</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+ * <li>{@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
  * <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamespace()
  * @model
  * @generated
  */
@@ -68,9 +68,9 @@ public interface Namespace extends NamedElement, GenericElement {
 	/**
 	 * Returns the value of the '<em><b>Owned Rule</b></em>' containment reference
 	 * list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint}. It is bidirectional
+	 * {@link org.dresdenocl.pivotmodel.Constraint}. It is bidirectional
 	 * and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Constraint#getNamespace
+	 * {@link org.dresdenocl.pivotmodel.Constraint#getNamespace
 	 * <em>Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -80,7 +80,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Owned Rule</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Constraint#getNamespace
+	 * @see org.dresdenocl.pivotmodel.Constraint#getNamespace
 	 * @generated
 	 */
 	List<Constraint> getOwnedRule();
@@ -88,8 +88,8 @@ public interface Namespace extends NamedElement, GenericElement {
 	/**
 	 * Returns the value of the '<em><b>Owned Type</b></em>' containment reference
 	 * list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type}. It is bidirectional and its
-	 * opposite is '{@link tudresden.ocl20.pivot.pivotmodel.Type#getNamespace
+	 * {@link org.dresdenocl.pivotmodel.Type}. It is bidirectional and its
+	 * opposite is '{@link org.dresdenocl.pivotmodel.Type#getNamespace
 	 * <em>Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -98,7 +98,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @return the value of the '<em>Owned Type</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getNamespace
+	 * @see org.dresdenocl.pivotmodel.Type#getNamespace
 	 * @generated
 	 */
 	List<Type> getOwnedType();
@@ -106,9 +106,9 @@ public interface Namespace extends NamedElement, GenericElement {
 	/**
 	 * Returns the value of the '<em><b>Nested Namespace</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace}. It is bidirectional and
+	 * {@link org.dresdenocl.pivotmodel.Namespace}. It is bidirectional and
 	 * its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
 	 * <em>Nesting Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
@@ -118,8 +118,8 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * 
 	 * @return the value of the '<em>Nested Namespace</em>' containment reference
 	 *         list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace_NestedNamespace()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamespace_NestedNamespace()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
 	 * @model opposite="nestingNamespace" containment="true"
 	 * @generated
 	 */
@@ -128,7 +128,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	/**
 	 * Returns the value of the '<em><b>Nesting Namespace</b></em>' container
 	 * reference. It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace
 	 * <em>Nested Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
@@ -139,8 +139,8 @@ public interface Namespace extends NamedElement, GenericElement {
 	 * 
 	 * @return the value of the '<em>Nesting Namespace</em>' container reference.
 	 * @see #setNestingNamespace(Namespace)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getNamespace_NestingNamespace()
-	 * @see tudresden.ocl20.pivot.pivotmodel.Namespace#getNestedNamespace
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamespace_NestingNamespace()
+	 * @see org.dresdenocl.pivotmodel.Namespace#getNestedNamespace
 	 * @model opposite="nestedNamespace" resolveProxies="false" transient="false"
 	 * @generated
 	 */
@@ -148,7 +148,7 @@ public interface Namespace extends NamedElement, GenericElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Namespace#getNestingNamespace
+	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
 	 * <em>Nesting Namespace</em>}' container reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -280,7 +280,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	 *          The {@link Constraint}s that shall be removed.
 	 * @return <code>true</code> if the {@link Constraint}s have been removed.
 	 *         <!-- end-model-doc -->
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean" required="true"
 	 *        constraintsMany="true"
 	 * @generated
 	 */
@@ -289,7 +289,7 @@ public interface Namespace extends NamedElement, GenericElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	Namespace clone();
 

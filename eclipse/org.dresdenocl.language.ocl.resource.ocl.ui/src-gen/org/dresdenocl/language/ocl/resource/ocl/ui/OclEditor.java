@@ -4,40 +4,40 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A text editor for 'ocl' models.
  * <p>
  * This editor has id
- * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor</code>
+ * <code>org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor</code>
  * The editor's context menu has id
- * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorContext</code>.
+ * <code>org.dresdenocl.language.ocl.resource.ocl.EditorContext</code>.
  * The editor's ruler context menu has id
- * <code>tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorRuler</code>.
+ * <code>org.dresdenocl.language.ocl.resource.ocl.EditorRuler</code>.
  * </p>
  */
-public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements org.eclipse.emf.edit.domain.IEditingDomainProvider, org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener, org.eclipse.emf.common.ui.viewer.IViewerProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandlerProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider {
+public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements org.eclipse.emf.edit.domain.IEditingDomainProvider, org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener, org.eclipse.emf.common.ui.viewer.IViewerProvider, org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider, org.dresdenocl.language.ocl.resource.ocl.ui.IOclBracketHandlerProvider, org.dresdenocl.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHighlighting highlighting;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclHighlighting highlighting;
 	private org.eclipse.jface.text.source.projection.ProjectionSupport projectionSupport;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeFoldingManager codeFoldingManager;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBackgroundParsingStrategy bgParsingStrategy = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBackgroundParsingStrategy();
-	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener> bgParsingListeners = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener>();
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager();
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePage outlinePage;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclCodeFoldingManager codeFoldingManager;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclBackgroundParsingStrategy bgParsingStrategy = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBackgroundParsingStrategy();
+	private java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener> bgParsingListeners = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener>();
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager = new org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager();
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePage outlinePage;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource;
 	private org.eclipse.core.resources.IResourceChangeListener resourceChangeListener = new ModelResourceChangeListener();
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPropertySheetPage propertySheetPage;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclPropertySheetPage propertySheetPage;
 	private org.eclipse.emf.edit.domain.EditingDomain editingDomain;
 	private org.eclipse.emf.edit.provider.ComposedAdapterFactory adapterFactory;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler;
 	private java.util.List<org.eclipse.jface.viewers.ISelectionChangedListener> selectionChangedListeners = new java.util.LinkedList<org.eclipse.jface.viewers.ISelectionChangedListener>();
 	private org.eclipse.jface.viewers.ISelection editorSelection;
 	
 	public OclEditor() {
 		super();
-		setSourceViewerConfiguration(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclSourceViewerConfiguration(this, this, this, colorManager));
+		setSourceViewerConfiguration(new org.dresdenocl.language.ocl.resource.ocl.ui.OclSourceViewerConfiguration(this, this, this, colorManager));
 		initializeEditingDomain();
 		org.eclipse.core.resources.ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, org.eclipse.core.resources.IResourceChangeEvent.POST_CHANGE);
 		addSelectionChangedListener(this);
@@ -79,7 +79,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 							org.eclipse.emf.ecore.resource.Resource changedResource = resourceSet.getResource(org.eclipse.emf.common.util.URI.createURI(delta.getFullPath().toString()), false);
 							if (changedResource != null) {
 								changedResource.unload();
-								tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource currentResource = getResource();
+								org.dresdenocl.language.ocl.resource.ocl.IOclTextResource currentResource = getResource();
 								if (changedResource.equals(currentResource)) {
 									// reload the resource displayed in the editor
 									resourceSet.getResource(currentResource.getURI(), true);
@@ -101,15 +101,15 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				ResourceDeltaVisitor visitor = new ResourceDeltaVisitor();
 				delta.accept(visitor);
 			} catch (org.eclipse.core.runtime.CoreException exception) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Unexpected Error: ", exception);
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Unexpected Error: ", exception);
 			}
 		}
 	}
 	
 	public void initializeEditor() {
 		super.initializeEditor();
-		setEditorContextMenuId("tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorContext");
-		setRulerContextMenuId("tudresden.ocl20.pivot.language.ocl.resource.ocl.EditorRuler");
+		setEditorContextMenuId("org.dresdenocl.language.ocl.resource.ocl.EditorContext");
+		setRulerContextMenuId("org.dresdenocl.language.ocl.resource.ocl.EditorRuler");
 	}
 	
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class required) {
@@ -127,14 +127,14 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		// Code Folding
 		org.eclipse.jface.text.source.projection.ProjectionViewer viewer = (org.eclipse.jface.text.source.projection.ProjectionViewer) getSourceViewer();
 		// Occurrence initiation, need ITextResource and ISourceViewer.
-		highlighting = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHighlighting(getResource(), viewer, colorManager, this);
+		highlighting = new org.dresdenocl.language.ocl.resource.ocl.ui.OclHighlighting(getResource(), viewer, colorManager, this);
 		
 		projectionSupport = new org.eclipse.jface.text.source.projection.ProjectionSupport(viewer, getAnnotationAccess(), getSharedColors());
 		projectionSupport.install();
 		
 		// turn projection mode on
 		viewer.doOperation(org.eclipse.jface.text.source.projection.ProjectionViewer.TOGGLE);
-		codeFoldingManager = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeFoldingManager(viewer, this);
+		codeFoldingManager = new org.dresdenocl.language.ocl.resource.ocl.ui.OclCodeFoldingManager(viewer, this);
 	}
 	
 	protected void doSetInput(org.eclipse.ui.IEditorInput editorInput) throws org.eclipse.core.runtime.CoreException {
@@ -147,33 +147,33 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	private void initializeResourceObject(org.eclipse.ui.IEditorInput editorInput) {
 		org.eclipse.ui.part.FileEditorInput input = (org.eclipse.ui.part.FileEditorInput) editorInput;
 		org.eclipse.core.resources.IFile inputFile = input.getFile();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclNature.activate(inputFile.getProject());
+		org.dresdenocl.language.ocl.resource.ocl.mopp.OclNature.activate(inputFile.getProject());
 		String path = inputFile.getFullPath().toString();
 		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformResourceURI(path, true);
 		org.eclipse.emf.ecore.resource.ResourceSet resourceSet = editingDomain.getResourceSet();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource loadedResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resourceSet.getResource(uri, false);
+		org.dresdenocl.language.ocl.resource.ocl.IOclTextResource loadedResource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) resourceSet.getResource(uri, false);
 		if (loadedResource == null) {
 			try {
 				org.eclipse.emf.ecore.resource.Resource demandLoadedResource = null;
 				// here we do not use getResource(), because 'resource' might be null, which is ok
 				// when initializing the resource object
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource currentResource = this.resource;
+				org.dresdenocl.language.ocl.resource.ocl.IOclTextResource currentResource = this.resource;
 				if (currentResource != null && !currentResource.getURI().fileExtension().equals(uri.fileExtension())) {
 					// do not attempt to load if file extension has changed in a 'save as' operation	
 				}
 				else {
 					demandLoadedResource = resourceSet.getResource(uri, true);
 				}
-				if (demandLoadedResource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) {
-					setResource((tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) demandLoadedResource);
+				if (demandLoadedResource instanceof org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) {
+					setResource((org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) demandLoadedResource);
 				} else {
 					// the resource was not loaded by an EMFText resource, but some other EMF resource
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.showErrorDialog("No EMFText resource.", "The file '" + uri.lastSegment() + "' of type '" + uri.fileExtension() + "' can not be handled by the OclEditor.");
+					org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.showErrorDialog("No EMFText resource.", "The file '" + uri.lastSegment() + "' of type '" + uri.fileExtension() + "' can not be handled by the OclEditor.");
 					// close this editor because it can not present the resource
 					close(false);
 				}
 			} catch (Exception e) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while loading resource in " + this.getClass().getSimpleName() + ".", e);
+				org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception while loading resource in " + this.getClass().getSimpleName() + ".", e);
 			}
 		} else {
 			setResource(loadedResource);
@@ -256,11 +256,11 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		return editingDomain.getResourceSet();
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource getResource() {
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextResource getResource() {
 		return resource;
 	}
 	
-	private void setResource(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource) {
+	private void setResource(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource) {
 		assert resource != null;
 		this.resource = resource;
 		if (this.resource.getErrors().isEmpty()) {
@@ -270,7 +270,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	
 	private Object getOutlinePage() {
 		if (outlinePage == null) {
-			outlinePage = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePage(this);
+			outlinePage = new org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePage(this);
 			outlinePage.addSelectionChangedListener(highlighting);
 			highlighting.addSelectionChangedListener(outlinePage);
 		}
@@ -279,7 +279,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 	
 	public org.eclipse.ui.views.properties.IPropertySheetPage getPropertySheetPage() {
 		if (propertySheetPage == null) {
-			propertySheetPage = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPropertySheetPage();
+			propertySheetPage = new org.dresdenocl.language.ocl.resource.ocl.ui.OclPropertySheetPage();
 			// add a slightly modified adapter factory that does not return any editors for
 			// properties. this way, a model can never be modified through the properties view.
 			propertySheetPage.setPropertySourceProvider(new org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider(adapterFactory) {
@@ -327,15 +327,15 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				return;
 			}
 			org.eclipse.jface.text.source.ISourceViewer viewer = getSourceViewer();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) element.eResource();
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) element.eResource();
+			org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 			int destination = locationMap.getCharStart(element);
 			int length = locationMap.getCharEnd(element) + 1 - destination;
 			
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextScanner lexer = getResource().getMetaInformation().createLexer();
+			org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner lexer = getResource().getMetaInformation().createLexer();
 			try {
 				lexer.setText(viewer.getDocument().get(destination, length));
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextToken token = lexer.getNextToken();
+				org.dresdenocl.language.ocl.resource.ocl.IOclTextToken token = lexer.getNextToken();
 				String tokenText = token.getText();
 				while (tokenText != null) {
 					if (token.getText().equals(text)) {
@@ -356,7 +356,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 			}
 			viewer.getTextWidget().setSelection(destination);
 		} catch (Exception e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception in setCaret()", e);
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.logError("Exception in setCaret()", e);
 		}
 	}
 	
@@ -375,21 +375,21 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		return viewer;
 	}
 	
-	public void addBackgroundParsingListener(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener listener) {
+	public void addBackgroundParsingListener(org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener listener) {
 		bgParsingListeners.add(listener);
 	}
 	
 	public void notifyBackgroundParsingFinished() {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener listener : bgParsingListeners) {
+		for (org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener listener : bgParsingListeners) {
 			listener.parsingCompleted(getResource());
 		}
 	}
 	
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler getBracketHandler() {
+	public org.dresdenocl.language.ocl.resource.ocl.ui.IOclBracketHandler getBracketHandler() {
 		return bracketHandler;
 	}
 	
-	public void setBracketHandler(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler) {
+	public void setBracketHandler(org.dresdenocl.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler) {
 		this.bracketHandler = bracketHandler;
 	}
 	
@@ -503,11 +503,11 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 				if (resource == null) {
 					return false;
 				}
-				if (!(resource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource)) {
+				if (!(resource instanceof org.dresdenocl.language.ocl.resource.ocl.IOclTextResource)) {
 					return false;
 				}
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resource;
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
+				org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource = (org.dresdenocl.language.ocl.resource.ocl.IOclTextResource) resource;
+				org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 				int destination = locationMap.getCharStart(element);
 				if (destination < 0) {
 					destination = 0;

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -47,15 +47,15 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
-import tudresden.ocl20.pivot.pivotmodel.Expression;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.ConstrainableElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.Expression;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -63,18 +63,18 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getKind <em>
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getKind <em>
  * Kind</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getNamespace
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getNamespace
  * <em>Namespace</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getSpecification
+ * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getSpecification
  * <em>Specification</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getConstrainedElement
+ * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getConstrainedElement
  * <em>Constrained Element</em>}</li>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.ConstraintImpl#getDefinedFeature
+ * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getDefinedFeature
  * <em>Defined Feature</em>}</li>
  * </ul>
  * </p>
@@ -419,7 +419,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * Overridden to return the {@link #getNamespace() namespace} of this
 	 * <code>Constraint</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -429,7 +429,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#clone()
 	 */
 
 	@Override
@@ -441,7 +441,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	/**
 	 * Helper method that initializes a cloned <code>Constraint</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.NamedElement)
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#initialize(org.dresdenocl.pivotmodel.NamedElement)
 	 */
 	protected Constraint initialize(Constraint clone) {
 

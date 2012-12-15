@@ -17,12 +17,12 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -39,7 +39,7 @@ public class TestModelTypesNames {
 	 * {@link Type}s are located.
 	 */
 	public static final String NAMESPACE_NAME_TESTMODEL =
-			"tudresden::ocl20::pivot::modelinstancetype::test::testmodel";
+			"org::dresdenocl::modelinstancetype::test::testmodel";
 
 	/**
 	 * The name of the {@link Type} <code>Class1</code> that belongs to the

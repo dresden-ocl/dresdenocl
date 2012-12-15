@@ -5,15 +5,15 @@ code generator.
 
 Provided Tests
 ==============
-* The package tudresden.ocl20.pivot.ocl22java.test.aspectj.constraintkinds contains
+* The package org.dresdenocl.ocl22java.test.aspectj.constraintkinds contains
   test cases to test code generated for the different kinds of OCL constraints.
   
-* The package tudresden.ocl20.pivot.ocl22java.test.aspectj.standardlibrary contains
+* The package org.dresdenocl.ocl22java.test.aspectj.standardlibrary contains
   test cases to test code generated for the operations defined in the OCL Standard
   Library.
   
 Run the complete Suite
 ======================
-* Run the class tudresden.ocl20.pivot.ocl22java.test.aspectj.AllAspectJTests as JUnit
+* Run the class org.dresdenocl.ocl22java.test.aspectj.AllAspectJTests as JUnit
   test suite.
   

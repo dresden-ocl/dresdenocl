@@ -31,9 +31,9 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.model;
+package org.dresdenocl.model;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
+import org.dresdenocl.model.metamodel.IMetamodel;
 
 /**
  * <p>

@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test.constraintkinds;
+package org.dresdenocl.interpreter.test.constraintkinds;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

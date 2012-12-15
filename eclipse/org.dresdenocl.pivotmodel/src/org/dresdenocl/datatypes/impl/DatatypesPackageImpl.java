@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.datatypes.impl;
+package org.dresdenocl.datatypes.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,10 +40,10 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
-import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
+import org.dresdenocl.datatypes.DatatypesFactory;
+import org.dresdenocl.datatypes.DatatypesPackage;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
  * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains
@@ -142,7 +142,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see tudresden.ocl20.pivot.datatypes.DatatypesPackage#eNS_URI
+	 * @see org.dresdenocl.datatypes.DatatypesPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

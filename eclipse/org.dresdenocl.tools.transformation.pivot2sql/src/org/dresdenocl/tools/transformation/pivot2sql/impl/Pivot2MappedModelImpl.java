@@ -2,30 +2,30 @@
  * Created on 06.02.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl;
+package org.dresdenocl.tools.transformation.pivot2sql.impl;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.M2XTransformation;
-import tudresden.ocl20.pivot.tools.transformation.exception.InvalidModelException;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.Pivot2SqlPlugin;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedClassImpl;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.mapping.MappedModelImpl;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.PivotModelAnalyser;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.M2XTransformation;
+import org.dresdenocl.tools.transformation.exception.InvalidModelException;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.pivot2sql.Pivot2SqlPlugin;
+import org.dresdenocl.tools.transformation.pivot2sql.mapping.MappedClassImpl;
+import org.dresdenocl.tools.transformation.pivot2sql.mapping.MappedModelImpl;
+import org.dresdenocl.tools.transformation.pivot2sql.util.PivotModelAnalyser;
 
 /**
  * The class Pivot2MappedModelImpl implements the transformation of an instance

@@ -1,21 +1,21 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pivot Model Plug-in
-Bundle-SymbolicName: tudresden.ocl20.pivot.pivotmodel; singleton:=true
+Bundle-SymbolicName: org.dresdenocl.pivotmodel; singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: tudresden.ocl20.pivot.datatypes,
- tudresden.ocl20.pivot.datatypes.impl,
- tudresden.ocl20.pivot.pivotmodel,
- tudresden.ocl20.pivot.pivotmodel.base,
- tudresden.ocl20.pivot.pivotmodel.impl,
- tudresden.ocl20.pivot.pivotmodel.util
+Export-Package: org.dresdenocl.datatypes,
+ org.dresdenocl.datatypes.impl,
+ org.dresdenocl.pivotmodel,
+ org.dresdenocl.pivotmodel.base,
+ org.dresdenocl.pivotmodel.impl,
+ org.dresdenocl.pivotmodel.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- tudresden.ocl20.logging;visibility:=reexport,
+ org.dresdenocl.logging;visibility:=reexport,
  org.apache.commons.lang;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: tudresden.ocl20.pivot.PivotModelPlugin
+Bundle-Activator: org.dresdenocl.PivotModelPlugin

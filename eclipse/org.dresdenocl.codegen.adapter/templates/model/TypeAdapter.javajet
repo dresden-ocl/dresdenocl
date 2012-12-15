@@ -1,4 +1,4 @@
-<%@ jet package="tudresden.ocl20.pivot.codegen.adapter.templates.model" class="TypeAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* tudresden.ocl20.pivot.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="TypeAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
 <%GenClass genClass = (GenClass)argument;
 GenPackage genPackage = genClass.getGenPackage();
 GenModel genModel = genPackage.getGenModel();
@@ -14,11 +14,11 @@ package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
 <%genModel.addImport("org.apache.log4j.Logger");%>
 <%genModel.addImport("java.util.ArrayList");%>
 <%genModel.addImport("java.util.List");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Namespace");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Operation");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Property");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.Type");%>
-<%genModel.addImport("tudresden.ocl20.pivot.pivotmodel.base.AbstractType");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Namespace");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Operation");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Property");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.Type");%>
+<%genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractType");%>
 <%genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));%>
 <%genModel.markImportLocation(stringBuffer);%>
 
@@ -34,7 +34,7 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	 *
 	 * @generated
 	 */
-	private static final Logger logger = tudresden.ocl20.pivot.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
 	
 	/**
 	 * the adapted <%=adapteeClass%> class
@@ -65,7 +65,7 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	}
 	
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getName()
 	 *
 	 * @generated
 	 */
@@ -76,7 +76,7 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	}
 	
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getNamespace()
 	 *
 	 * @generated
 	 */
@@ -87,7 +87,7 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	}
 	
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
 	 *
 	 * @generated
 	 */
@@ -101,7 +101,7 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	}
 	
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getOwnedOperationImpl()
 	 *
 	 * @generated
 	 */
@@ -115,7 +115,7 @@ public class <%=adapterClass%> extends AbstractType implements Type {
 	}
 	
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getSuperTypeImpl()
 	 *
 	 * @generated
 	 */

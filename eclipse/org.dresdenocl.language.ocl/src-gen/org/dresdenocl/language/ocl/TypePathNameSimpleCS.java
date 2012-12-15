@@ -4,9 +4,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,11 +16,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTypePathNameSimpleCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getTypePathNameSimpleCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface TypePathNameSimpleCS extends TypePathNameCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' reference.
    * @see #setTypeName(Type)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTypePathNameSimpleCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getTypePathNameSimpleCS_TypeName()
    * @model required="true"
    * @generated
    */
 	Type getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.TypePathNameSimpleCS#getTypeName <em>Type Name</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' reference.

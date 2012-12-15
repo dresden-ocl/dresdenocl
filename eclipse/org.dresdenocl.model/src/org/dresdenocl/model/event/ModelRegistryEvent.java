@@ -31,12 +31,12 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.model.event;
+package org.dresdenocl.model.event;
 
 import java.util.EventObject;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelRegistry;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelRegistry;
 
 /**
  * <p>

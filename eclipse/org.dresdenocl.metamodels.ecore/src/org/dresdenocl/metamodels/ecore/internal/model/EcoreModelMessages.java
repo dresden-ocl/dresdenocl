@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.osgi.util.NLS;
@@ -44,7 +44,7 @@ import org.eclipse.osgi.util.NLS;
 public class EcoreModelMessages extends NLS {
 
 	/** The name of the message resource bundle. */
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.ecore.internal.model.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.dresdenocl.metamodels.ecore.internal.model.messages"; //$NON-NLS-1$
 
 	public static String EcoreAdapterFactory_CreatingPivotModelAdapter;
 

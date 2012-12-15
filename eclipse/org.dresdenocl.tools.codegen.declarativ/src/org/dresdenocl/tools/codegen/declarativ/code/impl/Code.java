@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.code.impl;
+package org.dresdenocl.tools.codegen.declarativ.code.impl;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.code.ICode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.code.IComplexCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.Guide;
-import tudresden.ocl20.pivot.tools.template.ITemplate;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.code.ICode;
+import org.dresdenocl.tools.codegen.declarativ.code.IComplexCode;
+import org.dresdenocl.tools.codegen.declarativ.mapping.Guide;
+import org.dresdenocl.tools.template.ITemplate;
 
 public class Code implements IComplexCode {
 

@@ -4,9 +4,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Namespace;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,12 +16,12 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTypePathNameNestedCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getTypePathNameNestedCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface TypePathNameNestedCS extends TypePathNameCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Namespace</em>' reference.
    * @see #setNamespace(Namespace)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTypePathNameNestedCS_Namespace()
+   * @see org.dresdenocl.language.ocl.OclPackage#getTypePathNameNestedCS_Namespace()
    * @model required="true"
    * @generated
    */
 	Namespace getNamespace();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getNamespace <em>Namespace</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Namespace</em>' reference.
@@ -62,14 +62,14 @@ public interface TypePathNameNestedCS extends TypePathNameCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Path Name</em>' containment reference.
    * @see #setTypePathName(TypePathNameCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTypePathNameNestedCS_TypePathName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getTypePathNameNestedCS_TypePathName()
    * @model containment="true" required="true"
    * @generated
    */
 	TypePathNameCS getTypePathName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.TypePathNameNestedCS#getTypePathName <em>Type Path Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Path Name</em>' containment reference.

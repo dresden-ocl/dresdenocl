@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS#getVariableDeclarations <em>Variable Declarations</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.TupleLiteralExpCS#getVariableDeclarations <em>Variable Declarations</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTupleLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getTupleLiteralExpCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface TupleLiteralExpCS extends LiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Variable Declarations</em>' containment reference.
    * @see #setVariableDeclarations(VariableDeclarationWithInitListCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getTupleLiteralExpCS_VariableDeclarations()
+   * @see org.dresdenocl.language.ocl.OclPackage#getTupleLiteralExpCS_VariableDeclarations()
    * @model containment="true" required="true"
    * @generated
    */
 	VariableDeclarationWithInitListCS getVariableDeclarations();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.TupleLiteralExpCS#getVariableDeclarations <em>Variable Declarations</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.TupleLiteralExpCS#getVariableDeclarations <em>Variable Declarations</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Variable Declarations</em>' containment reference.

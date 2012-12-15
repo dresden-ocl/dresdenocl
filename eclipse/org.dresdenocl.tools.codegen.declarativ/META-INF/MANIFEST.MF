@@ -1,17 +1,17 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DeclarativCodeGenerator Plug-In
-Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codegen.declarativ;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.tools.codegen.declarativ;singleton:=true
 Bundle-Version: 3.2.0.qualifier
-Bundle-Activator: tudresden.ocl20.pivot.tools.codegen.declarativ.Ocl2DeclCodePlugin
+Bundle-Activator: org.dresdenocl.tools.codegen.declarativ.Ocl2DeclCodePlugin
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: tudresden.ocl20.logging,
+Require-Bundle: org.dresdenocl.logging,
  org.eclipse.core.runtime,
- tudresden.ocl20.pivot.tools.codegen;visibility:=reexport,
- tudresden.ocl20.pivot.essentialocl,
- tudresden.ocl20.pivot.modelbus
+ org.dresdenocl.tools.codegen;visibility:=reexport,
+ org.dresdenocl.essentialocl,
+ org.dresdenocl.modelbus
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.tools.codegen.declarativ,
- tudresden.ocl20.pivot.tools.codegen.declarativ.mapping
+Export-Package: org.dresdenocl.tools.codegen.declarativ,
+ org.dresdenocl.tools.codegen.declarativ.mapping
 Bundle-Vendor: TU Dresden, Software Technology Group

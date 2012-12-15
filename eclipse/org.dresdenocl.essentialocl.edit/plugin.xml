@@ -39,7 +39,7 @@
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
        uri = "http://www.omg.org/2006/essentialocl/types" 
-       class = "tudresden.ocl20.pivot.essentialocl.types.provider.TypesItemProviderAdapterFactory" 
+       class = "org.dresdenocl.essentialocl.types.provider.TypesItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -51,7 +51,7 @@
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
        uri = "http://www.omg.org/2006/essentialocl/expressions" 
-       class = "tudresden.ocl20.pivot.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory" 
+       class = "org.dresdenocl.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider

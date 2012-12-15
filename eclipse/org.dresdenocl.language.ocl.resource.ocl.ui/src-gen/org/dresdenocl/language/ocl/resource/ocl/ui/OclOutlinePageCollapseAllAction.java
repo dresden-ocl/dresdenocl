@@ -4,11 +4,11 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
-public class OclOutlinePageCollapseAllAction extends tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.AbstractOclOutlinePageAction {
+public class OclOutlinePageCollapseAllAction extends org.dresdenocl.language.ocl.resource.ocl.ui.AbstractOclOutlinePageAction {
 	
-	public OclOutlinePageCollapseAllAction(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer) {
+	public OclOutlinePageCollapseAllAction(org.dresdenocl.language.ocl.resource.ocl.ui.OclOutlinePageTreeViewer treeViewer) {
 		super(treeViewer, "Collapse all", org.eclipse.jface.action.IAction.AS_PUSH_BUTTON);
 		initialize("icons/collapse_all_icon.gif");
 	}

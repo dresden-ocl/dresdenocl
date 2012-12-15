@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.standardlibrary.java.test.tests;
+package org.dresdenocl.standardlibrary.java.test.tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,12 +9,12 @@ import org.eclipse.emf.common.util.UniqueEList;
 import org.junit.Before;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInteger;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSortedCollection;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclInteger;
+import org.dresdenocl.essentialocl.standardlibrary.OclReal;
+import org.dresdenocl.essentialocl.standardlibrary.OclSortedCollection;
+import org.dresdenocl.essentialocl.standardlibrary.factory.IStandardLibraryFactory;
 
 /**
  * Test for sorted collections in OCL.

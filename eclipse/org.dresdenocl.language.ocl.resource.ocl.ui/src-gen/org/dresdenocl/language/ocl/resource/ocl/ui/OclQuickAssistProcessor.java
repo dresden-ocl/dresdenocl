@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassist.IQuickAssistProcessor {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider;
+	private org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider;
 	
-	public OclQuickAssistProcessor(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider) {
+	public OclQuickAssistProcessor(org.dresdenocl.language.ocl.resource.ocl.IOclResourceProvider resourceProvider, org.dresdenocl.language.ocl.resource.ocl.ui.IOclAnnotationModelProvider annotationModelProvider) {
 		super();
 		this.resourceProvider = resourceProvider;
 		this.annotationModelProvider = annotationModelProvider;
@@ -22,7 +22,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 	}
 	
 	public boolean canFix(org.eclipse.jface.text.source.Annotation annotation) {
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(annotation);
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(annotation);
 		return quickFixes.size() > 0;
 	}
 	
@@ -35,7 +35,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 			offset = textContext.getOffset();
 			length = textContext.getLength();
 		}
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(sourceViewer, offset, length);
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(sourceViewer, offset, length);
 		org.eclipse.jface.text.contentassist.ICompletionProposal[] proposals = new org.eclipse.jface.text.contentassist.ICompletionProposal[quickFixes.size()];
 		for (int i = 0; i < proposals.length; i++) {
 			proposals[i] = createCompletionProposal(sourceViewer, quickFixes.get(i));
@@ -43,7 +43,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 		return proposals;
 	}
 	
-	private org.eclipse.jface.text.contentassist.ICompletionProposal createCompletionProposal(final org.eclipse.jface.text.source.ISourceViewer sourceViewer, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
+	private org.eclipse.jface.text.contentassist.ICompletionProposal createCompletionProposal(final org.eclipse.jface.text.source.ISourceViewer sourceViewer, final org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix quickFix) {
 		return new org.eclipse.jface.text.contentassist.ICompletionProposal() {
 			
 			public org.eclipse.swt.graphics.Point getSelection(org.eclipse.jface.text.IDocument document) {
@@ -51,7 +51,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 			}
 			
 			public org.eclipse.swt.graphics.Image getImage() {
-				return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation().getImageProvider().getImage(quickFix.getImageKey());
+				return new org.dresdenocl.language.ocl.resource.ocl.ui.OclUIMetaInformation().getImageProvider().getImage(quickFix.getImageKey());
 			}
 			
 			public String getDisplayString() {
@@ -76,8 +76,8 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 		};
 	}
 	
-	private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.eclipse.jface.text.source.ISourceViewer sourceViewer, int offset, int length) {
-		java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> foundFixes = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+	private java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.eclipse.jface.text.source.ISourceViewer sourceViewer, int offset, int length) {
+		java.util.List<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> foundFixes = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
 		org.eclipse.jface.text.source.IAnnotationModel model = annotationModelProvider.getAnnotationModel();
 		
 		if (model == null) {
@@ -93,7 +93,7 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 					continue;
 				}
 			}
-			java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(annotation);
+			java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> quickFixes = getQuickFixes(annotation);
 			if (quickFixes != null) {
 				foundFixes.addAll(quickFixes);
 			}
@@ -101,17 +101,17 @@ public class OclQuickAssistProcessor implements org.eclipse.jface.text.quickassi
 		return foundFixes;
 	}
 	
-	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.eclipse.jface.text.source.Annotation annotation) {
+	private java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes(org.eclipse.jface.text.source.Annotation annotation) {
 		
-		java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+		java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix> foundQuickFixes = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.IOclQuickFix>();
 		if (annotation.isMarkedDeleted()) {
 			return foundQuickFixes;
 		}
 		
-		if (annotation instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation markerAnnotation = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerAnnotation) annotation;
+		if (annotation instanceof org.dresdenocl.language.ocl.resource.ocl.ui.OclMarkerAnnotation) {
+			org.dresdenocl.language.ocl.resource.ocl.ui.OclMarkerAnnotation markerAnnotation = (org.dresdenocl.language.ocl.resource.ocl.ui.OclMarkerAnnotation) annotation;
 			org.eclipse.core.resources.IMarker marker = markerAnnotation.getMarker();
-			foundQuickFixes.addAll(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator().getQuickFixes(resourceProvider.getResource(), marker));
+			foundQuickFixes.addAll(new org.dresdenocl.language.ocl.resource.ocl.ui.OclMarkerResolutionGenerator().getQuickFixes(resourceProvider.getResource(), marker));
 		}
 		return foundQuickFixes;
 	}

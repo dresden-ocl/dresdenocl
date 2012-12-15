@@ -4,12 +4,12 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A basic implementation of the ITokenResolveResult interface.
  */
-public class OclTokenResolveResult implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolveResult {
+public class OclTokenResolveResult implements org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolveResult {
 	
 	private String errorMessage;
 	private Object resolvedToken;

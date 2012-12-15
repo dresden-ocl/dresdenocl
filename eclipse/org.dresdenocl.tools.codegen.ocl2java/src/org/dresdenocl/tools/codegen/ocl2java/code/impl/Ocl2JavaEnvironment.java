@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along 
  * with Dresden OCL. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.code.impl;
+package org.dresdenocl.tools.codegen.ocl2java.code.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,11 +27,11 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
-import tudresden.ocl20.pivot.tools.template.ITemplate;
+import org.dresdenocl.essentialocl.expressions.Variable;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.tools.codegen.code.ITransformedCode;
+import org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment;
+import org.dresdenocl.tools.template.ITemplate;
 
 /**
  * <p>
@@ -236,7 +236,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#
 	 * addAllInstancesClass(java.lang.String)
 	 */
 	public void addAllInstancesClass(String canonicalName) {
@@ -248,9 +248,9 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#addAtPreValue
-	 * (tudresden.ocl20.pivot.ocl2java.code.ITransformedCode,
-	 * tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#addAtPreValue
+	 * (org.dresdenocl.ocl2java.code.ITransformedCode,
+	 * org.dresdenocl.pivotmodel.Type)
 	 */
 	public String addAtPreValue(ITransformedCode sourceCode, Type type) {
 
@@ -279,7 +279,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#addCalledProperty
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#addCalledProperty
 	 * (java.lang.String)
 	 */
 	public void addCalledProperty(String callPath) {
@@ -291,7 +291,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #addDefinedMethod(java.lang.String, java.lang.String)
 	 */
 	public void addDefinedMethod(String methodName, String className) {
@@ -311,7 +311,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#addIsNewClass
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#addIsNewClass
 	 * (java.lang.String)
 	 */
 	public void addIsNewClass(String canonicalName) {
@@ -323,7 +323,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #addUsedAspectName(java.lang.String)
 	 */
 	public void addUsedAspectName(String name) {
@@ -334,7 +334,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #addVariableMapping(java.lang.String, java.lang.String)
 	 */
 	public void addVariableMapping(String oldName, String newName) {
@@ -355,7 +355,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #existsMappingForVariable(java.lang.String)
 	 */
 	public boolean existsMappingForVariable(String name) {
@@ -365,7 +365,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#
 	 * getAllInstancesClasses()
 	 */
 	public Set<String> getAllInstancesClasses() {
@@ -377,7 +377,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getAtPreValues
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#getAtPreValues
 	 * ()
 	 */
 	public Map<ITransformedCode, Object[]> getAtPreValues() {
@@ -389,7 +389,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getIsNewClasses
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#getIsNewClasses
 	 * ()
 	 */
 	public Set<String> getIsNewClasses() {
@@ -401,7 +401,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getCalledProperties
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#getCalledProperties
 	 * ()
 	 */
 	public Set<String> getCalledProperties() {
@@ -413,7 +413,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #getExpectedReturnType()
 	 */
 	public Type getExpectedReturnType() {
@@ -425,7 +425,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#getNewBodyResultVarName()
+	 * @see org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#getNewBodyResultVarName()
 	 */
 	public String getNewBodyResultVarName() {
 	
@@ -442,7 +442,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.ICodeGenEnvironment#
 	 * getNewIteratorExpCollectionVarName()
 	 */
 	public String getNewCollectionVarName() {
@@ -461,7 +461,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewComparatorName
+	 * org.dresdenocl.ocl2java.code.ICodeGenEnvironment#getNewComparatorName
 	 * ()
 	 */
 	public String getNewComparatorName() {
@@ -480,7 +480,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewIndexVarName
+	 * org.dresdenocl.ocl2java.code.ICodeGenEnvironment#getNewIndexVarName
 	 * ()
 	 */
 	public String getNewIndexVarName() {
@@ -499,7 +499,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.ICodeGenEnvironment#getNewIfExpResultName
+	 * org.dresdenocl.ocl22code.ICodeGenEnvironment#getNewIfExpResultName
 	 * ()
 	 */
 	public String getNewIfExpResultName() {
@@ -517,7 +517,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl22code.ICodeGenEnvironment#
+	 * @seeorg.dresdenocl.ocl22code.ICodeGenEnvironment#
 	 * getNewIteratorExpIteratorVarName()
 	 */
 	public String getNewIteratorVarName() {
@@ -536,7 +536,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewResultVarName
+	 * org.dresdenocl.ocl2java.code.ICodeGenEnvironment#getNewResultVarName
 	 * ()
 	 */
 	public String getNewResultVarName() {
@@ -553,7 +553,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#getNewToVisitVarName()
+	 * @see org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment#getNewToVisitVarName()
 	 */
 	public String getNewToVisitVarName() {
 
@@ -570,7 +570,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewTupleVarName()
 	 */
 	public String getNewTupleVarName() {
@@ -588,7 +588,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewBodyAspectName()
 	 */
 	public String getNewBodyAspectName() {
@@ -606,7 +606,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewDefAspectName()
 	 */
 	public String getNewDefAspectName() {
@@ -624,7 +624,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.ICodeTransformationEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.ICodeTransformationEnvironment#
 	 * getNewDeriveAspectName()
 	 */
 	public String getNewDeriveAspectName() {
@@ -643,7 +643,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#getNewInitAspectName
+	 * org.dresdenocl.ocl2java.code.ICodeGenEnvironment#getNewInitAspectName
 	 * ()
 	 */
 	public String getNewInitAspectName() {
@@ -662,7 +662,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getNewInvAspectName
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#getNewInvAspectName
 	 * ()
 	 */
 	public String getNewInvAspectName() {
@@ -680,7 +680,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#
 	 * getNewPostAspectName()
 	 */
 	public String getNewPostAspectName() {
@@ -699,7 +699,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#getNewPreAspectName
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#getNewPreAspectName
 	 * ()
 	 */
 	public String getNewPreAspectName() {
@@ -718,7 +718,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #getVariableMapping(java.lang.String)
 	 */
 	public String getVariableMapping(String name) {
@@ -736,7 +736,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#
+	 * @seeorg.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#
 	 * hasAllInstancesClasses()
 	 */
 	public boolean hasAllInstancesClasses() {
@@ -748,7 +748,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasAtPreValues
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#hasAtPreValues
 	 * ()
 	 */
 	public boolean hasAtPreValues() {
@@ -760,7 +760,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasCalledProperties
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#hasCalledProperties
 	 * ()
 	 */
 	public boolean hasCalledProperties() {
@@ -772,7 +772,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.IOcl22JavaEnvironment#hasIsNewClasses
+	 * org.dresdenocl.ocl2java.code.IOcl22JavaEnvironment#hasIsNewClasses
 	 * ()
 	 */
 	public boolean hasIsNewClasses() {
@@ -784,7 +784,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #isMethodAlreadyDefined(java.lang.String, java.lang.String)
 	 */
 	public boolean isMethodAlreadyDefined(String methodName, String className) {
@@ -806,7 +806,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #isUsedAspectName(java.lang.String)
 	 */
 	public boolean isUsedAspectName(String name) {
@@ -818,7 +818,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #isUsingSelfVariable()
 	 */
 	public boolean isUsingSelfVariable() {
@@ -829,7 +829,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #popExpectedReturnType()
 	 */
 	public Type popExpectedReturnType() {
@@ -840,8 +840,8 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
-	 * #pushExpectedReturnType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * #pushExpectedReturnType(org.dresdenocl.pivotmodel.Type)
 	 */
 	public void pushExpectedReturnType(Type type) {
 		this.returnTypeStack.push(type);
@@ -851,7 +851,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #removeVariableMapping(java.lang.String)
 	 */
 	public boolean removeVariableMapping(String name) {
@@ -888,7 +888,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.ocl2java.code.ICodeGenEnvironment#resetAllCounters
+	 * org.dresdenocl.ocl2java.code.ICodeGenEnvironment#resetAllCounters
 	 * ()
 	 */
 	public void resetEnvironmentForNextConstraint() {
@@ -916,7 +916,7 @@ public class Ocl2JavaEnvironment implements IOcl2JavaEnvironment {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
+	 * org.dresdenocl.tools.codegen.ocl2java.code.IOcl2JavaEnvironment
 	 * #setIsUsigSelfVariable(boolean)
 	 */
 	public void setIsUsigSelfVariable(boolean enabled) {

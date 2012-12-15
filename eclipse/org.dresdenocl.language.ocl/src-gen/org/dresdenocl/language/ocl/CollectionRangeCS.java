@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,12 +15,12 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getFrom <em>From</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getTo <em>To</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionRangeCS#getFrom <em>From</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionRangeCS#getTo <em>To</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionRangeCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getCollectionRangeCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface CollectionRangeCS extends CollectionLiteralPartsCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>From</em>' containment reference.
    * @see #setFrom(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionRangeCS_From()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionRangeCS_From()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getFrom();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getFrom <em>From</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.CollectionRangeCS#getFrom <em>From</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>From</em>' containment reference.
@@ -61,14 +61,14 @@ public interface CollectionRangeCS extends CollectionLiteralPartsCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>To</em>' containment reference.
    * @see #setTo(OclExpressionCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionRangeCS_To()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionRangeCS_To()
    * @model containment="true" required="true"
    * @generated
    */
 	OclExpressionCS getTo();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.CollectionRangeCS#getTo <em>To</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.CollectionRangeCS#getTo <em>To</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>To</em>' containment reference.

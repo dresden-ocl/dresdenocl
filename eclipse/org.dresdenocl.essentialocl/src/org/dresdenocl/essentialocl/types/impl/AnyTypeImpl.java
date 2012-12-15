@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types.impl;
+package org.dresdenocl.essentialocl.types.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
+import org.dresdenocl.essentialocl.types.AnyType;
+import org.dresdenocl.pivotmodel.impl.TypeImpl;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Any Type</b></em>'.
@@ -72,7 +72,7 @@ public class AnyTypeImpl extends TypeImpl implements AnyType {
 	 * Standard Library, <code>OclAny</code> does not really have a namespace. It is implicitly
 	 * available in all namespaces.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getQualifiedName()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName()
 	 */
 	@Override
 	public String getQualifiedName() {

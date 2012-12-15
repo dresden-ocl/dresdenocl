@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test;
+package org.dresdenocl.ocl2parser.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -31,7 +31,7 @@ public class Activator extends Plugin {
 
 	/** The plug-in id. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.ocl2parser.test";
+			"org.dresdenocl.ocl2parser.test";
 
 	/** The shared instance. */
 	private static Activator plugin;

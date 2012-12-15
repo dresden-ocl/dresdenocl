@@ -30,13 +30,13 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.types;
+package org.dresdenocl.essentialocl.types;
 
 import java.util.List;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
+import org.dresdenocl.essentialocl.expressions.CollectionKind;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.TypeParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,9 +46,9 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getElementType <em>Element Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getOclLibrary <em>Ocl Library</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.CollectionType#getElementType <em>Element Type</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.CollectionType#getOclLibrary <em>Ocl Library</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.types.CollectionType#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,7 +71,7 @@ public interface CollectionType extends Type {
 	Type getElementType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getElementType <em>Element Type</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.CollectionType#getElementType <em>Element Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Element Type</em>' reference.
@@ -106,7 +106,7 @@ public interface CollectionType extends Type {
 	OclLibrary getOclLibrary();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getOclLibrary <em>Ocl Library</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.CollectionType#getOclLibrary <em>Ocl Library</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Ocl Library</em>' reference.
@@ -117,7 +117,7 @@ public interface CollectionType extends Type {
 
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind}.
+	 * The literals are from the enumeration {@link org.dresdenocl.essentialocl.expressions.CollectionKind}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Kind</em>' attribute isn't clear,
@@ -136,18 +136,18 @@ public interface CollectionType extends Type {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
 	 * @see #setKind(CollectionKind)
 	 * @generated
 	 */
 	CollectionKind getKind();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.types.CollectionType#getKind <em>Kind</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.types.CollectionType#getKind <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Kind</em>' attribute.
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind
+	 * @see org.dresdenocl.essentialocl.expressions.CollectionKind
 	 * @see #getKind()
 	 * @generated
 	 */
@@ -156,7 +156,7 @@ public interface CollectionType extends Type {
 	/**
 	 * Overridden to specialize the co-variant return type to <code>CollectionType</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * @see org.dresdenocl.pivotmodel.GenericElement#bindTypeParameter(java.util.List, java.util.List)
 	 */
 	CollectionType bindTypeParameter(List<TypeParameter> parameters,
 			List<? extends Type> types);

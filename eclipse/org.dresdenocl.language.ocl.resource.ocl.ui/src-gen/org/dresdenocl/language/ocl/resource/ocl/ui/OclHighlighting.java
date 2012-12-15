@@ -4,28 +4,28 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * A manager class for the highlighting of occurrences and brackets.
  */
 public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener {
 	
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
+	private final static org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionHelper();
 	
 	private java.util.List<org.eclipse.jface.viewers.ISelectionChangedListener> selectionChangedListeners = new java.util.ArrayList<org.eclipse.jface.viewers.ISelectionChangedListener>();
 	private org.eclipse.jface.viewers.ISelection selection = null;
 	private boolean isHighlightBrackets = true;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner scanner;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner scanner;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager;
 	private org.eclipse.swt.graphics.Color bracketColor;
 	private org.eclipse.swt.graphics.Color black;
 	private org.eclipse.swt.custom.StyledText textWidget;
 	private org.eclipse.jface.preference.IPreferenceStore preferenceStore;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor;
 	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrence occurrence;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketSet bracketSet;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclOccurrence occurrence;
+	private org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet bracketSet;
 	private org.eclipse.swt.widgets.Display display;
 	
 	/**
@@ -34,7 +34,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	 * increase the performance. Occurrences are not searched if the caret is still in
 	 * the same token to increase the performance.
 	 */
-	private final class UpdateHighlightingListener implements org.eclipse.swt.events.KeyListener, org.eclipse.swt.events.VerifyListener, org.eclipse.swt.events.MouseListener, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBackgroundParsingListener {
+	private final class UpdateHighlightingListener implements org.eclipse.swt.events.KeyListener, org.eclipse.swt.events.VerifyListener, org.eclipse.swt.events.MouseListener, org.dresdenocl.language.ocl.resource.ocl.IOclBackgroundParsingListener {
 		
 		private boolean changed = false;
 		private int caret = -1;
@@ -106,25 +106,25 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	 * @param colorManager the color manager provides highlighting colors
 	 * @param editor
 	 */
-	public OclHighlighting(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer sourceviewer, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	public OclHighlighting(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource textResource, org.eclipse.jface.text.source.projection.ProjectionViewer sourceviewer, org.dresdenocl.language.ocl.resource.ocl.ui.OclColorManager colorManager, org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor) {
 		this.display = org.eclipse.swt.widgets.Display.getCurrent();
 		sourceviewer.getSelectionProvider();
-		preferenceStore = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+		preferenceStore = org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
 		this.editor = editor;
 		textWidget = sourceviewer.getTextWidget();
 		projectionViewer = sourceviewer;
-		scanner = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner(textResource, colorManager);
-		occurrence = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrence(textResource, sourceviewer, scanner);
-		bracketSet = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketSet(editor, sourceviewer);
+		scanner = new org.dresdenocl.language.ocl.resource.ocl.ui.OclTokenScanner(textResource, colorManager);
+		occurrence = new org.dresdenocl.language.ocl.resource.ocl.ui.OclOccurrence(textResource, sourceviewer, scanner);
+		bracketSet = new org.dresdenocl.language.ocl.resource.ocl.ui.OclBracketSet(editor, sourceviewer);
 		this.colorManager = colorManager;
-		isHighlightBrackets = preferenceStore.getBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX);
-		bracketColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR));
+		isHighlightBrackets = preferenceStore.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX);
+		bracketColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR));
 		black = colorManager.getColor(new org.eclipse.swt.graphics.RGB(0, 0, 0));
 		
 		addListeners(editor);
 	}
 	
-	private void addListeners(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	private void addListeners(org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor editor) {
 		UpdateHighlightingListener hl = new UpdateHighlightingListener();
 		textWidget.addKeyListener(hl);
 		textWidget.addVerifyListener(hl);
@@ -143,7 +143,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	
 	private void setBracketHighlighting(org.eclipse.jface.text.IDocument document) {
 		org.eclipse.swt.custom.StyleRange styleRange = null;
-		org.eclipse.jface.text.Position[] positions = positionHelper.getPositions(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString());
+		org.eclipse.jface.text.Position[] positions = positionHelper.getPositions(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString());
 		
 		for (org.eclipse.jface.text.Position position : positions) {
 			org.eclipse.jface.text.Position tmpPosition = convertToWidgetPosition(position);
@@ -162,12 +162,12 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	private void removeHighlighting() {
 		org.eclipse.jface.text.IDocument document = projectionViewer.getDocument();
 		// remove highlighted matching brackets
-		removeHighlightingCategory(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString());
+		removeHighlightingCategory(document, org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString());
 	}
 	
 	private void removeHighlightingCategory(org.eclipse.jface.text.IDocument document, String category) {
 		org.eclipse.jface.text.Position[] positions = positionHelper.getPositions(document, category);
-		if (category.equals(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString())) {
+		if (category.equals(org.dresdenocl.language.ocl.resource.ocl.ui.OclPositionCategory.BRACKET.toString())) {
 			org.eclipse.swt.custom.StyleRange styleRange;
 			for (org.eclipse.jface.text.Position position : positions) {
 				org.eclipse.jface.text.Position tmpPosition = convertToWidgetPosition(position);
@@ -188,7 +188,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 			public void run() {
 				org.eclipse.emf.ecore.EObject selectedEObject = occurrence.getEObjectAtCurrentPosition();
 				if (selectedEObject != null) {
-					setSelection(new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection(selectedEObject, false));
+					setSelection(new org.dresdenocl.language.ocl.resource.ocl.ui.OclEObjectSelection(selectedEObject, false));
 				}
 			}
 		});
@@ -198,8 +198,8 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	 * Resets the changed values after setting the preference pages.
 	 */
 	public void resetValues() {
-		isHighlightBrackets = preferenceStore.getBoolean(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX);
-		bracketColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR));
+		isHighlightBrackets = preferenceStore.getBoolean(org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_CHECKBOX);
+		bracketColor = colorManager.getColor(org.eclipse.jface.preference.PreferenceConverter.getColor(preferenceStore, org.dresdenocl.language.ocl.resource.ocl.ui.OclPreferenceConstants.EDITOR_MATCHING_BRACKETS_COLOR));
 		bracketSet.resetBrackets();
 	}
 	

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.metamodel.internal;
+package org.dresdenocl.modelbus.metamodel.internal;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,12 +44,12 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IRegistryEventListener;
 import org.eclipse.core.runtime.Platform;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodelRegistry;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
-import tudresden.ocl20.pivot.modelbus.descriptor.InvalidDescriptorException;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.model.metamodel.IMetamodelRegistry;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.descriptor.IDescriptor;
+import org.dresdenocl.modelbus.descriptor.InvalidDescriptorException;
 
 /**
  * <p>
@@ -153,7 +153,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#addMetamodel(tudresden
+	 * org.dresdenocl.modelbus.IMetamodelRegistry#addMetamodel(tudresden
 	 * .ocl20.pivot.modelbus.IMetamodel)
 	 */
 	public void addMetamodel(IMetamodel metamodel) {
@@ -188,7 +188,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#dispose()
+	 * @see org.dresdenocl.modelbus.IMetamodelRegistry#dispose()
 	 */
 	public void dispose() {
 
@@ -207,7 +207,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#getMetamodel(java.lang
+	 * org.dresdenocl.modelbus.IMetamodelRegistry#getMetamodel(java.lang
 	 * .String)
 	 */
 	public IMetamodel getMetamodel(String id) {
@@ -228,7 +228,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#getMetamodels()
+	 * @see org.dresdenocl.modelbus.IMetamodelRegistry#getMetamodels()
 	 */
 	public IMetamodel[] getMetamodels() {
 

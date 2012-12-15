@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.codegen;
+package org.dresdenocl.tools.codegen;
 
 public interface IOcl2CodeSettings {
 

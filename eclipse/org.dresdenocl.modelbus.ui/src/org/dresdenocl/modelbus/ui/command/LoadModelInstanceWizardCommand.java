@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.modelbus.ui.command;
+package org.dresdenocl.modelbus.ui.command;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.Command;
@@ -28,9 +28,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.LoadModelInstanceWizard;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
+import org.dresdenocl.modelbus.ui.ModelBusUIPlugin;
+import org.dresdenocl.modelbus.ui.internal.wizards.LoadModelInstanceWizard;
+import org.dresdenocl.modelinstance.IModelInstance;
 
 /**
  * <p>

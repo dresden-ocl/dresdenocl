@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter;
+package org.dresdenocl.codegen.adapter;
 
 import java.util.ArrayList;
 import java.util.Collection;

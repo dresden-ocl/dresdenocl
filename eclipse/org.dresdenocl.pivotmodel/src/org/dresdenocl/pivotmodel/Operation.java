@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -48,22 +48,22 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwningType <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Operation#getOwningType <em>
  * Owning Type</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwnedParameter <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter <em>
  * Owned Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#getInputParameter <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Operation#getInputParameter <em>
  * Input Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#getOutputParameter <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Operation#getOutputParameter <em>
  * Output Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#getReturnParameter <em>
+ * <li>{@link org.dresdenocl.pivotmodel.Operation#getReturnParameter <em>
  * Return Parameter</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.Operation#getSignatureParameter
+ * <li>{@link org.dresdenocl.pivotmodel.Operation#getSignatureParameter
  * <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getOperation()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getOperation()
  * @model
  * @generated
  */
@@ -73,7 +73,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Type#getOwnedOperation
+	 * {@link org.dresdenocl.pivotmodel.Type#getOwnedOperation
 	 * <em>Owned Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
@@ -83,14 +83,14 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	 * 
 	 * @return the value of the '<em>Owning Type</em>' container reference.
 	 * @see #setOwningType(Type)
-	 * @see tudresden.ocl20.pivot.pivotmodel.Type#getOwnedOperation
+	 * @see org.dresdenocl.pivotmodel.Type#getOwnedOperation
 	 * @generated
 	 */
 	Type getOwningType();
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Operation#getOwningType
+	 * {@link org.dresdenocl.pivotmodel.Operation#getOwningType
 	 * <em>Owning Type</em>}' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -104,9 +104,9 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	/**
 	 * Returns the value of the '<em><b>Owned Parameter</b></em>' containment
 	 * reference list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter}. It is bidirectional and
+	 * {@link org.dresdenocl.pivotmodel.Parameter}. It is bidirectional and
 	 * its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation
+	 * {@link org.dresdenocl.pivotmodel.Parameter#getOperation
 	 * <em>Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc --> <!--
 	 * begin-model-doc -->
 	 * <p>
@@ -117,7 +117,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	 * 
 	 * @return the value of the '<em>Owned Parameter</em>' containment reference
 	 *         list.
-	 * @see tudresden.ocl20.pivot.pivotmodel.Parameter#getOperation
+	 * @see org.dresdenocl.pivotmodel.Parameter#getOperation
 	 * @generated
 	 */
 	List<Parameter> getOwnedParameter();
@@ -125,7 +125,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	/**
 	 * Returns the value of the '<em><b>Input Parameter</b></em>' reference list.
 	 * The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Parameter}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * This is the subset of all parameters with direction
@@ -142,7 +142,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	/**
 	 * Returns the value of the '<em><b>Output Parameter</b></em>' reference list.
 	 * The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Parameter}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * This is the subset of all parameters with direction
@@ -159,7 +159,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	/**
 	 * Returns the value of the '<em><b>Signature Parameter</b></em>' reference
 	 * list. The list contents are of type
-	 * {@link tudresden.ocl20.pivot.pivotmodel.Parameter}. <!-- begin-user-doc -->
+	 * {@link org.dresdenocl.pivotmodel.Parameter}. <!-- begin-user-doc -->
 	 * <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * This is the subset of all parameters except the
@@ -234,7 +234,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	 * Overridden to specialize the co-variant return type to
 	 * <code>Operation</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#bindTypeParameter(java.util.List,
+	 * @see org.dresdenocl.pivotmodel.GenericElement#bindTypeParameter(java.util.List,
 	 *      java.util.List)
 	 */
 	Operation bindTypeParameter(List<TypeParameter> parameters,
@@ -243,7 +243,7 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	Operation clone();
 

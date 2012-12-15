@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml;
+package org.dresdenocl.examples.pml;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -17,14 +17,14 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Operation#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Operation#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Operation#getParameters <em>Parameters</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Operation#getMyType <em>My Type</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Operation#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Operation#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Operation#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Operation#getMyType <em>My Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getOperation()
+ * @see org.dresdenocl.examples.pml.PmlPackage#getOperation()
  * @model
  * @generated
  */
@@ -39,14 +39,14 @@ public interface Operation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getOperation_Name()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getOperation_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Operation#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Operation#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -65,14 +65,14 @@ public interface Operation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Type</em>' reference.
 	 * @see #setReturnType(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getOperation_ReturnType()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getOperation_ReturnType()
 	 * @model required="true"
 	 * @generated
 	 */
 	JavaType getReturnType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Operation#getReturnType <em>Return Type</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Operation#getReturnType <em>Return Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Return Type</em>' reference.
@@ -83,8 +83,8 @@ public interface Operation extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Parameter}.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.Parameter#getOperation <em>Operation</em>}'.
+	 * The list contents are of type {@link org.dresdenocl.examples.pml.Parameter}.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.examples.pml.Parameter#getOperation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -92,8 +92,8 @@ public interface Operation extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getOperation_Parameters()
-	 * @see tudresden.ocl20.pivot.examples.pml.Parameter#getOperation
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getOperation_Parameters()
+	 * @see org.dresdenocl.examples.pml.Parameter#getOperation
 	 * @model opposite="operation" containment="true"
 	 * @generated
 	 */
@@ -109,14 +109,14 @@ public interface Operation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>My Type</em>' reference.
 	 * @see #setMyType(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getOperation_MyType()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getOperation_MyType()
 	 * @model required="true"
 	 * @generated
 	 */
 	JavaType getMyType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Operation#getMyType <em>My Type</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Operation#getMyType <em>My Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>My Type</em>' reference.

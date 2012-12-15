@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="tudresden.ocl20.pivot.tools.template.templateGroups">
+         point="org.dresdenocl.tools.template.templateGroups">
       <templateresource
             name="Standard(SQL)"
             path="resources/templates/Standard/">

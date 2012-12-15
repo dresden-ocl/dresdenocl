@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInteger;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInteger;
 
 /**
  * 
@@ -81,7 +81,7 @@ public interface OclInteger extends OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#negative()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#negative()
 	 */
 	OclInteger negative();
 
@@ -112,7 +112,7 @@ public interface OclInteger extends OclReal {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclReal#abs()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclReal#abs()
 	 */
 	OclInteger abs();
 

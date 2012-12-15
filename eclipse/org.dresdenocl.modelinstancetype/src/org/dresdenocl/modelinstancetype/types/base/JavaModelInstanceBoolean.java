@@ -17,20 +17,20 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.types.base;
+package org.dresdenocl.modelinstancetype.types.base;
 
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.ModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.internal.ModelInstanceMessages;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceBoolean;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.modelinstancetype.ModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.internal.ModelInstanceMessages;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceBoolean;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
@@ -98,8 +98,8 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceBoolean
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * #asType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+	 * #asType(org.dresdenocl.pivotmodel.Type)
 	 */
 	public IModelInstanceElement asType(Type type) throws AsTypeCastException {
 
@@ -156,7 +156,7 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceBoolean
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
 	 * #deepCopy()
 	 */
 	public IModelInstanceElement copyForAtPre() {
@@ -167,7 +167,7 @@ public class JavaModelInstanceBoolean extends AbstractModelInstanceBoolean
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceBoolean#getBoolean
+	 * org.dresdenocl.modelbus.modelinstance.IModelInstanceBoolean#getBoolean
 	 * ()
 	 */
 	public Boolean getBoolean() {

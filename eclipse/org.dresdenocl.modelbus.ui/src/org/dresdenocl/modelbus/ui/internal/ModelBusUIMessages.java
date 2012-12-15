@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal;
+package org.dresdenocl.modelbus.ui.internal;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -29,7 +29,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public class ModelBusUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.modelbus.ui.internal.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.dresdenocl.modelbus.ui.internal.messages"; //$NON-NLS-1$
 
 	public static String LoadModelPage_BrowseFileSystemButtonText;
 

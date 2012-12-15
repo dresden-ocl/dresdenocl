@@ -1,15 +1,15 @@
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclInvalid;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclInvalid;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclType;
+import org.dresdenocl.essentialocl.types.TypesFactory;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInvalid;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * Implementation for {@link OclInvalid}. <strong>This class should only be
@@ -51,7 +51,7 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#asSet()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#asSet()
 	 */
 	public <T extends OclAny> OclSet<T> asSet() {
 
@@ -63,7 +63,7 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#isEqualTo(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclAny)
 	 */
 	public OclBoolean isEqualTo(OclAny object2) {
@@ -77,7 +77,7 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
 	 * getModelInstanceElement()
 	 */
 	public IModelInstanceElement getModelInstanceElement() {
@@ -88,8 +88,8 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * oclAsType(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
+	 * oclAsType(org.dresdenocl.essentialocl.standardlibrary.OclType)
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends OclAny> T oclAsType(OclType<T> type) {
@@ -101,8 +101,8 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * oclIsKindOf(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
+	 * oclIsKindOf(org.dresdenocl.essentialocl.standardlibrary.OclType)
 	 */
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
 	
@@ -114,7 +114,7 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
 	 * oclIsInvalid()
 	 */
 	public OclBoolean oclIsInvalid() {
@@ -125,8 +125,8 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
-	 * oclIsTypeOf(tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType)
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
+	 * oclIsTypeOf(org.dresdenocl.essentialocl.standardlibrary.OclType)
 	 */
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
 
@@ -138,7 +138,7 @@ public class JavaOclInvalid extends JavaOclAny implements OclInvalid {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#
+	 * org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#
 	 * oclIsUndefined()
 	 */
 	public OclBoolean oclIsUndefined() {

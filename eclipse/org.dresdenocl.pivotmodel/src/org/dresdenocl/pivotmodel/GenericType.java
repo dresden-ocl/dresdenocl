@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ import java.util.List;
  * <em><b>Generic Type</b></em>'. <!-- end-user-doc -->
  * 
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericType()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getGenericType()
  * @model abstract="true"
  * @generated
  */
@@ -48,11 +48,11 @@ public interface GenericType extends NamedElement {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean" required="true"
 	 *        parametersDataType=
-	 *        "tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>"
+	 *        "org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>"
 	 *        parametersRequired="true" parametersMany="false" typesDataType=
-	 *        "tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>"
+	 *        "org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>"
 	 *        typesRequired="true" typesMany="false"
 	 * @generated
 	 */
@@ -62,11 +62,11 @@ public interface GenericType extends NamedElement {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean"
 	 *        parametersDataType=
-	 *        "tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>"
+	 *        "org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>"
 	 *        parametersRequired="true" parametersMany="false" typesDataType=
-	 *        "tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>"
+	 *        "org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>"
 	 *        typesRequired="true" typesMany="false"
 	 * @generated
 	 */
@@ -81,7 +81,7 @@ public interface GenericType extends NamedElement {
 	 * </p>
 	 * <!-- end-model-doc -->
 	 * 
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean"
 	 * @generated
 	 */
 	boolean isConformant(Type type);
@@ -89,7 +89,7 @@ public interface GenericType extends NamedElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	GenericType clone();
 

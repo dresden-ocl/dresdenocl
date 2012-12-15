@@ -2,7 +2,7 @@
  * Created on 26.01.2006
  *
  */
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl;
+package org.dresdenocl.tools.transformation.pivot2sql.impl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,14 +17,14 @@ import orgomg.cwm.resource.relational.Schema;
 import orgomg.cwm.resource.relational.Table;
 import orgomg.cwm.resource.relational.View;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.impl.TemplateHelper;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.M2XTransformation;
-import tudresden.ocl20.pivot.tools.transformation.exception.TransformationException;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.Pivot2SqlPlugin;
-import tudresden.ocl20.pivot.tools.transformation.pivot2sql.util.CwmModelAnalyser;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.impl.TemplateHelper;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.M2XTransformation;
+import org.dresdenocl.tools.transformation.exception.TransformationException;
+import org.dresdenocl.tools.transformation.pivot2sql.Pivot2SqlPlugin;
+import org.dresdenocl.tools.transformation.pivot2sql.util.CwmModelAnalyser;
 
 /**
  * The class Cwm2DdlImpl is a realisation of the DDL Codegeneration for a

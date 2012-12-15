@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.test;
+package org.dresdenocl.examples.royalsandloyals.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

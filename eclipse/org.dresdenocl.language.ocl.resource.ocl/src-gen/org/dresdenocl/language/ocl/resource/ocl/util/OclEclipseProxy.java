@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
+package org.dresdenocl.language.ocl.resource.ocl.util;
 
 /**
  * A utility class that bundles all dependencies to the Eclipse platform. Clients
@@ -24,17 +24,17 @@ public class OclEclipseProxy {
 		if (org.eclipse.core.runtime.Platform.isRunning()) {
 			// find default load option providers
 			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
-			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
+			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.EP_DEFAULT_LOAD_OPTIONS_ID);
 			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
 				try {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider provider = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider) element.createExecutableExtension("class");
+					org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider provider = (org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider) element.createExecutableExtension("class");
 					final java.util.Map<?, ?> options = provider.getOptions();
 					final java.util.Collection<?> keys = options.keySet();
 					for (Object key : keys) {
-						tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMapUtil.putAndMergeKeys(optionsMap, key, options.get(key));
+						org.dresdenocl.language.ocl.resource.ocl.util.OclMapUtil.putAndMergeKeys(optionsMap, key, options.get(key));
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while getting default options.", ce);
+					new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while getting default options.", ce);
 				}
 			}
 		}
@@ -48,7 +48,7 @@ public class OclEclipseProxy {
 	public void getResourceFactoryExtensions(java.util.Map<String, org.eclipse.emf.ecore.resource.Resource.Factory> factories) {
 		if (org.eclipse.core.runtime.Platform.isRunning()) {
 			org.eclipse.core.runtime.IExtensionRegistry extensionRegistry = org.eclipse.core.runtime.Platform.getExtensionRegistry();
-			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.EP_ADDITIONAL_EXTENSION_PARSER_ID);
+			org.eclipse.core.runtime.IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.EP_ADDITIONAL_EXTENSION_PARSER_ID);
 			for (org.eclipse.core.runtime.IConfigurationElement element : configurationElements) {
 				try {
 					String type = element.getAttribute("type");
@@ -71,7 +71,7 @@ public class OclEclipseProxy {
 						factories.put(type, factory);
 					}
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while getting default options.", ce);
+					new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while getting default options.", ce);
 				}
 			}
 		}
@@ -80,10 +80,10 @@ public class OclEclipseProxy {
 	/**
 	 * Gets the resource that is contained in the give file.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.core.resources.IFile file) {
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource getResource(org.eclipse.core.resources.IFile file) {
 		org.eclipse.emf.ecore.resource.ResourceSet rs = new org.eclipse.emf.ecore.resource.impl.ResourceSetImpl();
 		org.eclipse.emf.ecore.resource.Resource resource = rs.getResource(org.eclipse.emf.common.util.URI.createPlatformResourceURI(file.getFullPath().toString(),true), true);
-		return (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) resource;
+		return (org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource) resource;
 	}
 	
 	/**
@@ -91,11 +91,11 @@ public class OclEclipseProxy {
 	 * work if OSGi is not running.
 	 */
 	@SuppressWarnings("restriction")	
-	public void checkEMFValidationConstraints(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.emf.ecore.EObject root) {
+	public void checkEMFValidationConstraints(org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.emf.ecore.EObject root) {
 		// The EMF validation framework code throws a NPE if the validation plug-in is not
 		// loaded. This is a bug, which is fixed in the Helios release. Nonetheless, we
 		// need to catch the exception here.
-		if (new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().isEclipsePlatformRunning()) {
+		if (new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().isEclipsePlatformRunning()) {
 			// The EMF validation framework code throws a NPE if the validation plug-in is not
 			// loaded. This is a workaround for bug 322079.
 			if (org.eclipse.emf.validation.internal.EMFModelValidationPlugin.getPlugin() != null) {
@@ -106,13 +106,13 @@ public class OclEclipseProxy {
 					org.eclipse.core.runtime.IStatus status = validator.validate(root);
 					addStatus(status, resource, root);
 				} catch (Throwable t) {
-					new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while checking contraints provided by EMF validator classes.", t);
+					new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while checking contraints provided by EMF validator classes.", t);
 				}
 			}
 		}
 	}
 	
-	public void addStatus(org.eclipse.core.runtime.IStatus status, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.emf.ecore.EObject root) {
+	public void addStatus(org.eclipse.core.runtime.IStatus status, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource, org.eclipse.emf.ecore.EObject root) {
 		java.util.List<org.eclipse.emf.ecore.EObject> causes = new java.util.ArrayList<org.eclipse.emf.ecore.EObject>();
 		causes.add(root);
 		if (status instanceof org.eclipse.emf.validation.model.ConstraintStatus) {
@@ -127,12 +127,12 @@ public class OclEclipseProxy {
 		if (!status.isMultiStatus() || !hasChildren) {
 			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.ERROR) {
 				for (org.eclipse.emf.ecore.EObject cause : causes) {
-					resource.addError(status.getMessage(), tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ANALYSIS_PROBLEM, cause);
+					resource.addError(status.getMessage(), org.dresdenocl.language.ocl.resource.ocl.OclEProblemType.ANALYSIS_PROBLEM, cause);
 				}
 			}
 			if (status.getSeverity() == org.eclipse.core.runtime.IStatus.WARNING) {
 				for (org.eclipse.emf.ecore.EObject cause : causes) {
-					resource.addWarning(status.getMessage(), tudresden.ocl20.pivot.language.ocl.resource.ocl.OclEProblemType.ANALYSIS_PROBLEM, cause);
+					resource.addWarning(status.getMessage(), org.dresdenocl.language.ocl.resource.ocl.OclEProblemType.ANALYSIS_PROBLEM, cause);
 				}
 			}
 		}
@@ -147,7 +147,7 @@ public class OclEclipseProxy {
 	 */
 	public String getPlatformResourceEncoding(org.eclipse.emf.common.util.URI uri) {
 		// We can't determine the encoding if the platform is not running.
-		if (!new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().isEclipsePlatformRunning()) {
+		if (!new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().isEclipsePlatformRunning()) {
 			return null;
 		}
 		if (uri != null && uri.isPlatform()) {
@@ -158,7 +158,7 @@ public class OclEclipseProxy {
 				try {
 					return file.getCharset();
 				} catch (org.eclipse.core.runtime.CoreException ce) {
-					new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logWarning("Could not determine encoding of platform resource: " + uri.toString(), ce);
+					new org.dresdenocl.language.ocl.resource.ocl.util.OclRuntimeUtil().logWarning("Could not determine encoding of platform resource: " + uri.toString(), ce);
 				}
 			}
 		}

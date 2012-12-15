@@ -30,7 +30,7 @@
  * 
  * $Id$
  */
-package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
+package org.dresdenocl.metamodels.ecore.internal.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +41,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
+import org.dresdenocl.metamodels.ecore.EcoreMetamodelPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractType;
 
 /**
  * <p>
@@ -111,7 +111,7 @@ public class EcoreType extends AbstractType implements Type {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getName()
 	 */
 	@Override
 	public String getName() {
@@ -121,7 +121,7 @@ public class EcoreType extends AbstractType implements Type {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getNamespace()
 	 */
 	@Override
 	public Namespace getNamespace() {
@@ -133,7 +133,7 @@ public class EcoreType extends AbstractType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl ()
+	 * org.dresdenocl.pivotmodel.base.AbstractType#getOwnedOperationImpl ()
 	 */
 	@Override
 	protected List<Operation> getOwnedOperationImpl() {
@@ -152,7 +152,7 @@ public class EcoreType extends AbstractType implements Type {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
+	 * org.dresdenocl.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
 	 */
 	@Override
 	protected List<Property> getOwnedPropertyImpl() {
@@ -172,7 +172,7 @@ public class EcoreType extends AbstractType implements Type {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getSuperTypeImpl()
 	 */
 	@Override
 	protected List<Type> getSuperTypeImpl() {
@@ -189,7 +189,7 @@ public class EcoreType extends AbstractType implements Type {
 	}
 
 	/* (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getIDProperties()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#getIDProperties()
 	 */
 	@Override
 	public List<Property> getIDProperties() {

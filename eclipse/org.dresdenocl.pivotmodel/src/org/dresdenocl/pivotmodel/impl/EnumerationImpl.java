@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -43,10 +43,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -55,7 +55,7 @@ import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
  * The following features are implemented:
  * <ul>
  * <li>
- * {@link tudresden.ocl20.pivot.pivotmodel.impl.EnumerationImpl#getOwnedLiteral
+ * {@link org.dresdenocl.pivotmodel.impl.EnumerationImpl#getOwnedLiteral
  * <em>Owned Literal</em>}</li>
  * </ul>
  * </p>
@@ -184,7 +184,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	 * Overridden to additionally clone the {@link #getOwnedLiteral() enumeration
 	 * literals} of this <code>Enumeration</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#clone()
 	 */
 	@Override
 	public Enumeration clone() {
@@ -195,7 +195,7 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	/**
 	 * Helper method that initializes a cloned <code>Enumeration</code>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#initialize(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypeImpl#initialize(org.dresdenocl.pivotmodel.Type)
 	 */
 	protected Enumeration initialize(Enumeration clone) {
 

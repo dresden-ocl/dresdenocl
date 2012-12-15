@@ -1,4 +1,4 @@
-package tudresden.attributegrammar.integration.kiama
+package org.dresdenocl.attributegrammar.integration.kiama
 
 import java.lang.reflect.{ Proxy, InvocationHandler, Method }
 

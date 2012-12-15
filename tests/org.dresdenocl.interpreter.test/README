@@ -9,7 +9,7 @@ manual, located in the 'doc' directory in the SVN trunk or your
 toolkit's release (see chapter 'OCL Constraint Interpretation').
 
 * To run all test suites of this plugin run the class
-  tudresden.ocl20.pivot.interpreter.test.AllOclInterpreterTests 
+  org.dresdenocl.interpreter.test.AllOclInterpreterTests 
   as a Plug-in test suite.
   
 The sense of some Standard Library tests is documented in the spread sheet

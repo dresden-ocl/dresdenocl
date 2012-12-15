@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.test;
+package org.dresdenocl.modelinstancetype.java.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -31,7 +31,7 @@ public class JavaModelInstanceTypeTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.modelinstancetype.java.test";
+			"org.dresdenocl.modelinstancetype.java.test";
 
 	/** The shared instance. */
 	private static JavaModelInstanceTypeTestPlugin plugin;

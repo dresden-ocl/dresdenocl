@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml;
+package org.dresdenocl.examples.pml;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -17,18 +17,18 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getId <em>Id</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getVersion <em>Version</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getProvider <em>Provider</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getFeature <em>Feature</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getId <em>Id</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getProvider <em>Provider</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getExtensionPoints <em>Extension Points</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getExtensions <em>Extensions</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.Plugin#getActivator <em>Activator</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin()
+ * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin()
  * @model
  * @generated
  */
@@ -43,14 +43,14 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Id()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Id()
 	 * @model
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Plugin#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -69,14 +69,14 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Name()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Plugin#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -95,14 +95,14 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Version</em>' attribute.
 	 * @see #setVersion(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Version()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Version()
 	 * @model
 	 * @generated
 	 */
 	String getVersion();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getVersion <em>Version</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Plugin#getVersion <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Version</em>' attribute.
@@ -121,14 +121,14 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Provider</em>' attribute.
 	 * @see #setProvider(String)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Provider()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Provider()
 	 * @model
 	 * @generated
 	 */
 	String getProvider();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getProvider <em>Provider</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Plugin#getProvider <em>Provider</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Provider</em>' attribute.
@@ -139,7 +139,7 @@ public interface Plugin extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Feature</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.Feature#getPlugins <em>Plugins</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.examples.pml.Feature#getPlugins <em>Plugins</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Feature</em>' container reference isn't clear,
@@ -148,15 +148,15 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Feature</em>' container reference.
 	 * @see #setFeature(Feature)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Feature()
-	 * @see tudresden.ocl20.pivot.examples.pml.Feature#getPlugins
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Feature()
+	 * @see org.dresdenocl.examples.pml.Feature#getPlugins
 	 * @model opposite="plugins" transient="false"
 	 * @generated
 	 */
 	Feature getFeature();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getFeature <em>Feature</em>}' container reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Plugin#getFeature <em>Feature</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Feature</em>' container reference.
@@ -167,8 +167,8 @@ public interface Plugin extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Extension Points</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint}.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}'.
+	 * The list contents are of type {@link org.dresdenocl.examples.pml.ExtensionPoint}.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.examples.pml.ExtensionPoint#getPlugin <em>Plugin</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Extension Points</em>' containment reference list isn't clear,
@@ -176,8 +176,8 @@ public interface Plugin extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extension Points</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_ExtensionPoints()
-	 * @see tudresden.ocl20.pivot.examples.pml.ExtensionPoint#getPlugin
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_ExtensionPoints()
+	 * @see org.dresdenocl.examples.pml.ExtensionPoint#getPlugin
 	 * @model opposite="plugin" containment="true"
 	 * @generated
 	 */
@@ -185,7 +185,7 @@ public interface Plugin extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Extensions</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.examples.pml.Extension}.
+	 * The list contents are of type {@link org.dresdenocl.examples.pml.Extension}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Extensions</em>' containment reference list isn't clear,
@@ -193,7 +193,7 @@ public interface Plugin extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Extensions</em>' containment reference list.
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Extensions()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Extensions()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -209,14 +209,14 @@ public interface Plugin extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Activator</em>' reference.
 	 * @see #setActivator(JavaType)
-	 * @see tudresden.ocl20.pivot.examples.pml.PmlPackage#getPlugin_Activator()
+	 * @see org.dresdenocl.examples.pml.PmlPackage#getPlugin_Activator()
 	 * @model required="true"
 	 * @generated
 	 */
 	JavaType getActivator();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.examples.pml.Plugin#getActivator <em>Activator</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.examples.pml.Plugin#getActivator <em>Activator</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Activator</em>' reference.

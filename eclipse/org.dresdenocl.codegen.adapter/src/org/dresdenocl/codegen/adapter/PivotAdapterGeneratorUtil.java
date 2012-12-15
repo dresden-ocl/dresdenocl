@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.codegen.adapter;
+package org.dresdenocl.codegen.adapter;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -520,7 +520,7 @@ public class PivotAdapterGeneratorUtil {
 	 */
 	public static String getProjectName(GenModel genModel) {
 
-		return "tudresden.ocl20.pivot.metamodels."
+		return "org.dresdenocl.metamodels."
 				+ genModel.getModelName().toLowerCase();
 	}
 

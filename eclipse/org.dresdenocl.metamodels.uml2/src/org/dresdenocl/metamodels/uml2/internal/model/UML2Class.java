@@ -11,7 +11,7 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +21,12 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.Stereotype;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractType;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.base.AbstractType;
 
 /**
  * <p>
@@ -91,7 +91,7 @@ public class UML2Class extends AbstractType implements Type {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -102,7 +102,7 @@ public class UML2Class extends AbstractType implements Type {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getNamespace()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getNamespace()
 	 * 
 	 * @generated NOT
 	 */
@@ -113,7 +113,7 @@ public class UML2Class extends AbstractType implements Type {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getOwnedPropertyImpl()
 	 * 
 	 * @generated NOT
 	 */
@@ -134,7 +134,7 @@ public class UML2Class extends AbstractType implements Type {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getOwnedOperationImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getOwnedOperationImpl()
 	 * 
 	 * @generated NOT
 	 */
@@ -155,7 +155,7 @@ public class UML2Class extends AbstractType implements Type {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractType#getSuperTypeImpl()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractType#getSuperTypeImpl()
 	 * 
 	 * @generated NOT
 	 */

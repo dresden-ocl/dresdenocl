@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel;
+package org.dresdenocl.pivotmodel;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -39,12 +39,12 @@ package tudresden.ocl20.pivot.pivotmodel;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+ * <li>{@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
  * <em>Generic Element</em>}</li>
  * </ul>
  * </p>
  * 
- * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeParameter()
+ * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeParameter()
  * @model
  * @generated
  */
@@ -53,7 +53,7 @@ public interface TypeParameter extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Generic Element</b></em>' container
 	 * reference. It is bidirectional and its opposite is '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
+	 * {@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
 	 * <em>Owned Type Parameter</em>}'. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Generic Element</em>' container reference isn't
@@ -63,8 +63,8 @@ public interface TypeParameter extends NamedElement {
 	 * 
 	 * @return the value of the '<em>Generic Element</em>' container reference.
 	 * @see #setGenericElement(GenericElement)
-	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeParameter_GenericElement()
-	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeParameter_GenericElement()
+	 * @see org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
 	 * @model opposite="ownedTypeParameter" resolveProxies="false"
 	 *        transient="false"
 	 * @generated
@@ -73,7 +73,7 @@ public interface TypeParameter extends NamedElement {
 
 	/**
 	 * Sets the value of the '
-	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+	 * {@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
 	 * <em>Generic Element</em>}' container reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -88,7 +88,7 @@ public interface TypeParameter extends NamedElement {
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.NamedElement#clone()
+	 * @see org.dresdenocl.pivotmodel.NamedElement#clone()
 	 */
 	TypeParameter clone();
 

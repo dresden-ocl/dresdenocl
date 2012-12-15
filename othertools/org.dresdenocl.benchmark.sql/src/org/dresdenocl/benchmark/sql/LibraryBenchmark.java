@@ -1,14 +1,14 @@
-package tudresden.ocl20.benchmark.sql;
+package org.dresdenocl.benchmark.sql;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import tudresden.ocl20.benchmark.sql.library.EOSLibraryPerformer;
-import tudresden.ocl20.benchmark.sql.library.ILibraryPerformer;
-import tudresden.ocl20.benchmark.sql.library.OCL2SqlLibraryPerformer;
-import tudresden.ocl20.benchmark.sql.util.IBenchmark;
+import org.dresdenocl.benchmark.sql.library.EOSLibraryPerformer;
+import org.dresdenocl.benchmark.sql.library.ILibraryPerformer;
+import org.dresdenocl.benchmark.sql.library.OCL2SqlLibraryPerformer;
+import org.dresdenocl.benchmark.sql.util.IBenchmark;
 
 public class LibraryBenchmark extends Benchmark<ILibraryPerformer> {
 

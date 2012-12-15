@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A basic implementation of the ILocationMap interface. Instances store
@@ -20,7 +20,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
  * Start:  The lowest of all sources is used for target<br>
  * End:    The highest of all sources is used for target<br>
  */
-public class OclLocationMap implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap {
+public class OclLocationMap implements org.dresdenocl.language.ocl.resource.ocl.IOclLocationMap {
 	
 	/**
 	 * A basic interface that can be implemented to select EObjects based of their

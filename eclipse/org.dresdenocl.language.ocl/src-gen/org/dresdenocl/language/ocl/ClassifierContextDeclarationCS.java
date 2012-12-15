@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getInvariantsAndDefinitions <em>Invariants And Definitions</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getInvariantsAndDefinitions <em>Invariants And Definitions</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getClassifierContextDeclarationCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getClassifierContextDeclarationCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface ClassifierContextDeclarationCS extends ContextDeclarationCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
    * @see #setTypeName(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getClassifierContextDeclarationCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getClassifierContextDeclarationCS_TypeName()
    * @model containment="true" required="true"
    * @generated
    */
 	TypeCS getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.ClassifierContextDeclarationCS#getTypeName <em>Type Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' containment reference.
@@ -54,7 +54,7 @@ public interface ClassifierContextDeclarationCS extends ContextDeclarationCS {
 
 	/**
    * Returns the value of the '<em><b>Invariants And Definitions</b></em>' containment reference list.
-   * The list contents are of type {@link tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS}.
+   * The list contents are of type {@link org.dresdenocl.language.ocl.InvariantOrDefinitionCS}.
    * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Invariants And Definitions</em>' containment reference list isn't clear,
@@ -62,7 +62,7 @@ public interface ClassifierContextDeclarationCS extends ContextDeclarationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Invariants And Definitions</em>' containment reference list.
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getClassifierContextDeclarationCS_InvariantsAndDefinitions()
+   * @see org.dresdenocl.language.ocl.OclPackage#getClassifierContextDeclarationCS_InvariantsAndDefinitions()
    * @model containment="true" required="true"
    * @generated
    */

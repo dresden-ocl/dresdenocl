@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.all"
+      id="org.dresdenocl.feature.all"
       label="All Dresden OCL Features"
       version="1.0.0.qualifier"
       provider-name="TU Dresden, Software Technology  Group">
@@ -182,47 +182,47 @@ Library.
    </license>
 
    <includes
-         id="tudresden.ocl20.feature.codegen"
+         id="org.dresdenocl.feature.codegen"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.core"
+         id="org.dresdenocl.feature.core"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.examples"
+         id="org.dresdenocl.feature.examples"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.examples.ocl22java"
+         id="org.dresdenocl.feature.examples.ocl22java"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.facade"
+         id="org.dresdenocl.feature.facade"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.interpreter"
+         id="org.dresdenocl.feature.interpreter"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.metamodels"
+         id="org.dresdenocl.feature.metamodels"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.modelinstances"
+         id="org.dresdenocl.feature.modelinstances"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.ocl2java"
+         id="org.dresdenocl.feature.ocl2java"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.ocl2sql"
+         id="org.dresdenocl.feature.ocl2sql"
          version="0.0.0"/>
 
    <includes
-         id="tudresden.ocl20.feature.parser"
+         id="org.dresdenocl.feature.parser"
          version="0.0.0"/>
 
    <includes

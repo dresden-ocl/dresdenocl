@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.ui.internal.views;
+package org.dresdenocl.modelbus.ui.internal.views;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,22 +49,22 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.essentialocl.types.provider.TypesItemProviderAdapterFactory;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelListener;
-import tudresden.ocl20.pivot.model.IModelRegistry;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.event.IModelRegistryListener;
-import tudresden.ocl20.pivot.model.event.ModelRegistryEvent;
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
-import tudresden.ocl20.pivot.modelbus.ui.internal.views.util.ModelSelectionAction;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
+import org.dresdenocl.essentialocl.expressions.provider.ExpressionsItemProviderAdapterFactory;
+import org.dresdenocl.essentialocl.types.provider.TypesItemProviderAdapterFactory;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelListener;
+import org.dresdenocl.model.IModelRegistry;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.event.IModelRegistryListener;
+import org.dresdenocl.model.event.ModelRegistryEvent;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ui.ModelBusUIPlugin;
+import org.dresdenocl.modelbus.ui.internal.ModelBusUIMessages;
+import org.dresdenocl.modelbus.ui.internal.views.util.ModelSelectionAction;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.pivotmodel.provider.PivotModelItemProviderAdapterFactory;
 
 /**
  * <p>
@@ -223,9 +223,9 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * @seeorg.dresdenocl.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent e) {
 
@@ -286,8 +286,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * org.dresdenocl.modelbus.event.IModelRegistryListener#modelAdded
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelAdded(ModelRegistryEvent e) {
 
@@ -312,7 +312,7 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.model.IModelListener#modelChanged(tudresden
+	 * org.dresdenocl.modelbus.model.IModelListener#modelChanged(tudresden
 	 * .ocl20.pivot.modelbus.model.IModel)
 	 */
 	public void modelChanged(IModel model) {
@@ -340,8 +340,8 @@ public class ModelsView extends ViewPart implements IModelRegistryListener,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelRemoved
-	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
+	 * org.dresdenocl.modelbus.event.IModelRegistryListener#modelRemoved
+	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void modelRemoved(ModelRegistryEvent event) {
 

@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 139.
 -- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 context Customer
 def: initial: String = name.substring(1, 1)

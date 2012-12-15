@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * The IgnoredWordsFilter can be customized to add additional words that must not
@@ -18,7 +18,7 @@ public class OclIgnoredWordsFilter {
 	 */
 	public boolean ignoreWord(String word) {
 		// By default we ignore all keywords that are defined in the syntax
-		return tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords().contains(word);
+		return org.dresdenocl.language.ocl.resource.ocl.grammar.OclGrammarInformationProvider.INSTANCE.getKeywords().contains(word);
 	}
 	
 }

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * This interface provides information about a generated EMFText text resource
@@ -33,7 +33,7 @@ public interface IOclMetaInformation {
 	 * 
 	 * @return a new instance of the lexer class.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextScanner createLexer();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextScanner createLexer();
 	
 	/**
 	 * Returns an instance of the parser. This factory method is needed, because we
@@ -48,7 +48,7 @@ public interface IOclMetaInformation {
 	 * 
 	 * @return a new instance of the parser class
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextParser createParser(java.io.InputStream inputStream, String encoding);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextParser createParser(java.io.InputStream inputStream, String encoding);
 	
 	/**
 	 * Returns a new instance of the printer.
@@ -58,7 +58,7 @@ public interface IOclMetaInformation {
 	 * 
 	 * @return a new instance of the printer class
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter createPrinter(java.io.OutputStream outputStream, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter createPrinter(java.io.OutputStream outputStream, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource resource);
 	
 	/**
 	 * Returns all meta classes for which syntax was defined. This information is used
@@ -69,12 +69,12 @@ public interface IOclMetaInformation {
 	/**
 	 * Returns an instance of the reference resolver switch class.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolverSwitch getReferenceResolverSwitch();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolverSwitch getReferenceResolverSwitch();
 	
 	/**
 	 * Returns an instance of the token resolver factory.
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory getTokenResolverFactory();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory getTokenResolverFactory();
 	
 	/**
 	 * Returns a list of the names of all tokens defined in the syntax.
@@ -89,12 +89,12 @@ public interface IOclMetaInformation {
 	 * 
 	 * @return a style object or null if no default style is set
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(String tokenName);
+	public org.dresdenocl.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(String tokenName);
 	
 	/**
 	 * Returns the default bracket pairs.
 	 */
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs();
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.IOclBracketPair> getBracketPairs();
 	
 	/**
 	 * Returns all classes for which folding must be enabled in the editor.

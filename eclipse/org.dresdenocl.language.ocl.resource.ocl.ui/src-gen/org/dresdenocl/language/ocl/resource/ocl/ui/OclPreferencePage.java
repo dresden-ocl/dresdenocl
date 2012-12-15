@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 /**
  * The root preference page
@@ -12,7 +12,7 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 public class OclPreferencePage extends org.eclipse.jface.preference.PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {
 	
 	public void init(org.eclipse.ui.IWorkbench workbench) {
-		setPreferenceStore(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
 		setDescription("Ocl Text Editor Preferences");
 	}
 	

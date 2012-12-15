@@ -1,6 +1,6 @@
 -- All constraints were taken and adapted from [1].
 -- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 -- Body Expression 1:
 -- The expression type must match the operation return type in the context. Error occured at line 7 and column 1. The error occured at the token body.
@@ -87,7 +87,7 @@ context LoyaltyProgram
 inv knownServiceLevel: levels->includes(membership.currentLevel)
 
 -- Invariant 4:
--- Exception during parsing of given OCL constraints. Unable to find operation 'includes' with argument types [UML2Class[name=CustomerCard,namespace=UML2Package[name=royalsandloyals]]] in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard'.
+-- Exception during parsing of given OCL constraints. Unable to find operation 'includes' with argument types [UML2Class[name=CustomerCard,namespace=UML2Package[name=royalsandloyals]]] in type 'root::org::dresdenocl::examples::royalsandloyals::CustomerCard'.
 --context Membership
 --inv correctCard: program.participants.cards->includes(self.card)
 
@@ -197,7 +197,7 @@ context Transaction::getProgram(): LoyaltyProgram
 post: not result.oclIsNew()
 
 -- Postcondition 9:
--- Unable to find property 'membership' in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard' An error occured while building an property call expression. Error occured at line 6 and column 26. The error occured at the token membership.
+-- Unable to find property 'membership' in type 'root::org::dresdenocl::examples::royalsandloyals::CustomerCard' An error occured while building an property call expression. Error occured at line 6 and column 26. The error occured at the token membership.
 --context Transaction::getProgram(): LoyaltyProgram
 --post: result = self.card.membership.program
 

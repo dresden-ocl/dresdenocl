@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * Implementors of this interface can provide InputStreamProcessors. These
@@ -21,5 +21,5 @@ public interface IOclInputStreamProcessorProvider {
 	 * 
 	 * @return a processor that pre-processes the input stream
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclInputStreamProcessor getInputStreamProcessor(java.io.InputStream inputStream);
+	public org.dresdenocl.language.ocl.resource.ocl.mopp.OclInputStreamProcessor getInputStreamProcessor(java.io.InputStream inputStream);
 }

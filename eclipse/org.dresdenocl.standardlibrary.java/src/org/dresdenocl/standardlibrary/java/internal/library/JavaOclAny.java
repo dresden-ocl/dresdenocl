@@ -28,7 +28,7 @@
  * http://st.inf.tu-dresden.de/ocl                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  */
-package tudresden.ocl20.pivot.standardlibrary.java.internal.library;
+package org.dresdenocl.standardlibrary.java.internal.library;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -39,18 +39,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclBoolean;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclSet;
-import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceInvalid;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.standardlibrary.java.factory.JavaStandardLibraryFactory;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
+import org.dresdenocl.essentialocl.standardlibrary.OclSet;
+import org.dresdenocl.essentialocl.standardlibrary.OclType;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceInvalid;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceVoid;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Type;
+import org.dresdenocl.standardlibrary.java.factory.JavaStandardLibraryFactory;
 
 /**
  * <p>
@@ -192,7 +192,7 @@ public abstract class JavaOclAny implements OclAny {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#
+	 * @seeorg.dresdenocl.essentialocl.standardlibrary.OclAny#
 	 * getModelInstanceElement()
 	 */
 	public IModelInstanceElement getModelInstanceElement() {
@@ -204,7 +204,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#getUndefinedreason
+	 * org.dresdenocl.essentialocl.standardlibrary.OclRoot#getUndefinedreason
 	 * ()
 	 */
 	public String getUndefinedReason() {
@@ -216,9 +216,9 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#invokeOperation
-	 * (tudresden.ocl20.pivot.pivotmodel.Operation,
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny[])
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#invokeOperation
+	 * (org.dresdenocl.pivotmodel.Operation,
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny[])
 	 */
 	@SuppressWarnings("unchecked")
 	public OclAny invokeOperation(Operation operation, OclAny... args) {
@@ -295,8 +295,8 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isNotEqualTo
-	 * (tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot)
+	 * org.dresdenocl.essentialocl.standardlibrary.OclRoot#isNotEqualTo
+	 * (org.dresdenocl.essentialocl.standardlibrary.OclRoot)
 	 */
 	public OclBoolean isNotEqualTo(OclAny that) {
 
@@ -307,7 +307,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#isOclUndefined
+	 * org.dresdenocl.essentialocl.standardlibrary.OclRoot#isOclUndefined
 	 * ()
 	 */
 	public OclBoolean oclIsUndefined() {
@@ -328,7 +328,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclRoot#oclIsInvalid()
+	 * org.dresdenocl.essentialocl.standardlibrary.OclRoot#oclIsInvalid()
 	 */
 	public OclBoolean oclIsInvalid() {
 
@@ -339,7 +339,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclAsType(tudresden
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclAsType(tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
 	@SuppressWarnings("unchecked")
@@ -375,7 +375,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsKindOf
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclIsKindOf
 	 * (tudresden .ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
 	public <T extends OclAny> OclBoolean oclIsKindOf(OclType<T> typespec) {
@@ -411,7 +411,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclIsTypeOf
+	 * org.dresdenocl.essentialocl.standardlibrary.OclAny#oclIsTypeOf
 	 * (tudresden .ocl20.pivot.essentialocl.standardlibrary.OclType)
 	 */
 	public <T extends OclAny> OclBoolean oclIsTypeOf(OclType<T> typespec) {
@@ -439,7 +439,7 @@ public abstract class JavaOclAny implements OclAny {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny#oclType()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny#oclType()
 	 */
 	public <T extends OclAny> OclType<T> oclType() {
 
@@ -465,7 +465,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * such as {@link Collection#contains(Object)}!</strong>
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.standardlibrary.java.internal.library.JavaOclAny#equals(java.lang.Object)
+	 * @see org.dresdenocl.standardlibrary.java.internal.library.JavaOclAny#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object other) {
@@ -802,7 +802,7 @@ public abstract class JavaOclAny implements OclAny {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstance#getOperationName(java.lang
+	 * org.dresdenocl.modelbus.IModelInstance#getOperationName(java.lang
 	 * .String, int)
 	 */
 	protected String getOperationName(String name, int operatorCount) {

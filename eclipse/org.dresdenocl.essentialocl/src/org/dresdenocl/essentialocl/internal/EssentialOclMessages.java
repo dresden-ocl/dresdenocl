@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.internal;
+package org.dresdenocl.essentialocl.internal;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -47,7 +47,7 @@ public class EssentialOclMessages extends NLS {
 
 	/** The location of the messages file. */
 	private static final String MESSAGES_FILE_LOCATION =
-			"tudresden.ocl20.pivot.essentialocl.standardlibrary.internal.messages"; //$NON-NLS-1$
+			"org.dresdenocl.essentialocl.standardlibrary.internal.messages"; //$NON-NLS-1$
 
 	static {
 		/* Initialize resource bundle. */

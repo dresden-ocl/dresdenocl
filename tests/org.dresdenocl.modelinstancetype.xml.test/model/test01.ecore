@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="package1">
+<ecore:EPackage xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:version="2.0" name="package1">
   <eClassifiers xsi:type="ecore:EClass" name="Container">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="booleanValues" eType="#//BooleanValue"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="integerValues" eType="#//IntegerValue"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="realValues" eType="#//RealValue"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stringValues" eType="#//StringValue"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationValues" eType="#//EnumerationValue"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booleanValues" eType="#//BooleanValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="integerValues" eType="#//IntegerValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realValues" eType="#//RealValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stringValues" eType="#//StringValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationValues" eType="#//EnumerationValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

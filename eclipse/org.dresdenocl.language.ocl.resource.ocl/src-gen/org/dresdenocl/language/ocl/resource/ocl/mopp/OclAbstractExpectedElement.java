@@ -4,17 +4,17 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * Abstract super class for all expected elements. Provides methods to add
  * followers.
  */
-public abstract class OclAbstractExpectedElement implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement {
+public abstract class OclAbstractExpectedElement implements org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement {
 	
 	private org.eclipse.emf.ecore.EClass ruleMetaclass;
 	
-	private java.util.Set<tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclPair<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> followers = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclPair<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[]>>();
+	private java.util.Set<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> followers = new java.util.LinkedHashSet<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>>();
 	
 	public OclAbstractExpectedElement(org.eclipse.emf.ecore.EClass ruleMetaclass) {
 		super();
@@ -25,11 +25,11 @@ public abstract class OclAbstractExpectedElement implements tudresden.ocl20.pivo
 		return ruleMetaclass;
 	}
 	
-	public void addFollower(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement follower, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[] path) {
-		followers.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclPair<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[]>(follower, path));
+	public void addFollower(org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement follower, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[] path) {
+		followers.add(new org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>(follower, path));
 	}
 	
-	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclPair<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclExpectedElement, tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> getFollowers() {
+	public java.util.Collection<org.dresdenocl.language.ocl.resource.ocl.util.OclPair<org.dresdenocl.language.ocl.resource.ocl.IOclExpectedElement, org.dresdenocl.language.ocl.resource.ocl.mopp.OclContainedFeature[]>> getFollowers() {
 		return followers;
 	}
 	

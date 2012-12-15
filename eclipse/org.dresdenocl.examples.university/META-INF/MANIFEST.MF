@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: University Example
-Bundle-SymbolicName: tudresden.ocl20.pivot.examples.university;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.examples.university;singleton:=true
 Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden, Software Technology Group

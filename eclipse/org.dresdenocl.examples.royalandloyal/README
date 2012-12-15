@@ -28,7 +28,7 @@ Provided Model Instance
 The model instance provided by this exists as a Java Model Instance. 
 
 * To import the Java Model Instance use the file 
-  /bin/tudresden/ocl20/pivot/examples/royalsandloyals/instance/
+  /bin/org/dresdenocl/examples/royalsandloyals/instance/
    ModelInstanceProvider.class
 
 

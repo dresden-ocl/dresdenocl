@@ -11,7 +11,7 @@
  * the GNU Lesser General Public License along with Dresden OCL2 for Eclipse. If
  * not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.java;
+package org.dresdenocl.metamodels.java;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -20,12 +20,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
-import tudresden.ocl20.pivot.metamodels.java.internal.model.JavaModel;
-import tudresden.ocl20.pivot.metamodels.java.internal.provider.JavaModelProvider;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.logging.LoggingPlugin;
+import org.dresdenocl.metamodels.java.internal.model.JavaModel;
+import org.dresdenocl.metamodels.java.internal.provider.JavaModelProvider;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
 
 /**
  * <p>
@@ -37,7 +37,7 @@ import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 public class JavaMetaModelPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String ID = "tudresden.ocl20.pivot.metamodels.java"; //$NON-NLS-1$
+	public static final String ID = "org.dresdenocl.metamodels.java"; //$NON-NLS-1$
 
 	/**
 	 * An array containing all Java {@link Class}es that can be mapped to the
@@ -131,7 +131,7 @@ public class JavaMetaModelPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

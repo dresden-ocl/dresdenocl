@@ -4,16 +4,16 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar;
+package org.dresdenocl.language.ocl.resource.ocl.grammar;
 
-public class OclSequence extends tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement {
+public class OclSequence extends org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement {
 	
-	public OclSequence(tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclCardinality cardinality, tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement... elements) {
+	public OclSequence(org.dresdenocl.language.ocl.resource.ocl.grammar.OclCardinality cardinality, org.dresdenocl.language.ocl.resource.ocl.grammar.OclSyntaxElement... elements) {
 		super(cardinality, elements);
 	}
 	
 	public String toString() {
-		return tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStringUtil.explode(getChildren(), " ");
+		return org.dresdenocl.language.ocl.resource.ocl.util.OclStringUtil.explode(getChildren(), " ");
 	}
 	
 }

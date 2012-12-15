@@ -16,15 +16,15 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test;
+package org.dresdenocl.interpreter.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.interpreter.test.constraintkinds.AllConstraintKindTests;
-import tudresden.ocl20.pivot.interpreter.test.royalsandloyals.TestInterpretation;
-import tudresden.ocl20.pivot.interpreter.test.standardlibrary.AllStandardLibraryTests;
+import org.dresdenocl.interpreter.test.constraintkinds.AllConstraintKindTests;
+import org.dresdenocl.interpreter.test.royalsandloyals.TestInterpretation;
+import org.dresdenocl.interpreter.test.standardlibrary.AllStandardLibraryTests;
 
 /**
  * <p>

@@ -1,6 +1,6 @@
 -- Constraint taken and adapted from [1] page 190.
 -- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
    
 -- An invariant to test tuple expressions
 context Transaction

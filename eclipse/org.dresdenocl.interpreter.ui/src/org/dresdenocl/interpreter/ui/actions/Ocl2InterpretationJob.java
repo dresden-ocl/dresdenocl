@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.interpreter.ui.actions;
+package org.dresdenocl.interpreter.ui.actions;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,19 +10,19 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.IViewActionDelegate;
 
-import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
-import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
-import tudresden.ocl20.pivot.interpreter.ui.InterpreterUIPlugin;
-import tudresden.ocl20.pivot.interpreter.ui.internal.msg.OclInterpreterUIMessages;
-import tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.ui.ModelBusUIUtility;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
+import org.dresdenocl.interpreter.IInterpretationResult;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
+import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
+import org.dresdenocl.interpreter.ui.internal.views.InterpreterView;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.ui.ModelBusUIUtility;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.Feature;
 
 public class Ocl2InterpretationJob extends Job {
 

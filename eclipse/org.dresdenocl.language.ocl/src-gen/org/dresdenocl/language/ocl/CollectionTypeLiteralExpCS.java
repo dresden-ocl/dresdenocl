@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionTypeLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getCollectionTypeLiteralExpCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface CollectionTypeLiteralExpCS extends LiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Collection Type</em>' containment reference.
    * @see #setCollectionType(CollectionTypeIdentifierCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getCollectionTypeLiteralExpCS_CollectionType()
+   * @see org.dresdenocl.language.ocl.OclPackage#getCollectionTypeLiteralExpCS_CollectionType()
    * @model containment="true" required="true"
    * @generated
    */
 	CollectionTypeIdentifierCS getCollectionType();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.CollectionTypeLiteralExpCS#getCollectionType <em>Collection Type</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Collection Type</em>' containment reference.

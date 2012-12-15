@@ -15,7 +15,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.ocl2parser.test;
+package org.dresdenocl.ocl2parser.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,15 +28,15 @@ import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 
-import tudresden.ocl20.pivot.facade.Ocl2ForEclipseFacade;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
-import tudresden.ocl20.pivot.parser.ParseException;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
+import org.dresdenocl.facade.Ocl2ForEclipseFacade;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.ocl2parser.test.exception.MetaModelNotFoundException;
+import org.dresdenocl.parser.ParseException;
+import org.dresdenocl.pivotmodel.Constraint;
 
 /**
  * <p>

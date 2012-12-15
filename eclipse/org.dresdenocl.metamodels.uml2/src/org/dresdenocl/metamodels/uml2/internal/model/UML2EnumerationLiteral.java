@@ -11,14 +11,14 @@
  * received a copy of the GNU Lesser General Public License along with Dresden
  * OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.uml2.internal.model;
+package org.dresdenocl.metamodels.uml2.internal.model;
 
 import org.apache.log4j.Logger;
 
-import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
-import tudresden.ocl20.pivot.pivotmodel.Enumeration;
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
-import tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral;
+import org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin;
+import org.dresdenocl.pivotmodel.Enumeration;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.base.AbstractEnumerationLiteral;
 
 /**
  * <p>
@@ -93,7 +93,7 @@ public class UML2EnumerationLiteral extends AbstractEnumerationLiteral
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getName()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumerationLiteral#getName()
 	 * 
 	 * @generated NOT
 	 */
@@ -104,7 +104,7 @@ public class UML2EnumerationLiteral extends AbstractEnumerationLiteral
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.pivotmodel.base.AbstractEnumerationLiteral#getEnumeration()
+	 * @see org.dresdenocl.pivotmodel.base.AbstractEnumerationLiteral#getEnumeration()
 	 * 
 	 * @generated NOT
 	 */

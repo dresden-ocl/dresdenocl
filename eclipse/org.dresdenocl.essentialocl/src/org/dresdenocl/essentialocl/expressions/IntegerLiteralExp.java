@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ package tudresden.ocl20.pivot.essentialocl.expressions;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,7 +63,7 @@ public interface IntegerLiteralExp extends NumericLiteralExp {
 	int getIntegerSymbol();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.IntegerLiteralExp#getIntegerSymbol <em>Integer Symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Integer Symbol</em>' attribute.

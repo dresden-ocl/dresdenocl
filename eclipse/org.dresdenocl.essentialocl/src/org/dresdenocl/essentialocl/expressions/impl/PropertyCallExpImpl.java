@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions.impl;
+package org.dresdenocl.essentialocl.expressions.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -47,12 +47,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
-import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
-import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
-import tudresden.ocl20.pivot.pivotmodel.Feature;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
+import org.dresdenocl.essentialocl.expressions.PropertyCallExp;
+import org.dresdenocl.essentialocl.expressions.WellformednessException;
+import org.dresdenocl.pivotmodel.Feature;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Property Call Exp</b></em>'.
@@ -60,8 +60,8 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getReferredProperty <em>Referred Property</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.impl.PropertyCallExpImpl#getQualifier <em>Qualifier</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.PropertyCallExpImpl#getReferredProperty <em>Referred Property</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.impl.PropertyCallExpImpl#getQualifier <em>Qualifier</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,7 +119,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * is <code>null</code>, a {@link WellformednessException} is thrown.
 	 * </p>
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType()
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType()
 	 */
 	@Override
 	protected Type evaluateType() {
@@ -147,7 +147,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.expressions.impl.FeatureCallExpImpl#getFeature()
+	 * @see org.dresdenocl.essentialocl.expressions.impl.FeatureCallExpImpl#getFeature()
 	 */
 	@Override
 	protected Feature getFeature() {

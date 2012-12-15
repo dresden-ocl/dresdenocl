@@ -1,6 +1,6 @@
 -- Constraint taken from [1] page 182 and adapted.
 -- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
+package org::dresdenocl::examples::royalsandloyals
 
 context ProgramPartner
 def: getBurningTransactions(): Set(Transaction) =

@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.impl;
+package org.dresdenocl.tools.codegen.declarativ.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -6,11 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel;
-import tudresden.ocl20.pivot.tools.template.ITemplateGroup;
+import org.dresdenocl.pivotmodel.AssociationProperty;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel;
+import org.dresdenocl.tools.template.ITemplateGroup;
 
 public class Ocl2DeclSettings implements IOcl2DeclSettings {
 

@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
 import java.util.List;
 
@@ -42,8 +42,8 @@ import java.util.List;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getBody <em>Body</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getIterator <em>Iterator</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.LoopExp#getBody <em>Body</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.LoopExp#getIterator <em>Iterator</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,7 +66,7 @@ public interface LoopExp extends CallExp {
 	OclExpression getBody();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp#getBody <em>Body</em>}' containment reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.LoopExp#getBody <em>Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Body</em>' containment reference.
@@ -77,7 +77,7 @@ public interface LoopExp extends CallExp {
 
 	/**
 	 * Returns the value of the '<em><b>Iterator</b></em>' containment reference list.
-	 * The list contents are of type {@link tudresden.ocl20.pivot.essentialocl.expressions.Variable}.
+	 * The list contents are of type {@link org.dresdenocl.essentialocl.expressions.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Iterator</em>' containment reference list isn't clear,

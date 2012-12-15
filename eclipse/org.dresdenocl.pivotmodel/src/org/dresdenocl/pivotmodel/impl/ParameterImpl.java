@@ -30,7 +30,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.pivotmodel.impl;
+package org.dresdenocl.pivotmodel.impl;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
@@ -41,15 +41,15 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.Parameter;
-import tudresden.ocl20.pivot.pivotmodel.ParameterDirectionKind;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.pivotmodel.GenericType;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Parameter;
+import org.dresdenocl.pivotmodel.ParameterDirectionKind;
+import org.dresdenocl.pivotmodel.PivotModelFactory;
+import org.dresdenocl.pivotmodel.PivotModelPackage;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -57,9 +57,9 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getKind <em>
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ParameterImpl#getKind <em>
  * Kind</em>}</li>
- * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterImpl#getOperation
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ParameterImpl#getOperation
  * <em>Operation</em>}</li>
  * </ul>
  * </p>
@@ -114,7 +114,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * Overridden to change the type of the owning {@link Operation} if the type
 	 * of a return parameter is changed.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setType(tudresden.ocl20.pivot.pivotmodel.Type)
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#setType(org.dresdenocl.pivotmodel.Type)
 	 */
 	@Override
 	public void setType(Type newType) {
@@ -140,7 +140,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * Overridden to change the generic type of the owning {@link Operation} if
 	 * the generic type of a return parameter is changed.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType(tudresden.ocl20.pivot.pivotmodel.GenericType)
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#setGenericType(org.dresdenocl.pivotmodel.GenericType)
 	 */
 	@Override
 	public void setGenericType(GenericType newGenericType) {
@@ -167,7 +167,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	 * Overridden to return the {@link #getOperation() operation} that contains
 	 * this <code>Parameter</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
+	 * @see org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
 	@Override
 	public NamedElement getOwner() {
@@ -287,7 +287,7 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 	/**
 	 * Helper method to initialize a cloned <code>Parameter</code>.
 	 * 
-	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#initialize(tudresden.ocl20.pivot.pivotmodel.TypedElement)
+	 * @see org.dresdenocl.pivotmodel.impl.TypedElementImpl#initialize(org.dresdenocl.pivotmodel.TypedElement)
 	 */
 	protected Parameter initialize(Parameter clone) {
 

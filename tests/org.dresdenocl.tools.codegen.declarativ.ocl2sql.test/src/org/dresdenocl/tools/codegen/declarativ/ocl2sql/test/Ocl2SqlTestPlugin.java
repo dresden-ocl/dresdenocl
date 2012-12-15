@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -10,7 +10,7 @@ public class Ocl2SqlTestPlugin extends Plugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID =
-			"tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test";
+			"org.dresdenocl.tools.codegen.declarativ.ocl2sql.test";
 
 	// The shared instance
 	private static Ocl2SqlTestPlugin plugin;

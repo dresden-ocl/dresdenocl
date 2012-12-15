@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards;
+package org.dresdenocl.tools.codegen.ui.impl.wizards;
 
 import java.io.File;
 
@@ -50,7 +50,7 @@ import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceComparator;
 
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
+import org.dresdenocl.tools.codegen.ui.impl.CodegenUIMessages;
 
 /**
  * <p>

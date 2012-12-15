@@ -16,9 +16,9 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tools.codegen.code.impl;
+package org.dresdenocl.tools.codegen.code.impl;
 
-import tudresden.ocl20.pivot.tools.codegen.code.ITransformedCode;
+import org.dresdenocl.tools.codegen.code.ITransformedCode;
 
 /**
  * <p>
@@ -48,7 +48,7 @@ public class TransformedCodeImpl implements ITransformedCode {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.ocl22code.IGeneratedCode#addLogicalCode(java.lang
+	 * org.dresdenocl.ocl22code.IGeneratedCode#addLogicalCode(java.lang
 	 * .String)
 	 */
 	public void addCode(String someCode) {
@@ -66,7 +66,7 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#hasMoreThanOneLine()
+	 * @see org.dresdenocl.ocl22code.IGeneratedCode#hasMoreThanOneLine()
 	 */
 	public boolean containsCode() {
 
@@ -79,7 +79,7 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#getGeneratedCode()
+	 * @see org.dresdenocl.ocl22code.IGeneratedCode#getGeneratedCode()
 	 */
 	public String getCode() {
 
@@ -88,7 +88,7 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#getResultVariable()
+	 * @see org.dresdenocl.ocl22code.IGeneratedCode#getResultVariable()
 	 */
 	public String getResultExp() {
 
@@ -97,7 +97,7 @@ public class TransformedCodeImpl implements ITransformedCode {
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.ocl22code.IGeneratedCode#setResultVariable(java
+	 * @see org.dresdenocl.ocl22code.IGeneratedCode#setResultVariable(java
 	 * .lang.String)
 	 */
 	public void setResultExp(String someCode) {

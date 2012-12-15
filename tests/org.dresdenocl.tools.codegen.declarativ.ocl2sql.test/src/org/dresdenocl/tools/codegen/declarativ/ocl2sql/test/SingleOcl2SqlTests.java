@@ -17,17 +17,17 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2SqlTest;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2Sql_optimizeTest;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_notoptimizeTest;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_optimizeTest;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2SqlTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.CarOcl2Sql_optimizeTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_notoptimizeTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.SingleOcl2Sql_optimizeTest;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.test.tests.fast.Ocl2SqlTest;
 
 /**
  * <p>

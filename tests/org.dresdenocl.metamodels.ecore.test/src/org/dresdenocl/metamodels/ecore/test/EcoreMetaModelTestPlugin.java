@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.metamodels.ecore.test;
+package org.dresdenocl.metamodels.ecore.test;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -29,7 +29,7 @@ import org.osgi.framework.BundleContext;
 public class EcoreMetaModelTestPlugin extends AbstractUIPlugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.metamodels.ecore.test";
+	public static final String PLUGIN_ID = "org.dresdenocl.metamodels.ecore.test";
 
 	/** The shared instance. */
 	private static EcoreMetaModelTestPlugin plugin;

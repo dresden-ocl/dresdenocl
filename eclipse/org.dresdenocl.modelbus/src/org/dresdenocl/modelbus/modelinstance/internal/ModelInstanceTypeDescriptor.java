@@ -16,19 +16,19 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
+package org.dresdenocl.modelbus.modelinstance.internal;
 
 import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IConfigurationElement;
 
-import tudresden.ocl20.pivot.modelbus.IModelBusConstants;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
-import tudresden.ocl20.pivot.modelbus.descriptor.AbstractDescriptor;
-import tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceTypeDescriptor;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstance.IModelInstanceType;
+import org.dresdenocl.modelbus.IModelBusConstants;
+import org.dresdenocl.modelbus.ModelBusPlugin;
+import org.dresdenocl.modelbus.descriptor.AbstractDescriptor;
+import org.dresdenocl.modelbus.modelinstance.IModelInstanceTypeDescriptor;
+import org.dresdenocl.modelinstance.IModelInstanceProvider;
+import org.dresdenocl.modelinstance.IModelInstanceType;
 
 /**
  * <p>
@@ -91,7 +91,7 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor implements
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceFileFormat#getModelProvider ()
+	 * org.dresdenocl.modelbus.IModelInstanceFileFormat#getModelProvider ()
 	 */
 	public IModelInstanceProvider getModelInstanceProvider() {
 
@@ -108,7 +108,7 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceType#getName()
+	 * @see org.dresdenocl.modelbus.IModelInstanceType#getName()
 	 */
 	public String getName() {
 
@@ -117,7 +117,7 @@ public class ModelInstanceTypeDescriptor extends AbstractDescriptor implements
 
 	/*
 	 * (non-Javadoc)
-	 * @see tudresden.ocl20.pivot.modelbus.internal.IMetamodelDescriptor#getIcon()
+	 * @see org.dresdenocl.modelbus.internal.IMetamodelDescriptor#getIcon()
 	 */
 	public URL getIconURL() {
 

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.debug;
+package org.dresdenocl.language.ocl.resource.ocl.debug;
 
 /**
  * The DebugProxy allows to communicate between the interpreter, which runs in a

@@ -1,9 +1,9 @@
-package tudresden.ocl20.pivot.tools.codegen.declarativ;
+package org.dresdenocl.tools.codegen.declarativ;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.impl.Ocl2DeclCode;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.impl.Ocl2DeclSettings;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.tools.codegen.declarativ.impl.Ocl2DeclCode;
+import org.dresdenocl.tools.codegen.declarativ.impl.Ocl2DeclSettings;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
 
 /**
  * <p>

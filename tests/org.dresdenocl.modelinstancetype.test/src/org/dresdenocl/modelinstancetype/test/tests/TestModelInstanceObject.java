@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.tests;
+package org.dresdenocl.modelinstancetype.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -36,33 +36,33 @@ import org.eclipse.osgi.util.NLS;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.modelinstancetype.exception.AsTypeCastException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.CopyForAtPreException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyAccessException;
-import tudresden.ocl20.pivot.modelinstancetype.exception.PropertyNotFoundException;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestPlugin;
-import tudresden.ocl20.pivot.modelinstancetype.test.ModelInstanceTypeTestServices;
-import tudresden.ocl20.pivot.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
-import tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestModelTypesNames;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceCollection;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceVoid;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
-import tudresden.ocl20.pivot.pivotmodel.Property;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.modelinstancetype.exception.AsTypeCastException;
+import org.dresdenocl.modelinstancetype.exception.CopyForAtPreException;
+import org.dresdenocl.modelinstancetype.exception.OperationAccessException;
+import org.dresdenocl.modelinstancetype.exception.OperationNotFoundException;
+import org.dresdenocl.modelinstancetype.exception.PropertyAccessException;
+import org.dresdenocl.modelinstancetype.exception.PropertyNotFoundException;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestPlugin;
+import org.dresdenocl.modelinstancetype.test.ModelInstanceTypeTestServices;
+import org.dresdenocl.modelinstancetype.test.msg.ModelInstanceTypeTestSuiteMessages;
+import org.dresdenocl.modelinstancetype.test.testmodel.TestModelTypesNames;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceCollection;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceVoid;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
+import org.dresdenocl.pivotmodel.Property;
+import org.dresdenocl.pivotmodel.Type;
 
 /**
  * <p>
  * Contains test cases to test the implementation of
- * {@link tudresden.ocl20.pivot.modelbus.modelinstance.types.IModelInstanceObject}
+ * {@link org.dresdenocl.modelbus.modelinstance.types.IModelInstanceObject}
  * .
  * </p>
  * 
@@ -744,7 +744,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} without arguments and without result (void).
 	 * </p>
 	 */
@@ -814,7 +814,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with one model instance argument and with single
 	 * result.
 	 * </p>
@@ -895,7 +895,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with no arguments and with a multiple, unique,
 	 * ordered result.
 	 * </p>
@@ -977,7 +977,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with no arguments and with a multiple, unique,
 	 * unordered result.
 	 * </p>
@@ -1059,7 +1059,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with no arguments and with a multiple,
 	 * nonunique, ordered result.
 	 * </p>
@@ -1141,7 +1141,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with no arguments and with a multiple,
 	 * nonunique, unordered result.
 	 * </p>
@@ -1223,7 +1223,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link PrimitiveType} and
 	 * without result.
 	 * </p>
@@ -1336,7 +1336,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link PrimitiveType} and
 	 * without result.
 	 * </p>
@@ -1449,7 +1449,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link CollectionType} and
 	 * without result.
 	 * </p>
@@ -1562,7 +1562,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link CollectionType} and
 	 * without result.
 	 * </p>
@@ -1675,7 +1675,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link Type} and without
 	 * result.
 	 * </p>
@@ -1787,7 +1787,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link Type} and without
 	 * result.
 	 * </p>
@@ -1899,7 +1899,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link Type} and without
 	 * result.
 	 * </p>
@@ -2012,7 +2012,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with an argument of a {@link Type} and without
 	 * result.
 	 * </p>
@@ -2125,7 +2125,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with illegal arguments.
 	 * </p>
 	 * 
@@ -2165,7 +2165,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * for an {@link Operation} with illegal arguments.
 	 * </p>
 	 * 
@@ -2190,7 +2190,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * for a non multiple property.
 	 * </p>
 	 */
@@ -2261,7 +2261,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * for a multiple, ordered, unique property.
 	 * </p>
 	 */
@@ -2335,7 +2335,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * for a multiple, unordered, unique property.
 	 * </p>
 	 */
@@ -2409,7 +2409,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * for a multiple, ordered, nonunique property.
 	 * </p>
 	 */
@@ -2483,7 +2483,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * for a multiple, unordered, nonunique property.
 	 * </p>
 	 */
@@ -2557,7 +2557,7 @@ public class TestModelInstanceObject {
 	/**
 	 * <p>
 	 * Tests the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * with illegal arguments.
 	 * </p>
 	 * 

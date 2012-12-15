@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.impl;
+package org.dresdenocl.examples.pml.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
-import tudresden.ocl20.pivot.examples.pml.Extension;
-import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.Extension;
+import org.dresdenocl.examples.pml.ExtensionPoint;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -23,8 +23,8 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.ExtensionImpl#getExtensionPoint <em>Extension Point</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.ExtensionImpl#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.ExtensionImpl#getExtensionPoint <em>Extension Point</em>}</li>
  * </ul>
  * </p>
  *

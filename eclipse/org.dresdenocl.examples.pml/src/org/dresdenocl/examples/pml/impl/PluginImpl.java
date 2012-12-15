@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.examples.pml.impl;
+package org.dresdenocl.examples.pml.impl;
 
 import java.util.Collection;
 
@@ -20,12 +20,12 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.examples.pml.Extension;
-import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
-import tudresden.ocl20.pivot.examples.pml.Feature;
-import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Plugin;
-import tudresden.ocl20.pivot.examples.pml.PmlPackage;
+import org.dresdenocl.examples.pml.Extension;
+import org.dresdenocl.examples.pml.ExtensionPoint;
+import org.dresdenocl.examples.pml.Feature;
+import org.dresdenocl.examples.pml.JavaType;
+import org.dresdenocl.examples.pml.Plugin;
+import org.dresdenocl.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -33,14 +33,14 @@ import tudresden.ocl20.pivot.examples.pml.PmlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getId <em>Id</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getName <em>Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getProvider <em>Provider</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getFeature <em>Feature</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getExtensionPoints <em>Extension Points</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.examples.pml.impl.PluginImpl#getActivator <em>Activator</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getProvider <em>Provider</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getFeature <em>Feature</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getExtensionPoints <em>Extension Points</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getExtensions <em>Extensions</em>}</li>
+ *   <li>{@link org.dresdenocl.examples.pml.impl.PluginImpl#getActivator <em>Activator</em>}</li>
  * </ul>
  * </p>
  *

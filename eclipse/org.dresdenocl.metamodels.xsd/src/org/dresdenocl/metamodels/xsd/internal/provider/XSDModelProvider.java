@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.metamodels.xsd.internal.provider;
+package org.dresdenocl.metamodels.xsd.internal.provider;
 
 import java.net.URL;
 
@@ -8,13 +8,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import tudresden.ocl20.pivot.metamodels.xsd.XSDMetamodelPlugin;
-import tudresden.ocl20.pivot.metamodels.xsd.internal.model.XSDModel;
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.IModelProvider;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.model.base.AbstractModelProvider;
-import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
+import org.dresdenocl.metamodels.xsd.XSDMetamodelPlugin;
+import org.dresdenocl.metamodels.xsd.internal.model.XSDModel;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.IModelProvider;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.model.base.AbstractModelProvider;
+import org.dresdenocl.modelbus.ModelBusPlugin;
 
 /**
  * Implementation of the {@link IModelProvider} interface for XSD models. This
@@ -31,7 +31,7 @@ public class XSDModelProvider extends AbstractModelProvider implements
 	private ResourceSet resourceSet = null;
 
 	/**
-	 * @see tudresden.ocl20.pivot.model.IModelProvider#getModel(java.net.URL)
+	 * @see org.dresdenocl.model.IModelProvider#getModel(java.net.URL)
 	 * 
 	 * @generated
 	 */

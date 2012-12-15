@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testCollectionCount {
      *       def: testCollectionCount(source: Collection(OclAny), arg01: OclAny):    Integer = source ->count(arg01)</code></p>
      */
     public Integer testpackage.Class1.testCollectionCount(java.util.Collection<Object> source, Object arg01) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.count(source, arg01);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.count(source, arg01);
     }
 }

@@ -4,9 +4,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
-import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,11 +16,11 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNamedLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getNamedLiteralExpCS()
  * @model
  * @generated
  */
@@ -35,14 +35,14 @@ public interface NamedLiteralExpCS extends OclExpressionCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Named Element</em>' reference.
    * @see #setNamedElement(NamedElement)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNamedLiteralExpCS_NamedElement()
+   * @see org.dresdenocl.language.ocl.OclPackage#getNamedLiteralExpCS_NamedElement()
    * @model required="true"
    * @generated
    */
 	NamedElement getNamedElement();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}' reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}' reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Named Element</em>' reference.

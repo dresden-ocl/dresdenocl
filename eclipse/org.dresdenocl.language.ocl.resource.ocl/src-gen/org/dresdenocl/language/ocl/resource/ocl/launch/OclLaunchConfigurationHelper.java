@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.launch;
+package org.dresdenocl.language.ocl.resource.ocl.launch;
 
 /**
  * A class that provides common methods that are required by launch configuration

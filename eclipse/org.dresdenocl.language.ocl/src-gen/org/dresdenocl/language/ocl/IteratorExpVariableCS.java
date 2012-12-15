@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getVariableName <em>Variable Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IteratorExpVariableCS#getVariableName <em>Variable Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.IteratorExpVariableCS#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpVariableCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpVariableCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface IteratorExpVariableCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Variable Name</em>' containment reference.
    * @see #setVariableName(SimpleNameCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpVariableCS_VariableName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpVariableCS_VariableName()
    * @model containment="true" required="true"
    * @generated
    */
 	SimpleNameCS getVariableName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getVariableName <em>Variable Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IteratorExpVariableCS#getVariableName <em>Variable Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Variable Name</em>' containment reference.
@@ -62,14 +62,14 @@ public interface IteratorExpVariableCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' containment reference.
    * @see #setTypeName(TypeCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getIteratorExpVariableCS_TypeName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getIteratorExpVariableCS_TypeName()
    * @model containment="true"
    * @generated
    */
 	TypeCS getTypeName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.IteratorExpVariableCS#getTypeName <em>Type Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.IteratorExpVariableCS#getTypeName <em>Type Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' containment reference.

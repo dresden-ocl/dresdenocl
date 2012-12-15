@@ -30,9 +30,9 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.essentialocl.expressions;
+package org.dresdenocl.essentialocl.expressions;
 
-import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
+import org.dresdenocl.pivotmodel.EnumerationLiteral;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,7 +42,7 @@ import tudresden.ocl20.pivot.pivotmodel.EnumerationLiteral;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral <em>Referred Enum Literal</em>}</li>
+ *   <li>{@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral <em>Referred Enum Literal</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,7 +65,7 @@ public interface EnumLiteralExp extends LiteralExp {
 	EnumerationLiteral getReferredEnumLiteral();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral <em>Referred Enum Literal</em>}' reference.
+	 * Sets the value of the '{@link org.dresdenocl.essentialocl.expressions.EnumLiteralExp#getReferredEnumLiteral <em>Referred Enum Literal</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Referred Enum Literal</em>' reference.

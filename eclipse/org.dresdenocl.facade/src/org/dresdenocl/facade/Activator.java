@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.facade;
+package org.dresdenocl.facade;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends Plugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.facade";
+	public static final String PLUGIN_ID = "org.dresdenocl.facade";
 
 	// The shared instance
 	private static Activator plugin;

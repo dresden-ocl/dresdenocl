@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package org.dresdenocl.modelinstancetype.test.testmodel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,12 +25,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
-import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
-import tudresden.ocl20.pivot.pivotmodel.Property;
+import org.dresdenocl.essentialocl.types.CollectionType;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.PrimitiveType;
+import org.dresdenocl.pivotmodel.Property;
 
 /**
  * <p>
@@ -44,35 +44,35 @@ public class Class1 {
 
 	/**
 	 * A field to test the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * .
 	 */
 	protected String nonMultipleProperty = Class1.class.getCanonicalName();
 
 	/**
 	 * A field to test the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * .
 	 */
 	protected Set<String> multipleUniqueOrderedProperty;
 
 	/**
 	 * A field to test the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * .
 	 */
 	protected Set<String> multipleUniqueUnorderedProperty;
 
 	/**
 	 * A field to test the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * .
 	 */
 	protected List<String> multipleNonuniqueOrderedProperty;
 
 	/**
 	 * A field to test the method
-	 * {@link IModelInstanceObject#getProperty(tudresden.ocl20.pivot.pivotmodel.Property)}
+	 * {@link IModelInstanceObject#getProperty(org.dresdenocl.pivotmodel.Property)}
 	 * .
 	 */
 	protected List<String> multipleNonuniqueUnorderedProperty;
@@ -171,7 +171,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} without arguments and without result.
 	 */
 	protected void voidOperation() {
@@ -181,7 +181,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with non-multiple result.
 	 */
 	protected boolean nonMultipleOperation() {
@@ -191,7 +191,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with a multiple, unique, ordered result.
 	 */
 	protected Set<String> multipleUniqueOrderedOperation() {
@@ -208,7 +208,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with a multiple, unique, unordered result.
 	 */
 	protected Set<String> multipleUniqueUnorderedOperation() {
@@ -225,7 +225,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with a multiple, nonunique, ordered result.
 	 */
 	protected List<String> multipleNonuniqueOrderedOperation() {
@@ -242,7 +242,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with a multiple, nonunique, unordered result.
 	 */
 	protected List<String> multipleNonuniqueUnorderedOperation() {
@@ -259,7 +259,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument of a {@link PrimitiveType} and
 	 * without result.
 	 */
@@ -270,7 +270,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument of a {@link PrimitiveType} and
 	 * without result.
 	 */
@@ -284,7 +284,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument of a {@link PrimitiveType} and
 	 * without result.
 	 */
@@ -298,7 +298,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument of a {@link CollectionType} and
 	 * without result.
 	 */
@@ -312,7 +312,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument and without result.
 	 */
 	protected void voidOperationWithObjectArgument(Class1 arg1) {
@@ -325,7 +325,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument and without result.
 	 */
 	protected void voidOperationWithEnumerationLiteralMultipleArgument(
@@ -339,7 +339,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument and without result.
 	 */
 	protected void voidOperationWithEnumerationLiteralArgument(Enumeration1 arg1) {
@@ -352,7 +352,7 @@ public class Class1 {
 
 	/**
 	 * A method to test the method
-	 * {@link IModelInstanceObject#invokeOperation(tudresden.ocl20.pivot.pivotmodel.Operation, java.util.List)}
+	 * {@link IModelInstanceObject#invokeOperation(org.dresdenocl.pivotmodel.Operation, java.util.List)}
 	 * with an {@link Operation} with an argument and without result.
 	 */
 	protected void voidOperationWithObjectMultipleArgument(List<Class1> arg1) {

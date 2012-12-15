@@ -30,12 +30,12 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelbus.metamodel;
+package org.dresdenocl.modelbus.metamodel;
 
 import java.net.URL;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
-import tudresden.ocl20.pivot.modelbus.descriptor.IDescriptor;
+import org.dresdenocl.model.metamodel.IMetamodel;
+import org.dresdenocl.modelbus.descriptor.IDescriptor;
 
 /**
  * <p>

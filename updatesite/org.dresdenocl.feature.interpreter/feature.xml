@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="tudresden.ocl20.feature.interpreter"
+      id="org.dresdenocl.feature.interpreter"
       label="Dresden OCL Interpreter"
       version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
@@ -187,35 +187,35 @@ Library.
 
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.standardlibrary.java" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.standardlibrary.java" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelbus" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
+      <import plugin="org.dresdenocl.modelbus.ui" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
-         id="tudresden.ocl20.pivot.interpreter"
+         id="org.dresdenocl.interpreter"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.interpreter.ui"
+         id="org.dresdenocl.interpreter.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tracer"
+         id="org.dresdenocl.tracer"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.tracer.ui"
+         id="org.dresdenocl.tracer.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -16,7 +16,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.modelinstancetype.java.internal.provider;
+package org.dresdenocl.modelinstancetype.java.internal.provider;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -28,15 +28,15 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.osgi.util.NLS;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.modelinstance.IModelInstance;
-import tudresden.ocl20.pivot.modelinstance.ModelInstancePlugin;
-import tudresden.ocl20.pivot.modelinstance.base.AbstractModelInstanceProvider;
-import tudresden.ocl20.pivot.modelinstancetype.exception.TypeNotFoundInModelException;
-import tudresden.ocl20.pivot.modelinstancetype.java.JavaModelInstanceTypePlugin;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.modelinstance.JavaModelInstance;
-import tudresden.ocl20.pivot.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.modelinstance.IModelInstance;
+import org.dresdenocl.modelinstance.ModelInstancePlugin;
+import org.dresdenocl.modelinstance.base.AbstractModelInstanceProvider;
+import org.dresdenocl.modelinstancetype.exception.TypeNotFoundInModelException;
+import org.dresdenocl.modelinstancetype.java.JavaModelInstanceTypePlugin;
+import org.dresdenocl.modelinstancetype.java.internal.modelinstance.JavaModelInstance;
+import org.dresdenocl.modelinstancetype.java.internal.msg.JavaModelInstanceTypeMessages;
 
 /**
  * <p>
@@ -62,8 +62,8 @@ public class JavaModelInstanceProvider extends AbstractModelInstanceProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceProvider#
-	 * createEmptyModelInstance(tudresden.ocl20.pivot.modelbus.IModel)
+	 * @seeorg.dresdenocl.modelbus.modelinstance.IModelInstanceProvider#
+	 * createEmptyModelInstance(org.dresdenocl.modelbus.IModel)
 	 */
 	public IModelInstance createEmptyModelInstance(IModel model) {
 

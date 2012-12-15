@@ -1,6 +1,6 @@
 /**
  */
-package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Enumeration1</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getEnumeration1()
+ * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getEnumeration1()
  * @model
  * @generated
  */

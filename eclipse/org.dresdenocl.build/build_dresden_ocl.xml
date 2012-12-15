@@ -117,7 +117,7 @@
 			</cmdargs>
 		</buckminster>
 
-		<ant dir="./../tudresden.ocl20.pivot.language.ocl.staticsemantics" antfile="build.xml" target="Compile tudresden.ocl20.pivot.language.ocl.staticsemantics" inheritall="true">
+		<ant dir="./../org.dresdenocl.language.ocl.staticsemantics" antfile="build.xml" target="Compile org.dresdenocl.language.ocl.staticsemantics" inheritall="true">
 			<property name="headless" value="true" />
 		</ant>
 
@@ -137,7 +137,7 @@
 		<echo message="Creating p2 site" />
 		<buckminster command="perform" workspace="${workspacePath}">
 			<cmdargs>
-				<arg value="tudresden.ocl20.updatesite:eclipse.feature#site.p2" />
+				<arg value="org.dresdenocl.updatesite:eclipse.feature#site.p2" />
 			</cmdargs>
 		</buckminster>
 

@@ -16,13 +16,13 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.tracer;
+package org.dresdenocl.tracer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-import tudresden.ocl20.logging.LoggingPlugin;
+import org.dresdenocl.logging.LoggingPlugin;
 
 /**
  * <p>
@@ -35,7 +35,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
 public class TracerPlugin extends Plugin {
 
 	/** the plug-in ID */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.tracer";
+	public static final String PLUGIN_ID = "org.dresdenocl.tracer";
 
 	/** the shared instance of the plug-in */
 	private static TracerPlugin plugin;
@@ -80,7 +80,7 @@ public class TracerPlugin extends Plugin {
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
-	 * from the <code>tudresden.ocl20.logging</code> plug-in.
+	 * from the <code>org.dresdenocl.logging</code> plug-in.
 	 * </p>
 	 * 
 	 * @param clazz

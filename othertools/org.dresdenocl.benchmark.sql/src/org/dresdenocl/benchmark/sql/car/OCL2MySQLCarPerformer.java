@@ -1,8 +1,8 @@
-package tudresden.ocl20.benchmark.sql.car;
+package org.dresdenocl.benchmark.sql.car;
 
 import java.sql.SQLException;
 
-import tudresden.ocl20.benchmark.sql.util.MySqlPerformer;
+import org.dresdenocl.benchmark.sql.util.MySqlPerformer;
 
 public class OCL2MySQLCarPerformer extends MySqlPerformer implements
 		ICarPerformer {

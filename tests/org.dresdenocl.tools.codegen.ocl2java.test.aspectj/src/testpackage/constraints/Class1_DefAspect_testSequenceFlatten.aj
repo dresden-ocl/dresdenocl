@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequenceFlatten {
      *       def: testSequenceFlatten(source: Sequence(OclAny)): Sequence(OclAny) = source ->flatten()</code></p>
      */
     public java.util.List<Object> testpackage.Class1.testSequenceFlatten(java.util.List<Object> source) {
-        return (java.util.List<Object>) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.flatten(source);
+        return (java.util.List<Object>) org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.flatten(source);
     }
 }

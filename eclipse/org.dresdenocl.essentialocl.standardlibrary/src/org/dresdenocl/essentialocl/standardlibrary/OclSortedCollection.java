@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.essentialocl.standardlibrary;
+package org.dresdenocl.essentialocl.standardlibrary;
 
 public interface OclSortedCollection<T extends OclAny> extends OclCollection<T> {
 

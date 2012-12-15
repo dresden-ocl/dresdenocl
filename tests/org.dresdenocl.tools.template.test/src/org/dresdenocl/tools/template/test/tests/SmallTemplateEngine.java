@@ -1,12 +1,12 @@
-package tudresden.ocl20.pivot.tools.template.test.tests;
+package org.dresdenocl.tools.template.test.tests;
 
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import tudresden.ocl20.pivot.tools.template.ITemplate;
-import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
-import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
+import org.dresdenocl.tools.template.ITemplate;
+import org.dresdenocl.tools.template.ITemplateEngine;
+import org.dresdenocl.tools.template.exception.TemplateException;
 
 /**
  * A helper class for the template tests.
@@ -24,21 +24,21 @@ public class SmallTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFile(URL)
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#addFile(URL)
 	 */
 	public void addFile(String file) throws TemplateException {
 
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#addFiles(LinkedList)
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#addFiles(LinkedList)
 	 */
 	public void addFiles(List<String> files) throws TemplateException {
 
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getDisplayName()
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#getDisplayName()
 	 */
 	public String getDisplayName() {
 
@@ -46,7 +46,7 @@ public class SmallTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getTemplate(String)
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#getTemplate(String)
 	 */
 	public ITemplate getTemplate(String name) {
 
@@ -54,7 +54,7 @@ public class SmallTemplateEngine implements ITemplateEngine {
 	}
 
 	/**
-	 * @see tudresden.ocl20.pivot.tools.template.ITemplateEngine#getVersion()
+	 * @see org.dresdenocl.tools.template.ITemplateEngine#getVersion()
 	 */
 	public String getVersion() {
 

@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A OclLayoutInformationAdapter is used to store layout information that is found
@@ -30,7 +30,7 @@ public class OclLayoutInformationAdapter implements org.eclipse.emf.common.notif
 	 * A list of LayoutInformation objects. one for each keyword, attribute and
 	 * reference.
 	 */
-	private java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation>();
+	private java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> layoutInformations = new java.util.ArrayList<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation>();
 	
 	/**
 	 * Returns the EObject that this adapter is attached to.
@@ -53,11 +53,11 @@ public class OclLayoutInformationAdapter implements org.eclipse.emf.common.notif
 		this.target = newTarget;
 	}
 	
-	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation> getLayoutInformations() {
+	public java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation> getLayoutInformations() {
 		return layoutInformations;
 	}
 	
-	public void addLayoutInformation(tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
+	public void addLayoutInformation(org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation) {
 		layoutInformations.add(layoutInformation);
 	}
 	
@@ -71,7 +71,7 @@ public class OclLayoutInformationAdapter implements org.eclipse.emf.common.notif
 	 * propagated to all attached layout information objects.
 	 */
 	public void replaceProxy(org.eclipse.emf.ecore.EObject proxy, org.eclipse.emf.ecore.EObject target) {
-		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation : layoutInformations) {
+		for (org.dresdenocl.language.ocl.resource.ocl.mopp.OclLayoutInformation layoutInformation : layoutInformations) {
 			layoutInformation.replaceProxy(proxy, target);
 		}
 	}

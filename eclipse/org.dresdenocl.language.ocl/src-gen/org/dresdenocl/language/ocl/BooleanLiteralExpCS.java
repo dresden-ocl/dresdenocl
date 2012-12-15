@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 /**
@@ -15,11 +15,11 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getBooleanLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getBooleanLiteralExpCS()
  * @model
  * @generated
  */
@@ -34,14 +34,14 @@ public interface BooleanLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Boolean Literal</em>' attribute.
    * @see #setBooleanLiteral(boolean)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getBooleanLiteralExpCS_BooleanLiteral()
+   * @see org.dresdenocl.language.ocl.OclPackage#getBooleanLiteralExpCS_BooleanLiteral()
    * @model required="true"
    * @generated
    */
 	boolean isBooleanLiteral();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.BooleanLiteralExpCS#isBooleanLiteral <em>Boolean Literal</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Boolean Literal</em>' attribute.

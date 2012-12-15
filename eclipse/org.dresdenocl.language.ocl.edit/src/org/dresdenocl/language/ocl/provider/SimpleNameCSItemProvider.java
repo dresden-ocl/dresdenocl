@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.provider;
+package org.dresdenocl.language.ocl.provider;
 
 import java.util.Collection;
 import java.util.List;
@@ -23,12 +23,12 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.SimpleNameCS;
 
 /**
  * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.language.ocl.SimpleNameCS} object. <!--
+ * {@link org.dresdenocl.language.ocl.SimpleNameCS} object. <!--
  * begin-user-doc --> <!-- end-user-doc -->
  * 
  * @generated

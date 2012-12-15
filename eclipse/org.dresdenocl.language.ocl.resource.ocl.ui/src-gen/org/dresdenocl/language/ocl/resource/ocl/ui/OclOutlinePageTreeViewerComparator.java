@@ -4,7 +4,7 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
+package org.dresdenocl.language.ocl.resource.ocl.ui;
 
 public class OclOutlinePageTreeViewerComparator extends org.eclipse.jface.viewers.ViewerComparator {
 	
@@ -79,7 +79,7 @@ public class OclOutlinePageTreeViewerComparator extends org.eclipse.jface.viewer
 		if (sortLexically && o1 instanceof org.eclipse.emf.ecore.EObject && o2 instanceof org.eclipse.emf.ecore.EObject) {
 			org.eclipse.emf.ecore.EObject e1 = (org.eclipse.emf.ecore.EObject) o1;
 			org.eclipse.emf.ecore.EObject e2 = (org.eclipse.emf.ecore.EObject) o2;
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclNameProvider nameProvider = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation().createNameProvider();
+			org.dresdenocl.language.ocl.resource.ocl.IOclNameProvider nameProvider = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclMetaInformation().createNameProvider();
 			java.util.List<String> names1 = nameProvider.getNames(e1);
 			java.util.List<String> names2 = nameProvider.getNames(e2);
 			if (names1 != null && !names1.isEmpty() && names2 != null && !names2.isEmpty()) {

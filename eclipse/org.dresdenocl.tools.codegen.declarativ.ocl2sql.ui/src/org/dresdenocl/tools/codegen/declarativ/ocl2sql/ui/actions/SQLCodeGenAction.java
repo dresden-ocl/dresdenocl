@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.actions;
+package org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -26,10 +26,10 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
-import tudresden.ocl20.pivot.model.IModel;
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui.internal.wizards.SQLCodeWizard;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.SelectDirectoryPage;
+import org.dresdenocl.model.IModel;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.internal.wizards.SQLCodeWizard;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.SelectDirectoryPage;
 
 /**
  * <p>

@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl.impl;
+package org.dresdenocl.language.ocl.impl;
 
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
@@ -17,9 +17,9 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.emftext.commons.layout.LayoutInformation;
-import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationNestedNamespaceCS;
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
+import org.dresdenocl.language.ocl.OclPackage;
+import org.dresdenocl.language.ocl.PackageDeclarationNestedNamespaceCS;
+import org.dresdenocl.pivotmodel.Namespace;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,9 +28,9 @@ import tudresden.ocl20.pivot.pivotmodel.Namespace;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getNamespace <em>Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getNestedNamespace <em>Nested Namespace</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getLayoutInformation <em>Layout Information</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.impl.PackageDeclarationNestedNamespaceCSImpl#getLayoutInformation <em>Layout Information</em>}</li>
  * </ul>
  * </p>
  *

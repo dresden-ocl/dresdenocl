@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.tools.transformation.test.tests;
+package org.dresdenocl.tools.transformation.test.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.tools.codegen.IOcl2CodeSettings;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.TransformationFactory;
-import tudresden.ocl20.pivot.tools.transformation.impl.Tuple;
-import tudresden.ocl20.pivot.tools.transformation.test.AbstractTransformationTest;
+import org.dresdenocl.tools.codegen.IOcl2CodeSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.TransformationFactory;
+import org.dresdenocl.tools.transformation.impl.Tuple;
+import org.dresdenocl.tools.transformation.test.AbstractTransformationTest;
 
 /**
  * This test will test the class TestTransformationFactory.java of the package
- * tudresden.ocl20.pivot.tools.transformation.
+ * org.dresdenocl.tools.transformation.
  * 
- * @see tudresden.ocl20.pivot.tools.transformation.TestTransformationFactory
+ * @see org.dresdenocl.tools.transformation.TestTransformationFactory
  */
 public class TestTransformationFactory extends AbstractTransformationTest {
 

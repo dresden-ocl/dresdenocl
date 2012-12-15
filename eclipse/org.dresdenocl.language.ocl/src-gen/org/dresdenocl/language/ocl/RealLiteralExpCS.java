@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 
 
@@ -16,13 +16,13 @@ package tudresden.ocl20.pivot.language.ocl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getIntValue <em>Int Value</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getNavigationOperator <em>Navigation Operator</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getIntValue <em>Int Value</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getNavigationOperator <em>Navigation Operator</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getRealLiteralExpCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getRealLiteralExpCS()
  * @model
  * @generated
  */
@@ -37,14 +37,14 @@ public interface RealLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Int Value</em>' attribute.
    * @see #setIntValue(int)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getRealLiteralExpCS_IntValue()
+   * @see org.dresdenocl.language.ocl.OclPackage#getRealLiteralExpCS_IntValue()
    * @model required="true"
    * @generated
    */
 	int getIntValue();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getIntValue <em>Int Value</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getIntValue <em>Int Value</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Int Value</em>' attribute.
@@ -63,14 +63,14 @@ public interface RealLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Real Value</em>' attribute.
    * @see #setRealValue(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getRealLiteralExpCS_RealValue()
+   * @see org.dresdenocl.language.ocl.OclPackage#getRealLiteralExpCS_RealValue()
    * @model required="true"
    * @generated
    */
 	String getRealValue();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getRealValue <em>Real Value</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Real Value</em>' attribute.
@@ -89,14 +89,14 @@ public interface RealLiteralExpCS extends PrimitiveLiteralExpCS {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Navigation Operator</em>' attribute.
    * @see #setNavigationOperator(String)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getRealLiteralExpCS_NavigationOperator()
+   * @see org.dresdenocl.language.ocl.OclPackage#getRealLiteralExpCS_NavigationOperator()
    * @model required="true"
    * @generated
    */
 	String getNavigationOperator();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.RealLiteralExpCS#getNavigationOperator <em>Navigation Operator</em>}' attribute.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.RealLiteralExpCS#getNavigationOperator <em>Navigation Operator</em>}' attribute.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Navigation Operator</em>' attribute.

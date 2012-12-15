@@ -1,12 +1,12 @@
-package tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor;
+package org.dresdenocl.language.ocl.staticsemantics.postporcessor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveHelper;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptionProvider;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclOptions;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessorProvider;
+import org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveHelper;
+import org.dresdenocl.language.ocl.resource.ocl.IOclOptionProvider;
+import org.dresdenocl.language.ocl.resource.ocl.IOclOptions;
+import org.dresdenocl.language.ocl.resource.ocl.IOclResourcePostProcessorProvider;
 
 public class OclLoadOptionsProvider implements IOclOptionProvider {
 

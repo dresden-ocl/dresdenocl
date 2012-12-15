@@ -4,33 +4,33 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.modelinstancetype.test.testmodel.util;
+package org.dresdenocl.modelinstancetype.test.testmodel.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.C1Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Class2;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ClonableCopyableClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.ContainerClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.CopyableClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1I2Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I1Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I2C1Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3C2Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.I3Implementation;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.InitializableCopyableClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface1;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface2;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.Interface3;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.NonCopyableClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
-import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.C1Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Class2;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ClonableCopyableClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CollectionTypeProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.ContainerClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.CopyableClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.EnumerationLiteralProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1I2Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I1Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I2C1Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3C2Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.I3Implementation;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.InitializableCopyableClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface1;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface2;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.Interface3;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.NonCopyableClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.PrimitiveTypeProviderClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.StaticPropertyAndOperationClass;
+import ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage;
 
 
 /**
@@ -43,7 +43,7 @@ import ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPac
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage
+ * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage
  * @generated
  */
 public class TestmodelSwitch<T> extends 

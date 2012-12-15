@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
+package org.dresdenocl.examples.royalsandloyals.constraints;
 
 /**
  * <p>Generated Aspect to enforce OCL constraint.</p>
@@ -8,16 +8,16 @@ package tudresden.ocl20.pivot.examples.royalsandloyals.constraints;
  */
 public privileged aspect Customer_InvAspect_sizesAgree {
 
-    declare parents: tudresden.ocl20.pivot.examples.royalsandloyals.Customer implements tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclCheckable;
+    declare parents: org.dresdenocl.examples.royalsandloyals.Customer implements org.dresdenocl.tools.codegen.ocl2java.types.OclCheckable;
 
-    public void tudresden.ocl20.pivot.examples.royalsandloyals.Customer.checkInvariants() {
+    public void org.dresdenocl.examples.royalsandloyals.Customer.checkInvariants() {
         /* Remains empty. Is only filled with behavior by advice(s). */
     }
 
     /**
-     * <p>Pointcut for all calls on {@link tudresden.ocl20.pivot.examples.royalsandloyals.Customer#checkInvariants()}.</p>
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.Customer#checkInvariants()}.</p>
      */
-    protected pointcut checkInvariantsCaller(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass):
+    protected pointcut checkInvariantsCaller(org.dresdenocl.examples.royalsandloyals.Customer aClass):
     	call(void checkInvariants())
     	&& target(aClass);
 
@@ -26,21 +26,21 @@ public privileged aspect Customer_InvAspect_sizesAgree {
      * <code>context Customer
      *       inv sizesAgree:     programs->size() = cards->select( valid = true )->size()</code></p>
      */
-    after(tudresden.ocl20.pivot.examples.royalsandloyals.Customer aClass) : checkInvariantsCaller(aClass) {
+    after(org.dresdenocl.examples.royalsandloyals.Customer aClass) : checkInvariantsCaller(aClass) {
         /* Disable this constraint for subclasses of Customer. */
-        if (aClass.getClass().getCanonicalName().equals("tudresden.ocl20.pivot.examples.royalsandloyals.Customer")) {
-        java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard> result1;
-        result1 = new java.util.HashSet<tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard>();
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.Customer")) {
+        java.util.HashSet<org.dresdenocl.examples.royalsandloyals.CustomerCard> result1;
+        result1 = new java.util.HashSet<org.dresdenocl.examples.royalsandloyals.CustomerCard>();
         
         /* Iterator Select: Select all elements which fulfill the condition. */
-        for (tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard anElement1 : aClass.cards) {
+        for (org.dresdenocl.examples.royalsandloyals.CustomerCard anElement1 : aClass.cards) {
             if (((Object) anElement1.valid).equals(new Boolean(true))) {
                 result1.add(anElement1);
             }
             // no else
         }
     
-        if (!((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.programs)).equals(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
+        if (!((Object) org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(aClass.programs)).equals(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(result1))) {
         	// TODO Auto-generated code executed when constraint is violated.
         	String msg = "Error: Constraint 'sizesAgree' (inv sizesAgree:     programs->size() = cards->select( valid = true )->size()) was violated for Object " + aClass.toString() + ".";
         	throw new RuntimeException(msg);

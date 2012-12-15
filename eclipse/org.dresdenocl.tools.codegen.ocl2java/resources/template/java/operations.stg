@@ -773,32 +773,32 @@ createCopy
 
 // --- Utility Class for Bag Operations ---
 bagUtility() ::= <<
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclBags
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags
 >>
 
 // --- Utility Class for Collection Operations ---
 collectionUtility() ::= <<
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections
 >>
 
 // --- Utility Class for OrderedSet Operations ---
 orderedSetUtility() ::= <<
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclOrderedSets
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets
 >>
 
 // --- Utility Class for Sequence Operations ---
 sequenceUtility() ::= <<
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences
 >>
 
 // --- Utility Class for Set Operations ---
 setUtility() ::= <<
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets
 >>
 
 // --- Utility Class for String Operations ---
 stringUtility() ::= <<
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclString
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclString
 >>
 
 // --- Conversion operation from Number to Integer. */

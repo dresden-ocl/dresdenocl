@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.language.ocl;
+package org.dresdenocl.language.ocl;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.language.ocl.PathNameCS#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.dresdenocl.language.ocl.PathNameCS#getPathName <em>Path Name</em>}</li>
  * </ul>
  * </p>
  *
- * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPathNameCS()
+ * @see org.dresdenocl.language.ocl.OclPackage#getPathNameCS()
  * @model
  * @generated
  */
@@ -36,14 +36,14 @@ public interface PathNameCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Simple Name</em>' containment reference.
    * @see #setSimpleName(SimpleNameCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPathNameCS_SimpleName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPathNameCS_SimpleName()
    * @model containment="true" required="true"
    * @generated
    */
 	SimpleNameCS getSimpleName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PathNameCS#getSimpleName <em>Simple Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Simple Name</em>' containment reference.
@@ -62,14 +62,14 @@ public interface PathNameCS extends EObject {
 	 * <!-- end-user-doc -->
    * @return the value of the '<em>Path Name</em>' containment reference.
    * @see #setPathName(PathNameCS)
-   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getPathNameCS_PathName()
+   * @see org.dresdenocl.language.ocl.OclPackage#getPathNameCS_PathName()
    * @model containment="true"
    * @generated
    */
 	PathNameCS getPathName();
 
 	/**
-   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.PathNameCS#getPathName <em>Path Name</em>}' containment reference.
+   * Sets the value of the '{@link org.dresdenocl.language.ocl.PathNameCS#getPathName <em>Path Name</em>}' containment reference.
    * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
    * @param value the new value of the '<em>Path Name</em>' containment reference.

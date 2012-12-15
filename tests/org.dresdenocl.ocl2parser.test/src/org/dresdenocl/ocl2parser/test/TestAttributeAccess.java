@@ -1,4 +1,4 @@
-package tudresden.ocl20.pivot.ocl2parser.test;
+package org.dresdenocl.ocl2parser.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -16,23 +16,23 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
-import tudresden.ocl20.pivot.language.ocl.ClassifierContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.ContextDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantExpCS;
-import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.IterateExpCS;
-import tudresden.ocl20.pivot.language.ocl.NavigationCallExp;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
-import tudresden.ocl20.pivot.language.ocl.PackageDeclarationCS;
-import tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Ocl22Parser;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.Variables;
-import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
-import tudresden.ocl20.pivot.model.ModelAccessException;
-import tudresden.ocl20.pivot.ocl2parser.test.constrainttypes.AllConstraintTypeTests;
-import tudresden.ocl20.pivot.ocl2parser.test.exception.MetaModelNotFoundException;
-import tudresden.ocl20.pivot.pivotmodel.Type;
+import org.dresdenocl.essentialocl.EssentialOclPlugin;
+import org.dresdenocl.language.ocl.ClassifierContextDeclarationCS;
+import org.dresdenocl.language.ocl.ContextDeclarationCS;
+import org.dresdenocl.language.ocl.InvariantExpCS;
+import org.dresdenocl.language.ocl.InvariantOrDefinitionCS;
+import org.dresdenocl.language.ocl.IterateExpCS;
+import org.dresdenocl.language.ocl.NavigationCallExp;
+import org.dresdenocl.language.ocl.OclExpressionCS;
+import org.dresdenocl.language.ocl.PackageDeclarationCS;
+import org.dresdenocl.language.ocl.RelationalOperationCallExpCS;
+import org.dresdenocl.language.ocl.resource.ocl.Ocl22Parser;
+import org.dresdenocl.language.ocl.resource.ocl.Variables;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
+import org.dresdenocl.model.ModelAccessException;
+import org.dresdenocl.ocl2parser.test.constrainttypes.AllConstraintTypeTests;
+import org.dresdenocl.ocl2parser.test.exception.MetaModelNotFoundException;
+import org.dresdenocl.pivotmodel.Type;
 
 public class TestAttributeAccess {
 

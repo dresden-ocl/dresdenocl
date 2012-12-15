@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package tudresden.ocl20.pivot.tracer.tracermodel;
+package org.dresdenocl.tracer.tracermodel;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see tudresden.ocl20.pivot.tracer.tracermodel.TracermodelFactory
+ * @see org.dresdenocl.tracer.tracermodel.TracermodelFactory
  * @model kind="package"
  * @generated
  */
@@ -56,14 +56,14 @@ public interface TracermodelPackage extends EPackage {
 	 * @generated
 	 */
 	TracermodelPackage eINSTANCE =
-			tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl
+			org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl
 					.init();
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl <em>Tracer Item</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl <em>Tracer Item</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerItem()
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerItem()
 	 * @generated
 	 */
 	int TRACER_ITEM = 0;
@@ -130,10 +130,10 @@ public interface TracermodelPackage extends EPackage {
 	int TRACER_ITEM_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '{@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
+	 * The meta object id for the '{@link org.dresdenocl.tracer.tracermodel.impl.TracerRootImpl <em>Tracer Root</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracerRootImpl
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
 	 * @generated
 	 */
 	int TRACER_ROOT = 1;
@@ -159,8 +159,8 @@ public interface TracermodelPackage extends EPackage {
 	/**
 	 * The meta object id for the '<em>IModel Instance Element</em>' data type.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
 	 * @generated
 	 */
 	int IMODEL_INSTANCE_ELEMENT = 2;
@@ -169,8 +169,8 @@ public interface TracermodelPackage extends EPackage {
 	 * The meta object id for the '<em>Ocl Any</em>' data type. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getOclAny()
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getOclAny()
 	 * @generated
 	 */
 	int OCL_ANY = 3;
@@ -180,117 +180,117 @@ public interface TracermodelPackage extends EPackage {
 	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * @see java.util.UUID
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
+	 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
 	 * @generated
 	 */
 	int UUID = 4;
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem <em>Tracer Item</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.tracer.tracermodel.TracerItem <em>Tracer Item</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tracer Item</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem
 	 * @generated
 	 */
 	EClass getTracerItem();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.tracer.tracermodel.TracerItem#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Expression</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getExpression()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem#getExpression()
 	 * @see #getTracerItem()
 	 * @generated
 	 */
 	EReference getTracerItem_Expression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult <em>Result</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.tracer.tracermodel.TracerItem#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Result</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getResult()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem#getResult()
 	 * @see #getTracerItem()
 	 * @generated
 	 */
 	EAttribute getTracerItem_Result();
 
 	/**
-	 * Returns the meta object for the reference '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the reference '{@link org.dresdenocl.tracer.tracermodel.TracerItem#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Parent</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getParent()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem#getParent()
 	 * @see #getTracerItem()
 	 * @generated
 	 */
 	EReference getTracerItem_Parent();
 
 	/**
-	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dresdenocl.tracer.tracermodel.TracerItem#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Children</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getChildren()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem#getChildren()
 	 * @see #getTracerItem()
 	 * @generated
 	 */
 	EReference getTracerItem_Children();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID <em>UUID</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.tracer.tracermodel.TracerItem#getUUID <em>UUID</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>UUID</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getUUID()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem#getUUID()
 	 * @see #getTracerItem()
 	 * @generated
 	 */
 	EAttribute getTracerItem_UUID();
 
 	/**
-	 * Returns the meta object for the attribute '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement <em>Model Instance Element</em>}'.
+	 * Returns the meta object for the attribute '{@link org.dresdenocl.tracer.tracermodel.TracerItem#getModelInstanceElement <em>Model Instance Element</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for the attribute '<em>Model Instance Element</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerItem#getModelInstanceElement()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerItem#getModelInstanceElement()
 	 * @see #getTracerItem()
 	 * @generated
 	 */
 	EAttribute getTracerItem_ModelInstanceElement();
 
 	/**
-	 * Returns the meta object for class '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot <em>Tracer Root</em>}'.
+	 * Returns the meta object for class '{@link org.dresdenocl.tracer.tracermodel.TracerRoot <em>Tracer Root</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Tracer Root</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot
+	 * @see org.dresdenocl.tracer.tracermodel.TracerRoot
 	 * @generated
 	 */
 	EClass getTracerRoot();
 
 	/**
-	 * Returns the meta object for the reference list '{@link tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}'.
+	 * Returns the meta object for the reference list '{@link org.dresdenocl.tracer.tracermodel.TracerRoot#getRootItems <em>Root Items</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Root Items</em>'.
-	 * @see tudresden.ocl20.pivot.tracer.tracermodel.TracerRoot#getRootItems()
+	 * @see org.dresdenocl.tracer.tracermodel.TracerRoot#getRootItems()
 	 * @see #getTracerRoot()
 	 * @generated
 	 */
 	EReference getTracerRoot_RootItems();
 
 	/**
-	 * Returns the meta object for data type '{@link tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement <em>IModel Instance Element</em>}'.
+	 * Returns the meta object for data type '{@link org.dresdenocl.modelinstancetype.types.IModelInstanceElement <em>IModel Instance Element</em>}'.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @return the meta object for data type '<em>IModel Instance Element</em>'.
-	 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-	 * @model instanceClass="tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement"
+	 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+	 * @model instanceClass="org.dresdenocl.modelinstancetype.types.IModelInstanceElement"
 	 * @generated
 	 */
 	EDataType getIModelInstanceElement();
 
 	/**
-	 * Returns the meta object for data type '{@link tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny <em>Ocl Any</em>}'.
+	 * Returns the meta object for data type '{@link org.dresdenocl.essentialocl.standardlibrary.OclAny <em>Ocl Any</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Ocl Any</em>'.
-	 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny
-	 * @model instanceClass="tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny"
+	 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny
+	 * @model instanceClass="org.dresdenocl.essentialocl.standardlibrary.OclAny"
 	 * @generated
 	 */
 	EDataType getOclAny();
@@ -330,12 +330,12 @@ public interface TracermodelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl
+		 * {@link org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl
 		 * <em>Tracer Item</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerItemImpl
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerItem()
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracerItemImpl
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerItem()
 		 * @generated
 		 */
 		EClass TRACER_ITEM = eINSTANCE.getTracerItem();
@@ -385,12 +385,12 @@ public interface TracermodelPackage extends EPackage {
 
 		/**
 		 * The meta object literal for the '
-		 * {@link tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
+		 * {@link org.dresdenocl.tracer.tracermodel.impl.TracerRootImpl
 		 * <em>Tracer Root</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc
 		 * -->
 		 * 
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracerRootImpl
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracerRootImpl
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getTracerRoot()
 		 * @generated
 		 */
 		EClass TRACER_ROOT = eINSTANCE.getTracerRoot();
@@ -405,8 +405,8 @@ public interface TracermodelPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em>IModel Instance Element</em>' data type.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * @see tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
+		 * @see org.dresdenocl.modelinstancetype.types.IModelInstanceElement
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getIModelInstanceElement()
 		 * @generated
 		 */
 		EDataType IMODEL_INSTANCE_ELEMENT = eINSTANCE.getIModelInstanceElement();
@@ -415,8 +415,8 @@ public interface TracermodelPackage extends EPackage {
 		 * The meta object literal for the '<em>Ocl Any</em>' data type. <!--
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
-		 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getOclAny()
+		 * @see org.dresdenocl.essentialocl.standardlibrary.OclAny
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getOclAny()
 		 * @generated
 		 */
 		EDataType OCL_ANY = eINSTANCE.getOclAny();
@@ -426,7 +426,7 @@ public interface TracermodelPackage extends EPackage {
 		 * begin-user-doc --> <!-- end-user-doc -->
 		 * 
 		 * @see java.util.UUID
-		 * @see tudresden.ocl20.pivot.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
+		 * @see org.dresdenocl.tracer.tracermodel.impl.TracermodelPackageImpl#getUUID()
 		 * @generated
 		 */
 		EDataType UUID = eINSTANCE.getUUID();

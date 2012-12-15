@@ -4,14 +4,14 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
+package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A quick fix that replaces the target of a reference with another EObject. This
  * class is used to implement default quick fixes for references that could not be
  * resolved, but can also be used by custom reference resolvers.
  */
-public class OclChangeReferenceQuickFix extends tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclQuickFix {
+public class OclChangeReferenceQuickFix extends org.dresdenocl.language.ocl.resource.ocl.mopp.OclQuickFix {
 	
 	private org.eclipse.emf.ecore.EObject container;
 	private org.eclipse.emf.ecore.EReference reference;

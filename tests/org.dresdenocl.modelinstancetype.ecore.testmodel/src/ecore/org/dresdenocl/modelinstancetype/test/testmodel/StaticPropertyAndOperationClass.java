@@ -1,6 +1,6 @@
 /**
  */
-package ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel;
+package ecore.org.dresdenocl.modelinstancetype.test.testmodel;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  *
- * @see ecore.tudresden.ocl20.pivot.modelinstancetype.test.testmodel.TestmodelPackage#getStaticPropertyAndOperationClass()
+ * @see ecore.org.dresdenocl.modelinstancetype.test.testmodel.TestmodelPackage#getStaticPropertyAndOperationClass()
  * @model
  * @generated
  */

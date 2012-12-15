@@ -31,10 +31,10 @@
  * $Id$
  */
 
-package tudresden.ocl20.pivot.tools.transformation.event;
+package org.dresdenocl.tools.transformation.event;
 
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.ITransformationRegistry;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.ITransformationRegistry;
 
 /**
  * An {@link ITransformationRegistryListener} is informed about activities in an

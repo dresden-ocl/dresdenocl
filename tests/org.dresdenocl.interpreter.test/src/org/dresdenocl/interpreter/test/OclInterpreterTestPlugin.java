@@ -17,7 +17,7 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License along 
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
-package tudresden.ocl20.pivot.interpreter.test;
+package org.dresdenocl.interpreter.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -30,7 +30,7 @@ import org.osgi.framework.BundleContext;
 public class OclInterpreterTestPlugin extends Plugin {
 
 	/** The plug-in ID. */
-	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter.test";
+	public static final String PLUGIN_ID = "org.dresdenocl.interpreter.test";
 
 	/** The shared instance. */
 	private static OclInterpreterTestPlugin plugin;

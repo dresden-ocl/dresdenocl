@@ -4,13 +4,13 @@
  *
  * 
  */
-package tudresden.ocl20.pivot.language.ocl.resource.ocl;
+package org.dresdenocl.language.ocl.resource.ocl;
 
 /**
  * A text parser parses a text into a tree of <code>EObject</code>s. It is
  * associated with a <code>TextResource</code>.
  */
-public interface IOclTextParser extends tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclConfigurable {
+public interface IOclTextParser extends org.dresdenocl.language.ocl.resource.ocl.IOclConfigurable {
 	
 	/**
 	 * Parses the content given to the parser and create a tree of EObjects. The root
@@ -19,7 +19,7 @@ public interface IOclTextParser extends tudresden.ocl20.pivot.language.ocl.resou
 	 * 
 	 * @return the result of the parse process
 	 */
-	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclParseResult parse();
+	public org.dresdenocl.language.ocl.resource.ocl.IOclParseResult parse();
 	
 	/**
 	 * Parses the document and returns a list of expected elements. Each expected
@@ -32,7 +32,7 @@ public interface IOclTextParser extends tudresden.ocl20.pivot.language.ocl.resou
 	 * The <code>cursorPosition</code> is used to discard expected elements, which
 	 * will not be needed.
 	 */
-	public java.util.List<tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset);
+	public java.util.List<org.dresdenocl.language.ocl.resource.ocl.mopp.OclExpectedTerminal> parseToExpectedElements(org.eclipse.emf.ecore.EClass type, org.dresdenocl.language.ocl.resource.ocl.IOclTextResource dummyResource, int cursorOffset);
 	
 	/**
 	 * Signals the parse to terminate parsing as soon as possible. This method must be

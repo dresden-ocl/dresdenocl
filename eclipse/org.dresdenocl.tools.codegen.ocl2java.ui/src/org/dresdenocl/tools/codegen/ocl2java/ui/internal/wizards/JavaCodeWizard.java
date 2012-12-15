@@ -17,7 +17,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.wizards;
+package org.dresdenocl.tools.codegen.ocl2java.ui.internal.wizards;
 
 import java.util.List;
 
@@ -27,15 +27,15 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import tudresden.ocl20.pivot.pivotmodel.Constraint;
-import tudresden.ocl20.pivot.tools.codegen.exception.Ocl2CodeException;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.IOcl2JavaSettings;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.Ocl2JavaFactory;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.Ocl2JavaUIPlugIn;
-import tudresden.ocl20.pivot.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.CodegenUIMessages;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.CodegenJob;
-import tudresden.ocl20.pivot.tools.codegen.ui.impl.wizards.TransformCodeWizard;
+import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.tools.codegen.exception.Ocl2CodeException;
+import org.dresdenocl.tools.codegen.ocl2java.IOcl2JavaSettings;
+import org.dresdenocl.tools.codegen.ocl2java.Ocl2JavaFactory;
+import org.dresdenocl.tools.codegen.ocl2java.ui.Ocl2JavaUIPlugIn;
+import org.dresdenocl.tools.codegen.ocl2java.ui.internal.Ocl2JavaUIMessages;
+import org.dresdenocl.tools.codegen.ui.impl.CodegenUIMessages;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.CodegenJob;
+import org.dresdenocl.tools.codegen.ui.impl.wizards.TransformCodeWizard;
 
 public class JavaCodeWizard extends TransformCodeWizard implements INewWizard {
 

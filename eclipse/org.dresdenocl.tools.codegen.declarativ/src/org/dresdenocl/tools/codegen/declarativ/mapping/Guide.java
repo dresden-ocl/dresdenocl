@@ -25,7 +25,7 @@
  *
  */
 
-package tudresden.ocl20.pivot.tools.codegen.declarativ.mapping;
+package org.dresdenocl.tools.codegen.declarativ.mapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
  * navigations over association ends or simple attribute access.
  * 
  * @author Florian Heidenreich
- * @see tudresden.ocl20.pivot.tools.codegen.declarativ.mapping.IMappedModel
+ * @see org.dresdenocl.tools.codegen.declarativ.mapping.IMappedModel
  */
 public class Guide {
 

@@ -1,11 +1,11 @@
-package tudresden.ocl20.pivot.tools.transformation.pivot2sql.impl;
+package org.dresdenocl.tools.transformation.pivot2sql.impl;
 
 import orgomg.cwm.resource.relational.Schema;
 
-import tudresden.ocl20.pivot.pivotmodel.Namespace;
-import tudresden.ocl20.pivot.tools.codegen.declarativ.IOcl2DeclSettings;
-import tudresden.ocl20.pivot.tools.transformation.ITransformation;
-import tudresden.ocl20.pivot.tools.transformation.SequentialTransformation;
+import org.dresdenocl.pivotmodel.Namespace;
+import org.dresdenocl.tools.codegen.declarativ.IOcl2DeclSettings;
+import org.dresdenocl.tools.transformation.ITransformation;
+import org.dresdenocl.tools.transformation.SequentialTransformation;
 
 /**
  * The Pivot2Ddl transformation implements the serial composition of the

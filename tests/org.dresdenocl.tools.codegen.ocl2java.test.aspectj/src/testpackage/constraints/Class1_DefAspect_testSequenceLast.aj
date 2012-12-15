@@ -14,6 +14,6 @@ public privileged aspect Class1_DefAspect_testSequenceLast {
      *       def: testSequenceLast(source: Sequence(OclAny)): OclAny = source ->last()</code></p>
      */
     public Object testpackage.Class1.testSequenceLast(java.util.List<Object> source) {
-        return tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences.last(source);
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.last(source);
     }
 }
