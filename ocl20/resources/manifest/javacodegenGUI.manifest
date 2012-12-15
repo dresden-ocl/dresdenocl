@@ -1,2 +1,0 @@
-Main-Class: tudresden.ocl20.codegen.java.JavaCodeGeneratorGUI
-Class-Path: ./resources/ ./resources/classpath/ ocl20injector.jar ocl20parserbase.jar ocl20jmiimpl.jar ocl20jmiapi.jar ocl20stdlib.jar ocl20repository.jar lib/external/jmi.jar lib/external/mof.jar lib/external/openide.jar lib/external/nbjmi_mdrapi.jar lib/external/nbjmi_mdrimpl.jar lib/external/nbjmi_jmiutils.jar

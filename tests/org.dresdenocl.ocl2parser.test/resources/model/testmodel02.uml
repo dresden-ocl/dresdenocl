@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_YrjsoM2zEd62LvZ-4azseA" name="test">
+  <packagedElement xmi:type="uml:Class" xmi:id="_m086EM6AEd6qLaARTezfFw" name="ClassA">
+    <ownedAttribute xmi:id="_dpbNALE9Ed-LyYPZwGfByg" name="attr1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v7-XULE9Ed-LyYPZwGfByg" name="stmts" type="_m086EM6AEd6qLaARTezfFw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1lgLoLE9Ed-LyYPZwGfByg" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_1BzBoLE9Ed-LyYPZwGfByg"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_UustsLE9Ed-LyYPZwGfByg" name="ClassB">
+    <generalization xmi:id="_26L0sLE_Ed-LyYPZwGfByg" general="_m086EM6AEd6qLaARTezfFw"/>
+  </packagedElement>
+</uml:Package>

@@ -1,0 +1,812 @@
+group javaOperations;
+delimiters "$","$"
+// ---- TEMPLATES FOR JAVA OPERATIONS ----
+// ---------------------------------------
+
+// --- Integer.abs(Integer) ---
+absOperationOnInteger(sourceExp, resultType) ::= <<
+java.lang.Math.abs($sourceExp$)
+>>
+
+// --- Real.abs(Real) ---
+absOperationOnReal(sourceExp, resultType) ::= <<
+java.lang.Math.abs($sourceExp$)
+>>
+
+// --- OclBoolean.allInstances() ---
+allInstancesOperationOnOclBoolean(resultVar, typeName) ::= <<
+$setType()$<$typeName$> $resultVar$ = new $setTypeInitialization()$<$typeName$>();
+$resultVar$.$addOperationName()$($typeName$.FALSE);
+$resultVar$.$addOperationName()$($typeName$.TRUE);
+>>
+
+// --- OclInvalid.allInstances() ---
+allInstancesOperationOnOclInvalid(sourceExp, typeName) ::= <<
+$invalidLiteralExp(resultType = typeName)$
+>>
+
+// --- OclType.allInstances() ---
+allInstancesOperationOnOclType(sourceExp, typeName) ::= <<
+(new $setTypeInitialization()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
+>>
+
+// --- OclVoid.allInstances() ---
+allInstancesOperationOnOclVoid(resultVar) ::= <<
+$setType()$<$anyType()$> $resultVar$ = new $setTypeInitialization()$<$anyType()$>();
+$resultVar$.$addOperationName()$($undefinedLiteralExp()$);
+>>
+
+// --- Boolean.and(Boolean) ---
+andOperationOnBoolean(sourceExp, argsExp) ::= <<
+($sourceExp$ && $argsExp$)
+>>
+
+// --- OrderedSet.append(T) ---
+appendOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.append($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.append(T) ---
+appendOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.append($sourceExp$, $argsExp$)
+>>
+
+// --- Bag.asBag() ---
+asBagOperationOnBag(sourceExp) ::= <<
+$bagUtility()$.asBag($sourceExp$)
+>>
+
+// --- Collection.asBag() ---
+asBagOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asBag($sourceExp$)
+>>
+
+// --- OrderedSet.asBag() ---
+asBagOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.asBag($sourceExp$)
+>>
+
+// --- Sequence.asBag() ---
+asBagOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.asBag($sourceExp$)
+>>
+
+// --- Set.asBag() ---
+asBagOperationOnSet(sourceExp) ::= <<
+$setUtility()$.asBag($sourceExp$)
+>>
+
+// --- Bag.asOrderedSet() ---
+asOrderedSetOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Collection.asOrderedSet() ---
+asOrderedSetOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- OrderedSet.asOrderedSet() ---
+asOrderedSetOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Sequence.asOrderedSet() ---
+asOrderedSetOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Set.asOrderedSet() ---
+asOrderedSetOperationOnSet(sourceExp) ::= <<
+$setUtility()$.asOrderedSet($sourceExp$)
+>>
+
+// --- Bag.asSequence() ---
+asSequenceOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Collection.asSequence() ---
+asSequenceOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asSequence($sourceExp$)
+>>
+
+// --- OrderedSet.asSequence() ---
+asSequenceOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Set.asSequence() ---
+asSequenceOperationOnSet(sourceExp) ::= <<
+$setUtility()$.asSequence($sourceExp$)
+>>
+
+// --- Sequence.asSequence() ---
+asSequenceOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.asSequence($sourceExp$)
+>>
+
+// --- OclAny.asSet() ---
+asSetOperationOnOclAny(sourceExp, argsExp, elementType, resultVar) ::= <<
+$setType()$<$elementType$> $resultVar$;
+$resultVar$ = new $setTypeInitialization()$<$elementType$>();
+$resultVar$.$addOperationName()$($sourceExp$);>>
+
+// --- Bag.asSet() ---
+asSetOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.asSet($sourceExp$)
+>>
+
+// --- Collection.asSet() ---
+asSetOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.asSet($sourceExp$)
+>>
+
+// --- OrderedSet.asSet() ---
+asSetOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.asSet($sourceExp$)
+>>
+
+// --- Set.asSet() ---
+asSetOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.asSet($sourceExp$)
+>>
+
+// --- Sequence.asSet() ---
+asSetOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.asSet($sourceExp$)
+>>
+
+// --- OrderedSet.at(Integer) ---
+atOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.at($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.at(Integer) ---
+atOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.at($sourceExp$, $argsExp$)
+>>
+
+// --- String.at(Integer) ---
+atOperationOnString(sourceExp, argsExp) ::= <<
+Character.toString($sourceExp$.charAt($argsExp$ - 1))
+>>
+
+// --- String.characters() ---
+charactersOperationOnString(sourceExp, resultVar, elementName) ::= <<
+$sequenceType()$<$stringType()$> $resultVar$;
+$resultVar$ = new $sequenceTypeInitialization()$<$stringType()$>();
+
+/* Compute the result of a characters operation. */
+for ($stringType()$ $elementName$ : $sourceExp$.split("")) {
+    $resultVar$.add($elementName$);
+}
+
+/* Remove the first element ''. */
+$resultVar$.remove($sequenceUtility()$.first($resultVar$));
+
+>>
+
+// --- String.concat(String) ---
+concatOperationOnString(sourceExp, argsExp) ::= <<
+$sourceExp$.concat($argsExp$)
+>>
+
+// --- Collection.count(T) ---
+countOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.count($sourceExp$, $argsExp$)
+>>
+
+// --- Bag.count(T) ---
+countOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.count($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.count(T) ---
+countOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.count($sourceExp$, $argsExp$)
+>>
+
+// --- Set.count(T) ---
+countOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.count($sourceExp$, $argsExp$)
+>>
+
+// --- Integer.div(Integer) ---
+divOperationOnInteger(sourceExp, argsExp) ::= <<
+($sourceExp$ / $argsExp$)
+>>
+
+// --- Real./(Real) ---
+divisionOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ / $argsExp$)
+>>
+
+// --- Integer./(Integer) ---
+divisionOperationOnInteger(sourceExp, argsExp) ::= <<
+(new $realType()$ ($sourceExp$) / new $realType()$ ($argsExp$))
+>>
+
+// --- OclAny.equals(OclAny) ---
+equalsOperationOnOclAny(sourceExp, argsExp) ::= <<
+$sourceExp$.equals($argsExp$)
+>>
+
+// --- String.equalsIgnoreCase(String) ---
+equalsIgnorCaseOperationOnString(sourceExp, argsExp) ::= <<
+$sourceExp$.equalsIgnorCase($argsExp$)
+>>
+
+// --- Bag.=(Bag(T)) ---
+equalsOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.=(Collection) ---
+equalsOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.=(Sequence(T)) ---
+equalsOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Set.=(Set(T)) ---
+equalsOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.equals($sourceExp$, $argsExp$)
+>>
+
+// --- Equals Operation on Primitive Types ---
+equalsOperationOnPrimitiveType(sourceExp, argsExp) ::= <<
+(($anyType()$) $sourceExp$).equals($argsExp$)
+>>
+
+// --- Collection.excludes(T) ---
+excludesOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.excludes($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.excludesAll(Collection(T)) ---
+excludesAllOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.excludesAll($sourceExp$, $argsExp$)
+>>
+
+// --- Bag.excluding(T) ---
+excludingOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.excluding($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.excluding(T) ---
+excludingOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.excluding($sourceExp$, $argsExp$)
+>>
+
+// --- Set.excluding(T) ---
+excludingOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.excluding($sourceExp$, $argsExp$)
+>>
+
+// --- OrderedSet.first() ---
+firstOperationOnOrderedSet(sourceExp) ::= <<
+$orderedSetUtility()$.first($sourceExp$)
+>>
+
+// --- Sequence.first() ---
+firstOperationOnSequence(sourceExp) ::= <<
+$sequenceUtility()$.first($sourceExp$)
+>>
+
+// --- Collection.flatten() ---
+flattenOperationOnCollection(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $collectionUtility()$.flatten($sourceExp$)
+>>
+
+// --- Bag.flatten() ---
+flattenOperationOnBag(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $bagUtility()$.flatten($sourceExp$)
+>>
+
+// --- Sequence.flatten() ---
+flattenOperationOnSequence(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $sequenceUtility()$.flatten($sourceExp$)
+>>
+
+// --- Set.flatten() ---
+flattenOperationOnSet(sourceExp, argsExp, resultType) ::= <<
+($resultType$) $setUtility()$.flatten($sourceExp$)
+>>
+
+// --- Real.floor(Real) ---
+floorOperationOnReal(sourceExp) ::= <<
+(new $integerType()$(new Double(java.lang.Math.floor($sourceExp$)).intValue()))
+>>
+
+// --- Real.>(Real) ---
+greaterOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ > $argsExp$)
+>>
+
+// --- String.>(String) ---
+greaterOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) > 0)
+>>
+
+// --- Real.>=(Real) ---
+greaterEqualsOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ >= $argsExp$)
+>>
+
+// --- String.>=(String) ---
+greaterEqualsOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) >= 0)
+>>
+
+// --- Boolean.implies(Boolean) ---
+impliesOperationOnBoolean(sourceExp, argsExp) ::= <<
+(!$sourceExp$ || $argsExp$)
+>>
+
+// --- Collection.includes(T) ---
+includesOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.includes($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.includesAll(Collection(T)) ---
+includesAllOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.includesAll($sourceExp$, $argsExp$)
+>>
+
+// --- Bag.including(T) ---
+includingOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.including($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.including(T) ---
+includingOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.including($sourceExp$, $argsExp$)
+>>
+
+// --- Set.including(T) ---
+includingOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.including($sourceExp$, $argsExp$)
+>>
+
+// --- OrderedSet.indexOf(T) ---
+indexOfOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.indexOf($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.indexOf(T) ---
+indexOfOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.indexOf($sourceExp$, $argsExp$)
+>>
+
+// --- String.indexOf(String) ---
+indexOfOperationOnString(sourceExp, argsExp) ::= <<
+$sourceExp$.indexOf($argsExp$) + 1
+>>
+
+// --- OrderedSet.insertAt(Integer, T) ---
+insertAtOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.insertAt($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- Sequence.insertAt(Integer, T) ---
+insertAtOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.insertAt($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- Bag.intersection(Bag(T)) and Bag.intersection(Set(T)) ---
+intersectionOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.intersection($sourceExp$, $argsExp$)
+>>
+
+// --- Set.intersection(Bag(T)) and Set.intersection(Set(T)) ---
+intersectionOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.intersection($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.isEmpty() ---
+isEmptyOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.isEmpty($sourceExp$)
+>>
+
+// --- OrderedSet.last() ---
+lastOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.last($sourceExp$)
+>>
+
+// --- Sequence.last() ---
+lastOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.last($sourceExp$)
+>>
+
+// --- Real.<(Real) ---
+lesserOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ < $argsExp$)
+>>
+
+// --- String.<(String) ---
+lesserOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) < 0)
+>>
+
+// --- Real.<=(Real) ---
+lesserEqualsOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ <= $argsExp$)
+>>
+
+// --- String.<=(String) ---
+lesserEqualsOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) <= 0)
+>>
+
+// --- Integer.max(Integer) ---
+maxOperationOnInteger(sourceExp, argsExp) ::= <<
+java.lang.Math.max($sourceExp$, $argsExp$)
+>>
+
+// --- Real.max(Real) ---
+maxOperationOnReal(sourceExp, argsExp) ::= <<
+java.lang.Math.max($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.max() ---
+maxOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.max($sourceExp$)
+>>
+
+// --- Integer.min(Integer) ---
+minOperationOnInteger(sourceExp, argsExp) ::= <<
+java.lang.Math.min($sourceExp$, $argsExp$)
+>>
+
+// --- Real.min(Real) ---
+minOperationOnReal(sourceExp, argsExp) ::= <<
+java.lang.Math.min($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.min() ---
+minOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.min($sourceExp$)
+>>
+
+// --- Integer.-(Integer) ---
+minusOperationOnInteger(sourceExp, argsExp) ::= <<
+($sourceExp$ - $argsExp$)
+>>
+
+// --- Real.-(Real) ---
+minusOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ - $argsExp$)
+>>
+
+// --- Set.minus(Set(T)) ---
+minusOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.minus($sourceExp$, $argsExp$)
+>>
+
+// --- Integer.*(Integer) ---
+multiplyOperationOnInteger(sourceExp, argsExp) ::= <<
+($sourceExp$ * $argsExp$)
+>>
+
+// --- Real.*(Real) ---
+multiplyOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ * $argsExp$)
+>>
+
+// --- Integer.mod(Integer) ---
+modOperationOnInteger(sourceExp, argsExp) ::= <<
+($sourceExp$ % $argsExp$)
+>>
+
+// --- Integer.-() ---
+negativeOperationOnInteger(sourceExp) ::= <<
+-($sourceExp$)
+>>
+
+// --- Real.-() ---
+negativeOperationOnReal(sourceExp) ::= <<
+-($sourceExp$)
+>>
+
+// --- String.matches(String) ---
+matchesOperationOnString(sourceExp, argsExp) ::= <<
+Pattern.compile($stringUtility()$.getJavaRegEx($argsExp$)).matcher($sourceExp$).find()
+>>
+
+
+// --- Boolean.not(Boolean) ---
+notOperationOnBoolean(sourceExp) ::= <<
+!$sourceExp$
+>>
+
+// --- Collection.notEmpty() ---
+notEmptyOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.notEmpty($sourceExp$)
+>>
+
+// --- OclAny.<>(OclAny) ---
+notEqualsOperationOnOclAny(sourceExp, argsExp) ::= <<
+!$sourceExp$.equals($argsExp$)
+>>
+
+// --- Collection.<>(Collection(T)) ---
+notEqualsOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.notEquals($sourceExp$, $argsExp$)
+>>
+
+// --- NotEquals Operation on Primitive Types ---
+notEqualsOperationOnPrimitiveType(sourceExp, argsExp) ::= <<
+!(($anyType()$) $sourceExp$).equals($argsExp$)
+>>
+
+// --- OclAny.oclAsType(OclType) ---
+oclAsTypeOperationOnOclAny(sourceExp, argsExp) ::= <<
+(($argsExp$) $sourceExp$)
+>>
+
+// --- OclAny.oclIsInvalid() ---
+oclIsInvalidOperationOnOclAny(sourceCode, sourceExp, resultVar, sourceHasType) ::= <<
+Boolean $resultVar$;
+
+/* Check if the expression results in invalid. */
+try {
+	$if(sourceCode)$
+	$sourceCode$
+	$endif$
+    $if(sourceHasType)$
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = $sourceExp$; 
+    $else$
+    $sourceExp$;
+    $endif$
+    $resultVar$ = false;
+}
+
+catch (Exception e) {
+    $resultVar$ = true;
+}
+
+>>
+
+// --- OclAny.oclIsNew() ---
+oclIsNewOperationOnOclAny(sourceExp) ::= <<
+this.newInstances.containsKey($sourceExp$)
+>>
+
+// --- OclAny.oclIsKindOf(OclType) ---
+oclIsKindOfOperationOnOclAny(sourceExp, argsExp) ::= <<
+($argsExp$.isAssignableFrom($sourceExp$.getClass()))
+>>
+
+// --- OclAny.oclIsTypeOf(OclType) ---
+oclIsTypeOfOperationOnOclAny(sourceExp, argsExp) ::= <<
+$sourceExp$.getClass().getCanonicalName().equals($argsExp$.getCanonicalName())
+>>
+
+// --- OclAny.oclIsUndefined() ---
+oclIsUndefinedOperationOnOclAny(sourceExp) ::= <<
+($sourceExp$ == null)
+>>
+
+// --- OclAny.oclIsUndefined() ---
+oclIsUndefinedOperationOnPrimitiveType(sourceExp, sourceType) ::= <<
+((($sourceType$) $sourceExp$) == null)
+>>
+
+// --- Boolean.or(Boolean) ---
+orOperationOnBoolean(sourceExp, argsExp) ::= <<
+($sourceExp$ || $argsExp$)
+>>
+
+// --- OclAny.oclType() ---
+oclTypeOperationOnOclAny(sourceExp, argsExp) ::= <<
+$sourceExp$.getClass()
+>>
+
+// --- Integer.+(Integer) ---
+plusOperationOnInteger(sourceExp, argsExp) ::= <<
+($sourceExp$ + $argsExp$)
+>>
+
+// --- Real.+(Real) ---
+plusOperationOnReal(sourceExp, argsExp) ::= <<
+($sourceExp$ + $argsExp$)
+>>
+
+// --- String.+(String) ---
+plusOperationOnString(sourceExp, argsExp) ::= <<
+$sourceExp$.concat($argsExp$)
+>>
+
+// --- Sequence.prepend(T) ---
+prependOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.prepend($sourceExp$, $argsExp$)
+>>
+
+// --- OrderedSet.prepend(T) ---
+prependOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.prepend($sourceExp$, $argsExp$)
+>>
+
+// --- Collection.product(Collection(T)) ---
+productOperationOnCollection(sourceExp, argsExp) ::= <<
+$collectionUtility()$.product($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- OrderedSet.reverse() ---
+reverseOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.reverse($sourceExp$)
+>>
+
+// --- Sequence.reverse() ---
+reverseOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.reverse($sourceExp$)
+>>
+
+// --- Real.round(Real) ---
+roundOperationOnReal(sourceExp) ::= <<
+java.lang.Math.round($sourceExp$)
+>>
+
+// --- Collection.size() ---
+sizeOperationOnCollection(sourceExp) ::= <<
+$collectionUtility()$.size($sourceExp$)
+>>
+
+// --- String.size() ---
+sizeOperationOnString(sourceExp) ::= <<
+$sourceExp$.length()
+>>
+
+// --- OrderedSet.subOrderedSet(Integer, Integer) ---
+subOrderedSetOperationOnOrderedSet(sourceExp, argsExp) ::= <<
+$orderedSetUtility()$.subOrderedSet($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- Sequence.subSequence() ---
+subSequenceOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.subSequence($sourceExp$, $argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- String.substring(Integer, Integer) ---
+substringOperationOnString(sourceExp, argsExp) ::= <<
+$sourceExp$.substring($argsExp:{arg | $arg$}; separator = " - 1, "$)
+>>
+
+// --- Collection.sum() ---
+sumOperationOnCollection(sourceExp, argsExp, resultType, typeConversion) ::= <<
+new $resultType$($collectionUtility()$.sum($sourceExp$)$typeConversion$)
+>>
+
+// --- Set.symmatricDifference(Set(T)) ---
+symmetricDifferenceOperationOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.symmetricDifference($sourceExp$, $argsExp$)
+>>
+
+// --- String.toBoolean() ---
+toBooleanOperationOnString(sourceExp) ::= <<
+Boolean.parseBoolean($sourceExp$)
+>>
+
+// --- String.toInteger() ---
+toIntegerOperationOnString(sourceExp) ::= <<
+Integer.parseInt($sourceExp$)
+>>
+
+// --- String.toReal() ---
+toRealOperationOnString(sourceExp) ::= <<
+Float.parseFloat($sourceExp$)
+>>
+
+// --- OclAny.toString() ---
+toStringOperationOnOclAny(sourceExp) ::= <<
+$sourceExp$.toString()
+>>
+
+// --- String.toLowerCase() ---
+toLowerCaseOperationOnString(sourceExp) ::= <<
+$sourceExp$.toLowerCase()
+>>
+
+// --- String.toUpperCase() ---
+toUpperCaseOperationOnString(sourceExp) ::= <<
+$sourceExp$.toUpperCase()
+>>
+
+// --- UML Operation ---
+umlOperation(operationName, sourceExp, argsExp) ::= <<
+$sourceExp$.$operationName$($argsExp:{arg | $arg$}; separator = ", "$)
+>>
+
+// --- Bag.union(Bag(T)) and Bag.union(Set(T)) ---
+unionOperationOnBag(sourceExp, argsExp) ::= <<
+$bagUtility()$.union($sourceExp$, $argsExp$)
+>>
+
+// --- Sequence.union(Sequence.union(T)) ---
+unionOperationOnSequence(sourceExp, argsExp) ::= <<
+$sequenceUtility()$.union($sourceExp$, $argsExp$)
+>>
+
+// --- Set.union(Bag(T)) ---
+unionOperationWithBagOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.unionWithBag($sourceExp$, $argsExp$)
+>>
+
+// --- Set.union(Set(T)) ---
+unionOperationWithSetOnSet(sourceExp, argsExp) ::= <<
+$setUtility()$.unionWithSet($sourceExp$, $argsExp$)
+>>
+
+// --- Boolean.xor(Boolean) ---
+xorOperationOnBoolean(sourceExp, argsExp) ::= <<
+($sourceExp$ ^ $argsExp$)
+>>
+
+
+// ---- SOME OPERATION NAMES USED IN OTHER TEMPLATES ----
+// ------------------------------------------------------
+
+// --- Add Operation Name ---
+addOperationName() ::= <<
+add
+>>
+
+// --- AddAll Operation Name ---
+addAllOperationName() ::= <<
+addAll
+>>
+
+// --- Name for the method to manually check Invariants ---
+checkInvariantsOperationName() ::= <<
+checkInvariants
+>>
+
+// --- Name for the method to deeply clone Objects ---
+deepCopyOperationName() ::= <<
+createCopy
+>>
+
+// --- Utility Class for Bag Operations ---
+bagUtility() ::= <<
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags
+>>
+
+// --- Utility Class for Collection Operations ---
+collectionUtility() ::= <<
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections
+>>
+
+// --- Utility Class for OrderedSet Operations ---
+orderedSetUtility() ::= <<
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclOrderedSets
+>>
+
+// --- Utility Class for Sequence Operations ---
+sequenceUtility() ::= <<
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences
+>>
+
+// --- Utility Class for Set Operations ---
+setUtility() ::= <<
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets
+>>
+
+// --- Utility Class for String Operations ---
+stringUtility() ::= <<
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclString
+>>
+
+// --- Conversion operation from Number to Integer. */
+numberConversionToInteger() ::= <<
+.intValue()
+>>
+
+// --- Conversion operation from Number to Float. */
+numberConversionToFloat() ::= <<
+.floatValue()
+>>

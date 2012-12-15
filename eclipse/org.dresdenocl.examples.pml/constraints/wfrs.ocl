@@ -1,0 +1,45 @@
+-- @model{../model/pml.ecore}
+package org::dresdenocl::examples::pml
+
+-- The id of a plug-in must be defined.
+context Plugin
+inv pluginIdIsDefined: 
+  not self.id.oclIsUndefined()
+
+
+-- Each feature must have at least one plug-in.
+context Feature
+inv featureContainsPlugins:
+  self.plugins->size() > 0
+  
+-- Each feature must have the same version as all contained plug-ins.
+context Feature
+inv featureAndPluginsHaveSameVersion:
+  self.version.oclIsUndefined()
+  or
+  self.plugins->forAll(p : Plugin | p.version = self.version)
+  
+
+-- The id of an extension point must be defined.
+context ExtensionPoint 
+inv extensionPointIdIsDefined:
+  not self.id.oclIsUndefined()
+
+-- An extension point must provide an interface.
+context ExtensionPoint 
+inv extensionPointInterfacesAreSet:
+  not self.interface.oclIsUndefined()
+
+
+-- An extension must provide an implementation
+context Extension
+inv extensionImplementationIsProvided:
+  not self.implementation.oclIsUndefined()
+  
+-- An extension's implementation must implement
+-- the interface of its extension point.
+context Extension
+inv extensionImplementsExtensionPoint:
+  self.implementation.implements->includes(self.extensionPoint.interface)
+
+endpackage

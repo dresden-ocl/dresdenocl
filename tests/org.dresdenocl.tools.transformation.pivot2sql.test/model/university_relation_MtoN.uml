@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="org">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="dresdenocl">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
+        <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_5_jWoDePEd-JXKTQMEgtig" name="Paper"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_Hxsl8DeSEd-JXKTQMEgtig" name="A_author_papers" memberEnd="_Y0R9MDeSEd-JXKTQMEgtig _fSk2UDeSEd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_Y0R9MDeSEd-JXKTQMEgtig" name="author" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_Hxsl8DeSEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eUD_oDeSEd-JXKTQMEgtig" value="*"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_fSk2UDeSEd-JXKTQMEgtig" name="papers" type="_5_jWoDePEd-JXKTQMEgtig" association="_Hxsl8DeSEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hs6KwDeSEd-JXKTQMEgtig" value="*"/>
+          </ownedEnd>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

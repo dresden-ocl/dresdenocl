@@ -1,0 +1,34 @@
+package org.dresdenocl.examples.royalsandloyals.constraints;
+
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
+public privileged aspect LoyaltyProgram_BodyAspect_getServices {
+
+    /**
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyProgram#getServices()}.</p>
+     */
+    protected pointcut getServicesCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass):
+    	call(* org.dresdenocl.examples.royalsandloyals.LoyaltyProgram.getServices())
+    	&& target(aClass);
+
+    /**
+     * <p>Defines the body of the method getServices() defined by the constraint
+     * <code>context LoyaltyProgram::getServices(): java.util.Set<org.dresdenocl.examples.royalsandloyals.Service>
+     *       body: partners.deliveredServices->asSet()</code></p>
+     */
+    java.util.Set<org.dresdenocl.examples.royalsandloyals.Service> around(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass): getServicesCaller(aClass) {
+        java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service> result1;
+        result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service>();
+        
+        /* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+        for (org.dresdenocl.examples.royalsandloyals.ProgramPartner anElement1 : aClass.partners) {
+            result1.addAll(anElement1.deliveredServices);
+        }
+
+        return org.dresdenocl.tools.codegen.ocl2java.types.util.OclBags.asSet(result1);
+    }
+}

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 173f.
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context Membership
+inv: Sequence{'a','b','c','c','d','e'}->append('X') = Sequence{'a','b','c','c','d','e','X'}
+  
+endpackage

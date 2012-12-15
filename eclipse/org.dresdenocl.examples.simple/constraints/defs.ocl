@@ -1,0 +1,8 @@
+-- @model{../model/simple.uml}
+package org::dresdenocl::examples::simple
+
+-- Returns the age of a Person.
+context Person
+def: getAge(): Integer = age
+
+endpackage

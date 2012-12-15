@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Abstract Syntax Model Edit
+Bundle-SymbolicName: org.dresdenocl.language.ocl.edit;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.dresdenocl.language.ocl.provider.OCLEditPlugin$Implementation
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.language.ocl.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.language.ocl;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.dresdenocl.pivotmodel;visibility:=reexport,
+ org.dresdenocl.pivotmodel.edit;visibility:=reexport,
+ org.emftext.commons.layout.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy

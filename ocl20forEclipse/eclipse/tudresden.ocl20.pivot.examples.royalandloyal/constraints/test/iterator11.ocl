@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 179 and adapted.
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context LoyaltyProgram
-inv: self.participants->forAll(c1, c2 | c1 <> c2 implies not(c1.name = c2.name))
-  
-endpackage

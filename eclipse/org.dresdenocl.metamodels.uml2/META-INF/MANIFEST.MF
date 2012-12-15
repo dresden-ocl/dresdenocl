@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UML2 Meta-Model Plug-in
+Bundle-SymbolicName: org.dresdenocl.metamodels.uml2;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.uml2.UML2MetamodelPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.uml2.uml;bundle-version="[3.1.0,5.0.0)",
+ org.dresdenocl.modelbus
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.metamodels.uml2,
+ org.dresdenocl.metamodels.uml2.internal.provider

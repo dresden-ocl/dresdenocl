@@ -66,19 +66,17 @@ III. Eclipse Plug-Ins
 
 Installation:
 
-1. Add repository: svn+ssh://<<username>>@svn-st.inf.tu-dresden.de/srv/svn/dresdenocl
-	for readonly access, use the url http://svn-st.inf.tu-dresden.de/svn/dresdenocl/
+1. Add repository: https://github.com/dresden-ocl/test.git
 
 2. Check out the following projects from Dresden OCL SVN (see step 3):
-	* trunk/ocl20forEclipse/eclipse/** (all)
-	* trunk/ocl20forEclipse/experimental/org.dresdenocl.examples.uml
-	* trunk/ocl20forEclipse/tests/** (all)
+	* eclipse/** (all)
+	* tests/** (all)
 
 3. Build the project: 
-	* tudresden.ocl20.pivot.language.ocl.staticsemantics -> build.xml -> Run As -> 2nd entry of Ant-Build 
+	* org.dresdenocl.language.ocl.staticsemantics -> build.xml -> Run As -> 2nd entry of Ant-Build 
 		** Tab Targets:
-			- select Clean tudresden.ocl20.pivot.language.ocl.staticsemantics 
-			- select Compile tudresden.ocl20.pivot.language.ocl.staticsemantics 
+			- select Clean org.dresdenocl.language.ocl.staticsemantics 
+			- select Compile org.dresdenocl.language.ocl.staticsemantics 
 		** Tab JRE:
 			- Runtime JRE: select "Run in the same JRE as the workspace"
 	* Run

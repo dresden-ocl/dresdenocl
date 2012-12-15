@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Java Reflective Meta Model
+Bundle-SymbolicName: org.dresdenocl.metamodels.java;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.java.JavaMetaModelPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.modelbus
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.metamodels.java;
+  uses:="org.eclipse.core.runtime,
+   org.apache.log4j,
+   org.osgi.framework,
+   org.dresdenocl.model",
+ org.dresdenocl.metamodels.java.internal.model,
+ org.dresdenocl.metamodels.java.internal.provider;uses:="org.dresdenocl.model.base,org.apache.log4j,org.dresdenocl.model"

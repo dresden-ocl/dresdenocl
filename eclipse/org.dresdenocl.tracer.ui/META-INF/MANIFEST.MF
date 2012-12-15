@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL Tracer GUI Plug-In
+Bundle-SymbolicName: org.dresdenocl.tracer.ui;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.tracer.ui.TracerUIPlugin
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.dresdenocl.pivotmodel,
+ org.eclipse.core.runtime,
+ org.dresdenocl.interpreter.ui,
+ org.dresdenocl.tracer,
+ org.dresdenocl.interpreter,
+ org.dresdenocl.modelinstancetype,
+ org.dresdenocl.essentialocl.standardlibrary,
+ org.eclipse.emf.edit.ui
+Bundle-Vendor: TU Dresden, Software Technology Group

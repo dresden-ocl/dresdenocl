@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 47.
+-- @model{../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context Membership
+def: getCurrentLevelName() : String = currentLevel.name
+
+endpackage

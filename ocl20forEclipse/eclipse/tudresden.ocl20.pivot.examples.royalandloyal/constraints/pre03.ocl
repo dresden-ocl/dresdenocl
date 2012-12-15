@@ -1,8 +1,0 @@
--- Constraints taken from [1] page 138.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context LoyaltyProgram::addService(aPartner: ProgramPartner, aLevel: ServiceLevel, aService: Service)
-pre: levels->includes(aLevel)
-
-endpackage

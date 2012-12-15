@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 46.
+-- @model{../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context CustomerCard
+inv checkDates: validFrom.isBefore(validThru)
+    
+endpackage

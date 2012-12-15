@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.3"?>
+<plugin>
+    <extension
+    		point="org.dresdenocl.modelbus.metamodels">
+      <metamodel
+            icon="icons/xsd.gif"
+            id="org.dresdenocl.metamodels.xsd"
+            modelProvider="org.dresdenocl.metamodels.xsd.internal.provider.XSDModelProvider"
+            name="XML Schema Meta-Model">
+      </metamodel>
+   </extension>
+
+</plugin>

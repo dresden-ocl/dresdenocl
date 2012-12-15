@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL2 Interpreter Plug-in
+Bundle-SymbolicName: org.dresdenocl.interpreter
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.interpreter.OclInterpreterPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.standardlibrary.java,
+ org.dresdenocl.modelbus
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.interpreter,
+ org.dresdenocl.interpreter.event,
+ org.dresdenocl.interpreter.event.internal,
+ org.dresdenocl.interpreter.internal
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group

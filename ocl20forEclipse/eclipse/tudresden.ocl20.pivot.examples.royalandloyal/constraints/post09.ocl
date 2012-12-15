@@ -1,9 +1,0 @@
--- Constraint taken and adapted from [1] page 184.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
--- Unable to find property 'membership' in type 'root::tudresden::ocl20::pivot::examples::royalsandloyals::CustomerCard' An error occured while building an property call expression. Error occured at line 6 and column 26. The error occured at the token membership.
-context Transaction::getProgram(): LoyaltyProgram
-post: result = self.card.membership.program
-                     
-endpackage

@@ -1,1 +1,0 @@
-!"".equals(tudresden.ocl20.pivot.examples.royalsandloyals.Date.nowAsString())

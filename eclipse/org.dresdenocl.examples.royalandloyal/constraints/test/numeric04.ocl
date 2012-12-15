@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 153.
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context Service
+inv: 12 > 22.7 = false
+
+endpackage

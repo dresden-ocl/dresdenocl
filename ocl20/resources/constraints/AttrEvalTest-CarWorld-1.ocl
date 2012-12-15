@@ -1,5 +1,0 @@
-package carworld::nested
-context Classifier1
-inv: size >= 0
-endpackage
-

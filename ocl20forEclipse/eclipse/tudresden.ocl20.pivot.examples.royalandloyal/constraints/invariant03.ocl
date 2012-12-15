@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 47.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Adapted from includesAll to includes
-context LoyaltyProgram
-inv knownServiceLevel: levels->includes(membership.currentLevel)
-
-endpackage

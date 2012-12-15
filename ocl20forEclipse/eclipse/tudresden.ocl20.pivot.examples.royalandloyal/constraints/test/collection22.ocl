@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 172f and extended.
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Membership
-inv: Set { 1, 2 }->intersection(Set { 1, 3 })->size() = 1 
-  
-endpackage

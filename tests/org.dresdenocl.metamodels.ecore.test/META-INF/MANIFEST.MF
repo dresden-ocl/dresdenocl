@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ecore Meta-Model Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.metamodels.ecore.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.ecore.test.EcoreMetaModelTestPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.metamodels.test,
+ org.dresdenocl.metamodels.ecore,
+ org.dresdenocl.facade
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group
+Export-Package: org.dresdenocl.metamodels.ecore.test.tests

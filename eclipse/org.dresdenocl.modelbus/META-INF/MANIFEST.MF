@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Bus
+Bundle-SymbolicName: org.dresdenocl.modelbus;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.modelbus.ModelBusPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi,
+ org.dresdenocl.modelinstance;visibility:=reexport,
+ org.dresdenocl.essentialocl.standardlibrary;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Export-Package: org.dresdenocl.modelbus;
+  uses:="org.eclipse.core.runtime,
+   org.dresdenocl.modelinstance,
+   org.apache.log4j,
+   org.osgi.framework,
+   org.dresdenocl.model,
+   org.dresdenocl.model.metamodel",
+ org.dresdenocl.modelbus.descriptor;uses:="org.eclipse.core.runtime",
+ org.dresdenocl.modelbus.metamodel;uses:="org.dresdenocl.modelbus.descriptor",
+ org.dresdenocl.modelbus.modelinstance;uses:="org.dresdenocl.modelbus.descriptor",
+ org.dresdenocl.modelbus.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.commons.io

@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL2SQL GUI Plug-in
+Bundle-SymbolicName: org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.Ocl2SQLUIPlugIn
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.dresdenocl.modelbus,
+ org.dresdenocl.tools.codegen.ui,
+ org.dresdenocl.tools.codegen.declarativ.ocl2sql,
+ org.dresdenocl.tools.codegen.declarativ
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group

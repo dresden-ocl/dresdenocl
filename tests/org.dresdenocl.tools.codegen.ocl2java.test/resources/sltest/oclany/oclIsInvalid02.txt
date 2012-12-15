@@ -1,0 +1,17 @@
+Boolean result1;
+
+/* Check if the expression results in invalid. */
+try {
+	java.util.ArrayList collection1;
+	collection1 = new java.util.ArrayList();
+
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.first(collection1); 
+    result1 = false;
+}
+
+catch (Exception e) {
+    result1 = true;
+}
+
+result1

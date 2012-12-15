@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:version="2.0" name="package1" nsURI="package1" nsPrefix="">
+  <eClassifiers xsi:type="ecore:EClass" name="TestTypeClass1">
+    <eOperations name="operation1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="property1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestTypeClass2" eSuperTypes="#//TestTypeClass1">
+    <eOperations name="operation2"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="property2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TestEnumeration">
+    <eLiterals name="TestLiteral1" value="1"/>
+    <eLiterals name="TestLiteral2" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestPrimitiveTypeClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEByte" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEByteObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEShort" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEShortObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShortObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEIntegerObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerELong" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerELongObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEBigInteger" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerEBigDecimal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealEFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealEFloatObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealEDouble" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealEDoubleObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aBooleanEBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aBooleanEBooleanObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aStringEChar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aStringECharacterObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ECharacterObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aStringEString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerByte" eType="#//primitivetypes/Byte"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerByteObject" eType="#//primitivetypes/ByteObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerShort" eType="#//primitivetypes/Short"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerShortObject" eType="#//primitivetypes/ShortObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerInt" eType="#//primitivetypes/Int"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerIntegerObject" eType="#//primitivetypes/IntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerLong" eType="#//primitivetypes/Long"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerLongObject" eType="#//primitivetypes/LongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerBigInteger" eType="#//primitivetypes/BigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="anIntegerBigDecimal" eType="#//primitivetypes/BigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealFloat" eType="#//primitivetypes/Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealFloatObject" eType="#//primitivetypes/FloatObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealDouble" eType="#//primitivetypes/Double"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aRealDoubleObject" eType="#//primitivetypes/DoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aBooleanBoolean" eType="#//primitivetypes/Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aBooleanBooleanObject" eType="#//primitivetypes/BooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aStringChar" eType="#//primitivetypes/Char"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aStringCharacterObject" eType="#//primitivetypes/CharacterObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aStringString" eType="#//primitivetypes/String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestOperationAndParameterClass">
+    <eOperations name="operationWithoutParameters" eType="#//TestTypeClass1"/>
+    <eOperations name="voidOperationWithParameter">
+      <eParameters name="in1" eType="#//TestTypeClass1"/>
+    </eOperations>
+    <eOperations name="orderedMultipleOperation" unique="false" upperBound="-1" eType="#//TestTypeClass1"/>
+    <eOperations name="unorderedMultipleOperation" ordered="false" upperBound="-1" eType="#//TestTypeClass1"/>
+    <eOperations name="uniqueMultipleOperation" ordered="false" upperBound="-1" eType="#//TestTypeClass1"/>
+    <eOperations name="nonuniqueMultipleOperation" ordered="false" unique="false" upperBound="-1" eType="#//TestTypeClass1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestPropertyClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonmultipleProperty" eType="#//TestTypeClass1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderedMultipleProperty" unique="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unorderedMultipleProperty" ordered="false" unique="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueMultipleProperty" ordered="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonuniqueMultipleProperty" ordered="false" unique="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associationEnd1" eType="#//TestTypeClass1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderedMultiplePropertyAssociationEnd" unique="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unorderedMultiplePropertyAssociationEnd" ordered="false" unique="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueMultiplePropertyAssociationEnd" ordered="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonuniqueMultiplePropertyAssociationEnd" ordered="false" unique="false" upperBound="-1" eType="#//TestTypeClass1" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifierProperty" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonidentifierProperty" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="NonPrimitiveDataType" instanceClassName="java.lang.Object"/>
+  <eSubpackages name="package2" nsURI="package1.package2" nsPrefix=""/>
+  <eSubpackages name="primitivetypes" nsURI="package1.package2.primitiveTypes" nsPrefix="">
+    <eClassifiers xsi:type="ecore:EDataType" name="Byte" instanceClassName="byte"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="ByteObject" instanceClassName="java.lang.Byte"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Short" instanceClassName="short"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="ShortObject" instanceClassName="java.lang.Short"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Int" instanceClassName="int"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="IntegerObject" instanceClassName="java.lang.Integer"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Long" instanceClassName="long"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="LongObject" instanceClassName="java.lang.Long"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="BigInteger" instanceClassName="java.math.BigInteger"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="BigDecimal" instanceClassName="java.math.BigDecimal"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Float" instanceClassName="float"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="FloatObject" instanceClassName="java.lang.Float"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Double" instanceClassName="double"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="DoubleObject" instanceClassName="java.lang.Double"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="BooleanObject" instanceClassName="java.lang.Boolean"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Char" instanceClassName="char"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="CharacterObject" instanceClassName="java.lang.Character"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,20 @@
+java.util.ArrayList<Integer> result2;
+result2 = new java.util.ArrayList<Integer>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (org.dresdenocl.examples.royalsandloyals.Transaction anElement1 : aClass.transactions) {
+    result2.add(anElement1.points);
+}
+Boolean result1;
+result1 = false;
+
+/* Iterator Exists: Iterate and check, if any element fulfills the condition. */
+for (Integer anElement2 : result2) {
+    if (((Object) anElement2).equals(new Integer(500))) {
+        result1 = true;
+        break;
+    }
+    // no else
+}
+
+result1

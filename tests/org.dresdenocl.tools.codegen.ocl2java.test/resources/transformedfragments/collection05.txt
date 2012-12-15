@@ -1,0 +1,7 @@
+java.util.ArrayList<String> collection1;
+collection1 = new java.util.ArrayList<String>();
+
+collection1.add("Affe");
+collection1.add("Nuss");
+
+((Object) org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(2))

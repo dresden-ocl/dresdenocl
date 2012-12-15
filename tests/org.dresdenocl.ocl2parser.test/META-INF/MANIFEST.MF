@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL2 Parser Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.ocl2parser.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.ocl2parser.test.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.facade,
+ org.dresdenocl.language.ocl.staticsemantics,
+ org.dresdenocl.language.ocl.resource.ocl,
+ org.dresdenocl.language.ocl;bundle-version="3.1.0",
+ org.dresdenocl.testsuite.abstract
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group
+Import-Package: org.dresdenocl.essentialocl.expressions
+Export-Package: org.dresdenocl.ocl2parser.test

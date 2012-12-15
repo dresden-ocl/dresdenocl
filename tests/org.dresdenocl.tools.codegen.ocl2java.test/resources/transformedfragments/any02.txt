@@ -1,0 +1,1 @@
+aClass.getClass().getCanonicalName().equals(org.dresdenocl.examples.royalsandloyals.Transaction.class.getCanonicalName())

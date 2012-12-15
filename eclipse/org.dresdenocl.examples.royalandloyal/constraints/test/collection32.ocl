@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 173f.
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context Membership
+inv: OrderedSet{'a','b','c','d'}->subOrderedSet( 2, 3 ) = OrderedSet{'b','c'}
+  
+endpackage

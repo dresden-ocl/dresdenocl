@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: $bundlename
+Bundle-SymbolicName: $projectname
+Bundle-Version: 1.0.0
+Bundle-Activator: ${activatorpackage}.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.essentialocl,
+ org.dresdenocl.metamodels.uml,
+ org.dresdenocl.modelbus,
+ org.dresdenocl.pivotmodel,
+ org.dresdenocl.standardlibrary.java,
+ org.dresdenocl.logging,
+ org.dresdenocl.ocl2parser,
+ org.junit4
+Eclipse-LazyStart: true

@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL2 for Eclipse Facade
+Bundle-SymbolicName: org.dresdenocl.facade
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.facade.Activator
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.modelbus;visibility:=reexport,
+ org.dresdenocl.metamodels.ecore,
+ org.dresdenocl.metamodels.java,
+ org.dresdenocl.metamodels.uml2,
+ org.dresdenocl.modelinstancetype.ecore,
+ org.dresdenocl.modelinstancetype.java,
+ org.dresdenocl.language.ocl.staticsemantics;visibility:=reexport,
+ org.dresdenocl.parser;visibility:=reexport,
+ org.dresdenocl.interpreter;visibility:=reexport,
+ org.dresdenocl.tools.codegen.ocl2java;visibility:=reexport,
+ org.dresdenocl.tools.codegen,
+ org.dresdenocl.metamodels.xsd,
+ org.dresdenocl.tools.codegen.declarativ.ocl2sql,
+ org.dresdenocl.tools.codegen.declarativ,
+ org.dresdenocl.tools.template,
+ org.dresdenocl.tools.transformation,
+ org.dresdenocl.modelinstancetype.xml,
+ org.dresdenocl.language.ocl.resource.ocl,
+ org.dresdenocl.metrics
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.facade

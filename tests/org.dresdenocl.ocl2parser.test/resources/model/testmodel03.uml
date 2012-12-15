@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_YrjsoM2zEd62LvZ-4azseA" name="test">
+  <packagedElement xmi:type="uml:Class" xmi:id="_m086EM6AEd6qLaARTezfFw" name="ClassA">
+    <ownedAttribute xmi:id="_dpbNALE9Ed-LyYPZwGfByg" name="isUnique">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Package>

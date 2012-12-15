@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XML Ecore Model Instance Type Plug-in
+Bundle-SymbolicName: org.dresdenocl.modelinstancetype.ecore;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.modelinstancetype.ecore.EcoreModelInstanceTypePlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.modelbus
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.modelinstancetype.ecore;uses:="org.osgi.framework,org.eclipse.core.runtime",
+ org.dresdenocl.modelinstancetype.ecore.internal.provider;uses:="org.dresdenocl.modelbus,org.dresdenocl.modelbus.model.base,org.eclipse.emf.ecore.resource"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group

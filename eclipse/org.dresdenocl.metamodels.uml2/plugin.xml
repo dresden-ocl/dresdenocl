@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.3"?>
+<plugin>
+    <extension
+    		point="org.dresdenocl.modelbus.metamodels">
+      <metamodel
+            icon="icons/UML2.gif"
+            id="org.dresdenocl.metamodels.uml2"
+            modelProvider="org.dresdenocl.metamodels.uml2.internal.provider.UML2ModelProvider"
+            name="UML2 Class Diagram">
+      </metamodel>
+   </extension>
+</plugin>

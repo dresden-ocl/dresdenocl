@@ -1,0 +1,8 @@
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+   
+-- Used to test the preparation contained in '../define04.ocl'
+context LoyaltyAccount
+inv: usedServices->size() = transactions.service->asSet()->size()
+                     
+endpackage

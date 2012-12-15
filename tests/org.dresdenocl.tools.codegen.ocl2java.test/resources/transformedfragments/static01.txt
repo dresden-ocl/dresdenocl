@@ -1,0 +1,1 @@
+aClass.date.isBefore(org.dresdenocl.examples.royalsandloyals.Date.now())

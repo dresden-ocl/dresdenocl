@@ -1,9 +1,0 @@
-java.util.ArrayList<String> collection1;
-collection1 = new java.util.ArrayList<String>();
-
-collection1.add("Apfel");
-collection1.add("Orange");
-collection1.add("Erdbeere");
-collection1.add("Birne");
-
-((Object) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(4))

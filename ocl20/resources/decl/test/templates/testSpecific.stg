@@ -1,5 +1,0 @@
-group testSpecific;
-
-specific() ::= <<
-specificTemplate
->>

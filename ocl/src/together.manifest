@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-
-Name: OCL Editor
-Main-Class: com.togethersoft.modules.ocl.OCLInspectorBuilder
-Time: OnDemand
-
-Name: OCL Injector
-Main-Class: com.togethersoft.modules.ocl.OCLInjectorBuilder
-Time: OnDemand

@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 154.
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context Service
+inv: 'Anneke and Jos'.substring(12, 14) = 'Jos'
+
+endpackage

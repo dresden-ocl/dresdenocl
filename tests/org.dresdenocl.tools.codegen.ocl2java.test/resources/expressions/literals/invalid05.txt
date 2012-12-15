@@ -1,0 +1,13 @@
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(2));
+Integer result1;
+result1 = new Integer(0);
+/* IterateExp: Iterate through all elements and perform an operation on them. */
+for (Integer anElement1 : collection1) {
+    result1 = (Integer) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+}
+
+result1

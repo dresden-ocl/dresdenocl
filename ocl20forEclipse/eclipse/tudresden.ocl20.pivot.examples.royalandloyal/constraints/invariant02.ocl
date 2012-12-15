@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 46.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context CustomerCard
-inv checkDates: validFrom.isBefore(validThru)
-    
-endpackage

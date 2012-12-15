@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 61.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context LoyaltyAccount::transactions : Set(Transaction)
-init: Set{}
-
-endpackage

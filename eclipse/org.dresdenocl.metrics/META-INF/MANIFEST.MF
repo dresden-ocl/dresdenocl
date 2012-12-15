@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL Metrics
+Bundle-SymbolicName: org.dresdenocl.metrics;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.dresdenocl.pivotmodel;visibility:=reexport,
+ org.dresdenocl.model,
+ org.dresdenocl.essentialocl
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.metrics,
+ org.dresdenocl.metrics.metric,
+ org.dresdenocl.metrics.metric.impl,
+ org.dresdenocl.metrics.metric.util

@@ -1,7 +1,0 @@
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context LoyaltyProgram::enroll(c : Customer)
-post: 
-  participants = participants@pre->including(c)
-
-endpackage

@@ -1,0 +1,4 @@
+java.util.Set<Integer> result1;
+result1 = new java.util.HashSet<Integer>();
+result1.add(new Integer(42));
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(result1)

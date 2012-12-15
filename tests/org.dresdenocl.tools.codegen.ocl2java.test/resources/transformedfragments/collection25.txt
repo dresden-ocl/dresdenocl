@@ -1,0 +1,23 @@
+java.util.HashSet<Integer> collection1;
+collection1 = new java.util.HashSet<Integer>();
+
+collection1.add(new Integer(1));
+collection1.add(new Integer(4));
+collection1.add(new Integer(7));
+collection1.add(new Integer(10));
+
+java.util.HashSet<Integer> collection2;
+collection2 = new java.util.HashSet<Integer>();
+
+collection2.add(new Integer(4));
+collection2.add(new Integer(5));
+collection2.add(new Integer(7));
+
+java.util.HashSet<Integer> collection3;
+collection3 = new java.util.HashSet<Integer>();
+
+collection3.add(new Integer(1));
+collection3.add(new Integer(5));
+collection3.add(new Integer(10));
+
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.equals(org.dresdenocl.tools.codegen.ocl2java.types.util.OclSets.symmetricDifference(collection1, collection2), collection3)

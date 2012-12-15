@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Instance
+Bundle-SymbolicName: org.dresdenocl.modelinstancetype
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.modelinstancetype.ModelInstanceTypePlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.essentialocl;visibility:=reexport,
+ org.dresdenocl.pivotmodel
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.modelinstancetype.exception,
+ org.dresdenocl.modelinstancetype.types,
+ org.dresdenocl.modelinstancetype.types.base

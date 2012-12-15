@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Abstract Core of Dresden OCL Test Suite
+Bundle-SymbolicName: org.dresdenocl.testsuite.abstract
+Bundle-Version: 3.2.0.qualifier
+Bundle-Vendor: TU Dresden Software Technology Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit;bundle-version="4.0.0",
+ org.dresdenocl.modelbus,
+ org.dresdenocl.metamodels.ecore,
+ org.dresdenocl.metamodels.java,
+ org.dresdenocl.metamodels.uml2,
+ org.dresdenocl.metamodels.xsd,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.uml2.uml;bundle-version="[3.1.0,5.0.0)",
+ org.dresdenocl.modelinstancetype.java,
+ org.dresdenocl.language.ocl,
+ org.dresdenocl.language.ocl.resource.ocl,
+ org.dresdenocl.language.ocl.staticsemantics,
+ org.dresdenocl.modelinstancetype.ecore,
+ org.eclipse.xsd,
+ org.dresdenocl.modelinstancetype.xml,
+ org.dresdenocl.tools.template,
+ org.dresdenocl.tools.template.sql,
+ org.dresdenocl.tools.transformation,
+ org.dresdenocl.tools.transformation.pivot2sql,
+ org.dresdenocl.modelinstancetype.ecore.testmodel,
+ org.eclipse.uml2.uml.resources;bundle-version="[3.1.0,5.0.0)"
+Export-Package: org.dresdenocl.testsuite._abstract

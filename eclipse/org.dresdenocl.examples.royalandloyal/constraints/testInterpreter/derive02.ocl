@@ -1,0 +1,8 @@
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+-- Used to test the preparation contained in '../derive01.ocl'
+context LoyaltyAccount
+inv: totalPointsEarned = transactions->select(oclIsTypeOf(Earning)).points->sum()
+
+endpackage

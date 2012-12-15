@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 153.
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Added round() operation because rounding errors can occur.
-context Service
-inv: (2654 * 4.3 + 101).round() = 11513
-
-endpackage

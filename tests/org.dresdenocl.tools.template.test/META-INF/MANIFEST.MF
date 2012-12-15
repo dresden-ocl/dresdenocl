@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Template Test Plug-In
+Bundle-SymbolicName: org.dresdenocl.tools.template.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.template.test.TemplateTestPlugin
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.dresdenocl.logging,
+ org.eclipse.core.runtime,
+ org.dresdenocl.tools.template,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.testsuite.abstract
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: TU Dresden, Software Technology Group
+Export-Package: org.dresdenocl.tools.template.test

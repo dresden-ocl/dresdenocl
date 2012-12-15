@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="org">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="dresdenocl">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
+        <packagedElement xmi:type="uml:Class" xmi:id="_cjU9YDXHEd-_J9pP9Zsbaw" name="Grade">
+          <ownedAttribute xmi:id="_ePVMMDXHEd-_J9pP9Zsbaw" name="name" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <defaultValue xmi:type="uml:LiteralString" xmi:id="_fV82ADXHEd-_J9pP9Zsbaw" value=""/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_kfdtgDXHEd-_J9pP9Zsbaw" name="value" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person">
+          <ownedAttribute xmi:id="_MIZyMMHiEd2UNuYhQ_ApoA" name="firstName" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <defaultValue xmi:type="uml:LiteralString" xmi:id="_ix9C0DXHEd-_J9pP9Zsbaw" value=""/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_fjVkADXCEd-_J9pP9Zsbaw" name="lastName" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_Y5dQgDXDEd-_J9pP9Zsbaw" name="isMarried" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_HRNAYDXDEd-_J9pP9Zsbaw" name="birthDate" visibility="private" type="_hRZwELnfEd-wmYSW0rs3Tw"/>
+          <ownedAttribute xmi:id="_Ppaa0MHiEd2UNuYhQ_ApoA" name="age" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_onYJ4DePEd-JXKTQMEgtig" name="salaries" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w8L4sDePEd-JXKTQMEgtig" value="*"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Tagt4MHiEd2UNuYhQ_ApoA" name="Student">
+          <generalization xmi:id="_U2mRYMHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+          <ownedAttribute xmi:id="_6H5LUDXDEd-_J9pP9Zsbaw" name="matNr" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_9LuIsDXDEd-_J9pP9Zsbaw" name="matDate" visibility="private" type="_hRZwELnfEd-wmYSW0rs3Tw"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_XPL5YMHiEd2UNuYhQ_ApoA" name="Employee">
+          <generalization xmi:id="_XrWQ8MHiEd2UNuYhQ_ApoA" general="_J0lVcMHiEd2UNuYhQ_ApoA"/>
+          <ownedAttribute xmi:id="_KCsbIDXEEd-_J9pP9Zsbaw" name="soSecNr" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_jdA5YDXEEd-_J9pP9Zsbaw" name="taxClass" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="__dru0DXEEd-_J9pP9Zsbaw" name="wage" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Gp76IDXFEd-_J9pP9Zsbaw" name="PhDStudent">
+          <generalization xmi:id="_QtHPQDXFEd-_J9pP9Zsbaw" general="_XPL5YMHiEd2UNuYhQ_ApoA"/>
+          <ownedAttribute xmi:id="_Z5zBQDXFEd-_J9pP9Zsbaw" name="dissSubject" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_kbv9EDXFEd-_J9pP9Zsbaw" name="A_supervisor_supervised" memberEnd="_UG71UDXGEd-_J9pP9Zsbaw _g5eTsDXGEd-_J9pP9Zsbaw" navigableOwnedEnd="_UG71UDXGEd-_J9pP9Zsbaw _g5eTsDXGEd-_J9pP9Zsbaw">
+          <ownedEnd xmi:id="_UG71UDXGEd-_J9pP9Zsbaw" name="supervised" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_kbv9EDXFEd-_J9pP9Zsbaw">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P5cSgDd5Ed-JXKTQMEgtig" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O-NZUDd5Ed-JXKTQMEgtig"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_g5eTsDXGEd-_J9pP9Zsbaw" name="supervisor" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_kbv9EDXFEd-_J9pP9Zsbaw">
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ljg0EDd5Ed-JXKTQMEgtig"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_B6LiUDd5Ed-JXKTQMEgtig" name="A_person_grade" memberEnd="_TG4e4Dd5Ed-JXKTQMEgtig _ZeJi8Dd5Ed-JXKTQMEgtig" navigableOwnedEnd="_ZeJi8Dd5Ed-JXKTQMEgtig">
+          <ownedEnd xmi:id="_ZeJi8Dd5Ed-JXKTQMEgtig" name="grade" type="_cjU9YDXHEd-_J9pP9Zsbaw" association="_B6LiUDd5Ed-JXKTQMEgtig"/>
+          <ownedEnd xmi:id="_TG4e4Dd5Ed-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_B6LiUDd5Ed-JXKTQMEgtig"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_5_jWoDePEd-JXKTQMEgtig" name="Paper">
+          <ownedAttribute xmi:id="_7-70cDePEd-JXKTQMEgtig" name="title" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="__mIkoDePEd-JXKTQMEgtig" name="edition" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_Foo5oDeQEd-JXKTQMEgtig" name="purpose" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_Kr1GsDeQEd-JXKTQMEgtig" name="category" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_j9imEDeREd-JXKTQMEgtig" name="inProgress" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_rHlx8DeREd-JXKTQMEgtig" name="A_person_currentPaper" memberEnd="_xRCccDeREd-JXKTQMEgtig _Ao4wMDeSEd-JXKTQMEgtig" navigableOwnedEnd="_xRCccDeREd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_xRCccDeREd-JXKTQMEgtig" name="currentPaper" type="_5_jWoDePEd-JXKTQMEgtig" association="_rHlx8DeREd-JXKTQMEgtig"/>
+          <ownedEnd xmi:id="_Ao4wMDeSEd-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_rHlx8DeREd-JXKTQMEgtig"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_Hxsl8DeSEd-JXKTQMEgtig" name="A_author_papers" memberEnd="_Y0R9MDeSEd-JXKTQMEgtig _fSk2UDeSEd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_Y0R9MDeSEd-JXKTQMEgtig" name="author" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_Hxsl8DeSEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_eUD_oDeSEd-JXKTQMEgtig" value="*"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_fSk2UDeSEd-JXKTQMEgtig" name="papers" type="_5_jWoDePEd-JXKTQMEgtig" association="_Hxsl8DeSEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hs6KwDeSEd-JXKTQMEgtig" value="*"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tnYYsDeSEd-JXKTQMEgtig" name="Facility">
+          <ownedAttribute xmi:id="_xEs0IDeSEd-JXKTQMEgtig" name="name" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_fZs8kDeTEd-JXKTQMEgtig" name="Chair">
+          <generalization xmi:id="_nZZ-EDeTEd-JXKTQMEgtig" general="_tnYYsDeSEd-JXKTQMEgtig"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_pgLdUDeTEd-JXKTQMEgtig" name="Faculty">
+          <generalization xmi:id="_r-fS0DeTEd-JXKTQMEgtig" general="_tnYYsDeSEd-JXKTQMEgtig"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_vFCNADeTEd-JXKTQMEgtig" name="Institute">
+          <generalization xmi:id="_wyEWkDeTEd-JXKTQMEgtig" general="_tnYYsDeSEd-JXKTQMEgtig"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_1562oDeSEd-JXKTQMEgtig" name="A_superFacility_subFacility" memberEnd="_S8JPsDeTEd-JXKTQMEgtig _bk7qcDeTEd-JXKTQMEgtig" navigableOwnedEnd="_S8JPsDeTEd-JXKTQMEgtig _bk7qcDeTEd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_S8JPsDeTEd-JXKTQMEgtig" name="superFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_1562oDeSEd-JXKTQMEgtig"/>
+          <ownedEnd xmi:id="_bk7qcDeTEd-JXKTQMEgtig" name="subFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_1562oDeSEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yawsoaGUEd-BSYoiO3Cqzw" value="*"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_77EEQDeTEd-JXKTQMEgtig" name="A_owner_member" memberEnd="_Bpg00DeUEd-JXKTQMEgtig _ZzEOwDeUEd-JXKTQMEgtig" navigableOwnedEnd="_Bpg00DeUEd-JXKTQMEgtig _ZzEOwDeUEd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_Bpg00DeUEd-JXKTQMEgtig" name="owner" type="_tnYYsDeSEd-JXKTQMEgtig" association="_77EEQDeTEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_P8LCIDeUEd-JXKTQMEgtig" value="*"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_ZzEOwDeUEd-JXKTQMEgtig" name="member" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_77EEQDeTEd-JXKTQMEgtig">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bMkYUDeUEd-JXKTQMEgtig" value="*"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_qkaFADeUEd-JXKTQMEgtig" name="A_theFacility_headOfFacility" memberEnd="_wOAx0DeUEd-JXKTQMEgtig _3dLHMDeUEd-JXKTQMEgtig" navigableOwnedEnd="_wOAx0DeUEd-JXKTQMEgtig _3dLHMDeUEd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_wOAx0DeUEd-JXKTQMEgtig" name="theFacility" type="_tnYYsDeSEd-JXKTQMEgtig" association="_qkaFADeUEd-JXKTQMEgtig"/>
+          <ownedEnd xmi:id="_3dLHMDeUEd-JXKTQMEgtig" name="headOfFacility" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_qkaFADeUEd-JXKTQMEgtig"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_hRZwELnfEd-wmYSW0rs3Tw" name="Date"/>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

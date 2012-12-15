@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model Instance
+Bundle-SymbolicName: org.dresdenocl.modelinstance
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.modelinstance.ModelInstancePlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.modelinstancetype;visibility:=reexport,
+ org.dresdenocl.model;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.modelinstance,
+ org.dresdenocl.modelinstance.base,
+ org.dresdenocl.modelinstance.event

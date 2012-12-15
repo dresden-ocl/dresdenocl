@@ -1,0 +1,26 @@
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> result1;
+java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount> comparator1;
+
+result1 = aClass.membership.accounts;
+
+comparator1 = new java.util.Comparator<org.dresdenocl.examples.royalsandloyals.LoyaltyAccount>() {
+
+    /** Method which compares two elements of the collection. */
+    public int compare(org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement1, org.dresdenocl.examples.royalsandloyals.LoyaltyAccount anElement2) {
+        int result2;
+
+        result2 = 0;
+
+        if (anElement1.number < anElement2.number) {
+            result2 = 1;
+        } else if (anElement1.number > anElement2.number) {
+            result2 = -1;
+        }
+
+        return result2;
+    }
+};
+
+java.util.Collections.sort(result1, comparator1);
+
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))

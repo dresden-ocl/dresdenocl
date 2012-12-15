@@ -1,9 +1,0 @@
-package timing
-context calendar::weekend
-inv: this.getName() >= 'hello'
-context calendar::year: Integer
-init: 2004
-context calendar::owner: Person
-derive: system.getDatabaseOwner()
-endpackage
-

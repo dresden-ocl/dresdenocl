@@ -1,0 +1,167 @@
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Tables}
+\chapter*{TABLES}
+
+\begin{table}[h]
+\begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+    \textbf{Software} & \textbf{Available at} \\
+    \hline
+    Eclipse 4.2.x & \url{http://www.eclipse.org/} \\
+    \hline
+    Eclipse Modeling Framework (EMF) & \url{http://www.eclipse.org/modeling/emf/} \\
+    \hline
+    Eclipse Model Development Tools (MDT) 
+    \newline\footnotesize(required for the UML2.0 meta model) &
+    \url{http://www.eclipse.org/modeling/mdt/} \\
+    \hline
+    Eclipse Plug-in Development Environment 
+    \newline\footnotesize(only to run the toolkit using the source code
+    distribution) & \url{http://www.eclipse.org/pde/} \\
+    \hline
+    AspectJ Development Tools (AJDT) 
+    \newline\footnotesize(only to run the generated code of Ocl22Java) &
+    \url{http://www.eclipse.org/ajdt/} \\
+    \hline
+\end{tabular}
+\caption{Software required to run Dresden OCL (v. 3.x) with Eclipse \newline(Most parts are con\-tained in the Eclipse MDT Distribution).}
+\label{tab:software}
+\end{table}
+
+
+\begin{table}[p]
+\begin{tabular}{|p{3.5cm}|p{10.5cm}|}
+  \hline
+
+  \textbf{Living Example} & \\
+  Plug-in Package & org.dresdenocl.examples.living\\
+  Meta-Model & Java Meta-Model\\
+  Model & bin/org/dresdenocl/examples/living/ModelProviderClass.class \\
+  OCL Expressions & constraints/*.ocl \\
+  Model Instance Type & Java \\
+  Model Instance & bin/org/dresdenocl/examples/living/ModelInstanceProvider\-Class.class \\
+  \hline
+
+  \textbf{PML Example} & \\
+  Plug-in Package & org.dresdenocl.examples.pml\\
+  Meta-Model & EMF Ecore\\
+  Model & model/pml.ecore\\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Type & EMF Ecore\\
+  Model Instances & modelinstance/goodModelinstance.pml, \newline modelinstance/badModelinstance.pml\\
+  \hline
+
+  \textbf{Royal and Loyal Example} & \\
+  Plug-in Package & org.dresdenocl.examples.royalandloyal\\
+  Meta-Model & MDT UML2\\
+  Model & model/royalsandloyals.ecore \newline model/royalsandloyals.uml\\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Type & Java\\
+  Model Instance & src/org.dresdenocl.examples.royalandloyal.instance.Model\-Instance\-ProviderClass.java\\
+  Generated\newline AspectJ Code & org.dresdenocl.examples.royalandloyal.ocl22javacode\\
+  \hline
+
+  \textbf{SEPA Example} & \footnotesize (Provided by Nomos
+  Software (\url{http://www.nomos-software.com/}))\\ 
+  Plug-in Package &
+  org.dresdenocl.examples.pain\\ Meta-Model & XSD (XML Schema)\\
+  Model & model/pain.008.001.01corrected.xsd\\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Type & XML\\
+  Model Instances & modelinstances/BusEx1.xml, \newline modelinstances/BusEx2.xml, \newline modelinstances/Pain8Invalid.xml\\
+  \hline
+
+  \textbf{Simple Example} & \\
+  Plug-in Package & org.dresdenocl.examples.simple\\
+  Meta-Models & Java or MDT UML2\\
+  Model & src/org.dresdenocl.examples.simple.ModelProviderClass.java, model/simple.uml\\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Type & Java\\
+  Model Instance & src/org.dresdenocl.examples.simple.instance.Model\-Instance\-ProviderClass.java\\
+  Generated\newline AspectJ Code & org.dresdenocl.examples.simple.ocl22javacode\\
+  \hline
+
+  \textbf{University Example} & \\
+  Plug-in Package & org.dresdenocl.examples.university\\
+  Meta-Models & MDT UML2\\
+  Model & model/university.uml, model/university\_complex.uml \\
+  OCL Expressions & constraints/*.ocl\\
+  Model Instance Type & --\\
+  Model Instance & --\\
+  \hline
+
+\end{tabular}
+\caption{The examples provided with Dresden OCL.}
+\label{tab:examples}
+\end{table}
+
+
+
+
+% Show list of figures. %
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+
+% Show list of figures. %
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+
+% Show list of listings. %
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Listings}
+\lstlistoflistings{}
+
+
+% Show list of abbreviations. %
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\chapter*{LIST OF ABBREVIATIONS}
+
+\begin{acronym}[DOT4Eclipse] % Should contain the longest acronym.
+\acro{AJDT}{AspectJ Development Tools}
+\acro{API}{Application Programming Interface}
+\acro{AOP}{Aspect-Oriented Programming}
+\acro{BRs}{Business Rules}
+\acro{DOT}{Dresden OCL Toolkit}
+\acro{DOT4Eclipse}{Dresden OCL2 for E\-clip\-se}
+\acro{DSL}{Domain-Specific Language}
+\acro{Eclipse MDT}{Eclipse Modeling Development Tools}
+\acro{EMF}{Eclipse Modeling Framework}
+\acro{GMF}{Graphical Modeling Framework}
+\acro{GUI}{Graphical User Interface}
+\acro{JAR}{Java Archive}
+\acro{JDK}{Java Development Kit}
+\acro{JRE}{Java Run-time Environment}
+\acro{MDT}{Modeling Development Tools}
+\acro{MOF}{Meta Object Facility}
+\acro{OCL}{Object Constraint Language}
+\acro{OMG}{Object Management Group}
+\acro{OSGi}{Open Services Gateway initiative}
+\acro{SVN}{Subversion}
+\acro{UML}{Unified Modeling Language}
+\acro{URL}{Uniform Resource Locator}
+\acro{WFRs}{Well-Formedness Rules}
+\acro{XSD}{\acs{XML} Schema Definition}
+\acro{XMI}{\acs{XML} Metadata Interchange}
+\acro{XML}{Extensible Markup Language}
+\end{acronym}
+
+
+% Show Bibliography. %
+\begin{flushleft}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{alphadin}
+\bibliography{manual}
+\end{flushleft}
+

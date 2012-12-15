@@ -1,0 +1,1 @@
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size((new java.util.HashSet<org.dresdenocl.examples.royalsandloyals.Transaction>((java.util.Set<org.dresdenocl.examples.royalsandloyals.Transaction>) allInstances.get(org.dresdenocl.examples.royalsandloyals.Transaction.class.getCanonicalName()).keySet()))) > new Integer(0))

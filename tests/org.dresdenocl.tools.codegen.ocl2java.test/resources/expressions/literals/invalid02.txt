@@ -1,0 +1,14 @@
+Boolean result1;
+
+/* Check if the expression results in invalid. */
+try {
+    /* DUMMY variable is necessary to form literals into a statement. */
+    Object DUMMY = (Object) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral(); 
+    result1 = false;
+}
+
+catch (Exception e) {
+    result1 = true;
+}
+
+result1

@@ -1,0 +1,31 @@
+LIVING EXAMPLE PROVIDED WITH DRESDEN OCL
+========================================
+
+This plug-in contains the Living example that is provided with Dresden OCL
+for Eclipse. The Living example provides a Java Model and a Java Model 
+Instance.
+
+Further details how to import models, model instances and constraints into
+Dresden OCL can be found in the manual, available in the 'doc'
+directory of your distribution or online at
+http://www.reuseware.org/index.php/DresdenOCL:Documentation
+
+
+Provided Model
+==============
+The model provided by this example is a Java Model. To import the Java Model 
+use the file 
+/bin/org/dresdenocl/examples/living/ModelProviderClass.class
+
+
+Provided Model Instance
+=======================
+The model instance provided by this is a Java Model Instance. To import the 
+Java Model Instance use the file 
+/bin/org/dresdenocl/examples/living/instance/ModelInstanceProviderClass.class
+
+
+Provided OCL Constraints
+========================
+OCL Constraints that are provided by this example are located in the directory
+/constraints

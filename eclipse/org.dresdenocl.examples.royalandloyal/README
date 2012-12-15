@@ -1,0 +1,46 @@
+ROYAL AND LOYAL EXAMPLE PROVIDED WITH DRESDEN OCL
+=================================================
+This plug-in contains the famous "Royal and Loyal" example that is 
+provided with Dresden OCL. It is based on the model published
+on page 22 in [1]. The constraints are based on the constraints from the
+same book. The Royal and Loyal example provides a MDT UML2 Model
+and a Java Model Instance.
+
+This is the famous "Royal and Loyal" example. It is based on the
+model published on page 22 in [1]. The constraints are based on
+the constraints from the same book.
+
+Further details how to import models, model instances and constraints into
+Dresden OCL can be found in the manual, available in the 'doc'
+directory of your distribution or online at
+http://www.reuseware.org/index.php/DresdenOCL:Documentation
+
+
+Provided Model(s)
+=================
+The model provided by this example exists as MDT UML2 Model.
+
+* To import the MDT UML2 Model use the file
+  /model/royalandloyal.uml
+
+Provided Model Instance
+=======================
+The model instance provided by this exists as a Java Model Instance. 
+
+* To import the Java Model Instance use the file 
+  /bin/org/dresdenocl/examples/royalsandloyals/instance/
+   ModelInstanceProvider.class
+
+
+Provided OCL Constraints
+========================
+OCL Constraints that are provided by this example are located in the
+directory
+/constraints
+
+
+References
+==========
+[1] J. Warmer and A. Kleppke, The Object Constraint Language ---
+    Getting Your Models Ready for MDA, 2nd edition. Addison-Wesley,
+    2003

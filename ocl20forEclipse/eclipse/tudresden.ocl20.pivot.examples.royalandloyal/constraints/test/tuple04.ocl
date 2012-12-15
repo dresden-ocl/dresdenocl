@@ -1,9 +1,0 @@
--- Constraint taken and adapted from [1] page 190.
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
--- An invariant to test tuple expressions
-context Transaction
-inv: Tuple {a: Set(Integer) = Set{1, 2, 3}, b: String = 'foo', c: String = 'bar'}.b = 'foo'
-                     
-endpackage

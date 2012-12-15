@@ -1,8 +1,0 @@
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
--- Used to test the preparation contained in '../define02.ocl'
-context LoyaltyProgram
-inv: self.getServicesByLevel('level1')->size() = 2
-
-endpackage

@@ -1,0 +1,8 @@
+-- @model{../model/simple.uml}
+package org::dresdenocl::examples::simple
+
+-- Before returning the age, the age must be defined.
+context Person::getAge()
+pre: not age.oclIsUndefined()
+
+endpackage

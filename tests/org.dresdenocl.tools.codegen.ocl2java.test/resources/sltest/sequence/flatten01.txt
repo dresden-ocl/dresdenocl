@@ -1,0 +1,1 @@
+(java.util.List<Object>) org.dresdenocl.tools.codegen.ocl2java.types.util.OclSequences.flatten(source)

@@ -1,0 +1,5 @@
+Integer var;
+var = (Integer) org.dresdenocl.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral();
+
+
+var

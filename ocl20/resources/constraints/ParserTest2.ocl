@@ -1,5 +1,0 @@
-package ocl20
-context calendar::weekend
-inv: -1 + 4 * maxLength <= super.getMaxLength(this)
-endpackage
-

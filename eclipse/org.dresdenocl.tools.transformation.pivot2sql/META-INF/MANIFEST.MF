@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Pivot2Sql
+Bundle-SymbolicName: org.dresdenocl.tools.transformation.pivot2sql;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.tools.transformation.pivot2sql.Pivot2SqlPlugin
+Import-Package: org.osgi.framework;version="1.3.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.core.runtime,
+ org.dresdenocl.logging,
+ org.dresdenocl.modelbus,
+ org.dresdenocl.tools.CWM;visibility:=reexport,
+ org.dresdenocl.tools.template,
+ org.dresdenocl.tools.codegen.declarativ;visibility:=reexport,
+ org.dresdenocl.tools.transformation;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.tools.transformation.pivot2sql,
+ org.dresdenocl.tools.transformation.pivot2sql.impl,
+ org.dresdenocl.tools.transformation.pivot2sql.mapping
+Bundle-Vendor: TU Dresden, Software Technology Group

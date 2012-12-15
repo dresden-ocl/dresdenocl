@@ -1,8 +1,0 @@
-Setting up the 'OCL Editor for Eclipse' plugin project:
-
-  1. Checkout the following folders of the cvs in an existing project:
-  		
-  		eclipse/ocleditor
-
-  2. Set the folder src as the project src folder
-

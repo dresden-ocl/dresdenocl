@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.dresdenocl.metrics.ui.actionSet"
+            label="Metrics Action Set"
+            visible="true">
+         <menu
+               icon="icons/dresdenocl.gif"
+               id="org.dresdenocl.modelbus.ui.menu"
+               label="Dresden OCL">
+            <separator
+                  name="org.dresdenocl.modelbus.ui.menu.import">
+            </separator>
+            <separator
+                  name="org.dresdenocl.modelbus.ui.menu.tools">
+            </separator>
+            <groupMarker
+            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
+            </groupMarker>
+         </menu>
+         <action
+               label="Open OCL Metrics"
+               icon="icons/dresdenocl.gif"
+               class="org.dresdenocl.metrics.ui.MetricsViewAction"
+               tooltip="Opens the OCL Metrics View of Dresden OCL."
+               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.tools"
+               id="org.dresdenocl.metrics.ui.actions.MetricsViewAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="org.dresdenocl.views.category"
+            name="Dresden OCL">
+      </category>
+      <view
+            category="org.dresdenocl.views.category"
+            class="org.dresdenocl.metrics.ui.MetricsView"
+            icon="icons/dresdenocl.gif"
+            id="org.dresdenocl.metrics.view"
+            name="Dresden OCL Metrics View">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.dresdenocl.ui.perspective">
+         <view
+               id="org.dresdenocl.metrics.view"
+               minimized="false"
+               relationship="stack"
+               relative="org.eclipse.ui.views.PropertySheet">
+         </view>
+         <viewShortcut
+               id="org.dresdenocl.metrics.view">
+         </viewShortcut>
+      </perspectiveExtension>
+   </extension>
+
+</plugin>

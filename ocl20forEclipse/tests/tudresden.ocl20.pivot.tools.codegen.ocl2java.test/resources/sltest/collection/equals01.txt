@@ -1,1 +1,0 @@
-tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.equals(source, arg01)

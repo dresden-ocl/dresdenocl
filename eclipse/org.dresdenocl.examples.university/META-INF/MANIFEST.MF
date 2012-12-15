@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: University Example
+Bundle-SymbolicName: org.dresdenocl.examples.university;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy

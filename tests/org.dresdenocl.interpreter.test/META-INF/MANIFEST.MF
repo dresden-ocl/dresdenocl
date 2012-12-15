@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL2 Interpreter Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.interpreter.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.interpreter.test.OclInterpreterTestPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.examples.royalandloyal,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.facade,
+ org.dresdenocl.testsuite.abstract
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group
+Export-Package: org.dresdenocl.interpreter.test

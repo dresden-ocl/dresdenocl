@@ -1,0 +1,8 @@
+-- Constraints taken from [1] page 180 and adapted.
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context LoyaltyProgram
+inv: self.membership.accounts->one(number < 10000)
+
+endpackage

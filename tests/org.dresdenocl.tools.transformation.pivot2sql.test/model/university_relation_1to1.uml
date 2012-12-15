@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="org">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="dresdenocl">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="university_complex">
+        <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Person"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_5_jWoDePEd-JXKTQMEgtig" name="Paper"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_rHlx8DeREd-JXKTQMEgtig" name="A_person_currentPaper" memberEnd="_xRCccDeREd-JXKTQMEgtig _Ao4wMDeSEd-JXKTQMEgtig" navigableOwnedEnd="_xRCccDeREd-JXKTQMEgtig">
+          <ownedEnd xmi:id="_xRCccDeREd-JXKTQMEgtig" name="currentPaper" type="_5_jWoDePEd-JXKTQMEgtig" association="_rHlx8DeREd-JXKTQMEgtig"/>
+          <ownedEnd xmi:id="_Ao4wMDeSEd-JXKTQMEgtig" name="person" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_rHlx8DeREd-JXKTQMEgtig"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

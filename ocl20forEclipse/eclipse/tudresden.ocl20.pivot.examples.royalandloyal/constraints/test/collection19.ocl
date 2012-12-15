@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 169 and extended.
--- Adpadted constraints until the Java Type checking is integrated.
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Membership
-inv: Set { 1, 2 }->sum() = 3
-
-endpackage

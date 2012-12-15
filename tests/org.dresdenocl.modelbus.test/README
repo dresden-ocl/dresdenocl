@@ -1,0 +1,11 @@
+MODEL BUS TEST SUITE PLUG-IN OF DRESEN OCL2 FOR ECLIPSE
+=======================================================
+
+This plug-in contains JUnit tests to test the Model Bus Plug-in of 
+Dresden OCL2 for Eclipse.
+
+To run the test suite execute the class
+
+org.dresdenocl.modelbus.test.AllModelBusTests
+
+as a JUnit Plugin Test.

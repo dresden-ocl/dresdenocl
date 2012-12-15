@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PML Example Plugin
+Bundle-SymbolicName: org.dresdenocl.examples.pml;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: TU Dresden, Software Technology
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.examples.pml,
+ org.dresdenocl.examples.pml.impl,
+ org.dresdenocl.examples.pml.util
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Generic Codegenerator UI
+Bundle-SymbolicName: org.dresdenocl.tools.codegen.ui;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.dresdenocl.tools.codegen,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.dresdenocl.modelbus,
+ org.eclipse.core.resources,
+ org.eclipse.core.variables,
+ org.eclipse.ui.ide
+Export-Package: org.dresdenocl.tools.codegen.ui.impl,
+ org.dresdenocl.tools.codegen.ui.impl.wizards
+Bundle-Activator: org.dresdenocl.tools.codegen.ui.Ocl2CodeUIPlugIn
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: TU Dresden, Software Technology Group

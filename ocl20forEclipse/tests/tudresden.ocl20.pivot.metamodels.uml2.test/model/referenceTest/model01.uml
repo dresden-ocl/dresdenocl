@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_kJC7EOYGEd6gXYme4O_RNg" name="TestModel">
-  <packagedElement xmi:type="uml:Package" xmi:id="_sdCKgOYGEd6gXYme4O_RNg" name="package1">
-    <packagedElement xmi:type="uml:Class" xmi:id="_hpCD0UG4Ed-MiOJbftGfug" name="ReferredType"/>
-  </packagedElement>
-</uml:Model>

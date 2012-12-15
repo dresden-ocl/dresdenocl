@@ -1,0 +1,8 @@
+-- Constraint taken from [1] page 153.
+-- @model{../../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+context Service
+inv: (-2.4).floor() = -3
+
+endpackage

@@ -1,0 +1,1 @@
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.isEmpty(aClass.program.levels) || org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.notEmpty(aClass.program.levels))

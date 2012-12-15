@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_6pUsMMHhEd2UNuYhQ_ApoA" name="org">
+  <packagedElement xmi:type="uml:Package" xmi:id="_AsKYYMHiEd2UNuYhQ_ApoA" name="dresdenocl">
+    <packagedElement xmi:type="uml:Package" xmi:id="_Cff-QMHiEd2UNuYhQ_ApoA" name="examples">
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmIPIMHiEd2UNuYhQ_ApoA" name="library">
+        <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Writer"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_e_4MIK7YEd-nl4O4BHtP_g" name="Book">
+          <ownedAttribute xmi:id="_jAeTwK7YEd-nl4O4BHtP_g" name="title">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_rhmAQK7YEd-nl4O4BHtP_g" name="A_author_books" memberEnd="_wRYwMK7YEd-nl4O4BHtP_g _ybi6oK7YEd-nl4O4BHtP_g">
+          <ownedEnd xmi:id="_wRYwMK7YEd-nl4O4BHtP_g" name="author" type="_J0lVcMHiEd2UNuYhQ_ApoA" association="_rhmAQK7YEd-nl4O4BHtP_g">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7cpHsK7YEd-nl4O4BHtP_g" value="*"/>
+            <defaultValue xmi:type="uml:LiteralString" xmi:id="_w03QsK7YEd-nl4O4BHtP_g" value=""/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_ybi6oK7YEd-nl4O4BHtP_g" name="books" type="_e_4MIK7YEd-nl4O4BHtP_g" association="_rhmAQK7YEd-nl4O4BHtP_g">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8N8BwK7YEd-nl4O4BHtP_g" value="*"/>
+          </ownedEnd>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+</uml:Package>

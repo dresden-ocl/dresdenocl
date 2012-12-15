@@ -1,0 +1,202 @@
+OCL2 Parser Test Suite
+======================
+
+This plug-in contains testcases for the OCL2 Parser of Dresden OCL2 for
+Eclipse.
+
+Directory structure:
+====================
+
+The testdata lies int the ./resources/ directory.
+
+The testcases that tests the parser are located in the package
+./src/org.dresdenocl.ocl2parser.test/
+
+and can be executed using the 
+
+org.dresdenocl.ocl2parser.test.AllTests.java
+
+
+Implemented Test Packages:
+==========================
+
+The following test packages and test types are implemented by 
+this test suite:
+
+* Constraint Types
+  + Body Expressions
+  + Definitions
+  + Derive Expressions
+  + Init Expressions
+  + Invariants
+  + Postconditions
+  + Preconditions
+* Expressions
+  + BooleanLiteralExp
+  + CollectionLiteralExpression
+    - Standard Init
+    - Ranges
+  + EnumLiteralExp
+  + IntegerLiteralExp
+  + IfExp
+  + IterateExp
+  + (IteratorExp are tested with the standard library, because they are just
+     predefined IterateExpressions)
+  + LetExp
+  + OperationCallExp
+    + obligatory self variable
+    + obligatory asSet() operation for non-collection types
+    + static operations
+    + special operation allInstances() (uses . Operator!!!)
+    + special operation @pre
+      * non allowed on static properties
+      * only allowed in postconditions.
+  + PropertyCallExp
+    + obligatory self variable
+    + static properties
+    + When the name of an association-end is missing at one of the ends of an
+      association, the name of the type at the association end starting with a
+      lower case character is used as the role name.
+  + RealLiteralExp
+  + StringLiteralExp
+  + TupleLiteralExp
+  + TypeLiteralExp
+  + VariableExp
+    + self
+    + argument variables if context is operation
+    + result variable
+* Namespace and Context
+  + Context Expressions
+    - Positives and Negatives (Types and Operation contexts)
+    - Multiple result context unique/ordered -> Set, OrderedSet etc.
+  + Package Expression
+    - Positives and Negatives
+* StandardLibrary      
+  + Bag
+    - excluding(T)
+    - including(T)
+    - intersection(Bag) (does not include Sequence)
+    - intersection(Set) (does include OrderedSet)
+    - union(Bag) (does not include Sequence)
+    - union(Set) (does include OrderedSet)
+  + Boolean
+    - and(Boolean)
+    - implies(Boolean)
+    - not Boolean
+    - or(Boolean)
+    - toString() (OCL 2.1)
+    - xor(Boolean)
+  + Collection
+    - asBag()
+    - asOrderedSet()
+    - asSequence()
+    - asSet()
+    - count(T)
+    - excludes(T)
+    - excludesAll(Collection(T))
+    - flatten()
+    - includes(T)
+    - includesAll(Collection(T))
+    - isEmpty()
+    - max() (OCL 2.1)
+    - min() (OCL 2.1)
+    - notEmpty()
+    - product(Collection(T))
+    - size()
+    - sum()
+  + Integer
+    - a.-(), -a
+    - a.+(b), a + b
+    - a.-(b), a - b
+    - a.*(b), a * b
+    - a./(b), a / b (result type is real)
+    - abs()
+    - a.div(b) (result type is integer)
+    - a.mod(b)
+    - a.max(b)
+    - a.min(b)
+    - toString() (OCL 2.1)
+  + Iterators
+    - any(..)
+    - collect(..)
+    - collectNested(..)
+    - exists(..)
+    - forAll(..)
+    - isUnique(..)
+    - one(..)
+    - reject(..)
+    - select(..)
+    - sortedBy(..)
+  + OclAny
+    - a.=(b), a = b
+    - a.<>(b), a <> b
+    - oclAsType(Type)
+    - oclIsInvalid()
+    - oclIsKindOf(Type)
+    - oclIsNew()
+      * only in postconditions valid
+    - oclIsTypeOf(Type)
+    - oclIsUndefined()
+    - oclType() (OCL 2.1)
+  + OrderedSet
+    - append(T)
+    - at(Integer) (lowest index is 1)
+    - first()
+    - indexOf(Integer) (lowest index is 1)
+    - insertAt(Integer, T) (lowest index is 1)
+    - last()
+    - prepend(T)
+    - reverse() (OCL 2.1)
+    - subOrderedSet(Integer, Integer) (lowest index is 1)
+  + Real
+    - a.+(b), a + b
+    - a.-(b), a - b
+    - a.*(b), a * b
+    - a.-(), -a
+    - a./(b), a / b
+    - a.<(b), a < b
+    - a.>(b), a > b 
+    - a.<=(b), a <= b
+    - a.>=(b), a >= b
+    - abs()
+    - floor()
+    - a.max(b)
+    - a.min(b)
+    - round()
+    - toString() (OCL 2.1)
+  + Set
+    - excluding(T)
+    - including(T)
+    - -(Set(T))
+    - intersection(Bag(T)) (includes Sequence)
+    - intersection(Set(T)) (does not include OrderedSet)
+    - symmetricDifference(Set(T))    
+    - union(Bag(T)) (includes Sequence)
+    - union(Set(T)) (does not include OrderedSet)
+  + Sequence
+    - append(T)
+    - at(Integer) (lowest index is 1)
+    - excluding(T)
+    - first()
+    - including(T)
+    - indexOf(Integer) (lowest index is 1)
+    - insertAt(Integer, T)
+    - last()
+    - prepend(T)
+    - reverse() (OCL 2.1)
+    - union(Sequence)
+    - subSequence(Integer, Integer) (lowest index is 1)
+  + String
+    - a.+(b), a + b
+    - at(Integer) (OCL 2.1)
+    - characters(): Sequence(String) (OCL 2.1)
+    - concat(String)
+    - equalsIgnoreCase(String) (OCL 2.1)
+    - indexOf(String) (OCL 2.1) (index starts with 1)
+    - size()
+    - substring(lower, upper), (lower starts with 1)
+    - toBoolean() (OCL 2.1)
+    - toInteger()
+    - toLowerCase() (OCL 2.1)
+    - toReal()
+    - toUpperCase() (OCL 2.1)

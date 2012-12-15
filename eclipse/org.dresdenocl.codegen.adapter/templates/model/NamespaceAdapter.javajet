@@ -1,0 +1,114 @@
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="NamespaceAdapter" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%GenClass genClass = (GenClass)argument;
+GenPackage genPackage = genClass.getGenPackage();
+GenModel genModel = genPackage.getGenModel();
+String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName());
+String modelNameLC = PivotAdapterGeneratorUtil.startWithLowerCaseLetter(genModel.getModelName());
+String pluginName = PivotAdapterGeneratorUtil.startWithCapitalLetter(genModel.getModelName()) + "MetamodelPlugin";
+String adapterClass = PivotAdapterGeneratorUtil.getAdapterClassName(genModel, genClass);
+String adapteeClass = PivotAdapterGeneratorUtil.getDSLModelUniqueTypeName(genModel, genClass);
+String adapteeName = PivotAdapterGeneratorUtil.getDSLElementName(adapteeClass);
+String implementThis = PivotAdapterGeneratorUtil.getImplementThis();%>
+package <%=PivotAdapterGeneratorUtil.getAdapterPackage(genModel)%>;
+
+<%genModel.addImport("org.apache.log4j.Logger");
+genModel.addImport("java.util.List");
+genModel.addImport("java.util.ArrayList");
+genModel.addImport("org.dresdenocl.pivotmodel.Namespace");
+genModel.addImport("org.dresdenocl.pivotmodel.Type");
+genModel.addImport("org.dresdenocl.pivotmodel.base.AbstractNamespace");
+genModel.addImport(PivotAdapterGeneratorUtil.getAdapteeClassImport(genModel, genClass));
+genModel.markImportLocation(stringBuffer);%>
+
+/**
+ * An implementation of the Pivot Model {@link Namespace} concept for <%=modelName%>.
+ *
+ * @generated
+ */
+public class <%=adapterClass%> extends AbstractNamespace implements Namespace {
+
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = org.dresdenocl.metamodels.<%=modelNameLC%>.<%=pluginName%>.getLogger(<%=adapterClass%>.class);
+
+	/**
+	 * the adapted <%=adapteeClass%> data type
+	 *
+	 * @generated
+	 */
+	private <%=adapteeClass%> <%=adapteeName%>;
+	
+	/**
+	 * Creates a new <code><%=adapterClass%></code> instance.
+	 *
+	 * @param <%=adapteeName%> the {@link <%=adapteeClass%>} that is adopted by this class
+	 *
+	 * @generated
+	 */
+	public <%=adapterClass%>(<%=adapteeClass%> <%=adapteeName%>) {
+	
+		if (logger.isDebugEnabled()) {
+			logger.debug("<%=adapterClass%>(<%=adapteeName%>=" + <%=adapteeName%> + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+	
+		// initialize
+		this.<%=adapteeName%> = <%=adapteeName%>;
+	
+		if (logger.isDebugEnabled()) {
+			logger.debug("<%=adapteeClass%>() - exit"); //$NON-NLS-1$
+		}
+	}
+
+	/**
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getName()
+	 *
+	 * @generated
+	 */
+	@Override
+	public String getName() {
+		<%=implementThis%>
+		return null;
+	}
+
+	/**
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestedNamespaceImpl()
+	 *
+	 * @generated
+	 */
+	@Override
+	protected List<Namespace> getNestedNamespaceImpl() {
+		List<Namespace> nestedNamespace = new ArrayList<Namespace>();
+		
+		<%=implementThis%>
+		
+		return nestedNamespace;
+	}
+
+	/**
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getNestingNamespace()
+	 *
+	 * @generated
+	 */
+	@Override
+	public Namespace getNestingNamespace() {
+		<%=implementThis%>
+		return null;
+	}
+
+	/**
+	 * @see org.dresdenocl.pivotmodel.base.AbstractNamespace#getOwnedTypeImpl()
+	 *
+	 * @generated
+	 */
+	@Override
+	public List<Type> getOwnedType() {
+		List<Type> ownedType = new ArrayList<Type>();
+
+		<%=implementThis%>
+		
+		return ownedType;
+	}
+
+}
+<%genModel.emitSortedImports();%>

@@ -1,0 +1,121 @@
+<!-- Targets for working from terminal window:
+       build (default) - generates java files and compiles them
+       test            - runs junit test cases
+       clean           - removes all generated files and class files
+     Targets for working from Eclipse:
+       gen             - generates java files
+       genClean        - removes all generated files and their class files
+ -->
+
+	
+<project name="TestCaseGenerator" default="build" basedir=".">
+
+  <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <property name="binaryFiles" location="bin"/>
+		
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <property name="binarySableCCFiles" location="${binaryFiles}/sableCCFiles"/>
+		
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <property name="binaryJastaddFiles" location="${binaryFiles}/jastaddFiles"/>
+
+  <!-- "package" is the directory where generated files will be stored -->
+  <property name="sourceDic" location="src"/>
+
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <property name="tools" location="tools"/>
+	
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <!-- <property name="jastaddFiles" location="${sourceDic}/ocl2as"/> -->
+	
+ 
+	
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <!-- <property name="jastaddPackage" value="ocl2as"/> -->
+	
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <property name="sableCCFiles" value="${sourceDic}/tudresden/ocl20/pivot/ocl2parser/testcasegenerator/gen" />
+	
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <property name="sableCCSpec" value="${sourceDic}/spec"/>
+	
+  <property name="pluginDic" value="${eclipse.home}/plugins" />
+	
+  <!-- "tools" is the directory where the needed tools (lexing, parsing, jastadd2, junit.jar) are located. -->
+  <!-- <property name="jastaddSpec" value="${sourceDic}/spec/jastadd"/> -->
+	
+	
+
+  <!-- "jastadd" is an ant task class in jastadd2.jar -->
+  <!-- <taskdef classname="jastadd.JastAddTask" name="jastadd" classpath="${tools}/jastadd2.jar" /> -->
+  
+
+  <!-- TARGET build -->
+  <target name="build" depends="clean,gen">
+  	<echo message="The junit-plugin is found at ${pluginDic}/org.junit_3.8.2.v200705250844/junit.jar"/>
+  	
+  	<!--<javac compiler="javac1.5" debug="true" srcdir="${sourceDic}" destdir="${binaryFiles}">
+    	<classpath>
+    		<pathelement path="${pluginDic}/org.junit_3.8.2.v200705250844/junit.jar"/>
+    		<pathelement path="${pluginDic}/org.eclipse.core.runtime_3.3.100.v20070530.jar"/>
+    	</classpath>
+    </javac> -->
+  	<!--<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/> -->
+  	<!-- <eclipse.incrementalBuild/>
+  	<eclipse.refreshLocal resource="org.dresdenocl.ocl2parser.testcaseGenerator" depth="infinite"/> -->
+  </target>
+
+  <!-- TARGET gen -->
+  <target name="gen" depends="sableCC">
+  	<!-- create a directories for the generated files -->
+  	<mkdir dir="${sourceDic}/tudresden/ocl20/pivot/ocl2parser/testcasegenerator/gen" />
+    <!-- <mkdir dir="${jastaddFiles}"/> -->
+  </target>
+
+	
+	
+ <!-- TARGET SableCC -->
+	  <target name="sableCC" >
+	  	<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+	  	<eclipse.refreshLocal resource="org.dresdenocl.ocl2parser.testcaseGenerator" depth="infinite" />
+	  	<eclipse.incrementalBuild />
+		<!-- <mkdir dir="${sableCCFiles}"/> -->
+	  	<echo message = "Running SableCC"/>
+	  	<javac compiler="javac1.5" debug="true" srcdir="${sourceDic}/org" destdir="${binaryFiles}"/>
+	  	
+	  	<java classname="org.sablecc.sablecc.SableCC">
+	  		<classpath path="${binaryFiles}" /> 
+	  		<arg value="-d" />
+	  		<arg value="${sourceDic}" />
+	  		<arg value="${sableCCSpec}/testcaseGenerator.parser"/>
+	  	</java>
+	  	
+	  	<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+	  	<eclipse.refreshLocal resource="org.dresdenocl.ocl2parser.testcaseGenerator" depth="infinite" />
+	  	<eclipse.incrementalBuild />
+	  	
+	  	
+	  </target>
+	
+	 <!-- TARGET clean -->
+	  <target name="clean" depends="cleanGen">
+	    <!-- Delete all classfiles in dir and recursively in subdirectories -->
+	    <delete>
+	      <fileset dir="${basedir}/bin/org/dresdenocl/ocl2parser/testcasegenerator/gen" includes="**/*.class"/>
+	    </delete>
+	  	<!-- <eclipse.incrementalBuild project="org.dresdenocl.ocl2parser.testcaseGenerator" kind="full"/>
+	    <eclipse.refreshLocal resource="org.dresdenocl.ocl2parser.testcaseGenerator" depth="infinite"/> -->
+	  </target>
+	
+  <!-- TARGET cleanGen -->
+  <target name="cleanGen">
+    <!-- Delete the directory containing generated files and their class files -->
+  	<delete dir="${sableCCFiles}"/>
+  	<!--<delete dir="${jastaddFiles}"/> -->
+  </target>
+	
+ <target name = "showRootPath">
+ 	<echo message = "The root path is ${basedir}" />
+ </target>
+</project>

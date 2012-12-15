@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:version="2.1" xmi:id="_EV7v8RvWEd-lK-Yjl_N2xQ" name="testpackage">
+  <elementImport xmi:id="_LYLMcCeDEd-lDLWmUakCpQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_LYLMcSeDEd-lDLWmUakCpQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_LYLMcieDEd-lDLWmUakCpQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_HtFR8BvWEd-lK-Yjl_N2xQ" name="Class1">
+    <ownedAttribute xmi:id="_s-wwwE1PEd-UlNzXZQNjJA" name="anInteger01">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_vmTawE1PEd-UlNzXZQNjJA" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_qABPULqKEd-N3qJMAPwGIw" name="aStaticInteger01" isStatic="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_qABPUbqKEd-N3qJMAPwGIw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_7pOjgNebEd-XwoW1fFZJFg" name="deriveProperty01">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_7pOjgdebEd-XwoW1fFZJFg" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_9kqVcNebEd-XwoW1fFZJFg" name="staticDeriveProperty01" isStatic="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_9kqVcdebEd-XwoW1fFZJFg" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_AtdSYNecEd-XwoW1fFZJFg" name="initProperty01">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_AtdSYdecEd-XwoW1fFZJFg" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_AtdSYtecEd-XwoW1fFZJFg" name="staticInitProperty01" isStatic="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_AtdSY9ecEd-XwoW1fFZJFg" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_L5Al0NoCEd-vjYfE1ERESA" name="isInvariant01Violated">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_L5Al0doCEd-vjYfE1ERESA" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_RTdcUNoCEd-vjYfE1ERESA" name="isInvariant02Violated">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_RTdcUdoCEd-vjYfE1ERESA" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_RsaH0NoCEd-vjYfE1ERESA" name="isInvariant03Violated">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_RsaH0doCEd-vjYfE1ERESA" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_WZsN8NoQEd-SQtj4YsYIRg" name="isInvariant04Violated">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_WZsN8doQEd-SQtj4YsYIRg" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_KOs5YAgTEeC199kZ32Tr5w" name="parent" type="_HtFR8BvWEd-lK-Yjl_N2xQ"/>
+    <ownedAttribute xmi:id="_QOw-YAgTEeC199kZ32Tr5w" name="children" type="_HtFR8BvWEd-lK-Yjl_N2xQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_VRji0AgTEeC199kZ32Tr5w" value="*"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_TMg-EEO0Ed-6dYpdYOZoUQ" name="Class1" isStatic="true">
+      <ownedParameter xmi:id="_TMg-EkO0Ed-6dYpdYOZoUQ" name="in1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_BJcHkSeDEd-lDLWmUakCpQ" name="bodyOperation01">
+      <ownedParameter xmi:id="_NvC9MCeDEd-lDLWmUakCpQ" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_HIzyUCguEd-mWuCKIjczYQ" name="bodyOperation02">
+      <ownedParameter xmi:id="_HIzyUSguEd-mWuCKIjczYQ" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_Jp4n8CguEd-mWuCKIjczYQ" name="in1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_HCIJELqKEd-N3qJMAPwGIw" name="getInteger">
+      <ownedParameter xmi:id="_HCIJEbqKEd-N3qJMAPwGIw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_tpyyYLqKEd-N3qJMAPwGIw" name="getStaticInteger" isStatic="true">
+      <ownedParameter xmi:id="_tpyyYbqKEd-N3qJMAPwGIw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_d99dwCgxEd-mWuCKIjczYQ" name="preOperation01">
+      <ownedParameter xmi:id="_d99dwSgxEd-mWuCKIjczYQ" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_d99dwigxEd-mWuCKIjczYQ" name="in1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_MZH4kCgyEd-mWuCKIjczYQ" name="postOperation01">
+      <ownedParameter xmi:id="_MZH4kSgyEd-mWuCKIjczYQ" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_MZH4kigyEd-mWuCKIjczYQ" name="in1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_HXd_UE1PEd-UlNzXZQNjJA" name="postOperation02"/>
+    <ownedOperation xmi:id="_z4FAIIdyEd-jP82yEy3VXg" name="postOperation03">
+      <ownedParameter xmi:id="_DIhEUIdzEd-jP82yEy3VXg" type="_HtFR8BvWEd-lK-Yjl_N2xQ" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_r3roQNeZEd-XwoW1fFZJFg" name="staticBodyOperation01" isStatic="true">
+      <ownedParameter xmi:id="_r3roQdeZEd-XwoW1fFZJFg" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_x3stUNfCEd-XwoW1fFZJFg" name="staticPostOperation01" isStatic="true">
+      <ownedParameter xmi:id="_x3stUdfCEd-XwoW1fFZJFg" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_x3stUtfCEd-XwoW1fFZJFg" name="in1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_vM4F0NfCEd-XwoW1fFZJFg" name="staticPreOperation01" isStatic="true">
+      <ownedParameter xmi:id="_vM4F0dfCEd-XwoW1fFZJFg" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_vM4F0tfCEd-XwoW1fFZJFg" name="in1">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_-PlakLp3Ed-Ma_UOIldEog" name="Enumeration1">
+    <ownedLiteral xmi:id="_A8RqULp4Ed-Ma_UOIldEog" name="literal1"/>
+    <ownedLiteral xmi:id="_CdOfsLp4Ed-Ma_UOIldEog" name="literal2"/>
+  </packagedElement>
+</uml:Package>

@@ -1,8 +1,0 @@
--- @model{../model/simple.uml}
-package tudresden::ocl20::pivot::examples::simple
-
--- The result of getAge must equal to the age of a Person.
-context Person::getAge()
-post: result = age
-
-endpackage

@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 51.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context ProgramPartner
-inv nrOfParticipants: numberOfCustomers = programs.participants->size()
-  
-endpackage

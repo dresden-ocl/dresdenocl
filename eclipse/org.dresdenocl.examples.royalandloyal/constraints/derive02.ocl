@@ -1,0 +1,9 @@
+-- Constraint taken from [1] page 140 and adapted.
+-- @model{../model/royalsandloyals.uml}
+package org::dresdenocl::examples::royalsandloyals
+
+-- Adapted because a wrong context in the parser.
+context LoyaltyAccount::totalPointsEarned
+derive: transactions->select(oclIsTypeOf(Earning)).points->sum()
+
+endpackage

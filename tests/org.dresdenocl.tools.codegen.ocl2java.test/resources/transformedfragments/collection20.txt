@@ -1,0 +1,9 @@
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner> result1;
+result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (org.dresdenocl.examples.royalsandloyals.Service anElement1 : aClass.availableServices) {
+    result1.add(anElement1.partner);
+}
+
+org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.includesAll(aClass.program.partners, result1)

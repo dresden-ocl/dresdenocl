@@ -1,7 +1,0 @@
-java.util.HashSet<Integer> collection1;
-collection1 = new java.util.HashSet<Integer>();
-
-collection1.add((Integer) tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral());
-collection1.add(new Integer(2));
-
-collection1

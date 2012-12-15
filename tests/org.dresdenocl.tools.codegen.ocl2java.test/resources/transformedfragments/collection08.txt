@@ -1,0 +1,9 @@
+java.util.ArrayList<Integer> collection1;
+collection1 = new java.util.ArrayList<Integer>();
+
+/* TODO: Auto-generated initialization does only work for numeric values. */
+for (Integer index1 = new Integer(1); index1 <= new Integer(10); index1++) {
+    collection1.add(index1);
+}
+
+((Object) org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(collection1)).equals(new Integer(10))

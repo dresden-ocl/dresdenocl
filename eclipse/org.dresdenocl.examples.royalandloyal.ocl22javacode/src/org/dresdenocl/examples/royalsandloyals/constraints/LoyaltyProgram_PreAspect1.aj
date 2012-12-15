@@ -1,0 +1,35 @@
+package org.dresdenocl.examples.royalsandloyals.constraints;
+
+/**
+ * <p>Generated Aspect to enforce OCL constraint.</p>
+ *
+ * @author OCL22Java of Dresden OCL2 for Eclipse
+ * @Generated
+ */
+public privileged aspect LoyaltyProgram_PreAspect1 {
+
+    /**
+     * <p>Pointcut for all calls on {@link org.dresdenocl.examples.royalsandloyals.LoyaltyProgram#addService(org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService)}.</p>
+     */
+    protected pointcut addServiceCaller(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService):
+    	call(* org.dresdenocl.examples.royalsandloyals.LoyaltyProgram.addService(org.dresdenocl.examples.royalsandloyals.ProgramPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel, org.dresdenocl.examples.royalsandloyals.Service))
+    	&& target(aClass) && args(aPartner, aLevel, aService);
+
+    /**
+     * <p>Checks a precondition for the {@link LoyaltyProgram#addService(, org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService)} defined by the constraint
+     * <code>context LoyaltyProgram::addService(aPartner: org.dresdenocl.examples.royalsandloyals.ProgramPartner, aLevel: org.dresdenocl.examples.royalsandloyals.ServiceLevel, aService: org.dresdenocl.examples.royalsandloyals.Service) : 
+     *       pre: levels->includes(aLevel)</code></p>
+     */
+    before(org.dresdenocl.examples.royalsandloyals.LoyaltyProgram aClass, org.dresdenocl.examples.royalsandloyals.ProgramPartner aPartner, org.dresdenocl.examples.royalsandloyals.ServiceLevel aLevel, org.dresdenocl.examples.royalsandloyals.Service aService): addServiceCaller(aClass, aPartner, aLevel, aService) {
+        /* Disable this constraint for subclasses of LoyaltyProgram. */
+        if (aClass.getClass().getCanonicalName().equals("org.dresdenocl.examples.royalsandloyals.LoyaltyProgram")) {
+        if (!org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.includes(aClass.levels, aLevel)) {
+        	// TODO Auto-generated code executed when constraint is violated.
+        	String msg = "Error: Constraint 'undefined' (pre: levels->includes(aLevel)) was violated for Object " + aClass.toString() + ".";
+        	throw new RuntimeException(msg);
+        }
+        // no else.
+        }
+        // no else.
+    }
+}

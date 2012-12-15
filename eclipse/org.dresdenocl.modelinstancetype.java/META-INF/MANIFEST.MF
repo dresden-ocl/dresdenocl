@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Java Model Instance Type Plug-in
+Bundle-SymbolicName: org.dresdenocl.modelinstancetype.java;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.modelinstancetype.java.JavaModelInstanceTypePlugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.modelbus
+Export-Package: org.dresdenocl.modelinstancetype.java,
+ org.dresdenocl.modelinstancetype.java.internal.provider
+Bundle-Vendor: TU Dresden, Software Technology Group

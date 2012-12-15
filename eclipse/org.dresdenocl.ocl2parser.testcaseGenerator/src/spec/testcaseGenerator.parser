@@ -1,0 +1,167 @@
+/*
+    Copyright (C) 2008  Nils (s0006383@inf.tu-dresden.de)
+
+    This file is part of the OCL parser of the Dresden OCL2 for Eclipse.
+
+    The OCL parser is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    The OCL parser is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with the OCL parser.  If not, see <http://www.gnu.org/licenses/>.
+.
+*/
+/* Specification for the test case generator */
+Package org.dresdenocl.ocl2parser.testcasegenerator.gen.testcasegenerator;
+
+Helpers
+
+all					  = [0..0xffff];
+lf					  = 10;
+cr					  = 13;
+input_character		  = [all - [lf + cr]];
+character			  = ['a'..'z'] | ['A'..'Z'];
+digit				  = ['0'..'9'];
+ndigit				  = ['1'..'9'];
+tab					  = 9;
+ident_symbol		  = character (((character)|(digit))* '_'? ((character)|(digit)))*;
+
+line_terminator       = cr | lf | cr lf ;
+space                 = ' ';
+whitespace			  = tab | space;
+commentblock_start    = '/*';
+commentblock_end	  = '*/';
+
+noasterisk			  = [all - '*'];
+asterisk			  = '*';
+
+no_hash				= [all - '#'];
+no_brace_close		= [all - '}'];
+no_hash_brace_close	= [all - ['#' + '}']];
+
+tick_symbol				= ''';
+noslash				  = [all - '/'];
+string_not_unescaped  = [''' + [cr + lf ]];
+string_literal_parts  = [all - string_not_unescaped];
+braceo				= '{#';
+bracec				= '#}';
+
+/* all_for_ocl_exp		= [all - ['{#' + '#}']];*/
+
+States
+init_state, ocl_state, tick_state;
+
+
+Tokens
+{init_state -> tick_state, tick_state -> init_state} !tick		= tick_symbol;
+
+{init_state} !new					= 'new';
+//{init_state} !type					= 'Type';
+//{init_state} !operation				= 'Operation';
+//{init_state} !property				= 'Property';
+//{init_state} !enumeration_literal	= 'EnumerationLiteral';
+//{init_state} !primitive_type		= 'PrimitiveType';
+//{init_state} !constraint_kind		= 'ConstraintKind';
+//{init_state} !collection_kind		= 'CollectionKind';
+//{init_state} !list					= 'List';
+//{init_state} !constraint			= 'Constraint';
+//{init_state} !namespace				= 'Namespace';
+{init_state} null<ITokenAS>			= 'null';
+{init_state, ocl_state} new_line	= line_terminator;
+{init_state, ocl_state} blank		= whitespace+;
+{init_state} !package 				= '#package';
+{init_state} !metamodel				= '#metamodel';
+{init_state} !model					= '#model';
+{init_state} !include				= '#include';
+{init_state} !testname				= '#testname';
+{init_state} !suitename				= '#suitename';
+{init_state} !brace_open			= braceo;
+{init_state} !brace_close			= bracec;
+{init_state} error<ITokenAS>		= '#error';
+{init_state} !assign					= ':=';
+{init_state} !comma					= ',';
+{init_state} first_name<ITokenAS>	= 'model';
+{init_state} !colon 					= ':';
+{init_state} !openparen				= '(';
+{init_state} !closeparen				= ')';
+{init_state} atpre<ITokenAS>		= '@pre';
+{init_state} !testcase				= '#testcase';
+{init_state} abstractmodel<ITokenAS>= '#abstractmodel';
+{init_state -> ocl_state} !oclexpression			= '#oclexpression';
+{init_state} real_value<ITokenAS>	= ((ndigit digit*)|'0')? '.' (digit)+ (('e'|'E') ('+'|'-')? (digit)*)?;
+{init_state} integer_value<ITokenAS>	= ndigit digit* | '0';
+
+
+
+{init_state} ident<ITokenAS>			= ident_symbol;
+{init_state} package_name<ITokenAS>	= (ident_symbol '.')* ident_symbol;
+{init_state} commentblock 			= 	commentblock_start (noasterisk | asterisk noslash)* commentblock_end;
+{init_state} commentline			=	'//' input_character* line_terminator;
+{ocl_state-> init_state}  oclblock<ITokenAS>	= '{#' no_hash* '#'+ (no_hash_brace_close no_hash* '#'+)* '}';
+{tick_state} string_literal<ITokenAS> = string_literal_parts*;
+
+
+Ignored Tokens
+blank, new_line, commentline;
+
+Productions
+
+/* ------------------------------------------------------- Whole file ----------------------------------- */
+testpackage<ITest> = {suite}<ITestSuite> testsuite#chain |{testcase}<ITestcase> testcasefile #chain;
+
+/* ------------------------------------------------ Test suite file ---------------------------------- */
+testsuite<ITestSuite> = names package_declaration? suite_element*;
+
+names<ITokenAS> = suitename ident#chain;
+
+suite_element<ITokenAS> = include openparen [first]:tick string_literal [last]:tick closeparen#chain;
+
+
+/* --------------------------------------------- Test case file ------------------------------------- */
+
+testcasefile<ITestcase> =  name package_declaration? model_declaration testcase_element*;
+
+name<ITokenAS> = testname ident#chain;
+
+package_declaration<IPackageDeclaration> =  package package_name;
+
+model_declaration<IDeclarationContainer> = {metamodel} metamodel_desc model_desc | {model} model_desc metamodel_desc;
+
+metamodel_desc<IMetamodelReference> = metamodel package_name;
+
+model_desc<IModelReference> = model [first]:tick string_literal [last]:tick;
+
+testcase_element<ITestcaseElement> = testcasename brace_open ocl_expression result brace_close;
+
+testcasename<ITokenAS> = testcase ident#chain;
+
+ocl_expression<ITokenAS> = oclexpression oclblock#chain;
+
+result<IResult> = {abstractmodel}<IAbstractModel> abstract_model#chain | {error}<IErrorElement> error;
+
+abstract_model<IAbstractModel> = abstractmodel brace_open first_name assign model_expression assignment* brace_close;
+
+assignment<IVariable> = ident assign model_expression;
+
+model_expression<IModelExpression> = {modelelement}<IModelExpression> ident openparen parameters? closeparen atpre?#nocreate 
+									| {ident}<IVariable> ident
+									| {null}<INullElement> null
+									| {simple}<ISimpleElement> simple_expression#chain
+									| {new}<IModelExpression> new ident openparen parameters closeparen#nocreate;
+									
+																		
+simple_expression<ISimpleElement> = {real}<IRealElement> real_value 				
+					| {integer}<IIntegerElement> integer_value
+					| {string}<IStringElement> [first]:tick string_literal? [last]:tick;
+									
+element_parameter<IModelExpression> = comma parameter#chain;
+
+parameters<List> = {single}<List>parameter | {multiple}<List> parameter comma parameters;
+
+parameter<IModelExpression> = {expression} model_expression#chain #nocreate;

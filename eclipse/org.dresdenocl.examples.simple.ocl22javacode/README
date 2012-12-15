@@ -1,0 +1,24 @@
+SIMPLE EXAMPLE PROVIDED WITH DRESDEN OCL
+GENERATED JAVA CODE AND TEST SUITE
+========================================
+
+This plug-in contains and extension of the Simple example that is provided 
+with Dresden OCL. The Simple example is located in the plug-in
+org.dresdenocl.examples.simple
+
+This plug-in provides some test cases and the environment to generated
+AspectJ code for the constraints provided with the simple example.
+
+Further details how to generate such AspectJ code can be found in the manual, 
+available in the 'doc' directory of your distribution or online at
+http://www.reuseware.org/index.php/DresdenOCL:Documentation
+
+The exceution of probably generated code requires the installation of the
+AspectJ Development Tools (AJDT) Project (http://www.eclipse.org/ajdt/)
+into your Eclipse distribution.
+
+
+Provided Tests
+==============
+The directory org.dresdenocl.examples.simple.constraints.test contains
+test cases to test generated AspectJ code with JUnit.

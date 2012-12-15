@@ -1,0 +1,16 @@
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner> result2;
+result2 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.ProgramPartner>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (org.dresdenocl.examples.royalsandloyals.LoyaltyProgram anElement1 : aClass.programs) {
+    result2.addAll(anElement1.partners);
+}
+java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service> result1;
+result1 = new java.util.ArrayList<org.dresdenocl.examples.royalsandloyals.Service>();
+
+/* Iterator Collect: Iterate through all elements and collect them. Elements which are collections are flattened. */
+for (org.dresdenocl.examples.royalsandloyals.ProgramPartner anElement2 : result2) {
+    result1.addAll(anElement2.deliveredServices);
+}
+
+(org.dresdenocl.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))

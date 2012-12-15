@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 61.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
--- Adapted from derive to def. Derive only allowed for existing attributes.
-context LoyaltyAccount
-def: usedServices: Set(Service) = transactions.service->asSet()
-                     
-endpackage

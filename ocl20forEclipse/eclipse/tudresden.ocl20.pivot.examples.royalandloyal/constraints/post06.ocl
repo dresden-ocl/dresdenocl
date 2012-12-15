@@ -1,8 +1,0 @@
--- Constraint taken from [1] page 53.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context Customer::birthdayHappens()
-post: age = age@pre + 1
-
-endpackage

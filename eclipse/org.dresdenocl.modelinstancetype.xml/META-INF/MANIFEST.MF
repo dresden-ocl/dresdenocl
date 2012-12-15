@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XML Model Instance Type Plug-in
+Bundle-SymbolicName: org.dresdenocl.modelinstancetype.xml;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.modelinstancetype.xml.XmlModelInstanceTypePlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.modelbus,
+ org.eclipse.emf.ecore.xmi
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.modelinstancetype.xml,
+ org.dresdenocl.modelinstancetype.xml.internal.provider

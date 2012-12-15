@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XML Schema Metamodel Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.metamodels.xsd.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.xsd.test.XmlSchemaMetamodelTestPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.metamodels.test,
+ org.dresdenocl.metamodels.xsd,
+ org.dresdenocl.modelbus,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.xsd,
+ org.dresdenocl.facade
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.metamodels.xsd.test

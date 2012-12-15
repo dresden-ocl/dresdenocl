@@ -1,7 +1,0 @@
--- @model{../../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-
-context Transaction
-inv: Transaction.allInstances()->size() > 0
-
-endpackage

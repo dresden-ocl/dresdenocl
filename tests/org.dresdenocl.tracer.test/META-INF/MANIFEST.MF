@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OCL Tracer Tests
+Bundle-SymbolicName: org.dresdenocl.tracer.test;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.tracer.test.TracerTestPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.interpreter;bundle-version="3.1.0",
+ org.junit,
+ org.dresdenocl.modelinstancetype,
+ org.dresdenocl.tracer;bundle-version="3.1.0",
+ org.dresdenocl.interpreter.test;bundle-version="3.1.0",
+ org.eclipse.emf.common;bundle-version="2.7.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: TU Dresden, Software Technology Group
+Import-Package: org.dresdenocl.testsuite._abstract,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.junit.runner;version="4.8.2",
+ org.junit.runners;version="4.8.2",
+ org.dresdenocl.essentialocl.standardlibrary,
+ org.dresdenocl.facade,
+ org.dresdenocl.language.ocl.resource.ocl,
+ org.dresdenocl.metamodels.ecore,
+ org.dresdenocl.model,
+ org.dresdenocl.modelinstance,
+ org.dresdenocl.parser,
+ org.dresdenocl.pivotmodel,
+ org.dresdenocl.tracer,
+ org.dresdenocl.tracer.tracermodel
+Export-Package: org.dresdenocl.tracer.test
+Bundle-ClassPath: lib/xmlunit-1.3.jar,
+ .

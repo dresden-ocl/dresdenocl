@@ -1,0 +1,5 @@
+<%@ jet package="org.dresdenocl.codegen.adapter.templates.model" class="Messages" imports="org.eclipse.emf.codegen.ecore.genmodel.* org.dresdenocl.codegen.adapter.PivotAdapterGeneratorUtil "%>
+<%String modelName = PivotAdapterGeneratorUtil.startWithCapitalLetter(((GenModel)argument).getModelName());%>
+
+<%=modelName%>Model_LoadingEcoreModel=Loading <%=modelName%> model from {0}. 
+<%=modelName%>AdapterFactory_CreatingPivotModelAdapter=Creating Pivot Model adapter for {0} ''{1}''.

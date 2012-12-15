@@ -1,9 +1,0 @@
--- Constraint taken from [1] page 55.
--- @model{../model/royalsandloyals.uml}
-package tudresden::ocl20::pivot::examples::royalsandloyals
-   
-context ProgramPartner
-inv totalPointsEarning: 
-  deliveredServices.transaction->select(oclIsTypeOf(Earning)).points->sum() < 10000
-                     
-endpackage

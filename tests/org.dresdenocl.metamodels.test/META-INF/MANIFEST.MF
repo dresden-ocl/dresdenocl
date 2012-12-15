@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Abstract Meta-Model Test Plug-in
+Bundle-SymbolicName: org.dresdenocl.metamodels.test
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.test.MetaModelTestPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.0.0",
+ org.dresdenocl.facade,
+ org.dresdenocl.testsuite.abstract;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.metamodels.test
+Bundle-Vendor: TU Dresden, Software Technology Group

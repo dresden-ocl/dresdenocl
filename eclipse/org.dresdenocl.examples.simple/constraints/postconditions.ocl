@@ -1,0 +1,8 @@
+-- @model{../model/simple.uml}
+package org::dresdenocl::examples::simple
+
+-- The result of getAge must equal to the age of a Person.
+context Person::getAge()
+post: result = age
+
+endpackage

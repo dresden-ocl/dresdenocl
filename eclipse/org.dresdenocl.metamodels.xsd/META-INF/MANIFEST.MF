@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XSD Meta-Model Plug-in
+Bundle-SymbolicName: org.dresdenocl.metamodels.xsd; singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.dresdenocl.metamodels.xsd.XSDMetamodelPlugin
+Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.xsd,
+ org.dresdenocl.modelbus,
+ org.dresdenocl.metamodels.ecore
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.metamodels.xsd,
+ org.dresdenocl.metamodels.xsd.internal.provider
