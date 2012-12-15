@@ -1,9 +1,0 @@
-package timing
-context calendar::weekend
-inv: -1 + 4 * maxLength <= super.getMaxLength(this) -- nonsense, just texting syntactical analysis :o)
-context calendar::year: Integer
-init: 2004
-context calendar::owner: Person
-derive: system.getDatabaseOwner()
-endpackage
-

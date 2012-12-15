@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Dresden OCL Deft Utility Example
-Bundle-SymbolicName: org.dresdenocl.util.deft.example
-Bundle-Version: 3.1.0.qualifier
-Bundle-Vendor: TU Dresden, Software Technology Group

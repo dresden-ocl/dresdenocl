@@ -1,2 +1,0 @@
-Main-Class: tudresden.ocl20.workbench.Workbench
-Class-Path: ./resources/ ocl20scriptrunner.jar ocl20codegen-java.jar ocl20jmiimpl.jar ocl20jmiapi.jar ocl20stdlib.jar ocl20repository.jar lib/external/jmi.jar lib/external/mof.jar lib/external/openide.jar lib/external/nbjmi_mdrapi.jar lib/external/nbjmi_mdrimpl.jar lib/external/nbjmi_jmiutils.jar

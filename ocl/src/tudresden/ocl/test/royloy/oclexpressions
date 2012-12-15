@@ -1,7 +1,0 @@
-
-context Transaction::program()
-post: result=self.card.membership.program
-
-context OclAny
-inv metamodel:
-oclIsKindOf(Bank)=oclIsTypeOf(Person)
