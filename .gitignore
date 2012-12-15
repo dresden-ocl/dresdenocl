@@ -1,0 +1,7 @@
+bin/
+.DS_Store
+pdf/
+*.aux
+*.lo*
+*.toc
+*.out
