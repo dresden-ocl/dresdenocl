@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2008-2009 by Matthias Bräuer
+Copyright (C) 2008-2009 by Matthias Brï¿½uer
 
 This file is part of the Model Bus GUI of Dresden OCL2 for Eclipse.
 
@@ -38,6 +38,8 @@ public class ModelBusUIMessages extends NLS {
 	public static String LoadModelPage_BrowseWorkspaceDialogDescription;
 
 	public static String LoadModelPage_BrowseWorkspaceDialogTitle;
+	
+	public static String LoadModelPage_ErrorMsgCorrespondingClassFileNotExisting;
 
 	public static String LoadModelPage_Description;
 
@@ -104,6 +106,8 @@ public class ModelBusUIMessages extends NLS {
 	public static String LoadModelInstancePage_SelectModelInstanceTypeErrorMessage;
 
 	public static String LoadModelInstancePage_Title;
+	
+	public static String LoadModelInstancePage_ErrorMsgCorrespondingClassFileNotExisting;
 
 	public static String LoadModelInstanceWizard_Title;
 

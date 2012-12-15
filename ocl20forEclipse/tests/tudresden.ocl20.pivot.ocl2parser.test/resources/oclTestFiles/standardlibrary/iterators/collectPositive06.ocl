@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Tests parsing of implicit collect
+context Type1
+def: testCollectPositive06 = 
+Type1.allInstances().anInteger.toString()
+
+endpackage

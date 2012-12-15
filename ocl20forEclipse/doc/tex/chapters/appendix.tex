@@ -8,7 +8,7 @@
     \hline
     \textbf{Software} & \textbf{Available at} \\
     \hline
-    Eclipse 3.6.x & \url{http://www.eclipse.org/} \\
+    Eclipse 4.2.x & \url{http://www.eclipse.org/} \\
     \hline
     Eclipse Modeling Framework (EMF) & \url{http://www.eclipse.org/modeling/emf/} \\
     \hline
@@ -25,150 +25,8 @@
     \url{http://www.eclipse.org/ajdt/} \\
     \hline
 \end{tabular}
-\caption{Software required to run Dresden OCL (v. 3.0.0) with Eclipse \newline(Most parts are con\-tained in the Eclipse MDT Distribution).}
+\caption{Software required to run Dresden OCL (v. 3.x) with Eclipse \newline(Most parts are con\-tained in the Eclipse MDT Distribution).}
 \label{tab:software}
-\end{table}
-
-
-\begin{table}[p]
-\begin{tabular}{|p{4cm}|p{10cm}|}
-    \hline
-    \textbf{Feature} & \textbf{Plug-ins} \\
-    \hline
-
-    \textbf{Codegen} &
-    (Required for code generation)\newline
-    tudresden.ocl20.pivot.tools.codegen\newline
-    tudresden.ocl20.pivot.tools.codegen.ui\newline
-    tudresden.ocl20.pivot.tools.template\newline
-    tudresden.ocl20.pivot.tools.template.test\newline
-    tudresden.ocl20.pivot.tools.transformation\newline
-    tudresden.ocl20.pivot.tools.transformation.test\\
-    \hline
-
-    \textbf{Core} & 
-    (Required)\newline
-    tudresden.ocl20.pivot.logging\newline
-    tudresden.ocl20.pivot.essentialocl\newline
-    tudresden.ocl20.pivot.essentialcol.edit\newline
-    tudresden.ocl20.pivot.essentialocl.editor\newline
-    tudresden.ocl20.pivot.essentialocl.standardlibrary\newline
-    tudresden.ocl20.pivot.essentialocl.tests\newline
-    tudresden.ocl20.pivot.examples.royalandloyal\newline
-    tudresden.ocl20.pivot.model\newline
-    tudresden.ocl20.pivot.modelbus\newline
-    tudresden.ocl20.pivot.modelbus.tests\newline
-    tudresden.ocl20.pivot.modelbus.ui\newline
-    tudresden.ocl20.pivot.modelinstance\newline
-    tudresden.ocl20.pivot.modelinstancetype\newline
-    tudresden.ocl20.pivot.pivotmodel\newline
-    tudresden.ocl20.pivot.pivotmodel.edit\newline
-    tudresden.ocl20.pivot.pivotmodel.tests\newline
-    tudresden.ocl20.pivot.standardlibrary.java\newline
-    tudresden.ocl20.pivot.standardlibrary.java.tests\newline
-    tudresden.ocl20.pivot.testsuite\\
-    \hline
-
-    \textbf{Examples} &
-    (Optional)\newline
-    tudresden.ocl20.pivot.examples.living\newline
-    tudresden.ocl20.pivot.examples.pain\newline
-    tudresden.ocl20.pivot.examples.pml\newline
-    tudresden.ocl20.pivot.examples.simple\newline
-    tudresden.ocl20.pivot.examples.university\\
-    \hline
-
-    \textbf{Integration Facade} &
-    (Optional)\newline
-    tudresden.ocl20.pivot.facade\\
-    \hline
-
-    \textbf{Interpreter} &
-    (Required for interpretation)\newline
-    tudresden.ocl20.interpreter\newline
-    tudresden.ocl20.interpreter.test\newline
-    tudresden.ocl20.interpreter.ui\\
-    \hline
- 
-    \textbf{Metamodels} &
-    (Required)\newline
-    tudresden.ocl20.pivot.codegen.adapter\newline
-    tudresden.ocl20.pivot.metamodels.ecore\newline
-    tudresden.ocl20.pivot.metamodels.ecore.test\newline
-    tudresden.ocl20.pivot.metamodels.java\newline
-    tudresden.ocl20.pivot.metamodels.java.test\newline
-    tudresden.ocl20.pivot.metamodels.test\newline
-    tudresden.ocl20.pivot.metamodels.uml2\newline
-    tudresden.ocl20.pivot.metamodels.uml2.test\newline
-    tudresden.ocl20.pivot.metamodels.xsd\\
-    \hline
- 
-\end{tabular}
-\caption{The plug-ins of Dresden OCL (v. 3.0.0) related to their features (part 1).}
-\label{tab:plugins}
-\end{table}
-
-\begin{table}[p]
-\begin{tabular}{|p{4cm}|p{10cm}|}
-    \hline
-    \textbf{Feature} & \textbf{Plug-ins} \\
-    \hline
-
-    \textbf{Model Instances} &
-    (Required)\newline
-    tudresden.ocl20.pivot.modelinstancetype.ecore\newline
-    tudresden.ocl20.pivot.modelinstancetype.java\newline
-    tudresden.ocl20.pivot.modelinstancetype.test\newline
-    tudresden.ocl20.pivot.modelinstancetype.test.ecore\newline
-    tudresden.ocl20.pivot.modelinstancetype.test.java\newline
-    tudresden.ocl20.pivot.modelinstancetype.test.xml\newline
-    tudresden.ocl20.pivot.modelinstancetype.xml\\
-    \hline
- 
-    \textbf{Ocl2Sql} &
-    (Required SQL code generation)\newline
-    tudresden.ocl20.pivot.tools.codegen.declarativ\newline
-    tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql\newline
-    tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test\newline
-    tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.ui\newline
-    tudresden.ocl20.pivot.tools.CWM\newline
-    tudresden.ocl20.pivot.tools.template.sql\newline
-    tudresden.ocl20.pivot.tools.transformation.pivot2sql\newline
-    tudresden.ocl20.pivot.tools.transformation.pivot2sql.test\\
-    \hline
-
-    \textbf{Ocl2Java} &
-    (Required for Java/AspectJ code generation)\newline
-    tudresden.ocl20.pivot.tools.codegen.ocl2java\newline
-    tudresden.ocl20.pivot.tools.codegen.ocl2java.types\newline
-    tudresden.ocl20.pivot.tools.codegen.ocl2java.test\newline
-    tudresden.ocl20.pivot.tools.codegen.ocl2java.ui\\
-    \hline
-
-    \textbf{Ocl22Java Examples} &
-    (Optional)\newline
-    tudresden.ocl20.pivot.examples.royalandloyal.ocl22javacode\newline
-    tudresden.ocl20.pivot.examples.simple.ocl22javacode\newline
-    tudresden.ocl20.pivot.tools.codegen.ocl22java.test.aspectj\\
-    \hline
-
-    \textbf{OCL2 Parser} &
-    (Required)\newline
-    org.emftext.access (provided by EMFText)\newline
-    org.emftext.commons.antlr3\_2\_0 (provided by EMFText)\newline
-    org.kiama.attribution\newline
-    scala.library\newline
-    tudresden.ocl20.pivot.language.ocl\newline
-    tudresden.ocl20.pivot.language.ocl.resource.ocl\newline
-    tudresden.ocl20.pivot.language.ocl.resource.ocl.ui\newline
-    tudresden.ocl20.pivot.language.ocl.semantics\newline
-    tudresden.ocl20.pivot.language.ocl.staticsemantics\newline
-    tudresden.ocl20.pivot.ocl2parser.test\newline
-    tudresden.ocl20.pivot.parser\newline
-    tudresden.ocl20.pivot.pivotmodel.semantics\\
-    \hline
-\end{tabular}
-\caption{The plug-ins of Dresden OCL (v. 3.0.0) related to their features (part 2).}
 \end{table}
 
 
@@ -272,6 +130,7 @@
 \acro{AJDT}{AspectJ Development Tools}
 \acro{API}{Application Programming Interface}
 \acro{AOP}{Aspect-Oriented Programming}
+\acro{BRs}{Business Rules}
 \acro{DOT}{Dresden OCL Toolkit}
 \acro{DOT4Eclipse}{Dresden OCL2 for E\-clip\-se}
 \acro{DSL}{Domain-Specific Language}
@@ -290,6 +149,7 @@
 \acro{SVN}{Subversion}
 \acro{UML}{Unified Modeling Language}
 \acro{URL}{Uniform Resource Locator}
+\acro{WFRs}{Well-Formedness Rules}
 \acro{XSD}{\acs{XML} Schema Definition}
 \acro{XMI}{\acs{XML} Metadata Interchange}
 \acro{XML}{Extensible Markup Language}

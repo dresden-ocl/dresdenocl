@@ -30,7 +30,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { OclBagsTest.class, OclCollectionsTest.class,
-		OclOrderedSetsTest.class, OclSequencesTest.class, OclSetsTest.class })
+		OclOrderedSetsTest.class, OclSequencesTest.class, OclSetsTest.class, OclStringTest.class })
 public class AllUtilTests {
 	// this class remains completely empty,
 	// being used only as a holder for the above annotations

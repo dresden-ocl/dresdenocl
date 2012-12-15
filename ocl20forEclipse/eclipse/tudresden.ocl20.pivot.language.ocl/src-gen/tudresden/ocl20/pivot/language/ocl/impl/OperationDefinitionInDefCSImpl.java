@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OperationDefinitionInDefCS;
  */
 public class OperationDefinitionInDefCSImpl extends OperationDefinitionCSImpl implements OperationDefinitionInDefCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OperationDefinitionInDefCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.OPERATION_DEFINITION_IN_DEF_CS;
-	}
+    return OclPackage.Literals.OPERATION_DEFINITION_IN_DEF_CS;
+  }
 
 } //OperationDefinitionInDefCSImpl

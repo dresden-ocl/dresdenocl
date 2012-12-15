@@ -53,6 +53,8 @@ public class Ocl2JavaUIMessages extends NLS {
 
 	public static String SettingsPage_GenerateGetters;
 
+	public static String SettingsPage_UseGetters;
+
 	public static String SettingsPage_InvariantModeGroupLabel;
 
 	public static String SettingsPage_InvariantMode1;

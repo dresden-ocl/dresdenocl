@@ -1,33 +1,46 @@
 <project>
 	<import file="./../scala.library/build.xml"/>
 	
-	<property name="attributionBin" value="./../org.kiama.attribution/bin"/>
+	<property name="attributableEObjectBin" value="./../tudresden.attributegrammar.integration.kiama/bin"/>
+	<property name="attributableEObjectSrc" value="./../tudresden.attributegrammar.integration.kiama/src"/>
 	
-	<target name="Clean org.kiama.attribution">
-		<mkdir dir="${attributionBin}"/>
+	<target name="Clean tudresden.attributegrammar.integration.kiama" >
+		<mkdir dir="${attributableEObjectBin}"/>
 		<delete>
-			<fileset dir="${attributionBin}">
+			<fileset dir="${attributableEObjectBin}">
 				<include name="**/*.class"/>
 			</fileset>
 		</delete>
-		<antcall target="Compile org.kiama.attribution" />
+		<antcall target="Compile tudresden.attributegrammar.integration.kiama" />
 	</target>
 	
-	<target name="Compile org.kiama.attribution" depends="Scala Compiler Init">		
-		
+	<target name="Compile tudresden.attributegrammar.integration.kiama" depends="Scala Compiler Init">		
+
+		<mkdir dir="${attributableEObjectBin}"/>
 		<echo message="Compile Scala Code" />
-		<mkdir dir="${attributionBin}"/>
 		<scalac
-				srcdir="./../org.kiama.attribution/src"
-				destdir="${attributionBin}"
+				srcdir="${attributableEObjectSrc}"
+				destdir="${attributableEObjectBin}"
 				classpathref="build.classpath"
 				includes="**/*.scala">
 		</scalac>
 		
+		<echo message="Compile Java Code" />
+		<javac
+			target="1.6"
+			source="1.6"
+			srcdir="${attributableEObjectSrc}"
+			destdir="${attributableEObjectBin}"
+			classpathref="build.classpath"
+			debug="on"
+			includes="**/*.java">
+			<compilerarg compiler="org.eclipse.jdt.core.JDTCompilerAdapter" line="-1.6 -g -warn:+boxing"/>
+		</javac>
+		
 		<!-- delete scala source files in output folder -->
 		<echo message="Delete .scala files from bin folder" />
 		<delete>
-			<fileset dir="${attributionBin}" includes="**/*.scala" />
+			<fileset dir="${attributableEObjectBin}" includes="**/*.scala" />
 		</delete>
 	</target>
 </project>

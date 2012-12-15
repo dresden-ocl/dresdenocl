@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* It is recommended that Charge Bearer be specified as part of Payment Information (PmtInf) and not Direct 

@@ -42,7 +42,13 @@ public class EcoreDataType extends AbstractType implements Type {
 
 	/** The adapted {@link EDataType}. */
 	private EDataType eDataType;
-
+	
+	/**
+	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
 	/**
 	 * <p>
 	 * Creates a new {@link EcoreDataType} instance.
@@ -50,8 +56,10 @@ public class EcoreDataType extends AbstractType implements Type {
 	 * 
 	 * @param eDataType
 	 *          The adapted {@link EDataType}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreDataType(EDataType eDataType) {
+	public EcoreDataType(EDataType eDataType,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -67,7 +75,7 @@ public class EcoreDataType extends AbstractType implements Type {
 
 		/* Initialize adapted EDataType. */
 		this.eDataType = eDataType;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -96,7 +104,7 @@ public class EcoreDataType extends AbstractType implements Type {
 	@Override
 	public Namespace getNamespace() {
 
-		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eDataType
+		return factory.createNamespace(this.eDataType
 				.getEPackage());
 	}
 

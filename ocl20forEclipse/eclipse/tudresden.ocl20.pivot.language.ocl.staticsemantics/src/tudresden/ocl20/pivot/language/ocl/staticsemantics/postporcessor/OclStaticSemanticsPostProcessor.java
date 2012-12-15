@@ -10,6 +10,7 @@ import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourcePostProcessor;
 import tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource;
 import tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemanticsException;
+import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 public class OclStaticSemanticsPostProcessor implements
@@ -25,12 +26,28 @@ public class OclStaticSemanticsPostProcessor implements
 				tudresden.ocl20.pivot.language.ocl.staticsemantics.OclStaticSemantics oclStaticSemantics = OclStaticSemanticsProvider
 						.getStaticSemantics(resource);
 
-				List<Constraint> result = oclStaticSemantics.cs2EssentialOcl(root);
+				List<Constraint> result = oclStaticSemantics
+						.cs2EssentialOcl(root);
 
-				//printResult(result);
+				/*
+				 * Probably notify listeners of the model that constraints have
+				 * been reparsed.
+				 */
+				if (result.size() > 0) {
+					if (ModelBusPlugin.getModelRegistry().getActiveModel() != null) {
+						ModelBusPlugin.getModelRegistry().getActiveModel()
+								.setChanged();
+						ModelBusPlugin.getModelRegistry().getActiveModel()
+								.notifiyListeners();
+					}
+					// no else.
+				}
+				// no else.
+
+				// printResult(result);
 
 			} catch (OclStaticSemanticsException e) {
-//				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 
@@ -56,6 +73,11 @@ public class OclStaticSemanticsPostProcessor implements
 
 	private void printBodyExpression(OclExpression bodyExpression) {
 		System.out.println(bodyExpression);
+	}
+
+	@Override
+	public void terminate() {
+		// left empty		
 	}
 
 }

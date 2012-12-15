@@ -69,6 +69,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 * @generated
 	 */
 	public ExpressionInOclItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -80,6 +81,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -98,6 +100,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
@@ -119,6 +122,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
+
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -133,8 +137,9 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/ExpressionInOcl")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/ExpressionInOcl")); //$NON-NLS-1$
 	}
 
 	/**
@@ -145,6 +150,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return "OCL";
 	}
 
@@ -157,6 +163,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExpressionInOcl.class)) {
@@ -164,8 +171,8 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT:
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT:
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -181,6 +188,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -192,6 +200,7 @@ public class ExpressionInOclItemProvider extends ExpressionItemProvider
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

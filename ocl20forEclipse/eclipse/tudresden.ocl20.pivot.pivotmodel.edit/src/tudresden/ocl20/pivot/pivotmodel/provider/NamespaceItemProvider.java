@@ -39,7 +39,6 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -58,9 +57,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Namespace} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.Namespace} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class NamespaceItemProvider extends NamedElementItemProvider implements
@@ -68,23 +68,25 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NamespaceItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,12 +96,13 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Nesting Namespace feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Nesting Namespace feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addNestingNamespacePropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -108,29 +111,30 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 						getString("_UI_Namespace_nestingNamespace_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_Namespace_nestingNamespace_feature", "_UI_Namespace_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.NAMESPACE__NESTING_NAMESPACE,
-						false, false, false, null, null, null));
+						PivotModelPackage.Literals.NAMESPACE__NESTING_NAMESPACE, false,
+						false, false, null, null, null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * This specifies how to implement {@link #getChildren} and is used to deduce
+	 * an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
+	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
 					.add(PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-			childrenFeatures
-					.add(PivotModelPackage.Literals.NAMESPACE__OWNED_TYPE);
-			childrenFeatures
-					.add(PivotModelPackage.Literals.NAMESPACE__OWNED_RULE);
+			childrenFeatures.add(PivotModelPackage.Literals.NAMESPACE__OWNED_TYPE);
+			childrenFeatures.add(PivotModelPackage.Literals.NAMESPACE__OWNED_RULE);
 			childrenFeatures
 					.add(PivotModelPackage.Literals.NAMESPACE__NESTED_NAMESPACE);
 		}
@@ -138,36 +142,39 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
+
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Namespace.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns Namespace.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/Namespace")); //$NON-NLS-1$
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
-	 *
+	 * 
 	 * <p>
-	 * The EMF implementation is changed to return the name of the adapted {@link Namespace} or 
-	 * <code>null</code> if no name is set. Existing type parameters are appended as well.
+	 * The EMF implementation is changed to return the name of the adapted
+	 * {@link Namespace} or <code>null</code> if no name is set. Existing type
+	 * parameters are appended as well.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -182,15 +189,16 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 		namespace = (Namespace) object;
 
 		// initialize with name
-		label = new StringBuilder(StringUtils.defaultIfEmpty(
-				namespace.getName(), "null")); //$NON-NLS-1$
+		label =
+				new StringBuilder(StringUtils.defaultIfEmpty(namespace.getName(),
+						"null")); //$NON-NLS-1$
 
 		// append type parameters if there are any
 		if (!namespace.getOwnedTypeParameter().isEmpty()) {
 			label.append('<');
 
-			for (Iterator<TypeParameter> it = namespace.getOwnedTypeParameter()
-					.iterator(); it.hasNext();) {
+			for (Iterator<TypeParameter> it =
+					namespace.getOwnedTypeParameter().iterator(); it.hasNext();) {
 				label.append(it.next().getName());
 
 				if (it.hasNext()) {
@@ -205,12 +213,13 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * The EMF implementation is adapted to send label notifications if the owned type parameters
-	 * change.
+	 * The EMF implementation is adapted to send label notifications if the owned
+	 * type parameters change.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -236,12 +245,14 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This adds to the collection of {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing all of the children that can be created under this object.
+	 * This adds to the collection of
+	 * {@link org.eclipse.emf.edit.command.CommandParameter}s describing all of
+	 * the children that can be created under this object.
 	 * 
 	 * <p>
-	 * The EMF implementation is adapted in order not to include the {@link GenericType}.
-	 * Generic types are created automatically so we do not want the editor to show them.
+	 * The EMF implementation is adapted in order not to include the
+	 * {@link GenericType}. Generic types are created automatically so we do not
+	 * want the editor to show them.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -252,10 +263,9 @@ public class NamespaceItemProvider extends NamedElementItemProvider implements
 
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-						PivotModelFactory.eINSTANCE.createTypeParameter()));
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackageImpl.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+				PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackageImpl.Literals.NAMESPACE__NESTED_NAMESPACE,

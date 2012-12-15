@@ -68,6 +68,7 @@ public class BooleanLiteralExpItemProvider extends
 	 * @generated
 	 */
 	public BooleanLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -79,6 +80,7 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,6 +96,7 @@ public class BooleanLiteralExpItemProvider extends
 	 * @generated
 	 */
 	protected void addBooleanSymbolPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -115,8 +118,9 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/BooleanLiteralExp")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/BooleanLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -127,16 +131,17 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String result;
-		
+
 		if (((BooleanLiteralExp) object).isBooleanSymbol()) {
 			result = "true";
 		}
-		
+
 		else {
 			result = "false";
 		}
-		
+
 		return result;
 	}
 
@@ -149,12 +154,13 @@ public class BooleanLiteralExpItemProvider extends
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BooleanLiteralExp.class)) {
 		case ExpressionsPackageImpl.BOOLEAN_LITERAL_EXP__BOOLEAN_SYMBOL:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -170,6 +176,7 @@ public class BooleanLiteralExpItemProvider extends
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

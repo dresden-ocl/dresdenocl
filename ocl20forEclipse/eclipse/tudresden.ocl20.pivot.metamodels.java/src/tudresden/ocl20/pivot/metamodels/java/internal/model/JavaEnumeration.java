@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 
 import tudresden.ocl20.pivot.metamodels.java.JavaMetaModelPlugin;
 import tudresden.ocl20.pivot.model.ModelConstants;
@@ -129,7 +130,7 @@ public class JavaEnumeration extends AbstractEnumeration implements Enumeration 
 
 		List<EnumerationLiteral> result;
 
-		result = new ArrayList<EnumerationLiteral>();
+		result = new BasicEList<EnumerationLiteral>();
 
 		for (Enum<?> aLiteral : (Enum<?>[]) this.myJavaEnum.getEnumConstants()) {
 			result.add(this.myFactory.createEnumerationLiteral(aLiteral));

@@ -1,0 +1,5 @@
+This directory contains resources that are necessary to be registered when the
+tests are executed headless (without Eclipse platform running).
+
+JARs were taken from:
+Eclipse Modeling Tools (http://www.eclipse.org/mdt/).

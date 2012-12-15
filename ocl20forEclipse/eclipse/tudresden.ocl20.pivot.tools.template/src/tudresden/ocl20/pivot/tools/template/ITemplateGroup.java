@@ -1,6 +1,5 @@
 package tudresden.ocl20.pivot.tools.template;
 
-import java.net.URL;
 import java.util.List;
 
 import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
@@ -52,7 +51,7 @@ public interface ITemplateGroup {
 	 * @throws TemplateException
 	 *           If the template engine can't read the files or is a file exits.
 	 */
-	public void addFiles(List<URL> files) throws TemplateException;
+	public void addFiles(List<String> files) throws TemplateException;
 
 	/**
 	 * Added a new template file to this {@link ITemplateGroup}.
@@ -62,6 +61,6 @@ public interface ITemplateGroup {
 	 * @throws TemplateException
 	 *           If the template engine can't read the file or is the file exits.
 	 */
-	public void addFile(URL file) throws TemplateException;
+	public void addFile(String file) throws TemplateException;
 
 }

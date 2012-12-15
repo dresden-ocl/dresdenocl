@@ -37,7 +37,8 @@ public class EssentialOclPlugin extends Plugin {
 	private IOclLibraryProvider oclLibraryProvider;
 
 	/**
-	 * Creates a new <code>PivotModelPlugin</code>. This is done by the workbench.
+	 * Creates a new <code>PivotModelPlugin</code>. This is done by the
+	 * workbench.
 	 */
 	public EssentialOclPlugin() {
 
@@ -47,8 +48,8 @@ public class EssentialOclPlugin extends Plugin {
 
 	/**
 	 * <p>
-	 * Returns the {@link IOclLibraryProvider} that is used to get an instance of
-	 * the {@link OclLibrary}.
+	 * Returns the {@link IOclLibraryProvider} that is used to get an instance
+	 * of the {@link OclLibrary}.
 	 * </p>
 	 * <p>
 	 * If no {@link IOclLibraryProvider} has been given to the
@@ -60,15 +61,18 @@ public class EssentialOclPlugin extends Plugin {
 	 * 
 	 * @see #setOclLibraryProvider(IOclLibraryProvider)
 	 * 
-	 * @return the {@link IOclLibraryProvider} that is used to get an instance of
-	 *         the {@link OclLibrary}
+	 * @return the {@link IOclLibraryProvider} that is used to get an instance
+	 *         of the {@link OclLibrary}
 	 */
 	public synchronized static IOclLibraryProvider getOclLibraryProvider() {
 
 		/* Check that the plugin has been activated. */
 		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Model Bus plugin has not been activated."); //$NON-NLS-1$
+			// throw new IllegalStateException(
+			//					"The Essential OCL plugin has not been activated."); //$NON-NLS-1$
+			plugin = new EssentialOclPlugin();
+			System.out
+					.println("The Essential OCL plugin has not been activated. Intialized it manually.");
 		}
 
 		/* Lazyily create the provider */
@@ -84,7 +88,7 @@ public class EssentialOclPlugin extends Plugin {
 	 * argument should be {@link StandaloneOclLibraryProvider}.
 	 * 
 	 * @param oclLibraryProvider
-	 *          the {@link IOclLibraryProvider} to set
+	 *            the {@link IOclLibraryProvider} to set
 	 */
 	public synchronized static void setOclLibraryProvider(
 			IOclLibraryProvider oclLibraryProvider) {
@@ -114,7 +118,9 @@ public class EssentialOclPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
@@ -129,7 +135,7 @@ public class EssentialOclPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          The {@link Class} to return the {@link Logger} for.
+	 *            The {@link Class} to return the {@link Logger} for.
 	 * 
 	 * @return A log4j {@link Logger}> instance.
 	 * 

@@ -29,7 +29,7 @@ import org.eclipse.osgi.util.NLS;
  */
 public class UML2ModelMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.uML2.internal.model.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.metamodels.uml2.internal.model.messages"; //$NON-NLS-1$
 
 	public static String UML2AdapterFactory_CreatingPivotModelAdapter;
 

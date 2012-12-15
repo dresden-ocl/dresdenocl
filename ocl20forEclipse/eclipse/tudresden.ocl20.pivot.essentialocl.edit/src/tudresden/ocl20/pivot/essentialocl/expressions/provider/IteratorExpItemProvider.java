@@ -47,10 +47,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.IteratorExp} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class IteratorExpItemProvider extends LoopExpItemProvider implements
@@ -64,6 +62,7 @@ public class IteratorExpItemProvider extends LoopExpItemProvider implements
 	 * @generated
 	 */
 	public IteratorExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -75,6 +74,7 @@ public class IteratorExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -90,6 +90,7 @@ public class IteratorExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/IteratorExp")); //$NON-NLS-1$
 	}
@@ -102,20 +103,21 @@ public class IteratorExpItemProvider extends LoopExpItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((IteratorExp) object).getName();
 		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -130,6 +132,7 @@ public class IteratorExpItemProvider extends LoopExpItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

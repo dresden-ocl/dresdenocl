@@ -62,4 +62,12 @@ public class OclFuzzyResolveResult<ReferenceType extends org.eclipse.emf.ecore.E
 		delegate.addMapping(identifier, uri, warning);
 	}
 	
+	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+		return delegate.getQuickFixes();
+	}
+	
+	public void addQuickFix(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
+		delegate.addQuickFix(quickFix);
+	}
+	
 }

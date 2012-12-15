@@ -41,26 +41,29 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import tudresden.ocl20.pivot.datatypes.*;
 import tudresden.ocl20.pivot.datatypes.DatatypesFactory;
+import tudresden.ocl20.pivot.datatypes.DatatypesPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
+ * 
  * @generated
  */
 public class DatatypesFactoryImpl extends EFactoryImpl implements
 		DatatypesFactory {
 
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static DatatypesFactory init() {
+
 		try {
-			DatatypesFactory theDatatypesFactory = (DatatypesFactory) EPackage.Registry.INSTANCE
-					.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"); //$NON-NLS-1$ 
+			DatatypesFactory theDatatypesFactory =
+					(DatatypesFactory) EPackage.Registry.INSTANCE
+							.getEFactory("http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"); //$NON-NLS-1$ 
 			if (theDatatypesFactory != null) {
 				return theDatatypesFactory;
 			}
@@ -71,22 +74,24 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public DatatypesFactoryImpl() {
+
 		super();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
+
 		switch (eClass.getClassifierID()) {
 		default:
 			throw new IllegalArgumentException(
@@ -95,12 +100,13 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
+
 		switch (eDataType.getClassifierID()) {
 		case DatatypesPackage.BOOLEAN:
 			return createBooleanFromString(eDataType, initialValue);
@@ -119,12 +125,13 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
+
 		switch (eDataType.getClassifierID()) {
 		case DatatypesPackage.BOOLEAN:
 			return convertBooleanToString(eDataType, instanceValue);
@@ -143,8 +150,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -155,8 +162,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -167,17 +174,18 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public DatatypesPackage getDatatypesPackage() {
+
 		return (DatatypesPackage) getEPackage();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -188,20 +196,19 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertIntegerToString(EDataType eDataType,
-			Object instanceValue) {
+	public String convertIntegerToString(EDataType eDataType, Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -212,44 +219,41 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertBooleanToString(EDataType eDataType,
-			Object instanceValue) {
+	public String convertBooleanToString(EDataType eDataType, Object instanceValue) {
 
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String createStringFromString(EDataType eDataType,
-			String initialValue) {
+	public String createStringFromString(EDataType eDataType, String initialValue) {
 
 		return initialValue;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
-	public String convertStringToString(EDataType eDataType,
-			Object instanceValue) {
+	public String convertStringToString(EDataType eDataType, Object instanceValue) {
 
 		return (String) instanceValue;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -259,8 +263,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated NOT
 	 */
 	@SuppressWarnings("unused")
@@ -270,14 +274,15 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @deprecated
 	 * @generated
 	 */
 	@Deprecated
 	public static DatatypesPackage getPackage() {
+
 		return DatatypesPackage.eINSTANCE;
 	}
 
-} //DatatypesFactoryImpl
+} // DatatypesFactoryImpl

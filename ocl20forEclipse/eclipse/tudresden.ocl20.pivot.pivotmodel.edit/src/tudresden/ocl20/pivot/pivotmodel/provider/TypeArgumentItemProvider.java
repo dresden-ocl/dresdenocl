@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -53,8 +52,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.TypeArgument} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class TypeArgumentItemProvider extends TypedElementItemProvider
@@ -62,23 +63,25 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TypeArgumentItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -87,12 +90,14 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This returns TypeArgument.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns TypeArgument.gif. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeArgument")); //$NON-NLS-1$
 	}
@@ -101,8 +106,8 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * Changed the EMF-generated code to return the name of the type of the adapted
-	 * {@link TypeArgument}.
+	 * Changed the EMF-generated code to return the name of the type of the
+	 * adapted {@link TypeArgument}.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -114,12 +119,13 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * Extended the EMF implementation to update the label of the owner if the type of the
-	 * {@link TypeArgument} is changed.
+	 * Extended the EMF implementation to update the label of the owner if the
+	 * type of the {@link TypeArgument} is changed.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -133,12 +139,14 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 		case PivotModelPackageImpl.TYPE_ARGUMENT__TYPE:
 		case PivotModelPackageImpl.TYPE_ARGUMENT__GENERIC_TYPE: {
 
-			// update all element labels until we arrive at the Type that contains the type argument
-			for (NamedElement element = (NamedElement) notification
-					.getNotifier(); // start at notifier 
+			// update all element labels until we arrive at the Type that contains the
+			// type argument
+			for (NamedElement element = (NamedElement) notification.getNotifier(); // start
+																																							// at
+																																							// notifier
 			element != null; element = element.getOwner()) {
-				fireNotifyChanged(new ViewerNotification(notification, element,
-						false, true));
+				fireNotifyChanged(new ViewerNotification(notification, element, false,
+						true));
 
 				// stop iteration when we have reached the type
 				if (element instanceof Type) {
@@ -153,15 +161,16 @@ public class TypeArgumentItemProvider extends TypedElementItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

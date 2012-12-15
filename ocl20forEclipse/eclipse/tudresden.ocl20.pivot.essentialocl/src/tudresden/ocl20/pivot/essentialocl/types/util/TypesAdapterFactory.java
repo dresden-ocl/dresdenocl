@@ -80,6 +80,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public TypesAdapterFactory() {
+
 		if (modelPackage == null) {
 			modelPackage = TypesPackageImpl.eINSTANCE;
 		}
@@ -95,6 +96,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
+
 		if (object == modelPackage) {
 			return true;
 		}
@@ -111,83 +113,100 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected TypesSwitch<Adapter> modelSwitch = new TypesSwitch<Adapter>() {
+
 		@Override
 		public Adapter caseBagType(BagType object) {
+
 			return createBagTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseTupleType(TupleType object) {
+
 			return createTupleTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseCollectionType(CollectionType object) {
+
 			return createCollectionTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseInvalidType(InvalidType object) {
+
 			return createInvalidTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseOrderedSetType(OrderedSetType object) {
+
 			return createOrderedSetTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseSequenceType(SequenceType object) {
+
 			return createSequenceTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseSetType(SetType object) {
+
 			return createSetTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseVoidType(VoidType object) {
+
 			return createVoidTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseTypeType(TypeType object) {
+
 			return createTypeTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseOclLibrary(OclLibrary object) {
+
 			return createOclLibraryAdapter();
 		}
 
 		@Override
 		public Adapter caseAnyType(AnyType object) {
+
 			return createAnyTypeAdapter();
 		}
 
 		@Override
 		public Adapter caseNamedElement(NamedElement object) {
+
 			return createNamedElementAdapter();
 		}
 
 		@Override
 		public Adapter caseConstrainableElement(ConstrainableElement object) {
+
 			return createConstrainableElementAdapter();
 		}
 
 		@Override
 		public Adapter caseGenericElement(GenericElement object) {
+
 			return createGenericElementAdapter();
 		}
 
 		@Override
 		public Adapter caseType(Type object) {
+
 			return createTypeAdapter();
 		}
 
 		@Override
 		public Adapter defaultCase(EObject object) {
+
 			return createEObjectAdapter();
 		}
 	};
@@ -202,6 +221,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
+
 		return modelSwitch.doSwitch((EObject) target);
 	}
 
@@ -216,6 +236,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBagTypeAdapter() {
+
 		return null;
 	}
 
@@ -230,6 +251,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTupleTypeAdapter() {
+
 		return null;
 	}
 
@@ -244,6 +266,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionTypeAdapter() {
+
 		return null;
 	}
 
@@ -258,6 +281,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidTypeAdapter() {
+
 		return null;
 	}
 
@@ -272,6 +296,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOrderedSetTypeAdapter() {
+
 		return null;
 	}
 
@@ -286,6 +311,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSequenceTypeAdapter() {
+
 		return null;
 	}
 
@@ -300,6 +326,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSetTypeAdapter() {
+
 		return null;
 	}
 
@@ -314,6 +341,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVoidTypeAdapter() {
+
 		return null;
 	}
 
@@ -328,6 +356,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeTypeAdapter() {
+
 		return null;
 	}
 
@@ -342,6 +371,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOclLibraryAdapter() {
+
 		return null;
 	}
 
@@ -356,6 +386,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAnyTypeAdapter() {
+
 		return null;
 	}
 
@@ -370,6 +401,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+
 		return null;
 	}
 
@@ -384,6 +416,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConstrainableElementAdapter() {
+
 		return null;
 	}
 
@@ -398,6 +431,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGenericElementAdapter() {
+
 		return null;
 	}
 
@@ -412,6 +446,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
+
 		return null;
 	}
 
@@ -424,6 +459,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEObjectAdapter() {
+
 		return null;
 	}
 

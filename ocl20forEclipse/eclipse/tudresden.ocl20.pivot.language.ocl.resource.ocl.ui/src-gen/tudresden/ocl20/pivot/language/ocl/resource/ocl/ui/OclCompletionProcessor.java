@@ -8,16 +8,19 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
 
 public class OclCompletionProcessor implements org.eclipse.jface.text.contentassist.IContentAssistProcessor {
 	
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandlerProvider bracketHandlerProvider;
 	
-	public OclCompletionProcessor(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
-		this.editor = editor;
+	public OclCompletionProcessor(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandlerProvider bracketHandlerProvider) {
+		this.resourceProvider = resourceProvider;
+		this.bracketHandlerProvider = bracketHandlerProvider;
 	}
 	
 	public org.eclipse.jface.text.contentassist.ICompletionProposal[] computeCompletionProposals(org.eclipse.jface.text.ITextViewer viewer, int offset) {
-		
-		org.eclipse.emf.ecore.resource.Resource resource = editor.getResource();
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resource;
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
+		if (textResource == null) {
+			return new org.eclipse.jface.text.contentassist.ICompletionProposal[0];
+		}
 		String content = viewer.getDocument().get();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper helper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCodeCompletionHelper();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclCompletionProposal[] computedProposals = helper.computeCompletionProposals(textResource, content, offset);
@@ -48,7 +51,7 @@ public class OclCompletionProcessor implements org.eclipse.jface.text.contentass
 			int replacementLength = prefix.length();
 			// if a closing bracket was automatically inserted right before, we enlarge the
 			// replacement length in order to overwrite the bracket.
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler = editor.getBracketHandler();
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.IOclBracketHandler bracketHandler = bracketHandlerProvider.getBracketHandler();
 			String closingBracket = bracketHandler.getClosingBracket();
 			if (bracketHandler.addedClosingBracket() && proposalString.endsWith(closingBracket)) {
 				replacementLength += closingBracket.length();

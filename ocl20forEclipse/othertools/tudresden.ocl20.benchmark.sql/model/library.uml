@@ -7,7 +7,7 @@
           <packagedElement xmi:type="uml:Class" xmi:id="_J0lVcMHiEd2UNuYhQ_ApoA" name="Writer"/>
           <packagedElement xmi:type="uml:Class" xmi:id="_e_4MIK7YEd-nl4O4BHtP_g" name="Book">
             <ownedAttribute xmi:id="_jAeTwK7YEd-nl4O4BHtP_g" name="title">
-              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#String"/>
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedAttribute>
           </packagedElement>
           <packagedElement xmi:type="uml:Association" xmi:id="_rhmAQK7YEd-nl4O4BHtP_g" name="A_author_books" memberEnd="_wRYwMK7YEd-nl4O4BHtP_g _ybi6oK7YEd-nl4O4BHtP_g">

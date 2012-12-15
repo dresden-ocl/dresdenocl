@@ -243,8 +243,8 @@ public class EssentialOclFactory {
 
 		CollectionLiteralExp collectionLiteralExp;
 
-		collectionLiteralExp = ExpressionsFactory.INSTANCE
-				.createCollectionLiteralExp();
+		collectionLiteralExp =
+				ExpressionsFactory.INSTANCE.createCollectionLiteralExp();
 		collectionLiteralExp.setKind(kind);
 		collectionLiteralExp.setElementType(elementType);
 		collectionLiteralExp.getPart().addAll(Arrays.asList(parts));
@@ -384,8 +384,8 @@ public class EssentialOclFactory {
 					+ " does not denote an enumeration."); //$NON-NLS-1$
 		}
 
-		EnumerationLiteral enumLiteral = ((Enumeration) enumeration)
-				.lookupLiteral(enumLiteralName);
+		EnumerationLiteral enumLiteral =
+				((Enumeration) enumeration).lookupLiteral(enumLiteralName);
 
 		if (enumLiteral == null) {
 			throw new IllegalArgumentException(
@@ -526,8 +526,8 @@ public class EssentialOclFactory {
 					+ ") - enter"); //$NON-NLS-1$
 		}
 
-		IntegerLiteralExp integerLiteralExp = ExpressionsFactory.INSTANCE
-				.createIntegerLiteralExp();
+		IntegerLiteralExp integerLiteralExp =
+				ExpressionsFactory.INSTANCE.createIntegerLiteralExp();
 		integerLiteralExp.setIntegerSymbol(integerSymbol);
 
 		// initialize reference to the OCL Library
@@ -554,8 +554,8 @@ public class EssentialOclFactory {
 			LOGGER.debug("createInvalidLiteralExp() - enter"); //$NON-NLS-1$
 		}
 
-		InvalidLiteralExp invalidLiteralExp = ExpressionsFactory.INSTANCE
-				.createInvalidLiteralExp();
+		InvalidLiteralExp invalidLiteralExp =
+				ExpressionsFactory.INSTANCE.createInvalidLiteralExp();
 
 		invalidLiteralExp.setOclLibrary(oclLibrary);
 
@@ -742,8 +742,8 @@ public class EssentialOclFactory {
 
 		// lookup the operation
 		Type sourceType = source.getType();
-		Operation operation = sourceType.lookupOperation(referredOperationName,
-				paramTypes);
+		Operation operation =
+				sourceType.lookupOperation(referredOperationName, paramTypes);
 
 		if (operation == null) {
 			StringBuilder paramTypeNames = new StringBuilder();
@@ -767,8 +767,8 @@ public class EssentialOclFactory {
 							+ source.getType().getQualifiedName() + "'."); //$NON-NLS-1$
 		}
 
-		OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE
-				.createOperationCallExp();
+		OperationCallExp operationCallExp =
+				ExpressionsFactory.INSTANCE.createOperationCallExp();
 		operationCallExp.setSource(source);
 		operationCallExp.setReferredOperation(operation);
 
@@ -841,8 +841,8 @@ public class EssentialOclFactory {
 		// another place (non-static operation)
 
 		// lookup the operation on OclType first (allInstances, probably more)
-		Operation operation = oclLibrary.getOclType().lookupOperation(
-				referredOperation, paramTypes);
+		Operation operation =
+				oclLibrary.getOclType().lookupOperation(referredOperation, paramTypes);
 
 		if (operation == null) {
 
@@ -858,8 +858,8 @@ public class EssentialOclFactory {
 		// no else.
 
 		// create the expression
-		OperationCallExp operationCallExp = ExpressionsFactory.INSTANCE
-				.createOperationCallExp();
+		OperationCallExp operationCallExp =
+				ExpressionsFactory.INSTANCE.createOperationCallExp();
 		operationCallExp.setSourceType(owningType);
 		operationCallExp.setReferredOperation(operation);
 
@@ -877,6 +877,57 @@ public class EssentialOclFactory {
 		}
 
 		return operationCallExp;
+	}
+
+	/**
+	 * @author Lars Schuetze
+	 * @param source
+	 *          The source {@link OclExpression} of the {@link PropertyCallExp}.
+	 * @param referredProperty
+	 *          The referred {@link Property property}
+	 * @param qualifier
+	 *          qualifier {@link OclExpression} as an Array.
+	 * @return A {@link PropertyCallExp} instance.
+	 * @throws EssentialOclFactoryException
+	 */
+	public PropertyCallExp createPropertyCallExp(OclExpression source,
+			Property referredProperty, OclExpression... qualifier)
+			throws EssentialOclFactoryException {
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPropertyCallExp(source=" + source
+					+ ", refferedProperty=" + referredProperty + ", qualifier="
+					+ ArrayUtils.toString(qualifier));
+		}
+
+		if (source == null || referredProperty == null) {
+			throw new IllegalArgumentException(
+					"Parameters must not be null: source=" + source //$NON-NLS-1$
+							+ ", referredProperty=" + referredProperty + "."); //$NON-NLS-1$//$NON-NLS-2$
+		}
+
+		// create the expression
+		PropertyCallExp propertyCallExp =
+				ExpressionsFactory.INSTANCE.createPropertyCallExp();
+
+		propertyCallExp.setSource(source);
+		propertyCallExp.setSourceType(referredProperty.getOwningType());
+		propertyCallExp.setReferredProperty(referredProperty);
+
+		// a property call expression needs access to the OCL library
+		propertyCallExp.setOclLibrary(oclLibrary);
+
+		// set the qualifiers if existing
+		if (qualifier != null) {
+			propertyCallExp.getQualifier().addAll(Arrays.asList(qualifier));
+		}
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("createPropertyCallExp() - exit - return value=" //$NON-NLS-1$
+					+ propertyCallExp);
+		}
+
+		return propertyCallExp;
 	}
 
 	/**
@@ -915,18 +966,19 @@ public class EssentialOclFactory {
 		Property property = sourceType.lookupProperty(referredPropertyName);
 
 		// invalid and undefined conform to all types, so we ignore if we
-		// haven't
-		// found a property
+		// haven't found a property
 		if (property == null) {
 			throw new EssentialOclFactoryException(
 					"Unable to find property '" + referredPropertyName //$NON-NLS-1$
 							+ "' in type '" + source.getType().getQualifiedName() + "'"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE
-				.createPropertyCallExp();
+		// create the expression
+		PropertyCallExp propertyCallExp =
+				ExpressionsFactory.INSTANCE.createPropertyCallExp();
 
 		propertyCallExp.setSource(source);
+		propertyCallExp.setSourceType(sourceType);
 		propertyCallExp.setReferredProperty(property);
 
 		// a property call expression needs access to the OCL library
@@ -989,8 +1041,8 @@ public class EssentialOclFactory {
 		}
 
 		// create the expression
-		PropertyCallExp propertyCallExp = ExpressionsFactory.INSTANCE
-				.createPropertyCallExp();
+		PropertyCallExp propertyCallExp =
+				ExpressionsFactory.INSTANCE.createPropertyCallExp();
 		propertyCallExp.setSourceType(owningType);
 		propertyCallExp.setReferredProperty(property);
 
@@ -1026,8 +1078,8 @@ public class EssentialOclFactory {
 					+ ") - enter"); //$NON-NLS-1$
 		}
 
-		RealLiteralExp realLiteralExp = ExpressionsFactory.INSTANCE
-				.createRealLiteralExp();
+		RealLiteralExp realLiteralExp =
+				ExpressionsFactory.INSTANCE.createRealLiteralExp();
 		realLiteralExp.setRealSymbol(realSymbol);
 
 		realLiteralExp.setOclLibrary(oclLibrary);
@@ -1171,8 +1223,8 @@ public class EssentialOclFactory {
 
 		Type type = findType(referredTypeName);
 
-		TypeLiteralExp typeLiteralExp = ExpressionsFactory.INSTANCE
-				.createTypeLiteralExp();
+		TypeLiteralExp typeLiteralExp =
+				ExpressionsFactory.INSTANCE.createTypeLiteralExp();
 		typeLiteralExp.setReferredType(type);
 
 		// initialize reference to the OCL Library
@@ -1199,8 +1251,8 @@ public class EssentialOclFactory {
 			LOGGER.debug("createUndefinedLiteralExp() - enter"); //$NON-NLS-1$
 		}
 
-		UndefinedLiteralExp undefinedLiteralExp = ExpressionsFactory.INSTANCE
-				.createUndefinedLiteralExp();
+		UndefinedLiteralExp undefinedLiteralExp =
+				ExpressionsFactory.INSTANCE.createUndefinedLiteralExp();
 
 		undefinedLiteralExp.setOclLibrary(oclLibrary);
 
@@ -1227,8 +1279,8 @@ public class EssentialOclFactory {
 			LOGGER.debug("createUnlimitedNaturalExp(symbol=" + symbol + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		UnlimitedNaturalExp unlimitedNaturalExp = ExpressionsFactory.INSTANCE
-				.createUnlimitedNaturalExp();
+		UnlimitedNaturalExp unlimitedNaturalExp =
+				ExpressionsFactory.INSTANCE.createUnlimitedNaturalExp();
 		unlimitedNaturalExp.setSymbol(symbol);
 
 		if (LOGGER.isDebugEnabled()) {

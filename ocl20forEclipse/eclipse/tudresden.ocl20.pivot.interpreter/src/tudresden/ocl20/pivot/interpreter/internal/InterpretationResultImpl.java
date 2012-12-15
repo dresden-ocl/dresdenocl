@@ -35,7 +35,9 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  */
 public class InterpretationResultImpl implements IInterpretationResult {
 
-	/** The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}. */
+	/**
+	 * The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
+	 */
 	private IModelInstanceElement myModelObject;
 
 	/** The result of this {@link InterpretationResultImpl} as {@link OclAny}. */
@@ -50,7 +52,8 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
+	 *          The {@link IModelInstanceElement} of this
+	 *          {@link InterpretationResultImpl}.
 	 * @param constraint
 	 *          The {@link Constraint} of this {@link InterpretationResultImpl}.
 	 * @param result
@@ -67,10 +70,12 @@ public class InterpretationResultImpl implements IInterpretationResult {
 
 	/**
 	 * <p>
-	 * Returns the {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
+	 * Returns the {@link IModelInstanceElement} of this
+	 * {@link InterpretationResultImpl}.
 	 * </p>
 	 * 
-	 * @return The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
+	 * @return The {@link IModelInstanceElement} of this
+	 *         {@link InterpretationResultImpl}.
 	 */
 	public IModelInstanceElement getModelObject() {
 
@@ -101,5 +106,10 @@ public class InterpretationResultImpl implements IInterpretationResult {
 	public Constraint getConstraint() {
 
 		return myConstraint;
+	}
+
+	public String toString() {
+
+		return myResult.toString();
 	}
 }

@@ -2,23 +2,29 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OCL Static Semantics Analysis Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.language.ocl.staticsemantics;singleton:=true
-Bundle-Version: 3.0.0.qualifier
-Require-Bundle: tudresden.ocl20.pivot.language.ocl.semantics;bundle-version="1.0.0",
- scala.library;bundle-version="2.7.7";visibility:=reexport,
- org.eclipse.core.runtime,
- tudresden.ocl20.pivot.essentialocl.standardlibrary,
+Bundle-Version: 3.2.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.language.ocl,
  tudresden.ocl20.pivot.language.ocl.resource.ocl,
- tudresden.ocl20.pivot.pivotmodel.semantics,
  tudresden.ocl20.pivot.parser,
- tudresden.ocl20.pivot.model,
- tudresden.ocl20.pivot.essentialocl,
  tudresden.ocl20.pivot.modelbus,
- org.emftext.access,
- org.kiama.attribution
+ tudresden.attributegrammar.integration.kiama;visibility:=reexport,
+ scala.library;bundle-version="2.9.1",
+ org.emftext.access
 Bundle-ActivationPolicy: lazy
-Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl,
- tudresden.ocl20.pivot.language.ocl.staticsemantics,
+Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl;
+  uses:="tudresden.ocl20.pivot.pivotmodel,
+   org.eclipse.emf.ecore,
+   org.eclipse.emf.common.util,
+   tudresden.ocl20.pivot.parser,
+   tudresden.ocl20.pivot.model",
+ tudresden.ocl20.pivot.language.ocl.staticsemantics;uses:="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp",
  tudresden.ocl20.pivot.language.ocl.staticsemantics.factory,
- tudresden.ocl20.pivot.language.ocl.staticsemantics.impl,
- tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor
+ tudresden.ocl20.pivot.language.ocl.staticsemantics.impl;uses:="tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp",
+ tudresden.ocl20.pivot.language.ocl.staticsemantics.postporcessor;
+  uses:="org.eclipse.emf.ecore,
+   tudresden.ocl20.pivot.language.ocl.staticsemantics,
+   tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp,
+   tudresden.ocl20.pivot.language.ocl.resource.ocl,
+   tudresden.ocl20.pivot.language.ocl"
 Bundle-Vendor: TU Dresden, Software Technology Group

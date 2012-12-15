@@ -19,6 +19,7 @@ with Dresden OCL2 for Eclipse. If not, see <http://www.gnu.org/licenses/>.
 package tudresden.ocl20.pivot.interpreter.ui.internal.views.util;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -61,31 +62,32 @@ public class ResultsLabelProvider extends LabelProvider implements
 	private final static String ICON_RESULT_FALSE = "icons/result_false.gif";
 
 	/** Path to icon for undefined results. */
-	private final static String ICON_RESULT_UNDEFINED = "icons/result_undefined.gif";
+	private final static String ICON_RESULT_UNDEFINED =
+			"icons/result_undefined.gif";
 
 	/** Path to icon for undefined results. */
 	private final static String ICON_RESULT_INVALID = "icons/result_invalid.gif";
 
-	private Map<ImageDescriptor, Image> cachedImages = new HashMap<ImageDescriptor, Image>();
+	private Map<ImageDescriptor, Image> cachedImages =
+			new HashMap<ImageDescriptor, Image>();
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object obj) {
 
 		Image result;
 
-		result = PlatformUI.getWorkbench().getSharedImages().getImage(
-				ISharedImages.IMG_OBJ_ELEMENT);
+		result =
+				PlatformUI.getWorkbench().getSharedImages()
+						.getImage(ISharedImages.IMG_OBJ_ELEMENT);
 
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnImage(java
 	 * .lang.Object, int)
 	 */
@@ -99,14 +101,13 @@ public class ResultsLabelProvider extends LabelProvider implements
 		switch (index) {
 
 		case ResultsContentProvider.CONSTRAINT: {
-			imageDescriptor = InterpreterUIPlugin
-					.getImageDescriptor(ICON_CONSTRAINT);
+			imageDescriptor = InterpreterUIPlugin.getImageDescriptor(ICON_CONSTRAINT);
 			break;
 		}
 
 		case ResultsContentProvider.MODELOBJECT: {
-			imageDescriptor = InterpreterUIPlugin
-					.getImageDescriptor(ICON_MODEL_OBJECT);
+			imageDescriptor =
+					InterpreterUIPlugin.getImageDescriptor(ICON_MODEL_OBJECT);
 			break;
 		}
 
@@ -137,26 +138,27 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 							/* Check if the boolean is invalid. */
 							if (anOclBoolean.oclIsInvalid().isTrue()) {
-								imageDescriptor = InterpreterUIPlugin
-										.getImageDescriptor(ICON_RESULT_INVALID);
+								imageDescriptor =
+										InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_INVALID);
 							}
 
 							/* Else check if the boolean is undefined. */
 							else if (anOclBoolean.oclIsUndefined().isTrue()) {
-								imageDescriptor = InterpreterUIPlugin
-										.getImageDescriptor(ICON_RESULT_UNDEFINED);
+								imageDescriptor =
+										InterpreterUIPlugin
+												.getImageDescriptor(ICON_RESULT_UNDEFINED);
 							}
 
 							/* Else check if the boolean is true. */
 							else if (anOclBoolean.isTrue()) {
-								imageDescriptor = InterpreterUIPlugin
-										.getImageDescriptor(ICON_RESULT_TRUE);
+								imageDescriptor =
+										InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_TRUE);
 							}
 
 							/* Else the result is false. */
 							else {
-								imageDescriptor = InterpreterUIPlugin
-										.getImageDescriptor(ICON_RESULT_FALSE);
+								imageDescriptor =
+										InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_FALSE);
 							}
 						}
 						// no else.
@@ -170,14 +172,14 @@ public class ResultsLabelProvider extends LabelProvider implements
 			/* If the icon could not be defined, use the undefined icon. */
 			if (imageDescriptor == null) {
 
-				imageDescriptor = InterpreterUIPlugin
-						.getImageDescriptor(ICON_RESULT_UNDEFINED);
+				imageDescriptor =
+						InterpreterUIPlugin.getImageDescriptor(ICON_RESULT_UNDEFINED);
 			}
 			// no else.
 
 			break;
 		}
-			// no default.
+		// no default.
 		}
 		// end switch.
 
@@ -194,8 +196,9 @@ public class ResultsLabelProvider extends LabelProvider implements
 		}
 
 		else {
-			result = PlatformUI.getWorkbench().getSharedImages().getImage(
-					ISharedImages.IMG_OBJ_ELEMENT);
+			result =
+					PlatformUI.getWorkbench().getSharedImages()
+							.getImage(ISharedImages.IMG_OBJ_ELEMENT);
 		}
 
 		return result;
@@ -203,9 +206,7 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang
+	 * @see org.eclipse.jface.viewers.ITableLabelProvider#getColumnText(java.lang
 	 * .Object, int)
 	 */
 	public String getColumnText(Object anObject, int index) {
@@ -231,14 +232,19 @@ public class ResultsLabelProvider extends LabelProvider implements
 						result = aRow[index].toString();
 					}
 
+					else if (index == 0) {
+						result = "static";
+					}
+
 					else {
-						result = OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
+						result =
+								OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
 					}
 
 					break;
 				}
 
-					/* Create the output for the constraint column. */
+				/* Create the output for the constraint column. */
 				case ResultsContentProvider.CONSTRAINT: {
 
 					if (aRow[index] instanceof Constraint) {
@@ -249,43 +255,32 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 						aConstraint = (Constraint) aRow[index];
 
-						constrainedElement = (NamedElement) aConstraint
-								.getConstrainedElement().get(0);
+						constrainedElement =
+								(NamedElement) aConstraint.getConstrainedElement().get(0);
 
 						/*
-						 * If the context is an operation, add context
-						 * information.
+						 * If the context is an operation, add context information.
 						 */
 						if (constrainedElement instanceof Operation) {
 
 							String qualifiedName;
 
-							qualifiedName = constrainedElement
-									.getQualifiedName();
+							qualifiedName = constrainedElement.getQualifiedName();
 							result = "context ";
-							result += qualifiedName.substring(qualifiedName
-									.lastIndexOf(":") + 1);
+							result +=
+									qualifiedName.substring(qualifiedName.lastIndexOf(":") + 1);
 							result += ": ";
 						}
 
 						/*
-						 * Else the context is not needed because it is clear by
-						 * the model object.
+						 * Else the context is not needed because it is clear by the model
+						 * object.
 						 */
 						else {
 							result = "";
 						}
 
 						body = aConstraint.getSpecification().getBody();
-
-						result += aConstraint.getKind() + " ";
-
-						if (aConstraint.getName() != null) {
-							result += aConstraint.getName();
-						}
-						// no else.
-
-						result += ": ";
 
 						if (body != null) {
 							result += body;
@@ -294,7 +289,8 @@ public class ResultsLabelProvider extends LabelProvider implements
 					}
 
 					else {
-						result = OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
+						result =
+								OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
 					}
 
 					break;
@@ -310,7 +306,8 @@ public class ResultsLabelProvider extends LabelProvider implements
 
 			/* Else show an error message. */
 			else {
-				result = OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
+				result =
+						OclInterpreterUIMessages.InterpreterView_Error_WrongTypeOfResult;
 			}
 
 		}
@@ -321,5 +318,19 @@ public class ResultsLabelProvider extends LabelProvider implements
 		}
 
 		return result;
+	}
+
+	@Override
+	public void dispose() {
+
+		/* Dispose all cached images */
+		Iterator<Image> i = cachedImages.values().iterator();
+		while (i.hasNext()) {
+
+			((Image) i.next()).dispose();
+		}
+
+		cachedImages.clear();
+		super.dispose();
 	}
 }

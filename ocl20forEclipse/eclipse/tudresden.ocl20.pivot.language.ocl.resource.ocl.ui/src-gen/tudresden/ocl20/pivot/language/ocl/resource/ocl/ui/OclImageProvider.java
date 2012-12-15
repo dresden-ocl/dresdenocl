@@ -50,14 +50,37 @@ public class OclImageProvider {
 		}
 		
 		// try loading image from UI bundle
-		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path(key);
-		org.eclipse.jface.resource.ImageDescriptor desriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle(), path, null));
-		image = desriptor.createImage();
+		org.eclipse.jface.resource.ImageDescriptor descriptor = getImageDescriptor(key);
+		if (descriptor == null) {
+			return null;
+		}
+		image = descriptor.createImage();
 		if (image == null) {
 			return null;
 		}
 		imageCache.put(key, image);
 		return image;
+	}
+	
+	public org.eclipse.jface.resource.ImageDescriptor getImageDescriptor(String key) {
+		org.eclipse.core.runtime.IPath path = new org.eclipse.core.runtime.Path(key);
+		org.eclipse.jface.resource.ImageDescriptor descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(org.eclipse.core.runtime.FileLocator.find(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getBundle(), path, null));
+		if (org.eclipse.jface.resource.ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
+			// try loading image from any bundle
+			try {
+				// possible URLs:
+				// platform:/plugin/your.plugin/icons/yourIcon.png
+				// bundleentry://557.fwk3560063/icons/yourIcon.png
+				java.net.URL pluginUrl = new java.net.URL(key);
+				descriptor = org.eclipse.jface.resource.ImageDescriptor.createFromURL(pluginUrl);
+				if (org.eclipse.jface.resource.ImageDescriptor.getMissingImageDescriptor().equals(descriptor) || descriptor == null) {
+					return null;
+				}
+			} catch (java.net.MalformedURLException mue) {
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.logError("IconProvider can't load image (URL is malformed).", mue);
+			}
+		}
+		return descriptor;
 	}
 	
 }

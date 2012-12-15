@@ -88,6 +88,10 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 	/** Keep track what EClasses have already been considered by resolving. */
 	private Set<EClass> resolvedClasses = new HashSet<EClass>();
+	
+	/** The {@link EcoreAdapterFactory} of this {@link UML2Model}. */
+	private EcoreAdapterFactory factory;
+
 
 	/**
 	 * <p>
@@ -367,7 +371,7 @@ public class EcoreModel extends AbstractModel implements IModel {
 		/* Create a new package to serve as the root package. */
 		rootPackage = EcoreFactory.eINSTANCE.createEPackage();
 		rootPackage.setName(ModelConstants.ROOT_PACKAGE_NAME);
-
+		this.factory = new EcoreAdapterFactory();
 		/* Add all sub-packages and sub-types to the new root package. */
 		for (EObject eObject : rootPackages) {
 
@@ -390,6 +394,6 @@ public class EcoreModel extends AbstractModel implements IModel {
 
 		this.addNamespacesForReferencedPackages(rootPackage);
 
-		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
+		return factory.createNamespace(rootPackage);
 	}
 }

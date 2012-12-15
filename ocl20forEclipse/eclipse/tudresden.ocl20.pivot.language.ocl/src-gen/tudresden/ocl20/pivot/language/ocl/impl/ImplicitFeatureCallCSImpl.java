@@ -6,13 +6,9 @@
  */
 package tudresden.ocl20.pivot.language.ocl.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import tudresden.ocl20.pivot.language.ocl.ImplicitFeatureCallCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 
@@ -27,22 +23,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public abstract class ImplicitFeatureCallCSImpl extends EObjectImpl implements ImplicitFeatureCallCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected ImplicitFeatureCallCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.IMPLICIT_FEATURE_CALL_CS;
-	}
+    return OclPackage.Literals.IMPLICIT_FEATURE_CALL_CS;
+  }
 
 } //ImplicitFeatureCallCSImpl

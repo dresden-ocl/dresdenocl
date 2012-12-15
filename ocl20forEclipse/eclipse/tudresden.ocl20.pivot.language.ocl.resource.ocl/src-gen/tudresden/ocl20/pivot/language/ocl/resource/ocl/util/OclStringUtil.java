@@ -95,14 +95,43 @@ public class OclStringUtil {
 	 */
 	public static String explode(Object[] parts, String glue) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < parts.length; i++) {
+		int length = parts.length;
+		for (int i = 0; i < length; i++) {
 			Object next = parts[i];
 			sb.append(next.toString());
-			if (i < parts.length - 1) {
+			if (i < length - 1) {
 				sb.append(glue);
 			}
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * Concatenates the given parts and puts 'glue' between them. The toStringFunction
+	 * is used to convert the parts to strings.
+	 */
+	public static <T> String explode(java.util.Collection<T> parts, String glue, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclFunction1<String, T> toStringFunction) {
+		String[] partsAsArray = new String[parts.size()];
+		int i = 0;
+		for (T part : parts) {
+			partsAsArray[i] = toStringFunction.execute(part);
+			i++;
+		}
+		return explode(partsAsArray, glue);
+	}
+	
+	/**
+	 * Concatenates the given parts and puts 'glue' between them. The toStringFunction
+	 * is used to convert the parts to strings.
+	 */
+	public static <T> String explode(T[] parts, String glue, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclFunction1<String, T> toStringFunction) {
+		String[] partsAsArray = new String[parts.length];
+		int i = 0;
+		for (T part : parts) {
+			partsAsArray[i] = toStringFunction.execute(part);
+			i++;
+		}
+		return explode(partsAsArray, glue);
 	}
 	
 	/**
@@ -221,7 +250,7 @@ public class OclStringUtil {
 	 * as keyword (i.e., an in-line token). Single quotes are escaped using a
 	 * backslash. Backslashes are escaped using a backslash.
 	 * 
-	 * @param text the text to escape
+	 * @param value the text to escape
 	 * 
 	 * @return the escaped text
 	 */
@@ -271,4 +300,99 @@ public class OclStringUtil {
 		}
 		return result.toString();
 	}
+	
+	private static int minimum(int a, int b, int c) {
+		return Math.min(Math.min(a, b), c);
+	}
+	
+	public static int computeLevenshteinDistance(CharSequence str1, CharSequence str2) {
+		int[][] distance = new int[str1.length() + 1][str2.length() + 1];
+		for (int i = 0; i <= str1.length(); i++) {
+			distance[i][0] = i;
+		}
+		for (int j = 0; j <= str2.length(); j++) {
+			distance[0][j] = j;
+		}
+		for (int i = 1; i <= str1.length(); i++) {
+			for (int j = 1; j <= str2.length(); j++) {
+				distance[i][j] = minimum(distance[i - 1][j] + 1, distance[i][j - 1] + 1, distance[i - 1][j - 1] + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+			}
+		}
+		return distance[str1.length()][str2.length()];
+	}
+	
+	public static String encode(char delimiter, String[] parts) {
+		java.util.List<String> partList = new java.util.ArrayList<String>();
+		for (String part : parts) {
+			partList.add(part);
+		}
+		return encode(delimiter, partList);
+	}
+	
+	public static String encode(char delimiter, Iterable<String> parts) {
+		StringBuilder result = new StringBuilder();
+		for (String part : parts) {
+			String encodedPart = part.replace("\\", "\\\\");
+			encodedPart = encodedPart.replace("" + delimiter, "\\" + delimiter);
+			result.append(encodedPart);
+			result.append(delimiter);
+		}
+		return result.toString();
+	}
+	
+	public static java.util.List<String> decode(String text, char delimiter) {
+		java.util.List<String> parts = new java.util.ArrayList<String>();
+		
+		boolean escapeMode = false;
+		String part = "";
+		for (int i = 0; i < text.length(); i++) {
+			char c = text.charAt(i);
+			if (c == delimiter) {
+				if (escapeMode) {
+					part += delimiter;
+					escapeMode = false;
+				} else {
+					// end of part
+					parts.add(part);
+					part = "";
+				}
+			} else if (c == '\\') {
+				if (escapeMode) {
+					part += '\\';
+					escapeMode = false;
+				} else {
+					escapeMode = true;
+				}
+			} else {
+				part += c;
+			}
+		}
+		return parts;
+	}
+	
+	public static String convertToString(java.util.Map<String, Object> properties) {
+		java.util.List<String> parts = new java.util.ArrayList<String>();
+		for (String key : properties.keySet()) {
+			Object value = properties.get(key);
+			if (value instanceof String) {
+				parts.add(encode('=', new String[] {key, (String) value}));
+			} else {
+				throw new RuntimeException("Can't encode " + value);
+			}
+		}
+		return encode(';', parts);
+	}
+	
+	public static java.util.Map<String, String> convertFromString(String text) {
+		java.util.Map<String, String> result = new java.util.LinkedHashMap<String, String>();
+		java.util.List<String> keyValuePairs = decode(text, ';');
+		for (String pair : keyValuePairs) {
+			java.util.List<String> keyAndValue = decode(pair, '=');
+			String key = keyAndValue.get(0);
+			String value = keyAndValue.get(1);
+			result.put(key, value);
+		}
+		return result;
+	}
+	
 }

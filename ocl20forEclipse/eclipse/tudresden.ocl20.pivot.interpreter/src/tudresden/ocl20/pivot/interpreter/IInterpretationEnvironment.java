@@ -47,13 +47,12 @@ public interface IInterpretationEnvironment extends Cloneable {
 
 	/**
 	 * <p>
-	 * Returns result for @pre values stored during a postconditions
-	 * preparation.
+	 * Returns result for @pre values stored during a postconditions preparation.
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *            The {@link OperationCallExp} containing the @pre operation
-	 *            call whose value shall be returned.
+	 *          The {@link OperationCallExp} containing the @pre operation call
+	 *          whose value shall be returned.
 	 * 
 	 * @return The @pre value for the given {@link OperationCallExp}.
 	 */
@@ -76,8 +75,8 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param identifier
-	 *            The identifier of the variable or simply the name (e.g.
-	 *            <code>self</code>).
+	 *          The identifier of the variable or simply the name (e.g.
+	 *          <code>self</code>).
 	 * 
 	 * @return Saved variables with given name.
 	 */
@@ -85,18 +84,18 @@ public interface IInterpretationEnvironment extends Cloneable {
 
 	/**
 	 * <p>
-	 * Checks whether or not a given {@link IModelInstanceObject} (represented
-	 * by an {@link OclModelInstanceObject}) existed before the execution of the
-	 * current interpreted postcondition. This method can be used to interpret
-	 * the <code>oclIsNew()</code> operation during the interpretation of a
+	 * Checks whether or not a given {@link IModelInstanceObject} (represented by
+	 * an {@link OclModelInstanceObject}) existed before the execution of the
+	 * current interpreted postcondition. This method can be used to interpret the
+	 * <code>oclIsNew()</code> operation during the interpretation of a
 	 * postcondition.
 	 * </p>
 	 * 
 	 * @param source
-	 *            The {@link OclModelInstanceObject} for that the
-	 *            <code>oclIsNew()</code> operation shall be evaluated.
-	 * @return <code>true</code>, if the given {@link OclModelInstanceObject}
-	 *         did not exist before the operation invocation of the current
+	 *          The {@link OclModelInstanceObject} for that the
+	 *          <code>oclIsNew()</code> operation shall be evaluated.
+	 * @return <code>true</code>, if the given {@link OclModelInstanceObject} did
+	 *         not exist before the operation invocation of the current
 	 *         interpreted postcondition.
 	 */
 	boolean isNewInstance(OclModelInstanceObject source);
@@ -108,13 +107,12 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
-	 *            The {@link OperationCallExp} containing @pre Operation whose
-	 *            value shall be stored.
+	 *          The {@link OperationCallExp} containing @pre Operation whose value
+	 *          shall be stored.
 	 * @param value
-	 *            The {@link OclAny} value to be stored.
+	 *          The {@link OclAny} value to be stored.
 	 */
-	public void saveAtPreValue(OperationCallExp anOperationCallExp,
-			OclAny value);
+	public void saveAtPreValue(OperationCallExp anOperationCallExp, OclAny value);
 
 	/**
 	 * <p>
@@ -126,19 +124,18 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param type
-	 *            The {@link Type} for which the instances shall be stored.
+	 *          The {@link Type} for which the instances shall be stored.
 	 */
 	void saveOldInstances(Type type);
 
 	/**
 	 * <p>
-	 * Sets the {@link IModelInstance} of this
-	 * {@link IInterpretationEnvironment}.
+	 * Sets the {@link IModelInstance} of this {@link IInterpretationEnvironment}.
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *            The {@link IModelInstance} of this
-	 *            {@link IInterpretationEnvironment}.
+	 *          The {@link IModelInstance} of this
+	 *          {@link IInterpretationEnvironment}.
 	 */
 	void setModelInstance(IModelInstance modelInstance);
 
@@ -151,10 +148,10 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 * </p>
 	 * 
 	 * @param identifier
-	 *            The identifier of the variable or simply the name (e.g.
-	 *            <code>self</code>).
+	 *          The identifier of the variable or simply the name (e.g.
+	 *          <code>self</code>).
 	 * @param value
-	 *            The {@link Variable}'s value.
+	 *          The {@link Variable}'s value.
 	 */
 	void setVariableValue(String identifier, OclAny value);
 }

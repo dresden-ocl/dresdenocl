@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* The instructed amount currency in direct debit transaction information (DbctDbTxInf InstdAmt Ccy) must be 

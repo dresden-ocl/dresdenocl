@@ -50,11 +50,13 @@ import tudresden.ocl20.pivot.essentialocl.standardlibrary.factory.IStandardLibra
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
 import tudresden.ocl20.pivot.essentialocl.types.BagType;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
+import tudresden.ocl20.pivot.essentialocl.types.InvalidType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.essentialocl.types.TypesFactory;
+import tudresden.ocl20.pivot.essentialocl.types.VoidType;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationAccessException;
 import tudresden.ocl20.pivot.modelinstancetype.exception.OperationNotFoundException;
@@ -148,7 +150,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			throw new IllegalArgumentException(
 					"Cannot create OclAny with \'null\' as given IModelInstanceElement.");
 		}
-	
+
 		else if (modelInstanceElement instanceof IModelInstanceVoid) {
 			if (cachedUndefinedOrInvalid.containsKey(modelInstanceElement))
 				result = cachedUndefinedOrInvalid.get(modelInstanceElement);
@@ -211,8 +213,9 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 				result = new JavaOclModelInstanceObject(modelInstanceObject,
 						modelInstanceObject.getType());
 			}
-		}else if (modelInstanceElement instanceof IModelInstanceTuple){
-			result = new JavaOclTuple((IModelInstanceTuple) modelInstanceElement); 
+		} else if (modelInstanceElement instanceof IModelInstanceTuple) {
+			result = new JavaOclTuple(
+					(IModelInstanceTuple) modelInstanceElement);
 		}
 
 		else {
@@ -665,7 +668,7 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			}
 		}
 		// end for.
-		
+
 		result = this.createOclTuple(imiNames, imiValues, type);
 
 		return result;
@@ -692,28 +695,66 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			 * ()
 			 */
 			public Type getType() {
-
 				return type;
+			}
+
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType#
+			 * allInstances(tudresden.ocl20.pivot.modelinstance.IModelInstance)
+			 */
+			public OclSet<OclAny> allInstances(IModelInstance modelInstance) {
+
+				if (this.oclIsInvalid().isTrue())
+					return createOclInvalid(type, this.getInvalidReason());
+
+				else if (this.oclIsUndefined().isTrue())
+					return createOclInvalid(type, new RuntimeException(
+							"Tried to call allInstances() on null. Reason :"
+									+ this.getUndefinedReason()));
+
+				/* Some types of the Standard Library define allInstances. */
+				else if (type instanceof PrimitiveType
+						&& ((PrimitiveType) type).getKind() == PrimitiveTypeKind.BOOLEAN) {
+					Set<OclAny> result = new HashSet<OclAny>();
+					result.add(JavaOclBoolean.getInstance(true));
+					result.add(JavaOclBoolean.getInstance(false));
+					return createOclSet(result, type);
+				}
+
+				else if (type instanceof VoidType) {
+					Set<OclAny> result = new HashSet<OclAny>();
+					result.add(createOclUndefined(type, "OclVoid instance"));
+					return createOclSet(result, type);
+				}
+
+				else if (type instanceof InvalidType) {
+					return createOclInvalid(
+							EssentialOclPlugin
+									.getOclLibraryProvider()
+									.getOclLibrary()
+									.getSetType(
+											EssentialOclPlugin
+													.getOclLibraryProvider()
+													.getOclLibrary()
+													.getOclAny()),
+							new IllegalArgumentException(
+									"Invocation of allInstances on OclInvalid."));
+				}
+
+				/* Instance specific type. */
+				else {
+					Set<IModelInstanceObject> allInstances = modelInstance
+							.getAllInstances(type);
+
+					return createOclSet(allInstances, type);
+				}
 			}
 		};
 
 		return result;
 	}
-
-	// /*
-	// * (non-Javadoc)
-	// * @seetudresden.ocl20.pivot.essentialocl.standardlibrary.factory.
-	// * IStandardLibraryFactory#createOclUndefined(java.lang.Class,
-	// * java.lang.String)
-	// */
-	// @SuppressWarnings("unchecked")
-	// public <T extends OclAny> T createOclUndefined(Class<T> clazz, String
-	// reason) {
-	//
-	// Type type = getTypeFromOclAny(clazz);
-	//
-	// return (T) createOclUndefined(type, reason);
-	// }
 
 	/*
 	 * (non-Javadoc)
@@ -821,11 +862,38 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			else if (type instanceof TypeType) {
 				result = (T) new BaseOclType<OclAny>(reason) {
 
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see
+					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
+					 * #getType()
+					 */
 					public Type getType() {
-
 						return ((TypeType) type).getRepresentedType();
 					}
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see
+					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
+					 * #allInstances(tudresden.ocl20.pivot.modelinstance.
+					 * IModelInstance)
+					 */
+					public OclSet<OclAny> allInstances(
+							IModelInstance modelInstance) {
+						Set<OclAny> resultSet = new HashSet<OclAny>();
+						resultSet.add(this);
+						return createOclSet(resultSet, EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary()
+								.getOclVoid());
+					}
 				};
+			}
+
+			else if (type instanceof VoidType) {
+				result = (T) JavaOclVoid.INSTANCE;
 			}
 
 			/* If no result has been created yet, create a JavaOclObject. */
@@ -975,11 +1043,36 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			else if (type instanceof TypeType) {
 				result = (T) new BaseOclType<OclAny>(invalidReason) {
 
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see
+					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
+					 * #getType()
+					 */
 					public Type getType() {
-
 						return ((TypeType) type).getRepresentedType();
 					}
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see
+					 * tudresden.ocl20.pivot.essentialocl.standardlibrary.OclType
+					 * #allInstances(tudresden.ocl20.pivot.modelinstance.
+					 * IModelInstance)
+					 */
+					public OclSet<OclAny> allInstances(
+							IModelInstance modelInstance) {
+						return createOclInvalid(EssentialOclPlugin
+								.getOclLibraryProvider().getOclLibrary()
+								.getSetType(type), getInvalidReason());
+					}
 				};
+			}
+
+			else if (type instanceof InvalidType) {
+				result = (T) new JavaOclInvalid(invalidReason);
 			}
 
 			/* If no result has been created yet, create a JavaOclObject. */
@@ -1019,8 +1112,8 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 
 				CollectionType collectionType = (CollectionType) genericType;
 				OclCollection<OclAny> oclCollection = createOclCollection(
-						(Collection<?>) element, collectionType, collectionType
-								.getElementType());
+						(Collection<?>) element, collectionType,
+						collectionType.getElementType());
 				imiElements.add(oclCollection.getModelInstanceElement());
 			} else {
 				throw new IllegalArgumentException("Cannot create "
@@ -1297,11 +1390,14 @@ public class JavaStandardLibraryFactory implements IStandardLibraryFactory {
 			if (operation.getName().equals("allInstances")) {
 
 				imiResult = BasisJavaModelInstanceFactory
-						.createModelInstanceCollection(modelInstance
-								.getAllInstances(((CollectionType) operation
-										.getType()).getElementType()),
-								EssentialOclPlugin.getOclLibraryProvider()
-										.getOclLibrary().getSetType(
+						.createModelInstanceCollection(
+								modelInstance
+										.getAllInstances(((CollectionType) operation
+												.getType()).getElementType()),
+								EssentialOclPlugin
+										.getOclLibraryProvider()
+										.getOclLibrary()
+										.getSetType(
 												((CollectionType) operation
 														.getType())
 														.getElementType()));

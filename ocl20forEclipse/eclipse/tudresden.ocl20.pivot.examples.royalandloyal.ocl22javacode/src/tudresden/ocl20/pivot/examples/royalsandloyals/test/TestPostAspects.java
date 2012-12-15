@@ -1,20 +1,21 @@
 package tudresden.ocl20.pivot.examples.royalsandloyals.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Date;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Membership;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Service;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
+import org.dresdenocl.tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
 import org.junit.Test;
 
-import tudresden.ocl20.pivot.examples.royalsandloyals.Customer;
-import tudresden.ocl20.pivot.examples.royalsandloyals.CustomerCard;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Date;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Earning;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount;
-import tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyProgram;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Membership;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ProgramPartner;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Service;
-import tudresden.ocl20.pivot.examples.royalsandloyals.ServiceLevel;
-import tudresden.ocl20.pivot.examples.royalsandloyals.Transaction;
 
 /**
  * <p>
@@ -200,6 +201,6 @@ public class TestPostAspects {
 		
 		date1 = Date.now();
 		
-		System.out.println(date1);
+		assertNotNull(date1);
 	}
 }

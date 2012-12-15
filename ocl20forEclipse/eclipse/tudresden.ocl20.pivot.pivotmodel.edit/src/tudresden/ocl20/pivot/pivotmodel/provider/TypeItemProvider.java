@@ -41,7 +41,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.command.CreateChildCommand;
@@ -66,8 +65,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.Type} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.Type} object. <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class TypeItemProvider extends NamedElementItemProvider implements
@@ -75,23 +76,25 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -104,7 +107,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	 * This adds a property descriptor for the Super Type feature.
 	 * 
 	 * <p>
-	 * The EMF implementation is adapted to add the special {@link SuperTypePropertyDescriptor}.
+	 * The EMF implementation is adapted to add the special
+	 * {@link SuperTypePropertyDescriptor}.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -118,21 +122,20 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * A special property descriptor for the super types of a {@link Type} that additionally includes
-	 * all {@link TypeParameter}s of the {@link Type}.
+	 * A special property descriptor for the super types of a {@link Type} that
+	 * additionally includes all {@link TypeParameter}s of the {@link Type}.
 	 */
 	protected class SuperTypePropertyDescriptor extends ItemPropertyDescriptor {
 
 		/**
-		 * Creates a new <code>TypePropertyDescriptor</code> instance using the default EMF
+		 * Creates a new <code>TypePropertyDescriptor</code> instance using the
+		 * default EMF
 		 */
-		public SuperTypePropertyDescriptor(String displayName,
-				String description) {
+		public SuperTypePropertyDescriptor(String displayName, String description) {
 
 			super(((ComposeableAdapterFactory) getAdapterFactory())
-					.getRootAdapterFactory(), getResourceLocator(),
-					displayName, description,
-					PivotModelPackageImpl.Literals.TYPE__SUPER_TYPE, true,
+					.getRootAdapterFactory(), getResourceLocator(), displayName,
+					description, PivotModelPackageImpl.Literals.TYPE__SUPER_TYPE, true,
 					false, true, null, null, null);
 		}
 
@@ -158,16 +161,16 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 					// remove that type from the list of super types
 					it.remove();
 
-					// create a new complex generic type and set the given type as a reference
-					ComplexGenericType genericType = PivotModelFactory.eINSTANCE
-							.createComplexGenericType();
+					// create a new complex generic type and set the given type as a
+					// reference
+					ComplexGenericType genericType =
+							PivotModelFactory.eINSTANCE.createComplexGenericType();
 					genericType.setUnboundType(type);
 
 					// append type arguments for each type parameter
 					for (int i = 0, size = type.getOwnedTypeParameter().size(); i < size; i++) {
 						genericType.getTypeArgument().add(
-								PivotModelFactory.eINSTANCE
-										.createTypeArgument());
+								PivotModelFactory.eINSTANCE.createTypeArgument());
 					}
 
 					// add the new generic type to the list of generic super types
@@ -186,7 +189,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 
 		/**
 		 * Helper method to add the generic super type to a {@link Type}. Uses a
-		 * <code>CreateChildCommand</code> for this purpose so the action can be undone.
+		 * <code>CreateChildCommand</code> for this purpose so the action can be
+		 * undone.
 		 */
 		protected void addGenericSuperTypes(Type type,
 				List<GenericType> genericSuperTypes) {
@@ -194,14 +198,10 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 			EditingDomain editingDomain = getEditingDomain(type);
 
 			if (editingDomain != null) {
-				editingDomain
-						.getCommandStack()
-						.execute(
-								SetCommand
-										.create(editingDomain,
-												type,
-												PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
-												genericSuperTypes));
+				editingDomain.getCommandStack().execute(
+						SetCommand.create(editingDomain, type,
+								PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
+								genericSuperTypes));
 			}
 
 			else {
@@ -212,60 +212,63 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate
-	 * feature for an {@link org.eclipse.emf.edit.command.AddCommand},
+	 * This specifies how to implement {@link #getChildren} and is used to deduce
+	 * an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand},
 	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures
 					.add(PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER);
-			childrenFeatures
-					.add(PivotModelPackage.Literals.TYPE__OWNED_OPERATION);
-			childrenFeatures
-					.add(PivotModelPackage.Literals.TYPE__OWNED_PROPERTY);
-			childrenFeatures
-					.add(PivotModelPackage.Literals.TYPE__GENERIC_SUPER_TYPE);
+			childrenFeatures.add(PivotModelPackage.Literals.TYPE__OWNED_OPERATION);
+			childrenFeatures.add(PivotModelPackage.Literals.TYPE__OWNED_PROPERTY);
+			childrenFeatures.add(PivotModelPackage.Literals.TYPE__GENERIC_SUPER_TYPE);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
+
+		// Check the type of the specified child object and return the proper
+		// feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns Type.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns Type.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object,
-				getResourceLocator().getImage("full/obj16/Type")); //$NON-NLS-1$
+
+		return overlayImage(object, getResourceLocator()
+				.getImage("full/obj16/Type")); //$NON-NLS-1$
 	}
 
 	/**
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * The EMF implementation is extended by the display of super types, in analogy to the Ecore
-	 * editor.
+	 * The EMF implementation is extended by the display of super types, in
+	 * analogy to the Ecore editor.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -286,8 +289,7 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 		if (!type.getSuperType().isEmpty()) {
 			label.append(" -> "); //$NON-NLS-1$
 
-			for (Iterator<Type> it = type.getSuperType().iterator(); it
-					.hasNext();) {
+			for (Iterator<Type> it = type.getSuperType().iterator(); it.hasNext();) {
 				label.append(it.next().getName());
 
 				if (it.hasNext()) {
@@ -308,8 +310,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 				label.append(", "); //$NON-NLS-1$
 			}
 
-			for (Iterator<GenericType> it = type.getGenericSuperType()
-					.iterator(); it.hasNext();) {
+			for (Iterator<GenericType> it = type.getGenericSuperType().iterator(); it
+					.hasNext();) {
 				GenericType genericType = it.next();
 				label.append(getLabel(genericType));
 
@@ -323,8 +325,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * Helper method that returns the name of the adapted {@link Type} including any
-	 * {@link TypeParameter}s that may have been defined.
+	 * Helper method that returns the name of the adapted {@link Type} including
+	 * any {@link TypeParameter}s that may have been defined.
 	 * 
 	 * @return a <code>CharSequence</code> representing
 	 */
@@ -339,8 +341,8 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 		if (!type.getOwnedTypeParameter().isEmpty()) {
 			name.append(getTypeParameterListOpeningDelimiter());
 
-			for (Iterator<TypeParameter> it = type.getOwnedTypeParameter()
-					.iterator(); it.hasNext();) {
+			for (Iterator<TypeParameter> it = type.getOwnedTypeParameter().iterator(); it
+					.hasNext();) {
 				name.append(it.next().getName());
 
 				if (it.hasNext()) {
@@ -355,9 +357,9 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * Helper method that returns the name of the {@link Type}. This is meant as a chance for
-	 * subclasses to alter the way the type name is displayed. The default implementation simply
-	 * returns the name of the type.
+	 * Helper method that returns the name of the {@link Type}. This is meant as a
+	 * chance for subclasses to alter the way the type name is displayed. The
+	 * default implementation simply returns the name of the type.
 	 * 
 	 * @return a <code>CharSequence</code> with the name of the type
 	 */
@@ -367,11 +369,13 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * Overridden to create a generic super type if the type to be added has type parameters.
+	 * Overridden to create a generic super type if the type to be added has type
+	 * parameters.
 	 * 
 	 * @see org.eclipse.emf.edit.provider.ItemProviderAdapter#createCreateChildCommand(org.eclipse.emf.edit.domain.EditingDomain,
-	 *      org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object,
-	 *      int, java.util.Collection)
+	 *      org.eclipse.emf.ecore.EObject,
+	 *      org.eclipse.emf.ecore.EStructuralFeature, java.lang.Object, int,
+	 *      java.util.Collection)
 	 */
 	@Override
 	protected Command createCreateChildCommand(EditingDomain domain,
@@ -385,9 +389,10 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 			// check if this is a generic super type
 			if (superType.getOwnedTypeParameter().size() > 0) {
 
-				// create a new complex generic type and set the given type as a reference
-				ComplexGenericType genericType = PivotModelFactory.eINSTANCE
-						.createComplexGenericType();
+				// create a new complex generic type and set the given type as a
+				// reference
+				ComplexGenericType genericType =
+						PivotModelFactory.eINSTANCE.createComplexGenericType();
 				genericType.setUnboundType(superType);
 
 				// append type arguments for each type parameter
@@ -396,25 +401,24 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 							PivotModelFactory.eINSTANCE.createTypeArgument());
 				}
 
-				return new CreateChildCommand(
-						domain,
-						owner,
+				return new CreateChildCommand(domain, owner,
 						PivotModelPackageImpl.Literals.TYPE__GENERIC_SUPER_TYPE,
 						genericType, index, collection, this);
 			}
 		}
 
-		return super.createCreateChildCommand(domain, owner, feature, value,
-				index, collection);
+		return super.createCreateChildCommand(domain, owner, feature, value, index,
+				collection);
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * The EMF implementation is extended to update the label of the type if the generic type
-	 * parameters change.
+	 * The EMF implementation is extended to update the label of the type if the
+	 * generic type parameters change.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -439,21 +443,21 @@ public class TypeItemProvider extends NamedElementItemProvider implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors
-				.add(createChildParameter(
-						PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
-						PivotModelFactory.eINSTANCE.createTypeParameter()));
+		newChildDescriptors.add(createChildParameter(
+				PivotModelPackage.Literals.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
+				PivotModelFactory.eINSTANCE.createTypeParameter()));
 
 		newChildDescriptors.add(createChildParameter(
 				PivotModelPackage.Literals.TYPE__OWNED_OPERATION,

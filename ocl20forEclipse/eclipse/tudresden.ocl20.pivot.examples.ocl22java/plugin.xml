@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ocl22java.wizard.RoyalAndLoyalExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.simple"
+            name="Royal and Loyal (Ocl22Java)"
+            project="true">
+         <description>
+            Creates two project containing the famous Royal &amp; Loyal UML model of Warmer &amp; Kleppe, some OCL constraints and test cases that can be used to test generated AspectJ code for the OCL constraints.
+         </description>
+      </wizard>
+      <wizard
+            canFinishEarly="true"
+            category="tudresden.ocl20.pivot.examples.ui.category"
+            class="tudresden.ocl20.pivot.examples.ocl22java.wizard.SimpleExampleWizard"
+            hasPages="false"
+            icon="icons/example.gif"
+            id="tudresden.ocl20.pivot.examples.ui.wizard.simple"
+            name="Simple Example (Ocl22Java)"
+            project="true">
+         <description>
+            Creates two project containing a simple UML/Java model, some OCL constraints and test cases that can be used to test generated AspectJ code for the OCL constraints.
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

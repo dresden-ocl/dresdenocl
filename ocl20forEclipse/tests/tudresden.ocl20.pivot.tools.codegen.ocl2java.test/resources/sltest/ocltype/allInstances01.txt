@@ -1,0 +1,4 @@
+java.util.Set<Boolean> result1 = new java.util.HashSet<Boolean>();
+result1.add(Boolean.FALSE);
+result1.add(Boolean.TRUE);
+result1

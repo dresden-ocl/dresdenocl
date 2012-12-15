@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.RelationalOperationCallExpCS;
  */
 public class RelationalOperationCallExpCSImpl extends OperationCallBinaryExpCSImpl implements RelationalOperationCallExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected RelationalOperationCallExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.RELATIONAL_OPERATION_CALL_EXP_CS;
-	}
+    return OclPackage.Literals.RELATIONAL_OPERATION_CALL_EXP_CS;
+  }
 
 } //RelationalOperationCallExpCSImpl

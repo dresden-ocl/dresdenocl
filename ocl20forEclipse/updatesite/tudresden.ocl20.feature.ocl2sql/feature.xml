@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.ocl2sql"
-      label="Dresden OCL Ocl2Sql"
-      version="3.0.2.qualifier"
+      label="Dresden OCL Ocl2Sql Code Generator"
+      version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technoloy Group">
 
    <description url="http://www.example.com/description">
@@ -210,11 +210,6 @@ Library.
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="tudresden.ocl20.pivot.tools.template"/>
       <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite"/>
-      <import plugin="org.junit4"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
-      <import plugin="tudresden.ocl20.pivot.parser"/>
-      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
       <import plugin="tudresden.ocl20.pivot.tools.codegen"/>
       <import plugin="tudresden.ocl20.pivot.essentialocl"/>
    </requires>
@@ -244,25 +239,10 @@ Library.
          id="tudresden.ocl20.pivot.tools.template.sql"
          download-size="0"
          install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="tudresden.ocl20.pivot.tools.transformation.pivot2sql"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.transformation.pivot2sql.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.tools.codegen.declarativ.ocl2sql.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

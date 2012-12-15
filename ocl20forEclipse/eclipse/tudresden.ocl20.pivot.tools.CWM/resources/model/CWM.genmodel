@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.tools.CWM/src"
-    modelPluginID="tudresden.ocl20.pivot.tools.CWM" modelName="CWM" importerID="org.eclipse.emf.importer.rose"
-    complianceLevel="6.0" copyrightFields="false" fontProviders="true" interfaceNamePattern="">
-  <foreignModel>rose\CWM.mdl</foreignModel>
-  <foreignModel>CWM_CAT_FILE</foreignModel>
-  <foreignModel>F:\Dateien\Projekte\java\Beleg\tudresden.CWM\resources\model\rose</foreignModel>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/tudresden.ocl20.pivot.tools.CWM/src" modelPluginID="tudresden.ocl20.pivot.tools.CWM"
+    modelName="CWM2" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>CWM.ecore</foreignModel>
   <genPackages prefix="Orgomg" disposableProviderFactory="true" ecorePackage="CWM.ecore#/">
-    <nestedGenPackages prefix="Cwm" basePackage="orgomg" disposableProviderFactory="true"
-        ecorePackage="CWM.ecore#//cwm">
-      <nestedGenPackages prefix="Objectmodel" basePackage="orgomg.cwm" disposableProviderFactory="true"
-          ecorePackage="CWM.ecore#//cwm/objectmodel">
-        <nestedGenPackages prefix="Core" basePackage="orgomg.cwm.objectmodel" disposableProviderFactory="true"
-            ecorePackage="CWM.ecore#//cwm/objectmodel/core">
+    <nestedGenPackages prefix="Cwm" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm">
+      <nestedGenPackages prefix="Objectmodel" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel">
+        <nestedGenPackages prefix="Core" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel/core">
           <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/objectmodel/core/ChangeableKind">
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/objectmodel/core/ChangeableKind/ck_changeable"/>
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/objectmodel/core/ChangeableKind/ck_frozen"/>
@@ -191,8 +185,7 @@
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CWM.ecore#//cwm/objectmodel/core/TaggedValue/modelElement"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Behavioral" basePackage="orgomg.cwm.objectmodel"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel/behavioral">
+        <nestedGenPackages prefix="Behavioral" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel/behavioral">
           <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/objectmodel/behavioral/ParameterDirectionKind">
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/objectmodel/behavioral/ParameterDirectionKind/pdk_in"/>
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/objectmodel/behavioral/ParameterDirectionKind/pdk_inout"/>
@@ -239,8 +232,8 @@
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/objectmodel/behavioral/Parameter/type"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Relationships" basePackage="orgomg.cwm.objectmodel"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel/relationships">
+        <nestedGenPackages prefix="Relationships" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/objectmodel/relationships">
           <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/objectmodel/relationships/AggregationKind">
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/objectmodel/relationships/AggregationKind/ak_none"/>
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/objectmodel/relationships/AggregationKind/ak_aggregate"/>
@@ -258,8 +251,7 @@
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/objectmodel/relationships/Generalization/parent"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Instance" basePackage="orgomg.cwm.objectmodel"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel/instance">
+        <nestedGenPackages prefix="Instance" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/objectmodel/instance">
           <genClasses image="false" ecoreClass="CWM.ecore#//cwm/objectmodel/instance/Instance">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/objectmodel/instance/Instance/valueSlot"/>
@@ -282,10 +274,9 @@
           <genClasses ecoreClass="CWM.ecore#//cwm/objectmodel/instance/Extent"/>
         </nestedGenPackages>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Foundation" basePackage="orgomg.cwm" disposableProviderFactory="true"
-          ecorePackage="CWM.ecore#//cwm/foundation">
-        <nestedGenPackages prefix="Businessinformation" basePackage="orgomg.cwm.foundation"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/businessinformation">
+      <nestedGenPackages prefix="Foundation" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation">
+        <nestedGenPackages prefix="Businessinformation" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/foundation/businessinformation">
           <genClasses ecoreClass="CWM.ecore#//cwm/foundation/businessinformation/ResponsibleParty">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/foundation/businessinformation/ResponsibleParty/responsibility"/>
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -342,8 +333,7 @@
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/businessinformation/ResourceLocator/contact"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Datatypes" basePackage="orgomg.cwm.foundation"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/datatypes">
+        <nestedGenPackages prefix="Datatypes" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/datatypes">
           <genClasses ecoreClass="CWM.ecore#//cwm/foundation/datatypes/Enumeration">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/foundation/datatypes/Enumeration/isOrdered"/>
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/datatypes/Enumeration/literal"/>
@@ -366,8 +356,7 @@
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/foundation/datatypes/UnionMember/isDefault"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Expressions" basePackage="orgomg.cwm.foundation"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/expressions">
+        <nestedGenPackages prefix="Expressions" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/expressions">
           <genClasses ecoreClass="CWM.ecore#//cwm/foundation/expressions/ExpressionNode">
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/expressions/ExpressionNode/expression"/>
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -387,8 +376,7 @@
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/expressions/FeatureNode/argument"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Keysindexes" basePackage="orgomg.cwm.foundation"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/keysindexes">
+        <nestedGenPackages prefix="Keysindexes" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/keysindexes">
           <genClasses ecoreClass="CWM.ecore#//cwm/foundation/keysindexes/UniqueKey">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/keysindexes/UniqueKey/feature"/>
@@ -416,8 +404,8 @@
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/keysindexes/IndexedFeature/index"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Softwaredeployment" basePackage="orgomg.cwm.foundation"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/softwaredeployment">
+        <nestedGenPackages prefix="Softwaredeployment" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/foundation/softwaredeployment">
           <genClasses ecoreClass="CWM.ecore#//cwm/foundation/softwaredeployment/Site">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/foundation/softwaredeployment/Site/containingSite"/>
@@ -482,8 +470,7 @@
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/foundation/softwaredeployment/PackageUsage/packageAlias"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Typemapping" basePackage="orgomg.cwm.foundation"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/typemapping">
+        <nestedGenPackages prefix="Typemapping" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/foundation/typemapping">
           <genClasses ecoreClass="CWM.ecore#//cwm/foundation/typemapping/TypeMapping">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/foundation/typemapping/TypeMapping/isBestMatch"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/foundation/typemapping/TypeMapping/isLossy"/>
@@ -499,10 +486,8 @@
           </genClasses>
         </nestedGenPackages>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Resource" basePackage="orgomg.cwm" disposableProviderFactory="true"
-          ecorePackage="CWM.ecore#//cwm/resource">
-        <nestedGenPackages prefix="Relational" basePackage="orgomg.cwm.resource" disposableProviderFactory="true"
-            ecorePackage="CWM.ecore#//cwm/resource/relational">
+      <nestedGenPackages prefix="Resource" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/resource">
+        <nestedGenPackages prefix="Relational" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/resource/relational">
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/relational/Catalog">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/resource/relational/Catalog/defaultCharacterSetName"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/resource/relational/Catalog/defaultCollationName"/>
@@ -608,8 +593,8 @@
           </genClasses>
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/relational/RowSet"/>
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/relational/SQLParameter"/>
-          <nestedGenPackages prefix="Enumerations" basePackage="orgomg.cwm.resource.relational"
-              disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/resource/relational/enumerations">
+          <nestedGenPackages prefix="Enumerations" disposableProviderFactory="true"
+              ecorePackage="CWM.ecore#//cwm/resource/relational/enumerations">
             <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/resource/relational/enumerations/ActionOrientationType">
               <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/resource/relational/enumerations/ActionOrientationType/row"/>
               <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/resource/relational/enumerations/ActionOrientationType/statement"/>
@@ -646,8 +631,7 @@
             </genEnums>
           </nestedGenPackages>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Record" basePackage="orgomg.cwm.resource" disposableProviderFactory="true"
-            ecorePackage="CWM.ecore#//cwm/resource/record">
+        <nestedGenPackages prefix="Record" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/resource/record">
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/record/Field">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/resource/record/Field/length"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/resource/record/Field/precision"/>
@@ -676,8 +660,8 @@
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/record/RecordSet"/>
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/record/Group"/>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Multidimensional" basePackage="orgomg.cwm.resource"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/resource/multidimensional">
+        <nestedGenPackages prefix="Multidimensional" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/resource/multidimensional">
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/multidimensional/Dimension">
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/resource/multidimensional/Dimension/dimensionedObject"/>
@@ -703,8 +687,7 @@
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CWM.ecore#//cwm/resource/multidimensional/Schema/dimension"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Xml" basePackage="orgomg.cwm.resource" disposableProviderFactory="true"
-            ecorePackage="CWM.ecore#//cwm/resource/xml">
+        <nestedGenPackages prefix="Xml" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/resource/xml">
           <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/resource/xml/AttributeDefault">
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/resource/xml/AttributeDefault/xml_required"/>
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/resource/xml/AttributeDefault/xml_implied"/>
@@ -768,10 +751,9 @@
           <genClasses ecoreClass="CWM.ecore#//cwm/resource/xml/Document"/>
         </nestedGenPackages>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Analysis" basePackage="orgomg.cwm" disposableProviderFactory="true"
-          ecorePackage="CWM.ecore#//cwm/analysis">
-        <nestedGenPackages prefix="Transformation" basePackage="orgomg.cwm.analysis"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/analysis/transformation">
+      <nestedGenPackages prefix="Analysis" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/analysis">
+        <nestedGenPackages prefix="Transformation" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/analysis/transformation">
           <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/analysis/transformation/TreeType">
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/analysis/transformation/TreeType/tfm_unary"/>
             <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/analysis/transformation/TreeType/tfm_binary"/>
@@ -856,8 +838,7 @@
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/analysis/transformation/ClassifierFeatureMap/feature"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Olap" basePackage="orgomg.cwm.analysis" disposableProviderFactory="true"
-            ecorePackage="CWM.ecore#//cwm/analysis/olap">
+        <nestedGenPackages prefix="Olap" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/analysis/olap">
           <genClasses ecoreClass="CWM.ecore#//cwm/analysis/olap/ContentMap">
             <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CWM.ecore#//cwm/analysis/olap/ContentMap/cubeDeployment"/>
           </genClasses>
@@ -966,8 +947,8 @@
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/analysis/olap/StructureMap/dimensionDeploymentIP"/>
           </genClasses>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Informationvisualization" basePackage="orgomg.cwm.analysis"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/analysis/informationvisualization">
+        <nestedGenPackages prefix="Informationvisualization" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/analysis/informationvisualization">
           <genClasses ecoreClass="CWM.ecore#//cwm/analysis/informationvisualization/RenderedObject">
             <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CWM.ecore#//cwm/analysis/informationvisualization/RenderedObject/formula"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/analysis/informationvisualization/RenderedObject/action"/>
@@ -1002,8 +983,8 @@
           </genClasses>
           <genClasses ecoreClass="CWM.ecore#//cwm/analysis/informationvisualization/XSLRendering"/>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Businessnomenclature" basePackage="orgomg.cwm.analysis"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/analysis/businessnomenclature">
+        <nestedGenPackages prefix="Businessnomenclature" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/analysis/businessnomenclature">
           <genClasses ecoreClass="CWM.ecore#//cwm/analysis/businessnomenclature/VocabularyElement">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/analysis/businessnomenclature/VocabularyElement/definition"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/analysis/businessnomenclature/VocabularyElement/example"/>
@@ -1055,10 +1036,9 @@
           </genClasses>
         </nestedGenPackages>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Management" basePackage="orgomg.cwm" disposableProviderFactory="true"
-          ecorePackage="CWM.ecore#//cwm/management">
-        <nestedGenPackages prefix="Warehouseprocess" basePackage="orgomg.cwm.management"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management/warehouseprocess">
+      <nestedGenPackages prefix="Management" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management">
+        <nestedGenPackages prefix="Warehouseprocess" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/management/warehouseprocess">
           <genClasses image="false" ecoreClass="CWM.ecore#//cwm/management/warehouseprocess/WarehouseProcess">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/management/warehouseprocess/WarehouseProcess/staticDefinition"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/management/warehouseprocess/WarehouseProcess/isSequential"/>
@@ -1077,8 +1057,7 @@
             <genFeatures notify="false" createChild="false" propertySortChoices="true"
                 ecoreFeature="ecore:EReference CWM.ecore#//cwm/management/warehouseprocess/WarehouseActivity/transformationActivity"/>
           </genClasses>
-          <nestedGenPackages prefix="Datatype" basePackage="orgomg.cwm.management.warehouseprocess"
-              disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management/warehouseprocess/datatype">
+          <nestedGenPackages prefix="Datatype" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management/warehouseprocess/datatype">
             <genEnums typeSafeEnumCompatible="false" ecoreEnum="CWM.ecore#//cwm/management/warehouseprocess/datatype/RecurringType">
               <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/management/warehouseprocess/datatype/RecurringType/everyYear"/>
               <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/management/warehouseprocess/datatype/RecurringType/everyMonth"/>
@@ -1103,8 +1082,7 @@
               <genEnumLiterals ecoreEnumLiteral="CWM.ecore#//cwm/management/warehouseprocess/datatype/WaitRuleType/waitForAny"/>
             </genEnums>
           </nestedGenPackages>
-          <nestedGenPackages prefix="Events" basePackage="orgomg.cwm.management.warehouseprocess"
-              disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management/warehouseprocess/events">
+          <nestedGenPackages prefix="Events" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management/warehouseprocess/events">
             <genClasses image="false" ecoreClass="CWM.ecore#//cwm/management/warehouseprocess/events/WarehouseEvent">
               <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CWM.ecore#//cwm/management/warehouseprocess/events/WarehouseEvent/warehouseProcess"/>
             </genClasses>
@@ -1149,8 +1127,8 @@
             </genClasses>
           </nestedGenPackages>
         </nestedGenPackages>
-        <nestedGenPackages prefix="Warehouseoperation" basePackage="orgomg.cwm.management"
-            disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/management/warehouseoperation">
+        <nestedGenPackages prefix="Warehouseoperation" disposableProviderFactory="true"
+            ecorePackage="CWM.ecore#//cwm/management/warehouseoperation">
           <genClasses ecoreClass="CWM.ecore#//cwm/management/warehouseoperation/Measurement">
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/management/warehouseoperation/Measurement/value"/>
             <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CWM.ecore#//cwm/management/warehouseoperation/Measurement/unit"/>
@@ -1191,8 +1169,7 @@
           </genClasses>
         </nestedGenPackages>
       </nestedGenPackages>
-      <nestedGenPackages prefix="Cwmcomplete" basePackage="orgomg.cwm" disposableProviderFactory="true"
-          ecorePackage="CWM.ecore#//cwm/cwmcomplete"/>
+      <nestedGenPackages prefix="Cwmcomplete" disposableProviderFactory="true" ecorePackage="CWM.ecore#//cwm/cwmcomplete"/>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

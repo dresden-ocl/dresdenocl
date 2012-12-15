@@ -47,7 +47,8 @@ public class InterpreterUIPlugin extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "tudresden.ocl20.pivot.interpreter.ui";
 
 	/** The ID of the {@link InterpreterView}. */
-	public static final String INTERPRETER_VIEW_ID = "tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView";
+	public static final String INTERPRETER_VIEW_ID =
+			"tudresden.ocl20.pivot.interpreter.ui.internal.views.InterpreterView";
 
 	/** The shared instance of this plug-in. */
 	private static InterpreterUIPlugin plugin;
@@ -58,6 +59,7 @@ public class InterpreterUIPlugin extends AbstractUIPlugin {
 	 * </p>
 	 */
 	public InterpreterUIPlugin() {
+
 	}
 
 	/**
@@ -67,21 +69,22 @@ public class InterpreterUIPlugin extends AbstractUIPlugin {
 	 * </p>
 	 * 
 	 * @param path
-	 *            the path
+	 *          the path
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
+
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
 	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
+
 		super.start(context);
 
 		plugin = this;
@@ -89,12 +92,12 @@ public class InterpreterUIPlugin extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
 	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
+
 		plugin = null;
 
 		super.stop(context);
@@ -104,6 +107,7 @@ public class InterpreterUIPlugin extends AbstractUIPlugin {
 	 * @return The shared instance of this plug-in.
 	 */
 	public static InterpreterUIPlugin getDefault() {
+
 		return plugin;
 	}
 

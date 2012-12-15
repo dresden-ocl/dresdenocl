@@ -6,9 +6,9 @@
 \end{flushright}
 
 As mentioned in Chapter~\ref{chapter:architecture}, Dresden OCL is able to
-interpret \acs{OCL} constraints on different types of model instances. E.g., 
+interpret \acs{OCL} constraints on different types of model instances (e.g., 
 the same constraints can be interpreted on Java \code{Object}s, \acs{EMF}
-\code{EObject}s and \acs{XML} files. This is possible because Dresden OCL
+\code{EObject}s and \acs{XML} files). This is possible because Dresden OCL
 abstracts the instance's elements as \code{IModelInstanceElements}. Thus, each
 type of model instance that shall be connected with the \acs{OCL} Interpreter 
 requires its own Model Instance Type Adaptation. How such an adaptation has to
@@ -47,27 +47,27 @@ reasons.
 \subsubsection{asType(Type)}
 
 The method \code{asType(Type)} is required to cast an element to a given type of
-its model. E.g., in \acs{OCL} the primitive type \code{Integer} can be casted to
-\code{Real}. In general, this method should check if the given Type conforms to 
+its model (e.g., in \acs{OCL} the primitive type \code{Integer} can be casted to
+\code{Real}). In general, this method should check if the given Type conforms to 
 the adapted element and if so, the result is a new \code{IModelInstanceElement} 
 of the given type. Else an \code{AsTypeCastException} is thrown.
 
 \subsubsection{copyForAtPre()} 
 
 The method \code{copyForAtPre()} is required to create a copy of the element if 
-its value shall be stored during interpretation as an \keyword{@pre-value}.
-E.g., during the interpretation of the constraint
+its value shall be stored during interpretation as an \keyword{@pre-value}
+(e.g., during the interpretation of the constraint
 
 \code{context Person::birthdayHappens()\\
 post: self.age = self.age@pre + 1}
 
-the interpreter has to store the value of the property \code{age}. The value has
-to be copied, because if \code{age} is incremented during the method's
+the interpreter has to store the value of the property \code{age}). The value
+has to be copied, because if \code{age} is incremented during the method's
 execution, a simple reference would refer to the incremented
 value.\footnote{This is true although age is a primitive type. The integer
 instance is modeled in Java and thus can be referenced.} As far as we know, it 
-is rather complicate to copy some objects at runtime - e.g., in Java where the 
-\code{clone()} method is not visible for every class. Thus, a 
+is rather complicate to copy some objects at runtime (e.g., in Java where the 
+\code{clone()} method is not visible for every class). Thus, a 
 \code{CopyForAtPreException} can be thrown, if an element cannot be copied.
 
 \subsubsection{getName()}
@@ -134,9 +134,9 @@ given operation does not exist. An \code{Operation\-Access\-Ex\-ception} can be
 thrown, if an unexpected exception occurs during invoking the object's
 operation. This operation is one of the most complicated operations in the 
 complete model instance implementation because it must be able to reconvert 
-adapted model instance elements given as parameters. E.g., a given 
+adapted model instance elements given as parameters (e.g., a given 
 \code{IModelInstanceObject} has to be unwrapped by calling its 
-\code{getObject()} method. For primitive and collection type implementation 
+\code{getObject()} method). For primitive and collection type implementation 
 instances this is more complicate because they do not contain an adapted object 
 that can be returned. They have to be converted. For details of such a reconvert
 mechanism investigate the Java implementation that uses \keyword{Java 
@@ -181,7 +181,7 @@ The interface \code{IModelInstanceEnumerationLiteral} represents instances of
 \code{Enumerations}. Because enumerations do not have any state, they do not
 need any adapted \code{Object}. Thus, a standard 
 \code{ModelInstanceEnumerationLiteral} implementation located in the plug-in
-\code{tudresden.ocl20.\linebreak[0]pivot.modelinstance} can be reused. During 
+\code{tudresden.ocl\-20.\linebreak[0]pivot.modelinstance} can be reused. During 
 adaptation, an enumeration literal existing in the model instance just has to 
 be associated to its related \code{EnumerationLiteral} in the instance's model. 
 For details investigate the existing \code{IModelInstance} implementations for 
@@ -204,8 +204,8 @@ The interfaces \code{IModelInstanceVoid} and \code{IModelInstanceInvalid} exist
 to define the singleton instances of the types \code{OclVoid} and 
 \code{OclInvalid}. Their instances can be accessed via the static property 
 \code{IModelInstanceVoid.INSTANCE} or \code{IModelInstanceInvalid.INSTANCE}, 
-respectively. E. g., the \code{IModelInstanceVoid} instance is required when a 
-method's invocation shall return a \code{null} value.
+respectively (e.g., the \code{IModelInstanceVoid} instance is required when a 
+method's invocation shall return a \code{null} value).
 
 
 
@@ -299,8 +299,8 @@ exist. An \code{O\-pe\-ra\-tion\-Ac\-cess\-Ex\-cep\-tion} can be thrown, if an
 unexpected exception occurs during invoking the object's operation. This operation is one 
 of the most complicated operations in the complete model instance implementation
 because it must be able to reconvert adapted model instance elements given as 
-parameters. E.g., a given \code{IModelInstanceObject} can be unwrapped by 
-invoking its \code{getObject()} method. For primitive and collection type 
+parameters (e.g., a given \code{IModelInstanceObject} can be unwrapped by 
+invoking its \code{getObject()} method). For primitive and collection type 
 implementations this is more complicate because they do not contain an adapted 
 object that can be simply returned. They have to be converted. For details of 
 such a reconvert mechanism investigate the Java implementation that uses 

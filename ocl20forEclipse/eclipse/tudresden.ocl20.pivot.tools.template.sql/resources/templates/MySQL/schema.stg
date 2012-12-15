@@ -1,0 +1,38 @@
+group mysql;
+
+typeMap ::= [
+        "Integer":"INT",
+        "Long":"BIGINT",
+        "Float":"FLOAT",
+        "Double":"DOUBLE",
+        "Boolean":"BOOL",
+        "Short":"INT",
+        "Char":"CHAR",
+        "String":"VARCHAR(255)",
+        "Date":"DATE",
+        default:"VARCHAR (255)"
+]
+
+createType(type) ::= <<
+<typeMap.(type)>
+>>
+
+createView(viewname, body) ::= <<
+CREATE VIEW `<viewname>`
+AS ( <body> );
+>>
+
+createColumn(name, type, primaryKey, foreignKey) ::= <<
+`<name>` <type><if(primaryKey)> PRIMARY KEY<endif><if(foreignKey)> REFERENCES <foreignKey> <endif>
+>>
+
+createTable(tablename, columns) ::= <<
+CREATE TABLE `<tablename>` (
+<columns>
+) TYPE = InnoDB;
+>>
+
+createForeignKeyConstraint(tablename, columnname, pktablename,pkname) ::= <<
+ALTER TABLE `<tablename>` ADD CONSTRAINT `CON<tablename><columnname>`
+FOREIGN KEY (`<columnname>`) REFERENCES `<pktablename>`(`<pkname>`);
+>>

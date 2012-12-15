@@ -1,0 +1,8 @@
+package package1::package2
+
+-- Iterator variable should be optional.
+context Type1
+def: testOnePositive05 =
+Type1.allInstances()->one(anInteger > 0)
+
+endpackage

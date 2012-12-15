@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -45,7 +44,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
@@ -65,6 +63,7 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 * @generated
 	 */
 	public OrderedSetTypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -76,6 +75,7 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -90,8 +90,9 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/OrderedSetType")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/OrderedSetType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -105,6 +106,7 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return super.getText(object);
 	}
 
@@ -114,8 +116,8 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected String getTypeName(Type type) {
+
 		return "OrderedSet"; //$NON-NLS-1$
 	}
 
@@ -127,6 +129,7 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -141,6 +144,7 @@ public class OrderedSetTypeItemProvider extends CollectionTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

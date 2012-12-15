@@ -38,18 +38,18 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Generic Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Generic Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class GenericTypeImpl extends NamedElementImpl implements
@@ -58,21 +58,24 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger
-			.getLogger(GenericTypeImpl.class);
+	private static final Logger logger = Logger.getLogger(GenericTypeImpl.class);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected GenericTypeImpl() {
+
 		super();
 	}
 
 	/**
-	 * Overridden to return the EMF container reference. This will either be a {@link TypedElement} or
-	 * a {@link Type}, depending on whether this <code>GenericType</code> is used as a generic type
-	 * for a <code>TypedElement</code> or as a generic super type of a <code>Type</code>.
+	 * Overridden to return the EMF container reference. This will either be a
+	 * {@link TypedElement} or a {@link Type}, depending on whether this
+	 * <code>GenericType</code> is used as a generic type for a
+	 * <code>TypedElement</code> or as a generic super type of a <code>Type</code>
+	 * .
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#getOwner()
 	 */
@@ -84,8 +87,8 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * Overridden to prevent setting the name for the GenericType. This method will throw an
-	 * {@link UnsupportedOperationException}.
+	 * Overridden to prevent setting the name for the GenericType. This method
+	 * will throw an {@link UnsupportedOperationException}.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
@@ -98,13 +101,18 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * This method checks the input parameters and delegates to {@link #doBindGenericType(List, List)}.
+	 * This method checks the input parameters and delegates to
+	 * {@link #doBindGenericType(List, List)}.
 	 * 
-	 * @param parameters the type parameters to be bound
-	 * @param types the types for binding
-	 * @param typedElement the <code>TypedElement</code> whose type should be bound
+	 * @param parameters
+	 *          the type parameters to be bound
+	 * @param types
+	 *          the types for binding
+	 * @param typedElement
+	 *          the <code>TypedElement</code> whose type should be bound
 	 * 
-	 * @return the given <code>TypedElement</code>, either with a bound type or unchanged
+	 * @return the given <code>TypedElement</code>, either with a bound type or
+	 *         unchanged
 	 * 
 	 * @see GenericType#bindGenericType(List, List, TypedElement)
 	 * 
@@ -114,8 +122,9 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 			List<? extends Type> types, TypedElement typedElement) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("bindGenericType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
-					+ ", typedElement=" + typedElement + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
+			logger
+					.debug("bindGenericType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
+							+ ", typedElement=" + typedElement + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		// perform binding
@@ -128,7 +137,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 		return success;
 	}
 
-	/**
+/**
 	 * This method checks the input parameters and delegates to
 	 * {@link #doBindGenericSuperType(List, List, Type).
 	 * 
@@ -146,8 +155,9 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 			List<? extends Type> types, Type subType) {
 
 		if (logger.isDebugEnabled()) {
-			logger.debug("bindGenericSuperType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
-					+ ", subType=" + subType + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
+			logger
+					.debug("bindGenericSuperType(parameters=" + parameters + ", types=" + types //$NON-NLS-1$ //$NON-NLS-2$
+							+ ", subType=" + subType + ") - enter"); //$NON-NLS-1$//$NON-NLS-2$
 		}
 
 		// perform binding
@@ -163,16 +173,14 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	/**
 	 * Subclasses need to implement the actual binding.
 	 */
-	protected abstract boolean doBindGenericType(
-			List<TypeParameter> parameters, List<? extends Type> types,
-			TypedElement typedElement);
+	protected abstract boolean doBindGenericType(List<TypeParameter> parameters,
+			List<? extends Type> types, TypedElement typedElement);
 
 	/**
 	 * Subclasses need to implement the actual binding.
 	 */
 	protected abstract boolean doBindGenericSuperType(
-			List<TypeParameter> parameters, List<? extends Type> types,
-			Type subType);
+			List<TypeParameter> parameters, List<? extends Type> types, Type subType);
 
 	/**
 	 * Made abstract in order to leave implementation to subclasses.
@@ -182,7 +190,8 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	public abstract boolean isConformant(Type type);
 
 	/**
-	 * Overridden to set the covariant return type. The actual implementation is left to subclasses.
+	 * Overridden to set the covariant return type. The actual implementation is
+	 * left to subclasses.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#clone()
 	 */
@@ -190,9 +199,9 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 	public abstract GenericType clone();
 
 	/**
-	 * The EMF implementation is adapted to prevent that the name of the generic type is serialized to
-	 * XMI. This is necessary to prevent setting the name upon loading the document which would throw
-	 * an exception.
+	 * The EMF implementation is adapted to prevent that the name of the generic
+	 * type is serialized to XMI. This is necessary to prevent setting the name
+	 * upon loading the document which would throw an exception.
 	 * 
 	 * @generated NOT
 	 * 
@@ -210,10 +219,12 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.GENERIC_TYPE;
 	}
 

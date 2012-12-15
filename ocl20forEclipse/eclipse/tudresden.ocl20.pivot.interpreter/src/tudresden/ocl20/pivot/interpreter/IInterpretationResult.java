@@ -31,10 +31,12 @@ public interface IInterpretationResult {
 
 	/**
 	 * <p>
-	 * Returns the {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
+	 * Returns the {@link IModelInstanceElement} of this
+	 * {@link InterpretationResultImpl}.
 	 * </p>
 	 * 
-	 * @return The {@link IModelInstanceElement} of this {@link InterpretationResultImpl}.
+	 * @return The {@link IModelInstanceElement} of this
+	 *         {@link InterpretationResultImpl}.
 	 */
 	public IModelInstanceElement getModelObject();
 

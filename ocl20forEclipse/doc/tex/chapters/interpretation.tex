@@ -2,11 +2,11 @@
 \label{chapter:interpretation}
 
 \begin{flushright}
-\textit{Chapter written by Claas Wilke}
+\textit{Chapter written by Claas Wilke and Lars Sch\"{u}tze}
 \end{flushright}
 
 This chapter describes how the \acs{OCL} Interpreter provided with Dresden OCL 
-can be used. How to install and run Dresden OCL and how 
+can be used and how to trace such interpretations. How to install and run Dresden OCL and how 
 to load models and OCL constraints was explained in 
 Chapter~\ref{chapter:introduction}. If you are not familiar with such basic uses
 of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
@@ -18,7 +18,7 @@ of Dresden OCL, read Chapter~\ref{chapter:introduction} first.
 This chapter uses the \keyword{Simple Example} which is provided with 
 \acl{DOT4Eclipse} located in the plug-in 
 \reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple}. An overview over
-all examples provided with \acl{DOT4Eclipse} can be found in 
+all examples provided with Dresden OCL can be found in 
 Table~\ref{tab:examples} in the appendix of this manual. An introduction into
 the Simple Example can be found in Section~\ref{intro:simpleExample}. The model 
 of the example defines three classes: The class \model{Person} has the 
@@ -31,9 +31,9 @@ Section~\ref{intro:simpleExample}. Figure~\ref{pic:example:simple02} shows the
 
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/examples/simple02}
-	\caption{The Project Explorer containing the Project which is required to run
-	this Tutorial.}
+	\includegraphics[width=0.45\linewidth]{figures/examples/simple02}
+	\caption{The Project Explorer containing the project which is required to run
+	this tutorial.}
 	\label{pic:example:simple02}
 \end{figure}
 	
@@ -41,7 +41,8 @@ Section~\ref{intro:simpleExample}. Figure~\ref{pic:example:simple02} shows the
   \lstset{
     language=OCL
   }
-  \begin{lstlisting}[caption={The Constraints contained in the Constraint File.}, captionpos=b, label=lst:interpret:allConstraints]
+  \begin{lstlisting}[caption={The constraints contained in the constraint
+  file.}, captionpos=b, label=lst:interpret:allConstraints]
 -- The age of Person can not be negative.
 context Person
 inv: age >= 0
@@ -76,14 +77,15 @@ Listing~\ref{lst:interpret:allConstraints} shows the constraints defined in the
 constraint file.
 
 First, the constraint file defines three simple invariants that ensure that 
-the \model{age} of every \model{Person} must always zero or greater than zero. 
+the \model{age} of every \model{Person} must always be zero or greater than
+zero.
 Furthermore, the \model{age} of every \model{Student} must be greater than
 \model{16} and the \model{age} of every \model{Professor} does not have to be
-lesser than \model{30}.
+less than \model{30}.
 
-In addition to that the constraint file contains a definition constraint that 
+In addition to that, the constraint file contains a definition constraint that 
 defines a new operation \model{getAge()} which returns the \model{age} of a 
-\model{Person}. A precondition checks, that the \model{age} must be defined 
+\model{Person}. A precondition checks that the \model{age} must be defined 
 before it can be returned by the operation \model{getAge()}. And finally, a 
 postcondition which checks, whether or not the result of the operation 
 \model{getAge()} is the same as the \model{age} of the \model{Person}.
@@ -99,7 +101,7 @@ the model. This procedure is explained in Section~\ref{intro:loadModel}.
 Furthermore, we have to import a model instance for which the constraints shall 
 be interpreted into the \eclipse{Model Instance Browser}. We use another import 
 wizard to import the model instance 
-\model{bin/tudresden/ocl20/pivot/\linebreak[0]exam\-ples/\linebreak[0]simple\linebreak[0]/\linebreak[0]ModelProviderClass.class}.
+\model{src/tudresden/ocl20/pivot/\linebreak[0]exam\-ples/\linebreak[0]simple\linebreak[0]/\linebreak[0]ModelProviderClass.java}.
 Finally, we have to open the constraint file 
 \model{con\-straints/\linebreak[0]all\-Con\-straints\linebreak[0].ocl}
 containing the constraints we want to interpret. Afterwards, the \eclipse{Model
@@ -109,8 +111,8 @@ Figure~\ref{pic:interpret:prepare02}.
 
 \begin{figure}[!p]
 	\centering
-	\includegraphics[width=0.6\linewidth]{figures/interpreter/prepare01}
-	\caption{The Model Browser containing the Simple Model and its Constraints.}
+	\includegraphics[width=0.5\linewidth]{figures/interpreter/prepare01}
+	\caption{The Model Browser containing the Simple Model and its constraints.}
 	\label{pic:interpret:prepare01}
 
   \vspace{4.0em}
@@ -132,8 +134,8 @@ we now want to interpret the imported constraints.
 
 Now we can start the interpretation. To open the \acs{OCL} Interpreter we use 
 the menu option \eclipse{Dresden OCL2 > Open OCL2 Interpreter}. The 
-\eclipse{OCL Interpreter View} should now be visible (see 
-Figure~\ref{pic:interpret:interpret01}).
+\eclipse{OCL Interpreter View} should now be visible (cf. 
+Fig.~\ref{pic:interpret:interpret01}).
 
 By now, the \eclipse{OCL Interpreter View} does not contain any result. Besides
 the results table, the view provides four buttons to control the \acs{OCL} 
@@ -156,21 +158,21 @@ explained below.
   
 	\centering
 	\includegraphics[width=0.5\linewidth]{figures/interpreter/interpret02}
-	\caption{The Buttons to Control the OCL2 Interpreter.}
+	\caption{The Buttons to control the OCL2 Interpreter.}
 	\label{pic:interpret:interpret02}
 
   \vspace{3.0em}
 
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/interpreter/interpret04}
-	\caption{The results of the three Invariants for all Model Instance Elements.}
+	\caption{The results of the three invariants for all Model Instance Elements.}
 	\label{pic:interpret:interpret04}
 
   \vspace{3.0em}
 
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/interpreter/interpret07}
-	\caption{The results of the Definition for all Model Instance Elements.}
+	\caption{The results of the definition for all Model Instance Elements.}
 	\label{pic:interpret:interpret07}
 
 \end{figure}
@@ -178,13 +180,13 @@ explained below.
 
 \subsection{Interpretation of Constraints}
 
-To interpret constraints, we simple select them in the \eclipse{Model Browser} 
+To interpret constraints, we simply select them in the \eclipse{Model Browser} 
 and push the button to interpret constraints (the third button from the left). 
 First, we want to interpret the three invariants defining the range of the 
 \model{age} of \model{Persons}, \model{Students} and \model{Professors}. We 
 select them in the \eclipse{Model Browser} and push the \eclipse{Interpret} button.
 The result of the interpretation is now shown in the \eclipse{\acs{OCL}
-Interpreter View} (see Figure~\ref{pic:interpret:interpret04}).
+Interpreter View} (cf. Figure~\ref{pic:interpret:interpret04}).
 
 The invariant \model{age >= 0} has been interpreted for all three model objects.
 The results for the \model{Person} and the \model{Student} instances are 
@@ -194,11 +196,11 @@ The results for the \model{Person} and the \model{Student} instances are
 
 The two other invariants were only interpreted for the \model{Student} or the 
 \model{Pro\-fessor} instance because their context is not the class 
-\model{Person} but the class \model{Student} or the class \model{Professor}, 
+\model{Person} but the \model{Student} class or the \model{Professor} class, 
 respectively. Again, the \model{Student's} result is \model{true} and the 
 \model{Professor's} result is \model{false}.
 
-Besides invariants, \acs{OCL}~2.2 enables us to use \acs{OCL} expressions to
+Besides invariants, \acs{OCL} allows to use \acs{OCL} expressions to
 define new attributes and methods or to initialize attributes and methods. Such
 \model{def}, \model{init} and \model{body} constraints cannot be interpreted to
 \model{true} or \model{false}, because their result type has not to be 
@@ -206,8 +208,8 @@ define new attributes and methods or to initialize attributes and methods. Such
 constraints that shall be interpreted. The \model{allConstraints.ocl} file 
 contains a definition constraint, which defines the method \model{getAge()} for 
 the class \model{Person}. Now, we want to interpret this definition constraint. 
-We select the constraint in the \eclipse{Model Browser} and push the \eclipse{Interpret} button.
-The result of the interpretation is shown in 
+We select the constraint in the \eclipse{Model Browser} and click the
+\eclipse{Interpret} button. The result of the interpretation is shown in 
 Figure~\ref{pic:interpret:interpret07}. The interpretation finishes for all
 three instances successfully because the attribute \model{age} has been set for 
 all three instances.
@@ -224,38 +226,39 @@ method \model{getAge()} with the attribute \model{age} of the referenced
 method's execution. Using the \eclipse{\acs{OCL} Interpreter View} we cannot 
 execute the method \model{getAge()} and store the result in the \model{result} 
 variable. We can interpret the postcondition in a specific context which has to 
-be prepared by hand only. We have to set the result variable manually.
+be prepared by hand only. We have to set the \texttt{result} variable manually.
 
 If we interpret the postcondition constraint (the sixth and last constraint in 
 the \eclipse{Model Browser}) without setting the \model{result} variable, the 
 constraint results in a \model{undefined} result for all three model instances
-(see Figure~\ref{pic:interpret:interpret08}).
+(cf. Fig.~\ref{pic:interpret:interpret08}).
 
 To prepare the variable, we push the button to add new variables to the 
-Interpreter Environment (the second button from the left) and a new window opens
-which we can use to specify new variables. We enter the name \model{result}, 
-select the variable type \model{Integer} and enter the value \model{25}. Then we
-push the \eclipse{OK} button (see Figure~\ref{pic:interpret:interpret09}. The 
-result variable has now been added to the Interpreter's Environment.
+Interpreter Environment (the second button from the left) and a dialog to
+specify new variables opens. We enter the name \model{result}, select the
+variable type \model{Integer} and enter the value \model{25}. Then, we click the
+\eclipse{OK} button (cf. Fig.~\ref{pic:interpret:interpret09}). The
+\texttt{result} variable has now been added to the Interpreter's Environment.
 
 \begin{figure}[!p]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/interpreter/interpret08}
-	\caption{The results of the Postcondition without preparing the Result Variable.}
+	\caption{The results of the Postcondition without preparing the result
+	variable.}
 	\label{pic:interpret:interpret08}
 
   \vspace{3.0em}
 	
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/interpreter/interpret09}
-	\caption{The Window to add new Variables to the Environment.}
+	\includegraphics[width=0.4\linewidth]{figures/interpreter/interpret09}
+	\caption{The window to add new variables to the environment.}
 	\label{pic:interpret:interpret09}
 
   \vspace{3.0em}
 	
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/interpreter/interpret10}
-	\caption{The Results of the Postcondition with Result Variable Preparation.}
+	\caption{The results of the postcondition with result variable preparation.}
 	\label{pic:interpret:interpret10}
 	
   \vspace{3.0em}
@@ -263,7 +266,7 @@ result variable has now been added to the Interpreter's Environment.
   \lstset{
     language=OCL
   }
-  \begin{lstlisting}[caption={An example Precondition defined on an Operation with Argument.}, captionpos=b, label=lst:interpret:precondition]
+  \begin{lstlisting}[caption={An example precondition defined on an operation with argument.}, captionpos=b, label=lst:interpret:precondition]
 -- arg01 must be defined.
 context Person::setAge(arg01: Integer)
 pre: not arg01.oclIsUndefined()
@@ -306,7 +309,7 @@ complicate from the GUI). Afterwards you can interpret the postcondition.
   \lstset{
     language=OCL
   }
-  \begin{lstlisting}[caption={An example Postcondition that must be prepared.}, captionpos=b, label=lst:interpret:postcondition]
+  \begin{lstlisting}[caption={An example postcondition that must be prepared.}, captionpos=b, label=lst:interpret:postcondition]
 -- age must be incremented by one.
 context Person::birthdayHappens()
 post: age = age@pre + 1
@@ -315,7 +318,7 @@ post: age = age@pre + 1
 
 The preparation of postconditions is not that useful when interpreting 
 constraints from the GUI of Dresden OCL because you cannot invoke your 
-operations here to alter your model instance's state. Nevertheless, like the 
+operations to alter your model instance's state. Nevertheless, like the 
 possibility to add variables to the Interpreter's environment you can prepare 
 postconditions from the GUI. These operations are much more useful when using 
 Dresden OCL via its API and using the \acs{OCL} Interpreter to check \acs{OCL} 
@@ -323,6 +326,39 @@ constraints during the runtime of other software. Then you can prepare
 constraints before methods are invoked and check postconditions afterwards, 
 e.g., by using \emph{\acf{AOP}}.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{figures/interpreter/tracer01.png}
+	\caption{The results of the interpretation in the tracer view.}
+	\label{pic:interpret:tracer01}
+
+	\vspace{3.0em}	
+	
+	\centering
+	\includegraphics[scale=1]{figures/interpreter/tracer02.png}
+	\caption{The menu to apply filters to the tracer.}
+	\label{pic:interpret:tracer02}
+\end{figure}
+
+\subsection{Tracing}
+
+Tracing is applied for logging and visualizing the execution path of the
+interpretation of an \acs{OCL} expression. Tracing allows to investigate
+parts of interpreted \acs{OCL} expressions in a tree based manner (e.g., if
+an expression comparing to values using the \code{=} operation results in
+\code{false}, you can investigate the left- and right-hand arguments of the
+\code{=} expression resulting in \code{false}. To receive interim results
+during interpretation of \acs{OCL} expressions, open the Dresden \acs{OCL}
+Tracer from the menu option \eclipse{Dresden OCL > Open Dresden OCL Tracer}
+before you start the interpretation. Once opened, the execution path of an
+\acs{OCL} expression will be logged and shown in the \acs{OCL} \eclipse{Tracer
+View} (cf. Figure \ref{pic:interpret:tracer01}).
+
+When debugging OCL expressions users typically intend to find failures. Thus,
+the \acs{OCL} \eclipse{Tracer View} also provides a menu to filter for special
+criteria, e.g. all \model{true} or \model{false} results (cf. Figure
+\ref{pic:interpret:tracer02}). Feel free to explore the tracer view based on
+interpretation results from the \acs{OCL} constraint examples explained above.
 
 
 \section{Summary}
@@ -330,7 +366,8 @@ e.g., by using \emph{\acf{AOP}}.
 This chapter described how \acs{OCL} constraints can be interpreted using the 
 \acs{OCL} Interpreter of Dresden OCL. The preparation and interpretation of 
 constraints has been explained, the addition of new variables to the 
-Interpreter Environment has been shown. Besides the use of the Interpreter via 
+Interpreter Environment has been shown. The tracing of expressions has been
+demonstrated. Besides the use of the Interpreter via 
 Dresden OCL's GUI, you can also invoke the Interpreter via Dresden OCL's 
 \acs{API}. The easiest way to connect to Dresden OCL is via its \emph{Facade} 
 providing interfaces for all services of Dresden OCL. How to use Dresden OCL's 

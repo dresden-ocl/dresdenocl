@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
+import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
+import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
 import tudresden.ocl20.pivot.interpreter.ui.internal.views.util.ResultsContentProvider;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
@@ -62,12 +64,14 @@ public class InterpretationResultCache {
 
 	/**
 	 * <p>
-	 * Clears this {@link InterpretationResultCache}.
+	 * Clears this {@link InterpretationResultCache} and forward this to the
+	 * {@link IInterpreterTraceListener}.
 	 * </p>
 	 */
 	public void clear() {
 
 		this.myCachedResults.clear();
+		OclInterpreterPlugin.getInterpreterRegistry().fireInterpretationCleared();
 	}
 
 	/**
@@ -87,7 +91,8 @@ public class InterpretationResultCache {
 	/**
 	 * <p>
 	 * Removes the {@link IInterpretationResult}s for a given {@link List} of
-	 * {@link IModelInstanceElement}s and a given {@link List} of {@link Constraint}s.
+	 * {@link IModelInstanceElement}s and a given {@link List} of
+	 * {@link Constraint}s.
 	 * </p>
 	 * 
 	 * @param modelObjects
@@ -168,6 +173,6 @@ public class InterpretationResultCache {
 			// no else (less than three values in a row).
 		}
 		// end for.
-		
+
 	}
 }

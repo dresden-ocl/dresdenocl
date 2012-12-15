@@ -2,7 +2,7 @@
 <feature
       id="tudresden.ocl20.feature.core"
       label="Dresden OCL Core"
-      version="3.0.2.qualifier"
+      version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://dresden-ocl.sourceforge.net/4eclipse_packages.html">
@@ -189,16 +189,12 @@ Library.
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
       <import plugin="org.eclipse.ui.ide" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.junit" version="3.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.variables"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.apache.commons.lang"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.junit4" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.facade" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.metamodels.uml2" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java" version="2.1.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -224,13 +220,6 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.essentialocl.standardlibrary"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.essentialocl.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -265,13 +254,6 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.pivotmodel.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="tudresden.ocl20.pivot.standardlibrary.java"
          download-size="0"
          install-size="0"
@@ -286,28 +268,7 @@ Library.
          unpack="false"/>
 
    <plugin
-         id="tudresden.ocl20.pivot.testsuite"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="tudresden.ocl20.pivot.examples.royalandloyal"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.modelbus.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="tudresden.ocl20.pivot.standardlibrary.java.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -329,6 +290,20 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.modelinstancetype"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.modelinstancetype.ecore"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel"
          download-size="0"
          install-size="0"
          version="0.0.0"

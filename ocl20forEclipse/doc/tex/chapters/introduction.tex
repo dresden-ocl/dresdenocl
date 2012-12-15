@@ -5,17 +5,16 @@
 \textit{Chapter written by Claas Wilke and Michael Thiele}
 \end{flushright}
 
-This chapter generally introduces into \keyword{\acl{DOT4Eclipse}}. 
-\acl{DOT4Eclipse} is the last version of \keyword{Dresden OCL} and is based on a
-\keyword{Pivot Model}. The pivot model was developed by Matthias 
-Bräuer~\cite{GB:Braeuer} and is shortly explained in 
+This chapter generally introduces into \keyword{Dresden OCL}. Dresden OCL is
+based on a \keyword{Pivot Model} developed by Matthias 
+Bräuer~\cite{GB:Braeuer} which is shortly explained in 
 Chapter~\ref{chapter:architecture}. Further information about Dresden OCL is 
 available at the project's website~\cite{WWW:toolkit}.
 
-This chapter explains the installation of \acl{DOT4Eclipse} and how to load a 
+This chapter explains the installation of Dresden OCL and how to load a 
 model, an instance of such a model, and \acs{OCL} constraints defined on such a 
-model into \acl{DOT4Eclipse}. Besides the Eclipse distribution, Dresden OCL can 
-also be used as a stand-alone Java Library. If you plan to use the stand-alone 
+model into Dresden OCL. Besides the Eclipse distribution, Dresden OCL can 
+also be used as a stand-alone Java library. If you plan to use the stand-alone 
 distribution you can skip this chapter and continue with 
 Chapter~\ref{chapter:standalone}. However, this chapter explains the basic 
 concepts of Dresden OCL. Although you cannot use the shown GUI wizards and 
@@ -26,28 +25,55 @@ understand the terms used in and the mechanisms provided by Dresden OCL.
 
 \section{How to Install Dresden OCL}
 	
-The following different possibilities exist to install \acl{DOT4Eclipse}. 
+The following different possibilities exist to install Dresden OCL within
+Eclipse.
 
 \begin{enumerate}
-	\item You may install the plug-ins using the update site available
+	\item You may install Dresden OCL using the \emph{Eclipse Marketplace
+	  Client}.
+	\item You may install Dresden using the update site available
 	  at~\cite{WWW:toolkitUpdatesite},
 	\item You may checkout and run the source code distribution from the \acs{SVN}
 	  available at~\cite{WWW:toolkitSVN}.
 \end{enumerate}
 
-This section will explain both possibilities.
+This section will explain all three possibilities.
 	
-	
+
+\subsection{Installing Dresden OCL using the Eclipse Marketplace Client}
+
+Since Eclipse 3.6, the new Eclipse Marketplace Client allows easy installation
+of Eclipse-based tools such as Dresden OCL.
+
+To install Dresden OCL via the Eclipse Marketplace Client, select the menu
+option \emph{Help -> Eclipse Marketplace\ldots}. Probably you have to select a
+marketplace catalog afterwards. If so, select the \emph{Eclipse Marketplace}
+catalog and proceed.
+
+Type \texttt{Dresden OCL} into the search text field and press the return key.
+Select Dresden OCL from the search results and click the \emph{Install} button
+(cf. Fig.~\ref{pic:intro:marketplace01}). Afterwards, click through the
+installation dialog and Dresden OCL will be installed. Finally you have to 
+restart your Eclipse distribution to complete the installation.
+
+\begin{figure}[!b]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/introduction/marketplace01}
+	\caption{Installing Dresden OCL using the Marketplace Client.}
+	\label{pic:intro:marketplace01}
+\end{figure}
+
+
 \subsection{Installing Dresden OCL using the Eclipse Update Site}
 	
-To install \acl{DOT4Eclipse} via the \keyword{Eclipse Update Site}, you have to
-start an \keyword{Eclipse} instance and select the menu option \eclipse{Help ->
-Install New Software ...}
+To install Dresden OCL via the \keyword{Eclipse Update Site}, you have to
+start an Eclipse instance and select the menu option \eclipse{Help ->
+Install New Software\ldots}
 
-Enter the path \url{http://dresden-ocl.sourceforge.net/downloads/updatesite/} 
-and press the \eclipse{Add...} button (see Figure~\ref{pic:intro:updateSite01}).
-In the new opened window you can additionaly enter a name for the update site 
-(see Figure~\ref{pic:intro:updateSite02}).
+Enter the path \url{http://www.dresden-ocl.org/update/} and
+click the \eclipse{Add...} button (cf. Fig.~\ref{pic:intro:updateSite01}). 
+In the new opened window you can additionally enter a name for the update site 
+(cf. Fig.~\ref{pic:intro:updateSite02}).
 
 \begin{figure}[!b]
 	\centering
@@ -63,10 +89,10 @@ In the new opened window you can additionaly enter a name for the update site
 	\label{pic:intro:updateSite02}
 \end{figure}
 
-Now you can select the features of \acl{DOT4Eclipse} which you want to install. 
-Select them and click on the \eclipse{Next >} button (see 
-Figure~\ref{pic:intro:updateSite03}). An overview about all features of 
-\acl{DOT4Eclipse} can be found in Table~\ref{tab:plugins} in the appendix of 
+Now you can select the features of Dresden OCL which you want to install. 
+Select them and click the \eclipse{Next >} button (cf. 
+Fig.~\ref{pic:intro:updateSite03}). An overview on all features of 
+Dresden OCL can be found in Table~\ref{tab:plugins} in the appendix of 
 this manual. Follow the wizard and agree with the user license. Then Dresden OCL
 will be installed. Afterwards, you should restart your Eclipse application to 
 finish the installation.
@@ -74,64 +100,63 @@ finish the installation.
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/introduction/updateSite03}
-	\caption{Selecting features of Dresden OCL2 for Eclipse.}
+	\caption{Selecting features of Dresden OCL.}
 	\label{pic:intro:updateSite03}
 \end{figure}
 	
 	
-	
 \subsection{Importing Dresden OCL from the SVN}
 
-To use \acl{DOT4Eclipse} by checking out the source code from the \acs{SVN} you
-need to install an \acs{SVN} client. In the following we use the 
-\keyword{Eclipse Subversive} plug-in and at least one of the \keyword{\acs{SVN}
-Connectors} available at~\cite{WWW:eclipseSubversive}.
+To use Dresden OCL by checking out the source code from the \acs{SVN} you
+need to install an \acs{SVN} client. In the following the 
+\keyword{Eclipse Subversive} plug-in is used.
 
 After installing Eclipse Subversive, a new \keyword{Eclispe Perspective} 
 providing access to \acs{SVN} should exist. The perspective can be opened via 
 the menu \eclipse{Window > Open Perpective > Other... > SVN Repository
 Exploring}. In the view \eclipse{\acs{SVN} Repositories} you can add a new 
 repository using the \acs{URL} 
-\url{https://dresden-ocl.svn.sourceforge.net/svnroot/dresden-ocl/} (see 
-Figure~\ref{pic:intro:svn01}).
+\url{http://svn-st.inf.tu-dresden.de/svn/dresdenocl/} (cf. 
+Fig.~\ref{pic:intro:svn01}).
 
 \begin{figure}[!b]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/introduction/svn01}
+	\includegraphics[width=0.4\linewidth]{figures/introduction/svn01}
 	\caption{Adding an SVN repository.}
 	\label{pic:intro:svn01}
 \end{figure}
 
-After pushing the \eclipse{Finish} button, the \acs{SVN} repository root should 
+After clicking the \eclipse{Finish} button, the \acs{SVN} repository root should 
 be visible in the \eclipse{\acs{SVN} Repositories} view. To checkout the
 plug-ins, you have to select them in the repository directory 
 \reference{trunk/ocl20\-for\-Eclipse/eclipse} and use the \eclipse{Checkout...} 
-function in the context menu (see Figure \ref{pic:intro:svn02}).
+function in the context menu (cf. Fig.~\ref{pic:intro:svn02}).
 	
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.5\linewidth]{figures/introduction/svn02}
-	\caption{Checkout of the Dresden OCL2 Toolkit plug-in projects.}
+	\includegraphics[width=0.4\linewidth]{figures/introduction/svn02}
+	\caption{Checkout of Dresden OCL's plug-in projects.}
 	\label{pic:intro:svn02}
 \end{figure}
 
 
-\subsection{Which Plug-ins do you need at least?}
+\subsection{Problems While Installing Dresden OCL}
 
-Often people wonder which plug-ins of \acl{DOT4Eclipse} they require for a
-minimum installation. The answer to this question depends on the things you 
-plan to do with \acl{DOT4Eclipse}. Table~\ref{tab:plugins} in the appendix of 
-this manual shows a list of the currently existing plug-ins of
-\acl{DOT4Eclipse}, that are related to different features. You should install 
-at least the \keyword{Core} feature, at least one meta-model of the 
-\keyword{Meta-Models} feature, and the complete \keyword{Parser} feature. The 
-\keyword{Interpreter} and \keyword{OCL22Java} features are only required if you 
-want to interpret constraints or to generate code from constraints,
-respectively. If you import or interpret model instances, you need to install 
-the \keyword{Model Instances} feature as well. The examples of the 
-\keyword{Example} feature are only required to run the examples provided in 
-this manual. We recommend to install all provided features.
-		
+Dresden OCL required some other plugins as a prerequesite for its installation. Unfortunately,
+the mechanism to declare these dependencies automatically does not work with all installations of
+Eclipse well. If during the installation of Dresden OCL problems such as unresolved dependencies occur,
+you have to declare these dependent update sites manually.
+
+Open the p2 update manager by the menu option \emph{Help -> Install New Software\ldots}.
+
+Enter the following update sites and confirm each site by pressing the \emph{Add} button:
+
+\begin{itemize}
+  \item \url{http://www.emftext.org/update/}
+  \item \url{http://download.eclipse.org/tools/ajdt/42/dev/update/}
+\end{itemize}
+
+Afterwards, the problem with unresolved dependencies should not occur anymore.
 
 
 \subsection{Building the OCL2 Parser}
@@ -150,17 +175,7 @@ be cleaning the
 \reference{tudresden\linebreak[0].ocl\-20\linebreak[0].pivot.language.ocl.staticsemantics}
 plug-in or by running the \keyword{Ant} task \reference{clean all} of the same plug-in.
 
-Each plug-in that contains Scala code (\reference{org.kiama.attribution},
-\reference{tudresden.ocl20.pivot\linebreak[0].lan\-guage\linebreak[0].ocl.semantics},
-\reference{tudresden.ocl20.pivot.language.ocl.staticsemantics} and
-\reference{tu\-dres\-den\linebreak[0].ocl20.pivot.pivotmodel.semantics})
-contains a
-\keyword{build.xml} file that comes with three targets: \reference{clean all}
-to clean the selected project and all dependent projects, \reference{clean} to
-only clean the selected project and \reference{compile} to simply compile changes
-that have been made since the last build.
-
-In either case, you have to run the \keyword{ANT} scripts in the same 
+You have to run the \keyword{ANT} scripts in the same 
 \keyword{JRE} as Eclipse. Figures~\ref{pic:intro:parserbuild01} 
 and~\ref{pic:intro:parserbuild02} show how to achieve this. If an error like 
 ``Unable to find javac compiler.'' occurs, you might be trying to run the
@@ -169,11 +184,10 @@ and~\ref{pic:intro:parserbuild02} show how to achieve this. If an error like
 same window to select a \acs{JDK} instead.
 
 If you want to make changes to the static semantics evaluation of the parser you
-should consider installing the \reference{Scala IDE} from 
+should consider installing the \emph{Scala IDE} from 
 \url{http://www.scala-lang.org/scala-eclipse-plugin}. Be aware that the Scala
 code is version 2.7.7 which is not compatible with Scala 2.8 and therefore you
-cannot use the current \reference{Scala IDE} which supports only Scala 2.8. The
-\reference{Scala IDE} runs with \reference{Eclipse 3.5}.
+cannot use the current \emph{Scala IDE} which supports only Scala 2.8. 
 
 In order to use the Scala compiler of the IDE, you have to go to the
 \eclipse{Properties} of each Scala plug-in, select the tab \eclipse{Builders},
@@ -202,12 +216,11 @@ for building.
 \end{figure}
 
 
-
 \section{Loading Models, Model Instances and Constraints}
 
-If you installed the Dresden OCL using the update site, you can execute
-the toolkit by re-starting your Eclipse distribution. If you imported the
-Toolkit as source code plug-ins into an Eclipse workspace, you have to start a 
+If you installed the Dresden OCL using the market place client or update site,
+you can execute the toolkit within your Eclipse distribution. If you imported
+the Toolkit as source code plug-ins into an Eclipse workspace, you have to start a 
 new Eclipse instance. You can start a new instance via the menu \eclipse{Run >
 Run As > Eclipse Application}. If the menu \eclipse{Eclipse Application} is not 
 available or disabled you need to select one of the plug-ins of the toolkit in
@@ -223,11 +236,11 @@ which is located in the plug-in
 Figure~\ref{pic:examples:simple01} shows a class diagram of the Simple Example.
 
 Dresden OCL provides more examples than the Simple Example. The different 
-examples use different meta-models which is possible with the \textit{Pivot
-Model} architecture of the Toolkit. An overview about all examples provided 
-with \acl{DOT4Eclipse} is listed in Table~\ref{tab:examples} in the appendix of
-this manual. The Simple Example can be used with two different meta-models. 
-These are \keyword{\acs{UML} 2.0} (based on \keyword{\acs{Eclipse MDT} 
+examples use different metamodels which is possible with the \textit{Pivot
+Model} architecture of the Toolkit. An overview on all examples provided 
+with Dresden OCL is listed in Table~\ref{tab:examples} in the appendix of
+this manual. The Simple Example can be used with two different metamodels. 
+These are \keyword{\acs{UML}~2} (based on \keyword{\acs{Eclipse MDT} 
 \acs{UML}}) and \keyword{Java}.
 
 
@@ -237,7 +250,7 @@ Dresden OCL provides its own perspective within Eclipse that contains all views
 and editors provided with Dresden OCL. To ease the work with Dresden OCL, you
 should now switch to the Dresden OCL perspective. Select the menu option
 \eclipse{Window -> Open Perspective -> Other \ldots} and select the perspective
-\eclipse{Dresden OCL} (see Figure~\ref{pic:introduction:perspective})
+\eclipse{Dresden OCL} (cf. Fig.~\ref{pic:introduction:perspective}).
 	
 \begin{figure}[!t]
 	\centering
@@ -259,27 +272,34 @@ the following.
 
 \subsection{Loading a Model}
 	
-For this tutorial you first have to load a model into Dresden OCL. If the 
-plug-ins of Dresden OCL have been installed using the update site, the 
-Simple Example plug-in has to be imported into the \keyword{Workspace} first. 
-Create a new Java project into your workspace and select the \keyword{Import
-Wizard} \eclipse{General > Archive File}. In the following window select the 
-\eclipse{plugins} directory in your Eclipse root folder, select the archive 
-\reference{tudresden.ocl20.pivot.examples.\linebreak[0]simple\_<vers.-\_nr>.jar}
-and push the \eclipse{Finish} button.
+For this tutorial you first have to load a model into Dresden OCL. To ease the
+use of the Simple Example project, this project should be imported into the  
+\keyword{Workspace} first. Select the menu option \emph{File -> New ->
+Other} and select the option \emph{Dresden OCL Examples -> Simple Example}
+within the new opened window (cf. Fig~\ref{pic:intro:importexample01}). Click
+the \emph{Finish} button to import the project into your workspace. Afterwards, the workspace should contain the Simple
+Example project as shown in Figure~\ref{pic:introduction:perspective}, left hand
+side.
 
-Now you can load a model. Select the \reference{model/simple.uml} file in the
-\eclipse{Project Explorer} and open the popup menu with a right mouse click on
-it. Select the menu option \eclipse{Dresden OCL > Load 
-Model} (see Figure~\ref{pic:intro:loadmodel00}). In the opened wizard you have
-to select the meta-model \acs{UML}2 and push the \eclipse{Finish} button (see
-Figure~\ref{pic:intro:loadmodel01}).
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/introduction/importexample01}
+	\caption{Importing the Simple Example project.}
+	\label{pic:intro:importexample01}
+\end{figure}
 
-Figure~\ref{pic:intro:loadmodel02} shows the loaded Simple Example model, which
-uses \acs{UML}2 as its meta-model. Via the menu button of the \eclipse{Model 
+Now you can import the model into Dresden OCL. Select the
+\reference{model/simple.uml} file in the \eclipse{Project Explorer} and open the
+context menu (right mouse click). Select the menu option
+\eclipse{Dresden OCL > Load Model} (cf. Fig.~\ref{pic:intro:loadmodel00}). In
+the opened wizard you have to select the metamodel \acs{UML}2 and click the
+\eclipse{Finish} button (cf. Fig.~\ref{pic:intro:loadmodel01}).
+
+Figure~\ref{pic:intro:loadmodel02} shows the imported Simple Example model,
+which uses \acs{UML}2 as its meta-model. Via the menu button of the \eclipse{Model 
 Browser} (the little triangle in the right top corner) you can switch between 
-different models loaded into \acl{DOT4Eclipse} (see 
-Figure~\ref{pic:intro:loadmodel03}) With the two circled arrows icon you can
+different models imported into Dresden OCL (cf.  
+Fig.~\ref{pic:intro:loadmodel03}). With the two circled arrows icon you can
 reload a model into Dresden OCL, with the red \emph{X} you can close the
 currently selected model.
 	
@@ -296,17 +316,17 @@ currently selected model.
 	\label{pic:intro:loadmodel01}
 \end{figure}
 	
-\begin{figure}[!htbp]
+\begin{figure}[!p]
 	\centering
 	\includegraphics[width=0.4\linewidth]{figures/introduction/loadmodel02}
-	\caption{The Simple Example Model in the Model Browser.}
+	\caption{The Simple Example model within the Model Browser.}
 	\label{pic:intro:loadmodel02}
 	
 	\vspace{6.0em}
 
 	\centering
 	\includegraphics[width=0.4\linewidth]{figures/introduction/loadmodel03}
-	\caption{You can switch between different Models using the little Triangle.}
+	\caption{You can switch between different Models using the little triangle.}
 	\label{pic:intro:loadmodel03}
 	
 \end{figure}
@@ -314,25 +334,22 @@ currently selected model.
 	
 \subsection{Loading a Model Instance}
 \label{intro:loadModel}
-	
+
 After loading a model, you can load an instance of this model using another 
 wizard. The model instance is required to interpret \acs{OCL} constraints on
 elements instantiating the classes described in the opened model. Which kinds
 of model instances are supported in Dresden OCL is documented in
 Section~\ref{sect:info:modelinstances}. 
 Since the Simple Example provides a Java model instance, we now have to select a
-\code{class} file. \code{class} files are not displayed in the \eclipse{Project
-Explorer}. Thus, switch to the \eclipse{Navigator} that should be visible at the
-left hand side of the \eclipse{Dresden OCL} perspective as well and select the
-file
-\reference{bin/tudresden/ocl20/\linebreak[0]pivot/examples/\linebreak[0]sim\-ple/\linebreak[0]in\-stance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].class}
-of the Simple Example in the \eclipse{Project Explorer}. Open the popup menu 
-on it and select the menu option \eclipse{Dresden OCL > Load Model Instance} (see
-Figure~\ref{pic:intro:loadInstance00}).
+\code{*.java} or \code{*.class} file. Select the file
+\reference{src/tudresden/ocl20/\linebreak[0]pivot/examples/\linebreak[0]sim\-ple/\linebreak[0]in\-stance/\linebreak[0]Mo\-del\-InstanceProviderClass\linebreak[0].java}
+of the Simple Example in the \eclipse{Project Explorer}. Open the context menu 
+and select the menu option \eclipse{Dresden OCL > Load Model Instance} (cf.
+Fig.~\ref{pic:intro:loadInstance00}).
 In the opened wizard you have to select a model for which the model instance 
-shall be loaded and the type of model instance you want to load (see
-Figure~\ref{pic:intro:loadInstance01}). Select the \keyword{Java Instance} type
-and push the \eclipse{Finish} button.
+shall be loaded and the type of model instance you want to load (cf.
+Fig.~\ref{pic:intro:loadInstance01}). Select the \keyword{Java Instance} type
+and click the \eclipse{Finish} button.
 
 \begin{figure}[!p]
 	\centering
@@ -372,7 +389,7 @@ of model instances available in the model instance browser.
 	
 \subsection{Parsing OCL Expressions}
 \label{intro:oclEditor}
-Any file with the file extension \keyword{ocl} can be opened with the
+Any file with the file extension \texttt{.ocl} can be opened with the
 \keyword{Dresden OCL Editor}. Once opened, syntactic checks are performed
 to analyse whether the given file contains valid \acs{OCL} code. If currently
 there is no active model selected in the \eclipse{Model Browser}, the editor
@@ -397,11 +414,187 @@ Figure~\ref{pic:intro:loadconstraints03}.
 	\label{pic:intro:loadconstraints03}
 \end{figure}
 
+
+\subsection{Referencing the constrained Model}
+
+The architecture of Dresden OCL requires that a model must always be imported before
+a constraint file can be parsed correctly. Thus, if a constraint file is opened before
+its model has been loaded, its complete contend will be marked as erroneous, as the
+OCL parser is not able to resolved the referenced files.
+
+To avoid this situation, an annotation can be added to an OCL file that references to
+the constraint model specifying a relative path to the model file. The annotation must
+be included in a comment at the top of the OCL file consisting of the pattern
+\texttt{@model{<path>}} (e.g., for the constraint files of the simple example, the annotation
+\texttt{@model{../model/simple.uml}} should work).
+
+
+\subsection{Refactorings for Dresden OCL}
+
+Dresden OCL can be extended with support for OCL refactorings to ease and improve OCL editing.
+How refactorings can be installed and used in Dresden OCL is shortly explained in the following.
+
+\subsubsection{Installation of Refactorings for Dresden OCL}
+
+\begin{itemize}
+  \item Install Refactory from the following URL: \url{http://www.emftext.org/update/}.
+  \item Install the Refactoring for Dresden OCL feature from: 
+  \url{http://www.modelrefactoring.org/DresdenOCLRefactoring/} 
+\end{itemize}
+
+\subsubsection{Usage of OCL Refactorings}
+
+After installing the refactoring support, refactorings can simply be performed by selecting
+an element in the OCL editor, opening the context menu and select the respective refactoring
+(e.g., you can extract a variable as shwon in Fig.~\ref{pic:intro:refactoring01}--\ref{pic:intro:refactoring03}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.35\linewidth]{figures/introduction/refactoring01.png}
+	\caption{Extracting a variable: issue the refactoring.}
+	\label{pic:intro:refactoring01}
+
+	\vspace{2.0em}
+	
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/introduction/refactoring02.png}
+	\caption{Extracting a variable: enter parameters.}
+	\label{pic:intro:refactoring02}
+
+	\vspace{2.0em}
+
+	\centering
+	\includegraphics[width=0.35\linewidth]{figures/introduction/refactoring03.png}
+	\caption{Extracting a variable: the result.}
+	\label{pic:intro:refactoring03}
+\end{figure}
 	
 
-\section{Summary}
-  
-This chapter described how to use Dresden OCL. It explained how to 
+\section{Possible Use Cases of Dresden OCL using different Models and Model
+Instances}
+\label{sec:usecases}
+
+Dresden \acs{OCL} can be used in the context of different kind of models and
+instances and even at different modeling layers. This section tries to name some 
+prominent examples for possible use cases of Dresden \acs{OCL} w.r.t.
+different kinds of models and instances. Readers who are not interested in
+these details are encouraged to skip this section.
+
+In general, Dresden \acs{OCL} supports the use of \acs{OCL} at two different 
+levels: First, \acs{OCL} constraints can be defined on a metamodel and evaluated
+on instances of this metamodel (i.e., models). In this context,
+\acs{OCL} constraints are often called \emph{\acf{WFRs}}. Second, \acs{OCL}
+constraints can be defined on a model and evaluated on instances of this model
+(i.e., runtime objects or data). These constraints are often called
+\emph{\acf{BRs}}. Examples for both use cases are shown in
+Table~\ref{tab:usecases} and shortly explained in the following.
+
+\begin{table}[!t]
+\begin{tabular}{|p{7cm}p{7cm}|}
+  \hline
+  \textbf{WFR Specification and Evaluation} & \\
+  \hline
+  EMF/Ecore-based model,\newline e.g., \texttt{mydsl.ecore} &
+  EMF/Ecore-based instance (model),\newline e.g., \texttt{model01.mydsl} \\
+  \hline
+  UML metamodel,\newline \texttt{uml.ecore} of MDT/UML &
+  UML instance (model),\newline e.g., \texttt{model01.uml} \\
+  \hline
+  \hline
+  \textbf{BR Specification and Evaluation} & \\
+  \hline
+  UML-based model,\newline e.g., \texttt{model01.uml} &
+  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.java}
+  \\
+  \hline
+  Java classes,\newline e.g., \texttt{Model01.java} &
+  Java-based instance (runtime objects),\newline e.g., \texttt{Instance01.java}
+  \\
+  \hline
+  XML Schema (\acs{XSD}),\newline e.g., \texttt{mySchema.xsd} &
+  XML instance (data),\newline e.g., \texttt{Instance01.xml} \\
+  \hline
+\end{tabular}
+\caption{Different possible use cases of Dresden OCL.}
+\label{tab:usecases}
+\end{table}
+
+
+\subsection{Use Cases of Dresden OCL for Well-Formedness Rules}
+
+Dresden \acs{OCL} supports different scenarios, where \acs{OCL} rules can be
+specified on metamodels as \acs{WFRs}. The mose prominent scenarios are shortly
+explained below.
+
+\subsubsection{WFRs for EMF/Ecore Models} 
+\acs{EMF}/Ecore is often used as a metamodeling language to develop \acl{DSL}s
+(\acs{DSL}s). To specify \acs{OCL} constraints on an Ecore-based metamodel, you
+import the model file (e.g., \texttt{mydsl.ecore}) as a model into Dresden
+\acs{OCL} using the model importer for \acs{EMF}/Ecore-based models. Afterwards,
+you can specify \acs{OCL} constraints using the \acs{OCL} parser/editor of
+Dresden \acs{OCL}. You can import istances of your \acs{DSL} into Dresden
+\acs{OCL} using the model instance importer for \acs{EMF}/Ecore-based instances
+(e.g., \texttt{model01.mydsl}) to interpret the specified constraints on them.
+
+\subsubsection{WFRs for the UML Metamodel}
+Another common use case is the specification of \acs{OCL} constraints on the
+\acs{UML} metamodel and their evaluation for instances of the metamodel (i.e.,
+\acs{UML} models). You can do this by importing the \acs{EMF}/Ecore-based
+\acs{UML}-metamodel of the Eclipse \acf{MDT}. You can find the required
+\texttt{uml.ecore} within the Eclipse plug-in \texttt{org.eclipse.uml.uml} of
+Eclipse MDT. Please note, when importing this metamodel into Dresden \acs{OCL},
+you have to import it using the \acs{EMF}/Ecore model importer and not a
+\acs{UML} model importer (since the \acs{UML} metamodel was modelled in \acs{EMF})!
+Afterwards, you can import a \acs{UML} model as an instance of the metamodel to
+evaluate constraints on it (e.g., \texttt{model.uml}). Again, you have use
+the \acs{EMF}/Ecore model instance importer.
+
+
+\subsection{Use Case of Dresden OCL for Busines Rules}
+
+Besides the evaluation of \acs{WFRs}, multiple use cases for the evaluation of
+\acf{BRs} are supported and explained below.
+
+\subsubsection{BRs for UML models}
+A common use case is the definition of \acs{OCL} constraints on a \acs{UML}
+model (e.g., \texttt{model01.uml}), typically containing a class model. You can
+import \acs{UML} class models into Dresden \acs{OCL} using the corresponding
+model importer. For \acs{OCL} evaluation a
+possible model instance is a set of runtime objects by using a Java class and
+the Java model instance importer (e.g., \texttt{Instance01.java}). Details how
+a Java class usable as a Java model instance must be implemented are documented
+in Section~\ref{subsec:javaInstance}.
+
+\subsubsection{BRs for Java Classes}
+Another possible use case is the use of a set of Java classes as a model for
+\acs{OCL} constraint specification (e.g., \texttt{Model01.java}). A Java class
+can be imported as a model using the Java model importer. Details how the class
+is imported as a model are documented in Section~\ref{subsec:javaModel}. Again,
+a typical model istance would be a set of Java objects as mentioned above
+(e.g., \texttt{Instance01.java}).
+
+\subsubsection{BRs for XML Schemata}
+Dresden \acs{OCL} supports the definition of \acs{OCL} rules on \acl{XSD}s
+(\acs{XSD}s) as well (e.g., \texttt{mySchema.xsd}) using the \acs{XSD} model
+importer. Obviously an \acs{XML} file would be an appropriate model instance,
+using the \acs{XML} model instance importer (e.g., \texttt{Instance01.xml}).
+
+
+\subsection{Further Use Cases}
+
+Of course, the use cases presented above are not a complete list of all possible
+use cases. Theoretically, every supported type of model importer can be combined
+with every type of model instances. And besides, you can even define your own
+importers for further use cases, if necessary. How to adapt Dresden \acs{OCL} to
+other types of models and instances is documented in the
+Chapters~\ref{chapter:pivotModelAdaptation}
+and~\ref{chapter:modelInstanceTypeAdaptation}.
+
+
+
+\section{Summary} 
+
+This chapter described how to use Dresden OCL. It was explained how to 
 install the plug-ins of Dresden OCL. Afterwards, the import of models,
 model instances and \acs{OCL} constraints into Dresden OCL was explained.
 
@@ -411,7 +604,7 @@ constraints for a given model and model instance (as explained in
 Chapter~\ref{chapter:interpretation}) or you can use the \keyword{OCL22Java
 Code Generator} to generate \keyword{AspectJ} code for a loaded model and 
 \acs{OCL} constraints (as explained in Chapter~\ref{chapter:codeGeneration}).
-Ho the \keyword{OCL2SQL Code Generator} can be used to generated SQL schema and
+How the \keyword{OCL2SQL Code Generator} can be used to generated SQL schema and
 integretiy views is documented in Chapter~\ref{chapter:ocl2sql}.
 
 If you do not want to use Eclipse, but still want to interpret OCL constraints 

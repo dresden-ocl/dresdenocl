@@ -26,7 +26,6 @@ public class OclDocBrowserInformationControlInput {
 	 * @param previous previous input, or <code>null</code> if none available
 	 * @param element the element, or <code>null</code> if none available
 	 * @param htmlContent HTML contents, must not be null
-	 * @param leadingImageWidth the indent required for the element image
 	 */
 	public OclDocBrowserInformationControlInput(OclDocBrowserInformationControlInput previous, org.eclipse.emf.ecore.EObject element, org.eclipse.emf.ecore.resource.Resource resource, String htmlContent, String tokenText) {
 		fPrevious= previous;

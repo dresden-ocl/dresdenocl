@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<university:University xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:university="http://www.emftext.org/language/university">
-  <students firstName="Michael" lastName="Thiele" age="26" supervisor="//@employees.0"/>
-  <employees xsi:type="university:PhDStudent" firstName="Sven" lastName="Karol" supervisor="//@employees.1" supervised="//@students.0"/>
-  <employees firstName="Uwe" lastName="Aßmann" isMarried="true" supervised="//@employees.0 //@employees.2"/>
-  <employees xsi:type="university:PhDStudent" firstName="Claas" lastName="Wilke" age="27" supervisor="//@employees.1"/>
-  <employees xsi:type="university:PhDStudent" firstName="Claire" lastName="Selfish" supervisor="//@employees.4" supervised="//@employees.4"/>
-  <employees xsi:type="university:PhDStudent" firstName="Mr." lastName="Fake" supervisor="//@employees.3" supervised="//@employees.3"/>
-</university:University>

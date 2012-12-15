@@ -2,7 +2,6 @@ package tudresden.ocl20.pivot.tools.template.sql;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.ui.IStartup;
 import org.osgi.framework.BundleContext;
 
 import tudresden.ocl20.logging.LoggingPlugin;
@@ -20,7 +19,7 @@ import tudresden.ocl20.logging.LoggingPlugin;
  * @author Bjoern Freitag
  * 
  */
-public class SQLTemplatePlugin extends Plugin implements IStartup {
+public class SQLTemplatePlugin extends Plugin {
 
 	/**
 	 * The id of this plugin
@@ -38,7 +37,6 @@ public class SQLTemplatePlugin extends Plugin implements IStartup {
 
 		super();
 		plugin = this;
-		SQLTemplate.loadSQLTemplates();
 	}
 
 	/**
@@ -82,8 +80,5 @@ public class SQLTemplatePlugin extends Plugin implements IStartup {
 		return LoggingPlugin.getLogManager(plugin).getLogger(clazz);
 	}
 
-	public void earlyStartup() {
-
-	}
 
 }

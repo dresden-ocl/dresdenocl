@@ -1,0 +1,7 @@
+package package1
+
+context Class1
+def: testOclVoidOclAsType01: Integer = 
+null.oclAsType(Integer)
+
+endpackage

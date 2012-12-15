@@ -8,6 +8,8 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
 public class OclTokenStyleInformationProvider {
 	
+	public static String TASK_ITEM_TOKEN_NAME = "TASK_ITEM";
+	
 	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenStyle getDefaultTokenStyle(String tokenName) {
 		if ("ML_COMMENT".equals(tokenName)) {
 			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyle(new int[] {0x00, 0x80, 0x00}, null, false, true, false, false);
@@ -86,6 +88,9 @@ public class OclTokenStyleInformationProvider {
 		}
 		if ("QUOTED_39_39".equals(tokenName)) {
 			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyle(new int[] {0x2A, 0x00, 0xFF}, null, false, false, false, false);
+		}
+		if ("TASK_ITEM".equals(tokenName)) {
+			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclTokenStyle(new int[] {0x7F, 0x9F, 0xBF}, null, true, false, false, false);
 		}
 		return null;
 	}

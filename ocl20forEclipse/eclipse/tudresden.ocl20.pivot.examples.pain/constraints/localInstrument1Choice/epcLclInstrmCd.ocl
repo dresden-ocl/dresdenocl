@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* Only 'B2B' is allowed for Local Instrument Code (PmtInf PmtTpInf Cd). 'B2B' is used to indicate a B2B direct

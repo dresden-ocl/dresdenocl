@@ -1,9 +1,73 @@
 Changes and Bugs fixed during the different Releases
 ====================================================
 
-Release 3.X (Not scheduled yet)
-===================================
+Release 3.2 (September, 24th 2012)
+==================================
+* Introduction of new Tool: Dresden OCL Metrics
 
+* Introduction of new Tool: OCL Interpreter Tracer: the cause of interpretation results 
+  can now be visualized by displaying a trace tree of an individual interpretation 
+  result.
+  
+* Dresden OCL Supports Juno and Indigo
+
+* Changes on OCL Editor:
+  - On .ocl files metadata can be defined using the new @model{model/path} command
+	within comments. This can be single line comments as well as multi line comments.
+    This model path can either be absolute or relative to the corresponding .ocl file.
+	  
+* Genreal bug fixes:
+  - Enumerations now extend OclAny. Thus, operations of OclAny can now be parsed on
+    enumerations.
+  - Properties having the same name within inheritance relations are now shadowed
+    correctly.
+
+* Bug fixes on UML metamodel adaptation
+  - Added missing dependency to org.eclipse.uml.resources. Should now be installable
+    appropiately within non MDT-Eclipse distributions.
+  - Adaptation of DataTypes is now supported.
+  
+ * Bug fixes on Java metamodel adaptation
+  - Java models can now be opened by selecting the .java file instead of the .class 
+    file.
+   
+* Bug fixes on Java model instance adaptation
+  - Java model instances can now be opened by selecting the .java file instead of the
+    .class file.
+  
+* Bug fixes on XML model instande adaptation
+  - XML files having a file name ending with .XML instead of .xml should now be 
+    imported appropriately as well.
+  
+* Bug fixes on OCL Parser/Editor
+  - Parsing of recursively defined properties is now supported.
+
+* Bug fixes on OCL Interpreter
+  - Interpretation of recursively defined properties is now supported.
+  - Constraints defined in a static context are now interpreted only once for a given
+    set of constraints.
+  
+* Changes on OCL2SQL
+  - Closure iterator is now supported.
+  
+* Bug fixes on OCL2AspectJ
+  - SortedBy iterator is now supported correctly (requires at least AspectJ 1.6.12.M1).
+
+GUI
+===
+* OCL Editor
+  - The outline has been completely revised.
+  
+* Introduction of the new OCL Tracer View (see above)
+
+
+Release 3.1 (January, 17th 2011)
+================================
+
+* First (inofficial) parts of OCL 2.3 are now supported by Dresden OCL
+  - The new closure() iterator is supported by parser, interpreter and Ocl2Java.
+  - The String operations <, <=, >=, > are supported.
+  
 * A Bug in the UML2 Metamodel has been fixed.
   - Class diagrams using stereotypes are now adapted correctly.
   
@@ -12,6 +76,11 @@ Release 3.X (Not scheduled yet)
   - The escape underscore for reserved words can now be used.
   - The ASM of nested LetExpressions now has the right order.
   - OclAny.asSet() is now parsed correctly either if used implicitly or explicitly.
+  - Wellformednes Rules for Iterators having at most one iterator variable are checked
+    appropriately.
+  
+* Changes on Code Generators
+  - The template engine was switched to String Template v. 3.2.1.
   
 * Improvements on Ocl2Java
   - Generated aspects are named according to their constraints.
@@ -31,11 +100,18 @@ Release 3.X (Not scheduled yet)
   - OclAny.oclIsUndefined() now works on Java primitive types as well.
   - IsUnique() iterators are now transformed correctly if their body expression result
     in another type than the collection's element type.
+  - The patterns <CONSTRAINT_NAME>, <CONSTAINTS_BODY>, and <OBJECT_IN_ILLEGAL_STATE>
+    can now be used to parameterize error messages in violation macros constraint 
+    specific.
 
 * Changes on Ocl2SQL
   - for nested where statements now generated join statements
   - the IteratorExp of OCL will now correctly generated to SQL
   - difference sql code for managed and not managed key references (new template) 
+
+GUI
+---
+* All Examples can now be easily imported into Eclipse using import wizards.
 
 Tests
 -----

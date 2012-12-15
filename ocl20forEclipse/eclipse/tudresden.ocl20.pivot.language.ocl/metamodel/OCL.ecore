@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl" nsPrefix="ocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl" nsURI="http://www.tu-dresden.de/ocl20/pivot/language/ocl"
+    nsPrefix="ocl">
   <eClassifiers xsi:type="ecore:EClass" name="OclExpressionCS" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="BracketExpCS" eSuperTypes="#//OclExpressionCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="oclExpression" lowerBound="1"
@@ -249,6 +248,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationCS" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextDeclarations" upperBound="-1"
         eType="#//ContextDeclarationCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithNamespaceCS" eSuperTypes="#//PackageDeclarationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" lowerBound="1"
@@ -259,6 +260,8 @@
         eType="ecore:EClass ../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Namespace"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedNamespace" eType="#//PackageDeclarationNestedNamespaceCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformation" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclarationWithoutNamespaceCS"
       eSuperTypes="#//PackageDeclarationCS"/>

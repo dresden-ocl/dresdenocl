@@ -33,7 +33,6 @@
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
 import org.apache.log4j.Logger;
-
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
@@ -61,6 +60,7 @@ public class InvalidLiteralExpImpl extends LiteralExpImpl implements
 	 * @generated
 	 */
 	protected InvalidLiteralExpImpl() {
+
 		super();
 	}
 
@@ -102,6 +102,7 @@ public class InvalidLiteralExpImpl extends LiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.INVALID_LITERAL_EXP;
 	}
 

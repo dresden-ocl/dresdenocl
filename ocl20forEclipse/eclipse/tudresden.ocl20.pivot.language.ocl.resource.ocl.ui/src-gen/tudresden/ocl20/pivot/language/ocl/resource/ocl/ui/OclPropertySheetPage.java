@@ -13,9 +13,9 @@ public class OclPropertySheetPage extends org.eclipse.ui.views.properties.Proper
 	}
 	
 	public void selectionChanged(org.eclipse.ui.IWorkbenchPart part, org.eclipse.jface.viewers.ISelection iSelection) {
-		// this is a workaround for a bug in EMF see
-		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=291301unfortunately Ed Merks
-		// refuses to fix it, so we need to solve it here
+		// This is a workaround for a bug in EMF (see
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=291301).Unfortunately Ed Merks
+		// refuses to fix it, so we need to solve it here.
 		if (iSelection instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection) {
 			final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection selection = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEObjectSelection) iSelection;
 			final org.eclipse.emf.ecore.EObject selectedObject = selection.getSelectedObject();

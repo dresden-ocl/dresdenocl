@@ -1,7 +1,0 @@
-package testpackage
-
-context Class1
-static def: staticDefOperation01(): Integer = 
-42
-
-endpackage

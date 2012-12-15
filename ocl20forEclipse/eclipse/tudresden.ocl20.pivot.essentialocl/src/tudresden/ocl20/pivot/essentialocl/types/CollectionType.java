@@ -32,10 +32,9 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types;
 
-import org.eclipse.emf.ecore.EObject;
-import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import java.util.List;
 
+import tudresden.ocl20.pivot.essentialocl.expressions.CollectionKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 

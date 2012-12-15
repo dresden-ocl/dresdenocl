@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -75,14 +76,12 @@ import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.OrderedSetType;
 import tudresden.ocl20.pivot.essentialocl.types.SequenceType;
 import tudresden.ocl20.pivot.essentialocl.types.SetType;
-import tudresden.ocl20.pivot.essentialocl.types.TypeType;
 import tudresden.ocl20.pivot.interpreter.IInterpretationEnvironment;
 import tudresden.ocl20.pivot.interpreter.IInterpretationResult;
 import tudresden.ocl20.pivot.interpreter.IOclInterpreter;
 import tudresden.ocl20.pivot.interpreter.OclInterpreterPlugin;
 import tudresden.ocl20.pivot.modelinstance.IModelInstance;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
-import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceString;
 import tudresden.ocl20.pivot.modelinstancetype.types.base.BasisJavaModelInstanceFactory;
 import tudresden.ocl20.pivot.pivotmodel.ConstrainableElement;
@@ -178,10 +177,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			throw new IllegalArgumentException(
 					"Parameter 'constraint' must not be null.");
 		// no else.
-		if (modelInstanceElement == null)
-			throw new IllegalArgumentException(
-					"Parameter 'modelInstanceElement' must not be null.");
-		// no else.
 
 		/* Probably log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -192,12 +187,46 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		IInterpretationResult result;
+		UUID guid = null;
+
+		/* Check if the constraint has a static context. */
+		if (this.hasStaticContext(constraint)) {
+
+			/* Probably trace the entry into this method */
+			if (!isPreparationRun) {
+				guid = UUID.randomUUID();
+				increaseTracerTreeDepth(guid, modelInstanceElement);
+			}
+			// no else
+
+			OclAny context = myStandardLibraryFactory.createOclUndefined(
+					EssentialOclPlugin.getOclLibraryProvider().getOclLibrary()
+							.getOclAny(), "Static context.");
+
+			OclAny oclResult = this.interpretConstraint(constraint, context);
+
+			result = new InterpretationResultImpl(null, constraint, oclResult);
+
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.fireInterpretationFinished(result);
+		}
 
 		/*
 		 * Check if the IModelInstanceElement is constrained by the constraint
 		 * at all.
 		 */
-		if (this.isConstrained(modelInstanceElement, constraint)) {
+		else if (modelInstanceElement == null)
+			throw new IllegalArgumentException(
+					"Parameter 'modelInstanceElement' cannot be null for constraints not defined in a static context.");
+
+		else if (this.isConstrained(modelInstanceElement, constraint)) {
+
+			/* Probably trace the entry into this method */
+			if (!isPreparationRun) {
+				guid = UUID.randomUUID();
+				increaseTracerTreeDepth(guid, modelInstanceElement);
+			}
+			// no else
 
 			OclAny context = myStandardLibraryFactory
 					.createOclAny(modelInstanceElement);
@@ -223,6 +252,20 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun && (guid != null)) {
+			decreaseTracerTreeDepth();
+
+			/*
+			 * Propagate tracer information for partial interpretation. The uuid
+			 * will be null iff the constraint could not be applied to any
+			 * context or instance
+			 */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(constraint,
+							result.getResult(), guid);
+		}
+
 		return result;
 	}
 
@@ -241,10 +284,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (constraints == null)
 			throw new IllegalArgumentException(
 					"Parameter 'constraints' must not be null.");
-		// no else.
-		if (modelInstanceElement == null)
-			throw new IllegalArgumentException(
-					"Parameter 'modelInstanceElement' must not be null.");
 		// no else.
 
 		/* Probably log the entry into this method. */
@@ -532,6 +571,30 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	/**
+	 * Checks if a given {@link Constraint} is defined in a static context i.e.
+	 * is defined in a static context (static def, or body/derive/init on static
+	 * feature).
+	 * 
+	 * @param constraint
+	 *            The {@link Constraint}
+	 * @return <code>true</code> if the context is static.
+	 */
+	private boolean hasStaticContext(Constraint constraint) {
+
+		switch (constraint.getKind()) {
+		case DEFINITION:
+			return constraint.getDefinedFeature().isStatic();
+		case DERIVED:
+		case INITIAL:
+		case BODY:
+			return ((Feature) constraint.getConstrainedElement().iterator()
+					.next()).isStatic();
+		default:
+			return false;
+		}
+	}
+
+	/**
 	 * <p>
 	 * A helper method that checks if a given {@link IModelInstanceElement} is
 	 * constrained by the context of a given {@link Constraint} and thus, if the
@@ -763,6 +826,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Cache is not efficient here. */
 		OclAny result = myStandardLibraryFactory
 				.createOclBoolean(booleanLiteralExp.isBooleanSymbol());
@@ -773,6 +844,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted BooleanLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probaby trace the exit from this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(booleanLiteralExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -795,6 +876,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Collection items cannot be cached. */
 		OclAny result = doSwitch((EObject) collectionItem.getItem());
 
@@ -805,6 +894,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted CollectionItem. Result = " + result);
 		}
 		// no else.
+
+		/* Probaby trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin
+					.getInterpreterRegistry()
+					.firePartialInterpretionResult(collectionItem, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -826,6 +926,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret CollectionLiteral.");
 			this.pushLogOffset();
 		}
+
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
 
 		/*
 		 * Collection literal cannot be cached - they are only defined once in a
@@ -877,6 +985,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted CollectionLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(collectionLiteralExp,
+							result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -955,6 +1074,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Cache is not efficient here. */
 		OclAny result = myStandardLibraryFactory
 				.createOclEnumLiteral(enumLiteralExp.getReferredEnumLiteral());
@@ -965,6 +1092,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted EnumerationLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin
+					.getInterpreterRegistry()
+					.firePartialInterpretionResult(enumLiteralExp, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -988,6 +1125,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		OclAny result;
 		result = doSwitch((EObject) expressionInOcl.getBodyExpression());
 
@@ -998,6 +1143,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted ExpressionInOcl. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(expressionInOcl, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -1018,6 +1173,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
 
 		/* If expressions cannot be cached. */
 		OclAny result;
@@ -1079,6 +1242,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(ifExp, result, guid);
+		}
+		// no else
+
 		return result;
 	}
 
@@ -1092,10 +1265,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public OclAny caseIntegerLiteralExp(IntegerLiteralExp integerLiteralExp) {
 
+		/* Probaby log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpret IntegerLiteral.");
 		}
 		// no else.
+
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
 
 		/* Cache is not efficient here. */
 		OclAny result = myStandardLibraryFactory.createOclInteger(new Long(
@@ -1106,6 +1288,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted IntegerLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(integerLiteralExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -1127,6 +1319,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		OclAny result = myStandardLibraryFactory.createOclInvalid(
 				invalidLiteralExp.getType(), new IllegalArgumentException(
 						"InvalidLiteral"));
@@ -1137,6 +1337,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted InvalidLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(invalidLiteralExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -1159,6 +1369,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
 
 		/* IterateExpressions cannot be cached. */
 		OclAny result;
@@ -1203,6 +1421,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(iterateExp, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -1312,6 +1540,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* IteratorExpressions cannot be cached. */
 		OclAny result;
 
@@ -1362,6 +1598,28 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			else {
 				result = this.evaluateAny(bodyExpression, sourceCollection,
 						allIteratorVariables.get(0), iteratorExp.getType());
+			}
+		}
+
+		else if (iteratorExp.getName().equals("closure")) {
+
+			/* Closure can only use one iterator variable. */
+			if (allIteratorVariables.size() > 1) {
+				String msg = "Iterator closure() can have only one iterator variable.";
+
+				if (LOGGER.isInfoEnabled()) {
+					LOGGER.warn(msg);
+				}
+				// no else.
+
+				result = myStandardLibraryFactory.createOclInvalid(
+						iteratorExp.getType(),
+						new IllegalArgumentException(msg));
+			}
+
+			else {
+				result = this.evaluateClosure(bodyExpression, sourceCollection,
+						allIteratorVariables.get(0), resultType);
 			}
 		}
 
@@ -1565,6 +1823,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(iteratorExp, result, guid);
+		}
+		// no else
+
 		return result;
 	}
 
@@ -1675,6 +1943,157 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					msg);
 		}
 		// no else.
+
+		return result;
+	}
+
+	/**
+	 * <p>
+	 * The closure of applying body transitively to every distinct element of
+	 * the source collection.
+	 * </p>
+	 * 
+	 * @param body
+	 *            The body expression to be evaluated.
+	 * @param source
+	 *            The collection representing the source expression of the
+	 *            iteration.
+	 * @param iterator
+	 *            The iterator (closure may have at most one iterator
+	 *            variable.).
+	 * @param resultType
+	 *            The result type (set or orderedSet).
+	 * 
+	 * @return The result of the iteration.
+	 */
+	@SuppressWarnings("unchecked")
+	protected OclAny evaluateClosure(OclExpression body,
+			OclCollection<OclAny> source, Variable iterator, Type resultType) {
+
+		OclAny result = null;
+		OclIterator<OclAny> sourceIt = source.getIterator();
+
+		/* Check if iterator is undefined. */
+		if (sourceIt.hasNext().oclIsInvalid().isTrue()) {
+			result = myStandardLibraryFactory.createOclInvalid(source
+					.getGenericType(), new IllegalArgumentException(
+					"Source of iterator closure() was invalid.", sourceIt
+							.hasNext().getInvalidReason()));
+		}
+
+		/* Else compute the result. */
+		else {
+			List<OclAny> elementsToVisit = new ArrayList<OclAny>();
+			List<OclAny> resultElements = new ArrayList<OclAny>();
+
+			/* Add all elements to elementsToVisit. */
+			while (sourceIt.hasNext().isTrue()) {
+				elementsToVisit.add(sourceIt.next());
+			}
+
+			while (elementsToVisit.size() > 0) {
+
+				OclAny element = elementsToVisit.remove(0);
+
+				/* Compute relation for one element. */
+				myEnvironment.setVariableValue(iterator.getQualifiedName(),
+						element);
+				OclAny relationResult = doSwitch(body);
+
+				if (relationResult.oclIsInvalid().isTrue()) {
+					result = this.myStandardLibraryFactory
+							.createOclInvalid(
+									resultType,
+									new IllegalArgumentException(
+											"Body of closure iterator was invalid for at least one element."));
+					break;
+				}
+
+				/*
+				 * If the result conforms to the source's element type the
+				 * result is only one element. Else the result is a collection
+				 * of elements.
+				 */
+				if (relationResult instanceof OclCollection<?>) {
+
+					OclIterator<OclAny> relationResultsIt = ((OclCollection<OclAny>) relationResult)
+							.getIterator();
+
+					while (relationResultsIt.hasNext().isTrue()) {
+						OclAny elem = relationResultsIt.next();
+						if (elem.oclIsInvalid().isTrue()) {
+							result = this.myStandardLibraryFactory
+									.createOclInvalid(
+											resultType,
+											new IllegalArgumentException(
+													"Body of closure iterator was invalid for at least one element."));
+							break;
+						}
+
+						else if (!elem.oclIsUndefined().isTrue()
+								&& !resultElements.contains(elem)) {
+							/* Visit the element later, if not visited yet. */
+							elementsToVisit.add(elem);
+							resultElements.add(elem);
+						}
+						// no else.
+					}
+					// end while
+				}
+
+				/*
+				 * TODO Claas: Don't know yet, why we have to check two
+				 * different cases here.
+				 */
+				else if ((source.getGenericType().conformsTo(
+						relationResult.getModelInstanceElement().getType()) || (source
+						.getGenericType() instanceof CollectionType && ((CollectionType) source
+						.getGenericType()).getElementType().conformsTo(
+						relationResult.getModelInstanceElement().getType())))) {
+
+					if (!relationResult.oclIsUndefined().isTrue()
+							&& !resultElements.contains(relationResult)) {
+						/* Visit the element later, if not visited yet. */
+						elementsToVisit.add(relationResult);
+						resultElements.add(relationResult);
+					}
+					// no else.
+				}
+				// no else.
+			}
+			// end while.
+
+			if (result == null) {
+				/* Compute the result type depending on the given result type. */
+				if (resultType instanceof OrderedSetType) {
+					result = myStandardLibraryFactory.createOclOrderedSet(
+							resultElements,
+							((OrderedSetType) resultType).getElementType());
+				}
+
+				else if (resultType instanceof SetType) {
+					result = myStandardLibraryFactory.createOclSet(
+							new HashSet<OclAny>(resultElements),
+							((SetType) resultType).getElementType());
+				}
+
+				else {
+					String msg;
+					msg = "The ResultType of a closure Iterator should by a Set or OrderedSet.";
+					msg += " But was " + resultType.getQualifiedName();
+
+					if (LOGGER.isInfoEnabled()) {
+						LOGGER.warn(msg);
+					}
+					// no else.
+
+					result = myStandardLibraryFactory.createOclInvalid(
+							resultType, new IllegalArgumentException(msg));
+				}
+			}
+			// no else.
+		}
+		// end else.
 
 		return result;
 	}
@@ -2569,6 +2988,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		OclAny result = null;
 
 		/* LetExpressions cannot be cached. */
@@ -2596,6 +3023,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ letExp.getVariable().getName() + ". Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(letExp, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -2629,6 +3066,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Probably handle a static operation. */
 		if (operationCallExp.getReferredOperation() != null
 				&& operationCallExp.getReferredOperation().isStatic()) {
@@ -2658,6 +3103,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(msg);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(operationCallExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -2952,11 +3408,13 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * <p>
 	 * Checks whether or not a given {@link Feature}'s semantic is defined by an
 	 * {@link Constraint} and returns this {@link Constraint} or
-	 * <code>null</code>.
+	 * <code>null</code> .
 	 * </p>
 	 * 
-	 * TODO This method would be unnecessary if {@link Feature}s would know
-	 * their {@link Constraint}s if they exist.
+	 * TODO Claas: This code is only required since the feature.getSemantics()
+	 * method leads to five failing test cases of the OCL interpreter tests.
+	 * Assume that this are side effect issues for overriding the same operation
+	 * multiple times.
 	 * 
 	 * @param feature
 	 *            The {@link Feature} that shall be checked.
@@ -2966,12 +3424,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		Constraint result = null;
 
-		/*
-		 * TODO Claas: This code is only required since the
-		 * feature.getSemantics() method leads to five failing test cases of the
-		 * OCL interpreter tests. Assume that this are side effect issues for
-		 * overriding the same operation multiple times.
-		 */
 		Type owningType = (Type) feature.getOwner();
 
 		if (owningType != null && owningType.getNamespace() != null) {
@@ -2992,6 +3444,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 			// end for.
 		}
+
+		else if (null != feature.getSemantics()) {
+			return feature.getSemantics();
+		}
 		// no else.
 
 		return result;
@@ -3002,8 +3458,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * A helper method that tries to retrieve the result for an
 	 * {@link OperationCallExp} by evaluation a special operation like
 	 * <code>@pre()</code>, <code>oclIsNew()</code> or
-	 * <code>allInstances()</code>. Furthermore, operations like <code>or</code>, <code>and</code> and <code>implies</code> are evaluated if their
-	 * source's value is sufficient as result.
+	 * <code>allInstances()</code> . Furthermore, operations like
+	 * <code>or</code>, <code>and</code> and <code>implies</code> are evaluated
+	 * if their source's value is sufficient as result.
 	 * </p>
 	 * 
 	 * @param anOperationCallExp
@@ -3014,6 +3471,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 *            .
 	 * @return The result of a special {@link Operation} or <code>null</code>.
 	 */
+	@SuppressWarnings("unchecked")
 	private OclAny handleSpecialOperations(OperationCallExp anOperationCallExp,
 			OclAny source) {
 
@@ -3120,27 +3578,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 				// no else.
 
-				if (source.oclIsInvalid().isTrue())
-					result = myStandardLibraryFactory.createOclInvalid(
-							anOperationCallExp.getSourceType(),
-							source.getInvalidReason());
-
-				else if (source.oclIsUndefined().isTrue())
-					result = myStandardLibraryFactory.createOclInvalid(
-							anOperationCallExp.getSourceType(),
-							new RuntimeException(
-									"Tried to call allInstances() on null. Reason :"
-											+ source.getUndefinedReason()));
-				else {
-					final Type sourceType = ((TypeType) anOperationCallExp
-							.getSourceType()).getRepresentedType();
-
-					Set<IModelInstanceObject> allInstances = myEnvironment
-							.getModelInstance().getAllInstances(sourceType);
-
-					result = myStandardLibraryFactory.createOclSet(
-							allInstances, sourceType);
-				}
+				result = ((OclType<OclAny>) source)
+						.allInstances(this.myEnvironment.getModelInstance());
 			}
 
 			/*
@@ -3226,6 +3665,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		OclAny result;
 
 		/* Handle static properties. */
@@ -3248,6 +3695,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ ". Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(propertyCallExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3285,7 +3743,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					.createOclString(referredProperty.getName()));
 		}
 
-		/* Else the source must be an OclModelInstanceObject. */
 		else {
 			try {
 				OclModelInstanceObject sourceObject;
@@ -3298,7 +3755,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				 * Probably interpret the result of a definition, derive or init
 				 * constraint.
 				 */
-				if (propertySemanticInOcl != null) {
+				if (null != propertySemanticInOcl) {
 
 					if (source.oclIsInvalid().isTrue()) {
 						result = this.myStandardLibraryFactory
@@ -3464,6 +3921,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Cache is not efficient here. */
 		OclAny result = myStandardLibraryFactory.createOclReal(realLiteralExp
 				.getRealSymbol());
@@ -3474,6 +3939,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin
+					.getInterpreterRegistry()
+					.firePartialInterpretionResult(realLiteralExp, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3495,6 +3970,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Cache is not efficient here. */
 		OclAny result = myStandardLibraryFactory
 				.createOclString(stringLiteralExp.getStringSymbol());
@@ -3505,6 +3988,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted StringLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(stringLiteralExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3527,35 +4020,31 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* TupleLiteralExps cannot be cached. */
 		OclAny result;
 
-		if (tupleLiteralExp.getPart().size() != tupleLiteralExp.getPart()
-				.size()) {
-			result = this.myStandardLibraryFactory
-					.createOclInvalid(
-							tupleLiteralExp.getType(),
-							new IllegalStateException(
-									"Sizes of keys and values in TupleLiteralExp does not match."));
+		List<IModelInstanceString> partNames = new LinkedList<IModelInstanceString>();
+		List<IModelInstanceElement> partValues = new LinkedList<IModelInstanceElement>();
+
+		for (TupleLiteralPart literalPart : tupleLiteralExp.getPart()) {
+			partNames.add(BasisJavaModelInstanceFactory
+					.createModelInstanceString(literalPart.getProperty()
+							.getName()));
+			partValues.add(doSwitch((EObject) literalPart)
+					.getModelInstanceElement());
 		}
+		// end for.
 
-		else {
-			List<IModelInstanceString> partNames = new LinkedList<IModelInstanceString>();
-			List<IModelInstanceElement> partValues = new LinkedList<IModelInstanceElement>();
-
-			for (TupleLiteralPart literalPart : tupleLiteralExp.getPart()) {
-				partNames.add(BasisJavaModelInstanceFactory
-						.createModelInstanceString(literalPart.getProperty()
-								.getName()));
-				partValues.add(doSwitch((EObject) literalPart)
-						.getModelInstanceElement());
-			}
-			// end for.
-
-			result = myStandardLibraryFactory.createOclTuple(partNames,
-					partValues, tupleLiteralExp.getType());
-		}
-		// end else.
+		result = myStandardLibraryFactory.createOclTuple(partNames, partValues,
+				tupleLiteralExp.getType());
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -3564,6 +4053,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(tupleLiteralExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3587,6 +4087,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else;
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* TupleLiteralParts cannot be cached. */
 		OclAny result = doSwitch(tupleLiteralPart.getValue());
 
@@ -3595,9 +4103,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.popLogOffset();
 			LOGGER.debug("Interpreted TuplePart " + tupleLiteralPart.getName()
 					+ ". Result = " + result);
-
 		}
 		// no else;
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(tupleLiteralPart, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3619,6 +4137,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Cache is not efficient here. */
 		OclAny result = myStandardLibraryFactory.createOclType(typeLiteralExp
 				.getReferredType());
@@ -3629,6 +4155,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin
+					.getInterpreterRegistry()
+					.firePartialInterpretionResult(typeLiteralExp, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3651,6 +4187,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
+
 		/* Cache is not efficient here. */
 		OclAny result;
 		result = myStandardLibraryFactory.createOclUndefined(
@@ -3662,6 +4206,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ "Interpreted UndefinedLiteral. Result = " + result);
 		}
 		// no else.
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(undefinedLiteralExp, result,
+							guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3681,6 +4235,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		UUID guid = null;
+		/* Probably trace the entry into this method */
+		if (!isPreparationRun) {
+			guid = UUID.randomUUID();
+			increaseTracerTreeDepth(guid);
+		}
+		// no else
 
 		OclAny result;
 
@@ -3725,6 +4287,16 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpreted Variable "
 					+ variable.getName() + ". Result = " + result);
 		}
+
+		/* Probably trace the exit of this method. */
+		if (!isPreparationRun) {
+			decreaseTracerTreeDepth();
+
+			/* Propagate tracer information for partial interpretation */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(variable, result, guid);
+		}
+		// no else
 
 		return result;
 	}
@@ -3823,6 +4395,45 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * </p>
 	 */
 	protected void pushLogOffset() {
+
 		this.logOffset += ". ";
+	}
+
+	/**
+	 * <p>
+	 * Fires a notification to the observers that the tree depth has increased
+	 * </p>
+	 */
+	protected void increaseTracerTreeDepth(UUID guid) {
+
+		/* set the offset for the tree structure */
+		OclInterpreterPlugin.getInterpreterRegistry()
+				.fireInterpretationDepthIncreased(guid);
+	}
+
+	/**
+	 * <p>
+	 * Fires a notification to the observers that the tree depth has increased.
+	 * </p>
+	 */
+
+	protected void increaseTracerTreeDepth(UUID guid,
+			IModelInstanceElement modelInstanceElement) {
+
+		/* set the offset for the tree structure */
+		OclInterpreterPlugin.getInterpreterRegistry()
+				.fireInterpretationDepthIncreased(guid, modelInstanceElement);
+	}
+
+	/**
+	 * <p>
+	 * Fires a notification to the observers that the tree depth has decreased
+	 * </p>
+	 */
+	protected void decreaseTracerTreeDepth() {
+
+		/* set the offset for the tree structure */
+		OclInterpreterPlugin.getInterpreterRegistry()
+				.fireInterpretationDepthDecreased();
 	}
 }

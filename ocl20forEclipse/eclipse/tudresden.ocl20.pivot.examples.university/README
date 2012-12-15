@@ -1,13 +1,13 @@
-UNIVERSITY EXAMPLE PROVIDED WITH DRESDEN OCL2 FOR ECLIPSE
-=====================================================
+UNIVERSITY EXAMPLE PROVIDED WITH DRESDEN OCL
+============================================
 
-This plug-in contains the University example that is provided with Dresden OCL2
-for Eclipse. The University example provides two UML2 Model.
+This plug-in contains the University example that is provided with Dresden 
+OCL. The University example provides two UML2 Model.
 
-Further details how to import models and constraints into
-Dresden OCL2 for Eclipse can be found in the manual, available in the 'doc'
+Further details how to import models, model instances and constraints into
+Dresden OCL can be found in the manual, available in the 'doc'
 directory of your distribution or online at
-http://dresden-ocl.sourceforge.net/4eclipse_usage.html
+http://www.reuseware.org/index.php/DresdenOCL:Documentation
 
 
 Provided Model(s)

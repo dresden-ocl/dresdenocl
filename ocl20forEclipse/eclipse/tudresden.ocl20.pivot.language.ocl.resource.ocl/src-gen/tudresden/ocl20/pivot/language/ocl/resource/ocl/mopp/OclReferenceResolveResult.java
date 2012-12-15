@@ -19,6 +19,7 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	private java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> mappings;
 	private String errorMessage;
 	private boolean resolveFuzzy;
+	private java.util.Set<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> quickFixes;
 	
 	public OclReferenceResolveResult(boolean resolveFuzzy) {
 		super();
@@ -27,6 +28,20 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+	
+	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix> getQuickFixes() {
+		if (quickFixes == null) {
+			quickFixes = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+		}
+		return java.util.Collections.unmodifiableSet(quickFixes);
+	}
+	
+	public void addQuickFix(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix quickFix) {
+		if (quickFixes == null) {
+			quickFixes = new java.util.LinkedHashSet<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclQuickFix>();
+		}
+		quickFixes.add(quickFix);
 	}
 	
 	public java.util.Collection<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>> getMappings() {
@@ -58,7 +73,7 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	
 	public void addMapping(String identifier, ReferenceType target, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>();
+			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclElementMapping<ReferenceType>(identifier, target, warning));
 		errorMessage = null;
@@ -70,7 +85,7 @@ public class OclReferenceResolveResult<ReferenceType> implements tudresden.ocl20
 	
 	public void addMapping(String identifier, org.eclipse.emf.common.util.URI uri, String warning) {
 		if (mappings == null) {
-			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>();
+			mappings = new java.util.ArrayList<tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType>>(1);
 		}
 		mappings.add(new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclURIMapping<ReferenceType>(identifier, uri, warning));
 	}

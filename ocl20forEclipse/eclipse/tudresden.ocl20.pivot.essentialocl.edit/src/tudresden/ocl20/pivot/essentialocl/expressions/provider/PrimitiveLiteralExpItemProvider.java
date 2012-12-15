@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -46,7 +45,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.PrimitiveLiteralExp} object.
@@ -65,6 +63,7 @@ public class PrimitiveLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public PrimitiveLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -76,6 +75,7 @@ public class PrimitiveLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -91,6 +91,7 @@ public class PrimitiveLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((PrimitiveLiteralExp) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_PrimitiveLiteralExp_type") : //$NON-NLS-1$
 				getString("_UI_PrimitiveLiteralExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
@@ -105,6 +106,7 @@ public class PrimitiveLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -119,6 +121,7 @@ public class PrimitiveLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

@@ -47,8 +47,8 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 	 * The {@link Logger} for this class.
 	 * </p>
 	 */
-	private static final Logger LOGGER =
-			UML2MetamodelPlugin.getLogger(UML2ModelProvider.class);
+	private static final Logger LOGGER = UML2MetamodelPlugin
+			.getLogger(UML2ModelProvider.class);
 
 	/** The resourceSet. */
 	protected ResourceSet resourceSet;
@@ -92,10 +92,8 @@ public class UML2ModelProvider extends AbstractModelProvider implements
 		}
 		// no else.
 
-		result =
-				new UML2Model(getResourceSet().getResource(modelURI, false),
-						ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-								UML2MetamodelPlugin.ID));
+		result = new UML2Model(resource, ModelBusPlugin.getMetamodelRegistry()
+				.getMetamodel(UML2MetamodelPlugin.ID));
 
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {

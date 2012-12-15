@@ -40,23 +40,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Parameter Generic Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Parameter Generic Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter <em>Type Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter
+ * <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ParameterGenericTypeImpl extends GenericTypeImpl implements
@@ -69,8 +71,10 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 			.getLogger(ParameterGenericTypeImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getTypeParameter()
+	 * <em>Type Parameter</em>}' reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @see #getTypeParameter()
 	 * @generated
 	 * @ordered
@@ -79,18 +83,22 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ParameterGenericTypeImpl() {
+
 		super();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.PARAMETER_GENERIC_TYPE;
 	}
 
@@ -107,17 +115,21 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TypeParameter getTypeParameter() {
+
 		return typeParameter;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setTypeParameter(TypeParameter newTypeParameter) {
+
 		TypeParameter oldTypeParameter = typeParameter;
 		typeParameter = newTypeParameter;
 		if (eNotificationRequired())
@@ -179,16 +191,16 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 	}
 
 	/**
-	 * This method returns <code>true</code> because any type is conformant to
-	 * an unbound {@link TypeParameter}. The non-generic type of an element
-	 * referring to a type parameter simply is the root of the object hierarchy
-	 * (e.g. java.lang.Object or OclAny).
+	 * This method returns <code>true</code> because any type is conformant to an
+	 * unbound {@link TypeParameter}. The non-generic type of an element referring
+	 * to a type parameter simply is the root of the object hierarchy (e.g.
+	 * java.lang.Object or OclAny).
 	 * 
 	 * <p>
 	 * To see why, consider the following example: a generic operation
 	 * {@code <T> op(param:T) : T} can be called with any argument, no matter what
-	 * type. The type parameter <code>T</code> will consecutively be bound to
-	 * the type of the argument, determining the correct return type.
+	 * type. The type parameter <code>T</code> will consecutively be bound to the
+	 * type of the argument, determining the correct return type.
 	 * </p>
 	 * 
 	 * 
@@ -203,14 +215,12 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.GenericTypeImpl#clone()
 	 */
 	@Override
 	public ParameterGenericType clone() {
 
-		return initialize(PivotModelFactory.eINSTANCE
-				.createParameterGenericType());
+		return initialize(PivotModelFactory.eINSTANCE.createParameterGenericType());
 	}
 
 	/**
@@ -226,10 +236,12 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			return getTypeParameter();
@@ -239,10 +251,12 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			setTypeParameter((TypeParameter) newValue);
@@ -253,10 +267,12 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			setTypeParameter((TypeParameter) null);
@@ -267,10 +283,12 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.PARAMETER_GENERIC_TYPE__TYPE_PARAMETER:
 			return typeParameter != null;

@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 
 import tudresden.ocl20.pivot.essentialocl.EssentialOclPlugin;
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
@@ -272,7 +273,7 @@ public class JavaAdapterFactory {
 		classes = method.getParameterTypes();
 		genericTypes = method.getGenericParameterTypes();
 
-		result = new ArrayList<Parameter>();
+		result = new BasicEList<Parameter>();
 
 		for (int index = 0; index < classes.length; index++) {
 			result.add(this.createParameter(classes[index],
@@ -616,9 +617,7 @@ public class JavaAdapterFactory {
 	 */
 	public List<Type> getOwnedTypes(Namespace aNamespace) {
 
-		List<Type> result;
-
-		result = new ArrayList<Type>();
+		List<Type> result = new BasicEList<Type>();
 
 		/* Iterate through all adapted name spaces. */
 		for (Class<?> aClass : this.adaptedTypes.keySet()) {

@@ -32,16 +32,15 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.log4j.Logger;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.StringLiteralExp;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>String Literal Exp</b></em>'.
@@ -89,6 +88,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 * @generated
 	 */
 	protected StringLiteralExpImpl() {
+
 		super();
 	}
 
@@ -129,6 +129,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 * @generated
 	 */
 	public String getStringSymbol() {
+
 		return stringSymbol;
 	}
 
@@ -137,6 +138,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 * @generated
 	 */
 	public void setStringSymbol(String newStringSymbol) {
+
 		String oldStringSymbol = stringSymbol;
 		stringSymbol = newStringSymbol;
 		if (eNotificationRequired())
@@ -151,6 +153,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.STRING_LITERAL_EXP__STRING_SYMBOL:
 			return getStringSymbol();
@@ -164,6 +167,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.STRING_LITERAL_EXP__STRING_SYMBOL:
 			setStringSymbol((String) newValue);
@@ -178,6 +182,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.STRING_LITERAL_EXP__STRING_SYMBOL:
 			setStringSymbol(STRING_SYMBOL_EDEFAULT);
@@ -192,6 +197,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.STRING_LITERAL_EXP__STRING_SYMBOL:
 			return STRING_SYMBOL_EDEFAULT == null ? stringSymbol != null
@@ -206,6 +212,7 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.STRING_LITERAL_EXP;
 	}
 

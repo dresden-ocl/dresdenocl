@@ -63,12 +63,12 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 		IRegistryEventListener {
 
 	/** Logger for this class. */
-	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(MetamodelRegistry.class);
+	private static final Logger LOGGER = ModelBusPlugin
+			.getLogger(MetamodelRegistry.class);
 
 	/** The full identifier of the {@link IMetamodel}s' extension point. */
-	private static final String METAMODEL_EXTENSION_POINT_ID =
-			ModelBusPlugin.ID + '.' + IModelBusConstants.EXT_METAMODELS;
+	private static final String METAMODEL_EXTENSION_POINT_ID = ModelBusPlugin.ID
+			+ '.' + IModelBusConstants.EXT_METAMODELS;
 
 	/**
 	 * A helper class to read the {@link IMetamodel} configuration from the
@@ -93,11 +93,17 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 		// create a new reader and read in the configuration
 		metaModelReader = new MetamodelRegistryReader();
-		metaModelReader.read(this.getExtensionPoint(), this);
+		IExtensionPoint extensionPoint = this.getExtensionPoint();
 
-		/* Register this registry as a listener for plug-in events. */
-		Platform.getExtensionRegistry().addListener(this,
-				METAMODEL_EXTENSION_POINT_ID);
+		if (extensionPoint != null) {
+			metaModelReader.read(this.getExtensionPoint(), this);
+
+			/* Register this registry as a listener for plug-in events. */
+			Platform.getExtensionRegistry().addListener(this,
+					METAMODEL_EXTENSION_POINT_ID);
+		} else {
+			LOGGER.warn("Platform is not running. Metamodels must be registered manually.");
+		}
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("MetamodelRegistry() - exit"); //$NON-NLS-1$
@@ -107,6 +113,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
 	 * runtime.IExtension[])
@@ -132,6 +139,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
 	 * runtime.IExtensionPoint[])
@@ -143,6 +151,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#addMetamodel(tudresden
 	 * .ocl20.pivot.modelbus.IMetamodel)
@@ -156,7 +165,8 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 		/* Precondition check. */
 		if (metamodel == null) {
-			throw new IllegalArgumentException("The parameter 'metamodel' was null."); //$NON-NLS-1$
+			throw new IllegalArgumentException(
+					"The parameter 'metamodel' was null."); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -177,6 +187,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#dispose()
 	 */
 	public void dispose() {
@@ -194,6 +205,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#getMetamodel(java.lang
 	 * .String)
@@ -215,6 +227,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IMetamodelRegistry#getMetamodels()
 	 */
 	public IMetamodel[] getMetamodels() {
@@ -226,7 +239,8 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 		}
 
 		else {
-			result = metaModels.values().toArray(new IMetamodel[metaModels.size()]);
+			result = metaModels.values().toArray(
+					new IMetamodel[metaModels.size()]);
 		}
 
 		return result;
@@ -234,6 +248,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
 	 * .runtime.IExtension[])
@@ -254,8 +269,8 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 						.getConfigurationElements()) {
 
 					String metaModelID;
-					metaModelID =
-							this.getAttribute(IDescriptor.ATT_ID, configurationElement);
+					metaModelID = this.getAttribute(IDescriptor.ATT_ID,
+							configurationElement);
 
 					if (metaModelID != null) {
 						this.metaModels.remove(metaModelID);
@@ -276,6 +291,7 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
 	 * .runtime.IExtensionPoint[])
@@ -288,26 +304,26 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 	/**
 	 * <p>
 	 * Helper method that returns the value of an attribute of the given
-	 * {@link IConfigurationElement}. Throws an {@link InvalidDescriptorException}
-	 * if the attribute is empty and required.
+	 * {@link IConfigurationElement}. Throws an
+	 * {@link InvalidDescriptorException} if the attribute is empty and
+	 * required.
 	 * </p>
 	 * 
 	 * @param attributeName
-	 *          The name of the extension point attribute.
+	 *            The name of the extension point attribute.
 	 * @param configurationElement
-	 *          The {@link IllegalClassException} whose attribute shall be
-	 *          returned.
+	 *            The {@link IllegalClassException} whose attribute shall be
+	 *            returned.
 	 * 
 	 * @throws InvalidDescriptorException
-	 *           If the value of the attribute is invalid.
+	 *             If the value of the attribute is invalid.
 	 */
 	private String getAttribute(String attributeName,
 			IConfigurationElement configurationElement) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
-							+ ") - enter"); //$NON-NLS-1$
+			LOGGER.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
+					+ ") - enter"); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -332,18 +348,22 @@ public final class MetamodelRegistry implements IMetamodelRegistry,
 
 		IExtensionPoint result;
 
-		/* Get the point from the registry. */
-		result =
-				Platform.getExtensionRegistry().getExtensionPoint(
-						METAMODEL_EXTENSION_POINT_ID);
+		if (Platform.getExtensionRegistry() != null) {
+			/* Get the point from the registry. */
+			result = Platform.getExtensionRegistry().getExtensionPoint(
+					METAMODEL_EXTENSION_POINT_ID);
 
-		/* This should not happen unless the id changes. */
-		if (result == null) {
-			throw new IllegalStateException(
-					"The extension point for new metamodels could not be found under the id " //$NON-NLS-1$
-							+ METAMODEL_EXTENSION_POINT_ID);
+			/* This should not happen unless the id changes. */
+			if (result == null) {
+				throw new IllegalStateException(
+						"The extension point for new metamodels could not be found under the id " //$NON-NLS-1$
+								+ METAMODEL_EXTENSION_POINT_ID);
+			}
+			// no else.
 		}
-		// no else.
+
+		else
+			result = null;
 
 		return result;
 	}

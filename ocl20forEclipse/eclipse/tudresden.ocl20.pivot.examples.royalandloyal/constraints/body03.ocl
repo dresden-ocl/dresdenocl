@@ -1,3 +1,4 @@
+-- @model{../model/royalsandloyals.uml}
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
 -- Check static operation implementation.

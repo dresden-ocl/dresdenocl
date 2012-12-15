@@ -158,8 +158,8 @@ public class ModelInstancesView extends ViewPart implements
 		final IModel model = e.getAffectedModel();
 
 		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
-		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
-				new Runnable() {
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
+				.asyncExec(new Runnable() {
 
 					/*
 					 * (non-Javadoc)
@@ -187,8 +187,8 @@ public class ModelInstancesView extends ViewPart implements
 		final IModelInstance modelInstance = event.getAffectedModelInstance();
 
 		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
-		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
-				new Runnable() {
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
+				.asyncExec(new Runnable() {
 
 					/*
 					 * (non-Javadoc)
@@ -236,8 +236,8 @@ public class ModelInstancesView extends ViewPart implements
 		final IModel model = event.getAffectedModel();
 
 		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
-		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
-				new Runnable() {
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
+				.asyncExec(new Runnable() {
 
 					/*
 					 * (non-Javadoc)
@@ -258,8 +258,8 @@ public class ModelInstancesView extends ViewPart implements
 		final IModel model = event.getAffectedModel();
 
 		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
-		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
-				new Runnable() {
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
+				.asyncExec(new Runnable() {
 
 					/*
 					 * (non-Javadoc)
@@ -288,8 +288,8 @@ public class ModelInstancesView extends ViewPart implements
 		final IModelInstance modelInstance = event.getAffectedModelInstance();
 
 		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
-		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
-				new Runnable() {
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
+				.asyncExec(new Runnable() {
 
 					/*
 					 * (non-Javadoc)
@@ -314,8 +314,8 @@ public class ModelInstancesView extends ViewPart implements
 		final IModelInstance modelInstance = event.getAffectedModelInstance();
 
 		/* Execute in a GUI thread to avoid IllegalThreadExceptions. */
-		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay().asyncExec(
-				new Runnable() {
+		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
+				.asyncExec(new Runnable() {
 
 					/*
 					 * (non-Javadoc)
@@ -337,7 +337,7 @@ public class ModelInstancesView extends ViewPart implements
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 
 		this.myModelObjectFilter.clearFilter();
-		
+
 		/*
 		 * TODO Claas: Disabled filter because it is more confusing then helpful
 		 * here.
@@ -414,11 +414,8 @@ public class ModelInstancesView extends ViewPart implements
 
 		/* Get the action or initialize it. */
 		if (aModelsActions != null) {
-			result = aModelsActions.get(modelInstance.getModel());
-		}
-		// no else.
-
-		else {
+			result = aModelsActions.get(modelInstance);
+		} else {
 			aModelsActions = new HashMap<IModelInstance, ModelInstanceSelectionAction>();
 		}
 
@@ -525,8 +522,33 @@ public class ModelInstancesView extends ViewPart implements
 								ModelBusPlugin.getModelRegistry()
 										.getActiveModel()) != null);
 
-		this.getViewSite().getActionBars().getToolBarManager().add(
-				myActionRemoveModelInstance);
+		this.getViewSite().getActionBars().getToolBarManager()
+				.add(myActionRemoveModelInstance);
+
+		/*
+		 * Update the currently active model instance.
+		 */
+		updateActiveModelInstance();
+	}
+
+	/**
+	 * <p>
+	 * If there is an active {@link IModelInstance} the viewer will be updated
+	 * to show it properly.
+	 * </p>
+	 */
+	private void updateActiveModelInstance() {
+		IModel activeModel;
+		IModelInstance activeModelInstance;
+
+		activeModel = ModelBusPlugin.getModelRegistry().getActiveModel();
+
+		activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
+				.getActiveModelInstance(activeModel);
+
+		if (activeModelInstance != null) {
+			this.setActiveModelInstance(activeModelInstance);
+		}
 	}
 
 	/**
@@ -596,14 +618,12 @@ public class ModelInstancesView extends ViewPart implements
 
 		/* Check if the model has actions at all. */
 		if (modelsActions != null) {
-			result = modelsActions.get(modelInstance.getModel());
-
 			result = modelsActions.remove(modelInstance);
 
 			if (result != null) {
 
-				this.myModelInstanceSelectionActions.put(modelInstance
-						.getModel(), modelsActions);
+				this.myModelInstanceSelectionActions.put(
+						modelInstance.getModel(), modelsActions);
 
 				if (ModelBusPlugin.getModelRegistry().getActiveModel() == modelInstance
 						.getModel()) {

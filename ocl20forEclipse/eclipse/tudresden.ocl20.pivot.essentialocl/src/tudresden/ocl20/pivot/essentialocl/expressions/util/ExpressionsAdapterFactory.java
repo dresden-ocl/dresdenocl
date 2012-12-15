@@ -99,6 +99,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public ExpressionsAdapterFactory() {
+
 		if (modelPackage == null) {
 			modelPackage = ExpressionsPackageImpl.eINSTANCE;
 		}
@@ -114,6 +115,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
+
 		if (object == modelPackage) {
 			return true;
 		}
@@ -129,182 +131,219 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ExpressionsSwitch<Adapter> modelSwitch = new ExpressionsSwitch<Adapter>() {
-		@Override
-		public Adapter caseVariableExp(VariableExp object) {
-			return createVariableExpAdapter();
-		}
+	protected ExpressionsSwitch<Adapter> modelSwitch =
+			new ExpressionsSwitch<Adapter>() {
 
-		@Override
-		public Adapter caseVariable(Variable object) {
-			return createVariableAdapter();
-		}
+				@Override
+				public Adapter caseVariableExp(VariableExp object) {
 
-		@Override
-		public Adapter caseUnlimitedNaturalExp(UnlimitedNaturalExp object) {
-			return createUnlimitedNaturalExpAdapter();
-		}
+					return createVariableExpAdapter();
+				}
 
-		@Override
-		public Adapter caseTypeLiteralExp(TypeLiteralExp object) {
-			return createTypeLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseVariable(Variable object) {
 
-		@Override
-		public Adapter caseTupleLiteralPart(TupleLiteralPart object) {
-			return createTupleLiteralPartAdapter();
-		}
+					return createVariableAdapter();
+				}
 
-		@Override
-		public Adapter caseTupleLiteralExp(TupleLiteralExp object) {
-			return createTupleLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseUnlimitedNaturalExp(UnlimitedNaturalExp object) {
 
-		@Override
-		public Adapter caseStringLiteralExp(StringLiteralExp object) {
-			return createStringLiteralExpAdapter();
-		}
+					return createUnlimitedNaturalExpAdapter();
+				}
 
-		@Override
-		public Adapter caseRealLiteralExp(RealLiteralExp object) {
-			return createRealLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseTypeLiteralExp(TypeLiteralExp object) {
 
-		@Override
-		public Adapter casePropertyCallExp(PropertyCallExp object) {
-			return createPropertyCallExpAdapter();
-		}
+					return createTypeLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter casePrimitiveLiteralExp(PrimitiveLiteralExp object) {
-			return createPrimitiveLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseTupleLiteralPart(TupleLiteralPart object) {
 
-		@Override
-		public Adapter caseOperationCallExp(OperationCallExp object) {
-			return createOperationCallExpAdapter();
-		}
+					return createTupleLiteralPartAdapter();
+				}
 
-		@Override
-		public Adapter caseOclExpression(OclExpression object) {
-			return createOclExpressionAdapter();
-		}
+				@Override
+				public Adapter caseTupleLiteralExp(TupleLiteralExp object) {
 
-		@Override
-		public Adapter caseNumericLiteralExp(NumericLiteralExp object) {
-			return createNumericLiteralExpAdapter();
-		}
+					return createTupleLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseUndefinedLiteralExp(UndefinedLiteralExp object) {
-			return createUndefinedLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseStringLiteralExp(StringLiteralExp object) {
 
-		@Override
-		public Adapter caseLoopExp(LoopExp object) {
-			return createLoopExpAdapter();
-		}
+					return createStringLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseLiteralExp(LiteralExp object) {
-			return createLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseRealLiteralExp(RealLiteralExp object) {
 
-		@Override
-		public Adapter caseLetExp(LetExp object) {
-			return createLetExpAdapter();
-		}
+					return createRealLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseIteratorExp(IteratorExp object) {
-			return createIteratorExpAdapter();
-		}
+				@Override
+				public Adapter casePropertyCallExp(PropertyCallExp object) {
 
-		@Override
-		public Adapter caseIterateExp(IterateExp object) {
-			return createIterateExpAdapter();
-		}
+					return createPropertyCallExpAdapter();
+				}
 
-		@Override
-		public Adapter caseInvalidLiteralExp(InvalidLiteralExp object) {
-			return createInvalidLiteralExpAdapter();
-		}
+				@Override
+				public Adapter casePrimitiveLiteralExp(PrimitiveLiteralExp object) {
 
-		@Override
-		public Adapter caseIntegerLiteralExp(IntegerLiteralExp object) {
-			return createIntegerLiteralExpAdapter();
-		}
+					return createPrimitiveLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseIfExp(IfExp object) {
-			return createIfExpAdapter();
-		}
+				@Override
+				public Adapter caseOperationCallExp(OperationCallExp object) {
 
-		@Override
-		public Adapter caseFeatureCallExp(FeatureCallExp object) {
-			return createFeatureCallExpAdapter();
-		}
+					return createOperationCallExpAdapter();
+				}
 
-		@Override
-		public Adapter caseBooleanLiteralExp(BooleanLiteralExp object) {
-			return createBooleanLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseOclExpression(OclExpression object) {
 
-		@Override
-		public Adapter caseCallExp(CallExp object) {
-			return createCallExpAdapter();
-		}
+					return createOclExpressionAdapter();
+				}
 
-		@Override
-		public Adapter caseCollectionItem(CollectionItem object) {
-			return createCollectionItemAdapter();
-		}
+				@Override
+				public Adapter caseNumericLiteralExp(NumericLiteralExp object) {
 
-		@Override
-		public Adapter caseCollectionLiteralExp(CollectionLiteralExp object) {
-			return createCollectionLiteralExpAdapter();
-		}
+					return createNumericLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseCollectionLiteralPart(CollectionLiteralPart object) {
-			return createCollectionLiteralPartAdapter();
-		}
+				@Override
+				public Adapter caseUndefinedLiteralExp(UndefinedLiteralExp object) {
 
-		@Override
-		public Adapter caseCollectionRange(CollectionRange object) {
-			return createCollectionRangeAdapter();
-		}
+					return createUndefinedLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseEnumLiteralExp(EnumLiteralExp object) {
-			return createEnumLiteralExpAdapter();
-		}
+				@Override
+				public Adapter caseLoopExp(LoopExp object) {
 
-		@Override
-		public Adapter caseExpressionInOcl(ExpressionInOcl object) {
-			return createExpressionInOclAdapter();
-		}
+					return createLoopExpAdapter();
+				}
 
-		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
+				@Override
+				public Adapter caseLiteralExp(LiteralExp object) {
 
-		@Override
-		public Adapter caseTypedElement(TypedElement object) {
-			return createTypedElementAdapter();
-		}
+					return createLiteralExpAdapter();
+				}
 
-		@Override
-		public Adapter caseExpression(Expression object) {
-			return createExpressionAdapter();
-		}
+				@Override
+				public Adapter caseLetExp(LetExp object) {
 
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+					return createLetExpAdapter();
+				}
+
+				@Override
+				public Adapter caseIteratorExp(IteratorExp object) {
+
+					return createIteratorExpAdapter();
+				}
+
+				@Override
+				public Adapter caseIterateExp(IterateExp object) {
+
+					return createIterateExpAdapter();
+				}
+
+				@Override
+				public Adapter caseInvalidLiteralExp(InvalidLiteralExp object) {
+
+					return createInvalidLiteralExpAdapter();
+				}
+
+				@Override
+				public Adapter caseIntegerLiteralExp(IntegerLiteralExp object) {
+
+					return createIntegerLiteralExpAdapter();
+				}
+
+				@Override
+				public Adapter caseIfExp(IfExp object) {
+
+					return createIfExpAdapter();
+				}
+
+				@Override
+				public Adapter caseFeatureCallExp(FeatureCallExp object) {
+
+					return createFeatureCallExpAdapter();
+				}
+
+				@Override
+				public Adapter caseBooleanLiteralExp(BooleanLiteralExp object) {
+
+					return createBooleanLiteralExpAdapter();
+				}
+
+				@Override
+				public Adapter caseCallExp(CallExp object) {
+
+					return createCallExpAdapter();
+				}
+
+				@Override
+				public Adapter caseCollectionItem(CollectionItem object) {
+
+					return createCollectionItemAdapter();
+				}
+
+				@Override
+				public Adapter caseCollectionLiteralExp(CollectionLiteralExp object) {
+
+					return createCollectionLiteralExpAdapter();
+				}
+
+				@Override
+				public Adapter caseCollectionLiteralPart(CollectionLiteralPart object) {
+
+					return createCollectionLiteralPartAdapter();
+				}
+
+				@Override
+				public Adapter caseCollectionRange(CollectionRange object) {
+
+					return createCollectionRangeAdapter();
+				}
+
+				@Override
+				public Adapter caseEnumLiteralExp(EnumLiteralExp object) {
+
+					return createEnumLiteralExpAdapter();
+				}
+
+				@Override
+				public Adapter caseExpressionInOcl(ExpressionInOcl object) {
+
+					return createExpressionInOclAdapter();
+				}
+
+				@Override
+				public Adapter caseNamedElement(NamedElement object) {
+
+					return createNamedElementAdapter();
+				}
+
+				@Override
+				public Adapter caseTypedElement(TypedElement object) {
+
+					return createTypedElementAdapter();
+				}
+
+				@Override
+				public Adapter caseExpression(Expression object) {
+
+					return createExpressionAdapter();
+				}
+
+				@Override
+				public Adapter defaultCase(EObject object) {
+
+					return createEObjectAdapter();
+				}
+			};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -316,6 +355,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
+
 		return modelSwitch.doSwitch((EObject) target);
 	}
 
@@ -330,6 +370,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableExpAdapter() {
+
 		return null;
 	}
 
@@ -344,6 +385,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableAdapter() {
+
 		return null;
 	}
 
@@ -358,6 +400,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUnlimitedNaturalExpAdapter() {
+
 		return null;
 	}
 
@@ -372,6 +415,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -386,6 +430,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTupleLiteralPartAdapter() {
+
 		return null;
 	}
 
@@ -400,6 +445,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTupleLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -414,6 +460,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStringLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -428,6 +475,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRealLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -442,6 +490,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPropertyCallExpAdapter() {
+
 		return null;
 	}
 
@@ -456,6 +505,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPrimitiveLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -470,6 +520,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationCallExpAdapter() {
+
 		return null;
 	}
 
@@ -484,6 +535,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOclExpressionAdapter() {
+
 		return null;
 	}
 
@@ -498,6 +550,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNumericLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -512,6 +565,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUndefinedLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -526,6 +580,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLoopExpAdapter() {
+
 		return null;
 	}
 
@@ -540,6 +595,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -554,6 +610,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLetExpAdapter() {
+
 		return null;
 	}
 
@@ -568,6 +625,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorExpAdapter() {
+
 		return null;
 	}
 
@@ -582,6 +640,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIterateExpAdapter() {
+
 		return null;
 	}
 
@@ -596,6 +655,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInvalidLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -610,6 +670,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIntegerLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -624,6 +685,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIfExpAdapter() {
+
 		return null;
 	}
 
@@ -638,6 +700,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFeatureCallExpAdapter() {
+
 		return null;
 	}
 
@@ -652,6 +715,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBooleanLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -666,6 +730,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallExpAdapter() {
+
 		return null;
 	}
 
@@ -680,6 +745,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionItemAdapter() {
+
 		return null;
 	}
 
@@ -694,6 +760,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -708,6 +775,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionLiteralPartAdapter() {
+
 		return null;
 	}
 
@@ -722,6 +790,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCollectionRangeAdapter() {
+
 		return null;
 	}
 
@@ -736,6 +805,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnumLiteralExpAdapter() {
+
 		return null;
 	}
 
@@ -750,6 +820,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionInOclAdapter() {
+
 		return null;
 	}
 
@@ -764,6 +835,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
+
 		return null;
 	}
 
@@ -778,6 +850,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+
 		return null;
 	}
 
@@ -792,6 +865,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
+
 		return null;
 	}
 
@@ -804,6 +878,7 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEObjectAdapter() {
+
 		return null;
 	}
 

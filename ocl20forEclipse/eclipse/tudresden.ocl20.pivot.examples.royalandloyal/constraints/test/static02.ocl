@@ -1,5 +1,5 @@
 package tudresden::ocl20::pivot::examples::royalsandloyals
-
+-- @model{../../model/royalsandloyals.uml}
 -- Check static property calls.
 context Transaction
 inv: date.isBefore(Date::now)

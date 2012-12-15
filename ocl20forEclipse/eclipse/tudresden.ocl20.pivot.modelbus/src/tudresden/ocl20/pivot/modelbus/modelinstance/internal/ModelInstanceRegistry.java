@@ -30,6 +30,7 @@
  */
 package tudresden.ocl20.pivot.modelbus.modelinstance.internal;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -57,8 +58,8 @@ import tudresden.ocl20.pivot.modelinstance.event.ModelInstanceRegistryEvent;
 public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/** {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(ModelInstanceRegistry.class);
+	private static final Logger LOGGER = ModelBusPlugin
+			.getLogger(ModelInstanceRegistry.class);
 
 	/** The {@link IModelInstance}s mapped to the corresponding {@link IModel}. */
 	private Map<IModel, Set<IModelInstance>> modelInstances;
@@ -71,8 +72,9 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#activeModelChanged
+	 * 
+	 * @see tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#
+	 * activeModelChanged
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
@@ -82,6 +84,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
 	 * addModelInstance
 	 * (tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
@@ -89,8 +92,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	public void addModelInstance(IModelInstance modelInstance) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("addModelInstance(modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER.debug("addModelInstance(modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
@@ -118,7 +120,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		similarModelInstance = this.getSimilarModelInstance(modelInstance);
 
 		if (similarModelInstance != null) {
-			LOGGER.warn("ModelInstance '" + modelInstance.getDisplayName()
+			LOGGER.warn("ModelInstance '"
+					+ modelInstance.getDisplayName()
 					+ "' has already been loaded. The ModelInstance will be replaced.");
 			instances.remove(similarModelInstance);
 		}
@@ -145,6 +148,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#
 	 * addModelInstanceRegistryListener
 	 * (tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
@@ -157,6 +161,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#dispose()
 	 */
 	public void dispose() {
@@ -176,6 +181,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getActiveModelInstance
 	 * (tudresden.ocl20.pivot.modelbus.IModel)
@@ -197,6 +203,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#getModelInstances
 	 * (tudresden.ocl20.pivot.modelbus.IModel)
@@ -218,7 +225,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 			}
 
 			else {
-				result = instances.toArray(new IModelInstance[instances.size()]);
+				result = instances
+						.toArray(new IModelInstance[instances.size()]);
 			}
 		}
 
@@ -227,6 +235,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelAdded(
 	 * tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
@@ -238,6 +247,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.event.IModelRegistryListener#modelRemoved
 	 * (tudresden.ocl20.pivot.modelbus.event.ModelRegistryEvent)
@@ -247,8 +257,10 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		if (this.modelInstances != null
 				&& this.modelInstances.containsKey(event.getAffectedModel())) {
 
-			for (IModelInstance modelInstance : this.modelInstances.get(event
-					.getAffectedModel())) {
+			ArrayList<IModelInstance> instancesToRemove = new ArrayList<IModelInstance>(
+					this.modelInstances.get(event.getAffectedModel()));
+
+			for (IModelInstance modelInstance : instancesToRemove) {
 
 				this.removeModelInstance(modelInstance);
 			}
@@ -259,6 +271,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
 	 * removeModelInstance
 	 * (tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
@@ -276,7 +289,8 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 		if (this.modelInstances != null) {
 
 			Set<IModelInstance> modelInstancesOfModel;
-			modelInstancesOfModel = this.modelInstances.get(modelInstance.getModel());
+			modelInstancesOfModel = this.modelInstances.get(modelInstance
+					.getModel());
 
 			if (modelInstancesOfModel != null) {
 
@@ -296,16 +310,18 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 					this.fireModelInstanceRemoved(modelInstance);
 
 					/* Probably add the active IModelInstances as well. */
-					if (modelInstance.equals(this.getActiveModelInstance(modelInstance
-							.getModel()))) {
+					if (modelInstance.equals(this
+							.getActiveModelInstance(modelInstance.getModel()))) {
 
 						if (modelInstancesOfModel.size() == 1) {
-							this.setActiveModelInstance(modelInstance.getModel(),
+							this.setActiveModelInstance(
+									modelInstance.getModel(),
 									modelInstancesOfModel.iterator().next());
 						}
 
 						else {
-							this.setActiveModelInstance(modelInstance.getModel(), null);
+							this.setActiveModelInstance(
+									modelInstance.getModel(), null);
 						}
 						// end else.
 					}
@@ -330,6 +346,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
 	 * removeModelInstance(java.lang.String)
 	 */
@@ -380,6 +397,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceRegistry#
 	 * removeModelInstanceRegistryListener
 	 * (tudresden.ocl20.pivot.modelbus.event.IModelInstanceRegistryListener)
@@ -395,21 +413,26 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.modelinstance.IModelInstanceRegistry#
 	 * setActiveModelInstance(tudresden.ocl20.pivot.modelbus.model.IModel,
 	 * tudresden.ocl20.pivot.modelbus.modelinstance.IModelInstance)
 	 */
-	public void setActiveModelInstance(IModel model, IModelInstance modelInstance) {
+	public void setActiveModelInstance(IModel model,
+			IModelInstance modelInstance) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("setActiveModelInstance(model = " + model + ", modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER.debug("setActiveModelInstance(model = " + model + ", modelInstance = " + modelInstance + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
-		/* ModelInstance parameter can be null to reset the active model instance. */
+		/*
+		 * ModelInstance parameter can be null to reset the active model
+		 * instance.
+		 */
 		if (model == null) {
-			throw new IllegalArgumentException("Parameter model must not be null.");
+			throw new IllegalArgumentException(
+					"Parameter model must not be null.");
 		}
 
 		if (this.modelInstances == null) {
@@ -472,7 +495,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The new active {@link IModelInstance}.
+	 *            The new active {@link IModelInstance}.
 	 */
 	private void fireActiveModelInstanceChanged(IModelInstance modelInstance) {
 
@@ -506,7 +529,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} that has been added.
+	 *            The {@link IModelInstance} that has been added.
 	 */
 	private void fireModelInstanceAdded(IModelInstance modelInstance) {
 
@@ -539,7 +562,7 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} that has been removed.
+	 *            The {@link IModelInstance} that has been removed.
 	 */
 	private void fireModelInstanceRemoved(IModelInstance modelInstance) {
 
@@ -590,10 +613,10 @@ public class ModelInstanceRegistry implements IModelInstanceRegistry {
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance}.
-	 * @return A found {@link IModelInstance} if the given {@link IModelInstance}
-	 *         or an {@link IModelInstance} with the same display name is already
-	 *         registered. Else <code>null</code>.
+	 *            The {@link IModelInstance}.
+	 * @return A found {@link IModelInstance} if the given
+	 *         {@link IModelInstance} or an {@link IModelInstance} with the same
+	 *         display name is already registered. Else <code>null</code>.
 	 */
 	private IModelInstance getSimilarModelInstance(IModelInstance modelInstance) {
 

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dresden OCL2 for Eclipse Facade
 Bundle-SymbolicName: tudresden.ocl20.pivot.facade
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.facade.Activator
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
@@ -23,7 +23,8 @@ Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.tools.template,
  tudresden.ocl20.pivot.tools.transformation,
  tudresden.ocl20.pivot.modelinstancetype.xml,
- tudresden.ocl20.pivot.language.ocl.resource.ocl
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+ tudresden.ocl20.pivot.language.ocl.resource.ocl,
+ org.dresdenocl.metrics
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: tudresden.ocl20.pivot.facade

@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests for the Pain example
+Bundle-SymbolicName: tudresden.ocl20.pivot.examples.pain.tests
+Bundle-Version: 3.2.0.qualifier
+Fragment-Host: tudresden.ocl20.pivot.examples.pain;bundle-version="3.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: tudresden.ocl20.pivot.examples.pain.test;uses:="org.dresdenocl.testsuite._abstract,tudresden.ocl20.pivot.interpreter"
+Require-Bundle: org.dresdenocl.testsuite.abstract;bundle-version="3.1.0"

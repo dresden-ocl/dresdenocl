@@ -33,17 +33,17 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Type Parameter</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Type Parameter</b></em>'. <!-- end-user-doc -->
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement <em>Generic Element</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+ * <em>Generic Element</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeParameter()
  * @model
  * @generated
@@ -51,28 +51,35 @@ package tudresden.ocl20.pivot.pivotmodel;
 public interface TypeParameter extends NamedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Generic Element</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter <em>Owned Type Parameter</em>}'.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generic Element</b></em>' container
+	 * reference. It is bidirectional and its opposite is '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
+	 * <em>Owned Type Parameter</em>}'. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Generic Element</em>' container reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Generic Element</em>' container reference isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Generic Element</em>' container reference.
 	 * @see #setGenericElement(GenericElement)
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypeParameter_GenericElement()
 	 * @see tudresden.ocl20.pivot.pivotmodel.GenericElement#getOwnedTypeParameter
-	 * @model opposite="ownedTypeParameter" resolveProxies="false" transient="false"
+	 * @model opposite="ownedTypeParameter" resolveProxies="false"
+	 *        transient="false"
 	 * @generated
 	 */
 	GenericElement getGenericElement();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement <em>Generic Element</em>}' container reference.
-	 * <!-- begin-user-doc -->
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter#getGenericElement
+	 * <em>Generic Element</em>}' container reference. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generic Element</em>' container reference.
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Generic Element</em>' container
+	 *          reference.
 	 * @see #getGenericElement()
 	 * @generated
 	 */

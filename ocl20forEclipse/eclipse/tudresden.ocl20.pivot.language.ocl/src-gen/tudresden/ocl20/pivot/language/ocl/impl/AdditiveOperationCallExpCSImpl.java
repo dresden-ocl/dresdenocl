@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public class AdditiveOperationCallExpCSImpl extends OperationCallBinaryExpCSImpl implements AdditiveOperationCallExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected AdditiveOperationCallExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.ADDITIVE_OPERATION_CALL_EXP_CS;
-	}
+    return OclPackage.Literals.ADDITIVE_OPERATION_CALL_EXP_CS;
+  }
 
 } //AdditiveOperationCallExpCSImpl

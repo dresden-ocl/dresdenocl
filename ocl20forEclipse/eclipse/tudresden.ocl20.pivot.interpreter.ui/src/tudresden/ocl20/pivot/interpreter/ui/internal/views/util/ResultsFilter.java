@@ -71,7 +71,8 @@ public class ResultsFilter extends ViewerFilter {
 			result = true;
 
 			/* Check if the element is contained in the filtered model objects. */
-			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements().size() > 0) {
+			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements()
+					.size() > 0) {
 
 				if (aRow.length >= ResultsContentProvider.MODELOBJECT) {
 
@@ -80,7 +81,10 @@ public class ResultsFilter extends ViewerFilter {
 						modelObject =
 								(IModelInstanceElement) aRow[ResultsContentProvider.MODELOBJECT];
 
-						result &= this.myInterpreterView.getCurrentlySelectedModelInstanceElements().contains(modelObject);
+						result &=
+								this.myInterpreterView
+										.getCurrentlySelectedModelInstanceElements().contains(
+												modelObject);
 					}
 					else {
 						result = false;
@@ -93,8 +97,11 @@ public class ResultsFilter extends ViewerFilter {
 			}
 			// no else.
 
-			/* Check if the element is contained in the filtered constraint objects. */
-			if (result && this.myInterpreterView.getCurrentlySelectedConstraints().size() > 0) {
+			/*
+			 * Check if the element is contained in the filtered constraint objects.
+			 */
+			if (result
+					&& this.myInterpreterView.getCurrentlySelectedConstraints().size() > 0) {
 
 				if (aRow.length >= ResultsContentProvider.CONSTRAINT) {
 
@@ -102,7 +109,9 @@ public class ResultsFilter extends ViewerFilter {
 						Constraint constraint;
 						constraint = (Constraint) aRow[ResultsContentProvider.CONSTRAINT];
 
-						result &= this.myInterpreterView.getCurrentlySelectedConstraints().contains(constraint);
+						result &=
+								this.myInterpreterView.getCurrentlySelectedConstraints()
+										.contains(constraint);
 					}
 					else {
 						result = false;

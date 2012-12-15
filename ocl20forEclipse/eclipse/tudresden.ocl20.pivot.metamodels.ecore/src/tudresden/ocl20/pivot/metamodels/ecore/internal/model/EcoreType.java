@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -65,13 +66,22 @@ public class EcoreType extends AbstractType implements Type {
 
 	/**
 	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
+	
+	/**
+	 * <p>
 	 * Creates a new {@link EcoreType} instance.
 	 * </p>
 	 * 
 	 * @param eClass
 	 *          The adapted {@link EClass}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreType(EClass eClass) {
+	public EcoreType(EClass eClass,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -87,7 +97,7 @@ public class EcoreType extends AbstractType implements Type {
 
 		/* Initialize adapted EClass. */
 		this.eClass = eClass;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -116,7 +126,7 @@ public class EcoreType extends AbstractType implements Type {
 	@Override
 	public Namespace getNamespace() {
 
-		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eClass
+		return factory.createNamespace(this.eClass
 				.getEPackage());
 	}
 
@@ -130,10 +140,10 @@ public class EcoreType extends AbstractType implements Type {
 
 		List<Operation> result;
 
-		result = new ArrayList<Operation>();
+		result = new BasicEList<Operation>();
 
 		for (EOperation eOperation : this.eClass.getEOperations()) {
-			result.add(EcoreAdapterFactory.INSTANCE.createOperation(eOperation));
+			result.add(factory.createOperation(eOperation));
 		}
 
 		return result;
@@ -153,7 +163,7 @@ public class EcoreType extends AbstractType implements Type {
 
 		for (EStructuralFeature eStructuralFeature : this.eClass
 				.getEStructuralFeatures()) {
-			result.add(EcoreAdapterFactory.INSTANCE
+			result.add(factory
 					.createProperty(eStructuralFeature));
 		}
 
@@ -172,9 +182,20 @@ public class EcoreType extends AbstractType implements Type {
 		result = new ArrayList<Type>();
 
 		for (EClass eSuperType : this.eClass.getESuperTypes()) {
-			result.add(EcoreAdapterFactory.INSTANCE.createType(eSuperType));
+			result.add(factory.createType(eSuperType));
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#getIDProperties()
+	 */
+	@Override
+	public List<Property> getIDProperties() {
+		if (eClass.getEIDAttribute() == null) return super.getIDProperties();
+		List<Property> props = new ArrayList<Property>();
+		props.add(factory.createProperty(eClass.getEIDAttribute()));
+		return props;
 	}
 }

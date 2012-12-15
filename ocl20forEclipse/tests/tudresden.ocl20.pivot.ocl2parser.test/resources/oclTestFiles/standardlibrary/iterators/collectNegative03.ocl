@@ -1,0 +1,10 @@
+package package1::package2
+
+-- Should fail. For collect only one iterator variable is allowed.
+context Type1
+def: testCollectNegative03 =
+Sequence { -2, -1, 0, 1, 2 } 
+       -> collect(number1 : Integer, number2 : Integer | number1 = number2) 
+       -> size() > 0
+
+endpackage

@@ -119,6 +119,24 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 		this.adaptedNode = node;
 		this.modelInstanceFactory = factory;
 
+		StringBuffer nameBuffer = new StringBuffer();
+		if (this.adaptedNode != null) {
+			if (this.adaptedNode.getNodeName() != null) {
+				nameBuffer.append(this.adaptedNode.getNodeName());
+				nameBuffer.append(": ");
+			}
+			// no else.
+			if (this.adaptedNode.getNodeValue() != null)
+				nameBuffer.append(this.adaptedNode.getNodeValue());
+			else {
+				nameBuffer.append("TextContent[");
+				nameBuffer.append(this.adaptedNode.getTextContent().trim());
+				nameBuffer.append("]");
+			}
+		}
+		// no else.
+		this.myName = nameBuffer.toString();
+
 		/* Probably debug the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -157,8 +175,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 
 		/* If the type can be casted in the model, cast it. */
 		if (this.getOriginalType().conformsTo(type)) {
-			result = new XmlModelInstanceObject(this.adaptedNode, type, this
-					.getOriginalType(), this.modelInstanceFactory);
+			result = new XmlModelInstanceObject(this.adaptedNode, type,
+					this.getOriginalType(), this.modelInstanceFactory);
 		}
 		// no else.
 
@@ -190,8 +208,8 @@ public class XmlModelInstanceObject extends AbstractModelInstanceObject
 		Node copiedNode;
 		copiedNode = this.adaptedNode.cloneNode(true);
 
-		result = new XmlModelInstanceObject(copiedNode, this.myType, this
-				.getOriginalType(), this.modelInstanceFactory);
+		result = new XmlModelInstanceObject(copiedNode, this.myType,
+				this.getOriginalType(), this.modelInstanceFactory);
 
 		return result;
 	}

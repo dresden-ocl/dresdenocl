@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OperationCallExpCS;
  */
 public abstract class OperationCallExpCSImpl extends FeatureCallExpCSImpl implements OperationCallExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OperationCallExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.OPERATION_CALL_EXP_CS;
-	}
+    return OclPackage.Literals.OPERATION_CALL_EXP_CS;
+  }
 
 } //OperationCallExpCSImpl

@@ -32,10 +32,10 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 
@@ -61,7 +61,14 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 
 	/** The adapted {@link EOperation}. */
 	private EOperation eOperation;
-
+	
+	/**
+	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
+	
 	/**
 	 * <p>
 	 * Creates a new {@link EcoreOperation}.
@@ -69,8 +76,10 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	 * 
 	 * @param eOperation
 	 *            The adapted {@link EOperation}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreOperation(EOperation eOperation) {
+	public EcoreOperation(EOperation eOperation,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -86,7 +95,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 
 		/* Initialize adapted EOperation. */
 		this.eOperation = eOperation;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -109,7 +118,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 		Type result;
 
 		Type elementType;
-		elementType = EcoreAdapterFactory.INSTANCE.createType(eOperation
+		elementType = factory.createType(eOperation
 				.getEType());
 
 		/* Probably put the type into a collection. */
@@ -176,14 +185,14 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 
 		List<Parameter> result;
 
-		result = new ArrayList<Parameter>();
+		result = new BasicEList<Parameter>();
 
 		for (EParameter parameter : this.eOperation.getEParameters()) {
-			result.add(EcoreAdapterFactory.INSTANCE.createParameter(parameter));
+			result.add(factory.createParameter(parameter));
 		}
 
 		/* Add the return parameter. */
-		result.add(EcoreAdapterFactory.INSTANCE
+		result.add(factory
 				.createReturnParameter(this.eOperation));
 
 		return result;
@@ -198,7 +207,7 @@ public class EcoreOperation extends AbstractOperation implements Operation {
 	@Override
 	public Type getOwningType() {
 
-		return EcoreAdapterFactory.INSTANCE.createType(this.eOperation
+		return factory.createType(this.eOperation
 				.getEContainingClass());
 	}
 }

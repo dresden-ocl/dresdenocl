@@ -6,21 +6,10 @@
  */
 package tudresden.ocl20.pivot.language.ocl.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.OperationCallWithImlicitSourceExpCS;
-import tudresden.ocl20.pivot.pivotmodel.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,22 +22,22 @@ import tudresden.ocl20.pivot.pivotmodel.Operation;
  */
 public class OperationCallWithImlicitSourceExpCSImpl extends OperationCallOnSelfExpCSImpl implements OperationCallWithImlicitSourceExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected OperationCallWithImlicitSourceExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS;
-	}
+    return OclPackage.Literals.OPERATION_CALL_WITH_IMLICIT_SOURCE_EXP_CS;
+  }
 
 } //OperationCallWithImlicitSourceExpCSImpl

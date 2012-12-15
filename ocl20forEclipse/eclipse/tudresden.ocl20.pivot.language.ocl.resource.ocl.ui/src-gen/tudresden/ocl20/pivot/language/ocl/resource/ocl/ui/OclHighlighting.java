@@ -11,9 +11,10 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProvider, org.eclipse.jface.viewers.ISelectionChangedListener {
 	
+	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
+	
 	private java.util.List<org.eclipse.jface.viewers.ISelectionChangedListener> selectionChangedListeners = new java.util.ArrayList<org.eclipse.jface.viewers.ISelectionChangedListener>();
 	private org.eclipse.jface.viewers.ISelection selection = null;
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper positionHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionHelper();
 	private boolean isHighlightBrackets = true;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner scanner;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclColorManager colorManager;
@@ -21,6 +22,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	private org.eclipse.swt.graphics.Color black;
 	private org.eclipse.swt.custom.StyledText textWidget;
 	private org.eclipse.jface.preference.IPreferenceStore preferenceStore;
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
 	private org.eclipse.jface.text.source.projection.ProjectionViewer projectionViewer;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclOccurrence occurrence;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclBracketSet bracketSet;
@@ -49,6 +51,9 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 		}
 		
 		private void refreshHighlighting() {
+			if (textWidget.isDisposed()) {
+				return;
+			}
 			int textCaret = textWidget.getCaretOffset();
 			if (textCaret < 0 || textCaret > textWidget.getCharCount()) {
 				return;
@@ -83,7 +88,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 		}
 		
 		public void parsingCompleted(org.eclipse.emf.ecore.resource.Resource resource) {
-			display.syncExec(new Runnable() {
+			display.asyncExec(new Runnable() {
 				
 				public void run() {
 					refreshHighlighting();
@@ -105,6 +110,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 		this.display = org.eclipse.swt.widgets.Display.getCurrent();
 		sourceviewer.getSelectionProvider();
 		preferenceStore = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore();
+		this.editor = editor;
 		textWidget = sourceviewer.getTextWidget();
 		projectionViewer = sourceviewer;
 		scanner = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTokenScanner(textResource, colorManager);
@@ -178,7 +184,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	}
 	
 	public void setEObjectSelection() {
-		display.syncExec(new Runnable() {
+		display.asyncExec(new Runnable() {
 			public void run() {
 				org.eclipse.emf.ecore.EObject selectedEObject = occurrence.getEObjectAtCurrentPosition();
 				if (selectedEObject != null) {
@@ -250,19 +256,7 @@ public class OclHighlighting implements org.eclipse.jface.viewers.ISelectionProv
 	
 	private void handleContentOutlineSelection(org.eclipse.jface.viewers.ISelection selection) {
 		if (!selection.isEmpty()) {
-			Object selectedElement = ((org.eclipse.jface.viewers.IStructuredSelection) selection).getFirstElement();
-			if (selectedElement instanceof org.eclipse.emf.ecore.EObject) {
-				org.eclipse.emf.ecore.EObject selectedEObject = (org.eclipse.emf.ecore.EObject) selectedElement;
-				org.eclipse.emf.ecore.resource.Resource resource = selectedEObject.eResource();
-				if (resource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) {
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource) resource;
-					tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
-					int elementCharStart = locationMap.getCharStart(selectedEObject);
-					int elementCharEnd = locationMap.getCharEnd(selectedEObject);
-					org.eclipse.jface.text.TextSelection textEditorSelection = new org.eclipse.jface.text.TextSelection(elementCharStart, elementCharEnd - elementCharStart + 1);
-					projectionViewer.getSelectionProvider().setSelection(textEditorSelection);
-				}
-			}
+			editor.setSelection(selection);
 		}
 	}
 	

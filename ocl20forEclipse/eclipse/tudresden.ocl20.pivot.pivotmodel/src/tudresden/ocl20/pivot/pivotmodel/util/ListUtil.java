@@ -16,62 +16,71 @@ import org.eclipse.emf.ecore.util.EObjectEList;
  */
 public final class ListUtil {
 
-  /**
-   * This class is not meant to be instantiated.
-   */
-  private ListUtil() {
-    // no implementation by design
-  }
+	/**
+	 * This class is not meant to be instantiated.
+	 */
+	private ListUtil() {
 
-  /**
-   * Removes the given <code>object</code> from the given <code>list</code>,
-   * comparing each element in the list with <code>equals</code>.
-   * 
-   * @param list a list
-   * @param object an object to be removed from the list
-   */
-  public static <E> void remove(List<E> list, E object) {
+		// no implementation by design
+	}
 
-    for (Iterator<E> it = list.iterator(); it.hasNext();) {
-      if (it.next().equals(object)) {
-        it.remove();
-      }
-    }
-  }
+	/**
+	 * Removes the given <code>object</code> from the given <code>list</code>,
+	 * comparing each element in the list with <code>equals</code>.
+	 * 
+	 * @param list
+	 *          a list
+	 * @param object
+	 *          an object to be removed from the list
+	 */
+	public static <E> void remove(List<E> list, E object) {
 
-  /**
-   * Removes all <code>objects</code> from <code>list</code>.
-   * 
-   * @param <E> the element type of the list
-   * @param list the list
-   * @param objects a list of objects to be removed from list
-   */
-  public static <E> void removeAll(List<E> list, List<? extends E> objects) {
+		for (Iterator<E> it = list.iterator(); it.hasNext();) {
+			if (it.next().equals(object)) {
+				it.remove();
+			}
+		}
+	}
 
-    for (E object : objects) {
-      remove(list, object);
-    }
+	/**
+	 * Removes all <code>objects</code> from <code>list</code>.
+	 * 
+	 * @param <E>
+	 *          the element type of the list
+	 * @param list
+	 *          the list
+	 * @param objects
+	 *          a list of objects to be removed from list
+	 */
+	public static <E> void removeAll(List<E> list, List<? extends E> objects) {
 
-  }
+		for (E object : objects) {
+			remove(list, object);
+		}
 
-  /**
-   * Returns the index of <code>object</code> in <code>list</code> or
-   * <code>-1</code> if the list does not contain the object.
-   * 
-   * @param <E> the element type of the list
-   * @param list the list
-   * @param object the object to search for
-   * 
-   * @return the index of the object in the list or -1
-   */
-  public static <E> int indexOf(List<E> list, E object) {
+	}
 
-    for (ListIterator<E> it = list.listIterator(); it.hasNext();) {
-      if (it.next().equals(object)) {
-        return it.previousIndex();
-      }
-    }
+	/**
+	 * Returns the index of <code>object</code> in <code>list</code> or
+	 * <code>-1</code> if the list does not contain the object.
+	 * 
+	 * @param <E>
+	 *          the element type of the list
+	 * @param list
+	 *          the list
+	 * @param object
+	 *          the object to search for
+	 * 
+	 * @return the index of the object in the list or -1
+	 */
+	public static <E> int indexOf(List<E> list, E object) {
 
-    return -1;
-  }
+		for (ListIterator<E> it = list.listIterator(); it.hasNext();) {
+			if (it.next().equals(object)) {
+				return it.previousIndex();
+			}
+		}
+
+		return -1;
+	}
 }

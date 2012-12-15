@@ -522,39 +522,31 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 			/* Try to find the type's class. */
 			try {
 
-				/* Check if the object is undefined. */
-				if (object != null) {
-					typeClass = object.getClass().getClassLoader().loadClass(
-							canonicalName);
+				typeClass = object.getClass().getClassLoader()
+						.loadClass(canonicalName);
 
-					/* Check if the given object conforms to the found class. */
-					if (typeClass.isAssignableFrom(object.getClass())) {
-						Type originalType;
-						try {
-							originalType = this.findTypeOfClassInModel(object
-									.getClass());
+				/* Check if the given object conforms to the found class. */
+				if (typeClass.isAssignableFrom(object.getClass())) {
+					Type originalType;
+					try {
+						originalType = this.findTypeOfClassInModel(object
+								.getClass());
 
-							result = new JavaModelInstanceObject(object,
-									typeClass, type, originalType, this);
-						}
-
-						catch (TypeNotFoundInModelException e) {
-							/* Create an undefined instance object. */
-							result = new JavaModelInstanceObject(null,
-									typeClass, type, type, this);
-						}
+						result = new JavaModelInstanceObject(object, typeClass,
+								type, originalType, this);
 					}
 
-					else {
+					catch (TypeNotFoundInModelException e) {
 						/* Create an undefined instance object. */
 						result = new JavaModelInstanceObject(null, typeClass,
 								type, type, this);
 					}
 				}
 
-				/* Create an undefined instance object. */
 				else {
-					result = new JavaModelInstanceObject(null, type, type, this);
+					/* Create an undefined instance object. */
+					result = new JavaModelInstanceObject(null, typeClass, type,
+							type, this);
 				}
 			}
 
@@ -685,9 +677,7 @@ public class JavaModelInstanceFactory extends BasisJavaModelInstanceFactory
 
 				/* Add recursively found types for the super class. */
 				try {
-					result
-							.addAll(findTypesOfClassInModel(clazz
-									.getSuperclass()));
+					result.addAll(findTypesOfClassInModel(clazz.getSuperclass()));
 				}
 
 				catch (TypeNotFoundInModelException e2) {

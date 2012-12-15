@@ -5,10 +5,10 @@
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-In Chapter~\ref{chapter:architecture} the architecture of Dresden OCL has shortly
-been explained. This chapter will explain, how Dresden OCL can be integrated into
+In Chapter~\ref{chapter:architecture} the architecture of Dresden OCL was
+introduced. This chapter explains, how Dresden OCL can be integrated into
 other Eclipse plug-ins. If you plan to use Dresden OCL as a \acs{JAR} library
-without Eclipse plug-in structure, you should use the \keyword{Standalone 
+without Eclipse plug-in structure, you should use the \keyword{Standalone
 Integration Facade} presented in Chapter~\ref{chapter:standalone} instead.
 
 
@@ -16,27 +16,28 @@ Integration Facade} presented in Chapter~\ref{chapter:standalone} instead.
 \section{The Integration Facade of Dresden OCL}
 
 Since the release 2.2.0, Dresden OCL contains an \keyword{Integration Facade},
-that combines all required interfaces of Dresden OCL in one interface, also
+that combines all required interfaces of Dresden OCL into one interface, also
 called a \keyword{Facade}~\cite{gamma:dp}. The facade contains self-explanatory 
 static methods that provide access to the repository (modelbus) and all tools 
 of Dresden OCL. A documentation of the complete facade's interface would be too
-large for this documentation. Thus, please investigate the facade directly in
-the code. The facade called \code{Ocl2ForEclipseFacade} is located in the 
-plug-in \code{tudresden.ocl20.pivot.facade}. Please be aware of the fact that 
-if you use the facade, you will result in dependencies to all major parts of
-Dresden OCL. Thus, if you want to use one of the tools only (e.g, the \acs{OCL}
-Parser) you could access these tools directly as explained below.
+large for this documentation. Thus, please investigate the facade directly
+trough the source code or API documentation. The facade called
+\code{Ocl2ForEclipseFacade} is located in the plug-in
+\code{tudresden.ocl20.pivot.facade}. Please be aware of the fact that if you
+use the facade, you will result in dependencies to all major parts of Dresden
+OCL. Thus, if you want to use one of the tools only (e.g, the \acs{OCL} Parser)
+you could access these tools directly as explained below.
 
 
 
-\section{How to access Meta-Models, Models and Instances}
+\section{How to access Metamodels, Models and Instances}
 
-The central regustry component of Dresden OCL is the \keyword{Model-Bus}
+The central registry component of Dresden OCL is the \keyword{Model-Bus}
 which is implemented by the Eclipse plug-in 
 \code{tudresden.ocl20.pivot.modelbus}. The main class of this plug-in 
 (\code{tudresden.\linebreak[0]ocl20.pivot.modelbus.ModelBusPlugin}) provides 
-methods, to access meta-models, models and model instances and to import new
-resources of these kinds into the toolkit (see 
+methods, to access metamodels, models and model instances and to import new
+resources of these kinds into the toolkit (cf. 
 Figure~\ref{pic:integration:modelBusPlugin}).
 
 The class provides four different static methods to access different registries,
@@ -51,33 +52,33 @@ the \code{Meta\-model\-Re\-gis\-try}, the \code{ModelRegistry}, the
 \end{figure}
 
 
-\subsection{The Meta-Model Registry}
+\subsection{The Metamodel Registry}
 
-The Meta-Model Registry provides methods to add and get meta-models to and from 
+The Metamodel Registry provides methods to add and get metamodels to and from 
 Dresden OCL. Normally, the method \code{addMetamodel(IMetamodel)} is not required
-because by starting Eclipse, all meta-models register themselves via their 
-extension point in the registry. To get a meta-model from the toolkit, the
+because by starting Eclipse, all metamodels register themselves via their 
+extension point in the registry. To get a metamodel from the toolkit, the
 methods \code{getMetamodels()} and \code{getMetamodel(id: String)} can be used. 
-The method \code{getMetamodels()} returns all meta-models that are currently 
+The method \code{getMetamodels()} returns all metamodels that are currently 
 registered in the registry. The method \code{getMetamodel(id: String)} can be 
-used to get a meta-model by its ID (Normally, the ID of a meta-model is equal to
-the name of its plug-in. E.g., the \acs{UML}2 meta-model has the ID 
-\code{tudresden.ocl20.pivot.metamodels.uml2}).
+used to get a metamodel by its ID (Normally, the ID of a metamodel is equal to
+the name of its plug-in (e.g., the \acs{UML}2 metamodel has the ID 
+\code{tudresden.ocl20.pivot.metamodels.uml2})).
 
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=.55\linewidth]{figures/integration/metaModelRegistry}
-	\caption{The Meta-Model Registry.}
+	\caption{The metamodel registry.}
 	\label{pic:integration:metaModelRegistry}
 \end{figure}
 
 
 \subsection{How to load a Model}
 
-First, to load a model into Dresden OCL, the meta-model the model is an instance
-of has to be selected . E.g., for an \acs{UML}2 class diagram the \acs{UML}2 
-meta-model should be selected (see Listing~\ref{lst:integration:loadModel}).
-Each meta-model has its own \code{IModelProvider} that can be accessed by using 
+First, to load a model into Dresden OCL, the metamodel the model is an instance
+of has to be selected (e.g., for a \acs{UML}2 class diagram the \acs{UML}2 
+metamodel should be selected (cf. Listing~\ref{lst:integration:loadModel}).
+Each metamodel has its own \code{IModelProvider} that can be accessed by using 
 the method \code{IMetamodel.getModelProvider()}. The \code{IModelProvider} 
 provides three methods to load a model. A model can be loaded by using the 
 method \code{getModel(..)} with
@@ -104,12 +105,12 @@ model = metaModel.getModelProvider().getModel(modelURL);
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=.55\linewidth]{figures/integration/modelRegistry}
-	\caption{The Model Registry.}
+	\caption{The model registry.}
 	\label{pic:integration:modelRegistry}
 \end{figure}
 
 After loading the model, the model can be added to the \code{ModelRegistry},
-that manages all models currently loaded into Dresden OCL (see 
+that manages all models currently loaded into Dresden OCL (cf. 
 Figure~\ref{pic:integration:modelRegistry}). The \code{ModelRegistry} can also 
 be used to set an active model which represents the \code{IModel} that is 
 currently selected in the \keyword{Model Browser} of Dresden OCL's GUI.
@@ -117,24 +118,24 @@ currently selected in the \keyword{Model Browser} of Dresden OCL's GUI.
 
 \subsection{The Model Instance Type Registry}
 
-Similar to the Meta-Model Registry, the Model Instance Type Registry provides 
+Similar to the Metamodel Registry, the Model Instance Type Registry provides 
 methods to add and get model instance types to and from Dresden OCL. Normally,
 the method \code{add\-Mo\-del\-In\-stance\-Type(I\-Mo\-del\-In\-stance\-Type)}
-is not required because by starting Eclipse, all model instance types register themselves via 
-their extension point in the registry. To get a model instance type from
+is not required because by starting Eclipse, all model instance types register
+themselves via an extension at the registry. To get a model instance type from
 Dresden OCL, the methods \code{getModelInstanceTypes()} and
 \code{getModelInstance\-Type\linebreak[0](id: String)} can be used. The method 
 \code{getModelInstanceTypes()} returns all model instance types that are
 currently registered in the registry. The method \code{getModelInstanceType(id: 
 String)} can be used to get a model instance types by its ID (Normally, the ID 
-of a model instance type is equal to the name of its plug-in. E.g., the Java 
+of a model instance type is equal to the name of its plug-in (e.g., the Java 
 model instance type has the ID 
-\code{tudresden.ocl20.pivot.modelinstancetype.java}).
+\code{tudresden.ocl20.pivot.modelinstancetype.java})).
 
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=.7\linewidth]{figures/integration/modelInstanceTypeRegistry}
-	\caption{The Model Instance Type Registry.}
+	\caption{The model instance type registry.}
 	\label{pic:integration:modelInstanceTypeRegistry}
 \end{figure}
 
@@ -142,8 +143,8 @@ model instance type has the ID
 \subsection{How to load a Model Instance}
 
 First, to load a model instance into Dresden OCL, the model instance type must be
-selected of that the instance is an instance of. E.g., for a set of Java objects
-the Java model instance type should be selected (see 
+selected of which the instance is an instance of (e.g., for a set of Java
+objects the Java model instance type should be selected, cf. 
 Listing~\ref{lst:integration:loadModelInstance}). Each model instance type has
 its own \code{IModelInstance\-Pro\-vi\-der} that can be accessed by using the
 method \code{IModelInstanceType.get\-Mo\-del\-Instance\-Provider}. The 
@@ -154,13 +155,13 @@ with
 \begin{enumerate}
 	\item a \code{File} object representing the model instance as argument,
 	\item a \code{String} representing the path of the file there the model
-	  instance is located,
-	\item or a \code{URL} leading to the file there the model instance is located.
+	  instance is located, or
+	\item a \code{URL} leading to the file there the model instance is located.
 \end{enumerate}
 
 Additionally, each of these methods requires the \code{IModel} as a second
-argument, the model instance is an instance of. Thus, the model must be loaded 
-before the model instance can be loaded.
+argument, of which the model instance is an instance of. Thus, the model must be
+loaded before the model instance can be loaded.
 
 \lstset{
   language=Java
@@ -179,13 +180,14 @@ modelInstance = miType.getModelInstanceProvider()
 \begin{figure}[!b]
 	\centering
 	\includegraphics[width=.75\linewidth]{figures/integration/modelInstanceRegistry}
-	\caption{The Model Instance Registry.}
+	\caption{The model instance registry.}
 	\label{pic:integration:modelInstanceRegistry}
 \end{figure}
 
 After loading the model instance, the model instance can be added to the
 \code{Model\-Instance\-Re\-gis\-try}, that manages all model instances currently
-loaded into Dresden OCL (see Figure~\ref{pic:integration:modelInstanceRegistry}).
+loaded into Dresden OCL (cf.
+Figure~\ref{pic:integration:modelInstanceRegistry}).
 The \code{ModelInstanceRegistry} can also be used to set an active model
 instance that represents the \code{IModelInstance} that is currently selected in
 the \keyword{Model Instance Browser} of Dresden OCL's GUI.
@@ -194,9 +196,10 @@ the \keyword{Model Instance Browser} of Dresden OCL's GUI.
 
 \section{How to access the OCL Parser}
 The \acs{OCL}2 Parser of \acl{DOT4Eclipse} is located in the plug-in 
-\code{tudresden.ocl20.pivot.\linebreak[0]language.ocl.staticsemantics} in the
-package \code{tudresden.ocl20.pivot.language.ocl.resource.ocl}. The parser
-provides a very simple interface and can be used as shown in Listing 
+\code{tudresden.ocl20.pivot.\linebreak[0]language.ocl.staticsemantics} within
+the package
+\code{tudresden.ocl20.pivot.language.ocl\linebreak[0].\linebreak[0]re\-source\linebreak[0].ocl}.
+The parser provides a very simple interface and can be used as shown in Listing
 \ref{lst:integration:parserConstraints}. You have to provide an \code{IModel}
 and an \code{URI} where the \acs{OCL} file can be found. You can specify whether
 constraints and definitions should be added to the \code{IModel} by a third
@@ -272,8 +275,8 @@ have been interpreted resulting in (3) an \code{OclAny}.
 
 This chapter shortly presented, how the tools of Dresden OCL can be accessed and
 used via their interfaces. First, the integration facade has been presented, 
-afterwards, direct access of specific tools and the modelbus has been explained.
-Please be aware of the fact, that direct code documentation is always 
-error-prone and will be outdated very soon. Thus, please do not hesitate to 
-contact us if some parts of this chapter are written in a unclear manner or are 
-inconsistent with the code.
+afterwards, direct access of specific tools and the modelbus was explained.
+Please be aware of the fact that code documentation is always error-prone and
+will be outdated very soon. Thus, please do not hesitate to contact us if some
+parts of this chapter are written in a unclear manner or are inconsistent with
+the code.

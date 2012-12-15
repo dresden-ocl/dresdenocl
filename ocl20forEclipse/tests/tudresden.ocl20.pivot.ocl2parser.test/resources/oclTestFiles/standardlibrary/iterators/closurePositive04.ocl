@@ -1,0 +1,7 @@
+package package1::package2
+
+context Type1
+def: testClosurePositive04 : Set(Type1) =
+self->asBag()->closure(aType1)
+
+endpackage

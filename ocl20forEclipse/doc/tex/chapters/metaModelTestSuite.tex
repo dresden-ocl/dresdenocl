@@ -1,52 +1,52 @@
-\chapter{The Generic Meta-Model Test Suite}
+\chapter{The Generic Metamodel Test Suite}
 \label{chapter:metaModelTestSuite}
 
 \begin{flushright}
 \textit{Chapter written by Claas Wilke}
 \end{flushright}
 
-To test the adaptation of a meta-model to the pivot model of Dresden OCL, the
+To test the adaptation of a metamodel to the pivot model of Dresden OCL, the
 toolkit provides a generic test suite that can be simply instantiated by each 
-adapted meta-model. This chapter shortly presents, how the generic meta-model 
-test suite can be instantiated to test an adapted meta-model.
+adapted metamodel. This chapter shortly presents, how the generic metamodel 
+test suite can be instantiated to test an adapted metamodel.
 
 
 
 \section{The Test Suite Plug-in}
 
-The generic meta-model test suite is located in the plug-in 
+The generic metamodel test suite is located in the plug-in 
 \code{tudresden.ocl20.pivot.meta\-mo\-dels.\linebreak[0]test}. The test suite 
 provides a set of JUnit tests, that check the functionality of all operations 
-that must be implemented by every meta-model that shall be adapted to the pivot 
-model. The adaptation of a meta-model to the pivot model is explained in 
+that must be implemented by every metamodel that shall be adapted to the pivot 
+model. The adaptation of a metamodel to the pivot model is explained in 
 Chapter~\ref{chapter:pivotModelAdaptation}. The test suite contains about 150
-Junit tests.
+JUnit tests.
 
-To instantiate the generic test suite for a newly adapted meta-model, only two
-resources must be provided: (1) a model modeled in the newly adapted meta-model 
+To instantiate the generic test suite for a newly adapted metamodel, only two
+resources must be provided: (1) a model modeled in the newly adapted metamodel 
 that contains instances of all pivot model types that shall be tested, and (2) a
 Java class that instantiates the test suite with the modeled model. During test 
-execution, the generic test suite uses the provided model to test the meta-model
-(see Figure~\ref{pic:metaModelTestsuite:genericTestSuite}). Both, the model and 
+execution, the generic test suite uses the provided model to test the metamodel
+(cf. Figure~\ref{pic:metaModelTestsuite:genericTestSuite}). Both, the model and 
 the Java class are shortly presented in the following sections.
 
 \begin{figure}[!t]
 	\centering
 		\includegraphics[width=0.80\textwidth]{figures/metamodeltestsuite/genericTestSuite.pdf}
 	\label{pic:metaModelTestsuite:genericTestSuite}
-	\caption{The Generic Meta-Model Test Suite in respect to the Generic Three Layer Ar\-chi\-tec\-ture (as presented in Section \ref{architecture:genericLayers}).}
+	\caption{The Generic Metamodel Test Suite in respect to the Generic Three Layer Ar\-chi\-tec\-ture (as presented in Section \ref{architecture:genericLayers}).}
 \end{figure}
 
 
 
-\section{The required Model to test a Meta-Model}
+\section{The required Model to test a Metamodel}
 
 Figure~\ref{pic:metaModelTestsuite:testModel} shows the test model that must be
-modeled using the meta-model that shall be tested with the generic meta-model 
+modeled using the metamodel that shall be tested with the generic metamodel 
 test suite. At a first sight, the model seems to be very complex. But many of 
 the contained features are optional, because some data structures and types of 
-the pivot model could be (but do not have to be) implemented by a meta-model. 
-E.g., a meta-model can provide an enumeration type but does not have to. If a 
+the pivot model could be (but do not have to be) implemented by a metamodel 
+(e.g., a metamodel can provide an enumeration type but does not have to). If a 
 structure is not provided by a test model, the test suite will print a warning 
 during test execution that the expected structure has not been found. If the 
 structure is not adapted intentionally, the warning can be ignored. In the 
@@ -54,7 +54,8 @@ following, all types and relations of the test model are explained shortly.
 
 \begin{sidewaysfigure}[!p]
 	\includegraphics[width=0.85\textwidth]{figures/metamodeltestsuite/testModel.pdf}
-	\caption{The required Test Model to test a Meta-Model's adaptation. The gray parts are optional.}
+	\caption{The required Test Model to test a metamodel's adaptation. The gray
+	parts are optional.}
 	\label{pic:metaModelTestsuite:testModel}
 \end{sidewaysfigure}
 
@@ -63,22 +64,22 @@ following, all types and relations of the test model are explained shortly.
 
 As their names already tell us, the classes \code{TestTypeClass1} and 
 \code{TestTypeClass2} are used to test the adaptation of \code{Types}. Each 
-meta-model has to provide types, thus, these classes are required. Both classes 
+metamodel has to provide types, thus, these classes are required. Both classes 
 provide an operation and a property. The association between the two classes is 
-optional because not all meta-models contain associations. But the
+optional because not all metamodels contain associations. But the
 generalization between \code{TestTypeClass2} and \code{TestTypeClass1} is 
 required.
 
 
 \subsection{TestTypeInterface1 and TestTypeInterface2}
 
-Besides classes, some meta-models also provide a second type that must be mapped
+Besides classes, some metamodels also provide a second type that must be mapped
 to the pivot model's interface \code{Type}, which are \code{Interface}s. To test
-the adaptation of the \code{Type} element for meta-models that have both,
+the adaptation of the \code{Type} element for metamodels that have both,
 classes (or types) and interfaces, the test model contains two interfaces 
 \code{TestTypeInterface1} and \code{TestTypeInterface2}. They are optional and
-can be used to test the adaptation of interfaces. E.g., a meta-model that adapts
-both classes and interfaces is the \acs{UML}2 meta-model located in the plug-in 
+can be used to test the adaptation of interfaces. E.g., a metamodel that adapts
+both classes and interfaces is the \acs{UML}2 metamodel located in the plug-in 
 \code{tudresden.ocl20.pivot.metamodels.uml2}.
 
 
@@ -86,21 +87,21 @@ both classes and interfaces is the \acs{UML}2 meta-model located in the plug-in
 
 To test the adaptation of an \code{Enumeration} type, the class
 \code{TestEnumeration} can be used. Because enumerations are not part of every 
-meta-model, this class of the test model is optional.
+metamodel, this class of the test model is optional.
 
 
 \subsection{TestPrimitiveTypeClass}
 
 A special class in the test model is the class \code{TestPrimitiveTypeClass}. 
-This class contains a property for each primitive type of the adapted meta-model
+This class contains a property for each primitive type of the adapted metamodel
 that shall be tested. Each property has the type of the \code{PrimitiveType} 
 whose adaptation shall be tested. Important is the name of the property. If the 
 property's name starts with \code{aBoolean}, the type is tested as adapted to a 
 pivot model's \code{PrimitiveType} of the kind \code{Boolean}. If the name 
-starts with \code{anInteger} instead, the types is tested as an \code{Integer}. 
-E.g., the example property \code{aStringString} shown in 
+starts with \code{anInteger} instead, the types is tested as an \code{Integer} 
+(e.g., the example property \code{aStringString} shown in 
 \code{TestPrimitiveTypeClass} in Figure \ref{pic:metaModelTestsuite:testModel} 
-is tested as adapted to a \code{String}. 
+is tested as adapted to a \code{String}). 
 Table~\ref{tab:metaModelTestSuite:kindAdaptation} shows the adaptation of the 
 different property name prefixes to the different \code{PrimitiveTypeKinds}.
 
@@ -128,13 +129,13 @@ different property name prefixes to the different \code{PrimitiveTypeKinds}.
 The class \code{TestPropertyClass} contains properties to test the right 
 adaptation of the pivot model element \code{Property}. Additionally, the class 
 has many associations that can be used to test the adaptation of a second
-property type for associations (like in the \acs{UML}2 meta-model, plug-in: 
+property type for associations (like in the \acs{UML}2 metamodel, plug-in: 
 \code{tudresden.ocl20.pivot.metamodels.uml2}). Thus, all associations are 
-optional and are not required to test a meta-model's adaptation. The names of 
+optional and are not required to test a metamodel's adaptation. The names of 
 the contained properties are self-explainable: The property 
 \code{nonMultipleProperty} is used to test the adaptation of a \code{Property} 
 that cannot contain multiple values. The property \code{staticProperty}
-represents a static \code{Property} and is optional because not all meta-models 
+represents a static \code{Property} and is optional because not all metamodels 
 contain a \code{static} modifier. The other properties are used to test multiple
 properties that are ordered, unordered, unique and non-unique.
 
@@ -151,16 +152,16 @@ an output value), others are required.
 
 \section{Instantiating the Generic Test Suite}
 
-As mentioned above, to initialize the generic meta-model test suite, only one 
+As mentioned above, to initialize the generic metamodel test suite, only one 
 Java class must be implemented that instantiates the test suite with the test 
-model modeled useing the adapted meta-model. 
+model modeled useing the adapted metamodel. 
 Listing~\ref{list:metaModelTestSuite:constraints01} shows a Java class that 
-instantiates the test suite to test the \acs{UML}2 meta-model.
+instantiates the test suite to test the \acs{UML}2 metamodel.
 
 \lstset{
   language=Java
 }
-\begin{lstlisting}[caption={An instantiation of the generic meta-model test suite.}, captionpos=b, label=list:metaModelTestSuite:constraints01, float]
+\begin{lstlisting}[caption={An instantiation of the generic metamodel test suite.}, captionpos=b, label=list:metaModelTestSuite:constraints01, float]
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestPlugin;
 import tudresden.ocl20.pivot.metamodels.test.MetaModelTestSuite;
 
@@ -187,10 +188,10 @@ public class TestUML2MetaModel extends MetaModelTestSuite {
 }
 \end{lstlisting}
 
-Important is that the class provides a JUnit test suite (according to JUnit 4
-conventions), that contains the \code{MetaModelTestSuite} (line 4).
+Important is that the class provides a JUnit test suite (according to JUnit~4
+conventions) that contains the \code{MetaModelTestSuite} (line~4).
 Additionally, the class has to provide a \code{setUp()} method only that can be 
-used to setup the test suite before its execution (lines 13 to 23). Inside the 
+used to setup the test suite before its execution (lines~13 to~23). Inside the 
 \code{setUp()} method, the operation
 \code{MetaModelTestPlugin.prepareTest(String, String, String)} must be invoked. 
 The method initializes the environment of the generic test suite by setting 
@@ -199,23 +200,23 @@ three arguments:
 \begin{enumerate}
 	\item The \code{ID} of the plug-in that contains the test model used for 
 	  testing (e.g.,
-	  \code{tudresden.ocl20.\linebreak[0]pivot.\linebreak[0]metamodels.uml2.test},
+	  \code{tudresden.ocl20.\linebreak[0]pivot.\linebreak[0]metamodels.uml2.test}),
 	\item The location of the test model relative to the plug-in's root folder 
 	  (e.g., \code{model/testmodel.\linebreak[0]uml}),
-	\item And the \code{ID} of the meta-model that shall be tested (e.g. 
-	  \code{tudresden.ocl20.pivot.meta\-mo\-dels.\linebreak[0]uml2}.
+	\item And the \code{ID} of the metamodel that shall be tested (e.g. 
+	  \code{tudresden.ocl20.pivot.meta\-mo\-dels.\linebreak[0]uml2}).
 \end{enumerate}
 
 Afterwards, the implemented Java class can be executed as a \eclipse{JUnit 
 Plug-in Test} in Eclipse. The test suite should then inform you (by failed test 
-cases) which parts of your meta-model adaptation are wrong implemented or
+cases) which parts of your metamodel adaptation are wrong implemented or
 missing. As mentioned above, warnings caused by missing parts of the test 
-model--that were not implemented intentionally--can be ignored.
+model---that were not implemented intentionally---can be ignored.
 
 
 \section{Summary}
 
-This chapter shortly introduced into the generic meta-model test suite of 
+This chapter shortly introduced into the generic metamodel test suite of 
 Dresden OCL. For further details of the test suite investigate the test suite
 plug-in
 \code{tudresden.ocl20.pivot\linebreak[0].me\-ta\-mo\-dels\linebreak[0].test} or

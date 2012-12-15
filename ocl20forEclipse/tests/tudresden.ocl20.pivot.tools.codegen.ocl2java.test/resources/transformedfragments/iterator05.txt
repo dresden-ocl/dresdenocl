@@ -1,0 +1,50 @@
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result2;
+java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator1;
+
+result2 = aClass.membership.accounts;
+
+comparator1 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>() {
+
+    /** Method which compares two elements of the collection. */
+    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement1, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement2) {
+        int result3;
+
+        result3 = 0;
+
+        if (anElement1.number < anElement2.number) {
+            result3 = 1;
+        } else if (anElement1.number > anElement2.number) {
+            result3 = -1;
+        }
+
+        return result3;
+    }
+};
+
+java.util.Collections.sort(result2, comparator1);
+java.util.ArrayList<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> result1;
+java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount> comparator2;
+
+result1 = result2;
+
+comparator2 = new java.util.Comparator<tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount>() {
+
+    /** Method which compares two elements of the collection. */
+    public int compare(tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement3, tudresden.ocl20.pivot.examples.royalsandloyals.LoyaltyAccount anElement4) {
+        int result4;
+
+        result4 = 0;
+
+        if (anElement3.number < anElement4.number) {
+            result4 = 1;
+        } else if (anElement3.number > anElement4.number) {
+            result4 = -1;
+        }
+
+        return result4;
+    }
+};
+
+java.util.Collections.sort(result1, comparator2);
+
+(tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclCollections.size(result1) > new Integer(0))

@@ -36,6 +36,7 @@ import java.util.List;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.interpreter.internal.InterpretationEnvironment;
 import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceObject;
 import tudresden.ocl20.pivot.pivotmodel.Constraint;
 import tudresden.ocl20.pivot.pivotmodel.ConstraintKind;
 import tudresden.ocl20.pivot.pivotmodel.Operation;
@@ -58,8 +59,8 @@ public interface IOclInterpreter {
 	public static final String SELF_VARIABLE_NAME = "self";
 
 	/**
-	 * The name used to store the OCL <code>result</code> {@link Variable} in
-	 * the {@link InterpretationEnvironment}.
+	 * The name used to store the OCL <code>result</code> {@link Variable} in the
+	 * {@link InterpretationEnvironment}.
 	 */
 	public static final String RESULT_VARIABLE_NAME = "result";
 
@@ -76,10 +77,13 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *            The {@link Constraint} to be interpreted.
+	 *          The {@link Constraint} to be interpreted.
 	 * @param aModelObject
-	 *            The {@link IModelInstanceElement} representing the current
-	 *            object.
+	 *          The {@link IModelInstanceElement} representing the current object.
+	 *          Can be <code>null</code> if the given {@link Constraint}s requires
+	 *          no {@link IModelInstanceObject} as context, i.e. is defined in a
+	 *          static context (static def, or body/derive/init on static
+	 *          feature).
 	 * 
 	 * @return The {@link IInterpretationResult} of the interpretation or
 	 *         <code>null</code>.
@@ -94,17 +98,19 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param constraints
-	 *            The {@link Constraint}s to be interpreted.
+	 *          The {@link Constraint}s to be interpreted.
 	 * @param aModelObject
-	 *            The {@link IModelInstanceElement} representing the current
-	 *            object.
+	 *          The {@link IModelInstanceElement} representing the current object.
+	 *          Can be <code>null</code> if none of the given {@link Constraint}s
+	 *          requires an {@link IModelInstanceObject} as context, i.e. all of
+	 *          them are defined in a static context (static def, or
+	 *          body/derive/init on static feature).
 	 * 
-	 * @return A {@link List} containing the {@link IInterpretationResult} of
-	 *         the interpretation as {@link OclRoot}s.
+	 * @return A {@link List} containing the {@link IInterpretationResult} of the
+	 *         interpretation as {@link OclRoot}s.
 	 */
 	public List<IInterpretationResult> interpretConstraints(
-			Collection<Constraint> constraints,
-			IModelInstanceElement aModelObject);
+			Collection<Constraint> constraints, IModelInstanceElement aModelObject);
 
 	/**
 	 * <p>
@@ -112,19 +118,18 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *            The {@link IModelInstanceElement} on that the
-	 *            {@link Operation} shall be invoked.
+	 *          The {@link IModelInstanceElement} on that the {@link Operation}
+	 *          shall be invoked.
 	 * @param operation
-	 *            The {@link Operation} that shall be invoked.
+	 *          The {@link Operation} that shall be invoked.
 	 * @param parameterValues
-	 *            The values of the {@link Operation}'s {@link Parameter}s as an
-	 *            Array {@link IModelInstanceElement} values.
+	 *          The values of the {@link Operation}'s {@link Parameter}s as an
+	 *          Array {@link IModelInstanceElement} values.
 	 * @param preConditions
-	 *            The preconditions that shall be interpreted. <b>Attention:</b>
-	 *            if this {@link Collection} contains {@link Constraint}s of the
-	 *            {@link ConstraintKind} that is different than
-	 *            {@link ConstraintKind#PRECONDITION} they will not be
-	 *            interpreted.
+	 *          The preconditions that shall be interpreted. <b>Attention:</b> if
+	 *          this {@link Collection} contains {@link Constraint}s of the
+	 *          {@link ConstraintKind} that is different than
+	 *          {@link ConstraintKind#PRECONDITION} they will not be interpreted.
 	 * @return A {@link List} of {@link IInterpretationResult}s.
 	 */
 	public List<IInterpretationResult> interpretPreConditions(
@@ -138,30 +143,28 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *            The {@link IModelInstanceElement} on that the
-	 *            {@link Operation} shall be invoked.
+	 *          The {@link IModelInstanceElement} on that the {@link Operation}
+	 *          shall be invoked.
 	 * @param operation
-	 *            The {@link Operation} that shall be invoked.
+	 *          The {@link Operation} that shall be invoked.
 	 * @param parameterValues
-	 *            The values of the {@link Operation}'s {@link Parameter}s as an
-	 *            Array {@link IModelInstanceElement} values.
+	 *          The values of the {@link Operation}'s {@link Parameter}s as an
+	 *          Array {@link IModelInstanceElement} values.
 	 * @param resultValue
-	 *            The result of the {@link Operation}'s invocation or
-	 *            <code>null</code> if no result has been returned (e.g., a void
-	 *            {@link Operation}).
+	 *          The result of the {@link Operation}'s invocation or
+	 *          <code>null</code> if no result has been returned (e.g., a void
+	 *          {@link Operation}).
 	 * @param postConditions
-	 *            The postconditions that shall be interpreted.
-	 *            <b>Attention:</b> if this {@link Collection} contains
-	 *            {@link Constraint}s of the {@link ConstraintKind} that is
-	 *            different than {@link ConstraintKind#POSTCONDITION} they will
-	 *            not be interpreted.
+	 *          The postconditions that shall be interpreted. <b>Attention:</b> if
+	 *          this {@link Collection} contains {@link Constraint}s of the
+	 *          {@link ConstraintKind} that is different than
+	 *          {@link ConstraintKind#POSTCONDITION} they will not be interpreted.
 	 * @return A {@link List} of {@link IInterpretationResult}s.
 	 */
 	public List<IInterpretationResult> interpretPostConditions(
 			IModelInstanceElement modelObject, Operation operation,
 			IModelInstanceElement[] parameterValues,
-			IModelInstanceElement resultValue,
-			Collection<Constraint> postConditions);
+			IModelInstanceElement resultValue, Collection<Constraint> postConditions);
 
 	/**
 	 * <p>
@@ -170,19 +173,18 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *            The {@link IModelInstanceElement} on that the
-	 *            {@link Operation} shall be invoked.
+	 *          The {@link IModelInstanceElement} on that the {@link Operation}
+	 *          shall be invoked.
 	 * @param operation
-	 *            The {@link Operation} that shall be invoked.
+	 *          The {@link Operation} that shall be invoked.
 	 * @param parameterValues
-	 *            The values of the {@link Operation}'s {@link Parameter}s as an
-	 *            Array {@link IModelInstanceElement} values.
+	 *          The values of the {@link Operation}'s {@link Parameter}s as an
+	 *          Array {@link IModelInstanceElement} values.
 	 * @param postConditions
-	 *            The postconditions that shall be prepared. <b>Attention:</b>
-	 *            if this {@link Collection} contains {@link Constraint}s of the
-	 *            {@link ConstraintKind} that is different than
-	 *            {@link ConstraintKind#POSTCONDITION} they will not be
-	 *            prepared.
+	 *          The postconditions that shall be prepared. <b>Attention:</b> if
+	 *          this {@link Collection} contains {@link Constraint}s of the
+	 *          {@link ConstraintKind} that is different than
+	 *          {@link ConstraintKind#POSTCONDITION} they will not be prepared.
 	 */
 	public void preparePostConditions(IModelInstanceElement modelObject,
 			Operation operation, IModelInstanceElement[] parameterValues,
@@ -191,8 +193,8 @@ public interface IOclInterpreter {
 	/**
 	 * <p>
 	 * Sets a given {@link OclRoot} as value of a {@link Variable} (given as its
-	 * name as a {@link String}) in the {@link IInterpretationEnvironment} of
-	 * this {@link IOclInterpreter}.
+	 * name as a {@link String}) in the {@link IInterpretationEnvironment} of this
+	 * {@link IOclInterpreter}.
 	 * </p>
 	 * 
 	 * <p>
@@ -201,9 +203,9 @@ public interface IOclInterpreter {
 	 * </p>
 	 * 
 	 * @param name
-	 *            The name of the {@link Variable} that shall be set.
+	 *          The name of the {@link Variable} that shall be set.
 	 * @param value
-	 *            The value of the {@link Variable} that shall be set.
+	 *          The value of the {@link Variable} that shall be set.
 	 */
 	public void setEnviromentVariable(String name, IModelInstanceElement value);
 }

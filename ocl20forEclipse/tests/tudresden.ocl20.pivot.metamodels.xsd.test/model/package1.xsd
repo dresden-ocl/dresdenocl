@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:complexType name="TestTypeClass1">
+  <xs:sequence>
+    <xs:element name="property1" type="TestTypeClass1"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="TestTypeClass2">
+  <xs:complexContent>
+    <xs:extension base="TestTypeClass1">
+      <xs:sequence>
+    <xs:element name="property2" type="TestTypeClass2"/>
+      </xs:sequence>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="TestPropertyClass">
+  <xs:sequence>
+    <xs:element name="nonmultipleProperty" type="TestTypeClass1"/>
+    <xs:element name="orderedMultipleProperty" type="TestTypeClass1" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:element name="uniqueMultipleProperty" type="TestTypeClass1" minOccurs="0" maxOccurs="unbounded"/>
+  </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="TestPrimitiveTypeClass">
+  <xs:sequence>
+    <xs:attribute name="aBooleanBoolean" type="xs:boolean"/>
+
+    <xs:element name="anIntegerByte" type="xs:byte"/>
+    <xs:element name="anIntegerDecimal" type="xs:decimal"/>
+    <xs:attribute name="anIntegerInt" type="xs:int"/>
+    <xs:element name="anIntegerLong" type="xs:long"/>
+    <xs:element name="anIntegerNegativeInteger" type="xs:negativeInteger"/>
+    <xs:element name="anIntegerNonNegativeInteger" type="xs:nonNegativeInteger"/>
+    <xs:element name="anIntegerPositiveInteger" type="xs:positiveInteger"/>
+    <xs:element name="anIntegerShort" type="xs:short"/>
+    <xs:element name="anIntegerUnsignedLong" type="xs:unsignedLong"/>
+    <xs:element name="anIntegerUnsignedInt" type="xs:unsignedInt"/>
+    <xs:element name="anIntegerUnsignedShort" type="xs:unsignedShort"/>
+    <xs:element name="anIntegerUnsignedByte" type="xs:unsignedByte"/>
+
+    <xs:attribute name="aRealDouble" type="xs:double"/>
+    <xs:element name="aRealFloat" type="xs:float"/>
+
+    <xs:element name="aStringAnyURI" type="xs:anyURI"/>
+    <xs:element name="aStringENTITY" type="xs:ENTITY"/>
+    <xs:element name="aStringID" type="xs:ID"/>
+    <xs:element name="aStringIDREF" type="xs:IDREF"/>
+    <xs:element name="aStringLanguage" type="xs:language"/>
+    <xs:element name="aStringName" type="xs:Name"/>
+    <xs:element name="aStringNCName" type="xs:NCName"/>
+    <xs:element name="aStringNMTOKEN" type="xs:NMTOKEN"/>
+    <xs:element name="aStringNormalizedString" type="xs:normalizedString"/>
+    <xs:attribute name="aStringString" type="xs:string"/>
+    <xs:element name="aStringNormalizedToken" type="xs:token"/>
+
+<!--    <xs:element name="aStringBase64Binary" type="xs:base64Binary"/>-->
+<!--    <xs:element name="aStringENTITIES" type="xs:ENTITIES"/>-->
+<!--    <xs:element name="aStringHexBinary" type="xs:hexBinary"/>-->
+<!--    <xs:element name="aStringIDREFS" type="xs:IDREFS"/>-->
+<!--    <xs:element name="aStringNMTOKENS" type="xs:NMTOKENS"/>-->
+<!--    <xs:element name="aStringNOTATION" type="xs:NOTATION"/>-->
+<!--    <xs:element name="aStringQName" type="xs:QName"/>-->
+
+<!--    <xs:element name="aStringDate" type="xs:date"/>-->
+<!--    <xs:element name="aStringDateTime" type="xs:dateTime"/>-->
+<!--    <xs:element name="aStringDuration" type="xs:duration"/>-->
+<!--    <xs:element name="aStringGDay" type="xs:gDay"/>-->
+<!--    <xs:element name="aStringGMonth" type="xs:gMonth"/>-->
+<!--    <xs:element name="aStringGMonthDay" type="xs:gMonthDay"/>-->
+<!--    <xs:element name="aStringGYear" type="xs:gYear"/>-->
+<!--    <xs:element name="aStringGYearMonth" type="xs:gYearMonth"/>-->
+<!--    <xs:element name="aStringTime" type="xs:time"/>-->
+  </xs:sequence>
+</xs:complexType>
+
+
+</xs:schema>

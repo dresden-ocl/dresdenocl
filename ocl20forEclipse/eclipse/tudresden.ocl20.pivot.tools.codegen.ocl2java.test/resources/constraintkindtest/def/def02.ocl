@@ -1,7 +1,0 @@
-package testpackage
-
-context Class1
-def: defOperation01(): Integer = 
-42
-
-endpackage

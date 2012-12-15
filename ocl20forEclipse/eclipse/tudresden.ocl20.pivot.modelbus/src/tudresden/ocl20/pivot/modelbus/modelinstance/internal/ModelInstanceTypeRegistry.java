@@ -48,19 +48,19 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		IRegistryEventListener {
 
 	/** The full identifier of the fileFormats extension point. */
-	private static final String MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID =
-			ModelBusPlugin.ID + '.' + IModelBusConstants.EXT_MODELINSTANCETYPES;
+	private static final String MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID = ModelBusPlugin.ID
+			+ '.' + IModelBusConstants.EXT_MODELINSTANCETYPES;
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			ModelBusPlugin.getLogger(ModelInstanceTypeRegistry.class);
+	private static final Logger LOGGER = ModelBusPlugin
+			.getLogger(ModelInstanceTypeRegistry.class);
 
 	/** The registered {@link IModelInstanceType}s mapped by their id. */
 	private Map<String, IModelInstanceType> modelInstanceTypes;
 
 	/**
-	 * A helper class to read the {@link ModelInstanceTypeRegistry} configuration
-	 * from the Eclipse extension registry.
+	 * A helper class to read the {@link ModelInstanceTypeRegistry}
+	 * configuration from the Eclipse extension registry.
 	 */
 	private ModelInstanceTypeRegistryReader reader;
 
@@ -79,11 +79,16 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 		/* Create a new reader and read in the configuration. */
 		this.reader = new ModelInstanceTypeRegistryReader();
-		this.reader.read(this.getExtensionPoint(), this);
+		IExtensionPoint extensionPoint = this.getExtensionPoint();
+		if (extensionPoint != null)
+			this.reader.read(this.getExtensionPoint(), this);
+		// no else.
 
 		/* Register the registry as a listener for plug-in events. */
-		Platform.getExtensionRegistry().addListener(this,
-				MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID);
+		if (Platform.isRunning())
+			Platform.getExtensionRegistry().addListener(this,
+					MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID);
+		// no else.
 
 		/* Eventually log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -94,6 +99,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
 	 * runtime.IExtension[])
@@ -119,6 +125,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#added(org.eclipse.core.
 	 * runtime.IExtensionPoint[])
@@ -130,6 +137,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
 	 * addModelInstanceType(tudresden.ocl20.pivot.modelbus.IModelInstanceType)
 	 */
@@ -139,7 +147,8 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
 
-			msg = "addModelInstanceType(miType=" + modelInstanceType + ") - enter";
+			msg = "addModelInstanceType(miType=" + modelInstanceType
+					+ ") - enter";
 
 			LOGGER.debug(msg);
 		}
@@ -161,21 +170,21 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		// no else.
 
 		/*
-		 * Else check if the file format is already contained in the registry. Than
-		 * silently do nothing.
+		 * Else check if the file format is already contained in the registry.
+		 * Than silently do nothing.
 		 */
 		else if (this.modelInstanceTypes.containsKey(modelInstanceType.getId())) {
 			String msg;
 
-			msg =
-					"ModelInstanceType '" + modelInstanceType.getName()
-							+ "' is already loaded.";
+			msg = "ModelInstanceType '" + modelInstanceType.getName()
+					+ "' is already loaded.";
 
 			throw new IllegalStateException(msg);
 		}
 
 		/* Add the file format. */
-		this.modelInstanceTypes.put(modelInstanceType.getId(), modelInstanceType);
+		this.modelInstanceTypes.put(modelInstanceType.getId(),
+				modelInstanceType);
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -190,6 +199,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#dispose()
 	 */
 	public void dispose() {
@@ -205,31 +215,36 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceTypeRegistry#
 	 * getModelInstanceType(java.lang.String)
 	 */
 	public IModelInstanceType getModelInstanceType(String id) {
-	
+
 		IModelInstanceType result;
-	
+
+		if (this.modelInstanceTypes == null)
+			this.modelInstanceTypes = new HashMap<String, IModelInstanceType>();
+		// no else.
+
 		result = this.modelInstanceTypes.get(id);
-	
+
 		if (result == null) {
 			String msg;
-	
-			msg =
-					"The ModelInstanceType with the given id '" + id
-							+ "' does not exist.";
-	
-			throw new IllegalStateException(msg);
+
+			msg = "The ModelInstanceType with the given id '" + id
+					+ "' does not exist.";
+
+			LOGGER.warn(msg);
 		}
 		// no else.
-	
+
 		return result;
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seetudresden.ocl20.pivot.modelbus.IModelInstanceFileFormatRegistry#
 	 * getFileFormats()
 	 */
@@ -242,9 +257,8 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		}
 
 		else {
-			result =
-					this.modelInstanceTypes.values().toArray(
-							new IModelInstanceType[this.modelInstanceTypes.size()]);
+			result = this.modelInstanceTypes.values().toArray(
+					new IModelInstanceType[this.modelInstanceTypes.size()]);
 		}
 
 		return result;
@@ -252,6 +266,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
 	 * .runtime.IExtension[])
@@ -272,8 +287,8 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 						.getConfigurationElements()) {
 
 					String modelInstanceTypeID;
-					modelInstanceTypeID =
-							this.getAttribute(IDescriptor.ATT_ID, configurationElement);
+					modelInstanceTypeID = this.getAttribute(IDescriptor.ATT_ID,
+							configurationElement);
 
 					if (modelInstanceTypeID != null) {
 						this.modelInstanceTypes.remove(modelInstanceTypeID);
@@ -294,6 +309,7 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.IRegistryEventListener#removed(org.eclipse.core
 	 * .runtime.IExtensionPoint[])
@@ -306,26 +322,26 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 	/**
 	 * <p>
 	 * Helper method that returns the value of an attribute of the given
-	 * {@link IConfigurationElement}. Throws an {@link InvalidDescriptorException}
-	 * if the attribute is empty and required.
+	 * {@link IConfigurationElement}. Throws an
+	 * {@link InvalidDescriptorException} if the attribute is empty and
+	 * required.
 	 * </p>
 	 * 
 	 * @param attributeName
-	 *          The name of the extension point attribute.
+	 *            The name of the extension point attribute.
 	 * @param configurationElement
-	 *          The {@link IllegalClassException} whose attribute shall be
-	 *          returned.
+	 *            The {@link IllegalClassException} whose attribute shall be
+	 *            returned.
 	 * 
 	 * @throws InvalidDescriptorException
-	 *           If the value of the attribute is invalid.
+	 *             If the value of the attribute is invalid.
 	 */
 	private String getAttribute(String attributeName,
 			IConfigurationElement configurationElement) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
-							+ ") - enter"); //$NON-NLS-1$
+			LOGGER.debug("getAttribute(attributeName=" + attributeName + ", configurationElement=" + configurationElement //$NON-NLS-1$ //$NON-NLS-2$
+					+ ") - enter"); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -349,21 +365,28 @@ public class ModelInstanceTypeRegistry implements IModelInstanceTypeRegistry,
 		IExtensionPoint result;
 
 		/* Get the point from the registry. */
-		result =
-				Platform.getExtensionRegistry().getExtensionPoint(
-						MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID);
+		if (Platform.isRunning()) {
+			result = Platform.getExtensionRegistry().getExtensionPoint(
+					MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID);
 
-		/* This should not happen unless the id changes. */
-		if (result == null) {
-			String msg;
+			/* This should not happen unless the id changes. */
+			if (result == null) {
+				String msg;
 
-			msg = "The extension point for new model instance types could not ";
-			msg += "be found under the id ";
-			msg += MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID;
+				msg = "The extension point for new model instance types could not ";
+				msg += "be found under the id ";
+				msg += MODEL_INSTANCE_TYPE_EXTENSION_POINT_ID;
 
-			throw new IllegalStateException(msg);
+				throw new IllegalStateException(msg);
+			}
+			// no else.
 		}
-		// no else.
+
+		else {
+			System.out
+					.println("Platform is not running. Please register ModelInstanceTypes manually.");
+			result = null;
+		}
 
 		return result;
 	}

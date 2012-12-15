@@ -1,5 +1,8 @@
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
+import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import tudresden.ocl20.pivot.model.IModel;
@@ -10,6 +13,7 @@ import tudresden.ocl20.pivot.model.IModelRegistry;
  * refer to OCL constructs.
  * 
  * @author Michael Thiele
+ * @author Lars Schuetze
  * 
  */
 public interface IOclResource extends Resource {
@@ -28,6 +32,6 @@ public interface IOclResource extends Resource {
 	 * 
 	 * @return the active {@link IModel} for this OCL resource
 	 */
-	public IModel getModel();
+	public IModel getModel(List<EObject> from);
 
 }

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Restored Target" sequenceNumber="6">
+<locations>
+<location path="${eclipse_home}" type="Profile"/>
+</locations>
+<includeBundles>
+<plugin id="org.w3c.dom.events"/>
+<plugin id="org.eclipse.ant.core"/>
+<plugin id="org.eclipse.emf.ecore.source"/>
+<plugin id="org.apache.commons.lang"/>
+<plugin id="org.eclipse.uml2.uml.profile.l2.source"/>
+<plugin id="org.eclipse.core.databinding"/>
+<plugin id="org.eclipse.emf.transaction.source"/>
+<plugin id="org.eclipse.emf"/>
+<plugin id="org.eclipse.jdt.core.source"/>
+<plugin id="org.eclipse.emf.ecore.edit.source"/>
+<plugin id="org.eclipse.emf.common.ui.source"/>
+<plugin id="org.eclipse.e4.ui.workbench3.source"/>
+<plugin id="org.aspectj.runtime"/>
+<plugin id="org.eclipse.emf.edit"/>
+<plugin id="org.emftext.access"/>
+<plugin id="javax.inject"/>
+<plugin id="org.eclipse.e4.ui.bindings"/>
+<plugin id="org.eclipse.uml2.uml.profile.l2"/>
+<plugin id="org.w3c.dom.svg"/>
+<plugin id="org.eclipse.emf.ecore.change.source"/>
+<plugin id="org.eclipse.core.filesystem.win32.x86_64"/>
+<plugin id="org.eclipse.jface.databinding.source"/>
+<plugin id="org.eclipse.debug.core.source"/>
+<plugin id="org.eclipse.e4.ui.widgets.source"/>
+<plugin id="org.w3c.dom.smil" version="1.0.1.v200903091627"/>
+<plugin id="org.eclipse.jface.text.source"/>
+<plugin id="org.junit" version="3.8.2.v3_8_2_v20100427-1100"/>
+<plugin id="org.eclipse.emf.common"/>
+<plugin id="org.w3c.dom.svg.source"/>
+<plugin id="org.eclipse.equinox.event.source"/>
+<plugin id="org.eclipse.emf.common.ui"/>
+<plugin id="org.eclipse.equinox.app.source"/>
+<plugin id="org.eclipse.emf.edit.source"/>
+<plugin id="org.eclipse.core.databinding.property.source"/>
+<plugin id="org.eclipse.ui.editors"/>
+<plugin id="org.w3c.dom.smil.source"/>
+<plugin id="org.eclipse.emf.ecore.xmi.source"/>
+<plugin id="org.eclipse.osgi"/>
+<plugin id="org.eclipse.equinox.weaving.hook.source"/>
+<plugin id="javax.servlet"/>
+<plugin id="org.eclipse.emf.mapping.ecore2xml.source"/>
+<plugin id="org.eclipse.swt"/>
+<plugin id="org.eclipse.e4.core.services"/>
+<plugin id="org.eclipse.jdt.compiler.apt.source"/>
+<plugin id="org.eclipse.core.jobs"/>
+<plugin id="org.eclipse.equinox.security.win32.x86_64"/>
+<plugin id="org.eclipse.e4.ui.workbench3"/>
+<plugin id="org.eclipse.emf.mapping.ecore2xml"/>
+<plugin id="org.eclipse.e4.ui.workbench.swt.source"/>
+<plugin id="org.eclipse.ui.source"/>
+<plugin id="org.emftext.commons.antlr3_3_0"/>
+<plugin id="javax.servlet.source"/>
+<plugin id="org.eclipse.equinox.app"/>
+<plugin id="org.eclipse.equinox.p2.repository.source"/>
+<plugin id="javax.annotation"/>
+<plugin id="org.eclipse.e4.core.commands.source"/>
+<plugin id="org.eclipse.e4.ui.css.swt"/>
+<plugin id="org.eclipse.core.runtime.compatibility.registry"/>
+<plugin id="org.eclipse.core.filebuffers.source"/>
+<plugin id="org.eclipse.jdt.core"/>
+<plugin id="org.eclipse.e4.ui.css.swt.theme.source"/>
+<plugin id="org.w3c.css.sac"/>
+<plugin id="org.apache.batik.util.source"/>
+<plugin id="org.eclipse.emf.codegen"/>
+<plugin id="org.eclipse.e4.ui.model.workbench.source"/>
+<plugin id="org.hamcrest.core.source"/>
+<plugin id="org.eclipse.e4.ui.css.core"/>
+<plugin id="org.eclipse.core.databinding.property"/>
+<plugin id="org.eclipse.e4.core.di.source"/>
+<plugin id="org.eclipse.equinox.event"/>
+<plugin id="org.eclipse.equinox.security"/>
+<plugin id="org.eclipse.help"/>
+<plugin id="org.eclipse.ui.workbench"/>
+<plugin id="org.junit4"/>
+<plugin id="org.apache.batik.util.gui.source"/>
+<plugin id="org.eclipse.e4.core.commands"/>
+<plugin id="org.eclipse.emf.codegen.source"/>
+<plugin id="org.eclipse.equinox.ds.source"/>
+<plugin id="org.eclipse.e4.ui.model.workbench"/>
+<plugin id="org.eclipse.uml2.uml.resources.source"/>
+<plugin id="org.apache.batik.css"/>
+<plugin id="org.apache.batik.util.gui"/>
+<plugin id="org.eclipse.text.source"/>
+<plugin id="org.eclipse.emf.ecore.change"/>
+<plugin id="org.eclipse.core.databinding.source"/>
+<plugin id="org.eclipse.core.variables"/>
+<plugin id="org.eclipse.ant.core.source"/>
+<plugin id="org.eclipse.ui.ide"/>
+<plugin id="org.eclipse.team.core"/>
+<plugin id="org.eclipse.equinox.ds"/>
+<plugin id="org.eclipse.jdt.debug.source"/>
+<plugin id="com.ibm.icu.source"/>
+<plugin id="org.eclipse.uml2.uml"/>
+<plugin id="org.eclipse.jdt.launching"/>
+<plugin id="org.junit.source" version="4.10.0.v4_10_0_v20120426-0900"/>
+<plugin id="org.eclipse.equinox.p2.metadata.source"/>
+<plugin id="org.eclipse.e4.ui.widgets"/>
+<plugin id="org.eclipse.osgi.services"/>
+<plugin id="org.eclipse.ui.workbench.texteditor.source"/>
+<plugin id="org.eclipse.core.contenttype.source"/>
+<plugin id="org.eclipse.e4.core.contexts"/>
+<plugin id="org.eclipse.equinox.p2.metadata.repository"/>
+<plugin id="org.eclipse.equinox.util.source"/>
+<plugin id="org.eclipse.e4.ui.workbench.source"/>
+<plugin id="org.eclipse.core.filesystem.source"/>
+<plugin id="org.eclipse.equinox.preferences.source"/>
+<plugin id="org.eclipse.swt.win32.win32.x86_64"/>
+<plugin id="org.eclipse.jface.databinding"/>
+<plugin id="org.w3c.css.sac.source"/>
+<plugin id="org.eclipse.e4.ui.workbench.swt"/>
+<plugin id="org.eclipse.e4.ui.css.swt.source"/>
+<plugin id="org.eclipse.core.jobs.source"/>
+<plugin id="org.eclipse.core.runtime.compatibility.registry.source"/>
+<plugin id="org.eclipse.ui.forms"/>
+<plugin id="org.eclipse.emf.ecore.edit"/>
+<plugin id="org.eclipse.text"/>
+<plugin id="org.eclipse.ui.workbench.texteditor"/>
+<plugin id="org.eclipse.team.core.source"/>
+<plugin id="org.eclipse.xsd.source"/>
+<plugin id="org.eclipse.jdt.launching.source"/>
+<plugin id="org.eclipse.ui.workbench.source"/>
+<plugin id="org.eclipse.ui.ide.source"/>
+<plugin id="org.apache.batik.css.source"/>
+<plugin id="org.eclipse.core.databinding.observable.source"/>
+<plugin id="org.eclipse.compare.core"/>
+<plugin id="com.ibm.icu"/>
+<plugin id="org.eclipse.e4.core.services.source"/>
+<plugin id="org.eclipse.emf.validation"/>
+<plugin id="org.eclipse.core.filebuffers"/>
+<plugin id="org.eclipse.uml2.uml.resources"/>
+<plugin id="org.eclipse.equinox.p2.metadata"/>
+<plugin id="org.eclipse.jface.text"/>
+<plugin id="org.eclipse.swt.win32.win32.x86_64.source"/>
+<plugin id="org.junit.source" version="3.8.2.v3_8_2_v20100427-1100"/>
+<plugin id="org.eclipse.uml2.types"/>
+<plugin id="org.eclipse.osgi.services.source"/>
+<plugin id="org.eclipse.emf.edit.ui"/>
+<plugin id="org.apache.log4j"/>
+<plugin id="org.eclipse.jface"/>
+<plugin id="org.eclipse.jdt.debug"/>
+<plugin id="org.eclipse.core.resources.source"/>
+<plugin id="org.eclipse.e4.ui.services.source"/>
+<plugin id="org.eclipse.ui.editors.source"/>
+<plugin id="org.eclipse.equinox.p2.engine"/>
+<plugin id="org.eclipse.equinox.preferences"/>
+<plugin id="org.eclipse.compare.core.source"/>
+<plugin id="org.eclipse.e4.core.di.extensions.source"/>
+<plugin id="org.eclipse.uml2.types.source"/>
+<plugin id="org.eclipse.emf.common.source"/>
+<plugin id="org.eclipse.jdt.compiler.tool"/>
+<plugin id="org.eclipse.jdt.compiler.tool.source"/>
+<plugin id="org.eclipse.emf.ecore"/>
+<plugin id="org.eclipse.equinox.p2.metadata.repository.source"/>
+<plugin id="org.eclipse.core.runtime.compatibility.auth"/>
+<plugin id="org.eclipse.emf.workspace.source"/>
+<plugin id="org.eclipse.core.contenttype"/>
+<plugin id="org.eclipse.core.runtime.source"/>
+<plugin id="org.eclipse.jdt.compiler.apt"/>
+<plugin id="org.eclipse.e4.ui.css.core.source"/>
+<plugin id="org.eclipse.equinox.registry"/>
+<plugin id="org.eclipse.emf.edit.ui.source"/>
+<plugin id="org.eclipse.equinox.p2.core"/>
+<plugin id="org.eclipse.uml2.common.source"/>
+<plugin id="org.eclipse.equinox.weaving.hook" version="1.0.200.I20120427-0800"/>
+<plugin id="org.eclipse.e4.ui.workbench.renderers.swt"/>
+<plugin id="org.eclipse.equinox.common"/>
+<plugin id="org.eclipse.equinox.common.source"/>
+<plugin id="org.eclipse.e4.core.di.extensions"/>
+<plugin id="org.eclipse.e4.ui.css.swt.theme"/>
+<plugin id="org.eclipse.equinox.security.source"/>
+<plugin id="org.eclipse.emf.ecore.xmi"/>
+<plugin id="org.eclipse.equinox.util"/>
+<plugin id="org.eclipse.xsd"/>
+<plugin id="org.eclipse.equinox.registry.source"/>
+<plugin id="org.eclipse.core.expressions.source"/>
+<plugin id="org.eclipse.core.databinding.observable"/>
+<plugin id="org.eclipse.jface.source"/>
+<plugin id="org.eclipse.equinox.p2.repository"/>
+<plugin id="org.eclipse.e4.core.di"/>
+<plugin id="org.eclipse.core.commands.source"/>
+<plugin id="org.eclipse.core.filesystem"/>
+<plugin id="org.eclipse.emf.codegen.ecore"/>
+<plugin id="org.eclipse.ui.win32.source"/>
+<plugin id="org.eclipse.osgi.source"/>
+<plugin id="org.eclipse.uml2.uml.profile.l3"/>
+<plugin id="org.hamcrest.core"/>
+<plugin id="org.eclipse.uml2.uml.profile.l3.source"/>
+<plugin id="org.eclipse.ui"/>
+<plugin id="org.eclipse.e4.core.contexts.source"/>
+<plugin id="org.eclipse.ui.views"/>
+<plugin id="org.eclipse.ui.views.source"/>
+<plugin id="org.w3c.dom.events.source"/>
+<plugin id="org.eclipse.core.runtime"/>
+<plugin id="org.eclipse.emf.transaction"/>
+<plugin id="org.eclipse.ui.forms.source"/>
+<plugin id="org.eclipse.e4.ui.services"/>
+<plugin id="org.eclipse.equinox.p2.core.source"/>
+<plugin id="org.eclipse.emf.codegen.ecore.source"/>
+<plugin id="org.eclipse.e4.ui.di.source"/>
+<plugin id="org.eclipse.equinox.p2.engine.source"/>
+<plugin id="org.eclipse.equinox.weaving.hook" version="1.0.200.v20120524-1707"/>
+<plugin id="org.eclipse.core.expressions"/>
+<plugin id="org.eclipse.debug.core"/>
+<plugin id="org.eclipse.core.variables.source"/>
+<plugin id="org.eclipse.emf.workspace"/>
+<plugin id="org.eclipse.e4.ui.workbench"/>
+<plugin id="org.eclipse.e4.ui.bindings.source"/>
+<plugin id="org.eclipse.uml2.common"/>
+<plugin id="org.eclipse.uml2.uml.source"/>
+<plugin id="org.eclipse.emf.validation.source"/>
+<plugin id="org.w3c.dom.smil" version="1.0.0.v200806040011"/>
+<plugin id="org.eclipse.equinox.security.win32.x86_64.source"/>
+<plugin id="org.eclipse.ui.win32"/>
+<plugin id="org.eclipse.core.commands"/>
+<plugin id="org.junit" version="4.10.0.v4_10_0_v20120426-0900"/>
+<plugin id="org.eclipse.e4.ui.workbench.renderers.swt.source"/>
+<plugin id="org.eclipse.help.source"/>
+<plugin id="org.eclipse.e4.ui.di"/>
+<plugin id="org.eclipse.core.resources"/>
+<plugin id="org.apache.batik.util"/>
+</includeBundles>
+<environment>
+<os>win32</os>
+<ws>win32</ws>
+<arch>x86_64</arch>
+<nl>de_DE</nl>
+</environment>
+</target>

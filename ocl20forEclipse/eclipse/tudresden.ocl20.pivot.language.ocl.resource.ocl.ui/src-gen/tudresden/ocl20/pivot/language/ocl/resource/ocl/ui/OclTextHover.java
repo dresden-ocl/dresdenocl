@@ -10,10 +10,11 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  * A class to display the information of an element. Most of the code is taken
  * from <code>org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover</code>.
  */
-public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.eclipse.jface.text.ITextHoverExtension, org.eclipse.jface.text.ITextHoverExtension2{
+public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.eclipse.jface.text.ITextHoverExtension, org.eclipse.jface.text.ITextHoverExtension2 {
 	
 	private static final String FONT = org.eclipse.jface.resource.JFaceResources.DIALOG_FONT;
-	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+	
+	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider;
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclHoverTextProvider hoverTextProvider;
 	/**
 	 * The style sheet (css).
@@ -197,14 +198,20 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	/**
 	 * Creates a new TextHover to collect the information about the hovered element.
 	 */
-	public OclTextHover(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+	public OclTextHover(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclResourceProvider resourceProvider) {
 		super();
-		this.editor = editor;
-		hoverTextProvider = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation().getHoverTextProvider();
+		this.resourceProvider = resourceProvider;
+		this.hoverTextProvider = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIMetaInformation().getHoverTextProvider();
 	}
 	
+	// The warning about overriding or implementing a deprecated API cannot be avoided
+	// because the SourceViewerConfiguration class depends on ITextHover.
 	public String getHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
-		return ((tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) getHoverInfo2(textViewer, hoverRegion)).getHtml();
+		Object hoverInfo = getHoverInfo2(textViewer, hoverRegion);
+		if (hoverInfo == null) {
+			return null;
+		}
+		return ((tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput) hoverInfo).getHtml();
 	}
 	
 	public org.eclipse.jface.text.IRegion getHoverRegion(org.eclipse.jface.text.ITextViewer textViewer, int offset) {
@@ -217,7 +224,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	
 	public org.eclipse.jface.text.IInformationControlCreator getHoverControlCreator() {
 		if (hoverControlCreator == null) {
-			hoverControlCreator = new HoverControlCreator(			getInformationPresenterControlCreator());
+			hoverControlCreator = new HoverControlCreator(getInformationPresenterControlCreator());
 		}
 		return hoverControlCreator;
 	}
@@ -234,7 +241,10 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	}
 	
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput internalGetHoverInfo(org.eclipse.jface.text.ITextViewer textViewer, org.eclipse.jface.text.IRegion hoverRegion) {
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = editor.getResource();
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
+		if (textResource == null) {
+			return null;
+		}
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(hoverRegion.getOffset());
 		if (elementsAtOffset == null || elementsAtOffset.size() == 0) {
@@ -257,11 +267,12 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 	private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput getHoverInfo(java.util.List<org.eclipse.emf.ecore.EObject> elements, org.eclipse.jface.text.ITextViewer textViewer, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput previousInput) {
 		StringBuffer buffer = new StringBuffer();
 		org.eclipse.emf.ecore.EObject proxyObject = getFirstProxy(elements);
+		org.eclipse.emf.ecore.EObject containerObject = getFirstNonProxy(elements);
 		org.eclipse.emf.ecore.EObject declarationObject = null;
 		// get the token text, which is hovered. It is needed to jump to the declaration.
 		String tokenText = "";
 		if (proxyObject != null) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = editor.getResource();
+			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource textResource = resourceProvider.getResource();
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 			int offset = locationMap.getCharStart(proxyObject);
 			int length = locationMap.getCharEnd(proxyObject) + 1 - offset;
@@ -269,9 +280,9 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 				tokenText = textViewer.getDocument().get(offset, length);
 			} catch (org.eclipse.jface.text.BadLocationException e) {
 			}
-			declarationObject = org.eclipse.emf.ecore.util.EcoreUtil.resolve(proxyObject, editor.getResource());
+			declarationObject = org.eclipse.emf.ecore.util.EcoreUtil.resolve(proxyObject, resourceProvider.getResource());
 			if (declarationObject != null) {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(declarationObject));
+				tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(containerObject, declarationObject));
 			}
 		} else {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addParagraph(buffer, hoverTextProvider.getHoverText(elements.get(0)));
@@ -279,7 +290,7 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		if (buffer.length() > 0) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.insertPageProlog(buffer, 0, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclTextHover.getStyleSheet());
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.addPageEpilog(buffer);
-			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput(previousInput, declarationObject, editor.getResource(), buffer.toString(), tokenText);
+			return new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclDocBrowserInformationControlInput(previousInput, declarationObject, resourceProvider.getResource(), buffer.toString(), tokenText);
 		}
 		return null;
 	}
@@ -296,10 +307,8 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		String css = styleSheet;
 		// Sets background color for the hover text window
 		css += "body {background-color:#FFFFE1;}\n";
-		if (css != null) {
-			org.eclipse.swt.graphics.FontData fontData = org.eclipse.jface.resource.JFaceResources.getFontRegistry().getFontData(FONT)[0];
-			css = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.convertTopLevelFont(css, fontData);
-		}
+		org.eclipse.swt.graphics.FontData fontData = org.eclipse.jface.resource.JFaceResources.getFontRegistry().getFontData(FONT)[0];
+		css = tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclHTMLPrinter.convertTopLevelFont(css, fontData);
 		
 		return css;
 	}
@@ -313,39 +322,30 @@ public class OclTextHover implements org.eclipse.jface.text.ITextHover, org.ecli
 		org.osgi.framework.Bundle bundle = org.eclipse.core.runtime.Platform.getBundle(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.PLUGIN_ID);
 		java.net.URL styleSheetURL = bundle.getEntry("/css/hover_style.css");
 		if (styleSheetURL != null) {
-			java.io.BufferedReader reader = null;
 			try {
-				reader = new java.io.BufferedReader(new java.io.InputStreamReader(styleSheetURL.openStream()));
-				StringBuffer buffer = new StringBuffer();
-				String line = reader.readLine();
-				while (line != null) {
-					buffer.append(line);
-					buffer.append('\n');
-					line = reader.readLine();
-				}
-				return buffer.toString();
+				return tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclStreamUtil.getContent(styleSheetURL.openStream());
 			} catch (java.io.IOException ex) {
 				ex.printStackTrace();
-				return "";
-			} finally {
-				try {
-					if (reader != null) {
-						reader.close();
-					}
-				} catch (java.io.IOException e) {
-					e.printStackTrace();
-				}
 			}
 		}
-		return null;
+		return "";
 	}
 	
 	private static org.eclipse.emf.ecore.EObject getFirstProxy(java.util.List<org.eclipse.emf.ecore.EObject> elements) {
+		return getFirstObject(elements, true);
+	}
+	
+	private static org.eclipse.emf.ecore.EObject getFirstNonProxy(java.util.List<org.eclipse.emf.ecore.EObject> elements) {
+		return getFirstObject(elements, false);
+	}
+	
+	private static org.eclipse.emf.ecore.EObject getFirstObject(java.util.List<org.eclipse.emf.ecore.EObject> elements, boolean proxy) {
 		for (org.eclipse.emf.ecore.EObject object : elements) {
-			if (object.eIsProxy()) {
+			if (proxy == object.eIsProxy()) {
 				return object;
 			}
 		}
 		return null;
 	}
+	
 }

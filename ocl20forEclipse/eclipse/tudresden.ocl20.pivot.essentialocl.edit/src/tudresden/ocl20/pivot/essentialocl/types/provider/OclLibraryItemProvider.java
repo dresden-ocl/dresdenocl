@@ -71,6 +71,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 * @generated
 	 */
 	public OclLibraryItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -82,6 +83,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -101,6 +103,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN);
@@ -129,6 +132,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
+
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -142,8 +146,9 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/OclLibrary")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/OclLibrary")); //$NON-NLS-1$
 	}
 
 	/**
@@ -154,6 +159,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return getString("_UI_OclLibrary_type"); //$NON-NLS-1$
 	}
 
@@ -165,6 +171,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(OclLibrary.class)) {
@@ -182,8 +189,8 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 		case TypesPackageImpl.OCL_LIBRARY__OCL_SET:
 		case TypesPackageImpl.OCL_LIBRARY__OCL_ORDERED_SET:
 		case TypesPackageImpl.OCL_LIBRARY__OCL_TUPLE:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -205,11 +212,12 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID, TypesFactory.INSTANCE
-						.createVoidType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_VOID,
+				TypesFactory.INSTANCE.createVoidType()));
 
 		newChildDescriptors.add(createChildParameter(
 				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN,
@@ -232,12 +240,12 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 				TypesFactory.INSTANCE.createInvalidType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE, TypesFactory.INSTANCE
-						.createTypeType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TYPE,
+				TypesFactory.INSTANCE.createTypeType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY, TypesFactory.INSTANCE
-						.createAnyType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ANY,
+				TypesFactory.INSTANCE.createAnyType()));
 
 		newChildDescriptors.add(createChildParameter(
 				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_COLLECTION,
@@ -248,20 +256,20 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 				TypesFactory.INSTANCE.createSequenceType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG, TypesFactory.INSTANCE
-						.createBagType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BAG,
+				TypesFactory.INSTANCE.createBagType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET, TypesFactory.INSTANCE
-						.createSetType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_SET,
+				TypesFactory.INSTANCE.createSetType()));
 
 		newChildDescriptors.add(createChildParameter(
 				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_ORDERED_SET,
 				TypesFactory.INSTANCE.createOrderedSetType()));
 
 		newChildDescriptors.add(createChildParameter(
-				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE, TypesFactory.INSTANCE
-						.createTupleType()));
+				TypesPackageImpl.Literals.OCL_LIBRARY__OCL_TUPLE,
+				TypesFactory.INSTANCE.createTupleType()));
 	}
 
 	/**
@@ -277,13 +285,15 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	@Override
 	public String getCreateChildText(Object owner, Object feature, Object child,
 			Collection<?> selection) {
+
 		Object childFeature = feature;
 		Object childObject = child;
 
-		boolean qualify = childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN
-				|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING
-				|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER
-				|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL;
+		boolean qualify =
+				childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_BOOLEAN
+						|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_STRING
+						|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_INTEGER
+						|| childFeature == TypesPackageImpl.Literals.OCL_LIBRARY__OCL_REAL;
 
 		if (qualify) {
 			return getString("_UI_CreateChild_text2", //$NON-NLS-1$
@@ -301,6 +311,7 @@ public class OclLibraryItemProvider extends ItemProviderAdapter implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

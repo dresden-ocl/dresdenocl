@@ -1,4 +1,5 @@
 group javaExpressions;
+delimiters "$","$"
 
 // ---- TEMPLATES FOR JAVA EXPRESSIONS ----
 // ----------------------------------------
@@ -11,8 +12,8 @@ $collectionType$ $collectionName$;
 $collectionName$ = new $collectionType$();
 $if(elementExps)$
 
-$elementCodes, elementExps:{code, exp | $if(code)$$code$$endif$$exp$}; separator = "\n"$$endif$
-
+$elementCodes, elementExps:{code, exp | $if(code)$$code$$endif$$exp$}; separator = "\n"$
+$endif$
 >>
 
 
@@ -51,8 +52,7 @@ $ifCode$if ($ifExp$) {
 
 // --- InvalidLiteralExp ---
 invalidLiteralExp(resultType) ::= <<
-$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()
->>
+$if(resultType)$($resultType$)$else$($anyType()$)$endif$ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.OclInvalidException.getInvalidLiteral()>>
 
 
 // --- IterateExp ---
@@ -82,6 +82,46 @@ for ($itType$ $itVar$ : $sourceExp$) {
     // no else
 }
 
+>>
+
+
+// --- IteratorExp for Iterator Closure ---
+iteratorExp_closure(sourceCode, sourceExp, itVar, itType, bodyCode, bodyExp, bodyResultType, bodyResultsInCollection, bodyResultVar, toVisitVar, resultVar, resultType) ::= <<
+/* Compute closure iterator. */
+$sourceCode$$resultType$ $resultVar$;
+$resultVar$ = new $resultType$();
+$resultType$ $toVisitVar$ = new $resultType$();
+$toVisitVar$.addAll($sourceExp$);
+        
+while ($toVisitVar$.size() > 0) {
+	$itType$ $itVar$ = $toVisitVar$.iterator().next();
+    $toVisitVar$.remove($itVar$);
+        	
+    /* This is the body. */
+    $bodyCode$
+    $bodyResultType$ $bodyResultVar$ = $bodyExp$;
+    $if(bodyResultsInCollection)$    	
+	if ($bodyResultVar$ != null) {
+		// TODO replace anElem with generated var.
+		for ($itType$ anElem : $bodyResultVar$) {
+			if(!$resultVar$.contains(anElem)) {
+        		$resultVar$.$addOperationName()$(anElem);
+        		$toVisitVar$.$addOperationName()$(anElem);
+        	}
+        	// no else.
+        }
+        // end for.
+    }
+    // no else.
+    $else$
+	if ($bodyResultVar$ != null && !$resultVar$.contains($bodyResultVar$)) {
+        $resultVar$.$addOperationName()$($bodyResultVar$);
+        $toVisitVar$.$addOperationName()$($bodyResultVar$);
+    }
+    // no else.
+    $endif$
+}
+// end while.
 >>
 
 
@@ -245,9 +285,9 @@ $comparatorName$ = new java.util.Comparator<$itType$>() {
         $bodyCode$$bodyCode2$$compareResult$ = 0;
 
         if ($bodyExp$ < $bodyExp2$) {
-            $compareResult$ = -1;
-        } else if ($bodyExp$ > $bodyExp2$) {
             $compareResult$ = 1;
+        } else if ($bodyExp$ > $bodyExp2$) {
+            $compareResult$ = -1;
         }
 
         return $compareResult$;
@@ -265,10 +305,8 @@ $varType$ $varName$;
 $if(initCode)$
 $initCode$
 $endif$
-
 $if(initExp)$
 $varName$ = $initExp$;
-
 
 $endif$
 $inCode$
@@ -307,9 +345,7 @@ $tupleName$ = new $tupleType()$();
 $if(argNames)$
 
 $argNames, argCodes, argExps:{name, code, exp | $if(code)$$code$$endif$$tupleName$.put("$name$", $exp$);}; separator = "\n"$
-
 $endif$
-
 >>
 
 

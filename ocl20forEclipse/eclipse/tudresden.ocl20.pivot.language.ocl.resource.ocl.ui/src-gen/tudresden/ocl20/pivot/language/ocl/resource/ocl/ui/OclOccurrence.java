@@ -77,6 +77,9 @@ public class OclOccurrence {
 		}
 		int caretOffset = textWidget.getCaretOffset();
 		caretOffset = projectionViewer.widgetOffset2ModelOffset(caretOffset);
+		if (textResource == null) {
+			return null;
+		}
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		java.util.List<org.eclipse.emf.ecore.EObject> elementsAtOffset = locationMap.getElementsAt(caretOffset);
 		
@@ -87,8 +90,9 @@ public class OclOccurrence {
 			if (candidate.eIsProxy()) {
 				candidate = getResolvedEObject(candidate);
 			}
-			// take an element that is actually contained in a resource. the location map
-			// might reference elements that were removed by a post processor
+			// Only accept elements that are actually contained in a resource. The location
+			// map might reference elements that were removed by a post processor and which
+			// are therefore not part of the resource anymore.
 			if (candidate.eResource() != null) {
 				return candidate;
 			}
@@ -182,8 +186,7 @@ public class OclOccurrence {
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclLocationMap locationMap = textResource.getLocationMap();
 		org.eclipse.jface.text.rules.IToken token;
 		int defPosition = -1;
-		boolean isNull = definitionElement == null;
-		if (isNull) {
+		if (definitionElement == null) {
 			definitionElement = elementsAtDefinition.get(0);
 		}
 		org.eclipse.emf.ecore.resource.Resource resource = definitionElement.eResource();
@@ -211,7 +214,7 @@ public class OclOccurrence {
 			if (text != null && text.equals(tokenText) && tokenScanner.getTokenOffset() != defPosition) {
 				occEO = tryToResolve(locationMap.getElementsAt(tokenScanner.getTokenOffset()));
 				if (occEO != null) {
-					if ((isNull && elementsAtDefinition.contains(occEO)) || !isNull && definitionElement.equals(occEO)) {
+					if (elementsAtDefinition.contains(occEO) || definitionElement.equals(occEO)) {
 						addAnnotation(document, tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclPositionCategory.PROXY, text);
 					}
 				}

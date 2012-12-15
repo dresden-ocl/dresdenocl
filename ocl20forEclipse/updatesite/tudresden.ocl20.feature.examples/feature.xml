@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="tudresden.ocl20.feature.examples"
-      label="Dresden OCL2 for Eclipse Examples"
-      version="3.0.2.qualifier"
+      label="Dresden OCL Examples"
+      version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
    <install-handler library="" handler=""/>
 
    <description url="http://www.example.com/description">
-      Examples for DresdenOCL.
+      This feature contains example projects for Dresden OCL. Some UML, EMF Ecore, XML and Java models and OCL constraints are provided as well as some model instances that can be used for interpretation. Code generation examples are provided as well.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -189,7 +189,30 @@ Library.
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.metamodels.xsd" version="2.1.0" match="greaterOrEqual"/>
       <import plugin="tudresden.ocl20.pivot.modelinstancetype.xml" version="2.1.0" match="greaterOrEqual"/>
-      <import plugin="tudresden.ocl20.pivot.testsuite" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.common.ui"/>
+      <import plugin="tudresden.ocl20.logging"/>
+      <import plugin="tudresden.ocl20.pivot.examples.royalandloyal" version="3.1.0" match="greaterOrEqual"/>
+      <import plugin="org.junit" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="tudresden.ocl20.pivot.modelbus"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.ecore"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.java"/>
+      <import plugin="tudresden.ocl20.pivot.metamodels.uml2"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.uml2.uml"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.java"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.resource.ocl"/>
+      <import plugin="tudresden.ocl20.pivot.language.ocl.staticsemantics"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore"/>
+      <import plugin="org.eclipse.xsd"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template"/>
+      <import plugin="tudresden.ocl20.pivot.tools.template.sql"/>
+      <import plugin="tudresden.ocl20.pivot.tools.transformation"/>
+      <import plugin="tudresden.ocl20.pivot.tools.transformation.pivot2sql"/>
+      <import plugin="tudresden.ocl20.pivot.modelinstancetype.ecore.testmodel"/>
    </requires>
 
    <plugin
@@ -222,6 +245,20 @@ Library.
 
    <plugin
          id="tudresden.ocl20.pivot.examples.university"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="tudresden.ocl20.pivot.examples.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.testsuite.abstract"
          download-size="0"
          install-size="0"
          version="0.0.0"

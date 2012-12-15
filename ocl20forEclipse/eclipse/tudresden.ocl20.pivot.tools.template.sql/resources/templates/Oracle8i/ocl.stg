@@ -1,0 +1,144 @@
+group oracle;
+delimiters "$","$"
+
+// --- OCL INVARIANT --- 
+constraint_invariant(constraint_name,context,context_alias,expression) ::= <<
+CREATE OR REPLACE VIEW $constraint_name$ AS
+(SELECT * FROM $context$ $context_alias$
+WHERE NOT ($expression$));
+>>
+
+// ---  COLLECTIONS - BAG (QUERY) --- 
+literal_collection_bag(items) ::= <<
+$items:literal_collection_bag_item(); separator="\nUNION ALL\n"$
+>>
+
+literal_collection_bag_item(item) ::= <<
+SELECT $item$ AS elem FROM DUAL
+>>
+
+
+// ---  COLLECTIONS - SEQUENCE (QUERY) --- 
+literal_collection_sequence(items) ::= <<
+$items:literal_collection_sequence_item(); separator="\nUNION\n"$
+>>
+
+literal_collection_sequence_item(item) ::= <<
+SELECT $item$ AS elem, $i$ AS seqno FROM DUAL
+>>
+
+
+// ---  COLLECTIONS - SET (QUERY) --- 
+literal_collection_set_item(item) ::= <<
+SELECT $item$ AS elem FROM DUAL
+>>
+
+
+// --- IF EXPRESSION ---
+if_expression(if_branch,then_branch,else_branch) ::= <<
+!!! no if-expressions supported !!!
+>>
+
+
+// --- COLLECTION RELATED OPERATIONS ---
+feature_call_count(object) ::= <<
+NVL(COUNT(*),0)
+>>
+
+feature_call_size(select) ::= <<
+NVL(COUNT(*),0)
+>>
+
+feature_call_sum(object) ::= <<
+NVL(SUM($object$),0)
+>>
+
+feature_call_excludes(operand2,operand1) ::= <<
+NOT EXISTS (
+  SELECT $operand2$ FROM DUAL
+  INTERSECT
+  ($operand1$))
+>>
+
+feature_call_includes(operand2,operand1) ::= <<
+EXISTS (
+  SELECT $operand2$ FROM DUAL
+  INTERSECT
+  ($operand1$))
+>>
+
+feature_call_includesall(operand1,operand2) ::= <<
+NOT EXISTS (
+  ($operand2$)
+  MINUS
+  ($operand1$))
+>>
+
+feature_call_including_bag(operand1,operand2) ::= <<
+($operand1$ UNION ALL
+  SELECT $operand2$ FROM DUAL)
+>>
+
+feature_call_including_sequence(operand1,operand2) ::= <<
+($operand1$)
+  UNION
+  (SELECT $operand2$, ((SELECT max(SEQNO) FROM ($operand1$)) + 1) AS SEQNO FROM DUAL)
+>>
+
+feature_call_including_set(operand1,operand2) ::= <<
+($operand1$ UNION
+  SELECT $operand2$ FROM DUAL)
+>>
+
+feature_call_excluding_bag(operand1,operand2,element) ::= <<
+($operand1$ MINUS
+  SELECT $operand2$ FROM DUAL)
+>>
+
+feature_call_excluding_sequence(operand1,operand2,element) ::= <<
+SELECT $operand2$,
+  (SELECT count(*)+1 FROM (
+    SELECT $operand2$, SEQNO
+    FROM $operand1$
+    WHERE NOT ($element$ = $operand2$)
+  ) WHERE SEQNO < s.SEQNO) AS SEQNO
+  FROM (
+    SELECT $operand2$, SEQNO
+    FROM $operand1$
+    WHERE NOT ($element$ = $operand2$)
+  )
+>>
+
+feature_call_excluding_set(operand1,operand2,element) ::= <<
+($operand1$ MINUS
+  SELECT $operand2$ FROM DUAL)
+>>
+
+feature_call_union_bag(operand1,operand2,element) ::= <<
+($operand1$ UNION ALL
+  $operand2$)
+>>
+
+feature_call_string_concat(operand1,operand2) ::= <<
+$operand1$ + $operand2$
+>>
+
+feature_call_string_substring(operand,start,end) ::= <<
+SUBSTR($operand$, $start$, $end$ - $start$ + 1)
+>>
+
+feature_call_string_matches(operand1,operand2) ::= <<
+REGEXP_LIKE($operand1$,$operand2$)
+>>
+
+feature_call_int_max(operand1,operand2) ::= <<
+GREATEST($operand1$,$operand2$)
+>>
+
+feature_call_int_min(operand1,operand2) ::= <<
+LEAST($operand1$,$operand2$)
+>>
+
+feature_call_int_mod(operand1,operand2) ::= <<
+$operand1$ - $operand2$ * FLOOR($operand1$/$operand2$)
+>>

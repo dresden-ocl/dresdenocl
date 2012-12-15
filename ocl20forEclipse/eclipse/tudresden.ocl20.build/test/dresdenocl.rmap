@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rmap xmlns="http://www.eclipse.org/buckminster/RMap-1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pmp="http://www.eclipse.org/buckminster/PDEMapProvider-1.0"
+	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0">
+
+	<property key="build.type" mutable="true" value="N" />
+
+	<searchPath name="dresdenocl.platform">
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="file:{0}">
+				<bc:propertyRef key="updatesiteURI" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="dresdenocl.tests">
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="svn" source="true">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/tests/{0}">
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="dresdenocl.experimental">
+		<provider componentTypes="osgi.bundle" readerType="svn"
+			source="true">
+			<uri
+				format="http://svn-st.inf.tu-dresden.de/svn/dresdenocl/trunk/ocl20forEclipse/experimental/{0}">
+				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="target.platform">
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://emftext.org/update" />
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/tools/ajdt/37/update" />
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/modeling/mdt/updates/releases/" />
+		</provider>
+		<provider componentTypes="eclipse.feature,osgi.bundle"
+			readerType="p2" source="false" mutable="false">
+			<uri format="http://download.eclipse.org/releases/indigo" />
+		</provider>
+	</searchPath>
+
+
+	<!-- the abstract testsuite has already been built -->
+	<locator searchPathRef="dresdenocl.platform" pattern="^org\.dresdenocl\.testsuite\.abstract"
+		failOnError="false" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\.tests"
+		failOnError="false" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^tudresden\.ocl20\..+\.test(\..+)?"
+		failOnError="false" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\..+\.test(\..+)?"
+		failOnError="false" />
+	<locator searchPathRef="dresdenocl.tests" pattern="^org\.dresdenocl\.testsuite(\..+)?" />
+	<locator searchPathRef="dresdenocl.experimental" pattern="^org\.dresdenocl\.examples\.uml(\..+)?" />
+	<locator searchPathRef="dresdenocl.platform" pattern="^tudresden(\..+)?" />
+	<locator searchPathRef="dresdenocl.platform" pattern="^org\.dresdenocl(\..+)?" />
+	<locator searchPathRef="dresdenocl.platform" pattern="^org\.kiama\.attribution" />
+	<locator searchPathRef="dresdenocl.platform" pattern="^scala\.library" />
+	<locator searchPathRef="target.platform" />
+
+</rmap>

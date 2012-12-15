@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generic Codegenerator UI
 Bundle-SymbolicName: tudresden.ocl20.pivot.tools.codegen.ui;singleton:=true
-Bundle-Version: 3.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Version: 3.2.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: tudresden.ocl20.pivot.tools.codegen,
  org.eclipse.core.runtime,
  org.eclipse.ui,

@@ -8,7 +8,6 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.util;
 
 public class OclCopiedEList<E> implements org.eclipse.emf.common.util.EList<E> {
 	
-	private static final long serialVersionUID = 604726114003869602L;
 	private org.eclipse.emf.common.util.EList<E> original;
 	private org.eclipse.emf.common.util.EList<E> copy;
 	

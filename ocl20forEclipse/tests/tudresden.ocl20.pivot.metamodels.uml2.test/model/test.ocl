@@ -1,0 +1,6 @@
+package package1
+
+context TestOperationAndParameterClass::voidOperationWithParameter(in1:TestTypeClass1)
+post: result.oclIsUndefined()
+
+endpackage

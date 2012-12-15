@@ -1,4 +1,5 @@
-package university
+-- @model{../model/university.uml}
+package tudresden::ocl20::pivot::examples::university
 
 context Person
 inv ageNonNegative: self.age > 0

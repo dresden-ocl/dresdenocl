@@ -1,7 +1,0 @@
-package testpackage
-
-context Class1
-def: defProperty01: Integer = 
-42
-
-endpackage

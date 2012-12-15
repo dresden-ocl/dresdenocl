@@ -44,8 +44,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp;
-
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.InvalidLiteralExp} object.
  * <!-- begin-user-doc -->
@@ -63,6 +61,7 @@ public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public InvalidLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -74,6 +73,7 @@ public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -89,8 +89,9 @@ public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/InvalidLiteralExp")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/InvalidLiteralExp")); //$NON-NLS-1$
 	}
 
 	/**
@@ -101,6 +102,7 @@ public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return "invalid";
 	}
 
@@ -113,6 +115,7 @@ public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -127,6 +130,7 @@ public class InvalidLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

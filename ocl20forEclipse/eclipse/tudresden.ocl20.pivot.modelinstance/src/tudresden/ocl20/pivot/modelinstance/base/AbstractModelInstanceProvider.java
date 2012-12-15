@@ -52,54 +52,62 @@ public abstract class AbstractModelInstanceProvider implements
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
 	 * (java.io.File, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
 	public IModelInstance getModelInstance(File modelInstanceFile, IModel model)
 			throws ModelAccessException {
-	
+
 		IModelInstance modelInstance;
 		URL modelInstanceFileUrl;
-	
+
 		if (modelInstanceFile == null) {
 			throw new IllegalArgumentException(
 					"The argument 'modelInstanceFile' was null."); //$NON-NLS-1$
 		}
 		// no else.
-	
+
 		try {
 			/* File.toURL().toURL() handles white spaces differently. */
-			modelInstanceFileUrl = modelInstanceFile.toURL();
+			// modelInstanceFileUrl = modelInstanceFile.toURL();
+			modelInstanceFileUrl = modelInstanceFile.toURI().toURL();
 		}
-	
+		// If a required system property value cannot be accessed
+		catch (SecurityException e) {
+			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
+					+ modelInstanceFile.getAbsolutePath(), e);
+		}
+		// If this URL is not absolute
+		catch (IllegalArgumentException e) {
+			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
+					+ modelInstanceFile.getAbsolutePath(), e);
+		}
+		// If a protocol handler for the URL could not be found,
+		// or if some other error occurred while constructing the URL
 		catch (MalformedURLException e) {
 			throw new ModelAccessException("Failed to create a URL for file " //$NON-NLS-1$
 					+ modelInstanceFile.getAbsolutePath(), e);
 		}
-	
+
 		/* Delegate to user implementation. */
 		modelInstance = this.getModelInstance(modelInstanceFileUrl, model);
-	
+
 		return modelInstance;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
+	 * @see tudresden.ocl20.pivot.modelbus.IModelInstanceProvider#getModelInstance
 	 * (java.lang.String, tudresden.ocl20.pivot.modelbus.IModel)
 	 */
-	public IModelInstance getModelInstance(String modelInstanceName,
-			IModel model) throws ModelAccessException {
+	public IModelInstance getModelInstance(String modelInstanceName, IModel model)
+			throws ModelAccessException {
 
 		URL modelInstanceUrl;
 		IModelInstance modelInstance;
 
-		modelInstanceUrl = AbstractModelProvider.class
-				.getResource(modelInstanceName);
+		modelInstanceUrl =
+				AbstractModelProvider.class.getResource(modelInstanceName);
 
 		if (modelInstanceUrl == null) {
 			throw new ModelAccessException(

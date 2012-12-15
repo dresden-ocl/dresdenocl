@@ -210,7 +210,6 @@ public class DefaultLogManager implements ILogManager {
      * @param category level
      * @param appender appender added for this level
      */
-    @SuppressWarnings("unused")
     public void addAppenderEvent(final Category category,
         final Appender appender) {
       if (logger.isDebugEnabled()) {
@@ -239,7 +238,6 @@ public class DefaultLogManager implements ILogManager {
      * @param category level
      * @param appender appender added for this level
      */
-    @SuppressWarnings("unused")
     public void removeAppenderEvent(final Category category,
         final Appender appender) {
       // no implementation necessary

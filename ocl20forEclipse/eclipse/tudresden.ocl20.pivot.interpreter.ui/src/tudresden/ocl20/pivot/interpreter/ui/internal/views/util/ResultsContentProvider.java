@@ -36,8 +36,8 @@ import tudresden.ocl20.pivot.pivotmodel.Constraint;
  * The {@link ResultsContentProvider} is responsible for providing
  * {@link Object}s to the {@link TableViewer} of the {@link InterpreterView}.
  * The {@link ResultsContentProvider} provides elements as {@link List}
- * containing {@link Constraint}, {@link IModelInstanceElement} and {@link OclRoot}
- * result.
+ * containing {@link Constraint}, {@link IModelInstanceElement} and
+ * {@link OclRoot} result.
  * </p>
  * 
  * @author Claas Wilke

@@ -38,7 +38,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -51,13 +50,13 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.ComplexGenericType;
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
 import tudresden.ocl20.pivot.pivotmodel.GenericType;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
@@ -81,6 +80,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * @generated
 	 */
 	public TypedElementItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -92,6 +92,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -128,6 +129,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * @generated
 	 */
 	protected void addGenericTypePropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -136,8 +138,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 						getString("_UI_TypedElement_genericType_feature"), //$NON-NLS-1$
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_TypedElement_genericType_feature", "_UI_TypedElement_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						PivotModelPackage.Literals.TYPED_ELEMENT__GENERIC_TYPE,
-						false, false, false, null, null, null));
+						PivotModelPackage.Literals.TYPED_ELEMENT__GENERIC_TYPE, false,
+						false, false, null, null, null));
 	}
 
 	/**
@@ -153,27 +155,25 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		public TypePropertyDescriptor(String displayName, String description) {
 
 			super(((ComposeableAdapterFactory) getAdapterFactory())
-					.getRootAdapterFactory(), getResourceLocator(),
-					displayName, description,
-					PivotModelPackageImpl.Literals.TYPED_ELEMENT__TYPE, true,
-					false, true, null, null, null);
+					.getRootAdapterFactory(), getResourceLocator(), displayName,
+					description, PivotModelPackageImpl.Literals.TYPED_ELEMENT__TYPE,
+					true, false, true, null, null, null);
 		}
 
 		/**
-		 * Returns the normal choices (i.e, all {@link Type}s in the model) as
-		 * well as the {@link TypeParameter}s of all owning elements.
+		 * Returns the normal choices (i.e, all {@link Type}s in the model) as well
+		 * as the {@link TypeParameter}s of all owning elements.
 		 * 
 		 * @see org.eclipse.emf.edit.provider.ItemPropertyDescriptor#getChoiceOfValues(java.lang.Object)
 		 */
 		@Override
 		public Collection<?> getChoiceOfValues(Object object) {
 
-			Collection<Object> result = new ArrayList<Object>(
-					super.getChoiceOfValues(object));
+			Collection<Object> result =
+					new ArrayList<Object>(super.getChoiceOfValues(object));
 
 			// go up the containment hierachy and collect all type parameters
-			for (NamedElement e = (NamedElement) object; e != null; e = e
-					.getOwner()) {
+			for (NamedElement e = (NamedElement) object; e != null; e = e.getOwner()) {
 
 				// the owner (operation, type, namespace) should usually be a
 				// GenericElement
@@ -202,8 +202,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 
 				// create a new generic type for type parameters and set its
 				// referenced type parameter
-				ParameterGenericType genericType = PivotModelFactory.eINSTANCE
-						.createParameterGenericType();
+				ParameterGenericType genericType =
+						PivotModelFactory.eINSTANCE.createParameterGenericType();
 				genericType.setTypeParameter(typeParameter);
 
 				setGenericType(typedElement, genericType);
@@ -218,15 +218,14 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 
 					// create a new complex generic type and set the given type
 					// as a reference
-					ComplexGenericType genericType = PivotModelFactory.eINSTANCE
-							.createComplexGenericType();
+					ComplexGenericType genericType =
+							PivotModelFactory.eINSTANCE.createComplexGenericType();
 					genericType.setUnboundType(type);
 
 					// append type arguments for each type parameter
 					for (int i = 0, size = type.getOwnedTypeParameter().size(); i < size; i++) {
 						genericType.getTypeArgument().add(
-								PivotModelFactory.eINSTANCE
-										.createTypeArgument());
+								PivotModelFactory.eINSTANCE.createTypeArgument());
 					}
 
 					setGenericType(typedElement, genericType);
@@ -242,9 +241,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		}
 
 		/**
-		 * Helper method that sets the generic type on a {@link TypedElement}.
-		 * Uses a <code>SetCommand</code> for this purpose so the action can be
-		 * undone.
+		 * Helper method that sets the generic type on a {@link TypedElement}. Uses
+		 * a <code>SetCommand</code> for this purpose so the action can be undone.
 		 * 
 		 * @param genericType
 		 */
@@ -254,14 +252,10 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 			EditingDomain editingDomain = getEditingDomain(typedElement);
 
 			if (editingDomain != null) {
-				editingDomain
-						.getCommandStack()
-						.execute(
-								SetCommand
-										.create(editingDomain,
-												typedElement,
-												PivotModelPackageImpl.Literals.TYPED_ELEMENT__GENERIC_TYPE,
-												genericType));
+				editingDomain.getCommandStack().execute(
+						SetCommand.create(editingDomain, typedElement,
+								PivotModelPackageImpl.Literals.TYPED_ELEMENT__GENERIC_TYPE,
+								genericType));
 			}
 
 			else {
@@ -273,8 +267,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * Overridden to return the type arguments of the generic type of the
-	 * adapted {@link TypedElement}.
+	 * Overridden to return the type arguments of the generic type of the adapted
+	 * {@link TypedElement}.
 	 * 
 	 * @see org.eclipse.emf.edit.provider.ItemProviderAdapter#getChildren(java.lang.Object)
 	 */
@@ -291,8 +285,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		// ComplexGenericType
 		if (typedElement.getGenericType() != null
 				&& typedElement.getGenericType() instanceof ComplexGenericType) {
-			ComplexGenericType genericType = (ComplexGenericType) typedElement
-					.getGenericType();
+			ComplexGenericType genericType =
+					(ComplexGenericType) typedElement.getGenericType();
 
 			// check if the generic type has type arguments
 			if (!genericType.getTypeArgument().isEmpty()) {
@@ -332,8 +326,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 		typedElement = (TypedElement) object;
 
 		/*
-		 * Initialize with the name of the typed element determined by
-		 * subclasses.
+		 * Initialize with the name of the typed element determined by subclasses.
 		 */
 		typedElementName = this.getTypedElementName(typedElement);
 
@@ -357,12 +350,12 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This method can be overridden in subclasses to specify the rendering of
-	 * the name of the {@link TypedElement}. This default implementation simply
+	 * This method can be overridden in subclasses to specify the rendering of the
+	 * name of the {@link TypedElement}. This default implementation simply
 	 * returns the name of the <code>TypedElement</code> unchanged.
 	 * 
 	 * @param typedElement
-	 *            the <code>TypedElement</code> instance
+	 *          the <code>TypedElement</code> instance
 	 * 
 	 * @return a <code>String</code> with the name of the
 	 *         <code>TypedElement</code>
@@ -379,15 +372,14 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * neither a type nor a generic type is set, the empty string is returned.
 	 * 
 	 * @param typedElement
-	 *            the <code>TypedElement</code> instance
+	 *          the <code>TypedElement</code> instance
 	 * 
 	 * @return a <code>String</code> representing the type of the
 	 *         <code>TypedElement</code>
 	 */
 	protected CharSequence getTypedElementTypeName(TypedElement typedElement) {
 
-		return typedElement.getType() != null ? getTypeName(typedElement
-				.getType())
+		return typedElement.getType() != null ? getTypeName(typedElement.getType())
 				: (typedElement.getGenericType() != null ? getGenericTypeName(typedElement
 						.getGenericType()) : ""); //$NON-NLS-1$
 	}
@@ -398,7 +390,7 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * if the type, but subclasses may override to provide a custom rendering.
 	 * 
 	 * @param type
-	 *            the <code>Type</code>, guaranteed not to be <code>null</code>
+	 *          the <code>Type</code>, guaranteed not to be <code>null</code>
 	 * 
 	 * @return a formatted name for the type
 	 */
@@ -413,8 +405,8 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	 * {@link GenericTypeItemProvider#getText()} for determining the rendering.
 	 * 
 	 * @param genericType
-	 *            the <code>GenericType</code>, guaranteed not to be
-	 *            <code>null</code>
+	 *          the <code>GenericType</code>, guaranteed not to be
+	 *          <code>null</code>
 	 * 
 	 * @return a formatted name for the generic type
 	 */
@@ -424,14 +416,16 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TypedElement.class)) {
@@ -445,15 +439,16 @@ public class TypedElementItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
-	 * describing the children that can be created under this object. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

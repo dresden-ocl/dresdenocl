@@ -26,29 +26,29 @@ import tudresden.ocl20.pivot.pivotmodel.NamedElement;
  */
 public interface NamedLiteralExpCS extends OclExpressionCS {
 	/**
-	 * Returns the value of the '<em><b>Named Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Named Element</b></em>' reference.
+   * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Named Element</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Named Element</em>' reference.
-	 * @see #setNamedElement(NamedElement)
-	 * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNamedLiteralExpCS_NamedElement()
-	 * @model required="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Named Element</em>' reference.
+   * @see #setNamedElement(NamedElement)
+   * @see tudresden.ocl20.pivot.language.ocl.OclPackage#getNamedLiteralExpCS_NamedElement()
+   * @model required="true"
+   * @generated
+   */
 	NamedElement getNamedElement();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}' reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link tudresden.ocl20.pivot.language.ocl.NamedLiteralExpCS#getNamedElement <em>Named Element</em>}' reference.
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Named Element</em>' reference.
-	 * @see #getNamedElement()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Named Element</em>' reference.
+   * @see #getNamedElement()
+   * @generated
+   */
 	void setNamedElement(NamedElement value);
 
 } // NamedLiteralExpCS

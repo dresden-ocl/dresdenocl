@@ -43,8 +43,8 @@ import tudresden.ocl20.pivot.essentialocl.types.SetType;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Iterator Exp</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Iterator Exp</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
  *
@@ -57,13 +57,15 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * @generated
 	 */
 	protected IteratorExpImpl() {
+
 		super();
 	}
 
 	/**
 	 * Overridden to determine the type of the <code>IteratorExp</code>
 	 * according to the OCL specification (Section 8.3). Note that the
-	 * specification is incomplete and this implementation adds a few more rules.
+	 * specification is incomplete and this implementation adds a few more
+	 * rules.
 	 * 
 	 * <p>
 	 * [1] If the iterator is ‘forAll,’ ‘isUnique,’ or ‘exists’ the type of the
@@ -77,8 +79,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * 
 	 * [2] The result type of the collect operation on a sequence type is a
 	 * sequence, the result type of ‘collect’ on any other collection type is a
-	 * Bag. The type of the body is always the type of the elements in the return
-	 * collection.
+	 * Bag. The type of the body is always the type of the elements in the
+	 * return collection.
 	 * 
 	 * <pre>
 	 *   context IteratorExp
@@ -109,13 +111,15 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 		// check for wellformedness of loop expression
 		validateWellformednessRules();
 
-		// determine the types of the source collection, its elements and the body
+		// determine the types of the source collection, its elements and the
+		// body
 		// expression
 		sourceType = source.getType();
 		elementType = ((CollectionType) sourceType).getElementType();
 		bodyType = body.getType();
 
-		// implement rule [1], but additionally check for iterator expression "one"
+		// implement rule [1], but additionally check for iterator expression
+		// "one"
 		if (name.equals("exists") || name.equals("forAll") || name.equals("isUnique") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				|| name.equals("one")) { //$NON-NLS-1$
 			type = getValidOclLibrary().getOclBoolean();
@@ -140,6 +144,18 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 
 			else {
 				type = getValidOclLibrary().getSequenceType(elementType);
+			}
+		}
+
+		else if (name.equals("closure")) {
+
+			if (sourceType instanceof SequenceType
+					|| sourceType instanceof OrderedSetType) {
+				type = getValidOclLibrary().getOrderedSetType(elementType);
+			}
+
+			else {
+				type = getValidOclLibrary().getSetType(elementType);
 			}
 		}
 
@@ -192,8 +208,8 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 * Overridden to additionally check the following wellformedness rule
 	 * 
 	 * <p>
-	 * [4] The type of the body of the select, reject, exists, and forAll must be
-	 * boolean.
+	 * [4] The type of the body of the select, reject, exists, and forAll must
+	 * be boolean.
 	 * 
 	 * <pre>
 	 *   context IteratorExp
@@ -218,7 +234,49 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 				throw new WellformednessException(this, "The body expression of an '" //$NON-NLS-1$
 						+ name + "' iterator expression must have the type Boolean."); //$NON-NLS-1$
 			}
+			// no else.
 		}
+
+		/* Check result type of closure iterator. */
+		if (name.equals("closure")) {
+
+			String msg =
+					"The body expression of a closure iterator expression must conform to the source expression's element type.";
+			Type bodyType = body.getType();
+			Type sourceType = source.getType();
+			Type sourceElementType = ((CollectionType) sourceType).getElementType();
+
+			if (!bodyType.conformsTo(sourceElementType)
+					&& !(bodyType instanceof CollectionType)) {
+				throw new WellformednessException(this, msg);
+			}
+
+			else if (bodyType instanceof CollectionType) {
+				Type bodyElementType = ((CollectionType) bodyType).getElementType();
+
+				if (!bodyElementType.conformsTo(sourceElementType)) {
+					throw new WellformednessException(this, msg);
+				}
+				// no else.
+			}
+			// no else.
+		}
+		// no else.
+
+		/* Check count of variables. */
+		if (name.equals("any") || name.equals("collect")
+				|| name.equals("collectNested") || name.equals("closure")
+				|| name.equals("isUnique") || name.equals("one")
+				|| name.equals("reject") || name.equals("select")
+				|| name.equals("sortedBy")) {
+
+			if (this.getIterator().size() > 1) {
+				throw new WellformednessException(this, "The iterator " + name
+						+ " may have at most one iterator variable.");
+			}
+			// no else.
+		}
+		// no else.
 	}
 
 	/**
@@ -227,6 +285,7 @@ public class IteratorExpImpl extends LoopExpImpl implements IteratorExp {
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.ITERATOR_EXP;
 	}
 

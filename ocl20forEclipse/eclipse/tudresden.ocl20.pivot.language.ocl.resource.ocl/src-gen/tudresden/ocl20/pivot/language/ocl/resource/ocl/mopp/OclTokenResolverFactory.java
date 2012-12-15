@@ -6,6 +6,14 @@
  */
 package tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp;
 
+/**
+ * The OclTokenResolverFactory class provides access to all generated token
+ * resolvers. By giving the name of a defined token, the corresponding resolve can
+ * be obtained. Despite the fact that this class is called TokenResolverFactory is
+ * does NOT create new token resolvers whenever a client calls methods to obtain a
+ * resolver. Rather, this class maintains a map of all resolvers and creates each
+ * resolver at most once.
+ */
 public class OclTokenResolverFactory implements tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolverFactory {
 	
 	private java.util.Map<String, tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTokenResolver> tokenName2TokenResolver;

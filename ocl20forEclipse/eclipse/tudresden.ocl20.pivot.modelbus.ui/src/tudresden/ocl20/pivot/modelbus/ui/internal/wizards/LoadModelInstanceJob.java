@@ -139,12 +139,15 @@ public class LoadModelInstanceJob extends Job {
 			IModelInstanceRegistry modelInstanceRegistry;
 			modelInstanceRegistry = ModelBusPlugin.getModelInstanceRegistry();
 			modelInstanceRegistry.addModelInstance(modelInstance);
+			modelInstanceRegistry.setActiveModelInstance(model, modelInstance);
 
 			monitor.worked(4);
 
 			/* Try to activate the ModelInstanceView. */
 			ModelBusUIUtility.setActiveView(ModelInstancesView.ID);
 			monitor.worked(1);
+			
+			monitor.done();
 
 			result = new Status(IStatus.OK, ModelBusUIPlugin.ID,
 					"Imported Model Instance successfully.");

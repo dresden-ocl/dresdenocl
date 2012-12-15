@@ -23,6 +23,13 @@ public class OclExpectedCsString extends tudresden.ocl20.pivot.language.ocl.reso
 		return keyword.getValue();
 	}
 	
+	/**
+	 * Returns the expected keyword.
+	 */
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.grammar.OclSyntaxElement getSymtaxElement() {
+		return keyword;
+	}
+	
 	public java.util.Set<String> getTokenNames() {
 		return java.util.Collections.singleton("'" + getValue() + "'");
 	}
@@ -36,6 +43,11 @@ public class OclExpectedCsString extends tudresden.ocl20.pivot.language.ocl.reso
 			return getValue().equals(((OclExpectedCsString) o).getValue());
 		}
 		return false;
+	}
+	
+	@Override	
+	public int hashCode() {
+		return getValue().hashCode();
 	}
 	
 }

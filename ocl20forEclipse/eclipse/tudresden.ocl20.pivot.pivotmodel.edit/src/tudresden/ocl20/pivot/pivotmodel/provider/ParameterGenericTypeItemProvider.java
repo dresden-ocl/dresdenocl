@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -49,12 +48,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import tudresden.ocl20.pivot.pivotmodel.ParameterGenericType;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
-import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.ParameterGenericType} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
@@ -62,23 +61,25 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public ParameterGenericTypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -88,12 +89,13 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Type Parameter feature.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This adds a property descriptor for the Type Parameter feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addTypeParameterPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -107,7 +109,8 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * Adapted to simply default to the super{@link #getImage(Object) super implementation}.
+	 * Adapted to simply default to the super{@link #getImage(Object) super
+	 * implementation}.
 	 * 
 	 * @generated NOT
 	 */
@@ -121,9 +124,10 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * The EMF implementation is altered to simply return the
-	 * {@link super#getText(Object) super implementation} which will return the name of the
-	 * {@link TypeParameter} referenced by the adapted {@link ParameterGenericType}.
+	 * The EMF implementation is altered to simply return the {@link
+	 * super#getText(Object) super implementation} which will return the name of
+	 * the {@link TypeParameter} referenced by the adapted
+	 * {@link ParameterGenericType}.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -135,27 +139,31 @@ public class ParameterGenericTypeItemProvider extends GenericTypeItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

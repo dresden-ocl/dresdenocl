@@ -23,23 +23,23 @@ a modeling language is required to define a model on that \acs{OCL} constraints
 can be specified.
 
 Each modeling language is defined in another language, its 
-\keyword{Meta-Modeling Language}. For example, the \acl{UML}'s meta-model is 
+\keyword{Metamodeling Language}. For example, the \acl{UML}'s metamodel is 
 defined using the \keyword{\acf{MOF}}~\cite{spec:MOF2.0}, the standardized
-meta-meta model of the \acs{OMG}. The \acs{MOF} is used to describe the 
-\acs{UML} meta-model that can be used to model \acs{UML} models. Generally 
-spoken, each model requires a meta-model that is used to describe the model. 
+metameta model of the \acs{OMG}. The \acs{MOF} is used to describe the 
+\acs{UML} metamodel that can be used to model \acs{UML} models. Generally 
+spoken, each model requires a metamodel that is used to describe the model. 
 The model can be instantiated by model instances (for example a \acs{UML} class 
 diagram can be instantiated by a \acs{UML} object diagram). The model can be 
 enriched with \acs{OCL} constraints that are defined on the model (using an 
-\acs{OCL} meta-model / abstract syntax) and can then be verified for instances
+\acs{OCL} metamodel / abstract syntax) and can then be verified for instances
 of the model afterwards.
 
 The \acs{OMG} introduced the \keyword{\acs{MOF} Four Layered Metadata
 Architecture} \cite{spec:MOF2.0}\cite[p. 16ff]{spec:UML2-2Inf} that is used to 
-arrange and structure the meta-model, the model, and the model's instances into 
+arrange and structure the metamodel, the model, and the model's instances into 
 a layered hierarchy (see Figure~\ref{pic:architecture:mofLayers}). Generally, 
-four layers can be identified, the \keyword{Meta-Meta-Model Layer (M3)}, the
-\keyword{Meta-Model Layer (M2)}, the \keyword{Model Layer (M1)}, and the 
+four layers can be identified, the \keyword{Meta-Metamodel Layer (M3)}, the
+\keyword{Metamodel Layer (M2)}, the \keyword{Model Layer (M1)}, and the 
 \keyword{Model Instance Layer (M0)}. The latest version of \acs{MOF} allows to
 define as much layers as required for a certain use
 case~\cite[p.~8f]{spec:MOF2.0}. 
@@ -54,30 +54,31 @@ case~\cite[p.~8f]{spec:MOF2.0}.
 \begin{sidewaysfigure}[!p]
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/architecture/genericLayers}
-	\caption{The Generic Three Layer Metadata Architecture.}
+	\caption{The Generic Three Layer Metadata
+	Architecture~\cite{wilkeEA:MODELS2010}.}
 	\label{pic:architecture:genericLayers}
 \end{sidewaysfigure}
 
-\acs{OCL} constraints can be defined on both, meta-models and models to verify 
+\acs{OCL} constraints can be defined on both, metamodels and models to verify 
 models or model instances, respectively. E.g., one may use \acs{OCL} to define 
-rules on a meta-model that must be ensured for every model modeled with the 
-meta-model. But, one may use \acs{OCL} to define rules on a model (that must be
+rules on a metamodel that must be ensured for every model modeled with the 
+metamodel. But, one may use \acs{OCL} to define rules on a model (that must be
 verified for the model's instances) as well. Thus, the four layer metadata 
 architecture can be generalized to a \keyword{Generic Three Layer Metadata 
-Architecture}~\cite{demuth:RGWS09} in the scope of an \acs{OCL} definition (see 
+Architecture}~\cite{demuth:RGWS09} in the scope of an \acs{OCL} definition (cf. 
 Figure~\ref{pic:architecture:genericLayers}). 
 
 On the \keyword{Mn+1 Layer} lies 
-the meta-model that is used to define the model that shall be constrained. The
-\acs{OCL} abstract syntax extends the meta-model to allow contexts of \acs{OCL}
+the metamodel that is used to define the model that shall be constrained. The
+\acs{OCL} abstract syntax extends the metamodel to allow contexts of \acs{OCL}
 constraints refering to elements of the model.
 
-On the \keyword{Mn Layer} lies the model that is an instance of the meta-model
+On the \keyword{Mn Layer} lies the model that is an instance of the metamodel
 and can be enriched by the specification of \acs{OCL} constraints. 
 
 Finally, on the \keyword{Mn-1 Layer} lies the model instance on that the 
 \acs{OCL} constraints shall be verified. Please note that in the context of 
-such a generic layer architecture, a model instance can be both a model (like a
+such a generic layer architecture, a model instance can be both a model (like an
 \acs{EMF} Ecore model in Figure~\ref{pic:architecture:genericLayers}~(c))) or a
 set of objects (like Java run-time objects in
 Figure~\ref{pic:architecture:genericLayers}~(b)). To provide a relationship
@@ -125,23 +126,23 @@ Chapter~\ref{chapter:codeGeneration}, and the
 \acs{OCL}2SQL Code Generator introduced in
 Chapter~\ref{chapter:ocl2sql}. Finally, the \keyword{Model Browser}
 can be used to store imported models, and model instances. The backend of the Model
-Browser is the \keyword{Model Bus} that manages all meta-models and model
+Browser is the \keyword{Model Bus} that manages all metamodels and model
 instance types currently provided by Dresden OCL. The model bus is located at the
 Registry Layer.
 
 The \acs{OCL} layer contains the \acs{OCL} syntax and semantics used by the
 tools of Dresden OCL. The \acs{OCL} syntax and semantics are separated into
 three different packages. \keyword{Essential OCL} contains the abstract syntax
-(or meta-model) of \acs{OCL} that is used by Dresden OCL and its tools. The
+(or metamodel) of \acs{OCL} that is used by Dresden OCL and its tools. The
 \keyword{OCL Standard Library Model} provides a modeled description of all
 operations that are provided by the \acs{OCL} Standard Library (as defined in
-\cite[Ch.~11]{spec:OCL2-2}). Finally the \keyword{OCL Standard Library
+\cite[Ch.~11]{spec:OCL2-3}). Finally the \keyword{OCL Standard Library
 Semantics} provides an implementation of all these operations that are used by
 the \acs{OCL} Interpreter of Dresden OCL for \acs{OCL} interpretation.
 
 The last layer is the Variability Layer. The Variability layer contains the
 \keyword{Pivot Model} and the \keyword{Model Instance Types} that are used to
-connect Dresden OCL with various meta-models or types of model instances,
+connect Dresden OCL with various metamodels or types of model instances,
 respectively. The Pivot Model is described more detailed in
 Section~\ref{architecture:metaModelAdaptation}, the Model Instance Types are
 explained in Section~\ref{architecture:modelInstanceAdaptation}. Further details
@@ -164,7 +165,7 @@ be found in Table~\ref{tab:plugins} in the appendix of this manual.
 	\centering
 	\includegraphics[width=1.0\linewidth]{figures/architecture/modeladaptation}
 	\caption{The architecture of Dresden OCL with respect to the Generic Three Layer
-	Metadata Architecture.}
+	Metadata Architecture~\cite{wilkeEA:MODELS2010}.}
 	\label{pic:architecture:genericArchitecture}
 \end{sidewaysfigure}
 
@@ -179,11 +180,11 @@ architecture will now be explained step by step.
 
 As you can see, the left part of 
 Figure~\ref{pic:architecture:genericArchitecture} shows the Generic Three Layer
-Metadata Architecture. Meta-models, models and model instances are adapted and 
+Metadata Architecture. Metamodels, models and model instances are adapted and 
 loaded into Dresden OCL. It could be argued that such an adaptation is expensive
 and costly, but the opposite is the truth. The architecture of Dresden OCL allows
-its users to adapt the toolkit to every meta-model and model instance type they 
-want to. After the adaptation of a new meta-model or model-instance type, they
+its users to adapt the toolkit to every metamodel and model instance type they 
+want to. After the adaptation of a new metamodel or model instance type, they
 can reuse the complete set of tools provided by Dresden OCL! Thus,
 to adapt the \acs{OCL} Interpreter to a new type of model instance, only one 
 adaptation is required. The rest comes for free!
@@ -193,30 +194,30 @@ adaptation is required. The rest comes for free!
 \label{architecture:metaModelAdaptation}
 
 As already said, the core feature of Dresden OCL is the \keyword{Pivot Model}
-(a.k.a. \keyword{Model Types}). The pivot model is a meta-model that abstracts
-from all other meta-models. It contains interfaces to define the structural 
+(a.k.a. \keyword{Model Types}). The pivot model is a metamodel that abstracts
+from all other metamodels. It contains interfaces to define the structural 
 parts of a model such as
 \code{Types}, \code{Namespaces}, \code{Operations} and \code{Properties}. 
 Furthermore, these interfaces provide methods to reason on them (e.g., the 
 interface \code{Namespace} provides a method \code{getNestedNamespaces()} to 
 retrieve all contained \code{Namespaces}).
 
-Every meta-model users want to work with can be adapted to the pivot model. The
-\keyword{Adapted Meta-Model} must implement the interfaces of the pivot model 
-and must adapt them to its meta-model elements. E.g., adapting the \acs{UML}2 
-meta-model, the interface \code{Type} from the pivot model must be adapted to 
-the meta-model element \code{UML2Class}. Besides the adaptation of the pivot 
-model, each meta-model must provide a \code{ModelProvider} that provides 
-methods to load model resources of the adapted meta-model and adapts them to 
+Every metamodel users want to work with can be adapted to the pivot model. The
+\keyword{Adapted Metamodel} must implement the interfaces of the pivot model 
+and must adapt them to its metamodel elements. E.g., adapting the \acs{UML}2 
+metamodel, the interface \code{Type} from the pivot model must be adapted to 
+the metamodel element \code{UML2Class}. Besides the adaptation of the pivot 
+model, each metamodel must provide a \code{ModelProvider} that provides 
+methods to load model resources of the adapted metamodel and adapts them to 
 its pivot model implementation. The result is an \keyword{Adapted Model},
-Dresden OCL can work with. Further details about the adaptation of meta-models to
+Dresden OCL can work with. Further details about the adaptation of metamodels to
 the pivot model can be found in Chapter~\ref{chapter:pivotModelAdaptation}.
 
 
 \subsection{How Model Instances are Adapted}
 \label{architecture:modelInstanceAdaptation}
 
-If the \acs{OCL} Interpreter shall be used to interpret instances of amn opened 
+If the \acs{OCL} Interpreter shall be used to interpret instances of an opened 
 model, a second adaptation is required, an adaptation to the \keyword{Model 
 Instance Type Model}. The model instance type model can be considered as similar
 to the pivot model, but the purpose is different. If \acs{OCL} constraints shall
@@ -256,9 +257,9 @@ Chapter~\ref{chapter:modelInstanceTypeAdaptation}.
 As mentioned above, different types of models can be connected with different 
 types of instances. E.g., a \acs{UML} class diagram could be implemented by a 
 set of Java Classes (and their objects) or by an \acs{XML} document. To 
-maintain this loose coupling, meta-models and model implementation types do not 
+maintain this loose coupling, metamodels and model instance types do not 
 know each other. If a model instance is imported into Dresden OCL, a model (and
-thus also a meta-model) has to be selected, to that the instance belongs to. The
+thus also a metamodel) has to be selected, to that the instance belongs to. The
 objects of the instance are matched to the types of the selected model by the 
 name of their types. E.g., a Java instance's \code{Object}s are matched by
 associating their \code{Class}es' names to the names of the types of the
@@ -268,7 +269,7 @@ selected model.
 
 \section{Summary}
 
-This Chapter introduced into the architecture and package structure of
+This chapter introduced into the architecture and package structure of
 Dresden OCL. The \keyword{Pivot Model} and the \keyword{Model Instance Types} 
 have been explained shortly. Also the relationships between the pivot model, 
 \keyword{Essential \acs{OCL}} and the \keyword{\acs{OCL} Standard Library} have
@@ -277,6 +278,6 @@ complicate. Nevertheless, it should be remembered that Dresden OCL was
 designed as generic as possible. Thus, Dresden OCL can be adapted to various
 different kinds of meta-models and model instances without changing the
 \acs{OCL} Parser nor the \acs{OCL} Interpreter! The currently existing
-adaptations to meta-models and model instances are documented in
+adaptations to metamodels and model instances are documented in
 Section~\ref{sect:info:models} and Section~\ref{sect:info:modelinstances},
 respectively.

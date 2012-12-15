@@ -73,6 +73,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	protected CollectionItemImpl() {
+
 		super();
 	}
 
@@ -82,6 +83,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.COLLECTION_ITEM;
 	}
 
@@ -90,6 +92,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	public OclExpression getItem() {
+
 		return item;
 	}
 
@@ -127,12 +130,13 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 */
 	public NotificationChain basicSetItem(OclExpression newItem,
 			NotificationChain msgs) {
+
 		OclExpression oldItem = item;
 		item = newItem;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ExpressionsPackageImpl.COLLECTION_ITEM__ITEM,
-					oldItem, newItem);
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, oldItem, newItem);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -146,20 +150,24 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 * @generated
 	 */
 	public void setItem(OclExpression newItem) {
+
 		if (newItem != item) {
 			NotificationChain msgs = null;
 			if (item != null)
-				msgs = ((InternalEObject) item).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
+				msgs =
+						((InternalEObject) item).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
 			if (newItem != null)
-				msgs = ((InternalEObject) newItem).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
+				msgs =
+						((InternalEObject) newItem).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, null, msgs);
 			msgs = basicSetItem(newItem, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.COLLECTION_ITEM__ITEM, newItem, newItem));
 	}
@@ -171,6 +179,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
 			return basicSetItem(null, msgs);
@@ -184,6 +193,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
 			return getItem();
@@ -197,6 +207,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
 			setItem((OclExpression) newValue);
@@ -211,6 +222,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
 			setItem((OclExpression) null);
@@ -225,6 +237,7 @@ public class CollectionItemImpl extends CollectionLiteralPartImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.COLLECTION_ITEM__ITEM:
 			return item != null;

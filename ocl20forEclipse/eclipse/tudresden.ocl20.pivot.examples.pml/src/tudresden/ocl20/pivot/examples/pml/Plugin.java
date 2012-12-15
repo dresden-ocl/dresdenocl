@@ -7,7 +7,6 @@
 package tudresden.ocl20.pivot.examples.pml;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

@@ -1,3 +1,4 @@
+-- @model{../model/pml.ecore}
 package tudresden::ocl20::pivot::examples::pml
 
 -- The id of a plug-in must be defined.
@@ -54,33 +55,6 @@ inv extensionPointInterfacesAreSet:
 context JavaType
 inv javaTypeNameIsDefined:
   not self.fullyQualifiedName.oclIsUndefined()
-
-
--- The name of a Service must be defined.
-context Service 
-inv serviceNameIsDefined:
-  not self.name.oclIsUndefined()
-
--- The plug-in of a Service must be defined.
-context Service 
-inv servicePluginIsDefined:
-  not self.plugin.oclIsUndefined()
-
--- Each parameter of Service must know the service.
-context Service 
-inv serviceParametersHaveName:
-  self.parameters->forAll(p : ServiceParameter | p.service = self)
-
-
--- The name of a Parameter must be defined.
-context ServiceParameter 
-inv parameterNameIsDefined:
-  not self.name.oclIsUndefined()
-
--- The type of a Parameter must be defined.
-context ServiceParameter 
-inv parameterTypeIsDefined:
-  not self.type.oclIsUndefined()
 
 
 endpackage

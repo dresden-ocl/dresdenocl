@@ -51,8 +51,8 @@ import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
 import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Collection Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Collection Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -91,17 +91,20 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	protected OclLibrary oclLibrary;
 
 	/**
-	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final CollectionKind KIND_EDEFAULT = CollectionKind.COLLECTION;
+	protected static final CollectionKind KIND_EDEFAULT =
+			CollectionKind.COLLECTION;
 
 	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -202,7 +205,6 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#setName(java.lang.String)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	public final void setName(String newName) {
 
 		throw new UnsupportedOperationException(
@@ -214,6 +216,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public Type getElementType() {
+
 		return elementType;
 	}
 
@@ -252,6 +255,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public void setElementTypeGen(Type newElementType) {
+
 		Type oldElementType = elementType;
 		elementType = newElementType;
 		if (eNotificationRequired())
@@ -265,6 +269,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public OclLibrary getOclLibrary() {
+
 		return oclLibrary;
 	}
 
@@ -273,6 +278,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public void setOclLibrary(OclLibrary newOclLibrary) {
+
 		OclLibrary oldOclLibrary = oclLibrary;
 		oclLibrary = newOclLibrary;
 		if (eNotificationRequired())
@@ -286,6 +292,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public CollectionKind getKind() {
+
 		return kind;
 	}
 
@@ -294,6 +301,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * @generated
 	 */
 	public void setKind(CollectionKind newKind) {
+
 		CollectionKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
@@ -302,12 +310,12 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	}
 
 	/**
-	 * Overrides the implementation in {@link Type}. A
-	 * <code>CollectionType</code> is only conformant to another type if:
+	 * Overrides the implementation in {@link Type}. A <code>CollectionType</code>
+	 * is only conformant to another type if:
 	 * 
 	 * <ul>
-	 * <li>the other type is indeed a <code>CollectionType</code>, i.e. has
-	 * the same metatype
+	 * <li>the other type is indeed a <code>CollectionType</code>, i.e. has the
+	 * same metatype
 	 * <li>the element type is conformant to the element type of the other
 	 * collection type
 	 * </ul>
@@ -386,9 +394,10 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 				// necessary to ensure that operations with unbound collection
 				// types as parameters (e.g., Collection::product) can be looked up;
 				// unbound collection types themselves do not conform to other types
-				conformant = otherElementType == null ? true
-						: (this.elementType != null ? this.elementType
-								.conformsTo(otherElementType) : false);
+				conformant =
+						otherElementType == null ? true
+								: (this.elementType != null ? this.elementType
+										.conformsTo(otherElementType) : false);
 			}
 		}
 
@@ -404,15 +413,15 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 * super type of a <code>CollectionType</code> with another type is:
 	 * 
 	 * <ul>
-	 * <li><code>null</code>, if the other type is no collection type or there
-	 * is no common supertype for the element types of two collection types
+	 * <li><code>null</code>, if the other type is no collection type or there is
+	 * no common supertype for the element types of two collection types
 	 * <li>the most specific collection type with the common element type
 	 * </ul>
 	 * 
 	 * For example, the common supertype of <code>Set(Integer)</code> and
-	 * <code>Sequence(Real)</code> is <code>Collection(Real)</code>, but
-	 * together with <code>Sequence(String)</code> the common super type
-	 * evaluates to <code>Collection(OclAny)</code>.
+	 * <code>Sequence(Real)</code> is <code>Collection(Real)</code>, but together
+	 * with <code>Sequence(String)</code> the common super type evaluates to
+	 * <code>Collection(OclAny)</code>.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#commonSuperType(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
@@ -440,12 +449,13 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 			CollectionType otherCollectionType = (CollectionType) other;
 
 			// find the common super type of the element types
-			Type commonElementType = getElementType().commonSuperType(
-					otherCollectionType.getElementType());
+			Type commonElementType =
+					getElementType()
+							.commonSuperType(otherCollectionType.getElementType());
 
 			if (commonElementType != null) {
-				commonSuperType = getCommonCollectionType(otherCollectionType,
-						commonElementType);
+				commonSuperType =
+						getCommonCollectionType(otherCollectionType, commonElementType);
 			}
 		}
 
@@ -459,16 +469,17 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
 	/**
 	 * Helper method to determine the common type of this
-	 * <code>CollectionType</code> and another <code>CollectionType</code> for
-	 * a given element type. This should be overridden in subclasses.
+	 * <code>CollectionType</code> and another <code>CollectionType</code> for a
+	 * given element type. This should be overridden in subclasses.
 	 * 
-	 * @param otherCollectionType the other <code>CollectionType</code>
-	 * @param commonElementType the common element type
+	 * @param otherCollectionType
+	 *          the other <code>CollectionType</code>
+	 * @param commonElementType
+	 *          the common element type
 	 * 
 	 * @return the most specific <code>CollectionType</code> that is commmon for
 	 *         this and the other <code>CollectionType</code>
 	 */
-	@SuppressWarnings("unused")
 	protected CollectionType getCommonCollectionType(
 			CollectionType otherCollectionType, Type commonElementType) {
 
@@ -568,6 +579,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
 			return getElementType();
@@ -585,6 +597,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
 			setElementType((Type) newValue);
@@ -605,6 +618,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
 			setElementType((Type) null);
@@ -621,9 +635,9 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 
 	/**
 	 * The EMF implementation is adapted to prevent that the name and element type
-	 * of the <code>CollectionType</code> are serialized to XMI. This is
-	 * necessary to prevent setting these properties upon loading the document
-	 * which would cause an exception.
+	 * of the <code>CollectionType</code> are serialized to XMI. This is necessary
+	 * to prevent setting these properties upon loading the document which would
+	 * cause an exception.
 	 * 
 	 * @generated NOT
 	 * 
@@ -633,13 +647,13 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	public boolean eIsSet(int featureID) {
 
 		switch (featureID) {
+		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
+		case TypesPackageImpl.COLLECTION_TYPE__NAME:
+			return false;
 		case TypesPackageImpl.COLLECTION_TYPE__OCL_LIBRARY:
 			return oclLibrary != null;
 		case TypesPackageImpl.COLLECTION_TYPE__KIND:
 			return kind != KIND_EDEFAULT;
-		case TypesPackageImpl.COLLECTION_TYPE__ELEMENT_TYPE:
-		case TypesPackageImpl.COLLECTION_TYPE__NAME:
-			return false;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -650,6 +664,7 @@ public class CollectionTypeImpl extends TypeImpl implements CollectionType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return TypesPackageImpl.Literals.COLLECTION_TYPE;
 	}
 

@@ -7,7 +7,7 @@
 -- 
 -- Use this constraint file with model university.uml
 -- 
-
+-- @model{../model/university.uml}
 package tudresden::ocl20::pivot::examples::university
 
 /*

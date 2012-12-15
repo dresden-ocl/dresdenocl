@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testClosureIteratorExp04() : OrderedSet(Class1) =
+self->asSequence()->closure(parent)
+
+endpackage

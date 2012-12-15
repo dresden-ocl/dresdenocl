@@ -50,7 +50,14 @@ public class OclEClassUtil {
 	org.eclipse.emf.ecore.EClass classB) {
 		String nsURI_A = classA.getEPackage().getNsURI();
 		String nsURI_B = classB.getEPackage().getNsURI();
-		return (nsURI_A == null && nsURI_B == null) || nsURI_A.equals(nsURI_B);
+		if (nsURI_A == null && nsURI_B == null) {
+			return true;
+		}
+		if (nsURI_A != null) {
+			return nsURI_A.equals(nsURI_B);
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean namesAreEqual(org.eclipse.emf.ecore.EClass classA, org.eclipse.emf.ecore.EClass classB) {
@@ -63,6 +70,18 @@ public class OclEClassUtil {
 	
 	public boolean isNotConcrete(org.eclipse.emf.ecore.EClass eClass) {
 		return !isConcrete(eClass);
+	}
+	
+	/**
+	 * Returns true if the given object is an instance of one of the EClasses.
+	 */
+	public boolean isInstance(Object object, org.eclipse.emf.ecore.EClass[] allowedTypes) {
+		for (org.eclipse.emf.ecore.EClass allowedType : allowedTypes) {
+			if (allowedType.isInstance(object)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

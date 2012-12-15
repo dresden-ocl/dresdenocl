@@ -1,0 +1,6 @@
+package package1
+
+context Class2::intProperty
+init: 42
+
+endpackage

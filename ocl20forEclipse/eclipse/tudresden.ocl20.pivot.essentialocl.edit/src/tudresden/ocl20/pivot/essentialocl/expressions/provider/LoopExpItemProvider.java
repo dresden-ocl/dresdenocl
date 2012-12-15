@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -49,7 +48,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import tudresden.ocl20.pivot.essentialocl.expressions.LoopExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
-import tudresden.ocl20.pivot.essentialocl.types.provider.EssentialOCLEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.LoopExp} object.
@@ -68,6 +66,7 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	 * @generated
 	 */
 	public LoopExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -79,6 +78,7 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,6 +97,7 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(
 			Object object) {
+
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(ExpressionsPackageImpl.Literals.LOOP_EXP__BODY);
@@ -112,6 +113,7 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
+
 		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
@@ -126,6 +128,7 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((LoopExp) object).getName();
 		return label == null || label.length() == 0 ? getString("_UI_LoopExp_type") : //$NON-NLS-1$
 				getString("_UI_LoopExp_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
@@ -140,13 +143,14 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(LoopExp.class)) {
 		case ExpressionsPackageImpl.LOOP_EXP__BODY:
 		case ExpressionsPackageImpl.LOOP_EXP__ITERATOR:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), true, false));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, false));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -162,6 +166,7 @@ public class LoopExpItemProvider extends CallExpItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

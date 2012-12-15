@@ -1,0 +1,8 @@
+package package1::package2
+
+/* Since OCL 2.3 allInstances() is defined on OclVoid. */
+context Type1
+def: testAllInstancesPositive04(): Set(OclVoid) =
+OclVoid.allInstances()
+
+endpackage

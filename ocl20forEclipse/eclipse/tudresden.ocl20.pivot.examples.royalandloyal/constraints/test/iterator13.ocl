@@ -1,5 +1,5 @@
 -- Constraints taken from [1] page 180 and adapted.
-
+-- @model{../../model/royalsandloyals.uml}
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
 context LoyaltyProgram

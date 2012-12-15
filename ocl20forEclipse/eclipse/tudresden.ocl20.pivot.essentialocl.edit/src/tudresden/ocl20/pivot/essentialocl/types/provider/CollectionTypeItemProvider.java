@@ -46,8 +46,8 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -70,6 +70,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public CollectionTypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -81,6 +82,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -97,6 +99,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addOclLibraryPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -116,6 +119,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addKindPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -139,6 +143,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return super.getText(object);
 	}
 
@@ -150,6 +155,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected CharSequence getTypeNameWithTypeArguments(Type type) {
+
 		CollectionType collectionType = (CollectionType) type;
 
 		// check whether the element type has been bound
@@ -162,8 +168,9 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 			name = new StringBuilder(getTypeName(collectionType));
 
 			// append element type
-			name.append(getTypeParameterListOpeningDelimiter()).append(
-					elementType.getName()).append(getTypeParameterListClosingDelimiter());
+			name.append(getTypeParameterListOpeningDelimiter())
+					.append(elementType.getName())
+					.append(getTypeParameterListClosingDelimiter());
 
 			return name;
 		}
@@ -177,8 +184,8 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected String getTypeName(Type type) {
+
 		return "Collection"; //$NON-NLS-1$
 	}
 
@@ -189,6 +196,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected char getTypeParameterListOpeningDelimiter() {
+
 		return '(';
 	}
 
@@ -199,6 +207,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected char getTypeParameterListClosingDelimiter() {
+
 		return ')';
 	}
 
@@ -210,12 +219,13 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CollectionType.class)) {
 		case TypesPackageImpl.COLLECTION_TYPE__KIND:
-			fireNotifyChanged(new ViewerNotification(notification, notification
-					.getNotifier(), false, true));
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), false, true));
 			return;
 		}
 		super.notifyChanged(notification);
@@ -231,6 +241,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -242,6 +253,7 @@ public class CollectionTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+Copyright (c) 2010 Cloudsmith Inc, Martin Taal (Doorn, The Netherlands) and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Cloudsmith Inc - build.xml for Buckminster project
+   Martin Taal - changes for Teneo
+
+Some important parts have been copied from Buckminster's own
+build setup:
+http://dev.eclipse.org/viewsvn/index.cgi/trunk/org.eclipse.buckminster.releng/build.xml?root=Tools_BUCKMINSTER&view=markup
+-->
+<project>
+	<!-- This macro executes the default application of an eclipse installation that resides
+	     in the folder ${buildtools}/@app
+	  -->
+	<macrodef name="eclipse.launch">
+		<attribute name="app" />
+		<element name="args" optional="true" />
+		<sequential>
+			<!-- We assume that the eclipse installation is beneath ${buildtools} -->
+			<property name="@{app}.deploy.dir" value="${toolsPath}/@{app}" />
+
+			<!-- Find the Eclipse launcher and adding its location to the @{app}.launcher property -->
+			<pathconvert property="@{app}.launcher">
+				<first count="1">
+					<sort>
+						<fileset dir="${@{app}.deploy.dir}/plugins" includes="**/org.eclipse.equinox.launcher_*.jar" />
+						<reverse xmlns="antlib:org.apache.tools.ant.types.resources.comparators">
+							<date />
+						</reverse>
+					</sort>
+				</first>
+			</pathconvert>
+
+			<!-- Launch the eclipse application -->
+			<java fork="true" jar="${@{app}.launcher}" dir="${@{app}.deploy.dir}">
+				<env key="no_proxy" value="${no.proxy}" />
+				<!-- Uncomment to debug <jvmarg value="-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=y"/> -->
+				<args />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="buckminster">
+		<attribute name="command" />
+		<attribute name="workspace" />
+		<element name="globargs" optional="true" />
+		<element name="cmdargs" optional="true" />
+		<sequential>
+			<eclipse.launch app="buckminster">
+				<args>
+					<jvmarg value="-Xmx1024m" />
+					<jvmarg value="-Dbugfix.288796=true" />
+					<jvmarg value="-Declipse.p2.mirrors=false" />
+					<jvmarg value="-Declipse.p2.unsignedPolicy=allow" />
+					<arg value="-data" />
+					<arg value="@{workspace}" />
+					<arg value="--loglevel" />
+					<arg value="${buckminster.loglevel}" />
+					<arg value="--displaystacktrace" />
+					<arg value="@{command}" />
+					<globargs />
+					<arg value="-P" />
+					<arg value="${properties.tmp}" />
+					<cmdargs />
+				</args>
+			</eclipse.launch>
+		</sequential>
+	</macrodef>
+
+	<!-- ================================= 
+          target: init.build.properties              
+         ================================= -->
+	<target name="init.build.properties">
+		<!-- Echo relevant properties to a temporary file so that Buckminster can read them
+			  -->
+		<tempfile destdir="${java.io.tmpdir}" prefix="build-" suffix=".properties" deleteonexit="true" property="properties.tmp" />
+		<echoproperties destfile="${properties.tmp}">
+			<!-- We don't want these. basedir in particular will cause problems if passed explicitly -->
+			<propertyset negate="true">
+				<propertyref name="basedir" />
+				<propertyref name="eclipse.home" />
+				<propertyref name="properties.tmp" />
+				<propertyref name="line.separator" />
+				<propertyref name="path.separator" />
+				<propertyref prefix="ant." />
+				<propertyref prefix="file." />
+				<propertyref prefix="java." />
+				<propertyref prefix="sun." />
+				<propertyref prefix="user." />
+			</propertyset>
+		</echoproperties>
+	</target>
+
+</project>

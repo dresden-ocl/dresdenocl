@@ -135,7 +135,7 @@ public class XmlModelInstanceProvider extends AbstractModelInstanceProvider {
 		// no else.
 
 		/* Check if the given file is a XML file. */
-		if (!instanceURL.getFile().endsWith(".xml")) {
+		if (!instanceURL.getFile().toLowerCase().endsWith(".xml")) {
 			throw new ModelAccessException(
 					XmlModelInstanceTypeMessages.XMLModelInstanceProvider_InvalidFileFormat);
 		}

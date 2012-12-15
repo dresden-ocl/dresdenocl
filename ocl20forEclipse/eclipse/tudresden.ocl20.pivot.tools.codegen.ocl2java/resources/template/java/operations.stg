@@ -1,5 +1,5 @@
 group javaOperations;
-
+delimiters "$","$"
 // ---- TEMPLATES FOR JAVA OPERATIONS ----
 // ---------------------------------------
 
@@ -13,9 +13,27 @@ absOperationOnReal(sourceExp, resultType) ::= <<
 java.lang.Math.abs($sourceExp$)
 >>
 
+// --- OclBoolean.allInstances() ---
+allInstancesOperationOnOclBoolean(resultVar, typeName) ::= <<
+$setType()$<$typeName$> $resultVar$ = new $setTypeInitialization()$<$typeName$>();
+$resultVar$.$addOperationName()$($typeName$.FALSE);
+$resultVar$.$addOperationName()$($typeName$.TRUE);
+>>
+
+// --- OclInvalid.allInstances() ---
+allInstancesOperationOnOclInvalid(sourceExp, typeName) ::= <<
+$invalidLiteralExp(resultType = typeName)$
+>>
+
 // --- OclType.allInstances() ---
 allInstancesOperationOnOclType(sourceExp, typeName) ::= <<
 (new $setTypeInitialization()$<$typeName$>((java.util.Set<$typeName$>) allInstances.get($sourceExp$.class.getCanonicalName()).keySet()))
+>>
+
+// --- OclVoid.allInstances() ---
+allInstancesOperationOnOclVoid(resultVar) ::= <<
+$setType()$<$anyType()$> $resultVar$ = new $setTypeInitialization()$<$anyType()$>();
+$resultVar$.$addOperationName()$($undefinedLiteralExp()$);
 >>
 
 // --- Boolean.and(Boolean) ---
@@ -112,8 +130,7 @@ $sequenceUtility()$.asSequence($sourceExp$)
 asSetOperationOnOclAny(sourceExp, argsExp, elementType, resultVar) ::= <<
 $setType()$<$elementType$> $resultVar$;
 $resultVar$ = new $setTypeInitialization()$<$elementType$>();
-$resultVar$.$addOperationName()$($sourceExp$);
->>
+$resultVar$.$addOperationName()$($sourceExp$);>>
 
 // --- Bag.asSet() ---
 asSetOperationOnBag(sourceExp, argsExp) ::= <<
@@ -310,9 +327,19 @@ greaterOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ > $argsExp$)
 >>
 
+// --- String.>(String) ---
+greaterOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) > 0)
+>>
+
 // --- Real.>=(Real) ---
 greaterEqualsOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ >= $argsExp$)
+>>
+
+// --- String.>=(String) ---
+greaterEqualsOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) >= 0)
 >>
 
 // --- Boolean.implies(Boolean) ---
@@ -400,9 +427,19 @@ lesserOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ < $argsExp$)
 >>
 
+// --- String.<(String) ---
+lesserOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) < 0)
+>>
+
 // --- Real.<=(Real) ---
 lesserEqualsOperationOnReal(sourceExp, argsExp) ::= <<
 ($sourceExp$ <= $argsExp$)
+>>
+
+// --- String.<=(String) ---
+lesserEqualsOperationOnString(sourceExp, argsExp) ::= <<
+($sourceExp$.compareTo($argsExp$) <= 0)
 >>
 
 // --- Integer.max(Integer) ---
@@ -474,6 +511,12 @@ negativeOperationOnInteger(sourceExp) ::= <<
 negativeOperationOnReal(sourceExp) ::= <<
 -($sourceExp$)
 >>
+
+// --- String.matches(String) ---
+matchesOperationOnString(sourceExp, argsExp) ::= <<
+Pattern.compile($stringUtility()$.getJavaRegEx($argsExp$)).matcher($sourceExp$).find()
+>>
+
 
 // --- Boolean.not(Boolean) ---
 notOperationOnBoolean(sourceExp) ::= <<
@@ -751,6 +794,11 @@ tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSequences
 // --- Utility Class for Set Operations ---
 setUtility() ::= <<
 tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclSets
+>>
+
+// --- Utility Class for String Operations ---
+stringUtility() ::= <<
+tudresden.ocl20.pivot.tools.codegen.ocl2java.types.util.OclString
 >>
 
 // --- Conversion operation from Number to Integer. */

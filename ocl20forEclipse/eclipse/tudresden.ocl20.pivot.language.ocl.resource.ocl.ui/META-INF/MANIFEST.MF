@@ -19,10 +19,12 @@ Require-Bundle: org.eclipse.core.resources,
   org.eclipse.ui.ide,
   org.eclipse.ui.views,
   tudresden.ocl20.pivot.language.ocl.resource.ocl,
-  org.emftext.commons.antlr3_2_0,
+  org.emftext.commons.antlr3_4_0,
   tudresden.ocl20.pivot.language.ocl,
+  org.emftext.commons.layout,
   tudresden.ocl20.pivot.pivotmodel
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.language.ocl.resource.ocl.ui
 Bundle-Activator: tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin
+Import-Package: org.eclipse.ui.texteditor.spelling

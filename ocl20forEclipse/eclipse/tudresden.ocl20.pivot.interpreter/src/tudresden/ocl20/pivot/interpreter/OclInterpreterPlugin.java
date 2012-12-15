@@ -118,8 +118,9 @@ public class OclInterpreterPlugin extends Plugin {
 
 		/* Check if the plug-in has been activated. */
 		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Interpreter plugin has not been activated.");
+			System.out
+					.println("The Interpreter plugin has not been activated. Initialized it manually.");
+			plugin = new OclInterpreterPlugin();
 		}
 		// no else.
 

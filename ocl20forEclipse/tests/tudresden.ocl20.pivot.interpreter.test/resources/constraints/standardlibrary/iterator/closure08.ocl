@@ -1,0 +1,8 @@
+package package1
+
+/* Returns all transitive children as a Set. */
+context Class1
+def: testClosure08(): Set(Class1) =
+self.asSet()->closure(children)
+
+endpackage

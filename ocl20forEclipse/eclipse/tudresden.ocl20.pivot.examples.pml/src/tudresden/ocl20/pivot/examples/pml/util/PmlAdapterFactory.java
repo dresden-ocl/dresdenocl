@@ -8,12 +8,18 @@ package tudresden.ocl20.pivot.examples.pml.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
-import tudresden.ocl20.pivot.examples.pml.*;
+import tudresden.ocl20.pivot.examples.pml.Extension;
+import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
+import tudresden.ocl20.pivot.examples.pml.Feature;
+import tudresden.ocl20.pivot.examples.pml.JavaType;
+import tudresden.ocl20.pivot.examples.pml.Operation;
+import tudresden.ocl20.pivot.examples.pml.Parameter;
+import tudresden.ocl20.pivot.examples.pml.Plugin;
+import tudresden.ocl20.pivot.examples.pml.PluginPackage;
+import tudresden.ocl20.pivot.examples.pml.PmlPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -49,10 +49,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.EnumLiteralExp} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
@@ -66,6 +64,7 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public EnumLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -77,6 +76,7 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -88,10 +88,10 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	/**
 	 * This adds a property descriptor for the Referred Enum Literal feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addReferredEnumLiteralPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -105,13 +105,14 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	}
 
 	/**
-	 * This returns EnumLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * This returns EnumLiteralExp.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/EnumLiteralExp")); //$NON-NLS-1$
 	}
@@ -124,22 +125,23 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String result = ((EnumLiteralExp) object).getReferredEnumLiteral()
-				.getName();
+
+		String result =
+				((EnumLiteralExp) object).getReferredEnumLiteral().getName();
 
 		return result;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -154,6 +156,7 @@ public class EnumLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

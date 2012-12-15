@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
 import tudresden.ocl20.pivot.language.ocl.TypeCS;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,22 +23,22 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public abstract class TypeCSImpl extends EObjectImpl implements TypeCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TypeCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.TYPE_CS;
-	}
+    return OclPackage.Literals.TYPE_CS;
+  }
 
 } //TypeCSImpl

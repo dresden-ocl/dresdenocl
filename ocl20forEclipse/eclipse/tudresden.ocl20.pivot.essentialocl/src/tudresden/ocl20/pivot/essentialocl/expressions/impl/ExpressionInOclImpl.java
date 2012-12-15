@@ -35,6 +35,8 @@ package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -48,8 +50,6 @@ import tudresden.ocl20.pivot.essentialocl.expressions.ExpressionInOcl;
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.Variable;
 import tudresden.ocl20.pivot.pivotmodel.impl.ExpressionImpl;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Expression In Ocl</b></em>'.
@@ -112,6 +112,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	protected ExpressionInOclImpl() {
+
 		super();
 	}
 
@@ -144,6 +145,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public OclExpression getBodyExpression() {
+
 		return bodyExpression;
 	}
 
@@ -153,13 +155,14 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	public NotificationChain basicSetBodyExpression(
 			OclExpression newBodyExpression, NotificationChain msgs) {
+
 		OclExpression oldBodyExpression = bodyExpression;
 		bodyExpression = newBodyExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-					oldBodyExpression, newBodyExpression);
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+							oldBodyExpression, newBodyExpression);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -173,22 +176,30 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public void setBodyExpression(OclExpression newBodyExpression) {
+
 		if (newBodyExpression != bodyExpression) {
 			NotificationChain msgs = null;
 			if (bodyExpression != null)
-				msgs = ((InternalEObject) bodyExpression).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-						null, msgs);
+				msgs =
+						((InternalEObject) bodyExpression)
+								.eInverseRemove(
+										this,
+										EOPPOSITE_FEATURE_BASE
+												- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+										null, msgs);
 			if (newBodyExpression != null)
-				msgs = ((InternalEObject) newBodyExpression).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
-						null, msgs);
+				msgs =
+						((InternalEObject) newBodyExpression)
+								.eInverseAdd(
+										this,
+										EOPPOSITE_FEATURE_BASE
+												- ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
+										null, msgs);
 			msgs = basicSetBodyExpression(newBodyExpression, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION,
 					newBodyExpression, newBodyExpression));
@@ -199,6 +210,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public Variable getContext() {
+
 		return context;
 	}
 
@@ -208,12 +220,14 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	public NotificationChain basicSetContext(Variable newContext,
 			NotificationChain msgs) {
+
 		Variable oldContext = context;
 		context = newContext;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT,
-					oldContext, newContext);
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, oldContext,
+							newContext);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -227,20 +241,26 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public void setContext(Variable newContext) {
+
 		if (newContext != context) {
 			NotificationChain msgs = null;
 			if (context != null)
-				msgs = ((InternalEObject) context)
-						.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null, msgs);
+				msgs =
+						((InternalEObject) context).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null,
+								msgs);
 			if (newContext != null)
-				msgs = ((InternalEObject) newContext)
-						.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null, msgs);
+				msgs =
+						((InternalEObject) newContext).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, null,
+								msgs);
 			msgs = basicSetContext(newContext, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.EXPRESSION_IN_OCL__CONTEXT, newContext,
 					newContext));
@@ -251,6 +271,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public Variable getResult() {
+
 		return result;
 	}
 
@@ -260,12 +281,14 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	public NotificationChain basicSetResult(Variable newResult,
 			NotificationChain msgs) {
+
 		Variable oldResult = result;
 		result = newResult;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET, ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT,
-					oldResult, newResult);
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, oldResult,
+							newResult);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -279,20 +302,26 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public void setResult(Variable newResult) {
+
 		if (newResult != result) {
 			NotificationChain msgs = null;
 			if (result != null)
-				msgs = ((InternalEObject) result).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null, msgs);
+				msgs =
+						((InternalEObject) result).eInverseRemove(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null,
+								msgs);
 			if (newResult != null)
-				msgs = ((InternalEObject) newResult).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE
-								- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null, msgs);
+				msgs =
+						((InternalEObject) newResult).eInverseAdd(this,
+								EOPPOSITE_FEATURE_BASE
+										- ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, null,
+								msgs);
 			msgs = basicSetResult(newResult, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					ExpressionsPackageImpl.EXPRESSION_IN_OCL__RESULT, newResult,
 					newResult));
@@ -303,9 +332,11 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 * @generated
 	 */
 	public List<Variable> getParameter() {
+
 		if (parameter == null) {
-			parameter = new EObjectContainmentEList<Variable>(Variable.class, this,
-					ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER);
+			parameter =
+					new EObjectContainmentEList<Variable>(Variable.class, this,
+							ExpressionsPackageImpl.EXPRESSION_IN_OCL__PARAMETER);
 		}
 		return parameter;
 	}
@@ -317,6 +348,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 			return basicSetBodyExpression(null, msgs);
@@ -336,6 +368,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 			return getBodyExpression();
@@ -356,6 +389,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 			setBodyExpression((OclExpression) newValue);
@@ -380,6 +414,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 			setBodyExpression((OclExpression) null);
@@ -403,6 +438,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.EXPRESSION_IN_OCL__BODY_EXPRESSION:
 			return bodyExpression != null;
@@ -422,6 +458,7 @@ public class ExpressionInOclImpl extends ExpressionImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.EXPRESSION_IN_OCL;
 	}
 

@@ -10,15 +10,11 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -28,7 +24,6 @@ import tudresden.ocl20.pivot.examples.pml.Extension;
 import tudresden.ocl20.pivot.examples.pml.ExtensionPoint;
 import tudresden.ocl20.pivot.examples.pml.Feature;
 import tudresden.ocl20.pivot.examples.pml.JavaType;
-import tudresden.ocl20.pivot.examples.pml.Operation;
 import tudresden.ocl20.pivot.examples.pml.Plugin;
 import tudresden.ocl20.pivot.examples.pml.PmlPackage;
 

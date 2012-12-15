@@ -1,0 +1,46 @@
+package uml
+
+/* [1] The query mustBeOwned() indicates whether elements of this type must have an owner. */
+context Package::mustBeOwned() : Boolean
+body: false
+
+/* The following bugs were fixed:
+- removed 'mustBeOwned = ' from body
+*/
+
+
+/*[2] The query visibleMembers() defines which members of a Package can be accessed outside it. */
+context Package::visibleMembers() : Set(PackageableElement)
+body: ownedMember->select( m | self.makesVisible(m))
+
+/* The following bugs were fixed:
+- removed ';' from context declaration
+- removed 'visibleMembers = ' from body
+- changed member to ownedMember to avoid cast to PackageableElement
+*/
+
+
+/* [3] The query makesVisible() defines whether a Package makes an element visible outside itself. 
+   Elements with no visibility and elements with public visibility are made visible. */
+context Package::makesVisible(el: NamedElement) : Boolean
+pre: self.member->includes(el)
+body:
+	-- case: the element is in the package itself
+	(ownedMember->collect(oclAsType(NamedElement))->includes(el)) or
+	-- case: it is imported individually with public visibility
+	(elementImport->select(ei|ei.importedElement.visibility = VisibilityKind::public)
+		->collect(ei|ei.importedElement)->collect(oclAsType(NamedElement))->includes(el)) or
+	-- case: it is imported in a package with public visibility
+	(packageImport->select(pi|pi.visibility = VisibilityKind::public)
+		->collect(pi|pi.importedPackage.member->includes(el))->notEmpty())
+
+/* The following bugs were fixed:
+- removed ';' from context declaration
+- removed 'makesVisible = ' from body
+- replaced old EnumerationLiteral notation with new one (2x)
+- added missing reference to property visibility in comparasion with VisibilityKind
+- Added collect with cast to NamedElement since wrong ownedMember association is referred here (2x)
+ (fixed in UML 2.3)
+*/
+
+endpackage 

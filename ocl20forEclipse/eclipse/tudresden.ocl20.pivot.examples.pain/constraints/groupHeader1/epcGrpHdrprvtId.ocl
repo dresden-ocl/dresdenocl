@@ -1,3 +1,4 @@
+-- @model{../../model/pain.008.001.01corrected.xsd}
 package isoStdIso20022TechXsdPain00800101
 
 /* Only one occurrence of Private Identification (initgPty Id prvtId) may be present.

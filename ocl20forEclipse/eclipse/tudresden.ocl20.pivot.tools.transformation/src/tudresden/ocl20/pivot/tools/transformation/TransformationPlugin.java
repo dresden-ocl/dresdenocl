@@ -53,6 +53,7 @@ public class TransformationPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
@@ -66,7 +67,9 @@ public class TransformationPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext context) throws Exception {
 
@@ -89,7 +92,7 @@ public class TransformationPlugin extends Plugin {
 	 * </p>
 	 * 
 	 * @param clazz
-	 *          the class to return the logger for
+	 *            the class to return the logger for
 	 * 
 	 * @return a log4j <code>Logger</code> instance
 	 */
@@ -105,8 +108,8 @@ public class TransformationPlugin extends Plugin {
 	 * </p>
 	 * <p>
 	 * If no {@link ITransformationRegistry} has been given to the
-	 * {@link TemplatePlugin}, the standard {@link TransformationRegistry} will be
-	 * used. This is important when using DresdenOCL stand-alone, as the
+	 * {@link TemplatePlugin}, the standard {@link TransformationRegistry} will
+	 * be used. This is important when using DresdenOCL stand-alone, as the
 	 * {@link StandaloneTransformationRegistry} should be set first, using
 	 * {@link #setTransformationRegistry(ITransformationRegistry)}.
 	 * </p>
@@ -119,8 +122,9 @@ public class TransformationPlugin extends Plugin {
 
 		/* Check that the plugin has been activated. */
 		if (plugin == null) {
-			throw new IllegalStateException(
-					"The Template plugin has not been activated."); //$NON-NLS-1$
+			System.out
+					.println("The Transformation plugin has not been activated. Initialized it manually"); //$NON-NLS-1$
+			plugin = new TransformationPlugin();
 		}
 
 		/* Lazily create the registry. */
@@ -138,7 +142,7 @@ public class TransformationPlugin extends Plugin {
 	 * {@link StandaloneTransformationRegistry}.
 	 * 
 	 * @param metamodelRegistry
-	 *          the {@link ITransformationRegistry} to set
+	 *            the {@link ITransformationRegistry} to set
 	 */
 	public synchronized static void setTransformationRegistry(
 			ITransformationRegistry transformationRegistry) {

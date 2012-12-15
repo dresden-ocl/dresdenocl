@@ -32,9 +32,11 @@
  */
 package tudresden.ocl20.pivot.essentialocl.standardlibrary.provider;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -59,12 +61,11 @@ import tudresden.ocl20.pivot.essentialocl.types.util.TypeResolver;
 public class OclLibraryProvider implements IOclLibraryProvider {
 
 	/** The {@link Logger} for this class. */
-	private static final Logger LOGGER =
-			EssentialOclPlugin.getLogger(OclLibraryProvider.class);
+	private static final Logger LOGGER = EssentialOclPlugin
+			.getLogger(OclLibraryProvider.class);
 
 	/** The file name of the OCL Standard Library model. */
-	private static final String OCL_LIBRARY_FILE =
-			"/resources/oclstandardlibrary.types"; //$NON-NLS-1$
+	private static final String OCL_LIBRARY_FILE = "/resources/oclstandardlibrary.types"; //$NON-NLS-1$
 
 	/** The cached {@link OclLibrary} instance. */
 	private OclLibrary oclLibrary;
@@ -73,6 +74,7 @@ public class OclLibraryProvider implements IOclLibraryProvider {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see tudresden.ocl20.pivot.modelbus.IOclLibraryProvider#getOclLibrary()
 	 */
 	public OclLibrary getOclLibrary() {
@@ -87,8 +89,8 @@ public class OclLibraryProvider implements IOclLibraryProvider {
 
 	/**
 	 * <p>
-	 * A helper method that performs the actual loading. This should work without
-	 * errors unless the Model Bus plug-in is changed.
+	 * A helper method that performs the actual loading. This should work
+	 * without errors unless the Model Bus plug-in is changed.
 	 * </p>
 	 * 
 	 * @return An {@link OclLibrary} instance.
@@ -101,9 +103,35 @@ public class OclLibraryProvider implements IOclLibraryProvider {
 		resourceSet = new ResourceSetImpl();
 
 		Resource resource;
-		resource =
-				resourceSet.createResource(URI.createPlatformPluginURI(
-						EssentialOclPlugin.ID + OCL_LIBRARY_FILE, false));
+
+		if (Platform.isRunning()) {
+			resource = resourceSet.createResource(URI.createPlatformPluginURI(
+					EssentialOclPlugin.ID + OCL_LIBRARY_FILE, false));
+		}
+
+		/* Find the resource manually. */
+		else {
+			File testLocation = new File(System.getProperty("DRESDENOCL_LOCATION_TESTS") + EssentialOclPlugin.ID);
+			File eclipseLocation = new File(System.getProperty("DRESDENOCL_LOCATION_ECLIPSE") + EssentialOclPlugin.ID);
+			
+			File bundleFile = null;
+
+			
+			if (testLocation != null && testLocation.exists() && testLocation.isDirectory()) {
+				bundleFile = testLocation;
+			} else if (eclipseLocation != null && eclipseLocation.exists() && eclipseLocation.isDirectory()) {
+				bundleFile = eclipseLocation;
+			}
+
+			if (bundleFile != null)
+				resource = resourceSet.createResource(URI
+						.createFileURI(bundleFile.getAbsolutePath()
+								+ File.separator + OCL_LIBRARY_FILE));
+
+			else
+				throw new RuntimeException("Bundle or directory '"
+						+ OCL_LIBRARY_FILE + "' was not found.");
+		}
 
 		if (LOGGER.isInfoEnabled()) {
 			LOGGER.info(EssentialOclMessages.OclLibraryProvider_LoadOclLibrary);

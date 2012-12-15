@@ -158,4 +158,47 @@ public interface OclString extends OclLibraryObject {
 	 * @return the characters of <code>this</code> as an {@link OclSequence}
 	 */
 	OclSequence<OclString> characters();
+	
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is less than <code>s</code>.
+	 */
+	OclBoolean isLessThan(OclString s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is greater than <code>s</code>.
+	 */
+	OclBoolean isGreaterThan(OclString s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is less than or equal to <code>s</code>.
+	 */
+	OclBoolean isLessEqual(OclString s);
+
+	/**
+	 * 
+	 * @param s
+	 * @return true if <code>this</code> is greater than or equal to
+	 *         <code>s</code>.
+	 */
+	OclBoolean isGreaterEqual(OclString s);
+	
+	/** TODO: change javadoc
+	 * Queries the index in <code>this</code> at which <code>s</code> is a
+	 * substring of <code>this</code>, or zero if <code>s</code> is not a
+	 * substring of <code>this</code>. The empty string is considered to be a
+	 * substring of every string but the empty string, at index 1. No string is a
+	 * substring of the empty string.
+	 * 
+	 * @param s
+	 *          the substring to look for
+	 * @return the index in <code>this</code> at which <code>s</code> is a
+	 *         substring of <code>this</code>
+	 */
+	OclBoolean matches(OclString s);
 }

@@ -65,4 +65,5 @@ public class OclEObjectSelection implements org.eclipse.jface.viewers.IStructure
 		list.add(selectedObject);
 		return list;
 	}
+	
 }

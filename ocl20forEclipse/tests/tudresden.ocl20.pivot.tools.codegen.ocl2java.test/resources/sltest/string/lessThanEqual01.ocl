@@ -1,0 +1,7 @@
+package testpackage
+
+context Class1
+def: testStringLessThanEqual01(source: String, arg01: String): Boolean =
+source <= arg01
+
+endpackage

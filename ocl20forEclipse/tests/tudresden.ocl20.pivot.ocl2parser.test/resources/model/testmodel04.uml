@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_YrjsoM2zEd62LvZ-4azseA" name="test">
+  <packagedElement xmi:type="uml:Class" xmi:id="_m086EM6AEd6qLaARTezfFw" name="ParentClass">
+    <ownedAttribute xmi:id="_dpbNALE9Ed-LyYPZwGfByg" name="sameName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Boolean"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NC_XQFCTEeCibfOjh68OSg" name="ChildClass">
+    <generalization xmi:id="_O-nWcFCTEeCibfOjh68OSg" general="_m086EM6AEd6qLaARTezfFw"/>
+    <ownedAttribute xmi:id="_NC_XQVCTEeCibfOjh68OSg" name="sameName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+  </packagedElement>
+</uml:Package>

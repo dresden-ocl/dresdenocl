@@ -58,6 +58,7 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	 * @generated
 	 */
 	protected SequenceTypeImpl() {
+
 		super();
 	}
 
@@ -67,6 +68,7 @@ public class SequenceTypeImpl extends CollectionTypeImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return TypesPackageImpl.Literals.SEQUENCE_TYPE;
 	}
 

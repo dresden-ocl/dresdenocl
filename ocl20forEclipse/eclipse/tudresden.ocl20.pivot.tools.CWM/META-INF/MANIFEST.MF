@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CWM
 Bundle-SymbolicName: tudresden.ocl20.pivot.tools.CWM;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: orgomg.cwm.analysis.businessnomenclature,
  orgomg.cwm.analysis.businessnomenclature.impl,
  orgomg.cwm.analysis.businessnomenclature.util,

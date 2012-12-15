@@ -1,0 +1,9 @@
+package package1::package2
+
+/* The operation .=() should be available for enumeration literals since enumerations 
+   are also subtypes of OclAny. */
+context Type1
+inv testEqualsOnEnumerationLiteral: 
+not (Enumeration1::Literal1 = Enumeration1::Literal2)
+
+endpackage

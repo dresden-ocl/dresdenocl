@@ -2,12 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMF Ecore Meta-Model Plug-in
 Bundle-SymbolicName: tudresden.ocl20.pivot.metamodels.ecore;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: tudresden.ocl20.pivot.metamodels.ecore.EcoreMetamodelPlugin
 Bundle-Vendor: TU Dresden, Software Technology Group
 Require-Bundle: org.eclipse.core.runtime,
  tudresden.ocl20.pivot.modelbus
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: tudresden.ocl20.pivot.metamodels.ecore,
- tudresden.ocl20.pivot.metamodels.ecore.internal.model; x-friends:="tudresden.ocl20.pivot.metamodels.xsd"
+ tudresden.ocl20.pivot.metamodels.ecore.internal.model;x-friends:="tudresden.ocl20.pivot.metamodels.xsd",
+ tudresden.ocl20.pivot.metamodels.ecore.internal.provider

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dresden OCL DEFT Utility Plug-in
+Bundle-SymbolicName: org.dresdenocl.util.deft
+Bundle-Version: 3.1.0.qualifier
+Bundle-Activator: org.dresdenocl.util.deft.Activator
+Bundle-Vendor: TU Dresden, Software Technology Group
+Require-Bundle: org.eclipse.core.runtime,
+ tudresden.ocl20.pivot.facade;bundle-version="3.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.dresdenocl.util.deft

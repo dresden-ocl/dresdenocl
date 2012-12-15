@@ -57,8 +57,15 @@ public class EcoreProperty extends AbstractProperty implements Property {
 			.getLogger(EcoreProperty.class);
 
 	/** The adapted {@link EAttribute} or {@link EReference}. */
-	private EStructuralFeature eStructuralFeature;
+	protected EStructuralFeature eStructuralFeature;
 
+	/**
+	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	protected EcoreAdapterFactory factory;
+	
 	/**
 	 * <p>
 	 * Creates a new {@link EcoreProperty} instance.
@@ -66,8 +73,10 @@ public class EcoreProperty extends AbstractProperty implements Property {
 	 * 
 	 * @param eStructuralFeature
 	 *            The adapted {@link EAttribute} or {@link EReference}.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreProperty(EStructuralFeature eStructuralFeature) {
+	public EcoreProperty(EStructuralFeature eStructuralFeature,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -83,7 +92,8 @@ public class EcoreProperty extends AbstractProperty implements Property {
 
 		/* Initialize adapted feature. */
 		this.eStructuralFeature = eStructuralFeature;
-
+		this.factory = factory;
+		
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -115,7 +125,7 @@ public class EcoreProperty extends AbstractProperty implements Property {
 	@Override
 	public Type getOwningType() {
 
-		return EcoreAdapterFactory.INSTANCE.createType(this.eStructuralFeature
+		return factory.createType(this.eStructuralFeature
 				.getEContainingClass());
 	}
 
@@ -130,7 +140,7 @@ public class EcoreProperty extends AbstractProperty implements Property {
 		Type result;
 
 		Type elementType;
-		elementType = EcoreAdapterFactory.INSTANCE
+		elementType = factory
 				.createType(eStructuralFeature.getEType());
 
 		/* Probably put the type into a collection. */
@@ -172,5 +182,13 @@ public class EcoreProperty extends AbstractProperty implements Property {
 		}
 
 		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isIdentifier()
+	 */
+	@Override
+	public boolean isIdentifier() {
+		return (eStructuralFeature instanceof EAttribute && ((EAttribute)eStructuralFeature).isID());
 	}
 }

@@ -93,7 +93,7 @@ public class EcoreModelProvider extends AbstractModelProvider implements
 		}
 
 		/* Get the resource. */
-		resource = getResourceSet().getResource(modelURI, false);
+		resource = getResourceSet().getResource(modelURI, true);
 
 		/* Check if the resource has already been created. */
 		if (resource == null) {

@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.OclPackage;
  */
 public class InvalidLiteralExpCSImpl extends PrimitiveLiteralExpCSImpl implements InvalidLiteralExpCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected InvalidLiteralExpCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.INVALID_LITERAL_EXP_CS;
-	}
+    return OclPackage.Literals.INVALID_LITERAL_EXP_CS;
+  }
 
 } //InvalidLiteralExpCSImpl

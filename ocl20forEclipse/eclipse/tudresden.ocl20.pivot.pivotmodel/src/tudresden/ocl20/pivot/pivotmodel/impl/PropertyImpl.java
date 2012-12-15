@@ -54,10 +54,11 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#getOwningType
+ * <em>Owning Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PropertyImpl extends FeatureImpl implements Property {
@@ -69,18 +70,22 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PropertyImpl() {
+
 		super();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.PROPERTY;
 	}
 
@@ -98,9 +103,11 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
+
 		if (eContainerFeatureID() != PivotModelPackage.PROPERTY__OWNING_TYPE)
 			return null;
 		return (Type) eContainer();
@@ -108,20 +115,25 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
 			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newOwningType,
-				PivotModelPackage.PROPERTY__OWNING_TYPE, msgs);
+
+		msgs =
+				eBasicSetContainer((InternalEObject) newOwningType,
+						PivotModelPackage.PROPERTY__OWNING_TYPE, msgs);
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
+
 		if (newOwningType != eInternalContainer()
 				|| (eContainerFeatureID() != PivotModelPackage.PROPERTY__OWNING_TYPE && newOwningType != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningType))
@@ -131,16 +143,26 @@ public class PropertyImpl extends FeatureImpl implements Property {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningType != null)
-				msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
-						PivotModelPackage.TYPE__OWNED_PROPERTY, Type.class,
-						msgs);
+				msgs =
+						((InternalEObject) newOwningType).eInverseAdd(this,
+								PivotModelPackage.TYPE__OWNED_PROPERTY, Type.class, msgs);
 			msgs = basicSetOwningType(newOwningType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.PROPERTY__OWNING_TYPE, newOwningType,
-					newOwningType));
+					PivotModelPackage.PROPERTY__OWNING_TYPE, newOwningType, newOwningType));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean isIdentifier() {
+
+		return false;
 	}
 
 	/**
@@ -158,8 +180,9 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 		// compare name and type (note that we require the type of the property
 		// to be non-null)
-		result = getName().equals(p.getName()) && getType() != null
-				&& getType().equals(p.getType());
+		result =
+				getName().equals(p.getName()) && getType() != null
+						&& getType().equals(p.getType());
 
 		if (logger.isDebugEnabled()) {
 			logger.debug("cmpSlots() - exit - return value=" + result); //$NON-NLS-1$
@@ -193,11 +216,13 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			if (eInternalContainer() != null)
@@ -209,11 +234,13 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			return basicSetOwningType(null, msgs);
@@ -223,11 +250,13 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
+
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			return eInternalContainer().eInverseRemove(this,
@@ -238,10 +267,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			return getOwningType();
@@ -251,10 +282,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			setOwningType((Type) newValue);
@@ -265,10 +298,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			setOwningType((Type) null);
@@ -279,10 +314,12 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.PROPERTY__OWNING_TYPE:
 			return getOwningType() != null;

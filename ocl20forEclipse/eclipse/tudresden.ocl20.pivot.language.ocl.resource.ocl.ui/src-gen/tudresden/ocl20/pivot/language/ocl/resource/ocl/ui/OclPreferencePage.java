@@ -13,7 +13,7 @@ public class OclPreferencePage extends org.eclipse.jface.preference.PreferencePa
 	
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 		setPreferenceStore(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
-		setDescription(" Ocl Text Editor Preferences");
+		setDescription("Ocl Text Editor Preferences");
 	}
 	
 	@Override	

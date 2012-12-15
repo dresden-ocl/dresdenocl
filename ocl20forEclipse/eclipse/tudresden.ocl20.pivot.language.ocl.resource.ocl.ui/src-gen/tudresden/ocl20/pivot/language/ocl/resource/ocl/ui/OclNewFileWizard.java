@@ -43,7 +43,7 @@ public class OclNewFileWizard extends org.eclipse.jface.wizard.Wizard implements
 		final String fileName = page.getFileName();
 		this.newName = fileName;
 		int seperatorIdx = newName.indexOf('.');
-		if(seperatorIdx != -1) {
+		if (seperatorIdx != -1) {
 			newName = newName.substring(0, seperatorIdx);
 		}
 		final org.eclipse.core.resources.IFile file;

@@ -7,12 +7,22 @@ IMPORTS {
 }
 
 OPTIONS {
+	generateCodeFromGeneratorModel = "true";
+	disableDebugSupport = "true";
+	disableLaunchSupport = "true";
 	reloadGeneratorModel = "true";
 	tokenspace = "1";
 	overrideTextResource = "false";
 	overrideCodeCompletionHelper = "true";
 	overrideManifest = "false";
+	overridePluginXML = "false";
 	usePredefinedTokens = "false";
+	overrideHyperlink = "false";
+	overrideDefaultResolverDelegate = "false";
+	resourcePluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl";
+	resourceUIPluginID = "tudresden.ocl20.pivot.language.ocl.resource.ocl.ui";
+	srcFolder = "src";
+	srcGenFolder = "src-gen";
 }
 
 TOKENS {
@@ -32,7 +42,7 @@ TOKENS {
 	DEFINE IS_MARKED_PRE			$ '@pre'$;
 	DEFINE BOOLEAN_LITERAL			$ 'true' | 'false' $;
 	DEFINE COLLECTION_TYPES			$ 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' $;
-	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' $;
+	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' $;
 	DEFINE STATIC					$ 'static'$;
 	DEFINE INTEGER_0				$ '0'+ ('0'..'9')$;
 	DEFINE INTEGER_LITERAL			$ ('1'..'9') ('0'..'9')* | '0'$;

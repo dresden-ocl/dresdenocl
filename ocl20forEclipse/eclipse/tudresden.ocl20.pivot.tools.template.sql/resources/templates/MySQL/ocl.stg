@@ -1,0 +1,63 @@
+group mysql;
+delimiters "$","$"
+
+// --- ATTRIBUTE ACCESS (CLASS AND ATTRIBUTE) --- 
+feature_call_attribute_boolean(attribute) ::= <<
+($attribute$ = true)
+>>
+
+// ---  BOOLEAN (BASIC TYPE) --- 
+literal_boolean_true() ::= <<
+(true)
+>>
+
+literal_boolean_false() ::= <<
+(false)
+>>
+
+feature_call_navigation_from(select,where,from) ::= <<
+$from$
+>>
+
+// ---  COLLECTIONS - SET (QUERY) --- 
+literal_collection_set(items) ::= <<
+$items:literal_collection_set_item(); separator=", "$
+>>
+
+literal_collection_set_item(item) ::= <<
+$item$
+>>
+
+// --- IF EXPRESSION ---
+if_expression(if_branch,then_branch,else_branch) ::= <<
+IF($if_branch$,$then_branch$,$else_branch$)
+>>
+
+// --- COLLECTION RELATED OPERATIONS ---
+feature_call_count(object) ::= <<
+IFNULL(COUNT($object$),0)
+>>
+
+feature_call_size(select) ::= <<
+IFNULL(COUNT($select$),0)
+>>
+
+feature_call_sum(select) ::= <<
+IFNULL(SUM($select$),0)
+>>
+
+feature_call_size_select(select) ::= <<
+IF($select$ IS NULL,NULL,1)
+>>
+
+feature_call_count_select(select) ::= <<
+IF($select$ IS NULL,NULL,1)
+>>
+
+feature_call_string_concat(operand1,operand2) ::= <<
+CONCAT($operand1$,$operand2$)
+>>
+
+feature_call_string_matches(operand1,operand2) ::= <<
+$operand1$ REGEXP $operand2$
+>>

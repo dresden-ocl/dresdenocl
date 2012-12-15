@@ -47,7 +47,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import tudresden.ocl20.pivot.essentialocl.types.TupleType;
 import tudresden.ocl20.pivot.essentialocl.types.impl.TypesPackageImpl;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -70,6 +69,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	public TupleTypeItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -81,6 +81,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -96,6 +97,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * @generated
 	 */
 	protected void addOclLibraryPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -115,8 +117,9 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage(
-				"full/obj16/TupleType")); //$NON-NLS-1$
+
+		return overlayImage(object,
+				getResourceLocator().getImage("full/obj16/TupleType")); //$NON-NLS-1$
 	}
 
 	/**
@@ -130,6 +133,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return super.getText(object);
 	}
 
@@ -141,6 +145,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected CharSequence getTypeNameWithTypeArguments(Type type) {
+
 		StringBuilder name = new StringBuilder(getTypeName(type));
 
 		// append the properties of the tuple type
@@ -168,8 +173,8 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 * @see tudresden.ocl20.pivot.pivotmodel.provider.TypeItemProvider#getTypeName(tudresden.ocl20.pivot.pivotmodel.Type)
 	 */
 	@Override
-	@SuppressWarnings("unused")
 	protected CharSequence getTypeName(Type type) {
+
 		return "Tuple"; //$NON-NLS-1$
 	}
 
@@ -180,6 +185,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected char getTypeParameterListOpeningDelimiter() {
+
 		return '(';
 	}
 
@@ -190,6 +196,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	protected char getTypeParameterListClosingDelimiter() {
+
 		return ')';
 	}
 
@@ -201,6 +208,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -215,6 +223,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 
@@ -226,6 +235,7 @@ public class TupleTypeItemProvider extends TypeItemProvider implements
 	 */
 	@Override
 	public ResourceLocator getResourceLocator() {
+
 		return EssentialOCLEditPlugin.INSTANCE;
 	}
 

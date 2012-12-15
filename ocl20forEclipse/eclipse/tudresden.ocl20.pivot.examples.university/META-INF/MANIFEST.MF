@@ -1,15 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: University Example
 Bundle-SymbolicName: tudresden.ocl20.pivot.examples.university;singleton:=true
-Bundle-Version: 1.0.0
+Bundle-Version: 3.2.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: tudresden.ocl20.pivot.examples.university,
- tudresden.ocl20.pivot.examples.university.impl,
- tudresden.ocl20.pivot.examples.university.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy

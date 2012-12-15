@@ -2,8 +2,31 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.startup">
-      <startup></startup>
+         point="tudresden.ocl20.pivot.tools.template.templateGroups">
+      <templateresource
+            name="Standard(SQL)"
+            path="resources/templates/Standard/">
+      </templateresource>
+      <templateresource
+            name="MySQL(SQL)"
+            path="resources/templates/MySQL/"
+            supergroup="Standard(SQL)">
+      </templateresource>
+      <templateresource
+            name="MySQL ab 5.5(SQL)"
+            path="resources/templates/MySQL55/"
+            supergroup="MySQL(SQL)">
+      </templateresource>
+      <templateresource
+            name="Oracle 8i(SQL)"
+            path="resources/templates/Oracle8i/"
+            supergroup="Standard(SQL)">
+      </templateresource>
+      <templateresource
+            name="PostgreSQL 8.1(SQL)"
+            path="resources/templates/PostgreSQL81/"
+            supergroup="Standard(SQL)">
+      </templateresource>
    </extension>
 
 </plugin>

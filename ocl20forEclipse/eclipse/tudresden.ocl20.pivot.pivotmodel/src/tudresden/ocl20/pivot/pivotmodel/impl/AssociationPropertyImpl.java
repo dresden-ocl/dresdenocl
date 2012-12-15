@@ -36,12 +36,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -49,24 +46,27 @@ import tudresden.ocl20.pivot.pivotmodel.AssociationProperty;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Association Property</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Association Property</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties <em>Inverse Association Properties</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.AssociationPropertyImpl#getInverseAssociationProperties
+ * <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class AssociationPropertyImpl extends PropertyImpl implements
 		AssociationProperty {
+
 	/**
-	 * The cached value of the '{@link #getInverseAssociationProperties() <em>Inverse Association Properties</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getInverseAssociationProperties()
+	 * <em>Inverse Association Properties</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getInverseAssociationProperties()
 	 * @generated
 	 * @ordered
@@ -74,113 +74,124 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	protected EList<AssociationProperty> inverseAssociationProperties;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected AssociationPropertyImpl() {
+
 		super();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.ASSOCIATION_PROPERTY;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List<AssociationProperty> getInverseAssociationProperties() {
+
 		if (inverseAssociationProperties == null) {
-			inverseAssociationProperties = new EObjectContainmentEList<AssociationProperty>(
-					AssociationProperty.class,
-					this,
-					PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
+			inverseAssociationProperties =
+					new EObjectContainmentEList<AssociationProperty>(
+							AssociationProperty.class,
+							this,
+							PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES);
 		}
 		return inverseAssociationProperties;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void addAssociation(AssociationProperty bProperty) {
+
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public AssociationProperty getAssociation(String propName) {
+
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void removeAssociation(AssociationProperty bProperty) {
+
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isInverseAssociation(AssociationProperty bProperty) {
+
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void addAssociations(List<AssociationProperty> bProperty) {
+
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isNavigable() {
+
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			return ((InternalEList<?>) getInverseAssociationProperties())
@@ -190,12 +201,13 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			return getInverseAssociationProperties();
@@ -204,13 +216,14 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			getInverseAssociationProperties().clear();
@@ -222,12 +235,13 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			getInverseAssociationProperties().clear();
@@ -237,12 +251,13 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.ASSOCIATION_PROPERTY__INVERSE_ASSOCIATION_PROPERTIES:
 			return inverseAssociationProperties != null
@@ -251,4 +266,4 @@ public class AssociationPropertyImpl extends PropertyImpl implements
 		return super.eIsSet(featureID);
 	}
 
-} //AssociationPropertyImpl
+} // AssociationPropertyImpl

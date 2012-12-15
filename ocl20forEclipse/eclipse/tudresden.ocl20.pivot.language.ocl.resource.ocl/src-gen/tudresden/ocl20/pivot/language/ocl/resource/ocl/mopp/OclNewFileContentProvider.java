@@ -33,13 +33,18 @@ public class OclNewFileContentProvider {
 	protected String getExampleContent(org.eclipse.emf.ecore.EClass eClass, org.eclipse.emf.ecore.EClass[] allClassesWithSyntax, String newFileName) {
 		// create a minimal model
 		org.eclipse.emf.ecore.EObject root = new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclMinimalModelHelper().getMinimalModel(eClass, allClassesWithSyntax, newFileName);
+		if (root == null) {
+			// could not create a minimal model. returning an empty document is the best we
+			// can do.
+			return "";
+		}
 		// use printer to get text for model
 		java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream();
 		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextPrinter printer = getPrinter(buffer);
 		try {
 			printer.print(root);
 		} catch (java.io.IOException e) {
-			tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError("Exception while generating example content.", e);
+			new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError("Exception while generating example content.", e);
 		}
 		return buffer.toString();
 	}

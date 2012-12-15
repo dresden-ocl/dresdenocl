@@ -62,7 +62,7 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 
 	/**
 	 * <p>
-	 * Returns the violation macro as {@link ITransformedCode} used for code
+	 * Returns the violation macro as string used for code
 	 * generation of a given {@link Constraint}.
 	 * </p>
 	 * 
@@ -70,10 +70,10 @@ public interface IOcl2JavaSettings extends IOcl2CodeSettings {
 	 *            The {@link Constraint} which violation macro shall be
 	 *            returned.
 	 * 
-	 * @return The violation macro as {@link ITransformedCode} used for code
+	 * @return The violation macro as a String used for code
 	 *         generation of a given {@link Constraint}.
 	 */
-	public ITransformedCode getViolationMacro(Constraint aConstraint);
+	public String getViolationMacro(Constraint aConstraint);
 
 	/**
 	 * @return If true, getters are generated for new defined attributes.

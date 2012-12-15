@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="essentialocl"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/essentialocl" nsPrefix="essentialocl">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="essentialocl" nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/essentialocl"
+    nsPrefix="essentialocl">
   <eSubpackages name="types" nsURI="http://www.omg.org/2006/essentialocl/types" nsPrefix="types">
     <eClassifiers xsi:type="ecore:EClass" name="BagType" eSuperTypes="#//types/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="TupleType" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type">
@@ -38,7 +37,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="SetType" eSuperTypes="#//types/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type">
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclLibrary" lowerBound="1"
-          eType="#//types/OclLibrary"/>
+          eType="#//types/OclLibrary" eOpposite="#//types/OclLibrary/oclVoid"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeType" eSuperTypes="../../tudresden.ocl20.pivot.pivotmodel/model/pivotmodel.ecore#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -94,7 +93,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclAny" lowerBound="1"
           eType="#//types/AnyType" containment="true" resolveProxies="false"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclVoid" lowerBound="1"
-          eType="#//types/VoidType" containment="true" resolveProxies="false"/>
+          eType="#//types/VoidType" containment="true" resolveProxies="false" eOpposite="#//types/VoidType/oclLibrary"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclInvalid" lowerBound="1"
           eType="#//types/InvalidType" containment="true" resolveProxies="false" eOpposite="#//types/InvalidType/oclLibrary"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="oclType" lowerBound="1"

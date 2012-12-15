@@ -33,6 +33,7 @@
 package tudresden.ocl20.pivot.modelbus.ui.internal.wizards;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -52,8 +53,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.model.IModel;
+import tudresden.ocl20.pivot.model.metamodel.IMetamodel;
 import tudresden.ocl20.pivot.modelbus.ModelBusPlugin;
 import tudresden.ocl20.pivot.modelbus.ui.internal.ModelBusUIMessages;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.AbstractModelBusPage;
@@ -62,6 +63,7 @@ import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.BrowseWorkspaceLi
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.FileBoxListener;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.MetaModelLabelProvider;
 import tudresden.ocl20.pivot.modelbus.ui.internal.wizards.util.ModelViewerListener;
+import tudresden.ocl20.pivot.modelbus.util.ModelLoaderUtility;
 
 /**
  * <p>
@@ -91,8 +93,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param selection
-	 *            A parent selection which can be used by the page to set a
-	 *            previously selected file as model file.
+	 *          A parent selection which can be used by the page to set a
+	 *          previously selected file as model file.
 	 */
 	public LoadModelPage(IStructuredSelection selection) {
 
@@ -106,7 +108,6 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
 	 * .Composite)
@@ -142,18 +143,17 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #setFileTextBoxText(java.lang.String)
 	 */
 	public void setFileTextBoxText(String text) {
+
 		this.modelFileTextBox.setText(text);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * tudresden.ocl20.pivot.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #updatePageComplete()
@@ -178,8 +178,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		/* Check if model file name is empty. */
 		if (modelFileName.length() == 0) {
-			this
-					.setMessage(ModelBusUIMessages.LoadModelPage_MessagePleaseChooseModel);
+			this.setMessage(ModelBusUIMessages.LoadModelPage_MessagePleaseChooseModel);
 			complete = false;
 		}
 
@@ -188,8 +187,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 			modelFileName = this.decodePath(modelFileName);
 
 			if (modelFileName == null) {
-				this
-						.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgInvalidVariables);
+				this.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgInvalidVariables);
 				complete = false;
 			}
 
@@ -202,11 +200,24 @@ public class LoadModelPage extends AbstractModelBusPage {
 				modelFile = modelFilePath.toFile();
 
 				if (modelFile == null || !modelFile.exists()) {
-					this
-							.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgModelFileNotExisting);
+					this.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgModelFileNotExisting);
 					complete = false;
 				}
 				// no else.
+
+				/* Automaticly select the correct metamodel */
+				selectMetaModelByModelFilePath(modelFilePath);
+
+				/* Check if the corresponding .class file exists */
+				if (complete
+						&& modelFilePath.getFileExtension().equalsIgnoreCase("java")
+						&& !new File(
+								ModelLoaderUtility.getCorrespondingClassFileName(modelFileName))
+								.exists()) {
+					this.setErrorMessage(ModelBusUIMessages.LoadModelPage_ErrorMsgCorrespondingClassFileNotExisting);
+					complete = false;
+				}
+				// no else
 			}
 			// end else.
 		}
@@ -214,8 +225,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		/* Check that a meta model has been selected. */
 		if (complete && !this.isMetamodelSelected()) {
-			this
-					.setErrorMessage(ModelBusUIMessages.LoadModelPage_SelectMetamodelErrorMessage);
+			this.setErrorMessage(ModelBusUIMessages.LoadModelPage_SelectMetamodelErrorMessage);
 			complete = false;
 		}
 		// no else.
@@ -234,6 +244,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		File result;
 		String modelFileName;
+		IPath modelFilePath;
 
 		/** By default the model file is null. */
 		result = null;
@@ -242,7 +253,17 @@ public class LoadModelPage extends AbstractModelBusPage {
 		modelFileName = decodePath(getModelFileName());
 
 		if (modelFileName != null) {
-			result = new Path(modelFileName).toFile();
+			modelFilePath = new Path(modelFileName);
+
+			/* Get the path to the corresponding .class file if needed */
+			if (modelFilePath.getFileExtension().equalsIgnoreCase("java")) {
+				modelFilePath =
+						new Path(
+								ModelLoaderUtility.getCorrespondingClassFileName(modelFileName));
+			}
+			// no else.
+
+			result = modelFilePath.toFile();
 		}
 		// no else.
 
@@ -261,8 +282,9 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		IMetamodel result;
 
-		result = (IMetamodel) ((IStructuredSelection) this.metamodelViewer
-				.getSelection()).getFirstElement();
+		result =
+				(IMetamodel) ((IStructuredSelection) this.metamodelViewer
+						.getSelection()).getFirstElement();
 
 		return result;
 	}
@@ -273,7 +295,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param parent
-	 *            The parent {@link Composite} of this part.
+	 *          The parent {@link Composite} of this part.
 	 */
 	private void createMetamodelSelectionGroup(Composite parent) {
 
@@ -298,8 +320,9 @@ public class LoadModelPage extends AbstractModelBusPage {
 				.setText(ModelBusUIMessages.LoadModelPage_SelectMetamodelLabel);
 
 		/* Create the list viewer to display the meta models. */
-		this.metamodelViewer = new TableViewer(metamodelSelectionGroup,
-				SWT.SINGLE | SWT.V_SCROLL | SWT.BORDER);
+		this.metamodelViewer =
+				new TableViewer(metamodelSelectionGroup, SWT.SINGLE | SWT.V_SCROLL
+						| SWT.BORDER);
 		this.metamodelViewer.setContentProvider(new ArrayContentProvider());
 		this.metamodelViewer.setLabelProvider(new MetaModelLabelProvider());
 		this.metamodelViewer.setInput(ModelBusPlugin.getMetamodelRegistry()
@@ -307,8 +330,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 		this.metamodelViewer.getControl().setLayoutData(
 				new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		this.metamodelViewer
-				.addSelectionChangedListener(new ModelViewerListener(this));
+		this.metamodelViewer.addSelectionChangedListener(new ModelViewerListener(
+				this));
 	}
 
 	/**
@@ -318,7 +341,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 * </p>
 	 * 
 	 * @param parent
-	 *            The {@link Composite} parent of this {@link Group}.
+	 *          The {@link Composite} parent of this {@link Group}.
 	 */
 	private void createModelFileGroup(Composite parent) {
 
@@ -333,8 +356,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 		 * metamodel selection.
 		 */
 		modelFileGroupComposite = new Composite(parent, SWT.None);
-		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
-				true, false));
+		modelFileGroupComposite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
+				false));
 
 		/* We need another GridLayout to properly set additional margins. */
 		layout = new GridLayout();
@@ -342,10 +365,8 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		/* Create model file group and specify properties. */
 		modelFileGroup = new Group(modelFileGroupComposite, SWT.NONE);
-		modelFileGroup
-				.setText(ModelBusUIMessages.LoadModelPage_ModelFileGroupText);
-		modelFileGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
-				false));
+		modelFileGroup.setText(ModelBusUIMessages.LoadModelPage_ModelFileGroupText);
+		modelFileGroup.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true, false));
 
 		layout = new GridLayout(4, false);
 		layout.horizontalSpacing = 10;
@@ -354,8 +375,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		/* Create the text label. */
 		locationLabel = new Label(modelFileGroup, SWT.None);
-		locationLabel
-				.setText(ModelBusUIMessages.LoadModelPage_LocationLabelText);
+		locationLabel.setText(ModelBusUIMessages.LoadModelPage_LocationLabelText);
 
 		/* Create the text box. */
 		modelFileTextBox = new Text(modelFileGroup, SWT.SINGLE | SWT.BORDER);
@@ -367,18 +387,19 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 		/* The spacing label. */
 		spacer = new Label(modelFileGroup, SWT.NONE);
-		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2,
-				1));
+		spacer.setLayoutData(new GridData(SWT.FILL, SWT.NORMAL, true, false, 2, 1));
 
 		/* Create buttons. */
-		fBrowseWorkspaceButton = createButton(modelFileGroup,
-				ModelBusUIMessages.LoadModelPage_BrowseWorkspaceButtonText);
-		fBrowseFileButton = createButton(modelFileGroup,
-				ModelBusUIMessages.LoadModelPage_BrowseFileSystemButtonText);
+		fBrowseWorkspaceButton =
+				createButton(modelFileGroup,
+						ModelBusUIMessages.LoadModelPage_BrowseWorkspaceButtonText);
+		fBrowseFileButton =
+				createButton(modelFileGroup,
+						ModelBusUIMessages.LoadModelPage_BrowseFileSystemButtonText);
 
 		/* Add the listeners. */
-		fBrowseWorkspaceButton
-				.addSelectionListener(new BrowseWorkspaceListener(this));
+		fBrowseWorkspaceButton.addSelectionListener(new BrowseWorkspaceListener(
+				this));
 		fBrowseFileButton.addSelectionListener(new BrowseFileListener(this));
 	}
 
@@ -390,6 +411,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 * @return The name of the {@link IModel} file.
 	 */
 	private String getModelFileName() {
+
 		return modelFileTextBox.getText().trim();
 	}
 
@@ -401,6 +423,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 * @return True if a {@link IMetamodel} has been selected.
 	 */
 	private boolean isMetamodelSelected() {
+
 		return !((IStructuredSelection) this.metamodelViewer.getSelection())
 				.isEmpty();
 	}
@@ -414,9 +437,30 @@ public class LoadModelPage extends AbstractModelBusPage {
 	private void initializeFromSelection() {
 
 		IMetamodel[] metaModels;
+		String fileTextBoxContent = null;
 
-		if (this.selection != null) {
+		if (this.selection.getFirstElement() != null) {
 			Object selectedObject = this.selection.getFirstElement();
+
+			/*
+			 * Determine the CorrespondingResource to a CompilationUnit-Object (e.g.
+			 * .java Files in the src directory) Reflection is used here to avoid
+			 * introducing a dependency to the JDT-Framework, just in case that
+			 * somebody uses DresdenOCL without Java
+			 */
+			if (selectedObject.getClass().getName()
+					.equals("org.eclipse.jdt.internal.core.CompilationUnit")) {
+
+				try {
+					Method method =
+							selectedObject.getClass().getMethod("getCorrespondingResource");
+					selectedObject = (IResource) method.invoke(selectedObject);
+				} catch (Exception e) {
+					/* If invocation fails, selection will be discarded */
+					selectedObject = null;
+				}
+
+			}
 
 			if (selectedObject instanceof IResource) {
 
@@ -425,10 +469,12 @@ public class LoadModelPage extends AbstractModelBusPage {
 				selectedResource = (IResource) selectedObject;
 
 				if (selectedResource.getType() == IResource.FILE) {
-					modelFileTextBox.setText(selectedResource.getRawLocation()
-							.toString());
+
+					fileTextBoxContent = selectedResource.getRawLocation().toString();
+
+					modelFileTextBox.setText(fileTextBoxContent);
 				}
-				// no else.
+				// no else
 			}
 			// no else.
 		}
@@ -438,9 +484,38 @@ public class LoadModelPage extends AbstractModelBusPage {
 		metaModels = ModelBusPlugin.getMetamodelRegistry().getMetamodels();
 
 		if (metaModels.length > 0) {
-			this.metamodelViewer.setSelection(new StructuredSelection(
-					metaModels[0]));
+			this.metamodelViewer.setSelection(new StructuredSelection(metaModels[0]));
 		}
 		// no else.
+	}
+
+	/**
+	 * <p>
+	 * Selects the metamodel in the metamodelviewer depending on the filetype
+	 * given by the path parameter...
+	 * </p>
+	 * 
+	 * @param The
+	 *          {@link IPath} to the model file
+	 */
+	private void selectMetaModelByModelFilePath(IPath modelFilePath) {
+
+		if(modelFilePath == null) {
+			return;
+		}
+		
+		IMetamodel mm =
+				ModelLoaderUtility.getMetamodelByExtension(modelFilePath
+						.getFileExtension());
+
+		StructuredSelection selection = new StructuredSelection(mm);
+
+		/*
+		 * Avoid endless loop due to the eventhandler is called for every
+		 * setSelection()
+		 */
+		if (!this.metamodelViewer.getSelection().equals(selection)) {
+			this.metamodelViewer.setSelection(selection);
+		}
 	}
 }

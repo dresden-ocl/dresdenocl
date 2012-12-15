@@ -6,19 +6,11 @@
  */
 package tudresden.ocl20.pivot.language.ocl.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import tudresden.ocl20.pivot.language.ocl.InvariantOrDefinitionCS;
-import tudresden.ocl20.pivot.language.ocl.OclExpressionCS;
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,22 +23,22 @@ import tudresden.ocl20.pivot.language.ocl.SimpleNameCS;
  */
 public abstract class InvariantOrDefinitionCSImpl extends EObjectImpl implements InvariantOrDefinitionCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected InvariantOrDefinitionCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.INVARIANT_OR_DEFINITION_CS;
-	}
+    return OclPackage.Literals.INVARIANT_OR_DEFINITION_CS;
+  }
 
 } //InvariantOrDefinitionCSImpl

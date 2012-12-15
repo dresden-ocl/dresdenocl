@@ -28,7 +28,7 @@ only two resources must be provided: (1) a model instance of the newly adapted
 model instance type that contains instances of a set of model types defined in a
 special test model, and (2) a Java class that instantiates the test suite with 
 the model instance. During test execution, the generic test suite uses the
-provided model instance to test the model instance type (see 
+provided model instance to test the model instance type (cf. 
 Figure~\ref{pic:modelinstancetestsuite:genericTestSuite}). Both, the model
 instance and the Java class are shortly presented in the following sections.
 
@@ -106,9 +106,9 @@ of operations with different argument types
 The test model contains a second class called \code{Class2} that is used to
 test casting between classes and subclasses. For the same purpose, the only 
 property of the class called \code{non\-Mul\-tiple\-Pro\-per\-ty} is required. 
-It is used to test the special access on parent properties in \acs{OCL} e.g., 
+It is used to test the special access on parent properties in \acs{OCL} (e.g., 
 by the statement \code{aClass2.oclAsType(Class1).nonMultipleProperty} which 
-returns the property of \code{Class1} instead of the property of \code{Class2}.
+returns the property of \code{Class1} instead of the property of \code{Class2}).
 
 
 \subsection{Interface1, Interface2 and Interface3}
@@ -142,11 +142,11 @@ to the same kind of type in Dresden OCL (e.g., the types \code{int} and
 \code{java.lang.Integer} of Java should both be mapped to the primitive type 
 \code{Integer}), these classes can provide multiple properties for the same 
 type. The properties should then be numbered, ignoring the number for the first 
-property and starting with the number two for the second property. E.g., if the 
+property and starting with the number two for the second property (e.g., if the 
 \code{Pri\-mi\-tive\-Type\-Pro\-vi\-der\-Class} should provide multiple 
 different \code{Integer} instances their properties should be called 
 \code{integerProperty}, \code{integerProperty2}, \code{integerProperty3} and so 
-on. If multiple properties for the same type are provided, the test suite must 
+on). If multiple properties for the same type are provided, the test suite must 
 be informed during setup to load all the different properties (see also 
 Section~\ref{modelInstanceTestSuite:setupTestSuite}).
 
@@ -274,5 +274,6 @@ This chapter shortly introduced into the generic model instance type test suite
 of Dresden OCL. For further details of the test suite investigate the test suite
 plug-in
 \code{tudresden.ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.test} 
-or the existing test suite instantiations in the plug-in 
-\code{tu\-dres\-den\linebreak[0].ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.java.test}, and the plug-in \code{tudresden\linebreak[0].ocl\-20.pivot.mo\-del\-in\-stance\-type\linebreak[0].ecore.test}.
+or the existing test suite instantiations in the plug-ins
+\code{tu\-dres\-den\linebreak[0].ocl20\linebreak[0].pi\-vot\linebreak[0].modelinstancetype.java.test},
+and \code{tudresden\linebreak[0].ocl\-20.pivot.mo\-del\-in\-stance\-type\linebreak[0].ecore.test}.

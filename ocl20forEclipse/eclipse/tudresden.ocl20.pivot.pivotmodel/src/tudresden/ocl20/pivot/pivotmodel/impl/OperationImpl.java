@@ -75,16 +75,29 @@ import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedTypeParameter
+ * <em>Owned Type Parameter</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwningType
+ * <em>Owning Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOwnedParameter
+ * <em>Owned Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getInputParameter
+ * <em>Input Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getOutputParameter
+ * <em>Output Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getReturnParameter
+ * <em>Return Parameter</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.OperationImpl#getSignatureParameter
+ * <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class OperationImpl extends FeatureImpl implements Operation {
@@ -107,8 +120,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * The cached value of the '{@link #getOwnedParameter()
-	 * <em>Owned Parameter</em>}' containment reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * <em>Owned Parameter</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
 	 * 
 	 * @see #getOwnedParameter()
 	 * @generated
@@ -121,9 +134,11 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected OperationImpl() {
+
 		super();
 	}
 
@@ -149,10 +164,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			Parameter parameter = it.next();
 
 			// append the type name or the generic type name
-			qualifiedName.append(parameter.getType() != null ? parameter
-					.getType().getQualifiedName()
-					: (parameter.getGenericType() != null ? parameter
-							.getGenericType().getName() : "null")); //$NON-NLS-1$
+			qualifiedName.append(parameter.getType() != null ? parameter.getType()
+					.getQualifiedName() : (parameter.getGenericType() != null ? parameter
+					.getGenericType().getName() : "null")); //$NON-NLS-1$
 
 			if (it.hasNext()) {
 				qualifiedName.append(',');
@@ -193,9 +207,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	}
 
 	/**
-	 * Overridden to return the generic type of the
-	 * {@link #getReturnParameter() return parameter} if there is one.
-	 * Otherwise, default to super implementation.
+	 * Overridden to return the generic type of the {@link #getReturnParameter()
+	 * return parameter} if there is one. Otherwise, default to super
+	 * implementation.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType()
 	 */
@@ -237,9 +251,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	/*
 	 * Overridden so that the generic type of the {@link #getReturnParameter()
 	 * return parameter} is changed if one exists.
-	 * 
-	 * @see
-	 * tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#setGenericType
 	 * (tudresden.ocl20.pivot.pivotmodel.GenericType)
 	 */
 	@Override
@@ -251,8 +263,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		Parameter returnParameter = getReturnParameter();
 
 		if (returnParameter != null) {
-			GenericType returnParameterGenericType = returnParameter
-					.getGenericType();
+			GenericType returnParameterGenericType = returnParameter.getGenericType();
 
 			if ((returnParameterGenericType == null && newGenericType != null)
 					|| (returnParameterGenericType != null && !returnParameterGenericType
@@ -279,23 +290,28 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
+
 		if (ownedTypeParameter == null) {
-			ownedTypeParameter = new EObjectContainmentWithInverseEList<TypeParameter>(
-					TypeParameter.class, this,
-					PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER,
-					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT);
+			ownedTypeParameter =
+					new EObjectContainmentWithInverseEList<TypeParameter>(
+							TypeParameter.class, this,
+							PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER,
+							PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT);
 		}
 		return ownedTypeParameter;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
+
 		if (eContainerFeatureID() != PivotModelPackage.OPERATION__OWNING_TYPE)
 			return null;
 		return (Type) eContainer();
@@ -303,20 +319,25 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
 			NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newOwningType,
-				PivotModelPackage.OPERATION__OWNING_TYPE, msgs);
+
+		msgs =
+				eBasicSetContainer((InternalEObject) newOwningType,
+						PivotModelPackage.OPERATION__OWNING_TYPE, msgs);
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
+
 		if (newOwningType != eInternalContainer()
 				|| (eContainerFeatureID() != PivotModelPackage.OPERATION__OWNING_TYPE && newOwningType != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningType))
@@ -326,13 +347,14 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningType != null)
-				msgs = ((InternalEObject) newOwningType).eInverseAdd(this,
-						PivotModelPackage.TYPE__OWNED_OPERATION, Type.class,
-						msgs);
+				msgs =
+						((InternalEObject) newOwningType).eInverseAdd(this,
+								PivotModelPackage.TYPE__OWNED_OPERATION, Type.class, msgs);
 			msgs = basicSetOwningType(newOwningType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
 					PivotModelPackage.OPERATION__OWNING_TYPE, newOwningType,
 					newOwningType));
@@ -355,14 +377,16 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedParameter()} is redirected to this method. <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected final List<Parameter> getOwnedParameterGen() {
+
 		if (ownedParameter == null) {
-			ownedParameter = new EObjectContainmentWithInverseEList<Parameter>(
-					Parameter.class, this,
-					PivotModelPackage.OPERATION__OWNED_PARAMETER,
-					PivotModelPackage.PARAMETER__OPERATION);
+			ownedParameter =
+					new EObjectContainmentWithInverseEList<Parameter>(Parameter.class,
+							this, PivotModelPackage.OPERATION__OWNED_PARAMETER,
+							PivotModelPackage.PARAMETER__OPERATION);
 		}
 		return ownedParameter;
 	}
@@ -374,8 +398,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 */
 	public List<Parameter> getInputParameter() {
 
-		return getFilteredParameters(EnumSet.of(ParameterDirectionKind.IN,
-				ParameterDirectionKind.INOUT),
+		return getFilteredParameters(
+				EnumSet.of(ParameterDirectionKind.IN, ParameterDirectionKind.INOUT),
 				PivotModelPackageImpl.Literals.OPERATION__INPUT_PARAMETER);
 	}
 
@@ -386,8 +410,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 */
 	public List<Parameter> getOutputParameter() {
 
-		return getFilteredParameters(EnumSet.of(ParameterDirectionKind.OUT,
-				ParameterDirectionKind.INOUT),
+		return getFilteredParameters(
+				EnumSet.of(ParameterDirectionKind.OUT, ParameterDirectionKind.INOUT),
 				PivotModelPackageImpl.Literals.OPERATION__OUTPUT_PARAMETER);
 	}
 
@@ -404,15 +428,15 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	}
 
 	/**
-	 * A helper method that can be used to filter the
-	 * {@link #getOwnedParameter() list of all parameters} according to their
-	 * {@link Parameter#getKind() direction}.
+	 * A helper method that can be used to filter the {@link #getOwnedParameter()
+	 * list of all parameters} according to their {@link Parameter#getKind()
+	 * direction}.
 	 * 
 	 * @param directionKinds
-	 *            an <code>EnumSet</code> containing the direction kinds of the
-	 *            parameters that should be contained in the filtered list
+	 *          an <code>EnumSet</code> containing the direction kinds of the
+	 *          parameters that should be contained in the filtered list
 	 * @param structuralFeature
-	 *            the meta object representing the corresponding feature
+	 *          the meta object representing the corresponding feature
 	 * 
 	 * @return an {@link EcoreEList.UnmodifiableEList<Parameter>} with the
 	 *         filtered <code>Parameters</code>.
@@ -437,9 +461,8 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		// we return an EcoreEList here to support the EMF framework (editor,
 		// notification etc.) subclasses may override if they provide their own
 		// container visualization options
-		return new EcoreEList.UnmodifiableEList<Parameter>(this,
-				structuralFeature, filteredParameters.size(),
-				filteredParameters.toArray());
+		return new EcoreEList.UnmodifiableEList<Parameter>(this, structuralFeature,
+				filteredParameters.size(), filteredParameters.toArray());
 	}
 
 	/**
@@ -491,8 +514,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 		// check type conformance of each parameter
 		else {
 
-			for (ListIterator<Type> it = paramTypes.listIterator(); it
-					.hasNext();) {
+			for (ListIterator<Type> it = paramTypes.listIterator(); it.hasNext();) {
 				Type type = it.next();
 
 				// get the next input parameter of this operation
@@ -606,8 +628,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			boundOperations.put(binding, boundOperation);
 
 			// remove the type parameters that are going to be bound
-			ListUtil.removeAll(boundOperation.getOwnedTypeParameter(),
-					parameters);
+			ListUtil.removeAll(boundOperation.getOwnedTypeParameter(), parameters);
 
 			// bind the operation
 			GenericElements.bindOperation(boundOperation, parameters, types);
@@ -670,12 +691,14 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
 			return ((InternalEList<InternalEObject>) (InternalEList<?>) getOwnedTypeParameter())
@@ -693,31 +716,35 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
-			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getOwnedTypeParameter()).basicRemove(otherEnd,
+					msgs);
 		case PivotModelPackage.OPERATION__OWNING_TYPE:
 			return basicSetOwningType(null, msgs);
 		case PivotModelPackage.OPERATION__OWNED_PARAMETER:
-			return ((InternalEList<?>) getOwnedParameter()).basicRemove(
-					otherEnd, msgs);
+			return ((InternalEList<?>) getOwnedParameter()).basicRemove(otherEnd,
+					msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
+
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.OPERATION__OWNING_TYPE:
 			return eInternalContainer().eInverseRemove(this,
@@ -728,10 +755,12 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
 			return getOwnedTypeParameter();
@@ -753,11 +782,13 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
 			getOwnedTypeParameter().clear();
@@ -769,8 +800,7 @@ public class OperationImpl extends FeatureImpl implements Operation {
 			return;
 		case PivotModelPackage.OPERATION__OWNED_PARAMETER:
 			getOwnedParameter().clear();
-			getOwnedParameter().addAll(
-					(Collection<? extends Parameter>) newValue);
+			getOwnedParameter().addAll((Collection<? extends Parameter>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -778,10 +808,12 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
 			getOwnedTypeParameter().clear();
@@ -798,10 +830,12 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.OPERATION__OWNED_TYPE_PARAMETER:
 			return ownedTypeParameter != null && !ownedTypeParameter.isEmpty();
@@ -823,10 +857,12 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+
 		if (baseClass == ConstrainableElement.class) {
 			switch (derivedFeatureID) {
 			default:
@@ -846,10 +882,12 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+
 		if (baseClass == ConstrainableElement.class) {
 			switch (baseFeatureID) {
 			default:
@@ -869,18 +907,20 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.OPERATION;
 	}
 
 	/**
-	 * Changed EMF implementation in order to use a consistent style. In
-	 * addition, the getter methods are used to get attribute values. This is
-	 * important if repository-specific subclasses have alternative ways of
-	 * obtaining their attribute values.
+	 * Changed EMF implementation in order to use a consistent style. In addition,
+	 * the getter methods are used to get attribute values. This is important if
+	 * repository-specific subclasses have alternative ways of obtaining their
+	 * attribute values.
 	 * 
 	 * @generated NOT
 	 */

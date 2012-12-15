@@ -35,11 +35,10 @@ package tudresden.ocl20.pivot.pivotmodel;
 import java.util.List;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Generic Type</b></em>'.
- * <!-- end-user-doc -->
- *
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Generic Type</b></em>'. <!-- end-user-doc -->
+ * 
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getGenericType()
  * @model abstract="true"
  * @generated
@@ -47,32 +46,41 @@ import java.util.List;
 public interface GenericType extends NamedElement {
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true" parametersDataType="tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>" typesRequired="true" typesMany="false"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" required="true"
+	 *        parametersDataType=
+	 *        "tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>"
+	 *        parametersRequired="true" parametersMany="false" typesDataType=
+	 *        "tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>"
+	 *        typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	boolean bindGenericType(List<TypeParameter> parameters,
 			List<? extends Type> types, TypedElement typedElement);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean" parametersDataType="tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>" typesRequired="true" typesMany="false"
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
+	 *        parametersDataType=
+	 *        "tudresden.ocl20.pivot.datatypes.Sequence<tudresden.ocl20.pivot.pivotmodel.TypeParameter>"
+	 *        parametersRequired="true" parametersMany="false" typesDataType=
+	 *        "tudresden.ocl20.pivot.datatypes.Sequence<? extends tudresden.ocl20.pivot.pivotmodel.Type>"
+	 *        typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	boolean bindGenericSuperType(List<TypeParameter> parameters,
 			List<? extends Type> types, Type subType);
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * Returns <code>true</code> if the given type conforms to this
 	 * <code>GenericType</code>, <code>false</code> otherwise.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @model dataType="tudresden.ocl20.pivot.datatypes.Boolean"
 	 * @generated
 	 */

@@ -35,27 +35,28 @@ package tudresden.ocl20.pivot.pivotmodel.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import tudresden.ocl20.pivot.pivotmodel.GenericElement;
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.NamedElement;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Type Parameter</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Type Parameter</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl#getGenericElement <em>Generic Element</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypeParameterImpl#getGenericElement
+ * <em>Generic Element</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TypeParameterImpl extends NamedElementImpl implements
@@ -63,26 +64,32 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TypeParameterImpl() {
+
 		super();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.TYPE_PARAMETER;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public GenericElement getGenericElement() {
+
 		if (eContainerFeatureID() != PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT)
 			return null;
 		return (GenericElement) eContainer();
@@ -90,20 +97,25 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetGenericElement(
 			GenericElement newGenericElement, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject) newGenericElement,
-				PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, msgs);
+
+		msgs =
+				eBasicSetContainer((InternalEObject) newGenericElement,
+						PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, msgs);
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setGenericElement(GenericElement newGenericElement) {
+
 		if (newGenericElement != eInternalContainer()
 				|| (eContainerFeatureID() != PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT && newGenericElement != null)) {
 			if (EcoreUtil.isAncestor(this, newGenericElement))
@@ -113,18 +125,18 @@ public class TypeParameterImpl extends NamedElementImpl implements
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newGenericElement != null)
-				msgs = ((InternalEObject) newGenericElement)
-						.eInverseAdd(
-								this,
+				msgs =
+						((InternalEObject) newGenericElement).eInverseAdd(this,
 								PivotModelPackage.GENERIC_ELEMENT__OWNED_TYPE_PARAMETER,
 								GenericElement.class, msgs);
 			msgs = basicSetGenericElement(newGenericElement, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT,
-					newGenericElement, newGenericElement));
+					PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT, newGenericElement,
+					newGenericElement));
 	}
 
 	/**
@@ -153,24 +165,23 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * Helper method that returns a name useful for identifying this
-	 * <code>TypeParameter</code>. This method is used by
-	 * {@link #equals(Object)} and {@link #hashCode()} when determining the
-	 * equality with another <code>TypeParameter</code>. This is important in
-	 * the context of
-	 * {@link GenericElement#bindTypeParameter(java.util.List, java.util.List) binding}
-	 * the type parameters of a {@link GenericElement generic element}. The name
-	 * alone is not enough for this purpose, since two different type parameters
-	 * may have the same name. However, the full
+	 * <code>TypeParameter</code>. This method is used by {@link #equals(Object)}
+	 * and {@link #hashCode()} when determining the equality with another
+	 * <code>TypeParameter</code>. This is important in the context of
+	 * {@link GenericElement#bindTypeParameter(java.util.List, java.util.List)
+	 * binding} the type parameters of a {@link GenericElement generic element}.
+	 * The name alone is not enough for this purpose, since two different type
+	 * parameters may have the same name. However, the full
 	 * {@link #getQualifiedName() qualified name} is not helpful either.
 	 * 
 	 * <p>
 	 * To see why, consider that generic elements are cloned before they are
 	 * bound. However, they are not added to the original element's namespace.
 	 * Thus, their fully qualified name (and that of the owned
-	 * <code>TypeParameter</code>s) will be different. During binding, this
-	 * would prevent recognizing two <code>TypeParameter</code>s as equal and
-	 * therefore hinder binding. Thus, changing the qualified name to only include
-	 * the parent solves this problem.
+	 * <code>TypeParameter</code>s) will be different. During binding, this would
+	 * prevent recognizing two <code>TypeParameter</code>s as equal and therefore
+	 * hinder binding. Thus, changing the qualified name to only include the
+	 * parent solves this problem.
 	 * </p>
 	 * 
 	 * <p>
@@ -181,18 +192,19 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 */
 	private String getIdentifyingName() {
 
-		return getGenericElement() != null ? getGenericElement().getName()
-				+ "::" //$NON-NLS-1$
+		return getGenericElement() != null ? getGenericElement().getName() + "::" //$NON-NLS-1$
 				+ getName() : getName();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd,
-			int featureID, NotificationChain msgs) {
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID,
+			NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			if (eInternalContainer() != null)
@@ -204,11 +216,13 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return basicSetGenericElement(null, msgs);
@@ -218,11 +232,13 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(
 			NotificationChain msgs) {
+
 		switch (eContainerFeatureID()) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return eInternalContainer().eInverseRemove(this,
@@ -234,10 +250,12 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return getGenericElement();
@@ -247,10 +265,12 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			setGenericElement((GenericElement) newValue);
@@ -261,10 +281,12 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			setGenericElement((GenericElement) null);
@@ -275,10 +297,12 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPE_PARAMETER__GENERIC_ELEMENT:
 			return getGenericElement() != null;
@@ -299,8 +323,9 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((identifyingName == null) ? 0 : identifyingName.hashCode());
+		result =
+				prime * result
+						+ ((identifyingName == null) ? 0 : identifyingName.hashCode());
 		return result;
 	}
 
@@ -309,7 +334,8 @@ public class TypeParameterImpl extends NamedElementImpl implements
 	 * the name of their owning generic element are equal. See
 	 * {@link #getIdentifyingName()} for more details.
 	 * 
-	 * @param obj the other object
+	 * @param obj
+	 *          the other object
 	 * 
 	 * @return <code>true</code> if the other object is a
 	 *         <code>TypeParameter</code> with the same name and equally-named

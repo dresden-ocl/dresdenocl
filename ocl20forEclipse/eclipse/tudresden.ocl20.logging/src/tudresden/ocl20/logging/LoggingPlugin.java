@@ -26,10 +26,11 @@ import tudresden.ocl20.logging.internal.StandaloneLogManager;
  * {@link ILog} instance.
  * 
  * <p>
- * The code for this plugin is loosely based on the article <em>"Plugging in a logging framework for
- * Eclipse plug-ins"</em> by Manoel Marques available at the IBM developerWorks site. Large
- * portions of the code and its behaviour have been changed, some aspects
- * removed and some features added.
+ * The code for this plugin is loosely based on the article
+ * <em>"Plugging in a logging framework for
+ * Eclipse plug-ins"</em> by Manoel Marques available at the IBM developerWorks
+ * site. Large portions of the code and its behaviour have been changed, some
+ * aspects removed and some features added.
  * </p>
  * 
  * <p>
@@ -66,8 +67,8 @@ import tudresden.ocl20.logging.internal.StandaloneLogManager;
  * 
  * 
  * 
- * Logger logger =
- * 		LoggingPlugin.getLogManager(MyPlugin.getDefault()).getLogger(MyClass.class);
+ * Logger logger = LoggingPlugin.getLogManager(MyPlugin.getDefault()).getLogger(
+ * 		MyClass.class);
  * </pre>
  * 
  * An alternative is to provide a facade method in your Plugin class in order
@@ -131,16 +132,13 @@ public class LoggingPlugin extends Plugin {
 
 	// an identifier for the default log manager (used if null is passed when
 	// requesting a log mgr.)
-	private static final String DEFAULT_LOG_MANAGER_NAME =
-			"tudresden.ocl20.logging"; //$NON-NLS-1$
+	private static final String DEFAULT_LOG_MANAGER_NAME = "tudresden.ocl20.logging"; //$NON-NLS-1$
 
 	// the system property used to activate debug logging for the logging plugin
-	private static final String DEBUG_SYSTEM_PROPERTY =
-			"tudresden.ocl20.logging.debug"; //$NON-NLS-1$
+	private static final String DEBUG_SYSTEM_PROPERTY = "tudresden.ocl20.logging.debug"; //$NON-NLS-1$
 
 	// the default name of the log4j configuration file
-	private static final String DEFAULT_LOG4J_CONFIGURATION_FILE =
-			"log4j.properties"; //$NON-NLS-1$
+	private static final String DEFAULT_LOG4J_CONFIGURATION_FILE = "log4j.properties"; //$NON-NLS-1$
 
 	// The plug-in ID
 	public static final String ID = "tudresden.ocl20.logging"; //$NON-NLS-1$
@@ -167,7 +165,7 @@ public class LoggingPlugin extends Plugin {
 	 * developing stand-alone applications.
 	 * 
 	 * @param loggerPropertiesUrl
-	 *          points to a Log4j properties file
+	 *            points to a Log4j properties file
 	 */
 	public LoggingPlugin(URL loggerPropertiesUrl) {
 
@@ -177,6 +175,7 @@ public class LoggingPlugin extends Plugin {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * org.eclipse.core.runtime.Plugins#start(org.osgi.framework.BundleContext)
 	 */
@@ -209,7 +208,8 @@ public class LoggingPlugin extends Plugin {
 	private void initializeLogManagers() {
 
 		logManagers = new HashMap<String, ILogManager>();
-		logManagers.put(DEFAULT_LOG_MANAGER_NAME, new DefaultLogManager(plugin));
+		logManagers
+				.put(DEFAULT_LOG_MANAGER_NAME, new DefaultLogManager(plugin));
 	}
 
 	/**
@@ -217,10 +217,10 @@ public class LoggingPlugin extends Plugin {
 	 * <code>LoggingPlugin</code> will be disposed.
 	 * 
 	 * @param context
-	 *          the context for this plugin
+	 *            the context for this plugin
 	 * 
 	 * @throws Exception
-	 *           if an error occurs
+	 *             if an error occurs
 	 * 
 	 * @see org.eclipse.core.runtime.Plugin#stop(org.osgi.framework.BundleContext)
 	 * @see ILogManager#dispose()
@@ -248,11 +248,11 @@ public class LoggingPlugin extends Plugin {
 
 	/**
 	 * Returns the {@link ILogManager} for a particular plugin. If the given
-	 * <code>plugin</code> is <code>null</code>, the default log manager belonging
-	 * to the <code>LoggingPlugin</code> will be returned.
+	 * <code>plugin</code> is <code>null</code>, the default log manager
+	 * belonging to the <code>LoggingPlugin</code> will be returned.
 	 * 
 	 * @param aPlugin
-	 *          the plugin, may be <code>null</code>
+	 *            the plugin, may be <code>null</code>
 	 * 
 	 * @return the <code>ILogManager</code> for the given plugin or the default
 	 *         log manager
@@ -271,14 +271,14 @@ public class LoggingPlugin extends Plugin {
 			}
 
 			// determine the name for the log manager
-			name =
-					(aPlugin != null) ? aPlugin.getBundle().getSymbolicName()
-							: DEFAULT_LOG_MANAGER_NAME;
+			name = (aPlugin != null) ? aPlugin.getBundle().getSymbolicName()
+					: DEFAULT_LOG_MANAGER_NAME;
 
 			// try to get a log manager for this plugin
 			logManager = LoggingPlugin.plugin.logManagers.get(name);
 
-			// no log manager found, so create a new log manager for the given plugin
+			// no log manager found, so create a new log manager for the given
+			// plugin
 			if (logManager == null) {
 				logManager = new DefaultLogManager(aPlugin);
 
@@ -294,8 +294,9 @@ public class LoggingPlugin extends Plugin {
 		else {
 			// invariant check
 			if (LoggingPlugin.plugin == null) {
-				throw new IllegalStateException(
-						"The LoggingPlugin has not been activated."); //$NON-NLS-1$
+				System.out
+						.println("The LoggingPlugin has not been activated. Intialized it manually."); //$NON-NLS-1$
+				plugin = new LoggingPlugin();
 			}
 
 			final String key = "standaloneLogger";
@@ -306,8 +307,8 @@ public class LoggingPlugin extends Plugin {
 				return plugin.logManagers.get(key);
 
 			else {
-				ILogManager standaloneLogManager =
-						new StandaloneLogManager(plugin.loggerPropertiesUrl);
+				ILogManager standaloneLogManager = new StandaloneLogManager(
+						plugin.loggerPropertiesUrl);
 				plugin.logManagers.put(key, standaloneLogManager);
 				return standaloneLogManager;
 			}
@@ -315,36 +316,36 @@ public class LoggingPlugin extends Plugin {
 	}
 
 	/**
-	 * This method allows to configure the default log4j logger hierarchy that is
-	 * automatically created when using one of the <code>getLogger()</code>
+	 * This method allows to configure the default log4j logger hierarchy that
+	 * is automatically created when using one of the <code>getLogger()</code>
 	 * methods in the log4j {@link Logger} class. Because Eclipse carefully
 	 * separates the classloaders for each plugin, this is the only way a client
 	 * plugin can configure the default log4j loggers (loaded by the
-	 * <code>tudresden.ocl20.logging</code> bundle). This might be necessary when
-	 * a client plugin does not want to use the {@link #getLogManager()} API
-	 * provided by the <code>LoggingPlugin</code>.
+	 * <code>tudresden.ocl20.logging</code> bundle). This might be necessary
+	 * when a client plugin does not want to use the {@link #getLogManager()}
+	 * API provided by the <code>LoggingPlugin</code>.
 	 * 
 	 * <p>
-	 * The <code>LoggingPlugin</code> provides a default <em>log4j.properties</em>
-	 * configuration file which will be used in this case. This file sets the log
-	 * level to {@link Level#WARN WARN}. It also defines an
-	 * {@link ErrorLogAppender} named <code>"errorLog"</code>, but does not assign
-	 * it to the root logger. This is to prevent the Error Log from being flooded
-	 * with messages if clients set the log level for their loggers to
-	 * {@link Level#DEBUG DEBUG} during development.
+	 * The <code>LoggingPlugin</code> provides a default
+	 * <em>log4j.properties</em> configuration file which will be used in this
+	 * case. This file sets the log level to {@link Level#WARN WARN}. It also
+	 * defines an {@link ErrorLogAppender} named <code>"errorLog"</code>, but
+	 * does not assign it to the root logger. This is to prevent the Error Log
+	 * from being flooded with messages if clients set the log level for their
+	 * loggers to {@link Level#DEBUG DEBUG} during development.
 	 * </p>
 	 * 
 	 * <p>
 	 * Client plugins can contribute their own log properties through a
-	 * <em>log4j.properties</em> file that is either located in their root path or
-	 * accessible via the plugin's classloader. In this file, they may also use
-	 * the Error Log appender defined by the <code>LoggingPlugin</code>. If a
-	 * custom <code>log4j.properties</code> file is provided, this method will
+	 * <em>log4j.properties</em> file that is either located in their root path
+	 * or accessible via the plugin's classloader. In this file, they may also
+	 * use the Error Log appender defined by the <code>LoggingPlugin</code>. If
+	 * a custom <code>log4j.properties</code> file is provided, this method will
 	 * load it and configure the default log4j logger hierarchy.
 	 * </p>
 	 * 
 	 * @param aPlugin
-	 *          the plugin that provides additional log4j properties
+	 *            the plugin that provides additional log4j properties
 	 */
 	public static void configureDefaultLogging(final Plugin aPlugin) {
 
@@ -353,16 +354,18 @@ public class LoggingPlugin extends Plugin {
 
 			// precondition check
 			if (aPlugin == null) {
-				throw new IllegalArgumentException("The parameter 'plugin' was null!"); //$NON-NLS-1$
+				throw new IllegalArgumentException(
+						"The parameter 'plugin' was null!"); //$NON-NLS-1$
 			}
 
 			// try to load a file from the given plugin's root
-			url =
-					aPlugin.getBundle().getEntry("/" + DEFAULT_LOG4J_CONFIGURATION_FILE); //$NON-NLS-1$
+			url = aPlugin.getBundle().getEntry(
+					"/" + DEFAULT_LOG4J_CONFIGURATION_FILE); //$NON-NLS-1$
 
 			// try to load a resource from the plugin
 			if (url == null) {
-				url = aPlugin.getBundle().getResource(DEFAULT_LOG4J_CONFIGURATION_FILE);
+				url = aPlugin.getBundle().getResource(
+						DEFAULT_LOG4J_CONFIGURATION_FILE);
 			}
 
 			// configure additional properties

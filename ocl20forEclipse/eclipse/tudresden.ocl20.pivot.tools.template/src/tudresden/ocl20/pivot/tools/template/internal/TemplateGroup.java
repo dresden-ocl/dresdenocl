@@ -35,7 +35,7 @@ public class TemplateGroup implements ITemplateGroup {
 	/**
 	 * the full path file list
 	 */
-	protected List<URL> files;
+	protected List<String> files;
 
 	/**
 	 * The constructor for a new Template group.
@@ -55,7 +55,7 @@ public class TemplateGroup implements ITemplateGroup {
 
 		this.name = name;
 		this.superGroup = superGroup;
-		this.files = new LinkedList<URL>();
+		this.files = new LinkedList<String>();
 		this.templateEngine = templateEngine;
 	}
 
@@ -92,7 +92,7 @@ public class TemplateGroup implements ITemplateGroup {
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#addFile(URL)
 	 */
-	public void addFile(URL file) throws TemplateException {
+	public void addFile(String file) throws TemplateException {
 
 		if (!files.contains(file)) {
 			files.add(file);
@@ -103,10 +103,10 @@ public class TemplateGroup implements ITemplateGroup {
 	/**
 	 * @see tudresden.ocl20.pivot.tools.template.ITemplateGroup#addFiles(List)
 	 */
-	public void addFiles(List<URL> files) throws TemplateException {
+	public void addFiles(List<String> files) throws TemplateException {
 
-		files.addAll(files);
-		templateEngine.addFiles((LinkedList<URL>) files);
+		for (String file : files)
+			this.addFile(file);
+		// end for.
 	}
-
 }

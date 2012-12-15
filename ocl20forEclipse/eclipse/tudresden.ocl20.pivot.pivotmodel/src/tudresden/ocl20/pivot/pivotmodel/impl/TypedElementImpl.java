@@ -48,25 +48,28 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.TypedElement;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Typed Element</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Typed Element</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType <em>Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType <em>Generic Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getType
+ * <em>Type</em>}</li>
+ * <li>
+ * {@link tudresden.ocl20.pivot.pivotmodel.impl.TypedElementImpl#getGenericType
+ * <em>Generic Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class TypedElementImpl extends NamedElementImpl implements
 		TypedElement {
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -74,8 +77,9 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	protected Type type;
 
 	/**
-	 * The cached value of the '{@link #getGenericType() <em>Generic Type</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getGenericType() <em>Generic Type</em>}'
+	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getGenericType()
 	 * @generated
 	 * @ordered
@@ -84,25 +88,31 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TypedElementImpl() {
+
 		super();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Type getType() {
+
 		return type;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setType(Type newType) {
+
 		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
@@ -112,15 +122,18 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public GenericType getGenericType() {
+
 		return genericType;
 	}
 
 	/**
-	 * Convenience method for subclasses that initializes a cloned <code>TypedElement</code> with
-	 * the properties of this <code>TypedElement</code>.
+	 * Convenience method for subclasses that initializes a cloned
+	 * <code>TypedElement</code> with the properties of this
+	 * <code>TypedElement</code>.
 	 */
 	protected TypedElement initialize(TypedElement clone) {
 
@@ -131,7 +144,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 			clone.setGenericType(getGenericType().clone());
 		}
 
-		// it is important to do this AFTER the generic type has been set or it will be reset
+		// it is important to do this AFTER the generic type has been set or it will
+		// be reset
 		clone.setType(getType());
 
 		return clone;
@@ -139,17 +153,19 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetGenericType(GenericType newGenericType,
 			NotificationChain msgs) {
+
 		GenericType oldGenericType = genericType;
 		genericType = newGenericType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this,
-					Notification.SET,
-					PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-					oldGenericType, newGenericType);
+			ENotificationImpl notification =
+					new ENotificationImpl(this, Notification.SET,
+							PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, oldGenericType,
+							newGenericType);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -159,11 +175,12 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * Decorator method for {@link #setGenericTypeGen(GenericType)} that resets the
-	 * {@link #getType() type} of this <code>TypedElement</code> if a <code>GenericType</code> is
-	 * set. This ensures that a <code>TypedElement</code> with a generic type has to be
-	 * {@link GenericType#bindTypedElement(java.util.List, java.util.List) bound} first before it has
-	 * a proper non-generic type.
+	 * Decorator method for {@link #setGenericTypeGen(GenericType)} that resets
+	 * the {@link #getType() type} of this <code>TypedElement</code> if a
+	 * <code>GenericType</code> is set. This ensures that a
+	 * <code>TypedElement</code> with a generic type has to be
+	 * {@link GenericType#bindTypedElement(java.util.List, java.util.List) bound}
+	 * first before it has a proper non-generic type.
 	 * 
 	 * @see GenericElement#bind(TypeParameter, Type)
 	 * 
@@ -171,7 +188,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	 */
 	public void setGenericType(GenericType newGenericType) {
 
-		// reset an existing type if the new generic type is different from the old one
+		// reset an existing type if the new generic type is different from the old
+		// one
 		if ((genericType == null && newGenericType != null)
 				|| (genericType != null && !genericType.equals(newGenericType))) {
 			setType(null);
@@ -181,53 +199,55 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> The EMF implementation is forwarded to this method. <!-- end-user-doc
-	 * -->
+	 * <!-- begin-user-doc --> The EMF implementation is forwarded to this method.
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 */
 	public void setGenericTypeGen(GenericType newGenericType) {
+
 		if (newGenericType != genericType) {
 			NotificationChain msgs = null;
 			if (genericType != null)
-				msgs = ((InternalEObject) genericType)
-						.eInverseRemove(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-								null, msgs);
+				msgs =
+						((InternalEObject) genericType)
+								.eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+										- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, null, msgs);
 			if (newGenericType != null)
-				msgs = ((InternalEObject) newGenericType)
-						.eInverseAdd(
-								this,
-								EOPPOSITE_FEATURE_BASE
-										- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-								null, msgs);
+				msgs =
+						((InternalEObject) newGenericType)
+								.eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+										- PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, null, msgs);
 			msgs = basicSetGenericType(newGenericType, msgs);
 			if (msgs != null)
 				msgs.dispatch();
-		} else if (eNotificationRequired())
+		}
+		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-					PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE,
-					newGenericType, newGenericType));
+					PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE, newGenericType,
+					newGenericType));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.TYPED_ELEMENT;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPED_ELEMENT__GENERIC_TYPE:
 			return basicSetGenericType(null, msgs);
@@ -237,10 +257,12 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPED_ELEMENT__TYPE:
 			return getType();
@@ -252,10 +274,12 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPED_ELEMENT__TYPE:
 			setType((Type) newValue);
@@ -269,10 +293,12 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPED_ELEMENT__TYPE:
 			setType((Type) null);
@@ -286,10 +312,12 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.TYPED_ELEMENT__TYPE:
 			return type != null;
@@ -300,7 +328,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	}
 
 	/**
-	 * Overridden to include the type and generic type in the stringification of subclasses.
+	 * Overridden to include the type and generic type in the stringification of
+	 * subclasses.
 	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.NamedElementImpl#toString()
 	 */

@@ -75,9 +75,11 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public static TypesFactoryImpl init() {
+
 		try {
-			TypesFactoryImpl theTypesFactory = (TypesFactoryImpl) EPackage.Registry.INSTANCE
-					.getEFactory("http://www.omg.org/2006/essentialocl/types"); //$NON-NLS-1$ 
+			TypesFactoryImpl theTypesFactory =
+					(TypesFactoryImpl) EPackage.Registry.INSTANCE
+							.getEFactory("http://www.omg.org/2006/essentialocl/types"); //$NON-NLS-1$ 
 			if (theTypesFactory != null) {
 				return theTypesFactory;
 			}
@@ -94,6 +96,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public TypesFactoryImpl() {
+
 		super();
 	}
 
@@ -104,6 +107,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 */
 	@Override
 	public EObject create(EClass eClass) {
+
 		switch (eClass.getClassifierID()) {
 		case TypesPackageImpl.BAG_TYPE:
 			return createBagType();
@@ -139,6 +143,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public BagType createBagType() {
+
 		BagTypeImpl bagType = new BagTypeImpl();
 		return bagType;
 	}
@@ -149,6 +154,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public TupleType createTupleType() {
+
 		TupleTypeImpl tupleType = new TupleTypeImpl();
 		return tupleType;
 	}
@@ -159,6 +165,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public CollectionType createCollectionType() {
+
 		CollectionTypeImpl collectionType = new CollectionTypeImpl();
 		return collectionType;
 	}
@@ -169,6 +176,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public InvalidType createInvalidType() {
+
 		InvalidTypeImpl invalidType = new InvalidTypeImpl();
 		return invalidType;
 	}
@@ -179,6 +187,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public OrderedSetType createOrderedSetType() {
+
 		OrderedSetTypeImpl orderedSetType = new OrderedSetTypeImpl();
 		return orderedSetType;
 	}
@@ -189,6 +198,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public SequenceType createSequenceType() {
+
 		SequenceTypeImpl sequenceType = new SequenceTypeImpl();
 		return sequenceType;
 	}
@@ -199,6 +209,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public SetType createSetType() {
+
 		SetTypeImpl setType = new SetTypeImpl();
 		return setType;
 	}
@@ -209,6 +220,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public VoidType createVoidType() {
+
 		VoidTypeImpl voidType = new VoidTypeImpl();
 		return voidType;
 	}
@@ -219,6 +231,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public TypeType createTypeType() {
+
 		TypeTypeImpl typeType = new TypeTypeImpl();
 		return typeType;
 	}
@@ -229,6 +242,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public OclLibrary createOclLibrary() {
+
 		OclLibraryImpl oclLibrary = new OclLibraryImpl();
 		return oclLibrary;
 	}
@@ -239,6 +253,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public AnyType createAnyType() {
+
 		AnyTypeImpl anyType = new AnyTypeImpl();
 		return anyType;
 	}
@@ -249,6 +264,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * @generated
 	 */
 	public TypesPackageImpl getTypesPackage() {
+
 		return (TypesPackageImpl) getEPackage();
 	}
 
@@ -260,6 +276,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 */
 	@Deprecated
 	public static TypesPackageImpl getPackage() {
+
 		return TypesPackageImpl.eINSTANCE;
 	}
 

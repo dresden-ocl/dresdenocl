@@ -240,4 +240,12 @@ public class UML2Property extends AbstractProperty implements Property {
 
 		return this.dslProperty.isStatic();
 	}
+
+	/* (non-Javadoc)
+	 * @see tudresden.ocl20.pivot.pivotmodel.impl.PropertyImpl#isIdentifier()
+	 */
+	@Override
+	public boolean isIdentifier() {
+		return dslProperty.isID();
+	}
 }

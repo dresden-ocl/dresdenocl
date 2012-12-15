@@ -32,27 +32,27 @@
  */
 package tudresden.ocl20.pivot.essentialocl.expressions.impl;
 
-import org.apache.log4j.Logger;
-
 import java.util.Collection;
 import java.util.List;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import tudresden.ocl20.pivot.essentialocl.expressions.OclExpression;
 import tudresden.ocl20.pivot.essentialocl.expressions.PropertyCallExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.WellformednessException;
 import tudresden.ocl20.pivot.pivotmodel.Feature;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
-import org.apache.commons.lang.builder.ToStringStyle;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Property Call Exp</b></em>'.
@@ -99,6 +99,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	protected PropertyCallExpImpl() {
+
 		super();
 	}
 
@@ -159,6 +160,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	public Property getReferredProperty() {
+
 		return referredProperty;
 	}
 
@@ -167,6 +169,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	public void setReferredProperty(Property newReferredProperty) {
+
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
@@ -180,10 +183,11 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 * @generated
 	 */
 	public List<OclExpression> getQualifier() {
+
 		if (qualifier == null) {
-			qualifier = new EObjectContainmentEList<OclExpression>(
-					OclExpression.class, this,
-					ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER);
+			qualifier =
+					new EObjectContainmentEList<OclExpression>(OclExpression.class, this,
+							ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER);
 		}
 		return qualifier;
 	}
@@ -195,6 +199,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd,
 			int featureID, NotificationChain msgs) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__QUALIFIER:
 			return ((InternalEList<?>) getQualifier()).basicRemove(otherEnd, msgs);
@@ -208,6 +213,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			return getReferredProperty();
@@ -224,6 +230,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			setReferredProperty((Property) newValue);
@@ -242,6 +249,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			setReferredProperty((Property) null);
@@ -259,6 +267,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case ExpressionsPackageImpl.PROPERTY_CALL_EXP__REFERRED_PROPERTY:
 			return referredProperty != null;
@@ -274,6 +283,7 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return ExpressionsPackageImpl.Literals.PROPERTY_CALL_EXP;
 	}
 
@@ -286,8 +296,8 @@ public class PropertyCallExpImpl extends FeatureCallExpImpl implements
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendSuper(super.toString()).append(
-						"referredProperty", referredProperty).toString(); //$NON-NLS-1$
+				.appendSuper(super.toString())
+				.append("referredProperty", referredProperty).toString(); //$NON-NLS-1$
 	}
 
 } // PropertyCallExpImpl

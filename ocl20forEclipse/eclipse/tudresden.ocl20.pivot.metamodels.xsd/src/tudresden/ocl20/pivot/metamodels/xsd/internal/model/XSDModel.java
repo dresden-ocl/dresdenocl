@@ -33,6 +33,14 @@ public class XSDModel extends AbstractModel implements IModel {
 
 	// the adapter for the top package of the associated XSD model
 	private Namespace rootNamespace;
+	
+	
+	/**
+	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory = new EcoreAdapterFactory();
 
 	/**
 	 * Creates a new <code>XSDModel</code> adapting the given {@link XSDSchema}.
@@ -128,7 +136,7 @@ public class XSDModel extends AbstractModel implements IModel {
 			rootPackage.getESubpackages().add((EPackage) object);
 		}
 
-		return EcoreAdapterFactory.INSTANCE.createNamespace(rootPackage);
+		return factory.createNamespace(rootPackage);
 	}
 
 	/**

@@ -29,7 +29,8 @@ import org.eclipse.osgi.util.NLS;
  */
 public class OclInterpreterUIMessages extends NLS {
 
-	private static final String BUNDLE_NAME = "tudresden.ocl20.pivot.interpreter.ui.internal.msg.messages";
+	private static final String BUNDLE_NAME =
+			"tudresden.ocl20.pivot.interpreter.ui.internal.msg.messages";
 
 	public static String InterpreterView_ObjectColumn;
 
@@ -40,7 +41,7 @@ public class OclInterpreterUIMessages extends NLS {
 	public static String InterpreterView_ResultSelection;
 
 	public static String InterpreterView_InterpreterResults;
-	
+
 	public static String InterpreterView_UseCache;
 
 	public static String InterpreterView_Menu_Body;
@@ -57,10 +58,14 @@ public class OclInterpreterUIMessages extends NLS {
 
 	public static String InterpreterView_Menu_Pre;
 
+	public static String InterpreterView_Menu_Trace;
+
 	public static String InterpreterView_ActionError_NoConstraintSelected;
+	
+	public static String InterpreterView_ActionError_NoConstraintForTracingSelected;
 
 	public static String InterpreterView_ActionError_NoModelObectSelected;
-
+	
 	public static String InterpreterView_Error_NoActiveModel;
 
 	public static String InterpreterView_Error_NoActiveModelInstance;
@@ -115,12 +120,15 @@ public class OclInterpreterUIMessages extends NLS {
 
 	public static String InterpretAction_RemoveSelectedResults;
 
+	public static String InterpretAction_TraceSelectedConstraints;
+
 	static {
 		/* Initialize resource bundle. */
 		NLS.initializeMessages(BUNDLE_NAME, OclInterpreterUIMessages.class);
 	}
 
 	private OclInterpreterUIMessages() {
+
 		/* No implementation necessary. */
 	}
 }

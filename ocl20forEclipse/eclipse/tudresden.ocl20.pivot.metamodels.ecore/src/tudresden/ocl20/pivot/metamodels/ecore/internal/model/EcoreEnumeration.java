@@ -32,10 +32,10 @@
  */
 package tudresden.ocl20.pivot.metamodels.ecore.internal.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 
@@ -61,6 +61,13 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 
 	/** The adapted {@link EEnum}. */
 	private EEnum eEnum;
+	
+	/**
+	 * <p>
+	 * The {@link EcoreAdapterFactory} used to create nested elements.
+	 * </p>
+	 */
+	private EcoreAdapterFactory factory;
 
 	/**
 	 * <p>
@@ -69,8 +76,10 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 	 * 
 	 * @param eEnum
 	 *          The {@link EEnum} adapted by this object.
+	 * @param factory
+	 *            The {@link EcoreAdapterFactory} used to create nested elements.
 	 */
-	public EcoreEnumeration(EEnum eEnum) {
+	public EcoreEnumeration(EEnum eEnum,EcoreAdapterFactory factory) {
 
 		/* Eventually log the entry into this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -86,7 +95,7 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 
 		/* Initialize adapted enumeration. */
 		this.eEnum = eEnum;
-
+		this.factory = factory;
 		/* Eventually log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
 			String msg;
@@ -115,7 +124,7 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 	@Override
 	public Namespace getNamespace() {
 
-		return EcoreAdapterFactory.INSTANCE.createNamespace(this.eEnum
+		return factory.createNamespace(this.eEnum
 				.getEPackage());
 	}
 
@@ -130,11 +139,11 @@ public class EcoreEnumeration extends AbstractEnumeration implements
 
 		List<EnumerationLiteral> result;
 
-		result = new ArrayList<EnumerationLiteral>();
+		result = new BasicEList<EnumerationLiteral>();
 
 		for (EEnumLiteral literal : eEnum.getELiterals()) {
 			result
-					.add(EcoreAdapterFactory.INSTANCE.createEnumerationLiteral(literal));
+					.add(factory.createEnumerationLiteral(literal));
 		}
 
 		return result;

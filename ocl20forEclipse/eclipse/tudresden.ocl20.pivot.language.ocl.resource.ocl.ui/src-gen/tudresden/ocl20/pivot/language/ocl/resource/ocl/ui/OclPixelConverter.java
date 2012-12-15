@@ -16,7 +16,7 @@ public class OclPixelConverter {
 	public OclPixelConverter(org.eclipse.swt.widgets.Control control) {
 		org.eclipse.swt.graphics.GC gc = new org.eclipse.swt.graphics.GC(control);
 		gc.setFont(control.getFont());
-		fFontMetrics= gc.getFontMetrics();
+		fFontMetrics = gc.getFontMetrics();
 		gc.dispose();
 	}
 	

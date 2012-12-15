@@ -51,10 +51,8 @@ import tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp;
 import tudresden.ocl20.pivot.essentialocl.expressions.impl.ExpressionsPackageImpl;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp} object.
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.RealLiteralExp} object.
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
@@ -68,6 +66,7 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 * @generated
 	 */
 	public RealLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -79,6 +78,7 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -94,6 +94,7 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 * @generated
 	 */
 	protected void addRealSymbolPropertyDescriptor(Object object) {
+
 		itemPropertyDescriptors
 				.add(createItemPropertyDescriptor(
 						((ComposeableAdapterFactory) adapterFactory)
@@ -103,18 +104,19 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 						getString(
 								"_UI_PropertyDescriptor_description", "_UI_RealLiteralExp_realSymbol_feature", "_UI_RealLiteralExp_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						ExpressionsPackageImpl.Literals.REAL_LITERAL_EXP__REAL_SYMBOL,
-						true, false, false,
-						ItemPropertyDescriptor.REAL_VALUE_IMAGE, null, null));
+						true, false, false, ItemPropertyDescriptor.REAL_VALUE_IMAGE, null,
+						null));
 	}
 
 	/**
-	 * This returns RealLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * This returns RealLiteralExp.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/RealLiteralExp")); //$NON-NLS-1$
 	}
@@ -127,20 +129,21 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		String label = ((RealLiteralExp) object).getRealSymbol() + "";
 		return label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(RealLiteralExp.class)) {
@@ -162,6 +165,7 @@ public class RealLiteralExpItemProvider extends NumericLiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

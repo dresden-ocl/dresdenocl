@@ -1,12 +1,23 @@
 package tudresden.ocl20.pivot.tools.template.internal;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IRegistryEventListener;
+import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.Platform;
 
 import tudresden.ocl20.pivot.tools.template.ITemplate;
 import tudresden.ocl20.pivot.tools.template.ITemplateEngine;
@@ -23,13 +34,17 @@ import tudresden.ocl20.pivot.tools.template.exception.TemplateException;
  * @author Bjoern Freitag
  * 
  */
-public class TemplateGroupRegistry implements ITemplateGroupRegistry {
+public class TemplateGroupRegistry implements ITemplateGroupRegistry,
+IRegistryEventListener {
 
 	/** {@link Logger} for this class. */
 	private static final Logger LOGGER = TemplatePlugin
 			.getLogger(TemplateGroupRegistry.class);
 
 	private static String DEFAULT_TEMPLATE_ENGINE = "StringTemplate";
+	
+	private static final String TEMPLATEGROUPS_EXTENSION_POINT_ID = TemplatePlugin.ID
+			+ ".templateGroups";
 
 	/**
 	 * a map of all {@link ITemplateGroup}
@@ -45,6 +60,9 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 	public TemplateGroupRegistry() {
 
 		this.templateGroups = new HashMap<String, ITemplateGroup>();
+		
+		IExtensionPoint extensionPoint = this.getExtensionPoint();
+		if (extensionPoint != null) this.added(extensionPoint.getExtensions());
 
 	}
 
@@ -300,6 +318,142 @@ public class TemplateGroupRegistry implements ITemplateGroupRegistry {
 				new TemplateGroup(templateName, superGroup, templateEngine);
 		this.addTemplateGroup(returnGroup);
 		return returnGroup;
+	}
+	
+	public void added(IConfigurationElement configurationElement,IExtension extension) {
+		if (configurationElement.getName().equals("templateresource")) {
+			ITemplateGroup superGroup = null;
+			try {
+				superGroup = this.getTemplateGroup(configurationElement.getAttribute("supergroup"));
+			} catch (InvalidRegistryObjectException e1) {
+				//Do nothing
+			} catch (TemplateException e1) {
+				//Do nothing
+			}
+			List<String> streams = new LinkedList<String>();
+			if (configurationElement.getAttribute("path") != null) {
+				try {
+					File file = new File(FileLocator.toFileURL(Platform
+							.getBundle(extension.getNamespaceIdentifier())
+							.getResource(configurationElement.getAttribute("path"))).getPath());
+					if (file.isFile()) {
+						streams.add(file.getPath());
+					} else {
+						File[] files = file.listFiles(new FilenameFilter() {
+							@Override
+							public boolean accept(File dir, String name) {
+								return new File(dir, name).isFile()
+										&& name.toLowerCase().endsWith(".stg");
+							}
+						});
+						for (File dirFile : files) {
+							streams.add(dirFile.getPath());
+						}
+					}
+				} catch (InvalidRegistryObjectException e) {
+					// Do nothing
+				} catch (IOException e) {
+					// Do nothing
+				}
+			}
+			String name = configurationElement.getAttribute("name");
+			try {
+				ITemplateGroup group  = this.addDefaultTemplateGroup(name, superGroup);
+				group.addFiles(streams);
+			} catch (TemplateException e) {
+				// Do nothing
+			}
+		} else if (configurationElement.getName().equals("templategroup")) {
+			try {
+				ITemplateGroup clazz = ITemplateGroup.class.cast(Platform.getBundle(
+						extension.getNamespaceIdentifier()).loadClass(
+					configurationElement.getAttribute("class")));
+			this.addTemplateGroup(clazz);
+			} catch (TemplateException e) {
+				// Do nothing
+			} catch (ClassNotFoundException e) {
+				// Do nothing
+			}
+		}
+	}
+
+	@Override
+	public void added(IExtension[] extensions) {
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("added(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		// no else.
+
+			for (IExtension extension : extensions) {
+				for (IConfigurationElement configurationElement : extension
+						.getConfigurationElements()) {				
+					added(configurationElement,extension);
+					}
+				// end for (configurationElements).		
+			}
+			// end for (extensions).	
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("added(IExtension[]) - exit"); //$NON-NLS-1$
+		}
+		// no else.
+
+	}
+	
+	@Override
+	public void removed(IExtension[] extensions) {
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removed(extensions=" + extensions + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		}
+		// no else.
+
+			for (IExtension extension : extensions) {
+				for (IConfigurationElement configurationElement : extension
+						.getConfigurationElements()) {				
+					this.removeTemplateGroup(configurationElement.getAttribute("name"));
+					}
+				// end for (configurationElements).		
+			}
+			// end for (extensions).	
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("removed(IExtension[]) - exit"); //$NON-NLS-1$
+		}
+		// no else.
+
+	}
+
+	@Override
+	public void added(IExtensionPoint[] extensionPoints) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removed(IExtensionPoint[] extensionPoints) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * <p>
+	 * A helper method to get the worklist task {@link IExtensionPoint}.
+	 * </p>
+	 * 
+	 * @return The {@link IMetamodel} {@link IExtensionPoint}.
+	 */
+	private IExtensionPoint getExtensionPoint() {
+
+		IExtensionPoint result = null;
+
+		if (Platform.getExtensionRegistry() != null) {
+			/* Get the point from the registry. */
+			result = Platform.getExtensionRegistry().getExtensionPoint(
+					TEMPLATEGROUPS_EXTENSION_POINT_ID);
+
+		}
+
+		return result;
 	}
 
 }

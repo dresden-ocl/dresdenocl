@@ -38,37 +38,41 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PivotModelFactory;
+import tudresden.ocl20.pivot.pivotmodel.PivotModelPackage;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind;
 import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Primitive Type</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Primitive Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.impl.PrimitiveTypeImpl#getKind
+ * <em>Kind</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
-	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final PrimitiveTypeKind KIND_EDEFAULT = PrimitiveTypeKind.UNKNOWN;
+	protected static final PrimitiveTypeKind KIND_EDEFAULT =
+			PrimitiveTypeKind.UNKNOWN;
 	/**
-	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getKind() <em>Kind</em>}' attribute. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getKind()
 	 * @generated
 	 * @ordered
@@ -77,9 +81,11 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected PrimitiveTypeImpl() {
+
 		super();
 	}
 
@@ -92,12 +98,13 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	 * 
 	 * <p>
 	 * More precisely, two primitive types conform to each other if their
-	 * <code>kind</code> is equal. Furthermore, we implement the special rule
-	 * that a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
+	 * <code>kind</code> is equal. Furthermore, we implement the special rule that
+	 * a primitive type with kind {@link PrimitiveTypeKind#INTEGER INTEGER}
 	 * conforms to one with kind {@link PrimitiveTypeKind#REAL REAL}.
 	 * </p>
 	 * 
-	 * @param other the other type
+	 * @param other
+	 *          the other type
 	 * 
 	 * @return <code>true</code> if this type conforms to the other,
 	 *         <code>false</code> otherwise
@@ -115,8 +122,9 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 			thisKind = getKind();
 
 			if (thisKind == PrimitiveTypeKind.INTEGER) {
-				conformant = otherKind == PrimitiveTypeKind.INTEGER
-						|| otherKind == PrimitiveTypeKind.REAL;
+				conformant =
+						otherKind == PrimitiveTypeKind.INTEGER
+								|| otherKind == PrimitiveTypeKind.REAL;
 			}
 
 			else {
@@ -129,17 +137,21 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public PrimitiveTypeKind getKind() {
+
 		return kind;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setKind(PrimitiveTypeKind newKind) {
+
 		PrimitiveTypeKind oldKind = kind;
 		kind = newKind == null ? KIND_EDEFAULT : newKind;
 		if (eNotificationRequired())
@@ -149,7 +161,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl#clone()
 	 */
 	@Override
@@ -172,10 +183,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+
 		switch (featureID) {
 		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			return getKind();
@@ -185,10 +198,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
+
 		switch (featureID) {
 		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			setKind((PrimitiveTypeKind) newValue);
@@ -199,10 +214,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			setKind(KIND_EDEFAULT);
@@ -213,10 +230,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
+
 		switch (featureID) {
 		case PivotModelPackage.PRIMITIVE_TYPE__KIND:
 			return kind != KIND_EDEFAULT;
@@ -226,10 +245,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return PivotModelPackage.Literals.PRIMITIVE_TYPE;
 	}
 
@@ -243,12 +264,12 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 	public String toString() {
 
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
-				.appendToString(super.toString())
-				.append("kind", getKind()).toString(); //$NON-NLS-1$
+				.appendToString(super.toString()).append("kind", getKind()).toString(); //$NON-NLS-1$
 	}
 
 	@Override
 	public boolean equals(Object other) {
+
 		if (other instanceof PrimitiveType) {
 			PrimitiveType otherType = (PrimitiveType) other;
 			return this.getKind().equals(otherType.getKind());

@@ -22,22 +22,22 @@ import tudresden.ocl20.pivot.language.ocl.PostConditionDeclarationCS;
  */
 public class PostConditionDeclarationCSImpl extends PrePostOrBodyDeclarationCSImpl implements PostConditionDeclarationCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected PostConditionDeclarationCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.POST_CONDITION_DECLARATION_CS;
-	}
+    return OclPackage.Literals.POST_CONDITION_DECLARATION_CS;
+  }
 
 } //PostConditionDeclarationCSImpl

@@ -58,6 +58,7 @@ public class OrderedSetTypeImpl extends CollectionTypeImpl implements
 	 * @generated
 	 */
 	protected OrderedSetTypeImpl() {
+
 		super();
 	}
 
@@ -67,6 +68,7 @@ public class OrderedSetTypeImpl extends CollectionTypeImpl implements
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return TypesPackageImpl.Literals.ORDERED_SET_TYPE;
 	}
 

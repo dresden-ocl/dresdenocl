@@ -1,5 +1,5 @@
 -- Constraint taken from [1] page 140 and adapted.
-
+-- @model{../model/royalsandloyals.uml}
 package tudresden::ocl20::pivot::examples::royalsandloyals
 
 -- Adapted because a wrong context in the parser.

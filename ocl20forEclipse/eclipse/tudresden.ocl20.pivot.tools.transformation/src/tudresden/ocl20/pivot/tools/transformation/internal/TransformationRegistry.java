@@ -44,8 +44,8 @@ public class TransformationRegistry implements ITransformationRegistry,
 	private Map<String, Class<?>> transformations;
 
 	/** The full identifier of the {@link ITransformation}s' extension point. */
-	private static final String TRANSFORMATION_EXTENSION_POINT_ID =
-			TransformationPlugin.ID + ".transformations";
+	private static final String TRANSFORMATION_EXTENSION_POINT_ID = TransformationPlugin.ID
+			+ ".transformations";
 
 	/** A list of listeners. */
 	private ListenerList listeners;
@@ -61,11 +61,18 @@ public class TransformationRegistry implements ITransformationRegistry,
 		// no else.
 
 		this.transformations = new HashMap<String, Class<?>>();
-		this.added(this.getExtensionPoint().getExtensions());
 
-		/* Register this registry as a listener for plug-in events. */
-		Platform.getExtensionRegistry().addListener(this,
-				TRANSFORMATION_EXTENSION_POINT_ID);
+		if (Platform.isRunning()) {
+			this.added(this.getExtensionPoint().getExtensions());
+
+			/* Register this registry as a listener for plug-in events. */
+			Platform.getExtensionRegistry().addListener(this,
+					TRANSFORMATION_EXTENSION_POINT_ID);
+		}
+
+		else {
+			LOGGER.warn("Plarform is not running. Please register transformations manually.");
+		}
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("TransformationRegistry() - exit"); //$NON-NLS-1$
@@ -79,8 +86,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	public void addTransformation(ITransformation<?, ?, ?> transformation) {
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("addTransformation(transformation=" + transformation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
+			LOGGER.debug("addTransformation(transformation=" + transformation + ") - enter"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		// no else.
 
@@ -91,13 +97,12 @@ public class TransformationRegistry implements ITransformationRegistry,
 		// no else.
 
 		/*
-		 * Check if model is already contained in the registry; this is meant to be
-		 * captured and dealt with on the UI, e.g., by showing an error message;
-		 * this is better than silently do nothing.
+		 * Check if model is already contained in the registry; this is meant to
+		 * be captured and dealt with on the UI, e.g., by showing an error
+		 * message; this is better than silently do nothing.
 		 */
 		if (this.transformations.containsValue(transformation)) {
-			LOGGER
-					.warn("Transformation '" + transformation.getClass().getSimpleName() + "' is already loaded. The transformation will be replaced."); //$NON-NLS-1$//$NON-NLS-2$
+			LOGGER.warn("Transformation '" + transformation.getClass().getSimpleName() + "' is already loaded. The transformation will be replaced."); //$NON-NLS-1$//$NON-NLS-2$
 		}
 		// no else.
 
@@ -152,8 +157,8 @@ public class TransformationRegistry implements ITransformationRegistry,
 		}
 		// no else.
 
-		this.fireTransformationRemoved(this.transformations.remove(transformation
-				.getClass().getSimpleName()));
+		this.fireTransformationRemoved(this.transformations
+				.remove(transformation.getClass().getSimpleName()));
 
 	}
 
@@ -188,7 +193,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	 * </p>
 	 * 
 	 * @param transformation
-	 *          The {@link ITransformation} that has been added.
+	 *            The {@link ITransformation} that has been added.
 	 */
 	private void fireTransformationAdded(Class<?> transformation) {
 
@@ -204,7 +209,8 @@ public class TransformationRegistry implements ITransformationRegistry,
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new TransformationRegistryEvent(this, transformation);
+					event = new TransformationRegistryEvent(this,
+							transformation);
 				}
 				// no else.
 
@@ -223,7 +229,7 @@ public class TransformationRegistry implements ITransformationRegistry,
 	 * </p>
 	 * 
 	 * @param transformation
-	 *          The {@link ITemplate} that has been removed.
+	 *            The {@link ITemplate} that has been removed.
 	 */
 	private void fireTransformationRemoved(Class<?> transformation) {
 
@@ -238,7 +244,8 @@ public class TransformationRegistry implements ITransformationRegistry,
 
 				/* Lazily create the event. */
 				if (event == null) {
-					event = new TransformationRegistryEvent(this, transformation);
+					event = new TransformationRegistryEvent(this,
+							transformation);
 				}
 				// no else.
 
@@ -297,9 +304,9 @@ public class TransformationRegistry implements ITransformationRegistry,
 				for (IConfigurationElement configurationElement : extension
 						.getConfigurationElements()) {
 					try {
-						Class<?> clazz =
-								Platform.getBundle(extension.getNamespaceIdentifier())
-										.loadClass(configurationElement.getAttribute("class"));
+						Class<?> clazz = Platform.getBundle(
+								extension.getNamespaceIdentifier()).loadClass(
+								configurationElement.getAttribute("class"));
 						this.addTransformation(clazz);
 					} catch (InvalidRegistryObjectException e) {
 						e.printStackTrace();
@@ -354,9 +361,9 @@ public class TransformationRegistry implements ITransformationRegistry,
 
 					String transformationID;
 					try {
-						transformationID =
-								((ITransformation<?, ?, ?>) configurationElement
-										.createExecutableExtension("class")).getDisplayName();
+						transformationID = ((ITransformation<?, ?, ?>) configurationElement
+								.createExecutableExtension("class"))
+								.getDisplayName();
 					} catch (CoreException e) {
 						continue;
 					}
@@ -397,9 +404,8 @@ public class TransformationRegistry implements ITransformationRegistry,
 		IExtensionPoint result;
 
 		/* Get the point from the registry. */
-		result =
-				Platform.getExtensionRegistry().getExtensionPoint(
-						TRANSFORMATION_EXTENSION_POINT_ID);
+		result = Platform.getExtensionRegistry().getExtensionPoint(
+				TRANSFORMATION_EXTENSION_POINT_ID);
 
 		/* This should not happen unless the id changes. */
 		if (result == null) {
@@ -423,20 +429,19 @@ public class TransformationRegistry implements ITransformationRegistry,
 		List<String> itransList = new ArrayList<String>();
 		for (String s : this.transformations.keySet()) {
 			Class<?> clazz = this.transformations.get(s);
-			ParameterizedType superclass =
-					((ParameterizedType) clazz.getGenericSuperclass());
+			ParameterizedType superclass = ((ParameterizedType) clazz
+					.getGenericSuperclass());
 			Type[] types = superclass.getActualTypeArguments();
 			if (types[0].equals(modelIn)) {
 				if (types[1].equals(settings)) {
-					if (superclass.getRawType().equals(ParallelTransformation.class)) {
+					if (superclass.getRawType().equals(
+							ParallelTransformation.class)) {
 						if (types[2].equals(modelOut)) {
 							itransList.add(s);
-						}
-						else if (types[3].equals(modelOut)) {
+						} else if (types[3].equals(modelOut)) {
 							itransList.add(s);
 						}
-					}
-					else {
+					} else {
 						if (types[types.length - 1].equals(modelOut)) {
 							itransList.add(s);
 						}

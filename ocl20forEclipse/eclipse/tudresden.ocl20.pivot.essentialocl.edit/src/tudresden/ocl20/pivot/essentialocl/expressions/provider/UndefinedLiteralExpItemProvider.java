@@ -45,10 +45,8 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a
- * {@link tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp}
- * object. <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * This is the item provider adapter for a {@link tudresden.ocl20.pivot.essentialocl.expressions.UndefinedLiteralExp} object.
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
@@ -62,6 +60,7 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 * @generated
 	 */
 	public UndefinedLiteralExpItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
@@ -73,6 +72,7 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -81,13 +81,14 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	}
 
 	/**
-	 * This returns UndefinedLiteralExp.gif. <!-- begin-user-doc --> <!--
+	 * This returns UndefinedLiteralExp.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/UndefinedLiteralExp")); //$NON-NLS-1$
 	}
@@ -100,19 +101,20 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+
 		return "null";
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
+
 		updateChildren(notification);
 		super.notifyChanged(notification);
 	}
@@ -127,6 +129,7 @@ public class UndefinedLiteralExpItemProvider extends LiteralExpItemProvider
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

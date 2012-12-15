@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -51,8 +50,10 @@ import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.PivotModelPackageImpl;
 
 /**
- * This is the item provider adapter for a {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter} object.
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link tudresden.ocl20.pivot.pivotmodel.TypeParameter} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public class TypeParameterItemProvider extends NamedElementItemProvider
@@ -60,23 +61,25 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 		ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource {
 
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TypeParameterItemProvider(AdapterFactory adapterFactory) {
+
 		super(adapterFactory);
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
@@ -85,12 +88,14 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This returns TypeParameter.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * This returns TypeParameter.gif. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/TypeParameter")); //$NON-NLS-1$
 	}
@@ -99,7 +104,8 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	 * This returns the label text for the adapted class.
 	 * 
 	 * <p>
-	 * The EMF implementation is changed to simply return the name of the <code>TypeParameter</code>.
+	 * The EMF implementation is changed to simply return the name of the
+	 * <code>TypeParameter</code>.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -111,12 +117,14 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which it
+	 * passes to {@link #fireNotifyChanged}.
 	 * 
 	 * <p>
-	 * The EMF implementation is extended to update the {@link GenericElement} that is the owner of
-	 * this <code>TypeParameter</code> if the name of the type parameter changes.
+	 * The EMF implementation is extended to update the {@link GenericElement}
+	 * that is the owner of this <code>TypeParameter</code> if the name of the
+	 * type parameter changes.
 	 * </p>
 	 * 
 	 * @generated NOT
@@ -129,8 +137,8 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 		switch (notification.getFeatureID(TypeParameter.class)) {
 		case PivotModelPackageImpl.TYPE_PARAMETER__NAME: {
 			fireNotifyChanged(new ViewerNotification(notification,
-					((TypeParameter) notification.getNotifier())
-							.getGenericElement(), true, true));
+					((TypeParameter) notification.getNotifier()).getGenericElement(),
+					true, true));
 			return;
 		}
 		}
@@ -139,15 +147,16 @@ public class TypeParameterItemProvider extends NamedElementItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
+	 * the children that can be created under this object. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
+
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 	}
 

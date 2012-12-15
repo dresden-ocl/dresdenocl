@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.uml2.uml.Package;
 
 import tudresden.ocl20.pivot.metamodels.uml2.UML2MetamodelPlugin;
@@ -139,7 +140,7 @@ public class UML2Package extends AbstractNamespace implements Namespace {
 	@Override
 	public List<Type> getOwnedType() {
 
-		List<Type> result = new ArrayList<Type>();
+		List<Type> result = new BasicEList<Type>();
 
 		for (Package mergedPackage : this.mergedPackages) {
 

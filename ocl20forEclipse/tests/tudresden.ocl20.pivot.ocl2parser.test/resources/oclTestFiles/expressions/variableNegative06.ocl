@@ -1,0 +1,8 @@
+package package1::package2
+
+/* Test possible renaming of the special variable self. */
+/* Should fail since self is not defined here. */
+context t : Type1
+inv: not self.oclIsUndefined()
+
+endpackage

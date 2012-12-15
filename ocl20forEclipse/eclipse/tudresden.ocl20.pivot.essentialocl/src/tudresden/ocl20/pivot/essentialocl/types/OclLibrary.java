@@ -35,6 +35,7 @@ package tudresden.ocl20.pivot.essentialocl.types;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+
 import tudresden.ocl20.pivot.pivotmodel.PrimitiveType;
 import tudresden.ocl20.pivot.pivotmodel.Property;
 import tudresden.ocl20.pivot.pivotmodel.Type;
@@ -82,6 +83,7 @@ public interface OclLibrary extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Ocl Void</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary <em>Ocl Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Ocl Void</em>' reference isn't clear, there really should be
@@ -90,6 +92,7 @@ public interface OclLibrary extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ocl Void</em>' containment reference.
 	 * @see #setOclVoid(VoidType)
+	 * @see tudresden.ocl20.pivot.essentialocl.types.VoidType#getOclLibrary
 	 * @generated
 	 */
 	VoidType getOclVoid();

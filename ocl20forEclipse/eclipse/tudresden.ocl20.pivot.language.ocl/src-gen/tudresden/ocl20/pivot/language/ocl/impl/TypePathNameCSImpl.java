@@ -6,18 +6,10 @@
  */
 package tudresden.ocl20.pivot.language.ocl.impl;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import tudresden.ocl20.pivot.language.ocl.OclPackage;
-import tudresden.ocl20.pivot.language.ocl.PathNameCS;
 import tudresden.ocl20.pivot.language.ocl.TypePathNameCS;
-import tudresden.ocl20.pivot.pivotmodel.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,22 +22,22 @@ import tudresden.ocl20.pivot.pivotmodel.Type;
  */
 public abstract class TypePathNameCSImpl extends TypeCSImpl implements TypePathNameCS {
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	protected TypePathNameCSImpl() {
-		super();
-	}
+    super();
+  }
 
 	/**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
 	@Override
 	protected EClass eStaticClass() {
-		return OclPackage.Literals.TYPE_PATH_NAME_CS;
-	}
+    return OclPackage.Literals.TYPE_PATH_NAME_CS;
+  }
 
 } //TypePathNameCSImpl

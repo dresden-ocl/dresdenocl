@@ -12,9 +12,29 @@ package tudresden.ocl20.pivot.language.ocl.resource.ocl.ui;
  */
 public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preference.PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {
 	
-	private final static tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclAntlrTokenHelper tokenHelper = new tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclAntlrTokenHelper();
-	private static final java.util.Map<String, java.util.List<HighlightingColorListItem>> content = new java.util.LinkedHashMap<String, java.util.List<HighlightingColorListItem>>();
-	private static final java.util.Collection<IChangedPreference> changedPreferences = new java.util.ArrayList<IChangedPreference>();
+	private final static java.util.Map<String, java.util.List<HighlightingColorListItem>> content = new java.util.LinkedHashMap<String, java.util.List<HighlightingColorListItem>>();
+	private final static java.util.Collection<IChangedPreference> changedPreferences = new java.util.ArrayList<IChangedPreference>();
+	
+	public OclSyntaxColoringPreferencePage() {
+		super();
+		
+		tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation metaInformation = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
+		
+		String languageId = metaInformation.getSyntaxName();
+		
+		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
+		String[] tokenNames = metaInformation.getSyntaxHighlightableTokenNames();
+		
+		for (int i = 0; i < tokenNames.length; i++) {
+			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenNames[i]);
+			terminals.add(item);
+		}
+		java.util.Collections.sort(terminals);
+		content.put(languageId, terminals);
+		
+		setPreferenceStore(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
+		setDescription("Configure syntax coloring for ." + languageId + " files.");
+	}
 	
 	private interface IChangedPreference {
 		public void apply(org.eclipse.jface.preference.IPreferenceStore store);
@@ -203,7 +223,7 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		
 		public Object[] getElements(Object inputElement) {
 			java.util.List<HighlightingColorListItem> contentsList = new java.util.ArrayList<HighlightingColorListItem>();
-			for(java.util.List<HighlightingColorListItem> l : content.values()) {
+			for (java.util.List<HighlightingColorListItem> l : content.values()) {
 				contentsList.addAll(l);
 			}
 			return contentsList.toArray();
@@ -269,10 +289,10 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		}
 		org.eclipse.swt.graphics.RGB rgb = org.eclipse.jface.preference.PreferenceConverter.getColor(getPreferenceStore(), item.getColorKey());
 		fSyntaxForegroundColorEditor.setColorValue(rgb);
-		fBoldCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getBoldKey()));
-		fItalicCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getItalicKey()));
-		fStrikethroughCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getStrikethroughKey()));
-		fUnderlineCheckBox.setSelection(getPreferenceStore().getBoolean(		item.getUnderlineKey()));
+		fBoldCheckBox.setSelection(getPreferenceStore().getBoolean(item.getBoldKey()));
+		fItalicCheckBox.setSelection(getPreferenceStore().getBoolean(item.getItalicKey()));
+		fStrikethroughCheckBox.setSelection(getPreferenceStore().getBoolean(item.getStrikethroughKey()));
+		fUnderlineCheckBox.setSelection(getPreferenceStore().getBoolean(item.getUnderlineKey()));
 		
 		fEnableCheckbox.setEnabled(true);
 		boolean enable = getPreferenceStore().getBoolean(item.getEnableKey());
@@ -331,7 +351,7 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		org.eclipse.swt.layout.GridData gd = new org.eclipse.swt.layout.GridData(org.eclipse.swt.layout.GridData.FILL, org.eclipse.swt.layout.GridData.FILL, true, true);
 		gd.heightHint = convertHeightInCharsToPixels(26);
 		int maxWidth = 0;
-		for (java.util.Iterator<java.util.List<HighlightingColorListItem>> it = content.values()		.iterator(); it.hasNext();) {
+		for (java.util.Iterator<java.util.List<HighlightingColorListItem>> it = content.values().iterator(); it.hasNext();) {
 			for (java.util.Iterator<HighlightingColorListItem> j = it.next().iterator(); j.hasNext();) {
 				HighlightingColorListItem item = j.next();
 				maxWidth = Math.max(maxWidth, convertWidthInCharsToPixels(item.getDisplayName().length()));
@@ -517,35 +537,6 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 		return (HighlightingColorListItem) element;
 	}
 	
-	public OclSyntaxColoringPreferencePage() {
-		super();
-		
-		tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclMetaInformation syntaxPlugin = new tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclMetaInformation();
-		
-		String languageId = syntaxPlugin.getSyntaxName();
-		
-		java.util.List<HighlightingColorListItem> terminals = new java.util.ArrayList<HighlightingColorListItem>();
-		String[] tokenNames = syntaxPlugin.getTokenNames();
-		
-		for (int i = 0; i < tokenNames.length; i++) {
-			if (!tokenHelper.canBeUsedForSyntaxColoring(i)) {
-				continue;
-			}
-			
-			String tokenName = tokenHelper.getTokenName(tokenNames, i);
-			if (tokenName == null) {
-				continue;
-			}
-			HighlightingColorListItem item = new HighlightingColorListItem(languageId, tokenName);
-			terminals.add(item);
-		}
-		java.util.Collections.sort(terminals);
-		content.put(languageId, terminals);
-		
-		setPreferenceStore(tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclUIPlugin.getDefault().getPreferenceStore());
-		setDescription("Configure syntax coloring for ." + languageId + " files.");
-	}
-	
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 	}
 	
@@ -609,10 +600,11 @@ public class OclSyntaxColoringPreferencePage extends org.eclipse.jface.preferenc
 	
 	private void updateActiveEditor() {
 		org.eclipse.ui.IWorkbench workbench = org.eclipse.ui.PlatformUI.getWorkbench();
-		org.eclipse.ui.IEditorPart editor = workbench.getActiveWorkbenchWindow()		.getActivePage().getActiveEditor();
+		org.eclipse.ui.IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (editor != null && editor instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) {
 			tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor emfTextEditor = (tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor) editor;
 			emfTextEditor.invalidateTextRepresentation();
 		}
 	}
+	
 }

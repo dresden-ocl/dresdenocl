@@ -1,0 +1,9 @@
+package package1::package2
+
+-- Should fail. The second def contains a type error?
+context Type1
+def: mydefine : Integer = 100
+
+def: mystring : Integ = mydefine + 50
+
+endpackage

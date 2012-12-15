@@ -1,0 +1,38 @@
+package uml
+
+/* [1] The query mustBeOwned() indicates whether elements of this type must have an owner. */
+context Package::mustBeOwned() : Boolean
+body: false
+
+
+
+/*[2] The query visibleMembers() defines which members of a Package can be accessed outside it. */
+context Package::visibleMembers() : Set(PackageableElement)
+body: packagedElement->select( m | self.makesVisible(m))
+
+/* The metamodel evolution causes the following problems:
+- ownedMember no refers another association (defined on Namespace)
+-> renamed ownedMember to packagedElement
+*/
+
+
+/* [3] The query makesVisible() defines whether a Package makes an element visible outside itself. 
+   Elements with no visibility and elements with public visibility are made visible. */
+context Package::makesVisible(el: NamedElement) : Boolean
+pre: self.member->includes(el)
+body:
+	-- case: the element is in the package itself
+	(ownedMember->includes(el)) or
+	-- case: it is imported individually with public visibility
+	(elementImport->select(ei|ei.importedElement.visibility = VisibilityKind::public)
+		->collect(ei|ei.importedElement)->collect(oclAsType(NamedElement))->includes(el)) or
+	-- case: it is imported in a package with public visibility
+	(packageImport->select(pi|pi.visibility = VisibilityKind::public)
+		->collect(pi|pi.importedPackage.member->includes(el))->notEmpty())
+
+/* The metamodel evolution causes the following problems:
+- ownedMember now refers another association (defined on Namespace)
+-> removed collect with cast to NamedElement (1x)
+*/
+
+endpackage 

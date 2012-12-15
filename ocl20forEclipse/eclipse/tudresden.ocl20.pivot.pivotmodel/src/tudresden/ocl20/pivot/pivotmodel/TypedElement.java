@@ -33,25 +33,25 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Typed Element</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Typed Element</b></em>'. <!-- end-user-doc -->
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * A <code>TypedElement</code> represents elements that 
- * have a {@link Type}.
+ * A <code>TypedElement</code> represents elements that have a {@link Type}.
  * </p>
  * <!-- end-model-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type</em>}</li>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType <em>Generic Type</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type
+ * </em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType <em>
+ * Generic Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement()
  * @model abstract="true"
  * @generated
@@ -59,14 +59,13 @@ package tudresden.ocl20.pivot.pivotmodel;
 public interface TypedElement extends NamedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * Returns the value of the '<em><b>Type</b></em>' reference. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
 	 * Specifies the type of the element.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(Type)
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement_Type()
@@ -76,23 +75,26 @@ public interface TypedElement extends NamedElement {
 	Type getType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getType <em>Type</em>}
+	 * ' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Type</em>' reference.
 	 * @see #getType()
 	 * @generated
 	 */
 	void setType(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Generic Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generic Type</b></em>' containment
+	 * reference. <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Generic Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
+	 * If the meaning of the '<em>Generic Type</em>' containment reference isn't
+	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * 
 	 * @return the value of the '<em>Generic Type</em>' containment reference.
 	 * @see #setGenericType(GenericType)
 	 * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getTypedElement_GenericType()
@@ -102,10 +104,14 @@ public interface TypedElement extends NamedElement {
 	GenericType getGenericType();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType <em>Generic Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Generic Type</em>' containment reference.
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.TypedElement#getGenericType
+	 * <em>Generic Type</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Generic Type</em>' containment
+	 *          reference.
 	 * @see #getGenericType()
 	 * @generated
 	 */

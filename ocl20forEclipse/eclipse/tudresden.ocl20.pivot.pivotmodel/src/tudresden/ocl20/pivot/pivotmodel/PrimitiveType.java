@@ -33,27 +33,26 @@
 package tudresden.ocl20.pivot.pivotmodel;
 
 /**
- * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Primitive Type</b></em>'.
- * <!-- end-user-doc -->
- *
+ * <!-- begin-user-doc --> A representation of the model object '
+ * <em><b>Primitive Type</b></em>'. <!-- end-user-doc -->
+ * 
  * <!-- begin-model-doc -->
  * <p>
- * A <code>PrimitiveType</code> defines a predefined data 
- * type, without any relevant substructure (i.e., it has no parts). 
- * A primitive datatype may have an algebra and operations 
- * defined outside of the Pivot Model, for example, 
+ * A <code>PrimitiveType</code> defines a predefined data type, without any
+ * relevant substructure (i.e., it has no parts). A primitive datatype may have
+ * an algebra and operations defined outside of the Pivot Model, for example,
  * mathematically.
  * </p>
  * <!-- end-model-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind <em>Kind</em>}</li>
+ * <li>{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind <em>Kind
+ * </em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see tudresden.ocl20.pivot.pivotmodel.PivotModelPackage#getPrimitiveType()
  * @model
  * @generated
@@ -61,18 +60,18 @@ package tudresden.ocl20.pivot.pivotmodel;
 public interface PrimitiveType extends Type {
 
 	/**
-	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
-	 * The default value is <code>"Unknown"</code>.
-	 * The literals are from the enumeration {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
+	 * Returns the value of the '<em><b>Kind</b></em>' attribute. The default
+	 * value is <code>"Unknown"</code>. The literals are from the enumeration
+	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind}. <!--
+	 * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * <p>
-	 * Specifies the {@link PrimitiveTypeKind kind} of this <code>PrimitiveType</code>.
-	 * Different DSLs may have different predefined primitive types, but it should be
-	 * possible to classify them according to the literals defined in the Pivot Model.
+	 * Specifies the {@link PrimitiveTypeKind kind} of this
+	 * <code>PrimitiveType</code>. Different DSLs may have different predefined
+	 * primitive types, but it should be possible to classify them according to
+	 * the literals defined in the Pivot Model.
 	 * </p>
 	 * <!-- end-model-doc -->
+	 * 
 	 * @return the value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
 	 * @see #setKind(PrimitiveTypeKind)
@@ -83,10 +82,12 @@ public interface PrimitiveType extends Type {
 	PrimitiveTypeKind getKind();
 
 	/**
-	 * Sets the value of the '{@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind <em>Kind</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kind</em>' attribute.
+	 * Sets the value of the '
+	 * {@link tudresden.ocl20.pivot.pivotmodel.PrimitiveType#getKind
+	 * <em>Kind</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Kind</em>' attribute.
 	 * @see tudresden.ocl20.pivot.pivotmodel.PrimitiveTypeKind
 	 * @see #getKind()
 	 * @generated

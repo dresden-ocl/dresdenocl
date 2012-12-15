@@ -37,7 +37,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 		return result != null;
 	}
 	
-	public synchronized tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve() {
+	public tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceResolveResult<ReferenceType> resolve() {
 		if (resolving) {
 			return null;
 		}
@@ -53,7 +53,7 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 			
 			// EMFText allows proxies to resolve to multiple objects. The first one is
 			// returned, the others are added here to the reference.
-			if(result.wasResolvedMultiple()) {
+			if (result.wasResolvedMultiple()) {
 				handleMultipleResults();
 			}
 		}
@@ -71,13 +71,13 @@ public abstract class OclContextDependentURIFragment<ContainerType extends org.e
 		}
 		
 		boolean first = true;
-		for(tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping : result.getMappings()) {
+		for (tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclReferenceMapping<ReferenceType> mapping : result.getMappings()) {
 			if (first) {
 				first = false;
 			} else if (list != null) {
 				addResultToList(mapping, proxy, list);
 			} else {
-				tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclPlugin.logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
+				new tudresden.ocl20.pivot.language.ocl.resource.ocl.util.OclRuntimeUtil().logError(container.eClass().getName() + "." + reference.getName() + " has multiplicity 1 but was resolved to multiple elements", null);
 			}
 		}
 	}

@@ -30,8 +30,16 @@
  */
 package tudresden.ocl20.pivot.interpreter;
 
-import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
+import java.util.List;
+import java.util.UUID;
 
+import org.eclipse.emf.ecore.EObject;
+
+import tudresden.ocl20.pivot.essentialocl.standardlibrary.OclAny;
+import tudresden.ocl20.pivot.interpreter.event.IInterpreterRegistryListener;
+import tudresden.ocl20.pivot.interpreter.event.IInterpreterTraceListener;
+import tudresden.ocl20.pivot.modelinstancetype.types.IModelInstanceElement;
+import tudresden.ocl20.pivot.pivotmodel.Constraint;
 
 /**
  * <p>
@@ -56,6 +64,49 @@ public interface IInterpreterRegistry {
 
 	/**
 	 * <p>
+	 * Adds an {@link IInterpreterTraceListener}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IInterpreterTraceListener} which shall be added.
+	 */
+	public void addInterpreterTraceListener(IInterpreterTraceListener listener);
+
+	/**
+	 * <p>
+	 * Removes an {@link IInterpreterTraceListener}.
+	 * </p>
+	 * 
+	 * @param listener
+	 *          The {@link IInterpreterTraceListener} which shall be removed.
+	 */
+	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
+
+	public void fireInterpretationDepthIncreased(UUID guid);
+
+	public void fireInterpretationDepthIncreased(UUID guid,
+			IModelInstanceElement modelInstanceElement);
+
+	public void fireInterpretationDepthDecreased();
+
+	public void firePartialInterpretionResult(EObject expression, OclAny result,
+			UUID guid);
+
+	/**
+	 * <p>
+	 * Fires an event that holds the {@link IModelInstanceElement}, the
+	 * {@link Constraint} and the {@link Expression} to determine which elements
+	 * have been selected in the {@link InterpreterView}.
+	 * </p>
+	 * TODO Lars: Document here and make this to a good event
+	 * 
+	 * @param interpretationResult
+	 *          The {@link IInterpretationResult} that shall be sent.
+	 */
+	public void fireTraceSelectedConstraints(List<Object[]> constraints);
+
+	/**
+	 * <p>
 	 * Fires an interpretation finished event.
 	 * </p>
 	 * 
@@ -74,4 +125,11 @@ public interface IInterpreterRegistry {
 	 */
 	public void removeInterpreterRegistryListener(
 			IInterpreterRegistryListener listener);
+
+	/**
+	 * <p>
+	 * Fires an interpretation cleared event.
+	 * </p>
+	 */
+	public void fireInterpretationCleared();
 }

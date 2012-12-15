@@ -32,16 +32,10 @@
  */
 package tudresden.ocl20.pivot.essentialocl.types.impl;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EClass;
 
 import tudresden.ocl20.pivot.essentialocl.types.AnyType;
-import tudresden.ocl20.pivot.essentialocl.types.CollectionType;
-import tudresden.ocl20.pivot.pivotmodel.Type;
-import tudresden.ocl20.pivot.pivotmodel.TypeParameter;
 import tudresden.ocl20.pivot.pivotmodel.impl.TypeImpl;
-import tudresden.ocl20.pivot.pivotmodel.util.ListUtil;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Any Type</b></em>'.
@@ -58,6 +52,7 @@ public class AnyTypeImpl extends TypeImpl implements AnyType {
 	 * @generated
 	 */
 	protected AnyTypeImpl() {
+
 		super();
 	}
 
@@ -67,6 +62,7 @@ public class AnyTypeImpl extends TypeImpl implements AnyType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
+
 		return TypesPackageImpl.Literals.ANY_TYPE;
 	}
 

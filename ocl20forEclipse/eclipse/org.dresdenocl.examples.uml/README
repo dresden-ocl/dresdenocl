@@ -1,0 +1,31 @@
+UML EXAMPLE PROVIDED WITH DRESDEN OCL
+=====================================
+
+This plug-in contains the UML example that is provided with Dresden OCL
+The Living example provides a Ecore-based UML metamodel and a set of 
+wellformedness rules (WFR).
+
+Further details how to import models, model instances and constraints into
+Dresden OCL can be found in the manual, available in the 'doc'
+directory of your distribution or online at
+http://www.reuseware.org/index.php/DresdenOCL:Documentation
+
+
+Provided Model
+==============
+The model provided by this example is a Ecore Model. To import the Ecore Model 
+use the file 
+/model/UML.ecore
+
+
+Provided Model Instances
+========================
+The model instance provided by this are Ecore instances. To import the 
+Ecore Model Instance use one of the files located in 
+/modelinstances/*.uml
+
+
+Provided OCL Constraints
+========================
+OCL Constraints that are provided by this example are located in the directory
+/constraints/*.ocl

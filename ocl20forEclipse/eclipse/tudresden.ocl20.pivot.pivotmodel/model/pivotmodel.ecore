@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pivotmodel"
-    nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel" nsPrefix="pivot">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pivotmodel" nsURI="http://www.tu-dresden.de/ocl20/pivot/2007/pivotmodel"
+    nsPrefix="pivot">
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;p>&#xD;&#xA;A &lt;code>NamedElement&lt;/code> represents elements that &#xD;&#xA;may have a name. The name is used for identification of &#xD;&#xA;the named element within the elements owned by its owner. &#xD;&#xA;A named element also has a qualified name that allows it to &#xD;&#xA;be unambiguously identified within a hierarchy of nested &#xD;&#xA;named elements. &lt;code>NamedElement&lt;/code> is an &#xD;&#xA;abstract metaclass.&#xD;&#xA;&lt;/p>"/>
@@ -250,6 +249,11 @@
       </eAnnotations>
       <eParameters name="operation" eType="#//Operation"/>
     </eOperations>
+    <eOperations name="getIDProperties" upperBound="-1" eType="#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;Returns all properties which identify this &lt;code>Type&lt;/code>. If no identifier property specify than an empty list will be return.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Namespace"
         transient="true" eOpposite="#//Namespace/ownedType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -342,6 +346,11 @@
         <details key="documentation" value="&lt;p>&#xD;&#xA;The operation cmpSlots returns true if the compared &#xD;&#xA;property has identical name and type.&#xD;&#xA;&#xD;&#xA;It is specified as follows:&#xD;&#xA;&lt;pre>&#xD;&#xA;context Parameter::cmpSlots(p : Property): Boolean =&#xD;&#xA;   p.name = self.name and p.type = self.type&#xD;&#xA;&lt;/pre>&#xD;&#xA;&lt;/p>"/>
       </eAnnotations>
       <eParameters name="p" eType="#//Property"/>
+    </eOperations>
+    <eOperations name="isIdentifier" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>&#xD;&#xA;If the &lt;code>Property&lt;/code> is an part of unique identifier of the owning type th return value is true&#xD;&#xA;The default value is false.&#xD;&#xA;&lt;/p>"/>
+      </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//Type"
         transient="true" eOpposite="#//Type/ownedProperty">

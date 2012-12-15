@@ -1,0 +1,131 @@
+<!-- 
+	Copied important parts from Teneo Hudson Build setup
+	(http://git.eclipse.org/c/teneo/org.eclipse.emf.teneo.git/tree/build/org.eclipse.emf.teneo.releng.buckminster/build.xml)
+	
+	Author: Michael Thiele
+	
+	Usage:
+	******
+	BUCKMINSTER_LOGLEVEL=(info|debug|error)
+	CLEAN_TOOLS=(true|false)					whether to download Director/Buckminster/AJDT and install it
+-->
+<project default="compile.and.create.update.site" name="Build, test and deploy Dresden OCL.">
+
+	<import file="ant_common.xml" />
+	<import file="build_common_properties.xml" />
+
+	<tstamp>
+		<format property="buildTimestamp" pattern="yyyyMMddHHmm" />
+	</tstamp>
+
+	<!-- ================================= 
+          target: init.clean.tools              
+         ================================= -->
+	<target name="init.clean.tools" if="clean.tools">
+		<delete dir="${toolsPath}" failonerror="true" quiet="true" />
+	</target>
+
+	<!-- ================================= 
+          target: init.checks              
+         ================================= -->
+	<target name="init.checks" depends="init.clean.tools">
+		<available file="${toolsPath}/director/director" property="director.exists" />
+		<available file="${toolsPath}/buckminster/buckminster" property="buckminster.exists" />
+	</target>
+
+	<!-- ================================= 
+          target: install.director              
+         ================================= -->
+	<target name="install.director" unless="director.exists">
+		<echo message="Fetching headless director application" />
+		<tempfile destdir="${java.io.tmpdir}" prefix="director-" suffix=".zip" property="director.zip" deleteonexit="true" />
+		<get src="${director.url}" dest="${director.zip}" />
+		<mkdir dir="${toolsPath}" />
+		<unzip src="${director.zip}" dest="${toolsPath}" />
+		<delete file="${director.zip}" />
+	</target>
+
+	<!-- ================================= 
+          target: install.buckminster              
+         ================================= -->
+	<target name="install.buckminster" unless="buckminster.exists" depends="install.director">
+		<echo message="Configuring headless buckminster with needed features" />
+		<eclipse.launch app="director">
+			<args>
+				<jvmarg value="-Declipse.p2.mirrors=false" />
+				<!--jvmarg value="-Dorg.eclipse.update.jarprocessor.pack200=${org.eclipse.update.jarprocessor.pack200}" /-->
+				<arg value="-r" />
+				<arg value="${buckminster.p2.site}" />
+				<arg value="-d" />
+				<arg value="${toolsPath}/buckminster" />
+				<arg value="-p" />
+				<arg value="Buckminster" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.cmdline.product" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.core.headless.feature.feature.group" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.pde.headless.feature.feature.group" />
+			</args>
+		</eclipse.launch>
+		<!-- use Jenkins to checkout SVN as it is multiple times faster than this
+		<eclipse.launch app="director">
+			<args>
+				<arg value="-r" />
+				<arg value="${buckminster.p2.site.svn}" />
+				<arg value="-d" />
+				<arg value="${toolsPath}/buckminster" />
+				<arg value="-p" />
+				<arg value="Buckminster" />
+				<arg value="-i" />
+				<arg value="org.eclipse.buckminster.subversive.headless.feature.feature.group" />
+			</args>
+		</eclipse.launch> -->
+		<!-- Additionally, install AJDT to enable the compilation of .aj files -->
+		<!-- deactivated as it is needed only for tests and highly unstable...
+		<echo message="Fetching AJDT and installing it into Buckminster" />
+		<eclipse.launch app="director">
+			<args>
+				<arg value="-r" />
+				<arg value="${ajdt.url}" />
+				<arg value="-r" />
+				<arg value="${eclipse.url}" />
+				<arg value="-d" />
+				<arg value="${toolsPath}/buckminster" />
+				<arg value="-i" />
+				<arg value="org.aspectj.ajde" />
+			</args>
+		</eclipse.launch> -->
+		<!-- <tempfile destdir="${java.io.tmpdir}" prefix="ajdt-" suffix=".zip" property="ajdt.zip" deleteonexit="true" />
+		<get src="${ajdt.url}" dest="${ajdt.zip}" />
+		<mkdir dir="${toolsPath}" />
+		<unzip src="${ajdt.zip}" dest="${toolsPath}/ajdt" />
+		<copy todir="${toolsPath}/buckminster/plugins">
+			<fileset dir="${toolsPath}/ajdt/plugins">
+				<include name="**" />
+			</fileset>
+		</copy>
+		<delete file="${ajdt.zip}" /> -->
+	</target>
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init" description="Clean old build data. Try to install Director and Buckminster on the Build Server.">
+
+		<echo message="Creating main directories" />
+		<echo message="rootPath: ${rootPath}" />
+		<echo message="buildRoot: ${buildRoot}" />
+		<mkdir dir="${rootPath}" />
+		<mkdir dir="${buildRoot}" />
+	</target>
+
+	<!-- ================================= 
+          target: compile.and.create.update.site              
+         ================================= -->
+	<target name="compile.and.create.update.site" depends="init, init.checks, install.buckminster" description="Compiles all the Dresden OCL plug-ins, executes all JUnit tests and creates a new update site.">
+		<ant dir="${basedir}" antfile="build_dresden_ocl.xml" target="run.all" inheritRefs="true" />
+		<ant dir="${basedir}/test" antfile="test_dresden_ocl.xml" target="test" inheritrefs="true" />
+	</target>
+
+</project>

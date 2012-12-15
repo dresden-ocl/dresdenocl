@@ -1,4 +1,5 @@
 group javaTypes;
+delimiters "$","$"
 
 // ---- TEMPLATES FOR JAVA TYPES ----
 // ----------------------------------

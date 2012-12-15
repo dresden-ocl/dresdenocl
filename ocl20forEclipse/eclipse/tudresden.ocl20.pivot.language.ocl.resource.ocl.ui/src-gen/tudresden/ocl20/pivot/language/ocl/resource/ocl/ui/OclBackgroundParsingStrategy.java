@@ -24,60 +24,90 @@ public class OclBackgroundParsingStrategy {
 	/**
 	 * the background parsing task (may be null)
 	 */
-	private org.eclipse.core.runtime.jobs.Job job;
+	private ParsingJob job = null;
 	
 	/**
 	 * Schedules a task for background parsing that will be started after a delay.
 	 */
 	public void parse(org.eclipse.jface.text.DocumentEvent event, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor) {
+		parse(event.getDocument(), resource, editor, DELAY);
+	}
+	
+	/**
+	 * Schedules a task for background parsing that will be started after a delay.
+	 */
+	public void parse(org.eclipse.jface.text.IDocument document, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
+		parse(document.get(), resource, editor, delay);
+	}
+	
+	/**
+	 * Schedules a task for background parsing that will be started after a delay.
+	 */
+	public void parse(final String contents, final tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource, final tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor, long delay) {
 		if (resource == null) {
 			return;
 		}
-		final String contents = event.getDocument().get();
 		if (contents == null) {
 			return;
 		}
 		
 		// this synchronization is needed to avoid the creation of multiple tasks. without
 		// the synchronization this could easily happen, when this method is accessed by
-		// multiple threads. the creation of multiple tasks would imply the multiple
+		// multiple threads. the creation of multiple tasks would imply that multiple
 		// background parsing threads for one editor are created, which is not desired.
 		synchronized (lock) {
-			// cancel old task
-			if (job != null) {
-				// stop current parser (if there is one)
-				job.cancel();
-				try {
-					job.join();
-				} catch (InterruptedException e) {}
+			if (job == null || job.getState() != org.eclipse.core.runtime.jobs.Job.RUNNING) {
+				// schedule new task
+				job = new ParsingJob();
+				job.resource = resource;
+				job.editor = editor;
+				job.newContents = contents;
+				job.schedule();
+			} else {
+				job.newContents = contents;
 			}
-			
-			// schedule new task
-			job = new org.eclipse.core.runtime.jobs.Job("parsing document") {
-				
-				protected org.eclipse.core.runtime.IStatus run(org.eclipse.core.runtime.IProgressMonitor monitor) {
-					try {
-						resource.reload(new java.io.ByteArrayInputStream(contents.getBytes()), null);
-					} catch (java.io.IOException e) {
-						e.printStackTrace();
-					}
-					// the post parsing stuff must be executed in a separate job to avoid deadlocks on
-					// the document
-					org.eclipse.core.runtime.jobs.Job finishJob = new org.eclipse.core.runtime.jobs.Job("refreshing views") {
-						protected org.eclipse.core.runtime.IStatus run(org.eclipse.core.runtime.IProgressMonitor monitor) {
-							editor.notifyBackgroundParsingFinished();
-							return org.eclipse.core.runtime.Status.OK_STATUS;
-						}
-					};
-					finishJob.schedule(10);
-					return org.eclipse.core.runtime.Status.OK_STATUS;
-				}
-				
-				protected void canceling() {
-					resource.cancelReload();
-				}
-			};
-			job.schedule(DELAY);
 		}
 	}
+	
+	private class ParsingJob extends org.eclipse.core.runtime.jobs.Job {
+		private tudresden.ocl20.pivot.language.ocl.resource.ocl.ui.OclEditor editor;
+		private tudresden.ocl20.pivot.language.ocl.resource.ocl.IOclTextResource resource;
+		
+		public ParsingJob() {
+			super("parsing document");
+		}
+		
+		private String newContents = null;
+		
+		protected org.eclipse.core.runtime.IStatus run(org.eclipse.core.runtime.IProgressMonitor monitor) {
+			while (newContents != null ) {
+				while (newContents != null) {
+					try {
+						String currentContent = newContents;
+						newContents = null;
+						String encoding = null;
+						if (resource instanceof tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) {
+							tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource concreteResource = (tudresden.ocl20.pivot.language.ocl.resource.ocl.mopp.OclResource) resource;
+							encoding = concreteResource.getEncoding(null);
+						}
+						byte[] bytes = null;
+						if (encoding != null) {
+							bytes = currentContent.getBytes(encoding);
+						} else {
+							bytes = currentContent.getBytes();
+						}
+						resource.reload(new java.io.ByteArrayInputStream(bytes), null);
+						if (newContents != null) {
+							Thread.sleep(DELAY);
+						}
+					} catch (java.lang.Exception e) {
+						e.printStackTrace();
+					}
+				}
+				editor.notifyBackgroundParsingFinished();
+			}
+			return org.eclipse.core.runtime.Status.OK_STATUS;
+		}
+	};
+	
 }

@@ -1,0 +1,2495 @@
+/* Wellformedness rules (WFRs) taken from UML Superstructure Specification, v2.3 */
+/* Search for FIX to find adapted constraints. */
+
+package uml
+
+context Association
+/* [1] An association specializing another association has the same number of ends as the other association. */
+inv: 
+parents()->select(oclIsKindOf(Association)).oclAsType(Association)->
+forAll(p | p.memberEnd->size() = self.memberEnd->size())
+
+/* [2] When an association specializes another association, every end of the specific association corresponds 
+   to an end of the general association, and the specific end reaches the same type or a subtype of the more 
+   general end. */
+inv:
+Sequence{1..self.memberEnd->size()}->
+forAll(i | self.general->select(oclIsKindOf(Association)).oclAsType(Association)->
+forAll(ga |self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
+
+/* [3] endType is derived from the types of the member ends. */
+inv: 
+self.endType = self.memberEnd->collect(e | e.type)
+
+/* [4] Only binary associations can be aggregations. */
+inv:
+-- FIX EVOLUTION ENUM Renamed Aggregation to AggregationKind.
+self.memberEnd->exists(aggregation <> AggregationKind::none) implies self.memberEnd->size() = 2
+
+/* [5] Association ends of associations with more than two ends must be owned by the association. */
+inv:
+-- FIX SYNTAX WRONG_IF Wrong syntax: if a then b -> a implies b 
+memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
+
+
+context AssociationClass
+/* [1] An AssociationClass cannot be defined between itself and something else. */
+inv:
+/* FIX TYPE SYNTAX ARROW OTHER WRONG_IT
+  Added missing - for -> in front of collect. 
+  Replaced allparents()->ecludes(self) with not conformsTo(self). 
+  Replaced collect(true) with forAll(true)*/
+self.endType->excludes(self) and self.endType->forAll(et|not et.conformsTo(self))
+
+/* [2] The owned attributes and owned ends of an AssociationClass are disjoint. */
+inv:
+-- FIX TYPE ASSET intersection is only defined on Set. Introduced to asSet().
+ownedAttribute->asSet()->intersection(ownedEnd->asSet())->isEmpty()
+
+
+context Classifier
+/* [1] The general classifiers are the classifiers referenced by the generalization relationships. */
+inv:
+general = self.parents()
+
+/* [2] Generalization hierarchies must be directed and acyclical. A classifier cannot be both a transitively
+   general and transitively specific classifier of the same classifier. */
+inv:
+not self.allParents()->includes(self)
+
+/* [3] A classifier may only specialize classifiers of a valid type. */
+inv:
+self.parents()->forAll(c | self.maySpecializeType(c))
+
+/* [4] The inheritedMember association is derived by inheriting the inheritable members of the parents. */
+inv:
+/* FIX SYNTAX TYPE BRACKET ASSET
+   Added missing bracket at end of rule.
+   Added missing asSet() */
+self.inheritedMember->includesAll(self.inherit(self.parents()->collect(p | p.inheritableMembers(self))->asSet()))
+
+/* [5] The parents of a classifier must be non-final. */
+inv:
+/* FIX MINOR WRONG_NAMED_ELEMENT isFinalSpecialization */
+self.parents()->forAll(not isLeaf)
+
+/* [6] The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in 
+   any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type 
+   may not be an instance of itself nor may its instances also be its subclasses. */
+-- NO_OCL
+
+
+context Constraint
+/* [1] The value specification for a constraint must evaluate to a Boolean value. */
+-- NO_OCL
+-- Cannot be expressed in OCL.
+
+/* [2] Evaluating the value specification for a constraint must not have side effects. */
+-- NO_OCL
+
+/* [3] A constraint cannot be applied to itself. */
+inv: 
+not constrainedElement->includes(self)
+
+
+context Element
+/* [1] An element may not directly or indirectly own itself. */
+inv: 
+not self.allOwnedElements()->includes(self)
+
+/* [2] Elements that must be owned must have an owner. */
+inv: 
+self.mustBeOwned() implies owner->notEmpty()
+
+
+context ElementImport
+/* [1] The visibility of an ElementImport is either public or private. */
+inv: 
+-- FIX EVOLUTION ENUM renamed #public to VisibilityKind::public and private as well.
+self.visibility = VisibilityKind::public or self.visibility = VisibilityKind::private
+
+/* [2] An importedElement has either public visibility or no visibility at all. */
+inv: 
+/* FIX EVOLUTION SYNTAX ENUM ARROW renamed #public to public.
+   renamed .notEmpty() to ->notEmpty() */
+self.importedElement.visibility->notEmpty() implies self.importedElement.visibility = VisibilityKind::public
+
+
+context GeneralizationSet
+/* [1] Every Generalization associated with a particular GeneralizationSet must have the same general Classifier. */
+inv: 
+generalization->collect(g | g.general)->asSet()->size() <= 1
+
+/* [2] The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier 
+   in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power 
+   type may not be an instance of itself nor may its instances be its subclasses. */
+-- NO_OCL
+
+
+context InstanceSpecification
+/* [1] The defining feature of each slot is a structural feature (directly or inherited) of a classifier of 
+   the instance specification. */
+inv: 
+slot->forAll(s | classifier->exists (c | c.allFeatures()->includes (s.definingFeature)))
+
+/* [2] One structural feature (including the same feature inherited from multiple classifiers) is the defining
+   feature of at most one slot in an instance specification. */
+inv: 
+classifier->forAll(c | (c.allFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1)))
+
+
+context Interface
+/* [1] The visibility of all features owned by an interface must be public. */
+-- FIX EVOLUTION ENUM changed #public to VisibilityKind::public.
+inv:
+self.feature->forAll(f | f.visibility = VisibilityKind::public)
+
+
+context MultiplicityElement
+/* [1] A multiplicity must define at least one valid cardinality that is greater than zero. */
+inv: 
+upperBound()->notEmpty() implies upperBound() > 0
+
+/* [1] The lower bound must be a non-negative integer literal. */
+inv: 
+lowerBound()->notEmpty() implies lowerBound() >= 0
+
+/* [2] The upper bound must be greater than or equal to the lower bound.  */
+inv: 
+(upperBound()->notEmpty() and lowerBound()->notEmpty()) implies upperBound() >= lowerBound()
+
+/* [3] If a non-literal ValueSpecification is used for the lower or upper bound, then evaluating that 
+   specification must not have side effects.  */
+-- Cannot be expressed in OCL.
+-- NO_OCL
+
+/* [4] If a non-literal ValueSpecification is used for the lower or upper bound, then that specification must
+   be a constant expression. */
+--Cannot be expressed in OCL. 
+-- NO_OCL
+
+/* [5] The derived lower attribute must equal the lowerBound. */
+inv: 
+lower = lowerBound()
+
+/* [6] The derived upper attribute must equal the upperBound. */
+inv: 
+upper = upperBound()
+
+
+context NamedElement
+/* [1] If there is no name, or one of the containing namespaces has no name, there is no qualified name. */
+inv: 
+(self.name->isEmpty() or self.allNamespaces()->select(ns | ns.name->isEmpty())->notEmpty())
+implies self.qualifiedName->isEmpty()
+
+/* [2] When there is a name, and all of the containing namespaces have a name, the qualified name is constructed 
+   from the names of the containing namespaces. */
+inv: 
+-- FIX OTHER replaced ->union with concat
+(self.name->notEmpty() and self.allNamespaces()->select(ns | ns.name->isEmpty())->isEmpty()) implies
+self.qualifiedName = self.allNamespaces()->iterate( ns : Namespace; result: String = self.name |
+ns.name.concat(self.separator()).concat(result))
+
+/* [3] If a NamedElement is not owned by a Namespace, it does not have a visibility. */
+inv: 
+namespace->isEmpty() implies visibility->isEmpty()
+
+
+context Namespace
+/* [1] All the members of a Namespace are distinguishable within it. */
+inv:
+membersAreDistinguishable()
+
+/* [2] The importedMember property is derived from the ElementImports and the PackageImports. */
+/* inv:
+/* FIX SYNTAX, TYPE COULD_NOT_FIX BRACKETS WRONG_TYPE
+   removed to brackets from end of constraint.
+   results in Bag not Boolean?
+self.elementImport.importedElement.asSet()->union(self.packageImport.importedPackage->collect(p |
+p.visibleMembers())) */
+
+
+context OpaqueExpression
+/* [1] If the language attribute is not empty, then the size of the body and language arrays must be the same. */
+inv:
+-- FIX SYNTAX ESCAPE replaced body with _body.
+language->notEmpty() implies
+(_body->size() = language->size())
+
+
+context Operation
+/* [1] An operation can have at most one return parameter (i.e., an owned parameter with the direction set to 
+   ‘return’). */
+inv:
+-- FIX EVOLUTION ENUM renamed #return to ParameterDirectionKind::return.
+ownedParameter->select(par | par.direction = ParameterDirectionKind::return)->size() <= 1
+
+/* [2] If this operation has a return parameter, isOrdered equals the value of isOrdered for that parameter; 
+   otherwise, isOrdered is false. */
+/* FIX 
+   OTHER Argument of iterator was outside iterator */
+inv:
+isOrdered = if returnResult()->notEmpty() then returnResult()->any(p | p.isOrdered) else false endif
+
+/* [3] If this operation has a return parameter, isUnique equals the value of isUnique for that parameter; 
+   otherwise, isUnique is true. */
+/* FIX 
+   OTHER Argument of iterator was outside iterator
+   Escape isUnique was used twice */
+inv:
+_isUnique = if returnResult()->notEmpty() then returnResult()->any(p | p._isUnique) else true endif
+
+/* [4] If this operation has a return parameter, lower equals the value of lower for that parameter; otherwise,
+   lower is not defined. */
+/* FIX TYPE EVOLUTION
+   OTHER Argument of iterator was outside iterator
+   WRONG_IT Use of iterator instead of at(1)
+   ASORDEREDSET Missing asOrderedSet
+   NULL use of Set{} instead of null */
+inv:
+lower = if returnResult()->notEmpty() then returnResult()->asOrderedSet()->at(1).lower else null endif
+
+/* [5] If this operation has a return parameter, upper equals the value of upper for that parameter; otherwise, 
+   upper is not defined. */
+/* FIX TYPE EVOLUTION
+   OTHER Argument of iterator was outside iterator
+   WRONG_IT Use of iterator instead of at(1)
+   ASORDEREDSET Missing asOrderedSet
+   NULL use of Set{} instead of null */
+inv:
+upper = if returnResult()->notEmpty() then returnResult()->asOrderedSet()->at(1).upper else null endif
+
+/* [6] If this operation has a return parameter, type equals the value of type for that parameter; otherwise, 
+   type is not defined. */
+/* FIX TYPE EVOLUTION
+   OTHER Argument of iterator was outside iterator
+   WRONG_IT Use of iterator instead of at(1)
+   ASORDEREDSET Missing asOrderedSet
+   NULL use of Set{} instead of null */
+inv:
+type = if returnResult()->notEmpty() then returnResult()->asOrderedSet()->at(1).type else null endif
+
+/* [7] A bodyCondition can only be specified for a query operation. */
+inv:
+bodyCondition->notEmpty() implies isQuery
+
+
+context Package
+/* [1] If an element that is owned by a package has visibility, it is public or private. */
+inv:
+/* FIX EVOLUTION MINOR SYNTAX ENUM adapted VisibilityKind again.
+   WRONG_NAMED_ELEMENT renamed ownedElements to packagedElement
+   TYPO visbility */
+self.packagedElement->forAll(e | e.visibility->notEmpty() implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private)
+
+
+context PackageImport
+/* [1] The visibility of a PackageImport is either public or private. */
+inv: 
+-- FIX EVOLUTION ENUM adapted VisibilityKind again.
+self.visibility = VisibilityKind::public or self.visibility = VisibilityKind::private
+
+
+context Property
+/* [1] If this property is owned by a class associated with a binary association, and the other end of the 
+   association is also owned by a class, then opposite gives the other end. */
+/* FIX EVOLUTION
+   NULL replaced Set{} with null 
+   OTHER replaced - with excluding()
+   OTHER iterator any() was used without argument*/
+inv:
+opposite =
+if owningAssociation->isEmpty() and association.memberEnd->size() = 2
+then
+  let otherEnd = (association.memberEnd->excluding(self))->any(true) in
+    if otherEnd.owningAssociation->isEmpty() 
+    then otherEnd 
+    else null
+    endif
+else 
+  null
+endif
+
+/* [2] A multiplicity on an aggregate end of a composite aggregation must not have an upper bound greater than 1. */
+inv: isComposite implies (upperBound()->isEmpty() or upperBound() <= 1)
+
+/* [3] Subsetting may only occur when the context of the subsetting property conforms to the context of the 
+   subsetted property. */
+inv:
+subsettedProperty->notEmpty() implies
+(subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
+subsettedProperty->forAll(sp |
+sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
+
+/* [4] A redefined property must be inherited from a more general classifier containing the redefining property. */
+/* TODO still contains errors. */
+inv:
+/* FIX SYNTAX
+   WRONG_IF replaced 'if a then b' with 'a implies b'. 
+   BRACKET Added bracket to end of constraint. */
+(redefinedProperty->notEmpty()) implies
+(redefinitionContext->notEmpty() and
+redefinedProperty->forAll(rp|
+((redefinitionContext->collect(fc|
+fc.allParents()))->asSet())->
+collect(c| c.allFeatures())->asSet()->
+includes(rp)))
+
+/* [5] A subsetting property may strengthen the type of the subsetted property, and its upper bound may be less. */
+inv:
+subsettedProperty->forAll(sp |
+type.conformsTo(sp.type) and
+((upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
+upperBound()<=sp.upperBound() ))
+
+/* [6] Only a navigable property can be marked as readOnly. */
+inv:
+isReadOnly implies isNavigable()
+
+/* [7] A derived union is derived. */
+inv:
+isDerivedUnion implies isDerived
+
+/* [8] A derived union is read only. */
+inv:
+isDerivedUnion implies isReadOnly
+
+/* [9] The value of isComposite is true only if aggregation is composite. */
+inv:
+-- FIX EVOLUTION ENUM modified #composite to AggregationKind::composite.
+isComposite = (self.aggregation = AggregationKind::composite)
+
+/* [10] A Property cannot be subset by a Property with the same name */
+inv:
+-- FIX SYNTAX WRONG_IF replaced 'if a then b' with 'a implies b'.
+(self.subsettedProperty->notEmpty()) implies 
+self.subsettedProperty->forAll(sp | sp.name <> self.name)
+
+
+context RedefinableElement
+/* [1] At least one of the redefinition contexts of the redefining element must be a specialization of at 
+   least one of the redefinition contexts for each redefined element. */
+inv:
+self.redefinedElement->forAll(e | self.isRedefinitionContextValid(e))
+
+/* [2] A redefining element must be consistent with each redefined element. */
+inv:
+self.redefinedElement->forAll(re | re.isConsistentWith(self))
+
+/* [3] A redefinable element can only redefine non-leaf redefinable elements. */
+inv:
+self.redefinedElement->forAll(not isLeaf)
+
+
+context Component
+/* [1] A component cannot nest classifiers. */
+inv:
+self.nestedClassifier->isEmpty()
+
+
+/* OTHER Only for PackagingComponents. How are they defined?
+context Component
+/* [1] A component nested in a Class cannot have any packaged elements. */
+/* inv:
+(not self.class->isEmpty()) implies self.packagedElement->isEmpty()
+
+
+/* [1] Each feature of each of the required interfaces of each Port or Part at the end of a connector must
+   have at least one compatible feature among the features of the provided interfaces of Ports or Parts at 
+   the other ends, where the required set of (interface) features of a delegating port from the context of
+   the delegating connector is the set of features that exist in the port's provided interfaces, and the 
+   provided set of (interface) features of a delegating port from the context of the delegating connector 
+   is the set of features that exist in the port's required interfaces. */
+-- NO_OCL
+
+
+/* [1] All the client elements of a roleBinding are in one classifier and all supplier elements of a 
+   roleBinding are in one collaboration and they are compatible. */
+-- NO_OCL
+   
+/* [2] Every role in the collaboration is bound within the collaboration use to a connectable element
+   within the owning classifier. */
+-- NO_OCL
+
+/* [3] The connectors in the classifier connect according to the connectors in the collaboration. */
+-- NO_OCL
+
+
+/* [1] The types of the connectable elements that the ends of a connector are attached to must conform to the
+   types of the association ends of the association that types the connector, if any. */
+-- NO_OCL
+
+/* [2] The connectable elements attached to the ends of a connector must be compatible. */
+-- NO_OCL
+
+/* [3] The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be roles of the
+   Classifier that owned the Connector, or they must be ports of such roles. */
+-- NO_OCL
+
+
+/* [1] If a connector end is attached to a port of the containing classifier, partWithPort will be empty.
+-- NO_OCL
+
+/* [2] If a connector end references a partWithPort, then the role must be a port that is defined by the type 
+   of the partWithPort. */
+-- NO_OCL
+
+/* [3] The property held in self.partWithPort must not be a Port. */
+-- NO_OCL
+
+/* [4] The multiplicity of the connector end may not be more general than the multiplicity of the association
+   typing the owning connector. */
+-- NO_OCL
+
+
+/* [1] The onPort must be a port on the receiver object. */
+-- NO_OCL
+
+
+/* [1] Port.aggregation must be composite. */
+-- NO_OCL
+
+/* [2] When a port is destroyed, all connectors attached to this port will be destroyed also. */
+-- NO_OCL
+
+/* [3] A defaultValue for port cannot be specified when the type of the Port is an Interface. */
+-- NO_OCL
+
+
+/* [1] The multiplicities on connected elements must be consistent. */
+-- NO_OCL
+
+
+context CommunicationPath
+/* [1] The association ends of a CommunicationPath are typed by DeploymentTargets. */
+inv: 
+self.endType->forAll (t | t.oclIsKindOf(DeploymentTarget))
+
+
+context DeploymentSpecification
+/* [1] The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment. */
+inv:
+-- FIX SYNTAX TYPO changed .. to .
+self.deployment->forAll (d | d.location.oclIsKindOf(ExecutionEnvironment))
+
+/* [2] The deployedElements of a DeploymentTarget that are involved in a Deployment that has an associated
+   DeploymentSpecification is a kind of Component (i.e., the configured components). */
+inv:
+-- FIX SYNTAX TYPO renamed deployedElements to deployedElement
+self.deployment->forAll (d | d.location.deployedElement->forAll (de | de.oclIsKindOf(Component)))
+
+
+/* [1] An InstanceSpecification can be a DeploymentTarget if it is the instance specification of a Node 
+   and functions as a part in the internal structure of an encompassing Node. */
+-- NO_OCL
+
+/* [2] An InstanceSpecification can be a DeployedArtifact if it is the instance specification of an Artifact. */
+-- NO_OCL
+
+
+/* [1] The internal structure of a Node (if defined) consists solely of parts of type Node. */
+-- NO_OCL
+
+
+/* [1] A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal 
+   structure of an encompassing Node. */
+-- NO_OCL
+
+
+context AcceptCallAction
+/* [1] The result pins must match the in and inout parameters of the operation specified by the trigger event 
+   in number, type, and order. */
+-- NO_OCL
+
+/* [2] The trigger event must be a CallEvent. */
+inv: 
+-- FIX TYPE WRONG_TYPE introduced forAll to result in Boolean.
+trigger->forAll(event.oclIsKindOf(CallEvent))
+
+/* [3] isUnmarshall must be true for an AcceptCallAction. */
+inv:
+isUnmarshall = true
+
+
+/* [1] AcceptEventActions may have no input pins. */
+-- NO_OCL
+
+/* [2] There are no output pins if the trigger events are only ChangeEvents, or if they are only CallEvents 
+   when this action is an instance of AcceptEventAction and not an instance of a descendant of 
+   AcceptEventAction (such as AcceptCallAction). */
+-- NO_OCL
+
+/* [3] If the trigger events are all TimeEvents, there is exactly one output pin. */
+-- NO_OCL
+
+/* [4] If isUnmarshalled is true, there must be exactly one trigger for events of type SignalEvent. The number
+   of result output pins must be the same as the number of attributes of the signal. The type and ordering of 
+   each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of 
+   each result output pin must be compatible with the multiplicity of the corresponding attribute. */
+-- NO_OCL
+
+
+/* [1] The fromAction of an action input pin must have exactly one output pin. */
+-- NO_OCL
+
+/* [2] The fromAction of an action input pin must only have action input pins as input pins. */
+-- NO_OCL
+
+/* [3] The fromAction of an action input pin cannot have control or data flows coming into or out of it or its 
+   pins. */
+-- NO_OCL
+
+
+context AddStructuralFeatureValueAction
+/* [1] Actions adding a value to ordered structural features must have a single input pin for the insertion 
+   point with type UnlimitedNatural and multiplicity of 1..1; otherwise, the action has no input pin for the
+   insertion point. */
+/* TODO still contains errors (wrong types) */
+inv:
+/* FIX SYNTAX TYPE MINOR
+   NUMCHAR modified #false to false.
+   BRACKET removed unecessary closing bracket. 
+   WRONG_TYPE Changed type of insertAtPins from Collection to InputPin 
+   WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..). */
+let insertAtPins : InputPin = self.insertAt in
+if self.structuralFeature.isOrdered = false
+then insertAtPins->size() = 0
+else let insertAtPin : InputPin= insertAt->asSequence()->first() in
+insertAtPins->size() = 1
+and insertAtPin.type = UnlimitedNatural
+and insertAtPin.is(1,1)
+endif
+
+/* [2] A value input pin is required. */
+inv:
+self.value -> notEmpty()
+
+
+context AddVariableValueAction
+/* [1] Actions adding values to ordered variables must have a single input pin for the insertion point with
+   type UnlimitedNatural and multiplicity of 1..1; otherwise, the action has no input pin for the insertion
+   point. */
+inv:
+/* FIX TYPE SYNTAX MINOR modified #unordered to ?
+   WRONG_TYPE Changed type of insertAtPins from Collection to InputPin 
+   BRACKET removed unecessary closing bracket.
+   OTHER replace 'ordering = unordered' with 'not isOrdered'
+   OTHER Removed multiplicity check 
+   WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..). */
+let insertAtPins : InputPin = self.insertAt in
+if not self.variable.isOrdered
+then insertAtPins->size() = 0
+else let insertAtPin : InputPin = insertAt->asSequence()->first() in
+insertAtPins->size() = 1
+and insertAtPin.type = UnlimitedNatural
+and insertAtPin.is(1,1)
+endif
+
+/* [2] A value input pin is required. */
+inv:
+self.value -> notEmpty()
+
+
+/* [1] The number and order of argument pins must be the same as the number and order of attributes in the
+   signal. */
+-- NO_OCL
+/* [2] The type, ordering, and multiplicity of an argument pin must be the same as the corresponding 
+   attribute of the signal. */
+-- NO_OCL
+
+
+/* [1] Only synchronous call actions can have result pins. */
+-- NO_OCL
+
+/* [2] The number and order of argument pins must be the same as the number and order of parameters of the
+   invoked behavior or behavioral feature. Pins are matched to parameters by order. */
+-- NO_OCL
+
+/* [3] The type, ordering, and multiplicity of an argument pin must be the same as the corresponding 
+   parameter of the behavior or behavioral feature. */
+-- NO_OCL
+
+
+/* [1] The number of argument pins and the number of parameters of the behavior of type in and in-out must
+   be equal. */
+-- NO_OCL
+
+/* [2] The number of result pins and the number of parameters of the behavior of type return, out, and 
+   in-out must be equal. */
+-- NO_OCL
+
+/* [3] The type, ordering, and multiplicity of an argument or result pin is derived from the corresponding 
+   parameter of the behavior. */
+-- NO_OCL
+
+
+/* [1] The number of argument pins and the number of owned parameters of the operation of type in and 
+   in-out must be equal. */
+-- NO_OCL
+
+/* [2] The number of result pins and the number of owned parameters of the operation of type return, out, 
+   and in-out must be equal. */
+-- NO_OCL
+
+/* [3] The type, ordering, and multiplicity of an argument or result pin is derived from the corresponding 
+   owned parameter of the operation. */
+-- NO_OCL
+
+/* [4] The type of the target pin must be the same as the type that owns the operation. */
+-- NO_OCL
+
+
+context ClearAssociationAction
+/* [1] The type of the input pin must be the same as the type of at least one of the association ends of 
+   the association. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT replaced end.type with endType.
+self.association->exists(endType = self.object.type)
+
+/* [2] The multiplicity of the input pin is 1..1. */
+inv:
+/* FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..). */
+self.object.is(1,1)
+
+
+context ClearStructuralFeatureAction
+/* [1] The type of the result output pin is the same as the type of the inherited object input pin. */
+inv:
+result->notEmpty() implies self.result.type = self.object.type
+
+/* [2] The multiplicity of the result output pin must be 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+result->notEmpty() implies self.result.is(1,1)
+
+
+context CreateLinkAction
+/* [1] The association cannot be an abstract classifier. */
+inv:
+-- FIX SYNTAX NUMCHAR modified #false to false.
+self.association().isAbstract = false
+
+
+context CreateLinkObjectAction
+/* [1] The association must be an association class. */
+inv:
+self.association().oclIsKindOf(Class)
+
+/* [2] The type of the result pin must be the same as the association of the action. */
+inv:
+self.result.type = self.association()
+
+/* [3] The multiplicity of the output pin is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+self.result.is(1,1)
+
+
+context CreateObjectAction
+/* [1] The classifier cannot be abstract. */
+inv:
+-- FIX SYNTAX NUMCHAR modified #true to true.
+not (self.classifier.isAbstract = true)
+
+/* [2] The classifier cannot be an association class. */
+inv:
+not self.classifier.oclIsKindOf(AssociationClass)
+
+/* [3] The type of the result pin must be the same as the classifier of the action. */
+inv:
+self.result.type = self.classifier
+
+/* [4] The multiplicity of the output pin is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+self.result.is(1,1)
+
+
+context DestroyObjectAction
+/* [1] The multiplicity of the input pin is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed multiplicity.is(..) to .is(..).
+self.target.is(1,1)
+
+/* [2] The input pin has no type. */
+inv:
+self.target.type->size() = 0
+
+
+context LinkAction
+/* [1] The association ends of the link end data must all be from the same association and include all and only
+   the association ends of that association. */
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT Unknown element connection 
+inv:
+self.endData->collect(end) = self.association()->collect(connection)
+
+/* [2] The association ends of the link end data must not be static. */
+/* FIX SYNTAX MINOR NUMCHAR replaced #false with false. 
+   TYPO replaced forall with forAll, oclisKindOf with oclIsKindOf 
+   WRONG_NAMED_ELEMENT COULD_NOT_FIX NavigableEnd does not exist
+inv:
+self.endData->forAll(end.oclIsKindOf(NavigableEnd) implies end.isStatic = false)
+
+/* [3] The input pins of the action are the same as the pins of the link end data and insertion pins. */
+/* FIX SYNTAX TYPE
+   WRONG_IF Added missing endif 
+   ASSET Added missing asSet in let
+   OTHER added generic to allow type inference. */
+inv:
+self.input->asSet() =
+let ledpins : Set(InputPin) = self.endData->collect(value)->asSet() in
+if self.oclIsKindOf(LinkEndCreationData)
+then ledpins->union(self.endData.oclAsType(LinkEndCreationData).insertAt)
+else ledpins
+endif
+
+
+context LinkEndCreationData
+/* [1] LinkEndCreationData can only be end data for CreateLinkAction or one of its specializations. */
+/* COULD_NOT_FIX unknown usage of LinkAction. 
+inv:
+self.LinkAction.oclIsKindOf(CreateLinkAction)
+
+/* [2] Link end creation data for ordered association ends must have a single input pin for the insertion point
+   with type UnlimitedNatural and multiplicity of 1..1; otherwise, the action has no input pin for the insertion
+   point. */
+inv:
+/* FIX SYNTAX TYPE MINOR changed #unordered to ?
+   BRACKET removed unecessary closing bracket
+   WRONG_TYPE Collection instead of InputPin for let
+   WRONG_NAMED_ELEMENT changed 'ordering = unordered' to not isOrdered
+   WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1)
+   TYPO changed insertAts to insertAtPins */
+let insertAtPins : InputPin = self.insertAt in
+if not self.end.isOrdered
+then insertAtPins->size() = 0
+else let insertAtPin : InputPin = insertAtPins->asSequence()->first() in
+insertAtPins->size() = 1
+and insertAtPin.type = UnlimitedNatural
+and insertAtPin.is(1,1)
+endif
+
+
+context LinkEndData
+/* [1] The property must be an association end. */
+inv:
+self.end.association->size() = 1
+
+/* [2] The type of the end object input pin is the same as the type of the association end. */
+inv:
+self.value.type = self.end.type
+
+/* [3] The multiplicity of the end object input pin must be “1..1.” */
+inv:
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+self.value.is(1,1)
+
+
+/* TODO The following constraints only for Package CompleteActions. How to express this?. */
+/* [1] The qualifiers include all and only the qualifiers of the association end. */
+inv:
+self.qualifier->collect(qualifier) = self.end.qualifier
+/* [2] The end object input pin is not also a qualifier value input pin. */
+inv:
+self.value->excludesAll(self.qualifier.value)
+
+
+/* context LinkEndDestructionData
+/* [1] LinkEndDestructionData can only be end data for DestroyLinkAction or one of its specializations. */
+-- NO_OCL
+
+/* [2] LinkEndDestructionData for ordered non-unique association ends must have a single destroyAt input pin if
+   isDestroyDuplicates is false. It must be of type UnlimitedNatural and have a multiplicity of 1..1; otherwise, 
+   the action has no input pin for the removal position. */
+-- NO_OCL
+
+
+/* [1] If the action is an invocation action, the number and types of pins must be the same as the number of
+   parameters and types of the invoked behavior or behavioral feature. Pins are matched to parameters by 
+   order. */
+-- NO_OCL
+
+
+context QualifierValue
+/* [1] The qualifier attribute must be a qualifier of the association end of the link-end data. */
+/* COULD_NOT_FIX unknown usage of LinkEndData. 
+inv:
+self.LinkEndData.end->collect(qualifier)->includes(self.qualifier)
+
+/* [2] The type of the qualifier value input pin is the same as the type of the qualifier attribute. */
+inv:
+self.value.type = self.qualifier.type
+
+/* [3] The multiplicity of the qualifier value input pin is “1..1.” */
+inv:
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+self.value.is(1,1)
+
+
+context ReadExtentAction
+/* [1] The type of the result output pin is the classifier. */
+-- No OCL specified.
+
+/* [2] The multiplicity of the result output pin is “0..*.” */
+inv:
+/* FIX SYNTAX MINOR NUMCHAR changed #null to null.
+   WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+self.result.is(0,null)
+
+
+context ReadIsClassifiedObjectAction
+/* [1] The multiplicity of the input pin is 1..1. */
+inv:
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+self.object.is(1,1)
+
+/* [2] The input pin has no type. */
+inv:
+self.object.type->isEmpty()
+
+/* [3] The multiplicity of the output pin is 1..1. */
+inv:
+/* FIX MINOR WRONG_NAMED_ELEMENT changed 'multiplicity.is(1,1)' to .is(1,1) */
+self.result.is(1,1)
+
+/* [4] The type of the output pin is Boolean. */
+inv:
+self.result.type = Boolean
+
+
+context ReadLinkAction
+/* [1] Exactly one link-end data specification (the “open” end) must not have an end object input pin. */
+inv:
+self.endData->select(ed | ed.value->size() = 0)->size() = 1
+
+/* [2] The type and ordering of the result output pin are the same as the type and ordering of the open
+   association end. */
+/* FIX MINOR WRONG_NAMED_ELEMENT replace ordering with isOrdered */
+inv:
+let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequence()->first().end in
+self.result.type = openend.type
+and self.result.isOrdered = openend.isOrdered
+
+/* [3] The multiplicity of the open association end must be compatible with the multiplicity of the result output 
+    pin. */
+/* FIX MINOR WRONG_NAMED_ELEMENT replaced .multiplicity.compatibleWith wiht .compatibleWith */
+inv:
+let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequence()->first().end in
+openend.compatibleWith(self.result)
+
+/* [4] The open end must be navigable. */
+inv:
+let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequence()->first().end in
+openend.isNavigable()
+
+/* [5] Visibility of the open end must allow access to the object performing the action. */
+/* COULD_NOT_FIX MINOR SYNTAX EVOLUTION Too many errors.
+   ENUM changed #public to VisibilityKind::public and #protected accordingly.
+   ESCAPE changed context to _context 
+   BRACKET
+   WRONG_NAMED_ELEMENT participant not defined on Property.
+inv:
+let host : Classifier = self._context in
+  let openend : Property = self.endData->select(ed | ed.value->size() = 0)->asSequence()->first().end in
+    openend.visibility = VisibilityKind::public
+    or self.endData->exists(oed | not (oed.end = openend)
+    and (host = oed.end.participant
+    or (openend.visibility = VisibilityKind::protected
+    and host.allSupertypes->includes(oed.end.participant))))
+
+
+/* [1] The property must be an association end. */
+-- NO_OCL
+
+
+context ReadLinkObjectEndQualifierAction
+/* [1] The qualifier attribute must be a qualifier attribute of an association end. */
+inv:
+self.qualifier.associationEnd->size() = 1
+
+/* [2] The association of the association end of the qualifier attribute must be an association class. */
+inv:
+self.qualifier.associationEnd.association.oclIsKindOf(AssociationClass)
+
+/* [3] The ends of the association must not be static. */
+/* FIX SYNTAX TYPO replaced forall with forAll */
+inv:
+self.qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)
+
+/* [4] The type of the object input pin is the association class that owns the association end that has the 
+   given qualifier attribute. */
+inv:
+self.object.type = self.qualifier.associationEnd.association
+
+/* [5] The multiplicity of the qualifier attribute is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.qualifier.is(1,1)
+
+/* [6] The multiplicity of the object input pin is “1..1.” */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.object.is(1,1)
+
+/* [7] The type of the result output pin is the same as the type of the qualifier attribute. */
+inv:
+self.result.type = self.qualifier.type
+
+/* [8] The multiplicity of the result output pin is “1..1.” */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.result.is(1,1)
+
+
+context ReadSelfAction
+/* [1] The action must be contained in a behavior that has a host classifier. */
+inv:
+-- FIX SYNTAX ESCAPE changed context to _context
+self._context->size() = 1
+
+/* [2] If the action is contained in a behavior that is acting as the body of a method, then the operation of 
+   the method must not be static. */
+-- NO_OCL
+
+/* [3] The type of the result output pin is the host classifier. */
+inv:
+-- FIX SYNTAX ESCAPE changed context to _context
+self.result.type = self._context
+
+/* [4] The multiplicity of the result output pin is “1..1.” */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.result.is(1,1)
+
+
+context ReadStructuralFeatureAction
+/* [1] The type and ordering of the result output pin are the same as the type and ordering of the structural 
+   feature. */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed ordering to isOrdered */
+inv:   
+self.result.type = self.structuralFeature.type
+and self.result.isOrdered = self.structuralFeature.isOrdered
+
+/* [2] The multiplicity of the structural feature must be compatible with the multiplicity of the output pin. */
+/* FIX MINOR WRONG_NAMED_ELEMENT replaced .multiplicity with . */
+inv:
+self.structuralFeature.compatibleWith(self.result)
+
+
+context ReadVariableAction
+/* [1] The type and ordering of the result output pin of a read-variable action are the same as the type and 
+   ordering of the variable. */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed ordering to isOrdered */
+inv:   
+self.result.type =self.variable.type
+and self.result.ordering = self.variable.isOrdered
+
+/* [2] The multiplicity of the variable must be compatible with the multiplicity of the output pin. */
+/* FIX MINOR WRONG_NAMED_ELEMENT replaced .multiplicity with . */
+inv:
+self.variable.compatibleWith(self.result)
+
+
+context ReclassifyObjectAction
+/* [1] None of the new classifiers may be abstract. */
+inv:
+not self.newClassifier->exists(isAbstract = true)
+
+/* [2] The multiplicity of the input pin is 1..1. */
+/* COULD_NOT_FIX MINOR
+   WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..) 
+   WRONG_NAMED_ELEMENT argument does not exist 
+inv:
+self.argument.is(1,1)
+
+/* [3] The input pin has no type. */
+/* COULD_NOT_FIX MINOR
+   WRONG_NAMED_ELEMENT argument does not exist 
+inv:
+self.argument.type->size() = 0
+
+
+/* [1] The type of the input must be a collection. */
+-- NO_OCL
+
+/* [2] The type of the output must be compatible with the type of the output of the reducer behavior. */
+-- NO_OCL
+
+/* [3] The reducer behavior must have two input parameters and one output parameter, of types compatible with 
+   the types of lements of the input collection. */
+-- NO_OCL
+
+
+context RemoveStructuralFeatureValueAction
+/* [1] Actions removing a value from ordered non-unique structural features must have a single removeAt input
+   pin and no value input pin if isRemoveDuplicates is false. The removeAt pin must be of type Unlimited Natural
+   with multiplicity 1..1. Otherwise, the action has a value input pin and no removeAt input pin. */
+/* FIX SYNTAX MINOR
+   ESCAPE isUnique
+   WRONG_NAMED_ELEMENT Replaced lower() = 1 and upper() = 1 with is(1,1) */
+inv: 
+if not self.structuralFeature.isOrdered 
+  or structuralFeature._isUnique 
+  or isRemoveDuplicates
+then
+  self.removeAt -> isEmpty() and self.value -> notEmpty()
+else
+  self.value -> isEmpty() and
+  self.removeAt -> notEmpty() and
+  self.removeAt.type = UnlimitedNatural and
+  self.removeAt.is(1,1)
+endif
+
+
+context RemoveVariableValueAction
+/* [1] Actions removing a value from ordered non-unique variables must have a single removeAt input pin and 
+   no value input pin if isRemoveDuplicates is false. The removeAt pin must be of type Unlimited Natural with
+   multiplicity 1..1. Otherwise, the action has a value input pin and no removeAt input pin. */
+/* FIX MINOR SYNTAX
+   ESCAPE isUnique
+   WRONG_NAMED_ELEMENT Replaced lower() = 1 and upper() = 1 with is(1,1) */
+inv:   
+if not self.variable.isOrdered or self.variable._isUnique or isRemoveDuplicates then
+self.removeAt -> isEmpty() and self.value -> notEmpty()
+else
+self.value -> isEmpty() and
+self.removeAt -> notEmpty() and
+self.removeAt.type = UnlimitedNatural and
+self.removeAt.is(1,1)
+endif
+
+
+context ReplyAction
+/* [1] The reply value pins must match the return, out, and inout parameters of the operation on the event on
+   the trigger in number, type, and order. */
+-- NO_OCL   
+
+/* [2] The event on replyToCall trigger must be a CallEvent. */
+/* FIX MINOR WRONG_NAMED_ELEMENT renamed replyToCallEvent to replyToCall*/
+inv:
+replyToCall.oclIsKindOf(CallEvent)
+
+
+/* [1] The number and order of argument pins must be the same as the number and order of attributes in the
+   signal. */
+-- NO_OCL
+
+/* [2] The type, ordering, and multiplicity of an argument pin must be the same as the corresponding attribute
+   of the signal. */
+-- NO_OCL
+
+/* [1] The multiplicity of the input pin is 1..1. */
+-- NO_OCL
+
+/* [2] If the input pin has a type, then the type must have a classifier behavior. */
+-- NO_OCL
+
+
+/* [1] The type of the object input pin must be either a Behavior or a BehavioredClassifier with a classifier 
+   behavior. */
+-- NO_OCL
+
+/* [2] The multiplicity of the object input pin must be [1..1]. */
+-- NO_OCL
+
+/* [3] The number and order of the argument pins must be the same as the number and order of the in and in-out 
+   parameters of the invoked behavior. Pins are matched to parameters by order. */
+-- NO_OCL
+
+/* [4] The number and order of result pins must be the same as the number and order of the in-out, out and 
+   return parameters of the invoked behavior. Pins are matched to parameters by order. */
+-- NO_OCL
+
+/* [5] The type, ordering, and multiplicity of an argument or result pin must be the same as the corresponding 
+   parameter of the behavior. */
+-- NO_OCL
+
+
+context StructuralFeatureAction
+/* [1] The structural feature must not be static. */
+inv:
+-- FIX SYNTAX NUMCHAR changed from #false to false.
+self.structuralFeature.isStatic = false
+
+/* [2] The structural feature must either be owned by the type of the object input pin, or it must be an 
+   owned end of a binary. association with the type of the opposite end being the type of the object input 
+   pin. */
+inv:   
+self.structuralFeature.featuringClassifier.oclAsType(Type)->includes(self.object.type) or
+self.structuralFeature.oclAsType(Property).opposite.type = self.object.type
+
+/* [3] The multiplicity of the object input pin must be 1..1. */
+inv:
+self.object.lowerBound()=1 and self.object.upperBound()=1
+
+/* [4] Visibility of structural feature must allow access to the object performing the action. */
+inv:
+/* FIX EVOLUTION SYNTAX MINOR
+   ENUM changed from #public to VisibilityKind::public and #protected accordingly. 
+   ESCAPE context
+   BRACKET unecessary bracket at end of constraint.
+   OTHER changed iterator type to one and removed = operator
+   WRONG_NAMED_ELEMENT changed .allSupertypes to allParents()
+   WRONG_NAMED_ELEMENT changed includes to includesAll
+   WRONG_NAMED_ELEMENT removed .type field (2x) */
+let host : Classifier = self._context in
+self.structuralFeature.visibility = VisibilityKind::public
+or self.structuralFeature.featuringClassifier->one(c | c = host)
+or (self.structuralFeature.visibility = VisibilityKind::protected and host.allParents()
+->includesAll(self.structuralFeature.featuringClassifier))
+
+/* [5] A structural feature has exactly one featuringClassifier. */
+inv:
+self.structuralFeature.featuringClassifier->size() = 1
+
+
+context TestIdentityAction
+/* [1] The input pins have no type. */
+inv:
+self.first.type->size() = 0
+and self.second.type->size() = 0
+
+/* [2] The multiplicity of the input pins is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.first.is(1,1)
+and self.second.is(1,1)
+
+/* [3] The type of the result is Boolean. */
+inv:
+self.result.type.oclIsTypeOf(Boolean)
+
+
+/* [1] The type of the object input pin must be the same as the unmarshall classifier. */
+-- NO_OCL
+
+/* [2] The multiplicity of the object input pin is 1..1. */
+-- NO_OCL
+
+/* [3] The number of result output pins must be the same as the number of structural features of the unmarshall 
+   classifier. */
+-- NO_OCL
+
+/* [4] The type and ordering of each result output pin must be the same as the corresponding structural features
+   of the unmarshall classifier. */
+-- NO_OCL
+
+/* [5] The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding 
+   structural features of the unmarshall classifier. */
+-- NO_OCL
+
+/* [6] The unmarshall classifier must have at least one structural feature. */
+-- NO_OCL
+
+/* [7] unmarshallType must be a Classifier with ordered attributes. */
+-- NO_OCL
+
+/* [1] The type of value specification must be compatible with the type of the value pin. */
+
+
+/* [1] The type of value specification must be compatible with the type of the result pin. */
+-- NO_OCL
+
+/* [2] The multiplicity of the result pin is 1..1. */
+-- NO_OCL
+
+
+context VariableAction
+/* [1] The action must be in the scope of the variable. */
+inv:
+self.variable.isAccessibleBy(self)
+
+
+context WriteLinkAction
+/* [1] All end data must have exactly one input object pin. */
+inv:
+-- FIX SYNTAX TYPO replaced .forall with ->forAll.
+self.endData->forAll(value->size() = 1)
+
+/* [2] The visibility of at least one end must allow access to the class using the action. */
+-- NO_OCL
+
+
+context WriteStructuralFeatureAction
+/* [1] The type input pin is the same as the classifier of the structural feature. */
+inv:
+self.value->notEmpty() implies
+self.value.type.oclIsKindOf(Classifier) and
+self.structuralFeature.featuringClassifier->includes(self.value.type.oclAsType(Classifier))
+
+/* [2] The multiplicity of the input pin is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.value.is(1,1)
+
+/* [3] The type of the result output pin is the same as the type of the inherited object input pin. */
+inv:
+result->notEmpty() implies self.result.type = self.object.type
+
+/* [4] The multiplicity of the result output pin must be 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+result->notEmpty() implies self.result.is(1,1)
+
+
+context WriteVariableAction
+/* [1] The type input pin is the same as the type of the variable. */
+inv:
+self.value -> notEmpty() implies self.value.type = self.variable.type
+
+/* [2] The multiplicity of the input pin is 1..1. */
+inv:
+-- FIX MINOR WRONG_NAMED_ELEMENT changed .multiplicity.is(..) to .is(..)
+self.value.is(1,1)
+
+
+/* [1] The nodes of the activity must include one ActivityParameterNode for each parameter. */
+-- NO_OCL
+
+/* [2] An activity cannot be autonomous and have a classifier or behavioral feature context at the same time. */
+-- NO_OCL
+
+/* [3] The groups of an activity have no supergroups. */
+-- NO_OCL
+
+
+/* [1] The source and target of an edge must be in the same activity as the edge. */
+-- NO_OCL
+
+/* [2] Activity edges may be owned only by activities or groups. */
+-- NO_OCL
+
+
+/* [1] Activity edges may be owned by at most one structured node. */
+-- NO_OCL
+
+
+/* [1] All nodes and edges of the group must be in the same activity as the group. */
+-- NO_OCL
+
+/* [2] No node or edge in a group may be contained by its subgroups or its containing groups, transitively. */
+-- NO_OCL
+
+/* [3] Groups may only be owned by activities or groups. */
+-- NO_OCL
+
+
+/* [1] Activity nodes can only be owned by activities or groups. */
+-- NO_OCL
+
+
+/* [1] Activity nodes may be owned by at most one structured node. */
+-- NO_OCL
+
+
+/* [1] Activity parameter nodes must have parameters from the containing activity. */
+-- NO_OCL
+
+/* [2] The type of an activity parameter node is the same as the type of its parameter. */
+-- NO_OCL
+
+/* [3] An activity parameter node may have either all incoming edges or all outgoing edges, but it must not have
+   both incoming and outgoing edges. */
+-- NO_OCL
+
+/* [4] Activity parameter object nodes with no incoming edges and one or more outgoing edges must have a parameter 
+   with in or inout direction. */
+-- NO_OCL
+
+/* [5] Activity parameter object nodes with no outgoing edges and one or more incoming edges must have a parameter 
+   with out, inout, or return direction. */
+-- NO_OCL
+
+/* [6] A parameter with direction other than inout must have at most one activity parameter node in an activity. */
+-- NO_OCL
+
+/* [7] A parameter with direction inout must have at most two activity parameter nodes in an activity, one with 
+   incoming flows and one with outgoing flows. */
+-- NO_OCL
+
+
+/* [1] A partition with isDimension = true may not be contained by another partition. */
+-- NO_OCL
+
+/* [2] If a partition represents a part, then all the non-external partitions in the same dimension and at the
+   same level of nesting in that dimension must represent parts directly contained in the internal structure 
+   of the same classifier. */
+-- NO_OCL
+
+/* [3] If a non-external partition represents a classifier and is contained in another partition, then the
+   containing partition must represent a classifier, and the classifier of the subpartition must be nested 
+   in the classifier represented by the containing partition, or be at the contained end of a strong 
+   composition association with the classifier represented by the containing partition. */
+-- NO_OCL
+
+/* [4] If a partition represents a part and is contained by another partition, then the part must be of a 
+   classifier represented by the containing partition, or of a classifier that is the type of a part 
+   representing the containing partition. */
+-- NO_OCL
+
+
+/* [1] The decider output pin must be for the test body or a node contained by the test body as a structured 
+   node. */
+-- NO_OCL
+
+/* [2] The test and body parts must be disjoint. */
+-- NO_OCL
+
+
+/* [1] The bodyOutput pins are output pins on actions in the body of the clause. */
+-- NO_OCL
+
+
+/* [1] The union of the ExecutabledNodes in the test and body parts of all clauses must be the same as the
+   subset of nodes contained in the ConditionalNode (considered as a StructuredActivityNode) that are 
+   ExecutableNodes. */
+-- NO_OCL
+
+/* [2] No ExecutableNode may appear in the test or body part of more than one clause of a conditional node. */
+-- NO_OCL
+
+/* [3] No two clauses within a ConditionalNode maybe predecessor clauses of each other, either directly or 
+   indirectly. */
+-- NO_OCL
+
+
+/* [1] The result output pins have no incoming edges. */
+-- NO_OCL
+
+/* [2] Each clause of a conditional node must have the same number of bodyOutput pins as the conditional 
+   node has result output pins, and each clause bodyOutput pin must be compatible with the corresponding 
+   result pin (by positional order) in type, multiplicity, ordering and uniqueness. */
+-- NO_OCL
+
+/* [3] A conditional node has no input pins. */
+-- NO_OCL
+
+
+/* [1] Control flows may not have object nodes at either end, except for object nodes with control type. */
+-- NO_OCL
+
+
+/* [1] A decision node has one or two incoming edges and at least one outgoing edge. */
+-- NO_OCL
+
+/* [2] The edges coming into and out of a decision node, other than the decision input flow (if any), must 
+   be either all object flows or all control flows. */
+-- NO_OCL
+
+/* [3] The decisionInputFlow of a decision node must be an incoming edge of the decision node. */
+-- NO_OCL
+
+/* [4] A decision input behavior has no output parameters, no in-out parameters and one return parameter. */
+-- NO_OCL
+
+/* [5] If the decision node has no decision input flow and an incoming control flow, then a decision input 
+   behavior has zero input parameters. */
+-- NO_OCL
+
+/* [6] If the decision node has no decision input flow and an incoming object flow, then a decision input 
+   behavior has one input parameter whose type is the same as or a supertype of the type of object tokens 
+   offered on the incoming edge. */
+-- NO_OCL
+
+/* [7] If the decision node has a decision input flow and an incoming control flow, then a decision input 
+   behavior has one input parameter whose type is the same as or a supertype of the type of object tokens
+   offered on the decision input flow. */
+-- NO_OCL
+
+/* [8] If the decision node has a decision input flow and a second incoming object flow, then a decision input
+   behavior has two input parameters, the first of which has a type that is the same as or a supertype of the 
+   type of the type of object tokens offered on the non-decision input flow and the second of which has a type
+   that is the same as or a supertype of the type of object tokens offered on the decision input flow. */
+-- NO_OCL
+
+
+/* [1] The exception handler and its input object node are not the source or target of any edge. */
+-- NO_OCL
+
+/* [2] An edge that has a source in an exception handler structured node must also have its target in the handler,
+    and vice versa. */
+-- NO_OCL
+
+/* [3] If the protected node is a StructuredActivityNode with output pins, then the exception handler body 
+   must also be a StructuredActivityNode with output pins that correspond in number and types to those of 
+   the protected node. */
+-- NO_OCL
+
+/*[4] The handler body has one input, and that input is the same as the exception input. */
+-- NO_OCL
+
+
+/* [1] One of regionAsInput or regionAsOutput must be non-empty, but not both. */
+-- NO_OCL
+
+
+/* [1] An ExpansionRegion must have one or more argument ExpansionNodes and zero or more result ExpansionNodes. */
+-- NO_OCL
+
+
+/* [1] A final node has no outgoing edges. */
+-- NO_OCL
+
+
+/* [1] A fork node has one incoming edge. */
+-- NO_OCL
+
+/* [2] The edges coming into and out of a fork node must be either all object flows or all control flows. */
+-- NO_OCL
+
+
+/* [1] An initial node has no incoming edges. */
+-- NO_OCL
+
+/* [2] Only control edges can have initial nodes as source. */
+-- NO_OCL
+
+
+/* [1] Input pins may have outgoing edges only when they are on actions that are structured nodes, and these edges 
+   must target a node contained by the structured node. */
+-- NO_OCL
+
+
+/* [1] Interrupting edges of a region must have their source node in the region and their target node outside 
+   the region in the same activity containing the region. */
+-- NO_OCL
+
+
+context JoinNode
+/* [1] A join node has one outgoing edge. */
+inv:
+self.outgoing->size() = 1
+
+/* [2] If a join node has an incoming object flow, it must have an outgoing object flow, otherwise, it must 
+   have an outgoing control flow. */
+inv:
+/* FIX MINOR SYNTAX TYPE
+   WRONG_NAMED_ELEMENT	changed isTypeOf(..) to oclIsTypeOf(..). 
+   BRACKET fixed many enclosing brackets.
+   WRONG_NAMED_ELEMENT replace empty() with isEmpty(). 
+   WRONG_TYPE introduced forAll to result in Boolean (2x)*/
+(self.incoming.select( e | e.oclIsTypeOf(ObjectFlow))->notEmpty() implies self.outgoing->forAll(oclIsTypeOf(ObjectFlow))) and
+(self.incoming.select( e | e.oclIsTypeOf(ObjectFlow))->isEmpty() implies self.outgoing->forAll(oclIsTypeOf(ControlFlow)))
+
+
+/* [1] The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of
+nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
+-- NO_OCL
+
+
+[1] Loop variable inputs must not have outgoing edges.
+-- NO_OCL
+
+[2] The bodyOutput pins are output pins on actions in the body of the loop node.
+-- NO_OCL
+
+[3] The result output pins have no incoming edges.
+-- NO_OCL
+
+
+[1] A merge node has one outgoing edge.
+-- NO_OCL
+
+[2] The edges coming into and out of a merge node must be either all object flows or all control flows.
+-- NO_OCL
+
+
+[1] Object flows may not have actions at either end.
+-- NO_OCL
+
+[2] Object nodes connected by an object flow, with optionally intervening control nodes, must have compatible types. In
+particular, the downstream object node type must be the same or a supertype of the upstream object node type.
+-- NO_OCL
+
+[3] Object nodes connected by an object flow, with optionally intervening control nodes, must have the same upper bounds.
+-- NO_OCL
+
+
+[1] An edge with constant weight may not target an object node, or lead to an object node downstream with no intervening
+actions, that has an upper bound less than the weight.
+-- NO_OCL
+
+[2] A transformation behavior has one input parameter and one output parameter. The input parameter must be the same or a
+supertype of the type of object token coming from the source end. The output parameter must be the same or a subtype of
+the type of object token expected downstream. The behavior cannot have side effects.
+-- NO_OCL
+
+[3] An object flow may have a selection behavior only if it has an object node as a source.
+-- NO_OCL
+
+[4] A selection behavior has one input parameter and one output parameter. The input parameter must be a bag of elements of
+the same or a supertype of the type of source object node. The output parameter must be the same or a subtype of the type
+of source object node. The behavior cannot have side effects.
+-- NO_OCL
+
+[5] isMulticast and isMultireceive cannot both be true.
+-- NO_OCL
+
+
+[1] All edges coming into or going out of object nodes must be object flow edges.
+-- NO_OCL
+
+
+[1] If an object node has a selection behavior, then the ordering of the object node is ordered and vice versa.
+-- NO_OCL
+
+[2] A selection behavior has one input parameter and one output parameter. The input parameter must be a bag of elements of
+the same type as the object node or a supertype of the type of object node. The output parameter must be the same or a
+subtype of the type of object node. The behavior cannot have side effects.
+-- NO_OCL
+
+
+[1] Output pins may have incoming edges only when they are on actions that are structured nodes, and these edges may not
+target a node contained by the structured node.
+-- NO_OCL
+
+
+[1] A parameter cannot be a stream and exception at the same time.
+-- NO_OCL
+
+[2] An input parameter cannot be an exception.
+-- NO_OCL
+
+[3] Reentrant behaviors cannot have stream parameters.
+-- NO_OCL
+
+[4] Only in and inout parameters may have a delete effect. Only out, inout, and return parameters may have a create effect.
+-- NO_OCL
+
+
+[1] The parameters in a parameter set must all be inputs or all be outputs of the same parameterized entity, and the parameter
+set is owned by that entity.
+-- NO_OCL
+
+[2] If a behavior has input parameters that are in a parameter set, then any inputs that are not in a parameter set must be
+streaming. Same for output parameters.
+-- NO_OCL
+
+[3] Two parameter sets cannot have exactly the same set of parameters. */
+-- NO_OCL
+
+
+context Pin
+/* [1] Control pins have a control type. */
+inv:
+isControl implies isControlType
+
+
+/* [1] The edges owned by a structured node must have source and target nodes in the structured node, and vice versa.
+-- NO_OCL
+
+[2] The incoming edges of the input pins of a StructuredActivityNode must have sources that are not within the
+StructuredActivityNode.
+-- NO_OCL
+
+[3] The outgoing edges of the output pins of a StructuredActivityNode must have targets that are not within the
+StructuredActivityNode.
+-- NO_OCL
+
+
+[1] Value pins have no incoming edges.
+-- NO_OCL
+
+
+[1] A variable is owned by a StructuredNode or Activity, but not both. */
+-- NO_OCL
+
+
+/* [1] The parameters of the behavior must match the parameters of the implemented behavioral feature.
+-- NO_OCL
+
+[2] The implemented behavioral feature must be a feature (possibly inherited) of the context classifier of the behavior.
+-- NO_OCL
+
+[3] If the implemented behavioral feature has been redefined in the ancestors of the owner of the behavior, then the behavior
+must realize the latest redefining behavioral feature.
+-- NO_OCL
+
+[4] There may be at most one behavior for a given pairing of classifier (as owner of the behavior) and behavioral feature (as
+specification of the behavior). */
+-- NO_OCL
+
+
+context BehavioredClassifier
+/* [1] If a behavior is classifier behavior, it does not have a specification. */
+inv:
+self.classifierBehavior->notEmpty() implies self.classifierBehavior.specification->isEmpty()
+
+
+context Class
+/* [1] A passive class cannot have receptions. */
+inv:
+(not self.isActive) implies self.ownedReception->isEmpty()
+
+
+context DurationConstraint
+/* [1] The multiplicity of firstEvent must be 2 if the multiplicity of constrainedElement is 2; otherwise, 
+   the multiplicity of firstEvent is 0. (The constraint is a requirement on the duration from the execution 
+   time from (constrainedElement[1], firstEvent[1]) to (constrainedElement[2], firstEvent[2]). If the 
+   multiplicity of constrainedElement is 1, then the constraint is a requirement on the duration given by the
+   duration of the execution of that constrainedElement.) */
+inv:
+-- FIX SYNTAX WRONG_IF added endif
+if (constrainedElement->size() = 2) then (firstEvent->size() = 2) else (firstEvent->size() = 0) endif
+
+
+context DurationObservation
+/* [1] The multiplicity of firstEvent must be 2 if the multiplicity of event is 2; otherwise, the multiplicity
+   of firstEvent is 0. */
+inv:
+-- FIX SYNTAX WRONG_IF added endif.
+if (event->size() = 2) then (firstEvent->size() = 2) else (firstEvent->size() = 0) endif
+
+
+context FunctionBehavior
+/* [1] A function behavior has at least one output parameter. */
+/* FIX SYNTAX MINOR TYPO replaced ownedParameters with ownedParameter 
+   METHOD_FIELD change notEmpty to notEmpty() */
+inv:
+(self.ownedParameter->notEmpty()) and self.ownedParameter->exists (p|
+(p.direction = ParameterDirectionKind::out) or
+(p.direction = ParameterDirectionKind::inout) or
+(p.direction = ParameterDirectionKind::return))
+
+/* [2] The types of parameters are all data types, which may not nest anything but other datatypes. */
+-- NO_OCL
+
+
+context OpaqueExpression
+/* [1] The behavior can only have return result parameters. */
+inv:
+/* FIX SYNTAX ARROW changed .notEmpty() to ->notEmpty() 
+   TYPO replaced ownedParameters with ownedParameter */
+self.behavior->notEmpty() implies
+(self.behavior.ownedParameter->select(p | p.direction <> ParameterDirectionKind::return))->isEmpty()
+
+/* [2] The behavior must have exactly one return result parameter. */
+inv:
+-- FIX SYNTAX ARROW changed .notEmpty() to ->notEmpty()
+self.behavior->notEmpty() implies
+(self.behavior.ownedParameter->select(p | p.direction = ParameterDirectionKind::return))->size() = 1
+
+
+/* 
+context Reception
+/* [1] A Reception cannot be a query. */
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT query
+inv:
+not self.isQuery
+
+
+/* context ActionExecutionSpecification
+/* [1] The Action referenced by the ActionExecutionOccurrence, if any, must be owned by the Interaction 
+   owning the ActionExecutionOccurrence. */
+-- NO_OCL
+
+/*
+context CombinedFragment
+/* [1] If the interactionOperator is opt, loop, break, assert, or neg, there must be exactly one operand. */
+-- NO_OCL
+
+/* [2] The InteractionConstraint with minint and maxint only apply when attached to an InteractionOperand where 
+   the interactionOperator is loop. */
+-- NO_OCL
+
+/* [3] If the interactionOperator is break, the corresponding InteractionOperand must cover all Lifelines 
+   within the enclosing InteractionFragment. */
+-- NO_OCL
+
+/* [4] The interaction operators ‘consider’ and ‘ignore’ can only be used for the CombineIgnoreFragment 
+   subtype of CombinedFragment. */
+/* COULD_NOT_FIX MINOR EVOLUTION SYNTAX WRONG_NAMED_ELEMENT CombineIgnoreFragment
+   ENUM changed #consider to InteractionOperatorKind::consider and ignore accordingly.
+   TYPO changed oclsisTypeOf to oclIsTypeOf 
+inv:
+((interactionOperator = InteractionOperatorKind::consider) 
+  or (interactionOperator = InteractionOperatorKind::ignore)) 
+  implies oclIsTypeOf(CombineIgnoreFragment)*/
+
+
+context ConsiderIgnoreFragment
+/* [1] The interaction operator of a ConsiderIgnoreFragment must be either ‘consider’ or ‘ignore.’ */
+inv:
+-- FIX EVOLUTION ENUM changed #consider to InteractionOperatorKind::consider and ignore accordingly.
+(interactionOperator = InteractionOperatorKind::consider) or (interactionOperator = InteractionOperatorKind::ignore)
+
+/* [2] The NamedElements must be of a type of element that identifies a message (e.g., an Operation, Reception, 
+   or a Signal). */
+inv:
+message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Reception) or m.oclIsKindOf(Signal))
+
+
+/* [1] Continuations with the same name may only cover the same set of Lifelines (within one Classifier).
+-- NO_OCL
+
+[2] Continuations are always global in the enclosing InteractionFragment (e.g., it always covers all Lifelines covered by the
+enclosing InteractionFragment).
+-- NO_OCL
+
+[3] Continuations always occur as the very first InteractionFragment or the very last InteractionFragment of the enclosing
+InteractionFragment.
+-- NO_OCL
+
+
+[1] No other OccurrenceSpecification may appear above an OccurrenceSpecification that references a CreationEvent on a
+given Lifeline in an InteractionOperand.
+-- NO_OCL
+
+
+[1] No other OccurrenceSpecifications may appear below an OccurrenceSpecification that references a DestructionEvent on
+a given Lifeline in an InteractionOperand. */
+-- NO_OCL
+
+
+/*
+context ExecutionSpecification
+/* [1] The startEvent and the finishEvent must be on the same Lifeline. */
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT lifeline
+inv:
+start.lifeline = finish.lifeline
+
+
+/* [1] The message leading to/from an actualGate of an InteractionUse must correspond to the message leading from/to the
+formalGate with the same name of the Interaction referenced by the InteractionUse.
+-- NO_OCL
+
+[2] The message leading to/from an (expression) Gate within a CombinedFragment must correspond to the message leading
+from/to the CombinedFragment on its outside.
+-- NO_OCL
+
+
+[1] An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words,
+the transitive closure of the general orderings is irreflexive.)
+-- NO_OCL
+
+
+[1] The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the
+covered Lifeline.
+-- NO_OCL
+
+[2] The constraint may contain references to global data or write-once data.
+-- NO_OCL
+
+[3] Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop
+CombinedFragment.
+-- NO_OCL
+
+[4] If minint is specified, then the expression must evaluate to a non-negative integer.
+-- NO_OCL
+
+[5] If maxint is specified, then the expression must evaluate to a positive integer.
+-- NO_OCL
+
+[6] If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
+-- NO_OCL
+
+
+[1] The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first
+OccurrenceSpecification within this InteractionOperand.
+-- NO_OCL
+
+[2] The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole
+Interaction (See “InteractionConstraint (from Fragments)” on page 501).
+-- NO_OCL
+
+
+[1] Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names
+are equal.
+-- NO_OCL
+
+[2] The InteractionUse must cover all Lifelines of the enclosing Interaction that represent the same properties as lifelines
+within the referred Interaction.
+-- NO_OCL
+
+[3] The arguments of the InteractionUse must correspond to parameters of the referred Interaction.
+-- NO_OCL
+
+[4] The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the
+enclosing Interaction. */
+-- NO_OCL
+
+/*
+context Lifeline
+/* [1] If two (or more) InteractionUses within one Interaction, refer to Interactions with common Lifelines, those Lifelines must
+also appear in the Interaction with the InteractionUses. By ‘common Lifelines’ we mean Lifelines with the same selector
+and represents associations. */
+-- NO_OCL
+
+/* [2] The selector for a Lifeline must only be specified if the referenced Part is multivalued. */
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT isMultivalued()
+inv:
+(self.selector->isEmpty() implies not self.represents.isMultivalued()) or
+(not self.selector->isEmpty() implies self.represents.isMultivalued())
+
+/* [3] The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, 
+   of the classifier that contains the interaction enclosing this lifeline. */
+/* COULD_NOT_FIX MINOR SYNTAX WRONG_NAMED_ELEMENT isMultivalued()
+   WRONG_IF replace 'if a then b' with 'a implie b', added missing endif
+inv:
+(represents->notEmpty()) implies
+(if selector->notEmpty() then represents.isMultivalued() else not represents.isMultivalued() endif)
+
+
+/* [1] If the sending MessageEvent and the receiving MessageEvent of the same Message are on the same Lifeline, the sending
+MessageEvent must be ordered before the receiving MessageEvent.
+-- NO_OCL
+
+[2] The signature must either refer to an Operation (in which case messageSort is either synchCall or asynchCall) or a Signal
+(in which case messageSort is asynchSignal). The name of the NamedElement referenced by signature must be the same
+as that of the Message.
+-- NO_OCL
+
+[3] In the case when the Message signature is an Operation, the arguments of the Message must correspond to the parameters
+of the Operation. A Parameter corresponds to an Argument if the Argument is of the same Class or a specialization of that
+of the Parameter.
+-- NO_OCL
+
+[4] In the case when the Message signature is a Signal, the arguments of the Message must correspond to the attributes of the
+Signal. A Message Argument corresponds to a Signal Attribute if the Argument is of the same Class or a specialization of
+that of the Attribute.
+-- NO_OCL
+
+[5] Arguments of a Message must only be:
+i) attributes of the sending lifeline.
+ii) constants.
+iii) symbolic values (which are wildcard values representing any legal value). 
+iv) explicit parameters of the enclosing Interaction.
+v) attributes of the class owning the Interaction.
+-- NO_OCL
+
+[6] Messages cannot cross boundaries of CombinedFragments or their operands.
+-- NO_OCL
+
+[7] If the MessageEnds are both OccurrenceSpecifications, then the connector must go between the Parts represented by the
+Lifelines of the two MessageEnds.
+-- NO_OCL
+
+
+[1] PartDecompositions apply only to Parts that are Parts of Internal Structures not to Parts of Collaborations.
+-- NO_OCL
+
+[2] Assume that within Interaction X, Lifeline L is of class C and decomposed to D. Within X there is a sequence of
+constructs along L (such constructs are CombinedFragments, InteractionUse and (plain) OccurrenceSpecifications). Then
+a corresponding sequence of constructs must appear within D, matched one-to-one in the same order.
+i) CombinedFragment covering L are matched with an extra-global CombinedFragment in D.
+ii) An InteractionUse covering L are matched with a global (i.e., covering all Lifelines) InteractionUse in D.
+iii) A plain OccurrenceSpecification on L is considered an actualGate that must be matched by a formalGate of D.
+-- NO_OCL
+
+[3] Assume that within Interaction X, Lifeline L is of class C and decomposed to D. Assume also that there is within X an
+InteractionUse (say) U that covers L. According to the constraint above U will have a counterpart CU within D. Within
+the Interaction referenced by U, L should also be decomposed, and the decomposition should reference CU. (This rule is
+called commutativity of decomposition.) */
+-- NO_OCL
+
+
+context ConnectionPointReference
+/* [1] The entry Pseudostates must be Pseudostates with kind entryPoint. */
+inv:
+-- FIX EVOLUTION ENUM replaced #entryPoint with PseudostateKind::entryPoint.
+entry->notEmpty() implies entry->forAll(e | e.kind = PseudostateKind::entryPoint)
+
+/* [2] The exit Pseudostates must be Pseudostates with kind exitPoint. */
+inv:
+-- FIX EVOLUTION ENUM replaced #entryPoint with PseudostateKind::exitPoint.
+exit->notEmpty() implies exit->forAll(e | e.kind = PseudostateKind::exitPoint)
+
+
+context FinalState
+/* [1] A final state cannot have any outgoing transitions. */
+inv:
+self.outgoing->size() = 0
+
+/* [2] A final state cannot have regions. */
+inv:
+self.region->size() =0
+
+/* [3] A final state cannot reference a submachine. */
+inv:
+self.submachine->isEmpty()
+
+/* [4] A final state has no entry behavior. */
+inv:
+self.entry->isEmpty()
+
+/* [5] A final state has no exit behavior. */
+inv:
+self.exit->isEmpty()
+
+/* [6] A final state has no state (doActivity) behavior. */
+/* FIX SYNTAX TYPO replaced doActivty with doActivity */
+inv:
+self.doActivity->isEmpty()
+
+
+context ProtocolStateMachine
+/* [1] A protocol state machine must only have a classifier context, not a behavioral feature context. */
+inv:
+-- FIX SYNTAX ESCAPE replaced context with _context.
+(not _context->isEmpty( )) and specification->isEmpty()
+
+/* [2] All transitions of a protocol state machine must be protocol transitions. (transitions as extended by the
+ProtocolStateMachines package). */
+inv:
+region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
+
+/* [3] The states of a protocol state machine cannot have entry, exit, or do activity actions. */
+inv:
+-- FIX TYPE WRONG_TYPE Added cast oclAsType(State). (3x)
+region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
+(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
+
+/* [4] Protocol state machines cannot have deep or shallow history pseudostates. */
+inv:
+/* FIX EVOLUTION SYNTAX TYPE
+   ENUM replaced #deepHistory with PseudostateKind::deepHistory and #shallowHistory accordingly.
+   BRACKET removed unecessary closing bracket.
+   TYPO renamed Psuedostate to Pseudostate.
+   WRONG_TYPE Added cast .oclAsType(Pseudostate) (2x) */
+region->forAll (r | r.subvertex->forAll (v | v.oclIsKindOf(Pseudostate) implies
+((v.oclAsType(Pseudostate).kind <> PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
+
+/* [5] If two ports are connected, then the protocol state machine of the required interface (if defined) must 
+   be conformant to the protocol state machine of the provided interface (if defined). */
+-- NO_OCL
+
+
+context ProtocolTransition
+/* [1] A protocol transition always belongs to a protocol state machine. */
+inv:
+container.belongsToPSM()
+
+/* [2] A protocol transition never has associated actions. */
+inv:
+effect->isEmpty()
+
+/* [3] If a protocol transition refers to an operation (i.e., has a call trigger corresponding to an operation),
+   then that operation should apply to the context classifier of the state machine of the protocol transition. */
+-- NO_OCL
+
+
+context Pseudostate
+/* [1] An initial vertex can have at most one outgoing transition. */
+inv:
+/* FIX EVOLUTION MINOR
+   ENUM Modified PseudostateKind enum.
+   METHOD_FIELD changed size to size() */
+(self.kind = PseudostateKind::initial) implies
+(self.outgoing->size() <= 1)
+
+/* [2] History vertices can have at most one outgoing transition. */
+inv:
+/* FIX EVOLUTION MINOR
+   ENUM Modified PseudostateKind enum.
+   METHOD_FIELD changed size to size() */
+((self.kind = PseudostateKind::deepHistory) or (self.kind = PseudostateKind::shallowHistory)) implies
+(self.outgoing->size() <= 1)
+
+/* [3] In a complete statemachine, a join vertex must have at least two incoming transitions and exactly one 
+   outgoing transition. */
+inv:
+/* FIX EVOLUTION MINOR
+   ENUM Modified PseudostateKind enum.
+   METHOD_FIELD changed size to size() */
+(self.kind = PseudostateKind::join) implies
+((self.outgoing->size() = 1) and (self.incoming->size() >= 2))
+
+/* [4] All transitions incoming a join vertex must originate in different regions of an orthogonal state. */
+/* COULD_NOT_FIX EVOLUTION TYPE MINOR
+   ENUM Modified PseudostateKind enum.
+   WRONG_TYPE Added cast to State (2x), to Transition
+   WRONG_NAME_ELEMENT isOrthogonal
+inv:
+(self.kind = PseudostateKind::join)
+implies
+self.incoming->forAll (t1, t2 | t1<>t2 implies
+(self.stateMachine.LCA(t1.source.oclAsType(State), t2.source.oclAsType(State)).oclAsType(Transition).container.isOrthogonal))
+
+/* [5] In a complete statemachine, a fork vertex must have at least two outgoing transitions and exactly one 
+   incoming transition. */
+inv:
+/* FIX  MINOR EVOLUTION
+   ENUM Modified PseudostateKind enum.
+   METHOD_FIELD changed size to size() */
+(self.kind = PseudostateKind::fork) implies
+((self.incoming->size() = 1) and (self.outgoing->size() >= 2))
+
+/* [6] All transitions outgoing a fork vertex must target states in different regions of an orthogonal state. */
+/* COULD_NOT_FIX EVOLUTION TYPE MINOR
+   ENUM Modified PseudostateKind enum.
+   WRONG_TYPE Added cast to State (2x), to Transition
+   WRONG_NAME_ELEMENT isOrthogonal
+inv:
+(self.kind = PseudostateKind::fork)
+implies
+self.outgoing->forAll (t1, t2 | t1<>t2 implies
+(self.stateMachine.LCA(t1.target.oclAsType(State), t2.target.oclAsType(State)).oclAsType(Transition)
+container.isOrthogonal))
+
+/* [7] In a complete statemachine, a junction vertex must have at least one incoming and one outgoing 
+   transition. */
+/* FIX EVOLUTION MINOR
+   ENUM Modified PseudostateKind enum.
+   METHOD_FIELD changed size to size() */
+inv:
+(self.kind = PseudostateKind::junction) implies
+((self.incoming->size() >= 1) and (self.outgoing->size() >= 1))
+
+/* [8] In a complete statemachine, a choice vertex must have at least one incoming and one outgoing transition. */
+/* FIX EVOLUTION MINOR
+   ENUM Modified PseudostateKind enum.
+   METHOD_FIELD changed size to size() */
+inv:
+(self.kind = PseudostateKind::choice) implies
+((self.incoming->size() >= 1) and (self.outgoing->size() >= 1))
+
+/* [9] The outgoing transition from an initial vertex may have a behavior, but not a trigger or guard. */
+inv:
+(self.kind = PseudostateKind::initial) implies (self.outgoing.guard->isEmpty() and self.outgoing.trigger->isEmpty())
+
+
+context Region
+/* [1] A region can have at most one initial vertex. */
+inv:
+/* FIX EVOLUTION TYPE ENUM Modified PseudostateKind enum.
+   WRONG_TYPE added cast ->collect(oclAsType(Pseudostate)) */
+self.subvertex->select (v | v.oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
+select(p : Pseudostate | p.kind = PseudostateKind::initial)->size() <= 1
+
+/* [2] A region can have at most one deep history vertex. */
+inv:
+/* FIX EVOLUTION TYPE ENUM Modified PseudostateKind enum.
+   WRONG_TYPE added cast ->collect(oclAsType(Pseudostate)) */
+self.subvertex->select (v | v.oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
+select(p : Pseudostate | p.kind = PseudostateKind::deepHistory)->size() <= 1
+
+/* [3] A region can have at most one shallow history vertex. */
+inv:
+/* FIX EVOLUTION TYPE ENUM Modified PseudostateKind enum.
+   WRONG_TYPE added cast ->collect(oclAsType(Pseudostate)) */
+self.subvertex->select(v | v.oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
+select(p : Pseudostate | p.kind = PseudostateKind::shallowHistory)->size() <= 1
+
+/* [4] If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa. */
+inv:
+(stateMachine->notEmpty() implies state->isEmpty()) and (state->notEmpty() implies stateMachine->isEmpty())
+
+/* [5] The redefinition context of a region is the nearest containing statemachine. */
+-- FIX SYNTAX ESCAPE replaced context with _context (2x)
+inv:
+redefinitionContext =
+let sm = containingStateMachine() in
+if sm._context->isEmpty() or sm.general->notEmpty() then
+sm
+else
+sm._context
+endif
+
+
+/* [1] The query isRedefinitionContextValid() specifies whether the redefinition contexts of a region are properly related to the
+redefinition contexts of the specified region to allow this element to redefine the other. The containing StateMachine/State
+of a redefining region must redefine the containing StateMachine/State of the redefined region.
+-- NO_OCL
+
+[2] The query isConsistentWith() specifies that a redefining region is consistent with a redefined region provided that the
+redefining region is an extension of the redefined region (i.e., it adds vertices and transitions and it redefines states and
+transitions of the redefined region). */
+-- NO_OCL
+
+
+context State
+/* [1] Only submachine states can have connection point references. */
+inv:
+isSubmachineState implies connection->notEmpty ( )
+
+/* [2] The connection point references used as destinations/sources of transitions associated with a submachine
+   state must be defined as entry/exit points in the submachine state machine. */
+/* FIX SYNTAX TYPO replaced p.statemachine with p.stateMachine (2x)*/
+inv:
+self.isSubmachineState implies (self.connection->forAll (cp |
+cp.entry->forAll (p | p.stateMachine = self.submachine) and cp.exit->forAll (p | p.stateMachine = self.submachine)))
+
+/* [3] A state is not allowed to have both a submachine and regions. */
+inv:
+isComposite implies not isSubmachineState
+
+/* [4] A simple state is a state without any regions. */
+inv:
+-- FIX SYNTAX ARROW replaced .isEmpty() with ->isEmpty()
+isSimple = region->isEmpty()
+
+/* [5] A composite state is a state with at least one region. */
+inv:
+-- FIX SYNTAX ARROW replaced .notEmpty() with ->notEmpty()
+isComposite = region->notEmpty()
+
+/* [6] An orthogonal state is a composite state with at least 2 regions. */
+inv:
+isOrthogonal = (region->size () > 1)
+
+/* [7] Only submachine states can have a reference statemachine. */
+inv:
+-- FIX SYNTAX ARROW replaced .notEmpty() with ->notEmpty()
+isSubmachineState = submachine->notEmpty()
+
+/* [8] The redefinition context of a state is the nearest containing statemachine. */
+-- FIX SYNTAX ESCAPE replaced context with _context
+inv:
+redefinitionContext =
+let sm = containingStateMachine() in
+if sm._context->isEmpty() or sm.general->notEmpty() then
+sm
+else
+sm._context
+endif
+
+/* [9] Only composite states can have entry or exit pseudostates defined. */
+inv:
+-- FIX SYNTAX TYPO renamed isComoposite
+connectionPoint->notEmpty() implies isComposite
+
+/* [10] Only entry or exit pseudostates can serve as connection points. */
+inv:
+-- FIX EVOLUTION ENUM Replaced #entry, #exit with PseudostateKind::entryPoint, exitPoint
+connectionPoint->forAll(cp|cp.kind = PseudostateKind::entryPoint or cp.kind = PseudostateKind::exitPoint)
+
+
+context StateMachine
+/* [1] The classifier context of a state machine cannot be an interface. */
+inv:
+-- FIX SYNTAX ESCAPE replaced context with _context
+_context->notEmpty() implies not _context.oclIsKindOf(Interface)
+
+/* [2] The context classifier of the method state machine of a behavioral feature must be the classifier that 
+   owns the behavioral feature. */
+/* FIX SYNTAX
+   ESCAPE replaced context with _context
+   ARROW Replaced specification->featuringClassifier with specification->featuringClassifier */
+inv:   
+specification->notEmpty() implies (_context->notEmpty() and specification.featuringClassifier->exists (c | c = _context))
+
+/* [3] The connection points of a state machine are pseudostates of kind entry point or exit point. */
+inv:
+/* FIX EVOLUTION SYNTAX
+   ENUM adapted enum PseudostateKind.
+   TYPO renamed conectionPoint to connectionPoint. */
+connectionPoint->forAll (c | c.kind = PseudostateKind::entryPoint or c.kind = PseudostateKind::exitPoint)
+
+/* [4] A state machine as the method for a behavioral feature cannot have entry/exit connection points. */
+inv:
+specification->notEmpty() implies connectionPoint->isEmpty()
+
+
+/* [1] The starting time for a relative time event may only be omitted for a time event that is the trigger of 
+   a state machine. */
+-- NO_OCL
+
+
+context Transition
+/* [1] A fork segment must not have guards or triggers. */
+inv:
+/* FIX EVOLUTION TYPE ENUM adapted enum PseudostateKind.
+   WRONG_TYPE added cast .oclAsType(Pseudostate) */
+(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard->isEmpty() and trigger->isEmpty())
+
+/* [2] A join segment must not have guards or triggers. */
+inv:
+/* FIX EVOLUTION SYNTAX TYPE ENUM adapted enum PseudostateKind.
+   BRACKET adapted enclosing brackets
+   WRONG_TYPE added cast .oclAsType(Pseudostate) */
+(target.oclIsKindOf(Pseudostate) and (target.oclAsType(Pseudostate).kind = PseudostateKind::join)) implies (guard->isEmpty() and trigger->isEmpty())
+
+/* [3] A fork segment must always target a state. */
+inv:
+/* FIX ENUM EVOLUTION TYPE adapted enum PseudostateKind.
+   WRONG_TYPE added cast .oclAsType(Pseudostate) */
+(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State))
+
+/* [4] A join segment must always originate from a state. */
+inv:
+/* FIX EVOLUTION TYPE ENUM adapted enum PseudostateKind.
+   WRONG_TYPE added cast .oclAsType(Pseudostate) */
+(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))
+
+/* [5] Transitions outgoing pseudostates may not have a trigger (except for those coming out of the initial
+   pseudostate). */
+inv:
+/* FIX EVOLUTION TYPE ENUM adapted enum PseudostateKind.
+   WRONG_TYPE added cast .oclAsType(Pseudostate) */
+(source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial)) implies trigger->isEmpty()
+
+/* [6] An initial transition at the topmost level (region of a statemachine) either has no trigger or it 
+   has a trigger with the stereotype “create.” */
+/* COULD_NOT_FIX MINOR EVOLUTION WRONG_NAMED_ELEMENT top
+   ENUM adapted enum PseudostateKind.
+   METHOD_FIELD changed isEmpty to isEmpty()
+   WRONG_NAMED_ELEMENT replaced stateMachine with self.containingStateMachine()
+inv:
+self.source.oclIsKindOf(Pseudostate) implies
+(self.source.oclAsType(Pseudostate).kind = PseudostateKind::initial) implies
+(self.source.container = self.containingStateMachine().top) implies
+((self.trigger->isEmpty()) or
+(self.trigger.stereotype.name = 'create'))
+
+/* [7] In case of more than one trigger, the signatures of these must be compatible in case the parameters 
+   of the signal are assigned to local variables/attributes. */
+-- NO_OCL
+
+/* [8] The redefinition context of a transition is the nearest containing statemachine. */
+-- FIX SYNTAX ESCAPE replaced context with _context
+inv:
+redefinitionContext =
+let sm = containingStateMachine() in
+if sm._context->isEmpty() or sm.general->notEmpty() then
+sm
+else
+sm._context
+endif
+
+
+/* [1] A transition with kind local must have a composite state or an entry point as its source. */
+context Transition inv:
+(kind = TransitionKind::local) implies
+((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or
+(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint))
+
+/* [2] A transition with kind external can source any vertex except entry points. */
+context Transition inv:
+(kind = TransitionKind::external) implies
+not (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint)
+
+/* [3] A transition with kind internal must have a state as its source, and its source and target must be 
+   equal. */
+context Transition inv:
+(kind = TransitionKind::internal) implies
+(source.oclIsKindOf (State) and source = target)
+
+
+context Actor
+/* [1] An actor can only have associations to use cases, components, and classes. Furthermore these 
+   associations must be binary. */
+/* COULD_NOT_FIX MINOR SYNTAX WRONG_NAMED_ELEMENT ownedAttribute
+   BRACKET added closing bracket to end of constraint.
+inv:
+self.ownedAttribute->forAll ( a |
+(a.association->notEmpty()) implies
+((a.association.memberEnd.size() = 2) and
+(a.opposite.class.oclIsKindOf(UseCase) or
+(a.opposite.class.oclIsKindOf(Class) and not a.opposite.class.oclIsKindOf(Behavior)))))
+
+/* [2] An actor must have a name. */
+inv:
+name->notEmpty()
+
+
+context Extend
+/* [1] The extension points referenced by the extend relationship must belong to the use case that is being
+   extended. */
+inv:   
+extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
+
+
+context ExtensionPoint
+/* [1] An ExtensionPoint must have a name. */
+inv:
+self.name->notEmpty ()
+
+
+context UseCase
+/* [1] A UseCase must have a name. */
+inv:
+self.name -> notEmpty ()
+
+/* [2] UseCases can only be involved in binary Associations. */
+-- NO_OCL
+
+/* [3] UseCases cannot have Associations to UseCases specifying the same subject. */
+-- NO_OCL
+
+/* [4] A use case cannot include use cases that directly or indirectly include it. */
+inv:
+not self.allIncludedUseCases()->includes(self)
+
+
+context InformationFlow
+/* [1] The sources and targets of the information flow can only be one of the following kind: Actor, Node, 
+   UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition 
+   and InstanceSpecification except when its classifier is a relationship (i.e., it represents a link). */
+inv:
+(self.informationSource->forAll(p | p->oclIsKindOf(Actor) or oclIsKindOf(Node) or oclIsKindOf(UseCase) or
+oclIsKindOf(Artifact) or oclIsKindOf(Class) or oclIsKindOf(Component) or oclIsKindOf(Port) or oclIsKindOf(Property) or
+oclIsKindOf(Interface) or oclIsKindOf(Package) or oclIsKindOf(ActivityNode) or oclIsKindOf(ActivityPartition) or
+oclIsKindOf(InstanceSpecification)))
+and
+(self.informationTarget-> forAll(p | p->oclIsKindOf(Actor) or oclIsKindOf(Node) or oclIsKindOf(UseCase) or
+oclIsKindOf(Artifact) or oclIsKindOf(Class) or oclIsKindOf(Component) or oclIsKindOf(Port) or oclIsKindOf(Property) or
+oclIsKindOf(Interface) or oclIsKindOf(Package) or oclIsKindOf(ActivityNode) or oclIsKindOf(ActivityPartition) or
+oclIsKindOf(InstanceSpecification)))
+
+/* [2] The sources and targets of the information flow must conform with the sources and targets or, 
+   conversely, the targets and sources of the realization relationships, if any. */
+-- NO_OCL
+
+/* [3] An information flow can only convey classifiers that are allowed to represent an information item 
+   (see constraints on “InformationItem (from InformationFlows)” on page 628). */
+/* FIX SYNTAX MINOR BRACKET added closing bracket to end of constraint. 
+   WRONG_NAMED_ELEMENT represented renamed to representation */
+inv:
+self.conveyed.representation->forAll(p |
+p->oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(InformationItem) or oclIsKindOf(Signal)
+or oclIsKindOf(Component))
+
+
+context InformationItem
+/* [1] The sources and targets of an information item (its related information flows) must designate subsets 
+   of the sources and targets of the representation information item, if any. The Classifiers that can realize
+   an information item can only be of the following kind: Class, Interface, InformationItem, Signal, 
+   Component. */
+/* COULD_NOT_FIX MINOR SYNTAX TYPE WRONG_NAMED_ELEMENT could not find informationFlow
+   ARROW replaced ->oclIsKindOf() with .oclIsKindOf() 
+   WRONG_TYPE missing cast to InformationItem
+inv:
+(self.represented.select(p | p.oclIsKindOf(InformationItem))
+  ->collect(oclAsType(InformationItem))
+  ->forAll(p |
+p.informationFlow.source->forAll( q |
+self.informationFlow.source->include(q) )
+and p.informationFlow.target->forAll( q |
+self.informationFlow.target->include(q) ) ))
+and
+(self.represented->forAll(p |
+p->oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(InformationItem) or oclIsKindOf(Signal)
+or oclIsKindOf(Component)))
+
+/* [2] An information item has no feature, no generalization, and no associations. */
+inv:
+self.generalization->isEmpty() and self.feature->isEmpty()
+
+/* [3] It is not instantiable. */
+inv: 
+isAbstract
+
+
+/*context TemplateBinding
+/* [1] Each parameter substitution must refer to a formal template parameter of the target template 
+   signature. */
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT template
+inv:   
+parameterSubstitution->forAll(b | template.parameter->includes(b.formal))
+
+/* [2] A binding contains at most one parameter substitution for each formal template parameter of the 
+   target template signature. */
+/* COULD_NOT_FIX MINOR WRONG_NAMED_ELEMENT template
+inv:
+template.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
+*/
+
+
+context TemplateParameterSubstitution
+/* [1] The actual parameter must be compatible with the formal template parameter (e.g., the actual 
+   parameter for a class template parameter must be a class). */
+inv:   
+actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))
+
+
+context TemplateSignature
+/* [1] Parameters must own the elements they parameter or those elements must be owned by the element being 
+   templated. */
+/* FIX MINOR
+   WRONG_NAMED_ELEMENT template instead of templatedElement
+   OTHER replaced parameter.parameteredElement - parameter.ownedParameteredElement with parameter */
+inv: 
+template.ownedElement->includesAll(parameter)
+
+
+
+context ClassifierTemplateParameter
+/* [1] If “allowSubstitutable” is true, then there must be a constrainingClassifier */
+inv:
+allowSubstitutable implies constrainingClassifier->notEmpty()
+
+
+context RedefinableTemplateSignature
+/* [1] The inherited parameters are the parameters of the extended template signature. */
+inv:
+inheritedParameter = if extendedSignature->isEmpty() then Set{} else extendedSignature.parameter endif
+
+
+context StringExpression
+/* [1] All the operands of a StringExpression must be LiteralStrings. */
+inv:
+operand->forAll (op | op.oclIsKindOf (LiteralString))
+
+/* [2] If a StringExpression has sub expressions, it cannot have operands and vice versa (this avoids 
+   the problem of having to define a collating sequence between operands and subexpressions). */
+inv:   
+-- FIX SYNTAX WRONG_IF added endif.
+if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
+
+
+/*context Property
+/* [1] A binding of a property template parameter representing an attribute must be to an attribute */
+/* COULD_NOT_FIX MINOR SYNTAX WRONG_NAMED_ELEMENT templateParameterSubstitution
+   BRACKET added closing brackets
+inv:
+(isAttribute(self) and (templateParameterSubstitution->notEmpty() implies
+(templateParameterSubstitution->forAll(ts | isAttribute(ts.formal)))))*/
+
+
+context Extension
+/* [1] The non-owned end of an Extension is typed by a Class. */
+/* FIX MINOR METHOD_FIELD changed metaclass() to metaclass */
+inv:
+metaclassEnd()->notEmpty() and metaclass->oclIsKindOf(Class)
+
+/* [2] An Extension is binary (i.e., it has only two memberEnds). */
+inv:
+memberEnd->size() = 2
+
+
+context ExtensionEnd
+/* [1] The multiplicity of ExtensionEnd is 0..1 or 1. */
+/* FIX MINOR WRONG_NAMED_ELEMENT changed (self->lowerBound() = 0 or self->lowerBound() = 1) and self->upperBound() = 1 to is(0, 1) or is(1,1)*/
+inv:
+is(0,1) or is(1,1)
+
+/* [2] The aggregation of an ExtensionEnd is composite. */
+inv:
+-- FIX EVOLUTION ENUM adapted enum AggregationKind.
+self.aggregation = AggregationKind::composite
+
+
+context Profile
+/* [1] An element imported as a metaclassReference is not specialized or generalized in a Profile. */
+/* COULD_NOT_FIX: MINOR TYPE WRONG_NAMED_ELEMENT namespace
+   WRONG_TYPE Added downcast to Classifier
+inv:
+self.metaclassReference.importedElement->
+select(c | c.oclIsKindOf(Classifier) and
+(c.oclAsType(Classifier).generalization.namespace = self or
+c.specialization.namespace = self))->isEmpty()
+
+/* [2] All elements imported either as metaclassReferences or through metamodelReferences are members of the 
+   same base reference metamodel. */
+inv:
+self.metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
+union(self.metaclassReference.importedElement.allOwningPackages())->notEmpty()
+
+
+context Stereotype
+/* [1] A Stereotype may only generalize or specialize another Stereotype. */
+inv:
+generalization.general->forAll(e | e.oclIsKindOf(Stereotype)) and
+generalization.specific->forAll(e | e.oclIsKindOf(Stereotype))
+
+/* [2] Stereotype names should not clash with keyword names for the extended model element. */
+-- NO_OCL
+
+/* [3] A stereotype must be contained, directly or indirectly, in a profile. */
+/* COULD_NOT_FIX MINOR containingProfile() ?
+   WRONG_NAMED_ELEMENT changed profile to getProfile()
+inv:
+getProfile() = self.containingProfile()*/
+
+endpackage
