@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
 
 import org.dresdenocl.essentialocl.types.tests.EssentialOCLAllTests;
 import org.dresdenocl.examples.pain.test.AllPainTests;
-import org.dresdenocl.examples.royalsandloyals.test.AllRoyalAndLoyalAspectJTests;
+import org.dresdenocl.examples.royalsandloyals.ocl22javacode.test.AllRoyalAndLoyalAspectJTests;
 import org.dresdenocl.interpreter.test.AllOclInterpreterTests;
 import org.dresdenocl.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import org.dresdenocl.metamodels.java.test.tests.TestJavaMetaModel;
