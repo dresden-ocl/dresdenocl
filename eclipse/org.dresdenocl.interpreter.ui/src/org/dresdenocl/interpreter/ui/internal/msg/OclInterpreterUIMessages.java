@@ -64,7 +64,7 @@ public class OclInterpreterUIMessages extends NLS {
 	
 	public static String InterpreterView_ActionError_NoConstraintForTracingSelected;
 
-	public static String InterpreterView_ActionError_NoModelObectSelected;
+	public static String InterpreterView_ActionError_NoModelObjectSelected;
 	
 	public static String InterpreterView_Error_NoActiveModel;
 
