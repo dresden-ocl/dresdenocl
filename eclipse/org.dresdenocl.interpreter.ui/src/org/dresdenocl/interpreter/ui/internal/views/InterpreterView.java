@@ -37,24 +37,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TreeSelection;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.ISelectionService;
-import org.eclipse.ui.IViewActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.part.ViewPart;
-
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.IOclInterpreter;
 import org.dresdenocl.interpreter.OclInterpreterPlugin;
@@ -76,6 +58,23 @@ import org.dresdenocl.modelinstance.event.ModelInstanceRegistryEvent;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Type;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TreeSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.ui.ISelectionListener;
+import org.eclipse.ui.ISelectionService;
+import org.eclipse.ui.IViewActionDelegate;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.part.ViewPart;
 
 /**
  * <p>
@@ -188,8 +187,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/*
 	 * (non-Javadoc)
 	 * @seeorg.dresdenocl.modelbus.event.IModelRegistryListener#
-	 * activeModelChanged
-	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
+	 * activeModelChanged (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
 	public void activeModelChanged(ModelRegistryEvent event) {
 
@@ -233,6 +231,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 		table = myTableViewer.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
 
 		/* Initialize the columns of the table. */
 		column = new TableColumn(table, SWT.LEFT);
@@ -244,19 +244,13 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		column = new TableColumn(table, SWT.LEFT);
 		column.setText(OclInterpreterUIMessages.InterpreterView_ResultColumn);
 
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-
 		this.myTableViewer.setInput(this.myResults);
-
-		for (int index = 0; index < table.getColumnCount(); index++) {
-			table.getColumn(index).pack();
-		}
+		this.refreshView();
 
 		this.getViewSite().getPage().addSelectionListener(this);
 		this.getViewSite().setSelectionProvider(this.myTableViewer);
 
-		this.initMenu();
+		// this.initMenu();
 	}
 
 	/*
@@ -571,19 +565,12 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		ModelBusUIPlugin.getDefault().getWorkbench().getDisplay()
 				.asyncExec(new Runnable() {
 
-					/*
-					 * (non-Javadoc)
-					 * @see java.lang.Runnable#run()
-					 */
 					public void run() {
 
-						for (int index = 0; index < myTableViewer.getTable()
-								.getColumnCount(); index++) {
-							myTableViewer.getTable().getColumn(index).pack();
-						}
-						// end for.
-
 						myTableViewer.refresh();
+						for (TableColumn column : myTableViewer.getTable().getColumns()) {
+							column.pack();
+						}
 					}
 				});
 	}

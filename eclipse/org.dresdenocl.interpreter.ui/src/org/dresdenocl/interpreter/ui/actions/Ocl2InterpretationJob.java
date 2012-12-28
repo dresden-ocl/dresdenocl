@@ -4,12 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.ui.IViewActionDelegate;
-
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.IOclInterpreter;
 import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
@@ -23,6 +17,11 @@ import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Feature;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.IViewActionDelegate;
 
 public class Ocl2InterpretationJob extends Job {
 
@@ -213,12 +212,6 @@ public class Ocl2InterpretationJob extends Job {
 				ModelBusUIUtility
 						.setActiveView(InterpreterUIPlugin.INTERPRETER_VIEW_ID);
 				interpreterView.refreshView();
-
-				/*
-				 * Unfortunately, a second refresh is required to compute the width of
-				 * the columns in the InverpreterView.
-				 */
-				interpreterView.refreshView();
 			}
 
 			else {
@@ -261,7 +254,8 @@ public class Ocl2InterpretationJob extends Job {
 		case BODY:
 			return ((Feature) constraint.getConstrainedElement().iterator().next())
 					.isStatic();
-			// no default;
+		default:
+			break;
 		}
 		return false;
 	}
