@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            id="org.dresdenocl.tracer.ui.actionSet"
-            label="Tracer Action Set"
-            visible="true">
-         <menu
-               icon="icons/dresdenocl.gif"
-               id="org.dresdenocl.modelbus.ui.menu"
-               label="Dresden OCL">
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.import">
-            </separator>
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.tools">
-            </separator>
-            <groupMarker
-            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
-            </groupMarker>
-         </menu>
-         <action
-               label="Open OCL Tracer"
-               icon="icons/dresdenocl.gif"
-               class="org.dresdenocl.tracer.ui.actions.TracerViewAction"
-               tooltip="Opens the OCL Tracer View of Dresden OCL."
-               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.tools"
-               id="org.dresdenocl.tracer.ui.actions.TracerViewAction">
-         </action>
-      </actionSet>
-   </extension>
    
    <extension point="org.eclipse.ui.views">
    		<view
@@ -72,6 +42,17 @@
                style="push">
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
+         <command
+               commandId="org.dresdenocl.tracer.ui.command8"
+               icon="icons/dresdenocl.gif"
+               label="Open OCL Tracer"
+               style="push"
+               tooltip="Opens the OCL Tracer View of Dresden OCL.">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -80,6 +61,11 @@
             defaultHandler="org.dresdenocl.tracer.ui.command.handler.TraceHandler"
             id="org.dresdenocl.tracer.ui.command.trace"
             name="Trace">
+      </command>
+      <command
+            defaultHandler="org.dresdenocl.tracer.ui.command.handler.TracerViewCommandHandler"
+            id="org.dresdenocl.tracer.ui.command.showView"
+            name="Open OCL Tracer">
       </command>
    </extension>
 </plugin>
