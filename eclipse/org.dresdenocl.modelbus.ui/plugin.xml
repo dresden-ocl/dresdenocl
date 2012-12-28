@@ -3,44 +3,6 @@
 <plugin>
 
    <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            id="org.dresdenocl.modelbus.ui.actionSet"
-            label="Dresden OCL Action Set"
-            visible="true">
-         <menu
-               icon="icons/dresdenocl.gif"
-               id="org.dresdenocl.modelbus.ui.menu"
-               label="Dresden OCL">
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.import">
-            </separator>
-            <separator
-                  name="org.dresdenocl. pivot.modelbus.ui.menu.tools">
-            </separator>
-            <groupMarker
-            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
-            </groupMarker>
-         </menu>
-         <action
-               class="org.dresdenocl.modelbus.ui.actions.LoadModelInstanceWizardAction"
-               icon="icons/instance.gif"
-               id="org.dresdenocl.modelbus.ui.actions.LoadModelInstanceWizardAction"
-               label="Load Model Instance"
-               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.import"
-               tooltip="Loads a Model Instance into Dresden OCL">
-         </action>
-         <action
-               label="Load Model"
-               icon="icons/models.gif"
-               class="org.dresdenocl.modelbus.ui.actions.LoadModelWizardAction"
-               tooltip="Loads a domain-specific model into Dresden OCL"
-               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.import"
-               id="org.dresdenocl.modelbus.ui.actions.LoadModelWizardAction">
-         </action>
-      </actionSet>
-   </extension>
-   <extension
          point="org.eclipse.ui.views">
       <category
             name="Dresden OCL"
@@ -124,6 +86,31 @@
             </command>
          </menu>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=project">
+         <menu
+               id="org.dresdenocl.modelbus.ui.menu.main"
+               label="Dresden OCL"
+               tooltip="Tools of Dresden OCL">
+            <command
+                  commandId="org.dresdenocl.modelbus.ui.loadModelCommand"
+                  icon="icons/models.gif"
+                  label="Load as Model ..."
+                  mnemonic="M"
+                  style="push"
+                  tooltip="Loads a domain-specific model into DresdenOCL">
+            </command>
+            <command
+                  commandId="org.dresdenocl.modelbus.ui.loadModelInstanceCommand"
+                  icon="icons/instance.gif"
+                  label="Load as Model Instance ..."
+                  mnemonic="I"
+                  style="push"
+                  tooltip="Loads a Model Instance into DresdenOCL">
+            </command>
+         </menu>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
@@ -137,7 +124,7 @@
             defaultHandler="org.dresdenocl.modelbus.ui.command.LoadModelInstanceWizardCommand"
             description="Loads a Model Instance into Dresden OCL"
             id="org.dresdenocl.modelbus.ui.loadModelInstanceCommand"
-            name="LoadModelCommand">
+            name="LoadModelInstanceCommand">
       </command>
    </extension>
    <extension
