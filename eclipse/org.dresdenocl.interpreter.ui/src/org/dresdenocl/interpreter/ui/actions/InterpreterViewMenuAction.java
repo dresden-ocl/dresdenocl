@@ -107,7 +107,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements()
 					.size() == 0) {
 				this.myInterpreterView
-						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoModelObectSelected);
+						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoModelObjectSelected);
 			}
 			// no else.
 
@@ -146,7 +146,7 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 			if (this.myInterpreterView.getCurrentlySelectedModelInstanceElements()
 					.size() == 0) {
 				this.myInterpreterView
-						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoModelObectSelected);
+						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoModelObjectSelected);
 			}
 			// no else.
 
@@ -166,9 +166,9 @@ public class InterpreterViewMenuAction extends Action implements IAction {
 		}
 
 		case TRACE_SELECTED_CONSTRAINTS: {
-			if(this.myInterpreterView.getTableViewer().getSelection().isEmpty()) {
-				this.myInterpreterView.showMessage(
-						OclInterpreterUIMessages.InterpreterView_ActionError_NoConstraintForTracingSelected);
+			if (this.myInterpreterView.getTableViewer().getSelection().isEmpty()) {
+				this.myInterpreterView
+						.showMessage(OclInterpreterUIMessages.InterpreterView_ActionError_NoConstraintForTracingSelected);
 			}
 			else {
 				this.traceSelectedConstraints(this.myInterpreterView.getTableViewer()

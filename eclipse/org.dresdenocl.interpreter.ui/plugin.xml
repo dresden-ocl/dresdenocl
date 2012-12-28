@@ -61,5 +61,143 @@
          </viewShortcut>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.dresdenocl.interpreter.ui.internal.views.InterpreterView">
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.Prepare"
+               icon="icons/prepare.gif"
+               id="org.dresdenocl.interpreter.ui.internal.views.toolbar.PrepareAll"
+               label="Prepare All"
+               style="push"
+               tooltip="%InterpretAction_PrepareAllConstraints">
+            <parameter
+                  name="org.dresdenocl.interpreter.ui.parameter.prepare"
+                  value="prepareAll">
+            </parameter>
+         </command>
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.AddVariable"
+               icon="icons/add.gif"
+               id="org.dresdenocl.interpreter.ui.internal.views.toolbar.AddVariable"
+               label="Add Variable"
+               style="push"
+               tooltip="%InterpreterView_AddVariable_Title">
+         </command>
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.Interpret"
+               icon="icons/interpret.gif"
+               id="org.dresdenocl.interpreter.ui.internal.views.toolbar.InterpretAll"
+               label="Interpret All"
+               style="push"
+               tooltip="%InterpretAction_InterpretAllConstraintsForAllModelObjects">
+            <parameter
+                  name="org.dresdenocl.interpreter.ui.parameter.interpret"
+                  value="interpretAll">
+            </parameter>
+         </command>
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.Clear"
+               icon="icons/remove.gif"
+               id="org.dresdenocl.interpreter.ui.internal.views.toolbar.ClearAll"
+               label="Clear All"
+               style="push"
+               tooltip="%InterpretAction_ClearAllConstraintsForAllModelObjects">
+            <parameter
+                  name="org.dresdenocl.interpreter.ui.parameter.clear"
+                  value="clearAll">
+            </parameter>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.dresdenocl.interpreter.ui.internal.views.InterpreterView">
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.Prepare"
+               label="Prepare Selected"
+               style="push">
+            <parameter
+                  name="org.dresdenocl.interpreter.ui.parameter.prepare"
+                  value="prepareSelected">
+            </parameter>
+         </command>
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.Interpret"
+               label="%InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects"
+               style="push"
+               tooltip="%InterpretAction_InterpretSelectedConstraintsForSelectedModelObjects">
+            <parameter
+                  name="org.dresdenocl.interpreter.ui.parameter.interpret"
+                  value="interpretSelected">
+            </parameter>
+         </command>
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.Clear"
+               label="%InterpretAction_ClearSelectedConstraintsForSelectedModelObjects"
+               style="push"
+               tooltip="%InterpretAction_ClearSelectedConstraintsForSelectedModelObjects">
+            <parameter
+                  name="org.dresdenocl.interpreter.ui.parameter.clear"
+                  value="clearSelected">
+            </parameter>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%InterpreterPlugin_Category_Description"
+            id="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
+            name="%InterpreterPlugin_Category_Name">
+      </category>
+      <command
+            categoryId="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
+            defaultHandler="org.dresdenocl.interpreter.ui.command.handler.PrepareHandler"
+            description="Prepares Constraints for Interpretation"
+            id="org.dresdenocl.interpreter.ui.command.Prepare"
+            name="Prepare">
+         <commandParameter
+               id="org.dresdenocl.interpreter.ui.parameter.prepare"
+               name="Prepare"
+               optional="false">
+         </commandParameter>
+      </command>
+      <command
+            categoryId="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
+            defaultHandler="org.dresdenocl.interpreter.ui.command.handler.AddVariableHandler"
+            description="Adds a Variable to the Environment"
+            id="org.dresdenocl.interpreter.ui.command.AddVariable"
+            name="Add Variable">
+      </command>
+      <command
+            categoryId="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
+            defaultHandler="org.dresdenocl.interpreter.ui.command.handler.InterpretHandler"
+            description="Interpretes Constraints"
+            id="org.dresdenocl.interpreter.ui.command.Interpret"
+            name="Interpret">
+         <commandParameter
+               id="org.dresdenocl.interpreter.ui.parameter.interpret"
+               name="Interpret"
+               optional="false">
+         </commandParameter>
+      </command>
+      <command
+            categoryId="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
+            defaultHandler="org.dresdenocl.interpreter.ui.command.handler.ClearHandler"
+            description="Clears Constraints"
+            id="org.dresdenocl.interpreter.ui.command.Clear"
+            name="Clear">
+         <commandParameter
+               id="org.dresdenocl.interpreter.ui.parameter.clear"
+               name="Clear"
+               optional="true">
+         </commandParameter>
+      </command>
+   </extension>
 
 </plugin>

@@ -103,7 +103,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private static final String TRACE_IMAGE = "icons/trace.gif";
 
 	/** The currently selected {@link Constraint}s that shall be interpreted. */
-	private Set<Constraint> currentlySelectedConstraints =
+	private final Set<Constraint> currentlySelectedConstraints =
 			new HashSet<Constraint>();
 
 	/** The currently selected {@link IModelInstance}. */
@@ -113,11 +113,11 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * The currently selected {@link IModelInstanceElement}s that shall be
 	 * interpreted.
 	 */
-	private Set<IModelInstanceElement> currentlySelectedModelInstanceElements =
+	private final Set<IModelInstanceElement> currentlySelectedModelInstanceElements =
 			new HashSet<IModelInstanceElement>();
 
 	/** The currently selected rows of this {@link IViewActionDelegate}. */
-	private Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
+	private final Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
 
 	/** The {@link InterpreterViewMenuAction} which removes results. */
 	private InterpreterViewMenuAction myActionToremoveSelectedResults = null;
