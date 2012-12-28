@@ -2,35 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
 
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            label="Codegen Action Set"
-            visible="true"
-            id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.actionSet">
-         <menu
-               label="DresdenOCL"
-               id="org.dresdenocl.modelbus.ui.menu">
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.import">
-            </separator>
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.tools">
-            </separator>
-            <groupMarker
-            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
-            </groupMarker>
-         </menu>
-         <action
-               class="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction"
-               icon="icons/codegen.gif"
-               id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.actions.SQLCodeGenAction"
-               label="Generate SQL Code"
-               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.codegen"
-               tooltip="Creates SQL code to instrument constraints for a given model and given OCL constraints.">
-         </action>
-      </actionSet>
-   </extension>
 
    <extension
          point="org.eclipse.ui.newWizards">
@@ -54,6 +25,28 @@
                id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.importWizards.loadModelWizard">
          </newWizardShortcut>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
+         <command
+               commandId="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command9"
+               icon="icons/codegen.gif"
+               label="Generate SQL Code"
+               style="push"
+               tooltip="Creates SQL code to instrument constraints for a given model and given OCL constraints.">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command.handler.SqlCodeGenHandler"
+            id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command4"
+            name="Generate SQL Code">
+      </command>
    </extension>
 
 </plugin>
