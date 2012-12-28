@@ -37,6 +37,7 @@ public class OclTracerUIMessages extends NLS {
 	public static String TracerView_Menu_Filter_False;
 	public static String TracerView_Menu_Filter_True;
 	public static String TracerView_Menu_Remove_Selection;
+	public static String InterpreterView_ActionError_NoConstraintForTracingSelected;
 	
 	static {
 		/* Initialize resource bundle. */

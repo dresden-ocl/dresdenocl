@@ -60,4 +60,26 @@
          </viewShortcut>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.dresdenocl.interpreter.ui.internal.views.InterpreterView?after=org.dresdenocl.interpreter.ui.internal.views.toolbar.ClearAll">
+         <command
+               commandId="org.dresdenocl.tracer.ui.command.trace"
+               icon="icons/trace.gif"
+               label="Trace"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
+            defaultHandler="org.dresdenocl.tracer.ui.command.handler.TraceHandler"
+            id="org.dresdenocl.tracer.ui.command.trace"
+            name="Trace">
+      </command>
+   </extension>
 </plugin>
