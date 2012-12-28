@@ -32,7 +32,7 @@
             allPopups="false"
             locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
          <command
-               commandId="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command9"
+               commandId="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command.generateCode"
                icon="icons/codegen.gif"
                label="Generate SQL Code"
                style="push"
@@ -44,7 +44,7 @@
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command.handler.SqlCodeGenHandler"
-            id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command4"
+            id="org.dresdenocl.tools.codegen.declarativ.ocl2sql.ui.command.generateCode"
             name="Generate SQL Code">
       </command>
    </extension>

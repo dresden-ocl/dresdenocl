@@ -82,6 +82,7 @@ public interface IInterpreterRegistry {
 	 */
 	public void removeInterpreterTraceListener(IInterpreterTraceListener listener);
 
+	//TODO Lars: Document
 	public void fireInterpretationDepthIncreased(UUID guid);
 
 	public void fireInterpretationDepthIncreased(UUID guid,
@@ -91,19 +92,6 @@ public interface IInterpreterRegistry {
 
 	public void firePartialInterpretionResult(EObject expression, OclAny result,
 			UUID guid);
-
-	/**
-	 * <p>
-	 * Fires an event that holds the {@link IModelInstanceElement}, the
-	 * {@link Constraint} and the {@link Expression} to determine which elements
-	 * have been selected in the {@link InterpreterView}.
-	 * </p>
-	 * TODO Lars: Document here and make this to a good event
-	 * 
-	 * @param interpretationResult
-	 *          The {@link IInterpretationResult} that shall be sent.
-	 */
-	public void fireTraceSelectedConstraints(List<Object[]> constraints);
 
 	/**
 	 * <p>

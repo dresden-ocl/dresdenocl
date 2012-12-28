@@ -93,6 +93,10 @@
                id="org.dresdenocl.modelbus.ui.menu.main"
                label="Dresden OCL"
                tooltip="Tools of Dresden OCL">
+            <separator
+                  name="org.dresdenocl.modelbus.ui.separator1"
+                  visible="true">
+            </separator>
             <command
                   commandId="org.dresdenocl.modelbus.ui.loadModelCommand"
                   icon="icons/models.gif"
@@ -109,6 +113,10 @@
                   style="push"
                   tooltip="Loads a Model Instance into DresdenOCL">
             </command>
+            <separator
+                  name="org.dresdenocl.modelbus.ui.separator2"
+                  visible="true">
+            </separator>
          </menu>
       </menuContribution>
    </extension>

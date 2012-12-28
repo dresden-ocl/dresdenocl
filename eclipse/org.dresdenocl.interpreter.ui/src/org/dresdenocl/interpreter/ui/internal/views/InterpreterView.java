@@ -40,9 +40,6 @@ import java.util.WeakHashMap;
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.IOclInterpreter;
 import org.dresdenocl.interpreter.OclInterpreterPlugin;
-import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
-import org.dresdenocl.interpreter.ui.actions.InterpreterViewMenuAction;
-import org.dresdenocl.interpreter.ui.actions.InterpreterViewMenuActionType;
 import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import org.dresdenocl.interpreter.ui.internal.views.util.ResultsContentProvider;
 import org.dresdenocl.interpreter.ui.internal.views.util.ResultsFilter;
@@ -58,8 +55,6 @@ import org.dresdenocl.modelinstance.event.ModelInstanceRegistryEvent;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Type;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -99,9 +94,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/** Icon to remove the interpretation results. */
 	public static String REMOVE_IMAGE = "icons/remove.gif";
 
-	/** Icon to trace the selected constraints */
-	private static final String TRACE_IMAGE = "icons/trace.gif";
-
 	/** The currently selected {@link Constraint}s that shall be interpreted. */
 	private final Set<Constraint> currentlySelectedConstraints =
 			new HashSet<Constraint>();
@@ -119,9 +111,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	/** The currently selected rows of this {@link IViewActionDelegate}. */
 	private final Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
 
-	/** The {@link InterpreterViewMenuAction} which removes results. */
-	private InterpreterViewMenuAction myActionToremoveSelectedResults = null;
-
 	/**
 	 * A {@link Map} containing the {@link IOclInterpreter}s for all
 	 * {@link IModelInstance}s. <b>This is a {@link WeakHashMap}!</b> The
@@ -133,9 +122,6 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/** The currently selected {@link ResultFilter}. */
 	private ResultsFilter myCurrentFilter = new ResultsFilter(this);
-
-	/** The {@link IMenuManager} used to provide the menu for the interpreter. */
-	private IMenuManager myMenuManager;
 
 	/** The {@link InterpretationResultCache} of this {@link InterpreterView}. */
 	private InterpretationResultCache myResults = new InterpretationResultCache();
@@ -655,197 +641,5 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private void clearModelObjectSelection() {
 
 		this.currentlySelectedModelInstanceElements.clear();
-	}
-
-	/**
-	 * @return The menu of the {@link InterpreterView}.
-	 */
-	private IMenuManager getMenuManager() {
-
-		if (this.myMenuManager == null) {
-			this.myMenuManager = getViewSite().getActionBars().getMenuManager();
-		}
-
-		return this.myMenuManager;
-	}
-
-	/**
-	 * <p>
-	 * Initializes the drop-down menu of the {@link InterpreterView} with all
-	 * supported {@link InterpreterViewMenuAction}s.
-	 */
-	private void initMenu() {
-
-		InterpreterViewMenuAction prepareSelected;
-		InterpreterViewMenuAction prepareAll;
-
-		InterpreterViewMenuAction addVariable;
-
-		InterpreterViewMenuAction interpretSelected;
-		InterpreterViewMenuAction interpretAll;
-
-		InterpreterViewMenuAction clearResultsForSelected;
-		InterpreterViewMenuAction clearAllResults;
-
-		InterpreterViewMenuAction traceSelectedConstraints;
-
-		/* Create the different actions for the preparation menu. */
-
-		/* Create action to prepare all constraints. */
-		{
-			prepareAll =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.PREPARE_ALL_CONSTRAINTS, this);
-
-			/* Set an Icon for this action. */
-			prepareAll.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(PREPARE_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(prepareAll);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(prepareAll);
-		}
-
-		/* Create action to prepare the selected constraints. */
-		{
-			prepareSelected =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.PREPARE_SELECTED_CONSTRAINTS, this);
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(prepareSelected);
-		}
-
-		/* Add a separator line to the menu. */
-		this.getMenuManager().add(new Separator());
-
-		/* Create an action to add new variables to the environment. */
-		{
-			addVariable =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.ADD_VARIABLE_TO_ENVIRONMENT, this);
-
-			addVariable
-					.setText(OclInterpreterUIMessages.InterpreterView_AddVariable_Title);
-
-			/* Set an Icon for this action. */
-			addVariable.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(ADD_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(addVariable);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(addVariable);
-		}
-
-		/* Add a separator line to the menu. */
-		this.getMenuManager().add(new Separator());
-
-		/* ---- INTERPRETER MENU ---- */
-		/* Create action to interpret all constraints and model objects. */
-		{
-			interpretAll =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.INTERPRET_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-							this);
-
-			/* Set an Icon for this action. */
-			interpretAll.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(INTERPRET_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(interpretAll);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager().add(interpretAll);
-		}
-
-		/* Create action to interpret selected constraints and model objects. */
-		{
-			interpretSelected =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.INTERPRET_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-							this);
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(interpretSelected);
-		}
-
-		/* Add a separator line to the menu. */
-		this.getMenuManager().add(new Separator());
-
-		/*
-		 * Create action to clear the results for the all constraints and objects.
-		 */
-		{
-			clearAllResults =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.CLEAR_ALL_CONSTRAINTS_FOR_ALL_MODEL_OBJECTS,
-							this);
-
-			/* Set an Icon for this action. */
-			clearAllResults.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(REMOVE_IMAGE));
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(clearAllResults);
-
-			/* Add the action to the tool bar. */
-			this.getViewSite().getActionBars().getToolBarManager()
-					.add(clearAllResults);
-		}
-
-		/*
-		 * Create action to trace all selected results.
-		 */
-		{
-			traceSelectedConstraints =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.TRACE_SELECTED_CONSTRAINTS, this);
-
-			/* Select an icon for this action */
-			traceSelectedConstraints.setImageDescriptor(InterpreterUIPlugin
-					.getImageDescriptor(TRACE_IMAGE));
-
-			/* Add the action to the tool bar */
-			this.getViewSite().getActionBars().getToolBarManager()
-					.add(traceSelectedConstraints);
-		}
-
-		/*
-		 * Create action to clear the results for the selected constraints model
-		 * objects.
-		 */
-		{
-			clearResultsForSelected =
-					new InterpreterViewMenuAction(
-							InterpreterViewMenuActionType.CLEAR_SELECTED_CONSTRAINTS_FOR_SELECTED_MODEL_OBJECTS,
-							this);
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(clearResultsForSelected);
-		}
-
-		/*
-		 * Eventually initialize an action to remove the results for all selected
-		 * constraints.
-		 */
-		{
-			if (this.myActionToremoveSelectedResults == null) {
-				this.myActionToremoveSelectedResults =
-						new InterpreterViewMenuAction(
-								InterpreterViewMenuActionType.REMOVE_SELECTED_RESULTS, this);
-			}
-			// no else.
-
-			/* Add the action to the menu. */
-			this.getMenuManager().add(myActionToremoveSelectedResults);
-		}
-
-		/* Update the menu and tool bar after initialization. */
-		this.getViewSite().getActionBars().updateActionBars();
 	}
 }

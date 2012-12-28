@@ -44,9 +44,9 @@
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
+            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main?after=interpreter">
          <command
-               commandId="org.dresdenocl.tracer.ui.command8"
+               commandId="org.dresdenocl.tracer.ui.command.showView"
                icon="icons/dresdenocl.gif"
                label="Open OCL Tracer"
                style="push"
@@ -63,7 +63,7 @@
             name="Trace">
       </command>
       <command
-            defaultHandler="org.dresdenocl.tracer.ui.command.handler.TracerViewCommandHandler"
+            defaultHandler="org.dresdenocl.tracer.ui.command.handler.TracerViewHandler"
             id="org.dresdenocl.tracer.ui.command.showView"
             name="Open OCL Tracer">
       </command>

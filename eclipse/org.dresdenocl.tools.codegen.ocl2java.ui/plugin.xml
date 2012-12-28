@@ -2,35 +2,6 @@
 <?eclipse version="3.2"?>
 <plugin>
 
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            label="Codegen Action Set"
-            visible="true"
-            id="org.dresdenocl.tools.codegen.ocl2java.ui.actionSet">
-         <menu
-               label="Dresden OCL"
-               id="org.dresdenocl.modelbus.ui.menu">
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.import">
-            </separator>
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.tools">
-            </separator>
-            <groupMarker
-            	name="org.dresdenocl.modelbus.ui.menu.codegen">
-            </groupMarker>
-         </menu>
-         <action
-               label="Generate AspectJ Constraint Code"
-               icon="icons/codegen.gif"
-               class="org.dresdenocl.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction"
-               tooltip="Creates AspectJ code to instrument constraints for a given model and given OCL constraints."
-               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.codegen"
-               id="org.dresdenocl.tools.codegen.ocl2java.ui.actions.JavaCodeGenAction">
-         </action>
-      </actionSet>
-   </extension>
 
    <extension
          point="org.eclipse.ui.newWizards">
@@ -54,6 +25,28 @@
                id="org.dresdenocl.tools.codegen.ocl2java.ui.importWizards.loadModelWizard">
          </newWizardShortcut>
       </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
+         <command
+               commandId="org.dresdenocl.tools.codegen.ocl2java.ui.generateCode"
+               icon="icons/codegen.gif"
+               label="Generate AspectJ Constraint Code"
+               style="push"
+               tooltip="Creates AspectJ code to instrument constraints for a given model and given OCL constraints.">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.dresdenocl.tools.codegen.ocl2java.ui.command.handler.JavaCodeGenHandler"
+            id="org.dresdenocl.tools.codegen.ocl2java.ui.generateCode"
+            name="Generate AspectJ Constraint Code">
+      </command>
    </extension>
 
 </plugin>

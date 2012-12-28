@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            id="org.dresdenocl.interpreter.ui.actionSet"
-            label="Interpreter Action Set"
-            visible="true">
-         <menu
-               icon="icons/dresdenocl.gif"
-               id="org.dresdenocl.modelbus.ui.menu"
-               label="Dresden OCL">
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.import">
-            </separator>
-            <separator
-                  name="org.dresdenocl.modelbus.ui.menu.tools">
-            </separator>
-            <groupMarker
-            	name="org.dresdenocl.modelbus.ui.menu.tools.codegen">
-            </groupMarker>
-         </menu>
-         <action
-               label="Open OCL Interpreter"
-               icon="icons/dresdenocl.gif"
-               class="org.dresdenocl.interpreter.ui.actions.InterpreterViewAction"
-               tooltip="Opens the OCL Interpreter of Dresden OCL."
-               menubarPath="org.dresdenocl.modelbus.ui.menu/org.dresdenocl.modelbus.ui.menu.tools"
-               id="org.dresdenocl.interpreter.ui.actions.InterpreterViewAction">
-         </action>
-      </actionSet>
-   </extension>
 
    <extension
          point="org.eclipse.ui.views">
@@ -147,13 +117,24 @@
             </parameter>
          </command>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
+         <command
+               commandId="org.dresdenocl.interpreter.ui.command.showView"
+               icon="icons/dresdenocl.gif"
+               id="interpreter"
+               label="Open OCL Interpreter View"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <category
-            description="%InterpreterPlugin_Category_Description"
+            description="This category belongs to the Interpreter View of the Dresden OCL Plug-In"
             id="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
-            name="%InterpreterPlugin_Category_Name">
+            name="Dresden OCL Interpreter View">
       </category>
       <command
             categoryId="org.dresdenocl.interpreter.ui.commandcategory.InterpreterView"
@@ -197,6 +178,11 @@
                name="Clear"
                optional="true">
          </commandParameter>
+      </command>
+      <command
+            defaultHandler="org.dresdenocl.interpreter.ui.command.handler.InterpreterViewHandler"
+            id="org.dresdenocl.interpreter.ui.command.showView"
+            name="Open OCL Interpreter View">
       </command>
    </extension>
 

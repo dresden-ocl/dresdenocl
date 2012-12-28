@@ -34,9 +34,9 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
-            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main">
+            locationURI="menu:org.dresdenocl.modelbus.ui.menu.main?after=interpreter">
          <command
-               commandId="org.dresdenocl.metrics.ui.command.metricsview"
+               commandId="org.dresdenocl.metrics.ui.command.showView"
                icon="icons/dresdenocl.gif"
                label="Open OCL Metrics"
                style="push"
@@ -48,7 +48,7 @@
          point="org.eclipse.ui.commands">
       <command
             defaultHandler="org.dresdenocl.metrics.ui.MetricsViewCommandHandler"
-            id="org.dresdenocl.metrics.ui.command.metricsview"
+            id="org.dresdenocl.metrics.ui.command.showView"
             name="Open OCL Metrics">
       </command>
    </extension>
