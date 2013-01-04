@@ -145,6 +145,7 @@ trait OclAttributes { selfType: OclStaticSemantics =>
           val property = PivotModelFactory.eINSTANCE.createProperty
           property.setName(v.getVariableName.getSimpleName)
           property.setType(tipe)
+          allMappings.put(property, v)
           Full(property)
         }
       }

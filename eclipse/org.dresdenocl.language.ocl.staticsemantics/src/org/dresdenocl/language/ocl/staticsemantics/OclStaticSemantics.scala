@@ -95,6 +95,10 @@ trait OclStaticSemantics extends OclLookUpFunctions
   protected lazy val iResource: IResource = EMFTextAccessProxy.get(resource, classOf[IResource]).asInstanceOf[IResource]
 
   protected var lastRoot: EObject = null
+  
+  //maps EssentialOcl to their corresponding CS
+  //@author Lars Schuetze
+  protected var allMappings : collection.mutable.HashMap[EObject, EObject] = new collection.mutable.HashMap[EObject, EObject]
 
   /*
    * For cached attributes.
@@ -178,7 +182,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
       val constraints = computeConstraints(root)
       // to avoid the conversion of Scala List to Java List multiple times
       val result: java.util.List[Constraint] = constraints.openOr { throw new OclStaticSemanticsException }
-      OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result)
+      OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result, allMappings)
       //definedOperationsType.clear
       allDefs = null
       lastRoot = root
@@ -191,6 +195,11 @@ trait OclStaticSemantics extends OclLookUpFunctions
     if (allDefs == null)
       allDefs = OclStaticSemanticsTransactions.getAllDefs(this, iResource.getContents.get(0))
     allDefs
+  }
+  
+  def getAllEssentialOcl2CsMappings : java.util.Map[EObject, EObject] = {
+  
+  	allMappings
   }
 }
 

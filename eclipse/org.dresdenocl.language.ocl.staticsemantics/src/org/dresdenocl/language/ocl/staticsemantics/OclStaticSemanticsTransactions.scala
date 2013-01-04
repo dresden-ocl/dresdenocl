@@ -10,6 +10,7 @@ import org.dresdenocl.language.ocl._
 import org.dresdenocl.model._
 import org.dresdenocl.pivotmodel._
 import org.dresdenocl.language.ocl.resource.ocl.mopp._
+import org.eclipse.emf.ecore.EObject
 
 
 import AttributableEObject._
@@ -74,7 +75,7 @@ object OclStaticSemanticsTransactions {
    * After the semantic analysis, the parsed constraints and defined
    * properties/operations are added to the model.
    */
-  def endStaticSemanticsAnalysis(model: IModel, resource: IOclResource, constraints: java.util.List[Constraint]) = {
+  def endStaticSemanticsAnalysis(model: IModel, resource: IOclResource, constraints: java.util.List[Constraint], mappings: java.util.Map[EObject, EObject]) = {
     val iter = constraints.iterator
     while (iter.hasNext) {
       val constraint = iter.next
@@ -100,6 +101,7 @@ object OclStaticSemanticsTransactions {
         }
       }
     }
+    model.addAllMappings(mappings)
     parsedConstraints += resource -> constraints
   }
 
