@@ -25,9 +25,6 @@ public final class ModelLoaderUtility {
 		throw new AssertionError("This class must not be instantiated.");
 	}
 
-	private static final String m_src = File.separator + "src" + File.separator;
-	private static final String m_bin = File.separator + "bin" + File.separator;
-
 	/**
 	 * <p>
 	 * Helper method which substitutes the "/src/" with "/bin/" and set the file
@@ -35,7 +32,7 @@ public final class ModelLoaderUtility {
 	 * </p>
 	 * 
 	 * @param A
-	 *          {@link String} which represents the path to the .java file
+	 *            {@link String} which represents the path to the .java file
 	 * @return A {@link String} which represents the possible path to the
 	 *         corresponding .class file of a .java file
 	 */
@@ -44,10 +41,23 @@ public final class ModelLoaderUtility {
 		if (pathToJavaFile == null)
 			return null;
 
-		String pathToClassFile = pathToJavaFile.replace(m_src, m_bin);
+		// Check which type of slashes are used and replace src with bin
+		String pathToClassFile = null;
+		if (pathToJavaFile.contains("\\src\\")) {
+			pathToClassFile = pathToJavaFile.replace("\\src\\", "\\bin\\");
+		} else if (pathToJavaFile.contains("/src/")) {
+			pathToClassFile = pathToJavaFile.replace("/src/", "/bin/");
+		}
 
-		pathToClassFile =
-				pathToClassFile.substring(0, pathToClassFile.length() - 4) + "class";
+		// now check the file ending
+		if (pathToClassFile.toLowerCase().endsWith(".java")) {
+			pathToClassFile = pathToClassFile.substring(0,
+					pathToClassFile.length() - 4)
+					+ "class";
+		} else {
+			// the file does not end with .java
+			return null;
+		}
 
 		return pathToClassFile;
 	}
@@ -77,30 +87,23 @@ public final class ModelLoaderUtility {
 				if (fileExtension.equalsIgnoreCase("class")
 						|| fileExtension.equalsIgnoreCase("javamodel")
 						|| fileExtension.equalsIgnoreCase("java")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"org.dresdenocl.metamodels.java");
+					mmType = ModelBusPlugin.getMetamodelRegistry()
+							.getMetamodel("org.dresdenocl.metamodels.java");
 
 					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("uml")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"org.dresdenocl.metamodels.uml2");
+				} else if (fileExtension.equalsIgnoreCase("uml")) {
+					mmType = ModelBusPlugin.getMetamodelRegistry()
+							.getMetamodel("org.dresdenocl.metamodels.uml2");
 
 					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("ecore")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"org.dresdenocl.metamodels.ecore");
+				} else if (fileExtension.equalsIgnoreCase("ecore")) {
+					mmType = ModelBusPlugin.getMetamodelRegistry()
+							.getMetamodel("org.dresdenocl.metamodels.ecore");
 
 					isApplicable = true;
-				}
-				else if (fileExtension.equalsIgnoreCase("xsd")) {
-					mmType =
-							ModelBusPlugin.getMetamodelRegistry().getMetamodel(
-									"org.dresdenocl.metamodels.xsd");
+				} else if (fileExtension.equalsIgnoreCase("xsd")) {
+					mmType = ModelBusPlugin.getMetamodelRegistry()
+							.getMetamodel("org.dresdenocl.metamodels.xsd");
 
 					isApplicable = true;
 				}
@@ -123,8 +126,8 @@ public final class ModelLoaderUtility {
 		IModelInstanceType[] miTypes;
 		boolean isApplicable = false;
 
-		miTypes =
-				ModelBusPlugin.getModelInstanceTypeRegistry().getModelInstanceTypes();
+		miTypes = ModelBusPlugin.getModelInstanceTypeRegistry()
+				.getModelInstanceTypes();
 
 		if (miTypes.length > 0) {
 
@@ -134,28 +137,23 @@ public final class ModelLoaderUtility {
 				/* Check whether the model instance file is a .class file */
 				if (fileExtension.equalsIgnoreCase("class")
 						|| fileExtension.equalsIgnoreCase("java")) {
-					miType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(
-											"org.dresdenocl.modelinstancetype.java");
+					miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"org.dresdenocl.modelinstancetype.java");
 
 					isApplicable = true;
 
-				}
-				else if (fileExtension.equalsIgnoreCase("pml")) {
-					miType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(
-											"org.dresdenocl.modelinstancetype.ecore");
+				} else if (fileExtension.equalsIgnoreCase("pml")) {
+					miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"org.dresdenocl.modelinstancetype.ecore");
 
 					isApplicable = true;
 
-				}
-				else if (fileExtension.equalsIgnoreCase("xml")) {
-					miType =
-							ModelBusPlugin.getModelInstanceTypeRegistry()
-									.getModelInstanceType(
-											"org.dresdenocl.modelinstancetype.xml");
+				} else if (fileExtension.equalsIgnoreCase("xml")) {
+					miType = ModelBusPlugin.getModelInstanceTypeRegistry()
+							.getModelInstanceType(
+									"org.dresdenocl.modelinstancetype.xml");
 
 					isApplicable = true;
 				}
