@@ -143,8 +143,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * @see org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #setFileTextBoxText(java.lang.String)
 	 */
 	public void setFileTextBoxText(String text) {
@@ -154,8 +153,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * @see org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #updatePageComplete()
 	 */
 	public void updatePageComplete() {
@@ -439,7 +437,7 @@ public class LoadModelPage extends AbstractModelBusPage {
 		IMetamodel[] metaModels;
 		String fileTextBoxContent = null;
 
-		if (this.selection.getFirstElement() != null) {
+		if (this.selection != null && this.selection.getFirstElement() != null) {
 			Object selectedObject = this.selection.getFirstElement();
 
 			/*
@@ -500,10 +498,10 @@ public class LoadModelPage extends AbstractModelBusPage {
 	 */
 	private void selectMetaModelByModelFilePath(IPath modelFilePath) {
 
-		if(modelFilePath == null) {
+		if (modelFilePath == null) {
 			return;
 		}
-		
+
 		IMetamodel mm =
 				ModelLoaderUtility.getMetamodelByExtension(modelFilePath
 						.getFileExtension());

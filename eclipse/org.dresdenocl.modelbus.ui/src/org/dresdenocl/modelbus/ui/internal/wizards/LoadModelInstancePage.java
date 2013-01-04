@@ -151,8 +151,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * @see org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #setFileTextBoxText(java.lang.String)
 	 */
 	public void setFileTextBoxText(String aText) {
@@ -162,8 +161,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
+	 * @see org.dresdenocl.modelbus.ui.internal.wizards.AbstractModelBusPage
 	 * #updatePageComplete()
 	 */
 	public void updatePageComplete() {
@@ -555,7 +553,7 @@ public class LoadModelInstancePage extends AbstractModelBusPage {
 		IModelInstanceType[] miTypes;
 
 		/* Eventually use a selected file as default resource for import. */
-		if (this.selection.getFirstElement() != null) {
+		if (this.selection != null && this.selection.getFirstElement() != null) {
 			/*
 			 * Use the name of the first Object in the selection as default text of
 			 * the fileNameTextBox.
