@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.dresdenocl.debug.ui.launch.OclLaunchConfigurationTabGroup"
+            id="org.dresdenocl.debug.ui.launchConfigurationTabGroup1"
+            type="org.dresdenocl.debug.launch.OclLaunchConfigurationDelegate">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.dresdenocl.debug.ui.launch.OclLaunchShortcut"
+            id="org.dresdenocl.debug.ui.launch.OclLaunchShortcut"
+            label="OCL"
+            modes="run, debug">
+      </shortcut>
+   </extension>
 
 </plugin>
