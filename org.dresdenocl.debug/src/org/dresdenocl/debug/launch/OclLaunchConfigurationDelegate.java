@@ -8,6 +8,8 @@ import java.util.List;
 import org.dresdenocl.debug.OclDebugPlugin;
 import org.dresdenocl.debug.model.OclDebugProcess;
 import org.dresdenocl.debug.model.OclDebugTarget;
+import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.interpreter.internal.OclInterpreter;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.modelbus.ModelBusPlugin;
@@ -29,14 +31,14 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 
-		int requestPort = -1;
-		int eventPort = -1;
+		final int requestPort;
+		final int eventPort;
 
 		// Check preconditions
-		IModel model;
-		IModelInstance minstance;
-		List<IModelInstanceElement> miElements;
-		List<Constraint> constraints = null;
+		final IModel model;
+		final IModelInstance minstance;
+		final List<IModelInstanceElement> miElements;
+		final List<Constraint> constraints = new ArrayList<Constraint>();
 
 		model = ModelBusPlugin.getModelRegistry().getActiveModel();
 		if (model == null) {
@@ -58,7 +60,7 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		}
 
 		try {
-			constraints = new ArrayList<Constraint>(model.getConstraints());
+			constraints.addAll(model.getConstraints());
 		} catch (ModelAccessException e) {
 			abort("Cannot access model", e);
 		}
@@ -80,7 +82,9 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 
 				@Override
 				public void run() {
-					
+					IOclInterpreter i = new OclInterpreter(minstance, requestPort, eventPort);
+					for(IModelInstanceElement mie : miElements)
+						i.interpretConstraints(constraints, mie, ILaunchManager.DEBUG_MODE);
 				}
 			});
 			interpreterThread.start();

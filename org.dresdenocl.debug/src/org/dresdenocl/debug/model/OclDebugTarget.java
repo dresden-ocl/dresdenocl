@@ -229,7 +229,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 			m_requestWriter.println(request);
 			m_requestWriter.flush();
 			try {
-				String respone = m_requestReader.readLine();
+				String response = m_requestReader.readLine();
 			} catch (IOException e) {
 				abort("Request failed: " + request, e);
 			}
