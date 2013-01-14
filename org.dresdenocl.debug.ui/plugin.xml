@@ -6,7 +6,7 @@
       <launchConfigurationTabGroup
             class="org.dresdenocl.debug.ui.launch.OclLaunchConfigurationTabGroup"
             id="org.dresdenocl.debug.ui.launchConfigurationTabGroup1"
-            type="org.dresdenocl.debug.launch.OclLaunchConfigurationDelegate">
+            type="org.dresdenocl.debug.launch.launchConfigurationType">
       </launchConfigurationTabGroup>
    </extension>
    <extension
@@ -16,7 +16,34 @@
             id="org.dresdenocl.debug.ui.launch.OclLaunchShortcut"
             label="OCL"
             modes="run, debug">
+            <contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count
+							value="1">
+						</count>
+						<iterate>
+							<test
+								property="org.dresdenocl.debug.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType
+				id="org.dresdenocl.debug.launch.launchConfigurationType">
+			</configurationType>
       </shortcut>
    </extension>
+   
+   	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester
+			id="org.dresdenocl.debug.PropertyTester"
+			type="java.lang.Object"
+			namespace="org.dresdenocl.debug"
+			properties="isLaunchable"
+			class="org.dresdenocl.debug.ui.launch.OclPropertyTester">
+		</propertyTester>
+	</extension>
 
 </plugin>
