@@ -49,7 +49,7 @@ import org.dresdenocl.pivotmodel.TypedElement;
  * <em><b>Generic Type</b></em>'. <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class GenericTypeImpl extends NamedElementImpl implements
@@ -62,7 +62,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected GenericTypeImpl() {
@@ -137,7 +136,7 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 		return success;
 	}
 
-/**
+	/**
 	 * This method checks the input parameters and delegates to
 	 * {@link #doBindGenericSuperType(List, List, Type).
 	 * 
@@ -219,7 +218,6 @@ public abstract class GenericTypeImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

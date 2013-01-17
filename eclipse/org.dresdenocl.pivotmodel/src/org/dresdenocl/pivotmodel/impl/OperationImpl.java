@@ -75,29 +75,16 @@ import org.dresdenocl.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwningType
- * <em>Owning Type</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwnedParameter
- * <em>Owned Parameter</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getInputParameter
- * <em>Input Parameter</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOutputParameter
- * <em>Output Parameter</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getReturnParameter
- * <em>Return Parameter</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.OperationImpl#getSignatureParameter
- * <em>Signature Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getInputParameter <em>Input Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getOutputParameter <em>Output Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getReturnParameter <em>Return Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.OperationImpl#getSignatureParameter <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class OperationImpl extends FeatureImpl implements Operation {
@@ -119,10 +106,9 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedParameter()
-	 * <em>Owned Parameter</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getOwnedParameter() <em>Owned Parameter</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getOwnedParameter()
 	 * @generated
 	 * @ordered
@@ -134,7 +120,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected OperationImpl() {
@@ -290,7 +275,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -307,7 +291,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
@@ -319,7 +302,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
@@ -333,7 +315,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
@@ -377,7 +358,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedParameter()} is redirected to this method. <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Parameter> getOwnedParameterGen() {
@@ -691,7 +671,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -716,7 +695,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -738,7 +716,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -755,7 +732,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -782,7 +758,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -808,7 +783,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -830,7 +804,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -857,7 +830,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -882,7 +854,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -907,7 +878,6 @@ public class OperationImpl extends FeatureImpl implements Operation {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

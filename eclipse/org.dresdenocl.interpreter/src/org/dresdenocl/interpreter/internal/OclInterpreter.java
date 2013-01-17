@@ -235,7 +235,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		UUID guid = null;
 
 		/* Check if the constraint has a static context. */
-		if (hasStaticContext(constraint)) {
+		if (constraint.hasStaticContext()) {
 
 			/* Probably trace the entry into this method */
 			if (!isPreparationRun) {

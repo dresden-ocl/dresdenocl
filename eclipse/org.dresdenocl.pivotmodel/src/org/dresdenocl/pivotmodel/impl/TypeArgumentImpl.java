@@ -51,19 +51,16 @@ import org.dresdenocl.pivotmodel.TypeArgument;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.TypeArgumentImpl#getOwningGenericType
- * <em>Owning Generic Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeArgumentImpl#getOwningGenericType <em>Owning Generic Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TypeArgumentImpl() {
@@ -73,7 +70,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -125,7 +121,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ComplexGenericType getOwningGenericType() {
@@ -160,7 +155,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningGenericType(
@@ -174,7 +168,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOwningGenericType(ComplexGenericType newOwningGenericType) {
@@ -204,7 +197,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -222,7 +214,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -238,7 +229,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -256,7 +246,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -271,7 +260,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -287,7 +275,6 @@ public class TypeArgumentImpl extends TypedElementImpl implements TypeArgument {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

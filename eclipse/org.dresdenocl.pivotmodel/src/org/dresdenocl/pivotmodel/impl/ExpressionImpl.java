@@ -52,16 +52,12 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getBody <em>
- * Body</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getLanguage
- * <em>Language</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getConstraint
- * <em>Constraint</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ExpressionImpl#getConstraint <em>Constraint</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ExpressionImpl extends EObjectImpl implements Expression {
@@ -87,9 +83,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	protected String body = BODY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getLanguage() <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -97,9 +92,8 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	protected static final String LANGUAGE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getLanguage() <em>Language</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLanguage()
 	 * @generated
 	 * @ordered
@@ -108,7 +102,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ExpressionImpl() {
@@ -118,7 +111,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -129,7 +121,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getBody() {
@@ -139,7 +130,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setBody(String newBody) {
@@ -153,7 +143,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLanguage() {
@@ -163,7 +152,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setLanguage(String newLanguage) {
@@ -177,7 +165,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Constraint getConstraint() {
@@ -189,7 +176,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetConstraint(Constraint newConstraint,
@@ -203,7 +189,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setConstraint(Constraint newConstraint) {
@@ -233,7 +218,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -251,7 +235,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -267,7 +250,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -284,7 +266,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -303,7 +284,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -325,7 +305,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -347,7 +326,6 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

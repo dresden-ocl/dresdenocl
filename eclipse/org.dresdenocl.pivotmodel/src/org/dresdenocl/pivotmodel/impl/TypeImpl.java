@@ -76,23 +76,15 @@ import org.dresdenocl.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.TypeImpl#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getNamespace <em>
- * Namespace</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getOwnedOperation
- * <em>Owned Operation</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getOwnedProperty
- * <em>Owned Property</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getSuperType <em>
- * Super Type</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.TypeImpl#getGenericSuperType
- * <em>Generic Super Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getOwnedOperation <em>Owned Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getOwnedProperty <em>Owned Property</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeImpl#getGenericSuperType <em>Generic Super Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeImpl extends NamedElementImpl implements Type {
@@ -114,10 +106,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedOperation()
-	 * <em>Owned Operation</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getOwnedOperation() <em>Owned Operation</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getOwnedOperation()
 	 * @generated
 	 * @ordered
@@ -125,10 +116,9 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Operation> ownedOperation;
 
 	/**
-	 * The cached value of the '{@link #getOwnedProperty()
-	 * <em>Owned Property</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getOwnedProperty() <em>Owned Property</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getOwnedProperty()
 	 * @generated
 	 * @ordered
@@ -136,9 +126,8 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	protected EList<Property> ownedProperty;
 
 	/**
-	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSuperType()
 	 * @generated
 	 * @ordered
@@ -164,7 +153,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TypeImpl() {
@@ -200,7 +188,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getSuperType()} is
 	 * redirected to this method. <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Type> getSuperTypeGen() {
@@ -215,7 +202,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public List<GenericType> getGenericSuperType() {
@@ -305,7 +291,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameterGen()} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -322,7 +307,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Namespace getNamespace() {
@@ -334,7 +318,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNamespace(Namespace newNamespace,
@@ -348,7 +331,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setNamespace(Namespace newNamespace) {
@@ -953,7 +935,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -981,7 +962,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1009,7 +989,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1026,7 +1005,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1051,7 +1029,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -1090,7 +1067,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1121,7 +1097,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1146,7 +1121,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1171,7 +1145,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -1196,7 +1169,6 @@ public class TypeImpl extends NamedElementImpl implements Type {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

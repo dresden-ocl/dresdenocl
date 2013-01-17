@@ -35,23 +35,22 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Typed Element</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>TypedElement</code> represents elements that have a {@link Type}.
+ * A <code>TypedElement</code> represents elements that 
+ * have a {@link Type}.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type
- * </em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.TypedElement#getGenericType <em>
- * Generic Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.TypedElement#getGenericType <em>Generic Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypedElement()
  * @model abstract="true"
  * @generated
@@ -75,26 +74,22 @@ public interface TypedElement extends NamedElement {
 	Type getType();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type</em>}
-	 * ' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Type</em>' reference.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.TypedElement#getType <em>Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
 	 * @see #getType()
 	 * @generated
 	 */
 	void setType(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Generic Type</b></em>' containment
-	 * reference. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generic Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Generic Type</em>' containment reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Generic Type</em>' containment reference.
 	 * @see #setGenericType(GenericType)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypedElement_GenericType()
@@ -104,14 +99,10 @@ public interface TypedElement extends NamedElement {
 	GenericType getGenericType();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.TypedElement#getGenericType
-	 * <em>Generic Type</em>}' containment reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.TypedElement#getGenericType <em>Generic Type</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Generic Type</em>' containment
-	 *          reference.
+	 * @param value the new value of the '<em>Generic Type</em>' containment reference.
 	 * @see #getGenericType()
 	 * @generated
 	 */

@@ -51,12 +51,10 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl#getEnumeration
- * <em>Enumeration</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.EnumerationLiteralImpl#getEnumeration <em>Enumeration</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class EnumerationLiteralImpl extends NamedElementImpl implements
@@ -64,7 +62,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected EnumerationLiteralImpl() {
@@ -74,7 +71,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -97,7 +93,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Enumeration getEnumeration() {
@@ -120,7 +115,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetEnumeration(Enumeration newEnumeration,
@@ -134,7 +128,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setEnumeration(Enumeration newEnumeration) {
@@ -164,7 +157,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -182,7 +174,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -198,7 +189,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -216,7 +206,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -231,7 +220,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -247,7 +235,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -263,7 +250,6 @@ public class EnumerationLiteralImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -125,6 +125,7 @@
       <genOperations ecoreOperation="pivotmodel.ecore#//Type/removeOperation">
         <genParameters ecoreParameter="pivotmodel.ecore#//Type/removeOperation/operation"/>
       </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Type/getIDProperties"/>
     </genClasses>
     <genClasses ecoreClass="pivotmodel.ecore#//PrimitiveType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//PrimitiveType/kind"/>
@@ -146,6 +147,7 @@
       <genOperations ecoreOperation="pivotmodel.ecore#//Property/cmpSlots">
         <genParameters ecoreParameter="pivotmodel.ecore#//Property/cmpSlots/p"/>
       </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Property/isIdentifier"/>
     </genClasses>
     <genClasses ecoreClass="pivotmodel.ecore#//Operation">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference pivotmodel.ecore#//Operation/owningType"/>
@@ -209,6 +211,7 @@
       <genOperations ecoreOperation="pivotmodel.ecore#//Constraint/addConstrainedElement">
         <genParameters ecoreParameter="pivotmodel.ecore#//Constraint/addConstrainedElement/constrainedElement"/>
       </genOperations>
+      <genOperations ecoreOperation="pivotmodel.ecore#//Constraint/hasStaticContext"/>
     </genClasses>
     <genClasses ecoreClass="pivotmodel.ecore#//Expression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute pivotmodel.ecore#//Expression/body"/>

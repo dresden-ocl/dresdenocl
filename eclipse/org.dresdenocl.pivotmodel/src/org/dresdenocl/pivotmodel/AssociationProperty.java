@@ -37,23 +37,21 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Association Property</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Association</code> is a {@link Property} typed element that
- * represents an bidirectional association to another type.
+ * A <code>Association</code> is a {@link Property} 
+ * typed element that represents an bidirectional association to another type.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.AssociationProperty#getInverseAssociationProperties
- * <em>Inverse Association Properties</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.AssociationProperty#getInverseAssociationProperties <em>Inverse Association Properties</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getAssociationProperty()
  * @model
  * @generated
@@ -147,7 +145,6 @@ public interface AssociationProperty extends Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @model kind="operation" dataType="org.dresdenocl.datatypes.Boolean"
 	 * @generated
 	 */

@@ -37,22 +37,22 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Enumeration</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * An <code>Enumeration</code> defines a set of {@link EnumerationLiteral
- * literals} that can be used as its values.
+ * An <code>Enumeration</code> defines a set of 
+ * {@link EnumerationLiteral literals} that can be used as its 
+ * values.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral <em>
- * Owned Literal</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Enumeration#getOwnedLiteral <em>Owned Literal</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getEnumeration()
  * @model
  * @generated

@@ -35,16 +35,14 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Type Argument</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
- * <em>Owning Generic Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeArgument()
  * @model
  * @generated
@@ -52,18 +50,15 @@ package org.dresdenocl.pivotmodel;
 public interface TypeArgument extends TypedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Owning Generic Type</b></em>' container
-	 * reference. It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
-	 * <em>Type Argument</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Owning Generic Type</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument <em>Type Argument</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owning Generic Type</em>' container reference
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Owning Generic Type</em>' container
-	 *         reference.
+	 * @return the value of the '<em>Owning Generic Type</em>' container reference.
 	 * @see #setOwningGenericType(ComplexGenericType)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeArgument_OwningGenericType()
 	 * @see org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
@@ -73,14 +68,10 @@ public interface TypeArgument extends TypedElement {
 	ComplexGenericType getOwningGenericType();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
-	 * <em>Owning Generic Type</em>}' container reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Owning Generic Type</em>' container
-	 *          reference.
+	 * @param value the new value of the '<em>Owning Generic Type</em>' container reference.
 	 * @see #getOwningGenericType()
 	 * @generated
 	 */

@@ -50,10 +50,9 @@ import org.dresdenocl.pivotmodel.Feature;
 import org.dresdenocl.pivotmodel.PivotModelPackage;
 
 /**
- * This is the item provider adapter for a
- * {@link org.dresdenocl.pivotmodel.Feature} object. <!-- begin-user-doc
+ * This is the item provider adapter for a {@link org.dresdenocl.pivotmodel.Feature} object.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class FeatureItemProvider extends TypedElementItemProvider implements
@@ -90,9 +89,9 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Static feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Static feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addStaticPropertyDescriptor(Object object) {
@@ -146,11 +145,10 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which it
-	 * passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -161,10 +159,10 @@ public class FeatureItemProvider extends TypedElementItemProvider implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

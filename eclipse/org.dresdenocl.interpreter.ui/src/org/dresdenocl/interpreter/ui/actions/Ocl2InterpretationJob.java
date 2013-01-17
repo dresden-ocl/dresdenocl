@@ -152,7 +152,7 @@ public class Ocl2InterpretationJob extends Job {
 				 */
 				for (Constraint aConstraint : usedConstraints) {
 
-					if (hasStaticContext(aConstraint)) {
+					if (aConstraint.hasStaticContext()) {
 						IInterpretationResult interpretationResult =
 								interpreter.interpretConstraint(aConstraint, null);
 
@@ -235,28 +235,4 @@ public class Ocl2InterpretationJob extends Job {
 		return result;
 	}
 
-	/**
-	 * Checks if a given {@link Constraint} is defined in a static context i.e. is
-	 * defined in a static context (static def, or body/derive/init on static
-	 * feature).
-	 * 
-	 * @param constraint
-	 *          The {@link Constraint}
-	 * @return <code>true</code> if the context is static.
-	 */
-	private boolean hasStaticContext(Constraint constraint) {
-
-		switch (constraint.getKind()) {
-		case DEFINITION:
-			return constraint.getDefinedFeature().isStatic();
-		case DERIVED:
-		case INITIAL:
-		case BODY:
-			return ((Feature) constraint.getConstrainedElement().iterator().next())
-					.isStatic();
-		default:
-			break;
-		}
-		return false;
-	}
 }

@@ -53,12 +53,10 @@ import org.dresdenocl.pivotmodel.util.ListUtil;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter
- * <em>Type Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ParameterGenericTypeImpl#getTypeParameter <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ParameterGenericTypeImpl extends GenericTypeImpl implements
@@ -71,10 +69,9 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 			.getLogger(ParameterGenericTypeImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getTypeParameter()
-	 * <em>Type Parameter</em>}' reference. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getTypeParameter() <em>Type Parameter</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getTypeParameter()
 	 * @generated
 	 * @ordered
@@ -83,7 +80,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ParameterGenericTypeImpl() {
@@ -93,7 +89,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -115,7 +110,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TypeParameter getTypeParameter() {
@@ -125,7 +119,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setTypeParameter(TypeParameter newTypeParameter) {
@@ -236,7 +229,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -251,7 +243,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -267,7 +258,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -283,7 +273,6 @@ public class ParameterGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

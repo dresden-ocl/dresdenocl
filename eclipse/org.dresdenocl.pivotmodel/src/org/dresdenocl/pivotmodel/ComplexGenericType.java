@@ -37,19 +37,15 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Complex Generic Type</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType
- * <em>Unbound Type</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument
- * <em>Type Argument</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType <em>Unbound Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.ComplexGenericType#getTypeArgument <em>Type Argument</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getComplexGenericType()
  * @model
  * @generated
@@ -74,33 +70,26 @@ public interface ComplexGenericType extends GenericType {
 	Type getUnboundType();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType
-	 * <em>Unbound Type</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.ComplexGenericType#getUnboundType <em>Unbound Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Unbound Type</em>' reference.
+	 * @param value the new value of the '<em>Unbound Type</em>' reference.
 	 * @see #getUnboundType()
 	 * @generated
 	 */
 	void setUnboundType(Type value);
 
 	/**
-	 * Returns the value of the '<em><b>Type Argument</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.dresdenocl.pivotmodel.TypeArgument}. It is bidirectional
-	 * and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
-	 * <em>Owning Generic Type</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Type Argument</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.pivotmodel.TypeArgument}.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType <em>Owning Generic Type</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type Argument</em>' containment reference list
 	 * isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Type Argument</em>' containment reference
-	 *         list.
+	 * @return the value of the '<em>Type Argument</em>' containment reference list.
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getComplexGenericType_TypeArgument()
 	 * @see org.dresdenocl.pivotmodel.TypeArgument#getOwningGenericType
 	 * @model opposite="owningGenericType" containment="true"

@@ -35,16 +35,14 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Parameter Generic Type</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter
- * <em>Type Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter <em>Type Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameterGenericType()
  * @model
  * @generated
@@ -69,13 +67,10 @@ public interface ParameterGenericType extends GenericType {
 	TypeParameter getTypeParameter();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter
-	 * <em>Type Parameter</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.ParameterGenericType#getTypeParameter <em>Type Parameter</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Type Parameter</em>' reference.
+	 * @param value the new value of the '<em>Type Parameter</em>' reference.
 	 * @see #getTypeParameter()
 	 * @generated
 	 */

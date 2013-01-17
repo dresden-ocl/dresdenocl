@@ -57,13 +57,11 @@ import org.dresdenocl.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.ParameterImpl#getKind <em>
- * Kind</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.ParameterImpl#getOperation
- * <em>Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ParameterImpl#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ParameterImpl#getOperation <em>Operation</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ParameterImpl extends TypedElementImpl implements Parameter {
@@ -91,7 +89,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ParameterImpl() {
@@ -101,7 +98,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -177,7 +173,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public ParameterDirectionKind getKind() {
@@ -187,7 +182,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setKind(ParameterDirectionKind newKind) {
@@ -201,7 +195,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Operation getOperation() {
@@ -213,7 +206,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOperation(Operation newOperation,
@@ -227,7 +219,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOperation(Operation newOperation) {
@@ -300,7 +291,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -318,7 +308,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -334,7 +323,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -351,7 +339,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -368,7 +355,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -387,7 +373,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -406,7 +391,6 @@ public class ParameterImpl extends TypedElementImpl implements Parameter {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

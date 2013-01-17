@@ -35,15 +35,14 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Type Parameter</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
- * <em>Generic Element</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement <em>Generic Element</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeParameter()
  * @model
  * @generated
@@ -51,35 +50,28 @@ package org.dresdenocl.pivotmodel;
 public interface TypeParameter extends NamedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Generic Element</b></em>' container
-	 * reference. It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
-	 * <em>Owned Type Parameter</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Generic Element</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter <em>Owned Type Parameter</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Generic Element</em>' container reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Generic Element</em>' container reference.
 	 * @see #setGenericElement(GenericElement)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getTypeParameter_GenericElement()
 	 * @see org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
-	 * @model opposite="ownedTypeParameter" resolveProxies="false"
-	 *        transient="false"
+	 * @model opposite="ownedTypeParameter" resolveProxies="false" transient="false"
 	 * @generated
 	 */
 	GenericElement getGenericElement();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
-	 * <em>Generic Element</em>}' container reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement <em>Generic Element</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Generic Element</em>' container
-	 *          reference.
+	 * @param value the new value of the '<em>Generic Element</em>' container reference.
 	 * @see #getGenericElement()
 	 * @generated
 	 */

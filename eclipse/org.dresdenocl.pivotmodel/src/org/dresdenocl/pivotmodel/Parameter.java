@@ -35,23 +35,21 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Parameter</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Parameter</code> is a specification of an argument used to pass
- * information into or out of an invocation of an {@link Operation}.
+ * A <code>Parameter</code> is a specification of an argument used to pass information into or out of an invocation of an {@link Operation}.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Parameter#getOperation <em>
- * Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Parameter#getOperation <em>Operation</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameter()
  * @model
  * @generated
@@ -79,12 +77,9 @@ public interface Parameter extends TypedElement, NamedElement {
 	ParameterDirectionKind getKind();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Kind</em>' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Parameter#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
 	 * @see org.dresdenocl.pivotmodel.ParameterDirectionKind
 	 * @see #getKind()
 	 * @generated
@@ -93,15 +88,13 @@ public interface Parameter extends TypedElement, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Operation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter
-	 * <em>Owned Parameter</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter <em>Owned Parameter</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * References the {@link Operation} for which this is a formal parameter.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * 
 	 * @return the value of the '<em>Operation</em>' container reference.
 	 * @see #setOperation(Operation)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getParameter_Operation()
@@ -112,13 +105,10 @@ public interface Parameter extends TypedElement, NamedElement {
 	Operation getOperation();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Parameter#getOperation
-	 * <em>Operation</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Parameter#getOperation <em>Operation</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Operation</em>' container reference.
+	 * @param value the new value of the '<em>Operation</em>' container reference.
 	 * @see #getOperation()
 	 * @generated
 	 */

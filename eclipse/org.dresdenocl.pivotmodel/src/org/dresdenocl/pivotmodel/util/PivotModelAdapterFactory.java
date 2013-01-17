@@ -65,23 +65,22 @@ import org.dresdenocl.pivotmodel.TypedElement;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * 
  * @see org.dresdenocl.pivotmodel.PivotModelPackage
  * @generated
  */
 public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected static PivotModelPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PivotModelAdapterFactory() {
@@ -255,11 +254,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 			};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param target
-	 *          the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
@@ -270,12 +268,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.Enumeration <em>Enumeration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Enumeration <em>Enumeration</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.Enumeration
 	 * @generated
@@ -286,13 +282,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.NamedElement
-	 * <em>Named Element</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.NamedElement
 	 * @generated
@@ -303,12 +297,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.Operation <em>Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.Operation
 	 * @generated
@@ -319,12 +311,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.Namespace <em>Namespace</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Namespace <em>Namespace</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.Namespace
 	 * @generated
@@ -351,12 +341,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.Parameter
 	 * @generated
@@ -367,13 +355,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.EnumerationLiteral
-	 * <em>Enumeration Literal</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.EnumerationLiteral <em>Enumeration Literal</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.EnumerationLiteral
 	 * @generated
@@ -400,13 +386,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.TypedElement
-	 * <em>Typed Element</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.TypedElement <em>Typed Element</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.TypedElement
 	 * @generated
@@ -417,13 +401,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.PrimitiveType
-	 * <em>Primitive Type</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.PrimitiveType <em>Primitive Type</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.PrimitiveType
 	 * @generated
@@ -450,12 +432,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.Constraint <em>Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Constraint <em>Constraint</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.Constraint
 	 * @generated
@@ -466,12 +446,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.Expression <em>Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that we
 	 * can easily ignore cases; it's useful to ignore a case when inheritance will
 	 * catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.Expression
 	 * @generated
@@ -482,13 +460,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.AssociationProperty
-	 * <em>Association Property</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.AssociationProperty <em>Association Property</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.AssociationProperty
 	 * @generated
@@ -499,13 +475,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.ConstrainableElement
-	 * <em>Constrainable Element</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.ConstrainableElement <em>Constrainable Element</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.ConstrainableElement
 	 * @generated
@@ -516,13 +490,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.GenericElement
-	 * <em>Generic Element</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.GenericElement <em>Generic Element</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.GenericElement
 	 * @generated
@@ -533,13 +505,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.TypeParameter
-	 * <em>Type Parameter</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.TypeParameter <em>Type Parameter</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.TypeParameter
 	 * @generated
@@ -550,13 +520,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.TypeArgument
-	 * <em>Type Argument</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.TypeArgument <em>Type Argument</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.TypeArgument
 	 * @generated
@@ -567,13 +535,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.ParameterGenericType
-	 * <em>Parameter Generic Type</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.ParameterGenericType <em>Parameter Generic Type</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.ParameterGenericType
 	 * @generated
@@ -584,13 +550,11 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.ComplexGenericType
-	 * <em>Complex Generic Type</em>}'. <!-- begin-user-doc --> This default
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.ComplexGenericType <em>Complex Generic Type</em>}'.
+	 * <!-- begin-user-doc --> This default
 	 * implementation returns null so that we can easily ignore cases; it's useful
 	 * to ignore a case when inheritance will catch all the cases anyway. <!--
 	 * end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.ComplexGenericType
 	 * @generated
@@ -601,12 +565,10 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.dresdenocl.pivotmodel.GenericType <em>Generic Type</em>}
-	 * '. <!-- begin-user-doc --> This default implementation returns null so that
+	 * Creates a new adapter for an object of class '{@link org.dresdenocl.pivotmodel.GenericType <em>Generic Type</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.dresdenocl.pivotmodel.GenericType
 	 * @generated
@@ -617,9 +579,9 @@ public class PivotModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */
