@@ -14,3 +14,4 @@ Export-Package: org.apache.commons.lang,
  org.apache.commons.lang.mutable,
  org.apache.commons.lang.text,
  org.apache.commons.lang.time
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
