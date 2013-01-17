@@ -37,32 +37,28 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Constraint</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Constraint</code> is a condition or restriction expressed in natural
- * language text or in a machine readable language for the purpose of declaring
- * some of the semantics of an element. The semantics are specified via an
- * associated {@link Expression}.
+ * A <code>Constraint</code> is a condition or restriction 
+ * expressed in natural language text or in a machine readable 
+ * language for the purpose of declaring some of the 
+ * semantics of an element. The semantics are specified via 
+ * an associated {@link Expression}.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}
- * </li>
- * <li>{@link org.dresdenocl.pivotmodel.Constraint#getNamespace <em>
- * Namespace</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Constraint#getSpecification <em>
- * Specification</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Constraint#getConstrainedElement
- * <em>Constrained Element</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature <em>
- * Defined Feature</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Constraint#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Constraint#getSpecification <em>Specification</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Constraint#getConstrainedElement <em>Constrained Element</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature <em>Defined Feature</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getConstraint()
  * @model
  * @generated
@@ -90,12 +86,9 @@ public interface Constraint extends NamedElement {
 	ConstraintKind getKind();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Kind</em>' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Constraint#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
 	 * @see org.dresdenocl.pivotmodel.ConstraintKind
 	 * @see #getKind()
 	 * @generated
@@ -128,13 +121,10 @@ public interface Constraint extends NamedElement {
 	Namespace getNamespace();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Constraint#getNamespace
-	 * <em>Namespace</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Constraint#getNamespace <em>Namespace</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Namespace</em>' container reference.
+	 * @param value the new value of the '<em>Namespace</em>' container reference.
 	 * @see #getNamespace()
 	 * @generated
 	 */
@@ -162,14 +152,10 @@ public interface Constraint extends NamedElement {
 	Expression getSpecification();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Constraint#getSpecification
-	 * <em>Specification</em>}' containment reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Constraint#getSpecification <em>Specification</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Specification</em>' containment
-	 *          reference.
+	 * @param value the new value of the '<em>Specification</em>' containment reference.
 	 * @see #getSpecification()
 	 * @generated
 	 */
@@ -215,13 +201,10 @@ public interface Constraint extends NamedElement {
 	Feature getDefinedFeature();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature
-	 * <em>Defined Feature</em>}' reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature <em>Defined Feature</em>}' reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Defined Feature</em>' reference.
+	 * @param value the new value of the '<em>Defined Feature</em>' reference.
 	 * @see #getDefinedFeature()
 	 * @generated
 	 */
@@ -241,6 +224,21 @@ public interface Constraint extends NamedElement {
 	 * @generated
 	 */
 	Constraint addConstrainedElement(ConstrainableElement constrainedElement);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>
+	 * Checks if a given {@link Constraint} is defined in a static context i.e. is
+	 * defined in a static context (static def, or body/derive/init on static feature).
+	 * <p>
+	 * @return <code>true</code> if the context is static.
+	 * <!-- end-model-doc -->
+	 * @model dataType="org.dresdenocl.datatypes.Boolean"
+	 * @generated
+	 */
+	boolean hasStaticContext();
 
 	/**
 	 * Redefines {@link NamedElement#clone()} with a covariant return type.

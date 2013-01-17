@@ -66,22 +66,14 @@ import org.dresdenocl.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedType
- * <em>Owned Type</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedRule
- * <em>Owned Rule</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getNestedNamespace
- * <em>Nested Namespace</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getNestingNamespace
- * <em>Nesting Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getOwnedRule <em>Owned Rule</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamespaceImpl#getNestingNamespace <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class NamespaceImpl extends NamedElementImpl implements Namespace {
@@ -103,9 +95,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<TypeParameter> ownedTypeParameter;
 
 	/**
-	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwnedType()
 	 * @generated
 	 * @ordered
@@ -113,9 +104,8 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<Type> ownedType;
 
 	/**
-	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOwnedRule() <em>Owned Rule</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwnedRule()
 	 * @generated
 	 * @ordered
@@ -123,10 +113,9 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	protected EList<Constraint> ownedRule;
 
 	/**
-	 * The cached value of the '{@link #getNestedNamespace()
-	 * <em>Nested Namespace</em>}' containment reference list. <!-- begin-user-doc
+	 * The cached value of the '{@link #getNestedNamespace() <em>Nested Namespace</em>}' containment reference list.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see #getNestedNamespace()
 	 * @generated
 	 * @ordered
@@ -135,7 +124,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected NamespaceImpl() {
@@ -145,7 +133,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -183,7 +170,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getOwnedTypeParameter} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeParameter> getOwnedTypeParameterGen() {
@@ -214,7 +200,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedRule()} is
 	 * redirected to this method.<!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Constraint> getOwnedRuleGen() {
@@ -244,7 +229,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedType()} is
 	 * redirected to this method.<!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Type> getOwnedTypeGen() {
@@ -275,7 +259,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 	 * <!-- begin-user-doc -->The code generated for {
 	 * {@link #getNestedNamespace()} is redirected to this method.<!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<Namespace> getNestedNamespaceGen() {
@@ -291,7 +274,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Namespace getNestingNamespace() {
@@ -303,7 +285,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetNestingNamespace(
@@ -317,7 +298,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setNestingNamespace(Namespace newNestingNamespace) {
@@ -615,7 +595,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NamedElement bindTypeParameter(List<TypeParameter> parameters,
@@ -667,7 +646,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -698,7 +676,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -724,7 +701,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -741,7 +717,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -764,7 +739,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -798,7 +772,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -826,7 +799,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -849,7 +821,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -868,7 +839,6 @@ public class NamespaceImpl extends NamedElementImpl implements Namespace {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

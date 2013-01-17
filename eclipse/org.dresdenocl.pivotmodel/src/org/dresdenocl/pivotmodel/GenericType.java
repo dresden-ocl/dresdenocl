@@ -37,8 +37,8 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Generic Type</b></em>'. <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getGenericType()
  * @model abstract="true"
  * @generated
@@ -47,13 +47,7 @@ public interface GenericType extends NamedElement {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.dresdenocl.datatypes.Boolean" required="true"
-	 *        parametersDataType=
-	 *        "org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>"
-	 *        parametersRequired="true" parametersMany="false" typesDataType=
-	 *        "org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>"
-	 *        typesRequired="true" typesMany="false"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean" required="true" parametersDataType="org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>" typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	boolean bindGenericType(List<TypeParameter> parameters,
@@ -61,13 +55,7 @@ public interface GenericType extends NamedElement {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @model dataType="org.dresdenocl.datatypes.Boolean"
-	 *        parametersDataType=
-	 *        "org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>"
-	 *        parametersRequired="true" parametersMany="false" typesDataType=
-	 *        "org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>"
-	 *        typesRequired="true" typesMany="false"
+	 * @model dataType="org.dresdenocl.datatypes.Boolean" parametersDataType="org.dresdenocl.datatypes.Sequence<org.dresdenocl.pivotmodel.TypeParameter>" parametersRequired="true" parametersMany="false" typesDataType="org.dresdenocl.datatypes.Sequence<? extends org.dresdenocl.pivotmodel.Type>" typesRequired="true" typesMany="false"
 	 * @generated
 	 */
 	boolean bindGenericSuperType(List<TypeParameter> parameters,

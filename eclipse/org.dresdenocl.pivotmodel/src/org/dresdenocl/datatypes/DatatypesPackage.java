@@ -45,7 +45,6 @@ import org.eclipse.emf.ecore.EPackage;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
  * @see org.dresdenocl.datatypes.DatatypesFactory
  * @model kind="package"
  * @generated
@@ -53,30 +52,30 @@ import org.eclipse.emf.ecore.EPackage;
 public interface DatatypesPackage extends EPackage {
 
 	/**
-	 * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNAME = "datatypes"; //$NON-NLS-1$
 
 	/**
-	 * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace URI.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_URI = "http://www.tu-dresden.de/ocl20/pivot/2007/datatypes"; //$NON-NLS-1$
 
 	/**
-	 * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The package namespace name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	String eNS_PREFIX = "datatypes"; //$NON-NLS-1$
 
 	/**
-	 * The singleton instance of the package. <!-- begin-user-doc --> <!--
+	 * The singleton instance of the package.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	DatatypesPackage eINSTANCE =
@@ -101,18 +100,18 @@ public interface DatatypesPackage extends EPackage {
 	int INTEGER = 1;
 
 	/**
-	 * The meta object id for the '<em>Real</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>Real</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getReal()
 	 * @generated
 	 */
 	int REAL = 2;
 
 	/**
-	 * The meta object id for the '<em>String</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>String</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see java.lang.String
 	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getString()
 	 * @generated
@@ -149,9 +148,9 @@ public interface DatatypesPackage extends EPackage {
 	int SEQUENCE = 6;
 
 	/**
-	 * The meta object id for the '<em>Bag</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>Bag</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see java.util.List
 	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getBag()
 	 * @generated
@@ -159,9 +158,9 @@ public interface DatatypesPackage extends EPackage {
 	int BAG = 7;
 
 	/**
-	 * The meta object id for the '<em>Set</em>' data type. <!-- begin-user-doc
+	 * The meta object id for the '<em>Set</em>' data type.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @see java.util.Set
 	 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getSet()
 	 * @generated
@@ -199,9 +198,9 @@ public interface DatatypesPackage extends EPackage {
 	EDataType getInteger();
 
 	/**
-	 * Returns the meta object for data type '<em>Real</em>'. <!-- begin-user-doc
+	 * Returns the meta object for data type '<em>Real</em>'.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for data type '<em>Real</em>'.
 	 * @model instanceClass="float"
 	 * @generated
@@ -209,9 +208,8 @@ public interface DatatypesPackage extends EPackage {
 	EDataType getReal();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String
-	 * <em>String</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.lang.String <em>String</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>String</em>'.
 	 * @see java.lang.String
 	 * @model instanceClass="java.lang.String"
@@ -230,37 +228,31 @@ public interface DatatypesPackage extends EPackage {
 	EDataType getUnlimitedNatural();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.Collection
-	 * <em>Collection</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.Collection <em>Collection</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Collection</em>'.
 	 * @see java.util.Collection
-	 * @model instanceClass="java.util.Collection" serializeable="false"
-	 *        typeParameters="T"
+	 * @model instanceClass="java.util.Collection" serializeable="false" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getCollection();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.List
-	 * <em>Sequence</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.List <em>Sequence</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Sequence</em>'.
 	 * @see java.util.List
-	 * @model instanceClass="java.util.List" serializeable="false"
-	 *        typeParameters="T"
+	 * @model instanceClass="java.util.List" serializeable="false" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getSequence();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.List <em>Bag</em>}
-	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.List <em>Bag</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Bag</em>'.
 	 * @see java.util.List
-	 * @model instanceClass="java.util.List" serializeable="false"
-	 *        typeParameters="T"
+	 * @model instanceClass="java.util.List" serializeable="false" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getBag();
@@ -268,23 +260,19 @@ public interface DatatypesPackage extends EPackage {
 	/**
 	 * Returns the meta object for data type '{@link java.util.Set <em>Set</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the meta object for data type '<em>Set</em>'.
 	 * @see java.util.Set
-	 * @model instanceClass="java.util.Set" serializeable="false"
-	 *        typeParameters="T"
+	 * @model instanceClass="java.util.Set" serializeable="false" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getSet();
 
 	/**
-	 * Returns the meta object for data type '{@link java.util.List
-	 * <em>Ordered Set</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for data type '{@link java.util.List <em>Ordered Set</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Ordered Set</em>'.
 	 * @see java.util.List
-	 * @model instanceClass="java.util.List" serializeable="false"
-	 *        typeParameters="T"
+	 * @model instanceClass="java.util.List" serializeable="false" typeParameters="T"
 	 * @generated
 	 */
 	EDataType getOrderedSet();
@@ -308,7 +296,6 @@ public interface DatatypesPackage extends EPackage {
 	 * <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	interface Literals {
@@ -353,7 +340,6 @@ public interface DatatypesPackage extends EPackage {
 		/**
 		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
-		 * 
 		 * @see org.dresdenocl.datatypes.impl.DatatypesPackageImpl#getUnlimitedNatural()
 		 * @generated
 		 */

@@ -35,25 +35,24 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Feature</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * An additional metaclass in comparison with UML::Core::Basic, a
- * <code>Feature</code> introduces the notion of a class-scope (i.e. static)
- * feature in a {@link Type}.
+ * An additional metaclass in comparison with 
+ * UML::Core::Basic, a <code>Feature</code> introduces 
+ * the notion of a class-scope (i.e. static) feature in a {@link 
+ * Type}.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}
- * </li>
- * <li>{@link org.dresdenocl.pivotmodel.Feature#getSemantics <em>
- * Semantics</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Feature#getSemantics <em>Semantics</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getFeature()
  * @model abstract="true"
  * @generated
@@ -78,28 +77,23 @@ public interface Feature extends TypedElement {
 	boolean isStatic();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Static</em>' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Feature#isStatic <em>Static</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Static</em>' attribute.
 	 * @see #isStatic()
 	 * @generated
 	 */
 	void setStatic(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Semantics</b></em>' reference. It is
-	 * bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature
-	 * <em>Defined Feature</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Semantics</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Constraint#getDefinedFeature <em>Defined Feature</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Semantics</em>' reference isn't clear, there
 	 * really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Semantics</em>' reference.
 	 * @see #setSemantics(Constraint)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getFeature_Semantics()

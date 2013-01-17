@@ -61,15 +61,11 @@ import org.dresdenocl.pivotmodel.TypedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType
- * <em>Unbound Type</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument
- * <em>Type Argument</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl#getUnboundType <em>Unbound Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.ComplexGenericTypeImpl#getTypeArgument <em>Type Argument</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ComplexGenericTypeImpl extends GenericTypeImpl implements
@@ -82,9 +78,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 			.getLogger(ComplexGenericTypeImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getUnboundType() <em>Unbound Type</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getUnboundType() <em>Unbound Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getUnboundType()
 	 * @generated
 	 * @ordered
@@ -92,9 +87,8 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	protected Type unboundType;
 
 	/**
-	 * The cached value of the '{@link #getTypeArgument() <em>Type Argument</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getTypeArgument() <em>Type Argument</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getTypeArgument()
 	 * @generated
 	 * @ordered
@@ -103,7 +97,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ComplexGenericTypeImpl() {
@@ -113,7 +106,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -136,7 +128,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getUnboundType() {
@@ -146,7 +137,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setUnboundType(Type newUnboundType) {
@@ -175,7 +165,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getTypeArgument()}
 	 * is redirected to this method. <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<TypeArgument> getTypeArgumentGen() {
@@ -383,7 +372,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -401,7 +389,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -417,7 +404,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -434,7 +420,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -455,7 +440,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -474,7 +458,6 @@ public class ComplexGenericTypeImpl extends GenericTypeImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

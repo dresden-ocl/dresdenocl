@@ -54,11 +54,10 @@ import org.dresdenocl.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.PropertyImpl#getOwningType
- * <em>Owning Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.PropertyImpl#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class PropertyImpl extends FeatureImpl implements Property {
@@ -70,7 +69,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected PropertyImpl() {
@@ -80,7 +78,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -103,7 +100,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getOwningType() {
@@ -115,7 +111,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningType(Type newOwningType,
@@ -129,7 +124,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setOwningType(Type newOwningType) {
@@ -216,7 +210,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -234,7 +227,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -250,7 +242,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -267,7 +258,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -282,7 +272,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -298,7 +287,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -314,7 +302,6 @@ public class PropertyImpl extends FeatureImpl implements Property {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

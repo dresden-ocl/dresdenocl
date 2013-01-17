@@ -50,11 +50,10 @@ import org.dresdenocl.pivotmodel.Type;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl#getKind
- * <em>Kind</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.PrimitiveTypeImpl#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
@@ -81,7 +80,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected PrimitiveTypeImpl() {
@@ -137,7 +135,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PrimitiveTypeKind getKind() {
@@ -147,7 +144,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setKind(PrimitiveTypeKind newKind) {
@@ -183,7 +179,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -198,7 +193,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -214,7 +208,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -230,7 +223,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -245,7 +237,6 @@ public class PrimitiveTypeImpl extends TypeImpl implements PrimitiveType {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -54,12 +54,10 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.EnumerationImpl#getOwnedLiteral
- * <em>Owned Literal</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.EnumerationImpl#getOwnedLiteral <em>Owned Literal</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class EnumerationImpl extends TypeImpl implements Enumeration {
@@ -70,9 +68,8 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	private static final Logger logger = Logger.getLogger(EnumerationImpl.class);
 
 	/**
-	 * The cached value of the '{@link #getOwnedLiteral() <em>Owned Literal</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOwnedLiteral() <em>Owned Literal</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwnedLiteral()
 	 * @generated
 	 * @ordered
@@ -81,7 +78,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected EnumerationImpl() {
@@ -91,7 +87,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -116,7 +111,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 	/**
 	 * <!-- begin-user-doc -->The code generated for {{@link #getOwnedParameter()}
 	 * is redirected to this method. <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected final List<EnumerationLiteral> getOwnedLiteralGen() {
@@ -211,7 +205,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -229,7 +222,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -245,7 +237,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -260,7 +251,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -279,7 +269,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -295,7 +284,6 @@ public class EnumerationImpl extends TypeImpl implements Enumeration {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

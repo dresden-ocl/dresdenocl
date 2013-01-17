@@ -51,12 +51,10 @@ import org.dresdenocl.pivotmodel.TypeParameter;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.TypeParameterImpl#getGenericElement
- * <em>Generic Element</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypeParameterImpl#getGenericElement <em>Generic Element</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class TypeParameterImpl extends NamedElementImpl implements
@@ -64,7 +62,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TypeParameterImpl() {
@@ -74,7 +71,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -85,7 +81,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public GenericElement getGenericElement() {
@@ -97,7 +92,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetGenericElement(
@@ -111,7 +105,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setGenericElement(GenericElement newGenericElement) {
@@ -198,7 +191,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -216,7 +208,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -232,7 +223,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -250,7 +240,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -265,7 +254,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -281,7 +269,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -297,7 +284,6 @@ public class TypeParameterImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

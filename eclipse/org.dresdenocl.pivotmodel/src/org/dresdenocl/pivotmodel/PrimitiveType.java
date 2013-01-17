@@ -35,24 +35,24 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Primitive Type</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>PrimitiveType</code> defines a predefined data type, without any
- * relevant substructure (i.e., it has no parts). A primitive datatype may have
- * an algebra and operations defined outside of the Pivot Model, for example,
+ * A <code>PrimitiveType</code> defines a predefined data 
+ * type, without any relevant substructure (i.e., it has no parts). 
+ * A primitive datatype may have an algebra and operations 
+ * defined outside of the Pivot Model, for example, 
  * mathematically.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.PrimitiveType#getKind <em>Kind
- * </em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.PrimitiveType#getKind <em>Kind</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getPrimitiveType()
  * @model
  * @generated
@@ -82,12 +82,9 @@ public interface PrimitiveType extends Type {
 	PrimitiveTypeKind getKind();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.PrimitiveType#getKind
-	 * <em>Kind</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Kind</em>' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.PrimitiveType#getKind <em>Kind</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kind</em>' attribute.
 	 * @see org.dresdenocl.pivotmodel.PrimitiveTypeKind
 	 * @see #getKind()
 	 * @generated

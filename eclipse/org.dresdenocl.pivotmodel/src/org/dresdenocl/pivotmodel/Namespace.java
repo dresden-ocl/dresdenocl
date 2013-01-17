@@ -38,27 +38,24 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Namespace</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Namespace</code> is a container for types and other namespaces.
+ * A <code>Namespace</code> is a container for types and 
+ * other namespaces.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Namespace#getOwnedType <em>Owned
- * Type</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Namespace#getOwnedRule <em>Owned
- * Rule</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace <em>
- * Nested Namespace</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
- * <em>Nesting Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Namespace#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Namespace#getOwnedRule <em>Owned Rule</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace <em>Nested Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace <em>Nesting Namespace</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamespace()
  * @model
  * @generated
@@ -104,20 +101,16 @@ public interface Namespace extends NamedElement, GenericElement {
 	List<Type> getOwnedType();
 
 	/**
-	 * Returns the value of the '<em><b>Nested Namespace</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.dresdenocl.pivotmodel.Namespace}. It is bidirectional and
-	 * its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
-	 * <em>Nesting Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Nested Namespace</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.pivotmodel.Namespace}.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace <em>Nesting Namespace</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * This is the set of namespaces contained in this namespace.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * 
-	 * @return the value of the '<em>Nested Namespace</em>' containment reference
-	 *         list.
+	 * @return the value of the '<em>Nested Namespace</em>' containment reference list.
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamespace_NestedNamespace()
 	 * @see org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
 	 * @model opposite="nestingNamespace" containment="true"
@@ -126,17 +119,15 @@ public interface Namespace extends NamedElement, GenericElement {
 	List<Namespace> getNestedNamespace();
 
 	/**
-	 * Returns the value of the '<em><b>Nesting Namespace</b></em>' container
-	 * reference. It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace
-	 * <em>Nested Namespace</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Nesting Namespace</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Namespace#getNestedNamespace <em>Nested Namespace</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
-	 * This specifies the <code>Namespace</code> that is the owner of this
-	 * namespace.
+	 * This specifies the <code>Namespace</code> that is the 
+	 * owner of this namespace.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * 
 	 * @return the value of the '<em>Nesting Namespace</em>' container reference.
 	 * @see #setNestingNamespace(Namespace)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamespace_NestingNamespace()
@@ -147,14 +138,10 @@ public interface Namespace extends NamedElement, GenericElement {
 	Namespace getNestingNamespace();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace
-	 * <em>Nesting Namespace</em>}' container reference. <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Namespace#getNestingNamespace <em>Nesting Namespace</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Nesting Namespace</em>' container
-	 *          reference.
+	 * @param value the new value of the '<em>Nesting Namespace</em>' container reference.
 	 * @see #getNestingNamespace()
 	 * @generated
 	 */

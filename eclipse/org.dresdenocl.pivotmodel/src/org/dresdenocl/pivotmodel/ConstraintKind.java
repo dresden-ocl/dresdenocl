@@ -54,9 +54,9 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum ConstraintKind implements Enumerator {
 	/**
-	 * The '<em><b>Invariant</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>Invariant</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #INVARIANT_VALUE
 	 * @generated
 	 * @ordered
@@ -64,9 +64,9 @@ public enum ConstraintKind implements Enumerator {
 	INVARIANT(0, "invariant", "invariant"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Definition</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>Definition</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #DEFINITION_VALUE
 	 * @generated
 	 * @ordered
@@ -74,9 +74,9 @@ public enum ConstraintKind implements Enumerator {
 	DEFINITION(1, "definition", "definition"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Precondition</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>Precondition</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #PRECONDITION_VALUE
 	 * @generated
 	 * @ordered
@@ -84,9 +84,9 @@ public enum ConstraintKind implements Enumerator {
 	PRECONDITION(2, "precondition", "precondition"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Postcondition</b></em>' literal object. <!-- begin-user-doc -->
+	 * The '<em><b>Postcondition</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #POSTCONDITION_VALUE
 	 * @generated
 	 * @ordered
@@ -94,9 +94,9 @@ public enum ConstraintKind implements Enumerator {
 	POSTCONDITION(3, "postcondition", "postcondition"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Initial</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>Initial</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #INITIAL_VALUE
 	 * @generated
 	 * @ordered
@@ -104,9 +104,9 @@ public enum ConstraintKind implements Enumerator {
 	INITIAL(4, "initial", "initial"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Derived</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>Derived</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #DERIVED_VALUE
 	 * @generated
 	 * @ordered
@@ -114,9 +114,9 @@ public enum ConstraintKind implements Enumerator {
 	DERIVED(5, "derived", "derived"), //$NON-NLS-1$ //$NON-NLS-2$
 
 	/**
-	 * The '<em><b>Body</b></em>' literal object. <!-- begin-user-doc --> <!--
+	 * The '<em><b>Body</b></em>' literal object.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #BODY_VALUE
 	 * @generated
 	 * @ordered
@@ -254,18 +254,16 @@ public enum ConstraintKind implements Enumerator {
 			BODY, };
 
 	/**
-	 * A public read-only list of all the '<em><b>Constraint Kind</b></em>'
-	 * enumerators. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * A public read-only list of all the '<em><b>Constraint Kind</b></em>' enumerators.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final List<ConstraintKind> VALUES = Collections
 			.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified
-	 * literal value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ConstraintKind get(String literal) {
@@ -280,9 +278,8 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified
-	 * name. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ConstraintKind getByName(String name) {
@@ -297,9 +294,8 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified
-	 * integer value. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the '<em><b>Constraint Kind</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static ConstraintKind get(int value) {
@@ -325,29 +321,26 @@ public enum ConstraintKind implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final int value;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String name;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private final String literal;
 
 	/**
-	 * Only this class can construct instances. <!-- begin-user-doc --> <!--
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	private ConstraintKind(int value, String name, String literal) {
@@ -359,7 +352,6 @@ public enum ConstraintKind implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
@@ -369,7 +361,6 @@ public enum ConstraintKind implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -379,7 +370,6 @@ public enum ConstraintKind implements Enumerator {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getLiteral() {
@@ -388,9 +378,8 @@ public enum ConstraintKind implements Enumerator {
 	}
 
 	/**
-	 * Returns the literal value of the enumerator, which is its string
-	 * representation. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

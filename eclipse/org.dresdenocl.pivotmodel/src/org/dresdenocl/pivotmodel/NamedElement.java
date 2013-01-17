@@ -39,29 +39,28 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Named Element</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>NamedElement</code> represents elements that may have a name. The
- * name is used for identification of the named element within the elements
- * owned by its owner. A named element also has a qualified name that allows it
- * to be unambiguously identified within a hierarchy of nested named elements.
- * <code>NamedElement</code> is an abstract metaclass.
+ * A <code>NamedElement</code> represents elements that 
+ * may have a name. The name is used for identification of 
+ * the named element within the elements owned by its owner. 
+ * A named element also has a qualified name that allows it to 
+ * be unambiguously identified within a hierarchy of nested 
+ * named elements. <code>NamedElement</code> is an 
+ * abstract metaclass.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name
- * </em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.NamedElement#getQualifiedName
- * <em>Qualified Name</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.NamedElement#getOwner <em>Owner
- * </em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.NamedElement#getQualifiedName <em>Qualified Name</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.NamedElement#getOwner <em>Owner</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamedElement()
  * @model abstract="true"
  * @generated
@@ -69,30 +68,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface NamedElement extends EObject {
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute. The default
-	 * value is <code>""</code>. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * Represents the name of the <code>NamedElement</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * 
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getNamedElement_Name()
-	 * @model default="" dataType="org.dresdenocl.datatypes.String"
-	 *        required="true" ordered="false"
+	 * @model default="" dataType="org.dresdenocl.datatypes.String" required="true" ordered="false"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name</em>}
-	 * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Name</em>' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.NamedElement#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
 	 * @see #getName()
 	 * @generated
 	 */

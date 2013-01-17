@@ -92,9 +92,9 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 	}
 
 	/**
-	 * This adds a property descriptor for the Kind feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Kind feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addKindPropertyDescriptor(Object object) {
@@ -196,10 +196,10 @@ public class ParameterItemProvider extends TypedElementItemProvider implements
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing
-	 * the children that can be created under this object. <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

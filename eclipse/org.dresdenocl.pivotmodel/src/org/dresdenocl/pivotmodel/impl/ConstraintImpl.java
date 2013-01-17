@@ -63,18 +63,16 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getKind <em>
- * Kind</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getNamespace
- * <em>Namespace</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getSpecification
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getKind <em>Kind
+ * </em>}</li>
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getNamespace <em>
+ * Namespace</em>}</li>
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getSpecification
  * <em>Specification</em>}</li>
  * <li>
  * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getConstrainedElement
  * <em>Constrained Element</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getDefinedFeature
+ * <li>{@link org.dresdenocl.pivotmodel.impl.ConstraintImpl#getDefinedFeature
  * <em>Defined Feature</em>}</li>
  * </ul>
  * </p>
@@ -413,6 +411,26 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 		}
 
 		return this;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @NOT generated
+	 */
+	public boolean hasStaticContext() {
+
+		switch (this.getKind()) {
+		case DEFINITION:
+			return this.getDefinedFeature().isStatic();
+		case DERIVED:
+		case INITIAL:
+		case BODY:
+			return ((Feature) this.getConstrainedElement().iterator().next())
+					.isStatic();
+		default:
+			return false;
+		}
 	}
 
 	/**

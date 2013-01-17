@@ -50,13 +50,11 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.FeatureImpl#isStatic <em>
- * Static</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.FeatureImpl#getSemantics
- * <em>Semantics</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.FeatureImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.FeatureImpl#getSemantics <em>Semantics</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class FeatureImpl extends TypedElementImpl implements Feature {
@@ -64,7 +62,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	/**
 	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #isStatic()
 	 * @generated
 	 * @ordered
@@ -74,7 +71,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	/**
 	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #isStatic()
 	 * @generated
 	 * @ordered
@@ -82,9 +78,8 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSemantics() <em>Semantics</em>}'
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSemantics() <em>Semantics</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSemantics()
 	 * @generated
 	 * @ordered
@@ -93,7 +88,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected FeatureImpl() {
@@ -103,7 +97,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -114,7 +107,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public boolean isStatic() {
@@ -124,7 +116,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setStatic(boolean newStatic) {
@@ -138,7 +129,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Constraint getSemantics() {
@@ -157,7 +147,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Constraint basicGetSemantics() {
@@ -167,7 +156,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetSemantics(Constraint newSemantics,
@@ -189,7 +177,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setSemantics(Constraint newSemantics) {
@@ -217,7 +204,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -238,7 +224,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -265,7 +250,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -284,7 +268,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -303,7 +286,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -322,7 +304,6 @@ public abstract class FeatureImpl extends TypedElementImpl implements Feature {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

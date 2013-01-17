@@ -37,30 +37,31 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Expression</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * An <code>Expression</code> contains a language- specific text string used to
- * describe a value or values, and an optional specification of the language.
- * One predefined language for specifying expressions is OCL. Natural language
- * or programming languages may also be used. Contrary to the UML specification,
- * the Pivot Model only permits one body string for each expression. This is
- * because the Pivot Model has been designed with an OCL integration in mind.
+ * An <code>Expression</code> contains a language-
+ * specific text string used to describe a value or values, and 
+ * an optional specification of the language. One predefined 
+ * language for specifying expressions is OCL. Natural 
+ * language or programming languages may also be
+ * used.
+ * Contrary to the UML specification, the Pivot Model only 
+ * permits one body string for each expression. This is 
+ * because the Pivot Model has been designed with an OCL
+ * integration in mind.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}
- * </li>
- * <li>{@link org.dresdenocl.pivotmodel.Expression#getLanguage <em>
- * Language</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Expression#getConstraint <em>
- * Constraint</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Expression#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Expression#getConstraint <em>Constraint</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getExpression()
  * @model
  * @generated
@@ -84,12 +85,9 @@ public interface Expression extends EObject {
 	String getBody();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Body</em>' attribute.
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Expression#getBody <em>Body</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Body</em>' attribute.
 	 * @see #getBody()
 	 * @generated
 	 */
@@ -126,15 +124,13 @@ public interface Expression extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Constraint</b></em>' container reference.
-	 * It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Constraint#getSpecification
-	 * <em>Specification</em>}'. <!-- begin-user-doc -->
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Constraint#getSpecification <em>Specification</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Constraint</em>' container reference isn't
 	 * clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
 	 * @return the value of the '<em>Constraint</em>' container reference.
 	 * @see #setConstraint(Constraint)
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getExpression_Constraint()
@@ -145,13 +141,10 @@ public interface Expression extends EObject {
 	Constraint getConstraint();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Expression#getConstraint
-	 * <em>Constraint</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Expression#getConstraint <em>Constraint</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Constraint</em>' container reference.
+	 * @param value the new value of the '<em>Constraint</em>' container reference.
 	 * @see #getConstraint()
 	 * @generated
 	 */

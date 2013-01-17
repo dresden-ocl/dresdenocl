@@ -37,16 +37,14 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Generic Element</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>
- * {@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter
- * <em>Owned Type Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.GenericElement#getOwnedTypeParameter <em>Owned Type Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getGenericElement()
  * @model interface="true" abstract="true"
  * @generated
@@ -54,20 +52,16 @@ import java.util.List;
 public interface GenericElement extends NamedElement {
 
 	/**
-	 * Returns the value of the '<em><b>Owned Type Parameter</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.dresdenocl.pivotmodel.TypeParameter}. It is bidirectional
-	 * and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
-	 * <em>Generic Element</em>}'. <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Owned Type Parameter</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.pivotmodel.TypeParameter}.
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.TypeParameter#getGenericElement <em>Generic Element</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Type Parameter</em>' containment reference
 	 * list isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Owned Type Parameter</em>' containment
-	 *         reference list.
+	 * @return the value of the '<em>Owned Type Parameter</em>' containment reference list.
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getGenericElement_OwnedTypeParameter()
 	 * @see org.dresdenocl.pivotmodel.TypeParameter#getGenericElement
 	 * @model opposite="genericElement" containment="true"

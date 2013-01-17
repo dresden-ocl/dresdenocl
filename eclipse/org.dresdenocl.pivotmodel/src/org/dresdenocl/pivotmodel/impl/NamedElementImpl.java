@@ -51,16 +51,12 @@ import org.dresdenocl.pivotmodel.PivotModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName
- * <em>Name</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName
- * <em>Qualified Name</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner
- * <em>Owner</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getQualifiedName <em>Qualified Name</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.NamedElementImpl#getOwner <em>Owner</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class NamedElementImpl extends EObjectImpl implements
@@ -89,10 +85,9 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getQualifiedName()
-	 * <em>Qualified Name</em>}' attribute. <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getQualifiedName()
 	 * @generated
 	 * @ordered
@@ -101,7 +96,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected NamedElementImpl() {
@@ -111,7 +105,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -122,7 +115,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getName() {
@@ -132,7 +124,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setName(String newName) {
@@ -260,7 +251,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -279,7 +269,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -295,7 +284,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -311,7 +299,6 @@ public abstract class NamedElementImpl extends EObjectImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

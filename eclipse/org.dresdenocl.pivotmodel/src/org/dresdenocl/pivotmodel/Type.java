@@ -37,35 +37,24 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Type</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Type</code> represents a set of values. A {@link TypedElement} that
- * has this type is constrained to represent values within this set. Contrary to
- * <code>Core::Basic::Type</code>, this is not an abstract metaclass. Instead,
- * the definition of a type in the pivot model is extended to what in many
- * metamodels is called <code>Classifier</code> or <code>Class</code>. In
- * particular, a <code>Type</code> can own {@link Property properties} and
- * {@link Operation operations}. It also may have super types.
+ * A <code>Type</code> represents a set of values. A {@link TypedElement} that has this type is constrained to represent values within this set. Contrary to <code>Core::Basic::Type</code>, this is not an abstract metaclass. Instead, the definition of a type in the pivot model is extended to what in many metamodels is called <code>Classifier</code> or <code>Class</code>. In particular, a <code>Type</code> can own {@link Property properties} and {@link Operation operations}. It also may have super types.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Type#getNamespace <em>Namespace
- * </em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Type#getOwnedOperation <em>Owned
- * Operation</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Type#getOwnedProperty <em>Owned
- * Property</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Type#getSuperType <em>Super Type
- * </em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Type#getGenericSuperType <em>
- * Generic Super Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Type#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Type#getOwnedOperation <em>Owned Operation</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Type#getOwnedProperty <em>Owned Property</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Type#getSuperType <em>Super Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Type#getGenericSuperType <em>Generic Super Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getType()
  * @model
  * @generated
@@ -89,18 +78,16 @@ public interface Type extends NamedElement, ConstrainableElement,
 	List<Type> getSuperType();
 
 	/**
-	 * Returns the value of the '<em><b>Generic Super Type</b></em>' containment
-	 * reference list. The list contents are of type
-	 * {@link org.dresdenocl.pivotmodel.GenericType}. <!-- begin-user-doc
+	 * Returns the value of the '<em><b>Generic Super Type</b></em>' containment reference list.
+	 * The list contents are of type {@link org.dresdenocl.pivotmodel.GenericType}.
+	 * <!-- begin-user-doc
 	 * -->
 	 * <p>
 	 * If the meaning of the '<em>Generic Super Type</em>' containment reference
 	 * list isn't clear, there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * 
-	 * @return the value of the '<em>Generic Super Type</em>' containment
-	 *         reference list.
+	 * @return the value of the '<em>Generic Super Type</em>' containment reference list.
 	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getType_GenericSuperType()
 	 * @model containment="true"
 	 * @generated
@@ -168,13 +155,10 @@ public interface Type extends NamedElement, ConstrainableElement,
 	Namespace getNamespace();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Type#getNamespace
-	 * <em>Namespace</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Type#getNamespace <em>Namespace</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Namespace</em>' container reference.
+	 * @param value the new value of the '<em>Namespace</em>' container reference.
 	 * @see #getNamespace()
 	 * @generated
 	 */

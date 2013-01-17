@@ -35,22 +35,22 @@ package org.dresdenocl.pivotmodel;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Property</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * A <code>Property</code> is a {@link TypedElement} typed element that
- * represents an attribute of a {@link Type} or an association to another type.
+ * A <code>Property</code> is a {@link TypedElement} 
+ * typed element that represents an attribute of a {@link 
+ * Type} or an association to another type.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Property#getOwningType <em>Owning
- * Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Property#getOwningType <em>Owning Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getProperty()
  * @model
  * @generated
@@ -60,30 +60,27 @@ public interface Property extends Feature, TypedElement, NamedElement,
 
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Type#getOwnedProperty
-	 * <em>Owned Property</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Type#getOwnedProperty <em>Owned Property</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * Specifies the owner of this <code>Property</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * 
 	 * @return the value of the '<em>Owning Type</em>' container reference.
 	 * @see #setOwningType(Type)
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getProperty_OwningType()
 	 * @see org.dresdenocl.pivotmodel.Type#getOwnedProperty
+	 * @model opposite="ownedProperty"
 	 * @generated
 	 */
 	Type getOwningType();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Property#getOwningType
-	 * <em>Owning Type</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Property#getOwningType <em>Owning Type</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Owning Type</em>' container reference.
+	 * @param value the new value of the '<em>Owning Type</em>' container reference.
 	 * @see #getOwningType()
 	 * @generated
 	 */

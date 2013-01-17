@@ -53,14 +53,11 @@ import org.dresdenocl.pivotmodel.TypedElement;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType
- * <em>Type</em>}</li>
- * <li>
- * {@link org.dresdenocl.pivotmodel.impl.TypedElementImpl#getGenericType
- * <em>Generic Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypedElementImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.impl.TypedElementImpl#getGenericType <em>Generic Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class TypedElementImpl extends NamedElementImpl implements
@@ -77,9 +74,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	protected Type type;
 
 	/**
-	 * The cached value of the '{@link #getGenericType() <em>Generic Type</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getGenericType() <em>Generic Type</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getGenericType()
 	 * @generated
 	 * @ordered
@@ -88,7 +84,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected TypedElementImpl() {
@@ -98,7 +93,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public Type getType() {
@@ -108,7 +102,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setType(Type newType) {
@@ -122,7 +115,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public GenericType getGenericType() {
@@ -153,7 +145,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetGenericType(GenericType newGenericType,
@@ -201,7 +192,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 	/**
 	 * <!-- begin-user-doc --> The EMF implementation is forwarded to this method.
 	 * <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setGenericTypeGen(GenericType newGenericType) {
@@ -230,7 +220,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -241,7 +230,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -257,7 +245,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -274,7 +261,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -293,7 +279,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -312,7 +297,6 @@ public abstract class TypedElementImpl extends NamedElementImpl implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

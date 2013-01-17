@@ -37,32 +37,27 @@ import java.util.List;
 /**
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>Operation</b></em>'. <!-- end-user-doc -->
- * 
+ *
  * <!-- begin-model-doc -->
  * <p>
- * An operation is a behavioral feature of a {@link Type} that specifies the
- * name, type, parameters, and constraints for invoking an associated behavior.
+ * An operation is a behavioral feature of a {@link Type} that 
+ * specifies the name, type, parameters, and constraints for 
+ * invoking an associated behavior.
  * </p>
  * <!-- end-model-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.dresdenocl.pivotmodel.Operation#getOwningType <em>
- * Owning Type</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter <em>
- * Owned Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Operation#getInputParameter <em>
- * Input Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Operation#getOutputParameter <em>
- * Output Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Operation#getReturnParameter <em>
- * Return Parameter</em>}</li>
- * <li>{@link org.dresdenocl.pivotmodel.Operation#getSignatureParameter
- * <em>Signature Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Operation#getOwningType <em>Owning Type</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Operation#getOwnedParameter <em>Owned Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Operation#getInputParameter <em>Input Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Operation#getOutputParameter <em>Output Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Operation#getReturnParameter <em>Return Parameter</em>}</li>
+ *   <li>{@link org.dresdenocl.pivotmodel.Operation#getSignatureParameter <em>Signature Parameter</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.dresdenocl.pivotmodel.PivotModelPackage#getOperation()
  * @model
  * @generated
@@ -72,30 +67,27 @@ public interface Operation extends Feature, TypedElement, NamedElement,
 
 	/**
 	 * Returns the value of the '<em><b>Owning Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '
-	 * {@link org.dresdenocl.pivotmodel.Type#getOwnedOperation
-	 * <em>Owned Operation</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * It is bidirectional and its opposite is '{@link org.dresdenocl.pivotmodel.Type#getOwnedOperation <em>Owned Operation</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * <p>
 	 * Specifies the owner of this <code>Operation</code>.
 	 * </p>
 	 * <!-- end-model-doc -->
-	 * 
 	 * @return the value of the '<em>Owning Type</em>' container reference.
 	 * @see #setOwningType(Type)
+	 * @see org.dresdenocl.pivotmodel.PivotModelPackage#getOperation_OwningType()
 	 * @see org.dresdenocl.pivotmodel.Type#getOwnedOperation
+	 * @model opposite="ownedOperation"
 	 * @generated
 	 */
 	Type getOwningType();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.dresdenocl.pivotmodel.Operation#getOwningType
-	 * <em>Owning Type</em>}' container reference. <!-- begin-user-doc --> <!--
+	 * Sets the value of the '{@link org.dresdenocl.pivotmodel.Operation#getOwningType <em>Owning Type</em>}' container reference.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *          the new value of the '<em>Owning Type</em>' container reference.
+	 * @param value the new value of the '<em>Owning Type</em>' container reference.
 	 * @see #getOwningType()
 	 * @generated
 	 */
