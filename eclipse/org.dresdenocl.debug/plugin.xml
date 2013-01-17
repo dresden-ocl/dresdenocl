@@ -5,7 +5,8 @@
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
             delegate="org.dresdenocl.debug.launch.OclLaunchConfigurationDelegate"
-            id="org.dresdenocl.debug.launch.OclLaunchConfigurationDelegate"
+            id="org.dresdenocl.debug.launch.launchConfigurationType"
+            modes="run, debug"
             name="Ocl Launch">
       </launchConfigurationType>
    </extension>

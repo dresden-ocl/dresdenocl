@@ -82,6 +82,7 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 
 				@Override
 				public void run() {
+					// dont forget static constraints to run w/o mie
 					IOclInterpreter i = new OclInterpreter(minstance, requestPort, eventPort);
 					for(IModelInstanceElement mie : miElements)
 						i.interpretConstraints(constraints, mie, ILaunchManager.DEBUG_MODE);
@@ -122,7 +123,7 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 	 * @return a free port number on localhost, or -1 if unable to find a free
 	 *         port
 	 */
-	public static int findFreePort() {
+	private static int findFreePort() {
 
 		ServerSocket socket = null;
 		try {

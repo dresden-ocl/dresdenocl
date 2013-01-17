@@ -12,8 +12,8 @@ public class OclDebugUIPlugin extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "org.dresdenocl.debug.ui"; //$NON-NLS-1$
 
 	public static final String LAUNCH_CONFIGURATION_TYPE =
-			"org.dresdenocl.debug.launch.OclLaunchConfigurationDelegate"; //$NON-NLS-1$
-	
+			"org.dresdenocl.debug.launch.launchConfigurationType"; //$NON-NLS-1$
+
 	public static final String OCL_URI = "uri";
 
 	// The shared instance

@@ -27,8 +27,6 @@ public class OclLaunchShortcut implements org.eclipse.debug.ui.ILaunchShortcut2 
 			java.util.Iterator<?> it = structuredSelection.iterator();
 			while (it.hasNext()) {
 				Object object = it.next();
-				//TODO
-				System.out.println(object);
 				if (object instanceof org.eclipse.core.resources.IFile) {
 					org.eclipse.core.resources.IFile file =
 							(org.eclipse.core.resources.IFile) object;

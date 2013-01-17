@@ -57,11 +57,11 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 		@Override
 		protected IStatus run(IProgressMonitor monitor) {
 
-			String event = "";
-			while (!isTerminated() && event != null) {
-				try {
-					event = m_eventReader.readLine();
-					if (event != null) {
+			String event = null;
+			try {
+				while (!isTerminated() && (event = m_eventReader.readLine()) != null) {
+					System.out.println(event);
+					if (event.length() > 1) {
 						m_thread.setBreakpoints(null);
 						m_thread.setStepping(false);
 						if (event.equals("started")) {
@@ -91,13 +91,12 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 							}
 						}
 					}
-				} catch (IOException e) {
-					terminated();
 				}
+			} catch (IOException e) {
+				terminated();
 			}
 			return Status.OK_STATUS;
 		}
-
 	}
 
 	public OclDebugTarget(ILaunch launch, IProcess process, int requestPort,
@@ -370,10 +369,10 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 			String framesData;
 			try {
 				framesData = m_requestReader.readLine();
-				if(framesData != null) {
+				if (framesData != null) {
 					String[] frames = framesData.split("#");
 					IStackFrame[] stackFrames = new IStackFrame[frames.length];
-					//TODO
+					// TODO
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
