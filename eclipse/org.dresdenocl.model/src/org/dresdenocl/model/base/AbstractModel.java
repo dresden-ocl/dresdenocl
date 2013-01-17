@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
@@ -46,6 +47,7 @@ import org.dresdenocl.pivotmodel.PivotModelFactory;
 import org.dresdenocl.pivotmodel.PrimitiveType;
 import org.dresdenocl.pivotmodel.PrimitiveTypeKind;
 import org.dresdenocl.pivotmodel.Type;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <p>
@@ -74,6 +76,20 @@ public abstract class AbstractModel implements IModel {
 
 	/** The {@link IMetamodel} of this {@link IModel}. */
 	private IMetamodel metamodel;
+
+	private Map<EObject, EObject> m_allMappings;
+
+	public Map<EObject, EObject> getAllMappings() {
+		return m_allMappings;
+	}
+
+	public boolean addAllMappings(final Map<EObject, EObject> mappings) {
+		if (mappings == null) {
+			return false;
+		}
+		m_allMappings = mappings;
+		return true;
+	}
 
 	/**
 	 * <p>
@@ -104,8 +120,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.model.IModel#addListener(org.dresdenocl
+	 * @see org.dresdenocl.modelbus.model.IModel#addListener(org.dresdenocl
 	 * .pivot.modelbus.model.IModelListener)
 	 */
 	public boolean addListener(IModelListener listener) {
@@ -134,8 +149,7 @@ public abstract class AbstractModel implements IModel {
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("addListener(IModelListener) - exit - return value=" + result); //$NON-NLS-1$
+			LOGGER.debug("addListener(IModelListener) - exit - return value=" + result); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -278,7 +292,7 @@ public abstract class AbstractModel implements IModel {
 			/* If the path has only one element check for a primitive type. */
 			if (pathName.size() == 1) {
 				String primitiveName;
-				
+
 				PrimitiveType primitiveType;
 
 				primitiveName = pathName.get(0);
@@ -462,8 +476,7 @@ public abstract class AbstractModel implements IModel {
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("removeAllConstraints() - exit - return value=" + result); //$NON-NLS-1$
+			LOGGER.debug("removeAllConstraints() - exit - return value=" + result); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -473,8 +486,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.model.IModel#removeConstraints(java.util
+	 * @see org.dresdenocl.modelbus.model.IModel#removeConstraints(java.util
 	 * .Collection)
 	 */
 	public boolean removeConstraints(Collection<Constraint> constraints)
@@ -520,8 +532,7 @@ public abstract class AbstractModel implements IModel {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.dresdenocl.modelbus.model.IModel#removeListener(tudresden.
+	 * @see org.dresdenocl.modelbus.model.IModel#removeListener(tudresden.
 	 * ocl20.pivot.modelbus.model.IModelListener)
 	 */
 	public boolean removeListener(IModelListener listener) {
@@ -550,8 +561,7 @@ public abstract class AbstractModel implements IModel {
 
 		/* Probably log the exit from this method. */
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER
-					.debug("removeListener(IModelListener) - exit - return value=" + result); //$NON-NLS-1$
+			LOGGER.debug("removeListener(IModelListener) - exit - return value=" + result); //$NON-NLS-1$
 		}
 		// no else.
 
@@ -654,8 +664,8 @@ public abstract class AbstractModel implements IModel {
 			namespace = namespace.lookupNamespace(firstPathSegment);
 
 			if (namespace != null) {
-				result.addAll(findTypeHere(namespace, pathName.subList(1,
-						pathName.size()), false));
+				result.addAll(findTypeHere(namespace,
+						pathName.subList(1, pathName.size()), false));
 			}
 		}
 

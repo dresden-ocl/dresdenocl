@@ -90,6 +90,10 @@ public interface IOclInterpreter {
 	 */
 	public IInterpretationResult interpretConstraint(Constraint aConstraint,
 			IModelInstanceElement aModelObject);
+	
+	
+	public IInterpretationResult interpretConstraint(Constraint aConstraint,
+			IModelInstanceElement aModelObject, String mode);
 
 	/**
 	 * <p>
@@ -110,7 +114,7 @@ public interface IOclInterpreter {
 	 *         interpretation as {@link OclRoot}s.
 	 */
 	public List<IInterpretationResult> interpretConstraints(
-			Collection<Constraint> constraints, IModelInstanceElement aModelObject);
+			Collection<Constraint> constraints, IModelInstanceElement aModelObject, String mode);
 
 	/**
 	 * <p>
@@ -136,6 +140,11 @@ public interface IOclInterpreter {
 			IModelInstanceElement modelObject, Operation operation,
 			IModelInstanceElement[] parameterValues,
 			Collection<Constraint> preConditions);
+
+	public List<IInterpretationResult> interpretPreConditions(
+			IModelInstanceElement modelObject, Operation operation,
+			IModelInstanceElement[] parameterValues,
+			Collection<Constraint> preConditions, String mode);
 
 	/**
 	 * <p>
@@ -165,6 +174,11 @@ public interface IOclInterpreter {
 			IModelInstanceElement modelObject, Operation operation,
 			IModelInstanceElement[] parameterValues,
 			IModelInstanceElement resultValue, Collection<Constraint> postConditions);
+
+	public List<IInterpretationResult> interpretPostConditions(
+			IModelInstanceElement modelObject, Operation operation,
+			IModelInstanceElement[] parameterValues,
+			IModelInstanceElement resultValue, Collection<Constraint> postConditions, String mode);
 
 	/**
 	 * <p>

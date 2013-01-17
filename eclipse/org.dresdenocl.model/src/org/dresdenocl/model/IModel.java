@@ -34,7 +34,9 @@ package org.dresdenocl.model;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import org.dresdenocl.model.metamodel.IMetamodel;
@@ -52,6 +54,10 @@ import org.dresdenocl.pivotmodel.Type;
  * @author Matthias Braeuer
  */
 public interface IModel {
+	
+	public Map<EObject, EObject> getAllMappings();
+	
+	public boolean addAllMappings(final Map<EObject, EObject> mappings);
 
 	/**
 	 * <p>
