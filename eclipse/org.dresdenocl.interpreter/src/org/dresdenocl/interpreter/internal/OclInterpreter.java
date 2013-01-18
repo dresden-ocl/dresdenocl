@@ -238,11 +238,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (constraint.hasStaticContext()) {
 
 			/* Probably trace the entry into this method */
-			if (!isPreparationRun) {
-				guid = UUID.randomUUID();
-				increaseTracerTreeDepth(guid, modelInstanceElement);
-			}
-			// no else
+			guid = increaseTracerTreeDepth(modelInstanceElement);
 
 			OclAny context =
 					myStandardLibraryFactory.createOclUndefined(EssentialOclPlugin
@@ -268,11 +264,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		else if (this.isConstrained(modelInstanceElement, constraint)) {
 
 			/* Probably trace the entry into this method */
-			if (!isPreparationRun) {
-				guid = UUID.randomUUID();
-				increaseTracerTreeDepth(guid, modelInstanceElement);
-			}
-			// no else
+			guid = increaseTracerTreeDepth(modelInstanceElement);
 
 			OclAny context =
 					myStandardLibraryFactory.createOclAny(modelInstanceElement);
@@ -867,11 +859,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result =
@@ -915,11 +903,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Collection items cannot be cached. */
 		OclAny result = doSwitch((EObject) collectionItem.getItem());
@@ -963,11 +947,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/*
 		 * Collection literal cannot be cached - they are only defined once in a
@@ -1114,11 +1094,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result =
@@ -1163,11 +1139,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		OclAny result;
 		result = doSwitch((EObject) expressionInOcl.getBodyExpression());
@@ -1209,11 +1181,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* If expressions cannot be cached. */
 		OclAny result;
@@ -1306,11 +1274,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result =
@@ -1352,11 +1316,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		OclAny result =
 				myStandardLibraryFactory.createOclInvalid(invalidLiteralExp.getType(),
@@ -1399,11 +1359,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* IterateExpressions cannot be cached. */
 		OclAny result;
@@ -1568,11 +1524,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* IteratorExpressions cannot be cached. */
 		OclAny result;
@@ -3021,11 +2973,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		OclAny result = null;
 
@@ -3096,11 +3044,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Probably handle a static operation. */
 		if (operationCallExp.getReferredOperation() != null
@@ -3684,11 +3628,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		OclAny result;
 
@@ -3939,11 +3879,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result =
@@ -3985,11 +3921,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result =
@@ -4033,11 +3965,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* TupleLiteralExps cannot be cached. */
 		OclAny result;
@@ -4097,11 +4025,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* TupleLiteralParts cannot be cached. */
 		OclAny result = doSwitch(tupleLiteralPart.getValue());
@@ -4144,11 +4068,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result =
@@ -4191,11 +4111,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		/* Cache is not efficient here. */
 		OclAny result;
@@ -4237,11 +4153,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
-		if (!isPreparationRun) {
-			guid = UUID.randomUUID();
-			increaseTracerTreeDepth(guid);
-		}
-		// no else
+		guid = increaseTracerTreeDepth();
 
 		OclAny result;
 
@@ -4390,17 +4302,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.logOffset += ". ";
 	}
-
-	/**
-	 * <p>
-	 * Fires a notification to the observers that the tree depth has increased
-	 * </p>
-	 */
-	protected void increaseTracerTreeDepth(UUID guid) {
-
-		/* set the offset for the tree structure */
-		OclInterpreterPlugin.getInterpreterRegistry()
-				.fireInterpretationDepthIncreased(guid);
+	
+	protected UUID increaseTracerTreeDepth() {
+		return increaseTracerTreeDepth(null);
 	}
 
 	/**
@@ -4408,13 +4312,23 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * Fires a notification to the observers that the tree depth has increased.
 	 * </p>
 	 */
-
-	protected void increaseTracerTreeDepth(UUID guid,
+	protected UUID increaseTracerTreeDepth(
 			IModelInstanceElement modelInstanceElement) {
 
-		/* set the offset for the tree structure */
-		OclInterpreterPlugin.getInterpreterRegistry()
-				.fireInterpretationDepthIncreased(guid, modelInstanceElement);
+		if (!isPreparationRun) {
+			UUID uuid = UUID.randomUUID();
+			/* set the offset for the tree structure */
+			if (modelInstanceElement != null) {
+				OclInterpreterPlugin.getInterpreterRegistry()
+						.fireInterpretationDepthIncreased(uuid, modelInstanceElement);
+			}
+			else {
+				OclInterpreterPlugin.getInterpreterRegistry()
+						.fireInterpretationDepthIncreased(uuid);
+			}
+			return uuid;
+		}
+		return null;
 	}
 
 	/**

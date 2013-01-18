@@ -28,3 +28,4 @@ Export-Package: org.dresdenocl.language.ocl.resource.ocl;
    org.dresdenocl.language.ocl.resource.ocl,
    org.dresdenocl.language.ocl"
 Bundle-Vendor: TU Dresden, Software Technology Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

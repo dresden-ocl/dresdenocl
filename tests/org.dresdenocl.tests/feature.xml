@@ -2,7 +2,7 @@
 <feature
       id="org.dresdenocl.tests"
       label="Tests"
-      version="3.1.0.qualifier"
+      version="3.2.0.qualifier"
       provider-name="TU Dresden, Software Technology Group">
 
    <description url="http://www.example.com/description">
@@ -47,13 +47,6 @@
 
    <plugin
          id="org.dresdenocl.examples.pain"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.dresdenocl.examples.pain.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -211,6 +204,14 @@
          download-size="0"
          install-size="0"
          version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.dresdenocl.examples.pain.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
          unpack="false"/>
 
 </feature>
