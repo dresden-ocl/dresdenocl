@@ -1,6 +1,7 @@
 package org.dresdenocl.tracer.test;
 
 import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -13,6 +14,7 @@ import org.dresdenocl.tracer.test.standardlibrary.AllStandardLibraryTracerTests;
  * @author Lars Schuetze
  * 
  */
+@Ignore
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ ConstraintKindTracerTest.class,
 	AllStandardLibraryTracerTests.class})

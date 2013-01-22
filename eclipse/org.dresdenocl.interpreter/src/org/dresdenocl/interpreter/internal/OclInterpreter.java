@@ -232,6 +232,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		IInterpretationResult result;
+		OclAny oclResult = null;
 		UUID guid = null;
 
 		/* Check if the constraint has a static context. */
@@ -245,7 +246,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 							.getOclLibraryProvider().getOclLibrary().getOclAny(),
 							"Static context.");
 
-			OclAny oclResult = this.interpretConstraint(constraint, context);
+			oclResult = this.interpretConstraint(constraint, context);
 
 			result = new InterpretationResultImpl(null, constraint, oclResult);
 
@@ -269,7 +270,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			OclAny context =
 					myStandardLibraryFactory.createOclAny(modelInstanceElement);
 
-			OclAny oclResult = this.interpretConstraint(constraint, context);
+			oclResult = this.interpretConstraint(constraint, context);
 
 			result =
 					new InterpretationResultImpl(modelInstanceElement, constraint,
@@ -293,16 +294,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun && (guid != null)) {
-			decreaseTracerTreeDepth();
-
-			/*
-			 * Propagate tracer information for partial interpretation. The uuid will
-			 * be null iff the constraint could not be applied to any context or
-			 * instance
-			 */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(constraint, result.getResult(), guid);
+		if (oclResult != null) {
+			decreaseTracerTreeDepth(constraint, oclResult, guid);
 		}
 
 		return result;
@@ -849,13 +842,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probaby trace the exit from this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(booleanLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(booleanLiteralExp, result, guid);
 
 		return result;
 	}
@@ -892,14 +879,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probaby trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(collectionItem, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(collectionItem, result, guid);
 
 		return result;
 	}
@@ -977,14 +957,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(collectionLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(collectionLiteralExp, result, guid);
 
 		return result;
 	}
@@ -1084,13 +1057,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(enumLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(enumLiteralExp, result, guid);
 
 		return result;
 	}
@@ -1128,13 +1095,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(expressionInOcl, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(expressionInOcl, result, guid);
 
 		return result;
 	}
@@ -1221,14 +1182,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(ifExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(ifExp, result, guid);
 
 		return result;
 	}
@@ -1263,13 +1217,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(integerLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(integerLiteralExp, result, guid);
 
 		return result;
 	}
@@ -1305,13 +1253,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(invalidLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(invalidLiteralExp, result, guid);
 
 		return result;
 	}
@@ -1381,14 +1323,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(iterateExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(iterateExp, result, guid);
 
 		return result;
 	}
@@ -1788,14 +1723,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(iteratorExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(iteratorExp, result, guid);
 
 		return result;
 	}
@@ -2979,14 +2907,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(letExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(letExp, result, guid);
 
 		return result;
 	}
@@ -3051,14 +2972,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(operationCallExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(operationCallExp, result, guid);
 
 		return result;
 	}
@@ -3628,14 +3542,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(propertyCallExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(propertyCallExp, result, guid);
 
 		return result;
 	}
@@ -3868,13 +3775,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(realLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(realLiteralExp, result, guid);
 
 		return result;
 	}
@@ -3911,13 +3812,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(stringLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(stringLiteralExp, result, guid);
 
 		return result;
 	}
@@ -3970,14 +3865,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(tupleLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(tupleLiteralExp, result, guid);
 
 		return result;
 	}
@@ -4014,14 +3902,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else;
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(tupleLiteralPart, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(tupleLiteralPart, result, guid);
 
 		return result;
 	}
@@ -4058,13 +3939,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(typeLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(typeLiteralExp, result, guid);
 
 		return result;
 	}
@@ -4102,13 +3977,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(undefinedLiteralExp, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(undefinedLiteralExp, result, guid);
 
 		return result;
 	}
@@ -4174,14 +4043,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 
 		/* Probably trace the exit of this method. */
-		if (!isPreparationRun) {
-			decreaseTracerTreeDepth();
-
-			/* Propagate tracer information for partial interpretation */
-			OclInterpreterPlugin.getInterpreterRegistry()
-					.firePartialInterpretionResult(variable, result, guid);
-		}
-		// no else
+		decreaseTracerTreeDepth(variable, result, guid);
 
 		return result;
 	}
@@ -4277,8 +4139,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		this.logOffset += ". ";
 	}
-	
+
 	protected UUID increaseTracerTreeDepth() {
+
 		return increaseTracerTreeDepth(null);
 	}
 
@@ -4311,11 +4174,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * Fires a notification to the observers that the tree depth has decreased
 	 * </p>
 	 */
-	protected void decreaseTracerTreeDepth() {
+	protected void decreaseTracerTreeDepth(EObject expression, OclAny result,
+			UUID uuid) {
 
-		/* set the offset for the tree structure */
-		OclInterpreterPlugin.getInterpreterRegistry()
-				.fireInterpretationDepthDecreased();
+		if (!isPreparationRun && uuid != null) {
+			/* set the offset for the tree structure */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.fireInterpretationDepthDecreased();
+			/* send the result event */
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.firePartialInterpretionResult(expression, result, uuid);
+		}
+		// no else
 	}
-	
+
+
 }
