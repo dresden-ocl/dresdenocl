@@ -90,7 +90,7 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 			});
 			interpreterThread.start();
 			// 2. make debug listener attach to debugger
-			// (this is done by the OclDebugTarget in the current implementation)
+			
 			// 3. start debugger
 			OclDebugProcess process = new OclDebugProcess(launch);
 			OclDebugTarget target =

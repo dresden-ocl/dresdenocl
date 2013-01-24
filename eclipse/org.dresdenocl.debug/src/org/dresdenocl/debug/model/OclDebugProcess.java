@@ -1,79 +1,81 @@
 package org.dresdenocl.debug.model;
 
+import org.dresdenocl.debug.events.EOclDebugMessageType;
+import org.dresdenocl.debug.events.IDebugEventListener;
+import org.dresdenocl.debug.events.OclDebugMessage;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
 
-
-public class OclDebugProcess extends OclDebugElement implements IProcess {
+public class OclDebugProcess extends OclDebugElement implements IProcess,
+		IDebugEventListener {
 
 	private ILaunch m_launch;
-	
+	private boolean m_terminated;
+
 	public OclDebugProcess(ILaunch launch) {
 
 		super((OclDebugTarget) launch.getDebugTarget());
 		m_launch = launch;
+		m_terminated = false;
 	}
 
 	@Override
 	public boolean canTerminate() {
 
-		// TODO Auto-generated method stub
-		return false;
+		return !m_terminated;
 	}
-	
+
 	public ILaunch getLaunch() {
 		return m_launch;
 	}
 
 	@Override
 	public boolean isTerminated() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return m_terminated;
 	}
 
 	@Override
 	public void terminate() throws DebugException {
-
-		// TODO Auto-generated method stub
-
+		m_terminated = true;
 	}
 
 	@Override
 	public String getLabel() {
 
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public IStreamsProxy getStreamsProxy() {
 
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setAttribute(String key, String value) {
-
-		// TODO Auto-generated method stub
-
+		// do nothing
 	}
 
 	@Override
 	public String getAttribute(String key) {
 
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getExitValue() throws DebugException {
 
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void handleMessage(OclDebugMessage message) {
+		if(message.hasType(EOclDebugMessageType.TERMINATED)) {
+			m_terminated = true;
+		}
+		//no else
 	}
 
 }
