@@ -22,13 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
-
 import org.dresdenocl.essentialocl.standardlibrary.OclBoolean;
 import org.dresdenocl.interpreter.ui.InterpreterUIPlugin;
 import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
@@ -37,6 +30,12 @@ import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.NamedElement;
 import org.dresdenocl.pivotmodel.Operation;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * <p>

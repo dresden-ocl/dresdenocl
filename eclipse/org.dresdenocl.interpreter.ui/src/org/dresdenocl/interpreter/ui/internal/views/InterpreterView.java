@@ -40,6 +40,8 @@ import java.util.WeakHashMap;
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.IOclInterpreter;
 import org.dresdenocl.interpreter.OclInterpreterPlugin;
+import org.dresdenocl.interpreter.event.IInterpreterRegistryListener;
+import org.dresdenocl.interpreter.event.internal.InterpreterRegistryEvent;
 import org.dresdenocl.interpreter.ui.internal.msg.OclInterpreterUIMessages;
 import org.dresdenocl.interpreter.ui.internal.views.util.ResultsContentProvider;
 import org.dresdenocl.interpreter.ui.internal.views.util.ResultsFilter;
@@ -80,7 +82,8 @@ import org.eclipse.ui.part.ViewPart;
  * @author Ronny Brandt
  */
 public class InterpreterView extends ViewPart implements ISelectionListener,
-		IModelInstanceRegistryListener, IModelRegistryListener {
+		IModelInstanceRegistryListener, IModelRegistryListener,
+		IInterpreterRegistryListener {
 
 	/** Icon to add variables to the environment. */
 	public static String ADD_IMAGE = "icons/add.gif";
@@ -95,8 +98,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	public static String REMOVE_IMAGE = "icons/remove.gif";
 
 	/** The currently selected {@link Constraint}s that shall be interpreted. */
-	private final Set<Constraint> currentlySelectedConstraints =
-			new HashSet<Constraint>();
+	private final Set<Constraint> currentlySelectedConstraints = new HashSet<Constraint>();
 
 	/** The currently selected {@link IModelInstance}. */
 	private IModelInstance currentlySelectedModelInstance;
@@ -105,8 +107,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * The currently selected {@link IModelInstanceElement}s that shall be
 	 * interpreted.
 	 */
-	private final Set<IModelInstanceElement> currentlySelectedModelInstanceElements =
-			new HashSet<IModelInstanceElement>();
+	private final Set<IModelInstanceElement> currentlySelectedModelInstanceElements = new HashSet<IModelInstanceElement>();
 
 	/** The currently selected rows of this {@link IViewActionDelegate}. */
 	private final Set<Object[]> currentlySelectedRows = new HashSet<Object[]>();
@@ -117,8 +118,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * {@link IOclInterpreter}s for {@link IModelInstance}s that are not
 	 * referenced anymore will be collected by the garbage collector!
 	 */
-	private Map<IModelInstance, IOclInterpreter> myCachedInterpreters =
-			new WeakHashMap<IModelInstance, IOclInterpreter>();
+	private Map<IModelInstance, IOclInterpreter> myCachedInterpreters = new WeakHashMap<IModelInstance, IOclInterpreter>();
 
 	/** The currently selected {@link ResultFilter}. */
 	private ResultsFilter myCurrentFilter = new ResultsFilter(this);
@@ -127,7 +127,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private InterpretationResultCache myResults = new InterpretationResultCache();
 
 	/**
-	 * The {@link TableViewer} used to present the results of the interpretation.
+	 * The {@link TableViewer} used to present the results of the
+	 * interpretation.
 	 */
 	private TableViewer myTableViewer;
 
@@ -142,16 +143,20 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 		ModelBusPlugin.getModelRegistry().addModelRegistryListener(this);
 
 		/* Register this view as a model instance listener. */
-		ModelBusPlugin.getModelInstanceRegistry().addModelInstanceRegistryListener(
-				this);
+		ModelBusPlugin.getModelInstanceRegistry()
+				.addModelInstanceRegistryListener(this);
 
-		this.currentlySelectedModelInstance =
-				ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+		this.currentlySelectedModelInstance = ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
 						ModelBusPlugin.getModelRegistry().getActiveModel());
+
+		OclInterpreterPlugin.getInterpreterRegistry()
+				.addInterpreterRegistryListener(this);
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
 	public void dispose() {
@@ -165,6 +170,9 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 			((ISelectionService) getSite().getService(ISelectionService.class))
 					.removeSelectionListener(this);
+
+			OclInterpreterPlugin.getInterpreterRegistry()
+					.removeInterpreterRegistryListener(this);
 		} finally {
 			super.dispose();
 		}
@@ -172,6 +180,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.dresdenocl.modelbus.event.IModelRegistryListener#
 	 * activeModelChanged (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
@@ -182,14 +191,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.dresdenocl.modelbus.event.IModelInstanceRegistryListener#
 	 * activeModelInstanceChanged
 	 * (org.dresdenocl.modelbus.event.ModelInstanceRegistryEvent)
 	 */
 	public void activeModelInstanceChanged(ModelInstanceRegistryEvent event) {
 
-		this.currentlySelectedModelInstance =
-				ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
+		this.currentlySelectedModelInstance = ModelBusPlugin
+				.getModelInstanceRegistry().getActiveModelInstance(
 						ModelBusPlugin.getModelRegistry().getActiveModel());
 
 		this.myResults.clear();
@@ -201,15 +211,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param parent
-	 *          The parent composite of the created {@link TableViewer}.
+	 *            The parent composite of the created {@link TableViewer}.
 	 */
 	public void createPartControl(Composite parent) {
 
 		final Table table;
 		TableColumn column;
 
-		this.myTableViewer =
-				new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+		this.myTableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL
+				| SWT.V_SCROLL);
 
 		/* Set the content and label provider. */
 		this.myTableViewer.setContentProvider(new ResultsContentProvider());
@@ -241,6 +251,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see org.dresdenocl.modelbus.event.IModelRegistryListener#modelAdded
 	 * (org.dresdenocl.modelbus.event.ModelRegistryEvent)
 	 */
@@ -256,6 +267,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.dresdenocl.modelbus.event.IModelInstanceRegistryListener#
 	 * modelInstanceAdded
 	 * (org.dresdenocl.modelbus.event.ModelInstanceRegistryEvent)
@@ -272,6 +284,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.
 	 * IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
 	 */
@@ -279,7 +292,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 		/* Check if the selection of the models view changed. */
 		if (part.getSite() != null
-				&& part.getSite().getId().equals(IModelBusConstants.MODELS_VIEW_ID)) {
+				&& part.getSite().getId()
+						.equals(IModelBusConstants.MODELS_VIEW_ID)) {
 
 			/* Check if the selection is a tree selection. */
 			if (selection instanceof TreeSelection) {
@@ -296,7 +310,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 				this.clearModelObjectSelection();
 
 				/*
-				 * Add all selected constraints and types to the constraint selection.
+				 * Add all selected constraints and types to the constraint
+				 * selection.
 				 */
 				while (selectionIt.hasNext()) {
 					Object anObject;
@@ -413,9 +428,10 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param interpretationResult
-	 *          The {@link IInterpretationResult} that shall be added.
+	 *            The {@link IInterpretationResult} that shall be added.
 	 */
-	public void addInterpretationResult(IInterpretationResult interpretationResult) {
+	public void addInterpretationResult(
+			IInterpretationResult interpretationResult) {
 
 		this.myResults.addResult(interpretationResult);
 	}
@@ -475,12 +491,12 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	/**
 	 * <p>
-	 * Returns the currently selected {@link IModelInstanceElement}s that shall be
-	 * interpreted.
+	 * Returns the currently selected {@link IModelInstanceElement}s that shall
+	 * be interpreted.
 	 * </p>
 	 * 
-	 * @return The currently selected {@link IModelInstanceElement}s that shall be
-	 *         interpreted.
+	 * @return The currently selected {@link IModelInstanceElement}s that shall
+	 *         be interpreted.
 	 */
 	public Set<IModelInstanceElement> getCurrentlySelectedModelInstanceElements() {
 
@@ -493,11 +509,12 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param modelInstance
-	 *          The {@link IModelInstance} for that the {@link IOclInterpreter}
-	 *          shall be returned.
+	 *            The {@link IModelInstance} for that the
+	 *            {@link IOclInterpreter} shall be returned.
 	 * @return The {@link IOclInterpreter} for a given {@link IModelInstance}
 	 */
-	public IOclInterpreter getInterpreterForInstance(IModelInstance modelInstance) {
+	public IOclInterpreter getInterpreterForInstance(
+			IModelInstance modelInstance) {
 
 		IOclInterpreter result;
 
@@ -554,7 +571,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 					public void run() {
 
 						myTableViewer.refresh();
-						for (TableColumn column : myTableViewer.getTable().getColumns()) {
+						for (TableColumn column : myTableViewer.getTable()
+								.getColumns()) {
 							column.pack();
 						}
 					}
@@ -567,12 +585,14 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param message
-	 *          The message which shall be shown.
+	 *            The message which shall be shown.
 	 */
 	public void showMessage(String message) {
 
-		MessageDialog.openInformation(this.myTableViewer.getControl().getShell(),
-				OclInterpreterUIMessages.InterpreterView_InterpreterResults, message);
+		MessageDialog.openInformation(this.myTableViewer.getControl()
+				.getShell(),
+				OclInterpreterUIMessages.InterpreterView_InterpreterResults,
+				message);
 	}
 
 	/**
@@ -581,7 +601,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param aConstraint
-	 *          The {@link Constraint} which shall be added.
+	 *            The {@link Constraint} which shall be added.
 	 */
 	private void addConstraintSelection(Constraint aConstraint) {
 
@@ -595,7 +615,7 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param modelObject
-	 *          The {@link IModelInstanceElement}s that shall be added.
+	 *            The {@link IModelInstanceElement}s that shall be added.
 	 */
 	private void addModelObjectSelection(IModelInstanceElement modelObject) {
 
@@ -609,14 +629,15 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	 * </p>
 	 * 
 	 * @param type
-	 *          The {@link Type} whose {@link IModelInstanceElement}s shall be
-	 *          added.
+	 *            The {@link Type} whose {@link IModelInstanceElement}s shall be
+	 *            added.
 	 */
 	private void addModelObjectSelection(Type type) {
 
 		if (this.currentlySelectedModelInstance != null) {
 			this.currentlySelectedModelInstanceElements
-					.addAll(this.currentlySelectedModelInstance.getAllInstances(type));
+					.addAll(this.currentlySelectedModelInstance
+							.getAllInstances(type));
 		}
 		// no else.
 	}
@@ -641,5 +662,10 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 	private void clearModelObjectSelection() {
 
 		this.currentlySelectedModelInstanceElements.clear();
+	}
+
+	@Override
+	public void interpretationFinished(InterpreterRegistryEvent event) {
+		addInterpretationResult(event.getInterpreationResult());
 	}
 }
