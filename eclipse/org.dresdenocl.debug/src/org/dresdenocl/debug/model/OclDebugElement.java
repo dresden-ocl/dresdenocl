@@ -5,11 +5,11 @@ import org.eclipse.debug.core.model.DebugElement;
 
 public abstract class OclDebugElement extends DebugElement {
 
-	protected OclDebugTarget m_target;
+	protected OclDebugTarget m_debugTarget;
 	
 	public OclDebugElement(OclDebugTarget target) {
 		super(target);
-		m_target = target;
+		m_debugTarget = target;
 	}
 
 	@Override

@@ -1,14 +1,19 @@
 package org.dresdenocl.debug.model;
 
+import org.dresdenocl.debug.events.IDebugEventListener;
+import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
+import org.dresdenocl.interpreter.debug.OclDebugMessage;
+import org.dresdenocl.interpreter.debug.util.OclStringUtil;
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
-public class OclDebugThread extends OclDebugElement implements IThread {
+public class OclDebugThread extends OclDebugElement implements IThread,
+		IDebugEventListener {
 
-	private IBreakpoint[] m_breakpoints;
-	private boolean m_stepping = false;
+	private boolean m_suspended = false;
 
 	public OclDebugThread(OclDebugTarget target) {
 
@@ -17,117 +22,79 @@ public class OclDebugThread extends OclDebugElement implements IThread {
 
 	@Override
 	public boolean canResume() {
-
-		return false;
+		return m_suspended;
 	}
 
 	@Override
 	public boolean canSuspend() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return !m_suspended;
 	}
 
 	@Override
 	public boolean isSuspended() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return m_suspended;
 	}
 
 	@Override
 	public void resume() throws DebugException {
-
-		// TODO Auto-generated method stub
-
+		m_debugTarget.getDebugProxy().resume();
+		m_suspended = false;
 	}
 
 	@Override
 	public void suspend() throws DebugException {
-
-		// TODO Auto-generated method stub
-
+		m_suspended = true;
+		fireSuspendEvent(DebugEvent.BREAKPOINT);
 	}
 
 	@Override
 	public boolean canStepInto() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canStepOver() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canStepReturn() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isStepping() {
-
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void stepInto() throws DebugException {
-
-		// TODO Auto-generated method stub
-
+		m_debugTarget.getDebugProxy().stepInto();
 	}
 
 	@Override
 	public void stepOver() throws DebugException {
-
-		// TODO Auto-generated method stub
-
+		m_debugTarget.getDebugProxy().stepOver();
 	}
 
 	@Override
 	public void stepReturn() throws DebugException {
-
-		// TODO Auto-generated method stub
-
+		m_debugTarget.getDebugProxy().stepReturn();
 	}
 
 	@Override
 	public boolean canTerminate() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return !isTerminated();
 	}
 
 	@Override
 	public boolean isTerminated() {
-
-		// TODO Auto-generated method stub
-		return false;
+		return m_debugTarget.isTerminated();
 	}
 
 	@Override
 	public void terminate() throws DebugException {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public IStackFrame[] getStackFrames() throws DebugException {
-
-		if (isSuspended()) {
-			return m_target.getStackFrames();
-		}
-		else {
-			return new IStackFrame[0];
-		}
+		m_debugTarget.getDebugProxy().terminate();
 	}
 
 	@Override
@@ -160,18 +127,45 @@ public class OclDebugThread extends OclDebugElement implements IThread {
 
 	@Override
 	public IBreakpoint[] getBreakpoints() {
-		if(m_breakpoints == null) {
-			return (m_breakpoints = new IBreakpoint[0]);
+		return null;
+	}
+
+	@Override
+	public IStackFrame[] getStackFrames() throws DebugException {
+		if (isSuspended()) {
+			OclDebugMessage stack = m_debugTarget.getDebugProxy().getStack();
+			String framesData = stack.getArgument(0);
+			if (framesData != null && !"".equals(framesData)) {
+				java.util.List<String> frames = OclStringUtil.decode(
+						framesData, '#');
+				IStackFrame[] theFrames = new IStackFrame[frames.size()];
+				for (int i = 0; i < frames.size(); i++) {
+					String data = frames.get(i);
+					theFrames[frames.size() - i - 1] = new OclStackFrame(
+							m_debugTarget, data);
+				}
+				return theFrames;
+			}
 		}
-		return m_breakpoints;
+		return new IStackFrame[0];
 	}
 
-	public void setStepping(boolean b) {
-		m_stepping = b;
-	}
-
-	public void setBreakpoints(IBreakpoint[] breakpoints) {
-		m_breakpoints = breakpoints;
+	@Override
+	public void handleMessage(OclDebugMessage message) {
+		if (message.hasType(EOclDebugMessageType.STARTED)) {
+			fireCreationEvent();
+		} else if (message.hasType(EOclDebugMessageType.RESUMED)) {
+			m_suspended = false;
+			fireResumeEvent(0);
+		} else if (message.hasType(EOclDebugMessageType.SUSPENDED)) {
+			m_suspended = true;
+			fireSuspendEvent(DebugEvent.BREAKPOINT);
+		} else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
+			// ignore this event
+		} else {
+			System.out.println("ERROR " + this.getClass().getName()
+					+ ".handleMessage(" + message + ") unknown event");
+		}
 	}
 
 }

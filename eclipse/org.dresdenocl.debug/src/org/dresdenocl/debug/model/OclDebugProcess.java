@@ -1,8 +1,8 @@
 package org.dresdenocl.debug.model;
 
-import org.dresdenocl.debug.events.EOclDebugMessageType;
 import org.dresdenocl.debug.events.IDebugEventListener;
-import org.dresdenocl.debug.events.OclDebugMessage;
+import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
+import org.dresdenocl.interpreter.debug.OclDebugMessage;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;

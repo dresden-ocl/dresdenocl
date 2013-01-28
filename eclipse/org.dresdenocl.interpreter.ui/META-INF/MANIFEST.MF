@@ -6,12 +6,13 @@ Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: org.dresdenocl.interpreter.ui.InterpreterUIPlugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.dresdenocl.interpreter,
  org.dresdenocl.modelbus,
- org.dresdenocl.modelbus.ui
+ org.dresdenocl.modelbus.ui,
+ org.dresdenocl.interpreter
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: TU Dresden, Software Technology Group
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.interpreter.ui,
  org.dresdenocl.interpreter.ui.command.handler,
  org.dresdenocl.interpreter.ui.internal.views
+Import-Package: org.dresdenocl.interpreter

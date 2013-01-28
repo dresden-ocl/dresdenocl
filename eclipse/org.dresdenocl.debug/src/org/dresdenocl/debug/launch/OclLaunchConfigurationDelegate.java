@@ -8,7 +8,8 @@ import java.util.List;
 import org.dresdenocl.debug.OclDebugPlugin;
 import org.dresdenocl.debug.model.OclDebugProcess;
 import org.dresdenocl.debug.model.OclDebugTarget;
-import org.dresdenocl.interpreter.IOclInterpreter;
+import org.dresdenocl.debug.model.OclDebuggerListener;
+import org.dresdenocl.interpreter.IOclDebuggable;
 import org.dresdenocl.interpreter.internal.OclInterpreter;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -78,18 +79,24 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 			}
 			// TODO Lars
 			// 1. run the interpreter in debug mode in own thread
+			final IOclDebuggable interpreter = new OclInterpreter(minstance);
 			Thread interpreterThread = new Thread(new Runnable() {
-
 				@Override
 				public void run() {
-					// dont forget static constraints to run w/o mie
-					IOclInterpreter i = new OclInterpreter(minstance, requestPort, eventPort);
-					for(IModelInstanceElement mie : miElements)
-						i.interpretConstraints(constraints, mie, ILaunchManager.DEBUG_MODE);
+					interpreter.setDebugMode(true);
+					interpreter.setEventPort(eventPort);
+					//TODO dont forget static constraints to run w/o mie
+					for(IModelInstanceElement mie : miElements) {
+						interpreter.interpretConstraints(constraints, mie);
+					}
 				}
 			});
 			interpreterThread.start();
+			
 			// 2. make debug listener attach to debugger
+			OclDebuggerListener listener = new OclDebuggerListener(requestPort);
+			listener.setDebuggable(interpreter);
+			new Thread(listener).start();
 			
 			// 3. start debugger
 			OclDebugProcess process = new OclDebugProcess(launch);

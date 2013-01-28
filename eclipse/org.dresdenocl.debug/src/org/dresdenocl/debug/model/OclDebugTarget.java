@@ -3,50 +3,53 @@ package org.dresdenocl.debug.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.dresdenocl.debug.OclDebugPlugin;
+import org.dresdenocl.debug.events.IDebugEventListener;
+import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
+import org.dresdenocl.interpreter.debug.OclDebugCommunicationHelper;
+import org.dresdenocl.interpreter.debug.OclDebugMessage;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.debug.core.model.ILineBreakpoint;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
-public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
+public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
+		IDebugEventListener {
 
-	private IProcess m_process;
+	private OclDebugProcess m_process;
 	private ILaunch m_launch;
-	private String m_name;
-
-	private Socket m_requestSocket;
-	private PrintWriter m_requestWriter;
-	private BufferedReader m_requestReader;
 
 	private Socket m_eventSocket;
 	private BufferedReader m_eventReader;
 
-	private boolean m_suspended = true;
 	private boolean m_terminated = false;
 
 	private OclDebugThread m_thread;
 	private IThread[] m_threads;
 
+	private OclDebugProxy m_debugProxy;
+
 	private EventDispatchJob m_eventDispatch;
+	private List<IDebugEventListener> m_eventListener;
 
 	private class EventDispatchJob extends Job {
+
+		private OclDebugCommunicationHelper m_communicationHelper = new OclDebugCommunicationHelper();
 
 		public EventDispatchJob() {
 
@@ -56,78 +59,73 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 
 		@Override
 		protected IStatus run(IProgressMonitor monitor) {
-
-			String event = null;
-			try {
-				while (!isTerminated() && (event = m_eventReader.readLine()) != null) {
-					System.out.println(event);
-					if (event.length() > 1) {
-						m_thread.setBreakpoints(null);
-						m_thread.setStepping(false);
-						if (event.equals("started")) {
-							started();
-						}
-						else if (event.equals("terminated")) {
-							terminated();
-						}
-						else if (event.startsWith("resumed")) {
-							if (event.endsWith("step")) {
-								m_thread.setStepping(true);
-								resumed(DebugEvent.STEP_OVER);
-							}
-							else if (event.endsWith("client")) {
-								resumed(DebugEvent.CLIENT_REQUEST);
-							}
-						}
-						else if (event.startsWith("suspended")) {
-							if (event.endsWith("client")) {
-								suspended(DebugEvent.CLIENT_REQUEST);
-							}
-							else if (event.endsWith("step")) {
-								suspended(DebugEvent.STEP_END);
-							}
-							else if (event.indexOf("breakpoint") >= 0) {
-								breakpointHit(event);
-							}
-						}
-					}
+			
+			while (!isTerminated()) {
+				OclDebugMessage msg = m_communicationHelper
+						.receive(m_eventReader);
+				if (msg != null) {
+					notifyListeners(msg);
+				} else {
+					terminated();
+					break;
 				}
-			} catch (IOException e) {
-				terminated();
 			}
 			return Status.OK_STATUS;
 		}
+
+		private void notifyListeners(OclDebugMessage msg) {
+
+		}
 	}
 
-	public OclDebugTarget(ILaunch launch, IProcess process, int requestPort,
+	public OclDebugTarget(ILaunch launch, OclDebugProcess process, int requestPort,
 			int eventPort) throws CoreException {
 
 		super(null);
-		m_target = this;
+		m_debugTarget = this;
 		m_launch = launch;
 		m_process = process;
-		try {
-			m_requestSocket = new Socket("localhost", requestPort);
-			m_requestWriter = new PrintWriter(m_requestSocket.getOutputStream());
-			m_requestReader =
-					new BufferedReader(new InputStreamReader(
-							m_requestSocket.getInputStream()));
-			m_eventSocket = new Socket("localhost", eventPort);
-			m_eventReader =
-					new BufferedReader(new InputStreamReader(
-							m_eventSocket.getInputStream()));
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		m_thread = new OclDebugThread(this);
 		m_threads = new IThread[] { m_thread };
+
+		try {
+			m_debugProxy = new OclDebugProxy(this, requestPort);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			m_eventSocket = new Socket("localhost", eventPort);
+			m_eventReader = new BufferedReader(new InputStreamReader(
+					m_eventSocket.getInputStream()));
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (ConnectException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		m_eventDispatch = new EventDispatchJob();
 		m_eventDispatch.schedule();
+
+		m_eventListener = new ArrayList<IDebugEventListener>();
+		this.addEventListener(this);
+		this.addEventListener(m_thread);
+		this.addEventListener(m_process);
+
 		this.getBreakpointManager().addBreakpointListener(this);
+	}
+
+	private void addEventListener(IDebugEventListener listener) {
+		if (!m_eventListener.contains(listener)) {
+			m_eventListener.add(listener);
+		}
+	}
+
+	private void removeEventListener(IDebugEventListener listener) {
+		m_eventListener.remove(listener);
 	}
 
 	private void started() {
@@ -143,101 +141,67 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 
 	private void installDeferredBreakPoints() {
 
-		IBreakpoint[] breakpoints =
-				this.getBreakpointManager().getBreakpoints(
-						OclDebugPlugin.DEBUG_MODEL_ID);
+		IBreakpoint[] breakpoints = getBreakpointManager().getBreakpoints(
+				OclDebugPlugin.DEBUG_MODEL_ID);
 		for (IBreakpoint breakpoint : breakpoints) {
 			breakpointAdded(breakpoint);
 		}
 	}
 
-	public void resumed(int clientRequest) {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	private void suspended(int stepEnd) {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	private void breakpointHit(String event) {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	private void terminated() {
+	private synchronized void terminated() {
 
 		m_terminated = true;
-		m_suspended = false;
-		this.getBreakpointManager().removeBreakpointListener(this);
+		m_threads = new IThread[0];
 		fireTerminateEvent();
+		removeEventListener(this);
+		removeEventListener(m_thread);
+		removeEventListener(m_process);
+		try {
+			getBreakpointManager().removeBreakpointListener(this);
+		} catch (NullPointerException e) {
+			//do nothing
+		}
+		m_debugProxy.terminate();
 	}
 
 	@Override
 	public boolean canTerminate() {
-
 		return m_process.canTerminate();
 	}
 
 	@Override
 	public boolean isTerminated() {
-
-		return m_process.isTerminated();
-	}
-
-	@Override
-	public void terminate() throws DebugException {
-
-		synchronized (m_requestSocket) {
-			m_requestWriter.println("exit");
-			m_requestWriter.flush();
-		}
+		return m_terminated || m_process.isTerminated();
 	}
 
 	@Override
 	public boolean canResume() {
-
-		return !isTerminated() && isSuspended();
+		return m_thread.canResume();
 	}
 
 	@Override
 	public boolean canSuspend() {
-
-		return !isTerminated() && !isSuspended();
+		return m_thread.canSuspend();
 	}
 
 	@Override
 	public boolean isSuspended() {
-
-		return m_suspended;
+		return m_thread.isSuspended();
 	}
 
 	@Override
 	public void resume() throws DebugException {
-
-		sendRequest("resume");
-	}
-
-	private void sendRequest(String request) throws DebugException {
-
-		synchronized (m_requestSocket) {
-			m_requestWriter.println(request);
-			m_requestWriter.flush();
-			try {
-				String response = m_requestReader.readLine();
-			} catch (IOException e) {
-				abort("Request failed: " + request, e);
-			}
-		}
+		m_thread.resume();
 	}
 
 	@Override
 	public void suspend() throws DebugException {
+		m_thread.suspend();
+	}
 
+	@Override
+	public void terminate() throws DebugException {
+		m_thread.terminate();
 	}
 
 	@Override
@@ -245,16 +209,12 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 
 		if (supportsBreakpoint(breakpoint)) {
 			try {
-				if (breakpoint.isEnabled()) {
-					try {
-						sendRequest("set "
-								+ (((ILineBreakpoint) breakpoint).getLineNumber() - 1));
-					} catch (DebugException e) {
-						e.printStackTrace();
-					} catch (CoreException e) {
-						e.printStackTrace();
-					}
+				if ((breakpoint.isEnabled() && getBreakpointManager()
+						.isEnabled()) || !breakpoint.isRegistered()) {
+					OclLineBreakpoint lineBreakpoint = (OclLineBreakpoint) breakpoint;
+					lineBreakpoint.install(this);
 				}
+				// no else
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -266,7 +226,12 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 
 		if (supportsBreakpoint(breakpoint)) {
 			try {
-				sendRequest("clear " + ((ILineBreakpoint) breakpoint).getLineNumber());
+				if ((breakpoint.isEnabled() && getBreakpointManager()
+						.isEnabled()) || !breakpoint.isRegistered()) {
+					OclLineBreakpoint lineBreakpoint = (OclLineBreakpoint) breakpoint;
+					lineBreakpoint.install(this);
+				}
+				// no else
 			} catch (DebugException e) {
 				e.printStackTrace();
 			} catch (CoreException e) {
@@ -277,31 +242,18 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 
 	@Override
 	public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
-
-		if (supportsBreakpoint(breakpoint)) {
-			try {
-				if (breakpoint.isEnabled()) {
-					breakpointAdded(breakpoint);
-				}
-				else {
-					breakpointRemoved(breakpoint, delta);
-				}
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
+		// empty
 	}
 
 	@Override
 	public boolean canDisconnect() {
 
-		// TODO
 		return false;
 	}
 
 	@Override
 	public void disconnect() throws DebugException {
-
+		// empty
 	}
 
 	@Override
@@ -343,41 +295,45 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget {
 
 	@Override
 	public String getName() throws DebugException {
-
-		if (m_name == null) {
-			m_name = "OCL Program";
-			// TODO
-		}
-		return m_name;
+		return "OCL model";
 	}
 
 	@Override
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
 
-		if (breakpoint.getModelIdentifier().equals(OclDebugPlugin.DEBUG_MODEL_ID)) {
-			// TODO
-			return true;
-		}
-		return false;
+		return breakpoint.getModelIdentifier().equals(
+				OclDebugPlugin.DEBUG_MODEL_ID);
 	}
 
-	protected IStackFrame[] getStackFrames() throws DebugException {
-
-		synchronized (m_requestSocket) {
-			m_requestWriter.println("stack");
-			m_requestWriter.flush();
-			String framesData;
-			try {
-				framesData = m_requestReader.readLine();
-				if (framesData != null) {
-					String[] frames = framesData.split("#");
-					IStackFrame[] stackFrames = new IStackFrame[frames.length];
-					// TODO
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
+	@Override
+	public void handleMessage(OclDebugMessage message) {
+		try {
+			if (message.hasType(EOclDebugMessageType.STARTED)) {
+				started();
+			} else if (message.hasType(EOclDebugMessageType.SUSPENDED)) {
+				suspend();
+			} else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
+				terminated();
+			} else if (message.hasType(EOclDebugMessageType.RESUMED)) {
+				// this event is handled by the debug thread
+			} else {
+				System.out.println("ERROR in " + this.getClass().getName()
+						+ ".handleMessage(): unknown event: " + message);
 			}
+		} catch (DebugException e) {
+			e.printStackTrace();
 		}
-		return new IStackFrame[0];
+	}
+
+	public OclDebugProxy getDebugProxy() {
+		return m_debugProxy;
+	}
+
+	public IThread getThread() {
+		return m_thread;
+	}
+	
+	public ILaunch getLaunch() {
+		return m_launch;
 	}
 }

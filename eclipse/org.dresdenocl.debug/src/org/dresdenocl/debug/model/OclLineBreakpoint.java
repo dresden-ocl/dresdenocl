@@ -33,6 +33,7 @@ public class OclLineBreakpoint extends LineBreakpoint {
 				marker.setAttribute(IMarker.MESSAGE,
 						"Line Breakpoint: " + resource.getName() + " [line: " + lineNumber
 								+ "]");
+				marker.setAttribute(IMarker.LOCATION, resource.getRawLocation().toPortableString());
 			}
 		};
 		run(getMarkerRule(resource), runnable);
@@ -44,4 +45,21 @@ public class OclLineBreakpoint extends LineBreakpoint {
 		return OclDebugPlugin.DEBUG_MODEL_ID;
 	}
 
+	public void install(OclDebugTarget target) {
+		try {
+			String location = (String) getMarker().getAttribute(IMarker.LOCATION);
+			target.getDebugProxy().addLineBreakpoint(location, getLineNumber());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void remove(OclDebugTarget target) {
+		try {
+			String location = (String) getMarker().getAttribute(IMarker.LOCATION);
+			target.getDebugProxy().removeLineBreakpoint(location, getLineNumber());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
 }
