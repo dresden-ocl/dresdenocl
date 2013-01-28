@@ -32,8 +32,8 @@ public class Ocl2InterpretationJob extends Job {
 	private Collection<Constraint> constraints;
 
 	/**
-	 * The {@link IViewActionDelegate} this {@link Ocl2InterpretationJob} belongs
-	 * to.
+	 * The {@link IViewActionDelegate} this {@link Ocl2InterpretationJob}
+	 * belongs to.
 	 */
 	private InterpreterView interpreterView;
 
@@ -49,15 +49,15 @@ public class Ocl2InterpretationJob extends Job {
 	 * </p>
 	 * 
 	 * @param modelObjects
-	 *          The {@link IModelInstanceElement}s that shall be interpreted or
-	 *          <code>null</code> if all {@link IModelInstanceElement}s shall be
-	 *          used.
+	 *            The {@link IModelInstanceElement}s that shall be interpreted
+	 *            or <code>null</code> if all {@link IModelInstanceElement}s
+	 *            shall be used.
 	 * @param constraints
-	 *          The {@link Constraint}s that shall be interpreted or
-	 *          <code>null</code> if all {@link Constraint}s shall be used.
+	 *            The {@link Constraint}s that shall be interpreted or
+	 *            <code>null</code> if all {@link Constraint}s shall be used.
 	 * @param interpreterView
-	 *          The {@link IViewActionDelegate} this {@link Ocl2InterpretationJob}
-	 *          belongs to.
+	 *            The {@link IViewActionDelegate} this
+	 *            {@link Ocl2InterpretationJob} belongs to.
 	 */
 	public Ocl2InterpretationJob(Set<IModelInstanceElement> modelObjects,
 			Collection<Constraint> constraints, InterpreterView interpreterView) {
@@ -77,6 +77,7 @@ public class Ocl2InterpretationJob extends Job {
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @seeorg.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.
 	 * IProgressMonitor)
 	 */
@@ -92,9 +93,8 @@ public class Ocl2InterpretationJob extends Job {
 		activeModelInstance = null;
 
 		if (activeModel != null) {
-			activeModelInstance =
-					ModelBusPlugin.getModelInstanceRegistry().getActiveModelInstance(
-							activeModel);
+			activeModelInstance = ModelBusPlugin.getModelInstanceRegistry()
+					.getActiveModelInstance(activeModel);
 
 			if (activeModelInstance != null) {
 
@@ -103,8 +103,8 @@ public class Ocl2InterpretationJob extends Job {
 				Set<IModelInstanceElement> usedModelObjects;
 				Collection<Constraint> usedConstraints;
 
-				interpreter =
-						this.interpreterView.getInterpreterForInstance(activeModelInstance);
+				interpreter = this.interpreterView
+						.getInterpreterForInstance(activeModelInstance);
 
 				usedModelObjects = null;
 
@@ -113,9 +113,8 @@ public class Ocl2InterpretationJob extends Job {
 				}
 
 				else {
-					usedModelObjects =
-							new HashSet<IModelInstanceElement>(
-									activeModelInstance.getAllModelInstanceObjects());
+					usedModelObjects = new HashSet<IModelInstanceElement>(
+							activeModelInstance.getAllModelInstanceObjects());
 				}
 
 				usedConstraints = null;
@@ -131,44 +130,36 @@ public class Ocl2InterpretationJob extends Job {
 
 					catch (ModelAccessException e) {
 
-						return new Status(IStatus.ERROR, InterpreterUIPlugin.PLUGIN_ID,
-								e.getMessage());
+						return new Status(IStatus.ERROR,
+								InterpreterUIPlugin.PLUGIN_ID, e.getMessage());
 					}
 				}
 
 				if (monitor.isCanceled()) {
-					return new Status(IStatus.CANCEL, InterpreterUIPlugin.PLUGIN_ID,
+					return new Status(IStatus.CANCEL,
+							InterpreterUIPlugin.PLUGIN_ID,
 							"Interpretation was canceled.");
 				}
 				// no else.
 
 				monitor.beginTask("Interpretation of " + usedConstraints.size()
 						+ " Constraints for " + usedModelObjects.size()
-						+ " Model Elements...",
-						usedConstraints.size() * usedModelObjects.size());
+						+ " Model Elements...", usedConstraints.size()
+						* usedModelObjects.size());
 				/*
-				 * Iterate through the model objects and constraints and compute their
-				 * results.
+				 * Iterate through the model objects and constraints and compute
+				 * their results.
 				 */
 				for (Constraint aConstraint : usedConstraints) {
 
 					if (aConstraint.hasStaticContext()) {
-						IInterpretationResult interpretationResult =
-								interpreter.interpretConstraint(aConstraint, null);
-
-						/*
-						 * May be null if Element does not match to context of constraint.
-						 */
-						if (interpretationResult != null) {
-							this.interpreterView
-									.addInterpretationResult(interpretationResult);
-						}
-						// no else.
+						interpreter.interpretConstraint(aConstraint, null);
 
 						monitor.worked(usedModelObjects.size());
 
 						if (monitor.isCanceled()) {
-							return new Status(IStatus.CANCEL, InterpreterUIPlugin.PLUGIN_ID,
+							return new Status(IStatus.CANCEL,
+									InterpreterUIPlugin.PLUGIN_ID,
 									"Interpretation was canceled.");
 						}
 						// no else.
@@ -177,17 +168,8 @@ public class Ocl2InterpretationJob extends Job {
 					else {
 						for (IModelInstanceElement aModelObject : usedModelObjects) {
 
-							IInterpretationResult interpretationResult =
-									interpreter.interpretConstraint(aConstraint, aModelObject);
-
-							/*
-							 * May be null if Element does not match to context of constraint.
-							 */
-							if (interpretationResult != null) {
-								this.interpreterView
-										.addInterpretationResult(interpretationResult);
-							}
-							// no else.
+							interpreter.interpretConstraint(aConstraint,
+									aModelObject);
 
 							monitor.worked(1);
 
@@ -205,9 +187,8 @@ public class Ocl2InterpretationJob extends Job {
 				// end for.
 
 				monitor.done();
-				result =
-						new Status(IStatus.OK, InterpreterUIPlugin.PLUGIN_ID,
-								"Interpretation finished successfully.");
+				result = new Status(IStatus.OK, InterpreterUIPlugin.PLUGIN_ID,
+						"Interpretation finished successfully.");
 
 				ModelBusUIUtility
 						.setActiveView(InterpreterUIPlugin.INTERPRETER_VIEW_ID);
@@ -215,20 +196,20 @@ public class Ocl2InterpretationJob extends Job {
 			}
 
 			else {
-				result =
-						new Status(
-								IStatus.ERROR,
-								InterpreterUIPlugin.PLUGIN_ID,
-								OclInterpreterUIMessages.InterpreterView_Error_NoActiveModelInstance
-										+ activeModel);
+				result = new Status(
+						IStatus.ERROR,
+						InterpreterUIPlugin.PLUGIN_ID,
+						OclInterpreterUIMessages.InterpreterView_Error_NoActiveModelInstance
+								+ activeModel);
 			}
 			// end else.
 		}
 
 		else {
-			result =
-					new Status(IStatus.ERROR, InterpreterUIPlugin.PLUGIN_ID,
-							OclInterpreterUIMessages.InterpreterView_Error_NoActiveModel);
+			result = new Status(
+					IStatus.ERROR,
+					InterpreterUIPlugin.PLUGIN_ID,
+					OclInterpreterUIMessages.InterpreterView_Error_NoActiveModel);
 		}
 		// end else.
 

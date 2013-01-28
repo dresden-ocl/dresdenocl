@@ -21,15 +21,14 @@ package org.dresdenocl.interpreter.ui.internal.views.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.Viewer;
-
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.ui.internal.views.InterpretationResultCache;
 import org.dresdenocl.interpreter.ui.internal.views.InterpreterView;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
 
 /**
  * <p>
