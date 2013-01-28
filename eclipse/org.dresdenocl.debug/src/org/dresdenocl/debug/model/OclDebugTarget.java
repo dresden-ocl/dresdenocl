@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dresdenocl.debug.OclDebugPlugin;
-import org.dresdenocl.debug.events.IDebugEventListener;
+import org.dresdenocl.debug.events.IOclDebugEventListener;
 import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
 import org.dresdenocl.interpreter.debug.OclDebugCommunicationHelper;
 import org.dresdenocl.interpreter.debug.OclDebugMessage;
@@ -29,7 +29,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
 public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
-		IDebugEventListener {
+		IOclDebugEventListener {
 
 	private OclDebugProcess m_process;
 	private ILaunch m_launch;
@@ -45,7 +45,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 	private OclDebugProxy m_debugProxy;
 
 	private EventDispatchJob m_eventDispatch;
-	private List<IDebugEventListener> m_eventListener;
+	private List<IOclDebugEventListener> m_eventListener;
 
 	private class EventDispatchJob extends Job {
 
@@ -59,12 +59,12 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 		@Override
 		protected IStatus run(IProgressMonitor monitor) {
-			
+
 			while (!isTerminated()) {
-				OclDebugMessage msg = m_communicationHelper
+				OclDebugMessage message = m_communicationHelper
 						.receive(m_eventReader);
-				if (msg != null) {
-					notifyListeners(msg);
+				if (message != null) {
+					notifyListeners(message);
 				} else {
 					terminated();
 					break;
@@ -73,13 +73,18 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 			return Status.OK_STATUS;
 		}
 
-		private void notifyListeners(OclDebugMessage msg) {
-
+		private void notifyListeners(OclDebugMessage message) {
+			System.out.println("EventDispatch notifyListeners ( " + message
+					+ " )");
+			Object[] listeners = m_eventListener.toArray();
+			for (Object obj : listeners) {
+				((IOclDebugEventListener) obj).handleMessage(message);
+			}
 		}
 	}
 
-	public OclDebugTarget(ILaunch launch, OclDebugProcess process, int requestPort,
-			int eventPort) throws CoreException {
+	public OclDebugTarget(ILaunch launch, OclDebugProcess process,
+			int requestPort, int eventPort) throws CoreException {
 
 		super(null);
 		m_debugTarget = this;
@@ -96,6 +101,11 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 			e.printStackTrace();
 		}
 
+		m_eventListener = new ArrayList<IOclDebugEventListener>();
+		this.addEventListener(this);
+		this.addEventListener(m_thread);
+		this.addEventListener(m_process);
+
 		try {
 			m_eventSocket = new Socket("localhost", eventPort);
 			m_eventReader = new BufferedReader(new InputStreamReader(
@@ -107,24 +117,20 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		m_eventDispatch = new EventDispatchJob();
 		m_eventDispatch.schedule();
-
-		m_eventListener = new ArrayList<IDebugEventListener>();
-		this.addEventListener(this);
-		this.addEventListener(m_thread);
-		this.addEventListener(m_process);
 
 		this.getBreakpointManager().addBreakpointListener(this);
 	}
 
-	private void addEventListener(IDebugEventListener listener) {
+	private void addEventListener(IOclDebugEventListener listener) {
 		if (!m_eventListener.contains(listener)) {
 			m_eventListener.add(listener);
 		}
 	}
 
-	private void removeEventListener(IDebugEventListener listener) {
+	private void removeEventListener(IOclDebugEventListener listener) {
 		m_eventListener.remove(listener);
 	}
 
@@ -149,7 +155,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 	}
 
 	private synchronized void terminated() {
-
+		System.out.println("OclDebugTarget terminated()");
 		m_terminated = true;
 		m_threads = new IThread[0];
 		fireTerminateEvent();
@@ -159,7 +165,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 		try {
 			getBreakpointManager().removeBreakpointListener(this);
 		} catch (NullPointerException e) {
-			//do nothing
+			// do nothing
 		}
 		m_debugProxy.terminate();
 	}
@@ -191,6 +197,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	@Override
 	public void resume() throws DebugException {
+		System.out.println("OclDebugTarget resume()");
 		m_thread.resume();
 	}
 
@@ -307,6 +314,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	@Override
 	public void handleMessage(OclDebugMessage message) {
+		System.out.println("OclDebugTarget handleMessage( " + message + " )");
 		try {
 			if (message.hasType(EOclDebugMessageType.STARTED)) {
 				started();
@@ -332,7 +340,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 	public IThread getThread() {
 		return m_thread;
 	}
-	
+
 	public ILaunch getLaunch() {
 		return m_launch;
 	}

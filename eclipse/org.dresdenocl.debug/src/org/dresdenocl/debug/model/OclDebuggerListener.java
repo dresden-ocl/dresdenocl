@@ -34,12 +34,12 @@ public class OclDebuggerListener implements Runnable {
 	private OclDebugCommunicationHelper m_communicationHelper;
 	private int m_requestPort;
 	private IOclDebuggable m_debuggable;
-	private boolean stop;
+	private boolean m_stop;
 
 	public OclDebuggerListener(int requestPort) {
 		m_requestPort = requestPort;
 		m_communicationHelper = new OclDebugCommunicationHelper();
-		stop = false;
+		m_stop = false;
 	}
 
 	public IOclDebuggable getDebuggable() {
@@ -68,15 +68,18 @@ public class OclDebuggerListener implements Runnable {
 		PrintStream output = new PrintStream(accept.getOutputStream());
 		
 		OclDebugMessage command;
-		while(!stop) {
+		while(!m_stop) {
+			System.out.println("OclDebuggerListener m_stop = " + m_stop);
 			command = m_communicationHelper.receive(reader);
+			System.out.println("OclDebuggerListener command = " + command);
 			if(command == null) {
 				break;
 			}
 			if(command.hasType(EXIT)) {
 				m_debuggable.terminate();
-				stop = true;
+				m_stop = true;
 			} else if(command.hasType(RESUME)) {
+				System.out.println("OclDebuggerListener RESUME");
 				m_debuggable.resume();
 			} else if(command.hasType(STEP_OVER)) {
 				m_debuggable.stepOver();
@@ -103,6 +106,7 @@ public class OclDebuggerListener implements Runnable {
 				output.append("Unrecognized command!");
 			}
 		}
+		System.out.println("OclDebuggerListener END WHILE");
 		server.close();
 	}
 

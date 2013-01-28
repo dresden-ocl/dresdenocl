@@ -190,6 +190,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	public IInterpretationResult interpretConstraint(Constraint constraint,
 			IModelInstanceElement modelInstanceElement) {
 
+		System.out.println("OclInterpreter interpretConstraint()");
 		startupAndWait();
 
 		if (constraint == null)
@@ -310,7 +311,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					+ result);
 		}
 		// no else.
-
+		
+		if(isDebugMode()) {
+			terminate();
+		}
+		
 		return result;
 	}
 
@@ -817,6 +822,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -855,6 +863,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -892,6 +903,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret CollectionLiteral.");
 			this.pushLogOffset();
 		}
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1027,6 +1041,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1066,6 +1083,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1102,6 +1122,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1188,6 +1211,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1223,6 +1249,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret InvalidLiteral.");
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1261,6 +1290,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1418,6 +1450,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -2855,6 +2890,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -2901,6 +2939,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * (org.dresdenocl.essentialocl.expressions.OperationCallExp)
 	 */
 	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
+
+		// TODO Lars
+		waitIfSuspended();
 
 		OclAny result;
 
@@ -3507,6 +3548,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -3750,6 +3794,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -3786,6 +3833,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret StringLiteral.");
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3824,6 +3874,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3879,6 +3932,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else;
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -3915,6 +3971,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret TypeLiteral.");
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3954,6 +4013,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
+		// TODO Lars
+		waitIfSuspended();
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -3990,6 +4052,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
+
+		// TODO Lars
+		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -4053,6 +4118,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseVariableExp(VariableExp variableExp) {
+
+		// TODO Lars
+		waitIfSuspended();
 
 		/* VariableExp cannot be cached. Only the variable self can be cached. */
 		return doSwitch((EObject) variableExp.getReferredVariable());
@@ -4189,7 +4257,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else
 	}
 
-	private void setTerminate(final boolean terminate) {
+	private void setTerminate(boolean terminate) {
 		m_terminated = terminate;
 	}
 
@@ -4199,13 +4267,17 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 	@Override
 	public void terminate() {
+		System.out.println("OclInterpreter terminate()");
 		sendEvent(EOclDebugMessageType.TERMINATED, false);
 		stopEventSocket();
+		setTerminate(true);
 	}
 
 	@Override
 	public void resume() {
+		System.out.println("OclInterpreter resume()");
 		setSuspend(false);
+		sendEvent(EOclDebugMessageType.RESUMED, true);
 	}
 
 	@Override
@@ -4250,35 +4322,33 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		return null;
 	}
 
+	public boolean alreadySentStartEvent = false;
+
 	public void startupAndWait() {
 		System.out.println("startupAndWait()");
 		if (isDebugMode()) {
-			sendEvent(EOclDebugMessageType.STARTED, true);
-			setSuspend(true);
-			// wait until server sends the RESUME event
-			while (isSuspended()) {
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					throw new RuntimeException(e.getMessage());
-				}
+			if (!alreadySentStartEvent) {
+				alreadySentStartEvent = true;
+				sendEvent(EOclDebugMessageType.STARTED, true);
 			}
-			// confirm that the debuggable was resumed
-			sendEvent(EOclDebugMessageType.RESUMED, true);
+			setSuspend(true);
+			waitIfSuspended();
 		}
 	}
 
-	private boolean isSuspended() {
+	public boolean isSuspended() {
 		return m_suspended;
 	}
 
-	private void setSuspend(boolean suspend) {
+	public void setSuspend(boolean suspend) {
+		System.out.println("setSuspend ( " + suspend + " )");
 		m_suspended = suspend;
+		sendEvent(EOclDebugMessageType.SUSPENDED, true);
 	}
 
 	public void sendEvent(EOclDebugMessageType command,
 			boolean sendOnlyInDebugMode, String... arguments) {
-		System.out.println("sendEvent " + command);
+		System.out.println("OclInterpreter sendEvent " + command);
 		if (isDebugMode() || !sendOnlyInDebugMode) {
 			OclDebugMessage message = new OclDebugMessage(command, arguments);
 			m_communicationHelper.sendEvent(message, m_outputStream);
@@ -4290,13 +4360,20 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	}
 
 	public boolean isDebugMode() {
+		System.out.println("isDebugMode = " + m_debugMode);
 		return m_debugMode;
 	}
 
 	public void startEventSocket(final int eventPort) {
+		System.out.println("OclInterpreter startEventSocket");
 		try {
 			m_server = new ServerSocket(eventPort);
 			Socket accept = m_server.accept();
+			/*
+			 * try { Thread.sleep(100); } catch (InterruptedException e) {
+			 * e.printStackTrace(); }
+			 */
+			System.out.println("OclInterpreter accepted client");
 			m_outputStream = new PrintStream(accept.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -4331,6 +4408,19 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				// still null
 				startEventSocket(eventPort);
 			}
+		}
+	}
+
+	public void waitIfSuspended() {
+		if (isSuspended()) {
+			try {
+				while (isSuspended()) {
+					Thread.sleep(100);
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			sendEvent(EOclDebugMessageType.RESUMED, true);
 		}
 	}
 }

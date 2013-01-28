@@ -666,6 +666,8 @@ public class InterpreterView extends ViewPart implements ISelectionListener,
 
 	@Override
 	public void interpretationFinished(InterpreterRegistryEvent event) {
+		System.out.println("InterpreterView interpretationFinished");
 		addInterpretationResult(event.getInterpreationResult());
+		refreshView();
 	}
 }

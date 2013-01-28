@@ -1,6 +1,6 @@
 package org.dresdenocl.debug.model;
 
-import org.dresdenocl.debug.events.IDebugEventListener;
+import org.dresdenocl.debug.events.IOclDebugEventListener;
 import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
 import org.dresdenocl.interpreter.debug.OclDebugMessage;
 import org.dresdenocl.interpreter.debug.util.OclStringUtil;
@@ -11,7 +11,7 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
 public class OclDebugThread extends OclDebugElement implements IThread,
-		IDebugEventListener {
+		IOclDebugEventListener {
 
 	private boolean m_suspended = false;
 
@@ -37,14 +37,17 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 
 	@Override
 	public void resume() throws DebugException {
+		System.out.println("OclDebugThread resume()");
 		m_debugTarget.getDebugProxy().resume();
 		m_suspended = false;
 	}
 
 	@Override
 	public void suspend() throws DebugException {
+		System.out.println("OclDebugThread suspend()");
 		m_suspended = true;
-		fireSuspendEvent(DebugEvent.BREAKPOINT);
+		//fireSuspendEvent(DebugEvent.BREAKPOINT);
+		fireSuspendEvent(0);
 	}
 
 	@Override
@@ -132,6 +135,7 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 
 	@Override
 	public IStackFrame[] getStackFrames() throws DebugException {
+		/*
 		if (isSuspended()) {
 			OclDebugMessage stack = m_debugTarget.getDebugProxy().getStack();
 			String framesData = stack.getArgument(0);
@@ -147,11 +151,13 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 				return theFrames;
 			}
 		}
+		*/
 		return new IStackFrame[0];
 	}
 
 	@Override
 	public void handleMessage(OclDebugMessage message) {
+		System.out.println("OclDebugThread handleMessage( " + message + " )");
 		if (message.hasType(EOclDebugMessageType.STARTED)) {
 			fireCreationEvent();
 		} else if (message.hasType(EOclDebugMessageType.RESUMED)) {
@@ -159,7 +165,8 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 			fireResumeEvent(0);
 		} else if (message.hasType(EOclDebugMessageType.SUSPENDED)) {
 			m_suspended = true;
-			fireSuspendEvent(DebugEvent.BREAKPOINT);
+			//TODO fireSuspendEvent(DebugEvent.BREAKPOINT);
+			fireSuspendEvent(0);
 		} else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
 			// ignore this event
 		} else {

@@ -1,6 +1,6 @@
 package org.dresdenocl.debug.model;
 
-import org.dresdenocl.debug.events.IDebugEventListener;
+import org.dresdenocl.debug.events.IOclDebugEventListener;
 import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
 import org.dresdenocl.interpreter.debug.OclDebugMessage;
 import org.eclipse.debug.core.DebugException;
@@ -9,7 +9,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
 
 public class OclDebugProcess extends OclDebugElement implements IProcess,
-		IDebugEventListener {
+		IOclDebugEventListener {
 
 	private ILaunch m_launch;
 	private boolean m_terminated;

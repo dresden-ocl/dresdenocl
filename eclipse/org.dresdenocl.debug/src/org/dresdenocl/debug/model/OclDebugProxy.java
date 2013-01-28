@@ -47,6 +47,10 @@ public class OclDebugProxy {
 			BufferedInputStream in = new BufferedInputStream(
 					client.getInputStream());
 			m_reader = new BufferedReader(new InputStreamReader(in));
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		try {
 			m_output = new PrintStream(client.getOutputStream());
 		} catch (IOException e) {
 			System.out.println(e);
@@ -68,6 +72,7 @@ public class OclDebugProxy {
 	}
 
 	public void resume() {
+		System.out.println("OclDebugProxy resume()");
 		sendCommand(EOclDebugMessageType.RESUME);
 	}
 
@@ -84,6 +89,7 @@ public class OclDebugProxy {
 	}
 
 	public void terminate() {
+		System.out.println("OclDebugProxy terminate()");
 		sendCommand(EOclDebugMessageType.EXIT);
 	}
 
@@ -92,6 +98,7 @@ public class OclDebugProxy {
 	}
 
 	private void sendCommand(EOclDebugMessageType command, String... parameters) {
+		System.out.println("OclDebugProxy sendCommand ( " + command + " )");
 		OclDebugMessage message = new OclDebugMessage(command, parameters);
 		m_communicationHelper.sendEvent(message, m_output);
 	}

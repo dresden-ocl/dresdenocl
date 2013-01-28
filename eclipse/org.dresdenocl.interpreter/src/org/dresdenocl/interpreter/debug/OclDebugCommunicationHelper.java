@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-
 public class OclDebugCommunicationHelper {
 
 	public void sendEvent(OclDebugMessage message, PrintStream stream) {
@@ -25,12 +24,10 @@ public class OclDebugCommunicationHelper {
 	public OclDebugMessage receive(BufferedReader reader) {
 		try {
 			String response = reader.readLine();
-			if (response == null) {
-				return null;
-			}
-			OclDebugMessage message = OclDebugMessage.deserialize(response);
-			return message;
+			return response == null ? null : OclDebugMessage
+					.deserialize(response);
 		} catch (IOException e) {
+			System.out.println("IO Error occured");
 			return null;
 		}
 	}
