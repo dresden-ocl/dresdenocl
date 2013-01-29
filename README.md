@@ -48,7 +48,7 @@ __Prerequisites__:
 
 __Installation__:
 
-1. Add repository: https://github.com/dresden-ocl/test.git
+1. Add repository: https://github.com/dresden-ocl/dresdenocl.git
 2. Check out the following projects from the folders (see step 3)
 	* eclipse/** (all)
 	* tests/** (all)
