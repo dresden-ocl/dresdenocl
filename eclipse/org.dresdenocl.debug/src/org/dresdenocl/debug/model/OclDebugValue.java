@@ -64,10 +64,22 @@ public class OclDebugValue extends OclDebugElement implements IValue {
 		return null;
 	}
 
+	public int getVariableCount() throws DebugException {
+		return getVariables().length;
+	}
+
 	@Override
 	public boolean hasVariables() throws DebugException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public IVariable getChild(int i) throws DebugException {
+		// the index starts with 0
+		if (getVariableCount() < (i + 1)) {
+			return null;
+		}
+		return getVariables()[i];
 	}
 
 }

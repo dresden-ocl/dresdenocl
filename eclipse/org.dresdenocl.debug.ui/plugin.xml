@@ -45,5 +45,99 @@
 			class="org.dresdenocl.debug.ui.launch.OclPropertyTester">
 		</propertyTester>
 	</extension>
-
+    <extension point="org.eclipse.ui.editors.annotationTypes">
+    	<type
+           markerType="org.dresdenocl.debug.lineBreakpoint.marker"
+           name="org.dresdenocl.debug.ui.lineBreakpoint"
+           super="org.eclipse.debug.core.breakpoint">
+  		</type>
+    </extension>
+    
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.dresdenocl.language.ocl.resource.ocl.ui.occurences" label="Occurrences (in .ocl files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="ocl.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="ocl.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="ocl.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="ocl.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="ocl.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="ocl.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.dresdenocl.language.ocl.resource.ocl.ui.occurences.declaration" label="Declarations (in .ocl files)" textPreferenceKey="ocl.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="ocl.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="ocl.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="ocl.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="ocl.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="ocl.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+  		<specification
+          annotationType="org.dresdenocl.debug.ui.lineBreakpoint"
+          colorPreferenceKey="org.dresdenocl.debug.ui.lineBreakpointColor"
+          colorPreferenceValue="212,212,212"
+          contributesToHeader="false"
+          highlightPreferenceKey="org.dresdenocl.debug.ui.lineBreakpointHighlight"
+          highlightPreferenceValue="true"
+          icon="/icons/breakpoint_icon.gif"
+          includeOnPreferencePage="true"
+          isGoToNextNavigationTarget="false"
+          isGoToNextNavigationTargetKey="org.dresdenocl.debug.ui.isGoToNextNavigationTarget"
+          label="Breakpoints (in .ocl files)"
+          overviewRulerPreferenceKey="org.dresdenocl.debug.ui.lineBreakpointIndicationInOverviewRuler"
+          overviewRulerPreferenceValue="true"
+          presentationLayer="4"
+          showInNextPrevDropdownToolbarAction="true"
+          showInNextPrevDropdownToolbarActionKey="org.dresdenocl.debug.ui.showInNextPrevDropdownToolbarAction"
+          textPreferenceKey="org.dresdenocl.debug.ui.lineBreakpoint"
+          textPreferenceValue="false"
+          textStylePreferenceKey="org.dresdenocl.debug.ui.lineBreakpointTextStyle"
+          textStylePreferenceValue="NONE"
+          verticalRulerPreferenceKey="org.dresdenocl.debug.ui.lineBreakpointIndicationInVerticalRuler"
+          verticalRulerPreferenceValue="false">
+  		</specification>
+	</extension>
+ <extension
+       point="org.eclipse.core.runtime.adapters">
+    <factory
+          adaptableType="org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor"
+          class="org.dresdenocl.debug.ui.resource.OclAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+       </adapter>
+    </factory>
+    <factory
+          adaptableType="org.dresdenocl.debug.model.OclDebugVariable"
+          class="org.dresdenocl.debug.ui.resource.OclAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+       </adapter>
+    </factory>
+    <factory
+          adaptableType="org.dresdenocl.debug.model.OclDebugVariable"
+          class="org.dresdenocl.debug.ui.resource.OclAdapterFactory">
+       <adapter
+             type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+       </adapter>
+    </factory>
+ </extension>
+ <extension point="org.eclipse.ui.popupMenus">
+ 	<viewerContribution
+ 		id="org.dresdenocl.language.ocl.resource.ocl.ui.RulerPopupActions"
+ 		targetID="org.dresdenocl.language.ocl.resource.ocl.EditorRuler">
+ 			<action
+ 				id="org.dresdenocl.language.ocl.resource.ocl.ui.toggleBreakpointAction"
+ 				icon="icons/breakpoint_icon.gif"
+ 				label="Toggle Breakpoint"
+ 				class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+ 				menubarPath="debug">
+			</action>
+	</viewerContribution>
+</extension>
+<extension point="org.eclipse.ui.editorActions">
+	<editorContribution
+		targetID="org.dresdenocl.language.ocl.resource.ocl.ui.OclEditor"
+		id="org.dresdenocl.language.ocl.resource.ocl.ui.BreakpointRulerActions">
+			<action
+         actionID="RulerDoubleClick"
+         class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+         icon="icons/breakpoint_icon.gif"
+         id="org.dresdenocl.language.ocl.resource.ocl.ui.debug.RulerToggleBreakpointAction"
+         label="Add breakpoint">
+			</action>
+	</editorContribution>
+</extension>
+<extension
+      point="org.eclipse.debug.ui.debugModelPresentations">
+   <debugModelPresentation
+         class="org.dresdenocl.debug.ui.resource.OclDebugModelPresentation"
+         id="org.dresdenocl.debug.ui.debugModel">
+   </debugModelPresentation>
+</extension> >
 </plugin>
