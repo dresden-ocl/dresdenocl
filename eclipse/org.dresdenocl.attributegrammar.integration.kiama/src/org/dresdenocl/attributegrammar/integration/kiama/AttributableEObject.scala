@@ -75,7 +75,7 @@ object AttributableEObject {
             clazz.getInterfaces.find { pivotModelTypes contains _.getSimpleName }
           } match {
             case Some(interface) =>
-              val proxy = Proxy.newProxyInstance(this.getClass.getClassLoader, Array(interface, classOf[AttributableEObject]),
+              val proxy = Proxy.newProxyInstance(attrEObject.getClass.getClassLoader, Array(interface, classOf[AttributableEObject]),
                 new InvocationHandler {
                   override def invoke(proxy: AnyRef, method: Method, args: Array[AnyRef]): AnyRef = {
                     // decide on which of the original objects the method call should be executed 
