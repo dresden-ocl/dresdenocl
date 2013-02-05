@@ -321,6 +321,9 @@ public class OclResource extends
 			java.util.Map<?, ?> options) throws java.io.IOException {
 
 		synchronized (loadingLock) {
+			System.out.println("doLoad()");
+			
+			
 			if (processTerminationRequested()) {
 				return;
 			}

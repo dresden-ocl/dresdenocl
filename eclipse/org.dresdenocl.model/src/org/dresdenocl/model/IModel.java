@@ -55,9 +55,9 @@ import org.dresdenocl.pivotmodel.Type;
  */
 public interface IModel {
 	
-	public Map<EObject, EObject> getAllMappings();
+	public Map<EObject, Integer> getAllMappings();
 	
-	public boolean addAllMappings(final Map<EObject, EObject> mappings);
+	public boolean addAllMappings(final Map<EObject, Integer> mappings);
 
 	/**
 	 * <p>

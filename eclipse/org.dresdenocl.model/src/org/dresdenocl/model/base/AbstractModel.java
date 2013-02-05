@@ -77,13 +77,13 @@ public abstract class AbstractModel implements IModel {
 	/** The {@link IMetamodel} of this {@link IModel}. */
 	private IMetamodel metamodel;
 
-	private Map<EObject, EObject> m_allMappings;
+	private Map<EObject, Integer> m_allMappings;
 
-	public Map<EObject, EObject> getAllMappings() {
+	public Map<EObject, Integer> getAllMappings() {
 		return m_allMappings;
 	}
 
-	public boolean addAllMappings(final Map<EObject, EObject> mappings) {
+	public boolean addAllMappings(final Map<EObject, Integer> mappings) {
 		if (mappings == null) {
 			return false;
 		}

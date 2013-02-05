@@ -249,7 +249,7 @@ public class Ocl22Parser implements IOclParser {
 		}
 	}
 
-	public Map<EObject, EObject> getEOcl2Cs(EObject eObject) {
+	public Map<EObject, Integer> getEOcl2Cs(EObject eObject) {
 
 		Resource res = eObject.eResource();
 		if (res instanceof OclResource) {

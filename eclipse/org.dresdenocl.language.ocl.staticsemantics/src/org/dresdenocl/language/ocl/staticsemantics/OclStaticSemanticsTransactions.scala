@@ -75,7 +75,7 @@ object OclStaticSemanticsTransactions {
    * After the semantic analysis, the parsed constraints and defined
    * properties/operations are added to the model.
    */
-  def endStaticSemanticsAnalysis(model: IModel, resource: IOclResource, constraints: java.util.List[Constraint], mappings: java.util.Map[EObject, EObject]) = {
+  def endStaticSemanticsAnalysis(model: IModel, resource: IOclResource, constraints: java.util.List[Constraint], mappings: java.util.Map[EObject, Integer]) = {
     val iter = constraints.iterator
     while (iter.hasNext) {
       val constraint = iter.next

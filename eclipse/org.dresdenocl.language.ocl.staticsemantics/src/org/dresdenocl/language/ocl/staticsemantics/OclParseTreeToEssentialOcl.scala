@@ -587,8 +587,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                       iteratorVar.setName("$implicitCollect" + ImplicitVariableNumberGenerator.getNumber + "$")
                       iteratorVar.setType(sourceExpression.getType.asInstanceOf[CollectionType].getElementType)
                       oce.setSource(factory.createVariableExp(iteratorVar))
-                      allMappings.put(oce, o)
                       val it = factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar)
+                      allMappings.put(oce, o)
                       allMappings.put(it, o)
                       Full(it)
                     }
@@ -623,6 +623,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                 // triggers WFR checks in if(EssentialOcl) WFRException is thrown yield a Failure
                 try {
                   iteratorExp.getType
+                  println ( "IteratorExpCS : " + iResource.getLocationMap.getLine( i ) )
                   allMappings.put(iteratorExp, i)
                   Full(iteratorExp)
                 }
@@ -648,6 +649,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                 // triggers WFR checks in if(EssentialOcl) WFRException is thrown yield a Failure
                 try {
                   iteratorExp.getType
+                  println ( "IterateExpCS : " + iResource.getLocationMap.getLine( i ) )
                   allMappings.put(iteratorExp, i)
                   Full(iteratorExp)
                 }
@@ -710,6 +712,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         ) yield {
           val ifExp = factory.createIfExp(conditionEOcl, thenEOcl, elseEOcl)
           allMappings.put(ifExp, i)
+          allMappings.put(thenEOcl, i)
+          allMappings.put(elseEOcl, i)
           ifExp          
         }
       }
@@ -743,6 +747,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               exp.setReferredEnumLiteral(e)
               exp.setOclLibrary(oclLibrary)
               allMappings.put(exp, e)
+              println ( "EnumerationLiteral : " + iResource.getLocationMap.getLine( enumLitOrProp ) )
               Full(exp)
             }
             case p : Property => {
@@ -775,6 +780,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               oce.setReferredOperation(operation)
               oce.getArgument.addAll(argumentsEOcl)
               oce.setOclLibrary(oclLibrary)
+              println ( "StaticOperationCallExpCS :" + iResource.getLocationMap.getLine( s ) )
               allMappings.put(oce, s)
               Full(oce)
             }

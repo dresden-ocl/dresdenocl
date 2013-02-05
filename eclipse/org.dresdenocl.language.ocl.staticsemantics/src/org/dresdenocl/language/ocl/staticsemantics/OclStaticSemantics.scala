@@ -98,7 +98,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
   
   //maps EssentialOcl to their corresponding CS
   //@author Lars Schuetze
-  protected val allMappings : collection.mutable.HashMap[EObject, EObject] = new collection.mutable.HashMap[EObject, EObject]
+  protected val allMappings : java.util.Map[EObject, EObject] = new java.util.IdentityHashMap[EObject, EObject]
 
   /*
    * For cached attributes.
@@ -182,7 +182,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
       val constraints = computeConstraints(root)
       // to avoid the conversion of Scala List to Java List multiple times
       val result: java.util.List[Constraint] = constraints.openOr { throw new OclStaticSemanticsException }
-      OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result, allMappings)
+      OclStaticSemanticsTransactions.endStaticSemanticsAnalysis(model, resource, result, getAllEssentialOcl2CsMappings)
       //definedOperationsType.clear
       allDefs = null
       lastRoot = root
@@ -197,9 +197,29 @@ trait OclStaticSemantics extends OclLookUpFunctions
     allDefs
   }
   
-  def getAllEssentialOcl2CsMappings : java.util.Map[EObject, EObject] = {
-  
-  	allMappings
+  def getAllEssentialOcl2CsMappings : java.util.Map[EObject, Integer] = {
+  	
+  	val result = new java.util.IdentityHashMap[EObject, Integer]
+  	// eocl = essential ocl
+  	// ecs = concrete syntax
+  	for ( (eocl, ecs) <- allMappings ) {
+      var e : EObject = ecs match {
+        case aeo : AttributableEObject => {
+          aeo.eObject
+        }
+        case eobj : EObject => {
+          eobj
+        }
+      }
+      var line : Integer = Integer.valueOf(-1)
+      while( line == -1 && e != null ) {
+        line = Integer.valueOf(iResource.getLocationMap.getLine( e ))
+        e = e.eContainer
+      }
+      result.put( eocl, line )
+  	}
+  	// return result
+  	result
   }
 }
 
