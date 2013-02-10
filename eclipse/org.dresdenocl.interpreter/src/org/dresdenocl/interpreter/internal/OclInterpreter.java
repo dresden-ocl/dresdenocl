@@ -4347,8 +4347,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		System.out.println("Interpreter addLineBreakpoint: location = '" + location
 				+ " '" + ", line = " + line);
-		// IModel m = ModelBusPlugin.getModelRegistry().getActiveModel();
-		// Map<EObject, Integer> map = m.getAllMappings();
 		m_lineBreakpointPositions.add(Integer.valueOf(line));
 	}
 
@@ -4361,12 +4359,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	@Override
 	public String[] getStack() {
 
-		// TODO Auto-generated method stub
-		return null;
+		return new String[] { "test01,1,test02,1,1,2,", "test11,2,test12,2,2,3," };
 	}
 
 	@Override
-	public String getFrameVariables(String stackFrame) {
+	public Map<String, Object> getFrameVariables(String stackFrame) {
 
 		// TODO Auto-generated method stub
 		return null;
@@ -4489,6 +4486,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	@Override
 	public boolean isLineBreakPointElement(EObject element) {
 
+		if (!isDebugMode()) {
+			return false;
+		}
+
 		Map<EObject, Integer> map =
 				ModelBusPlugin.getModelRegistry().getActiveModel().getAllMappings();
 		Integer line = map.get(element);
@@ -4507,4 +4508,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		return false;
 	}
+	
+	//TODO: set up StackFrames
+	//TODO: store Mapping from StackFrames to their respective Environment
+	//TODO: remove mappings when stackframes become invalid
+	//TODO: 
 }

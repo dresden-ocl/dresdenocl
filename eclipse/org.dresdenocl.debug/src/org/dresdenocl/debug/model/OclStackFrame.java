@@ -20,7 +20,7 @@ public class OclStackFrame extends OclDebugElement implements IStackFrame {
 	private int m_charStart;
 	private int m_charEnd;
 
-	public OclStackFrame(OclDebugTarget target, final String data) {
+	public OclStackFrame(OclDebugTarget target, String data) {
 		super(target);
 		List<String> dataParts = OclStringUtil.decode(data, ',');
 		m_name = dataParts.get(0);

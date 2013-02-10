@@ -1,5 +1,7 @@
 package org.dresdenocl.interpreter;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 
 
@@ -21,7 +23,7 @@ public interface IOclDebuggable extends IOclInterpreter {
 
 	public String[] getStack();
 
-	public String getFrameVariables(String stackFrame);
+	public Map<String, Object> getFrameVariables(String stackFrame);
 
 	public void setDebugMode(boolean debugMode);
 
