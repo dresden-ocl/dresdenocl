@@ -98,7 +98,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
   
   //maps EssentialOcl to their corresponding CS
   //@author Lars Schuetze
-  protected val allMappings : java.util.Map[EObject, EObject] = new java.util.IdentityHashMap[EObject, EObject]
+  protected var allMappings : java.util.Map[EObject, EObject] = new java.util.IdentityHashMap[EObject, EObject]
 
   /*
    * For cached attributes.
