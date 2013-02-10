@@ -209,6 +209,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		highlighting.resetValues();
 	}
 	
+	/*
 	public void setFocus() {
 		super.setFocus();
 		this.invalidateTextRepresentation();
@@ -216,6 +217,7 @@ public class OclEditor extends org.eclipse.ui.editors.text.TextEditor implements
 		// objects
 		bgParsingStrategy.parse(getSourceViewer().getDocument(), resource, this, 10);
 	}
+	*/
 	
 	protected void performSaveAs(org.eclipse.core.runtime.IProgressMonitor progressMonitor) {
 		org.eclipse.ui.part.FileEditorInput input = (org.eclipse.ui.part.FileEditorInput) getEditorInput();
