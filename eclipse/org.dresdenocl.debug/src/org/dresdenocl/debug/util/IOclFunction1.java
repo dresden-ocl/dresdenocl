@@ -4,7 +4,7 @@
  *
  * 
  */
-package org.dresdenocl.interpreter.debug.util;
+package org.dresdenocl.debug.util;
 
 /**
  * A simple interface for generic functions with one argument.

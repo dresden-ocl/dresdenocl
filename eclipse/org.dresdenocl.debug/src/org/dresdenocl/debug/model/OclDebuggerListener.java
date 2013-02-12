@@ -3,14 +3,14 @@
  */
 package org.dresdenocl.debug.model;
 
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.ADD_LINE_BREAKPOINT;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.EXIT;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.GET_STACK;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.REMOVE_LINE_BREAKPOINT;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.RESUME;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.STEP_INTO;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.STEP_OVER;
-import static org.dresdenocl.interpreter.debug.EOclDebugMessageType.STEP_RETURN;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.ADD_LINE_BREAKPOINT;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.EXIT;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.GET_STACK;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.REMOVE_LINE_BREAKPOINT;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.RESUME;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.STEP_INTO;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.STEP_OVER;
+import static org.dresdenocl.debug.model.EOclDebugMessageType.STEP_RETURN;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,12 +24,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.dresdenocl.debug.IOclDebuggable;
 import org.dresdenocl.debug.util.OclPair;
-import org.dresdenocl.interpreter.IOclDebuggable;
-import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
-import org.dresdenocl.interpreter.debug.OclDebugCommunicationHelper;
-import org.dresdenocl.interpreter.debug.OclDebugMessage;
-import org.dresdenocl.interpreter.debug.util.OclStringUtil;
+import org.dresdenocl.debug.util.OclStringUtil;
 
 /**
  * @author Lars Schuetze
@@ -138,7 +135,8 @@ public class OclDebuggerListener implements Runnable {
 				}
 				OclDebugMessage message =
 						new OclDebugMessage(
-								EOclDebugMessageType.GET_FRAME_VARIABLES_RESPONSE, variableIds);
+								EOclDebugMessageType.GET_FRAME_VARIABLES_RESPONSE,
+								variableIds.toArray(new String[0]));
 				m_communicationHelper.sendEvent(message, output);
 			}
 			else if (command.hasType(EOclDebugMessageType.GET_VARIABLES)) {

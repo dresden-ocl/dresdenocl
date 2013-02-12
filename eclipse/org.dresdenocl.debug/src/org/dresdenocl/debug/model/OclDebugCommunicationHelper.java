@@ -1,4 +1,4 @@
-package org.dresdenocl.interpreter.debug;
+package org.dresdenocl.debug.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;

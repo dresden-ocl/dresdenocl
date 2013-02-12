@@ -2,9 +2,8 @@ package org.dresdenocl.debug.model;
 
 import java.util.List;
 
-import org.dresdenocl.interpreter.debug.util.OclStringUtil;
+import org.dresdenocl.debug.util.OclStringUtil;
 import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;

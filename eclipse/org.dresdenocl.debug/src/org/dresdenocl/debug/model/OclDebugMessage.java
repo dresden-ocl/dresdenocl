@@ -1,8 +1,8 @@
-package org.dresdenocl.interpreter.debug;
+package org.dresdenocl.debug.model;
 
 import java.util.List;
 
-import org.dresdenocl.interpreter.debug.util.OclStringUtil;
+import org.dresdenocl.debug.util.OclStringUtil;
 
 public class OclDebugMessage {
 

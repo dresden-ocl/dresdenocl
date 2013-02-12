@@ -3,9 +3,7 @@ package org.dresdenocl.debug.model;
 import java.util.List;
 
 import org.dresdenocl.debug.events.IOclDebugEventListener;
-import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
-import org.dresdenocl.interpreter.debug.OclDebugMessage;
-import org.dresdenocl.interpreter.debug.util.OclStringUtil;
+import org.dresdenocl.debug.util.OclStringUtil;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;

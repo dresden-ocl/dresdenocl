@@ -18,10 +18,6 @@ with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.dresdenocl.interpreter.internal;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -80,13 +76,8 @@ import org.dresdenocl.essentialocl.types.SequenceType;
 import org.dresdenocl.essentialocl.types.SetType;
 import org.dresdenocl.interpreter.IInterpretationEnvironment;
 import org.dresdenocl.interpreter.IInterpretationResult;
-import org.dresdenocl.interpreter.IOclDebuggable;
 import org.dresdenocl.interpreter.IOclInterpreter;
 import org.dresdenocl.interpreter.OclInterpreterPlugin;
-import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
-import org.dresdenocl.interpreter.debug.OclDebugCommunicationHelper;
-import org.dresdenocl.interpreter.debug.OclDebugMessage;
-import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceString;
@@ -100,8 +91,6 @@ import org.dresdenocl.pivotmodel.Parameter;
 import org.dresdenocl.pivotmodel.Property;
 import org.dresdenocl.pivotmodel.Type;
 import org.dresdenocl.standardlibrary.java.JavaStandardlibraryPlugin;
-import org.eclipse.debug.core.ILaunchManager;
-import org.eclipse.debug.internal.core.commands.SuspendCommand;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -117,10 +106,9 @@ import org.eclipse.emf.ecore.EObject;
  * @author Ronny Brandt: Developed the very buggy first version.
  * @author Claas Wilke: Refactored the interpreter and fixed many bugs.
  * @author Michael Thiele: Helped with refactoring and implementation logic.
- * @author Lars Schuetze: Implemented debugging support.
  */
 public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
-		IOclInterpreter, IOclDebuggable {
+		IOclInterpreter {
 
 	/**
 	 * Logger for this class
@@ -161,16 +149,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	private Stack<IInterpretationEnvironment> myEnvironmentStack =
 			new Stack<IInterpretationEnvironment>();
-
-	private int m_eventPort;
-	private boolean m_debugMode;
-	private boolean m_suspended;
-	private OclDebugCommunicationHelper m_communicationHelper;
-	private ServerSocket m_server;
-	private PrintStream m_outputStream;
-	private boolean m_terminated;
-	private List<Integer> m_lineBreakpointPositions = new LinkedList<Integer>();
-
+	
 	/**
 	 * <p>
 	 * Instantiates a new {@link OclInterpreter}.
@@ -182,7 +161,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	public OclInterpreter(IModelInstance aModelInstance) {
 
 		this.myEnvironment.setModelInstance(aModelInstance);
-		m_communicationHelper = new OclDebugCommunicationHelper();
 	}
 
 	/*
@@ -195,8 +173,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			IModelInstanceElement modelInstanceElement) {
 
 		System.out.println("OclInterpreter interpretConstraint()");
-		startupAndWait();
-
+		
 		if (constraint == null)
 			throw new IllegalArgumentException(
 					"Parameter 'constraint' must not be null.");
@@ -317,11 +294,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 							+ result);
 		}
 		// no else.
-
-		if (isDebugMode()) {
-			terminate();
-		}
-
 		return result;
 	}
 
@@ -332,20 +304,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * org.dresdenocl.pivotmodel.Operation,
 	 * org.dresdenocl.modelbus.IModelInstanceElement[], java.util.Collection)
 	 */
-
 	public List<IInterpretationResult> interpretPreConditions(
 			IModelInstanceElement modelInstanceElement, Operation operation,
 			IModelInstanceElement[] parameterValues,
 			Collection<Constraint> preConditions) {
-
-		return interpretPreConditions(modelInstanceElement, operation,
-				parameterValues, preConditions, ILaunchManager.RUN_MODE);
-	}
-
-	public List<IInterpretationResult> interpretPreConditions(
-			IModelInstanceElement modelInstanceElement, Operation operation,
-			IModelInstanceElement[] parameterValues,
-			Collection<Constraint> preConditions, String mode) {
 
 		if (modelInstanceElement == null)
 			throw new IllegalArgumentException(
@@ -419,21 +381,10 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * org.dresdenocl.modelbus.IModelInstanceElement[],
 	 * org.dresdenocl.modelbus.IModelInstanceElement, java.util.Collection)
 	 */
-
 	public List<IInterpretationResult> interpretPostConditions(
 			IModelInstanceElement modelInstanceElement, Operation operation,
 			IModelInstanceElement[] parameterValues,
 			IModelInstanceElement resultValue, Collection<Constraint> postConditions) {
-
-		return interpretPostConditions(modelInstanceElement, operation,
-				parameterValues, resultValue, postConditions, ILaunchManager.RUN_MODE);
-	}
-
-	public List<IInterpretationResult> interpretPostConditions(
-			IModelInstanceElement modelInstanceElement, Operation operation,
-			IModelInstanceElement[] parameterValues,
-			IModelInstanceElement resultValue, Collection<Constraint> postConditions,
-			String mode) {
 
 		if (modelInstanceElement == null)
 			throw new IllegalArgumentException(
@@ -805,12 +756,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(booleanLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -849,12 +794,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(collectionItem)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -891,12 +830,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret CollectionLiteral.");
 			this.pushLogOffset();
 		}
-
-		// TODO Lars
-		if (isLineBreakPointElement(collectionLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -972,6 +905,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 *          The {@link Type} of the collection which shall be returned.
 	 * @return Returns a given List as an instance of a given collection type.
 	 */
+	//TODO Lars: ?
 	protected OclAny adaptResultListAsCollection(List<OclAny> resultList,
 			Type resultType) {
 
@@ -1038,12 +972,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(enumLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1083,12 +1011,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(expressionInOcl)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1124,12 +1046,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(ifExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1209,6 +1125,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * #caseIntegerLiteralExp
 	 * (org.dresdenocl.essentialocl.expressions.IntegerLiteralExp)
 	 */
+	@Override
 	public OclAny caseIntegerLiteralExp(IntegerLiteralExp integerLiteralExp) {
 
 		/* Probaby log the entry into this method. */
@@ -1216,13 +1133,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret IntegerLiteral.");
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(integerLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1258,12 +1169,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret InvalidLiteral.");
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(invalidLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1301,12 +1206,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(iterateExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -1456,6 +1355,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * #caseIteratorExp (org.dresdenocl.essentialocl.expressions.IteratorExp)
 	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	public OclAny caseIteratorExp(IteratorExp iteratorExp) {
 
 		/* Probably log the entry of this method. */
@@ -1465,12 +1365,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(iteratorExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -2914,12 +2808,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(letExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -2964,6 +2852,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * #caseOperationCallExp
 	 * (org.dresdenocl.essentialocl.expressions.OperationCallExp)
 	 */
+	@Override
 	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
 
 		OclAny result;
@@ -2983,12 +2872,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(operationCallExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3557,6 +3440,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * #casePropertyCallExp
 	 * (org.dresdenocl.essentialocl.expressions.PropertyCallExp)
 	 */
+	@Override
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {
 
 		/* Probably log the entry into this method. */
@@ -3566,12 +3450,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(propertyCallExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3817,12 +3695,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(realLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -3858,12 +3730,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret StringLiteral.");
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(stringLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3902,12 +3768,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(tupleLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -3962,12 +3822,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else;
 
-		// TODO Lars
-		if (isLineBreakPointElement(tupleLiteralPart)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -4003,12 +3857,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret TypeLiteral.");
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(typeLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -4047,12 +3895,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else.
 
-		// TODO Lars
-		if (isLineBreakPointElement(undefinedLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -4081,6 +3923,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * @see org.dresdenocl.essentialocl.expressions.util.ExpressionsSwitch
 	 * #caseVariable(org.dresdenocl.essentialocl.expressions.Variable)
 	 */
+	@Override
 	public OclAny caseVariable(Variable variable) {
 
 		if (LOGGER.isDebugEnabled()) {
@@ -4088,12 +3931,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			this.pushLogOffset();
 		}
 		// no else.
-
-		// TODO Lars
-		if (isLineBreakPointElement(variable)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		UUID guid = null;
 		/* Probably trace the entry into this method */
@@ -4155,12 +3992,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	@Override
 	public OclAny caseVariableExp(VariableExp variableExp) {
-
-		// TODO Lars
-		if (isLineBreakPointElement(variableExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
 
 		/* VariableExp cannot be cached. Only the variable self can be cached. */
 		return doSwitch((EObject) variableExp.getReferredVariable());
@@ -4293,224 +4124,4 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		}
 		// no else
 	}
-
-	private void setTerminate(boolean terminate) {
-
-		m_terminated = terminate;
-	}
-
-	private boolean isTerminated() {
-
-		return m_terminated;
-	}
-
-	@Override
-	public void terminate() {
-
-		System.out.println("OclInterpreter terminate()");
-		sendEvent(EOclDebugMessageType.TERMINATED, false);
-		stopEventSocket();
-		setTerminate(true);
-	}
-
-	@Override
-	public void resume() {
-
-		System.out.println("OclInterpreter resume()");
-		setSuspend(false);
-		sendEvent(EOclDebugMessageType.RESUMED, true);
-	}
-
-	@Override
-	public void stepOver() {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void stepInto() {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void stepReturn() {
-
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void addLineBreakPoint(String location, int line) {
-
-		System.out.println("Interpreter addLineBreakpoint: location = '" + location
-				+ " '" + ", line = " + line);
-		m_lineBreakpointPositions.add(Integer.valueOf(line));
-	}
-
-	@Override
-	public void removeLineBreakPoint(String location, int line) {
-
-		m_lineBreakpointPositions.remove(Integer.valueOf(line));
-	}
-
-	@Override
-	public String[] getStack() {
-
-		return new String[] { "test01,1,test02,1,1,2,", "test11,2,test12,2,2,3," };
-	}
-
-	@Override
-	public Map<String, Object> getFrameVariables(String stackFrame) {
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean alreadySentStartEvent = false;
-
-	public void startupAndWait() {
-
-		System.out.println("startupAndWait()");
-		if (isDebugMode()) {
-			if (!alreadySentStartEvent) {
-				alreadySentStartEvent = true;
-				sendEvent(EOclDebugMessageType.STARTED, true);
-				setSuspend(true);
-				waitIfSuspended();
-			}
-		}
-	}
-
-	public boolean isSuspended() {
-
-		return m_suspended;
-	}
-
-	public void setSuspend(boolean suspend) {
-
-		System.out.println("setSuspend ( " + suspend + " )");
-		m_suspended = suspend;
-		sendEvent(EOclDebugMessageType.SUSPENDED, true);
-	}
-
-	public void sendEvent(EOclDebugMessageType command,
-			boolean sendOnlyInDebugMode, String... arguments) {
-
-		System.out.println("OclInterpreter sendEvent " + command);
-		if (isDebugMode() || !sendOnlyInDebugMode) {
-			OclDebugMessage message = new OclDebugMessage(command, arguments);
-			m_communicationHelper.sendEvent(message, m_outputStream);
-		}
-	}
-
-	public void setDebugMode(boolean debugMode) {
-
-		m_debugMode = debugMode;
-	}
-
-	public boolean isDebugMode() {
-
-		System.out.println("isDebugMode = " + m_debugMode);
-		return m_debugMode;
-	}
-
-	public void startEventSocket(final int eventPort) {
-
-		System.out.println("OclInterpreter startEventSocket");
-		try {
-			m_server = new ServerSocket(eventPort);
-			Socket accept = m_server.accept();
-			/*
-			 * try { Thread.sleep(100); } catch (InterruptedException e) {
-			 * e.printStackTrace(); }
-			 */
-			System.out.println("OclInterpreter accepted client");
-			m_outputStream = new PrintStream(accept.getOutputStream());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void stopEventSocket() {
-
-		try {
-			m_server.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void setEventPort(int eventPort) {
-
-		if (isDebugMode()) {
-			// check if server is already running and shut down if necessary to
-			// change the port
-			if (m_server != null) {
-				if (!m_server.isClosed()) {
-					if (m_server.getLocalPort() != eventPort) {
-						stopEventSocket();
-						startEventSocket(eventPort);
-					}
-					// no else. already listening to the port
-				}
-				else {
-					// already closed, so create new one
-					startEventSocket(eventPort);
-				}
-			}
-			else {
-				// still null
-				startEventSocket(eventPort);
-			}
-		}
-	}
-
-	public void waitIfSuspended() {
-
-		if (isSuspended()) {
-			try {
-				while (isSuspended()) {
-					Thread.sleep(100);
-				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			sendEvent(EOclDebugMessageType.RESUMED, true);
-		}
-	}
-
-	@Override
-	public boolean isLineBreakPointElement(EObject element) {
-
-		if (!isDebugMode()) {
-			return false;
-		}
-
-		Map<EObject, Integer> map =
-				ModelBusPlugin.getModelRegistry().getActiveModel().getAllMappings();
-		Integer line = map.get(element);
-		// check if the element is found in the map
-		if (line != null && line.intValue() != -1) {
-			boolean result = m_lineBreakpointPositions.contains(line);
-			if (result == true) {
-				System.out.println(element + " is linebreakpoint at line " + line);
-			}
-			return result;
-		}
-		else {
-			System.out
-					.println("OclInterpreter.isLineBreakpointElement : element not found ( "
-							+ element + " )");
-		}
-		return false;
-	}
-	
-	//TODO: set up StackFrames
-	//TODO: store Mapping from StackFrames to their respective Environment
-	//TODO: remove mappings when stackframes become invalid
-	//TODO: 
 }

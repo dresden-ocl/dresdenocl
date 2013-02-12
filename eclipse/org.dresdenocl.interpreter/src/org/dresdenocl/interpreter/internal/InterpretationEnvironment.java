@@ -304,4 +304,9 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 		this.visibleVariableValues.put(identifier, oclRoot);
 	}
+
+	@Override
+	public Map<String, OclAny> getStoredVariableMappings() {
+		return visibleVariableValues;
+	}
 }

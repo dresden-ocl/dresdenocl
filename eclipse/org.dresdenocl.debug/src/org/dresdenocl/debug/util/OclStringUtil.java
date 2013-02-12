@@ -1,4 +1,4 @@
-package org.dresdenocl.interpreter.debug.util;
+package org.dresdenocl.debug.util;
 
 public class OclStringUtil {
 

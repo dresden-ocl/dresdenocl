@@ -6,12 +6,9 @@ Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: org.dresdenocl.interpreter.OclInterpreterPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.standardlibrary.java,
- org.dresdenocl.modelbus,
- org.eclipse.debug.core
+ org.dresdenocl.modelbus
 Bundle-ActivationPolicy: lazy
 Export-Package: org.dresdenocl.interpreter,
- org.dresdenocl.interpreter.debug,
- org.dresdenocl.interpreter.debug.util,
  org.dresdenocl.interpreter.event,
  org.dresdenocl.interpreter.event.internal,
  org.dresdenocl.interpreter.internal

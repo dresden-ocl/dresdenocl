@@ -1,4 +1,4 @@
-package org.dresdenocl.interpreter.debug;
+package org.dresdenocl.debug.model;
 
 public enum EOclDebugMessageType {
 	// An enumeration of all commands that can be sent to the debug server from debug

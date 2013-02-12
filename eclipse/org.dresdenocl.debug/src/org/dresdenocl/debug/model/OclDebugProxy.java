@@ -11,10 +11,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
-import org.dresdenocl.interpreter.debug.OclDebugCommunicationHelper;
-import org.dresdenocl.interpreter.debug.OclDebugMessage;
-import org.dresdenocl.interpreter.debug.util.OclStringUtil;
+import org.dresdenocl.debug.util.OclStringUtil;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 

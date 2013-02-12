@@ -18,6 +18,8 @@ with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.dresdenocl.interpreter;
 
+import java.util.Map;
+
 import org.dresdenocl.essentialocl.expressions.OperationCallExp;
 import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
@@ -154,4 +156,6 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 *          The {@link Variable}'s value.
 	 */
 	void setVariableValue(String identifier, OclAny value);
+	
+	Map<String, OclAny> getStoredVariableMappings();
 }

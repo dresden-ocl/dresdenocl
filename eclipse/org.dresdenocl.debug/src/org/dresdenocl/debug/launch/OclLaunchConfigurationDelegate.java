@@ -3,13 +3,15 @@ package org.dresdenocl.debug.launch;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import org.dresdenocl.debug.IOclDebuggable;
 import org.dresdenocl.debug.OclDebugPlugin;
+import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.debug.model.OclDebugProcess;
 import org.dresdenocl.debug.model.OclDebugTarget;
 import org.dresdenocl.debug.model.OclDebuggerListener;
-import org.dresdenocl.interpreter.IOclDebuggable;
 import org.dresdenocl.interpreter.internal.OclInterpreter;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -39,7 +41,7 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 		final IModel model;
 		final IModelInstance minstance;
 		final List<IModelInstanceElement> miElements;
-		final List<Constraint> constraints = new ArrayList<Constraint>();
+		final Collection<Constraint> constraints;
 
 		model = ModelBusPlugin.getModelRegistry().getActiveModel();
 		if (model == null) {
@@ -60,13 +62,16 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 					minstance), null);
 		}
 
+		Collection<Constraint> c = null;
 		try {
-			constraints.addAll(model.getConstraints());
+			c = model.getConstraints();
+			if (c == null || c.size() == 0) {
+				abort("There are no constraints to evaluate", null);
+			}
 		} catch (ModelAccessException e) {
 			abort("Cannot access model", e);
-		}
-		if (constraints == null || constraints.size() == 0) {
-			abort("There are no constraints to evaluate", null);
+		} finally {
+			constraints = c;
 		}
 
 		// Check for the mode
@@ -79,25 +84,27 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 			}
 			// TODO Lars
 			// 1. run the interpreter in debug mode in own thread
-			final IOclDebuggable interpreter = new OclInterpreter(minstance);
+			final IOclDebuggable interpreter = new OclDebugger(minstance);
 			Thread interpreterThread = new Thread(new Runnable() {
+
 				@Override
 				public void run() {
+
 					interpreter.setDebugMode(true);
 					interpreter.setEventPort(eventPort);
-					//TODO dont forget static constraints to run w/o mie
-					for(IModelInstanceElement mie : miElements) {
+					// TODO dont forget static constraints to run w/o mie
+					for (IModelInstanceElement mie : miElements) {
 						interpreter.interpretConstraints(constraints, mie);
 					}
 				}
 			});
 			interpreterThread.start();
-			
+
 			// 2. make debug listener attach to debugger
 			OclDebuggerListener listener = new OclDebuggerListener(requestPort);
 			listener.setDebuggable(interpreter);
 			new Thread(listener).start();
-			
+
 			// 3. start debugger
 			OclDebugProcess process = new OclDebugProcess(launch);
 			OclDebugTarget target =

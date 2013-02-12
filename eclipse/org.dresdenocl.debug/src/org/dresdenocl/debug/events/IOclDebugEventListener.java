@@ -1,6 +1,6 @@
 package org.dresdenocl.debug.events;
 
-import org.dresdenocl.interpreter.debug.OclDebugMessage;
+import org.dresdenocl.debug.model.OclDebugMessage;
 
 public interface IOclDebugEventListener {
 	

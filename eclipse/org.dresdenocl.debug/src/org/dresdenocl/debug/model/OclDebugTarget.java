@@ -11,9 +11,6 @@ import java.util.List;
 
 import org.dresdenocl.debug.OclDebugPlugin;
 import org.dresdenocl.debug.events.IOclDebugEventListener;
-import org.dresdenocl.interpreter.debug.EOclDebugMessageType;
-import org.dresdenocl.interpreter.debug.OclDebugCommunicationHelper;
-import org.dresdenocl.interpreter.debug.OclDebugMessage;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;

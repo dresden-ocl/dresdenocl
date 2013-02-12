@@ -1,7 +1,8 @@
-package org.dresdenocl.interpreter;
+package org.dresdenocl.debug;
 
 import java.util.Map;
 
+import org.dresdenocl.interpreter.IOclInterpreter;
 import org.eclipse.emf.ecore.EObject;
 
 
