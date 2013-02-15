@@ -324,6 +324,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             targetEOcl <- computeOclExpression(u.getTarget);
             result <- Full(factory.createOperationCallExp(targetEOcl, u.getOperationName))
           ) yield {
+            allMappings.put(targetEOcl, u)
           	allMappings.put(result, u)
           	result
           }
@@ -339,7 +340,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             targetEOcl <- computeOclExpression(l.getTarget);
             result <- Full(factory.createOperationCallExp(targetEOcl, l.getOperationName))
           ) yield {
-          	allMappings.put(result, l)
+            allMappings.put(targetEOcl, l)
+            allMappings.put(result, l)
           	result
           }
         }
@@ -361,7 +363,9 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             }
             case p : Property => {
               if (p.isStatic) {
-              	val statp = factory.createPropertyCallExp(factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList), p)
+                var tle = factory.createTypeLiteralExp(p.getOwningType.getQualifiedNameList)
+              	val statp = factory.createPropertyCallExp(tle, p)
+                allMappings.put(tle, v)
               	allMappings.put(statp, v)
                 Full(statp)
               }
@@ -597,6 +601,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                       val it = factory.createIteratorExp(sourceExpression, "collect", oce, iteratorVar)
                       allMappings.put(oce, o)
                       allMappings.put(it, o)
+                      allMappings.put(iteratorVar, o)
                       Full(it)
                     }
                     else {
@@ -630,7 +635,6 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                 // triggers WFR checks in if(EssentialOcl) WFRException is thrown yield a Failure
                 try {
                   iteratorExp.getType
-                  println ( "IteratorExpCS : " + iResource.getLocationMap.getLine( i ) )
                   allMappings.put(iteratorExp, i)
                   Full(iteratorExp)
                 }
@@ -656,7 +660,6 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                 // triggers WFR checks in if(EssentialOcl) WFRException is thrown yield a Failure
                 try {
                   iteratorExp.getType
-                  println ( "IterateExpCS : " + iResource.getLocationMap.getLine( i ) )
                   allMappings.put(iteratorExp, i)
                   Full(iteratorExp)
                 }

@@ -92,11 +92,21 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 
 					interpreter.setDebugMode(true);
 					interpreter.setEventPort(eventPort);
-					// TODO dont forget static constraints to run w/o mie
-					for (IModelInstanceElement mie : miElements) {
-						interpreter.interpretConstraints(constraints, mie);
+
+					for (Constraint c : constraints) {
+						if (c.hasStaticContext()) {
+							interpreter.interpretConstraint(c, null);
+						}
+						else {
+							for (IModelInstanceElement mie : miElements) {
+								interpreter.interpretConstraint(c, mie);
+							}
+						}
+						// end else
 					}
+					// end for
 				}
+
 			});
 			interpreterThread.start();
 
