@@ -528,7 +528,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                             Full(Normal, v)
                           }
                           //	              		    else {
-                          //	              		      if (iv.getType. [CollectionType] && iv.getType.asInstanceOf[CollectionType].getElementType.conformsTo(operationOwner))
+                          //	              		      if (iv.getType.isInstanceOf[CollectionType] && iv.getType.asInstanceOf[CollectionType].getElementType.conformsTo(operationOwner))
                           //	              		      	Full(ImplicitCollect, factory.createVariableExp(iv))
                           //	              		      else
                           //	              		      	if(operationOwner.isInstanceOf[SetType])

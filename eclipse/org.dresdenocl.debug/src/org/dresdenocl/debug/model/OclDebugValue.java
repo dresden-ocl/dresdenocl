@@ -1,5 +1,6 @@
 package org.dresdenocl.debug.model;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -46,8 +47,14 @@ public class OclDebugValue extends OclDebugElement implements IValue {
 	public IVariable[] getVariables() throws DebugException {
 
 		if (m_variables == null) {
-			String[] childIds = m_children.values().toArray(new String[0]);
-			m_variables = m_debugTarget.getDebugProxy().getVariables(childIds);
+			Collection<Long> childIds = m_children.values();
+			String[] childIdStrings = new String[childIds.size()];
+			int i = 0;
+			for ( Long childId : childIds) {
+				childIdStrings[i++] = childId.toString();
+			}
+			IVariable[] response = m_debugTarget.getDebugProxy().getVariables(childIdStrings);
+			m_variables = response;
 		}
 		return m_variables;
 	}
@@ -72,9 +79,9 @@ public class OclDebugValue extends OclDebugElement implements IValue {
 			keyAtIndex = it.next();
 		}
 		Long childId = m_children.get(keyAtIndex);
-		IVariable[] respone =
+		IVariable[] response =
 				m_debugTarget.getDebugProxy().getVariables(childId.toString());
-		return respone[0];
+		return response[0];
 	}
 
 }

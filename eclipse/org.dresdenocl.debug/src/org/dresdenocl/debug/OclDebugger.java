@@ -76,6 +76,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			IModelInstanceElement modelInstanceElement) {
 
 		startupAndWait();
+		//m_stackVariables.clear();
+		//m_stackframes.clear();
 
 		IInterpretationResult result =
 				super.interpretConstraint(constraint, modelInstanceElement);
@@ -372,6 +374,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	/*
 	@Override
 	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
 
@@ -382,6 +385,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		popStackFrame();
 		return result;
 	}
+	*/
 
 	@Override
 	public OclAny caseIfExp(IfExp ifExp) {

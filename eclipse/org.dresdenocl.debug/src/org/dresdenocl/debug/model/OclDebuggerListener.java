@@ -159,6 +159,7 @@ public class OclDebuggerListener implements Runnable {
 			}
 		}
 		System.out.println("OclDebuggerListener END WHILE");
+		//m_objectMap.clear();
 		server.close();
 	}
 
