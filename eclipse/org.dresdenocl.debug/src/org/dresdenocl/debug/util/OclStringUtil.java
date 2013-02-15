@@ -2,31 +2,36 @@ package org.dresdenocl.debug.util;
 
 public class OclStringUtil {
 
-	
 	public final static String HEX_DIGIT_REGEXP = "[0-9a-fA-F]";
-	public final static String UNICODE_SEQUENCE_REGEXP = "\\\\u" + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP;
+	public final static String UNICODE_SEQUENCE_REGEXP = "\\\\u"
+			+ HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP + HEX_DIGIT_REGEXP
+			+ HEX_DIGIT_REGEXP;
 	public final static String ESC_OTHER = "\\\\(n|r|t|b|f|\"|'|>)";
-	public final static String ESC_REGEXP = "\\A((" + UNICODE_SEQUENCE_REGEXP + ")|(" + ESC_OTHER + ")).*";
-	
+	public final static String ESC_REGEXP = "\\A((" + UNICODE_SEQUENCE_REGEXP
+			+ ")|(" + ESC_OTHER + ")).*";
+
 	/**
 	 * Capitalizes the first letter of the given string.
 	 * 
-	 * @param text the string to capitalize.
+	 * @param text
+	 *          the string to capitalize.
 	 * 
 	 * @return the modified string.
 	 */
 	public static String capitalize(String text) {
+
 		String h = text.substring(0, 1).toUpperCase();
 		String t = text.substring(1);
 		return h + t;
 	}
-	
+
 	/**
 	 * Returns the part of 'tail' that is not present at the end of 'text'. For
-	 * example if text = 'abc' and tail = 'cd' this method returns 'd'. If 'tail' can
-	 * not be found at the end of 'text', 'tail' is returned as is.
+	 * example if text = 'abc' and tail = 'cd' this method returns 'd'. If 'tail'
+	 * can not be found at the end of 'text', 'tail' is returned as is.
 	 */
 	public static String getMissingTail(String text, String tail) {
+
 		for (int i = 1; i < tail.length(); i++) {
 			int endIndex = text.length();
 			int end = Math.max(0, endIndex);
@@ -39,17 +44,19 @@ public class OclStringUtil {
 		}
 		return tail;
 	}
-	
+
 	/**
 	 * Converts a string that contains upper-case letter and underscores (e.g.,
-	 * constant names) to a camel-case string. For example, MY_CONSTANT is converted
-	 * to myConstant.
+	 * constant names) to a camel-case string. For example, MY_CONSTANT is
+	 * converted to myConstant.
 	 * 
-	 * @param text the string to convert
+	 * @param text
+	 *          the string to convert
 	 * 
 	 * @return a camel-case version of text
 	 */
 	public static String convertAllCapsToLowerCamelCase(String text) {
+
 		String lowerCase = text.toLowerCase();
 		while (true) {
 			int i = lowerCase.indexOf('_');
@@ -60,13 +67,15 @@ public class OclStringUtil {
 			if (i + 1 == lowerCase.length()) {
 				lowerCase = head;
 				break;
-			} else {
+			}
+			else {
 				char charAfterUnderscore = lowerCase.charAt(i + 1);
 				char upperCase = Character.toUpperCase(charAfterUnderscore);
 				if (i + 2 < lowerCase.length()) {
 					String tail = lowerCase.substring(i + 2, lowerCase.length());
 					lowerCase = head + upperCase + tail;
-				} else {
+				}
+				else {
 					lowerCase = head + upperCase;
 					break;
 				}
@@ -74,18 +83,21 @@ public class OclStringUtil {
 		}
 		return lowerCase;
 	}
-	
+
 	/**
 	 * Concatenates the given parts and puts 'glue' between them.
 	 */
-	public static String explode(java.util.Collection<? extends Object> parts, String glue) {
+	public static String explode(java.util.Collection<? extends Object> parts,
+			String glue) {
+
 		return explode(parts.toArray(new Object[parts.size()]), glue);
 	}
-	
+
 	/**
 	 * Concatenates the given parts and puts 'glue' between them.
 	 */
 	public static String explode(Object[] parts, String glue) {
+
 		StringBuilder sb = new StringBuilder();
 		int length = parts.length;
 		for (int i = 0; i < length; i++) {
@@ -97,12 +109,14 @@ public class OclStringUtil {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
-	 * Concatenates the given parts and puts 'glue' between them. The toStringFunction
-	 * is used to convert the parts to strings.
+	 * Concatenates the given parts and puts 'glue' between them. The
+	 * toStringFunction is used to convert the parts to strings.
 	 */
-	public static <T> String explode(java.util.Collection<T> parts, String glue, IOclFunction1<String, T> toStringFunction) {
+	public static <T> String explode(java.util.Collection<T> parts, String glue,
+			IOclFunction1<String, T> toStringFunction) {
+
 		String[] partsAsArray = new String[parts.size()];
 		int i = 0;
 		for (T part : parts) {
@@ -111,12 +125,14 @@ public class OclStringUtil {
 		}
 		return explode(partsAsArray, glue);
 	}
-	
+
 	/**
-	 * Concatenates the given parts and puts 'glue' between them. The toStringFunction
-	 * is used to convert the parts to strings.
+	 * Concatenates the given parts and puts 'glue' between them. The
+	 * toStringFunction is used to convert the parts to strings.
 	 */
-	public static <T> String explode(T[] parts, String glue, IOclFunction1<String, T> toStringFunction) {
+	public static <T> String explode(T[] parts, String glue,
+			IOclFunction1<String, T> toStringFunction) {
+
 		String[] partsAsArray = new String[parts.length];
 		int i = 0;
 		for (T part : parts) {
@@ -125,11 +141,12 @@ public class OclStringUtil {
 		}
 		return explode(partsAsArray, glue);
 	}
-	
+
 	/**
 	 * Removes single quotes at the start and end of tokenName.
 	 */
 	public static String formatTokenName(String tokenName) {
+
 		if (tokenName.length() > 0 && tokenName.startsWith("'")) {
 			tokenName = tokenName.substring(1, tokenName.length());
 		}
@@ -138,16 +155,19 @@ public class OclStringUtil {
 		}
 		return tokenName;
 	}
-	
+
 	public static int getLine(String text, int offset) {
+
 		return getLineAndCharPosition(text, offset)[0];
 	}
-	
+
 	public static int getCharPositionInLine(String text, int offset) {
+
 		return getLineAndCharPosition(text, offset)[1];
 	}
-	
+
 	public static Integer[] getLineAndCharPosition(String text, int offset) {
+
 		int index = 0;
 		int line = 0;
 		int positionInLine = 0;
@@ -159,13 +179,15 @@ public class OclStringUtil {
 			int nextNorR = Integer.MAX_VALUE;
 			if (nextN >= 0) {
 				nextNorR = nextN;
-			} else if (nextR >= 0 && nextR < nextNorR) {
+			}
+			else if (nextR >= 0 && nextR < nextNorR) {
 				nextNorR = nextR;
-			} else {
+			}
+			else {
 				// found no EOL character
 				break;
 			}
-			
+
 			index = nextNorR + 1;
 			if (index == nextN) {
 				index++;
@@ -177,29 +199,33 @@ public class OclStringUtil {
 				break;
 			}
 		}
-		return new Integer[] {line, positionInLine};
+		return new Integer[] { line, positionInLine };
 	}
-	
+
 	public static String escapeQuotes(String s) {
+
 		s = s.replace("\\", "\\\\");
 		s = s.replace("\"", "\\\"");
-		
+
 		return s;
 	}
-	
+
 	public static String convertCamelCaseToAllCaps(String qualifiedClassName) {
+
 		StringBuffer sb = new StringBuffer();
 		final char[] charArray = qualifiedClassName.toCharArray();
 		for (int c = 0; c < charArray.length; c++) {
 			char character = charArray[c];
 			final boolean isEnd = c + 1 == charArray.length;
 			boolean nextIsUpper = !isEnd && Character.isUpperCase(charArray[c + 1]);
-			boolean nextNextIsLower = c + 2 < (charArray.length) && Character.isLowerCase(charArray[c + 2]);
-			
+			boolean nextNextIsLower =
+					c + 2 < (charArray.length) && Character.isLowerCase(charArray[c + 2]);
+
 			sb.append(Character.toUpperCase(character));
 			if (Character.isLowerCase(character) && nextIsUpper) {
 				sb.append('_');
-			} else {
+			}
+			else {
 				if (nextIsUpper && nextNextIsLower) {
 					sb.append('_');
 				}
@@ -207,26 +233,32 @@ public class OclStringUtil {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
-	 * Escapes the given text such that it can be safely embedded in a string literal
-	 * in Java source code.
+	 * Escapes the given text such that it can be safely embedded in a string
+	 * literal in Java source code.
 	 * 
-	 * @param text the text to escape
+	 * @param text
+	 *          the text to escape
 	 * 
 	 * @return the escaped text
 	 */
 	public static String escapeToJavaString(String text) {
+
 		if (text == null) {
 			return null;
 		}
-		String result = text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"").replace("\b", "\\b").replace("\f", "\\f").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t");
+		String result =
+				text.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\"")
+						.replace("\b", "\\b").replace("\f", "\\f").replace("\n", "\\n")
+						.replace("\r", "\\r").replace("\t", "\\t");
 		StringBuilder complete = new StringBuilder();
 		for (int i = 0; i < result.length(); i++) {
 			int codePointI = result.codePointAt(i);
 			if (codePointI >= 32 && codePointI <= 127) {
 				complete.append(Character.toChars(codePointI));
-			} else {
+			}
+			else {
 				// use Unicode representation
 				complete.append("\\u");
 				String hex = Integer.toHexString(codePointI);
@@ -236,25 +268,30 @@ public class OclStringUtil {
 		}
 		return complete.toString();
 	}
-	
+
 	/**
-	 * Escapes the given text such that it can be safely embedded in an ANTLR grammar
-	 * as keyword (i.e., an in-line token). Single quotes are escaped using a
-	 * backslash. Backslashes are escaped using a backslash.
+	 * Escapes the given text such that it can be safely embedded in an ANTLR
+	 * grammar as keyword (i.e., an in-line token). Single quotes are escaped
+	 * using a backslash. Backslashes are escaped using a backslash.
 	 * 
-	 * @param value the text to escape
+	 * @param value
+	 *          the text to escape
 	 * 
 	 * @return the escaped text
 	 */
 	public static String escapeToANTLRKeyword(String value) {
-		return escapeToJavaString(value).replace("'", "\\'").replace("%", "\\u0025");
+
+		return escapeToJavaString(value).replace("'", "\\'")
+				.replace("%", "\\u0025");
 	}
-	
+
 	public static boolean isUnicodeSequence(String text) {
+
 		return text.matches(UNICODE_SEQUENCE_REGEXP);
 	}
-	
+
 	public static String matchCamelCase(String query, String str) {
+
 		if (!query.matches("[A-Za-z\\*]+")) {
 			return null;
 		}
@@ -264,7 +301,8 @@ public class OclStringUtil {
 			char charI = query.charAt(i);
 			if (Character.isLowerCase(charI)) {
 				head += charI;
-			} else {
+			}
+			else {
 				break;
 			}
 		}
@@ -275,29 +313,34 @@ public class OclStringUtil {
 		String re = "\\b(";
 		tail = tail.replaceAll("\\*", ".*?");
 		re += head + tail.replaceAll("([A-Z][^A-Z]*)", "$1[^A-Z]*");
-		re +=  ".*?)\\b";
+		re += ".*?)\\b";
 		java.util.regex.Pattern regex = java.util.regex.Pattern.compile(re);
 		java.util.regex.Matcher m = regex.matcher(str);
 		if (m.find()) {
 			return m.group();
-		} else {
+		}
+		else {
 			return null;
 		}
 	}
-	
+
 	public static String getRepeatingString(int count, char character) {
+
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < count; i++) {
 			result.append(character);
 		}
 		return result.toString();
 	}
-	
+
 	private static int minimum(int a, int b, int c) {
+
 		return Math.min(Math.min(a, b), c);
 	}
-	
-	public static int computeLevenshteinDistance(CharSequence str1, CharSequence str2) {
+
+	public static int computeLevenshteinDistance(CharSequence str1,
+			CharSequence str2) {
+
 		int[][] distance = new int[str1.length() + 1][str2.length() + 1];
 		for (int i = 0; i <= str1.length(); i++) {
 			distance[i][0] = i;
@@ -307,21 +350,28 @@ public class OclStringUtil {
 		}
 		for (int i = 1; i <= str1.length(); i++) {
 			for (int j = 1; j <= str2.length(); j++) {
-				distance[i][j] = minimum(distance[i - 1][j] + 1, distance[i][j - 1] + 1, distance[i - 1][j - 1] + ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
+				distance[i][j] =
+						minimum(
+								distance[i - 1][j] + 1,
+								distance[i][j - 1] + 1,
+								distance[i - 1][j - 1]
+										+ ((str1.charAt(i - 1) == str2.charAt(j - 1)) ? 0 : 1));
 			}
 		}
 		return distance[str1.length()][str2.length()];
 	}
-	
+
 	public static String encode(char delimiter, String[] parts) {
+
 		java.util.List<String> partList = new java.util.ArrayList<String>();
 		for (String part : parts) {
 			partList.add(part);
 		}
 		return encode(delimiter, partList);
 	}
-	
+
 	public static String encode(char delimiter, Iterable<String> parts) {
+
 		StringBuilder result = new StringBuilder();
 		for (String part : parts) {
 			String encodedPart = part.replace("\\", "\\\\");
@@ -331,10 +381,11 @@ public class OclStringUtil {
 		}
 		return result.toString();
 	}
-	
+
 	public static java.util.List<String> decode(String text, char delimiter) {
+
 		java.util.List<String> parts = new java.util.ArrayList<String>();
-		
+
 		boolean escapeMode = false;
 		String part = "";
 		for (int i = 0; i < text.length(); i++) {
@@ -343,40 +394,48 @@ public class OclStringUtil {
 				if (escapeMode) {
 					part += delimiter;
 					escapeMode = false;
-				} else {
+				}
+				else {
 					// end of part
 					parts.add(part);
 					part = "";
 				}
-			} else if (c == '\\') {
+			}
+			else if (c == '\\') {
 				if (escapeMode) {
 					part += '\\';
 					escapeMode = false;
-				} else {
+				}
+				else {
 					escapeMode = true;
 				}
-			} else {
+			}
+			else {
 				part += c;
 			}
 		}
 		return parts;
 	}
-	
+
 	public static String convertToString(java.util.Map<String, Object> properties) {
+
 		java.util.List<String> parts = new java.util.ArrayList<String>();
 		for (String key : properties.keySet()) {
 			Object value = properties.get(key);
 			if (value instanceof String) {
-				parts.add(encode('=', new String[] {key, (String) value}));
-			} else {
+				parts.add(encode('=', new String[] { key, (String) value }));
+			}
+			else {
 				throw new RuntimeException("Can't encode " + value);
 			}
 		}
 		return encode(';', parts);
 	}
-	
+
 	public static java.util.Map<String, String> convertFromString(String text) {
-		java.util.Map<String, String> result = new java.util.LinkedHashMap<String, String>();
+
+		java.util.Map<String, String> result =
+				new java.util.LinkedHashMap<String, String>();
 		java.util.List<String> keyValuePairs = decode(text, ';');
 		for (String pair : keyValuePairs) {
 			java.util.List<String> keyAndValue = decode(pair, '=');
@@ -386,5 +445,5 @@ public class OclStringUtil {
 		}
 		return result;
 	}
-	
+
 }

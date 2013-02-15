@@ -39,6 +39,7 @@ import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
 import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.essentialocl.expressions.VariableExp;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
+import org.dresdenocl.interpreter.IInterpretationEnvironment;
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.internal.OclInterpreter;
 import org.dresdenocl.modelbus.ModelBusPlugin;
@@ -52,6 +53,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private boolean m_debugMode;
 	private boolean m_suspended;
 	private boolean m_terminated;
+	private boolean alreadySentStartEvent = false;
 	private ServerSocket m_server;
 	private PrintStream m_outputStream;
 	private OclDebugCommunicationHelper m_communicationHelper =
@@ -141,7 +143,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return false;
 	}
 
-	public boolean alreadySentStartEvent = false;
+	private void stopOnBreakpoint(String methodName, EObject parameter) {
+
+		pushStackFrame(methodName, parameter);
+		if (isLineBreakPointElement(parameter)) {
+			setSuspend(true);
+		}
+		waitIfSuspended();
+	}
 
 	public void startupAndWait() {
 
@@ -321,13 +330,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseBooleanLiteralExp(BooleanLiteralExp booleanLiteralExp) {
 
-		pushStackFrame("caseBooleanLiteralExp", booleanLiteralExp);
-		if (isLineBreakPointElement(booleanLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseBooleanLiteralExp", booleanLiteralExp);
 		OclAny result = super.caseBooleanLiteralExp(booleanLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseBooleanLiteralExp", booleanLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -335,13 +341,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseCollectionItem(CollectionItem collectionItem) {
 
-		pushStackFrame("caseCollectionItem", collectionItem);
-		if (isLineBreakPointElement(collectionItem)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseCollectionItem", collectionItem);
 		OclAny result = super.caseCollectionItem(collectionItem);
+		popStackFrame();
+		stopOnBreakpoint("caseCollectionItem", collectionItem);
 		popStackFrame();
 		return result;
 	}
@@ -350,13 +353,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public OclAny caseCollectionLiteralExp(
 			CollectionLiteralExp collectionLiteralExp) {
 
-		pushStackFrame("caseCollectionLiteralExp", collectionLiteralExp);
-		if (isLineBreakPointElement(collectionLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseCollectionLiteralExp", collectionLiteralExp);
 		OclAny result = super.caseCollectionLiteralExp(collectionLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseCollectionLiteralExp", collectionLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -364,13 +364,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseEnumLiteralExp(EnumLiteralExp enumLiteralExp) {
 
-		pushStackFrame("caseEnumLiteralExp", enumLiteralExp);
-		if (isLineBreakPointElement(enumLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseEnumLiteralExp", enumLiteralExp);
 		OclAny result = super.caseEnumLiteralExp(enumLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseEnumLiteralExp", enumLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -378,13 +375,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
 
-		pushStackFrame("caseExpressionInOcl", expressionInOcl);
-		if (isLineBreakPointElement(expressionInOcl)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
 		OclAny result = super.caseExpressionInOcl(expressionInOcl);
+		popStackFrame();
+		stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
 		popStackFrame();
 		return result;
 	}
@@ -392,13 +386,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIfExp(IfExp ifExp) {
 
-		pushStackFrame("caseIfExp", ifExp);
-		if (isLineBreakPointElement(ifExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseIfExp", ifExp);
 		OclAny result = super.caseIfExp(ifExp);
+		popStackFrame();
+		stopOnBreakpoint("caseIfExp", ifExp);
 		popStackFrame();
 		return result;
 	}
@@ -406,13 +397,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIntegerLiteralExp(IntegerLiteralExp integerLiteralExp) {
 
-		pushStackFrame("caseIntegerLiteralExp", integerLiteralExp);
-		if (isLineBreakPointElement(integerLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseIntegerLiteralExp", integerLiteralExp);
 		OclAny result = super.caseIntegerLiteralExp(integerLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseIntegerLiteralExp", integerLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -420,13 +408,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseInvalidLiteralExp(InvalidLiteralExp invalidLiteralExp) {
 
-		pushStackFrame("caseInvalidLiteralExp", invalidLiteralExp);
-		if (isLineBreakPointElement(invalidLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseInvalidLiteralExp", invalidLiteralExp);
 		OclAny result = super.caseInvalidLiteralExp(invalidLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseInvalidLiteralExp", invalidLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -434,13 +419,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIterateExp(IterateExp iterateExp) {
 
-		pushStackFrame("caseIterateExp", iterateExp);
-		if (isLineBreakPointElement(iterateExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseIterateExp", iterateExp);
 		OclAny result = super.caseIterateExp(iterateExp);
+		popStackFrame();
+		stopOnBreakpoint("caseIterateExp", iterateExp);
 		popStackFrame();
 		return result;
 	}
@@ -448,25 +430,21 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseIteratorExp(IteratorExp iteratorExp) {
 
-		if (isLineBreakPointElement(iteratorExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseIteratorExp", iteratorExp);
 		OclAny result = super.caseIteratorExp(iteratorExp);
+		popStackFrame();
+		stopOnBreakpoint("caseIteratorExp", iteratorExp);
+		popStackFrame();
 		return result;
 	}
 
 	@Override
 	public OclAny caseLetExp(LetExp letExp) {
 
-		pushStackFrame("caseLetExp", letExp);
-		if (isLineBreakPointElement(letExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseLetExp", letExp);
 		OclAny result = super.caseLetExp(letExp);
+		popStackFrame();
+		stopOnBreakpoint("caseLetExp", letExp);
 		popStackFrame();
 		return result;
 	}
@@ -474,13 +452,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
 
-		pushStackFrame("caseOperationCallExp", operationCallExp);
-		if (isLineBreakPointElement(operationCallExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseOperationCallExp", operationCallExp);
 		OclAny result = super.caseOperationCallExp(operationCallExp);
+		popStackFrame();
+		stopOnBreakpoint("caseOperationCallExp", operationCallExp);
 		popStackFrame();
 		return result;
 	}
@@ -488,13 +463,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {
 
-		pushStackFrame("casePropertyCallExp", propertyCallExp);
-		if (isLineBreakPointElement(propertyCallExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
 		OclAny result = super.casePropertyCallExp(propertyCallExp);
+		popStackFrame();
+		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
 		popStackFrame();
 		return result;
 	}
@@ -502,13 +474,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseRealLiteralExp(RealLiteralExp realLiteralExp) {
 
-		pushStackFrame("caseRealLiteralExp", realLiteralExp);
-		if (isLineBreakPointElement(realLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseRealLiteralExp", realLiteralExp);
 		OclAny result = super.caseRealLiteralExp(realLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseRealLiteralExp", realLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -516,13 +485,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseStringLiteralExp(StringLiteralExp stringLiteralExp) {
 
-		pushStackFrame("caseStringLiteralExp", stringLiteralExp);
-		if (isLineBreakPointElement(stringLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseStringLiteralExp", stringLiteralExp);
 		OclAny result = super.caseStringLiteralExp(stringLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseStringLiteralExp", stringLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -530,13 +496,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseTupleLiteralExp(TupleLiteralExp tupleLiteralExp) {
 
-		pushStackFrame("caseTupleLiteralExp", tupleLiteralExp);
-		if (isLineBreakPointElement(tupleLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseTupleLiteralExp", tupleLiteralExp);
 		OclAny result = super.caseTupleLiteralExp(tupleLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseTupleLiteralExp", tupleLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -544,13 +507,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseTupleLiteralPart(TupleLiteralPart tupleLiteralPart) {
 
-		pushStackFrame("caseTupleLiteralPart", tupleLiteralPart);
-		if (isLineBreakPointElement(tupleLiteralPart)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseTupleLiteralPart", tupleLiteralPart);
 		OclAny result = super.caseTupleLiteralPart(tupleLiteralPart);
+		popStackFrame();
+		stopOnBreakpoint("caseTupleLiteralPart", tupleLiteralPart);
 		popStackFrame();
 		return result;
 	}
@@ -558,13 +518,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseTypeLiteralExp(TypeLiteralExp typeLiteralExp) {
 
-		pushStackFrame("caseTypeLiteralExp", typeLiteralExp);
-		if (isLineBreakPointElement(typeLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseTypeLiteralExp", typeLiteralExp);
 		OclAny result = super.caseTypeLiteralExp(typeLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseTypeLiteralExp", typeLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -572,13 +529,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseUndefinedLiteralExp(UndefinedLiteralExp undefinedLiteralExp) {
 
-		pushStackFrame("caseUndefinedLiteralExp", undefinedLiteralExp);
-		if (isLineBreakPointElement(undefinedLiteralExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseUndefinedLiteralExp", undefinedLiteralExp);
 		OclAny result = super.caseUndefinedLiteralExp(undefinedLiteralExp);
+		popStackFrame();
+		stopOnBreakpoint("caseUndefinedLiteralExp", undefinedLiteralExp);
 		popStackFrame();
 		return result;
 	}
@@ -586,13 +540,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseVariable(Variable variable) {
 
-		pushStackFrame("caseVariable", variable);
-		if (isLineBreakPointElement(variable)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseVariable", variable);
 		OclAny result = super.caseVariable(variable);
+		popStackFrame();
+		stopOnBreakpoint("caseVariable", variable);
 		popStackFrame();
 		return result;
 	}
@@ -600,13 +551,45 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public OclAny caseVariableExp(VariableExp variableExp) {
 
-		pushStackFrame("caseVariableExp", variableExp);
-		if (isLineBreakPointElement(variableExp)) {
-			setSuspend(true);
-		}
-		waitIfSuspended();
-
+		stopOnBreakpoint("caseVariableExp", variableExp);
 		OclAny result = super.caseVariableExp(variableExp);
+		popStackFrame();
+		stopOnBreakpoint("caseVariableExp", variableExp);
+		popStackFrame();
+		return result;
+	}
+
+	@Override
+	protected OclAny evaluateNonStaticOperation(OperationCallExp operationCallExp) {
+
+		stopOnBreakpoint("evaluateNonStaticOperation", operationCallExp);
+		OclAny result = super.evaluateNonStaticOperation(operationCallExp);
+		popStackFrame();
+		stopOnBreakpoint("evaluateNonStaticOperation", operationCallExp);
+		popStackFrame();
+		return result;
+	}
+
+	@Override
+	protected OclAny evaluateStaticOperation(OperationCallExp operationCallExp) {
+
+		stopOnBreakpoint("evaluateStaticOperation", operationCallExp);
+		OclAny result = super.evaluateStaticOperation(operationCallExp);
+		popStackFrame();
+		stopOnBreakpoint("evaluateStaticOperation", operationCallExp);
+		popStackFrame();
+		return result;
+	}
+
+	@Override
+	protected LinkedHashMap<String, OclAny> computeParameters(
+			OperationCallExp anOperationCallExp, Constraint oclDefinedOperation) {
+
+		stopOnBreakpoint("computeParameters", anOperationCallExp);
+		LinkedHashMap<String, OclAny> result =
+				super.computeParameters(anOperationCallExp, oclDefinedOperation);
+		popStackFrame();
+		stopOnBreakpoint("computeParameters", anOperationCallExp);
 		popStackFrame();
 		return result;
 	}
@@ -628,6 +611,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// store the mapping from current stackframe to variables
 		Map<String, Object> map =
 				new HashMap<String, Object>(myEnvironment.getStoredVariableMappings());
+		map.put(parameter.eClass().toString(), parameter.toString());
+		if (!myEnvironmentStack.isEmpty()) {
+			map.putAll(myEnvironmentStack.peek().getStoredVariableMappings());
+		}
 		m_stackVariables.put(data[1], map);
 	}
 

@@ -158,7 +158,8 @@ public class OclDebugThread extends OclDebugElement implements IThread,
 			if (framesData != null && !"".equals(framesData)) {
 				List<String> frames = OclStringUtil.decode(framesData, '#');
 				IStackFrame[] theFrames = new IStackFrame[frames.size()];
-				System.out.println("OclDebugThread.getStackFrames() : frames.size() = " + frames.size());
+				System.out.println("OclDebugThread.getStackFrames() : frames.size() = "
+						+ frames.size());
 				for (int i = 0; i < frames.size(); i++) {
 					String data = frames.get(i);
 					theFrames[frames.size() - i - 1] =

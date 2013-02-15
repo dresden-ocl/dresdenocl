@@ -28,20 +28,21 @@ public class OclLaunchConfigurationMainTab extends
 
 	public void createControl(org.eclipse.swt.widgets.Composite parent) {
 
-		org.eclipse.swt.widgets.Composite comp = new org.eclipse.swt.widgets.Composite(
-				parent, org.eclipse.swt.SWT.NONE);
-		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout(
-				1, true);
+		org.eclipse.swt.widgets.Composite comp =
+				new org.eclipse.swt.widgets.Composite(parent, org.eclipse.swt.SWT.NONE);
+		org.eclipse.swt.layout.GridLayout layout =
+				new org.eclipse.swt.layout.GridLayout(1, true);
 		comp.setLayout(layout);
 
-		org.eclipse.swt.layout.GridData gd = new org.eclipse.swt.layout.GridData(
-				org.eclipse.swt.layout.GridData.FILL_BOTH);
+		org.eclipse.swt.layout.GridData gd =
+				new org.eclipse.swt.layout.GridData(
+						org.eclipse.swt.layout.GridData.FILL_BOTH);
 		gd.grabExcessHorizontalSpace = true;
 		gd.horizontalAlignment = org.eclipse.swt.SWT.FILL;
 		comp.setLayoutData(gd);
 
-		org.eclipse.swt.widgets.Group group = new org.eclipse.swt.widgets.Group(
-				comp, org.eclipse.swt.SWT.NONE);
+		org.eclipse.swt.widgets.Group group =
+				new org.eclipse.swt.widgets.Group(comp, org.eclipse.swt.SWT.NONE);
 		group.setText("Launch parameters");
 		group.setLayout(new org.eclipse.swt.layout.GridLayout(3, false));
 		gd = new org.eclipse.swt.layout.GridData();
@@ -49,14 +50,15 @@ public class OclLaunchConfigurationMainTab extends
 		gd.horizontalAlignment = org.eclipse.swt.SWT.FILL;
 		group.setLayoutData(gd);
 
-		uriLabel = new org.eclipse.swt.widgets.Label(group,
-				org.eclipse.swt.SWT.NONE);
+		uriLabel =
+				new org.eclipse.swt.widgets.Label(group, org.eclipse.swt.SWT.NONE);
 		uriLabel.setText("Resource to execute:");
 		gd = new org.eclipse.swt.layout.GridData();
 		uriLabel.setLayoutData(gd);
 
-		uriText = new org.eclipse.swt.widgets.Text(group,
-				org.eclipse.swt.SWT.SINGLE | org.eclipse.swt.SWT.BORDER);
+		uriText =
+				new org.eclipse.swt.widgets.Text(group, org.eclipse.swt.SWT.SINGLE
+						| org.eclipse.swt.SWT.BORDER);
 		uriText.setLayoutData(new org.eclipse.swt.layout.GridData(
 				org.eclipse.swt.layout.GridData.FILL_HORIZONTAL));
 		uriText.addModifyListener(new org.eclipse.swt.events.ModifyListener() {
@@ -72,14 +74,13 @@ public class OclLaunchConfigurationMainTab extends
 		gd.horizontalSpan = 2;
 		uriText.setLayoutData(gd);
 
-		workspaceButton = new org.eclipse.swt.widgets.Button(group,
-				org.eclipse.swt.SWT.PUSH);
+		workspaceButton =
+				new org.eclipse.swt.widgets.Button(group, org.eclipse.swt.SWT.PUSH);
 		workspaceButton.setText("Workspace...");
 		workspaceButton
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent event) {
+					public void widgetSelected(org.eclipse.swt.events.SelectionEvent event) {
 
 						handleBrowseWorkspace();
 					}
@@ -91,14 +92,13 @@ public class OclLaunchConfigurationMainTab extends
 		gd.horizontalSpan = 2;
 		workspaceButton.setLayoutData(gd);
 
-		fileSystemButton = new org.eclipse.swt.widgets.Button(group,
-				org.eclipse.swt.SWT.PUSH);
+		fileSystemButton =
+				new org.eclipse.swt.widgets.Button(group, org.eclipse.swt.SWT.PUSH);
 		fileSystemButton.setText("File System...");
 		fileSystemButton
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent event) {
+					public void widgetSelected(org.eclipse.swt.events.SelectionEvent event) {
 
 						handleBrowseFileSystem();
 					}
@@ -120,8 +120,7 @@ public class OclLaunchConfigurationMainTab extends
 			org.eclipse.debug.core.ILaunchConfiguration configuration) {
 
 		try {
-			uriText.setText(configuration.getAttribute(
-					OclDebugUIPlugin.OCL_URI, ""));
+			uriText.setText(configuration.getAttribute(OclDebugUIPlugin.OCL_URI, ""));
 			// more initialization code can be added here
 		} catch (org.eclipse.core.runtime.CoreException e) {
 			org.dresdenocl.language.ocl.resource.ocl.mopp.OclPlugin.logError(
@@ -150,24 +149,24 @@ public class OclLaunchConfigurationMainTab extends
 
 	protected void handleBrowseFileSystem() {
 
-		org.eclipse.swt.widgets.FileDialog dialog = new org.eclipse.swt.widgets.FileDialog(
-				getControl().getShell());
+		org.eclipse.swt.widgets.FileDialog dialog =
+				new org.eclipse.swt.widgets.FileDialog(getControl().getShell());
 		dialog.setText("Select resource to launch");
 		String result = dialog.open();
 		if (result != null) {
-			uriText.setText(org.eclipse.emf.common.util.URI.createFileURI(
-					result).toString());
+			uriText.setText(org.eclipse.emf.common.util.URI.createFileURI(result)
+					.toString());
 		}
 	}
 
 	protected void handleBrowseWorkspace() {
 
-		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
-				getControl().getShell(), new WorkbenchLabelProvider(),
-				new WorkbenchContentProvider());
+		ElementTreeSelectionDialog dialog =
+				new ElementTreeSelectionDialog(getControl().getShell(),
+						new WorkbenchLabelProvider(), new WorkbenchContentProvider());
 
-		dialog.setInput(org.eclipse.core.resources.ResourcesPlugin
-				.getWorkspace().getRoot());
+		dialog.setInput(org.eclipse.core.resources.ResourcesPlugin.getWorkspace()
+				.getRoot());
 		dialog.addFilter(new org.eclipse.jface.viewers.ViewerFilter() {
 
 			@Override
@@ -175,7 +174,8 @@ public class OclLaunchConfigurationMainTab extends
 					Object parentElement, Object element) {
 
 				if (element instanceof IFile) {
-					org.eclipse.core.resources.IFile file = (org.eclipse.core.resources.IFile) element;
+					org.eclipse.core.resources.IFile file =
+							(org.eclipse.core.resources.IFile) element;
 					return file.getFileExtension().equals(
 							new OclMetaInformation().getSyntaxName());
 				}
@@ -192,23 +192,20 @@ public class OclLaunchConfigurationMainTab extends
 				if (selection.length > 0
 						&& selection[0] instanceof org.eclipse.core.resources.IFile)
 					return new org.eclipse.core.runtime.Status(
-							org.eclipse.core.runtime.IStatus.OK,
-							OclDebugUIPlugin.PLUGIN_ID,
+							org.eclipse.core.runtime.IStatus.OK, OclDebugUIPlugin.PLUGIN_ID,
 							org.eclipse.core.runtime.IStatus.OK, "", null);
 
 				return new org.eclipse.core.runtime.Status(
-						org.eclipse.core.runtime.IStatus.ERROR,
-						OclDebugUIPlugin.PLUGIN_ID,
+						org.eclipse.core.runtime.IStatus.ERROR, OclDebugUIPlugin.PLUGIN_ID,
 						org.eclipse.core.runtime.IStatus.ERROR, "", null);
 			}
 		});
 		if (dialog.open() == org.eclipse.jface.window.Window.OK) {
-			org.eclipse.core.resources.IFile file = (org.eclipse.core.resources.IFile) dialog
-					.getFirstResult();
+			org.eclipse.core.resources.IFile file =
+					(org.eclipse.core.resources.IFile) dialog.getFirstResult();
 			uriText.setText(org.eclipse.emf.common.util.URI
 					.createPlatformResourceURI(
-							file.getFullPath().makeRelative().toString(), true)
-					.toString());
+							file.getFullPath().makeRelative().toString(), true).toString());
 		}
 	}
 

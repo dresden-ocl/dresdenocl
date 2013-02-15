@@ -147,7 +147,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * {@link IInterpretationEnvironment}s can contain {@link Variable}s that are
 	 * not visible globally.
 	 */
-	private Stack<IInterpretationEnvironment> myEnvironmentStack =
+	protected Stack<IInterpretationEnvironment> myEnvironmentStack =
 			new Stack<IInterpretationEnvironment>();
 	
 	/**
@@ -3151,7 +3151,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 * @return A {@link LinkedHashMap} containing the parameters' names as key and
 	 *         their {@link OclAny} values as values.
 	 */
-	private LinkedHashMap<String, OclAny> computeParameters(
+	protected LinkedHashMap<String, OclAny> computeParameters(
 			OperationCallExp anOperationCallExp, Constraint oclDefinedOperation) {
 
 		/* Probably debug. */

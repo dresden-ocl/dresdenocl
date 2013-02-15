@@ -26,16 +26,19 @@ public class OclDebugProcess extends OclDebugElement implements IProcess,
 	}
 
 	public ILaunch getLaunch() {
+
 		return m_launch;
 	}
 
 	@Override
 	public boolean isTerminated() {
+
 		return m_terminated;
 	}
 
 	@Override
 	public void terminate() throws DebugException {
+
 		m_terminated = true;
 	}
 
@@ -53,6 +56,7 @@ public class OclDebugProcess extends OclDebugElement implements IProcess,
 
 	@Override
 	public void setAttribute(String key, String value) {
+
 		// do nothing
 	}
 
@@ -70,10 +74,11 @@ public class OclDebugProcess extends OclDebugElement implements IProcess,
 
 	@Override
 	public void handleMessage(OclDebugMessage message) {
-		if(message.hasType(EOclDebugMessageType.TERMINATED)) {
+
+		if (message.hasType(EOclDebugMessageType.TERMINATED)) {
 			m_terminated = true;
 		}
-		//no else
+		// no else
 	}
 
 }

@@ -28,15 +28,15 @@ public class OclAdapterFactory implements IAdapterFactory {
 
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
+
 		if (adaptableObject instanceof ITextEditor) {
 			ITextEditor editorPart = (ITextEditor) adaptableObject;
-			IResource resource = (IResource) editorPart.getEditorInput()
-					.getAdapter(IResource.class);
+			IResource resource =
+					(IResource) editorPart.getEditorInput().getAdapter(IResource.class);
 			if (resource != null) {
 				String extension = resource.getFileExtension();
 				if (extension != null
-						&& extension.equals(new OclMetaInformation()
-								.getSyntaxName())) {
+						&& extension.equals(new OclMetaInformation().getSyntaxName())) {
 					return new OclLineBreakpointAdapter();
 				}
 			}
@@ -47,11 +47,11 @@ public class OclAdapterFactory implements IAdapterFactory {
 			return new IElementLabelProvider() {
 
 				public void update(ILabelUpdate[] updates) {
+
 					for (ILabelUpdate update : updates) {
 						try {
 							update.setLabel(variable.getName(), 0);
-							update.setLabel(variable.getValue()
-									.getValueString(), 1);
+							update.setLabel(variable.getValue().getValueString(), 1);
 							update.done();
 						} catch (DebugException e) {
 						}
@@ -65,6 +65,7 @@ public class OclAdapterFactory implements IAdapterFactory {
 			return new IElementContentProvider() {
 
 				public void update(IChildrenCountUpdate[] updates) {
+
 					try {
 						for (IChildrenCountUpdate update : updates) {
 							IValue value = variable.getValue();
@@ -78,6 +79,7 @@ public class OclAdapterFactory implements IAdapterFactory {
 				}
 
 				public void update(IChildrenUpdate[] updates) {
+
 					try {
 						IValue value = variable.getValue();
 						OclDebugValue castedValue = (OclDebugValue) value;
@@ -96,10 +98,10 @@ public class OclAdapterFactory implements IAdapterFactory {
 				}
 
 				public void update(IHasChildrenUpdate[] updates) {
+
 					for (IHasChildrenUpdate update : updates) {
 						try {
-							update.setHasChilren(variable.getValue()
-									.hasVariables());
+							update.setHasChilren(variable.getValue().hasVariables());
 							update.done();
 						} catch (org.eclipse.debug.core.DebugException e) {
 							e.printStackTrace();
@@ -113,6 +115,7 @@ public class OclAdapterFactory implements IAdapterFactory {
 
 	@SuppressWarnings("rawtypes")
 	public Class[] getAdapterList() {
+
 		return new Class[] { IToggleBreakpointsTarget.class };
 	}
 

@@ -49,8 +49,7 @@ public class OclLaunchShortcut implements org.eclipse.debug.ui.ILaunchShortcut2 
 	private void launch(org.eclipse.core.resources.IFile file, String mode) {
 
 		try {
-			ILaunchManager lm =
-					DebugPlugin.getDefault().getLaunchManager();
+			ILaunchManager lm = DebugPlugin.getDefault().getLaunchManager();
 			ILaunchConfigurationType type =
 					lm.getLaunchConfigurationType(OclDebugUIPlugin.LAUNCH_CONFIGURATION_TYPE);
 			org.eclipse.debug.core.ILaunchConfigurationWorkingCopy workingCopy =

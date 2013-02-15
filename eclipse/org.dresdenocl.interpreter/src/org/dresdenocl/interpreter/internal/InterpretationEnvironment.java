@@ -19,6 +19,7 @@ with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
 package org.dresdenocl.interpreter.internal;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -137,8 +138,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#getModelInstance
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#getModelInstance
 	 * ()
 	 */
 	public IModelInstance getModelInstance() {
@@ -148,8 +148,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#getVariableValue
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#getVariableValue
 	 * (java.lang.String)
 	 */
 	public OclAny getVariableValue(String identifier) {
@@ -170,8 +169,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#isNewInstance
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#isNewInstance
 	 * (tudresden
 	 * .ocl20.pivot.essentialocl.standardlibrary.OclModelInstanceObject)
 	 */
@@ -254,8 +252,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#saveOldInstances
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#saveOldInstances
 	 * (org.dresdenocl.pivotmodel.Type)
 	 */
 	public void saveOldInstances(Type type) {
@@ -284,8 +281,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#setModelInstance
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#setModelInstance
 	 * (org.dresdenocl.modelinstance.IModelInstance)
 	 */
 	public void setModelInstance(IModelInstance modelInstance) {
@@ -295,10 +291,8 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
-	 * (java.lang.String,
-	 * org.dresdenocl.essentialocl.standardlibrary.OclAny)
+	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
+	 * (java.lang.String, org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
 	public void setVariableValue(String identifier, OclAny oclRoot) {
 
@@ -307,6 +301,22 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 	@Override
 	public Map<String, OclAny> getStoredVariableMappings() {
-		return visibleVariableValues;
+
+		Map<String, OclAny> result = new LinkedHashMap<String, OclAny>();
+		if (parentEnvironment != null) {
+			result.putAll(parentEnvironment.getStoredVariableMappings());
+		}
+		for (String k : visibleVariableValues.keySet()) {
+			if (result.containsKey(k)) {
+				result.put(Integer.toString(result.keySet().size()) + " " + k,
+						visibleVariableValues.get(k));
+			}
+			else {
+				result.put(k, visibleVariableValues.get(k));
+			}
+		}
+		System.out.println("getStoredVariableMappings size = "
+				+ result.keySet().size());
+		return result;
 	}
 }

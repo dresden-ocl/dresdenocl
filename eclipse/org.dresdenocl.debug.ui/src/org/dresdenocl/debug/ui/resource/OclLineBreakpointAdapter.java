@@ -24,15 +24,16 @@ public class OclLineBreakpointAdapter implements IToggleBreakpointsTarget {
 
 	public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection)
 			throws CoreException {
+
 		ITextEditor textEditor = getEditor(part);
 		if (textEditor != null) {
-			IResource resource = (IResource) textEditor.getEditorInput()
-					.getAdapter(IResource.class);
+			IResource resource =
+					(IResource) textEditor.getEditorInput().getAdapter(IResource.class);
 			ITextSelection textSelection = (ITextSelection) selection;
 			int lineNumber = textSelection.getStartLine();
-			IBreakpoint[] breakpoints = DebugPlugin.getDefault()
-					.getBreakpointManager()
-					.getBreakpoints(OclDebugPlugin.DEBUG_MODEL_ID);
+			IBreakpoint[] breakpoints =
+					DebugPlugin.getDefault().getBreakpointManager()
+							.getBreakpoints(OclDebugPlugin.DEBUG_MODEL_ID);
 			for (int i = 0; i < breakpoints.length; i++) {
 				IBreakpoint breakpoint = breakpoints[i];
 				if (resource.equals(breakpoint.getMarker().getResource())) {
@@ -44,8 +45,8 @@ public class OclLineBreakpointAdapter implements IToggleBreakpointsTarget {
 				}
 			}
 			// create line breakpoint (document line numbers start at 0)
-			OclLineBreakpoint lineBreakpoint = new OclLineBreakpoint(resource,
-					lineNumber + 1);
+			OclLineBreakpoint lineBreakpoint =
+					new OclLineBreakpoint(resource, lineNumber + 1);
 			DebugPlugin.getDefault().getBreakpointManager()
 					.addBreakpoint(lineBreakpoint);
 		}
@@ -53,6 +54,7 @@ public class OclLineBreakpointAdapter implements IToggleBreakpointsTarget {
 
 	public boolean canToggleLineBreakpoints(IWorkbenchPart part,
 			ISelection selection) {
+
 		ITextEditor editor = getEditor(part);
 		return editor != null;
 	}
@@ -62,18 +64,18 @@ public class OclLineBreakpointAdapter implements IToggleBreakpointsTarget {
 	 * <code>null</code> if none.
 	 * 
 	 * @param part
-	 *            workbench part
+	 *          workbench part
 	 */
 	private ITextEditor getEditor(IWorkbenchPart part) {
+
 		if (part instanceof ITextEditor) {
 			ITextEditor editorPart = (ITextEditor) part;
-			IResource resource = (IResource) editorPart.getEditorInput()
-					.getAdapter(IResource.class);
+			IResource resource =
+					(IResource) editorPart.getEditorInput().getAdapter(IResource.class);
 			if (resource != null) {
 				String extension = resource.getFileExtension();
 				if (extension != null
-						&& extension.equals(new OclMetaInformation()
-								.getSyntaxName())) {
+						&& extension.equals(new OclMetaInformation().getSyntaxName())) {
 					return editorPart;
 				}
 			}
@@ -81,21 +83,24 @@ public class OclLineBreakpointAdapter implements IToggleBreakpointsTarget {
 		return null;
 	}
 
-	public void toggleMethodBreakpoints(IWorkbenchPart part,
-			ISelection selection) throws CoreException {
+	public void toggleMethodBreakpoints(IWorkbenchPart part, ISelection selection)
+			throws CoreException {
+
 	}
 
 	public boolean canToggleMethodBreakpoints(IWorkbenchPart part,
 			ISelection selection) {
+
 		return false;
 	}
 
 	public void toggleWatchpoints(IWorkbenchPart part, ISelection selection)
 			throws CoreException {
+
 	}
 
-	public boolean canToggleWatchpoints(IWorkbenchPart part,
-			ISelection selection) {
+	public boolean canToggleWatchpoints(IWorkbenchPart part, ISelection selection) {
+
 		return false;
 	}
 

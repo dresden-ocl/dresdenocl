@@ -23,14 +23,15 @@ public class OclLineBreakpoint extends LineBreakpoint {
 			@Override
 			public void run(IProgressMonitor monitor) throws CoreException {
 
-				IMarker marker = resource
-						.createMarker("org.dresdenocl.debug.lineBreakpoint.marker");
+				IMarker marker =
+						resource.createMarker("org.dresdenocl.debug.lineBreakpoint.marker");
 				setMarker(marker);
 				marker.setAttribute(IBreakpoint.ENABLED, Boolean.TRUE);
 				marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
 				marker.setAttribute(IBreakpoint.ID, getModelIdentifier());
-				marker.setAttribute(IMarker.MESSAGE, "Line Breakpoint: "
-						+ resource.getName() + " [line: " + lineNumber + "]");
+				marker.setAttribute(IMarker.MESSAGE,
+						"Line Breakpoint: " + resource.getName() + " [line: " + lineNumber
+								+ "]");
 				marker.setAttribute(IMarker.LOCATION, resource.getRawLocation()
 						.toPortableString());
 			}
@@ -45,9 +46,9 @@ public class OclLineBreakpoint extends LineBreakpoint {
 	}
 
 	public void install(OclDebugTarget target) {
+
 		try {
-			String location = (String) getMarker().getAttribute(
-					IMarker.LOCATION);
+			String location = (String) getMarker().getAttribute(IMarker.LOCATION);
 			target.getDebugProxy().addLineBreakpoint(location, getLineNumber());
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -55,11 +56,10 @@ public class OclLineBreakpoint extends LineBreakpoint {
 	}
 
 	public void remove(OclDebugTarget target) {
+
 		try {
-			String location = (String) getMarker().getAttribute(
-					IMarker.LOCATION);
-			target.getDebugProxy().removeLineBreakpoint(location,
-					getLineNumber());
+			String location = (String) getMarker().getAttribute(IMarker.LOCATION);
+			target.getDebugProxy().removeLineBreakpoint(location, getLineNumber());
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}

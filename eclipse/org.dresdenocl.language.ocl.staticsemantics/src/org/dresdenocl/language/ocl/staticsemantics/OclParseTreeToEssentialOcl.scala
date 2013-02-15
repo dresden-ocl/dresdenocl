@@ -300,10 +300,14 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
             result <- Full(factory.createOperationCallExp(sourceEOcl, o.getOperationName, targetEOcl))
           ) yield {
             if (o.isIsMarkedPre) {
+              allMappings.put(sourceEOcl, o)
+              allMappings.put(targetEOcl, o)
               allMappings.put(result.withAtPre, o)
               result.withAtPre
             }
             else {
+              allMappings.put(sourceEOcl, o)
+              allMappings.put(targetEOcl, o)
               allMappings.put(result, o)
               result
             }
@@ -518,10 +522,13 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                     (variables(o)).flatMap {
                       case (implicitVariables, _) =>
                         implicitVariables.flatMap { iv =>
-                          if (iv.getType.conformsTo(operationOwner))
-                            Full(Normal, factory.createVariableExp(iv))
+                          if (iv.getType.conformsTo(operationOwner)) {
+                            var v = factory.createVariableExp(iv)
+                            allMappings.put(v, o)
+                            Full(Normal, v)
+                          }
                           //	              		    else {
-                          //	              		      if (iv.getType.isInstanceOf[CollectionType] && iv.getType.asInstanceOf[CollectionType].getElementType.conformsTo(operationOwner))
+                          //	              		      if (iv.getType. [CollectionType] && iv.getType.asInstanceOf[CollectionType].getElementType.conformsTo(operationOwner))
                           //	              		      	Full(ImplicitCollect, factory.createVariableExp(iv))
                           //	              		      else
                           //	              		      	if(operationOwner.isInstanceOf[SetType])

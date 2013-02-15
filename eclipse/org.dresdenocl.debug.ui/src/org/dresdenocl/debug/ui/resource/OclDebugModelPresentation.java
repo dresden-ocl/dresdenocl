@@ -14,40 +14,49 @@ import org.eclipse.ui.part.FileEditorInput;
 public class OclDebugModelPresentation implements IDebugModelPresentation {
 
 	public OclDebugModelPresentation() {
+
 		super();
 	}
 
 	@Override
 	public void addListener(ILabelProviderListener listener) {
+
 	}
 
 	@Override
 	public void dispose() {
+
 	}
 
 	@Override
 	public boolean isLabelProperty(Object element, String property) {
+
 		return false;
 	}
 
 	@Override
 	public void removeListener(ILabelProviderListener listener) {
+
 	}
 
 	@Override
 	public IEditorInput getEditorInput(Object element) {
+
 		if (element instanceof IFile) {
 			return new FileEditorInput((IFile) element);
-		} else if (element instanceof ILineBreakpoint) {
+		}
+		else if (element instanceof ILineBreakpoint) {
 			return new FileEditorInput((IFile) ((ILineBreakpoint) element)
 					.getMarker().getResource());
-		} else {
+		}
+		else {
 			return null;
 		}
 	}
 
 	@Override
 	public String getEditorId(IEditorInput input, Object element) {
+
 		if (element instanceof IFile || element instanceof ILineBreakpoint) {
 			return OclUIPlugin.EDITOR_ID;
 		}
@@ -56,19 +65,23 @@ public class OclDebugModelPresentation implements IDebugModelPresentation {
 
 	@Override
 	public void setAttribute(String attribute, Object value) {
+
 	}
 
 	@Override
 	public Image getImage(Object element) {
+
 		return null;
 	}
 
 	@Override
 	public String getText(Object element) {
+
 		return null;
 	}
 
 	@Override
 	public void computeDetail(IValue value, IValueDetailListener listener) {
+
 	}
 }

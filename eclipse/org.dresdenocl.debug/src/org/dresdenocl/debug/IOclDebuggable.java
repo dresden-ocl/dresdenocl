@@ -5,7 +5,6 @@ import java.util.Map;
 import org.dresdenocl.interpreter.IOclInterpreter;
 import org.eclipse.emf.ecore.EObject;
 
-
 public interface IOclDebuggable extends IOclInterpreter {
 
 	public void terminate();
@@ -29,6 +28,6 @@ public interface IOclDebuggable extends IOclInterpreter {
 	public void setDebugMode(boolean debugMode);
 
 	public void setEventPort(int eventPort);
-	
+
 	public boolean isLineBreakPointElement(EObject element);
 }

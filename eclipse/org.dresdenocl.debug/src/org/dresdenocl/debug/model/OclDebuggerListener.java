@@ -150,7 +150,7 @@ public class OclDebuggerListener implements Runnable {
 				}
 				OclDebugMessage message =
 						new OclDebugMessage(EOclDebugMessageType.GET_VARIABLES_RESPONSE,
-								varStrings);
+								varStrings.toArray(new String[0]));
 				m_communicationHelper.sendEvent(message, output);
 			}
 			else {

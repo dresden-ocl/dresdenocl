@@ -46,7 +46,8 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	private class EventDispatchJob extends Job {
 
-		private OclDebugCommunicationHelper m_communicationHelper = new OclDebugCommunicationHelper();
+		private OclDebugCommunicationHelper m_communicationHelper =
+				new OclDebugCommunicationHelper();
 
 		public EventDispatchJob() {
 
@@ -58,11 +59,11 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 		protected IStatus run(IProgressMonitor monitor) {
 
 			while (!isTerminated()) {
-				OclDebugMessage message = m_communicationHelper
-						.receive(m_eventReader);
+				OclDebugMessage message = m_communicationHelper.receive(m_eventReader);
 				if (message != null) {
 					notifyListeners(message);
-				} else {
+				}
+				else {
 					terminated();
 					break;
 				}
@@ -71,8 +72,8 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 		}
 
 		private void notifyListeners(OclDebugMessage message) {
-			System.out.println("EventDispatch notifyListeners ( " + message
-					+ " )");
+
+			System.out.println("EventDispatch notifyListeners ( " + message + " )");
 			Object[] listeners = m_eventListener.toArray();
 			for (Object obj : listeners) {
 				((IOclDebugEventListener) obj).handleMessage(message);
@@ -105,8 +106,9 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 		try {
 			m_eventSocket = new Socket("localhost", eventPort);
-			m_eventReader = new BufferedReader(new InputStreamReader(
-					m_eventSocket.getInputStream()));
+			m_eventReader =
+					new BufferedReader(new InputStreamReader(
+							m_eventSocket.getInputStream()));
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (ConnectException e) {
@@ -122,12 +124,14 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 	}
 
 	private void addEventListener(IOclDebugEventListener listener) {
+
 		if (!m_eventListener.contains(listener)) {
 			m_eventListener.add(listener);
 		}
 	}
 
 	private void removeEventListener(IOclDebugEventListener listener) {
+
 		m_eventListener.remove(listener);
 	}
 
@@ -144,14 +148,15 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	private void installDeferredBreakPoints() {
 
-		IBreakpoint[] breakpoints = getBreakpointManager().getBreakpoints(
-				OclDebugPlugin.DEBUG_MODEL_ID);
+		IBreakpoint[] breakpoints =
+				getBreakpointManager().getBreakpoints(OclDebugPlugin.DEBUG_MODEL_ID);
 		for (IBreakpoint breakpoint : breakpoints) {
 			breakpointAdded(breakpoint);
 		}
 	}
 
 	private synchronized void terminated() {
+
 		System.out.println("OclDebugTarget terminated()");
 		m_terminated = true;
 		m_threads = new IThread[0];
@@ -169,42 +174,50 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	@Override
 	public boolean canTerminate() {
+
 		return m_process.canTerminate();
 	}
 
 	@Override
 	public boolean isTerminated() {
+
 		return m_terminated || m_process.isTerminated();
 	}
 
 	@Override
 	public boolean canResume() {
+
 		return m_thread.canResume();
 	}
 
 	@Override
 	public boolean canSuspend() {
+
 		return m_thread.canSuspend();
 	}
 
 	@Override
 	public boolean isSuspended() {
+
 		return m_thread.isSuspended();
 	}
 
 	@Override
 	public void resume() throws DebugException {
+
 		System.out.println("OclDebugTarget resume()");
 		m_thread.resume();
 	}
 
 	@Override
 	public void suspend() throws DebugException {
+
 		m_thread.suspend();
 	}
 
 	@Override
 	public void terminate() throws DebugException {
+
 		m_thread.terminate();
 	}
 
@@ -213,8 +226,8 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 		if (supportsBreakpoint(breakpoint)) {
 			try {
-				if ((breakpoint.isEnabled() && getBreakpointManager()
-						.isEnabled()) || !breakpoint.isRegistered()) {
+				if ((breakpoint.isEnabled() && getBreakpointManager().isEnabled())
+						|| !breakpoint.isRegistered()) {
 					OclLineBreakpoint lineBreakpoint = (OclLineBreakpoint) breakpoint;
 					lineBreakpoint.install(this);
 				}
@@ -230,8 +243,8 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 		if (supportsBreakpoint(breakpoint)) {
 			try {
-				if ((breakpoint.isEnabled() && getBreakpointManager()
-						.isEnabled()) || !breakpoint.isRegistered()) {
+				if ((breakpoint.isEnabled() && getBreakpointManager().isEnabled())
+						|| !breakpoint.isRegistered()) {
 					OclLineBreakpoint lineBreakpoint = (OclLineBreakpoint) breakpoint;
 					lineBreakpoint.install(this);
 				}
@@ -246,6 +259,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	@Override
 	public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
+
 		// empty
 	}
 
@@ -257,6 +271,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	@Override
 	public void disconnect() throws DebugException {
+
 		// empty
 	}
 
@@ -299,29 +314,35 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 	@Override
 	public String getName() throws DebugException {
+
 		return "OCL model";
 	}
 
 	@Override
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
 
-		return breakpoint.getModelIdentifier().equals(
-				OclDebugPlugin.DEBUG_MODEL_ID);
+		return breakpoint.getModelIdentifier()
+				.equals(OclDebugPlugin.DEBUG_MODEL_ID);
 	}
 
 	@Override
 	public void handleMessage(OclDebugMessage message) {
+
 		System.out.println("OclDebugTarget handleMessage( " + message + " )");
 		try {
 			if (message.hasType(EOclDebugMessageType.STARTED)) {
 				started();
-			} else if (message.hasType(EOclDebugMessageType.SUSPENDED)) {
+			}
+			else if (message.hasType(EOclDebugMessageType.SUSPENDED)) {
 				suspend();
-			} else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
+			}
+			else if (message.hasType(EOclDebugMessageType.TERMINATED)) {
 				terminated();
-			} else if (message.hasType(EOclDebugMessageType.RESUMED)) {
+			}
+			else if (message.hasType(EOclDebugMessageType.RESUMED)) {
 				// this event is handled by the debug thread
-			} else {
+			}
+			else {
 				System.out.println("ERROR in " + this.getClass().getName()
 						+ ".handleMessage(): unknown event: " + message);
 			}
@@ -331,14 +352,17 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 	}
 
 	public OclDebugProxy getDebugProxy() {
+
 		return m_debugProxy;
 	}
 
 	public IThread getThread() {
+
 		return m_thread;
 	}
 
 	public ILaunch getLaunch() {
+
 		return m_launch;
 	}
 }

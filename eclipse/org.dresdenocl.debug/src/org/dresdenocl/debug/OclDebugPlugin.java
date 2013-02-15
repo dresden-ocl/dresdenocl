@@ -6,18 +6,18 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 public class OclDebugPlugin extends Plugin {
-	
+
 	/** The shared instance. */
 	private static OclDebugPlugin plugin;
-	
+
 	public static final String PLUGIN_ID = "org.dresdenocl.debug.OclDebugPlugin";
 	public static final String DEBUG_MODEL_ID = "org.dresdenocl.debug.ocl";
-	
+
 	public OclDebugPlugin() {
 
 		plugin = this;
 	}
-	
+
 	/**
 	 * @return The shared instance.
 	 */
@@ -25,7 +25,7 @@ public class OclDebugPlugin extends Plugin {
 
 		return plugin;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -48,7 +48,7 @@ public class OclDebugPlugin extends Plugin {
 
 		super.stop(context);
 	}
-	
+
 	/**
 	 * <p>
 	 * Facade method for the classes in this plug-in that hides the dependency
