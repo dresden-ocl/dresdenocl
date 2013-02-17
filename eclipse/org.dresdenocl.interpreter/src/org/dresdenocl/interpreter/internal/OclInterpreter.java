@@ -1808,8 +1808,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Else compute the result. */
 		else {
-			List<OclAny> elementsToVisit = new ArrayList<OclAny>();
-			List<OclAny> resultElements = new ArrayList<OclAny>();
+			LinkedList<OclAny> elementsToVisit = new LinkedList<OclAny>();
+			List<OclAny> resultElements = new LinkedList<OclAny>();
 
 			/* Add all elements to elementsToVisit. */
 			while (sourceIt.hasNext().isTrue()) {
@@ -1817,8 +1817,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			}
 
 			while (elementsToVisit.size() > 0) {
-
-				OclAny element = elementsToVisit.remove(0);
+				OclAny element = elementsToVisit.pollFirst();
+				//OclAny element = elementsToVisit.remove(0);
 
 				/* Compute relation for one element. */
 				myEnvironment.setVariableValue(iterator.getQualifiedName(), element);
@@ -1952,7 +1952,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		List<OclAny> resultList;
 		OclIterator<OclAny> sourceIt;
 
-		resultList = new ArrayList<OclAny>();
+		resultList = new LinkedList<OclAny>();
 		sourceIt = source.getIterator();
 
 		/* Check if iterator is undefined. */
@@ -2206,7 +2206,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				result = result.and(bodyResult);
 
 				/* Probably break iteration. */
-				if (!result.oclIsInvalid().isTrue() && result.oclIsUndefined().isTrue()
+				if (!result.oclIsInvalid().isTrue() && !result.oclIsUndefined().isTrue()
 						&& !result.isTrue()) {
 					/*
 					 * Do not break on invalid or undefined. Probably a false result
@@ -2257,8 +2257,9 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			/* By default, the result is true. */
 			result = myStandardLibraryFactory.createOclBoolean(true);
 
-			List<OclAny> resultList;
-			resultList = new LinkedList<OclAny>();
+			Set<OclAny> resultList = new HashSet<OclAny>();
+			//List<OclAny> resultList;
+			//resultList = new LinkedList<OclAny>();
 
 			/* Iterate over the collection and check if every element is unique. */
 			while (sourceIt.hasNext().isTrue()) {

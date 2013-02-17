@@ -96,7 +96,7 @@ public class TracerView extends ViewPart implements IInterpreterTraceListener {
 
 	/** This map holds the TracerItems in a cache for fast access */
 	private WeakHashMap<UUID, TracerItem> cachedItems;
-
+	
 	/**
 	 * <p>
 	 * Instantiates this view.

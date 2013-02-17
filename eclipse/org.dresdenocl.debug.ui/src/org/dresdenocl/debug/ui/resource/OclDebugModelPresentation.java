@@ -66,22 +66,30 @@ public class OclDebugModelPresentation implements IDebugModelPresentation {
 	@Override
 	public void setAttribute(String attribute, Object value) {
 
+		System.out.println("OclDebugModelPresentation.getImage: attribute = "
+				+ attribute + "value = " + value);
 	}
 
 	@Override
 	public Image getImage(Object element) {
 
+		System.out.println("OclDebugModelPresentation.getImage: element = "
+				+ element);
 		return null;
 	}
 
 	@Override
 	public String getText(Object element) {
 
+		System.out.println("OclDebugModelPresentation.getText: element = "
+				+ element);
 		return null;
 	}
 
 	@Override
 	public void computeDetail(IValue value, IValueDetailListener listener) {
 
+		System.out.println("OclDebugModelPresentation.computeDetail: value = "
+				+ value);
 	}
 }

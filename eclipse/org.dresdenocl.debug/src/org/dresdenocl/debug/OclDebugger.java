@@ -76,8 +76,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			IModelInstanceElement modelInstanceElement) {
 
 		startupAndWait();
-		//m_stackVariables.clear();
-		//m_stackframes.clear();
+		// m_stackVariables.clear();
+		// m_stackframes.clear();
 
 		IInterpretationResult result =
 				super.interpretConstraint(constraint, modelInstanceElement);
@@ -375,17 +375,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	}
 
 	/*
-	@Override
-	public OclAny caseExpressionInOcl(ExpressionInOcl expressionInOcl) {
-
-		stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
-		OclAny result = super.caseExpressionInOcl(expressionInOcl);
-		popStackFrame();
-		stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
-		popStackFrame();
-		return result;
-	}
-	*/
+	 * @Override public OclAny caseExpressionInOcl(ExpressionInOcl
+	 * expressionInOcl) { stopOnBreakpoint("caseExpressionInOcl",
+	 * expressionInOcl); OclAny result =
+	 * super.caseExpressionInOcl(expressionInOcl); popStackFrame();
+	 * stopOnBreakpoint("caseExpressionInOcl", expressionInOcl); popStackFrame();
+	 * return result; }
+	 */
 
 	@Override
 	public OclAny caseIfExp(IfExp ifExp) {
@@ -470,6 +466,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
 		OclAny result = super.casePropertyCallExp(propertyCallExp);
 		popStackFrame();
+		myEnvironment.setVariableValue(propertyCallExp.getReferredProperty()
+				.getName(), result);
 		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
 		popStackFrame();
 		return result;

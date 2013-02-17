@@ -13,5 +13,22 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.interpreter;bundle-version="3.2.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.dresdenocl.debug,
- org.dresdenocl.debug.model
+Export-Package: org.dresdenocl.debug;
+  uses:="org.dresdenocl.interpreter.internal,
+   org.eclipse.core.runtime,
+   org.apache.log4j,
+   org.dresdenocl.pivotmodel,
+   org.dresdenocl.essentialocl.standardlibrary,
+   org.dresdenocl.modelinstance,
+   org.eclipse.emf.ecore,
+   org.dresdenocl.interpreter,
+   org.dresdenocl.essentialocl.expressions,
+   org.dresdenocl.debug.model,
+   org.osgi.framework,
+   org.dresdenocl.modelinstancetype.types",
+ org.dresdenocl.debug.model;
+  uses:="org.eclipse.debug.core,
+   org.dresdenocl.debug,
+   org.eclipse.core.resources,
+   org.dresdenocl.debug.events,
+   org.eclipse.debug.core.model"
