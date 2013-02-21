@@ -21,13 +21,13 @@ import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
 import org.dresdenocl.essentialocl.expressions.CollectionLiteralExp;
 import org.dresdenocl.essentialocl.expressions.EnumLiteralExp;
-import org.dresdenocl.essentialocl.expressions.ExpressionInOcl;
 import org.dresdenocl.essentialocl.expressions.IfExp;
 import org.dresdenocl.essentialocl.expressions.IntegerLiteralExp;
 import org.dresdenocl.essentialocl.expressions.InvalidLiteralExp;
 import org.dresdenocl.essentialocl.expressions.IterateExp;
 import org.dresdenocl.essentialocl.expressions.IteratorExp;
 import org.dresdenocl.essentialocl.expressions.LetExp;
+import org.dresdenocl.essentialocl.expressions.OclExpression;
 import org.dresdenocl.essentialocl.expressions.OperationCallExp;
 import org.dresdenocl.essentialocl.expressions.PropertyCallExp;
 import org.dresdenocl.essentialocl.expressions.RealLiteralExp;
@@ -39,13 +39,16 @@ import org.dresdenocl.essentialocl.expressions.UndefinedLiteralExp;
 import org.dresdenocl.essentialocl.expressions.Variable;
 import org.dresdenocl.essentialocl.expressions.VariableExp;
 import org.dresdenocl.essentialocl.standardlibrary.OclAny;
-import org.dresdenocl.interpreter.IInterpretationEnvironment;
+import org.dresdenocl.essentialocl.standardlibrary.OclCollection;
+import org.dresdenocl.essentialocl.standardlibrary.OclIterator;
 import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.interpreter.internal.OclInterpreter;
+import org.dresdenocl.language.ocl.resource.ocl.mopp.OclResource;
 import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 public class OclDebugger extends OclInterpreter implements IOclDebuggable {
@@ -62,7 +65,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private LinkedList<String> m_stackframes = new LinkedList<String>();
 	private int m_nextId = 0;
 	private String m_resourceURI;
-	private Map<EObject, Integer> m_currentMappings;
+	private Map<EObject, EObject> m_currentMappings;
 	private Map<String, Map<String, Object>> m_stackVariables =
 			new LinkedHashMap<String, Map<String, Object>>();
 
@@ -122,15 +125,27 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		}
 	}
 
+	protected int getLine(EObject element) {
+
+		EObject e = m_currentMappings.get(element);
+		OclResource resource = (OclResource) e.eResource();
+		int line = -1;
+		while (line == -1 && e != null) {
+			line = resource.getLocationMap().getLine(e);
+			e = e.eContainer();
+		}
+		return line;
+	}
+
 	public boolean isLineBreakPointElement(EObject element) {
 
 		if (!isDebugMode()) {
 			return false;
 		}
 
-		Integer line = m_currentMappings.get(element);
+		int line = getLine(element);
 		// check if the element is found in the map
-		if (line != null && line.intValue() != -1) {
+		if (line != -1) {
 			boolean result = m_lineBreakpointPositions.contains(line);
 			if (result == true) {
 				System.out.println(element + " is linebreakpoint at line " + line);
@@ -442,6 +457,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public OclAny caseLetExp(LetExp letExp) {
 
 		stopOnBreakpoint("caseLetExp", letExp);
+		// Map<String, Object> m = m_stackVariables.get(m_stackframes.getLast());
+		// m.put(letExp.getVariable().getName(), letExp.getVariable());
 		OclAny result = super.caseLetExp(letExp);
 		popStackFrame();
 		stopOnBreakpoint("caseLetExp", letExp);
@@ -596,24 +613,63 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
+	protected OclAny evaluateIterate(OclExpression bodyExpression,
+			OclCollection<OclAny> source, List<Variable> iteratorVariables,
+			OclIterator<OclAny> iterator, Variable resultVariable) {
+
+		Map<String, Object> m = m_stackVariables.get(m_stackframes.getLast());
+		m.put("source", source);
+		m.put("iterator", iterator);
+
+		OclAny result =
+				super.evaluateIterate(bodyExpression, source, iteratorVariables,
+						iterator, resultVariable);
+
+		return result;
+	}
+
+	protected OclResource getOclResource(URI uri) {
+
+		String platformString = uri.toPlatformString(true);
+		org.eclipse.core.resources.IResource member =
+				org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()
+						.findMember(platformString);
+		if (member instanceof OclResource) {
+			return (OclResource) member;
+		}
+		else
+			return null;
+	}
+
 	protected void pushStackFrame(String functionName, EObject parameter) {
 
-		Integer line = m_currentMappings.get(parameter);
+		int line = getLine(parameter);
 		String[] data = new String[6];
 		data[0] = functionName + " ( " + parameter.getClass().toString() + " )";
 		data[1] = getNextStackId();
 		data[2] = m_resourceURI;
-		data[3] = line != null ? line.toString() : "0";
-		// TODO Lars: Call the resource and get the appropriate start and end
+		data[3] = Integer.toString(line);
 		data[4] = "1";
 		data[5] = "2";
+
+		OclResource resource =
+				(OclResource) m_currentMappings.get(parameter).eResource();
+		if (resource != null) {
+			data[4] =
+					Integer.toString(resource.getLocationMap().getCharStart(
+							m_currentMappings.get(parameter)));
+			data[5] =
+					Integer.toString(resource.getLocationMap().getCharEnd(
+							m_currentMappings.get(parameter)));
+		}
+		// no else
 
 		String stackFrame = OclStringUtil.encode(',', data);
 		m_stackframes.push(stackFrame);
 		// store the mapping from current stackframe to variables
 		Map<String, Object> map =
 				new HashMap<String, Object>(myEnvironment.getStoredVariableMappings());
-		map.put(parameter.eClass().toString(), parameter.toString());
+		map.put(parameter.getClass().getName(), parameter.toString());
 		if (!myEnvironmentStack.isEmpty()) {
 			map.putAll(myEnvironmentStack.peek().getStoredVariableMappings());
 		}

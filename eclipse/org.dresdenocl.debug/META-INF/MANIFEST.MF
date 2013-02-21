@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.model;bundle-version="3.2.0",
  org.dresdenocl.modelinstance;bundle-version="3.2.0",
  org.dresdenocl.modelbus;bundle-version="3.2.0",
- org.dresdenocl.interpreter;bundle-version="3.2.0"
+ org.dresdenocl.interpreter;bundle-version="3.2.0",
+ org.dresdenocl.language.ocl.resource.ocl;bundle-version="3.2.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.dresdenocl.debug;

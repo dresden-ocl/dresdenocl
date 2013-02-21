@@ -5,9 +5,13 @@
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
             delegate="org.dresdenocl.debug.launch.OclLaunchConfigurationDelegate"
+            delegateDescription="This will run or debug .ocl files"
+            delegateName="OCL Launch Tooling"
             id="org.dresdenocl.debug.launch.launchConfigurationType"
             modes="run, debug"
-            name="Ocl Launch">
+            name="Ocl Launch"
+            sourceLocatorId="org.dresdenocl.debug.sourceLocator"
+            sourcePathComputerId="org.dresdenocl.debug.sourcePathComputer">
       </launchConfigurationType>
    </extension>
  <extension
@@ -31,5 +35,20 @@
           markerType="org.dresdenocl.debug.lineBreakpoint.marker"
           name="OCL Breakpoint">
     </breakpoint>
+ </extension>
+ <extension
+       point="org.eclipse.debug.core.sourcePathComputers">
+    <sourcePathComputer
+          class="org.dresdenocl.debug.model.OclSourcePathComputerDelegate"
+          id="org.dresdenocl.debug.sourcePathComputer">
+    </sourcePathComputer>
+ </extension>
+ <extension
+       point="org.eclipse.debug.core.sourceLocators">
+    <sourceLocator
+          class="org.dresdenocl.debug.model.OclSourceLocator"
+          id="org.dresdenocl.debug.sourceLocator"
+          name="OCL Source Locator">
+    </sourceLocator>
  </extension>
 </plugin>

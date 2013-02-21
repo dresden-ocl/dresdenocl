@@ -197,9 +197,9 @@ trait OclStaticSemantics extends OclLookUpFunctions
     allDefs
   }
   
-  def getAllEssentialOcl2CsMappings : java.util.Map[EObject, Integer] = {
+  def getAllEssentialOcl2CsMappings : java.util.Map[EObject, EObject] = {
   	
-  	val result = new java.util.IdentityHashMap[EObject, Integer]
+  	val result = new java.util.IdentityHashMap[EObject, EObject]
   	// eocl = essential ocl
   	// ecs = concrete syntax
   	for ( (eocl, ecs) <- allMappings ) {
@@ -211,6 +211,8 @@ trait OclStaticSemantics extends OclLookUpFunctions
           eobj
         }
       }
+      result.put( eocl, e )
+      /*
       var line : Integer = Integer.valueOf(-1)
       while( line == -1 && e != null ) {
         line = Integer.valueOf(iResource.getLocationMap.getLine( e ))
@@ -218,7 +220,9 @@ trait OclStaticSemantics extends OclLookUpFunctions
       }
       result.put( eocl, line )
   	}
+    */
   	// return result
+    }
   	result
   }
 }

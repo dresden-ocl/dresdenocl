@@ -182,4 +182,9 @@ public class OclStackFrame extends OclDebugElement implements IStackFrame {
 		return false;
 	}
 
+	public String getResourceURI() {
+
+		return m_resourceURI;
+	}
+
 }
