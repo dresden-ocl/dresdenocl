@@ -29,7 +29,7 @@ public class OclPair<A, B> {
 
 		if (that instanceof OclPair<?, ?>) {
 			OclPair<?, ?> pair = (OclPair<?, ?>) that;
-			return m_left.equals(pair.getLeft()) && m_right.equals(getRight());
+			return m_left.equals(pair.getLeft()) && m_right.equals(pair.getRight());
 		}
 		return false;
 	}
