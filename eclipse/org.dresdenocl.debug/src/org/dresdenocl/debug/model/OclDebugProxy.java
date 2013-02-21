@@ -128,7 +128,6 @@ public class OclDebugProxy {
 		return variables;
 	}
 
-	// TODO unterstand
 	public IVariable[] getVariables(String... requestedIDs) {
 
 		OclDebugMessage response =

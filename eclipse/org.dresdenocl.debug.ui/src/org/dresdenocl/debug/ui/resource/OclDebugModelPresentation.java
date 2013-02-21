@@ -1,7 +1,5 @@
 package org.dresdenocl.debug.ui.resource;
 
-import javax.swing.ImageIcon;
-
 import org.dresdenocl.debug.model.OclDebugValue;
 import org.dresdenocl.debug.ui.OclDebugUIPlugin;
 import org.dresdenocl.language.ocl.resource.ocl.ui.OclUIPlugin;
@@ -11,7 +9,6 @@ import org.eclipse.debug.core.model.ILineBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.ui.IDebugModelPresentation;
-import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.debug.ui.IInstructionPointerPresentation;
 import org.eclipse.debug.ui.IValueDetailListener;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -106,14 +103,11 @@ public class OclDebugModelPresentation implements IDebugModelPresentation,
 	@Override
 	public void computeDetail(IValue value, IValueDetailListener listener) {
 
-		System.out.println("OclDebugModelPresentation.computeDetail: value = "
-				+ value);
 		if (value instanceof OclDebugValue) {
 			OclDebugValue val = (OclDebugValue) value;
 			try {
 				listener.detailComputed(value, val.getValueString());
 			} catch (DebugException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

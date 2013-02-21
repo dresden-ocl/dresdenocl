@@ -356,8 +356,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           Empty
         else {
           namedElement match {
-            case v : Variable => {
-              val varExp = factory.createVariableExp(v)
+            case v2 : Variable => {
+              val varExp = factory.createVariableExp(v2)
               allMappings.put(varExp, v)
               Full(varExp)
             }
@@ -410,7 +410,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               val tle = ExpressionsFactory.INSTANCE.createTypeLiteralExp
               tle.setReferredType(t)
               tle.setOclLibrary(oclLibrary)
-              allMappings.put(tle, t)
+              allMappings.put(tle, v)
               Full(tle)
             }
           }

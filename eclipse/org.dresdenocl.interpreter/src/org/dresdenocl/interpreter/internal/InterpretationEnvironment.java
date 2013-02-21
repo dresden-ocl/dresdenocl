@@ -295,29 +295,26 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
 	 * (java.lang.String, org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
+	int duplicates = 0;
+
 	public void setVariableValue(String identifier, OclAny oclRoot) {
 
-		this.visibleVariableValues.put(identifier, oclRoot);
+		if (visibleVariableValues.containsKey(identifier)) {
+			this.visibleVariableValues.put(identifier + duplicates++, oclRoot);
+		}
+		else {
+			visibleVariableValues.put(identifier, oclRoot);
+		}
 	}
 
 	@Override
 	public Map<String, OclAny> getStoredVariableMappings() {
 
-		Map<String, OclAny> result = new LinkedHashMap<String, OclAny>();
+		Map<String, OclAny> result =
+				new LinkedHashMap<String, OclAny>(visibleVariableValues);
 		if (parentEnvironment != null) {
 			result.putAll(parentEnvironment.getStoredVariableMappings());
 		}
-		for (String k : visibleVariableValues.keySet()) {
-			if (result.containsKey(k)) {
-				result.put(Integer.toString(result.keySet().size()) + " " + k,
-						visibleVariableValues.get(k));
-			}
-			else {
-				result.put(k, visibleVariableValues.get(k));
-			}
-		}
-		System.out.println("getStoredVariableMappings size = "
-				+ result.keySet().size());
 		return result;
 	}
 

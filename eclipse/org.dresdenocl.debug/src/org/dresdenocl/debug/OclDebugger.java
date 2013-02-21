@@ -128,6 +128,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected int getLine(EObject element) {
 
 		EObject e = m_currentMappings.get(element);
+		if(e == null) {
+			System.out.println("NULL in getLine " + element);
+			if(!m_currentMappings.containsKey(element)) {
+				System.out.println("element not in current mappings!!!!");
+			}
+		}
 		OclResource resource = (OclResource) e.eResource();
 		int line = -1;
 		while (line == -1 && e != null) {
@@ -553,7 +559,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		popStackFrame();
 		return result;
 	}
-
+/*
 	@Override
 	public OclAny caseVariable(Variable variable) {
 
@@ -564,7 +570,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		popStackFrame();
 		return result;
 	}
-
+*/
 	/*
 	 * @Override public OclAny caseVariableExp(VariableExp variableExp) {
 	 * stopOnBreakpoint("caseVariableExp", variableExp); OclAny result =
@@ -576,10 +582,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	protected OclAny evaluateNonStaticOperation(OperationCallExp operationCallExp) {
 
-		stopOnBreakpoint("evaluateNonStaticOperation", operationCallExp);
+		stopOnBreakpoint("evaluateNonStaticOperation " + operationCallExp.getReferredOperation().getName(), operationCallExp);
 		OclAny result = super.evaluateNonStaticOperation(operationCallExp);
 		popStackFrame();
-		stopOnBreakpoint("evaluateNonStaticOperation", operationCallExp);
+		stopOnBreakpoint("evaluateNonStaticOperation " + operationCallExp.getReferredOperation().getName(), operationCallExp);
 		popStackFrame();
 		return result;
 	}
@@ -640,7 +646,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		int line = getLine(parameter);
 		String[] data = new String[6];
-		data[0] = functionName + " ( " + parameter.getClass().toString() + " )";
+		data[0] = functionName + " ( " + parameter.getClass().getSimpleName() + " )";
 		data[1] = getNextStackId();
 		data[2] = m_currentMappings.get(parameter).eResource().getURI().toString();
 		data[3] = Integer.toString(line);
@@ -664,7 +670,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// store the mapping from current stackframe to variables
 		Map<String, Object> map =
 				new HashMap<String, Object>(myEnvironment.getStoredVariableMappings());
-		map.put(parameter.getClass().getSimpleName(), parameter.toString());
+		//map.put(parameter.getClass().getSimpleName(), parameter.toString());
 		if (!myEnvironmentStack.isEmpty()) {
 			map.putAll(myEnvironmentStack.peek().getStoredVariableMappings());
 		}

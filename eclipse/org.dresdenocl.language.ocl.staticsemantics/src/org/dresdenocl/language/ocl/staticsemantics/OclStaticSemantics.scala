@@ -211,6 +211,7 @@ trait OclStaticSemantics extends OclLookUpFunctions
           eobj
         }
       }
+      if(e == null) println("getAllEssentialOcl2CsMappings" + eocl )
       result.put( eocl, e )
       /*
       var line : Integer = Integer.valueOf(-1)

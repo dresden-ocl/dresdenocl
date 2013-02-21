@@ -1138,9 +1138,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Cache is not efficient here. */
 		OclAny result =
-				myStandardLibraryFactory.createOclInteger(new Long(integerLiteralExp
-						.getIntegerSymbol()));
-
+				myStandardLibraryFactory.createOclInteger(Long
+						.valueOf(integerLiteralExp.getIntegerSymbol()));
+		/*
+		 * myStandardLibraryFactory.createOclInteger(new Long(integerLiteralExp
+		 * .getIntegerSymbol()));
+		 */
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Interpreted IntegerLiteral. Result = "
 					+ result);
@@ -1386,7 +1389,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		if (source instanceof OclCollection) {
 			sourceCollection = (OclCollection<OclAny>) source;
 		}
-
 		else {
 			sourceCollection = source.asSet();
 		}
@@ -1645,7 +1647,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 							msg);
 		}
 		// no else.
-
+		
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			this.popLogOffset();
