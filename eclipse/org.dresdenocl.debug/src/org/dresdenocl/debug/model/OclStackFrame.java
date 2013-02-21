@@ -143,7 +143,7 @@ public class OclStackFrame extends OclDebugElement implements IStackFrame {
 	@Override
 	public boolean hasVariables() throws DebugException {
 
-		return false;
+		return true;
 	}
 
 	@Override

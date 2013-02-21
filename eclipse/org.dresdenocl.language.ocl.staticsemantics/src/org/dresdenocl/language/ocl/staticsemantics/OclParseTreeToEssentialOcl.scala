@@ -722,8 +722,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
         ) yield {
           val ifExp = factory.createIfExp(conditionEOcl, thenEOcl, elseEOcl)
           allMappings.put(ifExp, i)
-          allMappings.put(thenEOcl, i)
-          allMappings.put(elseEOcl, i)
+          allMappings.put(thenEOcl, i.getThenBranch)
+          allMappings.put(elseEOcl, i.getElseBranch)
           ifExp          
         }
       }

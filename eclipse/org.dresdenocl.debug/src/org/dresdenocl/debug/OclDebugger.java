@@ -567,16 +567,13 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
-	@Override
-	public OclAny caseVariableExp(VariableExp variableExp) {
-
-		stopOnBreakpoint("caseVariableExp", variableExp);
-		OclAny result = super.caseVariableExp(variableExp);
-		popStackFrame();
-		stopOnBreakpoint("caseVariableExp", variableExp);
-		popStackFrame();
-		return result;
-	}
+	/*
+	 * @Override public OclAny caseVariableExp(VariableExp variableExp) {
+	 * stopOnBreakpoint("caseVariableExp", variableExp); OclAny result =
+	 * super.caseVariableExp(variableExp); popStackFrame();
+	 * stopOnBreakpoint("caseVariableExp", variableExp); popStackFrame(); return
+	 * result; }
+	 */
 
 	@Override
 	protected OclAny evaluateNonStaticOperation(OperationCallExp operationCallExp) {
@@ -647,7 +644,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		String[] data = new String[6];
 		data[0] = functionName + " ( " + parameter.getClass().toString() + " )";
 		data[1] = getNextStackId();
-		data[2] = m_resourceURI;
+		data[2] = m_currentMappings.get(parameter).eResource().getURI().toString();
 		data[3] = Integer.toString(line);
 		data[4] = "1";
 		data[5] = "2";
@@ -660,7 +657,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 							m_currentMappings.get(parameter)));
 			data[5] =
 					Integer.toString(resource.getLocationMap().getCharEnd(
-							m_currentMappings.get(parameter)));
+							m_currentMappings.get(parameter)) + 1);
 		}
 		// no else
 

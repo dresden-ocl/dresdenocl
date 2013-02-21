@@ -133,12 +133,10 @@
 			</action>
 	</editorContribution>
 </extension>
-<!--
  <extension point="org.eclipse.debug.ui.debugModelPresentations">
 	<debugModelPresentation
 		id="org.dresdenocl.debug.ocl"
 		class="org.dresdenocl.debug.ui.resource.OclDebugModelPresentation">
 	</debugModelPresentation>
  </extension>
- -->
 </plugin>
