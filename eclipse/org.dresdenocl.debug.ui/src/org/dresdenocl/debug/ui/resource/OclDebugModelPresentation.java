@@ -94,17 +94,12 @@ public class OclDebugModelPresentation implements IDebugModelPresentation,
 	@Override
 	public Image getImage(Object element) {
 
-		System.out.println("OclDebugModelPresentation.getImage: element = "
-				+ element);
 		return null;
 	}
 
 	@Override
 	public String getText(Object element) {
 
-		System.out.println("OclDebugModelPresentation.getText: element = "
-				+ element);
-		// return element.toString();
 		return null;
 	}
 

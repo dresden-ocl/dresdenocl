@@ -666,7 +666,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// store the mapping from current stackframe to variables
 		Map<String, Object> map =
 				new HashMap<String, Object>(myEnvironment.getStoredVariableMappings());
-		map.put(parameter.getClass().getName(), parameter.toString());
+		map.put(parameter.getClass().getSimpleName(), parameter.toString());
 		if (!myEnvironmentStack.isEmpty()) {
 			map.putAll(myEnvironmentStack.peek().getStoredVariableMappings());
 		}
