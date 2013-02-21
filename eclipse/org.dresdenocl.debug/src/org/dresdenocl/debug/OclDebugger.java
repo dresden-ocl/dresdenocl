@@ -466,16 +466,14 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
-	@Override
-	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
-
-		stopOnBreakpoint("caseOperationCallExp", operationCallExp);
-		OclAny result = super.caseOperationCallExp(operationCallExp);
-		popStackFrame();
-		stopOnBreakpoint("caseOperationCallExp", operationCallExp);
-		popStackFrame();
-		return result;
-	}
+	/*
+	 * @Override public OclAny caseOperationCallExp(OperationCallExp
+	 * operationCallExp) { stopOnBreakpoint("caseOperationCallExp",
+	 * operationCallExp); OclAny result =
+	 * super.caseOperationCallExp(operationCallExp); popStackFrame();
+	 * stopOnBreakpoint("caseOperationCallExp", operationCallExp);
+	 * popStackFrame(); return result; }
+	 */
 
 	@Override
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {

@@ -149,7 +149,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	protected Stack<IInterpretationEnvironment> myEnvironmentStack =
 			new Stack<IInterpretationEnvironment>();
-	
+
 	/**
 	 * <p>
 	 * Instantiates a new {@link OclInterpreter}.
@@ -160,7 +160,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 */
 	public OclInterpreter(IModelInstance aModelInstance) {
 
-		this.myEnvironment.setModelInstance(aModelInstance);
+		myEnvironment.setModelInstance(aModelInstance);
 	}
 
 	/*
@@ -173,7 +173,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			IModelInstanceElement modelInstanceElement) {
 
 		System.out.println("OclInterpreter interpretConstraint()");
-		
+
 		if (constraint == null)
 			throw new IllegalArgumentException(
 					"Parameter 'constraint' must not be null.");
@@ -418,12 +418,12 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		/* Set the result variable to null or its result. */
 		if (resultValue != null) {
 			OclAny oclResult = myStandardLibraryFactory.createOclAny(resultValue);
-			this.myEnvironment.setVariableValue(RESULT_VARIABLE_NAME, oclResult);
+			myEnvironment.setVariableValue(RESULT_VARIABLE_NAME, oclResult);
 		}
 
 		else {
 			/* Reset result variable. */
-			this.myEnvironment.setVariableValue(RESULT_VARIABLE_NAME, null);
+			myEnvironment.deleteVariableValue(RESULT_VARIABLE_NAME);
 		}
 
 		/* Only interpret postconditions defined on the given operation. */
@@ -449,7 +449,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// end for.
 
 		/* Reset result variable. */
-		this.myEnvironment.setVariableValue(RESULT_VARIABLE_NAME, null);
+		myEnvironment.deleteVariableValue(RESULT_VARIABLE_NAME);
 
 		/* Probably log the exit of this method. */
 		if (LOGGER.isDebugEnabled()) {
@@ -480,16 +480,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		this.isPreparationRun = false;
 
 		/* Add self variable to environment. */
-		this.myEnvironment.setVariableValue(IOclInterpreter.SELF_VARIABLE_NAME,
-				context);
+		myEnvironment.setVariableValue(IOclInterpreter.SELF_VARIABLE_NAME, context);
 
 		/* Compute the result. */
 		EObject constraintSpecification = (EObject) constraint.getSpecification();
 		OclAny result = this.doSwitch((EObject) constraintSpecification);
 
 		/* Reset the self variable. */
-		this.myEnvironment.setVariableValue(IOclInterpreter.SELF_VARIABLE_NAME,
-				null);
+		myEnvironment.deleteVariableValue(IOclInterpreter.SELF_VARIABLE_NAME);
 
 		return result;
 	}
@@ -607,7 +605,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 		/* Probably remove parameters from the environment. */
 		for (Variable aVariable : oclExpression.getParameter()) {
-			this.myEnvironment.setVariableValue(aVariable.getName(), null);
+			myEnvironment.deleteVariableValue(aVariable.getName());
 		}
 		// end for.
 	}
@@ -681,14 +679,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 
 				/* Add self variable to environment. */
-				this.myEnvironment.setVariableValue(SELF_VARIABLE_NAME, oclModelObject);
+				myEnvironment.setVariableValue(SELF_VARIABLE_NAME, oclModelObject);
 
 				/* Prepare the constraintSpecification. */
 				constraintSpecification = (EObject) aConstraint.getSpecification();
 				this.doSwitch((EObject) constraintSpecification);
 
 				/* Remove the self variable from the environment again. */
-				this.myEnvironment.setVariableValue(SELF_VARIABLE_NAME, null);
+				myEnvironment.deleteVariableValue(SELF_VARIABLE_NAME);
 
 				/* Remove the parameters again. */
 				this.isPreparationRun = false;
@@ -905,7 +903,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 *          The {@link Type} of the collection which shall be returned.
 	 * @return Returns a given List as an instance of a given collection type.
 	 */
-	//TODO Lars: ?
+	// TODO Lars: ?
 	protected OclAny adaptResultListAsCollection(List<OclAny> resultList,
 			Type resultType) {
 
@@ -1133,7 +1131,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			LOGGER.debug(this.logOffset + "Interpret IntegerLiteral.");
 		}
 		// no else.
-		
+
 		UUID guid = null;
 		/* Probably trace the entry into this method */
 		guid = increaseTracerTreeDepth();
@@ -1235,8 +1233,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		this.pushLocalEnvironment();
 
 		/* Reset the accumulator variable in the environment. */
-		myEnvironment.setVariableValue(iterateExp.getResult().getQualifiedName(),
-				null);
+		myEnvironment
+				.deleteVariableValue(iterateExp.getResult().getQualifiedName());
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug(this.logOffset + "Evaluate Body ...");
@@ -1720,7 +1718,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				bodyResult = (OclBoolean) doSwitch((EObject) body);
 
 				/* Remove the variable from the environment again. */
-				this.myEnvironment.setVariableValue(iterator.getQualifiedName(), null);
+				myEnvironment.deleteVariableValue(iterator.getQualifiedName());
 
 				/* Probably result in invalid. */
 				if (result == null && bodyResult.oclIsInvalid().isTrue()) {
@@ -1818,7 +1816,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 
 			while (elementsToVisit.size() > 0) {
 				OclAny element = elementsToVisit.pollFirst();
-				//OclAny element = elementsToVisit.remove(0);
+				// OclAny element = elementsToVisit.remove(0);
 
 				/* Compute relation for one element. */
 				myEnvironment.setVariableValue(iterator.getQualifiedName(), element);
@@ -2102,8 +2100,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 
 				/* Remove the variable from the environment again. */
-				this.myEnvironment.setVariableValue(
-						iterators.get(0).getQualifiedName(), null);
+				myEnvironment.deleteVariableValue(iterators.get(0).getQualifiedName());
 
 				result = result.or(bodyResult);
 
@@ -2200,14 +2197,14 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				}
 
 				/* Remove the variable from the environment again. */
-				this.myEnvironment.setVariableValue(
-						iterators.get(0).getQualifiedName(), null);
+				this.myEnvironment.deleteVariableValue(iterators.get(0)
+						.getQualifiedName());
 
 				result = result.and(bodyResult);
 
 				/* Probably break iteration. */
-				if (!result.oclIsInvalid().isTrue() && !result.oclIsUndefined().isTrue()
-						&& !result.isTrue()) {
+				if (!result.oclIsInvalid().isTrue()
+						&& !result.oclIsUndefined().isTrue() && !result.isTrue()) {
 					/*
 					 * Do not break on invalid or undefined. Probably a false result
 					 * follows.
@@ -2258,8 +2255,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 			result = myStandardLibraryFactory.createOclBoolean(true);
 
 			Set<OclAny> resultList = new HashSet<OclAny>();
-			//List<OclAny> resultList;
-			//resultList = new LinkedList<OclAny>();
+			// List<OclAny> resultList;
+			// resultList = new LinkedList<OclAny>();
 
 			/* Iterate over the collection and check if every element is unique. */
 			while (sourceIt.hasNext().isTrue()) {
@@ -2277,7 +2274,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				bodyResult = doSwitch((EObject) body);
 
 				/* Remove the variable from the environment again. */
-				this.myEnvironment.setVariableValue(iterator.getQualifiedName(), null);
+				myEnvironment.deleteVariableValue(iterator.getQualifiedName());
 
 				/* Check if the result is invalid. */
 				if (bodyResult.oclIsInvalid().isTrue()) {
@@ -2376,7 +2373,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				bodyResult = (OclBoolean) doSwitch((EObject) body);
 
 				/* Remove the variable from the environment again. */
-				this.myEnvironment.setVariableValue(iterator.getQualifiedName(), null);
+				myEnvironment.deleteVariableValue(iterator.getQualifiedName());
 
 				/* Register if body is invalid. */
 				if (failedBodyResult == null && bodyResult.oclIsInvalid().isTrue()) {
@@ -2935,7 +2932,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 		// no else.
 
 		OclAny source = doSwitch((EObject) operationCallExp.getSource());
-
+		myEnvironment.setVariableValue("source", source);
 		/*
 		 * Probably get the result from a special operation like @pre or oclIsNew.
 		 */
@@ -2989,7 +2986,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 								oclAnyParameters.get(aParameterName));
 					}
 					// end for.
-
 					/* Interpret the OCL-defined semantic. */
 					result = this.interpretConstraint(operationSemanticInOcl, source);
 
@@ -3013,12 +3009,11 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 					index++;
 				}
 				// end for.
-
 				result = source.invokeOperation(referredOperation, parameterValues);
 			}
 		}
 		// end else.
-
+		myEnvironment.deleteVariableValue("source");
 		return result;
 	}
 

@@ -43,6 +43,7 @@ import org.dresdenocl.pivotmodel.Type;
  * </p>
  * 
  * @author Claas Wilke (first version by Ronny Brandt).
+ * @author Lars Schuetze
  */
 public class InterpretationEnvironment implements IInterpretationEnvironment {
 
@@ -318,5 +319,18 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 		System.out.println("getStoredVariableMappings size = "
 				+ result.keySet().size());
 		return result;
+	}
+
+	@Override
+	public void deleteVariableValue(String identifier) {
+
+		if (visibleVariableValues.containsKey(identifier)) {
+			visibleVariableValues.remove(identifier);
+		}
+		else {
+			if (parentEnvironment != null) {
+				parentEnvironment.deleteVariableValue(identifier);
+			}
+		}
 	}
 }

@@ -449,7 +449,7 @@ public class EssentialOclFactory {
 		expressionInOcl.setContext(context);
 
 		if (StringUtils.isNotEmpty(body)) {
-			expressionInOcl.setBody(body);
+			expressionInOcl.setBody(body.replaceAll("\r\n", " "));
 		}
 
 		if (result != null) {

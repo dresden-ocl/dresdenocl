@@ -724,7 +724,7 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
           allMappings.put(ifExp, i)
           allMappings.put(thenEOcl, i.getThenBranch)
           allMappings.put(elseEOcl, i.getElseBranch)
-          ifExp          
+          ifExp        
         }
       }
 
@@ -757,7 +757,6 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               exp.setReferredEnumLiteral(e)
               exp.setOclLibrary(oclLibrary)
               allMappings.put(exp, e)
-              println ( "EnumerationLiteral : " + iResource.getLocationMap.getLine( enumLitOrProp ) )
               Full(exp)
             }
             case p : Property => {
@@ -790,7 +789,6 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               oce.setReferredOperation(operation)
               oce.getArgument.addAll(argumentsEOcl)
               oce.setOclLibrary(oclLibrary)
-              println ( "StaticOperationCallExpCS :" + iResource.getLocationMap.getLine( s ) )
               allMappings.put(oce, s)
               Full(oce)
             }
@@ -831,8 +829,11 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
   protected val computeLiteralPart : Attributable ==> Box[CollectionLiteralPart] = {
     attr {
       case c : CollectionLiteralPartsOclExpCS => {
-        (computeOclExpression(c.getOclExpression)).flatMap { oclExpressionEOcl =>
-          Full(factory.createCollectionItem(oclExpressionEOcl))
+        (computeOclExpression(c.getOclExpression)).flatMap { oclExpressionEOcl => {
+            val ci = factory.createCollectionItem(oclExpressionEOcl)
+            allMappings.put(ci, c)
+            Full(ci)
+          }
         }
       }
       case c : CollectionRangeCS => {
@@ -849,8 +850,11 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
                   yieldFailure("Collection Ranges can only contain Integers. Found: " + toEOcl.getType.getName, c.getTo)
                 case ok => Full(true)
               }
-              ok_?.flatMap { _ =>
-                Full(factory.createCollectionRange(fromEOcl, toEOcl))
+              ok_?.flatMap { _ => {
+                  val cr = factory.createCollectionRange(fromEOcl, toEOcl)
+                  allMappings.put(cr, c)
+                  Full(cr)
+                }
               }
             }
           }
