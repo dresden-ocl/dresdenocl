@@ -187,4 +187,28 @@ public class OclStackFrame extends OclDebugElement implements IStackFrame {
 		return m_resourceURI;
 	}
 
+	@Override
+	public boolean equals(Object that) {
+
+		if (that == null) {
+			return false;
+		}
+		if (that instanceof OclStackFrame) {
+			OclStackFrame thatFrame = (OclStackFrame) that;
+			try {
+				return m_name.equals(thatFrame.getName())
+						&& m_line == thatFrame.getLineNumber()
+						&& m_charStart == thatFrame.getCharStart()
+						&& m_charEnd == thatFrame.getCharEnd();
+			} catch (DebugException e) {
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+
+		return 31 + (m_charEnd + m_charStart + m_line) * 7;
+	}
 }

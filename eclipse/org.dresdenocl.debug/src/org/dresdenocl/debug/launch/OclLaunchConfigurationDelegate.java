@@ -11,6 +11,7 @@ import org.dresdenocl.debug.OclDebugPlugin;
 import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.debug.model.OclDebugProcess;
 import org.dresdenocl.debug.model.OclDebugTarget;
+import org.dresdenocl.debug.model.OclDebuggerJob;
 import org.dresdenocl.debug.model.OclDebuggerListener;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -91,7 +92,6 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 
 					interpreter.setDebugMode(true);
 					interpreter.setEventPort(eventPort);
-
 					for (Constraint c : constraints) {
 						if (c.hasStaticContext()) {
 							interpreter.interpretConstraint(c, null);
@@ -101,11 +101,8 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 								interpreter.interpretConstraint(c, mie);
 							}
 						}
-						// end else
 					}
-					// end for
 				}
-
 			});
 			interpreterThread.start();
 

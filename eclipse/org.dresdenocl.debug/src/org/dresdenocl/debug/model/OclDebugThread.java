@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.dresdenocl.debug.events.IOclDebugEventListener;
 import org.dresdenocl.debug.util.OclStringUtil;
-import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;

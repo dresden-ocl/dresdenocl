@@ -365,4 +365,24 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 
 		return m_launch;
 	}
+
+	@Override
+	public boolean equals(Object that) {
+
+		if (that == null) {
+			return false;
+		}
+		if (that instanceof OclDebugTarget) {
+			OclDebugTarget thatTarget = (OclDebugTarget) that;
+			return m_process.equals(thatTarget.getProcess())
+					&& m_launch.equals(thatTarget.getLaunch())
+					&& m_thread.equals(thatTarget.getThread());
+		}
+		return false;
+	}
+	
+	@Override
+	public IDebugTarget getDebugTarget() {
+		return m_debugTarget;
+	}
 }

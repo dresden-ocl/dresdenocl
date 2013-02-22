@@ -59,7 +59,7 @@ public class OclDebugModelPresentation implements IDebugModelPresentation,
 
 	@Override
 	public IEditorInput getEditorInput(Object element) {
-
+		System.out.println(element);
 		if (element instanceof IFile) {
 			return new FileEditorInput((IFile) element);
 		}
