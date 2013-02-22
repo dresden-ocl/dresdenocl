@@ -126,7 +126,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected int getLine(EObject element) {
 
 		EObject e = m_currentMappings.get(element);
-		if(element instanceof IntegerLiteralExp) {
+		if (element instanceof IntegerLiteralExp) {
 			System.out.println("IntegerLiteralExp = " + element + "mapped to " + e);
 		}
 		OclResource resource = (OclResource) e.eResource();
@@ -462,14 +462,18 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return result;
 	}
 
-	/*
-	 * @Override public OclAny caseOperationCallExp(OperationCallExp
-	 * operationCallExp) { stopOnBreakpoint("caseOperationCallExp",
-	 * operationCallExp); OclAny result =
-	 * super.caseOperationCallExp(operationCallExp); popStackFrame();
-	 * stopOnBreakpoint("caseOperationCallExp", operationCallExp);
-	 * popStackFrame(); return result; }
-	 */
+	@Override
+	public OclAny caseOperationCallExp(OperationCallExp operationCallExp) {
+
+		OclAny result = super.caseOperationCallExp(operationCallExp);
+		myEnvironment.setVariableValue("result of "
+				+ operationCallExp.getReferredOperation().getName(), result);
+		stopOnBreakpoint("caseOperationCallExp", operationCallExp);
+		popStackFrame();
+		myEnvironment.deleteVariableValue("result of "
+				+ operationCallExp.getReferredOperation().getName());
+		return result;
+	}
 
 	@Override
 	public OclAny casePropertyCallExp(PropertyCallExp propertyCallExp) {
@@ -477,8 +481,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
 		OclAny result = super.casePropertyCallExp(propertyCallExp);
 		popStackFrame();
-		myEnvironment.setVariableValue(propertyCallExp.getReferredProperty()
-				.getName(), result);
 		stopOnBreakpoint("casePropertyCallExp", propertyCallExp);
 		popStackFrame();
 		return result;
@@ -597,8 +599,16 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		LinkedHashMap<String, OclAny> result =
 				super.computeParameters(anOperationCallExp, oclDefinedOperation);
 		popStackFrame();
+		int i = 0;
+		for (String paramKey : result.keySet()) {
+			myEnvironment.setVariableValue("param" + ++i, result.get(paramKey));
+		}
 		stopOnBreakpoint("computeParameters", anOperationCallExp);
 		popStackFrame();
+		i = 0;
+		while (i < result.keySet().size()) {
+			myEnvironment.deleteVariableValue("param" + ++i);
+		}
 		return result;
 	}
 
@@ -660,9 +670,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		Map<String, Object> map =
 				new HashMap<String, Object>(myEnvironment.getStoredVariableMappings());
 		// map.put(parameter.getClass().getSimpleName(), parameter.toString());
-		if (!myEnvironmentStack.isEmpty()) {
-			map.putAll(myEnvironmentStack.peek().getStoredVariableMappings());
-		}
+		/*
+		 * if (!myEnvironmentStack.isEmpty()) {
+		 * map.putAll(myEnvironmentStack.peek().getStoredVariableMappings()); }
+		 */
 		m_stackVariables.put(data[1], map);
 	}
 
