@@ -7,6 +7,7 @@ public class OclSourceLookupParticipant extends AbstractSourceLookupParticipant 
 
 	@Override
 	public String getSourceName(Object object) throws CoreException {
+
 		if (object instanceof OclStackFrame) {
 			OclStackFrame frame = (OclStackFrame) object;
 			return frame.getResourceURI();

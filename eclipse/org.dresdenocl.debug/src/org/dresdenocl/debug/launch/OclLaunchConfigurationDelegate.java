@@ -11,7 +11,6 @@ import org.dresdenocl.debug.OclDebugPlugin;
 import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.debug.model.OclDebugProcess;
 import org.dresdenocl.debug.model.OclDebugTarget;
-import org.dresdenocl.debug.model.OclDebuggerJob;
 import org.dresdenocl.debug.model.OclDebuggerListener;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;

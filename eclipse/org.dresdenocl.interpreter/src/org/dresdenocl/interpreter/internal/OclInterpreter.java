@@ -865,7 +865,8 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 				while (currentElement.isLessEqual(lastElement).isTrue()) {
 					resultList.add(currentElement);
 					currentElement =
-							currentElement.add(myStandardLibraryFactory.createOclInteger(1L));
+							currentElement.add(myStandardLibraryFactory.createOclInteger(Long
+									.valueOf(1l)));
 				}
 				// end while.
 			}
@@ -903,7 +904,6 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 	 *          The {@link Type} of the collection which shall be returned.
 	 * @return Returns a given List as an instance of a given collection type.
 	 */
-	// TODO Lars: ?
 	protected OclAny adaptResultListAsCollection(List<OclAny> resultList,
 			Type resultType) {
 
@@ -1647,7 +1647,7 @@ public class OclInterpreter extends ExpressionsSwitch<OclAny> implements
 							msg);
 		}
 		// no else.
-		
+
 		/* Probably log the entry of this method. */
 		if (LOGGER.isDebugEnabled()) {
 			this.popLogOffset();

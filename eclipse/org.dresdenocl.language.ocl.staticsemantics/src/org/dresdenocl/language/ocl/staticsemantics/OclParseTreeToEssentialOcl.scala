@@ -306,8 +306,8 @@ trait OclParseTreeToEssentialOcl { selfType : OclStaticSemantics =>
               result.withAtPre
             }
             else {
-              allMappings.put(sourceEOcl, o)
-              allMappings.put(targetEOcl, o)
+              //allMappings.put(sourceEOcl, o)
+              //allMappings.put(targetEOcl, o)
               allMappings.put(result, o)
               result
             }
