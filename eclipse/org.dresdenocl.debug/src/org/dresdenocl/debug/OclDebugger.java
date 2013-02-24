@@ -126,9 +126,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected int getLine(EObject element) {
 
 		EObject e = m_currentMappings.get(element);
-		if (element instanceof IntegerLiteralExp) {
-			System.out.println("IntegerLiteralExp = " + element + "mapped to " + e);
-		}
 		OclResource resource = (OclResource) e.eResource();
 		int line = -1;
 		while (line == -1 && e != null) {
@@ -668,7 +665,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		m_stackframes.push(stackFrame);
 		// store the mapping from current stackframe to variables
 		Map<String, Object> map =
-				new HashMap<String, Object>(myEnvironment.getStoredVariableMappings());
+				new HashMap<String, Object>(myEnvironment.getVariableValues());
 		// map.put(parameter.getClass().getSimpleName(), parameter.toString());
 		/*
 		 * if (!myEnvironmentStack.isEmpty()) {

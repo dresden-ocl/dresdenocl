@@ -19,7 +19,6 @@ with DresdenOCL. If not, see <http://www.gnu.org/licenses/>.
 package org.dresdenocl.interpreter.internal;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -43,7 +42,6 @@ import org.dresdenocl.pivotmodel.Type;
  * </p>
  * 
  * @author Claas Wilke (first version by Ronny Brandt).
- * @author Lars Schuetze
  */
 public class InterpretationEnvironment implements IInterpretationEnvironment {
 
@@ -106,7 +104,7 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 
 		/* Probably delegate to parent environment. */
 		if (this.parentEnvironment != null) {
-			this.parentEnvironment.getAtPreValue(operationCallExp);
+			result = this.parentEnvironment.getAtPreValue(operationCallExp);
 		}
 
 		else {
@@ -295,39 +293,24 @@ public class InterpretationEnvironment implements IInterpretationEnvironment {
 	 * @see org.dresdenocl.interpreter.IInterpretationEnvironment#setVariableValue
 	 * (java.lang.String, org.dresdenocl.essentialocl.standardlibrary.OclAny)
 	 */
-	int duplicates = 0;
-
 	public void setVariableValue(String identifier, OclAny oclRoot) {
 
-		if (visibleVariableValues.containsKey(identifier)) {
-			this.visibleVariableValues.put(identifier + duplicates++, oclRoot);
-		}
-		else {
-			visibleVariableValues.put(identifier, oclRoot);
-		}
+		this.visibleVariableValues.put(identifier, oclRoot);
 	}
 
-	@Override
-	public Map<String, OclAny> getStoredVariableMappings() {
-
-		Map<String, OclAny> result =
-				new LinkedHashMap<String, OclAny>(visibleVariableValues);
-		if (parentEnvironment != null) {
-			result.putAll(parentEnvironment.getStoredVariableMappings());
-		}
-		return result;
-	}
-
-	@Override
 	public void deleteVariableValue(String identifier) {
 
-		if (visibleVariableValues.containsKey(identifier)) {
-			visibleVariableValues.remove(identifier);
+		visibleVariableValues.remove(identifier);
+	}
+
+	@Override
+	public Map<String, OclAny> getVariableValues() {
+
+		Map<String, OclAny> result = new HashMap<String, OclAny>(visibleVariableValues);
+	
+		if(parentEnvironment != null) {
+			result.putAll(parentEnvironment.getVariableValues());
 		}
-		else {
-			if (parentEnvironment != null) {
-				parentEnvironment.deleteVariableValue(identifier);
-			}
-		}
+		return result;
 	}
 }

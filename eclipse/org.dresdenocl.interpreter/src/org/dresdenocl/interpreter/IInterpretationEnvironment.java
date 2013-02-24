@@ -157,7 +157,7 @@ public interface IInterpretationEnvironment extends Cloneable {
 	 */
 	void setVariableValue(String identifier, OclAny value);
 	
-	Map<String, OclAny> getStoredVariableMappings();
-	
 	void deleteVariableValue(String identifier);
+	
+	Map<String, OclAny> getVariableValues();
 }

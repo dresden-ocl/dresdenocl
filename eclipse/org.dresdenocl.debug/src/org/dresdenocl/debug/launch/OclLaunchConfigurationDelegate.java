@@ -18,6 +18,10 @@ import org.dresdenocl.modelbus.ModelBusPlugin;
 import org.dresdenocl.modelinstance.IModelInstance;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceElement;
 import org.dresdenocl.pivotmodel.Constraint;
+import org.dresdenocl.pivotmodel.ConstraintKind;
+import org.dresdenocl.pivotmodel.NamedElement;
+import org.dresdenocl.pivotmodel.Operation;
+import org.dresdenocl.pivotmodel.Type;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -81,7 +85,6 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 				// unable to find free port, abort
 				abort("Unable to find free port.", null);
 			}
-			// TODO Lars
 			// 1. run the interpreter in debug mode in own thread
 			final IOclDebuggable interpreter = new OclDebugger(minstance);
 			Thread interpreterThread = new Thread(new Runnable() {
@@ -92,6 +95,27 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 					interpreter.setDebugMode(true);
 					interpreter.setEventPort(eventPort);
 					for (Constraint c : constraints) {
+						if (c.getKind().equals(ConstraintKind.POSTCONDITION)) {
+							NamedElement constrainedElement =
+									(NamedElement) c.getConstrainedElement().get(0);
+							if (constrainedElement instanceof Operation) {
+								for (IModelInstanceElement mie : miElements) {
+									Type type = (Type) constrainedElement.getOwner();
+									if (mie.isKindOf(type)) {
+										ArrayList<Constraint> postConditions =
+												new ArrayList<Constraint>();
+										postConditions.add(c);
+										interpreter.preparePostConditions(mie,
+												(Operation) constrainedElement,
+												new IModelInstanceElement[0], postConditions);
+									}
+									// no else
+								}
+								// end for
+							}
+							// no else
+						}
+						// no else
 						if (c.hasStaticContext()) {
 							interpreter.interpretConstraint(c, null);
 						}
@@ -99,8 +123,11 @@ public class OclLaunchConfigurationDelegate extends LaunchConfigurationDelegate 
 							for (IModelInstanceElement mie : miElements) {
 								interpreter.interpretConstraint(c, mie);
 							}
+							// end for
 						}
+						// end else
 					}
+					// end for
 				}
 			});
 			interpreterThread.start();

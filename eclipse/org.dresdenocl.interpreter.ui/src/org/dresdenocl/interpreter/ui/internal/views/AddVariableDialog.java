@@ -262,8 +262,7 @@ public class AddVariableDialog extends Dialog implements SelectionListener {
 					try {
 						imiValue =
 								BasisJavaModelInstanceFactory
-										.createModelInstanceInteger(new Long(Integer
-												.parseInt(value)));
+										.createModelInstanceInteger(Long.parseLong(value));
 					}
 
 					catch (NumberFormatException e) {
