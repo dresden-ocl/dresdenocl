@@ -246,7 +246,7 @@ public class OclDebugTarget extends OclDebugElement implements IDebugTarget,
 				if ((breakpoint.isEnabled() && getBreakpointManager().isEnabled())
 						|| !breakpoint.isRegistered()) {
 					OclLineBreakpoint lineBreakpoint = (OclLineBreakpoint) breakpoint;
-					lineBreakpoint.install(this);
+					lineBreakpoint.remove(this);
 				}
 				// no else
 			} catch (DebugException e) {

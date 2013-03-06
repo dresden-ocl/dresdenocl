@@ -8,14 +8,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.dresdenocl.debug.model.EOclDebugMessageType;
 import org.dresdenocl.debug.model.OclDebugCommunicationHelper;
 import org.dresdenocl.debug.model.OclDebugMessage;
+import org.dresdenocl.debug.util.EStepMode;
 import org.dresdenocl.debug.util.OclStringUtil;
 import org.dresdenocl.essentialocl.expressions.BooleanLiteralExp;
 import org.dresdenocl.essentialocl.expressions.CollectionItem;
@@ -60,12 +63,15 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private PrintStream m_outputStream;
 	private OclDebugCommunicationHelper m_communicationHelper =
 			new OclDebugCommunicationHelper();
-	private List<Integer> m_lineBreakpointPositions = new LinkedList<Integer>();
+	private Set<Integer> m_lineBreakpointPositions = new HashSet<Integer>();
 	private LinkedList<String> m_stackframes = new LinkedList<String>();
 	private int m_nextId = 0;
 	private Map<EObject, EObject> m_currentMappings;
 	private Map<String, Map<String, Object>> m_stackVariables =
 			new LinkedHashMap<String, Map<String, Object>>();
+	private Integer m_lastPassedBreakpoint = Integer.valueOf(-1);
+	private Set<Integer> m_invalidBreakpoints = new HashSet<Integer>();
+	private EStepMode m_stepMode = EStepMode.NORMAL;
 
 	public OclDebugger(IModelInstance aModelInstance) {
 
@@ -79,6 +85,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		startupAndWait();
 		// m_stackVariables.clear();
 		// m_stackframes.clear();
+		m_invalidBreakpoints.clear();
+		m_lastPassedBreakpoint = Integer.valueOf(-1);
 
 		IInterpretationResult result =
 				super.interpretConstraint(constraint, modelInstanceElement);
@@ -123,15 +131,24 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		}
 	}
 
+	/**
+	 * Computes the line of the EObject in the containing resource.
+	 * 
+	 * @param element
+	 *          the EObject element
+	 * @return the line element was defined in the resource
+	 */
 	protected int getLine(EObject element) {
 
 		EObject e = m_currentMappings.get(element);
+		if (e == null)
+			System.out.println("getLine NULL BEI " + element);
 		OclResource resource = (OclResource) e.eResource();
-		int line = -1;
-		while (line == -1 && e != null) {
+		int line;
+		do {
 			line = resource.getLocationMap().getLine(e);
 			e = e.eContainer();
-		}
+		} while (line == -1 && e != null);
 		return line;
 	}
 
@@ -141,20 +158,25 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			return false;
 		}
 
-		int line = getLine(element);
-		// check if the element is found in the map
-		if (line != -1) {
-			boolean result = m_lineBreakpointPositions.contains(line);
-			if (result == true) {
-				System.out.println(element + " is linebreakpoint at line " + line);
+		// If normal mode : check if we have a breakpoint
+		if (m_stepMode.equals(EStepMode.NORMAL)) {
+			Integer line = Integer.valueOf(getLine(element));
+			// check if the element is found in the map
+			boolean result = false;
+
+			if (line != null && line.intValue() != -1) {
+				result =
+						m_lineBreakpointPositions.contains(line)
+								&& !m_invalidBreakpoints.contains(line);
 			}
+			// no else
 			return result;
 		}
-		else {
-			System.out
-					.println("OclInterpreter.isLineBreakpointElement : element not found ( "
-							+ element + " )");
+		else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
+			m_stepMode = EStepMode.NORMAL;
+			return true;
 		}
+		// no else
 		return false;
 	}
 
@@ -162,6 +184,7 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		pushStackFrame(methodName, parameter);
 		if (isLineBreakPointElement(parameter)) {
+			m_lastPassedBreakpoint = Integer.valueOf(getLine(parameter));
 			setSuspend(true);
 		}
 		waitIfSuspended();
@@ -269,35 +292,43 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public void terminate() {
 
 		System.out.println("OclInterpreter terminate()");
+		setTerminate(true);
 		sendEvent(EOclDebugMessageType.TERMINATED, false);
 		stopEventSocket();
-		setTerminate(true);
 	}
 
 	@Override
-	public void resume() {
+	public synchronized void resume() {
 
 		System.out.println("OclInterpreter resume()");
+		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
+		m_stepMode = EStepMode.NORMAL;
 		setSuspend(false);
 		sendEvent(EOclDebugMessageType.RESUMED, true);
 	}
 
 	@Override
-	public void stepOver() {
+	public synchronized void stepOver() {
 
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void stepInto() {
+	public synchronized void stepInto() {
 
-		// TODO Auto-generated method stub
-
+		// make the last passed breakpoint (the one we've been suspending, thought)
+		// invalid vor this model instance element
+		// and stop at the next line
+		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
+		m_stepMode = EStepMode.STEP_INTO;
+		System.out.println("OclInterpreter stepInto()");
+		setSuspend(false);
+		sendEvent(EOclDebugMessageType.RESUMED, true);
 	}
 
 	@Override
-	public void stepReturn() {
+	public synchronized void stepReturn() {
 
 		// TODO Auto-generated method stub
 
@@ -306,13 +337,18 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public void addLineBreakPoint(String location, int line) {
 
-		m_lineBreakpointPositions.add(Integer.valueOf(line));
+		Integer i = Integer.valueOf(line);
+		m_lineBreakpointPositions.add(i);
+		m_invalidBreakpoints.remove(i);
 	}
 
 	@Override
 	public void removeLineBreakPoint(String location, int line) {
 
-		m_lineBreakpointPositions.remove(Integer.valueOf(line));
+		Integer i = Integer.valueOf(line);
+		m_lineBreakpointPositions.remove(i);
+		m_invalidBreakpoints.add(i);
+		m_lastPassedBreakpoint = Integer.valueOf(-1);
 	}
 
 	@Override
@@ -328,11 +364,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		return m_stackVariables.get(stackFrame);
 	}
-
-	// TODO: set up StackFrames
-	// TODO: store Mapping from StackFrames to their respective Environment
-	// TODO: remove mappings when stackframes become invalid
-	// TODO:
 
 	private String getNextStackId() {
 
