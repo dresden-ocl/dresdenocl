@@ -4,6 +4,11 @@ Bundle-Name: Test
 Bundle-SymbolicName: org.dresdenocl.debugger.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.dresdenocl.debugger.test.DebuggerTestPlugin
-Require-Bundle: org.eclipse.core.runtime
+Require-Bundle: org.eclipse.core.runtime,
+ org.dresdenocl.debug,
+ org.junit;bundle-version="4.10.0",
+ org.dresdenocl.testsuite.abstract,
+ org.dresdenocl.model,
+ org.dresdenocl.modelinstance
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

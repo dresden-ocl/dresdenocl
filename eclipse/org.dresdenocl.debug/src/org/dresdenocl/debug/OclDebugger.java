@@ -173,7 +173,6 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			return result;
 		}
 		else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
-			m_stepMode = EStepMode.NORMAL;
 			return true;
 		}
 		// no else
