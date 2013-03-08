@@ -28,7 +28,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			"bin/resource/package01/TestModel.class";
 	protected static final String MODEL_INSTANCE_PATH =
 			"bin/resource/package01/TestModelInstance.class";
-	protected static final String RESOURCE01_PATH = "";
+	protected static final String RESOURCE01_PATH = "resources/resource01.ocl";
 
 	private static Map<String, IModel> modelCache;
 	private static Map<String, IModelInstance> modelInstanceCache;
