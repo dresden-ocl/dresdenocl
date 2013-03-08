@@ -2,6 +2,6 @@ package resource::package01
 	context TestClass
 	inv: integer = 10
 	
-	context TestClass::getAge()
+	context TestClass::getInteger()
 	post: result = 10
 endpackage

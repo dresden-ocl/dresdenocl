@@ -31,17 +31,17 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 	public void testStartUp01() throws Exception {
 
 		final OclDebugger debugger;
-		final String[] modelObjects = { "Class1" };
+		final String[] modelObjects = { "TestClass" };
 		final List<Constraint> constraints;
 		final Set<IModelInstanceObject> imio;
+		
+		constraints = getConstraints(MODEL_PATH, RESOURCE01_PATH);
 
 		imio = getModelInstanceObjects(MODEL_INSTANCE_PATH, modelObjects);
 
 		debugger = new OclDebugger(modelInstanceUnderTest);
 		debugger.setDebugMode(true);
 		debugger.setEventPort(findFreePort());
-
-		constraints = getConstraints(MODEL_PATH, RESOURCE01_PATH);
 
 		new Thread(new Runnable() {
 
@@ -53,9 +53,11 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 
 		}).start();
 		
-		this.wait(1000);
+		this.wait(500);
 		
 		assertTrue(debugger.isDebugMode());
 		assertTrue(debugger.isSuspended());
+		
+		debugger.terminate();
 	}
 }

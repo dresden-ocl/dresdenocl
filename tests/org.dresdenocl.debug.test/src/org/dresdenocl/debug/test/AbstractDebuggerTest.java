@@ -119,7 +119,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		assertNotNull(modelInstanceUnderTest);
 
 		// check the parameter
-		assertTrue(modelObjects != null && modelObjects.length > 1);
+		assertTrue(modelObjects != null && modelObjects.length >= 1);
 
 		// get the types
 		Type objectType = modelUnderTest.findType(Arrays.asList(modelObjects));
