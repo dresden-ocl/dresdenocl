@@ -12,10 +12,7 @@
  */
 package org.dresdenocl.testsuite;
 
-import org.dresdenocl.metrics.test.AllMetricsTests;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
+import org.dresdenocl.debug.test.AllDebuggerTests;
 import org.dresdenocl.essentialocl.types.tests.EssentialOCLAllTests;
 import org.dresdenocl.examples.pain.test.AllPainTests;
 import org.dresdenocl.examples.royalsandloyals.ocl22javacode.test.AllRoyalAndLoyalAspectJTests;
@@ -24,6 +21,7 @@ import org.dresdenocl.metamodels.ecore.test.tests.AllEcoreMetaModelTests;
 import org.dresdenocl.metamodels.java.test.tests.TestJavaMetaModel;
 import org.dresdenocl.metamodels.uml2.test.tests.AllUml2MetaModelTests;
 import org.dresdenocl.metamodels.xsd.test.AllXmlSchemaMetamodelTests;
+import org.dresdenocl.metrics.test.AllMetricsTests;
 import org.dresdenocl.modelbus.test.AllModelbusTests;
 import org.dresdenocl.modelinstancetype.ecore.test.AllEcoreModelInstanceTypeTests;
 import org.dresdenocl.modelinstancetype.java.test.AllJavaModelInstanceTypeTests;
@@ -37,6 +35,8 @@ import org.dresdenocl.tools.template.test.AllTestsTemplate;
 import org.dresdenocl.tools.transformation.pivot2sql.test.AllTestsPivot2Sql;
 import org.dresdenocl.tools.transformation.test.AllTestsTransformation;
 import org.dresdenocl.tracer.test.AllTracerTests;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * <p>
@@ -81,7 +81,10 @@ AllEcoreMetaModelTests.class, TestJavaMetaModel.class,
 		FastOcl2SqlTests.class,
 		
 		/* Tracer tests: */
-		AllTracerTests.class})
+		AllTracerTests.class,
+		
+		/* Debugger tests;*/
+		AllDebuggerTests.class})
 public class DresdenOclTestSuite {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

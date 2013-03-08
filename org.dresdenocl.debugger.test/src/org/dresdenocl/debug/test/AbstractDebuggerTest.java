@@ -1,4 +1,4 @@
-package org.dresdenocl.debugger.test;
+package org.dresdenocl.debug.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

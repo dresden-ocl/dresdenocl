@@ -1,4 +1,4 @@
-package org.dresdenocl.debugger.test.unit;
+package org.dresdenocl.debug.test.unit;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.dresdenocl.debug.OclDebugger;
-import org.dresdenocl.debugger.test.AbstractDebuggerTest;
+import org.dresdenocl.debug.test.AbstractDebuggerTest;
 import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.junit.AfterClass;

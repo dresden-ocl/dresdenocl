@@ -28,8 +28,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.tools.codegen.declarativ.ocl2sql.test,
  org.dresdenocl.modelinstancetype.ecore,
  org.dresdenocl.metrics.test,
- org.dresdenocl.examples.pain
+ org.dresdenocl.examples.pain,
+ org.dresdenocl.debug.test,
+ org.dresdenocl.tracer.test
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: org.dresdenocl.examples.pain.test,
- org.dresdenocl.tracer.test
+Import-Package: org.dresdenocl.examples.pain.test

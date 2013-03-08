@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Test
 Bundle-SymbolicName: org.dresdenocl.debug.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.dresdenocl.debugger.test.DebugTestPlugin
+Bundle-Activator: org.dresdenocl.debug.test.DebugTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.debug,
  org.junit;bundle-version="4.10.0",
@@ -13,3 +13,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.facade
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.dresdenocl.debug.test

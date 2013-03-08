@@ -1,4 +1,4 @@
-package org.dresdenocl.debugger.test;
+package org.dresdenocl.debug.test;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
