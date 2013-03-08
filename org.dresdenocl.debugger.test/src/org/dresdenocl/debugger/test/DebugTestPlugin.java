@@ -3,13 +3,13 @@ package org.dresdenocl.debugger.test;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-public class DebuggerTestPlugin extends Plugin {
+public class DebugTestPlugin extends Plugin {
 	
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.dresdenocl.debugger.test"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.dresdenocl.debug.test"; //$NON-NLS-1$
 
 	// The shared instance
-	private static DebuggerTestPlugin plugin;
+	private static DebugTestPlugin plugin;
 
 
 	/*
@@ -41,7 +41,7 @@ public class DebuggerTestPlugin extends Plugin {
 	 * 
 	 * @return the shared instance
 	 */
-	public static DebuggerTestPlugin getDefault() {
+	public static DebugTestPlugin getDefault() {
 
 		return plugin;
 	}

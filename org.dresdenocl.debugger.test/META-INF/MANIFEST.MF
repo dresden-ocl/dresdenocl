@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test
-Bundle-SymbolicName: org.dresdenocl.debugger.test;singleton:=true
+Bundle-SymbolicName: org.dresdenocl.debug.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.dresdenocl.debugger.test.DebuggerTestPlugin
+Bundle-Activator: org.dresdenocl.debugger.test.DebugTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.dresdenocl.debug,
  org.junit;bundle-version="4.10.0",

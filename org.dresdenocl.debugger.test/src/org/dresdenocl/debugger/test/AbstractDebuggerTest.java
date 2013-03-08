@@ -5,13 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.facade.Ocl2ForEclipseFacade;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -33,7 +33,6 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 	private static Map<String, IModel> modelCache;
 	private static Map<String, IModelInstance> modelInstanceCache;
 	private static Map<String, List<Constraint>> constraintCache;
-	protected static OclDebugger debuggerUnderTest;
 	protected static IModel modelUnderTest;
 	protected static IModelInstance modelInstanceUnderTest;
 
@@ -69,7 +68,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		File modelFile;
 		try {
 			modelFile =
-					AbstractDebuggerTest.getFile(modelPath, DebuggerTestPlugin.PLUGIN_ID);
+					AbstractDebuggerTest.getFile(modelPath, DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
@@ -97,7 +96,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		try {
 			modelInstanceFile =
 					AbstractDebuggerTest.getFile(modelInstancePath,
-							DebuggerTestPlugin.PLUGIN_ID);
+							DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
@@ -150,7 +149,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		try {
 			resourceFile =
 					AbstractDebuggerTest.getFile(resourcePath,
-							DebuggerTestPlugin.PLUGIN_ID);
+							DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
@@ -169,5 +168,23 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		constraintCache.put(resourcePath, result);
 
 		return result;
+	}
+
+	protected static int findFreePort() {
+
+		ServerSocket socket = null;
+		try {
+			socket = new ServerSocket(0);
+			return socket.getLocalPort();
+		} catch (IOException e) {
+		} finally {
+			if (socket != null) {
+				try {
+					socket.close();
+				} catch (IOException e) {
+				}
+			}
+		}
+		return -1;
 	}
 }
