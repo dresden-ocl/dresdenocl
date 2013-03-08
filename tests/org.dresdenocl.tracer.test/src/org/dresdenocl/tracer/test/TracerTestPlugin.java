@@ -13,6 +13,8 @@ public class TracerTestPlugin extends Plugin {
 
 	// The shared instance
 	private static TracerTestPlugin plugin;
+	
+	public static final String TracerTestPluginID = "org.dresdenocl.tracer.test.TracerTestPlugin";
 
 	/**
 	 * The constructor

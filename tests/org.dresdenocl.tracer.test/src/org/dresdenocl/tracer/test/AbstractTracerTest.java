@@ -17,11 +17,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import org.custommonkey.xmlunit.Diff;
-import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
-
 import org.dresdenocl.facade.Ocl2ForEclipseFacade;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -30,9 +25,12 @@ import org.dresdenocl.modelinstancetype.types.IModelInstanceObject;
 import org.dresdenocl.parser.ParseException;
 import org.dresdenocl.pivotmodel.Constraint;
 import org.dresdenocl.pivotmodel.Type;
-import org.dresdenocl.tracer.TracerPlugin;
+import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 import org.dresdenocl.tracer.tracermodel.TracerItem;
 import org.dresdenocl.tracer.tracermodel.TracerRoot;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 /**
  * Abstract test class for Dresden OCL Tracer tests.
