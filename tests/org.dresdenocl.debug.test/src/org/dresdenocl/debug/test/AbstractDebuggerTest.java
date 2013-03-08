@@ -148,8 +148,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		File resourceFile;
 		try {
 			resourceFile =
-					AbstractDebuggerTest.getFile(resourcePath,
-							DebugTestPlugin.PLUGIN_ID);
+					AbstractDebuggerTest.getFile(resourcePath, DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
