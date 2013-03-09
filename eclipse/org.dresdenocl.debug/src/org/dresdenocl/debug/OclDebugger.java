@@ -61,17 +61,16 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	private boolean alreadySentStartEvent = false;
 	private ServerSocket m_server;
 	private PrintStream m_outputStream;
-	private OclDebugCommunicationHelper m_communicationHelper =
-			new OclDebugCommunicationHelper();
+	private OclDebugCommunicationHelper m_communicationHelper = new OclDebugCommunicationHelper();
 	private Set<Integer> m_lineBreakpointPositions = new HashSet<Integer>();
 	private LinkedList<String> m_stackframes = new LinkedList<String>();
 	private int m_nextId = 0;
 	private Map<EObject, EObject> m_currentMappings;
-	private Map<String, Map<String, Object>> m_stackVariables =
-			new LinkedHashMap<String, Map<String, Object>>();
+	private Map<String, Map<String, Object>> m_stackVariables = new LinkedHashMap<String, Map<String, Object>>();
 	private Integer m_lastPassedBreakpoint = Integer.valueOf(-1);
 	private Set<Integer> m_invalidBreakpoints = new HashSet<Integer>();
 	private EStepMode m_stepMode = EStepMode.NORMAL;
+	private EObject m_curAsmElement;
 
 	public OclDebugger(IModelInstance aModelInstance) {
 
@@ -87,9 +86,10 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		// m_stackframes.clear();
 		m_invalidBreakpoints.clear();
 		m_lastPassedBreakpoint = Integer.valueOf(-1);
+		m_curAsmElement = null;
 
-		IInterpretationResult result =
-				super.interpretConstraint(constraint, modelInstanceElement);
+		IInterpretationResult result = super.interpretConstraint(constraint,
+				modelInstanceElement);
 		return result;
 	}
 
@@ -98,8 +98,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			Collection<Constraint> constraints,
 			IModelInstanceElement modelInstanceElement) {
 
-		List<IInterpretationResult> result =
-				super.interpretConstraints(constraints, modelInstanceElement);
+		List<IInterpretationResult> result = super.interpretConstraints(
+				constraints, modelInstanceElement);
 
 		terminate();
 		return result;
@@ -118,13 +118,11 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 						startEventSocket(eventPort);
 					}
 					// no else. already listening to the port
-				}
-				else {
+				} else {
 					// already closed, so create new one
 					startEventSocket(eventPort);
 				}
-			}
-			else {
+			} else {
 				// still null
 				startEventSocket(eventPort);
 			}
@@ -135,10 +133,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * Computes the line of the EObject in the containing resource.
 	 * 
 	 * @param element
-	 *          the EObject element
+	 *            the EObject element
 	 * @return the line element was defined in the resource
 	 */
 	protected int getLine(EObject element) {
+		if (element == null)
+			return -1;
 
 		EObject e = m_currentMappings.get(element);
 		if (e == null)
@@ -152,11 +152,17 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		return line;
 	}
 
+	public int getCurrentLine() {
+		return getLine(m_curAsmElement);
+	}
+
 	public boolean isLineBreakPointElement(EObject element) {
 
 		if (!isDebugMode()) {
 			return false;
 		}
+
+		m_curAsmElement = element;
 
 		// If normal mode : check if we have a breakpoint
 		if (m_stepMode.equals(EStepMode.NORMAL)) {
@@ -165,14 +171,12 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			boolean result = false;
 
 			if (line != null && line.intValue() != -1) {
-				result =
-						m_lineBreakpointPositions.contains(line)
-								&& !m_invalidBreakpoints.contains(line);
+				result = m_lineBreakpointPositions.contains(line)
+						&& !m_invalidBreakpoints.contains(line);
 			}
 			// no else
 			return result;
-		}
-		else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
+		} else if (m_stepMode.equals(EStepMode.STEP_INTO)) {
 			return true;
 		}
 		// no else
@@ -200,8 +204,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 				waitIfSuspended();
 			}
 		}
-		m_currentMappings =
-				ModelBusPlugin.getModelRegistry().getActiveModel().getAllMappings();
+		m_currentMappings = ModelBusPlugin.getModelRegistry().getActiveModel()
+				.getAllMappings();
 	}
 
 	public boolean isSuspended() {
@@ -316,7 +320,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	@Override
 	public synchronized void stepInto() {
 
-		// make the last passed breakpoint (the one we've been suspending, thought)
+		// make the last passed breakpoint (the one we've been suspending,
+		// thought)
 		// invalid vor this model instance element
 		// and stop at the next line
 		m_invalidBreakpoints.add(m_lastPassedBreakpoint);
@@ -419,8 +424,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * expressionInOcl) { stopOnBreakpoint("caseExpressionInOcl",
 	 * expressionInOcl); OclAny result =
 	 * super.caseExpressionInOcl(expressionInOcl); popStackFrame();
-	 * stopOnBreakpoint("caseExpressionInOcl", expressionInOcl); popStackFrame();
-	 * return result; }
+	 * stopOnBreakpoint("caseExpressionInOcl", expressionInOcl);
+	 * popStackFrame(); return result; }
 	 */
 
 	@Override
@@ -480,7 +485,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	public OclAny caseLetExp(LetExp letExp) {
 
 		stopOnBreakpoint("caseLetExp", letExp);
-		// Map<String, Object> m = m_stackVariables.get(m_stackframes.getLast());
+		// Map<String, Object> m =
+		// m_stackVariables.get(m_stackframes.getLast());
 		// m.put(letExp.getVariable().getName(), letExp.getVariable());
 		OclAny result = super.caseLetExp(letExp);
 		popStackFrame();
@@ -569,7 +575,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	}
 
 	@Override
-	public OclAny caseUndefinedLiteralExp(UndefinedLiteralExp undefinedLiteralExp) {
+	public OclAny caseUndefinedLiteralExp(
+			UndefinedLiteralExp undefinedLiteralExp) {
 
 		stopOnBreakpoint("caseUndefinedLiteralExp", undefinedLiteralExp);
 		OclAny result = super.caseUndefinedLiteralExp(undefinedLiteralExp);
@@ -583,8 +590,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 * @Override public OclAny caseVariable(Variable variable) {
 	 * stopOnBreakpoint("caseVariable", variable); OclAny result =
 	 * super.caseVariable(variable); popStackFrame();
-	 * stopOnBreakpoint("caseVariable", variable); popStackFrame(); return result;
-	 * }
+	 * stopOnBreakpoint("caseVariable", variable); popStackFrame(); return
+	 * result; }
 	 */
 	/*
 	 * @Override public OclAny caseVariableExp(VariableExp variableExp) {
@@ -595,14 +602,17 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	 */
 
 	@Override
-	protected OclAny evaluateNonStaticOperation(OperationCallExp operationCallExp) {
+	protected OclAny evaluateNonStaticOperation(
+			OperationCallExp operationCallExp) {
 
 		stopOnBreakpoint("evaluateNonStaticOperation "
-				+ operationCallExp.getReferredOperation().getName(), operationCallExp);
+				+ operationCallExp.getReferredOperation().getName(),
+				operationCallExp);
 		OclAny result = super.evaluateNonStaticOperation(operationCallExp);
 		popStackFrame();
 		stopOnBreakpoint("evaluateNonStaticOperation "
-				+ operationCallExp.getReferredOperation().getName(), operationCallExp);
+				+ operationCallExp.getReferredOperation().getName(),
+				operationCallExp);
 		popStackFrame();
 		return result;
 	}
@@ -623,8 +633,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 			OperationCallExp anOperationCallExp, Constraint oclDefinedOperation) {
 
 		stopOnBreakpoint("computeParameters", anOperationCallExp);
-		LinkedHashMap<String, OclAny> result =
-				super.computeParameters(anOperationCallExp, oclDefinedOperation);
+		LinkedHashMap<String, OclAny> result = super.computeParameters(
+				anOperationCallExp, oclDefinedOperation);
 		popStackFrame();
 		int i = 0;
 		for (String paramKey : result.keySet()) {
@@ -647,9 +657,8 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 		m.put("source", source);
 		m.put("iterator", iterator);
 
-		OclAny result =
-				super.evaluateIterate(bodyExpression, source, iteratorVariables,
-						iterator, resultVariable);
+		OclAny result = super.evaluateIterate(bodyExpression, source,
+				iteratorVariables, iterator, resultVariable);
 
 		return result;
 	}
@@ -657,13 +666,11 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 	protected OclResource getOclResource(URI uri) {
 
 		String platformString = uri.toPlatformString(true);
-		org.eclipse.core.resources.IResource member =
-				org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()
-						.findMember(platformString);
+		org.eclipse.core.resources.IResource member = org.eclipse.core.resources.ResourcesPlugin
+				.getWorkspace().getRoot().findMember(platformString);
 		if (member instanceof OclResource) {
 			return (OclResource) member;
-		}
-		else
+		} else
 			return null;
 	}
 
@@ -671,31 +678,30 @@ public class OclDebugger extends OclInterpreter implements IOclDebuggable {
 
 		int line = getLine(parameter);
 		String[] data = new String[6];
-		data[0] =
-				functionName + " ( " + parameter.getClass().getSimpleName() + " )";
+		data[0] = functionName + " ( " + parameter.getClass().getSimpleName()
+				+ " )";
 		data[1] = getNextStackId();
-		data[2] = m_currentMappings.get(parameter).eResource().getURI().toString();
+		data[2] = m_currentMappings.get(parameter).eResource().getURI()
+				.toString();
 		data[3] = Integer.toString(line);
 		data[4] = "1";
 		data[5] = "2";
 
-		OclResource resource =
-				(OclResource) m_currentMappings.get(parameter).eResource();
+		OclResource resource = (OclResource) m_currentMappings.get(parameter)
+				.eResource();
 		if (resource != null) {
-			data[4] =
-					Integer.toString(resource.getLocationMap().getCharStart(
-							m_currentMappings.get(parameter)));
-			data[5] =
-					Integer.toString(resource.getLocationMap().getCharEnd(
-							m_currentMappings.get(parameter)) + 1);
+			data[4] = Integer.toString(resource.getLocationMap().getCharStart(
+					m_currentMappings.get(parameter)));
+			data[5] = Integer.toString(resource.getLocationMap().getCharEnd(
+					m_currentMappings.get(parameter)) + 1);
 		}
 		// no else
 
 		String stackFrame = OclStringUtil.encode(',', data);
 		m_stackframes.push(stackFrame);
 		// store the mapping from current stackframe to variables
-		Map<String, Object> map =
-				new HashMap<String, Object>(myEnvironment.getVariableValues());
+		Map<String, Object> map = new HashMap<String, Object>(
+				myEnvironment.getVariableValues());
 		// map.put(parameter.getClass().getSimpleName(), parameter.toString());
 		/*
 		 * if (!myEnvironmentStack.isEmpty()) {

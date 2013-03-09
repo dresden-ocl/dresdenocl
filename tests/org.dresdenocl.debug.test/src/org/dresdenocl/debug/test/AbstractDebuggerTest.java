@@ -6,12 +6,15 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.dresdenocl.debug.OclDebugger;
 import org.dresdenocl.facade.Ocl2ForEclipseFacade;
 import org.dresdenocl.model.IModel;
 import org.dresdenocl.model.ModelAccessException;
@@ -24,10 +27,8 @@ import org.dresdenocl.testsuite._abstract.AbstractDresdenOclTest;
 
 public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
-	protected static final String MODEL_PATH =
-			"bin/resource/package01/TestModel.class";
-	protected static final String MODEL_INSTANCE_PATH =
-			"bin/resource/package01/TestModelInstance.class";
+	protected static final String MODEL_PATH = "bin/resource/package01/TestModel.class";
+	protected static final String MODEL_INSTANCE_PATH = "bin/resource/package01/TestModelInstance.class";
 	protected static final String RESOURCE01_PATH = "resources/resource01.ocl";
 
 	private static Map<String, IModel> modelCache;
@@ -67,16 +68,15 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 		File modelFile;
 		try {
-			modelFile =
-					AbstractDebuggerTest.getFile(modelPath, DebugTestPlugin.PLUGIN_ID);
+			modelFile = AbstractDebuggerTest.getFile(modelPath,
+					DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
 		assertNotNull(modelFile);
 
-		result =
-				Ocl2ForEclipseFacade.getModel(modelFile,
-						Ocl2ForEclipseFacade.JAVA_META_MODEL);
+		result = Ocl2ForEclipseFacade.getModel(modelFile,
+				Ocl2ForEclipseFacade.JAVA_META_MODEL);
 		// cache the model
 		modelCache.put(modelPath, result);
 
@@ -94,17 +94,15 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 		File modelInstanceFile;
 		try {
-			modelInstanceFile =
-					AbstractDebuggerTest.getFile(modelInstancePath,
-							DebugTestPlugin.PLUGIN_ID);
+			modelInstanceFile = AbstractDebuggerTest.getFile(modelInstancePath,
+					DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
 		assertNotNull(modelInstanceFile);
 
-		result =
-				Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile,
-						modelUnderTest, Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
+		result = Ocl2ForEclipseFacade.getModelInstance(modelInstanceFile,
+				modelUnderTest, Ocl2ForEclipseFacade.JAVA_MODEL_INSTANCE_TYPE);
 		// Cache the model instance
 		modelInstanceCache.put(modelInstancePath, result);
 
@@ -126,8 +124,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		assertNotNull(objectType);
 
 		// find the objects
-		Set<IModelInstanceObject> result =
-				modelInstanceUnderTest.getAllInstances(objectType);
+		Set<IModelInstanceObject> result = modelInstanceUnderTest
+				.getAllInstances(objectType);
 		assertNotNull(result);
 
 		return result;
@@ -147,8 +145,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 		File resourceFile;
 		try {
-			resourceFile =
-					AbstractDebuggerTest.getFile(resourcePath, DebugTestPlugin.PLUGIN_ID);
+			resourceFile = AbstractDebuggerTest.getFile(resourcePath,
+					DebugTestPlugin.PLUGIN_ID);
 		} catch (IOException e) {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
@@ -156,9 +154,8 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		assertNotNull(resourceFile);
 		assertTrue(resourceFile.canRead());
 
-		result =
-				Ocl2ForEclipseFacade.parseConstraints(resourceFile, modelUnderTest,
-						true);
+		result = Ocl2ForEclipseFacade.parseConstraints(resourceFile,
+				modelUnderTest, true);
 
 		assertNotNull(result);
 		assertTrue(result.size() >= 1);
@@ -185,5 +182,40 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			}
 		}
 		return -1;
+	}
+
+	protected static OclDebugger generateDebugger() throws Exception {
+
+		final OclDebugger debugger;
+		final String[] modelObjects = { "TestClass" };
+		final List<Constraint> constraints;
+		final Set<IModelInstanceObject> imio;
+
+		constraints = getConstraints(MODEL_PATH, RESOURCE01_PATH);
+
+		imio = getModelInstanceObjects(MODEL_INSTANCE_PATH, modelObjects);
+
+		debugger = new OclDebugger(modelInstanceUnderTest);
+		debugger.setDebugMode(true);
+
+		final int eventPort = findFreePort();
+		debugger.setEventPort(eventPort);
+
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				debugger.interpretConstraint(constraints.get(0), imio
+						.iterator().next());
+			}
+
+		}).start();
+		
+		AbstractDebuggerTest.class.wait(1000);
+
+		Socket socket = new Socket("localhost", eventPort);
+		socket.close();
+		return debugger;
 	}
 }
