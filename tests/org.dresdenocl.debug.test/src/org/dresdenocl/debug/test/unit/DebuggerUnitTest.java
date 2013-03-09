@@ -31,10 +31,11 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 
 		OclDebugger debugger = generateDebugger();
 
-		assertTrue(debugger.isDebugMode());
-		assertTrue(debugger.isSuspended());
+		assertTrue("Debugger is not in debug mode", debugger.isDebugMode());
+		Thread.sleep(1000);
+		assertTrue("Debugger is not suspended", debugger.isSuspended());
 		debugger.resume();
-		assertFalse(debugger.isSuspended());
+		assertFalse("Debugger is suspended but should be not", debugger.isSuspended());
 		debugger.terminate();
 	}
 
@@ -46,7 +47,10 @@ public class DebuggerUnitTest extends AbstractDebuggerTest {
 				DebugTestPlugin.PLUGIN_ID);
 
 		debugger.addLineBreakPoint(resourceFile.getAbsolutePath(), 3);
+		Thread.sleep(2000);
 		debugger.resume();
-		assertTrue(debugger.getCurrentLine() == 3);
+		Thread.sleep(1000);
+		System.out.println(debugger.getCurrentLine());
+		assertTrue("Debugger is not in the right line", debugger.getCurrentLine() == 3);
 	}
 }

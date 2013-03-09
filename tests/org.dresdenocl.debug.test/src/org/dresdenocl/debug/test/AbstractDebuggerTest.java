@@ -121,12 +121,12 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 
 		// get the types
 		Type objectType = modelUnderTest.findType(Arrays.asList(modelObjects));
-		assertNotNull(objectType);
+		assertNotNull("cannot find type", objectType);
 
 		// find the objects
 		Set<IModelInstanceObject> result = modelInstanceUnderTest
 				.getAllInstances(objectType);
-		assertNotNull(result);
+		assertNotNull("could not get all instances", result);
 
 		return result;
 	}
@@ -135,7 +135,7 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			String resourcePath) throws ModelAccessException, ParseException {
 
 		modelUnderTest = getModel(modelPath);
-		assertNotNull(modelUnderTest);
+		assertNotNull("could not get model", modelUnderTest);
 
 		List<Constraint> result = constraintCache.get(resourcePath);
 		if (result != null) {
@@ -151,14 +151,14 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 			throw new ModelAccessException(e.getMessage(), e);
 		}
 
-		assertNotNull(resourceFile);
-		assertTrue(resourceFile.canRead());
+		assertNotNull("resource file is null", resourceFile);
+		assertTrue("Cannot read the resource file", resourceFile.canRead());
 
 		result = Ocl2ForEclipseFacade.parseConstraints(resourceFile,
 				modelUnderTest, true);
 
-		assertNotNull(result);
-		assertTrue(result.size() >= 1);
+		assertNotNull("parse result is null", result);
+		assertTrue("parse result is empty", result.size() >= 1);
 
 		// cache the constraints
 		constraintCache.put(resourcePath, result);
@@ -199,20 +199,20 @@ public abstract class AbstractDebuggerTest extends AbstractDresdenOclTest {
 		debugger.setDebugMode(true);
 
 		final int eventPort = findFreePort();
-		debugger.setEventPort(eventPort);
 
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
+				debugger.setEventPort(eventPort);
 				debugger.interpretConstraint(constraints.get(0), imio
 						.iterator().next());
 			}
 
 		}).start();
 		
-		AbstractDebuggerTest.class.wait(1000);
+		//Thread.sleep(1000);
 
 		Socket socket = new Socket("localhost", eventPort);
 		socket.close();
