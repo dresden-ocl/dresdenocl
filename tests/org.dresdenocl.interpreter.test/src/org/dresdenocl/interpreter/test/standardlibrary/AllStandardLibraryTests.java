@@ -28,6 +28,7 @@ import org.junit.runners.Suite;
  * </p>
  * 
  * @author Claas Wilke
+ * @author Lars Schuetze
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestBag.class, TestBoolean.class, TestCollection.class,

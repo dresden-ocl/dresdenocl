@@ -32,6 +32,7 @@ import org.dresdenocl.model.IModel;
  * </p>
  * 
  * @author Claas Wilke
+ * @author Lars Schuetze
  */
 /* Specify a runner class: Suite.class. */
 @RunWith(Suite.class)
@@ -39,7 +40,8 @@ import org.dresdenocl.model.IModel;
 @Suite.SuiteClasses({ TestBag.class, TestBoolean.class, TestCollection.class,
 		TestInteger.class, TestIterators.class, TestOclAny.class,
 		TestOclType.class, TestOrderedSet.class, TestReal.class,
-		TestSequence.class, TestSet.class, TestString.class })
+		TestSequence.class, TestSet.class, TestString.class,
+		TestUnlimitedNatural.class })
 public class AllStandardLibraryTests {
 
 	/**
