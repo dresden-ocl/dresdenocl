@@ -1,0 +1,6 @@
+package package1
+
+context Class1
+def: infinity02 : UnlimitedNatural = 1 * *
+
+endpackage

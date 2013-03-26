@@ -32,7 +32,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ TestBag.class, TestBoolean.class, TestCollection.class,
 		TestIterator.class, TestOclInvalid.class, TestOclType.class,
-		TestOclVoid.class, TestOrderedSet.class, TestString.class })
+		TestOclVoid.class, TestOrderedSet.class, TestString.class,
+		TestUnlimitedNatural.class })
 public class AllStandardLibraryTests {
 	/*
 	 * This class remains completely empty, being used only as a holder for the
