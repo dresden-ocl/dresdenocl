@@ -1,0 +1,6 @@
+package package1::package2
+-- the standard explicitly name iterate as not a keyword
+context Type1
+def: iterate = 0
+
+endpackage

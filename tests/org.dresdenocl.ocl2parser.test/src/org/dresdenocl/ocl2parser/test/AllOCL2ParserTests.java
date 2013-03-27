@@ -26,6 +26,7 @@ import org.junit.runners.Suite;
 import org.dresdenocl.ocl2parser.test.constrainttypes.AllConstraintTypeTests;
 import org.dresdenocl.ocl2parser.test.context.AllContextTests;
 import org.dresdenocl.ocl2parser.test.expressions.AllExpressionTests;
+import org.dresdenocl.ocl2parser.test.keywords.AllKeywordTests;
 import org.dresdenocl.ocl2parser.test.standardlibrary.AllStandardLibraryTests;
 
 /**
@@ -34,11 +35,12 @@ import org.dresdenocl.ocl2parser.test.standardlibrary.AllStandardLibraryTests;
  * </p>
  * 
  * @author Claas Wilke
+ * @author Lars Schuetze
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ AllConstraintTypeTests.class, AllContextTests.class,
 		AllExpressionTests.class, AllStandardLibraryTests.class,
-		TestInterface.class })
+		TestInterface.class, AllKeywordTests.class })
 public class AllOCL2ParserTests extends AbstractDresdenOclTest {
 	/*
 	 * This class remains completely empty, being used only as a holder for the

@@ -1,13 +1,7 @@
 package org.dresdenocl.ocl2parser.test.standardlibrary;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.List;
 
-import org.dresdenocl.interpreter.IInterpretationResult;
 import org.dresdenocl.model.ModelAccessException;
 import org.dresdenocl.ocl2parser.test.TestPerformer;
 import org.dresdenocl.ocl2parser.test.exception.MetaModelNotFoundException;
@@ -22,7 +16,6 @@ import org.junit.Test;
 public class TestUnlimitedNatural {
 
 	private final static String MODEL_FILE_NAME = "testmodel.uml";
-
 	private TestPerformer testPerformer;
 	private String oclFileName;
 

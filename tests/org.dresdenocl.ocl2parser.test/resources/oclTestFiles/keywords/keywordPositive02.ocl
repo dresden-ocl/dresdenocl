@@ -1,0 +1,6 @@
+package package1::package2
+-- the standard explicitly name forAll as not a keyword
+context Type1
+def: forAll = 0
+
+endpackage

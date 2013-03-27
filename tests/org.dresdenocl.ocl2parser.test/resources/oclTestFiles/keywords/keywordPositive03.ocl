@@ -1,0 +1,6 @@
+package package1::package2
+-- underscore should escape the keyword
+context Type1
+def: _context = 0
+
+endpackage
