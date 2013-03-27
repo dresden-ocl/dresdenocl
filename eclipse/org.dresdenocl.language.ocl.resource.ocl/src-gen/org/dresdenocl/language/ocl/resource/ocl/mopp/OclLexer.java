@@ -3,15 +3,10 @@
 	package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 
-import org.antlr.runtime3_4_0.BaseRecognizer;
-import org.antlr.runtime3_4_0.CharStream;
-import org.antlr.runtime3_4_0.DFA;
-import org.antlr.runtime3_4_0.EarlyExitException;
-import org.antlr.runtime3_4_0.Lexer;
-import org.antlr.runtime3_4_0.MismatchedSetException;
-import org.antlr.runtime3_4_0.NoViableAltException;
-import org.antlr.runtime3_4_0.RecognitionException;
-import org.antlr.runtime3_4_0.RecognizerSharedState;
+import org.antlr.runtime3_4_0.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class OclLexer extends Lexer {
@@ -774,17 +769,17 @@ public class OclLexer extends Lexer {
         try {
             int _type = SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9795:11: ( ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
-            // Ocl.g:9796:3: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Ocl.g:9858:11: ( ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* ) )
+            // Ocl.g:9859:3: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
             {
-            // Ocl.g:9796:3: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
-            // Ocl.g:9796:3: '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Ocl.g:9859:3: ( '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )* )
+            // Ocl.g:9859:3: '--' (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             {
             match("--"); 
 
 
 
-            // Ocl.g:9796:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
+            // Ocl.g:9859:7: (~ ( '\\n' | '\\r' | '\\uffff' ) )*
             loop1:
             do {
                 int alt1=2;
@@ -839,17 +834,17 @@ public class OclLexer extends Lexer {
         try {
             int _type = ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9799:11: ( ( '/*' ( . )* '*/' ) )
-            // Ocl.g:9800:3: ( '/*' ( . )* '*/' )
+            // Ocl.g:9862:11: ( ( '/*' ( . )* '*/' ) )
+            // Ocl.g:9863:3: ( '/*' ( . )* '*/' )
             {
-            // Ocl.g:9800:3: ( '/*' ( . )* '*/' )
-            // Ocl.g:9800:3: '/*' ( . )* '*/'
+            // Ocl.g:9863:3: ( '/*' ( . )* '*/' )
+            // Ocl.g:9863:3: '/*' ( . )* '*/'
             {
             match("/*"); 
 
 
 
-            // Ocl.g:9800:7: ( . )*
+            // Ocl.g:9863:7: ( . )*
             loop2:
             do {
                 int alt2=2;
@@ -874,7 +869,7 @@ public class OclLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // Ocl.g:9800:7: .
+            	    // Ocl.g:9863:7: .
             	    {
             	    matchAny(); 
 
@@ -912,10 +907,10 @@ public class OclLexer extends Lexer {
         try {
             int _type = NAVIGATION_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9803:20: ( ( '.' | '->' ) )
-            // Ocl.g:9804:3: ( '.' | '->' )
+            // Ocl.g:9866:20: ( ( '.' | '->' ) )
+            // Ocl.g:9867:3: ( '.' | '->' )
             {
-            // Ocl.g:9804:3: ( '.' | '->' )
+            // Ocl.g:9867:3: ( '.' | '->' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -934,14 +929,14 @@ public class OclLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // Ocl.g:9804:3: '.'
+                    // Ocl.g:9867:3: '.'
                     {
                     match('.'); 
 
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9804:9: '->'
+                    // Ocl.g:9867:9: '->'
                     {
                     match("->"); 
 
@@ -969,7 +964,7 @@ public class OclLexer extends Lexer {
         try {
             int _type = ADDITIVE_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9806:18: ( ( '+' | '-' ) )
+            // Ocl.g:9869:18: ( ( '+' | '-' ) )
             // Ocl.g:
             {
             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -998,7 +993,7 @@ public class OclLexer extends Lexer {
         try {
             int _type = MULT_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9809:14: ( ( '*' | '/' | '%' ) )
+            // Ocl.g:9872:14: ( ( '*' | '/' | '%' ) )
             // Ocl.g:
             {
             if ( input.LA(1)=='%'||input.LA(1)=='*'||input.LA(1)=='/' ) {
@@ -1027,10 +1022,10 @@ public class OclLexer extends Lexer {
         try {
             int _type = RELATIONAL_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9812:20: ( ( '<' | '>' | '<=' | '>=' ) )
-            // Ocl.g:9813:3: ( '<' | '>' | '<=' | '>=' )
+            // Ocl.g:9875:20: ( ( '<' | '>' | '<=' | '>=' ) )
+            // Ocl.g:9876:3: ( '<' | '>' | '<=' | '>=' )
             {
-            // Ocl.g:9813:3: ( '<' | '>' | '<=' | '>=' )
+            // Ocl.g:9876:3: ( '<' | '>' | '<=' | '>=' )
             int alt4=4;
             int LA4_0 = input.LA(1);
 
@@ -1063,21 +1058,21 @@ public class OclLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // Ocl.g:9813:3: '<'
+                    // Ocl.g:9876:3: '<'
                     {
                     match('<'); 
 
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9813:9: '>'
+                    // Ocl.g:9876:9: '>'
                     {
                     match('>'); 
 
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9813:15: '<='
+                    // Ocl.g:9876:15: '<='
                     {
                     match("<="); 
 
@@ -1086,7 +1081,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:9813:22: '>='
+                    // Ocl.g:9876:22: '>='
                     {
                     match(">="); 
 
@@ -1114,11 +1109,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = EQUALITY_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9815:18: ( ( '=' ) )
-            // Ocl.g:9816:3: ( '=' )
+            // Ocl.g:9878:18: ( ( '=' ) )
+            // Ocl.g:9879:3: ( '=' )
             {
-            // Ocl.g:9816:3: ( '=' )
-            // Ocl.g:9816:3: '='
+            // Ocl.g:9879:3: ( '=' )
+            // Ocl.g:9879:3: '='
             {
             match('='); 
 
@@ -1141,11 +1136,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = NEQUALITY_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9818:19: ( ( '<>' ) )
-            // Ocl.g:9819:3: ( '<>' )
+            // Ocl.g:9881:19: ( ( '<>' ) )
+            // Ocl.g:9882:3: ( '<>' )
             {
-            // Ocl.g:9819:3: ( '<>' )
-            // Ocl.g:9819:3: '<>'
+            // Ocl.g:9882:3: ( '<>' )
+            // Ocl.g:9882:3: '<>'
             {
             match("<>"); 
 
@@ -1170,11 +1165,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = NOT_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9821:13: ( ( 'not' ) )
-            // Ocl.g:9822:3: ( 'not' )
+            // Ocl.g:9884:13: ( ( 'not' ) )
+            // Ocl.g:9885:3: ( 'not' )
             {
-            // Ocl.g:9822:3: ( 'not' )
-            // Ocl.g:9822:3: 'not'
+            // Ocl.g:9885:3: ( 'not' )
+            // Ocl.g:9885:3: 'not'
             {
             match("not"); 
 
@@ -1199,11 +1194,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = AND_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9824:13: ( ( 'and' ) )
-            // Ocl.g:9825:3: ( 'and' )
+            // Ocl.g:9887:13: ( ( 'and' ) )
+            // Ocl.g:9888:3: ( 'and' )
             {
-            // Ocl.g:9825:3: ( 'and' )
-            // Ocl.g:9825:3: 'and'
+            // Ocl.g:9888:3: ( 'and' )
+            // Ocl.g:9888:3: 'and'
             {
             match("and"); 
 
@@ -1228,11 +1223,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = OR_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9827:12: ( ( 'or' ) )
-            // Ocl.g:9828:3: ( 'or' )
+            // Ocl.g:9890:12: ( ( 'or' ) )
+            // Ocl.g:9891:3: ( 'or' )
             {
-            // Ocl.g:9828:3: ( 'or' )
-            // Ocl.g:9828:3: 'or'
+            // Ocl.g:9891:3: ( 'or' )
+            // Ocl.g:9891:3: 'or'
             {
             match("or"); 
 
@@ -1257,11 +1252,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = XOR_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9830:13: ( ( 'xor' ) )
-            // Ocl.g:9831:3: ( 'xor' )
+            // Ocl.g:9893:13: ( ( 'xor' ) )
+            // Ocl.g:9894:3: ( 'xor' )
             {
-            // Ocl.g:9831:3: ( 'xor' )
-            // Ocl.g:9831:3: 'xor'
+            // Ocl.g:9894:3: ( 'xor' )
+            // Ocl.g:9894:3: 'xor'
             {
             match("xor"); 
 
@@ -1286,11 +1281,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = IMPLIES_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9833:17: ( ( 'implies' ) )
-            // Ocl.g:9834:3: ( 'implies' )
+            // Ocl.g:9896:17: ( ( 'implies' ) )
+            // Ocl.g:9897:3: ( 'implies' )
             {
-            // Ocl.g:9834:3: ( 'implies' )
-            // Ocl.g:9834:3: 'implies'
+            // Ocl.g:9897:3: ( 'implies' )
+            // Ocl.g:9897:3: 'implies'
             {
             match("implies"); 
 
@@ -1315,11 +1310,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = IS_MARKED_PRE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9836:14: ( ( '@pre' ) )
-            // Ocl.g:9837:3: ( '@pre' )
+            // Ocl.g:9899:14: ( ( '@pre' ) )
+            // Ocl.g:9900:3: ( '@pre' )
             {
-            // Ocl.g:9837:3: ( '@pre' )
-            // Ocl.g:9837:3: '@pre'
+            // Ocl.g:9900:3: ( '@pre' )
+            // Ocl.g:9900:3: '@pre'
             {
             match("@pre"); 
 
@@ -1344,10 +1339,10 @@ public class OclLexer extends Lexer {
         try {
             int _type = BOOLEAN_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9839:16: ( ( 'true' | 'false' ) )
-            // Ocl.g:9840:3: ( 'true' | 'false' )
+            // Ocl.g:9902:16: ( ( 'true' | 'false' ) )
+            // Ocl.g:9903:3: ( 'true' | 'false' )
             {
-            // Ocl.g:9840:3: ( 'true' | 'false' )
+            // Ocl.g:9903:3: ( 'true' | 'false' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1366,7 +1361,7 @@ public class OclLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // Ocl.g:9840:3: 'true'
+                    // Ocl.g:9903:3: 'true'
                     {
                     match("true"); 
 
@@ -1375,7 +1370,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9840:12: 'false'
+                    // Ocl.g:9903:12: 'false'
                     {
                     match("false"); 
 
@@ -1403,10 +1398,10 @@ public class OclLexer extends Lexer {
         try {
             int _type = COLLECTION_TYPES;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9842:17: ( ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' ) )
-            // Ocl.g:9843:3: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
+            // Ocl.g:9905:17: ( ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' ) )
+            // Ocl.g:9906:3: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
             {
-            // Ocl.g:9843:3: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
+            // Ocl.g:9906:3: ( 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' )
             int alt6=5;
             switch ( input.LA(1) ) {
             case 'S':
@@ -1464,7 +1459,7 @@ public class OclLexer extends Lexer {
 
             switch (alt6) {
                 case 1 :
-                    // Ocl.g:9843:3: 'Set'
+                    // Ocl.g:9906:3: 'Set'
                     {
                     match("Set"); 
 
@@ -1473,7 +1468,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9843:11: 'Bag'
+                    // Ocl.g:9906:11: 'Bag'
                     {
                     match("Bag"); 
 
@@ -1482,7 +1477,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9843:19: 'Sequence'
+                    // Ocl.g:9906:19: 'Sequence'
                     {
                     match("Sequence"); 
 
@@ -1491,7 +1486,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // Ocl.g:9843:32: 'Collection'
+                    // Ocl.g:9906:32: 'Collection'
                     {
                     match("Collection"); 
 
@@ -1500,7 +1495,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // Ocl.g:9843:47: 'OrderedSet'
+                    // Ocl.g:9906:47: 'OrderedSet'
                     {
                     match("OrderedSet"); 
 
@@ -1528,10 +1523,10 @@ public class OclLexer extends Lexer {
         try {
             int _type = ITERATOR_NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9845:14: ( ( 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' ) )
-            // Ocl.g:9846:3: ( 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' )
+            // Ocl.g:9908:14: ( ( 'select' | 'reject' | 'forAll' | 'collect' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' ) )
+            // Ocl.g:9909:3: ( 'select' | 'reject' | 'forAll' | 'collect' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' )
             {
-            // Ocl.g:9846:3: ( 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' )
+            // Ocl.g:9909:3: ( 'select' | 'reject' | 'forAll' | 'collect' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' )
             int alt7=11;
             switch ( input.LA(1) ) {
             case 's':
@@ -1558,11 +1553,16 @@ public class OclLexer extends Lexer {
                 alt7=2;
                 }
                 break;
+            case 'f':
+                {
+                alt7=3;
+                }
+                break;
             case 'c':
                 {
-                int LA7_3 = input.LA(2);
+                int LA7_4 = input.LA(2);
 
-                if ( (LA7_3=='o') ) {
+                if ( (LA7_4=='o') ) {
                     int LA7_11 = input.LA(3);
 
                     if ( (LA7_11=='l') ) {
@@ -1584,7 +1584,7 @@ public class OclLexer extends Lexer {
                                             alt7=9;
                                         }
                                         else {
-                                            alt7=3;
+                                            alt7=4;
                                         }
                                     }
                                     else {
@@ -1627,21 +1627,16 @@ public class OclLexer extends Lexer {
 
                     }
                 }
-                else if ( (LA7_3=='l') ) {
+                else if ( (LA7_4=='l') ) {
                     alt7=11;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 7, 3, input);
+                        new NoViableAltException("", 7, 4, input);
 
                     throw nvae;
 
                 }
-                }
-                break;
-            case 'f':
-                {
-                alt7=4;
                 }
                 break;
             case 'a':
@@ -1674,7 +1669,7 @@ public class OclLexer extends Lexer {
 
             switch (alt7) {
                 case 1 :
-                    // Ocl.g:9846:3: 'select'
+                    // Ocl.g:9909:3: 'select'
                     {
                     match("select"); 
 
@@ -1683,7 +1678,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9846:14: 'reject'
+                    // Ocl.g:9909:14: 'reject'
                     {
                     match("reject"); 
 
@@ -1692,16 +1687,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9846:25: 'collect'
-                    {
-                    match("collect"); 
-
-
-
-                    }
-                    break;
-                case 4 :
-                    // Ocl.g:9846:37: 'forAll'
+                    // Ocl.g:9909:25: 'forAll'
                     {
                     match("forAll"); 
 
@@ -1709,8 +1695,17 @@ public class OclLexer extends Lexer {
 
                     }
                     break;
+                case 4 :
+                    // Ocl.g:9909:36: 'collect'
+                    {
+                    match("collect"); 
+
+
+
+                    }
+                    break;
                 case 5 :
-                    // Ocl.g:9846:48: 'any'
+                    // Ocl.g:9909:48: 'any'
                     {
                     match("any"); 
 
@@ -1719,7 +1714,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // Ocl.g:9846:56: 'exists'
+                    // Ocl.g:9909:56: 'exists'
                     {
                     match("exists"); 
 
@@ -1728,7 +1723,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // Ocl.g:9846:67: 'one'
+                    // Ocl.g:9909:67: 'one'
                     {
                     match("one"); 
 
@@ -1737,7 +1732,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // Ocl.g:9846:75: 'isUnique'
+                    // Ocl.g:9909:75: 'isUnique'
                     {
                     match("isUnique"); 
 
@@ -1746,7 +1741,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // Ocl.g:9846:88: 'collectNested'
+                    // Ocl.g:9909:88: 'collectNested'
                     {
                     match("collectNested"); 
 
@@ -1755,7 +1750,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // Ocl.g:9846:106: 'sortedBy'
+                    // Ocl.g:9909:106: 'sortedBy'
                     {
                     match("sortedBy"); 
 
@@ -1764,7 +1759,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 11 :
-                    // Ocl.g:9846:119: 'closure'
+                    // Ocl.g:9909:119: 'closure'
                     {
                     match("closure"); 
 
@@ -1792,11 +1787,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = STATIC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9848:7: ( ( 'static' ) )
-            // Ocl.g:9849:3: ( 'static' )
+            // Ocl.g:9911:7: ( ( 'static' ) )
+            // Ocl.g:9912:3: ( 'static' )
             {
-            // Ocl.g:9849:3: ( 'static' )
-            // Ocl.g:9849:3: 'static'
+            // Ocl.g:9912:3: ( 'static' )
+            // Ocl.g:9912:3: 'static'
             {
             match("static"); 
 
@@ -1821,13 +1816,13 @@ public class OclLexer extends Lexer {
         try {
             int _type = INTEGER_0;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9851:10: ( ( ( '0' )+ ( '0' .. '9' ) ) )
-            // Ocl.g:9852:3: ( ( '0' )+ ( '0' .. '9' ) )
+            // Ocl.g:9914:10: ( ( ( '0' )+ ( '0' .. '9' ) ) )
+            // Ocl.g:9915:3: ( ( '0' )+ ( '0' .. '9' ) )
             {
-            // Ocl.g:9852:3: ( ( '0' )+ ( '0' .. '9' ) )
-            // Ocl.g:9852:3: ( '0' )+ ( '0' .. '9' )
+            // Ocl.g:9915:3: ( ( '0' )+ ( '0' .. '9' ) )
+            // Ocl.g:9915:3: ( '0' )+ ( '0' .. '9' )
             {
-            // Ocl.g:9852:3: ( '0' )+
+            // Ocl.g:9915:3: ( '0' )+
             int cnt8=0;
             loop8:
             do {
@@ -1847,7 +1842,7 @@ public class OclLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // Ocl.g:9852:3: '0'
+            	    // Ocl.g:9915:3: '0'
             	    {
             	    match('0'); 
 
@@ -1893,10 +1888,10 @@ public class OclLexer extends Lexer {
         try {
             int _type = INTEGER_LITERAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9854:16: ( ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
-            // Ocl.g:9855:3: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Ocl.g:9917:16: ( ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' ) )
+            // Ocl.g:9918:3: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             {
-            // Ocl.g:9855:3: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
+            // Ocl.g:9918:3: ( ( '1' .. '9' ) ( '0' .. '9' )* | '0' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1915,7 +1910,7 @@ public class OclLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // Ocl.g:9855:3: ( '1' .. '9' ) ( '0' .. '9' )*
+                    // Ocl.g:9918:3: ( '1' .. '9' ) ( '0' .. '9' )*
                     {
                     if ( (input.LA(1) >= '1' && input.LA(1) <= '9') ) {
                         input.consume();
@@ -1927,7 +1922,7 @@ public class OclLexer extends Lexer {
                     }
 
 
-                    // Ocl.g:9855:14: ( '0' .. '9' )*
+                    // Ocl.g:9918:14: ( '0' .. '9' )*
                     loop9:
                     do {
                         int alt9=2;
@@ -1964,7 +1959,7 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9855:28: '0'
+                    // Ocl.g:9918:28: '0'
                     {
                     match('0'); 
 
@@ -1990,11 +1985,11 @@ public class OclLexer extends Lexer {
         try {
             int _type = SIMPLE_NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9857:12: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )* ) )
-            // Ocl.g:9858:3: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )* )
+            // Ocl.g:9920:12: ( ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )* ) )
+            // Ocl.g:9921:3: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )* )
             {
-            // Ocl.g:9858:3: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )* )
-            // Ocl.g:9858:3: ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )*
+            // Ocl.g:9921:3: ( ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )* )
+            // Ocl.g:9921:3: ( 'A' .. 'Z' | 'a' .. 'z' | '_' ) ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -2006,7 +2001,7 @@ public class OclLexer extends Lexer {
             }
 
 
-            // Ocl.g:9858:27: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )*
+            // Ocl.g:9921:27: ( 'A' .. 'Z' | 'a' .. 'z' | '0' .. '9' | '_' )*
             loop11:
             do {
                 int alt11=2;
@@ -2059,8 +2054,8 @@ public class OclLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9860:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
-            // Ocl.g:9861:2: ( ( ' ' | '\\t' | '\\f' ) )
+            // Ocl.g:9923:11: ( ( ( ' ' | '\\t' | '\\f' ) ) )
+            // Ocl.g:9924:2: ( ( ' ' | '\\t' | '\\f' ) )
             {
             if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
                 input.consume();
@@ -2090,13 +2085,13 @@ public class OclLexer extends Lexer {
         try {
             int _type = LINEBREAKS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9864:11: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
-            // Ocl.g:9865:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Ocl.g:9927:11: ( ( ( '\\r\\n' | '\\r' | '\\n' ) ) )
+            // Ocl.g:9928:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
             {
-            // Ocl.g:9865:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
-            // Ocl.g:9865:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // Ocl.g:9928:2: ( ( '\\r\\n' | '\\r' | '\\n' ) )
+            // Ocl.g:9928:2: ( '\\r\\n' | '\\r' | '\\n' )
             {
-            // Ocl.g:9865:2: ( '\\r\\n' | '\\r' | '\\n' )
+            // Ocl.g:9928:2: ( '\\r\\n' | '\\r' | '\\n' )
             int alt12=3;
             int LA12_0 = input.LA(1);
 
@@ -2122,7 +2117,7 @@ public class OclLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // Ocl.g:9865:3: '\\r\\n'
+                    // Ocl.g:9928:3: '\\r\\n'
                     {
                     match("\r\n"); 
 
@@ -2131,14 +2126,14 @@ public class OclLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // Ocl.g:9865:10: '\\r'
+                    // Ocl.g:9928:10: '\\r'
                     {
                     match('\r'); 
 
                     }
                     break;
                 case 3 :
-                    // Ocl.g:9865:15: '\\n'
+                    // Ocl.g:9928:15: '\\n'
                     {
                     match('\n'); 
 
@@ -2169,21 +2164,21 @@ public class OclLexer extends Lexer {
         try {
             int _type = QUOTED_39_39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // Ocl.g:9868:13: ( ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) ) )
-            // Ocl.g:9869:2: ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) )
+            // Ocl.g:9931:13: ( ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) ) )
+            // Ocl.g:9932:2: ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) )
             {
-            // Ocl.g:9869:2: ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) )
-            // Ocl.g:9869:2: ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' )
+            // Ocl.g:9932:2: ( ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' ) )
+            // Ocl.g:9932:2: ( '\\'' ) (~ ( '\\'' ) )* ( '\\'' )
             {
-            // Ocl.g:9869:2: ( '\\'' )
-            // Ocl.g:9869:3: '\\''
+            // Ocl.g:9932:2: ( '\\'' )
+            // Ocl.g:9932:3: '\\''
             {
             match('\''); 
 
             }
 
 
-            // Ocl.g:9869:8: (~ ( '\\'' ) )*
+            // Ocl.g:9932:8: (~ ( '\\'' ) )*
             loop13:
             do {
                 int alt13=2;
@@ -2217,8 +2212,8 @@ public class OclLexer extends Lexer {
             } while (true);
 
 
-            // Ocl.g:9869:18: ( '\\'' )
-            // Ocl.g:9869:19: '\\''
+            // Ocl.g:9932:18: ( '\\'' )
+            // Ocl.g:9932:19: '\\''
             {
             match('\''); 
 

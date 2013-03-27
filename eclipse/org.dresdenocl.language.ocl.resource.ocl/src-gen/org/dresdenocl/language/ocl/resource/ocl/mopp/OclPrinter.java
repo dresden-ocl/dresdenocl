@@ -6,10 +6,6 @@
  */
 package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
-import java.io.PrintWriter;
-
-import org.eclipse.emf.ecore.EObject;
-
 public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOclTextPrinter {
 	
 	protected org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolverFactory tokenResolverFactory = new org.dresdenocl.language.ocl.resource.ocl.mopp.OclTokenResolverFactory();
@@ -370,17 +366,43 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		printCountingMap.put("simpleName", temp == null ? 0 : 1);
 		// print collected hidden tokens
 		int count;
-		// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
-		count = printCountingMap.get("simpleName");
-		if (count > 0) {
-			Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME));
-			if (o != null) {
-				org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
-				resolver.setOptions(getOptions());
-				out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), element));
-				out.print(" ");
+		int alt = -1;
+		alt = 0;
+		int matches = 		matchCount(printCountingMap, java.util.Arrays.asList(		"simpleName"		));
+		int tempMatchCount;
+		tempMatchCount = 		matchCount(printCountingMap, java.util.Arrays.asList(		"simpleName"		));
+		if (tempMatchCount > matches) {
+			alt = 1;
+			matches = tempMatchCount;
+		}
+		switch(alt) {
+			case 1:			{
+				// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+				count = printCountingMap.get("simpleName");
+				if (count > 0) {
+					Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME));
+					if (o != null) {
+						org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("SIMPLE_NAME");
+						resolver.setOptions(getOptions());
+						out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), element));
+						out.print(" ");
+					}
+					printCountingMap.put("simpleName", count - 1);
+				}
 			}
-			printCountingMap.put("simpleName", count - 1);
+			break;
+			default:			// DEFINITION PART BEGINS (PlaceholderUsingSpecifiedToken)
+			count = printCountingMap.get("simpleName");
+			if (count > 0) {
+				Object o = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME));
+				if (o != null) {
+					org.dresdenocl.language.ocl.resource.ocl.IOclTokenResolver resolver = tokenResolverFactory.createTokenResolver("ITERATOR_NAME");
+					resolver.setOptions(getOptions());
+					out.print(resolver.deResolve((Object) o, element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.SIMPLE_NAME_CS__SIMPLE_NAME), element));
+					out.print(" ");
+				}
+				printCountingMap.put("simpleName", count - 1);
+			}
 		}
 	}
 	
@@ -475,12 +497,14 @@ public class OclPrinter implements org.dresdenocl.language.ocl.resource.ocl.IOcl
 		// the number of elements stored in each structural feature. For lists this is the
 		// list size. For non-multiple features it is either 1 (if the feature is set) or
 		// 0 (if the feature is null).
-		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(2);
+		java.util.Map<String, Integer> printCountingMap = new java.util.LinkedHashMap<String, Integer>(3);
 		Object temp;
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NAMESPACE));
 		printCountingMap.put("namespace", temp == null ? 0 : 1);
 		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__NESTED_NAMESPACE));
 		printCountingMap.put("nestedNamespace", temp == null ? 0 : 1);
+		temp = element.eGet(element.eClass().getEStructuralFeature(org.dresdenocl.language.ocl.OclPackage.PACKAGE_DECLARATION_NESTED_NAMESPACE_CS__LAYOUT_INFORMATION));
+		printCountingMap.put("layoutInformation", temp == null ? 0 : ((java.util.Collection<?>) temp).size());
 		// print collected hidden tokens
 		int count;
 		java.io.StringWriter sWriter = null;

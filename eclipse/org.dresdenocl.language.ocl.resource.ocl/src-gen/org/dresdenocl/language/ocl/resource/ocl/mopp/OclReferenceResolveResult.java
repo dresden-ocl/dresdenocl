@@ -8,8 +8,8 @@ package org.dresdenocl.language.ocl.resource.ocl.mopp;
 
 /**
  * A basic implementation of the
- * org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult
- * interface that collects mappings in a list.
+ * org.dresdenocl.language.ocl.resource.ocl.IOclReferenceResolveResult interface
+ * that collects mappings in a list.
  * 
  * @param <ReferenceType> the type of the references that can be contained in this
  * result

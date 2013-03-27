@@ -202,12 +202,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.language.ocl.IteratorExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_IteratorExpCS((org.dresdenocl.language.ocl.IteratorExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		if (object instanceof org.dresdenocl.language.ocl.LoopExpCS) {
 			result = interprete_org_dresdenocl_language_ocl_LoopExpCS((org.dresdenocl.language.ocl.LoopExpCS) object, context);
 		}
@@ -226,6 +220,12 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
+		if (object instanceof org.dresdenocl.language.ocl.IteratorExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_IteratorExpCS((org.dresdenocl.language.ocl.IteratorExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
 		if (object instanceof org.dresdenocl.language.ocl.IterateExpCS) {
 			result = interprete_org_dresdenocl_language_ocl_IterateExpCS((org.dresdenocl.language.ocl.IterateExpCS) object, context);
 		}
@@ -234,66 +234,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.language.ocl.NavigationCallExp) {
 			result = interprete_org_dresdenocl_language_ocl_NavigationCallExp((org.dresdenocl.language.ocl.NavigationCallExp) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.FeatureCallExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_FeatureCallExpCS((org.dresdenocl.language.ocl.FeatureCallExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.ImplicitOperationCallCS) {
-			result = interprete_org_dresdenocl_language_ocl_ImplicitOperationCallCS((org.dresdenocl.language.ocl.ImplicitOperationCallCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.OperationCallBaseExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_OperationCallBaseExpCS((org.dresdenocl.language.ocl.OperationCallBaseExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.ImplicitPropertyCallCS) {
-			result = interprete_org_dresdenocl_language_ocl_ImplicitPropertyCallCS((org.dresdenocl.language.ocl.ImplicitPropertyCallCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallBaseExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallBaseExpCS((org.dresdenocl.language.ocl.PropertyCallBaseExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.ImplicitFeatureCallCS) {
-			result = interprete_org_dresdenocl_language_ocl_ImplicitFeatureCallCS((org.dresdenocl.language.ocl.ImplicitFeatureCallCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallOnSelfExpCS((org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallExplicitPathExpCS((org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_PropertyCallExpCS((org.dresdenocl.language.ocl.PropertyCallExpCS) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
-			result = interprete_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS((org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -378,6 +318,66 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS) {
 			result = interprete_org_dresdenocl_language_ocl_OperationCallWithImlicitSourceExpCS((org.dresdenocl.language.ocl.OperationCallWithImlicitSourceExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.FeatureCallExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_FeatureCallExpCS((org.dresdenocl.language.ocl.FeatureCallExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.OperationCallBaseExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_OperationCallBaseExpCS((org.dresdenocl.language.ocl.OperationCallBaseExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.ImplicitPropertyCallCS) {
+			result = interprete_org_dresdenocl_language_ocl_ImplicitPropertyCallCS((org.dresdenocl.language.ocl.ImplicitPropertyCallCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallBaseExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallBaseExpCS((org.dresdenocl.language.ocl.PropertyCallBaseExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.ImplicitOperationCallCS) {
+			result = interprete_org_dresdenocl_language_ocl_ImplicitOperationCallCS((org.dresdenocl.language.ocl.ImplicitOperationCallCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.ImplicitFeatureCallCS) {
+			result = interprete_org_dresdenocl_language_ocl_ImplicitFeatureCallCS((org.dresdenocl.language.ocl.ImplicitFeatureCallCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallOnSelfExpCS((org.dresdenocl.language.ocl.PropertyCallOnSelfExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallExplicitPathExpCS((org.dresdenocl.language.ocl.PropertyCallExplicitPathExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.PropertyCallExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_PropertyCallExpCS((org.dresdenocl.language.ocl.PropertyCallExpCS) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) {
+			result = interprete_org_dresdenocl_language_ocl_OperationCallOnSelfExpCS((org.dresdenocl.language.ocl.OperationCallOnSelfExpCS) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -610,12 +610,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.Namespace) {
-			result = interprete_org_dresdenocl_pivotmodel_Namespace((org.dresdenocl.pivotmodel.Namespace) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
 		if (object instanceof org.dresdenocl.pivotmodel.PrimitiveType) {
 			result = interprete_org_dresdenocl_pivotmodel_PrimitiveType((org.dresdenocl.pivotmodel.PrimitiveType) object, context);
 		}
@@ -624,12 +618,6 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		}
 		if (object instanceof org.dresdenocl.pivotmodel.Enumeration) {
 			result = interprete_org_dresdenocl_pivotmodel_Enumeration((org.dresdenocl.pivotmodel.Enumeration) object, context);
-		}
-		if (result != null) {
-			return result;
-		}
-		if (object instanceof org.dresdenocl.pivotmodel.Type) {
-			result = interprete_org_dresdenocl_pivotmodel_Type((org.dresdenocl.pivotmodel.Type) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -688,14 +676,14 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.Constraint) {
-			result = interprete_org_dresdenocl_pivotmodel_Constraint((org.dresdenocl.pivotmodel.Constraint) object, context);
+		if (object instanceof org.dresdenocl.pivotmodel.TypeArgument) {
+			result = interprete_org_dresdenocl_pivotmodel_TypeArgument((org.dresdenocl.pivotmodel.TypeArgument) object, context);
 		}
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.AssociationProperty) {
-			result = interprete_org_dresdenocl_pivotmodel_AssociationProperty((org.dresdenocl.pivotmodel.AssociationProperty) object, context);
+		if (object instanceof org.dresdenocl.pivotmodel.Constraint) {
+			result = interprete_org_dresdenocl_pivotmodel_Constraint((org.dresdenocl.pivotmodel.Constraint) object, context);
 		}
 		if (result != null) {
 			return result;
@@ -712,14 +700,26 @@ public class AbstractOclInterpreter<ResultType, ContextType> {
 		if (result != null) {
 			return result;
 		}
-		if (object instanceof org.dresdenocl.pivotmodel.TypeArgument) {
-			result = interprete_org_dresdenocl_pivotmodel_TypeArgument((org.dresdenocl.pivotmodel.TypeArgument) object, context);
+		if (object instanceof org.dresdenocl.pivotmodel.Namespace) {
+			result = interprete_org_dresdenocl_pivotmodel_Namespace((org.dresdenocl.pivotmodel.Namespace) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.pivotmodel.Type) {
+			result = interprete_org_dresdenocl_pivotmodel_Type((org.dresdenocl.pivotmodel.Type) object, context);
 		}
 		if (result != null) {
 			return result;
 		}
 		if (object instanceof org.dresdenocl.pivotmodel.Expression) {
 			result = interprete_org_dresdenocl_pivotmodel_Expression((org.dresdenocl.pivotmodel.Expression) object, context);
+		}
+		if (result != null) {
+			return result;
+		}
+		if (object instanceof org.dresdenocl.pivotmodel.AssociationProperty) {
+			result = interprete_org_dresdenocl_pivotmodel_AssociationProperty((org.dresdenocl.pivotmodel.AssociationProperty) object, context);
 		}
 		if (result != null) {
 			return result;

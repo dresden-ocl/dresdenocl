@@ -10,8 +10,8 @@ package org.dresdenocl.language.ocl.resource.ocl.mopp;
  * Helper class to add markers to text files based on EMF's
  * <code>org.eclipse.emf.ecore.resource.Resource.Diagnostic</code>. If a resource
  * contains
- * <code>org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic</code>s
- * it uses the more precise information of this extended diagnostic type.
+ * <code>org.dresdenocl.language.ocl.resource.ocl.IOclTextDiagnostic</code>s it
+ * uses the more precise information of this extended diagnostic type.
  */
 public class OclMarkerHelper {
 	

@@ -42,7 +42,7 @@ TOKENS {
 	DEFINE IS_MARKED_PRE			$ '@pre'$;
 	DEFINE BOOLEAN_LITERAL			$ 'true' | 'false' $;
 	DEFINE COLLECTION_TYPES			$ 'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet' $;
-	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'collect' | 'forAll' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' $;
+	DEFINE ITERATOR_NAME			$ 'select' | 'reject' | 'forAll' | 'collect' | 'any' | 'exists' | 'one' | 'isUnique' | 'collectNested' | 'sortedBy' | 'closure' $;
 	DEFINE STATIC					$ 'static'$;
 	DEFINE INTEGER_0				$ '0'+ ('0'..'9')$;
 	DEFINE INTEGER_LITERAL			$ ('1'..'9') ('0'..'9')* | '0'$;
@@ -61,7 +61,7 @@ TOKENSTYLES {
 
 RULES {
 
-	SimpleNameCS						::= simpleName[SIMPLE_NAME];
+	SimpleNameCS						::= simpleName[ITERATOR_NAME] | simpleName[SIMPLE_NAME];
 	
 	PackageDeclarationWithNamespaceCS	::= "package" nestedNamespace !0 (contextDeclarations)* !0 "endpackage";
 	
